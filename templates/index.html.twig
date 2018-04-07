@@ -1,9 +1,44 @@
 {% extends 'base.html.twig' %}
 
+{% trans_default_domain 'front_index' %}
+
 {% block title %}Area{% endblock %}
 
 {% block body %}
     <div class="test">
-        En cours de contruction. {{ user }}
+        {{ 'message'|trans }} {{ user }}
+    </div>
+
+    <form action="{{ path('login') }}" method="post">
+        <label for="username">Login :</label>
+        <input type="text" id="username" name="_username"/>
+
+        <label for="password">Mot de passe :</label>
+        <input type="password" id="password" name="_password" />
+        <br />
+        <input type="submit" value="Connexion" />
+    </form>
+
+    <div class="row">
+        <div class="col-xs-6">
+            <input type="email" class="input-sm form-control" placeholder="email">
+        </div>
+        <div class="col-xs-6">
+            <button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-envelope"></span> Valider</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <input type="pseudo" class="input-sm form-control" placeholder="pseudo">
+        </div>
+        <div class="col-xs-6">
+            <input type="password" class="input-sm form-control" placeholder="password">
+        </div>
+        <div class="col-xs-6">
+            <input type="email" class="input-sm form-control" placeholder="email">
+        </div>
+        <div class="col-xs-6">
+            <button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-envelope"></span> Valider</button>
+        </div>
     </div>
 {% endblock %}
