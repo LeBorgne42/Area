@@ -10,34 +10,45 @@
     </div>
 
     <form action="{{ path('login') }}" method="post">
-        <label for="username">Login :</label>
-        <input type="text" id="username" name="_username"/>
-
-        <label for="password">Mot de passe :</label>
-        <input type="password" id="password" name="_password" />
-        <br />
-        <input type="submit" value="Connexion" />
+        <div class="row my-5">
+            <div class="offset-1 col-5">
+                <label for="username">Login :</label>
+                <input type="text" id="username" name="_username"/>
+            </div>
+            <div class="offset-1 col-5">
+                <label for="password">Mot de passe :</label>
+                <input type="password" id="password" name="_password" />
+            </div>
+            <div class="offset-1 col-5">
+                <input type="submit" value="Connexion" />
+            </div>
+        </div>
     </form>
 
-    <div class="row">
-        <div class="col-xs-6">
-            <input type="email" class="input-sm form-control" placeholder="email">
+    <form action="{{ path('login') }}" method="post">
+        <div class="row my-5">
+            <div class="offset-1 col-5">
+                <label for="email">email :</label>
+                <input type="text" id="email" name="_email"/>
+            </div>
+            <div class="offset-1 col-5">
+                <input type="submit" value="Connexion" />
+            </div>
         </div>
-        <div class="col-xs-6">
-            <button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-envelope"></span> Valider</button>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-6">
+    </form>
+    <div class="row my-5">
+        <div class="offset-1 col-5">
             <input type="pseudo" class="input-sm form-control" placeholder="pseudo">
         </div>
-        <div class="col-xs-6">
+        <div class="offset-1 col-5">
             <input type="password" class="input-sm form-control" placeholder="password">
         </div>
-        <div class="col-xs-6">
+    </div>
+    <div class="row my-5">
+        <div class="offset-1 col-5">
             <input type="email" class="input-sm form-control" placeholder="email">
         </div>
-        <div class="col-xs-6">
+        <div class="offset-1 col-5">
             <button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-envelope"></span> Valider</button>
         </div>
     </div>
