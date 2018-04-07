@@ -2,54 +2,50 @@
 
 {% trans_default_domain 'front_index' %}
 
-{% block title %}Area{% endblock %}
+{% block title %}{{ 'title'|trans }}{% endblock %}
 
 {% block body %}
-    <div class="test">
-        {{ 'message'|trans }} {{ user }}
-    </div>
+    {%- block left_menu -%}
+        {% include '_left_menu.html.twig' %}
+    {%- endblock -%}
 
-    <form action="{{ path('login') }}" method="post">
-        <div class="row my-5">
-            <div class="offset-1 col-5">
-                <label for="username">Login :</label>
-                <input type="text" id="username" name="_username"/>
+    <div class="wrapper-page">
+        <div class="card">
+            <div class="card-body p-sm-5 bg-bleu-ocean text-white">
+                {{ form_start(form_register) }}
+                {{ form_widget(form_register.pseudo) }}
+                {{ form_widget(form_register.password) }}
+                {{ form_widget(form_register.email) }}
+                <div class="col-12 text-center">
+                    {{ form_widget(form_register.sendForm,{attr: { class: 'btn-secondary'}}) }}
+                </div>
+                {{ form_end(form_register) }}
             </div>
-            <div class="offset-1 col-5">
-                <label for="password">Mot de passe :</label>
-                <input type="password" id="password" name="_password" />
-            </div>
-            <div class="offset-1 col-5">
-                <input type="submit" value="Connexion" />
-            </div>
-        </div>
-    </form>
-
-    <form action="{{ path('login') }}" method="post">
-        <div class="row my-5">
-            <div class="offset-1 col-5">
-                <label for="email">email :</label>
-                <input type="text" id="email" name="_email"/>
-            </div>
-            <div class="offset-1 col-5">
-                <input type="submit" value="Connexion" />
-            </div>
-        </div>
-    </form>
-    <div class="row my-5">
-        <div class="offset-1 col-5">
-            <input type="pseudo" class="input-sm form-control" placeholder="pseudo">
-        </div>
-        <div class="offset-1 col-5">
-            <input type="password" class="input-sm form-control" placeholder="password">
         </div>
     </div>
-    <div class="row my-5">
-        <div class="offset-1 col-5">
-            <input type="email" class="input-sm form-control" placeholder="email">
+    <div class="wrapper-page">
+        <div class="card">
+            <div class="card-body p-sm-5 bg-bleu-ocean text-white">
+                {{ form_start(form_connect) }}
+                {{ form_widget(form_connect.pseudoEmail) }}
+                {{ form_widget(form_connect.password) }}
+                <div class="col-12 text-center">
+                    {{ form_widget(form_connect.sendForm,{attr: { class: 'btn-secondary'}}) }}
+                </div>
+                {{ form_end(form_connect) }}
+            </div>
         </div>
-        <div class="offset-1 col-5">
-            <button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-envelope"></span> Valider</button>
+    </div>
+    <div class="wrapper-page">
+        <div class="card">
+            <div class="card-body p-sm-5 bg-bleu-ocean text-white">
+                {{ form_start(form_recoverPw) }}
+                {{ form_widget(form_recoverPw.pseudoEmail) }}
+                <div class="col-12 text-center">
+                    {{ form_widget(form_recoverPw.sendForm,{attr: { class: 'btn-secondary'}}) }}
+                </div>
+                {{ form_end(form_recoverPw) }}
+            </div>
         </div>
     </div>
 {% endblock %}

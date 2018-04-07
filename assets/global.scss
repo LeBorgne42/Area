@@ -3,7 +3,9 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
 
-.test {
-  color: black;
-  text-align: center;
+body {
+  background-image: url("img/wall.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 0 4rem 4rem 4rem;
 }

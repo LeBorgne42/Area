@@ -5,17 +5,51 @@ namespace App\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use App\Entity\User;
+use App\Form\Front\UserRegisterType;
+use App\Form\Front\UserConnectType;
+use App\Form\Front\UserRecoveryType;
 
 class HomeController extends Controller
 {
     /**
      * @Route("/", name="home")
      */
-    public function index()
+    public function index(Request $request)
     {
-        $user = 'Matt';
+        $user = new User();
+
+        $form_register = $this->createForm(UserRegisterType::class,$user);
+        $form_register->handleRequest($request);
+
+        if ($form_register->isSubmitted() && $form_register->isValid()) {
+            $user = $form_register->getData();
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            return $this->redirectToRoute('register');
+        }
+
+        $form_connect = $this->createForm(UserConnectType::class,$user);
+        $form_connect->handleRequest($request);
+
+        if ($form_connect->isSubmitted() && $form_connect->isValid()) {
+            return $this->redirectToRoute('login');
+        }
+
+        $form_recoverPw = $this->createForm(UserRecoveryType::class,$user);
+        $form_recoverPw->handleRequest($request);
+
+        if ($form_recoverPw->isSubmitted() && $form_recoverPw->isValid()) {
+            return $this->redirectToRoute('pw_recovery');
+        }
+
         return $this->render('index.html.twig', [
-            'user' => $user,
+            'form_register' => $form_register->createView(),
+            'form_connect' => $form_connect->createView(),
+            'form_recoverPw' => $form_recoverPw->createView(),
         ]);
     }
 
