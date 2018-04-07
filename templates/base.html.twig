@@ -2,11 +2,22 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Bienvenu!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
+
+        {% block sidebar %}
+            <div id="sidebar">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/interface">Interface</a></li>
+                </ul>
+            </div>
+        {% endblock %}
+
         {% block body %}{% endblock %}
+
         {% block javascripts %}{% endblock %}
     </body>
 </html>
