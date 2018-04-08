@@ -10,20 +10,9 @@
     </head>
     <body>
 
-        {% block sidebar %}
-            <div id="sidebar">
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="{{ path('interface') }}">{{ 'interface'|trans }}</a></li>
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <li><a href="{{ path('easyadmin') }}">{{ 'easyadmin'|trans }}</a></li>
-                    {% endif %}
-                    {% if app.user %}
-                        <li><a href="{{ path('logout') }}">{{ 'logout'|trans }}</a></li>
-                    {% endif %}
-                </ul>
-            </div>
-        {% endblock %}
+    {%- block left_menu -%}
+        {% include '_left_menu.html.twig' %}
+    {%- endblock -%}
 
         {% block body %}{% endblock %}
 

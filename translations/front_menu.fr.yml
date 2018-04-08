@@ -1,1 +1,11 @@
 menu: 'menu game'
+home: Accueil
+interface: tmp
+easyadmin: 'Pannel Admin'
+logout: Deconnexion
+username: Pseudo
+password: 'mot de passe'
+login: Connexion
+error: 'Pseudo/mot de passe erroné'
+faq: 'F.A.Q'
+contact: 'Nous contacter'

@@ -1,2 +1,5 @@
 error: 'Mauvais identifiant/mot de passe'
 title: Interface
+username: Pseudo
+password: 'mot de passe'
+login: Connexion

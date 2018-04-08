@@ -5,16 +5,24 @@
 {% block title %}{{ 'title'|trans }}{% endblock %}
 
 {% block body %}
-    <form action="{{ path('login') }}" method="post">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}" />
-
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="_password" />
-
-        <button type="submit">login</button>
-    </form>
-    {% if error %}
-        <div>{{ 'error'|trans }}</div>
-    {% endif %}
+    {%- block left_menu -%}
+    {%- endblock -%}
+    <div class="row my-5">
+        <div class="offset-3 col-6">
+            <div class="wrapper-page">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <form action="{{ path('login') }}" method="post">
+                            <input type="text" id="username" placeholder="{{ 'username'|trans }}" name="_username" value="{{ last_username }}" />
+                            <input type="password" placeholder="{{ 'password'|trans }}" id="password" name="_password" />
+                            <button class="btn btn-secondary" type="submit">{{ 'login'|trans }}</button>
+                        </form>
+                        {% if error %}
+                            <div>{{ 'error'|trans }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

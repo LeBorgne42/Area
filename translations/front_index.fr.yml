@@ -1,9 +1,10 @@
 title: 'Area Control'
-form:
-  connect: connexion
-  email: 'adresse email'
-  getPassword: 'renvoyer mot de passe'
-  password: 'mot de passe'
-  username: pseudo
-  pseudoEmail: 'pseudo ou email'
-  register: 's''enregistrer'
+form.connect: Connexion
+form.email: 'adresse email'
+form.getPassword: 'renvoyer mot de passe'
+form.password: 'mot de passe'
+form.username: Pseudo
+form.pseudoEmail: 'pseudo ou email'
+form.register: 's''enregistrer'
+blockOne: 'Premier block de news'
+blockTwo: 'Second block de news'
