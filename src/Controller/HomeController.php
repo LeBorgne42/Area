@@ -17,7 +17,7 @@ class HomeController extends Controller
     /**
      * @Route("/", name="home")
      */
-    public function index(Request $request, AuthenticationUtils $authenticationUtils)
+    public function index(Request $request, AuthenticationUtils $authenticationUtils, \Swift_Mailer $mailer)
     {
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
@@ -41,8 +41,20 @@ class HomeController extends Controller
         $form_recoverPw = $this->createForm(UserRecoveryType::class,$user);
         $form_recoverPw->handleRequest($request);
 
-        if ($form_recoverPw->isSubmitted() && $form_recoverPw->isValid()) {
-            return $this->redirectToRoute('pw_recovery');
+        if ($form_recoverPw->isSubmitted()) {
+            $message = (new \Swift_Message('Hello Email'))
+                ->setFrom('borntoswim42@gmail.com')
+                ->setTo($form_recoverPw->get('pseudoEmail')->getData())
+                ->setBody(
+                    $this->renderView(
+                        'emails/registration.html.twig'
+                    ),
+                    'text/html'
+                );
+
+            $mailer->send($message);
+
+            return $this->redirectToRoute('home');
         }
 
         return $this->render('index.html.twig', [
@@ -57,8 +69,21 @@ class HomeController extends Controller
      * @Route("/pw-recovery/", name="pw_recovery")
      * @Route("/pw-recovery", name="pw_recovery_noSlash")
      */
-    public function pwRecoveryAction(Request $request)
+    public function pwRecoveryAction(Request $request, \Swift_Mailer $mailer)
     {
+        $message = (new \Swift_Message('Hello Email'))
+            ->setFrom('borntoswim42@gmail.com')
+            ->setTo($user->getEmail())
+            ->setBody(
+                $this->renderView(
+                    'emails/registration.html.twig',
+                    array('name' => $user)
+                ),
+                'text/html'
+            );
+
+        $mailer->send($message);
+
         return $this->redirectToRoute('home');
     }
 
