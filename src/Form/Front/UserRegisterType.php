@@ -17,12 +17,12 @@ class UserRegisterType extends AbstractType
     {
         $builder
             ->add(
-                'pseudo',
+                'username',
                 null,
                 array(
-                    'label' => 'form.pseudo',
+                    'label' => 'form.username',
                     'attr'  => array(
-                        'placeholder' => 'form.pseudo',
+                        'placeholder' => 'form.username',
                         'class' => ''
                     )
                 )

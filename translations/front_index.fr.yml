@@ -4,6 +4,6 @@ form:
   email: 'adresse email'
   getPassword: 'renvoyer mot de passe'
   password: 'mot de passe'
-  pseudo: pseudo
+  username: pseudo
   pseudoEmail: 'pseudo ou email'
   register: 's''enregistrer'

@@ -7,10 +7,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @ORM\Table(name="app_users")
- * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @ORM\Table(name="app_admins")
+ * @ORM\Entity(repositoryClass="App\Repository\AdminRepository")
  */
-class User implements UserInterface, \Serializable
+class Admin implements UserInterface, \Serializable
 {
     /**
      * @ORM\Column(type="integer")
@@ -58,7 +58,7 @@ class User implements UserInterface, \Serializable
 
     public function getRoles()
     {
-        return array('ROLE_USER');
+        return array('ROLE_ADMIN');
     }
 
     public function eraseCredentials()
@@ -106,7 +106,7 @@ class User implements UserInterface, \Serializable
      */
     public function setUsername($username)
     {
-        $this->username = $username;
+        $this->pseudo = $username;
 
         return $this;
     }

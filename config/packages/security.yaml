@@ -1,13 +1,42 @@
 security:
+    encoders:
+        App\Entity\User: plaintext
+        App\Entity\Admin:
+            algorithm: plaintext #bcrypt
+        Symfony\Component\Security\Core\User\User: plaintext
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        in_memory: { memory: ~ }
+        chain_provider:
+            chain:
+                providers: [my_in_memory_provider, my_entity_user_provider, my_entity_admin_provider]
+        my_in_memory_provider:
+            memory:
+                users:
+                    admin:
+                        password: admin
+                        roles: [ROLE_USER, ROLE_ADMIN]
+        my_entity_user_provider:
+            entity: { class: App\Entity\User, property: username }
+        my_entity_admin_provider:
+            entity: { class: App\Entity\Admin, property: username }
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            anonymous: true
+            pattern: ^/
+            provider: chain_provider
+            anonymous: ~
+            form_login:
+                login_path: login
+                check_path: login
+                remember_me: true
+                default_target_path: interface
+                always_use_default_target_path: true
+            logout:
+                path: logout
+                target: home
+                invalidate_session: true
 
             # activate different ways to authenticate
 
@@ -20,5 +49,6 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/user, roles: ROLE_USER }
+        - { path: ^/admin-edr, roles: ROLE_ADMIN }

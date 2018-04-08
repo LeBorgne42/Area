@@ -57,28 +57,10 @@ class HomeController extends Controller
     }
 
     /**
-     * @Route("/login/", name="login")
-     * @Route("/login", name="login_noSlash")
-     */
-    public function loginAction(Request $request)
-    {
-        return $this->redirectToRoute('home');
-    }
-
-    /**
      * @Route("/pw-recovery/", name="pw_recovery")
      * @Route("/pw-recovery", name="pw_recovery_noSlash")
      */
     public function pwRecoveryAction(Request $request)
-    {
-        return $this->redirectToRoute('home');
-    }
-
-    /**
-     * @Route("/logout/", name="logout")
-     * @Route("/logout/", name="logout_noSlash")
-     */
-    public function logoutAction(Request $request)
     {
         return $this->redirectToRoute('home');
     }

@@ -4,7 +4,14 @@ namespace App\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
+/**
+ * Page controller.
+ *
+ * @Route("/user")
+ * @Security("has_role('ROLE_USER')")
+ */
 class InterfaceController extends Controller
 {
     /**
