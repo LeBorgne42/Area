@@ -9,6 +9,7 @@ use App\Entity\User;
 use App\Form\Front\UserRegisterType;
 use App\Form\Front\UserConnectType;
 use App\Form\Front\UserRecoveryType;
+use DateTime;
 
 class HomeController extends Controller
 {
@@ -24,6 +25,8 @@ class HomeController extends Controller
 
         if ($form_register->isSubmitted() && $form_register->isValid()) {
             $user = $form_register->getData();
+            $now = new DateTime();
+            $user->setCreatedAt($now);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);

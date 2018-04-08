@@ -252,7 +252,7 @@ $cfg['Servers'][$i]['user'] = 'root';
  *
  * @global string $cfg['Servers'][$i]['password']
  */
-$cfg['Servers'][$i]['password'] = 'test';
+$cfg['Servers'][$i]['password'] = 'edr';
 
 /**
  * Session to use for 'signon' authentication method
