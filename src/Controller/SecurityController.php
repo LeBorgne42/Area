@@ -15,6 +15,10 @@ class SecurityController extends Controller
      */
     public function loginAction(Request $request, AuthenticationUtils $authenticationUtils)
     {
+        if ($this->getUser()) {
+            return $this->redirectToRoute('interface');
+        }
+
         $error = $authenticationUtils->getLastAuthenticationError();
 
         $lastUsername = $authenticationUtils->getLastUsername();
@@ -31,5 +35,20 @@ class SecurityController extends Controller
      */
     public function logoutAction(Request $request)
     {
+    }
+
+    /**
+     * @Route("/login-redirect", name="login_redirect")
+     * @Route("/login-redirect/", name="login_redirect_noSlash")
+     */
+    public function loginRedirectAction(Request $request)
+    {
+        if ($this->getUser()->getRoles()[0] == 'ROLE_USER') {
+            return $this->redirectToRoute('interface');
+        }
+        if ($this->getUser()->getRoles()[0] == 'ROLE_ADMIN') {
+            return $this->redirectToRoute('easyadmin');
+        }
+        return $this->redirectToRoute('logout');
     }
 }

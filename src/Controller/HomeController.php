@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use App\Entity\User;
 use App\Form\Front\UserRegisterType;
 use App\Form\Front\UserConnectType;
@@ -16,8 +17,10 @@ class HomeController extends Controller
     /**
      * @Route("/", name="home")
      */
-    public function index(Request $request)
+    public function index(Request $request, AuthenticationUtils $authenticationUtils)
     {
+        $error = $authenticationUtils->getLastAuthenticationError();
+        $lastUsername = $authenticationUtils->getLastUsername();
         $user = new User();
 
         $form_register = $this->createForm(UserRegisterType::class,$user);
@@ -27,19 +30,12 @@ class HomeController extends Controller
             $user = $form_register->getData();
             $now = new DateTime();
             $user->setCreatedAt($now);
-
+            $user->setPassword(password_hash($form_register->get('password')->getData(), PASSWORD_BCRYPT));
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
 
             return $this->redirectToRoute('register');
-        }
-
-        $form_connect = $this->createForm(UserConnectType::class,$user);
-        $form_connect->handleRequest($request);
-
-        if ($form_connect->isSubmitted() && $form_connect->isValid()) {
-            return $this->redirectToRoute('login');
         }
 
         $form_recoverPw = $this->createForm(UserRecoveryType::class,$user);
@@ -51,8 +47,9 @@ class HomeController extends Controller
 
         return $this->render('index.html.twig', [
             'form_register' => $form_register->createView(),
-            'form_connect' => $form_connect->createView(),
             'form_recoverPw' => $form_recoverPw->createView(),
+            'last_username' => $lastUsername,
+            'error'         => $error,
         ]);
     }
 

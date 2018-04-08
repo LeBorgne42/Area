@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Bienvenu!{% endblock %}</title>
+        <title>{% block title %}{{ 'title'|trans }}{% endblock %}</title>
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('build/global.css') }}">
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -14,7 +14,13 @@
             <div id="sidebar">
                 <ul>
                     <li><a href="/">Home</a></li>
-                    <li><a href="{{ path('interface') }}">Interface</a></li>
+                    <li><a href="{{ path('interface') }}">{{ 'interface'|trans }}</a></li>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li><a href="{{ path('easyadmin') }}">{{ 'easyadmin'|trans }}</a></li>
+                    {% endif %}
+                    {% if app.user %}
+                        <li><a href="{{ path('logout') }}">{{ 'logout'|trans }}</a></li>
+                    {% endif %}
                 </ul>
             </div>
         {% endblock %}

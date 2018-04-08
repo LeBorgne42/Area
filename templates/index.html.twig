@@ -5,47 +5,44 @@
 {% block title %}{{ 'title'|trans }}{% endblock %}
 
 {% block body %}
-    {%- block left_menu -%}
-        {% include '_left_menu.html.twig' %}
-    {%- endblock -%}
-
-    <div class="wrapper-page">
-        <div class="card">
-            <div class="card-body p-sm-5 bg-bleu-ocean text-white">
-                {{ form_start(form_register) }}
-                {{ form_widget(form_register.username) }}
-                {{ form_widget(form_register.password) }}
-                {{ form_widget(form_register.email) }}
-                <div class="col-12 text-center">
+    {% if app.user is null %}
+        <div class="wrapper-page">
+            <div class="card">
+                <div class="card-body">
+                    {{ form_start(form_register) }}
+                    {{ form_widget(form_register.username) }}
+                    {{ form_widget(form_register.password) }}
+                    {{ form_widget(form_register.email) }}
                     {{ form_widget(form_register.sendForm,{attr: { class: 'btn-secondary'}}) }}
+                    {{ form_end(form_register) }}
                 </div>
-                {{ form_end(form_register) }}
             </div>
         </div>
-    </div>
-    <div class="wrapper-page">
-        <div class="card">
-            <div class="card-body p-sm-5 bg-bleu-ocean text-white">
-                {{ form_start(form_connect) }}
-                {{ form_widget(form_connect.pseudoEmail) }}
-                {{ form_widget(form_connect.password) }}
-                <div class="col-12 text-center">
-                    {{ form_widget(form_connect.sendForm,{attr: { class: 'btn-secondary'}}) }}
+        <div class="wrapper-page">
+            <div class="card">
+                <div class="card-body">
+                    <form action="{{ path('login') }}" method="post">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="_username" value="{{ last_username }}" />
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="_password" />
+                        <button type="submit">login</button>
+                    </form>
+                    {% if error %}
+                        <div>{{ 'error'|trans }}</div>
+                    {% endif %}
                 </div>
-                {{ form_end(form_connect) }}
             </div>
         </div>
-    </div>
-    <div class="wrapper-page">
-        <div class="card">
-            <div class="card-body p-sm-5 bg-bleu-ocean text-white">
-                {{ form_start(form_recoverPw) }}
-                {{ form_widget(form_recoverPw.pseudoEmail) }}
-                <div class="col-12 text-center">
+        <div class="wrapper-page">
+            <div class="card">
+                <div class="card-body">
+                    {{ form_start(form_recoverPw) }}
+                    {{ form_widget(form_recoverPw.pseudoEmail) }}
                     {{ form_widget(form_recoverPw.sendForm,{attr: { class: 'btn-secondary'}}) }}
+                    {{ form_end(form_recoverPw) }}
                 </div>
-                {{ form_end(form_recoverPw) }}
             </div>
         </div>
-    </div>
+    {% endif %}
 {% endblock %}

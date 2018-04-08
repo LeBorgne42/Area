@@ -106,7 +106,7 @@ class Admin implements UserInterface, \Serializable
      */
     public function setUsername($username)
     {
-        $this->pseudo = $username;
+        $this->username = $username;
 
         return $this;
     }

@@ -5,10 +5,6 @@
 {% block title %}{{ 'title'|trans }}{% endblock %}
 
 {% block body %}
-    {% if error %}
-        <div>{{ 'error'|trans }}</div>
-    {% endif %}
-
     <form action="{{ path('login') }}" method="post">
         <label for="username">Username:</label>
         <input type="text" id="username" name="_username" value="{{ last_username }}" />
@@ -18,4 +14,7 @@
 
         <button type="submit">login</button>
     </form>
+    {% if error %}
+        <div>{{ 'error'|trans }}</div>
+    {% endif %}
 {% endblock %}
