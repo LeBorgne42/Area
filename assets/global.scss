@@ -2,7 +2,7 @@ $brand-primary: darken(#428bca, 20%);
 $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
-@import 'front/*';
+@import 'scss/front/leftMenu.scss';
 
 body {
   color: black;
