@@ -1,0 +1,30 @@
+.btn-left {
+  color: #fff;
+  border-left: 1px solid #17a2b8;
+  border-right: 1px solid #17a2b8;
+  border-top: 1px solid #17a2b8;
+  border-radius: 1px;
+  :hover {
+    color: #FC7F23;
+  }
+}
+
+.btn-left-bottom {
+  color: #fff;
+  border: 1px solid #17a2b8;
+  border-radius: 1px;
+  :hover {
+    color: #FC7F23;
+  }
+}
+
+.bg-left {
+  background-color: rgba(52, 58, 64, 0.5);
+}
+
+.logout {
+  color: #fff;
+  :hover {
+    color: red;
+  }
+}

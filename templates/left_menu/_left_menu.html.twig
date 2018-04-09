@@ -1,6 +1,6 @@
 {% trans_default_domain 'front_menu' %}
 
-<nav class="navbar-left navbar-dark bg-dark text-center p-3">
+<nav class="navbar-left navbar-dark bg-left text-center p-3">
     <div class="logo">
         <img height="64" src="{{ vich_uploader_asset(app.user, 'imageFile') }}">
     </div>
@@ -9,57 +9,57 @@
         {#{{ form_widget(form_image.imageFile) }}#}
         {#{{ form_widget(form_image.sendForm,{attr: { class: 'btn btn-secondary'}}) }}#}
         {#{{ form_end(form_image) }}#}
-        <div class="my-4"><strong>{{ 'menu'|trans }}</strong></div>
+        <div class="text-orange my-4"><strong>{{ 'menu'|trans }}</strong></div>
+    </div>
+    <div class="btn-left">
+        <a href="{{ path('overview') }}" class="btn btn-left"><span>{{ 'globalView'|trans }}</span></a>
+    </div>
+    <div class="btn-left">
+        <a href="{{ path('dailyCost') }}" class="btn btn-left"><span>{{ 'dailyCost'|trans }}</span></a>
+    </div>
+    <div class="btn-left">
+        <a href="{{ path('fleet') }}" class="btn btn-left"><span>{{ 'fleet'|trans }}</span></a>
+    </div>
+    <div class="btn-left">
+        <a href="{{ path('planet') }}" class="btn btn-left"><span>{{ 'planet'|trans }}</span></a>
+    </div>
+    <div class="btn-left">
+        <a href="{{ path('search') }}" class="btn btn-left"><span>{{ 'search'|trans }}</span></a>
+    </div>
+    <div class="btn-left">
+        <a href="{{ path('ally') }}" class="btn btn-left"><span>{{ 'ally'|trans }}</span></a>
+    </div>
+    <div class="btn-left">
+        <a href="{{ path('galaxy') }}" class="btn btn-left"><span>{{ 'galaxy'|trans }}</span></a>
+    </div>
+    <div class="btn-left">
+        <a href="{{ path('map') }}" class="btn btn-left"><span>{{ 'map'|trans }}</span></a>
+    </div>
+    <div class="btn-left">
+        <a href="{{ path('product') }}" class="btn btn-left"><span>{{ 'product'|trans }}</span></a>
+    </div>
+    <div class="btn-left">
+        <a href="{{ path('building') }}" class="btn btn-left"><span>{{ 'building'|trans }}</span></a>
+    </div>
+    <div class="btn-left">
+        <a href="{{ path('spatial') }}" class="btn btn-left"><span>{{ 'spatial'|trans }}</span></a>
+    </div>
+    <div class="btn-left">
+        <a href="{{ path('soldier') }}" class="btn btn-left"><span>{{ 'soldier'|trans }}</span></a>
+    </div>
+    <div class="btn-left">
+        <a href="{{ path('ground') }}" class="btn btn-left"><span>{{ 'ground'|trans }}</span></a>
+    </div>
+    <div class="btn-left">
+        <a href="{{ path('message') }}" class="btn btn-left"><span>{{ 'message'|trans }}</span></a>
+    </div>
+    <div class="btn-left">
+        <a href="{{ path('report') }}" class="btn btn-left"><span>{{ 'report'|trans }}</span></a>
+    </div>
+    <div class="btn-left-bottom">
+        <a href="{{ path('salon') }}" class="btn btn-left"><span>{{ 'salon'|trans }}</span></a>
     </div>
     <div>
-        <a href="{{ path('overview') }}" class="btn btn-info"><span>{{ 'globalView'|trans }}</span></a>
-    </div>
-    <div>
-        <a href="{{ path('dailyCost') }}" class="btn btn-info"><span>{{ 'dailyCost'|trans }}</span></a>
-    </div>
-    <div>
-        <a href="{{ path('fleet') }}" class="btn btn-info"><span>{{ 'fleet'|trans }}</span></a>
-    </div>
-    <div>
-        <a href="{{ path('planet') }}" class="btn btn-info"><span>{{ 'planet'|trans }}</span></a>
-    </div>
-    <div>
-        <a href="{{ path('search') }}" class="btn btn-info"><span>{{ 'search'|trans }}</span></a>
-    </div>
-    <div>
-        <a href="{{ path('ally') }}" class="btn btn-info"><span>{{ 'ally'|trans }}</span></a>
-    </div>
-    <div>
-        <a href="{{ path('galaxy') }}" class="btn btn-info"><span>{{ 'galaxy'|trans }}</span></a>
-    </div>
-    <div>
-        <a href="{{ path('map') }}" class="btn btn-info"><span>{{ 'map'|trans }}</span></a>
-    </div>
-    <div>
-        <a href="{{ path('product') }}" class="btn btn-info"><span>{{ 'product'|trans }}</span></a>
-    </div>
-    <div>
-        <a href="{{ path('building') }}" class="btn btn-info"><span>{{ 'building'|trans }}</span></a>
-    </div>
-    <div>
-        <a href="{{ path('spatial') }}" class="btn btn-info"><span>{{ 'spatial'|trans }}</span></a>
-    </div>
-    <div>
-        <a href="{{ path('soldier') }}" class="btn btn-info"><span>{{ 'soldier'|trans }}</span></a>
-    </div>
-    <div>
-        <a href="{{ path('ground') }}" class="btn btn-info"><span>{{ 'ground'|trans }}</span></a>
-    </div>
-    <div>
-        <a href="{{ path('message') }}" class="btn btn-info"><span>{{ 'message'|trans }}</span></a>
-    </div>
-    <div>
-        <a href="{{ path('report') }}" class="btn btn-info"><span>{{ 'report'|trans }}</span></a>
-    </div>
-    <div>
-        <a href="{{ path('salon') }}" class="btn btn-info"><span>{{ 'salon'|trans }}</span></a>
-    </div>
-    <div>
-        <a href="{{ path('logout') }}" class="btn btn-info my-3"><span>{{ 'disconnect'|trans }}</span></a>
+        <a href="{{ path('logout') }}" class="btn logout my-3"><span>{{ 'disconnect'|trans }}</span></a>
     </div>
 </nav>

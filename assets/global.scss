@@ -2,6 +2,7 @@ $brand-primary: darken(#428bca, 20%);
 $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
+@import 'front/*';
 
 body {
   color: black;
@@ -9,4 +10,8 @@ body {
   background-repeat: repeat;
   background-size: contain;
   padding: 0 4rem 4rem 4rem;
+}
+
+.text-orange {
+  color: #FC7F23;
 }
