@@ -53,29 +53,32 @@ class User implements UserInterface, \Serializable
     protected $createdAt;
 
     /**
-     *
+     * @Assert\File(
+     *     maxSize="400k",
+     *     mimeTypes={"image/png", "image/jpeg", "image/bmp"}
+     * )
      * @Vich\UploadableField(mapping="user_img", fileNameProperty="imageName", size="imageSize" )
      *
      * @var File
      */
-    private $imageFile;
+    private $imageFile= null;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      *
      * @var string
      */
     private $imageName;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      *
      * @var integer
      */
     private $imageSize;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      *
      * @var \DateTime
      */

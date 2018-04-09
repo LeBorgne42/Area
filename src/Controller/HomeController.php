@@ -30,9 +30,9 @@ class HomeController extends Controller
             $user = $form_register->getData();
             $now = new DateTime();
             $user->setCreatedAt($now);
-            $user->setImageName('default.png');
-            $user->setImageSize(5);
-            $user->setUpdatedAt($now);
+//            $user->setImageName('default.png');
+//            $user->setImageSize(5);
+//            $user->setUpdatedAt($now);
             $user->setPassword(password_hash($form_register->get('password')->getData(), PASSWORD_BCRYPT));
             $em->persist($user);
             $em->flush();
