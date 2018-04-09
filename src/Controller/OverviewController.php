@@ -28,7 +28,7 @@ class OverviewController extends Controller
             $em->persist($user);
             $em->flush();
         }
-        return $this->render('overview.html.twig', [
+        return $this->render('left_menu/overview.html.twig', [
             'form_image' => $form_image->createView(),
         ]);
     }

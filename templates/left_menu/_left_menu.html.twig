@@ -2,12 +2,14 @@
 
 <nav class="navbar-left navbar-dark bg-left text-center p-3">
     <div class="logo">
-        {% if app.user.imageFile %}
-            <img height="64" width="64" src="{{ vich_uploader_asset(app.user, 'imageFile') }}">
-        {% else %}
-            <img height="64" width="64" src="{{ asset('img/defaut.png') }}">
-        {% endif %}
-        <div class="modify"><strong>{{ 'modify'|trans }}</strong></div>
+        <div class="modify">
+            {% if app.user.imageFile %}
+                <img height="64" width="64" src="{{ vich_uploader_asset(app.user, 'imageFile') }}">
+            {% else %}
+                <img height="64" width="64" src="{{ asset('img/defaut.png') }}">
+            {% endif %}
+            <div><strong>{{ 'modify'|trans }}</strong></div>
+        </div>
         <div class="text-orange my-4"><strong>{{ 'menu'|trans }}</strong></div>
     </div>
     {{ form_start(form_image,{attr: { hidden: 'hidden'}}) }}

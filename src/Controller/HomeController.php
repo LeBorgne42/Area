@@ -21,6 +21,13 @@ class HomeController extends Controller
         $em = $this->getDoctrine()->getManager();
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
+
+        $allUsers = $em->getRepository('App:User')
+                        ->createQueryBuilder('u')
+                        ->select('count(u)')
+                        ->getQuery()
+                        ->getSingleScalarResult();
+
         $user = new User();
 
         $form_register = $this->createForm(UserRegisterType::class,$user);
@@ -90,6 +97,7 @@ class HomeController extends Controller
             'form_register' => $form_register->createView(),
             'form_recoverPw' => $form_recoverPw->createView(),
             'last_username' => $lastUsername,
+            'allUsers' => $allUsers,
             'error'         => $error,
         ]);
     }
