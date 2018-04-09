@@ -4,6 +4,7 @@ form.email: 'adresse email'
 form.getPassword: 'renvoyer mot de passe'
 form.password: 'mot de passe'
 form.username: Pseudo
+form.image: upload
 form.pseudoEmail: 'pseudo ou email'
 form.register: 's''enregistrer'
 blockOne: 'Premier block de news'
