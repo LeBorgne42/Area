@@ -1,11 +1,28 @@
-menu: 'menu game'
+menu: 'Area v0.1'
 home: Accueil
-interface: tmp
+media: Medias
 easyadmin: 'Pannel Admin'
 logout: Deconnexion
 username: Pseudo
 password: 'mot de passe'
 login: Connexion
 error: 'Pseudo/mot de passe erroné'
-faq: 'F.A.Q'
+faq: F.A.Q
 contact: 'Nous contacter'
+globalView: 'Vue d''ensemble'
+dailyCost: 'Coût d''entretien'
+fleet: Flottes
+planet: Planètes
+search: Recherches
+ally: Alliance
+galaxy: Galaxie
+map: 'Carte spaciale'
+product: Production
+building: Infrastructure
+spatial: 'Chantier spatial'
+soldier: Entraînement
+ground: Orbite
+message: Messagerie
+report: Rapport
+salon: Salon
+disconnect: 'Se déconnecter'

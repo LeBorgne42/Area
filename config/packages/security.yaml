@@ -2,8 +2,8 @@ security:
     encoders:
         App\Entity\User: bcrypt
         App\Entity\Admin:
-            algorithm: bcrypt
-        Symfony\Component\Security\Core\User\User: plaintext
+            algorithm: plaintext
+        Symfony\Component\Security\Core\User\User: bcrypt
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         chain_provider:
@@ -13,7 +13,7 @@ security:
             memory:
                 users:
                     admin:
-                        password: admin
+                        password: $2y$13$P9SnnB/2cS.n47uBArwpfuL0XP8jJc21wGGSoNzC.dWvTmEiQI.Ke
                         roles: [ROLE_ADMIN]
         my_entity_user_provider:
             entity: { class: App\Entity\User}

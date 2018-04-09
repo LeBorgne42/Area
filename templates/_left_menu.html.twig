@@ -1,33 +1,77 @@
 {% trans_default_domain 'front_menu' %}
 
-<div class="card">
-    <div class="card-body">
-        <div class="left side-menu">
-            <div class="topbar-left">
-                <div class="text-center">
-                    <div class="mt-4"><strong>{{ 'menu'|trans }}</strong></div>
-                    <a class="navbar-brand" href="/" title="">
-                        <span class="logo">
-                            <img height="64" src="{{ asset('img/logo.png') }}">
-                        </span>
-                    </a>
+<div class="row">
+    <div class="col-2">
+        <div class="card">
+            <div class="card-body">
+                <div class="left side-menu">
+                    <div class="topbar-left">
+                        <div class="text-center">
+                                <div class="logo">
+                                    <img height="64" src="{{ asset('img/logo.png') }}">
+                                </div>
+                            <div class="mt-4"><strong>{{ 'menu'|trans }}</strong></div>
+                        </div>
+                    </div>
+                    <div class="sidebar-inner slimscrollleft">
+                        <div id="sidebar-menu" class="mt-5">
+                            <div class="text-center">
+                                <div>
+                                    <a href="{{ path('interface') }}" class="btn btn-info"><span>{{ 'globalView'|trans }}</span></a>
+                                </div>
+                                <div>
+                                    <a href="{{ path('interface') }}" class="btn btn-info"><span>{{ 'dailyCost'|trans }}</span></a>
+                                </div>
+                                <div>
+                                    <a href="{{ path('interface') }}" class="btn btn-info"><span>{{ 'fleet'|trans }}</span></a>
+                                </div>
+                                <div>
+                                    <a href="{{ path('interface') }}" class="btn btn-info"><span>{{ 'planet'|trans }}</span></a>
+                                </div>
+                                <div>
+                                    <a href="{{ path('interface') }}" class="btn btn-info"><span>{{ 'search'|trans }}</span></a>
+                                </div>
+                                <div>
+                                    <a href="{{ path('interface') }}" class="btn btn-info"><span>{{ 'ally'|trans }}</span></a>
+                                </div>
+                                <div>
+                                    <a href="{{ path('interface') }}" class="btn btn-info"><span>{{ 'galaxy'|trans }}</span></a>
+                                </div>
+                                <div>
+                                    <a href="{{ path('interface') }}" class="btn btn-info"><span>{{ 'map'|trans }}</span></a>
+                                </div>
+                                <div>
+                                    <a href="{{ path('interface') }}" class="btn btn-info"><span>{{ 'product'|trans }}</span></a>
+                                </div>
+                                <div>
+                                    <a href="{{ path('interface') }}" class="btn btn-info"><span>{{ 'building'|trans }}</span></a>
+                                </div>
+                                <div>
+                                    <a href="{{ path('interface') }}" class="btn btn-info"><span>{{ 'spatial'|trans }}</span></a>
+                                </div>
+                                <div>
+                                    <a href="{{ path('interface') }}" class="btn btn-info"><span>{{ 'soldier'|trans }}</span></a>
+                                </div>
+                                <div>
+                                    <a href="{{ path('interface') }}" class="btn btn-info"><span>{{ 'ground'|trans }}</span></a>
+                                </div>
+                                <div>
+                                    <a href="{{ path('interface') }}" class="btn btn-info"><span>{{ 'message'|trans }}</span></a>
+                                </div>
+                                <div>
+                                    <a href="{{ path('interface') }}" class="btn btn-info"><span>{{ 'report'|trans }}</span></a>
+                                </div>
+                                <div>
+                                    <a href="{{ path('interface') }}" class="btn btn-info"><span>{{ 'salon'|trans }}</span></a>
+                                </div>
+                                <div>
+                                    <a href="{{ path('logout') }}" class="btn btn-info my-3"><span>{{ 'disconnect'|trans }}</span></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
                 </div>
-            </div>
-            <div class="sidebar-inner slimscrollleft">
-                <div id="sidebar-menu" class="mt-5">
-                    <ul>
-                        <li>
-                            <a href="/" class="btn btn-lg btn-primary my-4"><span>{{ 'menu'|trans }}</span></a>
-                        </li>
-                        <li>
-                            <a href="/" class="btn btn-lg btn-primary my-4"><span>{{ 'menu'|trans }}</span></a>
-                        </li>
-                        <li>
-                            <a href="/" class="btn btn-lg btn-primary my-4"><span>{{ 'menu'|trans }}</span></a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="clearfix"></div>
             </div>
         </div>
     </div>

@@ -19,6 +19,7 @@ class HomeController extends Controller
      */
     public function index(Request $request, AuthenticationUtils $authenticationUtils, \Swift_Mailer $mailer)
     {
+        $em = $this->getDoctrine()->getManager();
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
         $user = new User();
@@ -31,7 +32,6 @@ class HomeController extends Controller
             $now = new DateTime();
             $user->setCreatedAt($now);
             $user->setPassword(password_hash($form_register->get('password')->getData(), PASSWORD_BCRYPT));
-            $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
 
@@ -42,19 +42,35 @@ class HomeController extends Controller
         $form_recoverPw->handleRequest($request);
 
         if ($form_recoverPw->isSubmitted()) {
-            $message = (new \Swift_Message('Hello Email'))
-                ->setFrom('borntoswim42@gmail.com')
-                ->setTo($form_recoverPw->get('pseudoEmail')->getData())
-                ->setBody(
-                    $this->renderView(
-                        'emails/registration.html.twig'
-                    ),
-                    'text/html'
-                );
+            $userPw = $em->getRepository('App:User')
+                        ->createQueryBuilder('u')
+                        ->where('u.username = :pseudoEmail OR u.email = :pseudoEmail')
+                        ->setParameter('pseudoEmail', $form_recoverPw->get('pseudoEmail')->getData())
+                        ->getQuery()
+                        ->getOneOrNullResult();
+            if($userPw) {
+                $alpha = ['a', '8', 'c', '&', 'e', 'f', 'g', '5', 'i', '-', 'k', 'l', '(', 'n', 'o'];
 
-            $mailer->send($message);
+                $newPassword = $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)];
+                $userPw->setPassword(password_hash($newPassword, PASSWORD_BCRYPT));
+                $em->persist($userPw);
+                $em->flush();
 
-            return $this->redirectToRoute('home');
+                $message = (new \Swift_Message('Hello Email'))
+                    ->setFrom('borntoswim42@gmail.com')
+                    ->setTo($userPw->getEmail())
+                    ->setBody(
+                        $this->renderView(
+                            'emails/registration.html.twig',
+                            array('password' => $newPassword)
+                        ),
+                        'text/html'
+                    );
+
+                $mailer->send($message);
+
+                return $this->redirectToRoute('home');
+            }
         }
 
         return $this->render('index.html.twig', [

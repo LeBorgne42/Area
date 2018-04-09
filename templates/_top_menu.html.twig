@@ -5,9 +5,9 @@
         <div class="sidebar-inner slimscrollleft">
             <div id="sidebar-menu">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-8">
                         <a class="btn btn-lg btn-primary mx-4" href="/">{{ 'home'|trans }}</a>
-                        <a class="btn btn-lg btn-primary mr-4" href="{{ path('interface') }}">{{ 'interface'|trans }}</a>
+                        <a class="btn btn-lg btn-primary mr-4" href="{{ path('interface') }}">{{ 'media'|trans }}</a>
                         <a class="btn btn-lg btn-primary mr-4" href="{{ path('interface') }}">{{ 'faq'|trans }}</a>
                         <a class="btn btn-lg btn-primary mr-4" href="{{ path('interface') }}">{{ 'contact'|trans }}</a>
                         {% if is_granted('ROLE_ADMIN') %}
@@ -18,7 +18,7 @@
                         {% endif %}
                     </div>
                     {% if app.user is null %}
-                        <div class="col-6 text-right">
+                        <div class="col-4 text-right">
                             <form action="{{ path('login') }}" method="post">
                                 <input type="text" id="username" placeholder="{{ 'username'|trans }}" name="_username" value="{{ last_username }}" />
                                 <input type="password" placeholder="{{ 'password'|trans }}" id="password" name="_password" />

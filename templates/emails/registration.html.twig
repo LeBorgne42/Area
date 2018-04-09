@@ -1,11 +1,9 @@
-<h3>You did it! You registered!</h3>
+<h3>Voici votre mot de passe :</h3>
 
-Hi ! You're successfully registered.
+{{ password }}
 
-{# example, assuming you have a route named "login" #}
 To login, go <a href="{{ url('login') }}">HERE</a>.
 
 Thanks!
 
-{# Makes an absolute URL to the /images/logo.png file #}
 <img src="{{ absolute_url(asset('img/logo.png')) }}">
