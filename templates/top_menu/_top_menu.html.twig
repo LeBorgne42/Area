@@ -7,9 +7,10 @@
                 <div class="row">
                     <div class="col-8">
                         <a class="btn btn-lg btn-primary mx-4" href="/">{{ 'home'|trans }}</a>
-                        <a class="btn btn-lg btn-primary mr-4" href="{{ path('interface') }}">{{ 'media'|trans }}</a>
-                        <a class="btn btn-lg btn-primary mr-4" href="{{ path('interface') }}">{{ 'faq'|trans }}</a>
-                        <a class="btn btn-lg btn-primary mr-4" href="{{ path('interface') }}">{{ 'contact'|trans }}</a>
+                        <a class="btn btn-lg btn-primary mr-4" href="{{ path('media') }}">{{ 'media'|trans }}</a>
+                        <a class="btn btn-lg btn-primary mr-4" href="{{ path('rules') }}">{{ 'rules'|trans }}</a>
+                        <a class="btn btn-lg btn-primary mr-4" href="{{ path('faq') }}">{{ 'faq'|trans }}</a>
+                        <a class="btn btn-lg btn-primary mr-4" href="{{ path('contact') }}">{{ 'contact'|trans }}</a>
                         {% if is_granted('ROLE_ADMIN') %}
                             <a class="btn btn-lg btn-primary mr-4" href="{{ path('easyadmin') }}">{{ 'easyadmin'|trans }}</a>
                         {% endif %}
@@ -20,13 +21,10 @@
                     {% if app.user is null %}
                         <div class="col-4 text-right">
                             <form action="{{ path('login') }}" method="post">
-                                <input type="text" id="username" placeholder="{{ 'username'|trans }}" name="_username" value="{{ last_username }}" />
-                                <input type="password" placeholder="{{ 'password'|trans }}" id="password" name="_password" />
+                                <input type="text" id="username" placeholder="{{ 'username'|trans }}" name="_username"/>
+                                <input type="password" placeholder="{{ 'password'|trans }}" id="password" name="_password"/>
                                 <button class="btn btn-secondary" type="submit">{{ 'login'|trans }}</button>
                             </form>
-                            {% if error %}
-                                <div>{{ 'error'|trans }}</div>
-                            {% endif %}
                         </div>
                     {% endif %}
                 </div>

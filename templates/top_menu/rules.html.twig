@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'front_rules' %}
+
+{% block title %}{{ 'title'|trans }}{% endblock %}
+
+{% block body %}
+    {%- block left_menu -%}
+    {%- endblock -%}
+    {%- block top_menu -%}
+        {% include 'top_menu/_top_menu.html.twig' %}
+    {%- endblock -%}
+    <div class="row my-5">
+        <div class="offset-3 col-6">
+            <div class="card">
+                <div class="card-body text-center">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

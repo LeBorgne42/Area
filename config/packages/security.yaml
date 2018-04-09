@@ -24,7 +24,7 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            pattern: ^/
+            pattern: ^/plop
             provider: chain_provider
             anonymous: ~
             form_login:
@@ -48,5 +48,6 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/user, roles: ROLE_USER }
+        - { path: ^/media, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/plop, roles: ROLE_USER }
         - { path: ^/admin-edr, roles: ROLE_ADMIN }
