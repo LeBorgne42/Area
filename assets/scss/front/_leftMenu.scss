@@ -1,20 +1,33 @@
 .btn-left {
-  color: #fff;
   border-left: 1px solid #17a2b8;
   border-right: 1px solid #17a2b8;
   border-top: 1px solid #17a2b8;
-  border-radius: 1px;
+  padding: .5rem 1rem;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  border-radius: .3rem;
+  a {
+    color: #fff;
+  }
   :hover {
     color: #FC7F23;
+    text-decoration: none;
   }
 }
 
 .btn-left-bottom {
   color: #fff;
   border: 1px solid #17a2b8;
-  border-radius: 1px;
+  padding: .5rem 1rem;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  border-radius: .3rem;
+  a {
+    color: #fff;
+  }
   :hover {
     color: #FC7F23;
+    text-decoration: none;
   }
 }
 
@@ -25,8 +38,11 @@
 }
 
 .logout {
-  color: #fff;
+  a {
+    color: #fff;
+  }
   :hover {
-    color: red;
+    color: #FC7F23;
+    text-decoration: none;
   }
 }

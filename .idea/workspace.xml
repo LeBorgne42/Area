@@ -2,30 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97f042ea-d0ee-4bd9-bb02-3d850e24f659" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/assets/global.scss" afterPath="$PROJECT_DIR$/assets/global.scss" />
       <change beforePath="$PROJECT_DIR$/assets/scss/front/_leftMenu.scss" afterPath="$PROJECT_DIR$/assets/scss/front/_leftMenu.scss" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html.twig" afterPath="$PROJECT_DIR$/templates/index.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/left_menu/ally.html.twig" afterPath="$PROJECT_DIR$/templates/left_menu/ally.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/left_menu/building.html.twig" afterPath="$PROJECT_DIR$/templates/left_menu/building.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/left_menu/dailyCost.html.twig" afterPath="$PROJECT_DIR$/templates/left_menu/dailyCost.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/left_menu/fleet.html.twig" afterPath="$PROJECT_DIR$/templates/left_menu/fleet.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/left_menu/galaxy.html.twig" afterPath="$PROJECT_DIR$/templates/left_menu/galaxy.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/left_menu/ground.html.twig" afterPath="$PROJECT_DIR$/templates/left_menu/ground.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/left_menu/map.html.twig" afterPath="$PROJECT_DIR$/templates/left_menu/map.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/left_menu/message.html.twig" afterPath="$PROJECT_DIR$/templates/left_menu/message.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/left_menu/planet.html.twig" afterPath="$PROJECT_DIR$/templates/left_menu/planet.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/left_menu/product.html.twig" afterPath="$PROJECT_DIR$/templates/left_menu/product.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/left_menu/report.html.twig" afterPath="$PROJECT_DIR$/templates/left_menu/report.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/left_menu/salon.html.twig" afterPath="$PROJECT_DIR$/templates/left_menu/salon.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/left_menu/search.html.twig" afterPath="$PROJECT_DIR$/templates/left_menu/search.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/left_menu/soldier.html.twig" afterPath="$PROJECT_DIR$/templates/left_menu/soldier.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/left_menu/spatial.html.twig" afterPath="$PROJECT_DIR$/templates/left_menu/spatial.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/overview.html.twig" afterPath="$PROJECT_DIR$/templates/overview.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/top_menu/_top_menu.html.twig" afterPath="$PROJECT_DIR$/templates/top_menu/_top_menu.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/top_menu/contact.html.twig" afterPath="$PROJECT_DIR$/templates/top_menu/contact.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/top_menu/faq.html.twig" afterPath="$PROJECT_DIR$/templates/top_menu/faq.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/top_menu/media.html.twig" afterPath="$PROJECT_DIR$/templates/top_menu/media.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/top_menu/rules.html.twig" afterPath="$PROJECT_DIR$/templates/top_menu/rules.html.twig" />
+      <change beforePath="$PROJECT_DIR$/public/img/wall.png" afterPath="$PROJECT_DIR$/public/img/wall.png" />
+      <change beforePath="$PROJECT_DIR$/templates/left_menu/_left_menu.html.twig" afterPath="$PROJECT_DIR$/templates/left_menu/_left_menu.html.twig" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -39,11 +20,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="_topMenu.scss" pinned="false" current-in-tab="true">
+      <file leaf-file-name="_topMenu.scss" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/scss/front/_topMenu.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="17" lean-forward="false" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
+            <state relative-caret-position="90">
+              <caret line="6" column="23" lean-forward="false" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_leftMenu.scss" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/scss/front/_leftMenu.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-3">
+              <caret line="4" column="22" lean-forward="true" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -59,21 +50,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/index.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="639">
-              <caret line="49" column="10" lean-forward="false" selection-start-line="38" selection-start-column="4" selection-end-line="49" selection-end-column="10" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_left_menu.html.twig" pinned="false" current-in-tab="false">
+      <file leaf-file-name="_left_menu.html.twig" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/left_menu/_left_menu.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="36" lean-forward="false" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="43" />
+            <state relative-caret-position="404">
+              <caret line="30" column="10" lean-forward="true" selection-start-line="30" selection-start-column="10" selection-end-line="30" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -154,10 +135,8 @@
         <option value="$PROJECT_DIR$/src/Controller/LeftMenu/SearchController.php" />
         <option value="$PROJECT_DIR$/src/Controller/LeftMenu/PlanetController.php" />
         <option value="$PROJECT_DIR$/src/Controller/LeftMenu/AllyController.php" />
-        <option value="$PROJECT_DIR$/templates/left_menu/_left_menu.html.twig" />
         <option value="$PROJECT_DIR$/assets/scss/front/leftMenu.scss" />
         <option value="$PROJECT_DIR$/assets/scss/global.scss" />
-        <option value="$PROJECT_DIR$/templates/base.html.twig" />
         <option value="$PROJECT_DIR$/templates/overview.html.twig" />
         <option value="$PROJECT_DIR$/templates/left_menu/ally.html.twig" />
         <option value="$PROJECT_DIR$/templates/left_menu/building.html.twig" />
@@ -174,15 +153,17 @@
         <option value="$PROJECT_DIR$/templates/left_menu/search.html.twig" />
         <option value="$PROJECT_DIR$/templates/left_menu/soldier.html.twig" />
         <option value="$PROJECT_DIR$/templates/left_menu/spatial.html.twig" />
-        <option value="$PROJECT_DIR$/assets/scss/front/_leftMenu.scss" />
         <option value="$PROJECT_DIR$/templates/top_menu/faq.html.twig" />
         <option value="$PROJECT_DIR$/templates/top_menu/media.html.twig" />
         <option value="$PROJECT_DIR$/templates/top_menu/rules.html.twig" />
         <option value="$PROJECT_DIR$/templates/top_menu/contact.html.twig" />
-        <option value="$PROJECT_DIR$/assets/global.scss" />
         <option value="$PROJECT_DIR$/templates/top_menu/_top_menu.html.twig" />
         <option value="$PROJECT_DIR$/templates/index.html.twig" />
+        <option value="$PROJECT_DIR$/assets/global.scss" />
+        <option value="$PROJECT_DIR$/templates/base.html.twig" />
         <option value="$PROJECT_DIR$/assets/scss/front/_topMenu.scss" />
+        <option value="$PROJECT_DIR$/assets/scss/front/_leftMenu.scss" />
+        <option value="$PROJECT_DIR$/templates/left_menu/_left_menu.html.twig" />
       </list>
     </option>
   </component>
@@ -418,12 +399,12 @@
       <workItem from="1523144551257" duration="1460000" />
       <workItem from="1523176702071" duration="31919000" />
       <workItem from="1523244272184" duration="580000" />
-      <workItem from="1523280628719" duration="13258000" />
+      <workItem from="1523280628719" duration="14358000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="67524000" />
+    <option name="totallyTimeSpent" value="68624000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -694,14 +675,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="41" lean-forward="false" selection-start-line="20" selection-start-column="41" selection-end-line="20" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/overview.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -822,14 +795,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/scss/front/_leftMenu.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="20" lean-forward="false" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/left_menu/galaxy.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -870,18 +835,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/global.scss">
+    <entry file="file://$PROJECT_DIR$/templates/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="42" column="1" lean-forward="true" selection-start-line="42" selection-start-column="1" selection-end-line="42" selection-end-column="14" />
+        <state relative-caret-position="639">
+          <caret line="49" column="10" lean-forward="false" selection-start-line="38" selection-start-column="4" selection-end-line="49" selection-end-column="10" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/left_menu/_left_menu.html.twig">
+    <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="36" lean-forward="false" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="43" />
+        <state relative-caret-position="90">
+          <caret line="6" column="74" lean-forward="true" selection-start-line="6" selection-start-column="74" selection-end-line="6" selection-end-column="74" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/global.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="44" lean-forward="false" selection-start-line="9" selection-start-column="44" selection-end-line="9" selection-end-column="44" />
           <folding />
         </state>
       </provider>
@@ -894,18 +867,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/index.html.twig">
+    <entry file="file://$PROJECT_DIR$/assets/scss/front/_topMenu.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="639">
-          <caret line="49" column="10" lean-forward="false" selection-start-line="38" selection-start-column="4" selection-end-line="49" selection-end-column="10" />
+        <state relative-caret-position="90">
+          <caret line="6" column="23" lean-forward="false" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/scss/front/_topMenu.scss">
+    <entry file="file://$PROJECT_DIR$/assets/scss/front/_leftMenu.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="17" lean-forward="false" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
+        <state relative-caret-position="-3">
+          <caret line="4" column="22" lean-forward="true" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/left_menu/_left_menu.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="404">
+          <caret line="30" column="10" lean-forward="true" selection-start-line="30" selection-start-column="10" selection-end-line="30" selection-end-column="10" />
           <folding />
         </state>
       </provider>

@@ -7,9 +7,10 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 
 body {
   color: black;
-  background-image: url("../public/img/wall.png");
-  background-repeat: repeat;
-  background-size: contain;
+  background-image: url("../public/img/wall2.png");
+  background-size: cover;
+  max-width: 100%;
+  height: auto;
   padding: 0 4rem 4rem 4rem;
 }
 
