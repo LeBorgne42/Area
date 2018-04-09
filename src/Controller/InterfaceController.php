@@ -4,12 +4,12 @@ namespace App\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use App\Form\Front\UserImageType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
- * Page controller.
- *
- * @Route("/user")
+ * @Route("/plop")
  * @Security("has_role('ROLE_USER')")
  */
 class InterfaceController extends Controller
@@ -18,10 +18,18 @@ class InterfaceController extends Controller
      * @Route("/interface", name="interface")
      * @Route("/interface/", name="interface_withSlash")
      */
-    public function index()
+    public function interfaceAction(Request $request)
     {
-        return $this->render('interface/index.html.twig', [
-            'controller_name' => 'InterfaceController',
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $form_image = $this->createForm(UserImageType::class,$user);
+        $form_image->handleRequest($request);
+        if ($form_image->isSubmitted() && $form_image->isValid()) {
+            $em->persist($user);
+            $em->flush();
+        }
+        return $this->render('interface/overview.html.twig', [
+            'form_image' => $form_image->createView(),
         ]);
     }
 }

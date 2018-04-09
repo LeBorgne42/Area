@@ -8,7 +8,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use App\Entity\User;
 use App\Form\Front\UserRegisterType;
-use App\Form\Front\UserConnectType;
 use App\Form\Front\UserRecoveryType;
 use DateTime;
 
@@ -31,6 +30,9 @@ class HomeController extends Controller
             $user = $form_register->getData();
             $now = new DateTime();
             $user->setCreatedAt($now);
+            $user->setImageName('default.png');
+            $user->setImageSize(5);
+            $user->setUpdatedAt($now);
             $user->setPassword(password_hash($form_register->get('password')->getData(), PASSWORD_BCRYPT));
             $em->persist($user);
             $em->flush();

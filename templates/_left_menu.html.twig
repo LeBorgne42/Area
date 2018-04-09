@@ -7,10 +7,16 @@
                 <div class="left side-menu">
                     <div class="topbar-left">
                         <div class="text-center">
-                                <div class="logo">
-                                    <img height="64" src="{{ asset('img/logo.png') }}">
-                                </div>
-                            <div class="mt-4"><strong>{{ 'menu'|trans }}</strong></div>
+                            <div class="logo">
+                                <img height="64" src="{{ vich_uploader_asset(app.user, 'imageFile') }}">
+                            </div>
+                            <div class="logo" height="64">
+                                {{ form_start(form_image) }}
+                                {{ form_widget(form_image.imageFile) }}
+                                {{ form_widget(form_image.sendForm,{attr: { class: 'btn btn-secondary'}}) }}
+                                {{ form_end(form_image) }}
+                                <div class="mt-4"><strong>{{ 'menu'|trans }}</strong></div>
+                            </div>
                         </div>
                     </div>
                     <div class="sidebar-inner slimscrollleft">
