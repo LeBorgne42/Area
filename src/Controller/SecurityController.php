@@ -16,7 +16,7 @@ class SecurityController extends Controller
     public function loginAction(Request $request, AuthenticationUtils $authenticationUtils)
     {
         if ($this->getUser()) {
-            return $this->redirectToRoute('interface');
+            return $this->redirectToRoute('overview');
         }
 
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -44,7 +44,7 @@ class SecurityController extends Controller
     public function loginRedirectAction(Request $request)
     {
         if ($this->getUser()->getRoles()[0] == 'ROLE_USER') {
-            return $this->redirectToRoute('interface');
+            return $this->redirectToRoute('overview');
         }
         if ($this->getUser()->getRoles()[0] == 'ROLE_ADMIN') {
             return $this->redirectToRoute('easyadmin');

@@ -23,9 +23,8 @@ class AdminRepository extends ServiceEntityRepository implements UserLoaderInter
     public function loadUserByUsername($username)
     {
         return $this->createQueryBuilder('a')
-            ->where('a.username = :username OR a.email = :email')
+            ->where('a.username = :username OR a.email = :username')
             ->setParameter('username', $username)
-            ->setParameter('email', $username)
             ->getQuery()
             ->getOneOrNullResult();
     }

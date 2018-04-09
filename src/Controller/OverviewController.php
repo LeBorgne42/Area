@@ -9,16 +9,16 @@ use App\Form\Front\UserImageType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
- * @Route("/plop")
+ * @Route("/a")
  * @Security("has_role('ROLE_USER')")
  */
-class InterfaceController extends Controller
+class OverviewController extends Controller
 {
     /**
-     * @Route("/interface", name="interface")
-     * @Route("/interface/", name="interface_withSlash")
+     * @Route("/empire", name="overview")
+     * @Route("/empire/", name="overview_withSlash")
      */
-    public function interfaceAction(Request $request)
+    public function overviewAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
@@ -28,7 +28,7 @@ class InterfaceController extends Controller
             $em->persist($user);
             $em->flush();
         }
-        return $this->render('interface/overview.html.twig', [
+        return $this->render('overview.html.twig', [
             'form_image' => $form_image->createView(),
         ]);
     }

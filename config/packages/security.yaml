@@ -13,7 +13,7 @@ security:
             memory:
                 users:
                     admin:
-                        password: $2y$13$P9SnnB/2cS.n47uBArwpfuL0XP8jJc21wGGSoNzC.dWvTmEiQI.Ke
+                        password: $2y$13$btsT96GfhIp4Ze1v3u73/ey5cQUVUUSEzqw2MVLJKUCi3YNglRea6
                         roles: [ROLE_ADMIN]
         my_entity_user_provider:
             entity: { class: App\Entity\User}
@@ -24,7 +24,7 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            pattern: ^/plop
+            pattern: ^/
             provider: chain_provider
             anonymous: ~
             form_login:
@@ -48,6 +48,5 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/media, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/plop, roles: ROLE_USER }
+        - { path: ^/a, roles: ROLE_USER }
         - { path: ^/admin-edr, roles: ROLE_ADMIN }

@@ -8,6 +8,7 @@ password: 'mot de passe'
 login: Connexion
 error: 'Pseudo/mot de passe erroné'
 faq: F.A.Q
+overview: Empire
 contact: 'Nous contacter'
 globalView: 'Vue d''ensemble'
 dailyCost: 'Coût d''entretien'

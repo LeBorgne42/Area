@@ -37,7 +37,7 @@ class HomeController extends Controller
             $em->persist($user);
             $em->flush();
 
-            return $this->redirectToRoute('register');
+            return $this->redirectToRoute('home');
         }
 
         $form_recoverPw = $this->createForm(UserRecoveryType::class,$user);
