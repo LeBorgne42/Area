@@ -13,51 +13,39 @@
     {%- endblock -%}
 
     {% if app.user is null %}
-        <div class="row my-5">
-            <div class="offset-3 col-6">
-                <div class="wrapper-page">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            <div class="row">
-                                <div class="col-12 mb-5">
-                                    {{ form_start(form_register) }}
-                                    {{ form_widget(form_register.username) }}
-                                    {{ form_widget(form_register.password) }}
-                                    {{ form_widget(form_register.email) }}
-                                    {{ form_widget(form_register.sendForm,{attr: { class: 'btn btn-secondary'}}) }}
-                                    {{ form_end(form_register) }}
-                                </div>
-                                <div class="col-12">
-                                    {{ form_start(form_recoverPw) }}
-                                    {{ form_widget(form_recoverPw.pseudoEmail) }}
-                                    {{ form_widget(form_recoverPw.sendForm,{attr: { class: 'btn btn-secondary'}}) }}
-                                    {{ form_end(form_recoverPw) }}
-                                </div>
-                            </div>
+        <div class="row">
+            <div class="offset-1 col-10">
+                <div class="unlogin-block">
+                    <div class="row">
+                        <div class="col-12 mb-5">
+                            {{ form_start(form_register) }}
+                            {{ form_widget(form_register.username) }}
+                            {{ form_widget(form_register.password) }}
+                            {{ form_widget(form_register.email) }}
+                            {{ form_widget(form_register.sendForm,{attr: { class: 'btn btn-secondary'}}) }}
+                            {{ form_end(form_register) }}
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row my-5">
-            <div class="col-6">
-                <div class="wrapper-page">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            {{ 'blockOne'|trans }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="wrapper-page">
-                    <div class="card">
-                        <div class="card-body text-center">
-                            {{ 'blockTwo'|trans }}
+                        <div class="col-12">
+                            {{ form_start(form_recoverPw) }}
+                            {{ form_widget(form_recoverPw.pseudoEmail) }}
+                            {{ form_widget(form_recoverPw.sendForm,{attr: { class: 'btn btn-secondary'}}) }}
+                            {{ form_end(form_recoverPw) }}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     {% endif %}
+    <div class="row my-5">
+        <div class="col-6">
+            <div class="unlogin-block">
+                {{ 'blockOne'|trans }}
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="unlogin-block">
+                {{ 'blockTwo'|trans }}
+            </div>
+        </div>
+    </div>
 {% endblock %}

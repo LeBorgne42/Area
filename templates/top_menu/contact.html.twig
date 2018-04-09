@@ -10,16 +10,14 @@
     {%- block top_menu -%}
         {% include 'top_menu/_top_menu.html.twig' %}
     {%- endblock -%}
-    <div class="row my-5">
-        <div class="offset-3 col-6">
-            <div class="card">
-                <div class="card-body text-center">
-                    {{ form_start(form_contact) }}
-                    {{ form_widget(form_contact.text) }}
-                    {{ form_widget(form_contact.email) }}
-                    {{ form_widget(form_contact.sendForm,{attr: { class: 'btn btn-secondary'}}) }}
-                    {{ form_end(form_contact) }}
-                </div>
+    <div class="row">
+        <div class="offset-1 col-10">
+            <div class="front-block text-center">
+                {{ form_start(form_contact) }}
+                {{ form_widget(form_contact.text) }}
+                {{ form_widget(form_contact.email) }}
+                {{ form_widget(form_contact.sendForm,{attr: { class: 'btn btn-secondary'}}) }}
+                {{ form_end(form_contact) }}
             </div>
         </div>
     </div>

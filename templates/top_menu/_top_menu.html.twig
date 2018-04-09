@@ -1,17 +1,17 @@
 {% trans_default_domain 'front_menu' %}
 
-<div class="navbar navbar-dark bg-dark">
-    <a class="btn btn-lg btn-primary" href="/">{{ 'home'|trans }}</a>
-    <a class="btn btn-lg btn-primary" href="{{ path('overview') }}">{{ 'overview'|trans }}</a>
-    <a class="btn btn-lg btn-primary" href="{{ path('media') }}">{{ 'media'|trans }}</a>
-    <a class="btn btn-lg btn-primary" href="{{ path('rules') }}">{{ 'rules'|trans }}</a>
-    <a class="btn btn-lg btn-primary" href="{{ path('faq') }}">{{ 'faq'|trans }}</a>
-    <a class="btn btn-lg btn-primary" href="{{ path('contact') }}">{{ 'contact'|trans }}</a>
+<div class="navbar navbar-dark bg-top">
+    <a class="btn-top" href="/">{{ 'home'|trans }}</a>
+    <a class="btn-top" href="{{ path('overview') }}">{{ 'overview'|trans }}</a>
+    <a class="btn-top" href="{{ path('media') }}">{{ 'media'|trans }}</a>
+    <a class="btn-top" href="{{ path('rules') }}">{{ 'rules'|trans }}</a>
+    <a class="btn-top" href="{{ path('faq') }}">{{ 'faq'|trans }}</a>
+    <a class="btn-top" href="{{ path('contact') }}">{{ 'contact'|trans }}</a>
     {% if is_granted('ROLE_ADMIN') %}
-        <a class="btn btn-lg btn-primary" href="{{ path('easyadmin') }}">{{ 'easyadmin'|trans }}</a>
+        <a class="btn-top" href="{{ path('easyadmin') }}">{{ 'easyadmin'|trans }}</a>
     {% endif %}
     {% if app.user %}
-        <a class="btn btn-lg btn-primary" href="{{ path('logout') }}">{{ 'logout'|trans }}</a>
+        <a class="btn-top" href="{{ path('logout') }}">{{ 'logout'|trans }}</a>
     {% endif %}
     {% if app.user is null %}
         <div class="text-right">
