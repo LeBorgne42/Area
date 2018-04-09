@@ -30,14 +30,25 @@ class HomeController extends Controller
             $user = $form_register->getData();
             $now = new DateTime();
             $user->setCreatedAt($now);
-//            $user->setImageName('default.png');
-//            $user->setImageSize(5);
-//            $user->setUpdatedAt($now);
             $user->setPassword(password_hash($form_register->get('password')->getData(), PASSWORD_BCRYPT));
             $em->persist($user);
             $em->flush();
 
-            return $this->redirectToRoute('home');
+            $message = (new \Swift_Message('Confirmation email'))
+                ->setFrom('borntoswim42@gmail.com')
+                ->setTo($user->getEmail())
+                ->setBody(
+                    $this->renderView(
+                        'emails/registration.html.twig',
+                        array('password' => $form_register->get('password')->getData())
+                    ),
+                    'text/html'
+                );
+
+            $mailer->send($message);
+
+            $this->addFlash("success", "This is a success message");
+            return $this->redirectToRoute('login');
         }
 
         $form_recoverPw = $this->createForm(UserRecoveryType::class,$user);
@@ -63,7 +74,7 @@ class HomeController extends Controller
                     ->setTo($userPw->getEmail())
                     ->setBody(
                         $this->renderView(
-                            'emails/registration.html.twig',
+                            'emails/recoveryPw.html.twig',
                             array('password' => $newPassword)
                         ),
                         'text/html'

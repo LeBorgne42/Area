@@ -51,4 +51,13 @@ class SecurityController extends Controller
         }
         return $this->redirectToRoute('logout');
     }
+
+    /**
+     * @Route("/confirmation-email", name="confirmEmail")
+     * @Route("/confirmation-email/", name="confirmEmail_noSlash")
+     */
+    public function confirmEmailAction()
+    {
+        return $this->redirectToRoute('login');
+    }
 }
