@@ -9,7 +9,7 @@
         <div class="offset-1 col-10">
             <div class="wrapper-page">
                 <div class="text-center">
-                    {{ form_start(form_contact) }}
+                    {{ form_start(form_contact,{attr: { action: path('contact') }}) }}
                     <div class="form-group">
                         {{ form_widget(form_contact.text) }}
                     </div>

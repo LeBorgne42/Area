@@ -9,7 +9,7 @@
         <div class="offset-1 col-10">
             <div class="wrapper-page">
                 <div class="text-center">
-                    {{ form_start(form_recoverPw) }}
+                    {{ form_start(form_recoverPw,{attr: { action: path('recoveryPw') }}) }}
                     <div class="form-group">
                         {{ form_widget(form_recoverPw.pseudoEmail) }}
                     </div>
