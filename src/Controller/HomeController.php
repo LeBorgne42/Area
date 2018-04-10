@@ -108,7 +108,7 @@ class HomeController extends Controller
      */
     public function pwRecoveryAction(Request $request, \Swift_Mailer $mailer)
     {
-        $message = (new \Swift_Message('Hello Email'))
+        $message = (new \Swift_Message('Reclamation de joueur'))
             ->setFrom('borntoswim42@gmail.com')
             ->setTo($user->getEmail())
             ->setBody(
