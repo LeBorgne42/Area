@@ -46,7 +46,7 @@ class TopMenuController extends Controller
         $form_contact->handleRequest($request);
 
         if ($form_contact->isSubmitted()) {
-            $message = (new \Swift_Message('Hello Email'))
+            $message = (new \Swift_Message('Reclamation joueur'))
                 ->setFrom('borntoswim42@gmail.com')
                 ->setTo('rivierematthieupro@gmail.com')
                 ->setBody(
@@ -59,7 +59,8 @@ class TopMenuController extends Controller
 
             $mailer->send($message);
 
-            return $this->redirectToRoute('home');
+            $this->addFlash("success", "This is a success message");
+            return $this->redirectToRoute('faq');
         }
 
         return $this->render('top_menu/contact.html.twig', [

@@ -33,3 +33,14 @@ modify: modifier
 tooltip.modify: 'Modifier votre image en cliquant ici !'
 popover.title: 'Note version 0.1'
 popover.text: 'Actuellement en developpement, le jeu n''en est qu''à l''elaboration de sa page d''accueil et de connexion.'
+modal.to: 'Nouveau message à l''admin'
+modal.from: 'Votre email :'
+modal.text: 'Message :'
+modal.close: Fermer
+modal.save: Envoyer
+register: Inscription
+modal.title: 'Créer un compte'
+modal.pseudo: Pseudo
+modal.password: 'Mot de passe'
+modal.email: Email
+recoveryPw: 'Mot de passe oublié'

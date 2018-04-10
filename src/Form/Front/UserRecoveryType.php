@@ -23,9 +23,9 @@ class UserRecoveryType extends AbstractType
                     'label' => 'form.pseudoEmail',
                     'attr'  => array(
                         'placeholder' => 'form.pseudoEmail',
-                        'class' => ''
+                        'class' => 'form-control',
+                        'minlength' => '4',
                     ),
-                    'mapped' => false,
                 )
             )
             ->add('sendForm', SubmitType::class, array('label' => 'form.getPassword'));
@@ -38,8 +38,8 @@ class UserRecoveryType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class'         => 'App\Entity\User',
-                'translation_domain' => 'front_index',
+                'data_class'         => null,
+                'translation_domain' => 'front_recoveryPw',
             )
         );
     }

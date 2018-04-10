@@ -6,7 +6,10 @@
     <a class="btn-top" href="{{ path('media') }}">{{ 'media'|trans }}</a>
     <a class="btn-top" href="{{ path('rules') }}">{{ 'rules'|trans }}</a>
     <a class="btn-top" href="{{ path('faq') }}">{{ 'faq'|trans }}</a>
-    <a class="btn-top" href="{{ path('contact') }}">{{ 'contact'|trans }}</a>
+    <a class="btn-top" href="{{ path('contact') }}" data-toggle="modal" data-target="#contactModal" data-whatever="@">{{ 'contact'|trans }}</a>
+    {% if app.user is null %}
+        <a class="btn-top" href="{{ path('register') }}" data-toggle="modal" data-target="#openModal">{{ 'register'|trans }}</a>
+    {% endif %}
     {% if is_granted('ROLE_ADMIN') %}
         <a class="btn-top" href="{{ path('easyadmin') }}">{{ 'easyadmin'|trans }}</a>
     {% endif %}
@@ -22,7 +25,22 @@
             </form>
         </div>
     {% endif %}
+    {% if app.user is null %}
+        <a class="btn-top" href="{{ path('recoveryPw') }}" data-toggle="modal" data-target="#openModal">{{ 'recoveryPw'|trans }}</a>
+    {% endif %}
     <div class="footer">
         <a href="http://www.facebook.com/" target="_blank">{{ 'footer'|trans }}</a>
+    </div>
+    <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="openModal" tabindex="-1" role="dialog" aria-labelledby="openModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+            </div>
+        </div>
     </div>
 </div>

@@ -10,7 +10,19 @@ function manageImageForm() {
     });
 }
 
+function manageModalContact() {
+    $('#contactModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var recipient = button.data('whatever');
+        var title = $('#contactModalLabel').text();
+        var modal = $(this);
+        modal.find('.modal-title').text(title);
+        modal.find('.modal-body input.form-control').val(recipient);
+    });
+}
+
 $(document).ready(function() {
     $('[data-toggle="popover"]').popover();
     manageImageForm();
+    manageModalContact();
 });

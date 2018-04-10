@@ -5,122 +5,55 @@ namespace App\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use App\Entity\User;
-use App\Form\Front\UserRegisterType;
-use App\Form\Front\UserRecoveryType;
-use DateTime;
+//use App\Entity\User;
+//use App\Form\Front\UserRegisterType;
 
 class HomeController extends Controller
 {
     /**
      * @Route("/", name="home")
      */
-    public function index(Request $request, AuthenticationUtils $authenticationUtils, \Swift_Mailer $mailer)
+    public function index(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $error = $authenticationUtils->getLastAuthenticationError();
-        $lastUsername = $authenticationUtils->getLastUsername();
-
         $allUsers = $em->getRepository('App:User')
                         ->createQueryBuilder('u')
                         ->select('count(u)')
                         ->getQuery()
                         ->getSingleScalarResult();
 
-        $user = new User();
-
-        $form_register = $this->createForm(UserRegisterType::class,$user);
-        $form_register->handleRequest($request);
-
-        if ($form_register->isSubmitted() && $form_register->isValid()) {
-            $user = $form_register->getData();
-            $now = new DateTime();
-            $user->setCreatedAt($now);
-            $user->setPassword(password_hash($form_register->get('password')->getData(), PASSWORD_BCRYPT));
-            $em->persist($user);
-            $em->flush();
-
-            $message = (new \Swift_Message('Confirmation email'))
-                ->setFrom('borntoswim42@gmail.com')
-                ->setTo($user->getEmail())
-                ->setBody(
-                    $this->renderView(
-                        'emails/registration.html.twig',
-                        array('password' => $form_register->get('password')->getData())
-                    ),
-                    'text/html'
-                );
-
-            $mailer->send($message);
-
-            $this->addFlash("success", "This is a success message");
-            return $this->redirectToRoute('login');
-        }
-
-        $form_recoverPw = $this->createForm(UserRecoveryType::class,$user);
-        $form_recoverPw->handleRequest($request);
-
-        if ($form_recoverPw->isSubmitted()) {
-            $userPw = $em->getRepository('App:User')
-                        ->createQueryBuilder('u')
-                        ->where('u.username = :pseudoEmail OR u.email = :pseudoEmail')
-                        ->setParameter('pseudoEmail', $form_recoverPw->get('pseudoEmail')->getData())
-                        ->getQuery()
-                        ->getOneOrNullResult();
-            if($userPw) {
-                $alpha = ['a', '8', 'c', '&', 'e', 'f', 'g', '5', 'i', '-', 'k', 'l', '(', 'n', 'o'];
-
-                $newPassword = $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)];
-                $userPw->setPassword(password_hash($newPassword, PASSWORD_BCRYPT));
-                $em->persist($userPw);
-                $em->flush();
-
-                $message = (new \Swift_Message('Hello Email'))
-                    ->setFrom('borntoswim42@gmail.com')
-                    ->setTo($userPw->getEmail())
-                    ->setBody(
-                        $this->renderView(
-                            'emails/recoveryPw.html.twig',
-                            array('password' => $newPassword)
-                        ),
-                        'text/html'
-                    );
-
-                $mailer->send($message);
-
-                return $this->redirectToRoute('home');
-            }
-        }
+//        $user = new User();
+//        $form_register = $this->createForm(UserRegisterType::class,$user);
+//        $form_register->handleRequest($request);
+//
+//        if ($form_register->isSubmitted() && $form_register->isValid()) {
+//            $user = $form_register->getData();
+//            $now = new DateTime();
+//            $user->setCreatedAt($now);
+//            $user->setPassword(password_hash($form_register->get('password')->getData(), PASSWORD_BCRYPT));
+//            $em->persist($user);
+//            $em->flush();
+//
+//            $message = (new \Swift_Message('Confirmation email'))
+//                ->setFrom('borntoswim42@gmail.com')
+//                ->setTo($user->getEmail())
+//                ->setBody(
+//                    $this->renderView(
+//                        'emails/registration.html.twig',
+//                        array('password' => $form_register->get('password')->getData())
+//                    ),
+//                    'text/html'
+//                );
+//
+//            $mailer->send($message);
+//
+//            $this->addFlash("success", "This is a success message");
+//            return $this->redirectToRoute('login');
+//        }
 
         return $this->render('index.html.twig', [
-            'form_register' => $form_register->createView(),
-            'form_recoverPw' => $form_recoverPw->createView(),
-            'last_username' => $lastUsername,
+//            'form_register' => $form_register->createView(),
             'allUsers' => $allUsers,
-            'error'         => $error,
         ]);
-    }
-
-    /**
-     * @Route("/pw-recovery/", name="pw_recovery")
-     * @Route("/pw-recovery", name="pw_recovery_noSlash")
-     */
-    public function pwRecoveryAction(Request $request, \Swift_Mailer $mailer)
-    {
-        $message = (new \Swift_Message('Reclamation de joueur'))
-            ->setFrom('borntoswim42@gmail.com')
-            ->setTo($user->getEmail())
-            ->setBody(
-                $this->renderView(
-                    'emails/registration.html.twig',
-                    array('name' => $user)
-                ),
-                'text/html'
-            );
-
-        $mailer->send($message);
-
-        return $this->redirectToRoute('home');
     }
 }

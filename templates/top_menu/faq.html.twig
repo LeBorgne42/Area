@@ -13,6 +13,11 @@
     <div class="row">
         <div class="offset-1 col-10">
             <div class="front-block">
+                {% for message in app.flashes('success') %}
+                    <div class="flash-notice text-orange my-3 text-center">
+                        {{ 'confirmContact'|trans }}
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </div>

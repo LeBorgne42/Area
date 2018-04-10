@@ -1,11 +1,15 @@
 title: 'Area Control'
 form.connect: Connexion
-form.email: 'adresse email'
-form.getPassword: 'renvoyer mot de passe'
+form.email: 'Adresse email'
+form.getPassword: 'Renvoyer mot de passe'
 form.password: 'mot de passe'
 form.username: Pseudo
 form.image: upload
-form.pseudoEmail: 'pseudo ou email'
+form.pseudoEmail: 'Pseudo ou email'
 form.register: 's''enregistrer'
 blockOne: '- Il y a actuellement %nbrUsers% joueurs enregistrés sur le jeu.'
 blockTwo: '- Le jeu est actuellement en développement !'
+modal.title: 'Réinitialiser mot de passe'
+modal.txt: 'Êtes vous sûr de vouloir réinitialiser votre mot de passe ?'
+modal.close: Fermer
+modal.save: Envoyer

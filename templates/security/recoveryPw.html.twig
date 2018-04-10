@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% trans_default_domain 'front_contact' %}
+{% trans_default_domain 'front_recoveryPw' %}
 
 {% block body %}
     {%- block left_menu -%}
@@ -9,17 +9,14 @@
         <div class="offset-1 col-10">
             <div class="wrapper-page">
                 <div class="text-center">
-                    {{ form_start(form_contact) }}
+                    {{ form_start(form_recoverPw) }}
                     <div class="form-group">
-                        {{ form_widget(form_contact.text) }}
-                    </div>
-                    <div class="form-group">
-                        {{ form_widget(form_contact.email) }}
+                        {{ form_widget(form_recoverPw.pseudoEmail) }}
                     </div>
                     <div class="form-group text-center mt-5">
-                        {{ form_widget(form_contact.sendForm,{attr: { class: 'btn btn-lg btn-info'}}) }}
+                        {{ form_widget(form_recoverPw.sendForm,{attr: { class: 'btn btn-lg btn-info' }}) }}
                     </div>
-                    {{ form_end(form_contact) }}
+                    {{ form_end(form_recoverPw) }}
                 </div>
             </div>
         </div>

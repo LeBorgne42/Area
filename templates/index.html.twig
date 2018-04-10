@@ -12,30 +12,24 @@
         {% include 'top_menu/_top_menu.html.twig' %}
     {%- endblock -%}
 
-    {% if app.user is null %}
-        <div class="row">
-            <div class="offset-1 col-10">
-                <div class="unlogin-block">
-                    <div class="row">
-                        <div class="col-12 mb-5">
-                            {{ form_start(form_register) }}
-                            {{ form_widget(form_register.username) }}
-                            {{ form_widget(form_register.password) }}
-                            {{ form_widget(form_register.email) }}
-                            {{ form_widget(form_register.sendForm,{attr: { class: 'btn btn-secondary'}}) }}
-                            {{ form_end(form_register) }}
-                        </div>
-                        <div class="col-12">
-                            {{ form_start(form_recoverPw) }}
-                            {{ form_widget(form_recoverPw.pseudoEmail) }}
-                            {{ form_widget(form_recoverPw.sendForm,{attr: { class: 'btn btn-secondary'}}) }}
-                            {{ form_end(form_recoverPw) }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% endif %}
+    {#{% if app.user is null %}#}
+        {#<div class="row">#}
+            {#<div class="offset-1 col-10">#}
+                {#<div class="unlogin-block">#}
+                    {#<div class="row">#}
+                        {#<div class="col-12 mb-5">#}
+                            {#{{ form_start(form_register) }}#}
+                            {#{{ form_widget(form_register.username) }}#}
+                            {#{{ form_widget(form_register.password) }}#}
+                            {#{{ form_widget(form_register.email) }}#}
+                            {#{{ form_widget(form_register.sendForm,{attr: { class: 'btn btn-secondary'}}) }}#}
+                            {#{{ form_end(form_register) }}#}
+                        {#</div>#}
+                    {#</div>#}
+                {#</div>#}
+            {#</div>#}
+        {#</div>#}
+    {#{% endif %}#}
     <div class="row my-5">
         <div class="col-6">
             <div class="unlogin-block">
@@ -53,16 +47,16 @@
                         <li data-target="#carouselMedias" data-slide-to="3"></li>
                     </ol>
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
+                        <div class="item active">
                             <img class="d-block w-100" src="{{ asset('img/slide.png') }}" alt="First slide">
                         </div>
-                        <div class="carousel-item">
+                        <div class="item">
                             <img class="d-block w-100" src="{{ asset('img/slide01.png') }}" alt="Second slide">
                         </div>
-                        <div class="carousel-item">
+                        <div class="item">
                             <img class="d-block w-100" src="{{ asset('img/slide02.png') }}" alt="Third slide">
                         </div>
-                        <div class="carousel-item">
+                        <div class="item">
                             <img class="d-block w-100" src="{{ asset('img/slide03.png') }}" alt="Four slide">
                         </div>
                     </div>

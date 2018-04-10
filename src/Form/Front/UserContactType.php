@@ -23,13 +23,12 @@ class UserContactType extends AbstractType
                     'label' => 'form.text',
                     'attr'  => array(
                         'placeholder' => 'form.text',
-                        'class' => '',
+                        'class' => 'form-control',
                         'rows' => 10,
                         'cols' => 75,
                         'maxlength' => '300',
                         'minlength' => '15',
                     ),
-                    'mapped' => false,
                     'required' => true
                 )
             )
@@ -40,9 +39,9 @@ class UserContactType extends AbstractType
                     'label' => 'form.email',
                     'attr'  => array(
                         'placeholder' => 'form.email',
-                        'class' => ''
+                        'class' => 'form-control',
+                        'minlength' => '5',
                     ),
-                    'mapped' => false,
                     'required' => true
                 )
             )
