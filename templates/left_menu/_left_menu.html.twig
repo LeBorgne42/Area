@@ -4,13 +4,13 @@
     <div class="logo">
         <div class="modify">
             {% if app.user.imageFile %}
-                <img height="64" width="64" src="{{ vich_uploader_asset(app.user, 'imageFile') }}">
+                <img data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.modify'|trans }}" height="64" width="64" src="{{ vich_uploader_asset(app.user, 'imageFile') }}">
             {% else %}
-                <img height="64" width="64" src="{{ asset('img/defaut.png') }}">
+                <img data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.modify'|trans }}" height="64" width="64" src="{{ asset('img/defaut.png') }}">
             {% endif %}
             <div><strong>{{ 'modify'|trans }}</strong></div>
         </div>
-        <div class="text-orange my-4"><strong>{{ 'menu'|trans }}</strong></div>
+        <button class="text-orange my-4" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-content="{{ 'popover.text'|trans }}"><strong>{{ 'version'|trans }}</strong></button>
     </div>
     {{ form_start(form_image,{attr: { hidden: 'hidden'}}) }}
     {{ form_widget(form_image.imageFile) }}
@@ -65,6 +65,6 @@
         <a href="{{ path('salon') }}"><span>{{ 'salon'|trans }}</span></a>
     </div>
     <div>
-        <a href="{{ path('logout') }}" class="btn logout my-3"><span>{{ 'disconnect'|trans }}</span></a>
+        <a href="{{ path('logout') }}" class="badge badge-danger my-4"><span>{{ 'disconnect'|trans }}</span></a>
     </div>
 </nav>
