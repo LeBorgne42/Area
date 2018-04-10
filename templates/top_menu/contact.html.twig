@@ -14,9 +14,9 @@
         <div class="offset-1 col-10">
             <div class="front-block text-center">
                 {{ form_start(form_contact) }}
-                {{ form_widget(form_contact.text) }}
-                {{ form_widget(form_contact.email) }}
-                {{ form_widget(form_contact.sendForm,{attr: { class: 'btn btn-secondary'}}) }}
+                <div class="mt-4">{{ form_widget(form_contact.text) }}</div>
+                <div class="my-3">{{ form_widget(form_contact.email) }}</div>
+                <div>{{ form_widget(form_contact.sendForm,{attr: { class: 'btn btn-secondary'}}) }}</div>
                 {{ form_end(form_contact) }}
             </div>
         </div>

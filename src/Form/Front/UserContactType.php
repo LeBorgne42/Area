@@ -18,14 +18,19 @@ class UserContactType extends AbstractType
         $builder
             ->add(
                 'text',
-                null,
+                'Symfony\Component\Form\Extension\Core\Type\TextareaType',
                 array(
                     'label' => 'form.text',
                     'attr'  => array(
                         'placeholder' => 'form.text',
-                        'class' => ''
+                        'class' => '',
+                        'rows' => 10,
+                        'cols' => 75,
+                        'maxlength' => '300',
+                        'minlength' => '15',
                     ),
                     'mapped' => false,
+                    'required' => true
                 )
             )
             ->add(
@@ -38,6 +43,7 @@ class UserContactType extends AbstractType
                         'class' => ''
                     ),
                     'mapped' => false,
+                    'required' => true
                 )
             )
             ->add('sendForm', SubmitType::class, array('label' => 'form.contact'));
