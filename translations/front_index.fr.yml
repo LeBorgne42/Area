@@ -7,5 +7,5 @@ form.username: Pseudo
 form.image: upload
 form.pseudoEmail: 'pseudo ou email'
 form.register: 's''enregistrer'
-blockOne: 'Premier block de news'
-blockTwo: 'Second block de news'
+blockOne: '- Il y a actuellement %nbrUsers% joueurs enregistrés sur le jeu.'
+blockTwo: '- Le jeu est actuellement en développement !'
