@@ -3,8 +3,12 @@
 <nav class="navbar-left navbar-dark bg-left text-center p-3">
     <div class="logo">
         <div class="modify">
-            {% if app.user.imageFile %}
-                <img data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.modify'|trans }}" height="64" width="64" src="{{ vich_uploader_asset(app.user, 'imageFile') }}">
+            {% if app.user %}
+                {% if app.user.imageFile %}
+                    <img data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.modify'|trans }}" height="64" width="64" src="{{ vich_uploader_asset(app.user, 'imageFile') }}">
+                {% else %}
+                    <img data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.modify'|trans }}" height="64" width="64" src="{{ asset('img/defaut.png') }}">
+                {% endif %}
             {% else %}
                 <img data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.modify'|trans }}" height="64" width="64" src="{{ asset('img/defaut.png') }}">
             {% endif %}

@@ -9,16 +9,16 @@
         <div class="offset-1 col-10">
             <div class="wrapper-page">
                 <div>
-                    <form action="{{ path('login') }}" method="post">
+                    <form action="{{ path('register') }}" method="post">
                         <div>
                             <div class="form-group">
                                 <input type="text" required="required" placeholder="{{ 'modal.pseudo'|trans }}" minlength="4" maxlength="20" class="form-control" id="username" name="_username">
                             </div>
                             <div class="form-group">
-                                <input type="text" required="required" placeholder="{{ 'modal.password'|trans }}" minlength="4" class="form-control" id="password" name="_password">
+                                <input type="password" required="required" placeholder="{{ 'modal.password'|trans }}" minlength="4" class="form-control" id="password" name="_password">
                             </div>
                             <div class="form-group">
-                                <input type="email" minlength="5" placeholder="{{ 'modal.email'|trans }}" maxlength="30" required="required" class="form-control" id="email">
+                                <input type="email" minlength="5" placeholder="{{ 'modal.email'|trans }}" maxlength="30" required="required" class="form-control" id="email" name="_email">
                             </div>
                         </div>
                         <div class="mt-5">

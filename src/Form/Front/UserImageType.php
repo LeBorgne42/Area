@@ -26,7 +26,7 @@ class UserImageType extends AbstractType
                         'class'       => '',
                         'accept'      => '.jpg,.jpeg,.bmp,.png',
                         'autocomplete' => 'off',
-                        'data-max-size' => '2'
+                        'data-max-size' => '1'
                     )
                 )
             )

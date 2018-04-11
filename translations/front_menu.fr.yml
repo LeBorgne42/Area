@@ -30,7 +30,7 @@ salon: Salon
 disconnect: 'Se déconnecter'
 rules: Reglement
 modify: modifier
-tooltip.modify: 'Modifier votre image en cliquant ici !'
+tooltip.modify: 'Modifier image !'
 popover.title: 'Note version 0.1'
 popover.text: 'Actuellement en developpement, le jeu n''en est qu''à l''elaboration de sa page d''accueil et de connexion.'
 modal.to: 'Nouveau message à l''admin'

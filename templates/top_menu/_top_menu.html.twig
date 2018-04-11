@@ -19,8 +19,8 @@
     {% if app.user is null %}
         <div class="text-right">
             <form action="{{ path('login') }}" method="post">
-                <input type="text" id="username" placeholder="{{ 'username'|trans }}" name="_username"/>
-                <input type="password" placeholder="{{ 'password'|trans }}" id="password" name="_password"/>
+                <input type="text" id="username" minlength="2" maxlength="30" placeholder="{{ 'username'|trans }}" name="_username"/>
+                <input type="password" minlength="2" maxlength="30" placeholder="{{ 'password'|trans }}" id="password" name="_password"/>
                 <button class="btn btn-secondary" type="submit">{{ 'login'|trans }}</button>
             </form>
         </div>

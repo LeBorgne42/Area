@@ -5,8 +5,11 @@ namespace App\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\Front\UserRecoveryType;
+use App\Entity\User;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class SecurityController extends Controller
 {
@@ -14,8 +17,48 @@ class SecurityController extends Controller
      * @Route("/enregistrement", name="register")
      * @Route("/enregistrement/", name="register_noSlash")
      */
-    public function registerAction()
+    public function registerAction(Request $request, \Swift_Mailer $mailer)
     {
+        $em = $this->getDoctrine()->getManager();
+        $user = new User();
+
+        if ($_POST) {
+            $now = new DateTime();
+            $user->setUsername($_POST['_username']);
+            $user->setEmail($_POST['_email']);
+            $user->setCreatedAt($now);
+            $user->setPassword(password_hash($_POST['_password'], PASSWORD_BCRYPT));
+            $em->persist($user);
+            $em->flush();
+
+            $message = (new \Swift_Message('Confirmation email'))
+                ->setFrom('borntoswim42@gmail.com')
+                ->setTo($user->getEmail())
+                ->setBody(
+                    $this->renderView(
+                        'emails/registration.html.twig',
+                        array(
+                            'password' => $_POST['_password'],
+                            'username' => $user->getUsername(),
+                            )
+                    ),
+                    'text/html'
+                );
+
+            $mailer->send($message);
+
+            $token = new UsernamePasswordToken(
+                $user->getUsername(),
+                $user->getPassword(),
+                'my_entity_user_provider',
+                $user->getRoles()
+            );
+
+            $this->get('security.token_storage')->setToken($token);
+            $request->getSession()->set('main', serialize($token));
+
+            return $this->redirectToRoute('overview');
+        }
         return $this->render('security/register.html.twig');
     }
 
@@ -109,11 +152,31 @@ class SecurityController extends Controller
     }
 
     /**
-     * @Route("/confirmation-email", name="confirmEmail")
-     * @Route("/confirmation-email/", name="confirmEmail_noSlash")
+     * @Route("/confirmation-email/{key}", name="confirmEmail", requirements={"key"=".+"})
+     * @Route("/confirmation-email/{key}", name="confirmEmail_noSlash", requirements={"key"=".+"})
      */
-    public function confirmEmailAction()
+    public function confirmEmailAction(Request $request, $key)
     {
-        return $this->redirectToRoute('login');
+        exit;
+        $userId = decrypt($key);
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('App:User')
+            ->createQueryBuilder('u')
+            ->where('u.id = :id')
+            ->setParameter('id', $userId())
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $token = new UsernamePasswordToken(
+            $user->getUsername(),
+            $user->getPassword(),
+            'my_entity_user_provider',
+            $user->getRoles()
+        );
+
+        $this->get('security.token_storage')->setToken($token);
+        $request->getSession()->set('main', serialize($token));
+
+        return $this->redirectToRoute('overview');
     }
 }
