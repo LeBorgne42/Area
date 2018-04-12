@@ -2,58 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97f042ea-d0ee-4bd9-bb02-3d850e24f659" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Area.iml" afterPath="$PROJECT_DIR$/.idea/Area.iml" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" afterPath="$PROJECT_DIR$/.idea/php.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/assets/global.scss" afterPath="$PROJECT_DIR$/assets/global.scss" />
-      <change beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/LeftMenu/AllyController.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/LeftMenu/BuildingController.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/LeftMenu/DailyCostController.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/LeftMenu/FleetController.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/LeftMenu/GalaxyController.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/LeftMenu/GroundController.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/LeftMenu/MapController.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/LeftMenu/MessageController.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/LeftMenu/PlanetController.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/LeftMenu/ProductController.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/LeftMenu/ReportController.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/LeftMenu/SalonController.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/LeftMenu/SearchController.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/LeftMenu/SoldierController.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/LeftMenu/SpatialController.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/OverviewController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/OverviewController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/TopMenuController.php" afterPath="$PROJECT_DIR$/src/Controller/TopMenuController.php" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" afterPath="$PROJECT_DIR$/symfony.lock" />
-      <change beforePath="$PROJECT_DIR$/templates/_top_ressource.html.twig" afterPath="$PROJECT_DIR$/templates/menu/_top_ressource.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" afterPath="$PROJECT_DIR$/templates/base.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html.twig" afterPath="$PROJECT_DIR$/templates/index.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/left_menu/_left_menu.html.twig" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/templates/left_menu/ally.html.twig" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/templates/left_menu/building.html.twig" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/templates/left_menu/dailyCost.html.twig" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/templates/left_menu/fleet.html.twig" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/templates/left_menu/galaxy.html.twig" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/templates/left_menu/ground.html.twig" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/templates/left_menu/map.html.twig" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/templates/left_menu/message.html.twig" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/templates/left_menu/overview.html.twig" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/templates/left_menu/planet.html.twig" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/templates/left_menu/product.html.twig" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/templates/left_menu/report.html.twig" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/templates/left_menu/salon.html.twig" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/templates/left_menu/search.html.twig" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/templates/left_menu/soldier.html.twig" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/templates/left_menu/spatial.html.twig" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/templates/top_menu/_top_menu.html.twig" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/templates/top_menu/contact.html.twig" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/templates/top_menu/faq.html.twig" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/templates/top_menu/media.html.twig" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/templates/top_menu/rules.html.twig" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/translations/front_menu.fr.yml" afterPath="$PROJECT_DIR$/translations/front_menu.fr.yml" />
+      <change beforePath="$PROJECT_DIR$/templates/menu/_left_menu.html.twig" afterPath="$PROJECT_DIR$/templates/menu/_left_menu.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/menu/_top_ressource.html.twig" afterPath="$PROJECT_DIR$/templates/menu/_top_ressource.html.twig" />
       <change beforePath="$PROJECT_DIR$/translations/front_overview.fr.yml" afterPath="$PROJECT_DIR$/translations/front_overview.fr.yml" />
-      <change beforePath="$PROJECT_DIR$/translations/front_recoveryPw.fr.yml" afterPath="$PROJECT_DIR$/translations/front_recoveryPw.fr.yml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -67,11 +19,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/index.html.twig">
+      <file leaf-file-name="_top_ressource.html.twig" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/menu/_top_ressource.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="26" lean-forward="false" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
+            <state relative-caret-position="150">
+              <caret line="10" column="38" lean-forward="false" selection-start-line="10" selection-start-column="38" selection-end-line="10" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -141,9 +93,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/translations/front_map.fr.yml" />
-        <option value="$PROJECT_DIR$/translations/front_message.fr.yml" />
-        <option value="$PROJECT_DIR$/translations/front_planet.fr.yml" />
         <option value="$PROJECT_DIR$/translations/front_product.fr.yml" />
         <option value="$PROJECT_DIR$/translations/front_report.fr.yml" />
         <option value="$PROJECT_DIR$/translations/front_salon.fr.yml" />
@@ -178,7 +127,6 @@
         <option value="$PROJECT_DIR$/translations/front_recoveryPw.fr.yml" />
         <option value="$PROJECT_DIR$/assets/scss/front/_topMenu.scss" />
         <option value="$PROJECT_DIR$/assets/scss/front/_leftMenu.scss" />
-        <option value="$PROJECT_DIR$/translations/front_menu.fr.yml" />
         <option value="$PROJECT_DIR$/translations/front_overview.fr.yml" />
         <option value="$PROJECT_DIR$/templates/left_menu/overview.html.twig" />
         <option value="$PROJECT_DIR$/assets/global.scss" />
@@ -192,6 +140,10 @@
         <option value="$PROJECT_DIR$/src/Controller/TopMenuController.php" />
         <option value="$PROJECT_DIR$/templates/base.html.twig" />
         <option value="$PROJECT_DIR$/templates/index.html.twig" />
+        <option value="$PROJECT_DIR$/translations/front_menu.fr.yml" />
+        <option value="$PROJECT_DIR$/templates/menu/_left_menu.html.twig" />
+        <option value="$PROJECT_DIR$/translations/front_rank.fr.yml" />
+        <option value="$PROJECT_DIR$/templates/menu/_top_ressource.html.twig" />
       </list>
     </option>
   </component>
@@ -390,6 +342,11 @@
               <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="menu" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
+            <path>
+              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="translations" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -454,12 +411,12 @@
       <workItem from="1523244272184" duration="580000" />
       <workItem from="1523280628719" duration="28192000" />
       <workItem from="1523347726879" duration="20260000" />
-      <workItem from="1523430258006" duration="6539000" />
+      <workItem from="1523430258006" duration="6729000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="109257000" />
+    <option name="totallyTimeSpent" value="109447000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -532,30 +489,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/translations/front_report.fr.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="14" lean-forward="false" selection-start-line="0" selection-start-column="14" selection-end-line="0" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/translations/front_salon.fr.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="12" lean-forward="false" selection-start-line="0" selection-start-column="12" selection-end-line="0" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/translations/front_soldier.fr.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="13" lean-forward="false" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/translations/front_spatial.fr.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -762,30 +695,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/translations/front_recoveryPw.fr.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="5" lean-forward="false" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/translations/front_menu.fr.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="575">
-          <caret line="48" column="13" lean-forward="false" selection-start-line="48" selection-start-column="13" selection-end-line="48" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/translations/front_overview.fr.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="30" lean-forward="false" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/top_menu/_top_menu.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
@@ -906,14 +815,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/menu/_top_ressource.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="55" lean-forward="false" selection-start-line="8" selection-start-column="55" selection-end-line="8" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -926,6 +827,62 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="12" column="26" lean-forward="false" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/menu/_top_menu.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/translations/front_overview.fr.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="30" lean-forward="false" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/translations/front_rank.fr.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="17" lean-forward="false" selection-start-line="0" selection-start-column="17" selection-end-line="0" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/translations/front_recoveryPw.fr.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="5" lean-forward="false" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/menu/_left_menu.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="12" lean-forward="false" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/translations/front_menu.fr.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="575">
+          <caret line="48" column="13" lean-forward="false" selection-start-line="48" selection-start-column="13" selection-end-line="48" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/menu/_top_ressource.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="38" lean-forward="false" selection-start-line="10" selection-start-column="38" selection-end-line="10" selection-end-column="38" />
           <folding />
         </state>
       </provider>

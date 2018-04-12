@@ -10,5 +10,5 @@ title.search: Recherche
 cell.search: 'Aucune recherche en cours.'
 title.spatial: 'Chantier spatial'
 cell.spatial: 'Aucune production en cours.'
-title.fleet: 'Flotte'
+title.fleet: Flotte
 cell.fleet: 'Aucune flotte en vol.'
