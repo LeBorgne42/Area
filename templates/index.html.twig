@@ -7,29 +7,12 @@
 {% block body %}
     {%- block left_menu -%}
     {%- endblock -%}
-
+    {%- block top_ressource -%}
+    {%- endblock -%}
     {%- block top_menu -%}
         {% include 'top_menu/_top_menu.html.twig' %}
     {%- endblock -%}
 
-    {#{% if app.user is null %}#}
-        {#<div class="row">#}
-            {#<div class="offset-1 col-10">#}
-                {#<div class="unlogin-block">#}
-                    {#<div class="row">#}
-                        {#<div class="col-12 mb-5">#}
-                            {#{{ form_start(form_register) }}#}
-                            {#{{ form_widget(form_register.username) }}#}
-                            {#{{ form_widget(form_register.password) }}#}
-                            {#{{ form_widget(form_register.email) }}#}
-                            {#{{ form_widget(form_register.sendForm,{attr: { class: 'btn btn-secondary'}}) }}#}
-                            {#{{ form_end(form_register) }}#}
-                        {#</div>#}
-                    {#</div>#}
-                {#</div>#}
-            {#</div>#}
-        {#</div>#}
-    {#{% endif %}#}
     <div class="row my-5">
         <div class="col-6">
             <div class="unlogin-block">

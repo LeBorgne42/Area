@@ -1,0 +1,9 @@
+{% trans_default_domain 'front_menu' %}
+
+<div class="navbar navbar-dark bg-top">
+    <span class="ressource">{{ app.user.getUsername() }} {{ 'metal'|trans }}</span>
+    <span class="ressource">{{ app.user.getUsername() }} {{ 'petrol'|trans }}</span>
+    <span class="ressource">{{ app.user.getUsername() }} {{ 'water'|trans }}</span>
+    <span class="ressource">{{ app.user.getUsername() }} {{ 'coin'|trans }}</span>
+    <a class="top" href="{{ path('login') }}">{{ 'top'|trans }}</a>
+</div>

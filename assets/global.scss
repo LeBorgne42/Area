@@ -4,6 +4,7 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
 @import 'scss/front/leftMenu.scss';
 @import 'scss/front/topMenu.scss';
+@import 'scss/front/topRessource.scss';
 
 body {
   color: #fff;
@@ -19,7 +20,7 @@ body {
 }
 
 .front-block {
-  margin-top: 10%;
+  margin-top: 6%;
   color: #fff;
   position: relative;
   display: -webkit-box;

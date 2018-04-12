@@ -163,7 +163,7 @@ class SecurityController extends Controller
         $user = $em->getRepository('App:User')
             ->createQueryBuilder('u')
             ->where('u.id = :id')
-            ->setParameter('id', $userId())
+            ->setParameter('id', $userId)
             ->getQuery()
             ->getOneOrNullResult();
 

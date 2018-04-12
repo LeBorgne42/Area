@@ -1,1 +1,16 @@
 title: Empire
+cell.none: __cell.none
+tooltip.modify: __tooltip.modify
+modify: __modify
+popover.title: __popover.title
+popover.text: __popover.text
+version: __version
+cell.first: __cell.first
+cell.second: __cell.second
+cell.third: __cell.third
+cell.four: __cell.four
+cell.five: __cell.five
+cell.six: __cell.six
+cell.seven: __cell.seven
+cell.group: __cell.group
+cell.lone: __cell.lone
