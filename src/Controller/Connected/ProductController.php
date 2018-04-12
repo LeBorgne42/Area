@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\LeftMenu;
+namespace App\Controller\Connected;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -18,6 +18,6 @@ class ProductController extends Controller
      */
     public function productAction()
     {
-        return $this->render('left_menu/product.html.twig');
+        return $this->render('connected/product.html.twig');
     }
 }

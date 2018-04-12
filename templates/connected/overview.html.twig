@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'front_overview' %}
+
+{% block title %}{{ 'title'|trans }}{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-11">
+            <div class="front-block table-responsive">
+                <table class="table table-striped table-bordered table-dark text-center">
+                    <tbody>
+                        <tr>
+                            <th class="tab-cells-name">
+                                <div class="logo">
+                                    <div class="modify">
+                                        {% if app.user %}
+                                            {% if app.user.imageFile %}
+                                                <img data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.modify'|trans }}" height="64" width="64" src="{{ vich_uploader_asset(app.user, 'imageFile') }}">
+                                            {% else %}
+                                                <img data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.modify'|trans }}" height="64" width="64" src="{{ asset('img/defaut.png') }}">
+                                            {% endif %}
+                                        {% else %}
+                                            <img data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.modify'|trans }}" height="64" width="64" src="{{ asset('img/defaut.png') }}">
+                                        {% endif %}
+                                        <div><strong>{{ 'modify'|trans }}</strong></div>
+                                    </div>
+                                </div>
+                                {{ form_start(form_image,{attr: { hidden: 'hidden'}}) }}
+                                {{ form_widget(form_image.imageFile) }}
+                                {{ form_widget(form_image.sendForm) }}
+                                {{ form_end(form_image) }}
+                            </th>
+                            <td class="center-cells">{{ 'cell.planet'|trans|raw }}</td>
+                        </tr>
+                        <tr>
+                            <td class="tab-cells-name">{{ 'title.attack'|trans|raw }}</td>
+                            <td class="center-cells"><a href="{{ path('galaxy') }}">{{ 'cell.attack'|trans|raw }}</a></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-cells-name">{{ 'title.batiment'|trans|raw }}</td>
+                            <td class="center-cells"><a href="{{ path('building') }}">{{ 'cell.batiment'|trans|raw }}</a></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-cells-name">{{ 'title.search'|trans|raw }}</td>
+                            <td class="center-cells"><a href="{{ path('search') }}">{{ 'cell.search'|trans|raw }}</a></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-cells-name">{{ 'title.spatial'|trans|raw }}</td>
+                            <td class="center-cells"><a href="{{ path('spatial') }}">{{ 'cell.spatial'|trans|raw }}</a></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-cells-name">{{ 'title.fleet'|trans|raw }}</td>
+                            <td class="center-cells"><a href="{{ path('fleet') }}">{{ 'cell.fleet'|trans|raw }}</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

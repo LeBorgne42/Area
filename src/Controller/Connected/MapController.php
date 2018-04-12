@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\LeftMenu;
+namespace App\Controller\Connected;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -10,14 +10,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
  * @Route("/a")
  * @Security("has_role('ROLE_USER')")
  */
-class GalaxyController extends Controller
+class MapController extends Controller
 {
     /**
-     * @Route("/galaxie", name="galaxy")
-     * @Route("/galaxie/", name="galaxy_withSlash")
+     * @Route("/carte-spatial", name="map")
+     * @Route("/carte-spatial/", name="map_withSlash")
      */
-    public function galaxyAction()
+    public function mapAction()
     {
-        return $this->render('left_menu/galaxy.html.twig');
+        return $this->render('connected/map.html.twig');
     }
 }

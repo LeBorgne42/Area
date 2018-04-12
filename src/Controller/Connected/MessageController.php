@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\LeftMenu;
+namespace App\Controller\Connected;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -10,14 +10,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
  * @Route("/a")
  * @Security("has_role('ROLE_USER')")
  */
-class ReportController extends Controller
+class MessageController extends Controller
 {
     /**
-     * @Route("/rapport", name="report")
-     * @Route("/rapport/", name="report_withSlash")
+     * @Route("/message", name="message")
+     * @Route("/message/", name="message_withSlash")
      */
-    public function reportAction()
+    public function messageAction()
     {
-        return $this->render('left_menu/report.html.twig');
+        return $this->render('connected/message.html.twig');
     }
 }

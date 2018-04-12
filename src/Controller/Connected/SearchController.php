@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\LeftMenu;
+namespace App\Controller\Connected;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -10,14 +10,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
  * @Route("/a")
  * @Security("has_role('ROLE_USER')")
  */
-class MapController extends Controller
+class SearchController extends Controller
 {
     /**
-     * @Route("/carte-spatial", name="map")
-     * @Route("/carte-spatial/", name="map_withSlash")
+     * @Route("/recherche", name="search")
+     * @Route("/recherche/", name="search_withSlash")
      */
-    public function mapAction()
+    public function searchAction()
     {
-        return $this->render('left_menu/map.html.twig');
+        return $this->render('connected/search.html.twig');
     }
 }

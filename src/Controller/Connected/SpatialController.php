@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\LeftMenu;
+namespace App\Controller\Connected;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -18,6 +18,6 @@ class SpatialController extends Controller
      */
     public function spatialAction()
     {
-        return $this->render('left_menu/spatial.html.twig');
+        return $this->render('connected/spatial.html.twig');
     }
 }

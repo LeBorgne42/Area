@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\LeftMenu;
+namespace App\Controller\Connected;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -18,6 +18,6 @@ class SalonController extends Controller
      */
     public function salonAction()
     {
-        return $this->render('left_menu/salon.html.twig');
+        return $this->render('connected/salon.html.twig');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\LeftMenu;
+namespace App\Controller\Connected;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -10,14 +10,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
  * @Route("/a")
  * @Security("has_role('ROLE_USER')")
  */
-class SearchController extends Controller
+class ReportController extends Controller
 {
     /**
-     * @Route("/recherche", name="search")
-     * @Route("/recherche/", name="search_withSlash")
+     * @Route("/rapport", name="report")
+     * @Route("/rapport/", name="report_withSlash")
      */
-    public function searchAction()
+    public function reportAction()
     {
-        return $this->render('left_menu/search.html.twig');
+        return $this->render('connected/report.html.twig');
     }
 }

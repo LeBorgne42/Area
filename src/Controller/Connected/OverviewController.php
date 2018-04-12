@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Connected;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -28,7 +28,7 @@ class OverviewController extends Controller
             $em->persist($user);
             $em->flush();
         }
-        return $this->render('left_menu/overview.html.twig', [
+        return $this->render('connected/overview.html.twig', [
             'form_image' => $form_image->createView(),
         ]);
     }

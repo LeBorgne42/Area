@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\LeftMenu;
+namespace App\Controller\Connected;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -10,14 +10,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
  * @Route("/a")
  * @Security("has_role('ROLE_USER')")
  */
-class AllyController extends Controller
+class PlanetController extends Controller
 {
     /**
-     * @Route("/alliance", name="ally")
-     * @Route("/alliance/", name="ally_withSlash")
+     * @Route("/planete", name="planet")
+     * @Route("/planete/", name="planet_withSlash")
      */
-    public function allyAction()
+    public function planetAction()
     {
-        return $this->render('left_menu/ally.html.twig');
+        return $this->render('connected/planet.html.twig');
     }
 }

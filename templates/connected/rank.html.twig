@@ -1,17 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% trans_default_domain 'front_rules' %}
+{% trans_default_domain 'front_rank' %}
 
 {% block title %}{{ 'title'|trans }}{% endblock %}
 
 {% block body %}
-    {%- block left_menu -%}
-    {%- endblock -%}
-    {%- block top_ressource -%}
-    {%- endblock -%}
-    {%- block top_menu -%}
-        {% include 'top_menu/_top_menu.html.twig' %}
-    {%- endblock -%}
     <div class="row">
         <div class="offset-1 col-10">
             <div class="front-block">

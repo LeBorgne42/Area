@@ -1,16 +1,14 @@
-title: Empire
-cell.none: __cell.none
-tooltip.modify: __tooltip.modify
-modify: __modify
-popover.title: __popover.title
-popover.text: __popover.text
-version: __version
-cell.first: __cell.first
-cell.second: __cell.second
-cell.third: __cell.third
-cell.four: __cell.four
-cell.five: __cell.five
-cell.six: __cell.six
-cell.seven: __cell.seven
-cell.group: __cell.group
-cell.lone: __cell.lone
+title: 'Your Empire'
+modify: modifier
+tooltip.modify: 'Modifier image !'
+cell.planet: 'Vous n''avez pas encore de planète'
+title.attack: 'Attaque en cours'
+cell.attack: 'Une attaque est en cours.'
+title.batiment: Bâtiment
+cell.batiment: 'Aucun bâtiment en construction.'
+title.search: Recherche
+cell.search: 'Aucune recherche en cours.'
+title.spatial: 'Chantier spatial'
+cell.spatial: 'Aucune production en cours.'
+title.fleet: 'Flotte'
+cell.fleet: 'Aucune flotte en vol.'

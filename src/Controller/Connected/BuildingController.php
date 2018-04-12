@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\LeftMenu;
+namespace App\Controller\Connected;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -18,6 +18,6 @@ class BuildingController extends Controller
      */
     public function buildingAction()
     {
-        return $this->render('left_menu/building.html.twig');
+        return $this->render('connected/building.html.twig');
     }
 }

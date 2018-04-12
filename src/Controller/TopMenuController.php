@@ -15,7 +15,7 @@ class TopMenuController extends Controller
      */
     public function mediaAction()
     {
-        return $this->render('top_menu/media.html.twig');
+        return $this->render('anonymous/media.html.twig');
     }
 
     /**
@@ -24,7 +24,7 @@ class TopMenuController extends Controller
      */
     public function rulesAction()
     {
-        return $this->render('top_menu/rules.html.twig');
+        return $this->render('anonymous/rules.html.twig');
     }
 
     /**
@@ -33,7 +33,7 @@ class TopMenuController extends Controller
      */
     public function faqAction()
     {
-        return $this->render('top_menu/faq.html.twig');
+        return $this->render('anonymous/faq.html.twig');
     }
 
     /**
@@ -63,7 +63,7 @@ class TopMenuController extends Controller
             return $this->redirectToRoute('faq');
         }
 
-        return $this->render('top_menu/contact.html.twig', [
+        return $this->render('anonymous/contact.html.twig', [
             'form_contact' => $form_contact->createView(),
         ]);
     }

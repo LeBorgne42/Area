@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\LeftMenu;
+namespace App\Controller\Connected;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -18,6 +18,6 @@ class DailyCostController extends Controller
      */
     public function dailyCostAction()
     {
-        return $this->render('left_menu/dailyCost.html.twig');
+        return $this->render('connected/dailyCost.html.twig');
     }
 }

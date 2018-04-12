@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\LeftMenu;
+namespace App\Controller\Connected;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -10,14 +10,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
  * @Route("/a")
  * @Security("has_role('ROLE_USER')")
  */
-class GroundController extends Controller
+class RankController extends Controller
 {
     /**
-     * @Route("/orbite", name="ground")
-     * @Route("/orbite/", name="ground_withSlash")
+     * @Route("/classement", name="rank")
+     * @Route("/classement/", name="rank_withSlash")
      */
-    public function groundAction()
+    public function rankAction()
     {
-        return $this->render('left_menu/ground.html.twig');
+        return $this->render('connected/rank.html.twig');
     }
 }
