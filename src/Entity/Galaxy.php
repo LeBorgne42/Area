@@ -20,7 +20,6 @@ class Galaxy
 
     /**
      * @ORM\OneToMany(targetEntity="Sector", mappedBy="galaxy", fetch="EXTRA_LAZY")
-     * @ORM\JoinColumn(name="sector_id", referencedColumnName="id")
      */
     protected $sectors;
 

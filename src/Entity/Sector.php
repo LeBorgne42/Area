@@ -26,6 +26,7 @@ class Sector
 
     /**
      * @ORM\ManyToOne(targetEntity="Galaxy", inversedBy="sector", fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="galaxy_id", referencedColumnName="id")
      */
     protected $galaxy;
 

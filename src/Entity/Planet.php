@@ -21,7 +21,7 @@ class Planet
     private $id;
 
     /**
-     * @ORM\Column(name="name",type="string", length=10)
+     * @ORM\Column(name="name",type="string", length=15)
      */
     protected $name = 'Inhabité';
 
@@ -72,7 +72,7 @@ class Planet
      *     maxSize="400k",
      *     mimeTypes={"image/png", "image/jpeg", "image/bmp"}
      * )
-     * @Vich\UploadableField(mapping="user_img", fileNameProperty="imageName", size="imageSize" )
+     * @Vich\UploadableField(mapping="planet_img", fileNameProperty="imageName", size="imageSize" )
      *
      * @var File
      */
@@ -263,7 +263,7 @@ class Planet
      */
     public function getName()
     {
-        return $this->username;
+        return $this->name;
     }
 
     /**
