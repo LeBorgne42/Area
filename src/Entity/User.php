@@ -36,6 +36,38 @@ class User implements UserInterface, \Serializable
     protected $email;
 
     /**
+     * @return mixed
+     */
+    public function getPlanets()
+    {
+        return $this->planets;
+    }
+
+    /**
+     * @param mixed $planets
+     */
+    public function setPlanets($planets): void
+    {
+        $this->planets = $planets;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBitcoin()
+    {
+        return $this->bitcoin;
+    }
+
+    /**
+     * @param mixed $bitcoin
+     */
+    public function setBitcoin($bitcoin): void
+    {
+        $this->bitcoin = $bitcoin;
+    }
+
+    /**
      *
      * @ORM\Column(type="string", length=64)
      * @Assert\NotBlank(message = "required")
@@ -43,9 +75,14 @@ class User implements UserInterface, \Serializable
     protected $password;
 
     /**
-     * @ORM\OneToMany(targetEntity="User", mappedBy="planets", fetch="EXTRA_LAZY")
+     * @ORM\OneToMany(targetEntity="Planet", mappedBy="user", fetch="EXTRA_LAZY")
      */
     protected $planets;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Bitcoin", mappedBy="user", fetch="EXTRA_LAZY")
+     */
+    protected $bitcoin;
 
     /**
      * @ORM\Column(name="created_at",type="datetime")

@@ -27,38 +27,43 @@ class Planet
     protected $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", mappedBy="planets", fetch="EXTRA_LAZY")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="planets", fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="Ressource", mappedBy="Planet", fetch="EXTRA_LAZY")
+     * @ORM\OneToMany(targetEntity="Water", mappedBy="planet", fetch="EXTRA_LAZY")
      */
-    protected $ressources;
+    protected $water;
 
     /**
-     * @ORM\OneToMany(targetEntity="Building", mappedBy="Planet", fetch="EXTRA_LAZY")
+     * @ORM\OneToMany(targetEntity="Niobium", mappedBy="planet", fetch="EXTRA_LAZY")
+     */
+    protected $niobium;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Building", mappedBy="planet", fetch="EXTRA_LAZY")
      */
     protected $buildings;
 
     /**
-     * @ORM\OneToOne(targetEntity="Orbite", mappedBy="Planet", fetch="EXTRA_LAZY")
+     * @ORM\OneToOne(targetEntity="Orbite", mappedBy="planet", fetch="EXTRA_LAZY")
      */
     protected $orbite;
 
     /**
-     * @ORM\OneToMany(targetEntity="Human", mappedBy="Planet", fetch="EXTRA_LAZY")
+     * @ORM\OneToMany(targetEntity="Human", mappedBy="planet", fetch="EXTRA_LAZY")
      */
     protected $humans;
 
     /**
-     * @ORM\OneToOne(targetEntity="Sector", mappedBy="Planet", fetch="EXTRA_LAZY")
+     * @ORM\OneToOne(targetEntity="Sector", mappedBy="planet", fetch="EXTRA_LAZY")
      */
     protected $sector;
 
     /**
-     * @ORM\OneToOne(targetEntity="Galaxy", mappedBy="Planet", fetch="EXTRA_LAZY")
+     * @ORM\OneToOne(targetEntity="Galaxy", mappedBy="planet", fetch="EXTRA_LAZY")
      */
     protected $galaxy;
 
@@ -129,33 +134,49 @@ class Planet
     /**
      * @return mixed
      */
-    public function getRessources()
+    public function getWater()
     {
-        return $this->ressources;
+        return $this->water;
     }
 
     /**
-     * @param mixed $ressources
+     * @param mixed $water
      */
-    public function setRessources($ressources): void
+    public function setWater($water): void
     {
-        $this->ressources = $ressources;
+        $this->water = $water;
     }
 
     /**
      * @return mixed
      */
-    public function getBuilding()
+    public function getNiobium()
     {
-        return $this->building;
+        return $this->niobium;
     }
 
     /**
-     * @param mixed $building
+     * @param mixed $niobium
      */
-    public function setBuilding($building): void
+    public function setNiobium($niobium): void
     {
-        $this->building = $building;
+        $this->niobium = $niobium;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBuildings()
+    {
+        return $this->buildings;
+    }
+
+    /**
+     * @param mixed $buildings
+     */
+    public function setBuildings($buildings): void
+    {
+        $this->buildings = $buildings;
     }
 
     /**

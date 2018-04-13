@@ -6,10 +6,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="galaxy")
+ * @ORM\Table(name="niobium")
  * @ORM\Entity(repositoryClass="App\Repository\ListOrderedRepository")
  */
-class Galaxy
+class Niobium
 {
     /**
      * @ORM\Column(type="integer")
@@ -19,10 +19,32 @@ class Galaxy
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="Planet", inversedBy="galaxy", fetch="EXTRA_LAZY")
+     * @ORM\Column(name="amount",type="integer")
+     * @Assert\NotBlank(message = "required")
+     */
+    protected $amount;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Planet", inversedBy="niobium", fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(name="planet_id", referencedColumnName="id")
      */
     protected $planet;
+
+    /**
+     * @return mixed
+     */
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+
+    /**
+     * @param mixed $amount
+     */
+    public function setAmount($amount): void
+    {
+        $this->amount = $amount;
+    }
 
     /**
      * @return mixed
