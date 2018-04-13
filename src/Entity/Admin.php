@@ -19,11 +19,6 @@ class Admin implements UserInterface, \Serializable
      */
     private $id;
 
-    public function getId()
-    {
-        return $this->id;
-    }
-
     /**
      * @ORM\Column(name="username",type="string", length=20, unique=true)
      * @Assert\NotBlank(message = "required")
@@ -48,6 +43,11 @@ class Admin implements UserInterface, \Serializable
      * @ORM\Column(name="created_at",type="datetime")
      */
     protected $createdAt;
+
+    public function getId()
+    {
+        return $this->id;
+    }
 
     public function getSalt()
     {

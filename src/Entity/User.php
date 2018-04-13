@@ -22,11 +22,6 @@ class User implements UserInterface, \Serializable
      */
     private $id;
 
-    public function getId()
-    {
-        return $this->id;
-    }
-
     /**
      * @ORM\Column(name="username",type="string", length=20, unique=true)
      * @Assert\NotBlank(message = "required")
@@ -46,6 +41,11 @@ class User implements UserInterface, \Serializable
      * @Assert\NotBlank(message = "required")
      */
     protected $password;
+
+    /**
+     * @ORM\OneToMany(targetEntity="User", mappedBy="planets", fetch="EXTRA_LAZY")
+     */
+    protected $planets;
 
     /**
      * @ORM\Column(name="created_at",type="datetime")
@@ -83,6 +83,12 @@ class User implements UserInterface, \Serializable
      * @var \DateTime
      */
     private $updatedAt;
+
+
+    public function getId()
+    {
+        return $this->id;
+    }
 
     public function getSalt()
     {
