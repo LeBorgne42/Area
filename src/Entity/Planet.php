@@ -8,7 +8,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Table(name="planet")
- * @ORM\Entity(repositoryClass="App\Repository\ListOrderedRepository")
+ * @ORM\Entity
  * @Vich\Uploadable
  */
 class Planet
@@ -22,9 +22,8 @@ class Planet
 
     /**
      * @ORM\Column(name="name",type="string", length=10)
-     * @Assert\NotBlank(message = "required")
      */
-    protected $name;
+    protected $name = 'Inhabité';
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="planets", fetch="EXTRA_LAZY")
@@ -33,12 +32,12 @@ class Planet
     protected $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="Water", mappedBy="planet", fetch="EXTRA_LAZY")
+     * @ORM\OneToOne(targetEntity="Water", mappedBy="planet", fetch="EXTRA_LAZY")
      */
     protected $water;
 
     /**
-     * @ORM\OneToMany(targetEntity="Niobium", mappedBy="planet", fetch="EXTRA_LAZY")
+     * @ORM\OneToOne(targetEntity="Niobium", mappedBy="planet", fetch="EXTRA_LAZY")
      */
     protected $niobium;
 
@@ -58,14 +57,9 @@ class Planet
     protected $humans;
 
     /**
-     * @ORM\OneToOne(targetEntity="Sector", mappedBy="planet", fetch="EXTRA_LAZY")
+     * @ORM\ManyToOne(targetEntity="Sector", inversedBy="planet", fetch="EXTRA_LAZY")
      */
     protected $sector;
-
-    /**
-     * @ORM\OneToOne(targetEntity="Galaxy", mappedBy="planet", fetch="EXTRA_LAZY")
-     */
-    protected $galaxy;
 
     /**
      * @ORM\Column(name="position",type="integer")
@@ -116,7 +110,7 @@ class Planet
     }
 
     /**
-     * @return mixed
+     * @return \App\Entity\User
      */
     public function getUser()
     {
@@ -124,11 +118,14 @@ class Planet
     }
 
     /**
-     * @param mixed $user
+     * @param \App\Entity\User $user
+     * @return Planet
      */
-    public function setUser($user): void
+    public function setUser(\App\Entity\User $user = null)
     {
         $this->user = $user;
+
+        return $this;
     }
 
     /**
@@ -225,22 +222,6 @@ class Planet
     public function setSector($sector): void
     {
         $this->sector = $sector;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getGalaxy()
-    {
-        return $this->galaxy;
-    }
-
-    /**
-     * @param mixed $galaxy
-     */
-    public function setGalaxy($galaxy): void
-    {
-        $this->galaxy = $galaxy;
     }
 
     /**

@@ -25,7 +25,7 @@ class Bitcoin
     protected $amount;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="bitcoin", fetch="EXTRA_LAZY")
+     * @ORM\OneToOne(targetEntity="User", inversedBy="bitcoin", fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $user;

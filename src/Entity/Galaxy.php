@@ -19,10 +19,48 @@ class Galaxy
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="Planet", inversedBy="galaxy", fetch="EXTRA_LAZY")
-     * @ORM\JoinColumn(name="planet_id", referencedColumnName="id")
+     * @ORM\OneToMany(targetEntity="Sector", mappedBy="galaxy", fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="sector_id", referencedColumnName="id")
      */
-    protected $planet;
+    protected $sectors;
+
+    /**
+     * @ORM\Column(name="position",type="integer")
+     * @Assert\NotBlank(message = "required")
+     */
+    protected $position;
+
+    /**
+     * @return mixed
+     */
+    public function getSectors()
+    {
+        return $this->sectors;
+    }
+
+    /**
+     * @param mixed $sectors
+     */
+    public function setSectors($sectors): void
+    {
+        $this->sectors = $sectors;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * @param mixed $position
+     */
+    public function setPosition($position): void
+    {
+        $this->position = $position;
+    }
 
     /**
      * @return mixed
@@ -33,11 +71,27 @@ class Galaxy
     }
 
     /**
-     * @param mixed $planet
+     * Add sector
+     *
+     * @param \App\Entity\Sector $sector
+     *
+     * @return Galaxy
      */
-    public function setPlanet($planet): void
+    public function addSector(\App\Entity\Sector $sector)
     {
-        $this->planet = $planet;
+        $this->sectors[] = $sector;
+
+        return $this;
+    }
+
+    /**
+     * Remove sector
+     *
+     * @param \App\Entity\Sector $sector
+     */
+    public function removeSector(\App\Entity\Sector $sector)
+    {
+        $this->sectors->removeElement($sector);
     }
 
     public function getId()

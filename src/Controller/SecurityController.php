@@ -6,6 +6,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\Front\UserRecoveryType;
 use App\Entity\User;
+use App\Entity\Bitcoin;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -28,7 +29,47 @@ class SecurityController extends Controller
             $user->setEmail($_POST['_email']);
             $user->setCreatedAt($now);
             $user->setPassword(password_hash($_POST['_password'], PASSWORD_BCRYPT));
+
+            $sectorF = [2, 3, 4, 5, 6, 7, 8, 9, 92, 93, 94, 95, 96, 97, 98, 99];
+            $x = 1;
+            $y = 0;
+            while ($x <= 100) {
+                if ($x % 10 == 0 || $x % 10 == 1) {
+                    $sectorS[$y] = $x;
+                }
+                $x++;
+                $y++;
+            }
+            $position= [4, 6, 15, 17, 25];
+            $sector = array_merge($sectorF,$sectorS);
+            sort($sector, SORT_NUMERIC);
+            $planet = $em->getRepository('App:Planet')
+                        ->createQueryBuilder('p')
+                        ->join('p.sector', 's')
+                        ->where('p.user is null')
+                        ->andWhere('s.position IN (:sector)')
+                        ->andWhere('p.position IN (:position) and p.position <= :max')
+                        ->setParameters(array('sector' => $sector, 'position' => $position, 'max' => 100))
+                        ->getQuery()
+                        ->getOneOrNullResult();
+            if($planet) {
+                $planet->setUser($user);
+                $user->addPlanet($planet);
+                $em->persist($planet);
+            }
+
+            $bitcoin = new Bitcoin();
+            $bitcoin->setUser($user);
+            $bitcoin->setAmount(5000);
+            $em->persist($bitcoin);
+            $user->setBitcoin($bitcoin);
             $em->persist($user);
+
+
+
+
+
+
             $em->flush();
 
             $message = (new \Swift_Message('Confirmation email'))

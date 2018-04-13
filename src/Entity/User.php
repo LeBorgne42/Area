@@ -36,38 +36,6 @@ class User implements UserInterface, \Serializable
     protected $email;
 
     /**
-     * @return mixed
-     */
-    public function getPlanets()
-    {
-        return $this->planets;
-    }
-
-    /**
-     * @param mixed $planets
-     */
-    public function setPlanets($planets): void
-    {
-        $this->planets = $planets;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getBitcoin()
-    {
-        return $this->bitcoin;
-    }
-
-    /**
-     * @param mixed $bitcoin
-     */
-    public function setBitcoin($bitcoin): void
-    {
-        $this->bitcoin = $bitcoin;
-    }
-
-    /**
      *
      * @ORM\Column(type="string", length=64)
      * @Assert\NotBlank(message = "required")
@@ -80,7 +48,7 @@ class User implements UserInterface, \Serializable
     protected $planets;
 
     /**
-     * @ORM\OneToMany(targetEntity="Bitcoin", mappedBy="user", fetch="EXTRA_LAZY")
+     * @ORM\OneToOne(targetEntity="Bitcoin", mappedBy="user", fetch="EXTRA_LAZY", orphanRemoval=true, cascade={"all"})
      */
     protected $bitcoin;
 
@@ -120,6 +88,63 @@ class User implements UserInterface, \Serializable
      * @var \DateTime
      */
     private $updatedAt;
+
+    /**
+     * User constructor.
+     */
+    public function __construct()
+    {
+        $this->planets = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getPlanets()
+    {
+        return $this->planets;
+    }
+
+    /**
+     * Add planet
+     *
+     * @param \App\Entity\Planet $planet
+     *
+     * @return User
+     */
+    public function addPlanet(\App\Entity\Planet $planet)
+    {
+        $this->planets[] = $planet;
+
+        return $this;
+    }
+
+    /**
+     * Remove planet
+     *
+     * @param \App\Entity\Planet $planet
+     */
+    public function removePlanet(\App\Entity\Planet $planet)
+    {
+        $this->planets->removeElement($planet);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBitcoin()
+    {
+        return $this->bitcoin;
+    }
+
+    /**
+     * @param mixed $bitcoin
+     */
+    public function setBitcoin($bitcoin): void
+    {
+        $this->bitcoin = $bitcoin;
+    }
 
 
     public function getId()
