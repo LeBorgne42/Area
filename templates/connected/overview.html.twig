@@ -13,6 +13,7 @@
                         <tr>
                             <th class="tab-cells-name">
                                 <div class="logo">
+                                    <div class="mb-3">{{ app.user.getUsername() }}</div>
                                     <div class="modify">
                                         {% if app.user %}
                                             {% if app.user.imageFile %}
