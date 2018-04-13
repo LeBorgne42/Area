@@ -2,7 +2,10 @@
 
 <div class="navbar navbar-dark bg-top">
     <a class="btn-top" href="/">{{ 'home'|trans }}</a>
-    <a class="btn-top" href="{{ path('overview') }}">{{ 'overview'|trans }}</a>
+    {% if is_granted('ROLE_ADMIN') %}
+    {% else %}
+        <a class="btn-top" href="{{ path('overview') }}">{{ 'overview'|trans }}</a>
+    {% endif %}
     <a class="btn-top" href="{{ path('media') }}">{{ 'media'|trans }}</a>
     <a class="btn-top" href="{{ path('rules') }}">{{ 'rules'|trans }}</a>
     <a class="btn-top" href="{{ path('faq') }}">{{ 'faq'|trans }}</a>

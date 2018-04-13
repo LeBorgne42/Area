@@ -1,9 +1,10 @@
 {% trans_default_domain 'front_menu' %}
 
-<nav class="navbar-right navbar-dark bg-left text-center p-3">
-    <div class="logo">
+<nav class="navbar-right navbar-dark bg-right text-center p-3">
+    <div class="mb-3">{{ 'planet'|trans }}</div>
+    <div class="logo mb-3">
         <img height="64" width="64" src="{{ asset('img/defaut.png') }}">
         <br>
     </div>
-    coordonnée : 1:22:78
+    <div>{{ 'coordonate'|trans }}</div>
 </nav>
