@@ -1,8 +1,8 @@
 {% trans_default_domain 'front_menu' %}
 
 <div class="navbar navbar-dark bg-top">
-    <span class="ressource" data-toggle="tooltip" data-placement="top" title="{{ 'niobium'|trans }}">15 045  <img src="{{ asset('img/niobium.png') }}"></span>
-    <span class="ressource" data-toggle="tooltip" data-placement="top" title="{{ 'water'|trans }}">11 394  <img src="{{ asset('img/water.png') }}"></span>
+    <span class="ressource niobium" data-toggle="tooltip" data-placement="top" title="{{ 'niobium'|trans }}"><span>15045</span>  <img src="{{ asset('img/niobium.png') }}"></span>
+    <span class="ressource water" data-toggle="tooltip" data-placement="top" title="{{ 'water'|trans }}"><span>11394</span>  <img src="{{ asset('img/water.png') }}"></span>
     <span class="ressource" data-toggle="tooltip" data-placement="top" title="{{ 'coin'|trans }}">{{ app.user.getBitcoin().getAmount() }} <img src="{{ asset('img/coin.png') }}"></span>
     <a class="top" href="{{ path('message') }}"><div class="glyphicon glyphicon-envelope"></div> {{ 'message'|trans }}</a>
     <a class="top" href="{{ path('salon') }}"><div class="glyphicon glyphicon-comment"></div> {{ 'salon'|trans }}</a>

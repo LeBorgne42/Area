@@ -20,6 +20,7 @@ Encore
     .autoProvidejQuery()
     .addStyleEntry('global', './assets/global.scss')
     .addEntry('main', './assets/main.js')
+    .enableForkedTypeScriptTypesChecking()
 ;
 
 module.exports = Encore.getWebpackConfig();

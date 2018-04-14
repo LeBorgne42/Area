@@ -21,8 +21,21 @@ function manageModalContact() {
     });
 }
 
+niobium = parseInt($('div.bg-top span.ressource.niobium span').text());
+water = parseInt($('div.bg-top span.ressource.water span').text());
+function manageReloadR() {
+    setTimeout(function(){
+        niobium = niobium + 4;
+        $('div.bg-top span.ressource.niobium span').text(niobium);
+        water = water + 2;
+        $('div.bg-top span.ressource.water span').text(water);
+        manageReloadR();
+        }, 2000);
+}
+
 $(document).ready(function() {
     $('[data-toggle="popover"]').popover();
     manageImageForm();
     manageModalContact();
+    manageReloadR();
 });
