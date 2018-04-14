@@ -173,7 +173,7 @@ class SecurityController extends Controller
      * @Route("/logout", name="logout")
      * @Route("/logout/", name="logout_noSlash")
      */
-    public function logoutAction(Request $request)
+    public function logoutAction()
     {
     }
 
@@ -181,7 +181,7 @@ class SecurityController extends Controller
      * @Route("/login-redirect", name="login_redirect")
      * @Route("/login-redirect/", name="login_redirect_noSlash")
      */
-    public function loginRedirectAction(Request $request)
+    public function loginRedirectAction()
     {
         if ($this->getUser()->getRoles()[0] == 'ROLE_USER') {
             return $this->redirectToRoute('overview');

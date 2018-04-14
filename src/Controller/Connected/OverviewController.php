@@ -9,7 +9,7 @@ use App\Form\Front\UserImageType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
- * @Route("/a")
+ * @Route("/fr")
  * @Security("has_role('ROLE_USER')")
  */
 class OverviewController extends Controller
