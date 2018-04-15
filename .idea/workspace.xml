@@ -2,36 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97f042ea-d0ee-4bd9-bb02-3d850e24f659" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/assets/scss/front/galaxy.scss" afterPath="$PROJECT_DIR$/assets/scss/front/galaxy.scss" />
-      <change beforePath="$PROJECT_DIR$/public/img/planet1.png" afterPath="$PROJECT_DIR$/public/img/planet1.png" />
-      <change beforePath="$PROJECT_DIR$/public/img/planet2.png" afterPath="$PROJECT_DIR$/public/img/planet2.png" />
-      <change beforePath="$PROJECT_DIR$/public/img/planet3.png" afterPath="$PROJECT_DIR$/public/img/planet3.png" />
-      <change beforePath="$PROJECT_DIR$/public/img/planet4.png" afterPath="$PROJECT_DIR$/public/img/planet4.png" />
-      <change beforePath="$PROJECT_DIR$/public/img/planet5.png" afterPath="$PROJECT_DIR$/public/img/planet5.png" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/MapController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/MapController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Security/ServerController.php" afterPath="$PROJECT_DIR$/src/Controller/Security/ServerController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Planet.php" afterPath="$PROJECT_DIR$/src/Entity/Planet.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Sector.php" afterPath="$PROJECT_DIR$/src/Entity/Sector.php" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180408000623.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180408091504.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180408091858.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180409201033.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180409203927.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180409210620.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180413123249.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180413123900.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180413134452.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180413140855.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180413141305.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180413142052.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180413142935.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180413143121.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180415193013.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/galaxy.html.twig" afterPath="$PROJECT_DIR$/templates/connected/galaxy.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/overview.html.twig" afterPath="$PROJECT_DIR$/templates/connected/overview.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/universe.html.twig" afterPath="$PROJECT_DIR$/templates/connected/universe.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/menu/_left_menu.html.twig" afterPath="$PROJECT_DIR$/templates/menu/_left_menu.html.twig" />
+      <change beforePath="$PROJECT_DIR$/translations/front_galaxy.fr.yml" afterPath="$PROJECT_DIR$/translations/front_galaxy.fr.yml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -45,51 +16,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="galaxy.html.twig" pinned="false" current-in-tab="true">
+      <file leaf-file-name="front_galaxy.fr.yml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/translations/front_galaxy.fr.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" column="34" lean-forward="false" selection-start-line="1" selection-start-column="34" selection-end-line="1" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="galaxy.html.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/connected/galaxy.html.twig">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="135">
               <caret line="9" column="28" lean-forward="false" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="universe.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/connected/universe.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="30" lean-forward="true" selection-start-line="0" selection-start-column="30" selection-end-line="0" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Planet.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Entity/Planet.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1082">
-              <caret line="141" column="5" lean-forward="false" selection-start-line="141" selection-start-column="5" selection-end-line="141" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ServerController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Controller/Security/ServerController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="403">
-              <caret line="41" column="43" lean-forward="false" selection-start-line="41" selection-start-column="43" selection-end-line="41" selection-end-column="43" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="galaxy.scss" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/scss/front/galaxy.scss">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="12" lean-forward="false" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -164,7 +105,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/assets/scss/front/_leftMenu.scss" />
         <option value="$PROJECT_DIR$/src/Entity/Water.php" />
         <option value="$PROJECT_DIR$/src/Entity/Orbite.php" />
         <option value="$PROJECT_DIR$/src/Entity/Niobium.php" />
@@ -215,6 +155,7 @@
         <option value="$PROJECT_DIR$/src/Entity/Planet.php" />
         <option value="$PROJECT_DIR$/assets/scss/front/galaxy.scss" />
         <option value="$PROJECT_DIR$/templates/connected/galaxy.html.twig" />
+        <option value="$PROJECT_DIR$/translations/front_galaxy.fr.yml" />
       </list>
     </option>
   </component>
@@ -380,61 +321,6 @@
             <path>
               <item name="Area" type="b2602c69:ProjectViewProjectNode" />
               <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="assets" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="assets" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="scss" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="assets" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="scss" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="front" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Connected" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Security" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Entity" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Migrations" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
@@ -442,12 +328,6 @@
               <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="connected" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="menu" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
@@ -516,12 +396,12 @@
       <workItem from="1523280628719" duration="28192000" />
       <workItem from="1523347726879" duration="20260000" />
       <workItem from="1523430258006" duration="33957000" />
-      <workItem from="1523711701169" duration="25029000" />
+      <workItem from="1523711701169" duration="25095000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="161704000" />
+    <option name="totallyTimeSpent" value="161770000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -594,13 +474,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Controller/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Kernel.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="335">
@@ -953,34 +826,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/scss/front/galaxy.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="12" lean-forward="false" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/Sector.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Security/ServerController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="403">
-          <caret line="41" column="43" lean-forward="false" selection-start-line="41" selection-start-column="43" selection-end-line="41" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Planet.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1082">
-          <caret line="141" column="5" lean-forward="false" selection-start-line="141" selection-start-column="5" selection-end-line="141" selection-end-column="5" />
           <folding />
         </state>
       </provider>
@@ -1001,10 +850,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Planet.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1082">
+          <caret line="141" column="5" lean-forward="false" selection-start-line="141" selection-start-column="5" selection-end-line="141" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Security/ServerController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="403">
+          <caret line="41" column="43" lean-forward="false" selection-start-line="41" selection-start-column="43" selection-end-line="41" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/scss/front/galaxy.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="12" lean-forward="false" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/connected/galaxy.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="9" column="28" lean-forward="false" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/translations/front_galaxy.fr.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="34" lean-forward="false" selection-start-line="1" selection-start-column="34" selection-end-line="1" selection-end-column="34" />
           <folding />
         </state>
       </provider>
