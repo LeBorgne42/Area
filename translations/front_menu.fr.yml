@@ -1,4 +1,4 @@
-version: 'Version0.1'
+version: Version0.1
 home: Accueil
 footer: 'Suivez nous sur facebook!'
 media: Medias
@@ -47,3 +47,4 @@ niobium: niobium
 water: eau
 coin: bitcoin
 coordonate: 'coordonnées :'
+universe: Univers
