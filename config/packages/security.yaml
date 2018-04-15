@@ -16,7 +16,7 @@ security:
                 users:
                     admin:
                         password: $2y$13$btsT96GfhIp4Ze1v3u73/ey5cQUVUUSEzqw2MVLJKUCi3YNglRea6
-                        roles: [ROLE_SUPER_ADMIN]
+                        roles: [ROLE_ADMIN]
         my_entity_user_provider:
             entity: { class: App\Entity\User}
         my_entity_admin_provider:

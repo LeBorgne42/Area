@@ -30,7 +30,7 @@ function manageReloadR() {
         water = water + 2;
         $('div.bg-top span.ressource.water span').text(water);
         manageReloadR();
-        }, 2000);
+        }, 1000);
 }
 
 $(document).ready(function() {
