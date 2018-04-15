@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="sector")
- * @ORM\Entity(repositoryClass="App\Repository\ListOrderedRepository")
+ * @ORM\Entity
  */
 class Sector
 {

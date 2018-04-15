@@ -12,20 +12,18 @@
                     <tbody>
                         <tr>
                             <th class="tab-cells-name">
-                                <div class="logo">
-                                    <div class="mb-3">{{ app.user.getUsername() }}</div>
-                                    <div class="modify">
-                                        {% if app.user %}
-                                            {% if app.user.imageFile %}
-                                                <img data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.modify'|trans }}" height="64" width="64" src="{{ vich_uploader_asset(app.user, 'imageFile') }}">
-                                            {% else %}
-                                                <img data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.modify'|trans }}" height="64" width="64" src="{{ asset('img/defaut.png') }}">
-                                            {% endif %}
+                                <div class="mb-3">{{ app.user.getUsername() }}</div>
+                                <div class="modify">
+                                    {% if app.user %}
+                                        {% if app.user.imageFile %}
+                                            <img data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.modify'|trans }}" height="64" width="64" src="{{ vich_uploader_asset(app.user, 'imageFile') }}">
                                         {% else %}
                                             <img data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.modify'|trans }}" height="64" width="64" src="{{ asset('img/defaut.png') }}">
                                         {% endif %}
-                                        <div><strong>{{ 'modify'|trans }}</strong></div>
-                                    </div>
+                                    {% else %}
+                                        <img data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.modify'|trans }}" height="64" width="64" src="{{ asset('img/defaut.png') }}">
+                                    {% endif %}
+                                    <div><strong>{{ 'modify'|trans }}</strong></div>
                                 </div>
                                 {{ form_start(form_image,{attr: { hidden: 'hidden'}}) }}
                                 {{ form_widget(form_image.imageFile) }}
@@ -35,23 +33,23 @@
                             <td class="center-cells">{{ 'cell.planet'|trans|raw }}</td>
                         </tr>
                         <tr>
-                            <td class="tab-cells-name">{{ 'title.attack'|trans|raw }}</td>
-                            <td class="center-cells"><a href="{{ path('galaxy') }}">{{ 'cell.attack'|trans|raw }}</a></td>
+                            <th class="tab-cells-name">{{ 'title.attack'|trans|raw }}</th>
+                            <td class="center-cells"><a href="{{ path('map') }}">{{ 'cell.attack'|trans|raw }}</a></td>
                         </tr>
                         <tr>
-                            <td class="tab-cells-name">{{ 'title.batiment'|trans|raw }}</td>
+                            <th class="tab-cells-name">{{ 'title.batiment'|trans|raw }}</th>
                             <td class="center-cells"><a href="{{ path('building') }}">{{ 'cell.batiment'|trans|raw }}</a></td>
                         </tr>
                         <tr>
-                            <td class="tab-cells-name">{{ 'title.search'|trans|raw }}</td>
+                            <th class="tab-cells-name">{{ 'title.search'|trans|raw }}</th>
                             <td class="center-cells"><a href="{{ path('search') }}">{{ 'cell.search'|trans|raw }}</a></td>
                         </tr>
                         <tr>
-                            <td class="tab-cells-name">{{ 'title.spatial'|trans|raw }}</td>
+                            <th class="tab-cells-name">{{ 'title.spatial'|trans|raw }}</th>
                             <td class="center-cells"><a href="{{ path('spatial') }}">{{ 'cell.spatial'|trans|raw }}</a></td>
                         </tr>
                         <tr>
-                            <td class="tab-cells-name">{{ 'title.fleet'|trans|raw }}</td>
+                            <th class="tab-cells-name">{{ 'title.fleet'|trans|raw }}</th>
                             <td class="center-cells"><a href="{{ path('fleet') }}">{{ 'cell.fleet'|trans|raw }}</a></td>
                         </tr>
                     </tbody>

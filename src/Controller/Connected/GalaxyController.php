@@ -13,11 +13,22 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class GalaxyController extends Controller
 {
     /**
-     * @Route("/galaxie", name="galaxy")
-     * @Route("/galaxie/", name="galaxy_withSlash")
+     * @Route("/galaxie/{id}", name="galaxy", requirements={"id"="\d+"})
      */
-    public function galaxyAction()
+    public function galaxyAction($id)
     {
-        return $this->render('connected/galaxy.html.twig');
+        $em = $this->getDoctrine()->getManager();
+
+        $sectors = $em->getRepository('App:Sector')
+            ->createQueryBuilder('s')
+            ->join('s.galaxy', 'g')
+            ->where('g.position = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult();
+
+        return $this->render('connected/galaxy.html.twig', [
+            'sectors' => $sectors,
+        ]);
     }
 }
