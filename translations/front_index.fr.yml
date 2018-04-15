@@ -8,7 +8,8 @@ form.image: upload
 form.pseudoEmail: 'Pseudo ou email'
 form.register: 's''enregistrer'
 blockOne: 'Guerrier/Diplomate/Bâtisseur rejoignez Area et accomplissez votre destinée contre ou avec les %nbrUsers% joueurs déjà présent sur le jeu !'
-blockTwo: 'Le jeu est actuellement en développement, n''hésitez pas a nous faire parvenir tout les bugs que vous rencontrez !'
+blockTwo: '2053 - Le niobium est exploité depuis 50 ans dans l''exploration spatiale ouvrant des perspectives d''expansion infinie. Malheureusement la Terre manque de sa ressource la plus précieuse : l''eau. C''est ainsi que les dirigeants de différents pays décident de l''abandonner pour d''autres planètes de la galaxie.'
+blockThree: 'Le jeu est actuellement en développement, n''hésitez pas a nous faire parvenir tout les bugs que vous rencontrez !'
 modal.title: 'Réinitialiser mot de passe'
 modal.txt: 'Êtes vous sûr de vouloir réinitialiser votre mot de passe ?'
 modal.close: Fermer

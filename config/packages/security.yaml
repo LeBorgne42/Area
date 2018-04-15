@@ -53,3 +53,4 @@ security:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/fr, roles: ROLE_USER }
         - { path: ^/admin-edr, roles: ROLE_ADMIN }
+        - { path: ^/serveur, roles: ROLE_ADMIN }

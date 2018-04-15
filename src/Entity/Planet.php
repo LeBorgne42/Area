@@ -23,7 +23,7 @@ class Planet
     /**
      * @ORM\Column(name="name",type="string", length=15)
      */
-    protected $name = 'Inhabité';
+    protected $name;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="planets", fetch="EXTRA_LAZY")
@@ -66,6 +66,18 @@ class Planet
      * @Assert\NotBlank(message = "required")
      */
     protected $position;
+
+    /**
+     * @ORM\Column(name="land",type="integer")
+     * @Assert\NotBlank(message = "required")
+     */
+    protected $land;
+
+    /**
+     * @ORM\Column(name="sky",type="integer")
+     * @Assert\NotBlank(message = "required")
+     */
+    protected $sky;
 
     /**
      * @Assert\File(
@@ -255,6 +267,37 @@ class Planet
         return $this->id;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getLand()
+    {
+        return $this->land;
+    }
+
+    /**
+     * @param mixed $land
+     */
+    public function setLand($land): void
+    {
+        $this->land = $land;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSky()
+    {
+        return $this->sky;
+    }
+
+    /**
+     * @param mixed $sky
+     */
+    public function setSky($sky): void
+    {
+        $this->sky = $sky;
+    }
 
     /**
      * Get name
