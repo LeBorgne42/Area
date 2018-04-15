@@ -9,3 +9,34 @@
   font-size: 1rem;
   color:#FFFFFF;
 }
+
+.sector-block {
+  border: 1px solid #fff;
+  background-color: black;
+  height: 65px;
+  width: 65px;
+  line-height: 1rem;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  color: gainsboro;
+  text-decoration: none;
+  padding: 0.3rem 0.5rem 0.3rem 0.5rem!important;
+}
+
+a.sector-block:hover {
+  color: gainsboro;
+  text-decoration: none;
+}
+
+a.sector-block:focus {
+  color: gainsboro;
+  text-decoration: none;
+}
+
+.pp-ally {
+  color: green;
+}
+
+.pp-enemy {
+  color: red;
+}

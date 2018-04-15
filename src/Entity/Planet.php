@@ -21,7 +21,7 @@ class Planet
     private $id;
 
     /**
-     * @ORM\Column(name="name",type="string", length=15)
+     * @ORM\Column(name="name",type="string", length=15, nullable=true)
      */
     protected $name;
 
@@ -57,7 +57,7 @@ class Planet
     protected $humans;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Sector", inversedBy="planet", fetch="EXTRA_LAZY")
+     * @ORM\ManyToOne(targetEntity="Sector", inversedBy="planets", fetch="EXTRA_LAZY")
      */
     protected $sector;
 
@@ -68,30 +68,34 @@ class Planet
     protected $position;
 
     /**
-     * @ORM\Column(name="land",type="integer")
-     * @Assert\NotBlank(message = "required")
+     * @ORM\Column(name="land",type="integer", nullable=true)
      */
     protected $land;
 
     /**
-     * @ORM\Column(name="sky",type="integer")
-     * @Assert\NotBlank(message = "required")
+     * @ORM\Column(name="sky",type="integer", nullable=true)
      */
     protected $sky;
+
+    /**
+     * @ORM\Column(name="empty",type="boolean")
+     * @Assert\NotBlank(message = "required")
+     */
+    protected $empty = false;
 
     /**
      * @Assert\File(
      *     maxSize="400k",
      *     mimeTypes={"image/png", "image/jpeg", "image/bmp"}
      * )
-     * @Vich\UploadableField(mapping="planet_img", fileNameProperty="imageName", size="imageSize" )
+     * @Vich\UploadableField(mapping="planet_img", fileNameProperty="imageName" )
      *
      * @var File
      */
     private $imageFile= null;
 
     /**
-     * @ORM\Column(name="imageName",type="string", length=20)
+     * @ORM\Column(name="imageName",type="string", length=20, nullable=true)
      * @Assert\NotBlank(message = "required")
      */
     protected $imageName;
@@ -119,6 +123,22 @@ class Planet
     public function getImageFile(): ?File
     {
         return $this->imageFile;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmpty()
+    {
+        return $this->empty;
+    }
+
+    /**
+     * @param mixed $empty
+     */
+    public function setEmpty($empty): void
+    {
+        $this->empty = $empty;
     }
 
     /**

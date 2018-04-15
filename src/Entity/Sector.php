@@ -22,7 +22,7 @@ class Sector
      * @ORM\OneToMany(targetEntity="Planet", mappedBy="sector", fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(name="planet_id", referencedColumnName="id")
      */
-    protected $planet;
+    protected $planets;
 
     /**
      * @ORM\ManyToOne(targetEntity="Galaxy", inversedBy="sectors", fetch="EXTRA_LAZY")
@@ -48,6 +48,14 @@ class Sector
         $this->planets[] = $planet;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPlanets()
+    {
+        return $this->planets;
     }
 
     /**
