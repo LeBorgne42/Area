@@ -19,17 +19,17 @@ class Fleet
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="Soldier", mappedBy="planet", fetch="EXTRA_LAZY")
+     * @ORM\OneToOne(targetEntity="Soldier", mappedBy="fleet", fetch="EXTRA_LAZY")
      */
     protected $soldier;
 
     /**
-     * @ORM\OneToOne(targetEntity="Worker", mappedBy="planet", fetch="EXTRA_LAZY")
+     * @ORM\OneToOne(targetEntity="Worker", mappedBy="fleet", fetch="EXTRA_LAZY")
      */
     protected $worker;
 
     /**
-     * @ORM\OneToOne(targetEntity="Scientist", mappedBy="planet", fetch="EXTRA_LAZY")
+     * @ORM\OneToOne(targetEntity="Scientist", mappedBy="fleet", fetch="EXTRA_LAZY")
      */
     protected $scientist;
 

@@ -19,7 +19,7 @@ class Soldier
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Planet", inversedBy="soldier", fetch="EXTRA_LAZY")
+     * @ORM\OneToOne(targetEntity="Planet", inversedBy="soldier", fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(name="planet_id", referencedColumnName="id")
      */
     protected $planet;
