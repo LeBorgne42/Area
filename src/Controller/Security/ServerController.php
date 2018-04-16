@@ -24,7 +24,6 @@ class ServerController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $nbrSector = 1;
-        $position = 1;
         $nbrPlanets = 0;
         $image = ['planet1.png', 'planet2.png', 'planet3.png', 'planet4.png', 'planet5.png'];
         $galaxy = new Galaxy();
@@ -42,14 +41,14 @@ class ServerController extends Controller
                     $planet = new Planet();
                     $planet->setEmpty(true);
                     $planet->setSector($sector);
-                    $planet->setPosition($position);
+                    $planet->setPosition($nbrPlanet);
                 } else {
                     $nbrPlanets++;
                     $planet = new Planet();
                     $planet->setName('vierge');
                     $planet->setImageName($image[rand(0, 4)]);
                     $planet->setSector($sector);
-                    $planet->setPosition($position);
+                    $planet->setPosition($nbrPlanet);
                     if (($nbrSector >= 1 && $nbrSector <= 9) || ($nbrSector >= 92 && $nbrSector <= 99) || ($nbrSector % 10 == 0 && $nbrSector % 10 == 1)) {
                         if ($nbrPlanet == 4 || $nbrPlanet == 6 || $nbrPlanet == 15 || $nbrPlanet == 17 || $nbrPlanet == 25) {
                             $planet->setLand(60);

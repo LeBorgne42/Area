@@ -45,16 +45,16 @@ class SecurityController extends Controller
             sort($sector, SORT_NUMERIC);
             $planet = $em->getRepository('App:Planet')
                         ->createQueryBuilder('p')
-                        ->join('p.sector', 's')
                         ->where('p.user is null')
-                        ->andWhere('s.position IN (:sector)')
-                        ->andWhere('p.position IN (:position)')
-                        ->setParameters(array('sector' => $sector, 'position' => $position))
+                        ->andWhere('p.land = :land')
+                        ->andWhere('p.sky = :sky')
+                        ->setParameters(array('land' => 60, 'sky' => 10))
+                        ->setMaxResults(1)
                         ->getQuery()
                         ->getOneOrNullResult();
-            var_dump($planet); exit;
             if($planet) {
                 $planet->setUser($user);
+                $planet->setName('Nova Terra');
                 $user->addPlanet($planet);
                 $em->persist($planet);
             }
