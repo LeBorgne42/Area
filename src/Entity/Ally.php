@@ -32,6 +32,26 @@ class Ally
     protected $bitcoin;
 
     /**
+     * @ORM\Column(name="taxe",type="integer")
+     */
+    protected $taxe;
+
+    /**
+     * @ORM\Column(name="pna",type="array")
+     */
+    protected $pna;
+
+    /**
+     * @ORM\Column(name="allied",type="array")
+     */
+    protected $allied;
+
+    /**
+     * @ORM\Column(name="war",type="array")
+     */
+    protected $war;
+
+    /**
      * @Assert\File(
      *     maxSize="800k",
      *     mimeTypes={"image/png", "image/jpeg", "image/bmp"}
@@ -104,6 +124,78 @@ class Ally
     }
 
     /**
+     * Add ally pna
+     *
+     * @param \App\Entity\Ally $ally
+     *
+     * @return Ally
+     */
+    public function addAllyPna(\App\Entity\Ally $ally)
+    {
+        $this->pna[] = $ally;
+
+        return $this;
+    }
+
+    /**
+     * Remove ally pna
+     *
+     * @param \App\Entity\Ally $ally
+     */
+    public function removeAllyPna(\App\Entity\Ally $ally)
+    {
+        $this->pna->removeElement($ally);
+    }
+
+    /**
+     * Add ally allied
+     *
+     * @param \App\Entity\Ally $ally
+     *
+     * @return Ally
+     */
+    public function addAllyAllied(\App\Entity\Ally $ally)
+    {
+        $this->allied[] = $ally;
+
+        return $this;
+    }
+
+    /**
+     * Remove ally allied
+     *
+     * @param \App\Entity\Ally $ally
+     */
+    public function removeAllyAllied(\App\Entity\Ally $ally)
+    {
+        $this->allied->removeElement($ally);
+    }
+
+    /**
+     * Add ally war
+     *
+     * @param \App\Entity\Ally $ally
+     *
+     * @return Ally
+     */
+    public function addAllyWar(\App\Entity\Ally $ally)
+    {
+        $this->war[] = $ally;
+
+        return $this;
+    }
+
+    /**
+     * Remove ally war
+     *
+     * @param \App\Entity\Ally $ally
+     */
+    public function removeAllyWar(\App\Entity\Ally $ally)
+    {
+        $this->war->removeElement($ally);
+    }
+
+    /**
      * @return mixed
      */
     public function getBitcoin()
@@ -154,6 +246,38 @@ class Ally
     public function getImageSize(): ?int
     {
         return $this->imageSize;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTaxe()
+    {
+        return $this->taxe;
+    }
+
+    /**
+     * @param mixed $taxe
+     */
+    public function setTaxe($taxe): void
+    {
+        $this->taxe = $taxe;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt(): \DateTime
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param \DateTime $updatedAt
+     */
+    public function setUpdatedAt(\DateTime $updatedAt): void
+    {
+        $this->updatedAt = $updatedAt;
     }
 
     /**
