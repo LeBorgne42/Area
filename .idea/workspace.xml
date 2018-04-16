@@ -3,7 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="97f042ea-d0ee-4bd9-bb02-3d850e24f659" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/assets/main.js" afterPath="$PROJECT_DIR$/assets/main.js" />
+      <change beforePath="$PROJECT_DIR$/assets/scss/front/ally.scss" afterPath="$PROJECT_DIR$/assets/scss/front/ally.scss" />
       <change beforePath="$PROJECT_DIR$/src/Form/Front/UserAllyType.php" afterPath="$PROJECT_DIR$/src/Form/Front/UserAllyType.php" />
+      <change beforePath="$PROJECT_DIR$/templates/anonymous/rules.html.twig" afterPath="$PROJECT_DIR$/templates/anonymous/rules.html.twig" />
       <change beforePath="$PROJECT_DIR$/templates/connected/ally.html.twig" afterPath="$PROJECT_DIR$/templates/connected/ally.html.twig" />
       <change beforePath="$PROJECT_DIR$/translations/front_ally.fr.yml" afterPath="$PROJECT_DIR$/translations/front_ally.fr.yml" />
     </list>
@@ -22,8 +25,18 @@
       <file leaf-file-name="ally.html.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/connected/ally.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="395">
-              <caret line="35" column="56" lean-forward="false" selection-start-line="35" selection-start-column="56" selection-end-line="35" selection-end-column="56" />
+            <state relative-caret-position="427">
+              <caret line="41" column="33" lean-forward="false" selection-start-line="41" selection-start-column="33" selection-end-line="41" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="front_ally.fr.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/translations/front_ally.fr.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="9" column="24" lean-forward="false" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -32,18 +45,58 @@
       <file leaf-file-name="UserAllyType.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Form/Front/UserAllyType.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="402">
-              <caret line="64" column="45" lean-forward="false" selection-start-line="64" selection-start-column="45" selection-end-line="64" selection-end-column="45" />
+            <state relative-caret-position="518">
+              <caret line="72" column="13" lean-forward="false" selection-start-line="72" selection-start-column="13" selection-end-line="72" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="front_ally.fr.yml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/translations/front_ally.fr.yml">
+      <file leaf-file-name="rules.html.twig" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/anonymous/rules.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="27" lean-forward="false" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="27" />
+            <state relative-caret-position="80">
+              <caret line="9" column="37" lean-forward="false" selection-start-line="9" selection-start-column="37" selection-end-line="9" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="global.scss" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/global.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="435">
+              <caret line="32" column="1" lean-forward="true" selection-start-line="32" selection-start-column="1" selection-end-line="32" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="529">
+              <caret line="48" column="30" lean-forward="false" selection-start-line="48" selection-start-column="30" selection-end-line="48" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ally.scss" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/scss/front/ally.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="20" lean-forward="false" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="galaxy.scss" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/scss/front/galaxy.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="18" lean-forward="false" selection-start-line="4" selection-start-column="18" selection-end-line="5" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -53,7 +106,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>$orbite</find>
       <find>getplanet</find>
       <find>getwater</find>
       <find>gala</find>
@@ -83,6 +135,7 @@
       <find>defaut.png</find>
       <find>defaut.p@</find>
       <find>cascade</find>
+      <find>navbar-example3</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -104,6 +157,7 @@
       <replace>&quot;/user&quot;</replace>
       <replace>&quot;/fr&quot;</replace>
       <replace>setSky</replace>
+      <replace>navbar-rules</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/config</dir>
@@ -118,7 +172,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Controller/Connected/OverviewController.php" />
         <option value="$PROJECT_DIR$/assets/js/ressource.js" />
         <option value="$PROJECT_DIR$/webpack.config.js" />
         <option value="$PROJECT_DIR$/templates/menu/_top_menu.html.twig" />
@@ -152,7 +205,6 @@
         <option value="$PROJECT_DIR$/src/Entity/Fleet.php" />
         <option value="$PROJECT_DIR$/config/packages/vich_uploader.yaml" />
         <option value="$PROJECT_DIR$/assets/global.scss" />
-        <option value="$PROJECT_DIR$/assets/scss/front/ally.scss" />
         <option value="$PROJECT_DIR$/src/Controller/Security/SecurityController.php" />
         <option value="$PROJECT_DIR$/src/Entity/Sector.php" />
         <option value="$PROJECT_DIR$/src/Controller/Connected/GalaxyController.php" />
@@ -164,11 +216,13 @@
         <option value="$PROJECT_DIR$/src/Entity/Grade.php" />
         <option value="$PROJECT_DIR$/src/Form/Front/AllyImageType.php" />
         <option value="$PROJECT_DIR$/templates/connected/overview.html.twig" />
-        <option value="$PROJECT_DIR$/assets/main.js" />
         <option value="$PROJECT_DIR$/src/Controller/Connected/AllyController.php" />
-        <option value="$PROJECT_DIR$/src/Form/Front/UserAllyType.php" />
-        <option value="$PROJECT_DIR$/templates/connected/ally.html.twig" />
+        <option value="$PROJECT_DIR$/assets/scss/front/ally.scss" />
         <option value="$PROJECT_DIR$/translations/front_ally.fr.yml" />
+        <option value="$PROJECT_DIR$/templates/connected/ally.html.twig" />
+        <option value="$PROJECT_DIR$/src/Form/Front/UserAllyType.php" />
+        <option value="$PROJECT_DIR$/assets/main.js" />
+        <option value="$PROJECT_DIR$/templates/anonymous/rules.html.twig" />
       </list>
     </option>
   </component>
@@ -334,6 +388,11 @@
             <path>
               <item name="Area" type="b2602c69:ProjectViewProjectNode" />
               <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="assets" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
@@ -357,7 +416,8 @@
             <path>
               <item name="Area" type="b2602c69:ProjectViewProjectNode" />
               <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="translations" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="anonymous" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
@@ -426,12 +486,12 @@
       <workItem from="1523280628719" duration="28192000" />
       <workItem from="1523347726879" duration="20260000" />
       <workItem from="1523430258006" duration="33957000" />
-      <workItem from="1523711701169" duration="59475000" />
+      <workItem from="1523711701169" duration="61871000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="196150000" />
+    <option name="totallyTimeSpent" value="198546000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -500,18 +560,12 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Entity/Orbite.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/translations/front_create.fr.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -728,22 +782,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/global.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="34" column="14" lean-forward="false" selection-start-line="34" selection-start-column="14" selection-end-line="35" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/scss/front/ally.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="16" lean-forward="false" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/menu/_right_planet.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -785,14 +823,6 @@
           <folding>
             <element signature="e#30#62#0#PHP" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/scss/front/galaxy.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="1" lean-forward="false" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -854,14 +884,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="15" column="37" lean-forward="false" selection-start-line="15" selection-start-column="37" selection-end-line="15" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Security/SecurityController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
@@ -890,6 +912,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/assets/scss/front/galaxy.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="18" lean-forward="false" selection-start-line="4" selection-start-column="18" selection-end-line="5" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/scss/front/ally.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="20" lean-forward="false" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Form/Front/AllyImageType.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
@@ -898,26 +936,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/Front/UserAllyType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="64" column="45" lean-forward="false" selection-start-line="64" selection-start-column="45" selection-end-line="64" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/connected/ally.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="395">
-          <caret line="35" column="56" lean-forward="false" selection-start-line="35" selection-start-column="56" selection-end-line="35" selection-end-column="56" />
+        <state relative-caret-position="427">
+          <caret line="41" column="33" lean-forward="false" selection-start-line="41" selection-start-column="33" selection-end-line="41" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/translations/front_ally.fr.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="27" lean-forward="false" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="27" />
+        <state relative-caret-position="135">
+          <caret line="9" column="24" lean-forward="false" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Form/Front/UserAllyType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="518">
+          <caret line="72" column="13" lean-forward="false" selection-start-line="72" selection-start-column="13" selection-end-line="72" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="529">
+          <caret line="48" column="30" lean-forward="false" selection-start-line="48" selection-start-column="30" selection-end-line="48" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/global.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="32" column="1" lean-forward="true" selection-start-line="32" selection-start-column="1" selection-end-line="32" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/anonymous/rules.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="9" column="37" lean-forward="false" selection-start-line="9" selection-start-column="37" selection-end-line="9" selection-end-column="37" />
           <folding />
         </state>
       </provider>

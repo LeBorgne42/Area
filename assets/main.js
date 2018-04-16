@@ -45,6 +45,10 @@ function manageReloadR() {
 $(document).ready(function() {
     $('[data-toggle="popover"]').popover();
     $('[data-toggle="tooltip"]').tooltip();
+    $("body").scrollspy({
+        target: "#navbar-rules",
+        offset: 70
+    });
     manageImageForm();
     manageAllyImageForm();
     manageModalContact();

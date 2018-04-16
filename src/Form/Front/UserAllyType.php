@@ -60,19 +60,34 @@ class UserAllyType extends AbstractType
             )
             ->add(
                 'taxe',
-                null,
+                'Symfony\Component\Form\Extension\Core\Type\ChoiceType',
                 array(
+                    'choices' => $this->getPercentTaxe(),
                     'label' => 'form.taxeAlly',
                     'attr'  => array(
                         'placeholder' => 'form.taxe',
-                        'class' => 'form-control',
-                        'min' => 1,
-                        'max' => 10
+                        'class' => 'form-control select2',
                     ),
                     'required' => true
                 )
             )
             ->add('sendForm', SubmitType::class, array('label' => 'form.send'));
+    }
+
+    protected function getPercentTaxe()
+    {
+        return array(
+            '01%' => '1',
+            '02%' => '2',
+            '03%' => '3',
+            '04%' => '4',
+            '05%' => '5',
+            '06%' => '6',
+            '07%' => '7',
+            '08%' => '8',
+            '09%' => '9',
+            '10%' => '10'
+        );
     }
 
     /**

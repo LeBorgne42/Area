@@ -7,3 +7,4 @@ form:
   taxe: '(1 à 10%)'
   taxeAlly: 'Taxe d''alliance :'
   send: 'Créer une alliance'
+ally.members: 'Membres :'
