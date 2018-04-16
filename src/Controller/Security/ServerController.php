@@ -50,7 +50,7 @@ class ServerController extends Controller
                     $planet->setImageName($image[rand(0, 4)]);
                     $planet->setSector($sector);
                     $planet->setPosition($position);
-                    if (($nbrSector > 2 && $nbrSector < 9) || ($nbrSector > 92 && $nbrSector < 99) || ($nbrSector % 10 == 0 && $nbrSector % 10 == 1)) {
+                    if (($nbrSector >= 1 && $nbrSector <= 9) || ($nbrSector >= 92 && $nbrSector <= 99) || ($nbrSector % 10 == 0 && $nbrSector % 10 == 1)) {
                         if ($nbrPlanet == 4 || $nbrPlanet == 6 || $nbrPlanet == 15 || $nbrPlanet == 17 || $nbrPlanet == 25) {
                             $planet->setLand(60);
                             $planet->setSky(10);
