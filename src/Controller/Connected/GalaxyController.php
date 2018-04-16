@@ -24,7 +24,7 @@ class GalaxyController extends Controller
             ->join('s.galaxy', 'g')
             ->where('g.position = :id')
             ->setParameter('id', $id)
-            ->orderBy('s.position')
+            ->orderBy('s.position', 'ASC')
             ->getQuery()
             ->getResult();
 

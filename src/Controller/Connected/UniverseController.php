@@ -22,6 +22,7 @@ class UniverseController extends Controller
 
         $galaxys = $em->getRepository('App:Galaxy')
             ->createQueryBuilder('g')
+            ->orderBy('g.position', 'ASC')
             ->getQuery()
             ->getResult();
 

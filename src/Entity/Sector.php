@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\Criteria;
 
 /**
  * @ORM\Table(name="sector")
@@ -51,11 +52,14 @@ class Sector
     }
 
     /**
-     * @return mixed
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getPlanets()
     {
-        return $this->planets;
+        $criteria = Criteria::create()
+            ->orderBy(array('position' => 'ASC'));
+
+        return $this->planets->matching($criteria);
     }
 
     /**

@@ -40,6 +40,8 @@ class AllyController extends Controller
         $ally->addUser($user);
         $ally->setTaxe(2);
         $ally->setName('Les baggareurs');
+        $ally->setSigle("KK");
+        $ally->setSlogan("On est la pour gagner !");
         $ally->setBitcoin(200);
         $ally->setImageName('defaut.jpg');
         $em->persist($ally);

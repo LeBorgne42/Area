@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Doctrine\Common\Collections\Criteria;
 
 /**
  * @ORM\Table(name="ally")
@@ -27,10 +28,22 @@ class Ally
     protected $users;
 
     /**
-     * @ORM\Column(name="name",type="string", length=20, unique=true)
+     * @ORM\Column(name="name",type="string", length=15, unique=true)
      * @Assert\NotBlank(message = "required")
      */
     protected $name;
+
+    /**
+     * @ORM\Column(name="sigle",type="string", length=5, unique=true)
+     * @Assert\NotBlank(message = "required")
+     */
+    protected $sigle;
+
+    /**
+     * @ORM\Column(name="slogan",type="string", length=30, unique=true)
+     * @Assert\NotBlank(message = "required")
+     */
+    protected $slogan;
 
     /**
      * @ORM\OneToMany(targetEntity="Grade", mappedBy="ally", fetch="EXTRA_LAZY")
@@ -103,11 +116,14 @@ class Ally
     }
 
     /**
-     * @return mixed
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getUsers()
     {
-        return $this->users;
+        $criteria = Criteria::create()
+            ->orderBy(array('grade' => 'ASC'));
+
+        return $this->users->matching($criteria);
     }
 
     /**
@@ -401,6 +417,54 @@ class Ally
     public function setWar($war): void
     {
         $this->war = $war;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSigle()
+    {
+        return $this->sigle;
+    }
+
+    /**
+     * @param mixed $sigle
+     */
+    public function setSigle($sigle): void
+    {
+        $this->sigle = $sigle;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSlogan()
+    {
+        return $this->slogan;
+    }
+
+    /**
+     * @param mixed $slogan
+     */
+    public function setSlogan($slogan): void
+    {
+        $this->slogan = $slogan;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGrades()
+    {
+        return $this->grades;
+    }
+
+    /**
+     * @param mixed $grades
+     */
+    public function setGrades($grades): void
+    {
+        $this->grades = $grades;
     }
 
     public function getId()

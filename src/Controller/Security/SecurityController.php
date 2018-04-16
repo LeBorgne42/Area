@@ -32,7 +32,7 @@ class SecurityController extends Controller
             $user->setCreatedAt($now);
             $user->setPassword(password_hash($_POST['_password'], PASSWORD_BCRYPT));
 
-            $sectorF = [2, 3, 4, 5, 6, 7, 8, 9, 92, 93, 94, 95, 96, 97, 98, 99];
+            /*$sectorF = [2, 3, 4, 5, 6, 7, 8, 9, 92, 93, 94, 95, 96, 97, 98, 99];
             $x = 1;
             $y = 0;
             while ($x <= 100) {
@@ -44,7 +44,7 @@ class SecurityController extends Controller
             }
             $position= [4, 6, 15, 17, 25];
             $sector = array_merge($sectorF,$sectorS);
-            sort($sector, SORT_NUMERIC);
+            sort($sector, SORT_NUMERIC);*/
             $planet = $em->getRepository('App:Planet')
                         ->createQueryBuilder('p')
                         ->where('p.user is null')
