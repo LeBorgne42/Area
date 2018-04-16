@@ -24,6 +24,7 @@ class Ally
 
     /**
      * @ORM\OneToMany(targetEntity="User", mappedBy="ally", fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $users;
 

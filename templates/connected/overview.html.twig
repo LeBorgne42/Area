@@ -16,10 +16,10 @@
                                 {% if app.user.imageFile %}
                                     <img data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.modify'|trans }}" height="64" width="64" src="{{ vich_uploader_asset(app.user, 'imageFile') }}">
                                 {% else %}
-                                    <img data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.modify'|trans }}" height="64" width="64" src="{{ asset('img/defaut.png') }}">
+                                    <img data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.modify'|trans }}" height="64" width="64" src="{{ asset('img/avatar.png') }}">
                                 {% endif %}
                             {% else %}
-                                <img data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.modify'|trans }}" height="64" width="64" src="{{ asset('img/defaut.png') }}">
+                                <img data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.modify'|trans }}" height="64" width="64" src="{{ asset('img/avatar.png') }}">
                             {% endif %}
                             <div><strong>{{ 'modify'|trans }}</strong></div>
                         </div>

@@ -10,6 +10,15 @@ function manageImageForm() {
     });
 }
 
+function manageAllyImageForm() {
+    $('.modify-allyImage').off('click').on('click',function(e){
+        $('#ally_image_imageFile_file').click();
+        $('#ally_image_imageFile_file').on('change',function(){
+            $(this).closest('form').submit();
+        });
+    });
+}
+
 function manageModalContact() {
     $('#contactModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
@@ -37,6 +46,7 @@ $(document).ready(function() {
     $('[data-toggle="popover"]').popover();
     $('[data-toggle="tooltip"]').tooltip();
     manageImageForm();
+    manageAllyImageForm();
     manageModalContact();
     manageReloadR();
 });

@@ -6,11 +6,32 @@
 
 {% block body %}
     <div class="front-block-ally">
-        <h1 class="text-center text-orange mb-4">{{ app.user.getAlly().getName() }} - <small>[{{ app.user.getAlly().getSigle() }}]</small></h1>
-        <div class="text-center"><img height="300" width="450" src="{{ vich_uploader_asset(app.user.getAlly(), 'imageFile') }}"></div>
-        <div class="text-center my-2">"{{ app.user.getAlly().getSlogan() }}"</div>
-        {% for user in app.user.getAlly().getUsers() %}
-            {{ user.getUsername() }} - {{ user.getGrade().getName() }}
-        {% endfor %}
+        {% if app.user.getAlly() %}
+            <h1 class="text-center text-orange mb-4">{{ app.user.getAlly().getName() }} - <small>[{{ app.user.getAlly().getSigle() }}]</small></h1>
+            <div class="text-center modify-allyImage">
+                {% if app.user.getAlly().getImageName() %}
+                    <img height="300" width="450" src="{{ vich_uploader_asset(app.user.getAlly(), 'imageFile') }}">
+                {% else %}
+                    <img height="300" width="450" src="{{ asset('img/ally.jpg') }}">
+                {% endif %}
+            </div>
+            {{ form_start(form_allyImage,{attr: { hidden: 'hidden'}}) }}
+            {{ form_widget(form_allyImage.imageFile) }}
+            {{ form_widget(form_allyImage.sendForm) }}
+            {{ form_end(form_allyImage) }}
+            <div class="text-center my-2">"{{ app.user.getAlly().getSlogan() }}"</div>
+            {% for user in app.user.getAlly().getUsers() %}
+                {{ user.getUsername() }} - {{ user.getGrade().getName() }}
+            {% endfor %}
+            <a href="{{ path('remove_ally') }}" class="btn btn-lg btn-danger">{{ 'delete'|trans }}</a>
+        {% else %}
+            {{ form_start(form_ally) }}
+            {{ form_widget(form_ally.name) }}
+            {{ form_widget(form_ally.sigle) }}
+            {{ form_widget(form_ally.slogan) }}
+            {{ form_widget(form_ally.taxe) }}
+            {{ form_widget(form_ally.sendForm,{attr: { class: 'btn btn-lg btn-info'}}) }}
+            {{ form_end(form_ally) }}
+        {% endif %}
     </div>
 {% endblock %}
