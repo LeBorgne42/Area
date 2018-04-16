@@ -38,7 +38,7 @@ class UserAllyType extends AbstractType
                     'attr'  => array(
                         'placeholder' => 'form.sigle',
                         'class' => 'form-control',
-                        'maxlength' => '5',
+                        'maxlength' => '4',
                         'minlength' => '2',
                     ),
                     'required' => true
@@ -62,7 +62,7 @@ class UserAllyType extends AbstractType
                 'taxe',
                 null,
                 array(
-                    'label' => 'form.taxe',
+                    'label' => 'form.taxeAlly',
                     'attr'  => array(
                         'placeholder' => 'form.taxe',
                         'class' => 'form-control',

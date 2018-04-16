@@ -1,1 +1,9 @@
 title: Alliance
+delete: 'Supprimer l''alliance'
+form:
+  name: 'Nom de l''alliance (max 15)'
+  sigle: 'Sigle (max 4)'
+  slogan: 'Cri de ralliement (max 30)'
+  taxe: '(1 à 10%)'
+  taxeAlly: 'Taxe d''alliance :'
+  send: 'Créer une alliance'

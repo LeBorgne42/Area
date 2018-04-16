@@ -26,11 +26,26 @@
             <a href="{{ path('remove_ally') }}" class="btn btn-lg btn-danger">{{ 'delete'|trans }}</a>
         {% else %}
             {{ form_start(form_ally) }}
-            {{ form_widget(form_ally.name) }}
-            {{ form_widget(form_ally.sigle) }}
-            {{ form_widget(form_ally.slogan) }}
-            {{ form_widget(form_ally.taxe) }}
-            {{ form_widget(form_ally.sendForm,{attr: { class: 'btn btn-lg btn-info'}}) }}
+            <div class="row">
+                <div class="offset-1 col-4 form-group">
+                    {{ form_widget(form_ally.name) }}
+                </div>
+                <div class="col-2 form-group">
+                    {{ form_widget(form_ally.sigle) }}
+                </div>
+                <div class="col-2 form-control-plaintext">
+                    {{ form_label(form_ally.taxe) }}
+                </div>
+                <div class="col-2 form-group">
+                    {{ form_widget(form_ally.taxe) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-1 col-10 form-group">
+                    {{ form_widget(form_ally.slogan) }}
+                    <div class="pull-right mt-3">{{ form_widget(form_ally.sendForm,{attr: { class: 'btn btn-lg btn-info'}}) }}</div>
+                </div>
+            </div>
             {{ form_end(form_ally) }}
         {% endif %}
     </div>
