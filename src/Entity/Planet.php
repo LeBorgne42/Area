@@ -32,14 +32,14 @@ class Planet
     protected $user;
 
     /**
-     * @ORM\OneToOne(targetEntity="Water", mappedBy="planet", fetch="EXTRA_LAZY")
+     * @ORM\Column(name="niobium",type="bigint")
      */
-    protected $water;
+    protected $niobium = 1500;
 
     /**
-     * @ORM\OneToOne(targetEntity="Niobium", mappedBy="planet", fetch="EXTRA_LAZY")
+     * @ORM\Column(name="water",type="bigint")
      */
-    protected $niobium;
+    protected $water = 750;
 
     /**
      * @ORM\OneToMany(targetEntity="Building", mappedBy="planet", fetch="EXTRA_LAZY")
@@ -52,9 +52,19 @@ class Planet
     protected $orbite;
 
     /**
-     * @ORM\OneToMany(targetEntity="Human", mappedBy="planet", fetch="EXTRA_LAZY")
+     * @ORM\OneToOne(targetEntity="Soldier", mappedBy="planet", fetch="EXTRA_LAZY")
      */
-    protected $humans;
+    protected $soldier;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Worker", mappedBy="planet", fetch="EXTRA_LAZY")
+     */
+    protected $worker;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Scientist", mappedBy="planet", fetch="EXTRA_LAZY")
+     */
+    protected $scientist;
 
     /**
      * @ORM\ManyToOne(targetEntity="Sector", inversedBy="planets", fetch="EXTRA_LAZY")
@@ -225,19 +235,51 @@ class Planet
     }
 
     /**
-     * @return mixed
+     * @param mixed $soldier
      */
-    public function getHumans()
+    public function setSoldier($soldier): void
     {
-        return $this->humans;
+        $this->soldier = $soldier;
     }
 
     /**
-     * @param mixed $humans
+     * @return mixed
      */
-    public function setHumans($humans): void
+    public function getSoldier()
     {
-        $this->humans = $humans;
+        return $this->soldier;
+    }
+
+    /**
+     * @param mixed $scientist
+     */
+    public function setScientist($scientist): void
+    {
+        $this->scientist = $scientist;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getScientist()
+    {
+        return $this->scientist;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWorker()
+    {
+        return $this->worker;
+    }
+
+    /**
+     * @param mixed $worker
+     */
+    public function setWorker($worker): void
+    {
+        $this->worker = $worker;
     }
 
     /**

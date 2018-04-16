@@ -6,7 +6,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\Front\UserRecoveryType;
 use App\Entity\User;
-use App\Entity\Bitcoin;
+use App\Entity\Soldier;
+use App\Entity\Worker;
+use App\Entity\Scientist;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -53,24 +55,27 @@ class SecurityController extends Controller
                         ->getQuery()
                         ->getOneOrNullResult();
             if($planet) {
+                $soldier = new Soldier();
+                $worker = new Worker();
+                $scientist = new Scientist();
+                $soldier->setPlanet($planet);
+                $worker->setPlanet($planet);
+                $scientist->setPlanet($planet);
+                $soldier->setAmount(500);
+                $worker->setAmount(10000);
+                $scientist->setAmount(200);
+                $planet->setSoldier($soldier);
+                $planet->setWorker($worker);
+                $planet->setScientist($scientist);
                 $planet->setUser($user);
                 $planet->setName('Nova Terra');
                 $user->addPlanet($planet);
+                $em->persist($soldier);
+                $em->persist($scientist);
+                $em->persist($worker);
                 $em->persist($planet);
             }
-
-            $bitcoin = new Bitcoin();
-            $bitcoin->setUser($user);
-            $bitcoin->setAmount(5000);
-            $em->persist($bitcoin);
-            $user->setBitcoin($bitcoin);
             $em->persist($user);
-
-
-
-
-
-
             $em->flush();
 
             $message = (new \Swift_Message('Confirmation email'))

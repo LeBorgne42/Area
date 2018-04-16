@@ -48,9 +48,9 @@ class User implements UserInterface, \Serializable
     protected $planets;
 
     /**
-     * @ORM\OneToOne(targetEntity="Bitcoin", mappedBy="user", fetch="EXTRA_LAZY", orphanRemoval=true, cascade={"all"})
+     * @ORM\Column(name="bitcoin",type="bigint")
      */
-    protected $bitcoin;
+    protected $bitcoin = 5000;
 
     /**
      * @ORM\Column(name="created_at",type="datetime")
