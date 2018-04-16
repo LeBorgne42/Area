@@ -1,2 +1,4 @@
 title: 'Carte spatiale'
 tooltip.planet: '%name%'
+tooltip.planetInfos: 'Terrain: %land% Espace: %sky%'
+tooltip.planetOrbite: '%orbite%'
