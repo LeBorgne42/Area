@@ -27,6 +27,11 @@ class Ally
     protected $users;
 
     /**
+     * @ORM\OneToMany(targetEntity="Grade", mappedBy="ally", fetch="EXTRA_LAZY")
+     */
+    protected $grade;
+
+    /**
      * @ORM\Column(name="bitcoin",type="bigint")
      */
     protected $bitcoin;
