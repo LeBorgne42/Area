@@ -5,33 +5,29 @@
 {% block title %}{{ 'title'|trans }}{% endblock %}
 
 {% block body %}
-    <div class="row">
-        <div class="col-10">
-            <div class="map-block table-responsive">
-                <table class="table table-bordered table-dark sector-table text-center">
-                    <tbody>
+    <div class="map-block">
+        <table class="table table-bordered table-dark sector-table text-center">
+            <tbody>
+                {% set x = 1 %}
+                {% for planet in planets %}
+                    {% if x == 1 %}
+                        <tr>
+                    {% endif %}
+                    {% if planet.getEmpty == false %}
+                        <td class="center-cells pt-4">
+                            <a {% if planet.getUser() == app.user %}href="{{ path('building') }}"{% else %}href="{{ path('overview') }}"{% endif %}><img class="mr-4 mb-4" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planet'|trans({'%name%': planet.getName() }) }}" height="64" width="64" src="{{ vich_uploader_asset(planet, 'imageFile') }}"></a>
+                            <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planetInfos'|trans({'%land%': planet.getLand(),  '%sky%': planet.getSky()}) }}"></span>{% if planet.getOrbite() %}<span class="glyphicon glyphicon-plane planet" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planetOrbite'|trans({'%orbite%': planet.getOrbite()}) }}"></span>{% endif %}
+                        </td>
+                    {% else %}
+                        <td class="center-cells">{% if planet.getOrbite() %}<span class="glyphicon glyphicon-plane empty" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planetOrbite'|trans({'%orbite%': planet.getOrbite()}) }}"></span>{% endif %}</td>
+                    {% endif %}
+                    {% set x = x + 1 %}
+                    {% if x == 6 %}
                         {% set x = 1 %}
-                        {% for planet in planets %}
-                            {% if x == 1 %}
-                                <tr>
-                            {% endif %}
-                            {% if planet.getEmpty == false %}
-                                <td class="center-cells">
-                                    <a href="{{ path('home') }}"><img class="mr-4 mb-4" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planet'|trans({'%name%': planet.getName() }) }}" height="64" width="64" src="{{ vich_uploader_asset(planet, 'imageFile') }}"></a>
-                                    <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planetInfos'|trans({'%land%': planet.getLand(),  '%sky%': planet.getSky()}) }}"></span>{% if planet.getOrbite() %}<span class="glyphicon glyphicon-plane planet" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planetOrbite'|trans({'%orbite%': planet.getOrbite()}) }}"></span>{% endif %}
-                                </td>
-                            {% else %}
-                                <td class="center-cells">{% if planet.getOrbite() %}<span class="glyphicon glyphicon-plane empty" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planetOrbite'|trans({'%orbite%': planet.getOrbite()}) }}"></span>{% endif %}</td>
-                            {% endif %}
-                            {% set x = x + 1 %}
-                            {% if x == 6 %}
-                                {% set x = 1 %}
-                                </tr>
-                            {% endif %}
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 {% endblock %}

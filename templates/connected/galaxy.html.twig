@@ -5,32 +5,27 @@
 {% block title %}{{ 'title'|trans }}{% endblock %}
 
 {% block body %}
-
-    <div class="row">
-        <div class="col-10">
-            <div class="map-block table-responsive">
-                <table class="table table-bordered table-dark galaxy-table text-center">
-                    <tbody>
+    <div class="map-block">
+        <table class="table table-bordered table-dark galaxy-table text-center">
+            <tbody>
+                {% set x = 1 %}
+                {% for sector in sectors %}
+                    {% if x == 1 %}
+                        <tr>
                         {% set x = 1 %}
-                        {% for sector in sectors %}
-                            {% if x == 1 %}
-                                <tr>
-                                {% set x = 1 %}
-                            {% endif %}
-                            <td class="center-cells"><a data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.sector'|trans({'%position%': sector.getPosition()}) }}" href="{{ path('map', {id: sector.getPosition()}) }}">
-                                {% for planet in sector.getPlanets() %}
-                                    <span class="{% if planet.getUser() == app.user %}pp-ally{% endif %}">{% if planet.getEmpty() == true %}&nbsp;{% else %}.{% endif %}</span>
-                                {% endfor %}
-                                </a></td>
-                            {% set x = x + 1 %}
-                                    {% if x == 11 %}
-                                </tr>
-                            {% set x = 1 %}
-                            {% endif %}
+                    {% endif %}
+                    <td class="center-cells"><a data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.sector'|trans({'%position%': sector.getPosition()}) }}" href="{{ path('map', {id: sector.getPosition()}) }}">
+                        {% for planet in sector.getPlanets() %}
+                            <span class="{% if planet.getUser() == app.user %}pp-ally{% endif %}">{% if planet.getEmpty() == true %}&nbsp;{% else %}.{% endif %}</span>
                         {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                        </a></td>
+                    {% set x = x + 1 %}
+                            {% if x == 11 %}
+                        </tr>
+                    {% set x = 1 %}
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 {% endblock %}
