@@ -42,10 +42,21 @@ class User implements UserInterface, \Serializable
     protected $ally;
 
     /**
+     * @ORM\Column(name="joinAllyAt",type="datetime", nullable=true)
+     */
+    protected $joinAllyAt;
+
+    /**
      * @ORM\OneToOne(targetEntity="Grade", inversedBy="user", fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(name="grade_id", referencedColumnName="id")
      */
     protected $grade;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Rank", inversedBy="user", fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="rank_id", referencedColumnName="id")
+     */
+    protected $rank;
 
     /**
      *
@@ -68,6 +79,12 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(name="created_at",type="datetime")
      */
     protected $createdAt;
+
+    /**
+     * @ORM\Column(name="connected",type="boolean")
+     * @Assert\NotBlank(message = "required")
+     */
+    protected $connected = true;
 
     /**
      * @Assert\File(
@@ -377,6 +394,54 @@ class User implements UserInterface, \Serializable
     public function setGrade($grade): void
     {
         $this->grade = $grade;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRank()
+    {
+        return $this->rank;
+    }
+
+    /**
+     * @param mixed $rank
+     */
+    public function setRank($rank): void
+    {
+        $this->rank = $rank;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConnected()
+    {
+        return $this->connected;
+    }
+
+    /**
+     * @param mixed $connected
+     */
+    public function setConnected($connected): void
+    {
+        $this->connected = $connected;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getJoinAllyAt()
+    {
+        return $this->joinAllyAt;
+    }
+
+    /**
+     * @param mixed $joinAllyAt
+     */
+    public function setJoinAllyAt($joinAllyAt): void
+    {
+        $this->joinAllyAt = $joinAllyAt;
     }
 
     public function getUpdatedAt()

@@ -13,6 +13,8 @@ ally.delete: 'Supprimer alliance'
 ally.memberGrade: 'Rang'
 ally.memberName: 'Pseudo'
 ally.memberDateJoin: 'Adhésion'
-ally.memberRank: 'Classement'
+ally.memberPoint: 'Points'
 ally.memberConnected: 'En ligne'
 ally.deleteText: 'Êtes vous bien sûr de vouloir supprimer votre alliance ?'
+0: Non
+1: Oui

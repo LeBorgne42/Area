@@ -9,6 +9,7 @@ use App\Entity\User;
 use App\Entity\Soldier;
 use App\Entity\Worker;
 use App\Entity\Scientist;
+use App\Entity\Rank;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -75,6 +76,10 @@ class SecurityController extends Controller
                 $em->persist($worker);
                 $em->persist($planet);
             }
+            $rank = new Rank();
+            $rank->setPoint(50);
+            $em->persist($rank);
+            $user->setRank($rank);
             $em->persist($user);
             $em->flush();
 
@@ -181,6 +186,12 @@ class SecurityController extends Controller
      */
     public function logoutAction()
     {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+
+        $user->setConnected(false);
+        $em->persist($user);
+        $em->flush();
     }
 
     /**
@@ -190,6 +201,13 @@ class SecurityController extends Controller
     public function loginRedirectAction()
     {
         if ($this->getUser()->getRoles()[0] == 'ROLE_USER') {
+            $user = $this->getUser();
+            $em = $this->getDoctrine()->getManager();
+
+            $user->setConnected(true);
+            $em->persist($user);
+            $em->flush();
+
             return $this->redirectToRoute('overview');
         }
         if ($this->getUser()->getRoles()[0] == 'ROLE_ADMIN') {

@@ -19,7 +19,7 @@ class Galaxy
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="Sector", mappedBy="galaxy", fetch="EXTRA_LAZY")
+     * @ORM\OneToMany(targetEntity="Sector", mappedBy="galaxy", fetch="EXTRA_LAZY", cascade={"persist"})
      */
     protected $sectors;
 

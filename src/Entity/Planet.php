@@ -42,27 +42,27 @@ class Planet
     protected $water = 750;
 
     /**
-     * @ORM\OneToMany(targetEntity="Building", mappedBy="planet", fetch="EXTRA_LAZY")
+     * @ORM\OneToMany(targetEntity="Building", mappedBy="planet", fetch="EXTRA_LAZY", cascade={"persist"})
      */
     protected $buildings;
 
     /**
-     * @ORM\OneToOne(targetEntity="Orbite", mappedBy="planet", fetch="EXTRA_LAZY")
+     * @ORM\OneToOne(targetEntity="Orbite", mappedBy="planet", fetch="EXTRA_LAZY", cascade={"persist"})
      */
     protected $orbite;
 
     /**
-     * @ORM\OneToOne(targetEntity="Soldier", mappedBy="planet", fetch="EXTRA_LAZY")
+     * @ORM\OneToOne(targetEntity="Soldier", mappedBy="planet", fetch="EXTRA_LAZY", cascade={"persist"})
      */
     protected $soldier;
 
     /**
-     * @ORM\OneToOne(targetEntity="Worker", mappedBy="planet", fetch="EXTRA_LAZY")
+     * @ORM\OneToOne(targetEntity="Worker", mappedBy="planet", fetch="EXTRA_LAZY", cascade={"persist"})
      */
     protected $worker;
 
     /**
-     * @ORM\OneToOne(targetEntity="Scientist", mappedBy="planet", fetch="EXTRA_LAZY")
+     * @ORM\OneToOne(targetEntity="Scientist", mappedBy="planet", fetch="EXTRA_LAZY", cascade={"persist"})
      */
     protected $scientist;
 

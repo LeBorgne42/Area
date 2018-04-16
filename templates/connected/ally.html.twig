@@ -42,7 +42,7 @@
                             <th class="tab-cells-name">{{ 'ally.memberGrade'|trans }}</th>
                             <th class="tab-cells-name">{{ 'ally.memberName'|trans }}</th>
                             <th class="tab-cells-name">{{ 'ally.memberDateJoin'|trans }}</th>
-                            <th class="tab-cells-name">{{ 'ally.memberRank'|trans }}</th>
+                            <th class="tab-cells-name">{{ 'ally.memberPoint'|trans }}</th>
                             <th class="tab-cells-name">{{ 'ally.memberConnected'|trans }}</th>
                         </tr>
                         {% for user in app.user.getAlly().getUsers() %}
@@ -51,16 +51,16 @@
                                     {{ user.getGrade().getName() }}
                                 </td>
                                 <td class="center-cells">
-                                    <a class="" href="{{ path('ally') }}">{{ user.getUsername() }}</a>
+                                    <a href="{{ path('ally') }}">{{ user.getUsername() }}</a>
                                 </td>
                                 <td class="center-cells">
-                                    {{ user.getGrade().getName() }}
+                                    {{ user.getJoinAllyAt()|date('d/m/Y h:m') }}
                                 </td>
                                 <td class="center-cells">
-                                    {{ user.getGrade().getName() }}
+                                    {{ user.getRank().getPoint() }}
                                 </td>
                                 <td class="center-cells">
-                                    {{ user.getGrade().getName() }}
+                                    {{ user.getConnected|trans }}
                                 </td>
                             </tr>
                         {% endfor %}

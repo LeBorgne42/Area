@@ -20,7 +20,7 @@ class Sector
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="Planet", mappedBy="sector", fetch="EXTRA_LAZY")
+     * @ORM\OneToMany(targetEntity="Planet", mappedBy="sector", fetch="EXTRA_LAZY", cascade={"persist"})
      * @ORM\JoinColumn(name="planet_id", referencedColumnName="id")
      */
     protected $planets;

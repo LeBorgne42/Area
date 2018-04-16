@@ -10,6 +10,7 @@ use App\Entity\Ally;
 use App\Form\Front\UserAllyType;
 use App\Form\Front\AllyImageType;
 use App\Entity\Grade;
+use DateTime;
 
 /**
  * @Route("/fr")
@@ -50,6 +51,7 @@ class AllyController extends Controller
 
         if ($form_ally->isSubmitted() && $form_ally->isValid()) {
             $grade = new Grade();
+            $now = new DateTime();
 
             $ally->addUser($user);
             $ally->setBitcoin(200);
@@ -67,6 +69,7 @@ class AllyController extends Controller
 
             $ally->addGrade($grade);
             $user->setAlly($ally);
+            $user->setJoinAllyAt($now);
             $user->setGrade($grade);
             $em->persist($user);
             $em->persist($ally);

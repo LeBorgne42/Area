@@ -47,7 +47,7 @@ class Ally
     protected $slogan;
 
     /**
-     * @ORM\OneToMany(targetEntity="Grade", mappedBy="ally", fetch="EXTRA_LAZY")
+     * @ORM\OneToMany(targetEntity="Grade", mappedBy="ally", fetch="EXTRA_LAZY", cascade={"persist"})
      */
     protected $grades;
 
