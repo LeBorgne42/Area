@@ -27,9 +27,15 @@ class Ally
     protected $users;
 
     /**
+     * @ORM\Column(name="name",type="string", length=20, unique=true)
+     * @Assert\NotBlank(message = "required")
+     */
+    protected $name;
+
+    /**
      * @ORM\OneToMany(targetEntity="Grade", mappedBy="ally", fetch="EXTRA_LAZY")
      */
-    protected $grade;
+    protected $grades;
 
     /**
      * @ORM\Column(name="bitcoin",type="bigint")
@@ -201,6 +207,30 @@ class Ally
     }
 
     /**
+     * Add grade
+     *
+     * @param \App\Entity\Grade $grade
+     *
+     * @return Ally
+     */
+    public function addGrade(\App\Entity\Grade $grade)
+    {
+        $this->grade[] = $grade;
+
+        return $this;
+    }
+
+    /**
+     * Remove grade
+     *
+     * @param \App\Entity\Grade $grade
+     */
+    public function removeGrade(\App\Entity\Grade $grade)
+    {
+        $this->grade->removeElement($grade);
+    }
+
+    /**
      * @return mixed
      */
     public function getBitcoin()
@@ -291,6 +321,86 @@ class Ally
     public function setBitcoin($bitcoin): void
     {
         $this->bitcoin = $bitcoin;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name): void
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGrade()
+    {
+        return $this->grade;
+    }
+
+    /**
+     * @param mixed $grade
+     */
+    public function setGrade($grade): void
+    {
+        $this->grade = $grade;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPna()
+    {
+        return $this->pna;
+    }
+
+    /**
+     * @param mixed $pna
+     */
+    public function setPna($pna): void
+    {
+        $this->pna = $pna;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAllied()
+    {
+        return $this->allied;
+    }
+
+    /**
+     * @param mixed $allied
+     */
+    public function setAllied($allied): void
+    {
+        $this->allied = $allied;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWar()
+    {
+        return $this->war;
+    }
+
+    /**
+     * @param mixed $war
+     */
+    public function setWar($war): void
+    {
+        $this->war = $war;
     }
 
     public function getId()

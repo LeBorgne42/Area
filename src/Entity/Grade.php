@@ -19,18 +19,23 @@ class Grade
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="Ally", inversedBy="grade", fetch="EXTRA_LAZY")
+     * @ORM\ManyToOne(targetEntity="Ally", inversedBy="grades", fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(name="ally_id", referencedColumnName="id")
      */
     protected $ally;
 
     /**
-     * @ORM\Column(name="order",type="integer")
+     * @ORM\OneToOne(targetEntity="User", mappedBy="grade", fetch="EXTRA_LAZY")
      */
-    protected $order;
+    protected $user;
 
     /**
-     * @ORM\Column(name="name",type="string", length=20, unique=true)
+     * @ORM\Column(name="placement",type="integer")
+     */
+    protected $placement;
+
+    /**
+     * @ORM\Column(name="name",type="string", length=20)
      * @Assert\NotBlank(message = "required")
      */
     protected $name;
@@ -74,17 +79,17 @@ class Grade
     /**
      * @return mixed
      */
-    public function getOrder()
+    public function getPlacement()
     {
-        return $this->order;
+        return $this->placement;
     }
 
     /**
-     * @param mixed $order
+     * @param mixed $placement
      */
-    public function setOrder($order): void
+    public function setPlacement($placement): void
     {
-        $this->order = $order;
+        $this->placement = $placement;
     }
 
     /**
@@ -165,6 +170,22 @@ class Grade
     public function setCanPeace($canPeace): void
     {
         $this->canPeace = $canPeace;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user): void
+    {
+        $this->user = $user;
     }
 
     public function getId()

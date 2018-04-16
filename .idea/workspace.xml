@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97f042ea-d0ee-4bd9-bb02-3d850e24f659" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/public/ally/img/defaut.jpg" afterPath="$PROJECT_DIR$/public/ally/img/defaut.jpg" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/AllyController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/AllyController.php" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Ally.php" afterPath="$PROJECT_DIR$/src/Entity/Ally.php" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Grade.php" afterPath="$PROJECT_DIR$/src/Entity/Grade.php" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" afterPath="$PROJECT_DIR$/src/Entity/User.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,11 +20,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Ally.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AllyController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Controller/Connected/AllyController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="230">
+              <caret line="32" column="61" lean-forward="true" selection-start-line="32" selection-start-column="61" selection-end-line="32" selection-end-column="61" />
+              <folding>
+                <element signature="e#44#91#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Ally.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Entity/Ally.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="29" column="80" lean-forward="true" selection-start-line="29" selection-start-column="80" selection-end-line="29" selection-end-column="80" />
+            <state relative-caret-position="262">
+              <caret line="29" column="55" lean-forward="true" selection-start-line="29" selection-start-column="55" selection-end-line="29" selection-end-column="68" />
               <folding>
                 <element signature="e#30#62#0#PHP" expanded="true" />
               </folding>
@@ -29,31 +44,43 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Grade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Entity/Grade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="22" column="7" lean-forward="false" selection-start-line="22" selection-start-column="7" selection-end-line="22" selection-end-column="65" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Planet.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Entity/Planet.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="244">
-              <caret line="90" column="47" lean-forward="false" selection-start-line="90" selection-start-column="47" selection-end-line="90" selection-end-column="47" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="User.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Entity/User.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="319">
-              <caret line="38" column="36" lean-forward="false" selection-start-line="38" selection-start-column="36" selection-end-line="38" selection-end-column="36" />
+            <state relative-caret-position="396">
+              <caret line="38" column="81" lean-forward="false" selection-start-line="38" selection-start-column="81" selection-end-line="38" selection-end-column="81" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Grade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Entity/Grade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="322">
+              <caret line="88" column="7" lean-forward="false" selection-start-line="88" selection-start-column="7" selection-end-line="88" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SecurityController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Controller/Security/SecurityController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="24" column="8" lean-forward="false" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="49" />
+              <folding>
+                <element signature="e#43#90#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ServerController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Controller/Security/ServerController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1">
+              <caret line="18" column="3" lean-forward="false" selection-start-line="18" selection-start-column="3" selection-end-line="18" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -63,8 +90,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Se déconnecter</find>
-      <find>petrol</find>
       <find>#212529</find>
       <find>planet</find>
       <find>getB</find>
@@ -91,8 +116,10 @@
       <find>inversedBy</find>
       <find>JoinColumn</find>
       <find>taxe</find>
-      <find>add</find>
       <find>bool</find>
+      <find>add</find>
+      <find>OneToOne</find>
+      <find>order</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -128,7 +155,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/config/routes/easy_admin.yaml" />
         <option value="$PROJECT_DIR$/src/Kernel.php" />
         <option value="$PROJECT_DIR$/public/index.php" />
         <option value="$PROJECT_DIR$/config/services.yaml" />
@@ -176,9 +202,10 @@
         <option value="$PROJECT_DIR$/src/Entity/Fleet.php" />
         <option value="$PROJECT_DIR$/templates/connected/ally.html.twig" />
         <option value="$PROJECT_DIR$/config/packages/vich_uploader.yaml" />
+        <option value="$PROJECT_DIR$/src/Entity/Ally.php" />
         <option value="$PROJECT_DIR$/src/Entity/Grade.php" />
         <option value="$PROJECT_DIR$/src/Entity/User.php" />
-        <option value="$PROJECT_DIR$/src/Entity/Ally.php" />
+        <option value="$PROJECT_DIR$/src/Controller/Connected/AllyController.php" />
       </list>
     </option>
   </component>
@@ -344,18 +371,27 @@
             <path>
               <item name="Area" type="b2602c69:ProjectViewProjectNode" />
               <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="config" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="config" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="packages" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="Area" type="b2602c69:ProjectViewProjectNode" />
               <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Connected" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Security" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="Area" type="b2602c69:ProjectViewProjectNode" />
@@ -430,12 +466,12 @@
       <workItem from="1523280628719" duration="28192000" />
       <workItem from="1523347726879" duration="20260000" />
       <workItem from="1523430258006" duration="33957000" />
-      <workItem from="1523711701169" duration="47507000" />
+      <workItem from="1523711701169" duration="49988000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="184182000" />
+    <option name="totallyTimeSpent" value="186663000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -508,14 +544,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/translations/front_index.fr.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="311" lean-forward="false" selection-start-line="10" selection-start-column="311" selection-end-line="10" selection-end-column="311" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/menu/_top_menu.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -718,14 +746,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Security/ServerController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="369">
-          <caret line="50" column="51" lean-forward="false" selection-start-line="50" selection-start-column="51" selection-end-line="50" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/scss/front/_leftMenu.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-85">
@@ -787,16 +807,6 @@
         <state relative-caret-position="101">
           <caret line="32" column="4" lean-forward="true" selection-start-line="32" selection-start-column="4" selection-end-line="46" selection-end-column="5" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Security/SecurityController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="358">
-          <caret line="62" column="45" lean-forward="false" selection-start-line="62" selection-start-column="45" selection-end-line="62" selection-end-column="45" />
-          <folding>
-            <element signature="e#43#90#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -898,28 +908,56 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/User.php">
+    <entry file="file://$PROJECT_DIR$/src/Controller/Security/ServerController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="38" column="36" lean-forward="false" selection-start-line="38" selection-start-column="36" selection-end-line="38" selection-end-column="36" />
+        <state relative-caret-position="-1">
+          <caret line="18" column="3" lean-forward="false" selection-start-line="18" selection-start-column="3" selection-end-line="18" selection-end-column="3" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Security/SecurityController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" column="8" lean-forward="false" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="49" />
+          <folding>
+            <element signature="e#43#90#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/Grade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="22" column="7" lean-forward="false" selection-start-line="22" selection-start-column="7" selection-end-line="22" selection-end-column="65" />
+        <state relative-caret-position="322">
+          <caret line="88" column="7" lean-forward="false" selection-start-line="88" selection-start-column="7" selection-end-line="88" selection-end-column="7" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/Ally.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="29" column="80" lean-forward="true" selection-start-line="29" selection-start-column="80" selection-end-line="29" selection-end-column="80" />
+        <state relative-caret-position="262">
+          <caret line="29" column="55" lean-forward="true" selection-start-line="29" selection-start-column="55" selection-end-line="29" selection-end-column="68" />
           <folding>
             <element signature="e#30#62#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="38" column="81" lean-forward="false" selection-start-line="38" selection-start-column="81" selection-end-line="38" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/AllyController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="32" column="61" lean-forward="true" selection-start-line="32" selection-start-column="61" selection-end-line="32" selection-end-column="61" />
+          <folding>
+            <element signature="e#44#91#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

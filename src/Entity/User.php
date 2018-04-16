@@ -42,6 +42,12 @@ class User implements UserInterface, \Serializable
     protected $ally;
 
     /**
+     * @ORM\OneToOne(targetEntity="Grade", inversedBy="user", fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="grade_id", referencedColumnName="id")
+     */
+    protected $grade;
+
+    /**
      *
      * @ORM\Column(type="string", length=64)
      * @Assert\NotBlank(message = "required")
@@ -355,6 +361,22 @@ class User implements UserInterface, \Serializable
     public function setUpdatedAt($updatedAt)
     {
         $this->updatedAt = $updatedAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGrade()
+    {
+        return $this->grade;
+    }
+
+    /**
+     * @param mixed $grade
+     */
+    public function setGrade($grade): void
+    {
+        $this->grade = $grade;
     }
 
     public function getUpdatedAt()
