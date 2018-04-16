@@ -36,6 +36,12 @@ class User implements UserInterface, \Serializable
     protected $email;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Ally", inversedBy="users", fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="ally_id", referencedColumnName="id")
+     */
+    protected $ally;
+
+    /**
      *
      * @ORM\Column(type="string", length=64)
      * @Assert\NotBlank(message = "required")
@@ -96,7 +102,6 @@ class User implements UserInterface, \Serializable
     {
         $this->planets = new \Doctrine\Common\Collections\ArrayCollection();
     }
-
 
     /**
      * @return mixed
@@ -329,6 +334,22 @@ class User implements UserInterface, \Serializable
     public function getImageSize(): ?int
     {
         return $this->imageSize;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAlly()
+    {
+        return $this->ally;
+    }
+
+    /**
+     * @param mixed $ally
+     */
+    public function setAlly($ally): void
+    {
+        $this->ally = $ally;
     }
 
     public function setUpdatedAt($updatedAt)

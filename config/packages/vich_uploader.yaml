@@ -8,3 +8,6 @@ vich_uploader:
             planet_img:
                 uri_prefix: /img
                 upload_destination: '%kernel.project_dir%/public/img'
+            ally_img:
+                uri_prefix: /ally/img
+                upload_destination: '%kernel.project_dir%/public/ally/img'
