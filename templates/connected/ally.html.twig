@@ -20,10 +20,9 @@
             {{ form_widget(form_allyImage.sendForm) }}
             {{ form_end(form_allyImage) }}
             <div class="text-center my-2">"{{ app.user.getAlly().getSlogan() }}"</div>
-            <div class="my-2">{{ 'ally.nbrMembers'|trans }} {{ app.user.getAlly().getUsers()|length }}</div>
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="members-tab" data-toggle="tab" href="#members" role="tab" aria-controls="members" aria-selected="true">{{ 'ally.members'|trans }}</a>
+                    <a class="nav-link active" id="members-tab" data-toggle="tab" href="#members" role="tab" aria-controls="members" aria-selected="true">{{ app.user.getAlly().getUsers()|length }} {{ 'ally.members'|trans }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="admin-tab" data-toggle="tab" href="#admin" role="tab" aria-controls="admin" aria-selected="false">{{ 'ally.admin'|trans }}</a>
