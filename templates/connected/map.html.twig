@@ -18,7 +18,7 @@
                             <a {% if planet.getUser() == app.user %}href="{{ path('building') }}"{% else %}href="{{ path('overview') }}"{% endif %}><img class="mr-4 mb-4" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planet'|trans({'%name%': planet.getName() }) }}" height="64" width="64" src="{{ vich_uploader_asset(planet, 'imageFile') }}"></a>
                             <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planetInfos'|trans({'%land%': planet.getLand(),  '%sky%': planet.getSky()}) }}"></span>{% if planet.getOrbite() %}<span class="glyphicon glyphicon-plane planet" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planetOrbite'|trans({'%orbite%': planet.getOrbite()}) }}"></span>{% endif %}
                            <div class="planet-position text-center">{{ planet.getPosition() }}</div>
-                            <div class="text-center">{{ planet.getName() }}</div>
+                            <div class="text-center{% if planet.getUser() == app.user %} pp-ally{% elseif planet.getUser() %} pp-enemy{% endif %}"">{{ planet.getName() }}</div>
                         </td>
                     {% else %}
                         <td class="center-cells">{% if planet.getOrbite() %}<span class="glyphicon glyphicon-plane empty" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planetOrbite'|trans({'%orbite%': planet.getOrbite()}) }}"></span>{% endif %}<div class="planet-position-empty text-center">{{ planet.getPosition() }}</div></td>
