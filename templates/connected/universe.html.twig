@@ -8,7 +8,7 @@
 
     <div class="row">
         <div class="col-11">
-            <div class="front-block table-responsive">
+            <div class="front-block">
                 {% for galaxy in galaxys %}
                     <a href="{{ path('galaxy', {id: galaxy.getPosition()}) }}"><span><img class="galaxy-block mr-4 mb-4" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.galaxy'|trans({'%position%': galaxy.getPosition()}) }}" src="{{ asset('img/galaxy.png') }}"><span class="galaxy-position">{{ 'galaxy.nbr'|trans({'%position%': galaxy.getPosition()}) }}</span></span></a>
                 {% endfor %}

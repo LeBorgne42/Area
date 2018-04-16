@@ -6,8 +6,28 @@
 
 {% block body %}
     <div class="row">
-        <div class="offset-1 col-10">
-            <div class="front-block">
+        <div class="col-11">
+            <div class="map-block">
+                <table class="table table-bordered table-dark text-center">
+                    <tbody>
+                        {% set x = 1 %}
+                        {% for planet in planets %}
+                            {% if x == 1 %}
+                                <tr>
+                            {% endif %}
+                            {% if planet.getEmpty == false %}
+                                <td class="center-cells"><a href="{{ path('home') }}"><img class="mr-4 mb-4" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planet'|trans({'%position%': planet.getPosition()}) }}" height="64" width="64" src="{{ vich_uploader_asset(planet, 'imageFile') }}"><span class="planet-land">{{ planet.getLand() }}</span><span class="planet-sky">{{ planet.getSky() }}</span><span class="planet-orbite">{{ planet.getOrbite() }}</span><span class="planet-name">{{ planet.getName() }}</span></a></td>
+                            {% else %}
+                                <td class="center-cells"><span class="planet-cell"><span class="planet-orbite">{{ planet.getOrbite() }}</span></span></td>
+                            {% endif %}
+                            {% set x = x + 1 %}
+                            {% if x == 6 %}
+                                {% set x = 1 %}
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

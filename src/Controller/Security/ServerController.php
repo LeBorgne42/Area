@@ -32,13 +32,13 @@ class ServerController extends Controller
         $em->persist($galaxy);
 
         while($nbrSector <= 100) {
-            $nbrPlanet = 0;
+            $nbrPlanet = 1;
             $sector = new Sector();
             $sector->setGalaxy($galaxy);
             $sector->setPosition($nbrSector);
             $em->persist($sector);
             while($nbrPlanet <= 25) {
-                if(rand(1, 20) < 4) {
+                if(rand(1, 20) < 6) {
                     $planet = new Planet();
                     $planet->setEmpty(true);
                     $planet->setSector($sector);

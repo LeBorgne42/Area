@@ -24,6 +24,7 @@ class MapController extends Controller
             ->join('p.sector', 's')
             ->where('s.position = :id')
             ->setParameter('id', $id)
+            ->orderBy('p.position')
             ->getQuery()
             ->getResult();
 

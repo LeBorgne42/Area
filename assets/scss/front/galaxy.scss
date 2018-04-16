@@ -40,3 +40,29 @@ a.sector-block:focus {
 .pp-enemy {
   color: red;
 }
+
+.map-block {
+  margin: 5% 6% 0 6%;
+  color: #fff;
+  .center-cells a {
+    line-height: 1rem;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    color: gainsboro;
+    text-decoration: none;
+  }
+
+  td {
+    width:100px;
+  }
+
+  a:hover {
+    color: gainsboro;
+    text-decoration: none;
+  }
+
+  a:focus {
+    color: gainsboro;
+    text-decoration: none;
+  }
+}

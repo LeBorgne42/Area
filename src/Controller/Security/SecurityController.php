@@ -48,10 +48,11 @@ class SecurityController extends Controller
                         ->join('p.sector', 's')
                         ->where('p.user is null')
                         ->andWhere('s.position IN (:sector)')
-                        ->andWhere('p.position IN (:position) and p.position <= :max')
-                        ->setParameters(array('sector' => $sector, 'position' => $position, 'max' => 100))
+                        ->andWhere('p.position IN (:position)')
+                        ->setParameters(array('sector' => $sector, 'position' => $position))
                         ->getQuery()
                         ->getOneOrNullResult();
+            var_dump($planet); exit;
             if($planet) {
                 $planet->setUser($user);
                 $user->addPlanet($planet);
