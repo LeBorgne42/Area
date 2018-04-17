@@ -29,6 +29,11 @@ class Ally
     protected $users;
 
     /**
+     * @ORM\OneToMany(targetEntity="Proposal", mappedBy="ally", fetch="EXTRA_LAZY")
+     */
+    protected $proposals;
+
+    /**
      * @ORM\Column(name="name",type="string", length=15, unique=true)
      * @Assert\NotBlank(message = "required")
      */
@@ -114,6 +119,31 @@ class Ally
     public function __construct()
     {
         $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->proposals = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add proposal
+     *
+     * @param \App\Entity\Proposal $proposal
+     *
+     * @return Ally
+     */
+    public function addProposal(\App\Entity\Proposal $proposal)
+    {
+        $this->proposals[] = $proposal;
+
+        return $this;
+    }
+
+    /**
+     * Remove planet
+     *
+     * @param \App\Entity\Proposal $proposal
+     */
+    public function removeProposal(\App\Entity\Proposal $proposal)
+    {
+        $this->proposals->removeElement($proposal);
     }
 
     /**
@@ -466,6 +496,22 @@ class Ally
     public function setGrades($grades): void
     {
         $this->grades = $grades;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProposals()
+    {
+        return $this->proposals;
+    }
+
+    /**
+     * @param mixed $proposals
+     */
+    public function setProposals($proposals): void
+    {
+        $this->proposals = $proposals;
     }
 
     public function getId()

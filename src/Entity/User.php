@@ -42,6 +42,11 @@ class User implements UserInterface, \Serializable
     protected $ally;
 
     /**
+     * @ORM\OneToMany(targetEntity="Proposal", mappedBy="user", fetch="EXTRA_LAZY")
+     */
+    protected $proposals;
+
+    /**
      * @ORM\Column(name="joinAllyAt",type="datetime", nullable=true)
      */
     protected $joinAllyAt;
@@ -124,6 +129,7 @@ class User implements UserInterface, \Serializable
     public function __construct()
     {
         $this->planets = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->proposals = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -156,6 +162,30 @@ class User implements UserInterface, \Serializable
     public function removePlanet(\App\Entity\Planet $planet)
     {
         $this->planets->removeElement($planet);
+    }
+
+    /**
+     * Add proposal
+     *
+     * @param \App\Entity\Proposal $proposal
+     *
+     * @return User
+     */
+    public function addProposal(\App\Entity\Proposal $proposal)
+    {
+        $this->proposals[] = $proposal;
+
+        return $this;
+    }
+
+    /**
+     * Remove planet
+     *
+     * @param \App\Entity\Proposal $proposal
+     */
+    public function removeProposal(\App\Entity\Proposal $proposal)
+    {
+        $this->proposals->removeElement($proposal);
     }
 
     /**
@@ -442,6 +472,22 @@ class User implements UserInterface, \Serializable
     public function setJoinAllyAt($joinAllyAt): void
     {
         $this->joinAllyAt = $joinAllyAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProposals()
+    {
+        return $this->proposals;
+    }
+
+    /**
+     * @param mixed $proposals
+     */
+    public function setProposals($proposals): void
+    {
+        $this->proposals = $proposals;
     }
 
     public function getUpdatedAt()

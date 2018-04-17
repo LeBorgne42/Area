@@ -10,10 +10,10 @@ form.send: 'Créer une alliance'
 ally.admin: Administration
 ally.add: 'Ajouter un membre'
 ally.delete: 'Supprimer alliance'
-ally.memberGrade: 'Rang'
-ally.memberName: 'Pseudo'
-ally.memberDateJoin: 'Adhésion'
-ally.memberPoint: 'Points'
+ally.memberGrade: Rang
+ally.memberName: Pseudo
+ally.memberDateJoin: Adhésion
+ally.memberPoint: Points
 ally.memberConnected: 'En ligne'
 ally.deleteText: 'Êtes vous bien sûr de vouloir supprimer votre alliance ?'
 0: Non

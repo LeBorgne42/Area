@@ -6,10 +6,12 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
-use App\Entity\Ally;
 use App\Form\Front\UserAllyType;
 use App\Form\Front\AllyImageType;
+use App\Form\Front\AllyAddType;
 use App\Entity\Grade;
+use App\Entity\Ally;
+use App\Entity\Proposal;
 use DateTime;
 
 /**
@@ -25,6 +27,7 @@ class AllyController extends Controller
     public function allyAction(Request $request)
     {
         $user = $this->getUser();
+        $now = new DateTime();
         if($user->getAlly()) {
             $ally = $user->getAlly();
         } else {
@@ -33,15 +36,12 @@ class AllyController extends Controller
         $form_allyImage = $this->createForm(AllyImageType::class,$ally);
         $form_allyImage->handleRequest($request);
 
+        $form_allyAdd = $this->createForm(AllyAddType::class);
+        $form_allyAdd->handleRequest($request);
+
         $form_ally = $this->createForm(UserAllyType::class, $ally);
         $form_ally->handleRequest($request);
 
-        if($this->getUser()->getAlly()) {
-            return $this->render('connected/ally.html.twig', [
-                'form_ally' => $form_ally->createView(),
-                'form_allyImage' => $form_allyImage->createView(),
-            ]);
-        }
         $em = $this->getDoctrine()->getManager();
 
         if ($form_allyImage->isSubmitted() && $form_allyImage->isValid()) {
@@ -49,9 +49,40 @@ class AllyController extends Controller
             $em->flush();
         }
 
+        if ($form_allyAdd->isSubmitted() && $form_allyAdd->isValid()) {
+            $userProposal = $em->getRepository('App:User')
+                ->createQueryBuilder('u')
+                ->where('u.username = :username')
+                ->andWhere('u.ally is null')
+                ->setParameter('username', $form_allyAdd->get('nameUser')->getData())
+                ->getQuery()
+                ->getOneOrNullResult();
+
+            if($userProposal) {
+                $proposal = new Proposal();
+                $proposal->setUser($userProposal);
+                $proposal->setAlly($ally);
+                $proposal->setProposalAt($now);
+                $em->persist($proposal);
+                $ally->addProposal($proposal);
+                $userProposal->addProposal($proposal);
+                $em->persist($ally);
+                $em->persist($userProposal);
+                $em->flush();
+            }
+            return $this->redirectToRoute('ally');
+        }
+
+        if($this->getUser()->getAlly()) {
+            return $this->render('connected/ally.html.twig', [
+                'form_ally' => $form_ally->createView(),
+                'form_allyAdd' => $form_allyAdd->createView(),
+                'form_allyImage' => $form_allyImage->createView(),
+            ]);
+        }
+
         if ($form_ally->isSubmitted() && $form_ally->isValid()) {
             $grade = new Grade();
-            $now = new DateTime();
 
             $ally->addUser($user);
             $ally->setBitcoin(200);
@@ -77,6 +108,7 @@ class AllyController extends Controller
         }
         return $this->render('connected/ally.html.twig', [
             'form_ally' => $form_ally->createView(),
+            'form_allyAdd' => $form_allyAdd->createView(),
             'form_allyImage' => $form_allyImage->createView(),
         ]);
     }
