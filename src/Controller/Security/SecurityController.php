@@ -218,7 +218,7 @@ class SecurityController extends Controller
 
     /**
      * @Route("/confirmation-email/{key}", name="confirmEmail", requirements={"key"=".+"})
-     * @Route("/confirmation-email/{key}", name="confirmEmail_noSlash", requirements={"key"=".+"})
+     * @Route("/confirmation-email/{key}/", name="confirmEmail_noSlash", requirements={"key"=".+"})
      */
     public function confirmEmailAction(Request $request, $key)
     {

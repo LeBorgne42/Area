@@ -49,7 +49,7 @@ class AllyController extends Controller
             $em->flush();
         }
 
-        if ($form_allyAdd->isSubmitted() && $form_allyAdd->isValid()) {
+        if (($form_allyAdd->isSubmitted() && $form_allyAdd->isValid()) && $user->getGrade()->getCanRecruit() == 1) {
             $userProposal = $em->getRepository('App:User')
                 ->createQueryBuilder('u')
                 ->where('u.username = :username')
@@ -132,6 +132,139 @@ class AllyController extends Controller
         }
 
         $em->remove($ally);
+        $em->flush();
+
+        return $this->redirectToRoute('ally');
+    }
+
+    /**
+     * @Route("/quitter-alliance", name="leave_ally")
+     * @Route("/quitter-alliance/", name="leave_ally_withSlash")
+     */
+    public function leaveAllyAction()
+    {
+        $user = $this->getUser();
+        if($user->getGrade()->getPlacement() == 1) {
+            return $this->redirectToRoute('ally');
+        }
+        $em = $this->getDoctrine()->getManager();
+        $user->setAlly(null);
+        $user->setJoinAllyAt(null);
+        $user->setGrade(null);
+        $em->persist($user);
+
+        $em->flush();
+
+        return $this->redirectToRoute('ally');
+    }
+
+    /**
+     * @Route("/quitter-alliance/{id}", name="ally_kick", requirements={"id"="\d+"})
+     */
+    public function kickAllyAction($id)
+    {
+        $user = $this->getUser();
+        if($user->getGrade()->getCanKick() == 0) {
+            return $this->redirectToRoute('ally');
+        }
+        $em = $this->getDoctrine()->getManager();
+        $kicked = $em->getRepository('App:User')
+            ->createQueryBuilder('u')
+            ->where('u.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $ally = $user->getAlly();
+        $ally->removeUser($kicked);
+        $kicked->setAlly(null);
+        $kicked->setJoinAllyAt(null);
+        $kicked->setGrade(null);
+        $em->persist($kicked);
+        $em->persist($ally);
+
+        $em->flush();
+
+        return $this->redirectToRoute('ally');
+    }
+
+    /**
+     * @Route("/rejoindre-alliance/{id}", name="ally_accept", requirements={"id"="\d+"})
+     */
+    public function allyAcceptAction($id)
+    {
+        $user = $this->getUser();
+        if($user->getAlly()) {
+            return $this->redirectToRoute('ally');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $proposal = $em->getRepository('App:Proposal')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+
+        $ally = $proposal->getAlly();
+        $ally->addUser($user);
+        $em->persist($ally);
+
+        $grade = new Grade();
+        $now = new DateTime();
+        $grade->setAlly($ally);
+        $grade->setName("Nouveau");
+        $grade->setUser($user);
+        $grade->setPlacement(5);
+        $em->persist($grade);
+
+        $ally->addGrade($grade);
+        $user->setAlly($ally);
+        $user->setJoinAllyAt($now);
+        $user->setGrade($grade);
+        $em->remove($proposal);
+
+        $em->persist($ally);
+        $em->persist($user);
+        $em->flush();
+
+        return $this->redirectToRoute('ally');
+    }
+
+    /**
+     * @Route("/refuser-alliance/{id}", name="ally_refuse", requirements={"id"="\d+"})
+     */
+    public function allyRefusetAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $proposal = $em->getRepository('App:Proposal')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $em->remove($proposal);
+        $em->flush();
+
+        return $this->redirectToRoute('ally');
+    }
+
+    /**
+     * @Route("/annuler-alliance/{id}", name="ally_cancel", requirements={"id"="\d+"})
+     */
+    public function allyCanceltAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $proposal = $em->getRepository('App:Proposal')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $em->remove($proposal);
         $em->flush();
 
         return $this->redirectToRoute('ally');
