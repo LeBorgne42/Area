@@ -96,6 +96,8 @@ class AllyController extends Controller
             $em->persist($user);
             $em->persist($ally);
             $em->flush();
+
+            return $this->redirectToRoute('ally');
         }
         return $this->render('connected/ally/noAlly.html.twig', [
             'form_ally' => $form_ally->createView(),
@@ -117,6 +119,45 @@ class AllyController extends Controller
 
         foreach ($ally->getGrades() as $grade) {
             $em->remove($grade);
+            $em->flush();
+        }
+
+        $pnas = $em->getRepository('App:Pna')
+            ->createQueryBuilder('pna')
+            ->where('pna.allyTag = :allytag')
+            ->andWhere('pna.ally = :ally')
+            ->setParameter('allytag', $ally->getSigle())
+            ->getQuery()
+            ->getResult();
+
+        $pacts = $em->getRepository('App:Allied')
+            ->createQueryBuilder('al')
+            ->where('al.allyTag = :allytag')
+            ->andWhere('al.ally = :ally')
+            ->setParameter('allytag', $ally->getSigle())
+            ->getQuery()
+            ->getResult();
+
+        $wars = $em->getRepository('App:War')
+            ->createQueryBuilder('w')
+            ->where('w.allyTag = :allytag')
+            ->andWhere('w.ally = :ally')
+            ->setParameter('allytag', $ally->getSigle())
+            ->getQuery()
+            ->getResult();
+
+        foreach ($pnas as $pna) {
+            $em->remove($pna);
+            $em->flush();
+        }
+
+        foreach ($pacts as $pact) {
+            $em->remove($pact);
+            $em->flush();
+        }
+
+        foreach ($wars as $war) {
+            $em->remove($war);
             $em->flush();
         }
 
@@ -277,7 +318,7 @@ class AllyController extends Controller
         if($user->getAlly()) {
             $ally = $user->getAlly();
         } else {
-            return $this->redirectToRoute('ally');
+            return $this->redirectToRoute('ally_blank');
         }
         $form_allyImage = $this->createForm(AllyImageType::class,$ally);
         $form_allyImage->handleRequest($request);
@@ -285,6 +326,7 @@ class AllyController extends Controller
         if ($form_allyImage->isSubmitted() && $form_allyImage->isValid()) {
             $em->persist($user);
             $em->flush();
+            return $this->redirectToRoute('ally');
         }
 
         return $this->render('connected/ally/exit.html.twig', [
@@ -303,7 +345,7 @@ class AllyController extends Controller
         if($user->getAlly()) {
             $ally = $user->getAlly();
         } else {
-            return $this->redirectToRoute('ally');
+            return $this->redirectToRoute('ally_blank');
         }
         $form_allyImage = $this->createForm(AllyImageType::class,$ally);
         $form_allyImage->handleRequest($request);
@@ -330,7 +372,7 @@ class AllyController extends Controller
         if($user->getAlly()) {
             $ally = $user->getAlly();
         } else {
-            return $this->redirectToRoute('ally');
+            return $this->redirectToRoute('ally_blank');
         }
         $form_allyImage = $this->createForm(AllyImageType::class,$ally);
         $form_allyImage->handleRequest($request);
@@ -364,7 +406,7 @@ class AllyController extends Controller
                 $em->persist($userProposal);
                 $em->flush();
             }
-            return $this->redirectToRoute('ally');
+            return $this->redirectToRoute('ally_page_add');
         }
 
         return $this->render('connected/ally/add.html.twig', [
@@ -385,7 +427,7 @@ class AllyController extends Controller
         if($user->getAlly()) {
             $ally = $user->getAlly();
         } else {
-            return $this->redirectToRoute('ally');
+            return $this->redirectToRoute('ally_blank');
         }
         $form_allyImage = $this->createForm(AllyImageType::class,$ally);
         $form_allyImage->handleRequest($request);
@@ -406,7 +448,7 @@ class AllyController extends Controller
             $em->persist($ally);
             $em->flush();
 
-            return $this->redirectToRoute('ally');
+            return $this->redirectToRoute('ally_page_admin');
         }
 
         return $this->render('connected/ally/admin.html.twig', [
@@ -427,7 +469,7 @@ class AllyController extends Controller
         if($user->getAlly()) {
             $ally = $user->getAlly();
         } else {
-            return $this->redirectToRoute('ally');
+            return $this->redirectToRoute('ally_blank');
         }
         $waitingPna = $em->getRepository('App:Pna')
             ->createQueryBuilder('pna')
@@ -504,7 +546,7 @@ class AllyController extends Controller
             }
             $em->persist($ally);
             $em->flush();
-            return $this->redirectToRoute('ally');
+            return $this->redirectToRoute('ally_page_pacts');
         }
 
         return $this->render('connected/ally/pact.html.twig', [

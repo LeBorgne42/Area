@@ -46,7 +46,7 @@
                 <div class="tab-pane fade show active" id="add" role="tabpanel" aria-labelledby="add-tab">
                     {% if app.user.getGrade().getCanRecruit() == 1 %}
                         {{ form_start(form_allyAdd) }}
-                        <div class="row mt-4">
+                        <div class="row mt-5">
                             <div class="offset-1 col-5 form-group">
                                 {{ form_widget(form_allyAdd.nameUser) }}
                             </div>
