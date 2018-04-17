@@ -52,13 +52,13 @@ class User implements UserInterface, \Serializable
     protected $joinAllyAt;
 
     /**
-     * @ORM\OneToOne(targetEntity="Grade", inversedBy="user", fetch="EXTRA_LAZY")
+     * @ORM\OneToOne(targetEntity="Grade", inversedBy="user", fetch="EXTRA_LAZY", cascade={"persist"})
      * @ORM\JoinColumn(name="grade_id", referencedColumnName="id")
      */
     protected $grade;
 
     /**
-     * @ORM\OneToOne(targetEntity="Rank", inversedBy="user", fetch="EXTRA_LAZY")
+     * @ORM\OneToOne(targetEntity="Rank", inversedBy="user", fetch="EXTRA_LAZY", cascade={"persist"})
      * @ORM\JoinColumn(name="rank_id", referencedColumnName="id")
      */
     protected $rank;
