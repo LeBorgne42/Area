@@ -1,6 +1,6 @@
 title: Alliance
 delete: 'Supprimer l''alliance'
-ally.members: 'membres :'
+ally.members: 'membres'
 form.name: 'Nom de l''alliance (max 15)'
 form.sigle: 'Sigle (max 4)'
 form.slogan: 'Cri de ralliement (max 30)'
@@ -8,6 +8,9 @@ form.taxe: '(1 à 10%)'
 form.taxeAlly: 'Taxe d''alliance :'
 form.send: 'Créer une alliance'
 form.add: 'Envoyer proposition'
+form.pactType: 'Type de pacte'
+form.image: 'Image'
+form.allyName: 'Sigle de l''alliance'
 form.nameUser: 'Pseudo du joueur'
 ally.admin: Administration
 ally.add: 'Ajouter un membre'
@@ -34,22 +37,28 @@ leave: 'Quitter l''alliance'
 ally.memberKick: 'Exclure un joueur'
 ally.kick: Exclure
 ally.allyUsers: 'Choisir membre'
-ally.canRecruit: 'Autorise recrutement'
-ally.canPeace: 'Autorise traité de paix'
-ally.canKick: 'Autorise exclusion'
-ally.canWar: 'Autorise déclarer guerre'
+ally.canRecruit: Recruter
+ally.gradeName: 'Nom du grade'
+ally.canPeace: Pacte/Pna
+ally.canKick: Exclure
+ally.canWar: 'Déclarer guerre'
 ally.pacts: Pactes
 ally.alliedName: 'Alliance alliée'
-ally.alliedAt: 'Allié depuis le'
-ally.cancelPact: 'Annulée pacte'
-ally.pnaName: 'Pacte de non-agression'
-ally.pnaAt: 'Neutre depuis le'
-ally.cancelPna: 'Annulée pna'
-ally.warName: 'Guerre avec la'
-ally.warAt: 'Depuis le'
+ally.cancelPact: 'Rompre traité'
+ally.pnaName: 'Alliance en pna'
+ally.cancelPna: 'Rompre pna'
+ally.warName: 'Alliance ennemie'
 ally.cancelwar: 'Proposer paix'
-ally.found: 'Fond alliance'
+ally.found: 'Fonds alliance'
 ally.foundTotal: 'Fond total de l''alliance :'
-ally.exchangerName: 'Membre'
-ally.amount: 'Montant'
+ally.exchangerName: Membre
+ally.amount: Montant
 ally.donateAt: 'Donné le'
+ally.statut: Statut
+ally.signedAt: 'Signé le'
+ally.accepted: Accepté
+ally.pactWaiting: 'En attente'
+ally.acceptCancel: Accepter/Refuser
+ally.acceptPact: Accepter
+ally.refusePact: Refuser
+ally.refuseCancelPact: Annuler

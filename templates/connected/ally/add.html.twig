@@ -22,7 +22,7 @@
             <div class="text-center my-2">"{{ app.user.getAlly().getSlogan() }}"</div>
             <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="members-tab" data-toggle="tab" href="#members" role="tab" aria-controls="members" aria-selected="true">{{ app.user.getAlly().getUsers()|length }} {{ 'ally.members'|trans }}</a>
+                    <a href="{{ path('ally') }}" >{{ app.user.getAlly().getUsers()|length }} {{ 'ally.members'|trans }}</a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ path('ally_page_bank') }}" >{{ 'ally.found'|trans }}</a>
@@ -31,7 +31,7 @@
                     <a href="{{ path('ally_page_pacts') }}" >{{ app.user.getAlly().getPacts() }}  {{ 'ally.pacts'|trans }}</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ path('ally_page_add') }}" >{{ 'ally.add'|trans }}</a>
+                    <a class="nav-link active" id="add-tab" data-toggle="tab" href="#add" role="tab" aria-controls="add" aria-selected="false">{{ 'ally.add'|trans }}</a>
                 </li>
                 {% if app.user.getGrade().getPlacement() == 1 %}
                     <li class="nav-item">
@@ -43,41 +43,37 @@
                 </li>
             </ul>
             <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="members" role="tabpanel" aria-labelledby="members-tab">
+                <div class="tab-pane fade show active" id="add" role="tabpanel" aria-labelledby="add-tab">
+                    {% if app.user.getGrade().getCanRecruit() == 1 %}
+                        {{ form_start(form_allyAdd) }}
+                        <div class="row mt-4">
+                            <div class="offset-1 col-5 form-group">
+                                {{ form_widget(form_allyAdd.nameUser) }}
+                            </div>
+                            <div class="offset-1 col-4 form-group">
+                                {{ form_widget(form_allyAdd.sendForm,{attr: { class: 'btn btn-lg btn-info'}}) }}
+                            </div>
+                        </div>
+                        {{ form_end(form_allyAdd) }}
+                    {% endif %}
                     <table class="table table-striped table-bordered table-dark text-center mt-4">
                         <tbody>
                         <tr>
-                            <th class="tab-cells-name">{{ 'ally.memberGrade'|trans }}</th>
                             <th class="tab-cells-name">{{ 'ally.memberName'|trans }}</th>
-                            <th class="tab-cells-name">{{ 'ally.memberDateJoin'|trans }}</th>
-                            <th class="tab-cells-name">{{ 'ally.memberPoint'|trans }}</th>
-                            <th class="tab-cells-name">{{ 'ally.memberConnected'|trans }}</th>
-                            {% if app.user.getGrade().getCanKick() == 1 %}
-                                <th class="tab-cells-name">{{ 'ally.memberKick'|trans }}</th>
-                            {% endif %}
+                            <th class="tab-cells-name">{{ 'ally.proposalAt'|trans }}</th>
+                            <th class="tab-cells-name">{{ 'ally.cancelAsk'|trans }}</th>
                         </tr>
-                        {% for user in app.user.getAlly().getUsers() %}
+                        {% for proposal in app.user.getAlly().getProposals() %}
                             <tr>
                                 <td class="center-cells">
-                                    {{ user.getGrade().getName() }}
+                                    {{ proposal.getUser().getUserName() }}
                                 </td>
                                 <td class="center-cells">
-                                    <a href="{{ path('ally') }}">{{ user.getUsername() }}</a>
+                                    {{ proposal.getProposalAt()|date('d/m/Y h:m') }}
                                 </td>
                                 <td class="center-cells">
-                                    {{ user.getJoinAllyAt()|date('d/m/Y h:m') }}
+                                    <a class="text-rouge" href="{{ path('ally_cancel',{'id': proposal.getId()}) }}"><div class="glyphicon glyphicon-remove"></div> <span>{{ 'ally.cancel'|trans }}</span></a>
                                 </td>
-                                <td class="center-cells">
-                                    {{ user.getRank().getPoint() }}
-                                </td>
-                                <td class="center-cells">
-                                    {{ user.getConnected|trans }}
-                                </td>
-                                {% if app.user.getGrade().getCanKick() == 1 %}
-                                    <td class="center-cells">
-                                        <a class="text-rouge" href="{{ path('ally_kick',{'id': user.getId()}) }}"><div class="glyphicon glyphicon-remove"></div> <span>{{ 'ally.kick'|trans }}</span></a>
-                                    </td>
-                                {% endif %}
                             </tr>
                         {% endfor %}
                         </tr>

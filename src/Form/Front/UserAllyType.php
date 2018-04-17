@@ -5,6 +5,7 @@ namespace App\Form\Front;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class UserAllyType extends AbstractType
@@ -72,6 +73,34 @@ class UserAllyType extends AbstractType
                 )
             )
             ->add('sendForm', SubmitType::class, array('label' => 'form.send'));
+
+        $builder->get('sigle')
+            ->addModelTransformer(new CallbackTransformer(
+                function ($tagAsUpper) {
+                    return strtolower($tagAsUpper);
+                },
+                function ($tagAsUpper) {
+                    return strtoupper($tagAsUpper);
+                }
+            ));
+        $builder->get('name')
+            ->addModelTransformer(new CallbackTransformer(
+                function ($tagAsFirstUpper) {
+                    return lcfirst($tagAsFirstUpper);
+                },
+                function ($tagAsFirstUpper) {
+                    return ucfirst($tagAsFirstUpper);
+                }
+            ));
+        $builder->get('slogan')
+            ->addModelTransformer(new CallbackTransformer(
+                function ($tagAsFirstUpper) {
+                    return lcfirst($tagAsFirstUpper);
+                },
+                function ($tagAsFirstUpper) {
+                    return ucfirst($tagAsFirstUpper);
+                }
+            ));
     }
 
     protected function getPercentTaxe()

@@ -67,19 +67,19 @@ class Ally
     protected $taxe;
 
     /**
-     * @ORM\Column(name="pna",type="array")
+     * @ORM\OneToMany(targetEntity="Pna", mappedBy="ally", fetch="EXTRA_LAZY", cascade={"persist"})
      */
-    protected $pna;
+    protected $pnas;
 
     /**
-     * @ORM\Column(name="allied",type="array")
+     * @ORM\OneToMany(targetEntity="Allied", mappedBy="ally", fetch="EXTRA_LAZY", cascade={"persist"})
      */
-    protected $allied;
+    protected $allieds;
 
     /**
-     * @ORM\Column(name="war",type="array")
+     * @ORM\OneToMany(targetEntity="War", mappedBy="ally", fetch="EXTRA_LAZY", cascade={"persist"})
      */
-    protected $war;
+    protected $wars;
 
     /**
      * @Assert\File(
@@ -120,6 +120,9 @@ class Ally
     {
         $this->users = new \Doctrine\Common\Collections\ArrayCollection();
         $this->proposals = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->pnas = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->allieds = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->wars = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -137,13 +140,26 @@ class Ally
     }
 
     /**
-     * Remove planet
+     * Remove proposal
      *
      * @param \App\Entity\Proposal $proposal
      */
     public function removeProposal(\App\Entity\Proposal $proposal)
     {
         $this->proposals->removeElement($proposal);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPacts()
+    {
+        $pnas = count($this->getPnas());
+        $allieds = count($this->getAllieds());
+        $wars = count($this->getWars());
+
+        $pacts = $pnas + $allieds + $wars;
+        return $pacts;
     }
 
     /**
@@ -184,13 +200,13 @@ class Ally
     /**
      * Add ally pna
      *
-     * @param \App\Entity\Ally $ally
+     * @param \App\Entity\Pna $pna
      *
      * @return Ally
      */
-    public function addAllyPna(\App\Entity\Ally $ally)
+    public function addAllyPna(\App\Entity\Pna $pna)
     {
-        $this->pna[] = $ally;
+        $this->pnas[] = $pna;
 
         return $this;
     }
@@ -198,23 +214,23 @@ class Ally
     /**
      * Remove ally pna
      *
-     * @param \App\Entity\Ally $ally
+     * @param \App\Entity\Pna $pna
      */
-    public function removeAllyPna(\App\Entity\Ally $ally)
+    public function removeAllyPna(\App\Entity\Pna $pna)
     {
-        $this->pna->removeElement($ally);
+        $this->pnas->removeElement($pna);
     }
 
     /**
      * Add ally allied
      *
-     * @param \App\Entity\Ally $ally
+     * @param \App\Entity\Allied $allied
      *
      * @return Ally
      */
-    public function addAllyAllied(\App\Entity\Ally $ally)
+    public function addAllyAllied(\App\Entity\Allied $allied)
     {
-        $this->allied[] = $ally;
+        $this->allieds[] = $allied;
 
         return $this;
     }
@@ -222,23 +238,23 @@ class Ally
     /**
      * Remove ally allied
      *
-     * @param \App\Entity\Ally $ally
+     * @param \App\Entity\Allied $allied
      */
-    public function removeAllyAllied(\App\Entity\Ally $ally)
+    public function removeAllyAllied(\App\Entity\Allied $allied)
     {
-        $this->allied->removeElement($ally);
+        $this->allieds->removeElement($allied);
     }
 
     /**
      * Add ally war
      *
-     * @param \App\Entity\Ally $ally
+     * @param \App\Entity\War $war
      *
      * @return Ally
      */
-    public function addAllyWar(\App\Entity\Ally $ally)
+    public function addAllyWar(\App\Entity\War $war)
     {
-        $this->war[] = $ally;
+        $this->wars[] = $war;
 
         return $this;
     }
@@ -246,11 +262,11 @@ class Ally
     /**
      * Remove ally war
      *
-     * @param \App\Entity\Ally $ally
+     * @param \App\Entity\War $war
      */
-    public function removeAllyWar(\App\Entity\Ally $ally)
+    public function removeAllyWar(\App\Entity\War $war)
     {
-        $this->war->removeElement($ally);
+        $this->wars->removeElement($war);
     }
 
     /**
@@ -405,49 +421,49 @@ class Ally
     /**
      * @return mixed
      */
-    public function getPna()
+    public function getPnas()
     {
-        return $this->pna;
+        return $this->pnas;
     }
 
     /**
-     * @param mixed $pna
+     * @param mixed $pnas
      */
-    public function setPna($pna): void
+    public function setPnas($pnas): void
     {
-        $this->pna = $pna;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getAllied()
-    {
-        return $this->allied;
-    }
-
-    /**
-     * @param mixed $allied
-     */
-    public function setAllied($allied): void
-    {
-        $this->allied = $allied;
+        $this->pnas = $pnas;
     }
 
     /**
      * @return mixed
      */
-    public function getWar()
+    public function getAllieds()
     {
-        return $this->war;
+        return $this->allieds;
     }
 
     /**
-     * @param mixed $war
+     * @param mixed $allieds
      */
-    public function setWar($war): void
+    public function setAllieds($allieds): void
     {
-        $this->war = $war;
+        $this->allieds = $allieds;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWars()
+    {
+        return $this->wars;
+    }
+
+    /**
+     * @param mixed $wars
+     */
+    public function setWars($wars): void
+    {
+        $this->wars = $wars;
     }
 
     /**

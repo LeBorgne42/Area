@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'front_ally' %}
+
+{% block title %}{{ 'title'|trans }}{% endblock %}
+
+{% block body %}
+    <div class="front-block-ally">
+        {% if app.user.getAlly() %}
+            <h1 class="text-center text-orange mb-4">{{ app.user.getAlly().getName() }}<small> - [{{ app.user.getAlly().getSigle() }}]</small></h1>
+            <div class="text-center modify-allyImage">
+                {% if app.user.getAlly().getImageName() %}
+                    <img height="300" width="450" src="{{ vich_uploader_asset(app.user.getAlly(), 'imageFile') }}">
+                {% else %}
+                    <img height="300" width="450" src="{{ asset('img/ally.jpg') }}">
+                {% endif %}
+            </div>
+            {{ form_start(form_allyImage,{attr: { hidden: 'hidden'}}) }}
+            {{ form_widget(form_allyImage.imageFile) }}
+            {{ form_widget(form_allyImage.sendForm) }}
+            {{ form_end(form_allyImage) }}
+            <div class="text-center my-2">"{{ app.user.getAlly().getSlogan() }}"</div>
+            <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a href="{{ path('ally') }}" >{{ app.user.getAlly().getUsers()|length }} {{ 'ally.members'|trans }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" id="bank-tab" data-toggle="tab" href="#bank" role="tab" aria-controls="bank" aria-selected="false">{{ 'ally.found'|trans }}</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ path('ally_page_pacts') }}" >{{ app.user.getAlly().getPacts() }}  {{ 'ally.pacts'|trans }}</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ path('ally_page_add') }}" >{{ 'ally.add'|trans }}</a>
+                </li>
+                {% if app.user.getGrade().getPlacement() == 1 %}
+                    <li class="nav-item">
+                        <a href="{{ path('ally_page_admin') }}" >{{ 'ally.admin'|trans }}</a>
+                    </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a href="{{ path('ally_page_exit') }}" >{{ 'ally.leave'|trans }}</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="bank" role="tabpanel" aria-labelledby="bank-tab">
+                    <h2 class="mt-4 text-right">{{ 'ally.foundTotal'|trans }} {{ app.user.getAlly().getBitcoin() }} <img src="{{ asset('img/coin.png') }}"></h2>
+                    <table class="table table-striped table-bordered table-dark text-center mt-3">
+                        <tbody>
+                        <tr>
+                            <th class="tab-cells-name">{{ 'ally.exchangerName'|trans }}</th>
+                            <th class="tab-cells-name">{{ 'ally.amount'|trans }}</th>
+                            <th class="tab-cells-name">{{ 'ally.donateAt'|trans }}</th>
+                        </tr>
+                        <tr>
+                            <td class="center-cells">t</td>
+                            <td class="center-cells">t</td>
+                            <td class="center-cells">t</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        {% else %}
+        {% endif %}
+    </div>
+{% endblock %}
