@@ -25,6 +25,9 @@
                     <a class="nav-link active" id="members-tab" data-toggle="tab" href="#members" role="tab" aria-controls="members" aria-selected="true">{{ app.user.getAlly().getUsers()|length }} {{ 'ally.members'|trans }}</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" id="bank-tab" data-toggle="tab" href="#bank" role="tab" aria-controls="bank" aria-selected="false">{{ 'ally.found'|trans }}</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" id="pacts-tab" data-toggle="tab" href="#pacts" role="tab" aria-controls="pacts" aria-selected="true">nbrPacts{{ 'ally.pacts'|trans }}</a>
                 </li>
                 <li class="nav-item">
@@ -38,11 +41,6 @@
                 <li class="nav-item">
                     <a class="nav-link" id="leave-tab" data-toggle="tab" href="#leave" role="tab" aria-controls="leave" aria-selected="false">{{ 'ally.leave'|trans }}</a>
                 </li>
-                {% if app.user.getGrade().getPlacement() == 1 %}
-                    <li class="nav-item">
-                        <a class="nav-link" id="delete-tab" data-toggle="tab" href="#delete" role="tab" aria-controls="delete" aria-selected="false">{{ 'ally.delete'|trans }}</a>
-                    </li>
-                {% endif %}
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="members" role="tabpanel" aria-labelledby="members-tab">
@@ -85,6 +83,27 @@
                         </tr>
                         </tbody>
                     </table>
+                </div>
+                <div class="tab-pane fade" id="bank" role="tabpanel" aria-labelledby="bank-tab">
+                    <h2 class="mt-4 text-right">{{ 'ally.foundTotal'|trans }} {{ app.user.getAlly().getBitcoin() }} <img src="{{ asset('img/coin.png') }}"></h2>
+                    <table class="table table-striped table-bordered table-dark text-center mt-3">
+                        <tbody>
+                        <tr>
+                            <th class="tab-cells-name">{{ 'ally.exchangerName'|trans }}</th>
+                            <th class="tab-cells-name">{{ 'ally.amount'|trans }}</th>
+                            <th class="tab-cells-name">{{ 'ally.donateAt'|trans }}</th>
+                        </tr>
+                        <tr>
+                            <td class="center-cells">t</td>
+                            <td class="center-cells">t</td>
+                            <td class="center-cells">t</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="pull-right mt-3">
+                        <span class="mr-3">{{ 'ally.deleteText'|trans }}</span>
+                        <a href="{{ path('remove_ally') }}" class="btn btn-lg btn-danger">{{ 'delete'|trans }}</a>
+                    </div>
                 </div>
                 <div class="tab-pane fade" id="pacts" role="tabpanel" aria-labelledby="pacts-tab">
                     <table class="table table-striped table-bordered table-dark text-center mt-4">
@@ -199,6 +218,10 @@
                             </tr>
                             </tbody>
                         </table>
+                        <div class="pull-right mt-3">
+                            <span class="mr-3">{{ 'ally.deleteText'|trans }}</span>
+                            <a href="{{ path('remove_ally') }}" class="btn btn-lg btn-danger">{{ 'delete'|trans }}</a>
+                        </div>
                     </div>
                 {% endif %}
                 <div class="tab-pane fade" id="leave" role="tabpanel" aria-labelledby="leave-tab">
@@ -207,14 +230,6 @@
                         <a href="{{ path('leave_ally') }}" class="btn btn-lg btn-danger">{{ 'leave'|trans }}</a>
                     </div>
                 </div>
-                {% if app.user.getGrade().getPlacement() == 1 %}
-                    <div class="tab-pane fade" id="delete" role="tabpanel" aria-labelledby="delete-tab">
-                        <div class="pull-right mt-3">
-                            <span class="mr-3">{{ 'ally.deleteText'|trans }}</span>
-                            <a href="{{ path('remove_ally') }}" class="btn btn-lg btn-danger">{{ 'delete'|trans }}</a>
-                        </div>
-                    </div>
-                {% endif %}
             </div>
         {% else %}
             {{ form_start(form_ally) }}
