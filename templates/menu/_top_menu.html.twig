@@ -5,7 +5,7 @@
     {% if is_granted('ROLE_USER') %}
         <a class="btn-top" href="{{ path('overview') }}">{{ 'overview'|trans }}</a>
     {% endif %}
-    <a class="btn-top" href="#">{{ 'forum'|trans }}</a>
+    <a class="btn-top" target="_blank" href="http://area-control.forumactif.com/">{{ 'forum'|trans }}</a>
     <a class="btn-top" href="{{ path('media') }}">{{ 'media'|trans }}</a>
     <a class="btn-top" href="{{ path('rules') }}">{{ 'rules'|trans }}</a>
     <a class="btn-top" href="{{ path('faq') }}">{{ 'faq'|trans }}</a>
