@@ -32,19 +32,19 @@ class Planet
     protected $user;
 
     /**
-     * @ORM\Column(name="niobium",type="bigint")
+     * @ORM\Column(name="niobium",type="decimal", precision=28, scale=5)
      */
     protected $niobium = 1500;
 
     /**
-     * @ORM\Column(name="water",type="bigint")
+     * @ORM\Column(name="water",type="decimal", precision=28, scale=5)
      */
     protected $water = 750;
 
     /**
-     * @ORM\OneToMany(targetEntity="Building", mappedBy="planet", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Building", mappedBy="planet", fetch="EXTRA_LAZY", cascade={"persist"})
      */
-    protected $buildings;
+    protected $building;
 
     /**
      * @ORM\OneToOne(targetEntity="Orbite", mappedBy="planet", fetch="EXTRA_LAZY", cascade={"persist"})
@@ -205,17 +205,17 @@ class Planet
     /**
      * @return mixed
      */
-    public function getBuildings()
+    public function getBuilding()
     {
-        return $this->buildings;
+        return $this->building;
     }
 
     /**
-     * @param mixed $buildings
+     * @param mixed $building
      */
-    public function setBuildings($buildings): void
+    public function setBuilding($building): void
     {
-        $this->buildings = $buildings;
+        $this->building = $building;
     }
 
     /**

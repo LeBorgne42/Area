@@ -31,7 +31,7 @@ class Worker
     protected $fleet;
 
     /**
-     * @ORM\Column(name="amount",type="bigint")
+     * @ORM\Column(name="amount",type="decimal", precision=28, scale=5)
      */
     protected $amount;
 

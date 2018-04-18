@@ -30,7 +30,7 @@ function manageModalContact() {
     });
 }
 
-niobium = parseInt($('div.bg-top span.ressource.niobium span').text());
+/*niobium = parseInt($('div.bg-top span.ressource.niobium span').text());
 water = parseInt($('div.bg-top span.ressource.water span').text());
 function manageReloadR() {
     setTimeout(function(){
@@ -40,6 +40,12 @@ function manageReloadR() {
         $('div.bg-top span.ressource.water span').text(water);
         manageReloadR();
         }, 1000);
+}*/
+
+function setNoDecimalDisplay() {
+    $('div.bg-top span.ressource.niobium span.reload').text(Math.trunc($('div.bg-top span.ressource.niobium span.reload').text()));
+    $('div.bg-top span.ressource.water span.reload').text(Math.trunc($('div.bg-top span.ressource.water span.reload').text()));
+    $('div.bg-top span.ressource.bitcoin span.reload').text(Math.trunc($('div.bg-top span.ressource.bitcoin span.reload').text()));
 }
 
 $(document).ready(function() {
@@ -52,6 +58,7 @@ $(document).ready(function() {
     manageImageForm();
     manageAllyImageForm();
     manageModalContact();
-    manageReloadR();
+    // manageReloadR();
+    setNoDecimalDisplay();
     console.log("Toute utilisation de scripts sur le jeu seront puni d'un ban permanent, merci.");
 });

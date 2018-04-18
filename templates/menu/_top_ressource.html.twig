@@ -1,9 +1,9 @@
 {% trans_default_domain 'front_menu' %}
 
 <div class="navbar navbar-dark bg-top">
-    <span class="ressource niobium" data-toggle="tooltip" data-placement="top" title="{{ 'niobium'|trans }}"><span>15045</span>  <img src="{{ asset('img/niobium.png') }}"></span>
-    <span class="ressource water" data-toggle="tooltip" data-placement="top" title="{{ 'water'|trans }}"><span>11394</span>  <img src="{{ asset('img/water.png') }}"></span>
-    <span class="ressource" data-toggle="tooltip" data-placement="top" title="{{ 'coin'|trans }}">{{ app.user.getBitcoin() }} <img src="{{ asset('img/coin.png') }}"></span>
+    <span class="ressource niobium" data-toggle="tooltip" data-placement="top" title="{{ 'niobium'|trans }}"><span class="reload">15045</span>  <img src="{{ asset('img/niobium.png') }}"></span>
+    <span class="ressource water" data-toggle="tooltip" data-placement="top" title="{{ 'water'|trans }}"><span class="reload">11394</span>  <img src="{{ asset('img/water.png') }}"></span>
+    <span class="ressource bitcoin" data-toggle="tooltip" data-placement="top" title="{{ 'coin'|trans }}"><span class="reload">{{ app.user.getBitcoin() }}</span> <img src="{{ asset('img/coin.png') }}"></span>
     <a class="top" href="{{ path('message') }}"><div class="glyphicon glyphicon-envelope"></div> {{ 'message'|trans }}</a>
     <a class="top" href="{{ path('salon') }}"><div class="glyphicon glyphicon-comment"></div> {{ 'salon'|trans }}</a>
     <a class="top" href="{{ path('report') }}"><div class="glyphicon glyphicon-exclamation-sign"></div> {{ 'report'|trans }}</a>

@@ -75,7 +75,7 @@ class User implements UserInterface, \Serializable
     protected $planets;
 
     /**
-     * @ORM\Column(name="bitcoin",type="bigint")
+     * @ORM\Column(name="bitcoin",type="decimal", precision=28, scale=5)
      */
     protected $bitcoin = 5000;
 

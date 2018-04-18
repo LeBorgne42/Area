@@ -19,10 +19,22 @@ class Building
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Planet", inversedBy="buildings", fetch="EXTRA_LAZY")
+     * @ORM\OneToOne(targetEntity="Planet", inversedBy="building", fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(name="planet_id", referencedColumnName="id")
      */
     protected $planet;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Xuilding_Miner", inversedBy="building", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\JoinColumn(name="miner_id", referencedColumnName="id")
+     */
+    protected $miner;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Xuilding_Extractor", inversedBy="building", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\JoinColumn(name="extractor_id", referencedColumnName="id")
+     */
+    protected $extractor;
 
     /**
      * @return mixed
@@ -38,6 +50,38 @@ class Building
     public function setPlanet($planet): void
     {
         $this->planet = $planet;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMiner()
+    {
+        return $this->miner;
+    }
+
+    /**
+     * @param mixed $miner
+     */
+    public function setMiner($miner): void
+    {
+        $this->miner = $miner;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getExtractor()
+    {
+        return $this->extractor;
+    }
+
+    /**
+     * @param mixed $extractor
+     */
+    public function setExtractor($extractor): void
+    {
+        $this->extractor = $extractor;
     }
 
     public function getId()
