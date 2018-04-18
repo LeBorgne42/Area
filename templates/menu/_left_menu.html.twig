@@ -34,9 +34,6 @@
         <a href="{{ path('map', {'id':usePlanet.getSector().getPosition(), 'idp': usePlanet.getId()}) }}"><span>{{ 'map'|trans }}</span></a>
     </div>
     <div class="btn-left">
-        <a href="{{ path('product', {'idp': usePlanet.getId()}) }}"><span>{{ 'product'|trans }}</span></a>
-    </div>
-    <div class="btn-left">
         <a href="{{ path('building', {'idp': usePlanet.getId()}) }}"><span>{{ 'building'|trans }}</span></a>
     </div>
     <div class="btn-left">
@@ -45,8 +42,14 @@
     <div class="btn-left">
         <a href="{{ path('soldier', {'idp': usePlanet.getId()}) }}"><span>{{ 'soldier'|trans }}</span></a>
     </div>
+    <div class="btn-left">
+        <a href="{{ path('message', {'idp': usePlanet.getId()}) }}"><span><div class="glyphicon glyphicon-envelope"></div> {{ 'message'|trans }}</span></a>
+    </div>
+    <div class="btn-left">
+        <a href="{{ path('salon', {'idp': usePlanet.getId()}) }}"><span><div class="glyphicon glyphicon-comment"></div> {{ 'salon'|trans }}</span></a>
+    </div>
     <div class="btn-left-bottom">
-        <a href="{{ path('ground', {'idp': usePlanet.getId()}) }}"><span>{{ 'ground'|trans }}</span></a>
+        <a href="{{ path('report', {'idp': usePlanet.getId()}) }}"><span><div class="glyphicon glyphicon-exclamation-sign"></div> {{ 'report'|trans }}</span></a>
     </div>
     <div>
         <a href="{{ path('logout') }}" class="badge badge-danger my-4"><div class="glyphicon glyphicon-remove"></div> <span>{{ 'disconnect'|trans }}</span></a>

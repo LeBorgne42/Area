@@ -29,7 +29,8 @@ class PactController extends Controller
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->where('p.id = :id')
-            ->setParameter('id', $idp)
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -69,7 +70,8 @@ class PactController extends Controller
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->where('p.id = :id')
-            ->setParameter('id', $idp)
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -97,7 +99,8 @@ class PactController extends Controller
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->where('p.id = :id')
-            ->setParameter('id', $idp)
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -137,7 +140,8 @@ class PactController extends Controller
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->where('p.id = :id')
-            ->setParameter('id', $idp)
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -165,7 +169,8 @@ class PactController extends Controller
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->where('p.id = :id')
-            ->setParameter('id', $idp)
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -213,7 +218,8 @@ class PactController extends Controller
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->where('p.id = :id')
-            ->setParameter('id', $idp)
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
             ->getQuery()
             ->getOneOrNullResult();
 

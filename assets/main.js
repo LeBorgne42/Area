@@ -46,6 +46,7 @@ function setNoDecimalDisplay() {
     $('div.bg-top span.ressource.niobium span.reload').text(Math.trunc($('div.bg-top span.ressource.niobium span.reload').text()));
     $('div.bg-top span.ressource.water span.reload').text(Math.trunc($('div.bg-top span.ressource.water span.reload').text()));
     $('div.bg-top span.ressource.bitcoin span.reload').text(Math.trunc($('div.bg-top span.ressource.bitcoin span.reload').text()));
+    $('div.bg-top span.ressource.worker span.reload').text(Math.trunc($('div.bg-top span.ressource.worker span.reload').text()));
 }
 
 $(document).ready(function() {

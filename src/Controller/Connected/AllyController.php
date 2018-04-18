@@ -37,7 +37,8 @@ class AllyController extends Controller
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->where('p.id = :id')
-            ->setParameter('id', $idp)
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -67,15 +68,18 @@ class AllyController extends Controller
     {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
-        $form_userAttrGrade = $this->createForm(UserAttrGradeType::class, null, array("allyId" => $user->getAlly()->getId()));
-        $form_userAttrGrade->handleRequest($request);
 
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->where('p.id = :id')
-            ->setParameter('id', $idp)
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
             ->getQuery()
             ->getOneOrNullResult();
+
+        $form_userAttrGrade = $this->createForm(UserAttrGradeType::class, null, array("allyId" => $user->getAlly()->getId()));
+        $form_userAttrGrade->handleRequest($request);
+
 
         if (($form_userAttrGrade->isSubmitted() && $form_userAttrGrade->isValid())) {
             $newGradeUser = $em->getRepository('App:User')
@@ -114,7 +118,8 @@ class AllyController extends Controller
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->where('p.id = :id')
-            ->setParameter('id', $idp)
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -170,7 +175,8 @@ class AllyController extends Controller
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->where('p.id = :id')
-            ->setParameter('id', $idp)
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -237,7 +243,8 @@ class AllyController extends Controller
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->where('p.id = :id')
-            ->setParameter('id', $idp)
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -265,7 +272,8 @@ class AllyController extends Controller
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->where('p.id = :id')
-            ->setParameter('id', $idp)
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -310,7 +318,8 @@ class AllyController extends Controller
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->where('p.id = :id')
-            ->setParameter('id', $idp)
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -361,7 +370,8 @@ class AllyController extends Controller
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->where('p.id = :id')
-            ->setParameter('id', $idp)
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -388,7 +398,8 @@ class AllyController extends Controller
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->where('p.id = :id')
-            ->setParameter('id', $idp)
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -416,7 +427,8 @@ class AllyController extends Controller
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->where('p.id = :id')
-            ->setParameter('id', $idp)
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -451,7 +463,8 @@ class AllyController extends Controller
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->where('p.id = :id')
-            ->setParameter('id', $idp)
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -486,7 +499,8 @@ class AllyController extends Controller
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->where('p.id = :id')
-            ->setParameter('id', $idp)
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -548,7 +562,8 @@ class AllyController extends Controller
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->where('p.id = :id')
-            ->setParameter('id', $idp)
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -598,7 +613,8 @@ class AllyController extends Controller
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->where('p.id = :id')
-            ->setParameter('id', $idp)
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
             ->getQuery()
             ->getOneOrNullResult();
 

@@ -19,14 +19,13 @@ class GalaxyController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $sectors = $em->getRepository('App:Sector')
-            ->createQueryBuilder('s')
-            ->join('s.galaxy', 'g')
-            ->where('g.position = :id')
-            ->setParameter('id', $id)
-            ->orderBy('s.position', 'ASC')
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
             ->getQuery()
-            ->getResult();
+            ->getOneOrNullResult();
 
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
