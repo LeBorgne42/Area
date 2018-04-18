@@ -44,7 +44,14 @@ class BitcoinController extends Controller
         foreach ($users as $user) {
             $worker = 0;
             foreach ($user->getPlanets() as $planet) {
-            $worker = $worker + $planet->getWorker()->getAmount();
+                $worker = $worker + $planet->getWorker()->getAmount();
+                $niobium = $planet->getNiobium();
+                $water = $planet->getWater();
+                $niobium = $niobium + ($planet->getBuilding()->getMiner()->getProduction());
+                $water = $water + ($planet->getBuilding()->getExtractor()->getProduction());
+                $planet->setNiobium($niobium);
+                $planet->setWater($water);
+                $em->persist($planet);
             }
             $bitcoin = $user->getBitcoin();
             $bitcoin = $bitcoin + ($worker / 175000);
