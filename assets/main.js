@@ -53,5 +53,5 @@ $(document).ready(function() {
     manageAllyImageForm();
     manageModalContact();
     manageReloadR();
-    console.log("Toute utilisation de scripte sur le jeu seront puni d'un ban permanent");
+    console.log("Toute utilisation de scripts sur le jeu seront puni d'un ban permanent, merci.");
 });

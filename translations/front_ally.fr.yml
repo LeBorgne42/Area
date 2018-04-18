@@ -1,6 +1,6 @@
 title: Alliance
 delete: 'Supprimer l''alliance'
-ally.members: 'membres'
+ally.members: membres
 form.name: 'Nom de l''alliance (max 15)'
 form.sigle: 'Sigle (max 4)'
 form.slogan: 'Cri de ralliement (max 30)'
@@ -9,7 +9,7 @@ form.taxeAlly: 'Taxe d''alliance :'
 form.send: 'Créer une alliance'
 form.add: 'Envoyer proposition'
 form.pactType: 'Type de pacte'
-form.image: 'Image'
+form.image: Image
 form.allyName: 'Sigle de l''alliance'
 form.nameUser: 'Pseudo du joueur'
 ally.admin: Administration
