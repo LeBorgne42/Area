@@ -11,6 +11,7 @@ use App\Form\Front\AllyImageType;
 use App\Form\Front\AllyAddType;
 use App\Form\Front\AllyPactType;
 use App\Form\Front\AllyGradeType;
+use App\Form\Front\UserAttrGradeType;
 use App\Entity\Grade;
 use App\Entity\Ally;
 use App\Entity\Proposal;
@@ -32,7 +33,6 @@ class AllyController extends Controller
     public function allyAction(Request $request)
     {
         $user = $this->getUser();
-        $now = new DateTime();
         $em = $this->getDoctrine()->getManager();
         if($user->getAlly()) {
             $ally = $user->getAlly();
@@ -47,11 +47,38 @@ class AllyController extends Controller
             $em->flush();
         }
 
-        if($this->getUser()->getAlly()) {
-            return $this->render('connected/ally.html.twig', [
-                'form_allyImage' => $form_allyImage->createView(),
-            ]);
+        return $this->render('connected/ally.html.twig', [
+            'form_allyImage' => $form_allyImage->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/attribution-grade/{id}", name="ally_addUser_grade", requirements={"id"="\d+"})
+     */
+    public function allyAddUserGradeAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $form_userAttrGrade = $this->createForm(UserAttrGradeType::class, null, array("allyId" => $this->getUser()->getAlly()->getId()));
+        $form_userAttrGrade->handleRequest($request);
+
+        if (($form_userAttrGrade->isSubmitted() && $form_userAttrGrade->isValid())) {
+            $newGradeUser = $em->getRepository('App:User')
+                ->createQueryBuilder('u')
+                ->where('u.id = :id')
+                ->setParameter('id', $id)
+                ->getQuery()
+                ->getOneOrNullResult();
+
+            $newGradeUser->setGrade($form_userAttrGrade->get('grade')->getData());
+            $em->persist($newGradeUser);
+            $em->flush();
+
+            return $this->redirectToRoute('ally');
         }
+
+        return $this->render('connected/ally/grade.html.twig', [
+            'form_userAttrGrade' => $form_userAttrGrade->createView(),
+        ]);
     }
 
     /**
@@ -81,7 +108,7 @@ class AllyController extends Controller
 
             $grade->setAlly($ally);
             $grade->setName("Dirigeant");
-            $grade->setUser($user);
+            $grade->addUser($user);
             $grade->setPlacement(1);
             $grade->setCanRecruit(true);
             $grade->setCanKick(true);
@@ -125,7 +152,6 @@ class AllyController extends Controller
         $pnas = $em->getRepository('App:Pna')
             ->createQueryBuilder('pna')
             ->where('pna.allyTag = :allytag')
-            ->andWhere('pna.ally = :ally')
             ->setParameter('allytag', $ally->getSigle())
             ->getQuery()
             ->getResult();
@@ -133,7 +159,6 @@ class AllyController extends Controller
         $pacts = $em->getRepository('App:Allied')
             ->createQueryBuilder('al')
             ->where('al.allyTag = :allytag')
-            ->andWhere('al.ally = :ally')
             ->setParameter('allytag', $ally->getSigle())
             ->getQuery()
             ->getResult();
@@ -141,7 +166,6 @@ class AllyController extends Controller
         $wars = $em->getRepository('App:War')
             ->createQueryBuilder('w')
             ->where('w.allyTag = :allytag')
-            ->andWhere('w.ally = :ally')
             ->setParameter('allytag', $ally->getSigle())
             ->getQuery()
             ->getResult();
@@ -252,7 +276,7 @@ class AllyController extends Controller
         $now = new DateTime();
         $grade->setAlly($ally);
         $grade->setName("Membre");
-        $grade->setUser($user);
+        $grade->addUser($user);
         $grade->setPlacement(5);
         $em->persist($grade);
 
@@ -423,7 +447,7 @@ class AllyController extends Controller
     {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
-        $gradeF = new Grade();
+        $grade = new Grade();
         if($user->getAlly()) {
             $ally = $user->getAlly();
         } else {
@@ -432,7 +456,7 @@ class AllyController extends Controller
         $form_allyImage = $this->createForm(AllyImageType::class,$ally);
         $form_allyImage->handleRequest($request);
 
-        $form_allyGrade = $this->createForm(AllyGradeType::class,$gradeF);
+        $form_allyGrade = $this->createForm(AllyGradeType::class,$grade);
         $form_allyGrade->handleRequest($request);
 
         if ($form_allyImage->isSubmitted() && $form_allyImage->isValid()) {
@@ -441,10 +465,9 @@ class AllyController extends Controller
         }
 
         if (($form_allyGrade->isSubmitted() && $form_allyGrade->isValid())) {
-            $gradeF->setAlly($ally);
-            $gradeF->setPlacement(4);
-            $em->persist($gradeF);
-            $ally->addGrade($gradeF);
+            $grade->setAlly($ally);
+            $em->persist($grade);
+            $ally->addGrade($grade);
             $em->persist($ally);
             $em->flush();
 

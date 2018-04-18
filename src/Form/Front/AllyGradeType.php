@@ -82,6 +82,19 @@ class AllyGradeType extends AbstractType
                     'required' => false
                 )
             )
+            ->add(
+                'placement',
+                'Symfony\Component\Form\Extension\Core\Type\ChoiceType',
+                array(
+                    'choices' => $this->getPlacement(),
+                    'label' => 'form.placement',
+                    'attr'  => array(
+                        'placeholder' => 'form.placement',
+                        'class' => 'form-control select2',
+                    ),
+                    'required' => true
+                )
+            )
             ->add('sendForm', SubmitType::class, array('label' => 'form.send'));
 
         $builder->get('name')
@@ -93,6 +106,15 @@ class AllyGradeType extends AbstractType
                     return ucfirst($tagAsFirstUpper);
                 }
             ));
+    }
+
+    protected function getPlacement()
+    {
+        return array(
+            'Dirigeant' => '1',
+            'Second' => '2',
+            'Officier' => '3',
+        );
     }
 
     /**

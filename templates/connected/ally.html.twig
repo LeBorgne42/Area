@@ -59,7 +59,11 @@
                         {% for user in app.user.getAlly().getUsers() %}
                             <tr>
                                 <td class="center-cells">
-                                    {{ user.getGrade().getName() }}
+                                    {% if app.user.getGrade().getPlacement() == 1 %}
+                                        <a class="btn-top" href="{{ path('ally_addUser_grade', {'id': user.getId() }) }}" data-toggle="modal" data-target="#openModal">{{ user.getGrade().getName() }}</a>
+                                    {% else %}
+                                        {{ user.getGrade().getName() }}
+                                    {% endif %}
                                 </td>
                                 <td class="center-cells">
                                     <a href="{{ path('ally') }}">{{ user.getUsername() }}</a>
@@ -87,5 +91,11 @@
             </div>
         {% else %}
         {% endif %}
+    </div>
+    <div class="modal fade" id="openModal" tabindex="-1" role="dialog" aria-labelledby="openModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+            </div>
+        </div>
     </div>
 {% endblock %}

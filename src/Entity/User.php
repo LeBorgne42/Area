@@ -52,8 +52,7 @@ class User implements UserInterface, \Serializable
     protected $joinAllyAt;
 
     /**
-     * @ORM\OneToOne(targetEntity="Grade", inversedBy="user", fetch="EXTRA_LAZY", cascade={"persist"})
-     * @ORM\JoinColumn(name="grade_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Grade", inversedBy="users", fetch="EXTRA_LAZY")
      */
     protected $grade;
 

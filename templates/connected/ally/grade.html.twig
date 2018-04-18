@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'front_grade' %}
+
+{% block body %}
+    {%- block left_menu -%}
+    {%- endblock -%}
+    {%- block top_ressource -%}
+    {%- endblock -%}
+    {%- block right_planet -%}
+    {%- endblock -%}
+    {% if app.user.getGrade().getPlacement() == 1 %}
+        <div class="row p-5">
+            <div class="offset-1 col-10">
+                <div class="wrapper-page">
+                    <div class="text-center">
+                        {{ form_start(form_userAttrGrade) }}
+                        <div class="form-group">
+                            {{ form_widget(form_userAttrGrade.grade) }}
+                        </div>
+                        <div class="form-group text-center mt-5">
+                            {{ form_widget(form_userAttrGrade.sendForm,{attr: { class: 'btn btn-lg btn-info'}}) }}
+                        </div>
+                        {{ form_end(form_userAttrGrade) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

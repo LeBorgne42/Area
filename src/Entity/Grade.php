@@ -25,9 +25,10 @@ class Grade
     protected $ally;
 
     /**
-     * @ORM\OneToOne(targetEntity="User", mappedBy="grade", fetch="EXTRA_LAZY")
+     * @ORM\OneToMany(targetEntity="User", mappedBy="grade", fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    protected $user;
+    protected $users;
 
     /**
      * @ORM\Column(name="placement",type="integer")
@@ -173,19 +174,43 @@ class Grade
     }
 
     /**
-     * @return mixed
+     * Add user
+     *
+     * @param \App\Entity\User $user
+     *
+     * @return Grade
      */
-    public function getUser()
+    public function addUser(\App\Entity\User $user)
     {
-        return $this->user;
+        $this->users[] = $user;
+
+        return $this;
     }
 
     /**
-     * @param mixed $user
+     * Remove user
+     *
+     * @param \App\Entity\User $user
      */
-    public function setUser($user): void
+    public function removeUser(\App\Entity\User $user)
     {
-        $this->user = $user;
+        $this->users->removeElement($user);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
+
+    /**
+     * @param mixed $users
+     */
+    public function setUsers($users): void
+    {
+        $this->users = $users;
     }
 
     public function getId()

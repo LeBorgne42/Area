@@ -53,6 +53,7 @@
                             <th class="tab-cells-name">{{ 'ally.canPeace'|trans }}</th>
                             <th class="tab-cells-name">{{ 'ally.canKick'|trans }}</th>
                             <th class="tab-cells-name">{{ 'ally.canWar'|trans }}</th>
+                            <th class="tab-cells-name">{{ 'ally.priority'|trans }}</th>
                             <th></th>
                         </tr>
                         <tr>
@@ -61,6 +62,7 @@
                             <td class="center-cells">{{ form_widget(form_allyGrade.canPeace) }}</td>
                             <td class="center-cells">{{ form_widget(form_allyGrade.canKick) }}</td>
                             <td class="center-cells">{{ form_widget(form_allyGrade.canWar) }}</td>
+                            <td class="center-cells">{{ form_widget(form_allyGrade.placement) }}</td>
                             <td class="center-cells">{{ form_widget(form_allyGrade.sendForm,{attr: { class: 'btn btn-lg btn-info'}}) }}</td>
                         </tr>
                         </tbody>
