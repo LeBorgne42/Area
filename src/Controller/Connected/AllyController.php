@@ -57,8 +57,9 @@ class AllyController extends Controller
      */
     public function allyAddUserGradeAction(Request $request, $id)
     {
+        $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
-        $form_userAttrGrade = $this->createForm(UserAttrGradeType::class, null, array("allyId" => $this->getUser()->getAlly()->getId()));
+        $form_userAttrGrade = $this->createForm(UserAttrGradeType::class, null, array("allyId" => $user->getAlly()->getId()));
         $form_userAttrGrade->handleRequest($request);
 
         if (($form_userAttrGrade->isSubmitted() && $form_userAttrGrade->isValid())) {
@@ -69,6 +70,9 @@ class AllyController extends Controller
                 ->getQuery()
                 ->getOneOrNullResult();
 
+            if(($user->getGrade()->getPlacement() == 1 && $newGradeUser->getId() == $user->getId()) && $form_userAttrGrade->get('grade')->getData()->getPlacement() != 1) {
+                return $this->redirectToRoute('ally');
+            }
             $newGradeUser->setGrade($form_userAttrGrade->get('grade')->getData());
             $em->persist($newGradeUser);
             $em->flush();
@@ -78,6 +82,7 @@ class AllyController extends Controller
 
         return $this->render('connected/ally/grade.html.twig', [
             'form_userAttrGrade' => $form_userAttrGrade->createView(),
+            'idUser' => $id,
         ]);
     }
 
@@ -198,7 +203,7 @@ class AllyController extends Controller
     public function leaveAllyAction()
     {
         $user = $this->getUser();
-        if($user->getGrade()->getPlacement() == 1) {
+        if($user->getGrade()->getPlacement() == 1 || count($user->getAlly()->getUsers()) == 1) {
             return $this->redirectToRoute('ally');
         }
         $em = $this->getDoctrine()->getManager();

@@ -112,8 +112,9 @@ class AllyGradeType extends AbstractType
     {
         return array(
             'Dirigeant' => '1',
-            'Second' => '2',
+            'Bras droit' => '2',
             'Officier' => '3',
+            'Normal' => '4'
         );
     }
 
