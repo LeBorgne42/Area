@@ -48,7 +48,7 @@ class PactController extends Controller
 
         $em->flush();
 
-        return $this->redirectToRoute('ally');
+        return $this->redirectToRoute('ally_page_pacts');
     }
 
     /**
@@ -68,7 +68,7 @@ class PactController extends Controller
 
         $em->flush();
 
-        return $this->redirectToRoute('ally');
+        return $this->redirectToRoute('ally_page_pacts');
     }
 
     /**
@@ -100,7 +100,7 @@ class PactController extends Controller
 
         $em->flush();
 
-        return $this->redirectToRoute('ally');
+        return $this->redirectToRoute('ally_page_pacts');
     }
 
     /**
@@ -120,7 +120,7 @@ class PactController extends Controller
 
         $em->flush();
 
-        return $this->redirectToRoute('ally');
+        return $this->redirectToRoute('ally_page_pacts');
     }
 
     /**
@@ -160,7 +160,7 @@ class PactController extends Controller
 
         $em->flush();
 
-        return $this->redirectToRoute('ally');
+        return $this->redirectToRoute('ally_page_pacts');
     }
 
     /**
@@ -200,6 +200,6 @@ class PactController extends Controller
 
         $em->flush();
 
-        return $this->redirectToRoute('ally');
+        return $this->redirectToRoute('ally_page_pacts');
     }
 }
