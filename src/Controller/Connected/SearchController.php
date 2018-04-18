@@ -13,11 +13,21 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class SearchController extends Controller
 {
     /**
-     * @Route("/recherche", name="search")
-     * @Route("/recherche/", name="search_withSlash")
+     * @Route("/recherche/{idp}", name="search", requirements={"idp"="\d+"})
      */
-    public function searchAction()
+    public function searchAction($idp)
     {
-        return $this->render('connected/search.html.twig');
+        $em = $this->getDoctrine()->getManager();
+
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->setParameter('id', $idp)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        return $this->render('connected/search.html.twig', [
+            'usePlanet' => $usePlanet,
+        ]);
     }
 }

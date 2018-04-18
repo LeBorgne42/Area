@@ -13,11 +13,21 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class SpatialController extends Controller
 {
     /**
-     * @Route("/chantier-spatial", name="spatial")
-     * @Route("/chantier-spatial/", name="spatial_withSlash")
+     * @Route("/chantier-spatial/{idp}", name="spatial", requirements={"idp"="\d+"})
      */
-    public function spatialAction()
+    public function spatialAction($idp)
     {
-        return $this->render('connected/spatial.html.twig');
+        $em = $this->getDoctrine()->getManager();
+
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->setParameter('id', $idp)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        return $this->render('connected/spatial.html.twig', [
+            'usePlanet' => $usePlanet,
+        ]);
     }
 }

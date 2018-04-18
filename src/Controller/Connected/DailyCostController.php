@@ -13,11 +13,21 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class DailyCostController extends Controller
 {
     /**
-     * @Route("/entretien", name="dailyCost")
-     * @Route("/entretien/", name="dailyCost_withSlash")
+     * @Route("/entretien/{idp}", name="dailyCost", requirements={"idp"="\d+"})
      */
-    public function dailyCostAction()
+    public function dailyCostAction($idp)
     {
-        return $this->render('connected/dailyCost.html.twig');
+        $em = $this->getDoctrine()->getManager();
+
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->setParameter('id', $idp)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        return $this->render('connected/dailyCost.html.twig', [
+            'usePlanet' => $usePlanet,
+        ]);
     }
 }

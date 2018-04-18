@@ -13,12 +13,18 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class UniverseController extends Controller
 {
     /**
-     * @Route("/univers", name="universe")
-     * @Route("/univers/", name="universe_withSlash")
+     * @Route("/univers/{idp}", name="universe", requirements={"idp"="\d+"})
      */
-    public function universeAction()
+    public function universeAction($idp)
     {
         $em = $this->getDoctrine()->getManager();
+
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->setParameter('id', $idp)
+            ->getQuery()
+            ->getOneOrNullResult();
 
         $galaxys = $em->getRepository('App:Galaxy')
             ->createQueryBuilder('g')
@@ -28,6 +34,7 @@ class UniverseController extends Controller
 
         return $this->render('connected/universe.html.twig', [
             'galaxys' => $galaxys,
+            'usePlanet' => $usePlanet,
         ]);
     }
 }

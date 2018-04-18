@@ -20,11 +20,19 @@ use DateTime;
 class PactController extends Controller
 {
     /**
-     * @Route("/accepter-pacte/{id}", name="ally_acceptAllied", requirements={"id"="\d+"})
+     * @Route("/accepter-pacte/{id}/{idp}", name="ally_acceptAllied", requirements={"id"="\d+", "idp"="\d+"})
      */
-    public function pactAcceptAction($id)
+    public function pactAcceptAction($id, $idp)
     {
         $em = $this->getDoctrine()->getManager();
+
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->setParameter('id', $idp)
+            ->getQuery()
+            ->getOneOrNullResult();
+
         $user = $this->getUser();
         $ally = $user->getAlly();
         $now = new DateTime();
@@ -48,15 +56,23 @@ class PactController extends Controller
 
         $em->flush();
 
-        return $this->redirectToRoute('ally_page_pacts');
+        return $this->redirectToRoute('ally_page_pacts', array('idp' => $usePlanet->getId()));
     }
 
     /**
-     * @Route("/refuser-pacte/{id}", name="ally_refuseAllied", requirements={"id"="\d+"})
+     * @Route("/refuser-pacte/{id}", name="ally_refuseAllied", requirements={"id"="\d+", "idp"="\d+"})
      */
-    public function pactRefuseAction($id)
+    public function pactRefuseAction($id, $idp)
     {
         $em = $this->getDoctrine()->getManager();
+
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->setParameter('id', $idp)
+            ->getQuery()
+            ->getOneOrNullResult();
+
         $pact = $em->getRepository('App:Allied')
             ->createQueryBuilder('al')
             ->where('al.id = :id')
@@ -68,15 +84,23 @@ class PactController extends Controller
 
         $em->flush();
 
-        return $this->redirectToRoute('ally_page_pacts');
+        return $this->redirectToRoute('ally_page_pacts', array('idp' => $usePlanet->getId()));
     }
 
     /**
-     * @Route("/accepter-pna/{id}", name="ally_acceptPna", requirements={"id"="\d+"})
+     * @Route("/accepter-pna/{id}", name="ally_acceptPna", requirements={"id"="\d+", "idp"="\d+"})
      */
-    public function pnaAcceptAction($id)
+    public function pnaAcceptAction($id, $idp)
     {
         $em = $this->getDoctrine()->getManager();
+
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->setParameter('id', $idp)
+            ->getQuery()
+            ->getOneOrNullResult();
+
         $user = $this->getUser();
         $ally = $user->getAlly();
         $now = new DateTime();
@@ -100,15 +124,23 @@ class PactController extends Controller
 
         $em->flush();
 
-        return $this->redirectToRoute('ally_page_pacts');
+        return $this->redirectToRoute('ally_page_pacts', array('idp' => $usePlanet->getId()));
     }
 
     /**
-     * @Route("/refuser-pna/{id}", name="ally_refusePna", requirements={"id"="\d+"})
+     * @Route("/refuser-pna/{id}", name="ally_refusePna", requirements={"id"="\d+", "idp"="\d+"})
      */
-    public function pnaRefuseAction($id)
+    public function pnaRefuseAction($id, $idp)
     {
         $em = $this->getDoctrine()->getManager();
+
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->setParameter('id', $idp)
+            ->getQuery()
+            ->getOneOrNullResult();
+
         $pact = $em->getRepository('App:Pna')
             ->createQueryBuilder('pna')
             ->where('pna.id = :id')
@@ -120,15 +152,23 @@ class PactController extends Controller
 
         $em->flush();
 
-        return $this->redirectToRoute('ally_page_pacts');
+        return $this->redirectToRoute('ally_page_pacts', array('idp' => $usePlanet->getId()));
     }
 
     /**
-     * @Route("/detruire-pna/{id}", name="ally_remove_pna", requirements={"id"="\d+"})
+     * @Route("/detruire-pna/{id}", name="ally_remove_pna", requirements={"id"="\d+", "idp"="\d+"})
      */
-    public function allyPnaRefuseAction($id)
+    public function allyPnaRefuseAction($id, $idp)
     {
         $em = $this->getDoctrine()->getManager();
+
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->setParameter('id', $idp)
+            ->getQuery()
+            ->getOneOrNullResult();
+
         $user = $this->getUser();
         $ally = $user->getAlly();
         $pact = $em->getRepository('App:Pna')
@@ -160,15 +200,23 @@ class PactController extends Controller
 
         $em->flush();
 
-        return $this->redirectToRoute('ally_page_pacts');
+        return $this->redirectToRoute('ally_page_pacts', array('idp' => $usePlanet->getId()));
     }
 
     /**
-     * @Route("/detruire-pacte/{id}", name="ally_remove_pact", requirements={"id"="\d+"})
+     * @Route("/detruire-pacte/{id}", name="ally_remove_pact", requirements={"id"="\d+", "idp"="\d+"})
      */
-    public function allyPactRefuseAction($id)
+    public function allyPactRefuseAction($id, $idp)
     {
         $em = $this->getDoctrine()->getManager();
+
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->setParameter('id', $idp)
+            ->getQuery()
+            ->getOneOrNullResult();
+
         $user = $this->getUser();
         $ally = $user->getAlly();
         $pact = $em->getRepository('App:Allied')
@@ -200,6 +248,6 @@ class PactController extends Controller
 
         $em->flush();
 
-        return $this->redirectToRoute('ally_page_pacts');
+        return $this->redirectToRoute('ally_page_pacts', array('idp' => $usePlanet->getId()));
     }
 }

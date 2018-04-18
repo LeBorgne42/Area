@@ -13,11 +13,21 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class SoldierController extends Controller
 {
     /**
-     * @Route("/entrainement", name="soldier")
-     * @Route("/entrainement/", name="soldier_withSlash")
+     * @Route("/entrainement/{idp}", name="soldier", requirements={"idp"="\d+"})
      */
-    public function soldierAction()
+    public function soldierAction($idp)
     {
-        return $this->render('connected/soldier.html.twig');
+        $em = $this->getDoctrine()->getManager();
+
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->setParameter('id', $idp)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        return $this->render('connected/soldier.html.twig', [
+            'usePlanet' => $usePlanet,
+        ]);
     }
 }

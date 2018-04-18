@@ -32,23 +32,23 @@
                 </tr>
                 <tr>
                     <th class="tab-cells-name">{{ 'title.attack'|trans|raw }}</th>
-                    <td class="center-cells"><a href="{{ path('map', {id: 1}) }}">{{ 'cell.attack'|trans|raw }}</a></td>
+                    <td class="center-cells"><a href="{{ path('map', {'id': usePlanet.getSector().getPosition(), 'idp': usePlanet.getId()}) }}">{{ 'cell.attack'|trans|raw }}</a></td>
                 </tr>
                 <tr>
                     <th class="tab-cells-name">{{ 'title.batiment'|trans|raw }}</th>
-                    <td class="center-cells"><a href="{{ path('building') }}">{{ 'cell.batiment'|trans|raw }}</a></td>
+                    <td class="center-cells"><a href="{{ path('building', {'idp': usePlanet.getId()}) }}">{{ 'cell.batiment'|trans|raw }}</a></td>
                 </tr>
                 <tr>
                     <th class="tab-cells-name">{{ 'title.search'|trans|raw }}</th>
-                    <td class="center-cells"><a href="{{ path('search') }}">{{ 'cell.search'|trans|raw }}</a></td>
+                    <td class="center-cells"><a href="{{ path('search', {'idp': usePlanet.getId()}) }}">{{ 'cell.search'|trans|raw }}</a></td>
                 </tr>
                 <tr>
                     <th class="tab-cells-name">{{ 'title.spatial'|trans|raw }}</th>
-                    <td class="center-cells"><a href="{{ path('spatial') }}">{{ 'cell.spatial'|trans|raw }}</a></td>
+                    <td class="center-cells"><a href="{{ path('spatial', {'idp': usePlanet.getId()}) }}">{{ 'cell.spatial'|trans|raw }}</a></td>
                 </tr>
                 <tr>
                     <th class="tab-cells-name">{{ 'title.fleet'|trans|raw }}</th>
-                    <td class="center-cells"><a href="{{ path('fleet') }}">{{ 'cell.fleet'|trans|raw }}</a></td>
+                    <td class="center-cells"><a href="{{ path('fleet', {'idp': usePlanet.getId()}) }}">{{ 'cell.fleet'|trans|raw }}</a></td>
                 </tr>
             </tbody>
         </table>

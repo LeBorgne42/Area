@@ -13,11 +13,21 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class ProductController extends Controller
 {
     /**
-     * @Route("/production", name="product")
-     * @Route("/production/", name="product_withSlash")
+     * @Route("/production/{idp}", name="product", requirements={"idp"="\d+"})
      */
-    public function productAction()
+    public function productAction($idp)
     {
-        return $this->render('connected/product.html.twig');
+        $em = $this->getDoctrine()->getManager();
+
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->setParameter('id', $idp)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        return $this->render('connected/product.html.twig', [
+            'usePlanet' => $usePlanet,
+        ]);
     }
 }

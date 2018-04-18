@@ -13,11 +13,21 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class RankController extends Controller
 {
     /**
-     * @Route("/classement", name="rank")
-     * @Route("/classement/", name="rank_withSlash")
+     * @Route("/classement/{idp}", name="rank", requirements={"idp"="\d+"})
      */
-    public function rankAction()
+    public function rankAction($idp)
     {
-        return $this->render('connected/rank.html.twig');
+        $em = $this->getDoctrine()->getManager();
+
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->setParameter('id', $idp)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        return $this->render('connected/rank.html.twig', [
+            'usePlanet' => $usePlanet,
+        ]);
     }
 }

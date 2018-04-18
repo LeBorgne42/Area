@@ -3,9 +3,9 @@
 <nav class="navbar-right text-center pr-4">
     {% for planet in app.user.getPlanets() %}
         <div class="mb-4 bg-right p-4">
-            <div class="pt-2"><a href="{{ path('galaxy', {id: planet.getSector().getGalaxy().getPosition()}) }}"><img height="64" width="64" src="{{ vich_uploader_asset(planet, 'imageFile') }}"></a></div>
+            <div class="pt-2"><a href="{{ path('galaxy', {id: planet.getSector().getGalaxy().getPosition(), 'idp': usePlanet.getId()}) }}"><img height="64" width="64" src="{{ vich_uploader_asset(planet, 'imageFile') }}"></a></div>
             <div class="mt-2">
-                {{ planet.getName() }} : <a href="{{ path('map', {id: planet.getSector().getPosition()}) }}">{{ planet.getSector().getGalaxy.getPosition() }}:{{ planet.getSector().getPosition() }}:{{ planet.getPosition() }}</a>
+                {{ planet.getName() }} : <a href="{{ path('map', {id: planet.getSector().getPosition(), 'idp': usePlanet.getId()}) }}">{{ planet.getSector().getGalaxy.getPosition() }}:{{ planet.getSector().getPosition() }}:{{ planet.getPosition() }}</a>
             </div>
         </div>
     {% endfor %}

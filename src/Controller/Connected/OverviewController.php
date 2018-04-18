@@ -15,12 +15,19 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class OverviewController extends Controller
 {
     /**
-     * @Route("/empire", name="overview")
-     * @Route("/empire/", name="overview_withSlash")
+     * @Route("/empire/{idp}", name="overview", requirements={"idp"="\d+"})
      */
-    public function overviewAction(Request $request)
+    public function overviewAction(Request $request, $idp)
     {
         $em = $this->getDoctrine()->getManager();
+
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->setParameter('id', $idp)
+            ->getQuery()
+            ->getOneOrNullResult();
+
         $user = $this->getUser();
         $form_image = $this->createForm(UserImageType::class,$user);
         $form_image->handleRequest($request);
@@ -30,6 +37,7 @@ class OverviewController extends Controller
         }
         return $this->render('connected/overview.html.twig', [
             'form_image' => $form_image->createView(),
+            'usePlanet' => $usePlanet,
         ]);
     }
 }

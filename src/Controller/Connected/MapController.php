@@ -13,11 +13,18 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class MapController extends Controller
 {
     /**
-     * @Route("/carte-spatial/{id}", name="map", requirements={"id"="\d+"})
+     * @Route("/carte-spatial/{id}/{idp}", name="map", requirements={"id"="\d+", "idp"="\d+"})
      */
-    public function mapAction($id)
+    public function mapAction($id, $idp)
     {
         $em = $this->getDoctrine()->getManager();
+
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->setParameter('id', $idp)
+            ->getQuery()
+            ->getOneOrNullResult();
 
         $planets = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
@@ -30,6 +37,7 @@ class MapController extends Controller
 
         return $this->render('connected/map.html.twig', [
             'planets' => $planets,
+            'usePlanet' => $usePlanet,
         ]);
     }
 }

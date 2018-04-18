@@ -25,21 +25,21 @@
                     <a class="nav-link active" id="members-tab" data-toggle="tab" href="#members" role="tab" aria-controls="members" aria-selected="true">{{ app.user.getAlly().getUsers()|length }} {{ 'ally.members'|trans }}</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ path('ally_page_bank') }}" >{{ 'ally.found'|trans }}</a>
+                    <a href="{{ path('ally_page_bank', {'idp': usePlanet.getId()}) }}" >{{ 'ally.found'|trans }}</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ path('ally_page_pacts') }}" >{{ app.user.getAlly().getPacts() }}  {{ 'ally.pacts'|trans }}</a>
+                    <a href="{{ path('ally_page_pacts', {'idp': usePlanet.getId()}) }}" >{{ app.user.getAlly().getPacts() }}  {{ 'ally.pacts'|trans }}</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ path('ally_page_add') }}" >{{ 'ally.add'|trans }}</a>
+                    <a href="{{ path('ally_page_add', {'idp': usePlanet.getId()}) }}" >{{ 'ally.add'|trans }}</a>
                 </li>
                 {% if app.user.getGrade().getPlacement() == 1 %}
                     <li class="nav-item">
-                        <a href="{{ path('ally_page_admin') }}" >{{ 'ally.admin'|trans }}</a>
+                        <a href="{{ path('ally_page_admin', {'idp': usePlanet.getId()}) }}" >{{ 'ally.admin'|trans }}</a>
                     </li>
                 {% endif %}
                 <li class="nav-item">
-                    <a href="{{ path('ally_page_exit') }}" >{{ 'ally.leave'|trans }}</a>
+                    <a href="{{ path('ally_page_exit', {'idp': usePlanet.getId()}) }}" >{{ 'ally.leave'|trans }}</a>
                 </li>
             </ul>
             <div class="tab-content" id="myTabContent">
@@ -60,13 +60,13 @@
                             <tr>
                                 <td class="center-cells">
                                     {% if app.user.getGrade().getPlacement() == 1 %}
-                                        <a class="btn-top" href="{{ path('ally_addUser_grade', {'id': user.getId() }) }}" data-toggle="modal" data-target="#openModal">{{ user.getGrade().getName() }}</a>
+                                        <a class="btn-top" href="{{ path('ally_addUser_grade', {'id': user.getId(), 'idp': usePlanet.getId() }) }}" data-toggle="modal" data-target="#openModal">{{ user.getGrade().getName() }}</a>
                                     {% else %}
                                         {{ user.getGrade().getName() }}
                                     {% endif %}
                                 </td>
                                 <td class="center-cells">
-                                    <a href="{{ path('ally') }}">{{ user.getUsername() }}</a>
+                                    <a href="{{ path('ally', {'idp': usePlanet.getId()}) }}">{{ user.getUsername() }}</a>
                                 </td>
                                 <td class="center-cells">
                                     {{ user.getJoinAllyAt()|date('d/m/Y h:m') }}
@@ -79,7 +79,7 @@
                                 </td>
                                 {% if app.user.getGrade().getCanKick() == 1 %}
                                     <td class="center-cells">
-                                        <a class="text-rouge" href="{{ path('ally_kick',{'id': user.getId()}) }}"><div class="glyphicon glyphicon-remove"></div> <span>{{ 'ally.kick'|trans }}</span></a>
+                                        <a class="text-rouge" href="{{ path('ally_kick',{'id': user.getId(), 'idp': usePlanet.getId()}) }}"><div class="glyphicon glyphicon-remove"></div> <span>{{ 'ally.kick'|trans }}</span></a>
                                     </td>
                                 {% endif %}
                             </tr>

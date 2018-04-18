@@ -7,46 +7,46 @@
         <button class="text-orange my-4" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-content="{{ 'popover.text'|trans }}"><strong>{{ 'version'|trans }}</strong></button>
     </div>
     <div class="btn-left">
-        <a href="{{ path('overview') }}"><span>{{ 'globalView'|trans }}</span></a>
+        <a href="{{ path('overview', {'idp': usePlanet.getId()}) }}"><span>{{ 'globalView'|trans }}</span></a>
     </div>
     <div class="btn-left">
-        <a href="{{ path('dailyCost') }}"><span>{{ 'dailyCost'|trans }}</span></a>
+        <a href="{{ path('dailyCost', {'idp': usePlanet.getId()}) }}"><span>{{ 'dailyCost'|trans }}</span></a>
     </div>
     <div class="btn-left">
-        <a href="{{ path('fleet') }}"><span>{{ 'fleet'|trans }}</span></a>
+        <a href="{{ path('fleet', {'idp': usePlanet.getId()}) }}"><span>{{ 'fleet'|trans }}</span></a>
     </div>
     <div class="btn-left">
-        <a href="{{ path('planet') }}"><span>{{ 'planet'|trans }}</span></a>
+        <a href="{{ path('planet', {'idp': usePlanet.getId()}) }}"><span>{{ 'planet'|trans }}</span></a>
     </div>
     <div class="btn-left">
-        <a href="{{ path('search') }}"><span>{{ 'search'|trans }}</span></a>
+        <a href="{{ path('search', {'idp': usePlanet.getId()}) }}"><span>{{ 'search'|trans }}</span></a>
     </div>
     <div class="btn-left">
-        <a href="{{ path('ally') }}"><span>{{ 'ally'|trans }}</span></a>
+        <a href="{{ path('ally', {'idp': usePlanet.getId()}) }}"><span>{{ 'ally'|trans }}</span></a>
     </div>
     <div class="btn-left">
-        <a href="{{ path('universe') }}"><span>{{ 'universe'|trans }}</span></a>
+        <a href="{{ path('universe', {'idp': usePlanet.getId()}) }}"><span>{{ 'universe'|trans }}</span></a>
     </div>
     <div class="btn-left">
-        <a href="{{ path('galaxy', {id: 1}) }}"><span>{{ 'galaxy'|trans }}</span></a>
+        <a href="{{ path('galaxy', {'id': usePlanet.getSector().getGalaxy().getPosition(), 'idp': usePlanet.getId()}) }}"><span>{{ 'galaxy'|trans }}</span></a>
     </div>
     <div class="btn-left">
-        <a href="{{ path('map', {id: 1}) }}"><span>{{ 'map'|trans }}</span></a>
+        <a href="{{ path('map', {'id':usePlanet.getSector().getPosition(), 'idp': usePlanet.getId()}) }}"><span>{{ 'map'|trans }}</span></a>
     </div>
     <div class="btn-left">
-        <a href="{{ path('product') }}"><span>{{ 'product'|trans }}</span></a>
+        <a href="{{ path('product', {'idp': usePlanet.getId()}) }}"><span>{{ 'product'|trans }}</span></a>
     </div>
     <div class="btn-left">
-        <a href="{{ path('building') }}"><span>{{ 'building'|trans }}</span></a>
+        <a href="{{ path('building', {'idp': usePlanet.getId()}) }}"><span>{{ 'building'|trans }}</span></a>
     </div>
     <div class="btn-left">
-        <a href="{{ path('spatial') }}"><span>{{ 'spatial'|trans }}</span></a>
+        <a href="{{ path('spatial', {'idp': usePlanet.getId()}) }}"><span>{{ 'spatial'|trans }}</span></a>
     </div>
     <div class="btn-left">
-        <a href="{{ path('soldier') }}"><span>{{ 'soldier'|trans }}</span></a>
+        <a href="{{ path('soldier', {'idp': usePlanet.getId()}) }}"><span>{{ 'soldier'|trans }}</span></a>
     </div>
     <div class="btn-left-bottom">
-        <a href="{{ path('ground') }}"><span>{{ 'ground'|trans }}</span></a>
+        <a href="{{ path('ground', {'idp': usePlanet.getId()}) }}"><span>{{ 'ground'|trans }}</span></a>
     </div>
     <div>
         <a href="{{ path('logout') }}" class="badge badge-danger my-4"><div class="glyphicon glyphicon-remove"></div> <span>{{ 'disconnect'|trans }}</span></a>

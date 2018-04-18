@@ -22,24 +22,24 @@
             <div class="text-center my-2">"{{ app.user.getAlly().getSlogan() }}"</div>
             <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
                 <li class="nav-item">
-                    <a href="{{ path('ally') }}" >{{ app.user.getAlly().getUsers()|length }} {{ 'ally.members'|trans }}</a>
+                    <a href="{{ path('ally', {'idp': usePlanet.getId()}) }}" >{{ app.user.getAlly().getUsers()|length }} {{ 'ally.members'|trans }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" id="bank-tab" data-toggle="tab" href="#bank" role="tab" aria-controls="bank" aria-selected="false">{{ 'ally.found'|trans }}</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ path('ally_page_pacts') }}" >{{ app.user.getAlly().getPacts() }}  {{ 'ally.pacts'|trans }}</a>
+                    <a href="{{ path('ally_page_pacts', {'idp': usePlanet.getId()}) }}" >{{ app.user.getAlly().getPacts() }}  {{ 'ally.pacts'|trans }}</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ path('ally_page_add') }}" >{{ 'ally.add'|trans }}</a>
+                    <a href="{{ path('ally_page_add', {'idp': usePlanet.getId()}) }}" >{{ 'ally.add'|trans }}</a>
                 </li>
                 {% if app.user.getGrade().getPlacement() == 1 %}
                     <li class="nav-item">
-                        <a href="{{ path('ally_page_admin') }}" >{{ 'ally.admin'|trans }}</a>
+                        <a href="{{ path('ally_page_admin', {'idp': usePlanet.getId()}) }}" >{{ 'ally.admin'|trans }}</a>
                     </li>
                 {% endif %}
                 <li class="nav-item">
-                    <a href="{{ path('ally_page_exit') }}" >{{ 'ally.leave'|trans }}</a>
+                    <a href="{{ path('ally_page_exit', {'idp': usePlanet.getId()}) }}" >{{ 'ally.leave'|trans }}</a>
                 </li>
             </ul>
             <div class="tab-content" id="myTabContent">

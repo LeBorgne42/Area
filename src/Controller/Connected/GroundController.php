@@ -13,11 +13,21 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class GroundController extends Controller
 {
     /**
-     * @Route("/orbite", name="ground")
-     * @Route("/orbite/", name="ground_withSlash")
+     * @Route("/orbite/{idp}", name="ground", requirements={"idp"="\d+"})
      */
-    public function groundAction()
+    public function groundAction($idp)
     {
-        return $this->render('connected/ground.html.twig');
+        $em = $this->getDoctrine()->getManager();
+
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->setParameter('id', $idp)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        return $this->render('connected/ground.html.twig', [
+            'usePlanet' => $usePlanet,
+        ]);
     }
 }

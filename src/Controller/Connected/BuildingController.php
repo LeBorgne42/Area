@@ -13,11 +13,21 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class BuildingController extends Controller
 {
     /**
-     * @Route("/batiment", name="building")
-     * @Route("/batiment/", name="building_withSlash")
+     * @Route("/batiment/{idp}", name="building", requirements={"idp"="\d+"})
      */
-    public function buildingAction()
+    public function buildingAction($idp)
     {
-        return $this->render('connected/building.html.twig');
+        $em = $this->getDoctrine()->getManager();
+
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->setParameter('id', $idp)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        return $this->render('connected/building.html.twig', [
+            'usePlanet' => $usePlanet,
+        ]);
     }
 }

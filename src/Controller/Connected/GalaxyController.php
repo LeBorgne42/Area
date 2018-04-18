@@ -13,9 +13,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class GalaxyController extends Controller
 {
     /**
-     * @Route("/galaxie/{id}", name="galaxy", requirements={"id"="\d+"})
+     * @Route("/galaxie/{id}/{idp}", name="galaxy", requirements={"id"="\d+", "idp"="\d+"})
      */
-    public function galaxyAction($id)
+    public function galaxyAction($id, $idp)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -28,8 +28,16 @@ class GalaxyController extends Controller
             ->getQuery()
             ->getResult();
 
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->setParameter('id', $idp)
+            ->getQuery()
+            ->getOneOrNullResult();
+
         return $this->render('connected/galaxy.html.twig', [
             'sectors' => $sectors,
+            'usePlanet' => $usePlanet,
         ]);
     }
 }

@@ -13,11 +13,21 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class MessageController extends Controller
 {
     /**
-     * @Route("/message", name="message")
-     * @Route("/message/", name="message_withSlash")
+     * @Route("/message/{idp}", name="message", requirements={"idp"="\d+"})
      */
-    public function messageAction()
+    public function messageAction($idp)
     {
-        return $this->render('connected/message.html.twig');
+        $em = $this->getDoctrine()->getManager();
+
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->setParameter('id', $idp)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        return $this->render('connected/message.html.twig', [
+            'usePlanet' => $usePlanet,
+        ]);
     }
 }
