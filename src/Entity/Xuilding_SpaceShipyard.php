@@ -162,22 +162,6 @@ class Xuilding_SpaceShipyard
     /**
      * @return mixed
      */
-    public function getProduction()
-    {
-        return $this->production;
-    }
-
-    /**
-     * @param mixed $production
-     */
-    public function setProduction($production): void
-    {
-        $this->production = $production;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getGround()
     {
         return $this->ground;

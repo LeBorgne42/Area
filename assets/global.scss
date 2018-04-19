@@ -20,6 +20,21 @@ body.area {
   padding: 0 4rem 4rem 4rem;
 }
 
+.navbar-right {
+  position: sticky;
+  top: 70px;
+}
+
+.navbar-left {
+  position: sticky;
+  top: 0;
+}
+
+.navbar-ressource {
+  position: sticky!important;
+  top: 0;
+}
+
 .modal-dialog {
   margin-top: 40%;
 }

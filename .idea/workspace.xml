@@ -4,12 +4,14 @@
     <list default="true" id="97f042ea-d0ee-4bd9-bb02-3d850e24f659" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/assets/global.scss" afterPath="$PROJECT_DIR$/assets/global.scss" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Security/ServerController.php" afterPath="$PROJECT_DIR$/src/Controller/Security/ServerController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Building.php" afterPath="$PROJECT_DIR$/src/Entity/Building.php" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/SpaceShipyardController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/SpaceShipyardController.php" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Xuilding_HeavyUsine.php" afterPath="$PROJECT_DIR$/src/Entity/Xuilding_HeavyUsine.php" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Xuilding_LightUsine.php" afterPath="$PROJECT_DIR$/src/Entity/Xuilding_LightUsine.php" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Xuilding_SkyBrouilleur.php" afterPath="$PROJECT_DIR$/src/Entity/Xuilding_SkyBrouilleur.php" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Xuilding_SkyRadar.php" afterPath="$PROJECT_DIR$/src/Entity/Xuilding_SkyRadar.php" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Xuilding_SpaceShipyard.php" afterPath="$PROJECT_DIR$/src/Entity/Xuilding_SpaceShipyard.php" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180419185036.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180419220735.php" afterPath="" />
       <change beforePath="$PROJECT_DIR$/templates/connected/building.html.twig" afterPath="$PROJECT_DIR$/templates/connected/building.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/menu/_left_menu.html.twig" afterPath="$PROJECT_DIR$/templates/menu/_left_menu.html.twig" />
       <change beforePath="$PROJECT_DIR$/templates/menu/_top_ressource.html.twig" afterPath="$PROJECT_DIR$/templates/menu/_top_ressource.html.twig" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,21 +26,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="_left_menu.html.twig" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/menu/_left_menu.html.twig">
+      <file leaf-file-name="SpaceShipyardController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Controller/Connected/SpaceShipyardController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="12" column="94" lean-forward="false" selection-start-line="12" selection-start-column="94" selection-end-line="12" selection-end-column="94" />
+            <state relative-caret-position="879">
+              <caret line="335" column="33" lean-forward="false" selection-start-line="335" selection-start-column="33" selection-end-line="335" selection-end-column="33" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="global.scss" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/global.scss">
+      <file leaf-file-name="building.html.twig" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/connected/building.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="30" column="11" lean-forward="false" selection-start-line="30" selection-start-column="1" selection-end-line="30" selection-end-column="11" />
+            <state relative-caret-position="290">
+              <caret line="104" column="272" lean-forward="false" selection-start-line="104" selection-start-column="272" selection-end-line="104" selection-end-column="272" />
               <folding />
             </state>
           </provider>
@@ -48,13 +50,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getB</find>
-      <find>path('map', {'id': usePlanet.getSector().getPosition(), 'idp': usePlanet.getId()}) }}</find>
-      <find>path('map'</find>
-      <find>redirectToRoute</find>
-      <find>return $this-&gt;render(</find>
-      <find>', {id:</find>
-      <find>{'id':</find>
       <find>setParameters</find>
       <find>\$usePlanet \= \$em\-\&gt;getRepository\(\'App\:Planet\'\)\n            \-\&gt;createQueryBuilder\(\'p\'\)\n            \-\&gt;where\(\'p\.id \= \:id\'\)\n            \-\&gt;setParameter\(\'id\'\, \$idp\)\n            \-\&gt;getQuery\(\)\n            \-\&gt;getOneOrNullResult\(\)\;</find>
       <find>$usePlanet = $em-&gt;getRepository('App:Planet')            -&gt;createQueryBuilder('p')            -&gt;where('p.id = :id')            -&gt;setParameter('id', $idp)            -&gt;getQuery()            -&gt;getOneOrNullResult();</find>
@@ -70,7 +65,6 @@
       <find>ship</find>
       <find>Land</find>
       <find>land</find>
-      <find>$spaceShip</find>
       <find>src=&quot;{{ asset('img/water.png') }}&quot;</find>
       <find>src=&quot;{{ asset('img/niobium.png') }}&quot;</find>
       <find>src=&quot;{{ asset('img/ground.png') }}&quot;</find>
@@ -78,6 +72,14 @@
       <find>getMiner</find>
       <find>getLand</find>
       <find>getExtractor</find>
+      <find>prodcu</find>
+      <find>production</find>
+      <find>product</find>
+      <find>$lightUsine</find>
+      <find>light</find>
+      <find>boolean</find>
+      <find>$spaceShip</find>
+      <find>metro</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -146,30 +148,30 @@
         <option value="$PROJECT_DIR$/src/Controller/Connected/ProductionController.php" />
         <option value="$PROJECT_DIR$/src/Controller/Connected/BuildingController.php" />
         <option value="$PROJECT_DIR$/assets/scss/front/building.scss" />
-        <option value="$PROJECT_DIR$/src/Entity/Xuilding_SkyRadar.php" />
-        <option value="$PROJECT_DIR$/src/Entity/Xuilding_SkyBrouilleur.php" />
         <option value="$PROJECT_DIR$/src/Entity/Xuilding_Search.php" />
         <option value="$PROJECT_DIR$/src/Entity/Xuilding_Radar.php" />
-        <option value="$PROJECT_DIR$/src/Entity/Xuilding_LightUsine.php" />
         <option value="$PROJECT_DIR$/src/Controller/Security/SecurityController.php" />
         <option value="$PROJECT_DIR$/src/Entity/Xuilding_Caserne.php" />
-        <option value="$PROJECT_DIR$/src/Entity/Xuilding_HeavyUsine.php" />
         <option value="$PROJECT_DIR$/templates/menu/_right_planet.html.twig" />
         <option value="$PROJECT_DIR$/translations/front_menu.fr.yml" />
-        <option value="$PROJECT_DIR$/src/Controller/Connected/SpaceShipyardController.php" />
         <option value="$PROJECT_DIR$/translations/front_map.fr.yml" />
         <option value="$PROJECT_DIR$/assets/scss/front/galaxy.scss" />
         <option value="$PROJECT_DIR$/translations/front_building.fr.yml" />
         <option value="$PROJECT_DIR$/templates/connected/map.html.twig" />
         <option value="$PROJECT_DIR$/src/Entity/Xuilding_City.php" />
-        <option value="$PROJECT_DIR$/src/Entity/Xuilding_SpaceShipyard.php" />
         <option value="$PROJECT_DIR$/src/Entity/Xuilding_Metropole.php" />
         <option value="$PROJECT_DIR$/src/Entity/Building.php" />
         <option value="$PROJECT_DIR$/src/Controller/Security/ServerController.php" />
-        <option value="$PROJECT_DIR$/templates/connected/building.html.twig" />
-        <option value="$PROJECT_DIR$/assets/global.scss" />
-        <option value="$PROJECT_DIR$/templates/menu/_top_ressource.html.twig" />
         <option value="$PROJECT_DIR$/templates/menu/_left_menu.html.twig" />
+        <option value="$PROJECT_DIR$/src/Entity/Xuilding_SkyBrouilleur.php" />
+        <option value="$PROJECT_DIR$/src/Entity/Xuilding_SkyRadar.php" />
+        <option value="$PROJECT_DIR$/src/Entity/Xuilding_SpaceShipyard.php" />
+        <option value="$PROJECT_DIR$/templates/menu/_top_ressource.html.twig" />
+        <option value="$PROJECT_DIR$/assets/global.scss" />
+        <option value="$PROJECT_DIR$/src/Entity/Xuilding_HeavyUsine.php" />
+        <option value="$PROJECT_DIR$/src/Entity/Xuilding_LightUsine.php" />
+        <option value="$PROJECT_DIR$/src/Controller/Connected/SpaceShipyardController.php" />
+        <option value="$PROJECT_DIR$/templates/connected/building.html.twig" />
       </list>
     </option>
   </component>
@@ -341,7 +343,43 @@
             <path>
               <item name="Area" type="b2602c69:ProjectViewProjectNode" />
               <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Connected" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Entity" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Migrations" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="connected" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="Area" type="b2602c69:ProjectViewProjectNode" />
@@ -417,12 +455,12 @@
       <workItem from="1523430258006" duration="33957000" />
       <workItem from="1523711701169" duration="77125000" />
       <workItem from="1523954087414" duration="23861000" />
-      <workItem from="1524041808030" duration="71764000" />
+      <workItem from="1524041808030" duration="75040000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="309425000" />
+    <option name="totallyTimeSpent" value="312701000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -683,14 +721,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Xuilding_LightUsine.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="43" column="24" lean-forward="false" selection-start-line="43" selection-start-column="24" selection-end-line="43" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Security/SecurityController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-68">
@@ -787,38 +817,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Xuilding_HeavyUsine.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="38" column="29" lean-forward="false" selection-start-line="38" selection-start-column="29" selection-end-line="38" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Xuilding_SpaceShipyard.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="38" column="29" lean-forward="false" selection-start-line="38" selection-start-column="29" selection-end-line="38" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Xuilding_SkyRadar.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="38" column="24" lean-forward="false" selection-start-line="38" selection-start-column="24" selection-end-line="38" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Xuilding_SkyBrouilleur.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="38" column="24" lean-forward="false" selection-start-line="38" selection-start-column="24" selection-end-line="38" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/Xuilding_Search.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="333">
@@ -831,14 +829,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="498">
           <caret line="38" column="24" lean-forward="false" selection-start-line="38" selection-start-column="24" selection-end-line="38" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Xuilding_Metropole.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="58" column="26" lean-forward="false" selection-start-line="58" selection-start-column="26" selection-end-line="58" selection-end-column="26" />
           <folding />
         </state>
       </provider>
@@ -869,42 +859,90 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/connected/building.html.twig">
+    <entry file="file://$PROJECT_DIR$/templates/menu/_left_menu.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="107" column="251" lean-forward="false" selection-start-line="107" selection-start-column="251" selection-end-line="107" selection-end-column="251" />
+        <state relative-caret-position="156">
+          <caret line="12" column="94" lean-forward="false" selection-start-line="12" selection-start-column="94" selection-end-line="12" selection-end-column="94" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/SpaceShipyardController.php">
+    <entry file="file://$PROJECT_DIR$/src/Entity/Xuilding_Metropole.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1365">
-          <caret line="94" column="46" lean-forward="false" selection-start-line="94" selection-start-column="46" selection-end-line="94" selection-end-column="46" />
+        <state relative-caret-position="396">
+          <caret line="58" column="26" lean-forward="false" selection-start-line="58" selection-start-column="26" selection-end-line="58" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/global.scss">
+    <entry file="file://$PROJECT_DIR$/src/Entity/Xuilding_SkyBrouilleur.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="11" lean-forward="false" selection-start-line="30" selection-start-column="1" selection-end-line="30" selection-end-column="11" />
+        <state relative-caret-position="218">
+          <caret line="149" column="5" lean-forward="false" selection-start-line="149" selection-start-column="5" selection-end-line="149" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Xuilding_SkyRadar.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="149" column="5" lean-forward="false" selection-start-line="149" selection-start-column="5" selection-end-line="149" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Xuilding_SpaceShipyard.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="159" column="5" lean-forward="false" selection-start-line="159" selection-start-column="5" selection-end-line="159" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/menu/_top_ressource.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="28" lean-forward="false" selection-start-line="10" selection-start-column="28" selection-end-line="10" selection-end-column="28" />
+        <state relative-caret-position="30">
+          <caret line="2" column="19" lean-forward="false" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/menu/_left_menu.html.twig">
+    <entry file="file://$PROJECT_DIR$/assets/global.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="12" column="94" lean-forward="false" selection-start-line="12" selection-start-column="94" selection-end-line="12" selection-end-column="94" />
+        <state relative-caret-position="495">
+          <caret line="33" column="28" lean-forward="false" selection-start-line="33" selection-start-column="28" selection-end-line="33" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Xuilding_LightUsine.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1716">
+          <caret line="132" column="36" lean-forward="false" selection-start-line="132" selection-start-column="36" selection-end-line="132" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Xuilding_HeavyUsine.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="39" column="0" lean-forward="false" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/SpaceShipyardController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="879">
+          <caret line="335" column="33" lean-forward="false" selection-start-line="335" selection-start-column="33" selection-end-line="335" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/connected/building.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="104" column="272" lean-forward="false" selection-start-line="104" selection-start-column="272" selection-end-line="104" selection-end-column="272" />
           <folding />
         </state>
       </provider>

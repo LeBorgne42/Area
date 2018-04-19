@@ -34,14 +34,9 @@ class Xuilding_HeavyUsine
     protected $water = 19000;
 
     /**
-     * @ORM\Column(name="production",type="decimal", precision=9, scale=5)
+     * @ORM\Column(name="level",type="boolean")
      */
-    protected $production = 1;
-
-    /**
-     * @ORM\Column(name="level",type="integer")
-     */
-    protected $level = 0;
+    protected $level = false;
 
     /**
      * @ORM\Column(name="finishAt",type="datetime", nullable=true)
@@ -152,22 +147,6 @@ class Xuilding_HeavyUsine
     public function setConstructTime($constructTime): void
     {
         $this->constructTime = $constructTime;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getProduction()
-    {
-        return $this->production;
-    }
-
-    /**
-     * @param mixed $production
-     */
-    public function setProduction($production): void
-    {
-        $this->production = $production;
     }
 
     /**

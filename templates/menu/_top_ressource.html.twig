@@ -1,6 +1,6 @@
 {% trans_default_domain 'front_menu' %}
 
-<div class="navbar navbar-dark bg-top">
+<div class="navbar navbar-ressource navbar-dark bg-top">
     <span class="ressource niobium" data-toggle="tooltip" data-placement="bottom" title="{{ 'niobium'|trans }}"><span class="reload">{{ usePlanet.getNiobium() }}</span>  <img src="{{ asset('img/niobium.png') }}"></span>
     <span class="ressource water" data-toggle="tooltip" data-placement="bottom" title="{{ 'water'|trans }}"><span class="reload">{{ usePlanet.getWater() }}</span>  <img src="{{ asset('img/water.png') }}"></span>
     <span class="ressource bitcoin" data-toggle="tooltip" data-placement="bottom" title="{{ 'coin'|trans }}"><span class="reload">{{ app.user.getBitcoin() }}</span> <img src="{{ asset('img/coin.png') }}"></span>
