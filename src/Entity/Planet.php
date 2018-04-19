@@ -42,27 +42,32 @@ class Planet
     protected $water = 750;
 
     /**
-     * @ORM\OneToOne(targetEntity="Building", mappedBy="planet", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Building", inversedBy="planet", fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="building_id", referencedColumnName="id")
      */
     protected $building;
 
     /**
-     * @ORM\OneToOne(targetEntity="Orbite", mappedBy="planet", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Orbite", inversedBy="planet", fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="orbite_id", referencedColumnName="id")
      */
     protected $orbite;
 
     /**
-     * @ORM\OneToOne(targetEntity="Soldier", mappedBy="planet", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Soldier", inversedBy="planet", fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="soldier_id", referencedColumnName="id")
      */
     protected $soldier;
 
     /**
-     * @ORM\OneToOne(targetEntity="Worker", mappedBy="planet", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Worker", inversedBy="planet", fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="worker_id", referencedColumnName="id")
      */
     protected $worker;
 
     /**
-     * @ORM\OneToOne(targetEntity="Scientist", mappedBy="planet", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Scientist", inversedBy="planet", fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="scientist_id", referencedColumnName="id")
      */
     protected $scientist;
 

@@ -19,14 +19,12 @@ class Scientist
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="Planet", inversedBy="scientist", fetch="EXTRA_LAZY")
-     * @ORM\JoinColumn(name="planet_id", referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="Planet", mappedBy="scientist", fetch="EXTRA_LAZY", cascade={"persist"})
      */
     protected $planet;
 
     /**
-     * @ORM\OneToOne(targetEntity="Fleet", inversedBy="scientist", fetch="EXTRA_LAZY")
-     * @ORM\JoinColumn(name="fleet_id", referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="Fleet", mappedBy="scientist", fetch="EXTRA_LAZY", cascade={"persist"})
      */
     protected $fleet;
 

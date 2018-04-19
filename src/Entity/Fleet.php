@@ -19,17 +19,20 @@ class Fleet
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="Soldier", mappedBy="fleet", fetch="EXTRA_LAZY")
+     * @ORM\OneToOne(targetEntity="Soldier", inversedBy="fleet", fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="soldier_id", referencedColumnName="id")
      */
     protected $soldier;
 
     /**
-     * @ORM\OneToOne(targetEntity="Worker", mappedBy="fleet", fetch="EXTRA_LAZY")
+     * @ORM\OneToOne(targetEntity="Worker", inversedBy="fleet", fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="worker_id", referencedColumnName="id")
      */
     protected $worker;
 
     /**
-     * @ORM\OneToOne(targetEntity="Scientist", mappedBy="fleet", fetch="EXTRA_LAZY")
+     * @ORM\OneToOne(targetEntity="Scientist", inversedBy="fleet", fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="scientist_id", referencedColumnName="id")
      */
     protected $scientist;
 

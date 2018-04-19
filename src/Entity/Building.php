@@ -19,8 +19,7 @@ class Building
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="Planet", inversedBy="building", fetch="EXTRA_LAZY")
-     * @ORM\JoinColumn(name="planet_id", referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="Planet", mappedBy="building", fetch="EXTRA_LAZY", cascade={"persist"})
      */
     protected $planet;
 

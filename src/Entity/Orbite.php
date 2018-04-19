@@ -19,8 +19,7 @@ class Orbite
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="Planet", inversedBy="orbite", fetch="EXTRA_LAZY")
-     * @ORM\JoinColumn(name="planet_id", referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="Planet", mappedBy="orbite", fetch="EXTRA_LAZY", cascade={"persist"})
      */
     protected $planet;
 

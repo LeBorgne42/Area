@@ -160,7 +160,7 @@ class SecurityController extends Controller
                 ->setMaxResults(1)
                 ->getOneOrNullResult();
 
-            return $this->redirectToRoute('overview', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('overview', array('idp' => $usePlanet->getId(), 'usePlanet' => $usePlanet));
         }
 
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -210,7 +210,7 @@ class SecurityController extends Controller
             $em->persist($user);
             $em->flush();
 
-            return $this->redirectToRoute('overview', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('overview', array('idp' => $usePlanet->getId(), 'usePlanet' => $usePlanet));
         }
         if ($this->getUser()->getRoles()[0] == 'ROLE_ADMIN') {
             return $this->redirectToRoute('easyadmin');
