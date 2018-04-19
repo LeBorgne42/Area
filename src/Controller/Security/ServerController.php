@@ -20,6 +20,8 @@ use App\Entity\Xuilding_SkyRadar;
 use App\Entity\Xuilding_Search;
 use App\Entity\Xuilding_SkyBrouilleur;
 use App\Entity\Xuilding_SpaceShipyard;
+use App\Entity\Xuilding_Metropole;
+use App\Entity\Xuilding_City;
 use App\Entity\Soldier;
 use App\Entity\Worker;
 use App\Entity\Scientist;
@@ -73,6 +75,8 @@ class ServerController extends Controller
                     $caserne = new Xuilding_Caserne();
                     $heavy = new Xuilding_HeavyUsine();
                     $light = new Xuilding_LightUsine();
+                    $metropole = new Xuilding_Metropole();
+                    $city = new Xuilding_City();
 
                     $building->setMiner($miner);
                     $building->setExtractor($extractor);
@@ -84,6 +88,8 @@ class ServerController extends Controller
                     $building->setCaserne($caserne);
                     $building->setHeavyUsine($heavy);
                     $building->setLightUsine($light);
+                    $building->setMetropole($metropole);
+                    $building->setCity($city);
                     $soldier->setPlanet($planet);
                     $worker->setPlanet($planet);
                     $scientist->setPlanet($planet);
@@ -104,6 +110,8 @@ class ServerController extends Controller
                     $em->persist($caserne);
                     $em->persist($heavy);
                     $em->persist($light);
+                    $em->persist($metropole);
+                    $em->persist($city);
                     $em->persist($miner);
                     $em->persist($extractor);
                     $em->persist($soldier);

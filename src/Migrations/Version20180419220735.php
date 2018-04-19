@@ -8,7 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20180419185036 extends AbstractMigration
+class Version20180419220735 extends AbstractMigration
 {
     public function up(Schema $schema)
     {
@@ -32,15 +32,17 @@ class Version20180419185036 extends AbstractMigration
         $this->addSql('CREATE TABLE sector (id INT AUTO_INCREMENT NOT NULL, galaxy_id INT DEFAULT NULL, position INT NOT NULL, INDEX IDX_4BA3D9E8B61FAB2 (galaxy_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE proposal (id INT AUTO_INCREMENT NOT NULL, ally_id INT DEFAULT NULL, user_id INT DEFAULT NULL, proposalAt DATETIME NOT NULL, INDEX IDX_BFE594721C6E3E76 (ally_id), INDEX IDX_BFE59472A76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE scientist (id INT AUTO_INCREMENT NOT NULL, amount BIGINT NOT NULL, life INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE building (id INT AUTO_INCREMENT NOT NULL, miner_id INT DEFAULT NULL, extractor_id INT DEFAULT NULL, caserne_id INT DEFAULT NULL, radar_id INT DEFAULT NULL, spaceShip_id INT DEFAULT NULL, buildSearch_id INT DEFAULT NULL, skyRadar_id INT DEFAULT NULL, skyBrouilleur_id INT DEFAULT NULL, lightUsine_id INT DEFAULT NULL, heavyUsine_id INT DEFAULT NULL, UNIQUE INDEX UNIQ_E16F61D4BF88117 (miner_id), UNIQUE INDEX UNIQ_E16F61D4DBCA8D53 (extractor_id), UNIQUE INDEX UNIQ_E16F61D485646CF7 (spaceShip_id), UNIQUE INDEX UNIQ_E16F61D42D15FD1C (buildSearch_id), UNIQUE INDEX UNIQ_E16F61D49C03C926 (caserne_id), UNIQUE INDEX UNIQ_E16F61D4C9976951 (radar_id), UNIQUE INDEX UNIQ_E16F61D42C83DB79 (skyRadar_id), UNIQUE INDEX UNIQ_E16F61D4EA5D5F6 (skyBrouilleur_id), UNIQUE INDEX UNIQ_E16F61D464119DE1 (lightUsine_id), UNIQUE INDEX UNIQ_E16F61D4813F26B9 (heavyUsine_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE building (id INT AUTO_INCREMENT NOT NULL, miner_id INT DEFAULT NULL, extractor_id INT DEFAULT NULL, metropole_id INT DEFAULT NULL, city_id INT DEFAULT NULL, caserne_id INT DEFAULT NULL, radar_id INT DEFAULT NULL, spaceShip_id INT DEFAULT NULL, buildSearch_id INT DEFAULT NULL, skyRadar_id INT DEFAULT NULL, skyBrouilleur_id INT DEFAULT NULL, lightUsine_id INT DEFAULT NULL, heavyUsine_id INT DEFAULT NULL, UNIQUE INDEX UNIQ_E16F61D4BF88117 (miner_id), UNIQUE INDEX UNIQ_E16F61D4DBCA8D53 (extractor_id), UNIQUE INDEX UNIQ_E16F61D485646CF7 (spaceShip_id), UNIQUE INDEX UNIQ_E16F61D42D15FD1C (buildSearch_id), UNIQUE INDEX UNIQ_E16F61D4186701AE (metropole_id), UNIQUE INDEX UNIQ_E16F61D48BAC62AF (city_id), UNIQUE INDEX UNIQ_E16F61D49C03C926 (caserne_id), UNIQUE INDEX UNIQ_E16F61D4C9976951 (radar_id), UNIQUE INDEX UNIQ_E16F61D42C83DB79 (skyRadar_id), UNIQUE INDEX UNIQ_E16F61D4EA5D5F6 (skyBrouilleur_id), UNIQUE INDEX UNIQ_E16F61D464119DE1 (lightUsine_id), UNIQUE INDEX UNIQ_E16F61D4813F26B9 (heavyUsine_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE worker (id INT AUTO_INCREMENT NOT NULL, amount NUMERIC(28, 5) NOT NULL, life INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE skyBrouilleur (id INT AUTO_INCREMENT NOT NULL, niobium INT NOT NULL, water INT NOT NULL, level INT NOT NULL, finishAt DATETIME DEFAULT NULL, constructTime BIGINT NOT NULL, sky INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE radar (id INT AUTO_INCREMENT NOT NULL, niobium INT NOT NULL, water INT NOT NULL, level INT NOT NULL, finishAt DATETIME DEFAULT NULL, constructTime BIGINT NOT NULL, ground INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE rank (id INT AUTO_INCREMENT NOT NULL, point BIGINT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE caserne (id INT AUTO_INCREMENT NOT NULL, niobium INT NOT NULL, water INT NOT NULL, production NUMERIC(9, 5) NOT NULL, level INT NOT NULL, finishAt DATETIME DEFAULT NULL, constructTime BIGINT NOT NULL, ground INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE pna (id INT AUTO_INCREMENT NOT NULL, ally_id INT DEFAULT NULL, allyTag VARCHAR(5) NOT NULL, signedAt DATETIME NOT NULL, accepted TINYINT(1) NOT NULL, INDEX IDX_6A7BA6A51C6E3E76 (ally_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE metropole (id INT AUTO_INCREMENT NOT NULL, niobium INT NOT NULL, water INT NOT NULL, production NUMERIC(9, 5) NOT NULL, level INT NOT NULL, finishAt DATETIME DEFAULT NULL, constructTime BIGINT NOT NULL, ground INT NOT NULL, sky INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE spaceShip (id INT AUTO_INCREMENT NOT NULL, niobium INT NOT NULL, water INT NOT NULL, production NUMERIC(9, 5) NOT NULL, level INT NOT NULL, finishAt DATETIME DEFAULT NULL, constructTime BIGINT NOT NULL, ground INT NOT NULL, sky INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE app_admins (id INT AUTO_INCREMENT NOT NULL, username VARCHAR(20) NOT NULL, email VARCHAR(40) NOT NULL, password VARCHAR(64) NOT NULL, created_at DATETIME NOT NULL, UNIQUE INDEX UNIQ_47E3788FF85E0677 (username), UNIQUE INDEX UNIQ_47E3788FE7927C74 (email), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE city (id INT AUTO_INCREMENT NOT NULL, niobium INT NOT NULL, water INT NOT NULL, production NUMERIC(9, 5) NOT NULL, level INT NOT NULL, finishAt DATETIME DEFAULT NULL, constructTime BIGINT NOT NULL, ground INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE x_miner (id INT AUTO_INCREMENT NOT NULL, niobium INT NOT NULL, water INT NOT NULL, production NUMERIC(9, 5) NOT NULL, level INT NOT NULL, finishAt DATETIME DEFAULT NULL, constructTime BIGINT NOT NULL, ground INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE skyRadar (id INT AUTO_INCREMENT NOT NULL, niobium INT NOT NULL, water INT NOT NULL, level INT NOT NULL, finishAt DATETIME DEFAULT NULL, constructTime BIGINT NOT NULL, sky INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('ALTER TABLE war ADD CONSTRAINT FK_6C12ED311C6E3E76 FOREIGN KEY (ally_id) REFERENCES ally (id)');
@@ -66,6 +68,8 @@ class Version20180419185036 extends AbstractMigration
         $this->addSql('ALTER TABLE building ADD CONSTRAINT FK_E16F61D4DBCA8D53 FOREIGN KEY (extractor_id) REFERENCES x_extractor (id)');
         $this->addSql('ALTER TABLE building ADD CONSTRAINT FK_E16F61D485646CF7 FOREIGN KEY (spaceShip_id) REFERENCES spaceShip (id)');
         $this->addSql('ALTER TABLE building ADD CONSTRAINT FK_E16F61D42D15FD1C FOREIGN KEY (buildSearch_id) REFERENCES buildSearch (id)');
+        $this->addSql('ALTER TABLE building ADD CONSTRAINT FK_E16F61D4186701AE FOREIGN KEY (metropole_id) REFERENCES metropole (id)');
+        $this->addSql('ALTER TABLE building ADD CONSTRAINT FK_E16F61D48BAC62AF FOREIGN KEY (city_id) REFERENCES city (id)');
         $this->addSql('ALTER TABLE building ADD CONSTRAINT FK_E16F61D49C03C926 FOREIGN KEY (caserne_id) REFERENCES caserne (id)');
         $this->addSql('ALTER TABLE building ADD CONSTRAINT FK_E16F61D4C9976951 FOREIGN KEY (radar_id) REFERENCES radar (id)');
         $this->addSql('ALTER TABLE building ADD CONSTRAINT FK_E16F61D42C83DB79 FOREIGN KEY (skyRadar_id) REFERENCES skyRadar (id)');
@@ -107,7 +111,9 @@ class Version20180419185036 extends AbstractMigration
         $this->addSql('ALTER TABLE building DROP FOREIGN KEY FK_E16F61D4C9976951');
         $this->addSql('ALTER TABLE app_users DROP FOREIGN KEY FK_C25028247616678F');
         $this->addSql('ALTER TABLE building DROP FOREIGN KEY FK_E16F61D49C03C926');
+        $this->addSql('ALTER TABLE building DROP FOREIGN KEY FK_E16F61D4186701AE');
         $this->addSql('ALTER TABLE building DROP FOREIGN KEY FK_E16F61D485646CF7');
+        $this->addSql('ALTER TABLE building DROP FOREIGN KEY FK_E16F61D48BAC62AF');
         $this->addSql('ALTER TABLE building DROP FOREIGN KEY FK_E16F61D4BF88117');
         $this->addSql('ALTER TABLE building DROP FOREIGN KEY FK_E16F61D42C83DB79');
         $this->addSql('DROP TABLE war');
@@ -134,8 +140,10 @@ class Version20180419185036 extends AbstractMigration
         $this->addSql('DROP TABLE rank');
         $this->addSql('DROP TABLE caserne');
         $this->addSql('DROP TABLE pna');
+        $this->addSql('DROP TABLE metropole');
         $this->addSql('DROP TABLE spaceShip');
         $this->addSql('DROP TABLE app_admins');
+        $this->addSql('DROP TABLE city');
         $this->addSql('DROP TABLE x_miner');
         $this->addSql('DROP TABLE skyRadar');
     }

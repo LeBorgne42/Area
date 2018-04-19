@@ -6,10 +6,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="spaceShip")
+ * @ORM\Table(name="metropole")
  * @ORM\Entity
  */
-class Xuilding_SpaceShipyard
+class Xuilding_Metropole
 {
     /**
      * @ORM\Column(type="integer")
@@ -19,24 +19,24 @@ class Xuilding_SpaceShipyard
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="Building", mappedBy="spaceShip", fetch="EXTRA_LAZY")
+     * @ORM\OneToOne(targetEntity="Building", mappedBy="metropole", fetch="EXTRA_LAZY")
      */
     protected $building;
 
     /**
      * @ORM\Column(name="niobium",type="integer")
      */
-    protected $niobium = 3000;
+    protected $niobium = 50000;
 
     /**
      * @ORM\Column(name="water",type="integer")
      */
-    protected $water = 2000;
+    protected $water = 30000;
 
     /**
      * @ORM\Column(name="production",type="decimal", precision=9, scale=5)
      */
-    protected $production = 1;
+    protected $production = 0.116;
 
     /**
      * @ORM\Column(name="level",type="integer")
@@ -51,17 +51,17 @@ class Xuilding_SpaceShipyard
     /**
      * @ORM\Column(name="constructTime",type="bigint")
      */
-    protected $constructTime = 900;
+    protected $constructTime = 2073600;
 
     /**
      * @ORM\Column(name="ground",type="integer")
      */
-    protected $ground = 10;
+    protected $ground = 12;
 
     /**
      * @ORM\Column(name="sky",type="integer")
      */
-    protected $sky = 4;
+    protected $sky = 8;
 
     /**
      * @return mixed

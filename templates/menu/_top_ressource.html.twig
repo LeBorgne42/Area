@@ -8,5 +8,5 @@
     <span class="ressource soldier" data-toggle="tooltip" data-placement="bottom" title="{{ 'soldiers'|trans }}"><span class="reload">{{ usePlanet.getSoldier().getAmount() }}</span> <img src="{{ asset('img/soldier.png') }}"></span>
     <span class="ressource scientist" data-toggle="tooltip" data-placement="bottom" title="{{ 'scientists'|trans }}"><span class="reload">{{ usePlanet.getScientist().getAmount() }}</span> <img src="{{ asset('img/scientist.png') }}"></span>
     <a class="top" target="_blank" href="http://area-control.forumactif.com/">{{ 'forum'|trans }}</a>
-    <a class="top" href="{{ path('rank', {'idp': usePlanet.getId()}) }}) }}">{{ 'top'|trans }}</a>
+    <a class="top text-jaune" href="{{ path('rank', {'idp': usePlanet.getId()}) }}">{{ 'top'|trans }}</a>
 </div>

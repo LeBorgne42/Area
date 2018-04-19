@@ -48,6 +48,18 @@ class Building
     protected $buildSearch;
 
     /**
+     * @ORM\OneToOne(targetEntity="Xuilding_Metropole", inversedBy="building", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\JoinColumn(name="metropole_id", referencedColumnName="id")
+     */
+    protected $metropole;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Xuilding_City", inversedBy="building", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\JoinColumn(name="city_id", referencedColumnName="id")
+     */
+    protected $city;
+
+    /**
      * @ORM\OneToOne(targetEntity="Xuilding_Caserne", inversedBy="building", fetch="EXTRA_LAZY", cascade={"persist"})
      * @ORM\JoinColumn(name="caserne_id", referencedColumnName="id")
      */
@@ -257,6 +269,38 @@ class Building
     public function setHeavyUsine($heavyUsine): void
     {
         $this->heavyUsine = $heavyUsine;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMetropole()
+    {
+        return $this->metropole;
+    }
+
+    /**
+     * @param mixed $metropole
+     */
+    public function setMetropole($metropole): void
+    {
+        $this->metropole = $metropole;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * @param mixed $city
+     */
+    public function setCity($city): void
+    {
+        $this->city = $city;
     }
 
     public function getId()

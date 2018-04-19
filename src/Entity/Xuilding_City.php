@@ -6,10 +6,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="spaceShip")
+ * @ORM\Table(name="city")
  * @ORM\Entity
  */
-class Xuilding_SpaceShipyard
+class Xuilding_City
 {
     /**
      * @ORM\Column(type="integer")
@@ -19,24 +19,24 @@ class Xuilding_SpaceShipyard
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="Building", mappedBy="spaceShip", fetch="EXTRA_LAZY")
+     * @ORM\OneToOne(targetEntity="Building", mappedBy="city", fetch="EXTRA_LAZY")
      */
     protected $building;
 
     /**
      * @ORM\Column(name="niobium",type="integer")
      */
-    protected $niobium = 3000;
+    protected $niobium = 10500;
 
     /**
      * @ORM\Column(name="water",type="integer")
      */
-    protected $water = 2000;
+    protected $water = 8680;
 
     /**
      * @ORM\Column(name="production",type="decimal", precision=9, scale=5)
      */
-    protected $production = 1;
+    protected $production = 0.025;
 
     /**
      * @ORM\Column(name="level",type="integer")
@@ -51,17 +51,12 @@ class Xuilding_SpaceShipyard
     /**
      * @ORM\Column(name="constructTime",type="bigint")
      */
-    protected $constructTime = 900;
+    protected $constructTime = 432000;
 
     /**
      * @ORM\Column(name="ground",type="integer")
      */
-    protected $ground = 10;
-
-    /**
-     * @ORM\Column(name="sky",type="integer")
-     */
-    protected $sky = 4;
+    protected $ground = 6;
 
     /**
      * @return mixed
@@ -189,22 +184,6 @@ class Xuilding_SpaceShipyard
     public function setGround($ground): void
     {
         $this->ground = $ground;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getSky()
-    {
-        return $this->sky;
-    }
-
-    /**
-     * @param mixed $sky
-     */
-    public function setSky($sky): void
-    {
-        $this->sky = $sky;
     }
 
     public function getId()
