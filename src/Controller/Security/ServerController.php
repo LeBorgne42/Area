@@ -159,6 +159,26 @@ class ServerController extends Controller
             $em->flush();
         }
 
+        $buildings = $em->getRepository('App:Building')
+            ->createQueryBuilder('bu')
+            ->getQuery()
+            ->getResult();
+
+        foreach ($buildings as $building) {
+            $em->remove($building);
+            $em->flush();
+        }
+
+        $planets = $em->getRepository('App:Planet')
+            ->createQueryBuilder('pl')
+            ->getQuery()
+            ->getResult();
+
+        foreach ($planets as $planet) {
+            $em->remove($planet);
+            $em->flush();
+        }
+
         $scientists = $em->getRepository('App:Scientist')
             ->createQueryBuilder('scien')
             ->getQuery()
@@ -186,16 +206,6 @@ class ServerController extends Controller
 
         foreach ($workers as $worker) {
             $em->remove($worker);
-            $em->flush();
-        }
-
-        $planets = $em->getRepository('App:Planet')
-            ->createQueryBuilder('pl')
-            ->getQuery()
-            ->getResult();
-
-        foreach ($planets as $planet) {
-            $em->remove($planet);
             $em->flush();
         }
 
