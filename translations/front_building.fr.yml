@@ -2,6 +2,20 @@ title: Batiment
 building.infos: Infrastructure
 building.construct: Construire
 building.mining: 'Mine de niobium'
-building.build: 'Construire'
-building.demolish: 'Detruire'
+building.build: Construire
+building.demolish: Detruire
 building.extract: 'Extracteur d''eau'
+building.titleRessource: 'Production de ressources'
+building.titleShip: 'Infrastructure militaire'
+building.titleEco: 'Infrastructure économique'
+building.titleSpy: 'Service de renseignement'
+building.search: 'Laboratoire de recherche'
+building.city: 'Grande ville'
+building.metropole: Metropole
+building.caserne: Caserne
+building.chantier: 'Chantier spatial'
+building.light: 'Usine d''armement'
+building.heavy: 'Industrie lourde'
+building.radar: 'Radar au sol'
+building.skyRadar: 'Radar d''espace'
+building.brouilleur: 'Brouilleur de radar'

@@ -46,9 +46,9 @@ class SecurityController extends Controller
             $planet = $em->getRepository('App:Planet')
                         ->createQueryBuilder('p')
                         ->where('p.user is null')
-                        ->andWhere('p.land = :land')
+                        ->andWhere('p.ground = :ground')
                         ->andWhere('p.sky = :sky')
-                        ->setParameters(array('land' => 60, 'sky' => 10))
+                        ->setParameters(array('ground' => 60, 'sky' => 10))
                         ->setMaxResults(1)
                         ->getQuery()
                         ->getOneOrNullResult();

@@ -12,6 +12,14 @@ use App\Entity\Galaxy;
 use App\Entity\Building;
 use App\Entity\Xuilding_Miner;
 use App\Entity\Xuilding_Extractor;
+use App\Entity\Xuilding_Caserne;
+use App\Entity\Xuilding_HeavyUsine;
+use App\Entity\Xuilding_LightUsine;
+use App\Entity\Xuilding_Radar;
+use App\Entity\Xuilding_SkyRadar;
+use App\Entity\Xuilding_Search;
+use App\Entity\Xuilding_SkyBrouilleur;
+use App\Entity\Xuilding_SpaceShipyard;
 use App\Entity\Soldier;
 use App\Entity\Worker;
 use App\Entity\Scientist;
@@ -57,8 +65,25 @@ class ServerController extends Controller
                     $building = new Building();
                     $miner = new Xuilding_Miner();
                     $extractor = new Xuilding_Extractor();
+                    $spaceShip = new Xuilding_SpaceShipyard();
+                    $SkyBrouilleur = new Xuilding_SkyBrouilleur();
+                    $search = new Xuilding_Search();
+                    $SkyRadar = new Xuilding_SkyRadar();
+                    $radar = new Xuilding_Radar();
+                    $caserne = new Xuilding_Caserne();
+                    $heavy = new Xuilding_HeavyUsine();
+                    $light = new Xuilding_LightUsine();
+
                     $building->setMiner($miner);
                     $building->setExtractor($extractor);
+                    $building->setSpaceShip($spaceShip);
+                    $building->setSkyBrouilleur($SkyBrouilleur);
+                    $building->setbuildSearch($search);
+                    $building->setSkyRadar($SkyRadar);
+                    $building->setRadar($radar);
+                    $building->setCaserne($caserne);
+                    $building->setHeavyUsine($heavy);
+                    $building->setLightUsine($light);
                     $soldier->setPlanet($planet);
                     $worker->setPlanet($planet);
                     $scientist->setPlanet($planet);
@@ -71,6 +96,14 @@ class ServerController extends Controller
                     $planet->setBuilding($building);
 
                     $em->persist($building);
+                    $em->persist($spaceShip);
+                    $em->persist($SkyBrouilleur);
+                    $em->persist($search);
+                    $em->persist($SkyRadar);
+                    $em->persist($radar);
+                    $em->persist($caserne);
+                    $em->persist($heavy);
+                    $em->persist($light);
                     $em->persist($miner);
                     $em->persist($extractor);
                     $em->persist($soldier);
@@ -83,17 +116,17 @@ class ServerController extends Controller
                     $planet->setPosition($nbrPlanet);
                     if (($nbrSector >= 1 && $nbrSector <= 9) || ($nbrSector >= 92 && $nbrSector <= 99) || ($nbrSector % 10 == 0 && $nbrSector % 10 == 1)) {
                         if ($nbrPlanet == 4 || $nbrPlanet == 6 || $nbrPlanet == 15 || $nbrPlanet == 17 || $nbrPlanet == 25) {
-                            $planet->setLand(60);
+                            $planet->setGround(60);
                             $planet->setSky(10);
                         } else {
-                            $planet->setLand(rand(75, 95));
+                            $planet->setGround(rand(75, 95));
                             $planet->setSky(rand(4, 15));
                         }
                     } elseif ($nbrSector == 55 || $nbrSector == 56 || $nbrSector == 65 || $nbrSector == 66) {
-                        $planet->setLand(rand(120, 160));
+                        $planet->setGround(rand(120, 160));
                         $planet->setSky(rand(3, 20));
                     } else {
-                        $planet->setLand(rand(85, 125));
+                        $planet->setGround(rand(85, 125));
                         $planet->setSky(rand(6, 30));
                     }
                 }
