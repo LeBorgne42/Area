@@ -1,12 +1,12 @@
 {% trans_default_domain 'front_menu' %}
 
 <div class="navbar navbar-dark bg-top">
-    <span class="ressource niobium" data-toggle="tooltip" data-placement="top" title="{{ 'niobium'|trans }}"><span class="reload">{{ usePlanet.getNiobium() }}</span>  <img src="{{ asset('img/niobium.png') }}"></span>
-    <span class="ressource water" data-toggle="tooltip" data-placement="top" title="{{ 'water'|trans }}"><span class="reload">{{ usePlanet.getWater() }}</span>  <img src="{{ asset('img/water.png') }}"></span>
-    <span class="ressource bitcoin" data-toggle="tooltip" data-placement="top" title="{{ 'coin'|trans }}"><span class="reload">{{ app.user.getBitcoin() }}</span> <img src="{{ asset('img/coin.png') }}"></span>
-    <span class="ressource worker" data-toggle="tooltip" data-placement="top" title="{{ 'coin'|trans }}"><span class="reload">{{ usePlanet.getWorker().getAmount() }}</span> <img src="{{ asset('img/worker.png') }}"></span>
-    <span class="ressource soldier" data-toggle="tooltip" data-placement="top" title="{{ 'coin'|trans }}"><span class="reload">{{ usePlanet.getSoldier().getAmount() }}</span> <img src="{{ asset('img/soldier.png') }}"></span>
-    <span class="ressource scientist" data-toggle="tooltip" data-placement="top" title="{{ 'coin'|trans }}"><span class="reload">{{ usePlanet.getScientist().getAmount() }}</span> <img src="{{ asset('img/scientist.png') }}"></span>
+    <span class="ressource niobium" data-toggle="tooltip" data-placement="bottom" title="{{ 'niobium'|trans }}"><span class="reload">{{ usePlanet.getNiobium() }}</span>  <img src="{{ asset('img/niobium.png') }}"></span>
+    <span class="ressource water" data-toggle="tooltip" data-placement="bottom" title="{{ 'water'|trans }}"><span class="reload">{{ usePlanet.getWater() }}</span>  <img src="{{ asset('img/water.png') }}"></span>
+    <span class="ressource bitcoin" data-toggle="tooltip" data-placement="bottom" title="{{ 'coin'|trans }}"><span class="reload">{{ app.user.getBitcoin() }}</span> <img src="{{ asset('img/coin.png') }}"></span>
+    <span class="ressource worker" data-toggle="tooltip" data-placement="bottom" title="{{ 'workers'|trans }}"><span class="reload">{{ usePlanet.getWorker().getAmount() }}</span> <img src="{{ asset('img/worker.png') }}"></span>
+    <span class="ressource soldier" data-toggle="tooltip" data-placement="bottom" title="{{ 'soldiers'|trans }}"><span class="reload">{{ usePlanet.getSoldier().getAmount() }}</span> <img src="{{ asset('img/soldier.png') }}"></span>
+    <span class="ressource scientist" data-toggle="tooltip" data-placement="bottom" title="{{ 'scientists'|trans }}"><span class="reload">{{ usePlanet.getScientist().getAmount() }}</span> <img src="{{ asset('img/scientist.png') }}"></span>
     <a class="top" target="_blank" href="http://area-control.forumactif.com/">{{ 'forum'|trans }}</a>
     <a class="top" href="{{ path('rank', {'idp': usePlanet.getId()}) }}) }}">{{ 'top'|trans }}</a>
 </div>

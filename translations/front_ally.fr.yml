@@ -41,7 +41,7 @@ ally.canRecruit: Recruter
 ally.gradeName: 'Nom du grade'
 ally.canPeace: Pacte/Pna
 ally.canKick: Exclure
-ally.canWar: 'Guerre'
+ally.canWar: Guerre
 ally.pacts: Pactes
 ally.alliedName: 'Alliance alliée'
 ally.cancelPact: 'Rompre traité'
@@ -62,4 +62,4 @@ ally.acceptCancel: Accepter/Refuser
 ally.acceptPact: Accepter
 ally.refusePact: Refuser
 ally.refuseCancelPact: Annuler
-ally.priority: 'Priorité'
+ally.priority: Priorité

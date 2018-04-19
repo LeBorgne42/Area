@@ -77,7 +77,7 @@ class ServerController extends Controller
                     $em->persist($scientist);
                     $em->persist($worker);
 
-                    $planet->setName('inhabitée');
+                    $planet->setName('Inhabitée');
                     $planet->setImageName($image[rand(0, 4)]);
                     $planet->setSector($sector);
                     $planet->setPosition($nbrPlanet);
@@ -116,8 +116,48 @@ class ServerController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
+        $allys = $em->getRepository('App:Ally')
+            ->createQueryBuilder('al')
+            ->getQuery()
+            ->getResult();
+
+        foreach ($allys as $ally) {
+            $em->remove($ally);
+            $em->flush();
+        }
+
+        $scientists = $em->getRepository('App:Scientist')
+            ->createQueryBuilder('scien')
+            ->getQuery()
+            ->getResult();
+
+        foreach ($scientists as $scientist) {
+            $em->remove($scientist);
+            $em->flush();
+        }
+
+        $soldiers = $em->getRepository('App:Soldier')
+            ->createQueryBuilder('sol')
+            ->getQuery()
+            ->getResult();
+
+        foreach ($soldiers as $soldier) {
+            $em->remove($soldier);
+            $em->flush();
+        }
+
+        $workers = $em->getRepository('App:Worker')
+            ->createQueryBuilder('wor')
+            ->getQuery()
+            ->getResult();
+
+        foreach ($workers as $worker) {
+            $em->remove($worker);
+            $em->flush();
+        }
+
         $planets = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
+            ->createQueryBuilder('pl')
             ->getQuery()
             ->getResult();
 
@@ -127,7 +167,7 @@ class ServerController extends Controller
         }
 
         $sectors = $em->getRepository('App:Sector')
-            ->createQueryBuilder('s')
+            ->createQueryBuilder('sec')
             ->getQuery()
             ->getResult();
 
@@ -137,7 +177,7 @@ class ServerController extends Controller
         }
 
         $galaxys = $em->getRepository('App:Galaxy')
-            ->createQueryBuilder('g')
+            ->createQueryBuilder('gal')
             ->getQuery()
             ->getResult();
 

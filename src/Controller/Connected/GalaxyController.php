@@ -27,12 +27,14 @@ class GalaxyController extends Controller
             ->getQuery()
             ->getOneOrNullResult();
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->setParameter('id', $idp)
+        $sectors = $em->getRepository('App:Sector')
+            ->createQueryBuilder('s')
+            ->join('s.galaxy', 'g')
+            ->where('g.position = :id')
+            ->setParameter('id', $id)
+            ->orderBy('s.position', 'ASC')
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getResult();
 
         return $this->render('connected/galaxy.html.twig', [
             'sectors' => $sectors,
