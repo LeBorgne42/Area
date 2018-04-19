@@ -9,7 +9,7 @@ building.titleRessource: 'Production de ressources'
 building.titleShip: 'Infrastructure militaire'
 building.titleEco: 'Infrastructure économique'
 building.titleSpy: 'Service de renseignement'
-building.search: 'Laboratoire de recherche'
+building.search: 'Centre de recherche'
 building.city: 'Grande ville'
 building.metropole: Metropole
 building.caserne: Caserne
@@ -19,3 +19,7 @@ building.heavy: 'Industrie lourde'
 building.radar: 'Radar au sol'
 building.skyRadar: 'Radar d''espace'
 building.brouilleur: 'Brouilleur de radar'
+niobiumImg: Niobium
+waterImg: Eau
+groundImg: Terrain
+skyImg: Espace

@@ -8,7 +8,7 @@
                 {{ planet.getName() }} : <a href="{{ path('map', {id: planet.getSector().getPosition(), 'idp': usePlanet.getId()}) }}">{{ planet.getSector().getGalaxy.getPosition() }}:{{ planet.getSector().getPosition() }}:{{ planet.getPosition() }}</a>
             </div>
             <div class="mt-2">
-                {{ planet.getGroundPlace() }}/{{ planet.getGround() }} <img src="{{ asset('img/ground.png') }}"> {{ planet.getSkyPlace() }}/{{ planet.getSky() }} <img src="{{ asset('img/sky.png') }}">
+                {{ planet.getGroundPlace() }}/{{ planet.getGround() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"> {{ planet.getSkyPlace() }}/{{ planet.getSky() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'SkyImg'|trans }}" src="{{ asset('img/sky.png') }}">
             </div>
         </div>
     {% endfor %}

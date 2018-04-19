@@ -33,7 +33,8 @@ class SpaceShipyardController extends Controller
         $usePlanetNb = $usePlanet->getNiobium();
         $usePlanetWt = $usePlanet->getWater();
         $newGround = $usePlanet->getGroundPlace() + $spaceShip->getGround();
-        if(($usePlanetNb < $spaceShip->getNiobium() || $usePlanetWt < $spaceShip->getWater()) || ($spaceShip->getFinishAt() > $now || $newGround > $usePlanet->getGround())) {
+        $newSky = $usePlanet->getSkyPlace() + $spaceShip->getSky();
+        if(($usePlanetNb < $spaceShip->getNiobium() || $usePlanetWt < $spaceShip->getWater()) || ($spaceShip->getFinishAt() > $now || $newGround > $usePlanet->getGround()) || $newSky > $usePlanet->getSky()) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $prod = 0.1;
@@ -48,6 +49,7 @@ class SpaceShipyardController extends Controller
         $usePlanet->setNiobium($usePlanetNb - $spaceShip->getNiobium());
         $usePlanet->setWater($usePlanetWt - $spaceShip->getWater());
         $usePlanet->setGroundPlace($newGround);
+        $usePlanet->setSkyPlace($newSky);
         $spaceShip->setNiobium($spaceShip->getNiobium() * $cost);
         $spaceShip->setWater($spaceShip->getWater() * $cost);
         $spaceShip->setProduction($spaceShip->getProduction() + $prod);
@@ -80,6 +82,7 @@ class SpaceShipyardController extends Controller
 
         $spaceShip = $usePlanet->getBuilding()->getSpaceShip();
         $newGround = $usePlanet->getGroundPlace() - $spaceShip->getGround();
+        $newSky = $usePlanet->getSkyPlace() + $spaceShip->getSky();
         if($spaceShip->getLevel() == 0 || $spaceShip->getFinishAt() > $now) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
@@ -103,6 +106,7 @@ class SpaceShipyardController extends Controller
         $usePlanet->setNiobium($usePlanetNb + ($spaceShip->getNiobium() / 1.5));
         $usePlanet->setWater($usePlanetWt + ($spaceShip->getWater() / 1.5));
         $usePlanet->setGroundPlace($newGround);
+        $usePlanet->setSkyPlace($newSky);
         $em->persist($usePlanet);
         $em->persist($spaceShip);
         $em->flush();
