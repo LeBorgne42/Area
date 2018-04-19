@@ -68,7 +68,7 @@ class ServerController extends Controller
                     $planet->setSoldier($soldier);
                     $planet->setWorker($worker);
                     $planet->setScientist($scientist);
-                    $building->setPlanet($planet);
+                    $planet->setBuilding($building);
 
                     $em->persist($building);
                     $em->persist($miner);

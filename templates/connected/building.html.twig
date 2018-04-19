@@ -5,10 +5,28 @@
 {% block title %}{{ 'title'|trans }}{% endblock %}
 
 {% block body %}
-    <div class="row">
-        <div class="offset-1 col-10">
-            <div class="front-block">
-            </div>
-        </div>
+    <div class="front-block-ally">
+        <table class="table table-striped table-bordered table-dark text-center mt-4">
+            <tbody>
+            <tr>
+                <th class="tab-cells-name"><h2>{{ 'building.infos'|trans }}</h2></th>
+                <th class="tab-cells-name"><h2>{{ 'building.construct'|trans }}</h2></th>
+            </tr>
+            <tr>
+                <td class="center-cells"><img class="float-left building-img ml-3" src="{{ asset('img/mining.png') }}">{{ 'building.mining'|trans }} {{ usePlanet.getBuilding().getMiner().getLevel() }}</td>
+                <td class="center-cells">
+                    <a class="btn btn-lg btn-info" href="{{ path('building_add_mine', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
+                    <div class="mt-4"><a class="btn btn-lg btn-danger" href="{{ path('building_remove_mine', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="center-cells"><img class="float-left building-img ml-3" src="{{ asset('img/extract.png') }}">{{ 'building.extract'|trans }} {{ usePlanet.getBuilding().getExtractor().getLevel() }}</td>
+                <td class="center-cells p-4">
+                    <a class="btn btn-lg btn-info" href="{{ path('building_add_extract', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
+                    <div class="mt-4"><a class="btn btn-lg btn-danger" href="{{ path('building_remove_extract', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a></div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 {% endblock %}
