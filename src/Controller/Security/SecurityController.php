@@ -6,13 +6,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\Front\UserRecoveryType;
 use App\Entity\User;
-use App\Entity\Soldier;
-use App\Entity\Worker;
-use App\Entity\Scientist;
 use App\Entity\Rank;
-use App\Entity\Building;
-use App\Entity\Xuilding_Miner;
-use App\Entity\Xuilding_Extractor;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -59,33 +53,9 @@ class SecurityController extends Controller
                         ->getQuery()
                         ->getOneOrNullResult();
             if($planet) {
-                $soldier = new Soldier();
-                $worker = new Worker();
-                $scientist = new Scientist();
-                $building = new Building();
-                $miner = new Xuilding_Miner();
-                $extractor = new Xuilding_Extractor();
-                $building->setMiner($miner);
-                $building->setExtractor($extractor);
-                $soldier->setPlanet($planet);
-                $worker->setPlanet($planet);
-                $scientist->setPlanet($planet);
-                $soldier->setAmount(500);
-                $worker->setAmount(10000);
-                $scientist->setAmount(200);
-                $planet->setSoldier($soldier);
-                $planet->setWorker($worker);
-                $planet->setScientist($scientist);
                 $planet->setUser($user);
                 $planet->setName('Nova Terra');
-                $building->setPlanet($planet);
                 $user->addPlanet($planet);
-                $em->persist($building);
-                $em->persist($miner);
-                $em->persist($extractor);
-                $em->persist($soldier);
-                $em->persist($scientist);
-                $em->persist($worker);
                 $em->persist($planet);
             }
             $rank = new Rank();
@@ -121,7 +91,7 @@ class SecurityController extends Controller
             $this->get('security.token_storage')->setToken($token);
             $request->getSession()->set('main', serialize($token));
 
-            return $this->redirectToRoute('overview');
+            return $this->redirectToRoute('overview', array('idp' => $planet->getId()));
         }
         return $this->render('security/register.html.twig');
     }
@@ -178,8 +148,19 @@ class SecurityController extends Controller
      */
     public function loginAction(Request $request, AuthenticationUtils $authenticationUtils)
     {
-        if ($this->getUser()) {
-            return $this->redirectToRoute('overview');
+        $em = $this->getDoctrine()->getManager();
+
+        if($this->getUser()) {
+            $usePlanet = $em->getRepository('App:Planet')
+                ->createQueryBuilder('p')
+                ->join('p.user', 'u')
+                ->where('u.username = :user')
+                ->setParameters(array('user' => $this->getUser()->getUsername()))
+                ->getQuery()
+                ->setMaxResults(1)
+                ->getOneOrNullResult();
+
+            return $this->redirectToRoute('overview', array('idp' => $usePlanet->getId()));
         }
 
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -216,11 +197,20 @@ class SecurityController extends Controller
             $user = $this->getUser();
             $em = $this->getDoctrine()->getManager();
 
+            $usePlanet = $em->getRepository('App:Planet')
+                ->createQueryBuilder('p')
+                ->join('p.user', 'u')
+                ->where('u.username = :user')
+                ->setParameters(array('user' => $this->getUser()->getUsername()))
+                ->getQuery()
+                ->setMaxResults(1)
+                ->getOneOrNullResult();
+
             $user->setConnected(true);
             $em->persist($user);
             $em->flush();
 
-            return $this->redirectToRoute('overview');
+            return $this->redirectToRoute('overview', array('idp' => $usePlanet->getId()));
         }
         if ($this->getUser()->getRoles()[0] == 'ROLE_ADMIN') {
             return $this->redirectToRoute('easyadmin');

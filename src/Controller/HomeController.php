@@ -13,6 +13,20 @@ class HomeController extends Controller
     public function index()
     {
         $em = $this->getDoctrine()->getManager();
+
+        if($this->getUser()) {
+            $usePlanet = $em->getRepository('App:Planet')
+                ->createQueryBuilder('p')
+                ->join('p.user', 'u')
+                ->where('u.username = :user')
+                ->setParameters(array('user' => $this->getUser()->getUsername()))
+                ->getQuery()
+                ->setMaxResults(1)
+                ->getOneOrNullResult();
+        } else {
+                $usePlanet = null;
+        }
+
         $allUsers = $em->getRepository('App:User')
                         ->createQueryBuilder('u')
                         ->select('count(u)')
@@ -21,6 +35,7 @@ class HomeController extends Controller
 
         return $this->render('index.html.twig', [
             'allUsers' => $allUsers,
+            'usePlanet' => $usePlanet,
         ]);
     }
 }

@@ -15,7 +15,24 @@ class TopMenuController extends Controller
      */
     public function mediaAction()
     {
-        return $this->render('anonymous/media.html.twig');
+        $em = $this->getDoctrine()->getManager();
+
+        if($this->getUser()) {
+            $usePlanet = $em->getRepository('App:Planet')
+                ->createQueryBuilder('p')
+                ->join('p.user', 'u')
+                ->where('u.username = :user')
+                ->setParameters(array('user' => $this->getUser()->getUsername()))
+                ->getQuery()
+                ->setMaxResults(1)
+                ->getOneOrNullResult();
+        } else {
+            $usePlanet = null;
+        }
+
+        return $this->render('anonymous/media.html.twig', [
+            'usePlanet' => $usePlanet,
+        ]);
     }
 
     /**
@@ -24,7 +41,24 @@ class TopMenuController extends Controller
      */
     public function rulesAction()
     {
-        return $this->render('anonymous/rules.html.twig');
+        $em = $this->getDoctrine()->getManager();
+
+        if($this->getUser()) {
+            $usePlanet = $em->getRepository('App:Planet')
+                ->createQueryBuilder('p')
+                ->join('p.user', 'u')
+                ->where('u.username = :user')
+                ->setParameters(array('user' => $this->getUser()->getUsername()))
+                ->getQuery()
+                ->setMaxResults(1)
+                ->getOneOrNullResult();
+        } else {
+            $usePlanet = null;
+        }
+
+        return $this->render('anonymous/rules.html.twig', [
+            'usePlanet' => $usePlanet,
+        ]);
     }
 
     /**
@@ -33,7 +67,24 @@ class TopMenuController extends Controller
      */
     public function faqAction()
     {
-        return $this->render('anonymous/faq.html.twig');
+        $em = $this->getDoctrine()->getManager();
+
+        if($this->getUser()) {
+            $usePlanet = $em->getRepository('App:Planet')
+                ->createQueryBuilder('p')
+                ->join('p.user', 'u')
+                ->where('u.username = :user')
+                ->setParameters(array('user' => $this->getUser()->getUsername()))
+                ->getQuery()
+                ->setMaxResults(1)
+                ->getOneOrNullResult();
+        } else {
+            $usePlanet = null;
+        }
+
+        return $this->render('anonymous/faq.html.twig', [
+            'usePlanet' => $usePlanet,
+        ]);
     }
 
     /**

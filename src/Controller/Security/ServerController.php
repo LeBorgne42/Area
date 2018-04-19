@@ -9,6 +9,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use App\Entity\Planet;
 use App\Entity\Sector;
 use App\Entity\Galaxy;
+use App\Entity\Building;
+use App\Entity\Xuilding_Miner;
+use App\Entity\Xuilding_Extractor;
+use App\Entity\Soldier;
+use App\Entity\Worker;
+use App\Entity\Scientist;
 
 /**
  * @Route("/serveur")
@@ -45,7 +51,33 @@ class ServerController extends Controller
                 } else {
                     $nbrPlanets++;
                     $planet = new Planet();
-                    $planet->setName('vierge');
+                    $soldier = new Soldier();
+                    $worker = new Worker();
+                    $scientist = new Scientist();
+                    $building = new Building();
+                    $miner = new Xuilding_Miner();
+                    $extractor = new Xuilding_Extractor();
+                    $building->setMiner($miner);
+                    $building->setExtractor($extractor);
+                    $soldier->setPlanet($planet);
+                    $worker->setPlanet($planet);
+                    $scientist->setPlanet($planet);
+                    $soldier->setAmount(500);
+                    $worker->setAmount(10000);
+                    $scientist->setAmount(200);
+                    $planet->setSoldier($soldier);
+                    $planet->setWorker($worker);
+                    $planet->setScientist($scientist);
+                    $building->setPlanet($planet);
+
+                    $em->persist($building);
+                    $em->persist($miner);
+                    $em->persist($extractor);
+                    $em->persist($soldier);
+                    $em->persist($scientist);
+                    $em->persist($worker);
+
+                    $planet->setName('inhabitée');
                     $planet->setImageName($image[rand(0, 4)]);
                     $planet->setSector($sector);
                     $planet->setPosition($nbrPlanet);
