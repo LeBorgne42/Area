@@ -49,9 +49,14 @@ class Xuilding_Miner
     protected $finishAt;
 
     /**
-     * @ORM\Column(name="constructTime",type="integer")
+     * @ORM\Column(name="constructTime",type="bigint")
      */
     protected $constructTime = 240;
+
+    /**
+     * @ORM\Column(name="ground",type="integer")
+     */
+    protected $ground = 1;
 
     /**
      * @return mixed
@@ -163,6 +168,22 @@ class Xuilding_Miner
     public function setProduction($production): void
     {
         $this->production = $production;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGround()
+    {
+        return $this->ground;
+    }
+
+    /**
+     * @param mixed $ground
+     */
+    public function setGround($ground): void
+    {
+        $this->ground = $ground;
     }
 
     public function getId()

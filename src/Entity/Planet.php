@@ -83,14 +83,24 @@ class Planet
     protected $position;
 
     /**
-     * @ORM\Column(name="land",type="integer", nullable=true)
+     * @ORM\Column(name="ground",type="integer", nullable=true)
      */
-    protected $land;
+    protected $ground;
+
+    /**
+     * @ORM\Column(name="groundPlace",type="integer", nullable=true)
+     */
+    protected $groundPlace = 0;
 
     /**
      * @ORM\Column(name="sky",type="integer", nullable=true)
      */
     protected $sky;
+
+    /**
+     * @ORM\Column(name="skyPlace",type="integer", nullable=true)
+     */
+    protected $skyPlace = 0;
 
     /**
      * @ORM\Column(name="empty",type="boolean")
@@ -337,22 +347,6 @@ class Planet
     /**
      * @return mixed
      */
-    public function getLand()
-    {
-        return $this->land;
-    }
-
-    /**
-     * @param mixed $land
-     */
-    public function setLand($land): void
-    {
-        $this->land = $land;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getSky()
     {
         return $this->sky;
@@ -374,6 +368,54 @@ class Planet
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGround()
+    {
+        return $this->ground;
+    }
+
+    /**
+     * @param mixed $ground
+     */
+    public function setGround($ground): void
+    {
+        $this->ground = $ground;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGroundPlace()
+    {
+        return $this->groundPlace;
+    }
+
+    /**
+     * @param mixed $groundPlace
+     */
+    public function setGroundPlace($groundPlace): void
+    {
+        $this->groundPlace = $groundPlace;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSkyPlace()
+    {
+        return $this->skyPlace;
+    }
+
+    /**
+     * @param mixed $skyPlace
+     */
+    public function setSkyPlace($skyPlace): void
+    {
+        $this->skyPlace = $skyPlace;
     }
 
     /**
