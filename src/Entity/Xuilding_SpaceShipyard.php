@@ -191,6 +191,22 @@ class Xuilding_SpaceShipyard
         $this->sky = $sky;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getProduction()
+    {
+        return $this->production;
+    }
+
+    /**
+     * @param mixed $production
+     */
+    public function setProduction($production): void
+    {
+        $this->production = $production;
+    }
+
     public function getId()
     {
         return $this->id;

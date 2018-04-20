@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Connected;
+namespace App\Controller\Connected\Building;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

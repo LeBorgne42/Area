@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Connected;
+namespace App\Controller\Connected\Building;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -82,7 +82,7 @@ class SpaceShipyardController extends Controller
 
         $spaceShip = $usePlanet->getBuilding()->getSpaceShip();
         $newGround = $usePlanet->getGroundPlace() - $spaceShip->getGround();
-        $newSky = $usePlanet->getSkyPlace() + $spaceShip->getSky();
+        $newSky = $usePlanet->getSkyPlace() - $spaceShip->getSky();
         if($spaceShip->getLevel() == 0 || $spaceShip->getFinishAt() > $now) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }

@@ -64,14 +64,14 @@
                 </td>
                 <td class="center-cells  p-4">
                     {% if usePlanet.getNiobium() >= usePlanet.getBuilding().getBuildSearch().getNiobium() and usePlanet.getWater() >= usePlanet.getBuilding().getBuildSearch().getWater() and usePlanet.getGroundPlace() + usePlanet.getBuilding().getBuildSearch().getGround() <= usePlanet.getGround() %}
-                        <a class="btn btn-lg btn-info mt-5" href="{{ path('building_add_mine', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
+                        <a class="btn btn-lg btn-info mt-5" href="{{ path('building_add_search', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-info mt-5" disabled>{{ 'building.build'|trans }}</a>
                     {% endif %}
                 </td>
                 <td class="center-cells p-4">
-                    {% if usePlanet.getBuilding().getBuildSearch().getLevel() > 1 %}
-                        <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_mine', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
+                    {% if usePlanet.getBuilding().getBuildSearch().getLevel() > 0 %}
+                        <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_search', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
                     {% endif %}
@@ -85,14 +85,14 @@
                 </td>
                 <td class="center-cells  p-4">
                     {% if usePlanet.getNiobium() >= usePlanet.getBuilding().getCity().getNiobium() and usePlanet.getWater() >= usePlanet.getBuilding().getCity().getWater() and usePlanet.getGroundPlace() + usePlanet.getBuilding().getCity().getGround() <= usePlanet.getGround() %}
-                        <a class="btn btn-lg btn-info mt-5" href="{{ path('building_add_mine', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
+                        <a class="btn btn-lg btn-info mt-5" href="{{ path('building_add_city', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-info mt-5" disabled>{{ 'building.build'|trans }}</a>
                     {% endif %}
                 </td>
                 <td class="center-cells p-4">
                     {% if usePlanet.getBuilding().getCity().getLevel() > 0 %}
-                        <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_mine', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
+                        <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_city', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
                     {% endif %}
@@ -106,14 +106,14 @@
                 </td>
                 <td class="center-cells p-4">
                     {% if usePlanet.getNiobium() >= usePlanet.getBuilding().getMetropole().getNiobium() and usePlanet.getWater() >= usePlanet.getBuilding().getMetropole().getWater() and usePlanet.getGroundPlace() + usePlanet.getBuilding().getMetropole().getGround() <= usePlanet.getGround() %}
-                        <a class="btn btn-lg btn-info mt-5" href="{{ path('building_add_extract', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
+                        <a class="btn btn-lg btn-info mt-5" href="{{ path('building_add_metropole', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-info mt-5" disabled>{{ 'building.build'|trans }}</a>
                     {% endif %}
                 </td>
                 <td class="center-cells p-4">
                     {% if usePlanet.getBuilding().getMetropole().getLevel() > 0 %}
-                        <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_extract', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a
+                        <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_metropole', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a
                     {% else %}
                         <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
                     {% endif %}
@@ -221,14 +221,14 @@
                 </td>
                 <td class="center-cells  p-4">
                     {% if usePlanet.getNiobium() >= usePlanet.getBuilding().getRadar().getNiobium() and usePlanet.getWater() >= usePlanet.getBuilding().getRadar().getWater() and usePlanet.getGroundPlace() + usePlanet.getBuilding().getRadar().getGround() <= usePlanet.getGround() %}
-                        <a class="btn btn-lg btn-info mt-5" href="{{ path('building_add_mine', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
+                        <a class="btn btn-lg btn-info mt-5" href="{{ path('building_add_radar', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-info mt-5" disabled>{{ 'building.build'|trans }}</a>
                     {% endif %}
                 </td>
                 <td class="center-cells p-4">
                     {% if usePlanet.getBuilding().getRadar().getLevel() > 0 %}
-                        <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_mine', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
+                        <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_radar', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
                     {% endif %}
@@ -242,14 +242,14 @@
                 </td>
                 <td class="center-cells p-4">
                     {% if usePlanet.getNiobium() >= usePlanet.getBuilding().getSkyRadar().getNiobium() and usePlanet.getWater() >= usePlanet.getBuilding().getSkyRadar().getWater() and usePlanet.getSkyPlace() + usePlanet.getBuilding().getSkyRadar().getSky() <= usePlanet.getSky() %}
-                        <a class="btn btn-lg btn-info mt-5" href="{{ path('building_add_extract', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
+                        <a class="btn btn-lg btn-info mt-5" href="{{ path('building_add_skyRadar', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-info mt-5" disabled>{{ 'building.build'|trans }}</a>
                     {% endif %}
                 </td>
                 <td class="center-cells p-4">
                     {% if usePlanet.getBuilding().getSkyRadar().getLevel() > 0 %}
-                        <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_extract', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a
+                        <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_skyRadar', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a
                     {% else %}
                         <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
                     {% endif %}
@@ -263,14 +263,14 @@
                 </td>
                 <td class="center-cells  p-4">
                     {% if usePlanet.getNiobium() >= usePlanet.getBuilding().getSkyBrouilleur().getNiobium() and usePlanet.getWater() >= usePlanet.getBuilding().getSkyBrouilleur().getWater() and usePlanet.getSkyPlace() + usePlanet.getBuilding().getSkyBrouilleur().getSky() <= usePlanet.getSky() %}
-                        <a class="btn btn-lg btn-info mt-5" href="{{ path('building_add_mine', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
+                        <a class="btn btn-lg btn-info mt-5" href="{{ path('building_add_brouilleur', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-info mt-5" disabled>{{ 'building.build'|trans }}</a>
                     {% endif %}
                 </td>
                 <td class="center-cells p-4">
                     {% if usePlanet.getBuilding().getSkyBrouilleur().getLevel() > 0 %}
-                        <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_mine', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
+                        <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_brouilleur', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
                     {% endif %}
