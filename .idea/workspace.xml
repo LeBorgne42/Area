@@ -2,25 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97f042ea-d0ee-4bd9-bb02-3d850e24f659" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/assets/global.scss" afterPath="$PROJECT_DIR$/assets/global.scss" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Security/SecurityController.php" afterPath="$PROJECT_DIR$/src/Controller/Security/SecurityController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Allied.php" afterPath="$PROJECT_DIR$/src/Entity/Allied.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Pna.php" afterPath="$PROJECT_DIR$/src/Entity/Pna.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Proposal.php" afterPath="$PROJECT_DIR$/src/Entity/Proposal.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" afterPath="$PROJECT_DIR$/src/Entity/User.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/War.php" afterPath="$PROJECT_DIR$/src/Entity/War.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Xuilding_Caserne.php" afterPath="$PROJECT_DIR$/src/Entity/Xuilding_Caserne.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Xuilding_City.php" afterPath="$PROJECT_DIR$/src/Entity/Xuilding_City.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Xuilding_HeavyUsine.php" afterPath="$PROJECT_DIR$/src/Entity/Xuilding_HeavyUsine.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Xuilding_LightUsine.php" afterPath="$PROJECT_DIR$/src/Entity/Xuilding_LightUsine.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Xuilding_Metropole.php" afterPath="$PROJECT_DIR$/src/Entity/Xuilding_Metropole.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Xuilding_Radar.php" afterPath="$PROJECT_DIR$/src/Entity/Xuilding_Radar.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Xuilding_Search.php" afterPath="$PROJECT_DIR$/src/Entity/Xuilding_Search.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Xuilding_SkyBrouilleur.php" afterPath="$PROJECT_DIR$/src/Entity/Xuilding_SkyBrouilleur.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Xuilding_SkyRadar.php" afterPath="$PROJECT_DIR$/src/Entity/Xuilding_SkyRadar.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Xuilding_SpaceShipyard.php" afterPath="$PROJECT_DIR$/src/Entity/Xuilding_SpaceShipyard.php" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180419225819.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/Building/EconomicController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/Building/EconomicController.php" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/Building/InformationController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/Building/InformationController.php" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/Building/SpaceShipyardController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/Building/SpaceShipyardController.php" />
+      <change beforePath="$PROJECT_DIR$/templates/connected/building.html.twig" afterPath="$PROJECT_DIR$/templates/connected/building.html.twig" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -34,33 +19,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="SecurityController.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Controller/Security/SecurityController.php">
+      <file leaf-file-name="building.html.twig" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/connected/building.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="453">
-              <caret line="77" column="34" lean-forward="false" selection-start-line="77" selection-start-column="34" selection-end-line="77" selection-end-column="34" />
-              <folding>
-                <element signature="e#43#90#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Research.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Entity/Research.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="765">
-              <caret line="52" column="7" lean-forward="false" selection-start-line="52" selection-start-column="7" selection-end-line="52" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="User.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Entity/User.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7516">
-              <caret line="510" column="36" lean-forward="true" selection-start-line="510" selection-start-column="36" selection-end-line="510" selection-end-column="36" />
+            <state relative-caret-position="275">
+              <caret line="128" column="88" lean-forward="false" selection-start-line="128" selection-start-column="88" selection-end-line="128" selection-end-column="88" />
               <folding />
             </state>
           </provider>
@@ -70,10 +33,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Your Empire</find>
-      <find>Pannel IA</find>
-      <find>blank</find>
-      <find>setImageFil</find>
       <find>OneToOne</find>
       <find>$miner</find>
       <find>ship</find>
@@ -100,6 +59,10 @@
       <find>$research</find>
       <find>boole</find>
       <find>$building</find>
+      <find>city</find>
+      <find>Onde</find>
+      <find>chantier</find>
+      <find>caserne</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -167,10 +130,6 @@
         <option value="$PROJECT_DIR$/src/Controller/Connected/Ally/AllyController.php" />
         <option value="$PROJECT_DIR$/src/Controller/Connected/Building/ProductionController.php" />
         <option value="$PROJECT_DIR$/src/Controller/Connected/Building/BuildingController.php" />
-        <option value="$PROJECT_DIR$/src/Controller/Connected/Building/SpaceShipyardController.php" />
-        <option value="$PROJECT_DIR$/src/Controller/Connected/Building/EconomicController.php" />
-        <option value="$PROJECT_DIR$/templates/connected/building.html.twig" />
-        <option value="$PROJECT_DIR$/src/Controller/Connected/Building/InformationController.php" />
         <option value="$PROJECT_DIR$/src/Entity/Xuilding_Caserne.php" />
         <option value="$PROJECT_DIR$/src/Entity/Xuilding_City.php" />
         <option value="$PROJECT_DIR$/src/Entity/Xuilding_HeavyUsine.php" />
@@ -198,6 +157,10 @@
         <option value="$PROJECT_DIR$/assets/global.scss" />
         <option value="$PROJECT_DIR$/src/Entity/User.php" />
         <option value="$PROJECT_DIR$/src/Controller/Security/SecurityController.php" />
+        <option value="$PROJECT_DIR$/templates/connected/building.html.twig" />
+        <option value="$PROJECT_DIR$/src/Controller/Connected/Building/EconomicController.php" />
+        <option value="$PROJECT_DIR$/src/Controller/Connected/Building/InformationController.php" />
+        <option value="$PROJECT_DIR$/src/Controller/Connected/Building/SpaceShipyardController.php" />
       </list>
     </option>
   </component>
@@ -364,18 +327,28 @@
             <path>
               <item name="Area" type="b2602c69:ProjectViewProjectNode" />
               <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="assets" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="Area" type="b2602c69:ProjectViewProjectNode" />
               <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Entity" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Connected" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Connected" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Building" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
@@ -445,12 +418,12 @@
       <workItem from="1523430258006" duration="33957000" />
       <workItem from="1523711701169" duration="77125000" />
       <workItem from="1523954087414" duration="23861000" />
-      <workItem from="1524041808030" duration="82140000" />
+      <workItem from="1524041808030" duration="83868000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="319801000" />
+    <option name="totallyTimeSpent" value="321529000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -463,7 +436,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287483" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287483" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -471,7 +443,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287483" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287483" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18901454" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18820679" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -630,56 +602,6 @@
           <folding>
             <element signature="e#49#96#0#PHP" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/Building/ProductionController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="2" column="43" lean-forward="false" selection-start-line="2" selection-start-column="43" selection-end-line="2" selection-end-column="43" />
-          <folding>
-            <element signature="e#53#100#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/Building/BuildingController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="43" lean-forward="false" selection-start-line="2" selection-start-column="43" selection-end-line="2" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/Building/InformationController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="470">
-          <caret line="279" column="77" lean-forward="false" selection-start-line="279" selection-start-column="77" selection-end-line="279" selection-end-column="77" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/connected/building.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="535">
-          <caret line="272" column="103" lean-forward="false" selection-start-line="272" selection-start-column="103" selection-end-line="272" selection-end-column="103" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/Building/EconomicController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="597">
-          <caret line="66" column="40" lean-forward="false" selection-start-line="66" selection-start-column="40" selection-end-line="66" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/Building/SpaceShipyardController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="331" column="45" lean-forward="true" selection-start-line="331" selection-start-column="45" selection-end-line="331" selection-end-column="45" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -917,6 +839,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Security/SecurityController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="438">
+          <caret line="76" column="44" lean-forward="false" selection-start-line="76" selection-start-column="44" selection-end-line="76" selection-end-column="44" />
+          <folding>
+            <element signature="e#43#90#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/Research.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="765">
@@ -933,13 +865,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Security/SecurityController.php">
+    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/Building/BuildingController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="453">
-          <caret line="77" column="34" lean-forward="false" selection-start-line="77" selection-start-column="34" selection-end-line="77" selection-end-column="34" />
-          <folding>
-            <element signature="e#43#90#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="30">
+          <caret line="2" column="43" lean-forward="false" selection-start-line="2" selection-start-column="43" selection-end-line="2" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/Building/InformationController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="188">
+          <caret line="217" column="220" lean-forward="false" selection-start-line="217" selection-start-column="220" selection-end-line="217" selection-end-column="220" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/Building/ProductionController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1603">
+          <caret line="2" column="43" lean-forward="false" selection-start-line="2" selection-start-column="43" selection-end-line="2" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/Building/EconomicController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1551">
+          <caret line="230" column="263" lean-forward="false" selection-start-line="230" selection-start-column="263" selection-end-line="230" selection-end-column="263" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/Building/SpaceShipyardController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="278" column="204" lean-forward="false" selection-start-line="278" selection-start-column="204" selection-end-line="278" selection-end-column="204" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/connected/building.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="128" column="88" lean-forward="false" selection-start-line="128" selection-start-column="88" selection-end-line="128" selection-end-column="88" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -33,7 +33,7 @@ class InformationController extends Controller
         $usePlanetNb = $usePlanet->getNiobium();
         $usePlanetWt = $usePlanet->getWater();
         $newGround = $usePlanet->getGroundPlace() + $radar->getGround();
-        if(($usePlanetNb < $radar->getNiobium() || $usePlanetWt < $radar->getWater()) || ($radar->getFinishAt() > $now || $newGround > $usePlanet->getGround())) {
+        if(($usePlanetNb < $radar->getNiobium() || $usePlanetWt < $radar->getWater()) || ($radar->getFinishAt() > $now || ($newGround > $usePlanet->getGround() || $user->getResearch()->getOnde()->getLevel() > 0))) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $cost = 1.7;
@@ -124,7 +124,7 @@ class InformationController extends Controller
         $usePlanetNb = $usePlanet->getNiobium();
         $usePlanetWt = $usePlanet->getWater();
         $newSky = $usePlanet->getSkyPlace() + $skyRadar->getSky();
-        if(($usePlanetNb < $skyRadar->getNiobium() || $usePlanetWt < $skyRadar->getWater()) || ($skyRadar->getFinishAt() > $now || $newSky > $usePlanet->getSky())) {
+        if(($usePlanetNb < $skyRadar->getNiobium() || $usePlanetWt < $skyRadar->getWater()) || ($skyRadar->getFinishAt() > $now || $newSky > $usePlanet->getSky()) || $user->getResearch()->getOnde()->getLevel() > 2) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $cost = 1.7;
@@ -215,7 +215,7 @@ class InformationController extends Controller
         $usePlanetNb = $usePlanet->getNiobium();
         $usePlanetWt = $usePlanet->getWater();
         $newSky = $usePlanet->getSkyPlace() + $brouilleur->getSky();
-        if(($usePlanetNb < $brouilleur->getNiobium() || $usePlanetWt < $brouilleur->getWater()) || ($brouilleur->getFinishAt() > $now || $newSky > $usePlanet->getSky())) {
+        if(($usePlanetNb < $brouilleur->getNiobium() || $usePlanetWt < $brouilleur->getWater()) || ($brouilleur->getFinishAt() > $now || $newSky > $usePlanet->getSky()) || $user->getResearch()->getOnde()->getLevel() == 5) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $cost = 1.7;
