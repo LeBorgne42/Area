@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\Criteria;
 
 /**
- * @ORM\Table(name="pna")
+ * @ORM\Table(name="ally_pna")
  * @ORM\Entity
  */
 class Pna

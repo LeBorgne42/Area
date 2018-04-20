@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="buildSearch")
+ * @ORM\Table(name="x_buildSearch")
  * @ORM\Entity
  */
 class Xuilding_Search

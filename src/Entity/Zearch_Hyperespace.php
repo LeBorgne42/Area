@@ -6,10 +6,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="x_skyRadar")
+ * @ORM\Table(name="z_hyperespace")
  * @ORM\Entity
  */
-class Xuilding_SkyRadar
+class Zearch_Hyperespace
 {
     /**
      * @ORM\Column(type="integer")
@@ -19,24 +19,19 @@ class Xuilding_SkyRadar
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="Building", mappedBy="skyRadar", fetch="EXTRA_LAZY")
+     * @ORM\OneToOne(targetEntity="Research", mappedBy="hyperespace", fetch="EXTRA_LAZY")
      */
-    protected $building;
+    protected $research;
 
     /**
-     * @ORM\Column(name="niobium",type="integer")
+     * @ORM\Column(name="bitcoin",type="integer")
      */
-    protected $niobium = 5050;
+    protected $bitcoin = 500000;
 
     /**
-     * @ORM\Column(name="water",type="integer")
+     * @ORM\Column(name="level",type="boolean")
      */
-    protected $water = 4380;
-
-    /**
-     * @ORM\Column(name="level",type="integer")
-     */
-    protected $level = 0;
+    protected $level = false;
 
     /**
      * @ORM\Column(name="finishAt",type="datetime", nullable=true)
@@ -46,59 +41,38 @@ class Xuilding_SkyRadar
     /**
      * @ORM\Column(name="constructTime",type="bigint")
      */
-    protected $constructTime = 3600;
-
-    /**
-     * @ORM\Column(name="sky",type="integer")
-     */
-    protected $sky = 2;
+    protected $constructTime = 604800;
 
     /**
      * @return mixed
      */
-    public function getBuilding()
+    public function getResearch()
     {
-        return $this->building;
+        return $this->research;
     }
 
     /**
-     * @param mixed $building
+     * @param mixed $research
      */
-    public function setBuilding($building): void
+    public function setResearch($research): void
     {
-        $this->building = $building;
+        $this->research = $research;
     }
 
     /**
      * @return mixed
      */
-    public function getNiobium()
+    public function getBitcoin()
     {
-        return $this->niobium;
+        return $this->bitcoin;
     }
 
     /**
-     * @param mixed $niobium
+     * @param mixed $bitcoin
      */
-    public function setNiobium($niobium): void
+    public function setBitcoin($bitcoin): void
     {
-        $this->niobium = $niobium;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getWater()
-    {
-        return $this->water;
-    }
-
-    /**
-     * @param mixed $water
-     */
-    public function setWater($water): void
-    {
-        $this->water = $water;
+        $this->bitcoin = $bitcoin;
     }
 
     /**
@@ -147,22 +121,6 @@ class Xuilding_SkyRadar
     public function setConstructTime($constructTime): void
     {
         $this->constructTime = $constructTime;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getSky()
-    {
-        return $this->sky;
-    }
-
-    /**
-     * @param mixed $sky
-     */
-    public function setSky($sky): void
-    {
-        $this->sky = $sky;
     }
 
     public function getId()

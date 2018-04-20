@@ -12,6 +12,7 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 @import 'scss/front/building.scss';
 
 body.area {
+  margin: 0 auto;
   color: #fff;
   background-image: url("../public/img/wall.png");
   max-width: 1280px;

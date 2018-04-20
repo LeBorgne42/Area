@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="spaceShip")
+ * @ORM\Table(name="x_spaceShip")
  * @ORM\Entity
  */
 class Xuilding_SpaceShipyard

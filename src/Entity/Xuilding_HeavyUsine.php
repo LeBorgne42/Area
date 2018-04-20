@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="heavyUsine")
+ * @ORM\Table(name="x_heavyUsine")
  * @ORM\Entity
  */
 class Xuilding_HeavyUsine

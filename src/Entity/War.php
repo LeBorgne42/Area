@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\Criteria;
 
 /**
- * @ORM\Table(name="war")
+ * @ORM\Table(name="ally_war")
  * @ORM\Entity
  */
 class War

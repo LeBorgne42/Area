@@ -42,6 +42,12 @@ class User implements UserInterface, \Serializable
     protected $ally;
 
     /**
+     * @ORM\OneToOne(targetEntity="Research", inversedBy="user", fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="research_id", referencedColumnName="id")
+     */
+    protected $research;
+
+    /**
      * @ORM\OneToMany(targetEntity="Proposal", mappedBy="user", fetch="EXTRA_LAZY")
      */
     protected $proposals;
@@ -487,6 +493,22 @@ class User implements UserInterface, \Serializable
     public function setProposals($proposals): void
     {
         $this->proposals = $proposals;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getResearch()
+    {
+        return $this->research;
+    }
+
+    /**
+     * @param mixed $research
+     */
+    public function setResearch($research): void
+    {
+        $this->research = $research;
     }
 
     public function getUpdatedAt()

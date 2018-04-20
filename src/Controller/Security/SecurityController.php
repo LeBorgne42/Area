@@ -7,6 +7,16 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Form\Front\UserRecoveryType;
 use App\Entity\User;
 use App\Entity\Rank;
+use App\Entity\Research;
+use App\Entity\Zearch_Demography;
+use App\Entity\Zearch_Discipline;
+use App\Entity\Zearch_HeavyShip;
+use App\Entity\Zearch_Hyperespace;
+use App\Entity\Zearch_Industry;
+use App\Entity\Zearch_LightShip;
+use App\Entity\Zearch_Onde;
+use App\Entity\Zearch_Terraformation;
+use App\Entity\Zearch_Utility;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -29,20 +39,6 @@ class SecurityController extends Controller
             $user->setEmail($_POST['_email']);
             $user->setCreatedAt($now);
             $user->setPassword(password_hash($_POST['_password'], PASSWORD_BCRYPT));
-
-            /*$sectorF = [2, 3, 4, 5, 6, 7, 8, 9, 92, 93, 94, 95, 96, 97, 98, 99];
-            $x = 1;
-            $y = 0;
-            while ($x <= 100) {
-                if ($x % 10 == 0 || $x % 10 == 1) {
-                    $sectorS[$y] = $x;
-                }
-                $x++;
-                $y++;
-            }
-            $position= [4, 6, 15, 17, 25];
-            $sector = array_merge($sectorF,$sectorS);
-            sort($sector, SORT_NUMERIC);*/
             $planet = $em->getRepository('App:Planet')
                         ->createQueryBuilder('p')
                         ->where('p.user is null')
@@ -57,7 +53,30 @@ class SecurityController extends Controller
                 $planet->setName('Nova Terra');
                 $user->addPlanet($planet);
                 $em->persist($planet);
+            } else {
+                return $this->redirectToRoute('logout');
             }
+            $research = new Research();
+            $demography = new Zearch_Demography();
+            $discipline = new Zearch_Discipline();
+            $heavyShip = new Zearch_HeavyShip();
+            $lightShip = new Zearch_LightShip();
+            $hyperespace = new Zearch_Hyperespace();
+            $industry = new Zearch_Industry();
+            $onde = new Zearch_Onde();
+            $terraformation = new Zearch_Terraformation();
+            $utility = new Zearch_Utility();
+            $research->setDemography($demography);
+            $research->setDiscipline($discipline);
+            $research->setHeavyShip($heavyShip);
+            $research->setLightShip($lightShip);
+            $research->setHyperespace($hyperespace);
+            $research->setIndustry($industry);
+            $research->setOnde($onde);
+            $research->setTerraformation($terraformation);
+            $research->setUtility($utility);
+            $em->persist($research);
+            $user->setResearch($research);
             $rank = new Rank();
             $rank->setPoint(50);
             $em->persist($rank);

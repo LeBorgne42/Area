@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="caserne")
+ * @ORM\Table(name="x_caserne")
  * @ORM\Entity
  */
 class Xuilding_Caserne
