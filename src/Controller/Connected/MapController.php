@@ -36,7 +36,7 @@ class MapController extends Controller
             ->getQuery()
             ->getResult();
 
-        return $this->render('connected/map.html.twig', [
+        return $this->render('connected/map/sector.html.twig', [
             'planets' => $planets,
             'usePlanet' => $usePlanet,
         ]);

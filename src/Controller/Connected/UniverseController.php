@@ -33,7 +33,7 @@ class UniverseController extends Controller
             ->getQuery()
             ->getResult();
 
-        return $this->render('connected/universe.html.twig', [
+        return $this->render('connected/map/universe.html.twig', [
             'galaxys' => $galaxys,
             'usePlanet' => $usePlanet,
         ]);

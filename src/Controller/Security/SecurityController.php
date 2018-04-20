@@ -3,6 +3,7 @@
 namespace App\Controller\Security;
 
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\Front\UserRecoveryType;
 use App\Entity\User;
@@ -102,13 +103,16 @@ class SecurityController extends Controller
 
             $token = new UsernamePasswordToken(
                 $user->getUsername(),
-                $user->getPassword(),
+                null,
                 'my_entity_user_provider',
                 $user->getRoles()
             );
 
             $this->get('security.token_storage')->setToken($token);
-            $request->getSession()->set('main', serialize($token));
+            $request->getSession()->set('_security_main', serialize($token));
+
+            $event = new InteractiveLoginEvent($request, $token);
+            $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
 
             return $this->redirectToRoute('overview', array('idp' => $planet->getId()));
         }
@@ -231,7 +235,7 @@ class SecurityController extends Controller
 
             return $this->redirectToRoute('overview', array('idp' => $usePlanet->getId(), 'usePlanet' => $usePlanet));
         }
-        if ($this->getUser()->getRoles()[0] == 'ROLE_ADMIN') {
+        if ($this->getUser()->getRoles()[0] == 'ROLE_MODO' || $this->getUser()->getRoles()[0] == 'ROLE_ADMIN') {
             return $this->redirectToRoute('easyadmin');
         }
         return $this->redirectToRoute('logout');

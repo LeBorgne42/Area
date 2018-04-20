@@ -6,7 +6,7 @@ security:
         Symfony\Component\Security\Core\User\User: bcrypt
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     role_hierarchy:
-        ROLE_SUPER_ADMIN: [ ROLE_ADMIN ]
+        ROLE_ADMIN: [ ROLE_MODO ]
     providers:
         chain_provider:
             chain:
@@ -52,5 +52,5 @@ security:
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/fr, roles: ROLE_USER }
-        - { path: ^/admin-edr, roles: ROLE_ADMIN }
+        - { path: ^/admin-edr, roles: ROLE_MODO }
         - { path: ^/serveur, roles: ROLE_ADMIN }

@@ -34,7 +34,7 @@ class SpaceShipyardController extends Controller
         $usePlanetWt = $usePlanet->getWater();
         $newGround = $usePlanet->getGroundPlace() + $spaceShip->getGround();
         $newSky = $usePlanet->getSkyPlace() + $spaceShip->getSky();
-        if(($usePlanetNb < $spaceShip->getNiobium() || $usePlanetWt < $spaceShip->getWater()) || ($spaceShip->getFinishAt() > $now || $newGround > $usePlanet->getGround()) || ($newSky > $usePlanet->getSky() || $user->getResearch()->getIndustry()->getLevel() > 0)) {
+        if(($usePlanetNb < $spaceShip->getNiobium() || $usePlanetWt < $spaceShip->getWater()) || ($spaceShip->getFinishAt() > $now || $newGround > $usePlanet->getGround()) || ($newSky > $usePlanet->getSky() || $user->getResearch()->getIndustry()->getLevel() == 0)) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $prod = 0.1;
@@ -134,7 +134,7 @@ class SpaceShipyardController extends Controller
         $usePlanetNb = $usePlanet->getNiobium();
         $usePlanetWt = $usePlanet->getWater();
         $newGround = $usePlanet->getGroundPlace() + $lightUsine->getGround();
-        if(($usePlanetNb < $lightUsine->getNiobium() || $usePlanetWt < $lightUsine->getWater()) || ($lightUsine->getFinishAt() > $now || $newGround > $usePlanet->getGround()) || ($lightUsine->getLevel() != 0 || $user->getResearch()->getIndustry()->getLevel() > 2) || $user->getResearch()->getLightShip()->getLevel() > 0) {
+        if(($usePlanetNb < $lightUsine->getNiobium() || $usePlanetWt < $lightUsine->getWater()) || ($lightUsine->getFinishAt() > $now || $newGround > $usePlanet->getGround()) || ($lightUsine->getLevel() != 0 || $user->getResearch()->getIndustry()->getLevel() < 3) || $user->getResearch()->getLightShip()->getLevel() == 0) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $usePlanet->setNiobium($usePlanetNb - $lightUsine->getNiobium());
@@ -205,7 +205,7 @@ class SpaceShipyardController extends Controller
         $usePlanetNb = $usePlanet->getNiobium();
         $usePlanetWt = $usePlanet->getWater();
         $newGround = $usePlanet->getGroundPlace() + $heavyUsine->getGround();
-        if(($usePlanetNb < $heavyUsine->getNiobium() || $usePlanetWt < $heavyUsine->getWater()) || ($heavyUsine->getFinishAt() > $now || $newGround > $usePlanet->getGround()) || ($heavyUsine->getLevel() != 0 || $user->getResearch()->getIndustry()->getLevel() == 5) || $user->getResearch()->getHeavyShip()->getLevel() > 0) {
+        if(($usePlanetNb < $heavyUsine->getNiobium() || $usePlanetWt < $heavyUsine->getWater()) || ($heavyUsine->getFinishAt() > $now || $newGround > $usePlanet->getGround()) || ($heavyUsine->getLevel() != 0 || $user->getResearch()->getIndustry()->getLevel() < 5) || $user->getResearch()->getHeavyShip()->getLevel() == 0) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $usePlanet->setNiobium($usePlanetNb - $heavyUsine->getNiobium());
@@ -276,7 +276,7 @@ class SpaceShipyardController extends Controller
         $usePlanetNb = $usePlanet->getNiobium();
         $usePlanetWt = $usePlanet->getWater();
         $newGround = $usePlanet->getGroundPlace() + $caserne->getGround();
-        if(($usePlanetNb < $caserne->getNiobium() || $usePlanetWt < $caserne->getWater()) || ($caserne->getFinishAt() > $now || $newGround > $usePlanet->getGround()) || $user->getResearch()->getDiscipline()->getLevel() > 0) {
+        if(($usePlanetNb < $caserne->getNiobium() || $usePlanetWt < $caserne->getWater()) || ($caserne->getFinishAt() > $now || $newGround > $usePlanet->getGround()) || $user->getResearch()->getDiscipline()->getLevel() == 0) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $prod = 0.1;

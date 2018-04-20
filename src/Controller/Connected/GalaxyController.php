@@ -36,7 +36,7 @@ class GalaxyController extends Controller
             ->getQuery()
             ->getResult();
 
-        return $this->render('connected/galaxy.html.twig', [
+        return $this->render('connected/map/galaxy.html.twig', [
             'sectors' => $sectors,
             'usePlanet' => $usePlanet,
         ]);
