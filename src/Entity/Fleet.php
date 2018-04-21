@@ -19,6 +19,12 @@ class Fleet
     private $id;
 
     /**
+     * @ORM\OneToMany(targetEntity="Ship", mappedBy="Fleet", fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="ship_id", referencedColumnName="id")
+     */
+    protected $ships;
+
+    /**
      * @ORM\OneToOne(targetEntity="Soldier", inversedBy="fleet", fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(name="soldier_id", referencedColumnName="id")
      */
@@ -35,6 +41,30 @@ class Fleet
      * @ORM\JoinColumn(name="scientist_id", referencedColumnName="id")
      */
     protected $scientist;
+
+    /**
+     * Add ship
+     *
+     * @param \App\Entity\Ship $ship
+     *
+     * @return Fleet
+     */
+    public function addShip(\App\Entity\Ship $ship)
+    {
+        $this->ships[] = $ship;
+
+        return $this;
+    }
+
+    /**
+     * Remove ship
+     *
+     * @param \App\Entity\Ship $ship
+     */
+    public function removeShip(\App\Entity\Ship $ship)
+    {
+        $this->ships->removeElement($ship);
+    }
 
     /**
      * @param mixed $soldier
