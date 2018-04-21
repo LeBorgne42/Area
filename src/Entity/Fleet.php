@@ -19,7 +19,13 @@ class Fleet
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="Ship", mappedBy="Fleet", fetch="EXTRA_LAZY")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="fleets", fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    protected $user;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Ship", mappedBy="fleet", fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(name="ship_id", referencedColumnName="id")
      */
     protected $ships;
@@ -112,6 +118,38 @@ class Fleet
     public function setWorker($worker): void
     {
         $this->worker = $worker;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShips()
+    {
+        return $this->ships;
+    }
+
+    /**
+     * @param mixed $ships
+     */
+    public function setShips($ships): void
+    {
+        $this->ships = $ships;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user): void
+    {
+        $this->user = $user;
     }
 
     public function getId()

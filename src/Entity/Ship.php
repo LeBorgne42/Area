@@ -31,6 +31,12 @@ class Ship
     protected $orbite;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Planet", inversedBy="ships", fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="planet_id", referencedColumnName="id")
+     */
+    protected $planet;
+
+    /**
      * @ORM\OneToOne(targetEntity="Yhip_Colonizer", inversedBy="ship", fetch="EXTRA_LAZY", cascade={"persist"})
      * @ORM\JoinColumn(name="colonizer_id", referencedColumnName="id")
      */
@@ -94,6 +100,54 @@ class Ship
     public function setColonizer($colonizer): void
     {
         $this->colonizer = $colonizer;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPlanet()
+    {
+        return $this->planet;
+    }
+
+    /**
+     * @param mixed $planet
+     */
+    public function setPlanet($planet): void
+    {
+        $this->planet = $planet;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHunter()
+    {
+        return $this->hunter;
+    }
+
+    /**
+     * @param mixed $hunter
+     */
+    public function setHunter($hunter): void
+    {
+        $this->hunter = $hunter;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFregate()
+    {
+        return $this->fregate;
+    }
+
+    /**
+     * @param mixed $fregate
+     */
+    public function setFregate($fregate): void
+    {
+        $this->fregate = $fregate;
     }
 
     public function getId()

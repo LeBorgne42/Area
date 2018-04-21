@@ -78,6 +78,42 @@ class Research
     protected $terraformation;
 
     /**
+     * @ORM\OneToOne(targetEntity="Zearch_Cargo", inversedBy="research", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\JoinColumn(name="cargo_id", referencedColumnName="id")
+     */
+    protected $cargo;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Zearch_Recycleur", inversedBy="research", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\JoinColumn(name="recycleur_id", referencedColumnName="id")
+     */
+    protected $recycleur;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Zearch_Armement", inversedBy="research", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\JoinColumn(name="armement_id", referencedColumnName="id")
+     */
+    protected $armement;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Zearch_Missile", inversedBy="research", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\JoinColumn(name="missile_id", referencedColumnName="id")
+     */
+    protected $missile;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Zearch_Laser", inversedBy="research", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\JoinColumn(name="laser_id", referencedColumnName="id")
+     */
+    protected $laser;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Zearch_Plasma", inversedBy="research", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\JoinColumn(name="plasma_id", referencedColumnName="id")
+     */
+    protected $plasma;
+
+    /**
      * @return mixed
      */
     public function getUser()
@@ -235,6 +271,102 @@ class Research
     public function setTerraformation($terraformation): void
     {
         $this->terraformation = $terraformation;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCargo()
+    {
+        return $this->cargo;
+    }
+
+    /**
+     * @param mixed $cargo
+     */
+    public function setCargo($cargo): void
+    {
+        $this->cargo = $cargo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRecycleur()
+    {
+        return $this->recycleur;
+    }
+
+    /**
+     * @param mixed $recycleur
+     */
+    public function setRecycleur($recycleur): void
+    {
+        $this->recycleur = $recycleur;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArmement()
+    {
+        return $this->armement;
+    }
+
+    /**
+     * @param mixed $armement
+     */
+    public function setArmement($armement): void
+    {
+        $this->armement = $armement;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMissile()
+    {
+        return $this->missile;
+    }
+
+    /**
+     * @param mixed $missile
+     */
+    public function setMissile($missile): void
+    {
+        $this->missile = $missile;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLaser()
+    {
+        return $this->laser;
+    }
+
+    /**
+     * @param mixed $laser
+     */
+    public function setLaser($laser): void
+    {
+        $this->laser = $laser;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPlasma()
+    {
+        return $this->plasma;
+    }
+
+    /**
+     * @param mixed $plasma
+     */
+    public function setPlasma($plasma): void
+    {
+        $this->plasma = $plasma;
     }
     
     public function getId()

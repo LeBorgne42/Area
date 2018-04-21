@@ -81,6 +81,12 @@ class User implements UserInterface, \Serializable
     protected $planets;
 
     /**
+     * @ORM\OneToMany(targetEntity="Fleet", mappedBy="user", fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="fleet_id", referencedColumnName="id")
+     */
+    protected $fleets;
+
+    /**
      * @ORM\Column(name="bitcoin",type="decimal", precision=28, scale=5)
      */
     protected $bitcoin = 5000;
@@ -509,6 +515,30 @@ class User implements UserInterface, \Serializable
     public function setResearch($research): void
     {
         $this->research = $research;
+    }
+
+    /**
+     * Add fleet
+     *
+     * @param \App\Entity\Fleet $fleet
+     *
+     * @return User
+     */
+    public function addShip(\App\Entity\Fleet $fleet)
+    {
+        $this->fleets[] = $fleet;
+
+        return $this;
+    }
+
+    /**
+     * Remove fleet
+     *
+     * @param \App\Entity\Fleet $fleet
+     */
+    public function removeShip(\App\Entity\Fleet $fleet)
+    {
+        $this->fleets->removeElement($fleet);
     }
 
     public function getUpdatedAt()

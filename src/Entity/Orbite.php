@@ -19,7 +19,7 @@ class Orbite
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="Ship", mappedBy="Orbite", fetch="EXTRA_LAZY")
+     * @ORM\OneToMany(targetEntity="Ship", mappedBy="orbite", fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(name="ship_id", referencedColumnName="id")
      */
     protected $ships;
@@ -67,6 +67,22 @@ class Orbite
     public function setPlanet($planet): void
     {
         $this->planet = $planet;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShips()
+    {
+        return $this->ships;
+    }
+
+    /**
+     * @param mixed $ships
+     */
+    public function setShips($ships): void
+    {
+        $this->ships = $ships;
     }
 
     public function getId()
