@@ -11,11 +11,11 @@
             <tbody>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.onde'|trans|raw }}
+                    {{ 'title.onde'|trans|raw }} x {{ app.user.getResearch().getOnde().getLevel() }}
                 </th>
                 <td class="center-cells">
                     {% if app.user %}
-                        <a class="btn btn-lg btn-info" href="{{ path('home', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                        <a class="btn btn-lg btn-info" href="{{ path('research_onde', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
                     {% endif %}
@@ -23,11 +23,11 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.terraformation'|trans|raw }}
+                    {{ 'title.terraformation'|trans|raw }} {% if app.user.getResearch().getTerraformation().getLevel() == false %}{{ 'research.canBe'|trans }}{% else %}{{ 'research.Activated'|trans }}{% endif %}
                 </th>
                 <td class="center-cells">
                     {% if app.user %}
-                        <a class="btn btn-lg btn-info" href="{{ path('home', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                        <a class="btn btn-lg btn-info" href="{{ path('research_terraformation', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
                     {% endif %}
@@ -35,11 +35,11 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.cargo'|trans|raw }}
+                    {{ 'title.cargo'|trans|raw }} x {{ app.user.getResearch().getCargo().getLevel() }}
                 </th>
                 <td class="center-cells">
                     {% if app.user %}
-                        <a class="btn btn-lg btn-info" href="{{ path('home', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                        <a class="btn btn-lg btn-info" href="{{ path('research_cargo', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
                     {% endif %}
@@ -47,11 +47,11 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.recycleur'|trans|raw }}
+                    {{ 'title.recycleur'|trans|raw }} {% if app.user.getResearch().getRecycleur().getLevel() == false %}{{ 'research.canBe'|trans }}{% else %}{{ 'research.Activated'|trans }}{% endif %}
                 </th>
                 <td class="center-cells">
                     {% if app.user %}
-                        <a class="btn btn-lg btn-info" href="{{ path('home', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                        <a class="btn btn-lg btn-info" href="{{ path('research_recyclage', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
                     {% endif %}
@@ -59,11 +59,11 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.utility'|trans|raw }}
+                    {{ 'title.utility'|trans|raw }} x {{ app.user.getResearch().getUtility().getLevel() }}
                 </th>
                 <td class="center-cells">
                     {% if app.user %}
-                        <a class="btn btn-lg btn-info" href="{{ path('home', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                        <a class="btn btn-lg btn-info" href="{{ path('research_utility', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
                     {% endif %}
@@ -71,11 +71,11 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.hyperespace'|trans|raw }}
+                    {{ 'title.hyperespace'|trans|raw }} {% if app.user.getResearch().getHyperespace().getLevel() == false %}{{ 'research.canBe'|trans }}{% else %}{{ 'research.Activated'|trans }}{% endif %}
                 </th>
                 <td class="center-cells">
                     {% if app.user %}
-                        <a class="btn btn-lg btn-info" href="{{ path('home', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                        <a class="btn btn-lg btn-info" href="{{ path('research_hyperespace', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
                     {% endif %}
@@ -88,11 +88,11 @@
             <tbody>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.demography'|trans|raw }}
+                    {{ 'title.demography'|trans|raw }} x {{ app.user.getResearch().getDemography().getLevel() }}
                 </th>
                 <td class="center-cells">
                     {% if app.user %}
-                        <a class="btn btn-lg btn-info" href="{{ path('home', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                        <a class="btn btn-lg btn-info" href="{{ path('research_demography', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
                     {% endif %}
@@ -100,11 +100,11 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.discipline'|trans|raw }}
+                    {{ 'title.discipline'|trans|raw }} x {{ app.user.getResearch().getDiscipline().getLevel() }}
                 </th>
                 <td class="center-cells">
                     {% if app.user %}
-                        <a class="btn btn-lg btn-info" href="{{ path('home', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                        <a class="btn btn-lg btn-info" href="{{ path('research_discipline', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
                     {% endif %}
@@ -117,11 +117,11 @@
             <tbody>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.armement'|trans|raw }}
+                    {{ 'title.armement'|trans|raw }} x {{ app.user.getResearch().getArmement().getLevel() }}
                 </th>
                 <td class="center-cells">
                     {% if app.user %}
-                        <a class="btn btn-lg btn-info" href="{{ path('home', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                        <a class="btn btn-lg btn-info" href="{{ path('research_armement', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
                     {% endif %}
@@ -129,11 +129,11 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.missile'|trans|raw }}
+                    {{ 'title.missile'|trans|raw }} x {{ app.user.getResearch().getMissile().getLevel() }}
                 </th>
                 <td class="center-cells">
                     {% if app.user %}
-                        <a class="btn btn-lg btn-info" href="{{ path('home', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                        <a class="btn btn-lg btn-info" href="{{ path('research_missile', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
                     {% endif %}
@@ -141,11 +141,11 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.laser'|trans|raw }}
+                    {{ 'title.laser'|trans|raw }} x {{ app.user.getResearch().getLaser().getLevel() }}
                 </th>
                 <td class="center-cells">
                     {% if app.user %}
-                        <a class="btn btn-lg btn-info" href="{{ path('home', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                        <a class="btn btn-lg btn-info" href="{{ path('research_laser', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
                     {% endif %}
@@ -153,11 +153,11 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.plasma'|trans|raw }}
+                    {{ 'title.plasma'|trans|raw }} x {{ app.user.getResearch().getPlasma().getLevel() }}
                 </th>
                 <td class="center-cells">
                     {% if app.user %}
-                        <a class="btn btn-lg btn-info" href="{{ path('home', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                        <a class="btn btn-lg btn-info" href="{{ path('research_plasma', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
                     {% endif %}
@@ -170,11 +170,11 @@
             <tbody>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.industry'|trans|raw }}
+                    {{ 'title.industry'|trans|raw }} x {{ app.user.getResearch().getIndustry().getLevel() }}
                 </th>
                 <td class="center-cells">
                     {% if app.user %}
-                        <a class="btn btn-lg btn-info" href="{{ path('home', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                        <a class="btn btn-lg btn-info" href="{{ path('research_industry', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
                     {% endif %}
@@ -182,11 +182,11 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.lightShip'|trans|raw }}
+                    {{ 'title.lightShip'|trans|raw }} x {{ app.user.getResearch().getLightShip().getLevel() }}
                 </th>
                 <td class="center-cells">
                     {% if app.user %}
-                        <a class="btn btn-lg btn-info" href="{{ path('home', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                        <a class="btn btn-lg btn-info" href="{{ path('research_light_ship', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
                     {% endif %}
@@ -194,11 +194,11 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.heavyShip'|trans|raw }}
+                    {{ 'title.heavyShip'|trans|raw }} x {{ app.user.getResearch().getHeavyShip().getLevel() }}
                 </th>
                 <td class="center-cells">
                     {% if app.user %}
-                        <a class="btn btn-lg btn-info" href="{{ path('home', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                        <a class="btn btn-lg btn-info" href="{{ path('research_heavy_ship', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
                     {% endif %}
