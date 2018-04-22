@@ -41,7 +41,7 @@ class ServerController extends Controller
         $em = $this->getDoctrine()->getManager();
         $nbrSector = 1;
         $nbrPlanets = 0;
-        $image = ['planet1.png', 'planet2.png', 'planet3.png', 'planet4.png', 'planet5.png'];
+        $image = ['planet1.png', 'planet2.png', 'planet3.png', 'planet4.png', 'planet5.png', 'planet6.png', 'planet7.png', 'planet8.png', 'planet9.png', 'planet10.png', 'planet11.png', 'planet12.png', 'planet13.png', 'planet14.png', 'planet15.png', 'planet16.png', 'planet17.png', 'planet18.png'];
         $galaxy = new Galaxy();
         $galaxy->setPosition(1);
         $em->persist($galaxy);
@@ -119,7 +119,7 @@ class ServerController extends Controller
                     $em->persist($worker);
 
                     $planet->setName('Inhabitée');
-                    $planet->setImageName($image[rand(0, 4)]);
+                    $planet->setImageName($image[rand(0, 17)]);
                     $planet->setSector($sector);
                     $planet->setPosition($nbrPlanet);
                     if (($nbrSector >= 1 && $nbrSector <= 9) || ($nbrSector >= 92 && $nbrSector <= 99) || ($nbrSector % 10 == 0 && $nbrSector % 10 == 1)) {
