@@ -8,7 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20180421213120 extends AbstractMigration
+class Version20180422021408 extends AbstractMigration
 {
     public function up(Schema $schema)
     {
@@ -21,7 +21,7 @@ class Version20180421213120 extends AbstractMigration
         $this->addSql('CREATE TABLE fleet (id INT AUTO_INCREMENT NOT NULL, user_id INT DEFAULT NULL, ship_id INT DEFAULT NULL, soldier_id INT DEFAULT NULL, worker_id INT DEFAULT NULL, scientist_id INT DEFAULT NULL, INDEX IDX_A05E1E47A76ED395 (user_id), UNIQUE INDEX UNIQ_A05E1E47C256317D (ship_id), UNIQUE INDEX UNIQ_A05E1E47A38C1700 (soldier_id), UNIQUE INDEX UNIQ_A05E1E476B20BA36 (worker_id), UNIQUE INDEX UNIQ_A05E1E47EBA327D6 (scientist_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE z_demography (id INT AUTO_INCREMENT NOT NULL, bitcoin INT NOT NULL, level INT NOT NULL, finishAt DATETIME DEFAULT NULL, constructTime BIGINT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE ally_allied (id INT AUTO_INCREMENT NOT NULL, ally_id INT DEFAULT NULL, allyTag VARCHAR(5) NOT NULL, signedAt DATETIME NOT NULL, accepted TINYINT(1) NOT NULL, INDEX IDX_161AB9BB1C6E3E76 (ally_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE y_colonizer (id INT AUTO_INCREMENT NOT NULL, niobium INT NOT NULL, water INT NOT NULL, bitcoin INT NOT NULL, finishAt DATETIME DEFAULT NULL, constructTime BIGINT NOT NULL, signature INT NOT NULL, armor INT NOT NULL, shield INT NOT NULL, missile INT NOT NULL, laser INT NOT NULL, plasma INT NOT NULL, cargo INT NOT NULL, speed INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE y_colonizer (id INT AUTO_INCREMENT NOT NULL, niobium INT NOT NULL, water INT NOT NULL, bitcoin INT NOT NULL, amount BIGINT NOT NULL, finishAt DATETIME DEFAULT NULL, constructTime BIGINT NOT NULL, signature INT NOT NULL, armor INT NOT NULL, shield INT NOT NULL, missile INT NOT NULL, laser INT NOT NULL, plasma INT NOT NULL, cargo INT NOT NULL, speed INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE x_buildSearch (id INT AUTO_INCREMENT NOT NULL, niobium INT NOT NULL, water INT NOT NULL, production NUMERIC(9, 5) NOT NULL, level INT NOT NULL, finishAt DATETIME DEFAULT NULL, constructTime BIGINT NOT NULL, ground INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE soldier (id INT AUTO_INCREMENT NOT NULL, amount BIGINT NOT NULL, life INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE x_lightUsine (id INT AUTO_INCREMENT NOT NULL, niobium INT NOT NULL, water INT NOT NULL, level TINYINT(1) NOT NULL, finishAt DATETIME DEFAULT NULL, constructTime BIGINT NOT NULL, ground INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
