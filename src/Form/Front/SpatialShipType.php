@@ -47,6 +47,20 @@ class SpatialShipType extends AbstractType
                 )
             )
             ->add(
+                'recycleur',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'max' => '5',
+                    ),
+                    'required' => false,
+                )
+            )
+            ->add(
                 'hunter',
                 null,
                 array(
@@ -70,6 +84,20 @@ class SpatialShipType extends AbstractType
                         'class' => 'form-control',
                         'min' => '0',
                         'max' => '50000',
+                    ),
+                    'required' => false,
+                )
+            )
+            ->add(
+                'barge',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'max' => '5',
                     ),
                     'required' => false,
                 )

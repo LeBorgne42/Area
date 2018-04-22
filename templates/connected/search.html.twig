@@ -11,11 +11,11 @@
             <tbody>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.onde'|trans|raw }} x {{ app.user.getResearch().getOnde().getLevel() }}
+                    {{ 'title.utility'|trans|raw }} {{ 'research.level'|trans|raw }} {{ app.user.getResearch().getUtility().getLevel() }}
                 </th>
                 <td class="center-cells">
-                    {% if app.user %}
-                        <a class="btn btn-lg btn-info" href="{{ path('research_onde', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                    {% if app.user.getBitcoin() >= app.user.getResearch().getUtility().getBitcoin() and app.user.getResearch().getUtility().getLevel() < 3 %}
+                        <a class="btn btn-lg btn-info" href="{{ path('research_utility', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
                     {% endif %}
@@ -26,7 +26,7 @@
                     {{ 'title.terraformation'|trans|raw }} {% if app.user.getResearch().getTerraformation().getLevel() == false %}{{ 'research.canBe'|trans }}{% else %}{{ 'research.Activated'|trans }}{% endif %}
                 </th>
                 <td class="center-cells">
-                    {% if app.user %}
+                    {% if app.user.getBitcoin() >= app.user.getResearch().getTerraformation().getBitcoin() and app.user.getResearch().getTerraformation().getLevel() == 0  and app.user.getResearch().getUtility().getLevel() > 0 %}
                         <a class="btn btn-lg btn-info" href="{{ path('research_terraformation', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
@@ -35,22 +35,33 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.cargo'|trans|raw }} x {{ app.user.getResearch().getCargo().getLevel() }}
+                    {{ 'title.cargo'|trans|raw }} {{ 'research.level'|trans|raw }} {{ app.user.getResearch().getCargo().getLevel() }}
                 </th>
                 <td class="center-cells">
-                    {% if app.user %}
+                    {% if app.user.getBitcoin() >= app.user.getResearch().getCargo().getBitcoin() and app.user.getResearch().getCargo().getLevel() < 5  and app.user.getResearch().getUtility().getLevel() > 1 %}
                         <a class="btn btn-lg btn-info" href="{{ path('research_cargo', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
                     {% endif %}
                 </td>
             </tr>
+            <th class="tab-cells-name">
+                {{ 'title.barge'|trans|raw }} {% if app.user.getResearch().getBarge().getLevel() == false %}{{ 'research.canBe'|trans }}{% else %}{{ 'research.Activated'|trans }}{% endif %}
+            </th>
+            <td class="center-cells">
+                {% if app.user.getBitcoin() >= app.user.getResearch().getBarge().getBitcoin() and app.user.getResearch().getBarge().getLevel() == 0  and app.user.getResearch().getUtility().getLevel() == 3 %}
+                    <a class="btn btn-lg btn-info" href="{{ path('research_barge', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                {% else %}
+                    <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
+                {% endif %}
+            </td>
+            </tr>
             <tr>
                 <th class="tab-cells-name">
                     {{ 'title.recycleur'|trans|raw }} {% if app.user.getResearch().getRecycleur().getLevel() == false %}{{ 'research.canBe'|trans }}{% else %}{{ 'research.Activated'|trans }}{% endif %}
                 </th>
                 <td class="center-cells">
-                    {% if app.user %}
+                    {% if app.user.getBitcoin() >= app.user.getResearch().getRecycleur().getBitcoin() and app.user.getResearch().getRecycleur().getLevel() == 0  and app.user.getResearch().getUtility().getLevel() == 3 %}
                         <a class="btn btn-lg btn-info" href="{{ path('research_recyclage', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
@@ -59,11 +70,11 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.utility'|trans|raw }} x {{ app.user.getResearch().getUtility().getLevel() }}
+                    {{ 'title.onde'|trans|raw }} {{ 'research.level'|trans|raw }} {{ app.user.getResearch().getOnde().getLevel() }}
                 </th>
                 <td class="center-cells">
-                    {% if app.user %}
-                        <a class="btn btn-lg btn-info" href="{{ path('research_utility', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                    {% if app.user.getBitcoin() >= app.user.getResearch().getOnde().getBitcoin() and app.user.getResearch().getOnde().getLevel() < 5 %}
+                        <a class="btn btn-lg btn-info" href="{{ path('research_onde', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
                     {% endif %}
@@ -74,7 +85,7 @@
                     {{ 'title.hyperespace'|trans|raw }} {% if app.user.getResearch().getHyperespace().getLevel() == false %}{{ 'research.canBe'|trans }}{% else %}{{ 'research.Activated'|trans }}{% endif %}
                 </th>
                 <td class="center-cells">
-                    {% if app.user %}
+                    {% if app.user.getBitcoin() >= app.user.getResearch().getHyperespace().getBitcoin() and app.user.getResearch().getHyperespace().getLevel() == false %}
                         <a class="btn btn-lg btn-info" href="{{ path('research_hyperespace', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
@@ -88,10 +99,10 @@
             <tbody>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.demography'|trans|raw }} x {{ app.user.getResearch().getDemography().getLevel() }}
+                    {{ 'title.demography'|trans|raw }} {{ 'research.level'|trans|raw }} {{ app.user.getResearch().getDemography().getLevel() }}
                 </th>
                 <td class="center-cells">
-                    {% if app.user %}
+                    {% if app.user.getBitcoin() >= app.user.getResearch().getDemography().getBitcoin() and app.user.getResearch().getDemography().getLevel() < 5 %}
                         <a class="btn btn-lg btn-info" href="{{ path('research_demography', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
@@ -100,10 +111,10 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.discipline'|trans|raw }} x {{ app.user.getResearch().getDiscipline().getLevel() }}
+                    {{ 'title.discipline'|trans|raw }} {{ 'research.level'|trans|raw }} {{ app.user.getResearch().getDiscipline().getLevel() }}
                 </th>
                 <td class="center-cells">
-                    {% if app.user %}
+                    {% if app.user.getBitcoin() >= app.user.getResearch().getDiscipline().getBitcoin() and app.user.getResearch().getDemography().getLevel() > 0 and app.user.getResearch().getDiscipline().getLevel() < 3 %}
                         <a class="btn btn-lg btn-info" href="{{ path('research_discipline', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
@@ -117,10 +128,10 @@
             <tbody>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.armement'|trans|raw }} x {{ app.user.getResearch().getArmement().getLevel() }}
+                    {{ 'title.armement'|trans|raw }} {{ 'research.level'|trans|raw }} {{ app.user.getResearch().getArmement().getLevel() }}
                 </th>
                 <td class="center-cells">
-                    {% if app.user %}
+                    {% if app.user.getBitcoin() >= app.user.getResearch().getArmement().getBitcoin() and app.user.getResearch().getArmement().getLevel() < 5 %}
                         <a class="btn btn-lg btn-info" href="{{ path('research_armement', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
@@ -129,10 +140,10 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.missile'|trans|raw }} x {{ app.user.getResearch().getMissile().getLevel() }}
+                    {{ 'title.missile'|trans|raw }} {{ 'research.level'|trans|raw }} {{ app.user.getResearch().getMissile().getLevel() }}
                 </th>
                 <td class="center-cells">
-                    {% if app.user %}
+                    {% if app.user.getBitcoin() >= app.user.getResearch().getMissile().getBitcoin() and app.user.getResearch().getArmement().getLevel() > 0 and app.user.getResearch().getMissile().getLevel() < 3 %}
                         <a class="btn btn-lg btn-info" href="{{ path('research_missile', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
@@ -141,10 +152,10 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.laser'|trans|raw }} x {{ app.user.getResearch().getLaser().getLevel() }}
+                    {{ 'title.laser'|trans|raw }} {{ 'research.level'|trans|raw }} {{ app.user.getResearch().getLaser().getLevel() }}
                 </th>
                 <td class="center-cells">
-                    {% if app.user %}
+                    {% if app.user.getBitcoin() >= app.user.getResearch().getLaser().getBitcoin() and app.user.getResearch().getArmement().getLevel() > 2 and app.user.getResearch().getLaser().getLevel() < 3 %}
                         <a class="btn btn-lg btn-info" href="{{ path('research_laser', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
@@ -153,10 +164,10 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.plasma'|trans|raw }} x {{ app.user.getResearch().getPlasma().getLevel() }}
+                    {{ 'title.plasma'|trans|raw }} {{ 'research.level'|trans|raw }} {{ app.user.getResearch().getPlasma().getLevel() }}
                 </th>
                 <td class="center-cells">
-                    {% if app.user %}
+                    {% if app.user.getBitcoin() >= app.user.getResearch().getPlasma().getBitcoin() and app.user.getResearch().getArmement().getLevel() == 5 and app.user.getResearch().getPlasma().getLevel() < 3 %}
                         <a class="btn btn-lg btn-info" href="{{ path('research_plasma', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
@@ -170,10 +181,10 @@
             <tbody>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.industry'|trans|raw }} x {{ app.user.getResearch().getIndustry().getLevel() }}
+                    {{ 'title.industry'|trans|raw }} {{ 'research.level'|trans|raw }} {{ app.user.getResearch().getIndustry().getLevel() }}
                 </th>
                 <td class="center-cells">
-                    {% if app.user %}
+                    {% if app.user.getBitcoin() >= app.user.getResearch().getIndustry().getBitcoin() and app.user.getResearch().getIndustry().getLevel() < 5 %}
                         <a class="btn btn-lg btn-info" href="{{ path('research_industry', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
@@ -182,10 +193,10 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.lightShip'|trans|raw }} x {{ app.user.getResearch().getLightShip().getLevel() }}
+                    {{ 'title.lightShip'|trans|raw }} {{ 'research.level'|trans|raw }} {{ app.user.getResearch().getLightShip().getLevel() }}
                 </th>
                 <td class="center-cells">
-                    {% if app.user %}
+                    {% if app.user.getBitcoin() >= app.user.getResearch().getLightShip().getBitcoin() and app.user.getResearch().getLightShip().getLevel() < 5 and app.user.getResearch().getIndustry().getLevel() > 2 %}
                         <a class="btn btn-lg btn-info" href="{{ path('research_light_ship', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
@@ -194,10 +205,10 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.heavyShip'|trans|raw }} x {{ app.user.getResearch().getHeavyShip().getLevel() }}
+                    {{ 'title.heavyShip'|trans|raw }} {{ 'research.level'|trans|raw }} {{ app.user.getResearch().getHeavyShip().getLevel() }}
                 </th>
                 <td class="center-cells">
-                    {% if app.user %}
+                    {% if app.user.getBitcoin() >= app.user.getResearch().getHeavyShip().getBitcoin() and app.user.getResearch().getHeavyShip().getLevel() < 5 and app.user.getResearch().getIndustry().getLevel() == 5 %}
                         <a class="btn btn-lg btn-info" href="{{ path('research_heavy_ship', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>

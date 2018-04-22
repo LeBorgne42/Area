@@ -60,6 +60,12 @@ class Research
     protected $hyperespace;
 
     /**
+     * @ORM\OneToOne(targetEntity="Zearch_Barge", inversedBy="research", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\JoinColumn(name="barge_id", referencedColumnName="id")
+     */
+    protected $barge;
+
+    /**
      * @ORM\OneToOne(targetEntity="Zearch_Utility", inversedBy="research", fetch="EXTRA_LAZY", cascade={"persist"})
      * @ORM\JoinColumn(name="utility_id", referencedColumnName="id")
      */
@@ -367,6 +373,22 @@ class Research
     public function setPlasma($plasma): void
     {
         $this->plasma = $plasma;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBarge()
+    {
+        return $this->barge;
+    }
+
+    /**
+     * @param mixed $barge
+     */
+    public function setBarge($barge): void
+    {
+        $this->barge = $barge;
     }
     
     public function getId()

@@ -67,7 +67,7 @@ class ExplorerController extends Controller
 
         $terraformation = $user->getResearch()->getTerraformation();
         $userBt = $user->getBitcoin();
-        if(($userBt < $terraformation->getBitcoin() || $terraformation->getFinishAt() > $now) || $terraformation->getLevel() == 1) {
+        if(($userBt < $terraformation->getBitcoin() || $terraformation->getFinishAt() > $now) || ($terraformation->getLevel() == 1 || $user->getResearch()->getUtility()->getLevel() == 0)) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
 
@@ -99,7 +99,7 @@ class ExplorerController extends Controller
 
         $cargo = $user->getResearch()->getCargo();
         $userBt = $user->getBitcoin();
-        if(($userBt < $cargo->getBitcoin() || $cargo->getFinishAt() > $now) || $cargo->getLevel() == 5) {
+        if(($userBt < $cargo->getBitcoin() || $cargo->getFinishAt() > $now) || ($cargo->getLevel() == 5 || $user->getResearch()->getUtility()->getLevel() < 2)) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
         $cost = 2;
@@ -120,7 +120,7 @@ class ExplorerController extends Controller
     /**
      * @Route("/rechercher-recyclage/{idp}", name="research_recyclage", requirements={"idp"="\d+"})
      */
-    public function researchRecyclagenAction($idp)
+    public function researchRecyclageAction($idp)
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
@@ -135,7 +135,7 @@ class ExplorerController extends Controller
 
         $recyclage = $user->getResearch()->getRecycleur();
         $userBt = $user->getBitcoin();
-        if(($userBt < $recyclage->getBitcoin() || $recyclage->getFinishAt() > $now) || $recyclage->getLevel() == 1) {
+        if(($userBt < $recyclage->getBitcoin() || $recyclage->getFinishAt() > $now) || ($recyclage->getLevel() == 1 || $user->getResearch()->getUtility()->getLevel() < 3)) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
 
@@ -144,6 +144,38 @@ class ExplorerController extends Controller
         $recyclage->setFinishAt($now);
         $em->persist($user);
         $em->persist($recyclage);
+        $em->flush();
+
+        return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
+    }
+
+    /**
+     * @Route("/rechercher-barge/{idp}", name="research_barge", requirements={"idp"="\d+"})
+     */
+    public function researchBargeAction($idp)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $now = new DateTime();
+        $user = $this->getUser();
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $barge = $user->getResearch()->getBarge();
+        $userBt = $user->getBitcoin();
+        if(($userBt < $barge->getBitcoin() || $barge->getFinishAt() > $now) || ($barge->getLevel() == 1 || $user->getResearch()->getUtility()->getLevel() < 3)) {
+            return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
+        }
+
+        $user->setBitcoin($userBt - $barge->getBitcoin());
+        $barge->setLevel($barge->getLevel() + 1);
+        $barge->setFinishAt($now);
+        $em->persist($user);
+        $em->persist($barge);
         $em->flush();
 
         return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
@@ -167,7 +199,7 @@ class ExplorerController extends Controller
 
         $utility = $user->getResearch()->getUtility();
         $userBt = $user->getBitcoin();
-        if(($userBt < $utility->getBitcoin() || $utility->getFinishAt() > $now) || $utility->getLevel() == 5) {
+        if(($userBt < $utility->getBitcoin() || $utility->getFinishAt() > $now) || $utility->getLevel() == 3) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
         $cost = 2;

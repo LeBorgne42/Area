@@ -67,7 +67,7 @@ class SociologicController extends Controller
 
         $discipline = $user->getResearch()->getDiscipline();
         $userBt = $user->getBitcoin();
-        if(($userBt < $discipline->getBitcoin() || $discipline->getFinishAt() > $now) || $discipline->getLevel() == 5) {
+        if(($userBt < $discipline->getBitcoin() || $discipline->getFinishAt() > $now) || ($discipline->getLevel() == 3 || $user->getResearch()->getDemography()->getLevel() == 0)) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
         $cost = 2;

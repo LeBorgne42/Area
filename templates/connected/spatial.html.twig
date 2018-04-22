@@ -28,6 +28,14 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
+                    {{ 'spatial.recycleur'|trans }} x {{ usePlanet.getShip().getRecycleur().getAmount() }}
+                </th>
+                <td class="center-cells">
+                    {{ form_widget(form_spatialShip.recycleur) }}
+                </td>
+            </tr>
+            <tr>
+                <th class="tab-cells-name">
                     {{ 'spatial.hunter'|trans }} x {{ usePlanet.getShip().getHunter().getAmount() }}
                 </th>
                 <td class="center-cells">
@@ -40,6 +48,14 @@
                 </th>
                 <td class="center-cells">
                     {{ form_widget(form_spatialShip.fregate) }}
+                </td>
+            </tr>
+            <tr>
+                <th class="tab-cells-name">
+                    {{ 'spatial.barge'|trans }} x {{ usePlanet.getShip().getBarge().getAmount() }}
+                </th>
+                <td class="center-cells">
+                    {{ form_widget(form_spatialShip.barge) }}
                 </td>
             </tr>
             </tbody>

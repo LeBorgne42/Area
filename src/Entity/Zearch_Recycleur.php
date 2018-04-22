@@ -39,7 +39,7 @@ class Zearch_Recycleur
     protected $finishAt;
 
     /**
-     * @ORM\Column(name="constructTime",type="bigint")
+     * @ORM\Column(name="constructTime",type="integer")
      */
     protected $constructTime = 3100;
 

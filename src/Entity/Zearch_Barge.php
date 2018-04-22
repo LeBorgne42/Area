@@ -6,10 +6,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="z_hyperespace")
+ * @ORM\Table(name="z_barge")
  * @ORM\Entity
  */
-class Zearch_Hyperespace
+class Zearch_Barge
 {
     /**
      * @ORM\Column(type="integer")
@@ -19,14 +19,14 @@ class Zearch_Hyperespace
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="Research", mappedBy="hyperespace", fetch="EXTRA_LAZY")
+     * @ORM\OneToOne(targetEntity="Research", mappedBy="barge", fetch="EXTRA_LAZY")
      */
     protected $research;
 
     /**
      * @ORM\Column(name="bitcoin",type="integer")
      */
-    protected $bitcoin = 500000;
+    protected $bitcoin = 6500;
 
     /**
      * @ORM\Column(name="level",type="boolean")
@@ -41,7 +41,7 @@ class Zearch_Hyperespace
     /**
      * @ORM\Column(name="constructTime",type="integer")
      */
-    protected $constructTime = 604800;
+    protected $constructTime = 9000;
 
     /**
      * @return mixed

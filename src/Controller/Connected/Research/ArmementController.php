@@ -67,7 +67,7 @@ class ArmementController extends Controller
 
         $missile = $user->getResearch()->getMissile();
         $userBt = $user->getBitcoin();
-        if(($userBt < $missile->getBitcoin() || $missile->getFinishAt() > $now) || $missile->getLevel() == 5) {
+        if(($userBt < $missile->getBitcoin() || $missile->getFinishAt() > $now) || ($missile->getLevel() == 3 || $user->getResearch()->getArmement()->getLevel() < 0)) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
         $cost = 2;
@@ -103,7 +103,7 @@ class ArmementController extends Controller
 
         $laser = $user->getResearch()->getLaser();
         $userBt = $user->getBitcoin();
-        if(($userBt < $laser->getBitcoin() || $laser->getFinishAt() > $now) || $laser->getLevel() == 5) {
+        if(($userBt < $laser->getBitcoin() || $laser->getFinishAt() > $now) || ($laser->getLevel() == 3 || $user->getResearch()->getArmement()->getLevel() < 2)) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
         $cost = 2;
@@ -139,7 +139,7 @@ class ArmementController extends Controller
 
         $plasma = $user->getResearch()->getPlasma();
         $userBt = $user->getBitcoin();
-        if(($userBt < $plasma->getBitcoin() || $plasma->getFinishAt() > $now) || $plasma->getLevel() == 5) {
+        if(($userBt < $plasma->getBitcoin() || $plasma->getFinishAt() > $now) || ($plasma->getLevel() == 3 || $user->getResearch()->getArmement()->getLevel() < 4)) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
         $cost = 2;

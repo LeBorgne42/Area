@@ -24,10 +24,13 @@ use App\Entity\Zearch_Laser;
 use App\Entity\Zearch_Plasma;
 use App\Entity\Zearch_Cargo;
 use App\Entity\Zearch_Recycleur;
+use App\Entity\Zearch_Barge;
 use App\Entity\Yhip_Colonizer;
 use App\Entity\Yhip_Sonde;
 use App\Entity\Yhip_Hunter;
 use App\Entity\Yhip_Fregate;
+use App\Entity\Yhip_Barge;
+use App\Entity\Yhip_Recycleur;
 use App\Entity\Ship;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -71,10 +74,14 @@ class SecurityController extends Controller
 
             $ship = new Ship();
             $colonizer = new Yhip_Colonizer();
+            $vBarge = new Yhip_Barge();
+            $vRecycleur = new Yhip_Recycleur();
             $sonde = new Yhip_Sonde();
             $hunter = new Yhip_Hunter();
             $fregate = new Yhip_Fregate();
             $ship->setColonizer($colonizer);
+            $ship->setBarge($vBarge);
+            $ship->setRecycleur($vRecycleur);
             $ship->setSonde($sonde);
             $ship->setHunter($hunter);
             $ship->setFregate($fregate);
@@ -96,7 +103,8 @@ class SecurityController extends Controller
             $laser = new Zearch_Laser();
             $plasma = new Zearch_Plasma();
             $cargo = new Zearch_Cargo();
-            $recycleur = new Zearch_Recycleur();
+            $sRecycleur = new Zearch_Recycleur();
+            $sBarge = new Zearch_Barge();
             $research->setDemography($demography);
             $research->setDiscipline($discipline);
             $research->setHeavyShip($heavyShip);
@@ -111,7 +119,8 @@ class SecurityController extends Controller
             $research->setLaser($laser);
             $research->setPlasma($plasma);
             $research->setCargo($cargo);
-            $research->setRecycleur($recycleur);
+            $research->setRecycleur($sRecycleur);
+            $research->setBarge($sBarge);
             $em->persist($research);
             $user->setResearch($research);
             $rank = new Rank();

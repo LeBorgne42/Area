@@ -44,13 +44,25 @@ class SpatialController extends Controller
         if ($form_spatialShip->isSubmitted() && $form_spatialShip->isValid()) {
             /*$em->persist($ship);*/
             $colonizer = $usePlanet->getShip()->getColonizer();
+            $recycleur = $usePlanet->getShip()->getRecycleur();
+            $barge = $usePlanet->getShip()->getBarge();
             $sonde = $usePlanet->getShip()->getSonde();
             $hunter = $usePlanet->getShip()->getHunter();
             $fregate = $usePlanet->getShip()->getFregate();
-            $niobiumLess = ($colonizer->getNiobium() * $form_spatialShip->get('colonizer')->getData()) + ($sonde->getNiobium() * $form_spatialShip->get('sonde')->getData()) + ($hunter->getNiobium() * $form_spatialShip->get('hunter')->getData()) + ($fregate->getNiobium() * $form_spatialShip->get('fregate')->getData());
-            $waterLess =  ($colonizer->getWater() * $form_spatialShip->get('colonizer')->getData()) + ($hunter->getWater() * $form_spatialShip->get('hunter')->getData()) + ($fregate->getWater() * $form_spatialShip->get('fregate')->getData());
-            $bitcoinLess = ($colonizer->getBitcoin() * $form_spatialShip->get('colonizer')->getData());
+            $niobiumLess = ($colonizer->getNiobium() * $form_spatialShip->get('colonizer')->getData()) + ($recycleur->getNiobium() * $form_spatialShip->get('recycleur')->getData()) + ($barge->getNiobium() * $form_spatialShip->get('barge')->getData()) + ($sonde->getNiobium() * $form_spatialShip->get('sonde')->getData()) + ($hunter->getNiobium() * $form_spatialShip->get('hunter')->getData()) + ($fregate->getNiobium() * $form_spatialShip->get('fregate')->getData());
+            $waterLess =  ($colonizer->getWater() * $form_spatialShip->get('colonizer')->getData()) + ($recycleur->getWater() * $form_spatialShip->get('recycleur')->getData()) + ($barge->getWater() * $form_spatialShip->get('barge')->getData()) + ($hunter->getWater() * $form_spatialShip->get('hunter')->getData()) + ($fregate->getWater() * $form_spatialShip->get('fregate')->getData());
+            $bitcoinLess = ($colonizer->getBitcoin() * $form_spatialShip->get('colonizer')->getData()) + ($barge->getBitcoin() * $form_spatialShip->get('barge')->getData());
+
+            if (($usePlanet->getNiobium() < $niobiumLess || $usePlanet->getWater() < $waterLess) || $user->getBitcoin() < $bitcoinLess) {
+                return $this->render('connected/spatial.html.twig', [
+                    'usePlanet' => $usePlanet,
+                    'form_spatialShip' => $form_spatialShip->createView(),
+                ]);
+            }
+            
             $colonizer->setAmount($colonizer->getAmount() + $form_spatialShip->get('colonizer')->getData());
+            $recycleur->setAmount($recycleur->getAmount() + $form_spatialShip->get('recycleur')->getData());
+            $barge->setAmount($barge->getAmount() + $form_spatialShip->get('barge')->getData());
             $sonde->setAmount($sonde->getAmount() + $form_spatialShip->get('sonde')->getData());
             $hunter->setAmount($hunter->getAmount() + $form_spatialShip->get('hunter')->getData());
             $fregate->setAmount($fregate->getAmount() + $form_spatialShip->get('fregate')->getData());
@@ -58,6 +70,8 @@ class SpatialController extends Controller
             $usePlanet->setWater($usePlanet->getWater() - $waterLess);
             $user->setBitcoin($user->getBitcoin() - $bitcoinLess);
             $em->persist($colonizer);
+            $em->persist($barge);
+            $em->persist($recycleur);
             $em->persist($sonde);
             $em->persist($hunter);
             $em->persist($fregate);

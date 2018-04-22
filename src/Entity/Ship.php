@@ -46,6 +46,18 @@ class Ship
     protected $colonizer;
 
     /**
+     * @ORM\OneToOne(targetEntity="Yhip_Recycleur", inversedBy="ship", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\JoinColumn(name="recycleur_id", referencedColumnName="id")
+     */
+    protected $recycleur;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Yhip_Barge", inversedBy="ship", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\JoinColumn(name="barge_id", referencedColumnName="id")
+     */
+    protected $barge;
+
+    /**
      * @ORM\OneToOne(targetEntity="Yhip_Hunter", inversedBy="ship", fetch="EXTRA_LAZY", cascade={"persist"})
      * @ORM\JoinColumn(name="hunter_id", referencedColumnName="id")
      */
@@ -167,6 +179,38 @@ class Ship
     public function setSonde($sonde): void
     {
         $this->sonde = $sonde;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBarge()
+    {
+        return $this->barge;
+    }
+
+    /**
+     * @param mixed $barge
+     */
+    public function setBarge($barge): void
+    {
+        $this->barge = $barge;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRecycleur()
+    {
+        return $this->recycleur;
+    }
+
+    /**
+     * @param mixed $recycleur
+     */
+    public function setRecycleur($recycleur): void
+    {
+        $this->recycleur = $recycleur;
     }
 
     public function getId()
