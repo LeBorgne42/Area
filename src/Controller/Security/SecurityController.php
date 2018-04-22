@@ -24,6 +24,11 @@ use App\Entity\Zearch_Laser;
 use App\Entity\Zearch_Plasma;
 use App\Entity\Zearch_Cargo;
 use App\Entity\Zearch_Recycleur;
+use App\Entity\Yhip_Colonizer;
+use App\Entity\Yhip_Sonde;
+use App\Entity\Yhip_Hunter;
+use App\Entity\Yhip_Fregate;
+use App\Entity\Ship;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -63,6 +68,19 @@ class SecurityController extends Controller
             } else {
                 return $this->redirectToRoute('logout');
             }
+
+            $ship = new Ship();
+            $colonizer = new Yhip_Colonizer();
+            $sonde = new Yhip_Sonde();
+            $hunter = new Yhip_Hunter();
+            $fregate = new Yhip_Fregate();
+            $ship->setColonizer($colonizer);
+            $ship->setSonde($sonde);
+            $ship->setHunter($hunter);
+            $ship->setFregate($fregate);
+            $em->persist($ship);
+            $planet->setShip($ship);
+            $em->persist($planet);
             $research = new Research();
             $demography = new Zearch_Demography();
             $discipline = new Zearch_Discipline();

@@ -34,14 +34,9 @@ class Yhip_Fregate
     protected $water = 450;
 
     /**
-     * @ORM\Column(name="bitcoin",type="integer")
-     */
-    protected $bitcoin = 0;
-
-    /**
      * @ORM\Column(name="amount",type="bigint")
      */
-    protected $amount;
+    protected $amount = 0;
 
     /**
      * @ORM\Column(name="finishAt",type="datetime", nullable=true)
@@ -56,7 +51,7 @@ class Yhip_Fregate
     /**
      * @ORM\Column(name="signature",type="integer")
      */
-    protected $signature = 3;
+    protected $signature = 85;
 
     /**
      * @ORM\Column(name="armor",type="integer")
@@ -139,22 +134,6 @@ class Yhip_Fregate
     public function setWater($water): void
     {
         $this->water = $water;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getBitcoin()
-    {
-        return $this->bitcoin;
-    }
-
-    /**
-     * @param mixed $bitcoin
-     */
-    public function setBitcoin($bitcoin): void
-    {
-        $this->bitcoin = $bitcoin;
     }
 
     /**

@@ -34,14 +34,9 @@ class Yhip_Hunter
     protected $water = 5;
 
     /**
-     * @ORM\Column(name="bitcoin",type="integer")
-     */
-    protected $bitcoin = 0;
-
-    /**
      * @ORM\Column(name="amount",type="bigint")
      */
-    protected $amount;
+    protected $amount = 0;
 
     /**
      * @ORM\Column(name="finishAt",type="datetime", nullable=true)
@@ -51,7 +46,7 @@ class Yhip_Hunter
     /**
      * @ORM\Column(name="constructTime",type="bigint")
      */
-    protected $constructTime = 20;
+    protected $constructTime = 40;
 
     /**
      * @ORM\Column(name="signature",type="integer")
@@ -139,22 +134,6 @@ class Yhip_Hunter
     public function setWater($water): void
     {
         $this->water = $water;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getBitcoin()
-    {
-        return $this->bitcoin;
-    }
-
-    /**
-     * @param mixed $bitcoin
-     */
-    public function setBitcoin($bitcoin): void
-    {
-        $this->bitcoin = $bitcoin;
     }
 
     /**

@@ -54,10 +54,10 @@ class Planet
     protected $orbite;
 
     /**
-     * @ORM\OneToMany(targetEntity="Ship", mappedBy="planet", fetch="EXTRA_LAZY")
+     * @ORM\OneToOne(targetEntity="Ship", mappedBy="planet", fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(name="ship_id", referencedColumnName="id")
      */
-    protected $ships;
+    protected $ship;
 
     /**
      * @ORM\OneToOne(targetEntity="Soldier", inversedBy="planet", fetch="EXTRA_LAZY")
@@ -425,6 +425,22 @@ class Planet
     }
 
     /**
+     * @return mixed
+     */
+    public function getShip()
+    {
+        return $this->ship;
+    }
+
+    /**
+     * @param mixed $ship
+     */
+    public function setShip($ship): void
+    {
+        $this->ship = $ship;
+    }
+
+    /**
      * Set name
      *
      * @param string $name
@@ -436,29 +452,5 @@ class Planet
         $this->name = $name;
 
         return $this;
-    }
-
-    /**
-     * Add ship
-     *
-     * @param \App\Entity\Ship $ship
-     *
-     * @return Planet
-     */
-    public function addShip(\App\Entity\Ship $ship)
-    {
-        $this->ships[] = $ship;
-
-        return $this;
-    }
-
-    /**
-     * Remove ship
-     *
-     * @param \App\Entity\Ship $ship
-     */
-    public function removeShip(\App\Entity\Ship $ship)
-    {
-        $this->ships->removeElement($ship);
     }
 }

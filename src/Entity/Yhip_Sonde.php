@@ -6,10 +6,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="y_colonizer")
+ * @ORM\Table(name="y_sonde")
  * @ORM\Entity
  */
-class Yhip_Colonizer
+class Yhip_Sonde
 {
     /**
      * @ORM\Column(type="integer")
@@ -19,24 +19,19 @@ class Yhip_Colonizer
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="Ship", mappedBy="colonizer", fetch="EXTRA_LAZY")
+     * @ORM\OneToOne(targetEntity="Ship", mappedBy="sonde", fetch="EXTRA_LAZY")
      */
     protected $ship;
 
     /**
      * @ORM\Column(name="niobium",type="integer")
      */
-    protected $niobium = 10000;
+    protected $niobium = 5;
 
     /**
      * @ORM\Column(name="water",type="integer")
      */
-    protected $water = 7500;
-
-    /**
-     * @ORM\Column(name="bitcoin",type="integer")
-     */
-    protected $bitcoin = 5000;
+    protected $water = 0;
 
     /**
      * @ORM\Column(name="amount",type="bigint")
@@ -51,17 +46,17 @@ class Yhip_Colonizer
     /**
      * @ORM\Column(name="constructTime",type="bigint")
      */
-    protected $constructTime = 3600;
+    protected $constructTime = 5;
 
     /**
      * @ORM\Column(name="signature",type="integer")
      */
-    protected $signature = 200;
+    protected $signature = 1;
 
     /**
      * @ORM\Column(name="armor",type="integer")
      */
-    protected $armor = 0;
+    protected $armor = 1;
 
     /**
      * @ORM\Column(name="shield",type="integer")
@@ -91,7 +86,7 @@ class Yhip_Colonizer
     /**
      * @ORM\Column(name="speed",type="integer")
      */
-    protected $speed = 2;
+    protected $speed = 0.03;
 
     /**
      * @return mixed
@@ -139,22 +134,6 @@ class Yhip_Colonizer
     public function setWater($water): void
     {
         $this->water = $water;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getBitcoin()
-    {
-        return $this->bitcoin;
-    }
-
-    /**
-     * @param mixed $bitcoin
-     */
-    public function setBitcoin($bitcoin): void
-    {
-        $this->bitcoin = $bitcoin;
     }
 
     /**
@@ -208,6 +187,22 @@ class Yhip_Colonizer
     /**
      * @return mixed
      */
+    public function getSignature()
+    {
+        return $this->signature;
+    }
+
+    /**
+     * @param mixed $signature
+     */
+    public function setSignature($signature): void
+    {
+        $this->signature = $signature;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getArmor()
     {
         return $this->armor;
@@ -219,22 +214,6 @@ class Yhip_Colonizer
     public function setArmor($armor): void
     {
         $this->armor = $armor;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getSpeed()
-    {
-        return $this->speed;
-    }
-
-    /**
-     * @param mixed $speed
-     */
-    public function setSpeed($speed): void
-    {
-        $this->speed = $speed;
     }
 
     /**
@@ -304,6 +283,22 @@ class Yhip_Colonizer
     /**
      * @return mixed
      */
+    public function getSpeed()
+    {
+        return $this->speed;
+    }
+
+    /**
+     * @param mixed $speed
+     */
+    public function setSpeed($speed): void
+    {
+        $this->speed = $speed;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getCargo()
     {
         return $this->cargo;
@@ -315,22 +310,6 @@ class Yhip_Colonizer
     public function setCargo($cargo): void
     {
         $this->cargo = $cargo;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getSignature()
-    {
-        return $this->signature;
-    }
-
-    /**
-     * @param mixed $signature
-     */
-    public function setSignature($signature): void
-    {
-        $this->signature = $signature;
     }
 
     public function getId()

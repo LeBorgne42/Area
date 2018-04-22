@@ -19,22 +19,25 @@ class Ship
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Fleet", inversedBy="ships", fetch="EXTRA_LAZY")
-     * @ORM\JoinColumn(name="fleet_id", referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="Fleet", inversedBy="ship", fetch="EXTRA_LAZY")
      */
     protected $fleet;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Orbite", inversedBy="ships", fetch="EXTRA_LAZY")
-     * @ORM\JoinColumn(name="orbite_id", referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="Orbite", inversedBy="ship", fetch="EXTRA_LAZY")
      */
     protected $orbite;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Planet", inversedBy="ships", fetch="EXTRA_LAZY")
-     * @ORM\JoinColumn(name="planet_id", referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="Planet", inversedBy="ship", fetch="EXTRA_LAZY")
      */
     protected $planet;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Yhip_Sonde", inversedBy="ship", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\JoinColumn(name="sonde_id", referencedColumnName="id")
+     */
+    protected $sonde;
 
     /**
      * @ORM\OneToOne(targetEntity="Yhip_Colonizer", inversedBy="ship", fetch="EXTRA_LAZY", cascade={"persist"})
@@ -148,6 +151,22 @@ class Ship
     public function setFregate($fregate): void
     {
         $this->fregate = $fregate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSonde()
+    {
+        return $this->sonde;
+    }
+
+    /**
+     * @param mixed $sonde
+     */
+    public function setSonde($sonde): void
+    {
+        $this->sonde = $sonde;
     }
 
     public function getId()

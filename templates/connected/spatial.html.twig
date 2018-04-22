@@ -5,10 +5,46 @@
 {% block title %}{{ 'title'|trans }}{% endblock %}
 
 {% block body %}
-    <div class="row">
-        <div class="offset-1 col-10">
-            <div class="front-block">
-            </div>
-        </div>
+    <div class="front-block spatial">
+        {{ form_start(form_spatialShip) }}
+        <div class="block-title"><h2>{{ 'spatial.constructShip'|trans }}</h2></div>
+        <table class="table table-striped table-bordered table-dark text-center">
+            <tbody>
+            <tr>
+                <th class="tab-cells-name">
+                    {{ 'spatial.sonde'|trans }} x {{ usePlanet.getShip().getSonde().getAmount() }}
+                </th>
+                <td class="center-cells">
+                    {{ form_widget(form_spatialShip.sonde) }}
+                </td>
+            </tr>
+            <tr>
+                <th class="tab-cells-name">
+                    {{ 'spatial.colonizer'|trans }} x {{ usePlanet.getShip().getColonizer().getAmount() }}
+                </th>
+                <td class="center-cells">
+                    {{ form_widget(form_spatialShip.colonizer) }}
+                </td>
+            </tr>
+            <tr>
+                <th class="tab-cells-name">
+                    {{ 'spatial.hunter'|trans }} x {{ usePlanet.getShip().getHunter().getAmount() }}
+                </th>
+                <td class="center-cells">
+                    {{ form_widget(form_spatialShip.hunter) }}
+                </td>
+            </tr>
+            <tr>
+                <th class="tab-cells-name">
+                    {{ 'spatial.fregate'|trans }} x {{ usePlanet.getShip().getFregate().getAmount() }}
+                </th>
+                <td class="center-cells">
+                    {{ form_widget(form_spatialShip.fregate) }}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        {{ form_widget(form_spatialShip.sendForm,{attr: { class: 'btn btn-lg btn-info'}}) }}
+        {{ form_end(form_spatialShip) }}
     </div>
 {% endblock %}
