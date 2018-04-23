@@ -524,7 +524,7 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function addShip(\App\Entity\Fleet $fleet)
+    public function addFleet(\App\Entity\Fleet $fleet)
     {
         $this->fleets[] = $fleet;
 
@@ -536,7 +536,7 @@ class User implements UserInterface, \Serializable
      *
      * @param \App\Entity\Fleet $fleet
      */
-    public function removeShip(\App\Entity\Fleet $fleet)
+    public function removeFleet(\App\Entity\Fleet $fleet)
     {
         $this->fleets->removeElement($fleet);
     }

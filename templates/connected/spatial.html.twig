@@ -8,11 +8,11 @@
     <div class="front-block spatial">
         {{ form_start(form_spatialShip) }}
         <div class="block-title"><h2>{{ 'spatial.constructShip'|trans }}</h2></div>
-        <table class="table table-striped table-bordered table-dark text-center">
+        <table class="table table-striped table-bordered table-dark">
             <tbody>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'spatial.sonde'|trans }} x {{ usePlanet.getShip().getSonde().getAmount() }}
+                    {{ 'spatial.sonde'|trans }} x {{ usePlanet.getShip().getSonde().getAmount() }} <span class="float-right"><span class="ml-5">{{ usePlanet.getShip().getSonde().getNiobium() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span></span>
                 </th>
                 <td class="center-cells">
                     {{ form_widget(form_spatialShip.sonde) }}
@@ -20,7 +20,7 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'spatial.colonizer'|trans }} x {{ usePlanet.getShip().getColonizer().getAmount() }}
+                    {{ 'spatial.colonizer'|trans }} x {{ usePlanet.getShip().getColonizer().getAmount() }} <span class="float-right"><span class="ml-5">{{ usePlanet.getShip().getColonizer().getNiobium() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3">{{ usePlanet.getShip().getColonizer().getWater() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span><span class="ml-3">{{ usePlanet.getShip().getColonizer().getBitcoin() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></span></span>
                 </th>
                 <td class="center-cells">
                     {{ form_widget(form_spatialShip.colonizer) }}
@@ -28,7 +28,7 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'spatial.recycleur'|trans }} x {{ usePlanet.getShip().getRecycleur().getAmount() }}
+                    {{ 'spatial.recycleur'|trans }} x {{ usePlanet.getShip().getRecycleur().getAmount() }} <span class="float-right"><span class="ml-5">{{ usePlanet.getShip().getRecycleur().getNiobium() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3">{{ usePlanet.getShip().getRecycleur().getWater() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></span>
                 </th>
                 <td class="center-cells">
                     {{ form_widget(form_spatialShip.recycleur) }}
@@ -36,7 +36,7 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'spatial.hunter'|trans }} x {{ usePlanet.getShip().getHunter().getAmount() }}
+                    {{ 'spatial.hunter'|trans }} x {{ usePlanet.getShip().getHunter().getAmount() }} <span class="float-right"><span class="ml-5">{{ usePlanet.getShip().getHunter().getNiobium() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3">{{ usePlanet.getShip().getHunter().getWater() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></span>
                 </th>
                 <td class="center-cells">
                     {{ form_widget(form_spatialShip.hunter) }}
@@ -44,7 +44,7 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'spatial.fregate'|trans }} x {{ usePlanet.getShip().getFregate().getAmount() }}
+                    {{ 'spatial.fregate'|trans }} x {{ usePlanet.getShip().getFregate().getAmount() }} <span class="float-right"><span class="ml-5">{{ usePlanet.getShip().getFregate().getNiobium() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3">{{ usePlanet.getShip().getFregate().getWater() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></span>
                 </th>
                 <td class="center-cells">
                     {{ form_widget(form_spatialShip.fregate) }}
@@ -52,7 +52,7 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'spatial.barge'|trans }} x {{ usePlanet.getShip().getBarge().getAmount() }}
+                    {{ 'spatial.barge'|trans }} x {{ usePlanet.getShip().getBarge().getAmount() }} <span class="float-right"><span class="ml-5">{{ usePlanet.getShip().getBarge().getNiobium() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3">{{ usePlanet.getShip().getBarge().getWater() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span><span class="ml-3">{{ usePlanet.getShip().getBarge().getBitcoin() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></span></span>
                 </th>
                 <td class="center-cells">
                     {{ form_widget(form_spatialShip.barge) }}
@@ -60,7 +60,46 @@
             </tr>
             </tbody>
         </table>
-        {{ form_widget(form_spatialShip.sendForm,{attr: { class: 'btn btn-lg btn-info'}}) }}
+        {{ form_widget(form_spatialShip.sendForm,{attr: { class: 'btn btn-lg btn-info float-right'}}) }}
         {{ form_end(form_spatialShip) }}
+    </div>
+    <div class="front-block display-fleet">
+        {{ form_start(form_spatialShip) }}
+        <div class="block-title"><h2>{{ 'spatial.orbiteFlotte'|trans }} <a class="btn btn-lg btn-info float-right" href="{{ path('create_fleet', {'idp': usePlanet.getId()}) }}" data-toggle="modal" data-target="#createModal"><span>{{ 'spatial.createFlotte'|trans }}</span></a></h2></div>
+        <table class="table table-striped table-bordered table-dark">
+            <tbody>
+            <tr>
+                <th class="tab-cells-name text-center">
+                    {{ 'spatial.fleetName'|trans }}
+                </th>
+                <td class="center-cells text-center">
+                    {{ 'spatial.fleetShips'|trans }}
+                </td>
+                <td class="center-cells text-center">
+                    {{ 'spatial.fleetSignature'|trans }}
+                </td>
+            </tr>
+            {% for fleet in usePlanet.getFleets() %}
+                <tr>
+                    <th class="tab-cells-name">
+                       "{{  fleet.getName() }}" <a class="ml-3" href="{{ path('spatial', {'idp': usePlanet.getId()}) }}"><span>{{ 'spatial.seeFlotte'|trans }}</span></a>
+                    </th>
+                    <td class="center-cells text-center">
+                        {{ fleet.getNbrShips() }}
+                    </td>
+                    <td class="center-cells text-center">
+                        {{ fleet.getNbrSignatures() }}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+            </div>
+        </div>
     </div>
 {% endblock %}

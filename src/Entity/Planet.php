@@ -48,10 +48,9 @@ class Planet
     protected $building;
 
     /**
-     * @ORM\OneToOne(targetEntity="Orbite", inversedBy="planet", fetch="EXTRA_LAZY")
-     * @ORM\JoinColumn(name="orbite_id", referencedColumnName="id")
+     * @ORM\OneToMany(targetEntity="Fleet", mappedBy="planet", fetch="EXTRA_LAZY")
      */
-    protected $orbite;
+    protected $fleets;
 
     /**
      * @ORM\OneToOne(targetEntity="Ship", mappedBy="planet", fetch="EXTRA_LAZY")
@@ -173,6 +172,30 @@ class Planet
     }
 
     /**
+     * Add fleet
+     *
+     * @param \App\Entity\Fleet $fleet
+     *
+     * @return Planet
+     */
+    public function addFleet(\App\Entity\Fleet $fleet)
+    {
+        $this->fleets[] = $fleet;
+
+        return $this;
+    }
+
+    /**
+     * Remove fleet
+     *
+     * @param \App\Entity\Fleet $fleet
+     */
+    public function remove(\App\Entity\Fleet $fleet)
+    {
+        $this->fleets->removeElement($fleet);
+    }
+
+    /**
      * @return \App\Entity\User
      */
     public function getUser()
@@ -237,22 +260,6 @@ class Planet
     public function setBuilding($building): void
     {
         $this->building = $building;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getOrbite()
-    {
-        return $this->orbite;
-    }
-
-    /**
-     * @param mixed $orbite
-     */
-    public function setOrbite($orbite): void
-    {
-        $this->orbite = $orbite;
     }
 
     /**
@@ -438,6 +445,32 @@ class Planet
     public function setShip($ship): void
     {
         $this->ship = $ship;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFleets()
+    {
+        return $this->fleets;
+    }
+
+    /**
+     * @param mixed $fleets
+     */
+    public function setFleets($fleets): void
+    {
+        $this->fleets = $fleets;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNbrFleets()
+    {
+        $nbr = count($this->fleets);
+
+        return $nbr;
     }
 
     /**

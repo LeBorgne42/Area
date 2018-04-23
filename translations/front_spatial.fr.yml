@@ -1,10 +1,20 @@
 title: 'Chantier spatial'
 spatial.constructShip: 'Construction de vaisseaux'
-spatial.sonde: 'Sonde'
+spatial.sonde: Sonde
 spatial.colonizer: 'Vaisseau terraformeur'
-spatial.recycleur: 'Recycleur'
+spatial.recycleur: Recycleur
 spatial.barge: 'Barge d''invasion'
-spatial.hunter: 'Chasseur'
-spatial.fregate: 'Fregate'
-form.construct: 'Construire'
-form.nbr: 'Nombre'
+spatial.hunter: Chasseur
+spatial.fregate: Fregate
+form.construct: Construire
+form.nbr: Nombre
+niobiumImg: Niobium
+waterImg: Water
+bitcoinImg: Bitcoin
+spatial.orbiteFlotte: 'Flotte en orbite'
+spatial.createFlotte: 'Créer une nouvelle flotte'
+spatial.createFleet: 'Choix des vaisseaux'
+spatial.seeFlotte: 'gerer flotte'
+spatial.fleetName: 'Nom de flotte'
+spatial.fleetShips: Vaisseaux
+spatial.fleetSignature: Signature

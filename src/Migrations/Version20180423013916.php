@@ -8,7 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20180422160541 extends AbstractMigration
+class Version20180423013916 extends AbstractMigration
 {
     public function up(Schema $schema)
     {
@@ -17,8 +17,7 @@ class Version20180422160541 extends AbstractMigration
 
         $this->addSql('CREATE TABLE ally_war (id INT AUTO_INCREMENT NOT NULL, ally_id INT DEFAULT NULL, allyTag VARCHAR(5) NOT NULL, signedAt DATETIME NOT NULL, accepted TINYINT(1) NOT NULL, INDEX IDX_BEBC3F951C6E3E76 (ally_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE z_terraformation (id INT AUTO_INCREMENT NOT NULL, bitcoin INT NOT NULL, level TINYINT(1) NOT NULL, finishAt DATETIME DEFAULT NULL, constructTime INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE orbite (id INT AUTO_INCREMENT NOT NULL, ship_id INT DEFAULT NULL, UNIQUE INDEX UNIQ_6BD04981C256317D (ship_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE fleet (id INT AUTO_INCREMENT NOT NULL, user_id INT DEFAULT NULL, ship_id INT DEFAULT NULL, soldier_id INT DEFAULT NULL, worker_id INT DEFAULT NULL, scientist_id INT DEFAULT NULL, INDEX IDX_A05E1E47A76ED395 (user_id), UNIQUE INDEX UNIQ_A05E1E47C256317D (ship_id), UNIQUE INDEX UNIQ_A05E1E47A38C1700 (soldier_id), UNIQUE INDEX UNIQ_A05E1E476B20BA36 (worker_id), UNIQUE INDEX UNIQ_A05E1E47EBA327D6 (scientist_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE fleet (id INT AUTO_INCREMENT NOT NULL, user_id INT DEFAULT NULL, planet_id INT DEFAULT NULL, ship_id INT DEFAULT NULL, soldier_id INT DEFAULT NULL, worker_id INT DEFAULT NULL, scientist_id INT DEFAULT NULL, name VARCHAR(15) NOT NULL, INDEX IDX_A05E1E47A76ED395 (user_id), INDEX IDX_A05E1E47A25E9820 (planet_id), UNIQUE INDEX UNIQ_A05E1E47C256317D (ship_id), UNIQUE INDEX UNIQ_A05E1E47A38C1700 (soldier_id), UNIQUE INDEX UNIQ_A05E1E476B20BA36 (worker_id), UNIQUE INDEX UNIQ_A05E1E47EBA327D6 (scientist_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE z_demography (id INT AUTO_INCREMENT NOT NULL, bitcoin INT NOT NULL, level INT NOT NULL, finishAt DATETIME DEFAULT NULL, constructTime BIGINT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE ally_allied (id INT AUTO_INCREMENT NOT NULL, ally_id INT DEFAULT NULL, allyTag VARCHAR(5) NOT NULL, signedAt DATETIME NOT NULL, accepted TINYINT(1) NOT NULL, INDEX IDX_161AB9BB1C6E3E76 (ally_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE y_colonizer (id INT AUTO_INCREMENT NOT NULL, niobium INT NOT NULL, water INT NOT NULL, bitcoin INT NOT NULL, amount BIGINT NOT NULL, finishAt DATETIME DEFAULT NULL, constructTime BIGINT NOT NULL, signature INT NOT NULL, armor INT NOT NULL, shield INT NOT NULL, missile INT NOT NULL, laser INT NOT NULL, plasma INT NOT NULL, cargo INT NOT NULL, speed INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
@@ -26,10 +25,10 @@ class Version20180422160541 extends AbstractMigration
         $this->addSql('CREATE TABLE x_buildSearch (id INT AUTO_INCREMENT NOT NULL, niobium INT NOT NULL, water INT NOT NULL, production NUMERIC(9, 5) NOT NULL, level INT NOT NULL, finishAt DATETIME DEFAULT NULL, constructTime BIGINT NOT NULL, ground INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE soldier (id INT AUTO_INCREMENT NOT NULL, amount BIGINT NOT NULL, life INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE x_lightUsine (id INT AUTO_INCREMENT NOT NULL, niobium INT NOT NULL, water INT NOT NULL, level TINYINT(1) NOT NULL, finishAt DATETIME DEFAULT NULL, constructTime BIGINT NOT NULL, ground INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE planet (id INT AUTO_INCREMENT NOT NULL, user_id INT DEFAULT NULL, building_id INT DEFAULT NULL, orbite_id INT DEFAULT NULL, ship_id INT DEFAULT NULL, soldier_id INT DEFAULT NULL, worker_id INT DEFAULT NULL, scientist_id INT DEFAULT NULL, sector_id INT DEFAULT NULL, name VARCHAR(15) DEFAULT NULL, niobium NUMERIC(28, 5) NOT NULL, water NUMERIC(28, 5) NOT NULL, position INT NOT NULL, ground INT DEFAULT NULL, groundPlace INT DEFAULT NULL, sky INT DEFAULT NULL, skyPlace INT DEFAULT NULL, empty TINYINT(1) NOT NULL, imageName VARCHAR(20) DEFAULT NULL, INDEX IDX_68136AA5A76ED395 (user_id), UNIQUE INDEX UNIQ_68136AA54D2A7E12 (building_id), UNIQUE INDEX UNIQ_68136AA521DE9274 (orbite_id), UNIQUE INDEX UNIQ_68136AA5C256317D (ship_id), UNIQUE INDEX UNIQ_68136AA5A38C1700 (soldier_id), UNIQUE INDEX UNIQ_68136AA56B20BA36 (worker_id), UNIQUE INDEX UNIQ_68136AA5EBA327D6 (scientist_id), INDEX IDX_68136AA5DE95C867 (sector_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE planet (id INT AUTO_INCREMENT NOT NULL, user_id INT DEFAULT NULL, building_id INT DEFAULT NULL, ship_id INT DEFAULT NULL, soldier_id INT DEFAULT NULL, worker_id INT DEFAULT NULL, scientist_id INT DEFAULT NULL, sector_id INT DEFAULT NULL, name VARCHAR(15) DEFAULT NULL, niobium NUMERIC(28, 5) NOT NULL, water NUMERIC(28, 5) NOT NULL, position INT NOT NULL, ground INT DEFAULT NULL, groundPlace INT DEFAULT NULL, sky INT DEFAULT NULL, skyPlace INT DEFAULT NULL, empty TINYINT(1) NOT NULL, imageName VARCHAR(20) DEFAULT NULL, INDEX IDX_68136AA5A76ED395 (user_id), UNIQUE INDEX UNIQ_68136AA54D2A7E12 (building_id), UNIQUE INDEX UNIQ_68136AA5C256317D (ship_id), UNIQUE INDEX UNIQ_68136AA5A38C1700 (soldier_id), UNIQUE INDEX UNIQ_68136AA56B20BA36 (worker_id), UNIQUE INDEX UNIQ_68136AA5EBA327D6 (scientist_id), INDEX IDX_68136AA5DE95C867 (sector_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE y_recycleur (id INT AUTO_INCREMENT NOT NULL, niobium INT NOT NULL, water INT NOT NULL, bitcoin INT NOT NULL, amount BIGINT NOT NULL, finishAt DATETIME DEFAULT NULL, constructTime BIGINT NOT NULL, signature INT NOT NULL, armor INT NOT NULL, shield INT NOT NULL, missile INT NOT NULL, laser INT NOT NULL, plasma INT NOT NULL, cargo INT NOT NULL, speed INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE galaxy (id INT AUTO_INCREMENT NOT NULL, position INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE ship (id INT AUTO_INCREMENT NOT NULL, fleet_id INT DEFAULT NULL, orbite_id INT DEFAULT NULL, planet_id INT DEFAULT NULL, sonde_id INT DEFAULT NULL, colonizer_id INT DEFAULT NULL, recycleur_id INT DEFAULT NULL, barge_id INT DEFAULT NULL, hunter_id INT DEFAULT NULL, fregate_id INT DEFAULT NULL, UNIQUE INDEX UNIQ_FA30EB244B061DF9 (fleet_id), UNIQUE INDEX UNIQ_FA30EB2421DE9274 (orbite_id), UNIQUE INDEX UNIQ_FA30EB24A25E9820 (planet_id), UNIQUE INDEX UNIQ_FA30EB24F1B7D1A2 (sonde_id), UNIQUE INDEX UNIQ_FA30EB24D726A9F2 (colonizer_id), UNIQUE INDEX UNIQ_FA30EB24D7B82D29 (recycleur_id), UNIQUE INDEX UNIQ_FA30EB24222D237A (barge_id), UNIQUE INDEX UNIQ_FA30EB24A7DC5C81 (hunter_id), UNIQUE INDEX UNIQ_FA30EB246D3EAA45 (fregate_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE ship (id INT AUTO_INCREMENT NOT NULL, fleet_id INT DEFAULT NULL, planet_id INT DEFAULT NULL, sonde_id INT DEFAULT NULL, colonizer_id INT DEFAULT NULL, recycleur_id INT DEFAULT NULL, barge_id INT DEFAULT NULL, hunter_id INT DEFAULT NULL, fregate_id INT DEFAULT NULL, UNIQUE INDEX UNIQ_FA30EB244B061DF9 (fleet_id), UNIQUE INDEX UNIQ_FA30EB24A25E9820 (planet_id), UNIQUE INDEX UNIQ_FA30EB24F1B7D1A2 (sonde_id), UNIQUE INDEX UNIQ_FA30EB24D726A9F2 (colonizer_id), UNIQUE INDEX UNIQ_FA30EB24D7B82D29 (recycleur_id), UNIQUE INDEX UNIQ_FA30EB24222D237A (barge_id), UNIQUE INDEX UNIQ_FA30EB24A7DC5C81 (hunter_id), UNIQUE INDEX UNIQ_FA30EB246D3EAA45 (fregate_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE ally (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(15) NOT NULL, sigle VARCHAR(5) NOT NULL, slogan VARCHAR(30) NOT NULL, bitcoin BIGINT NOT NULL, taxe INT NOT NULL, image_name VARCHAR(255) DEFAULT NULL, image_size INT DEFAULT NULL, updated_at DATETIME DEFAULT NULL, UNIQUE INDEX UNIQ_382900D5E237E06 (name), UNIQUE INDEX UNIQ_382900D8776B952 (sigle), UNIQUE INDEX UNIQ_382900D988768C9 (slogan), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE z_cargo (id INT AUTO_INCREMENT NOT NULL, bitcoin INT NOT NULL, level INT NOT NULL, finishAt DATETIME DEFAULT NULL, constructTime BIGINT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE grade (id INT AUTO_INCREMENT NOT NULL, ally_id INT DEFAULT NULL, placement INT NOT NULL, name VARCHAR(20) NOT NULL, canRecruit TINYINT(1) NOT NULL, canKick TINYINT(1) NOT NULL, canWar TINYINT(1) NOT NULL, canPeace TINYINT(1) NOT NULL, INDEX IDX_595AAE341C6E3E76 (ally_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
@@ -70,8 +69,8 @@ class Version20180422160541 extends AbstractMigration
         $this->addSql('CREATE TABLE x_skyRadar (id INT AUTO_INCREMENT NOT NULL, niobium INT NOT NULL, water INT NOT NULL, level INT NOT NULL, finishAt DATETIME DEFAULT NULL, constructTime BIGINT NOT NULL, sky INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE y_hunter (id INT AUTO_INCREMENT NOT NULL, niobium INT NOT NULL, water INT NOT NULL, amount BIGINT NOT NULL, finishAt DATETIME DEFAULT NULL, constructTime BIGINT NOT NULL, signature INT NOT NULL, armor INT NOT NULL, shield INT NOT NULL, missile INT NOT NULL, laser INT NOT NULL, plasma INT NOT NULL, cargo INT NOT NULL, speed INT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('ALTER TABLE ally_war ADD CONSTRAINT FK_BEBC3F951C6E3E76 FOREIGN KEY (ally_id) REFERENCES ally (id)');
-        $this->addSql('ALTER TABLE orbite ADD CONSTRAINT FK_6BD04981C256317D FOREIGN KEY (ship_id) REFERENCES ship (id)');
         $this->addSql('ALTER TABLE fleet ADD CONSTRAINT FK_A05E1E47A76ED395 FOREIGN KEY (user_id) REFERENCES app_users (id)');
+        $this->addSql('ALTER TABLE fleet ADD CONSTRAINT FK_A05E1E47A25E9820 FOREIGN KEY (planet_id) REFERENCES planet (id)');
         $this->addSql('ALTER TABLE fleet ADD CONSTRAINT FK_A05E1E47C256317D FOREIGN KEY (ship_id) REFERENCES ship (id)');
         $this->addSql('ALTER TABLE fleet ADD CONSTRAINT FK_A05E1E47A38C1700 FOREIGN KEY (soldier_id) REFERENCES soldier (id)');
         $this->addSql('ALTER TABLE fleet ADD CONSTRAINT FK_A05E1E476B20BA36 FOREIGN KEY (worker_id) REFERENCES worker (id)');
@@ -79,14 +78,12 @@ class Version20180422160541 extends AbstractMigration
         $this->addSql('ALTER TABLE ally_allied ADD CONSTRAINT FK_161AB9BB1C6E3E76 FOREIGN KEY (ally_id) REFERENCES ally (id)');
         $this->addSql('ALTER TABLE planet ADD CONSTRAINT FK_68136AA5A76ED395 FOREIGN KEY (user_id) REFERENCES app_users (id)');
         $this->addSql('ALTER TABLE planet ADD CONSTRAINT FK_68136AA54D2A7E12 FOREIGN KEY (building_id) REFERENCES building (id)');
-        $this->addSql('ALTER TABLE planet ADD CONSTRAINT FK_68136AA521DE9274 FOREIGN KEY (orbite_id) REFERENCES orbite (id)');
         $this->addSql('ALTER TABLE planet ADD CONSTRAINT FK_68136AA5C256317D FOREIGN KEY (ship_id) REFERENCES ship (id)');
         $this->addSql('ALTER TABLE planet ADD CONSTRAINT FK_68136AA5A38C1700 FOREIGN KEY (soldier_id) REFERENCES soldier (id)');
         $this->addSql('ALTER TABLE planet ADD CONSTRAINT FK_68136AA56B20BA36 FOREIGN KEY (worker_id) REFERENCES worker (id)');
         $this->addSql('ALTER TABLE planet ADD CONSTRAINT FK_68136AA5EBA327D6 FOREIGN KEY (scientist_id) REFERENCES scientist (id)');
         $this->addSql('ALTER TABLE planet ADD CONSTRAINT FK_68136AA5DE95C867 FOREIGN KEY (sector_id) REFERENCES sector (id)');
         $this->addSql('ALTER TABLE ship ADD CONSTRAINT FK_FA30EB244B061DF9 FOREIGN KEY (fleet_id) REFERENCES fleet (id)');
-        $this->addSql('ALTER TABLE ship ADD CONSTRAINT FK_FA30EB2421DE9274 FOREIGN KEY (orbite_id) REFERENCES orbite (id)');
         $this->addSql('ALTER TABLE ship ADD CONSTRAINT FK_FA30EB24A25E9820 FOREIGN KEY (planet_id) REFERENCES planet (id)');
         $this->addSql('ALTER TABLE ship ADD CONSTRAINT FK_FA30EB24F1B7D1A2 FOREIGN KEY (sonde_id) REFERENCES y_sonde (id)');
         $this->addSql('ALTER TABLE ship ADD CONSTRAINT FK_FA30EB24D726A9F2 FOREIGN KEY (colonizer_id) REFERENCES y_colonizer (id)');
@@ -139,8 +136,6 @@ class Version20180422160541 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE research DROP FOREIGN KEY FK_57EB50C2C220B9DF');
-        $this->addSql('ALTER TABLE planet DROP FOREIGN KEY FK_68136AA521DE9274');
-        $this->addSql('ALTER TABLE ship DROP FOREIGN KEY FK_FA30EB2421DE9274');
         $this->addSql('ALTER TABLE ship DROP FOREIGN KEY FK_FA30EB244B061DF9');
         $this->addSql('ALTER TABLE research DROP FOREIGN KEY FK_57EB50C21C829638');
         $this->addSql('ALTER TABLE ship DROP FOREIGN KEY FK_FA30EB24D726A9F2');
@@ -149,10 +144,10 @@ class Version20180422160541 extends AbstractMigration
         $this->addSql('ALTER TABLE fleet DROP FOREIGN KEY FK_A05E1E47A38C1700');
         $this->addSql('ALTER TABLE planet DROP FOREIGN KEY FK_68136AA5A38C1700');
         $this->addSql('ALTER TABLE building DROP FOREIGN KEY FK_E16F61D464119DE1');
+        $this->addSql('ALTER TABLE fleet DROP FOREIGN KEY FK_A05E1E47A25E9820');
         $this->addSql('ALTER TABLE ship DROP FOREIGN KEY FK_FA30EB24A25E9820');
         $this->addSql('ALTER TABLE ship DROP FOREIGN KEY FK_FA30EB24D7B82D29');
         $this->addSql('ALTER TABLE sector DROP FOREIGN KEY FK_4BA3D9E8B61FAB2');
-        $this->addSql('ALTER TABLE orbite DROP FOREIGN KEY FK_6BD04981C256317D');
         $this->addSql('ALTER TABLE fleet DROP FOREIGN KEY FK_A05E1E47C256317D');
         $this->addSql('ALTER TABLE planet DROP FOREIGN KEY FK_68136AA5C256317D');
         $this->addSql('ALTER TABLE ally_war DROP FOREIGN KEY FK_BEBC3F951C6E3E76');
@@ -202,7 +197,6 @@ class Version20180422160541 extends AbstractMigration
         $this->addSql('ALTER TABLE ship DROP FOREIGN KEY FK_FA30EB24A7DC5C81');
         $this->addSql('DROP TABLE ally_war');
         $this->addSql('DROP TABLE z_terraformation');
-        $this->addSql('DROP TABLE orbite');
         $this->addSql('DROP TABLE fleet');
         $this->addSql('DROP TABLE z_demography');
         $this->addSql('DROP TABLE ally_allied');

@@ -31,10 +31,6 @@
                     <td class="center-cells">{{ 'cell.planet'|trans|raw }}</td>
                 </tr>
                 <tr>
-                    <th class="tab-cells-name">{{ 'title.attack'|trans|raw }}</th>
-                    <td class="center-cells"><a href="{{ path('map', {'id': usePlanet.getSector().getPosition(), 'idp': usePlanet.getId()}) }}">{{ 'cell.attack'|trans|raw }}</a></td>
-                </tr>
-                <tr>
                     <th class="tab-cells-name">{{ 'title.batiment'|trans|raw }}</th>
                     <td class="center-cells"><a href="{{ path('building', {'idp': usePlanet.getId()}) }}">{{ 'cell.batiment'|trans|raw }}</a></td>
                 </tr>

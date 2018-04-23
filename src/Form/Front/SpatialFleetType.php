@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class SpatialShipType extends AbstractType
+class SpatialFleetType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -17,10 +17,26 @@ class SpatialShipType extends AbstractType
     {
         $builder
             ->add(
+                'name',
+                null,
+                array(
+                    'label' => 'form.name',
+                    'attr'  => array(
+                        'placeholder' => 'form.name',
+                        'class' => 'form-control',
+                        'maxlength' => '15',
+                        'minlength' => '2',
+                    ),
+                    'required' => true,
+                    'mapped' => true,
+                )
+            )
+            ->add(
                 'sonde',
                 null,
                 array(
                     'label' => 'form.nbr',
+                    'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
                         'class' => 'form-control',
@@ -35,6 +51,7 @@ class SpatialShipType extends AbstractType
                 null,
                 array(
                     'label' => 'form.nbr',
+                    'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
                         'class' => 'form-control',
@@ -49,6 +66,7 @@ class SpatialShipType extends AbstractType
                 null,
                 array(
                     'label' => 'form.nbr',
+                    'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
                         'class' => 'form-control',
@@ -63,6 +81,7 @@ class SpatialShipType extends AbstractType
                 null,
                 array(
                     'label' => 'form.nbr',
+                    'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
                         'class' => 'form-control',
@@ -77,6 +96,7 @@ class SpatialShipType extends AbstractType
                 null,
                 array(
                     'label' => 'form.nbr',
+                    'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
                         'class' => 'form-control',
@@ -91,6 +111,7 @@ class SpatialShipType extends AbstractType
                 null,
                 array(
                     'label' => 'form.nbr',
+                    'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
                         'class' => 'form-control',
@@ -100,7 +121,7 @@ class SpatialShipType extends AbstractType
                     'required' => false,
                 )
             )
-            ->add('sendForm', SubmitType::class, array('label' => 'form.construct'));
+            ->add('sendForm', SubmitType::class, array('label' => 'form.addFleet'));
     }
 
     /**

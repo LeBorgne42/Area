@@ -24,11 +24,6 @@ class Ship
     protected $fleet;
 
     /**
-     * @ORM\OneToOne(targetEntity="Orbite", inversedBy="ship", fetch="EXTRA_LAZY")
-     */
-    protected $orbite;
-
-    /**
      * @ORM\OneToOne(targetEntity="Planet", inversedBy="ship", fetch="EXTRA_LAZY")
      */
     protected $planet;
@@ -83,22 +78,6 @@ class Ship
     public function setFleet($fleet): void
     {
         $this->fleet = $fleet;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getOrbite()
-    {
-        return $this->orbite;
-    }
-
-    /**
-     * @param mixed $orbite
-     */
-    public function setOrbite($orbite): void
-    {
-        $this->orbite = $orbite;
     }
 
     /**

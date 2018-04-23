@@ -46,7 +46,7 @@ class Yhip_Fregate
     /**
      * @ORM\Column(name="constructTime",type="bigint")
      */
-    protected $constructTime = 20;
+    protected $constructTime = 300;
 
     /**
      * @ORM\Column(name="signature",type="integer")

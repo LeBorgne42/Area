@@ -22,4 +22,4 @@ title.laser: 'Arme laser'
 title.plasma: 'Arme plasma'
 research.canBe: Inactive
 research.Activated: Activée
-research.level: Niveau :
+research.level: 'Niveau :'
