@@ -541,6 +541,22 @@ class User implements UserInterface, \Serializable
         $this->fleets->removeElement($fleet);
     }
 
+    /**
+     * @return mixed
+     */
+    public function getFleets()
+    {
+        return $this->fleets;
+    }
+
+    /**
+     * @param mixed $fleets
+     */
+    public function setFleets($fleets): void
+    {
+        $this->fleets = $fleets;
+    }
+
     public function getUpdatedAt()
     {
         return $this->updatedAt;

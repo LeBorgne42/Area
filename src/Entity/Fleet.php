@@ -37,6 +37,16 @@ class Fleet
     protected $planet;
 
     /**
+     * @ORM\Column(name="oldPlanet",type="integer", nullable=true)
+     */
+    protected $oldPlanet = null;
+
+    /**
+     * @ORM\Column(name="flightTime",type="datetime", nullable=true)
+     */
+    protected $flightTime = null;
+
+    /**
      * @ORM\OneToOne(targetEntity="Ship", mappedBy="fleet", fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(name="ship_id", referencedColumnName="id")
      */
@@ -202,6 +212,49 @@ class Fleet
 
         $nbr = $fregate + $colonizer + $barge + $hunter + $recycleur + $sonde;
         return $nbr;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOldPlanet()
+    {
+        return $this->oldPlanet;
+    }
+
+    /**
+     * @param mixed $oldPlanet
+     */
+    public function setOldPlanet($oldPlanet): void
+    {
+        $this->oldPlanet = $oldPlanet;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrigin()
+    {
+        $criteria = Criteria::create()
+            ->andWhere(Criteria::expr()->gt('planet', $this->planet->getOldPlanet()));
+
+        return $this->fleet->matching($criteria);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFlightTime()
+    {
+        return $this->flightTime;
+    }
+
+    /**
+     * @param mixed $flightTime
+     */
+    public function setFlightTime($flightTime): void
+    {
+        $this->flightTime = $flightTime;
     }
 
     public function getId()

@@ -1,0 +1,137 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'front_fleet' %}
+
+{% block title %}{{ 'title'|trans }}{% endblock %}
+
+{% block body %}
+    {%- block left_menu -%}
+    {%- endblock -%}
+    {%- block top_ressource -%}
+    {%- endblock -%}
+    {%- block right_planet -%}
+    {%- endblock -%}
+    <div class="p-5 createFleet">
+        {{ form_start(form_manageFleet,{attr: { action: path('manage_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}) }}
+        <div class="block-title mb-2"><h2>{{ 'fleet.createFleet'|trans }}</h2></div>
+        <table class="table table-striped table-bordered table-dark">
+            <tbody>
+            <tr>
+                <th class="tab-cells-name">
+                    <div class="row">
+                        <div class="col-4 pt-3">
+                            {{ 'fleet.fleetName'|trans }}
+                        </div>
+                        <div class="col-8">
+                            {{ form_widget(form_manageFleet.name) }}
+                        </div>
+                    </div>
+                </th>
+            </tr>
+            </tbody>
+        </table>
+        {#<table class="table table-striped table-bordered table-dark">
+            <tbody>
+            <tr>
+                <th class="tab-cells-name">
+                    <div class="row">
+                        <div class="col-4 pt-3">
+                            {{ 'fleet.sendFleet'|trans }}
+                        </div>
+                        <div class="col-8">
+                            {{ form_start(form_sendFleet,{attr: { action: path('manage_fleet', {'idp': fleet.getId(), 'id': 2}) }}) }}
+                            {{ form_widget(form_sendFleet.galaxy) }}
+                            {{ form_widget(form_sendFleet.sector) }}
+                            {{ form_widget(form_sendFleet.position) }}
+                            {{ form_end(form_sendFleet) }}
+                        </div>
+                    </div>
+                </th>
+            </tr>
+            </tbody>
+        </table>#}
+        <table class="table table-striped table-bordered table-dark">
+            <tbody>
+            <tr>
+                <th class="tab-cells-name">
+                    {{ 'fleet.fleetShip'|trans }}
+                </th>
+                <td class="center-cells">
+                    {{ 'fleet.addShip'|trans }}
+                </td>
+                <td class="center-cells">
+                    {{ 'fleet.removeShip'|trans }}
+                </td>
+            </tr>
+            <tr>
+                <th class="tab-cells-name">
+                    {{ 'fleet.sonde'|trans }} x {{ fleet.getShip().getSonde().getAmount() }}
+                </th>
+                <td class="center-cells">
+                    {{ form_widget(form_manageFleet.moreSonde,{attr: { max: usePlanet.getShip().getSonde().getAmount()}}) }}
+                </td>
+                <td class="center-cells">
+                    {{ form_widget(form_manageFleet.lessSonde,{attr: { max: fleet.getShip().getSonde().getAmount()}}) }}
+                </td>
+            </tr>
+            <tr>
+                <th class="tab-cells-name">
+                    {{ 'fleet.colonizer'|trans }} x {{ fleet.getShip().getColonizer().getAmount() }}
+                </th>
+                <td class="center-cells">
+                    {{ form_widget(form_manageFleet.moreColonizer,{attr: { max: usePlanet.getShip().getColonizer().getAmount()}}) }}
+                </td>
+                <td class="center-cells">
+                    {{ form_widget(form_manageFleet.lessColonizer,{attr: { max: fleet.getShip().getColonizer().getAmount()}}) }}
+                </td>
+            </tr>
+            <tr>
+                <th class="tab-cells-name">
+                    {{ 'fleet.recycleur'|trans }} x {{ fleet.getShip().getRecycleur().getAmount() }}
+                </th>
+                <td class="center-cells">
+                    {{ form_widget(form_manageFleet.moreRecycleur,{attr: { max: usePlanet.getShip().getRecycleur().getAmount()}}) }}
+                </td>
+                <td class="center-cells">
+                    {{ form_widget(form_manageFleet.lessRecycleur,{attr: { max: fleet.getShip().getRecycleur().getAmount()}}) }}
+                </td>
+            </tr>
+            <tr>
+                <th class="tab-cells-name">
+                    {{ 'fleet.hunter'|trans }} x {{ fleet.getShip().getHunter().getAmount() }}
+                </th>
+                <td class="center-cells">
+                    {{ form_widget(form_manageFleet.moreHunter,{attr: { max: usePlanet.getShip().getHunter().getAmount()}}) }}
+                </td>
+                <td class="center-cells">
+                    {{ form_widget(form_manageFleet.lessHunter,{attr: { max: fleet.getShip().getHunter().getAmount()}}) }}
+                </td>
+            </tr>
+            <tr>
+                <th class="tab-cells-name">
+                    {{ 'fleet.fregate'|trans }} x {{ fleet.getShip().getFregate().getAmount() }}
+                </th>
+                <td class="center-cells">
+                    {{ form_widget(form_manageFleet.moreFregate,{attr: { max: usePlanet.getShip().getFregate().getAmount()}}) }}
+                </td>
+                <td class="center-cells">
+                    {{ form_widget(form_manageFleet.lessFregate,{attr: { max: fleet.getShip().getFregate().getAmount()}}) }}
+                </td>
+            </tr>
+            <tr>
+                <th class="tab-cells-name">
+                    {{ 'fleet.barge'|trans }} x {{ fleet.getShip().getBarge().getAmount() }}
+                </th>
+                <td class="center-cells">
+                    {{ form_widget(form_manageFleet.moreBarge,{attr: { max: usePlanet.getShip().getBarge().getAmount()}}) }}
+                </td>
+                <td class="center-cells">
+                    {{ form_widget(form_manageFleet.lessBarge,{attr: { max: fleet.getShip().getBarge().getAmount()}}) }}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        {{ form_widget(form_manageFleet.sendForm,{attr: { class: 'btn btn-lg btn-info float-right'}}) }}
+        {{ form_end(form_manageFleet) }}
+    </div>
+{% endblock %}

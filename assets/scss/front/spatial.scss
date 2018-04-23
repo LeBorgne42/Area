@@ -23,3 +23,12 @@
 .front-block.display-fleet {
   width: 400px;
 }
+
+.createFleet {
+  td.center-cells input {
+    height: 20px;
+  }
+  th.tab-cells-name {
+    vertical-align: middle;
+  }
+}

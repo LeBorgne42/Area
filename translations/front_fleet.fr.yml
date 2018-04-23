@@ -1,1 +1,30 @@
 title: Flotte
+fleet.onThisPlanet: 'Sur %planet%'
+fleet.createFlotte: 'Créer une nouvelle flotte'
+fleet.fleetName: 'Nom de la flotte'
+fleet.fleetShips: Vaisseaux
+fleet.fleetSignature: Signature
+fleet.seeFlotte: 'gestion vaisseaux'
+fleet.inAir: 'Flottes en mouvement'
+fleet.from: De
+fleet.goTo: Vers
+fleet.time: Temps
+fleet.otherPlanet: 'Flottes sur mes autres planètes'
+fleet.planet: Planète
+fleet.createFleet: 'Gestion flotte'
+fleet.fleetShip: 'Vaisseaux'
+fleet.destroyFleet: 'mettre au sol'
+fleet.exploration: 'Flotte en exploration'
+fleet.beforeName: Flotte
+fleet.addShip: Ajouter
+fleet.depart: Envoyer
+fleet.removeShip: Enlever
+fleet.sonde: Sonde
+fleet.colonizer: Colonisateur
+fleet.recycleur: Recycleur
+fleet.hunter: Chasseur
+fleet.fregate: Fregate
+fleet.barge: Barge
+form.nbr: Nombre
+form.manageFleet: 'Changer composition'
+form.name: ''

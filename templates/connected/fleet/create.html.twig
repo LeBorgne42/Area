@@ -37,7 +37,7 @@
                     {{ 'spatial.sonde'|trans }} x {{ usePlanet.getShip().getSonde().getAmount() }}
                 </th>
                 <td class="center-cells">
-                    {{ form_widget(form_createFleet.sonde) }}
+                    {{ form_widget(form_createFleet.sonde,{attr: { max: usePlanet.getShip().getSonde().getAmount()}}) }}
                 </td>
             </tr>
             <tr{% if usePlanet.getShip().getColonizer().getAmount() == 0 %} hidden{% endif %}>
@@ -45,7 +45,7 @@
                     {{ 'spatial.colonizer'|trans }} x {{ usePlanet.getShip().getColonizer().getAmount() }}
                 </th>
                 <td class="center-cells">
-                    {{ form_widget(form_createFleet.colonizer) }}
+                    {{ form_widget(form_createFleet.colonizer,{attr: { max: usePlanet.getShip().getColonizer().getAmount()}}) }}
                 </td>
             </tr>
             <tr{% if usePlanet.getShip().getRecycleur().getAmount() == 0 %} hidden{% endif %}>
@@ -53,7 +53,7 @@
                     {{ 'spatial.recycleur'|trans }} x {{ usePlanet.getShip().getRecycleur().getAmount() }}
                 </th>
                 <td class="center-cells">
-                    {{ form_widget(form_createFleet.recycleur) }}
+                    {{ form_widget(form_createFleet.recycleur,{attr: { max: usePlanet.getShip().getRecycleur().getAmount()}}) }}
                 </td>
             </tr>
             <tr{% if usePlanet.getShip().getHunter().getAmount() == 0 %} hidden{% endif %}>
@@ -61,7 +61,7 @@
                     {{ 'spatial.hunter'|trans }} x {{ usePlanet.getShip().getHunter().getAmount() }}
                 </th>
                 <td class="center-cells">
-                    {{ form_widget(form_createFleet.hunter) }}
+                    {{ form_widget(form_createFleet.hunter,{attr: { max: usePlanet.getShip().getHunter().getAmount()}}) }}
                 </td>
             </tr>
             <tr{% if usePlanet.getShip().getFregate().getAmount() == 0 %} hidden{% endif %}>
@@ -69,7 +69,7 @@
                     {{ 'spatial.fregate'|trans }} x {{ usePlanet.getShip().getFregate().getAmount() }}
                 </th>
                 <td class="center-cells">
-                    {{ form_widget(form_createFleet.fregate) }}
+                    {{ form_widget(form_createFleet.fregate,{attr: { max: usePlanet.getShip().getFregate().getAmount()}}) }}
                 </td>
             </tr>
             <tr{% if usePlanet.getShip().getBarge().getAmount() == 0 %} hidden{% endif %}>
@@ -77,7 +77,7 @@
                     {{ 'spatial.barge'|trans }} x {{ usePlanet.getShip().getBarge().getAmount() }}
                 </th>
                 <td class="center-cells">
-                    {{ form_widget(form_createFleet.barge) }}
+                    {{ form_widget(form_createFleet.barge,{attr: { max: usePlanet.getShip().getBarge().getAmount()}}) }}
                 </td>
             </tr>
             </tbody>
