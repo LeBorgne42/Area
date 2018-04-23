@@ -5,10 +5,117 @@
 {% block title %}{{ 'title'|trans }}{% endblock %}
 
 {% block body %}
-    <div class="row">
-        <div class="offset-1 col-10">
-            <div class="front-block">
-            </div>
-        </div>
+    <div class="front-block display-allFleet">
+        <div class="block-title"><h2>{{ 'fleet.onThisPlanet'|trans }} {% if usePlanet.getShipOn() > 0 %}<a class="btn btn-lg btn-info float-right mb-2" href="{{ path('create_fleet', {'idp': usePlanet.getId()}) }}" data-toggle="modal" data-target="#createModal"><span>{{ 'fleet.createFlotte'|trans }}</span></a>{% endif %}</h2></div>
+        <table class="table table-striped table-bordered table-dark">
+            <tbody>
+            <tr>
+                <th class="tab-cells-name text-center">
+                    {{ 'fleet.fleetName'|trans }}
+                </th>
+                <td class="center-cells text-center">
+                    {{ 'fleet.fleetShips'|trans }}
+                </td>
+                <td class="center-cells text-center">
+                    {{ 'fleet.fleetSignature'|trans }}
+                </td>
+            </tr>
+            {% for fleet in usePlanet.getFleets() %}
+                <tr>
+                    <th class="tab-cells-name">
+                        "{{  fleet.getName() }}" <a class="ml-3" href="{{ path('fleet', {'idp': usePlanet.getId()}) }}"><span>{{ 'fleet.seeFlotte'|trans }}</span></a>
+                    </th>
+                    <td class="center-cells text-center">
+                        {{ fleet.getNbrShips() }}
+                    </td>
+                    <td class="center-cells text-center">
+                        {{ fleet.getNbrSignatures() }}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="block-title"><h2>{{ 'fleet.inAir'|trans }}</h2></div>
+        <table class="table table-striped table-bordered table-dark">
+            <tbody>
+            <tr>
+                <th class="tab-cells-name text-center">
+                    {{ 'fleet.fleetName'|trans }}
+                </th>
+                <th class="tab-cells-name text-center">
+                    {{ 'fleet.from'|trans }}
+                </th>
+                <th class="tab-cells-name text-center">
+                    {{ 'fleet.goTo'|trans }}
+                </th>
+                <th class="tab-cells-name text-center">
+                    {{ 'fleet.time'|trans }}
+                </th>
+                <td class="center-cells text-center">
+                    {{ 'fleet.fleetShips'|trans }}
+                </td>
+                <td class="center-cells text-center">
+                    {{ 'fleet.fleetSignature'|trans }}
+                </td>
+            </tr>
+            {% for fleet in usePlanet.getFleets() %}
+                <tr>
+                    <th class="tab-cells-name">
+                        "{{  fleet.getName() }}" <a class="ml-3" href="{{ path('fleet', {'idp': usePlanet.getId()}) }}"><span>{{ 'fleet.seeFlotte'|trans }}</span></a>
+                    </th>
+                    <td class="center-cells text-center">
+                        vers
+                    </td>
+                    <td class="center-cells text-center">
+                        de
+                    </td>
+                    <td class="center-cells text-center">
+                        30mins
+                    </td>
+                    <td class="center-cells text-center">
+                        {{ fleet.getNbrShips() }}
+                    </td>
+                    <td class="center-cells text-center">
+                        {{ fleet.getNbrSignatures() }}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="block-title"><h2>{{ 'fleet.otherPlanet'|trans }}</h2></div>
+        <table class="table table-striped table-bordered table-dark">
+            <tbody>
+            <tr>
+                <th class="tab-cells-name text-center">
+                    {{ 'fleet.fleetName'|trans }}
+                </th>
+                <th class="tab-cells-name text-center">
+                    {{ 'fleet.planet'|trans }}
+                </th>
+                <td class="center-cells text-center">
+                    {{ 'fleet.fleetShips'|trans }}
+                </td>
+                <td class="center-cells text-center">
+                    {{ 'fleet.fleetSignature'|trans }}
+                </td>
+            </tr>
+            {% for fleet in usePlanet.getFleets() %}
+                <tr>
+                    <th class="tab-cells-name">
+                        "{{  fleet.getName() }}" <a class="ml-3" href="{{ path('fleet', {'idp': usePlanet.getId()}) }}"><span>{{ 'fleet.seeFlotte'|trans }}</span></a>
+                    </th>
+                    <td class="center-cells text-center">
+                        planet
+                    </td>
+                    <td class="center-cells text-center">
+                        {{ fleet.getNbrShips() }}
+                    </td>
+                    <td class="center-cells text-center">
+                        {{ fleet.getNbrSignatures() }}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
 {% endblock %}

@@ -7,10 +7,16 @@
   vertical-align: middle;
 }
 
+.modal-createFleet {
+  width: 400px!important;
+}
+
 .createFleet {
-  background-color: #32383e;
   td.center-cells {
     width: 75px;
+  }
+  th.tab-cells-name {
+    vertical-align: middle;
   }
 }
 

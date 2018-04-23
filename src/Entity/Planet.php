@@ -434,6 +434,23 @@ class Planet
     /**
      * @return mixed
      */
+    public function getShipOn()
+    {
+        $fregate = $this->ship->getFregate()->getAmount();
+        $hunter = $this->ship->getHunter()->getAmount();
+        $sonde = $this->ship->getSonde()->getAmount();
+        $colonizer = $this->ship->getColonizer()->getAmount();
+        $recycleur = $this->ship->getRecycleur()->getAmount();
+        $barge = $this->ship->getBarge()->getAmount();
+
+        $nbr = $fregate + $hunter + $sonde + $colonizer + $recycleur + $barge;
+
+        return $nbr;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getShip()
     {
         return $this->ship;

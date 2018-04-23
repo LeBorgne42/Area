@@ -8,6 +8,8 @@ spatial.hunter: Chasseur
 spatial.fregate: Fregate
 form.construct: Construire
 form.nbr: Nombre
+form.addFleet: 'Créer la flotte'
+form.name: ''
 niobiumImg: Niobium
 waterImg: Water
 bitcoinImg: Bitcoin
@@ -15,6 +17,6 @@ spatial.orbiteFlotte: 'Flotte en orbite'
 spatial.createFlotte: 'Créer une nouvelle flotte'
 spatial.createFleet: 'Choix des vaisseaux'
 spatial.seeFlotte: 'gerer flotte'
-spatial.fleetName: 'Nom de flotte'
+spatial.fleetName: 'Nom de la flotte'
 spatial.fleetShips: Vaisseaux
 spatial.fleetSignature: Signature

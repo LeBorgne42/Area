@@ -54,6 +54,27 @@ class SecurityController extends Controller
             $user->setEmail($_POST['_email']);
             $user->setCreatedAt($now);
             $user->setPassword(password_hash($_POST['_password'], PASSWORD_BCRYPT));
+
+            $alreadyInBase = $em->getRepository('App:User')
+                ->createQueryBuilder('u')
+                ->where('u.username = :username')
+                ->orWhere('u.email = :email')
+                ->setParameters(array('username' => $_POST['_username'], 'email' => $_POST['_email']))
+                ->setMaxResults(1)
+                ->getQuery()
+                ->getResult();
+
+            foreach ($alreadyInBase as $check) {
+                if ($check->getUsername() == $_POST['_username']) {
+                    $this->addFlash("fail", "Ce pseudo est déjà prit.");
+
+                    return $this->redirectToRoute('home');
+                } elseif ($check->getEmail() == $_POST['_email']) {
+                    $this->addFlash("fail", "Il y a déjà un compte rattaché a cet email.");
+                    return $this->redirectToRoute('login');
+                }
+            }
+
             $planet = $em->getRepository('App:Planet')
                         ->createQueryBuilder('p')
                         ->where('p.user is null')

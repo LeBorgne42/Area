@@ -31,9 +31,6 @@ body.area {
   width: 500px;
 }
 
-.building tr .center-cells:first-child {
-  width: 500px;
-}
 
 .navbar-right {
   position: sticky;
@@ -52,6 +49,12 @@ body.area {
 
 .modal-dialog {
   margin-top: 40%;
+}
+
+.modal-content.special {
+  background-color: rgba(83,74,74,0.9);
+  border-radius: 20px;
+  border: 1px solid white;
 }
 
 .text-orange {

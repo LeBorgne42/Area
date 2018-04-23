@@ -20,6 +20,11 @@
                         <input type="password" placeholder="{{ 'password'|trans }}" id="password" name="_password" />
                         <button class="btn btn-secondary" type="submit">{{ 'login'|trans }}</button>
                     </form>
+                    {% for message in app.flashes('fail') %}
+                        <div class="flash-notice mt-5 text-orange text-more">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
                     {% if error %}
                         <div>{{ 'error'|trans }}</div>
                     {% endif %}

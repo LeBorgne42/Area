@@ -13,26 +13,34 @@
     {%- endblock -%}
     <div class="p-5 createFleet">
         {{ form_start(form_createFleet,{attr: { action: path('create_fleet', {'idp': usePlanet.getId()}) }}) }}
-        <div class="block-title"><h2>{{ 'spatial.createFleet'|trans }}</h2></div>
+        <div class="block-title mb-2"><h2>{{ 'spatial.createFleet'|trans }}</h2></div>
         <table class="table table-striped table-bordered table-dark">
             <tbody>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'spatial.fleetName'|trans }}
+                    <div class="row">
+                        <div class="col-4 pt-3">
+                            {{ 'spatial.fleetName'|trans }}
+                        </div>
+                        <div class="col-8">
+                            {{ form_widget(form_createFleet.name) }}
+                        </div>
+                    </div>
                 </th>
-                <td class="center-cells">
-                    {{ form_widget(form_createFleet.name) }}
-                </td>
             </tr>
-            <tr>
+            </tbody>
+        </table>
+        <table class="table table-striped table-bordered table-dark">
+            <tbody>
+            <tr{% if usePlanet.getShip().getSonde().getAmount() == 0 %} hidden{% endif %}>
                 <th class="tab-cells-name">
                     {{ 'spatial.sonde'|trans }} x {{ usePlanet.getShip().getSonde().getAmount() }}
                 </th>
                 <td class="center-cells">
-                    {{ form_widget(form_createFleet.sonde) }} max
+                    {{ form_widget(form_createFleet.sonde) }}
                 </td>
             </tr>
-            <tr>
+            <tr{% if usePlanet.getShip().getColonizer().getAmount() == 0 %} hidden{% endif %}>
                 <th class="tab-cells-name">
                     {{ 'spatial.colonizer'|trans }} x {{ usePlanet.getShip().getColonizer().getAmount() }}
                 </th>
@@ -40,7 +48,7 @@
                     {{ form_widget(form_createFleet.colonizer) }}
                 </td>
             </tr>
-            <tr>
+            <tr{% if usePlanet.getShip().getRecycleur().getAmount() == 0 %} hidden{% endif %}>
                 <th class="tab-cells-name">
                     {{ 'spatial.recycleur'|trans }} x {{ usePlanet.getShip().getRecycleur().getAmount() }}
                 </th>
@@ -48,7 +56,7 @@
                     {{ form_widget(form_createFleet.recycleur) }}
                 </td>
             </tr>
-            <tr>
+            <tr{% if usePlanet.getShip().getHunter().getAmount() == 0 %} hidden{% endif %}>
                 <th class="tab-cells-name">
                     {{ 'spatial.hunter'|trans }} x {{ usePlanet.getShip().getHunter().getAmount() }}
                 </th>
@@ -56,7 +64,7 @@
                     {{ form_widget(form_createFleet.hunter) }}
                 </td>
             </tr>
-            <tr>
+            <tr{% if usePlanet.getShip().getFregate().getAmount() == 0 %} hidden{% endif %}>
                 <th class="tab-cells-name">
                     {{ 'spatial.fregate'|trans }} x {{ usePlanet.getShip().getFregate().getAmount() }}
                 </th>
@@ -64,7 +72,7 @@
                     {{ form_widget(form_createFleet.fregate) }}
                 </td>
             </tr>
-            <tr>
+            <tr{% if usePlanet.getShip().getBarge().getAmount() == 0 %} hidden{% endif %}>
                 <th class="tab-cells-name">
                     {{ 'spatial.barge'|trans }} x {{ usePlanet.getShip().getBarge().getAmount() }}
                 </th>

@@ -64,8 +64,7 @@
         {{ form_end(form_spatialShip) }}
     </div>
     <div class="front-block display-fleet">
-        {{ form_start(form_spatialShip) }}
-        <div class="block-title"><h2>{{ 'spatial.orbiteFlotte'|trans }} <a class="btn btn-lg btn-info float-right" href="{{ path('create_fleet', {'idp': usePlanet.getId()}) }}" data-toggle="modal" data-target="#createModal"><span>{{ 'spatial.createFlotte'|trans }}</span></a></h2></div>
+        <div class="block-title"><h2>{{ 'spatial.orbiteFlotte'|trans }} {% if usePlanet.getShipOn() > 0 %}<a class="btn btn-lg btn-info float-right mb-2" href="{{ path('create_fleet', {'idp': usePlanet.getId()}) }}" data-toggle="modal" data-target="#createModal"><span>{{ 'spatial.createFlotte'|trans }}</span></a>{% endif %}</h2></div>
         <table class="table table-striped table-bordered table-dark">
             <tbody>
             <tr>
@@ -97,8 +96,8 @@
     </div>
 
     <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
+        <div class="modal-dialog modal-createFleet" role="document">
+            <div class="modal-content special">
             </div>
         </div>
     </div>
