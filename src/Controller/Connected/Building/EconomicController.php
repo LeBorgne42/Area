@@ -6,6 +6,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use DateTime;
+use DateTimeZone;
 
 /**
  * @Route("/fr")
@@ -20,6 +21,7 @@ class EconomicController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
@@ -68,6 +70,7 @@ class EconomicController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
 
         $usePlanet = $em->getRepository('App:Planet')
@@ -117,6 +120,7 @@ class EconomicController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
@@ -165,6 +169,7 @@ class EconomicController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
 
         $usePlanet = $em->getRepository('App:Planet')
@@ -214,6 +219,7 @@ class EconomicController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
@@ -264,6 +270,7 @@ class EconomicController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
 
         $usePlanet = $em->getRepository('App:Planet')

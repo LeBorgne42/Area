@@ -33,6 +33,7 @@ use App\Entity\Yhip_Barge;
 use App\Entity\Yhip_Recycleur;
 use App\Entity\Ship;
 use DateTime;
+use DateTimeZone;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
@@ -50,6 +51,7 @@ class SecurityController extends Controller
 
         if ($_POST) {
             $now = new DateTime();
+            $now->setTimezone(new DateTimeZone('Europe/Paris'));
             $user->setUsername($_POST['_username']);
             $user->setEmail($_POST['_email']);
             $user->setCreatedAt($now);

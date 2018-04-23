@@ -5,7 +5,6 @@ namespace App\Controller\Connected\Building;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use DateTime;
 
 /**
  * @Route("/fr")

@@ -19,6 +19,7 @@ use App\Entity\Pna;
 use App\Entity\Allied;
 use App\Entity\War;
 use DateTime;
+use DateTimeZone;
 
 /**
  * @Route("/fr")
@@ -113,6 +114,7 @@ class AllyController extends Controller
     {
         $user = $this->getUser();
         $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $em = $this->getDoctrine()->getManager();
 
         $usePlanet = $em->getRepository('App:Planet')
@@ -341,6 +343,7 @@ class AllyController extends Controller
 
         $grade = new Grade();
         $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $grade->setAlly($ally);
         $grade->setName("Membre");
         $grade->addUser($user);
@@ -494,6 +497,7 @@ class AllyController extends Controller
     {
         $user = $this->getUser();
         $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $em = $this->getDoctrine()->getManager();
 
         $usePlanet = $em->getRepository('App:Planet')
@@ -608,6 +612,7 @@ class AllyController extends Controller
     {
         $user = $this->getUser();
         $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $em = $this->getDoctrine()->getManager();
 
         $usePlanet = $em->getRepository('App:Planet')

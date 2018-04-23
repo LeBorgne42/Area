@@ -39,7 +39,6 @@ class SpatialShipType extends AbstractType
                         'placeholder' => 'form.nbr',
                         'class' => 'form-control',
                         'min' => '0',
-                        'max' => '5',
                     ),
                     'required' => false,
                 )
@@ -53,7 +52,6 @@ class SpatialShipType extends AbstractType
                         'placeholder' => 'form.nbr',
                         'class' => 'form-control',
                         'min' => '0',
-                        'max' => '5',
                     ),
                     'required' => false,
                 )
@@ -67,7 +65,6 @@ class SpatialShipType extends AbstractType
                         'placeholder' => 'form.nbr',
                         'class' => 'form-control',
                         'min' => '0',
-                        'max' => '50000',
                     ),
                     'required' => false,
                 )
@@ -81,7 +78,6 @@ class SpatialShipType extends AbstractType
                         'placeholder' => 'form.nbr',
                         'class' => 'form-control',
                         'min' => '0',
-                        'max' => '50000',
                     ),
                     'required' => false,
                 )
@@ -95,7 +91,6 @@ class SpatialShipType extends AbstractType
                         'placeholder' => 'form.nbr',
                         'class' => 'form-control',
                         'min' => '0',
-                        'max' => '5',
                     ),
                     'required' => false,
                 )

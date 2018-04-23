@@ -16,7 +16,6 @@ use App\Entity\Yhip_Hunter;
 use App\Entity\Yhip_Fregate;
 use App\Entity\Yhip_Barge;
 use App\Entity\Yhip_Recycleur;
-use DateTime;
 
 /**
  * @Route("/fr")

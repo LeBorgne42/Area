@@ -12,6 +12,7 @@ use App\Entity\Pna;
 use App\Entity\Allied;
 use App\Entity\War;
 use DateTime;
+use DateTimeZone;
 
 /**
  * @Route("/fr")
@@ -37,6 +38,7 @@ class PactController extends Controller
         $user = $this->getUser();
         $ally = $user->getAlly();
         $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $pact = $em->getRepository('App:Allied')
             ->createQueryBuilder('al')
             ->where('al.id = :id')
@@ -107,6 +109,7 @@ class PactController extends Controller
         $user = $this->getUser();
         $ally = $user->getAlly();
         $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $pact = $em->getRepository('App:Pna')
             ->createQueryBuilder('pna')
             ->where('pna.id = :id')
