@@ -6,6 +6,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use DateTime;
+use Dateinterval;
 use DateTimeZone;
 
 /**
@@ -35,7 +36,9 @@ class InformationController extends Controller
         $usePlanetNb = $usePlanet->getNiobium();
         $usePlanetWt = $usePlanet->getWater();
         $newGround = $usePlanet->getGroundPlace() + $radar->getGround();
-        if(($usePlanetNb < $radar->getNiobium() || $usePlanetWt < $radar->getWater()) || ($radar->getFinishAt() > $now || ($newGround > $usePlanet->getGround() || $user->getResearch()->getOnde()->getLevel() == 0))) {
+        if(($usePlanetNb < $radar->getNiobium() || $usePlanetWt < $radar->getWater()) ||
+            ($radar->getFinishAt() > $now || $usePlanet->getBuilding()->getConstruct() < $now) ||
+            ($newGround > $usePlanet->getGround() || $user->getResearch()->getOnde()->getLevel() == 0)) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $cost = 1.7;
@@ -45,6 +48,7 @@ class InformationController extends Controller
             $cost = $cost + (0.25 * $multiple);
             $time = $time - (0.3 * $multiple);
         }
+        $now->add(new DateInterval('PT' . $radar->getConstructTime() . 'S'));
         $usePlanet->setNiobium($usePlanetNb - $radar->getNiobium());
         $usePlanet->setWater($usePlanetWt - $radar->getWater());
         $usePlanet->setGroundPlace($newGround);
@@ -52,6 +56,7 @@ class InformationController extends Controller
         $radar->setWater($radar->getWater() * $cost);
         $radar->setLevel($radar->getLevel() + 1);
         $radar->setFinishAt($now);
+        $usePlanet->getBuilding()->setConstruct($now);
         $radar->setConstructTime($radar->getConstructTime() * $time);
         $em->persist($usePlanet);
         $em->persist($radar);
@@ -80,7 +85,8 @@ class InformationController extends Controller
 
         $radar = $usePlanet->getBuilding()->getRadar();
         $newGround = $usePlanet->getGroundPlace() - $radar->getGround();
-        if($radar->getLevel() == 0 || $radar->getFinishAt() > $now) {
+        if($radar->getLevel() == 0 || $radar->getFinishAt() > $now ||
+            ($usePlanet->getBuilding()->getConstruct() < $now)) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $cost = 1.7;
@@ -90,12 +96,14 @@ class InformationController extends Controller
             $cost = $cost + (0.25 * $multiple);
             $time = $time - (0.3 * $multiple);
         }
+        $now->add(new DateInterval('PT' . $radar->getConstructTime() . 'S'));
         $usePlanetNb = $usePlanet->getNiobium();
         $usePlanetWt = $usePlanet->getWater();
         $radar->setNiobium($radar->getNiobium() / $cost);
         $radar->setWater($radar->getWater() / $cost);
         $radar->setLevel($radar->getLevel() - 1);
         $radar->setFinishAt($now);
+        $usePlanet->getBuilding()->setConstruct($now);
         $radar->setConstructTime($radar->getConstructTime() / $time);
         $usePlanet->setNiobium($usePlanetNb + ($radar->getNiobium() / 1.5));
         $usePlanet->setWater($usePlanetWt + ($radar->getWater() / 1.5));
@@ -128,7 +136,9 @@ class InformationController extends Controller
         $usePlanetNb = $usePlanet->getNiobium();
         $usePlanetWt = $usePlanet->getWater();
         $newSky = $usePlanet->getSkyPlace() + $skyRadar->getSky();
-        if(($usePlanetNb < $skyRadar->getNiobium() || $usePlanetWt < $skyRadar->getWater()) || ($skyRadar->getFinishAt() > $now || $newSky > $usePlanet->getSky()) || $user->getResearch()->getOnde()->getLevel() < 3) {
+        if(($usePlanetNb < $skyRadar->getNiobium() || $usePlanetWt < $skyRadar->getWater()) ||
+            ($skyRadar->getFinishAt() > $now || $newSky > $usePlanet->getSky()) ||
+            ($user->getResearch()->getOnde()->getLevel() < 3 || $usePlanet->getBuilding()->getConstruct() < $now)) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $cost = 1.7;
@@ -138,6 +148,7 @@ class InformationController extends Controller
             $cost = $cost + (0.25 * $multiple);
             $time = $time - (0.3 * $multiple);
         }
+        $now->add(new DateInterval('PT' . $skyRadar->getConstructTime() . 'S'));
         $usePlanet->setNiobium($usePlanetNb - $skyRadar->getNiobium());
         $usePlanet->setWater($usePlanetWt - $skyRadar->getWater());
         $usePlanet->setSkyPlace($newSky);
@@ -145,6 +156,7 @@ class InformationController extends Controller
         $skyRadar->setWater($skyRadar->getWater() * $cost);
         $skyRadar->setLevel($skyRadar->getLevel() + 1);
         $skyRadar->setFinishAt($now);
+        $usePlanet->getBuilding()->setConstruct($now);
         $skyRadar->setConstructTime($skyRadar->getConstructTime() * $time);
         $em->persist($usePlanet);
         $em->persist($skyRadar);
@@ -173,7 +185,7 @@ class InformationController extends Controller
 
         $skyRadar = $usePlanet->getBuilding()->getSkyRadar();
         $newSky = $usePlanet->getSkyPlace() - $skyRadar->getSky();
-        if($skyRadar->getLevel() == 0 || $skyRadar->getFinishAt() > $now) {
+        if($skyRadar->getLevel() == 0 || $skyRadar->getFinishAt() > $now || $usePlanet->getBuilding()->getConstruct() < $now) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $cost = 1.7;
@@ -183,12 +195,14 @@ class InformationController extends Controller
             $cost = $cost + (0.25 * $multiple);
             $time = $time - (0.3 * $multiple);
         }
+        $now->add(new DateInterval('PT' . $skyRadar->getConstructTime() . 'S'));
         $usePlanetNb = $usePlanet->getNiobium();
         $usePlanetWt = $usePlanet->getWater();
         $skyRadar->setNiobium($skyRadar->getNiobium() / $cost);
         $skyRadar->setWater($skyRadar->getWater() / $cost);
         $skyRadar->setLevel($skyRadar->getLevel() - 1);
         $skyRadar->setFinishAt($now);
+        $usePlanet->getBuilding()->setConstruct($now);
         $skyRadar->setConstructTime($skyRadar->getConstructTime() / $time);
         $usePlanet->setNiobium($usePlanetNb + ($skyRadar->getNiobium() / 1.5));
         $usePlanet->setWater($usePlanetWt + ($skyRadar->getWater() / 1.5));
@@ -221,7 +235,9 @@ class InformationController extends Controller
         $usePlanetNb = $usePlanet->getNiobium();
         $usePlanetWt = $usePlanet->getWater();
         $newSky = $usePlanet->getSkyPlace() + $brouilleur->getSky();
-        if(($usePlanetNb < $brouilleur->getNiobium() || $usePlanetWt < $brouilleur->getWater()) || ($brouilleur->getFinishAt() > $now || $newSky > $usePlanet->getSky()) || $user->getResearch()->getOnde()->getLevel() > 5) {
+        if(($usePlanetNb < $brouilleur->getNiobium() || $usePlanetWt < $brouilleur->getWater()) ||
+            ($brouilleur->getFinishAt() > $now || $newSky > $usePlanet->getSky()) ||
+            ($user->getResearch()->getOnde()->getLevel() > 5 || $usePlanet->getBuilding()->getConstruct() < $now)) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $cost = 1.7;
@@ -231,6 +247,7 @@ class InformationController extends Controller
             $cost = $cost + (0.25 * $multiple);
             $time = $time - (0.3 * $multiple);
         }
+        $now->add(new DateInterval('PT' . $brouilleur->getConstructTime() . 'S'));
         $usePlanet->setNiobium($usePlanetNb - $brouilleur->getNiobium());
         $usePlanet->setWater($usePlanetWt - $brouilleur->getWater());
         $usePlanet->setSkyPlace($newSky);
@@ -238,6 +255,7 @@ class InformationController extends Controller
         $brouilleur->setWater($brouilleur->getWater() * $cost);
         $brouilleur->setLevel($brouilleur->getLevel() + 1);
         $brouilleur->setFinishAt($now);
+        $usePlanet->getBuilding()->setConstruct($now);
         $brouilleur->setConstructTime($brouilleur->getConstructTime() * $time);
         $em->persist($usePlanet);
         $em->persist($brouilleur);
@@ -266,7 +284,7 @@ class InformationController extends Controller
 
         $brouilleur = $usePlanet->getBuilding()->getSkyBrouilleur();
         $newSky = $usePlanet->getSkyPlace() - $brouilleur->getSky();
-        if($brouilleur->getLevel() == 0 || $brouilleur->getFinishAt() > $now) {
+        if($brouilleur->getLevel() == 0 || $brouilleur->getFinishAt() > $now || $usePlanet->getBuilding()->getConstruct() < $now) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $cost = 1.7;
@@ -276,12 +294,14 @@ class InformationController extends Controller
             $cost = $cost + (0.25 * $multiple);
             $time = $time - (0.3 * $multiple);
         }
+        $now->add(new DateInterval('PT' . $brouilleur->getConstructTime() . 'S'));
         $usePlanetNb = $usePlanet->getNiobium();
         $usePlanetWt = $usePlanet->getWater();
         $brouilleur->setNiobium($brouilleur->getNiobium() / $cost);
         $brouilleur->setWater($brouilleur->getWater() / $cost);
         $brouilleur->setLevel($brouilleur->getLevel() - 1);
         $brouilleur->setFinishAt($now);
+        $usePlanet->getBuilding()->setConstruct($now);
         $brouilleur->setConstructTime($brouilleur->getConstructTime() / $time);
         $usePlanet->setNiobium($usePlanetNb + ($brouilleur->getNiobium() / 1.5));
         $usePlanet->setWater($usePlanetWt + ($brouilleur->getWater() / 1.5));

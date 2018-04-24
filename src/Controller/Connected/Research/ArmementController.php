@@ -6,6 +6,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use DateTime;
+use Dateinterval;
 use DateTimeZone;
 
 /**
@@ -33,12 +34,14 @@ class ArmementController extends Controller
 
         $armement = $user->getResearch()->getArmement();
         $userBt = $user->getBitcoin();
-        if(($userBt < $armement->getBitcoin() || $armement->getFinishAt() > $now) || $armement->getLevel() == 5) {
+        if(($userBt < $armement->getBitcoin() || $armement->getFinishAt() > $now) ||
+            ($armement->getLevel() == 5 || $user->getSearch() < $now)) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
         $cost = 2;
         $time = 2;
-
+        $now->add(new DateInterval('PT' . $armement->getConstructTime() . 'S'));
+        $user->setSearch($now);
         $user->setBitcoin($userBt - $armement->getBitcoin());
         $armement->setBitcoin($armement->getBitcoin() * $cost);
         $armement->setLevel($armement->getLevel() + 1);
@@ -70,12 +73,15 @@ class ArmementController extends Controller
 
         $missile = $user->getResearch()->getMissile();
         $userBt = $user->getBitcoin();
-        if(($userBt < $missile->getBitcoin() || $missile->getFinishAt() > $now) || ($missile->getLevel() == 3 || $user->getResearch()->getArmement()->getLevel() < 0)) {
+        if(($userBt < $missile->getBitcoin() || $missile->getFinishAt() > $now) ||
+            ($missile->getLevel() == 3 || $user->getResearch()->getArmement()->getLevel() < 0) ||
+            $user->getSearch() < $now) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
         $cost = 2;
         $time = 2;
-
+        $now->add(new DateInterval('PT' . $missile->getConstructTime() . 'S'));
+        $user->setSearch($now);
         $user->setBitcoin($userBt - $missile->getBitcoin());
         $missile->setBitcoin($missile->getBitcoin() * $cost);
         $missile->setLevel($missile->getLevel() + 1);
@@ -107,12 +113,15 @@ class ArmementController extends Controller
 
         $laser = $user->getResearch()->getLaser();
         $userBt = $user->getBitcoin();
-        if(($userBt < $laser->getBitcoin() || $laser->getFinishAt() > $now) || ($laser->getLevel() == 3 || $user->getResearch()->getArmement()->getLevel() < 2)) {
+        if(($userBt < $laser->getBitcoin() || $laser->getFinishAt() > $now) ||
+            ($laser->getLevel() == 3 || $user->getResearch()->getArmement()->getLevel() < 2) ||
+            $user->getSearch() < $now) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
         $cost = 2;
         $time = 2;
-
+        $now->add(new DateInterval('PT' . $laser->getConstructTime() . 'S'));
+        $user->setSearch($now);
         $user->setBitcoin($userBt - $laser->getBitcoin());
         $laser->setBitcoin($laser->getBitcoin() * $cost);
         $laser->setLevel($laser->getLevel() + 1);
@@ -141,15 +150,18 @@ class ArmementController extends Controller
             ->setParameters(array('id' => $idp, 'user' => $user))
             ->getQuery()
             ->getOneOrNullResult();
-
         $plasma = $user->getResearch()->getPlasma();
         $userBt = $user->getBitcoin();
-        if(($userBt < $plasma->getBitcoin() || $plasma->getFinishAt() > $now) || ($plasma->getLevel() == 3 || $user->getResearch()->getArmement()->getLevel() < 4)) {
+        if(($userBt < $plasma->getBitcoin() || $plasma->getFinishAt() > $now) ||
+            ($plasma->getLevel() == 3 || $user->getResearch()->getArmement()->getLevel() < 4) ||
+            $user->getSearch() < $now) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
         $cost = 2;
         $time = 2;
 
+        $now->add(new DateInterval('PT' . $plasma->getConstructTime() . 'S'));
+        $user->setSearch($now);
         $user->setBitcoin($userBt - $plasma->getBitcoin());
         $plasma->setBitcoin($plasma->getBitcoin() * $cost);
         $plasma->setLevel($plasma->getLevel() + 1);

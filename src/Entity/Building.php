@@ -96,6 +96,11 @@ class Building
     protected $heavyUsine;
 
     /**
+     * @ORM\Column(name="construct",type="datetime", nullable=true)
+     */
+    protected $construct;
+
+    /**
      * @return mixed
      */
     public function getPlanet()
@@ -301,6 +306,22 @@ class Building
     public function setCity($city): void
     {
         $this->city = $city;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConstruct()
+    {
+        return $this->construct;
+    }
+
+    /**
+     * @param mixed $construct
+     */
+    public function setConstruct($construct): void
+    {
+        $this->construct = $construct;
     }
 
     public function getId()

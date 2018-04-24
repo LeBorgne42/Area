@@ -6,6 +6,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use DateTime;
+use Dateinterval;
 use DateTimeZone;
 
 /**
@@ -33,12 +34,14 @@ class MilitaryController extends Controller
 
         $industry = $user->getResearch()->getIndustry();
         $userBt = $user->getBitcoin();
-        if(($userBt < $industry->getBitcoin() || $industry->getFinishAt() > $now) || $industry->getLevel() == 5) {
+        if(($userBt < $industry->getBitcoin() || $industry->getFinishAt() > $now) ||
+            ($industry->getLevel() == 5 || $user->getSearch() < $now)) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
         $cost = 2;
         $time = 2;
-
+        $now->add(new DateInterval('PT' . $industry->getConstructTime() . 'S'));
+        $user->setSearch($now);
         $user->setBitcoin($userBt - $industry->getBitcoin());
         $industry->setBitcoin($industry->getBitcoin() * $cost);
         $industry->setLevel($industry->getLevel() + 1);
@@ -70,12 +73,15 @@ class MilitaryController extends Controller
 
         $lightShip = $user->getResearch()->getLightShip();
         $userBt = $user->getBitcoin();
-        if(($userBt < $lightShip->getBitcoin() || $lightShip->getFinishAt() > $now) || ($lightShip->getLevel() == 5 || $user->getResearch()->getIndustry()->getLevel() < 3)) {
+        if(($userBt < $lightShip->getBitcoin() || $lightShip->getFinishAt() > $now) ||
+            ($lightShip->getLevel() == 5 || $user->getResearch()->getIndustry()->getLevel() < 3) ||
+            $user->getSearch() < $now) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
         $cost = 2;
         $time = 2;
-
+        $now->add(new DateInterval('PT' . $lightShip->getConstructTime() . 'S'));
+        $user->setSearch($now);
         $user->setBitcoin($userBt - $lightShip->getBitcoin());
         $lightShip->setBitcoin($lightShip->getBitcoin() * $cost);
         $lightShip->setLevel($lightShip->getLevel() + 1);
@@ -107,12 +113,15 @@ class MilitaryController extends Controller
 
         $heavyShip = $user->getResearch()->getHeavyShip();
         $userBt = $user->getBitcoin();
-        if(($userBt < $heavyShip->getBitcoin() || $heavyShip->getFinishAt() > $now) || ($heavyShip->getLevel() == 5 || $user->getResearch()->getIndustry()->getLevel() < 5)) {
+        if(($userBt < $heavyShip->getBitcoin() || $heavyShip->getFinishAt() > $now) ||
+            ($heavyShip->getLevel() == 5 || $user->getResearch()->getIndustry()->getLevel() < 5) ||
+            $user->getSearch() < $now) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
         $cost = 2;
         $time = 2;
-
+        $now->add(new DateInterval('PT' . $heavyShip->getConstructTime() . 'S'));
+        $user->setSearch($now);
         $user->setBitcoin($userBt - $heavyShip->getBitcoin());
         $heavyShip->setBitcoin($heavyShip->getBitcoin() * $cost);
         $heavyShip->setLevel($heavyShip->getLevel() + 1);

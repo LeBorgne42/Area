@@ -5,6 +5,8 @@ namespace App\Controller\Connected;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use DateTime;
+use DateTimeZone;
 
 /**
  * @Route("/fr")
@@ -18,6 +20,8 @@ class SearchController extends Controller
     public function searchAction($idp)
     {
         $em = $this->getDoctrine()->getManager();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
 
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
@@ -29,6 +33,7 @@ class SearchController extends Controller
 
         return $this->render('connected/search.html.twig', [
             'usePlanet' => $usePlanet,
+            'date' => $now,
         ]);
     }
 }

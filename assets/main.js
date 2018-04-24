@@ -172,6 +172,54 @@ function manageMaxShip() {
     });
 }
 
+function manageConstructTime() {
+    var build = new Date($('#timeConstruct').text());
+    var now = new Date();
+    var date_now = Math.abs(build - now) / 1000;
+    var jours = Math.floor(date_now / (60 * 60 * 24));
+    var heures = Math.floor((date_now - (jours * 60 * 60 * 24)) / (60 * 60));
+    var minutes = Math.floor((date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60))) / 60);
+    var secondes = Math.floor(date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60 + minutes * 60)));
+    if (date_now > 0) {
+        if (jours) {
+            $('#timeDisplay').text(jours + 'j ' + heures + 'heures ' + minutes + 'mins ' + secondes + 's');
+        } else if (heures)
+        {
+            $('#timeDisplay').text(heures + 'heures ' + minutes + 'mins ' + secondes + 's');
+        } else if (minutes)
+        {
+            $('#timeDisplay').text(minutes + 'mins ' + secondes + 's');
+        } else if (secondes)
+        {
+            $('#timeDisplay').text(secondes + ' secondes');
+        }
+    }
+}
+
+function manageResearchTime() {
+    var build = new Date($('#timeResearch').text());
+    var now = new Date();
+    var date_now = Math.abs(build - now) / 1000;
+    var jours = Math.floor(date_now / (60 * 60 * 24));
+    var heures = Math.floor((date_now - (jours * 60 * 60 * 24)) / (60 * 60));
+    var minutes = Math.floor((date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60))) / 60);
+    var secondes = Math.floor(date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60 + minutes * 60)));
+    if (date_now > 0) {
+        if (jours) {
+            $('#timeDisplayR').text(jours + 'j ' + heures + 'heures ' + minutes + 'mins ' + secondes + 's');
+        } else if (heures)
+        {
+            $('#timeDisplayR').text(heures + 'heures ' + minutes + 'mins ' + secondes + 's');
+        } else if (minutes)
+        {
+            $('#timeDisplayR').text(minutes + 'mins ' + secondes + 's');
+        } else if (secondes)
+        {
+            $('#timeDisplayR').text(secondes + ' secondes');
+        }
+    }
+}
+
 $(document).ready(function() {
     $('[data-toggle="popover"]').popover();
     $('[data-toggle="tooltip"]').tooltip();
@@ -183,6 +231,8 @@ $(document).ready(function() {
     manageAllyImageForm();
     manageModalContact();
     manageMaxShip();
+    manageConstructTime();
+    manageResearchTime();
     // manageReloadR();
     setNoDecimalDisplay();
     console.log("Toute utilisation de scripts sur le jeu seront puni d'un ban permanent, merci.");

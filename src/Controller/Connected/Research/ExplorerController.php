@@ -6,6 +6,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use DateTime;
+use Dateinterval;
 use DateTimeZone;
 
 /**
@@ -33,12 +34,13 @@ class ExplorerController extends Controller
 
         $onde = $user->getResearch()->getOnde();
         $userBt = $user->getBitcoin();
-        if(($userBt < $onde->getBitcoin() || $onde->getFinishAt() > $now) || $onde->getLevel() == 5) {
+        if(($userBt < $onde->getBitcoin() || $onde->getFinishAt() > $now) || ($onde->getLevel() == 5 || $user->getSearch() < $now)) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
         $cost = 2;
         $time = 2;
-
+        $now->add(new DateInterval('PT' . $onde->getConstructTime() . 'S'));
+        $user->setSearch($now);
         $user->setBitcoin($userBt - $onde->getBitcoin());
         $onde->setBitcoin($onde->getBitcoin() * $cost);
         $onde->setLevel($onde->getLevel() + 1);
@@ -70,10 +72,13 @@ class ExplorerController extends Controller
 
         $terraformation = $user->getResearch()->getTerraformation();
         $userBt = $user->getBitcoin();
-        if(($userBt < $terraformation->getBitcoin() || $terraformation->getFinishAt() > $now) || ($terraformation->getLevel() == 1 || $user->getResearch()->getUtility()->getLevel() == 0)) {
+        if(($userBt < $terraformation->getBitcoin() || $terraformation->getFinishAt() > $now) ||
+            ($terraformation->getLevel() == 1 || $user->getResearch()->getUtility()->getLevel() == 0) ||
+            $user->getSearch() < $now) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
-
+        $now->add(new DateInterval('PT' . $terraformation->getConstructTime() . 'S'));
+        $user->setSearch($now);
         $user->setBitcoin($userBt - $terraformation->getBitcoin());
         $terraformation->setLevel($terraformation->getLevel() + 1);
         $terraformation->setFinishAt($now);
@@ -103,12 +108,15 @@ class ExplorerController extends Controller
 
         $cargo = $user->getResearch()->getCargo();
         $userBt = $user->getBitcoin();
-        if(($userBt < $cargo->getBitcoin() || $cargo->getFinishAt() > $now) || ($cargo->getLevel() == 5 || $user->getResearch()->getUtility()->getLevel() < 2)) {
+        if(($userBt < $cargo->getBitcoin() || $cargo->getFinishAt() > $now) ||
+            ($cargo->getLevel() == 5 || $user->getResearch()->getUtility()->getLevel() < 2) ||
+            $user->getSearch() < $now) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
         $cost = 2;
         $time = 2;
-
+        $now->add(new DateInterval('PT' . $cargo->getConstructTime() . 'S'));
+        $user->setSearch($now);
         $user->setBitcoin($userBt - $cargo->getBitcoin());
         $cargo->setBitcoin($cargo->getBitcoin() * $cost);
         $cargo->setLevel($cargo->getLevel() + 1);
@@ -140,10 +148,13 @@ class ExplorerController extends Controller
 
         $recyclage = $user->getResearch()->getRecycleur();
         $userBt = $user->getBitcoin();
-        if(($userBt < $recyclage->getBitcoin() || $recyclage->getFinishAt() > $now) || ($recyclage->getLevel() == 1 || $user->getResearch()->getUtility()->getLevel() < 3)) {
+        if(($userBt < $recyclage->getBitcoin() || $recyclage->getFinishAt() > $now) ||
+            ($recyclage->getLevel() == 1 || $user->getResearch()->getUtility()->getLevel() < 3) ||
+            $user->getSearch() < $now) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
-
+        $now->add(new DateInterval('PT' . $recyclage->getConstructTime() . 'S'));
+        $user->setSearch($now);
         $user->setBitcoin($userBt - $recyclage->getBitcoin());
         $recyclage->setLevel($recyclage->getLevel() + 1);
         $recyclage->setFinishAt($now);
@@ -173,10 +184,13 @@ class ExplorerController extends Controller
 
         $barge = $user->getResearch()->getBarge();
         $userBt = $user->getBitcoin();
-        if(($userBt < $barge->getBitcoin() || $barge->getFinishAt() > $now) || ($barge->getLevel() == 1 || $user->getResearch()->getUtility()->getLevel() < 3)) {
+        if(($userBt < $barge->getBitcoin() || $barge->getFinishAt() > $now) ||
+            ($barge->getLevel() == 1 || $user->getResearch()->getUtility()->getLevel() < 3) ||
+            $user->getSearch() < $now) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
-
+        $now->add(new DateInterval('PT' . $barge->getConstructTime() . 'S'));
+        $user->setSearch($now);
         $user->setBitcoin($userBt - $barge->getBitcoin());
         $barge->setLevel($barge->getLevel() + 1);
         $barge->setFinishAt($now);
@@ -206,12 +220,14 @@ class ExplorerController extends Controller
 
         $utility = $user->getResearch()->getUtility();
         $userBt = $user->getBitcoin();
-        if(($userBt < $utility->getBitcoin() || $utility->getFinishAt() > $now) || $utility->getLevel() == 3) {
+        if(($userBt < $utility->getBitcoin() || $utility->getFinishAt() > $now) ||
+            ($utility->getLevel() == 3 || $user->getSearch() < $now)) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
         $cost = 2;
         $time = 2;
-
+        $now->add(new DateInterval('PT' . $utility->getConstructTime() . 'S'));
+        $user->setSearch($now);
         $user->setBitcoin($userBt - $utility->getBitcoin());
         $utility->setBitcoin($utility->getBitcoin() * $cost);
         $utility->setLevel($utility->getLevel() + 1);
@@ -243,10 +259,12 @@ class ExplorerController extends Controller
 
         $hyperespace = $user->getResearch()->getHyperespace();
         $userBt = $user->getBitcoin();
-        if(($userBt < $hyperespace->getBitcoin() || $hyperespace->getFinishAt() > $now) || $hyperespace->getLevel() == 1) {
+        if(($userBt < $hyperespace->getBitcoin() || $hyperespace->getFinishAt() > $now) ||
+            ($hyperespace->getLevel() == 1 || $user->getSearch() < $now)) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
-
+        $now->add(new DateInterval('PT' . $hyperespace->getConstructTime() . 'S'));
+        $user->setSearch($now);
         $user->setBitcoin($userBt - $hyperespace->getBitcoin());
         $hyperespace->setLevel($hyperespace->getLevel() + 1);
         $hyperespace->setFinishAt($now);

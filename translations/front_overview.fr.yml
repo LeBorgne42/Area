@@ -12,3 +12,5 @@ title.spatial: 'Chantier spatial'
 cell.spatial: 'Aucune production en cours.'
 title.fleet: Flotte
 cell.fleet: 'Aucune flotte en vol.'
+cell.constructName: 'Construction terminée dans '
+cell.searchName: 'Recherche effectuée dans '

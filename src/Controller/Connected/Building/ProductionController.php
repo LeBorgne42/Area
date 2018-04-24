@@ -6,6 +6,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use DateTime;
+use Dateinterval;
 use DateTimeZone;
 
 /**
@@ -35,7 +36,9 @@ class ProductionController extends Controller
         $usePlanetNb = $usePlanet->getNiobium();
         $usePlanetWt = $usePlanet->getWater();
         $newGround = $usePlanet->getGroundPlace() + $miner->getGround();
-        if(($usePlanetNb < $miner->getNiobium() || $usePlanetWt < $miner->getWater()) || ($miner->getFinishAt() > $now || $newGround > $usePlanet->getGround())) {
+        if(($usePlanetNb < $miner->getNiobium() || $usePlanetWt < $miner->getWater()) ||
+            ($miner->getFinishAt() > $now || $newGround > $usePlanet->getGround()) ||
+            ($usePlanet->getBuilding()->getConstruct() < $now)) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $prod = 1.3;
@@ -47,6 +50,7 @@ class ProductionController extends Controller
             $time = $time - (0.19 * $multiple);
             $prod = $prod - (0.075 * $multiple);
         }
+        $now->add(new DateInterval('PT' . $miner->getConstructTime() . 'S'));
         $usePlanet->setNiobium($usePlanetNb - $miner->getNiobium());
         $usePlanet->setWater($usePlanetWt - $miner->getWater());
         $usePlanet->setGroundPlace($newGround);
@@ -55,6 +59,7 @@ class ProductionController extends Controller
         $miner->setProduction($miner->getProduction() * $prod);
         $miner->setLevel($miner->getLevel() + 1);
         $miner->setFinishAt($now);
+        $usePlanet->getBuilding()->setConstruct($now);
         $miner->setConstructTime($miner->getConstructTime() * $time);
         $em->persist($usePlanet);
         $em->persist($miner);
@@ -83,7 +88,7 @@ class ProductionController extends Controller
 
         $miner = $usePlanet->getBuilding()->getMiner();
         $newGround = $usePlanet->getGroundPlace() - $miner->getGround();
-        if($miner->getLevel() == 1 || $miner->getFinishAt() > $now) {
+        if($miner->getLevel() == 1 || $miner->getFinishAt() > $now || $usePlanet->getBuilding()->getConstruct() < $now) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $prod = 1.3;
@@ -95,6 +100,7 @@ class ProductionController extends Controller
         $time = $time + (0.19 * $multiple);
         $prod = $prod + (0.075 * $multiple);
         }
+        $now->add(new DateInterval('PT' . $miner->getConstructTime() . 'S'));
         $usePlanetNb = $usePlanet->getNiobium();
         $usePlanetWt = $usePlanet->getWater();
         $miner->setNiobium($miner->getNiobium() / $cost);
@@ -102,6 +108,7 @@ class ProductionController extends Controller
         $miner->setProduction($miner->getProduction() / $prod);
         $miner->setLevel($miner->getLevel() - 1);
         $miner->setFinishAt($now);
+        $usePlanet->getBuilding()->setConstruct($now);
         $miner->setConstructTime($miner->getConstructTime() / $time);
         $usePlanet->setNiobium($usePlanetNb + ($miner->getNiobium() / 1.5));
         $usePlanet->setWater($usePlanetWt + ($miner->getWater() / 1.5));
@@ -135,7 +142,9 @@ class ProductionController extends Controller
         $usePlanetNb = $usePlanet->getNiobium();
         $usePlanetWt = $usePlanet->getWater();
         $newGround = $usePlanet->getGroundPlace() + $extract->getGround();
-        if(($usePlanetNb < $extract->getNiobium() || $usePlanetWt < $extract->getWater()) || ($extract->getFinishAt() > $now || $newGround > $usePlanet->getGround())) {
+        if(($usePlanetNb < $extract->getNiobium() || $usePlanetWt < $extract->getWater()) ||
+            ($extract->getFinishAt() > $now || $newGround > $usePlanet->getGround()) ||
+            ($usePlanet->getBuilding()->getConstruct() < $now)) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $prod = 1.3;
@@ -147,6 +156,7 @@ class ProductionController extends Controller
             $time = $time - (0.19 * $multiple);
             $prod = $prod - (0.075 * $multiple);
         }
+        $now->add(new DateInterval('PT' . $extract->getConstructTime() . 'S'));
         $usePlanet->setNiobium($usePlanetNb - $extract->getNiobium());
         $usePlanet->setWater($usePlanetWt - $extract->getWater());
         $usePlanet->setGroundPlace($newGround);
@@ -155,6 +165,7 @@ class ProductionController extends Controller
         $extract->setProduction($extract->getProduction() * $prod);
         $extract->setLevel($extract->getLevel() + 1);
         $extract->setFinishAt($now);
+        $usePlanet->getBuilding()->setConstruct($now);
         $extract->setConstructTime($extract->getConstructTime() * $time);
         $em->persist($usePlanet);
         $em->persist($extract);
@@ -183,7 +194,7 @@ class ProductionController extends Controller
 
         $extract = $usePlanet->getBuilding()->getExtractor();
         $newGround = $usePlanet->getGroundPlace() - $extract->getGround();
-        if($extract->getLevel() == 1 || $extract->getFinishAt() > $now) {
+        if($extract->getLevel() == 1 || $extract->getFinishAt() > $now || $usePlanet->getBuilding()->getConstruct() < $now) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $prod = 1.3;
@@ -195,6 +206,7 @@ class ProductionController extends Controller
             $time = $time + (0.19 * $multiple);
             $prod = $prod + (0.075 * $multiple);
         }
+        $now->add(new DateInterval('PT' . $extract->getConstructTime() . 'S'));
         $usePlanetNb = $usePlanet->getNiobium();
         $usePlanetWt = $usePlanet->getWater();
         $extract->setNiobium($extract->getNiobium() / $cost);
@@ -202,6 +214,7 @@ class ProductionController extends Controller
         $extract->setProduction($extract->getProduction() / $prod);
         $extract->setLevel($extract->getLevel() - 1);
         $extract->setFinishAt($now);
+        $usePlanet->getBuilding()->setConstruct($now);
         $extract->setConstructTime($extract->getConstructTime() / $time);
         $usePlanet->setNiobium($usePlanetNb + ($extract->getNiobium() / 1.5));
         $usePlanet->setWater($usePlanetWt + ($extract->getWater() / 1.5));

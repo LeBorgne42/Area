@@ -6,6 +6,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use DateTime;
+use Dateinterval;
 use DateTimeZone;
 
 /**
@@ -35,7 +36,9 @@ class EconomicController extends Controller
         $usePlanetNb = $usePlanet->getNiobium();
         $usePlanetWt = $usePlanet->getWater();
         $newGround = $usePlanet->getGroundPlace() + $search->getGround();
-        if(($usePlanetNb < $search->getNiobium() || $usePlanetWt < $search->getWater()) || ($search->getFinishAt() > $now || $newGround > $usePlanet->getGround())) {
+        if(($usePlanetNb < $search->getNiobium() || $usePlanetWt < $search->getWater()) ||
+            ($search->getFinishAt() > $now || $newGround > $usePlanet->getGround()) ||
+            ($usePlanet->getBuilding()->getConstruct() < $now)) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $prod = 0.5;
@@ -47,6 +50,7 @@ class EconomicController extends Controller
             $time = $time - (0.3 * $multiple);
             $prod = $prod - (0.02 * $multiple);
         }
+        $now->add(new DateInterval('PT' . $search->getConstructTime() . 'S'));
         $usePlanet->setNiobium($usePlanetNb - $search->getNiobium());
         $usePlanet->setWater($usePlanetWt - $search->getWater());
         $usePlanet->setGroundPlace($newGround);
@@ -55,6 +59,7 @@ class EconomicController extends Controller
         $search->setProduction($search->getProduction() + $prod);
         $search->setLevel($search->getLevel() + 1);
         $search->setFinishAt($now);
+        $usePlanet->getBuilding()->setConstruct($now);
         $search->setConstructTime($search->getConstructTime() * $time);
         $em->persist($usePlanet);
         $em->persist($search);
@@ -83,7 +88,7 @@ class EconomicController extends Controller
 
         $search = $usePlanet->getBuilding()->getBuildSearch();
         $newGround = $usePlanet->getGroundPlace() - $search->getGround();
-        if($search->getLevel() == 0 || $search->getFinishAt() > $now) {
+        if($search->getLevel() == 0 || $search->getFinishAt() > $now || ($usePlanet->getBuilding()->getConstruct() < $now)) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $prod = 0.5;
@@ -95,6 +100,7 @@ class EconomicController extends Controller
             $time = $time + (0.3 * $multiple);
             $prod = $prod + (0.075 * $multiple);
         }
+        $now->add(new DateInterval('PT' . $search->getConstructTime() . 'S'));
         $usePlanetNb = $usePlanet->getNiobium();
         $usePlanetWt = $usePlanet->getWater();
         $search->setNiobium($search->getNiobium() / $cost);
@@ -102,6 +108,7 @@ class EconomicController extends Controller
         $search->setProduction($search->getProduction() - $prod);
         $search->setLevel($search->getLevel() - 1);
         $search->setFinishAt($now);
+        $usePlanet->getBuilding()->setConstruct($now);
         $search->setConstructTime($search->getConstructTime() / $time);
         $usePlanet->setNiobium($usePlanetNb + ($search->getNiobium() / 1.5));
         $usePlanet->setWater($usePlanetWt + ($search->getWater() / 1.5));
@@ -134,7 +141,9 @@ class EconomicController extends Controller
         $usePlanetNb = $usePlanet->getNiobium();
         $usePlanetWt = $usePlanet->getWater();
         $newGround = $usePlanet->getGroundPlace() + $city->getGround();
-        if(($usePlanetNb < $city->getNiobium() || $usePlanetWt < $city->getWater()) || ($city->getFinishAt() > $now || $newGround > $usePlanet->getGround() || $user->getResearch()->getDemography()->getLevel() == 0)) {
+        if(($usePlanetNb < $city->getNiobium() || $usePlanetWt < $city->getWater()) ||
+            ($city->getFinishAt() > $now || $newGround > $usePlanet->getGround() || $user->getResearch()->getDemography()->getLevel() == 0) ||
+            ($usePlanet->getBuilding()->getConstruct() < $now)) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $prod = 0.25;
@@ -146,6 +155,7 @@ class EconomicController extends Controller
             $time = $time - (0.3 * $multiple);
             $prod = $prod - (0.02 * $multiple);
         }
+        $now->add(new DateInterval('PT' . $city->getConstructTime() . 'S'));
         $usePlanet->setNiobium($usePlanetNb - $city->getNiobium());
         $usePlanet->setWater($usePlanetWt - $city->getWater());
         $usePlanet->setGroundPlace($newGround);
@@ -154,6 +164,7 @@ class EconomicController extends Controller
         $city->setProduction($city->getProduction() + $prod);
         $city->setLevel($city->getLevel() + 1);
         $city->setFinishAt($now);
+        $usePlanet->getBuilding()->setConstruct($now);
         $city->setConstructTime($city->getConstructTime() * $time);
         $em->persist($usePlanet);
         $em->persist($city);
@@ -182,7 +193,8 @@ class EconomicController extends Controller
 
         $city = $usePlanet->getBuilding()->getCity();
         $newGround = $usePlanet->getGroundPlace() - $city->getGround();
-        if($city->getLevel() == 0 || $city->getFinishAt() > $now) {
+        if($city->getLevel() == 0 || $city->getFinishAt() > $now ||
+            ($usePlanet->getBuilding()->getConstruct() < $now)) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $prod = 0.25;
@@ -194,6 +206,7 @@ class EconomicController extends Controller
             $time = $time + (0.3 * $multiple);
             $prod = $prod + (0.075 * $multiple);
         }
+        $now->add(new DateInterval('PT' . $city->getConstructTime() . 'S'));
         $usePlanetNb = $usePlanet->getNiobium();
         $usePlanetWt = $usePlanet->getWater();
         $city->setNiobium($city->getNiobium() / $cost);
@@ -201,6 +214,7 @@ class EconomicController extends Controller
         $city->setProduction($city->getProduction() - $prod);
         $city->setLevel($city->getLevel() - 1);
         $city->setFinishAt($now);
+        $usePlanet->getBuilding()->setConstruct($now);
         $city->setConstructTime($city->getConstructTime() / $time);
         $usePlanet->setNiobium($usePlanetNb + ($city->getNiobium() / 1.5));
         $usePlanet->setWater($usePlanetWt + ($city->getWater() / 1.5));
@@ -234,7 +248,10 @@ class EconomicController extends Controller
         $usePlanetWt = $usePlanet->getWater();
         $newGround = $usePlanet->getGroundPlace() + $metropole->getGround();
         $newSky = $usePlanet->getSkyPlace() + $metropole->getSky();
-        if(($usePlanetNb < $metropole->getNiobium() || $usePlanetWt < $metropole->getWater()) || ($metropole->getFinishAt() > $now || $newGround > $usePlanet->getGround()) || ($newSky > $usePlanet->getSky() || $user->getResearch()->getDemography()->getLevel() < 5)) {
+        if(($usePlanetNb < $metropole->getNiobium() || $usePlanetWt < $metropole->getWater()) ||
+            ($metropole->getFinishAt() > $now || $newGround > $usePlanet->getGround()) ||
+            ($newSky > $usePlanet->getSky() || $user->getResearch()->getDemography()->getLevel() < 5) ||
+            ($usePlanet->getBuilding()->getConstruct() < $now)) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $prod = 1;
@@ -246,6 +263,7 @@ class EconomicController extends Controller
             $time = $time - (0.3 * $multiple);
             $prod = $prod - (0.02 * $multiple);
         }
+        $now->add(new DateInterval('PT' . $metropole->getConstructTime() . 'S'));
         $usePlanet->setNiobium($usePlanetNb - $metropole->getNiobium());
         $usePlanet->setWater($usePlanetWt - $metropole->getWater());
         $usePlanet->setGroundPlace($newGround);
@@ -255,6 +273,7 @@ class EconomicController extends Controller
         $metropole->setProduction($metropole->getProduction() + $prod);
         $metropole->setLevel($metropole->getLevel() + 1);
         $metropole->setFinishAt($now);
+        $usePlanet->getBuilding()->setConstruct($now);
         $metropole->setConstructTime($metropole->getConstructTime() * $time);
         $em->persist($usePlanet);
         $em->persist($metropole);
@@ -284,7 +303,8 @@ class EconomicController extends Controller
         $metropole = $usePlanet->getBuilding()->getMetropole();
         $newGround = $usePlanet->getGroundPlace() - $metropole->getGround();
         $newSky = $usePlanet->getSkyPlace() - $metropole->getSky();
-        if($metropole->getLevel() == 0 || $metropole->getFinishAt() > $now) {
+        if($metropole->getLevel() == 0 || $metropole->getFinishAt() > $now ||
+            ($usePlanet->getBuilding()->getConstruct() < $now)) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $prod = 1;
@@ -296,6 +316,7 @@ class EconomicController extends Controller
             $time = $time + (0.3 * $multiple);
             $prod = $prod + (0.075 * $multiple);
         }
+        $now->add(new DateInterval('PT' . $metropole->getConstructTime() . 'S'));
         $usePlanetNb = $usePlanet->getNiobium();
         $usePlanetWt = $usePlanet->getWater();
         $metropole->setNiobium($metropole->getNiobium() / $cost);
@@ -303,6 +324,7 @@ class EconomicController extends Controller
         $metropole->setProduction($metropole->getProduction() - $prod);
         $metropole->setLevel($metropole->getLevel() - 1);
         $metropole->setFinishAt($now);
+        $usePlanet->getBuilding()->setConstruct($now);
         $metropole->setConstructTime($metropole->getConstructTime() / $time);
         $usePlanet->setNiobium($usePlanetNb + ($metropole->getNiobium() / 1.5));
         $usePlanet->setWater($usePlanetWt + ($metropole->getWater() / 1.5));

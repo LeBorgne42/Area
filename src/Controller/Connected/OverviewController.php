@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\Front\UserImageType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use DateTime;
+use DateTimeZone;
 
 /**
  * @Route("/fr")
@@ -20,6 +22,8 @@ class OverviewController extends Controller
     public function overviewAction(Request $request, $idp)
     {
         $em = $this->getDoctrine()->getManager();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
 
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
@@ -39,6 +43,7 @@ class OverviewController extends Controller
         return $this->render('connected/overview.html.twig', [
             'form_image' => $form_image->createView(),
             'usePlanet' => $usePlanet,
+            'date' => $now,
         ]);
     }
 }

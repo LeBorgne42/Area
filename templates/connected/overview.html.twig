@@ -10,19 +10,21 @@
             <tbody>
                 <tr>
                     <th class="tab-cells-name">
-                        <div class="mb-3">{{ app.user.getUsername() }}</div>
-                        <div class="modify">
-                            {% if app.user %}
-                                {% if app.user.imageFile %}
-                                    <img data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.modify'|trans }}" height="64" width="64" src="{{ vich_uploader_asset(app.user, 'imageFile') }}">
+                        <h3>
+                            <div class="mb-3">{{ app.user.getUsername() }}</div>
+                            <div class="modify">
+                                {% if app.user %}
+                                    {% if app.user.imageFile %}
+                                        <img data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.modify'|trans }}" height="64" width="64" src="{{ vich_uploader_asset(app.user, 'imageFile') }}">
+                                    {% else %}
+                                        <img data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.modify'|trans }}" height="64" width="64" src="{{ asset('img/avatar.png') }}">
+                                    {% endif %}
                                 {% else %}
                                     <img data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.modify'|trans }}" height="64" width="64" src="{{ asset('img/avatar.png') }}">
                                 {% endif %}
-                            {% else %}
-                                <img data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.modify'|trans }}" height="64" width="64" src="{{ asset('img/avatar.png') }}">
-                            {% endif %}
-                            <div><strong>{{ 'modify'|trans }}</strong></div>
-                        </div>
+                                <div><strong>{{ 'modify'|trans }}</strong></div>
+                            </div>
+                        </h3>
                         {{ form_start(form_image,{attr: { hidden: 'hidden'}}) }}
                         {{ form_widget(form_image.imageFile) }}
                         {{ form_widget(form_image.sendForm) }}
@@ -31,20 +33,46 @@
                     <td class="center-cells">{{ 'cell.planet'|trans|raw }}</td>
                 </tr>
                 <tr>
-                    <th class="tab-cells-name">{{ 'title.batiment'|trans|raw }}</th>
-                    <td class="center-cells"><a href="{{ path('building', {'idp': usePlanet.getId()}) }}">{{ 'cell.batiment'|trans|raw }}</a></td>
+                    <th class="tab-cells-name"><h4>{{ 'title.batiment'|trans|raw }}</h4></th>
+                    <td class="center-cells">
+                        <a href="{{ path('building', {'idp': usePlanet.getId()}) }}">
+                            {% if usePlanet.getBuilding().getConstruct() > date %}
+                                <div id="timeConstruct" hidden>{{ usePlanet.getBuilding().getConstruct()|date('Y/m/d H:m:s') }}</div>
+                                <h4>{{ 'cell.constructName'|trans|raw }}<span id="timeDisplay" class="my-2"></span></h4>
+                            {% else %}
+                            {{ 'cell.batiment'|trans|raw }}
+                            {% endif %}
+                        </a>
+                    </td>
                 </tr>
                 <tr>
-                    <th class="tab-cells-name">{{ 'title.search'|trans|raw }}</th>
-                    <td class="center-cells"><a href="{{ path('search', {'idp': usePlanet.getId()}) }}">{{ 'cell.search'|trans|raw }}</a></td>
+                    <th class="tab-cells-name"><h4>{{ 'title.search'|trans|raw }}</h4></th>
+                    <td class="center-cells">
+                        <a href="{{ path('search', {'idp': usePlanet.getId()}) }}">
+                            {% if app.user.getSearch() > date %}
+                                <div id="timeResearch" hidden>{{ app.user.getSearch()|date('Y/m/d H:m:s') }}</div>
+                                <h4>{{ 'cell.searchName'|trans|raw }}<span id="timeDisplayR" class="my-2"></span></h4>
+                            {% else %}
+                                {{ 'cell.search'|trans|raw }}
+                            {% endif %}
+                        </a>
+                    </td>
                 </tr>
                 <tr>
-                    <th class="tab-cells-name">{{ 'title.spatial'|trans|raw }}</th>
-                    <td class="center-cells"><a href="{{ path('spatial', {'idp': usePlanet.getId()}) }}">{{ 'cell.spatial'|trans|raw }}</a></td>
+                    <th class="tab-cells-name"><h4>{{ 'title.spatial'|trans|raw }}</h4></th>
+                    <td class="center-cells">
+                        <a href="{{ path('spatial', {'idp': usePlanet.getId()}) }}">
+                            <h4>{{ 'cell.spatial'|trans|raw }}</h4>
+                        </a>
+                    </td>
                 </tr>
                 <tr>
-                    <th class="tab-cells-name">{{ 'title.fleet'|trans|raw }}</th>
-                    <td class="center-cells"><a href="{{ path('fleet', {'idp': usePlanet.getId()}) }}">{{ 'cell.fleet'|trans|raw }}</a></td>
+                    <th class="tab-cells-name"><h4>{{ 'title.fleet'|trans|raw }}</h4></th>
+                    <td class="center-cells">
+                        <a href="{{ path('fleet', {'idp': usePlanet.getId()}) }}">
+                            <h4>{{ 'cell.fleet'|trans|raw }}</h4>
+                        </a>
+                    </td>
                 </tr>
             </tbody>
         </table>

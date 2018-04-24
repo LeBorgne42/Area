@@ -5,6 +5,8 @@ namespace App\Controller\Connected\Building;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use DateTime;
+use DateTimeZone;
 
 /**
  * @Route("/fr")
@@ -18,6 +20,8 @@ class BuildingController extends Controller
     public function buildingAction($idp)
     {
         $em = $this->getDoctrine()->getManager();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
 
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
@@ -29,6 +33,7 @@ class BuildingController extends Controller
 
         return $this->render('connected/building.html.twig', [
             'usePlanet' => $usePlanet,
+            'date' => $now,
         ]);
     }
 }

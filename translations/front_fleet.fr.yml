@@ -12,7 +12,7 @@ fleet.time: Temps
 fleet.otherPlanet: 'Flottes sur mes autres planètes'
 fleet.planet: Planète
 fleet.createFleet: 'Gestion flotte'
-fleet.fleetShip: 'Vaisseaux'
+fleet.fleetShip: Vaisseaux
 fleet.destroyFleet: 'mettre au sol'
 fleet.exploration: 'Flotte en exploration'
 fleet.beforeName: Flotte

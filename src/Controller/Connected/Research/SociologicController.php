@@ -6,6 +6,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use DateTime;
+use Dateinterval;
 use DateTimeZone;
 
 /**
@@ -33,12 +34,14 @@ class SociologicController extends Controller
 
         $demography = $user->getResearch()->getDemography();
         $userBt = $user->getBitcoin();
-        if(($userBt < $demography->getBitcoin() || $demography->getFinishAt() > $now) || $demography->getLevel() == 5) {
+        if(($userBt < $demography->getBitcoin() || $demography->getFinishAt() > $now) ||
+            ($demography->getLevel() == 5 || $user->getSearch() < $now)) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
         $cost = 2;
         $time = 2;
-
+        $now->add(new DateInterval('PT' . $demography->getConstructTime() . 'S'));
+        $user->setSearch($now);
         $user->setBitcoin($userBt - $demography->getBitcoin());
         $demography->setBitcoin($demography->getBitcoin() * $cost);
         $demography->setLevel($demography->getLevel() + 1);
@@ -70,12 +73,15 @@ class SociologicController extends Controller
 
         $discipline = $user->getResearch()->getDiscipline();
         $userBt = $user->getBitcoin();
-        if(($userBt < $discipline->getBitcoin() || $discipline->getFinishAt() > $now) || ($discipline->getLevel() == 3 || $user->getResearch()->getDemography()->getLevel() == 0)) {
+        if(($userBt < $discipline->getBitcoin() || $discipline->getFinishAt() > $now) ||
+            ($discipline->getLevel() == 3 || $user->getResearch()->getDemography()->getLevel() == 0) ||
+            $user->getSearch() < $now) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
         $cost = 2;
         $time = 2;
-
+        $now->add(new DateInterval('PT' . $discipline->getConstructTime() . 'S'));
+        $user->setSearch($now);
         $user->setBitcoin($userBt - $discipline->getBitcoin());
         $discipline->setBitcoin($discipline->getBitcoin() * $cost);
         $discipline->setLevel($discipline->getLevel() + 1);

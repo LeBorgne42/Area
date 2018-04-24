@@ -6,6 +6,7 @@
 
 {% block body %}
     <div class="front-block research">
+        <div id="timeDefaut" hidden>{{ date|date('Y/m/d H:m:s') }}</div>
         <div class="block-title"><h2>{{ 'research.titleUtility'|trans }}</h2></div>
         <table class="table table-striped table-bordered table-dark text-center">
             <tbody>
@@ -14,10 +15,15 @@
                     {{ 'title.utility'|trans|raw }} {{ 'research.level'|trans|raw }} {{ app.user.getResearch().getUtility().getLevel() }}
                 </th>
                 <td class="center-cells">
-                    {% if app.user.getBitcoin() >= app.user.getResearch().getUtility().getBitcoin() and app.user.getResearch().getUtility().getLevel() < 3 %}
-                        <a class="btn btn-lg btn-info" href="{{ path('research_utility', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                    {% if app.user.getResearch().getUtility().getFinishAt() > date %}
+                        <div id="timeConstruct" hidden>{{ app.user.getResearch().getUtility().getFinishAt()|date('Y/m/d H:m:s') }}</div>
+                        <div id="timeDisplay" class="my-2"></div>
                     {% else %}
-                        <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
+                        {% if app.user.getBitcoin() >= app.user.getResearch().getUtility().getBitcoin() and app.user.getResearch().getUtility().getLevel() < 3 and app.user.getSearch() < date %}
+                            <a class="btn btn-lg btn-info" href="{{ path('research_utility', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                        {% else %}
+                            <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
+                        {% endif %}
                     {% endif %}
                 </td>
             </tr>
@@ -26,10 +32,15 @@
                     {{ 'title.terraformation'|trans|raw }} {% if app.user.getResearch().getTerraformation().getLevel() == false %}{{ 'research.canBe'|trans }}{% else %}{{ 'research.Activated'|trans }}{% endif %}
                 </th>
                 <td class="center-cells">
-                    {% if app.user.getBitcoin() >= app.user.getResearch().getTerraformation().getBitcoin() and app.user.getResearch().getTerraformation().getLevel() == 0  and app.user.getResearch().getUtility().getLevel() > 0 %}
-                        <a class="btn btn-lg btn-info" href="{{ path('research_terraformation', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                    {% if app.user.getResearch().getTerraformation().getFinishAt() > date %}
+                        <div id="timeConstruct" hidden>{{ app.user.getResearch().getTerraformation().getFinishAt()|date('Y/m/d H:m:s') }}</div>
+                        <div id="timeDisplay" class="my-2"></div>
                     {% else %}
-                        <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
+                        {% if app.user.getBitcoin() >= app.user.getResearch().getTerraformation().getBitcoin() and app.user.getResearch().getTerraformation().getLevel() == 0  and app.user.getResearch().getUtility().getLevel() > 0 and app.user.getSearch() < date %}
+                            <a class="btn btn-lg btn-info" href="{{ path('research_terraformation', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                        {% else %}
+                            <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
+                        {% endif %}
                     {% endif %}
                 </td>
             </tr>
@@ -38,10 +49,15 @@
                     {{ 'title.cargo'|trans|raw }} {{ 'research.level'|trans|raw }} {{ app.user.getResearch().getCargo().getLevel() }}
                 </th>
                 <td class="center-cells">
-                    {% if app.user.getBitcoin() >= app.user.getResearch().getCargo().getBitcoin() and app.user.getResearch().getCargo().getLevel() < 5  and app.user.getResearch().getUtility().getLevel() > 1 %}
-                        <a class="btn btn-lg btn-info" href="{{ path('research_cargo', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                    {% if app.user.getResearch().getCargo().getFinishAt() > date %}
+                        <div id="timeConstruct" hidden>{{ app.user.getResearch().getCargo().getFinishAt()|date('Y/m/d H:m:s') }}</div>
+                        <div id="timeDisplay" class="my-2"></div>
                     {% else %}
-                        <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
+                        {% if app.user.getBitcoin() >= app.user.getResearch().getCargo().getBitcoin() and app.user.getResearch().getCargo().getLevel() < 5  and app.user.getResearch().getUtility().getLevel() > 1 and app.user.getSearch() < date %}
+                            <a class="btn btn-lg btn-info" href="{{ path('research_cargo', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                        {% else %}
+                            <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
+                        {% endif %}
                     {% endif %}
                 </td>
             </tr>
@@ -49,10 +65,15 @@
                 {{ 'title.barge'|trans|raw }} {% if app.user.getResearch().getBarge().getLevel() == false %}{{ 'research.canBe'|trans }}{% else %}{{ 'research.Activated'|trans }}{% endif %}
             </th>
             <td class="center-cells">
-                {% if app.user.getBitcoin() >= app.user.getResearch().getBarge().getBitcoin() and app.user.getResearch().getBarge().getLevel() == 0  and app.user.getResearch().getUtility().getLevel() == 3 %}
-                    <a class="btn btn-lg btn-info" href="{{ path('research_barge', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                {% if app.user.getResearch().getBarge().getFinishAt() > date %}
+                    <div id="timeConstruct" hidden>{{ app.user.getResearch().getBarge().getFinishAt()|date('Y/m/d H:m:s') }}</div>
+                    <div id="timeDisplay" class="my-2"></div>
                 {% else %}
-                    <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
+                    {% if app.user.getBitcoin() >= app.user.getResearch().getBarge().getBitcoin() and app.user.getResearch().getBarge().getLevel() == 0  and app.user.getResearch().getUtility().getLevel() == 3 and app.user.getSearch() < date %}
+                        <a class="btn btn-lg btn-info" href="{{ path('research_barge', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                    {% else %}
+                        <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
+                    {% endif %}
                 {% endif %}
             </td>
             </tr>
@@ -61,10 +82,15 @@
                     {{ 'title.recycleur'|trans|raw }} {% if app.user.getResearch().getRecycleur().getLevel() == false %}{{ 'research.canBe'|trans }}{% else %}{{ 'research.Activated'|trans }}{% endif %}
                 </th>
                 <td class="center-cells">
-                    {% if app.user.getBitcoin() >= app.user.getResearch().getRecycleur().getBitcoin() and app.user.getResearch().getRecycleur().getLevel() == 0  and app.user.getResearch().getUtility().getLevel() == 3 %}
-                        <a class="btn btn-lg btn-info" href="{{ path('research_recyclage', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                    {% if app.user.getResearch().getRecycleur().getFinishAt() > date %}
+                        <div id="timeConstruct" hidden>{{ app.user.getResearch().getRecycleur().getFinishAt()|date('Y/m/d H:m:s') }}</div>
+                        <div id="timeDisplay" class="my-2"></div>
                     {% else %}
-                        <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
+                        {% if app.user.getBitcoin() >= app.user.getResearch().getRecycleur().getBitcoin() and app.user.getResearch().getRecycleur().getLevel() == 0  and app.user.getResearch().getUtility().getLevel() == 3 and app.user.getSearch() < date %}
+                            <a class="btn btn-lg btn-info" href="{{ path('research_recyclage', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                        {% else %}
+                            <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
+                        {% endif %}
                     {% endif %}
                 </td>
             </tr>
@@ -73,10 +99,15 @@
                     {{ 'title.onde'|trans|raw }} {{ 'research.level'|trans|raw }} {{ app.user.getResearch().getOnde().getLevel() }}
                 </th>
                 <td class="center-cells">
-                    {% if app.user.getBitcoin() >= app.user.getResearch().getOnde().getBitcoin() and app.user.getResearch().getOnde().getLevel() < 5 %}
-                        <a class="btn btn-lg btn-info" href="{{ path('research_onde', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                    {% if app.user.getResearch().getOnde().getFinishAt() > date %}
+                        <div id="timeConstruct" hidden>{{ app.user.getResearch().getOnde().getFinishAt()|date('Y/m/d H:m:s') }}</div>
+                        <div id="timeDisplay" class="my-2"></div>
                     {% else %}
-                        <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
+                        {% if app.user.getBitcoin() >= app.user.getResearch().getOnde().getBitcoin() and app.user.getResearch().getOnde().getLevel() < 5 and app.user.getSearch() < date %}
+                            <a class="btn btn-lg btn-info" href="{{ path('research_onde', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                        {% else %}
+                            <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
+                        {% endif %}
                     {% endif %}
                 </td>
             </tr>
@@ -85,10 +116,15 @@
                     {{ 'title.hyperespace'|trans|raw }} {% if app.user.getResearch().getHyperespace().getLevel() == false %}{{ 'research.canBe'|trans }}{% else %}{{ 'research.Activated'|trans }}{% endif %}
                 </th>
                 <td class="center-cells">
-                    {% if app.user.getBitcoin() >= app.user.getResearch().getHyperespace().getBitcoin() and app.user.getResearch().getHyperespace().getLevel() == false %}
-                        <a class="btn btn-lg btn-info" href="{{ path('research_hyperespace', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                    {% if app.user.getResearch().getHyperespace().getFinishAt() > date %}
+                        <div id="timeConstruct" hidden>{{ app.user.getResearch().getHyperespace().getFinishAt()|date('Y/m/d H:m:s') }}</div>
+                        <div id="timeDisplay" class="my-2"></div>
                     {% else %}
-                        <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
+                        {% if app.user.getBitcoin() >= app.user.getResearch().getHyperespace().getBitcoin() and app.user.getResearch().getHyperespace().getLevel() == false and app.user.getSearch() < date %}
+                            <a class="btn btn-lg btn-info" href="{{ path('research_hyperespace', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                        {% else %}
+                            <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
+                        {% endif %}
                     {% endif %}
                 </td>
             </tr>
@@ -102,10 +138,15 @@
                     {{ 'title.demography'|trans|raw }} {{ 'research.level'|trans|raw }} {{ app.user.getResearch().getDemography().getLevel() }}
                 </th>
                 <td class="center-cells">
-                    {% if app.user.getBitcoin() >= app.user.getResearch().getDemography().getBitcoin() and app.user.getResearch().getDemography().getLevel() < 5 %}
-                        <a class="btn btn-lg btn-info" href="{{ path('research_demography', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                    {% if app.user.getResearch().getDemography().getFinishAt() > date %}
+                        <div id="timeConstruct" hidden>{{ app.user.getResearch().getDemography().getFinishAt()|date('Y/m/d H:m:s') }}</div>
+                        <div id="timeDisplay" class="my-2"></div>
                     {% else %}
-                        <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
+                        {% if app.user.getBitcoin() >= app.user.getResearch().getDemography().getBitcoin() and app.user.getResearch().getDemography().getLevel() < 5 and app.user.getSearch() < date %}
+                            <a class="btn btn-lg btn-info" href="{{ path('research_demography', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                        {% else %}
+                            <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
+                        {% endif %}
                     {% endif %}
                 </td>
             </tr>
@@ -114,10 +155,15 @@
                     {{ 'title.discipline'|trans|raw }} {{ 'research.level'|trans|raw }} {{ app.user.getResearch().getDiscipline().getLevel() }}
                 </th>
                 <td class="center-cells">
-                    {% if app.user.getBitcoin() >= app.user.getResearch().getDiscipline().getBitcoin() and app.user.getResearch().getDemography().getLevel() > 0 and app.user.getResearch().getDiscipline().getLevel() < 3 %}
-                        <a class="btn btn-lg btn-info" href="{{ path('research_discipline', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                    {% if app.user.getResearch().getDiscipline().getFinishAt() > date %}
+                        <div id="timeConstruct" hidden>{{ app.user.getResearch().getDiscipline().getFinishAt()|date('Y/m/d H:m:s') }}</div>
+                        <div id="timeDisplay" class="my-2"></div>
                     {% else %}
-                        <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
+                        {% if app.user.getBitcoin() >= app.user.getResearch().getDiscipline().getBitcoin() and app.user.getResearch().getDemography().getLevel() > 0 and app.user.getResearch().getDiscipline().getLevel() < 3 and app.user.getSearch() < date %}
+                            <a class="btn btn-lg btn-info" href="{{ path('research_discipline', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                        {% else %}
+                            <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
+                        {% endif %}
                     {% endif %}
                 </td>
             </tr>
@@ -131,10 +177,15 @@
                     {{ 'title.armement'|trans|raw }} {{ 'research.level'|trans|raw }} {{ app.user.getResearch().getArmement().getLevel() }}
                 </th>
                 <td class="center-cells">
-                    {% if app.user.getBitcoin() >= app.user.getResearch().getArmement().getBitcoin() and app.user.getResearch().getArmement().getLevel() < 5 %}
-                        <a class="btn btn-lg btn-info" href="{{ path('research_armement', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                    {% if app.user.getResearch().getArmement().getFinishAt() > date %}
+                        <div id="timeConstruct" hidden>{{ app.user.getResearch().getArmement().getFinishAt()|date('Y/m/d H:m:s') }}</div>
+                        <div id="timeDisplay" class="my-2"></div>
                     {% else %}
-                        <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
+                        {% if app.user.getBitcoin() >= app.user.getResearch().getArmement().getBitcoin() and app.user.getResearch().getArmement().getLevel() < 5 and app.user.getSearch() < date %}
+                            <a class="btn btn-lg btn-info" href="{{ path('research_armement', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                        {% else %}
+                            <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
+                        {% endif %}
                     {% endif %}
                 </td>
             </tr>
@@ -143,10 +194,15 @@
                     {{ 'title.missile'|trans|raw }} {{ 'research.level'|trans|raw }} {{ app.user.getResearch().getMissile().getLevel() }}
                 </th>
                 <td class="center-cells">
-                    {% if app.user.getBitcoin() >= app.user.getResearch().getMissile().getBitcoin() and app.user.getResearch().getArmement().getLevel() > 0 and app.user.getResearch().getMissile().getLevel() < 3 %}
-                        <a class="btn btn-lg btn-info" href="{{ path('research_missile', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                    {% if app.user.getResearch().getMissile().getFinishAt() > date %}
+                        <div id="timeConstruct" hidden>{{ app.user.getResearch().getMissile().getFinishAt()|date('Y/m/d H:m:s') }}</div>
+                        <div id="timeDisplay" class="my-2"></div>
                     {% else %}
-                        <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
+                    {% if app.user.getBitcoin() >= app.user.getResearch().getMissile().getBitcoin() and app.user.getResearch().getArmement().getLevel() > 0 and app.user.getResearch().getMissile().getLevel() < 3 and app.user.getSearch() < date %}
+                            <a class="btn btn-lg btn-info" href="{{ path('research_missile', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                        {% else %}
+                            <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
+                        {% endif %}
                     {% endif %}
                 </td>
             </tr>
@@ -155,10 +211,15 @@
                     {{ 'title.laser'|trans|raw }} {{ 'research.level'|trans|raw }} {{ app.user.getResearch().getLaser().getLevel() }}
                 </th>
                 <td class="center-cells">
-                    {% if app.user.getBitcoin() >= app.user.getResearch().getLaser().getBitcoin() and app.user.getResearch().getArmement().getLevel() > 2 and app.user.getResearch().getLaser().getLevel() < 3 %}
-                        <a class="btn btn-lg btn-info" href="{{ path('research_laser', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                    {% if app.user.getResearch().getLaser().getFinishAt() > date %}
+                        <div id="timeConstruct" hidden>{{ app.user.getResearch().getLaser().getFinishAt()|date('Y/m/d H:m:s') }}</div>
+                        <div id="timeDisplay" class="my-2"></div>
                     {% else %}
-                        <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
+                        {% if app.user.getBitcoin() >= app.user.getResearch().getLaser().getBitcoin() and app.user.getResearch().getArmement().getLevel() > 2 and app.user.getResearch().getLaser().getLevel() < 3 and app.user.getSearch() < date %}
+                            <a class="btn btn-lg btn-info" href="{{ path('research_laser', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                        {% else %}
+                            <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
+                        {% endif %}
                     {% endif %}
                 </td>
             </tr>
@@ -167,10 +228,15 @@
                     {{ 'title.plasma'|trans|raw }} {{ 'research.level'|trans|raw }} {{ app.user.getResearch().getPlasma().getLevel() }}
                 </th>
                 <td class="center-cells">
-                    {% if app.user.getBitcoin() >= app.user.getResearch().getPlasma().getBitcoin() and app.user.getResearch().getArmement().getLevel() == 5 and app.user.getResearch().getPlasma().getLevel() < 3 %}
-                        <a class="btn btn-lg btn-info" href="{{ path('research_plasma', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                    {% if app.user.getResearch().getPlasma().getFinishAt() > date %}
+                        <div id="timeConstruct" hidden>{{ app.user.getResearch().getPlasma().getFinishAt()|date('Y/m/d H:m:s') }}</div>
+                        <div id="timeDisplay" class="my-2"></div>
                     {% else %}
-                        <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
+                        {% if app.user.getBitcoin() >= app.user.getResearch().getPlasma().getBitcoin() and app.user.getResearch().getArmement().getLevel() == 5 and app.user.getResearch().getPlasma().getLevel() < 3 and app.user.getSearch() < date %}
+                            <a class="btn btn-lg btn-info" href="{{ path('research_plasma', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                        {% else %}
+                            <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
+                        {% endif %}
                     {% endif %}
                 </td>
             </tr>
@@ -184,10 +250,15 @@
                     {{ 'title.industry'|trans|raw }} {{ 'research.level'|trans|raw }} {{ app.user.getResearch().getIndustry().getLevel() }}
                 </th>
                 <td class="center-cells">
-                    {% if app.user.getBitcoin() >= app.user.getResearch().getIndustry().getBitcoin() and app.user.getResearch().getIndustry().getLevel() < 5 %}
-                        <a class="btn btn-lg btn-info" href="{{ path('research_industry', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                    {% if app.user.getResearch().getIndustry().getFinishAt() > date %}
+                        <div id="timeConstruct" hidden>{{ app.user.getResearch().getIndustry().getFinishAt()|date('Y/m/d H:m:s') }}</div>
+                        <div id="timeDisplay" class="my-2"></div>
                     {% else %}
-                        <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
+                        {% if app.user.getBitcoin() >= app.user.getResearch().getIndustry().getBitcoin() and app.user.getResearch().getIndustry().getLevel() < 5 and app.user.getSearch() < date %}
+                            <a class="btn btn-lg btn-info" href="{{ path('research_industry', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                        {% else %}
+                            <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
+                        {% endif %}
                     {% endif %}
                 </td>
             </tr>
@@ -196,10 +267,15 @@
                     {{ 'title.lightShip'|trans|raw }} {{ 'research.level'|trans|raw }} {{ app.user.getResearch().getLightShip().getLevel() }}
                 </th>
                 <td class="center-cells">
-                    {% if app.user.getBitcoin() >= app.user.getResearch().getLightShip().getBitcoin() and app.user.getResearch().getLightShip().getLevel() < 5 and app.user.getResearch().getIndustry().getLevel() > 2 %}
-                        <a class="btn btn-lg btn-info" href="{{ path('research_light_ship', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                    {% if app.user.getResearch().getLightShip().getFinishAt() > date %}
+                        <div id="timeConstruct" hidden>{{ app.user.getResearch().getLightShip().getFinishAt()|date('Y/m/d H:m:s') }}</div>
+                        <div id="timeDisplay" class="my-2"></div>
                     {% else %}
-                        <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
+                        {% if app.user.getBitcoin() >= app.user.getResearch().getLightShip().getBitcoin() and app.user.getResearch().getLightShip().getLevel() < 5 and app.user.getResearch().getIndustry().getLevel() > 2 and app.user.getSearch() < date %}
+                            <a class="btn btn-lg btn-info" href="{{ path('research_light_ship', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                        {% else %}
+                            <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
+                        {% endif %}
                     {% endif %}
                 </td>
             </tr>
@@ -208,10 +284,15 @@
                     {{ 'title.heavyShip'|trans|raw }} {{ 'research.level'|trans|raw }} {{ app.user.getResearch().getHeavyShip().getLevel() }}
                 </th>
                 <td class="center-cells">
-                    {% if app.user.getBitcoin() >= app.user.getResearch().getHeavyShip().getBitcoin() and app.user.getResearch().getHeavyShip().getLevel() < 5 and app.user.getResearch().getIndustry().getLevel() == 5 %}
-                        <a class="btn btn-lg btn-info" href="{{ path('research_heavy_ship', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                    {% if app.user.getResearch().getHeavyShip().getFinishAt() > date %}
+                        <div id="timeConstruct" hidden>{{ app.user.getResearch().getHeavyShip().getFinishAt()|date('Y/m/d H:m:s') }}</div>
+                        <div id="timeDisplay" class="my-2"></div>
                     {% else %}
-                        <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
+                        {% if app.user.getBitcoin() >= app.user.getResearch().getHeavyShip().getBitcoin() and app.user.getResearch().getHeavyShip().getLevel() < 5 and app.user.getResearch().getIndustry().getLevel() == 5 and app.user.getSearch() < date %}
+                            <a class="btn btn-lg btn-info" href="{{ path('research_heavy_ship', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                        {% else %}
+                            <a class="btn btn-lg btn-info" disabled>{{ 'research.seek'|trans }}</a>
+                        {% endif %}
                     {% endif %}
                 </td>
             </tr>

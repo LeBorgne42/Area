@@ -135,6 +135,11 @@ class User implements UserInterface, \Serializable
     private $updatedAt;
 
     /**
+     * @ORM\Column(name="search",type="datetime", nullable=true)
+     */
+    protected $search;
+
+    /**
      * User constructor.
      */
     public function __construct()
@@ -555,6 +560,22 @@ class User implements UserInterface, \Serializable
     public function setFleets($fleets): void
     {
         $this->fleets = $fleets;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSearch()
+    {
+        return $this->search;
+    }
+
+    /**
+     * @param mixed $search
+     */
+    public function setSearch($search): void
+    {
+        $this->search = $search;
     }
 
     public function getUpdatedAt()
