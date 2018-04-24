@@ -29,7 +29,7 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.terraformation'|trans|raw }} {% if app.user.getResearch().getTerraformation().getLevel() == false %}{{ 'research.canBe'|trans }}{% else %}{{ 'research.Activated'|trans }}{% endif %}
+                    {{ 'title.terraformation'|trans|raw }} {% if app.user.getResearch().getTerraformation().getLevel() == false %}{{ 'research.canBe'|trans }}{% else %}<span class="text-vert">{{ 'research.Activated'|trans }}</span>{% endif %}
                 </th>
                 <td class="center-cells">
                     {% if app.user.getResearch().getTerraformation().getFinishAt() > date %}
@@ -62,7 +62,7 @@
                 </td>
             </tr>
             <th class="tab-cells-name">
-                {{ 'title.barge'|trans|raw }} {% if app.user.getResearch().getBarge().getLevel() == false %}{{ 'research.canBe'|trans }}{% else %}{{ 'research.Activated'|trans }}{% endif %}
+                {{ 'title.barge'|trans|raw }} {% if app.user.getResearch().getBarge().getLevel() == false %}{{ 'research.canBe'|trans }}{% else %}<span class="text-vert">{{ 'research.Activated'|trans }}</span>{% endif %}
             </th>
             <td class="center-cells">
                 {% if app.user.getResearch().getBarge().getFinishAt() > date %}
@@ -79,7 +79,7 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.recycleur'|trans|raw }} {% if app.user.getResearch().getRecycleur().getLevel() == false %}{{ 'research.canBe'|trans }}{% else %}{{ 'research.Activated'|trans }}{% endif %}
+                    {{ 'title.recycleur'|trans|raw }} {% if app.user.getResearch().getRecycleur().getLevel() == false %}{{ 'research.canBe'|trans }}{% else %}<span class="text-vert">{{ 'research.Activated'|trans }}</span>{% endif %}
                 </th>
                 <td class="center-cells">
                     {% if app.user.getResearch().getRecycleur().getFinishAt() > date %}
@@ -113,7 +113,7 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.hyperespace'|trans|raw }} {% if app.user.getResearch().getHyperespace().getLevel() == false %}{{ 'research.canBe'|trans }}{% else %}{{ 'research.Activated'|trans }}{% endif %}
+                    {{ 'title.hyperespace'|trans|raw }} {% if app.user.getResearch().getHyperespace().getLevel() == false %}{{ 'research.canBe'|trans }}{% else %}<span class="text-vert">{{ 'research.Activated'|trans }}</span>{% endif %}
                 </th>
                 <td class="center-cells">
                     {% if app.user.getResearch().getHyperespace().getFinishAt() > date %}

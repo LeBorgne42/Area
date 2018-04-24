@@ -57,7 +57,6 @@ class EconomicController extends Controller
         $search->setNiobium($search->getNiobium() * $cost);
         $search->setWater($search->getWater() * $cost);
         $search->setProduction($search->getProduction() + $prod);
-        $search->setLevel($search->getLevel() + 1);
         $search->setFinishAt($now);
         $usePlanet->getBuilding()->setConstruct($now);
         $search->setConstructTime($search->getConstructTime() * $time);
@@ -107,8 +106,6 @@ class EconomicController extends Controller
         $search->setWater($search->getWater() / $cost);
         $search->setProduction($search->getProduction() - $prod);
         $search->setLevel($search->getLevel() - 1);
-        $search->setFinishAt($now);
-        $usePlanet->getBuilding()->setConstruct($now);
         $search->setConstructTime($search->getConstructTime() / $time);
         $usePlanet->setNiobium($usePlanetNb + ($search->getNiobium() / 1.5));
         $usePlanet->setWater($usePlanetWt + ($search->getWater() / 1.5));
@@ -162,7 +159,6 @@ class EconomicController extends Controller
         $city->setNiobium($city->getNiobium() * $cost);
         $city->setWater($city->getWater() * $cost);
         $city->setProduction($city->getProduction() + $prod);
-        $city->setLevel($city->getLevel() + 1);
         $city->setFinishAt($now);
         $usePlanet->getBuilding()->setConstruct($now);
         $city->setConstructTime($city->getConstructTime() * $time);
@@ -213,8 +209,6 @@ class EconomicController extends Controller
         $city->setWater($city->getWater() / $cost);
         $city->setProduction($city->getProduction() - $prod);
         $city->setLevel($city->getLevel() - 1);
-        $city->setFinishAt($now);
-        $usePlanet->getBuilding()->setConstruct($now);
         $city->setConstructTime($city->getConstructTime() / $time);
         $usePlanet->setNiobium($usePlanetNb + ($city->getNiobium() / 1.5));
         $usePlanet->setWater($usePlanetWt + ($city->getWater() / 1.5));
@@ -271,7 +265,6 @@ class EconomicController extends Controller
         $metropole->setNiobium($metropole->getNiobium() * $cost);
         $metropole->setWater($metropole->getWater() * $cost);
         $metropole->setProduction($metropole->getProduction() + $prod);
-        $metropole->setLevel($metropole->getLevel() + 1);
         $metropole->setFinishAt($now);
         $usePlanet->getBuilding()->setConstruct($now);
         $metropole->setConstructTime($metropole->getConstructTime() * $time);
@@ -323,8 +316,6 @@ class EconomicController extends Controller
         $metropole->setWater($metropole->getWater() / $cost);
         $metropole->setProduction($metropole->getProduction() - $prod);
         $metropole->setLevel($metropole->getLevel() - 1);
-        $metropole->setFinishAt($now);
-        $usePlanet->getBuilding()->setConstruct($now);
         $metropole->setConstructTime($metropole->getConstructTime() / $time);
         $usePlanet->setNiobium($usePlanetNb + ($metropole->getNiobium() / 1.5));
         $usePlanet->setWater($usePlanetWt + ($metropole->getWater() / 1.5));

@@ -43,7 +43,6 @@ class ExplorerController extends Controller
         $user->setSearch($now);
         $user->setBitcoin($userBt - $onde->getBitcoin());
         $onde->setBitcoin($onde->getBitcoin() * $cost);
-        $onde->setLevel($onde->getLevel() + 1);
         $onde->setFinishAt($now);
         $onde->setConstructTime($onde->getConstructTime() * $time);
         $em->persist($user);
@@ -80,7 +79,6 @@ class ExplorerController extends Controller
         $now->add(new DateInterval('PT' . $terraformation->getConstructTime() . 'S'));
         $user->setSearch($now);
         $user->setBitcoin($userBt - $terraformation->getBitcoin());
-        $terraformation->setLevel($terraformation->getLevel() + 1);
         $terraformation->setFinishAt($now);
         $em->persist($user);
         $em->persist($terraformation);
@@ -119,7 +117,6 @@ class ExplorerController extends Controller
         $user->setSearch($now);
         $user->setBitcoin($userBt - $cargo->getBitcoin());
         $cargo->setBitcoin($cargo->getBitcoin() * $cost);
-        $cargo->setLevel($cargo->getLevel() + 1);
         $cargo->setFinishAt($now);
         $cargo->setConstructTime($cargo->getConstructTime() * $time);
         $em->persist($user);
@@ -156,7 +153,6 @@ class ExplorerController extends Controller
         $now->add(new DateInterval('PT' . $recyclage->getConstructTime() . 'S'));
         $user->setSearch($now);
         $user->setBitcoin($userBt - $recyclage->getBitcoin());
-        $recyclage->setLevel($recyclage->getLevel() + 1);
         $recyclage->setFinishAt($now);
         $em->persist($user);
         $em->persist($recyclage);
@@ -192,7 +188,6 @@ class ExplorerController extends Controller
         $now->add(new DateInterval('PT' . $barge->getConstructTime() . 'S'));
         $user->setSearch($now);
         $user->setBitcoin($userBt - $barge->getBitcoin());
-        $barge->setLevel($barge->getLevel() + 1);
         $barge->setFinishAt($now);
         $em->persist($user);
         $em->persist($barge);
@@ -230,7 +225,6 @@ class ExplorerController extends Controller
         $user->setSearch($now);
         $user->setBitcoin($userBt - $utility->getBitcoin());
         $utility->setBitcoin($utility->getBitcoin() * $cost);
-        $utility->setLevel($utility->getLevel() + 1);
         $utility->setFinishAt($now);
         $utility->setConstructTime($utility->getConstructTime() * $time);
         $em->persist($user);
@@ -266,7 +260,6 @@ class ExplorerController extends Controller
         $now->add(new DateInterval('PT' . $hyperespace->getConstructTime() . 'S'));
         $user->setSearch($now);
         $user->setBitcoin($userBt - $hyperespace->getBitcoin());
-        $hyperespace->setLevel($hyperespace->getLevel() + 1);
         $hyperespace->setFinishAt($now);
         $em->persist($user);
         $em->persist($hyperespace);

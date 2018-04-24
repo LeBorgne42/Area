@@ -58,7 +58,6 @@ class ProductionController extends Controller
         $miner->setNiobium($miner->getNiobium() * $cost);
         $miner->setWater($miner->getWater() * $cost);
         $miner->setProduction($miner->getProduction() * $prod);
-        $miner->setLevel($miner->getLevel() + 1);
         $miner->setFinishAt($now);
         $usePlanet->getBuilding()->setConstruct($now);
         $miner->setConstructTime($miner->getConstructTime() * $time);
@@ -108,8 +107,6 @@ class ProductionController extends Controller
         $miner->setWater($miner->getWater() / $cost);
         $miner->setProduction($miner->getProduction() / $prod);
         $miner->setLevel($miner->getLevel() - 1);
-        $miner->setFinishAt($now);
-        $usePlanet->getBuilding()->setConstruct($now);
         $miner->setConstructTime($miner->getConstructTime() / $time);
         $usePlanet->setNiobium($usePlanetNb + ($miner->getNiobium() / 1.5));
         $usePlanet->setWater($usePlanetWt + ($miner->getWater() / 1.5));
@@ -164,7 +161,6 @@ class ProductionController extends Controller
         $extract->setNiobium($extract->getNiobium() * $cost);
         $extract->setWater($extract->getWater() * $cost);
         $extract->setProduction($extract->getProduction() * $prod);
-        $extract->setLevel($extract->getLevel() + 1);
         $extract->setFinishAt($now);
         $usePlanet->getBuilding()->setConstruct($now);
         $extract->setConstructTime($extract->getConstructTime() * $time);
@@ -214,8 +210,6 @@ class ProductionController extends Controller
         $extract->setWater($extract->getWater() / $cost);
         $extract->setProduction($extract->getProduction() / $prod);
         $extract->setLevel($extract->getLevel() - 1);
-        $extract->setFinishAt($now);
-        $usePlanet->getBuilding()->setConstruct($now);
         $extract->setConstructTime($extract->getConstructTime() / $time);
         $usePlanet->setNiobium($usePlanetNb + ($extract->getNiobium() / 1.5));
         $usePlanet->setWater($usePlanetWt + ($extract->getWater() / 1.5));

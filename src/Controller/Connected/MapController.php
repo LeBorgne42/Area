@@ -36,9 +36,19 @@ class MapController extends Controller
             ->getQuery()
             ->getResult();
 
+        $fleetIn = $em->getRepository('App:Fleet')
+            ->createQueryBuilder('f')
+            ->join('f.planet', 'p')
+            ->where('p.sector = :id')
+            ->setParameter('id', $id)
+            ->orderBy('f.flightTime')
+            ->getQuery()
+            ->getResult();
+
         return $this->render('connected/map/sector.html.twig', [
             'planets' => $planets,
             'usePlanet' => $usePlanet,
+            'id' => $id
         ]);
     }
 }

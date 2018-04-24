@@ -60,7 +60,6 @@ class SpaceShipyardController extends Controller
         $spaceShip->setNiobium($spaceShip->getNiobium() * $cost);
         $spaceShip->setWater($spaceShip->getWater() * $cost);
         $spaceShip->setProduction($spaceShip->getProduction() + $prod);
-        $spaceShip->setLevel($spaceShip->getLevel() + 1);
         $spaceShip->setFinishAt($now);
         $usePlanet->getBuilding()->setConstruct($now);
         $spaceShip->setConstructTime($spaceShip->getConstructTime() * $time);
@@ -111,8 +110,6 @@ class SpaceShipyardController extends Controller
         $spaceShip->setWater($spaceShip->getWater() / $cost);
         $spaceShip->setProduction($spaceShip->getProduction() - $prod);
         $spaceShip->setLevel($spaceShip->getLevel() - 1);
-        $spaceShip->setFinishAt($now);
-        $usePlanet->getBuilding()->setConstruct($now);
         $spaceShip->setConstructTime($spaceShip->getConstructTime() / $time);
         $usePlanet->setNiobium($usePlanetNb + ($spaceShip->getNiobium() / 1.5));
         $usePlanet->setWater($usePlanetWt + ($spaceShip->getWater() / 1.5));
@@ -156,7 +153,6 @@ class SpaceShipyardController extends Controller
         $usePlanet->setNiobium($usePlanetNb - $lightUsine->getNiobium());
         $usePlanet->setWater($usePlanetWt - $lightUsine->getWater());
         $usePlanet->setGroundPlace($newGround);
-        $lightUsine->setLevel(1);
         $lightUsine->setFinishAt($now);
         $usePlanet->getBuilding()->setConstruct($now);
         $em->persist($usePlanet);
@@ -193,8 +189,6 @@ class SpaceShipyardController extends Controller
         $usePlanetNb = $usePlanet->getNiobium();
         $usePlanetWt = $usePlanet->getWater();
         $lightUsine->setLevel(0);
-        $lightUsine->setFinishAt($now);
-        $usePlanet->getBuilding()->setConstruct($now);
         $usePlanet->setNiobium($usePlanetNb + ($lightUsine->getNiobium() / 1.5));
         $usePlanet->setWater($usePlanetWt + ($lightUsine->getWater() / 1.5));
         $usePlanet->setGroundPlace($newGround);
@@ -236,7 +230,6 @@ class SpaceShipyardController extends Controller
         $usePlanet->setNiobium($usePlanetNb - $heavyUsine->getNiobium());
         $usePlanet->setWater($usePlanetWt - $heavyUsine->getWater());
         $usePlanet->setGroundPlace($newGround);
-        $heavyUsine->setLevel(1);
         $heavyUsine->setFinishAt($now);
         $usePlanet->getBuilding()->setConstruct($now);
         $em->persist($usePlanet);
@@ -273,8 +266,6 @@ class SpaceShipyardController extends Controller
         $usePlanetNb = $usePlanet->getNiobium();
         $usePlanetWt = $usePlanet->getWater();
         $heavyUsine->setLevel(0);
-        $heavyUsine->setFinishAt($now);
-        $usePlanet->getBuilding()->setConstruct($now);
         $usePlanet->setNiobium($usePlanetNb + ($heavyUsine->getNiobium() / 1.5));
         $usePlanet->setWater($usePlanetWt + ($heavyUsine->getWater() / 1.5));
         $usePlanet->setGroundPlace($newGround);
@@ -327,7 +318,6 @@ class SpaceShipyardController extends Controller
         $caserne->setNiobium($caserne->getNiobium() * $cost);
         $caserne->setWater($caserne->getWater() * $cost);
         $caserne->setProduction($caserne->getProduction() + $prod);
-        $caserne->setLevel($caserne->getLevel() + 1);
         $caserne->setFinishAt($now);
         $usePlanet->getBuilding()->setConstruct($now);
         $caserne->setConstructTime($caserne->getConstructTime() * $time);
@@ -377,8 +367,6 @@ class SpaceShipyardController extends Controller
         $caserne->setWater($caserne->getWater() / $cost);
         $caserne->setProduction($caserne->getProduction() - $prod);
         $caserne->setLevel($caserne->getLevel() - 1);
-        $caserne->setFinishAt($now);
-        $usePlanet->getBuilding()->setConstruct($now);
         $caserne->setConstructTime($caserne->getConstructTime() / $time);
         $usePlanet->setNiobium($usePlanetNb + ($caserne->getNiobium() / 1.5));
         $usePlanet->setWater($usePlanetWt + ($caserne->getWater() / 1.5));

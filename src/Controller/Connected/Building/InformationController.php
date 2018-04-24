@@ -54,7 +54,6 @@ class InformationController extends Controller
         $usePlanet->setGroundPlace($newGround);
         $radar->setNiobium($radar->getNiobium() * $cost);
         $radar->setWater($radar->getWater() * $cost);
-        $radar->setLevel($radar->getLevel() + 1);
         $radar->setFinishAt($now);
         $usePlanet->getBuilding()->setConstruct($now);
         $radar->setConstructTime($radar->getConstructTime() * $time);
@@ -102,8 +101,6 @@ class InformationController extends Controller
         $radar->setNiobium($radar->getNiobium() / $cost);
         $radar->setWater($radar->getWater() / $cost);
         $radar->setLevel($radar->getLevel() - 1);
-        $radar->setFinishAt($now);
-        $usePlanet->getBuilding()->setConstruct($now);
         $radar->setConstructTime($radar->getConstructTime() / $time);
         $usePlanet->setNiobium($usePlanetNb + ($radar->getNiobium() / 1.5));
         $usePlanet->setWater($usePlanetWt + ($radar->getWater() / 1.5));
@@ -154,7 +151,6 @@ class InformationController extends Controller
         $usePlanet->setSkyPlace($newSky);
         $skyRadar->setNiobium($skyRadar->getNiobium() * $cost);
         $skyRadar->setWater($skyRadar->getWater() * $cost);
-        $skyRadar->setLevel($skyRadar->getLevel() + 1);
         $skyRadar->setFinishAt($now);
         $usePlanet->getBuilding()->setConstruct($now);
         $skyRadar->setConstructTime($skyRadar->getConstructTime() * $time);
@@ -201,8 +197,6 @@ class InformationController extends Controller
         $skyRadar->setNiobium($skyRadar->getNiobium() / $cost);
         $skyRadar->setWater($skyRadar->getWater() / $cost);
         $skyRadar->setLevel($skyRadar->getLevel() - 1);
-        $skyRadar->setFinishAt($now);
-        $usePlanet->getBuilding()->setConstruct($now);
         $skyRadar->setConstructTime($skyRadar->getConstructTime() / $time);
         $usePlanet->setNiobium($usePlanetNb + ($skyRadar->getNiobium() / 1.5));
         $usePlanet->setWater($usePlanetWt + ($skyRadar->getWater() / 1.5));
@@ -253,7 +247,6 @@ class InformationController extends Controller
         $usePlanet->setSkyPlace($newSky);
         $brouilleur->setNiobium($brouilleur->getNiobium() * $cost);
         $brouilleur->setWater($brouilleur->getWater() * $cost);
-        $brouilleur->setLevel($brouilleur->getLevel() + 1);
         $brouilleur->setFinishAt($now);
         $usePlanet->getBuilding()->setConstruct($now);
         $brouilleur->setConstructTime($brouilleur->getConstructTime() * $time);
@@ -300,8 +293,6 @@ class InformationController extends Controller
         $brouilleur->setNiobium($brouilleur->getNiobium() / $cost);
         $brouilleur->setWater($brouilleur->getWater() / $cost);
         $brouilleur->setLevel($brouilleur->getLevel() - 1);
-        $brouilleur->setFinishAt($now);
-        $usePlanet->getBuilding()->setConstruct($now);
         $brouilleur->setConstructTime($brouilleur->getConstructTime() / $time);
         $usePlanet->setNiobium($usePlanetNb + ($brouilleur->getNiobium() / 1.5));
         $usePlanet->setWater($usePlanetWt + ($brouilleur->getWater() / 1.5));

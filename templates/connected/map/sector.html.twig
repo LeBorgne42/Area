@@ -5,13 +5,47 @@
 {% block title %}{{ 'title'|trans }}{% endblock %}
 
 {% block body %}
-    <div class="map-block sector">
-        <table class="table sector-table text-center">
+    {% set topSector = id - 10 %}
+    {% if topSector < 0 %}
+        {% set topSector = id + 90 %}
+    {% endif %}
+    {% set rightSector = id + 1 %}
+    {% if rightSector == 101 %}
+        {% set rightSector = 1 %}
+    {% endif %}
+    {% set bottomSector = id + 10 %}
+    {% if bottomSector > 100 %}
+        {% set bottomSector = id - 90 %}
+    {% endif %}
+    {% set leftSector = id - 1 %}
+    {% if leftSector == 0 %}
+        {% set leftSector = 100 %}
+    {% endif %}
+    <div class="map-block">
+        <table class="table sector-table text-center sector">
             <tbody>
+            <tr>
+                <td class="special-cell"></td>
+                <td class="special-cell"></td>
+                <td class="special-cell"></td>
+                <td class="special-cell"></td>
+                <td class="special-cell"></td>
+                <td class="special-cell">
+                    <span><a href="{{ path('map', {'id':topSector, 'idp': usePlanet.getId()}) }}"><span class="glyphicon glyphicon-chevron-up"></span></a></span>
+                </td>
+            </tr>
                 {% set x = 1 %}
                 {% for planet in planets %}
                     {% if x == 1 %}
                         <tr>
+                            {% if planet.getPosition() != 11 %}
+                                <td class="special-cell"></td>
+                            {% endif %}
+                    {% endif %}
+                    {% if planet.getPosition() == 11 %}
+                        <td class="special-cell">
+                            <span><a href="{{ path('map', {'id':leftSector, 'idp': usePlanet.getId()}) }}"><span class="glyphicon glyphicon-chevron-left"></span></a></span>
+                        </td>
                     {% endif %}
                     {% if planet.getEmpty == false %}
                         {% if (usePlanet.getBuilding().getRadar().getLevel() + usePlanet.getBuilding().getSkyRadar().getLevel()) > planet.getBuilding().getSkyBrouilleur().getLevel() %}
@@ -27,16 +61,37 @@
                                     <a {% if planet.getUser() == app.user %}href="{{ path('building', {'idp': usePlanet.getId()}) }}"{% else %}{% endif %}><img class="mr-4 mb-4" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planet'|trans({'%name%': planet.getName() }) }}" height="64" width="64" src="{{ vich_uploader_asset(planet, 'imageFile') }}"></a>
                                     {% if usePlanet.getSector().getPosition() == planet.getSector().getPosition() and (usePlanet.getBuilding().getRadar().getLevel() > planet.getBuilding().getSkyBrouilleur().getLevel() or usePlanet.getBuilding().getSkyRadar().getLevel() > planet.getBuilding().getSkyBrouilleur().getLevel() ) %}<span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planetInfos'|trans({'%land%': planet.getGround(),  '%sky%': planet.getSky()}) }}"></span>{% if planet.getNbrFleets() %}<span class="glyphicon glyphicon-plane planet" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planetOrbite'|trans({'%fleet%': planet.getNbrFleets()}) }}"></span>{% endif %}{% endif %}
                                    <div class="planet-position text-center">{{ planet.getPosition() }}</div>
-                                    <div class="text-center{% if planet.getUser() == app.user %} pp-ally{% elseif planet.getUser() %} pp-enemy{% endif %}">{{ planet.getName() }}</div>
+                                    <div class="text-center{% if planet.getUser() == app.user %} pp-ally">{{ planet.getName() }}</div>{% elseif planet.getUser() %} pp-enemy">{{ 'map.planetHostile'|trans }}</div>{% else %}">{{ planet.getName() }}</div>{% endif %}
                                 </td>
                             {% else %}
-                                <td class="center-cells">{% if planet.getNbrFleets() %}<span class="glyphicon glyphicon-plane empty" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planetOrbite'|trans({'%fleet%': planet.getNbrFleets()}) }}"></span>{% endif %}<div class="planet-position-empty text-center">{{ planet.getPosition() }}</div></td>
+                                <td class="center-cells">
+                                    {% if planet.getNbrFleets() %}
+                                    <span class="glyphicon glyphicon-plane empty" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planetOrbite'|trans({'%fleet%': planet.getNbrFleets()}) }}"></span>
+                                    {% endif %}
+                                    <div class="planet-position-empty text-center">{{ planet.getPosition() }}</div>
+                                </td>
                             {% endif %}
                         {% endif %}
                     {% else %}
-                        {% if usePlanet.getBuilding().getRadar().getLevel() > 0 or usePlanet.getBuilding().getSkyRadar().getLevel() > 0 %}
-                            <td class="center-cells">{% if planet.getNbrFleets() %}<span class="glyphicon glyphicon-plane empty" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planetOrbite'|trans({'%fleet%': planet.getNbrFleets()}) }}"></span>{% endif %}<div class="planet-position-empty text-center">{{ planet.getPosition() }}</div></td>
+                        {% if planet.getEmpty == false %}
+                            {% if usePlanet.getBuilding().getRadar().getLevel() > 0 or usePlanet.getBuilding().getSkyRadar().getLevel() > 0 %}
+                                <td class="center-cells">{% if planet.getNbrFleets() %}<span class="glyphicon glyphicon-plane empty" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planetOrbite'|trans({'%fleet%': planet.getNbrFleets()}) }}"></span>{% endif %}<div class="planet-position-empty text-center">{{ planet.getPosition() }}</div></td>
+                            {% endif %}
+                        {% else %}
+                            <td class="center-cells">
+                                {% if planet.getNbrFleets() %}
+                                    <span class="glyphicon glyphicon-plane empty" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planetOrbite'|trans({'%fleet%': planet.getNbrFleets()}) }}"></span>
+                                {% endif %}
+                                <div class="planet-position-empty text-center">{{ planet.getPosition() }}</div>
+                            </td>
                         {% endif %}
+                    {% endif %}
+                    {% if planet.getPosition() == 15 %}
+                        <td class="special-cell">
+                            <span><a href="{{ path('map', {'id':rightSector, 'idp': usePlanet.getId()}) }}"><span class="glyphicon glyphicon-chevron-right"></span></a></span>
+                        </td>
+                    {% else %}
+                        <td class="special-cell"></td>
                     {% endif %}
                     {% set x = x + 1 %}
                     {% if x == 6 %}
@@ -44,6 +99,16 @@
                         </tr>
                     {% endif %}
                 {% endfor %}
+            <tr>
+                <td class="special-cell"></td>
+                <td class="special-cell"></td>
+                <td class="special-cell"></td>
+                <td class="special-cell"></td>
+                <td class="special-cell"></td>
+                <td class="special-cell">
+                    <span><a href="{{ path('map', {'id':bottomSector, 'idp': usePlanet.getId()}) }}"><span class="glyphicon glyphicon-chevron-down"></span></a></span>
+                </td>
+            </tr>
             </tbody>
         </table>
         <div class="mt-5 sector-info">
@@ -61,32 +126,30 @@
                         {{ 'map.goTo'|trans }}
                     </th>
                     <th class="tab-cells-name text-center">
-                        {{ 'map.time'|trans }}
+                        {{ 'map.fleetSignature'|trans }}
                     </th>
                     <th class="tab-cells-name text-center">
-                        {{ 'map.fleetSignature'|trans }}
+                        {{ 'map.time'|trans }}
                     </th>
                 </tr>
                 {% for fleet in app.user.getFleets() %}
-                    {% if fleet.getPlanet() != usePlanet and fleet.getOrigin() %}
-                        <tr>
-                            <th class="tab-cells-name">
-                                "{{  fleet.getName() }}"
-                            </th>
-                            <td class="center-cells text-center">
-                                {{ fleet.getplanet().getName() }}
-                            </td>
-                            <td class="center-cells text-center">
-                                {{ fleet.getOrigin().getSector().getGalaxy.getPosition() }}:{{ fleet.getOrigin().getSector.getPosition() }}:{{ fleet.getOrigin().getPosition() }}
-                            </td>
-                            <td class="center-cells text-center">
-                                {{ fleet.getFlightTime() }}
-                            </td>
-                            <td class="center-cells text-center">
-                                {{ fleet.getNbrSignatures() }}
-                            </td>
-                        </tr>
-                    {% endif %}
+                    <tr>
+                        <th class="tab-cells-name">
+                            "{{  fleet.getName() }}"
+                        </th>
+                        <td class="center-cells text-center">
+                            {{ fleet.getplanet().getName() }}
+                        </td>
+                        <td class="center-cells text-center">
+                            {{ fleet.getplanet().getSector().getGalaxy.getPosition() }}:{{ fleet.getplanet().getSector.getPosition() }}:{{ fleet.getplanet().getPosition() }}
+                        </td>
+                        <td class="center-cells text-center">
+                            {{ fleet.getNbrSignatures() }}
+                        </td>
+                        <td class="center-cells text-center">
+                            {{ fleet.getFlightTime() }}
+                        </td>
+                    </tr>
                 {% endfor %}
                 </tbody>
             </table>
@@ -106,32 +169,30 @@
                         {{ 'map.goTo'|trans }}
                     </th>
                     <th class="tab-cells-name text-center">
-                        {{ 'map.time'|trans }}
+                        {{ 'map.fleetSignature'|trans }}
                     </th>
                     <th class="tab-cells-name text-center">
-                        {{ 'map.fleetSignature'|trans }}
+                        {{ 'map.time'|trans }}
                     </th>
                 </tr>
                 {% for fleet in app.user.getFleets() %}
-                    {% if fleet.getPlanet() != usePlanet and fleet.getOrigin() %}
-                        <tr>
-                            <th class="tab-cells-name">
-                                "{{  fleet.getName() }}"
-                            </th>
-                            <td class="center-cells text-center">
-                                {{ fleet.getplanet().getName() }}
-                            </td>
-                            <td class="center-cells text-center">
-                                {{ fleet.getOrigin().getSector().getGalaxy.getPosition() }}:{{ fleet.getOrigin().getSector.getPosition() }}:{{ fleet.getOrigin().getPosition() }}
-                            </td>
-                            <td class="center-cells text-center">
-                                {{ fleet.getFlightTime() }}
-                            </td>
-                            <td class="center-cells text-center">
-                                {{ fleet.getNbrSignatures() }}
-                            </td>
-                        </tr>
-                    {% endif %}
+                    <tr>
+                        <th class="tab-cells-name">
+                            "{{  fleet.getName() }}"
+                        </th>
+                        <td class="center-cells text-center">
+                            {{ fleet.getplanet().getName() }}
+                        </td>
+                        <td class="center-cells text-center">
+                            {{ fleet.getplanet().getSector().getGalaxy.getPosition() }}:{{ fleet.getplanet().getSector.getPosition() }}:{{ fleet.getplanet().getPosition() }}
+                        </td>
+                        <td class="center-cells text-center">
+                            {{ fleet.getNbrSignatures() }}
+                        </td>
+                        <td class="center-cells text-center">
+                            {{ fleet.getFlightTime() }}
+                        </td>
+                    </tr>
                 {% endfor %}
                 </tbody>
             </table>

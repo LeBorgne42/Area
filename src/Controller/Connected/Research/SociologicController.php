@@ -44,7 +44,6 @@ class SociologicController extends Controller
         $user->setSearch($now);
         $user->setBitcoin($userBt - $demography->getBitcoin());
         $demography->setBitcoin($demography->getBitcoin() * $cost);
-        $demography->setLevel($demography->getLevel() + 1);
         $demography->setFinishAt($now);
         $demography->setConstructTime($demography->getConstructTime() * $time);
         $em->persist($user);
@@ -84,7 +83,6 @@ class SociologicController extends Controller
         $user->setSearch($now);
         $user->setBitcoin($userBt - $discipline->getBitcoin());
         $discipline->setBitcoin($discipline->getBitcoin() * $cost);
-        $discipline->setLevel($discipline->getLevel() + 1);
         $discipline->setFinishAt($now);
         $discipline->setConstructTime($discipline->getConstructTime() * $time);
         $em->persist($user);

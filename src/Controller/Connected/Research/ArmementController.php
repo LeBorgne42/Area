@@ -44,7 +44,6 @@ class ArmementController extends Controller
         $user->setSearch($now);
         $user->setBitcoin($userBt - $armement->getBitcoin());
         $armement->setBitcoin($armement->getBitcoin() * $cost);
-        $armement->setLevel($armement->getLevel() + 1);
         $armement->setFinishAt($now);
         $armement->setConstructTime($armement->getConstructTime() * $time);
         $em->persist($user);
@@ -84,7 +83,6 @@ class ArmementController extends Controller
         $user->setSearch($now);
         $user->setBitcoin($userBt - $missile->getBitcoin());
         $missile->setBitcoin($missile->getBitcoin() * $cost);
-        $missile->setLevel($missile->getLevel() + 1);
         $missile->setFinishAt($now);
         $missile->setConstructTime($missile->getConstructTime() * $time);
         $em->persist($user);
@@ -124,7 +122,6 @@ class ArmementController extends Controller
         $user->setSearch($now);
         $user->setBitcoin($userBt - $laser->getBitcoin());
         $laser->setBitcoin($laser->getBitcoin() * $cost);
-        $laser->setLevel($laser->getLevel() + 1);
         $laser->setFinishAt($now);
         $laser->setConstructTime($laser->getConstructTime() * $time);
         $em->persist($user);
@@ -164,7 +161,6 @@ class ArmementController extends Controller
         $user->setSearch($now);
         $user->setBitcoin($userBt - $plasma->getBitcoin());
         $plasma->setBitcoin($plasma->getBitcoin() * $cost);
-        $plasma->setLevel($plasma->getLevel() + 1);
         $plasma->setFinishAt($now);
         $plasma->setConstructTime($plasma->getConstructTime() * $time);
         $em->persist($user);

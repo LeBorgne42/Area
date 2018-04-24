@@ -46,7 +46,6 @@ class MilitaryController extends Controller
         $industry->setBitcoin($industry->getBitcoin() * $cost);
         $industry->setFinishAt($now);
         $industry->setConstructTime($industry->getConstructTime() * $time);
-        $industry->setLevel($industry->getLevel() + 1);
         $em->persist($user);
         $em->persist($industry);
         $em->flush();
@@ -84,7 +83,6 @@ class MilitaryController extends Controller
         $user->setSearch($now);
         $user->setBitcoin($userBt - $lightShip->getBitcoin());
         $lightShip->setBitcoin($lightShip->getBitcoin() * $cost);
-        $lightShip->setLevel($lightShip->getLevel() + 1);
         $lightShip->setFinishAt($now);
         $lightShip->setConstructTime($lightShip->getConstructTime() * $time);
         $em->persist($user);
@@ -124,7 +122,6 @@ class MilitaryController extends Controller
         $user->setSearch($now);
         $user->setBitcoin($userBt - $heavyShip->getBitcoin());
         $heavyShip->setBitcoin($heavyShip->getBitcoin() * $cost);
-        $heavyShip->setLevel($heavyShip->getLevel() + 1);
         $heavyShip->setFinishAt($now);
         $heavyShip->setConstructTime($heavyShip->getConstructTime() * $time);
         $em->persist($user);
