@@ -35,7 +35,7 @@ class SociologicController extends Controller
         $demography = $user->getResearch()->getDemography();
         $userBt = $user->getBitcoin();
         if(($userBt < $demography->getBitcoin() || $demography->getFinishAt() > $now) ||
-            ($demography->getLevel() == 5 || $user->getSearch() < $now)) {
+            ($demography->getLevel() == 5 || $user->getSearch() > $now)) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
         $cost = 2;
@@ -75,7 +75,7 @@ class SociologicController extends Controller
         $userBt = $user->getBitcoin();
         if(($userBt < $discipline->getBitcoin() || $discipline->getFinishAt() > $now) ||
             ($discipline->getLevel() == 3 || $user->getResearch()->getDemography()->getLevel() == 0) ||
-            $user->getSearch() < $now) {
+            $user->getSearch() > $now) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
         $cost = 2;

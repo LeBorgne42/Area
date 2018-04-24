@@ -35,7 +35,7 @@ class MilitaryController extends Controller
         $industry = $user->getResearch()->getIndustry();
         $userBt = $user->getBitcoin();
         if(($userBt < $industry->getBitcoin() || $industry->getFinishAt() > $now) ||
-            ($industry->getLevel() == 5 || $user->getSearch() < $now)) {
+            ($industry->getLevel() == 5 || $user->getSearch() > $now)) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
         $cost = 2;
@@ -44,9 +44,9 @@ class MilitaryController extends Controller
         $user->setSearch($now);
         $user->setBitcoin($userBt - $industry->getBitcoin());
         $industry->setBitcoin($industry->getBitcoin() * $cost);
-        $industry->setLevel($industry->getLevel() + 1);
         $industry->setFinishAt($now);
         $industry->setConstructTime($industry->getConstructTime() * $time);
+        $industry->setLevel($industry->getLevel() + 1);
         $em->persist($user);
         $em->persist($industry);
         $em->flush();
@@ -75,7 +75,7 @@ class MilitaryController extends Controller
         $userBt = $user->getBitcoin();
         if(($userBt < $lightShip->getBitcoin() || $lightShip->getFinishAt() > $now) ||
             ($lightShip->getLevel() == 5 || $user->getResearch()->getIndustry()->getLevel() < 3) ||
-            $user->getSearch() < $now) {
+            $user->getSearch() > $now) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
         $cost = 2;
@@ -115,7 +115,7 @@ class MilitaryController extends Controller
         $userBt = $user->getBitcoin();
         if(($userBt < $heavyShip->getBitcoin() || $heavyShip->getFinishAt() > $now) ||
             ($heavyShip->getLevel() == 5 || $user->getResearch()->getIndustry()->getLevel() < 5) ||
-            $user->getSearch() < $now) {
+            $user->getSearch() > $now) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
         $cost = 2;

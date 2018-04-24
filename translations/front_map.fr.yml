@@ -2,3 +2,10 @@ title: 'Carte spatiale'
 tooltip.planet: '%name%'
 tooltip.planetInfos: 'Terrain: %land% Espace: %sky%'
 tooltip.planetOrbite: '%orbite%'
+map.coming: 'Flotte entrant dans le secteur'
+map.fleetName: 'Nom de flotte'
+map.from: De
+map.goTo: Vers
+map.time: Temps
+map.fleetSignature: Signature
+map.out: 'Flotte sortant du secteur'

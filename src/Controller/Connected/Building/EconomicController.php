@@ -38,7 +38,7 @@ class EconomicController extends Controller
         $newGround = $usePlanet->getGroundPlace() + $search->getGround();
         if(($usePlanetNb < $search->getNiobium() || $usePlanetWt < $search->getWater()) ||
             ($search->getFinishAt() > $now || $newGround > $usePlanet->getGround()) ||
-            ($usePlanet->getBuilding()->getConstruct() < $now)) {
+            ($usePlanet->getBuilding()->getConstruct() > $now)) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $prod = 0.5;
@@ -88,7 +88,7 @@ class EconomicController extends Controller
 
         $search = $usePlanet->getBuilding()->getBuildSearch();
         $newGround = $usePlanet->getGroundPlace() - $search->getGround();
-        if($search->getLevel() == 0 || $search->getFinishAt() > $now || ($usePlanet->getBuilding()->getConstruct() < $now)) {
+        if($search->getLevel() == 0 || $search->getFinishAt() > $now || ($usePlanet->getBuilding()->getConstruct() > $now)) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $prod = 0.5;
@@ -143,7 +143,7 @@ class EconomicController extends Controller
         $newGround = $usePlanet->getGroundPlace() + $city->getGround();
         if(($usePlanetNb < $city->getNiobium() || $usePlanetWt < $city->getWater()) ||
             ($city->getFinishAt() > $now || $newGround > $usePlanet->getGround() || $user->getResearch()->getDemography()->getLevel() == 0) ||
-            ($usePlanet->getBuilding()->getConstruct() < $now)) {
+            ($usePlanet->getBuilding()->getConstruct() > $now)) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $prod = 0.25;
@@ -194,7 +194,7 @@ class EconomicController extends Controller
         $city = $usePlanet->getBuilding()->getCity();
         $newGround = $usePlanet->getGroundPlace() - $city->getGround();
         if($city->getLevel() == 0 || $city->getFinishAt() > $now ||
-            ($usePlanet->getBuilding()->getConstruct() < $now)) {
+            ($usePlanet->getBuilding()->getConstruct() > $now)) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $prod = 0.25;
@@ -251,7 +251,7 @@ class EconomicController extends Controller
         if(($usePlanetNb < $metropole->getNiobium() || $usePlanetWt < $metropole->getWater()) ||
             ($metropole->getFinishAt() > $now || $newGround > $usePlanet->getGround()) ||
             ($newSky > $usePlanet->getSky() || $user->getResearch()->getDemography()->getLevel() < 5) ||
-            ($usePlanet->getBuilding()->getConstruct() < $now)) {
+            ($usePlanet->getBuilding()->getConstruct() > $now)) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $prod = 1;
@@ -304,7 +304,7 @@ class EconomicController extends Controller
         $newGround = $usePlanet->getGroundPlace() - $metropole->getGround();
         $newSky = $usePlanet->getSkyPlace() - $metropole->getSky();
         if($metropole->getLevel() == 0 || $metropole->getFinishAt() > $now ||
-            ($usePlanet->getBuilding()->getConstruct() < $now)) {
+            ($usePlanet->getBuilding()->getConstruct() > $now)) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $prod = 1;

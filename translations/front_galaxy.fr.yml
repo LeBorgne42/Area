@@ -1,2 +1,8 @@
 title: Galaxie
 tooltip.sector: 'Secteur %position%'
+galaxy.mine: 'Planète contrôlée'
+galaxy.ally: 'Planète alliée'
+galaxy.enemy: 'Planète hostile'
+galaxy.empty: 'Planète inhabitée'
+galaxy.ia: 'Planète IA'
+galaxy.cdr: Ressources

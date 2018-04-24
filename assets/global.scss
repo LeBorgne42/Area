@@ -76,8 +76,12 @@ body.area {
 .front-block {
   margin: 7rem 6% 2% 21rem;
   color: #fff;
-  width: 780px;
+  max-width: 760px;
   word-wrap: break-word;
+}
+
+span a {
+  color: orange;
 }
 
 .unlogin-block {

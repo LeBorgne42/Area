@@ -204,7 +204,7 @@
             </tr>
             <tr>
                 <td class="center-cells">
-                    <img class="float-left building-img ml-3" src="{{ asset('img/light.png') }}">{{ 'building.light'|trans }} x {{ usePlanet.getBuilding().getLightUsine().getLevel() }}
+                    <img class="float-left building-img ml-3" src="{{ asset('img/light.png') }}">{{ 'building.light'|trans }} {% if usePlanet.getBuilding().getLightUsine().getLevel() == false %}{{ 'building.canBe'|trans }}{% else %}{{ 'building.Activated'|trans }}{% endif %}
                     <div class="mt-4">{{ usePlanet.getBuilding().getLightUsine().getNiobium() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ usePlanet.getBuilding().getLightUsine().getWater() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
                     <div class="mt-4">{{ usePlanet.getBuilding().getLightUsine().getGround() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"></div>
                 </td>
@@ -230,7 +230,7 @@
             </tr>
             <tr>
                 <td class="center-cells">
-                    <img class="float-left building-img ml-3" src="{{ asset('img/heavy.png') }}">{{ 'building.heavy'|trans }} x {{ usePlanet.getBuilding().getHeavyUsine().getLevel() }}
+                    <img class="float-left building-img ml-3" src="{{ asset('img/heavy.png') }}">{{ 'building.heavy'|trans }} {% if usePlanet.getBuilding().getHeavyUsine().getLevel() == false %}{{ 'building.canBe'|trans }}{% else %}{{ 'building.Activated'|trans }}{% endif %}
                     <div class="mt-4">{{ usePlanet.getBuilding().getHeavyUsine().getNiobium() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ usePlanet.getBuilding().getHeavyUsine().getWater() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
                     <div class="mt-4">{{ usePlanet.getBuilding().getHeavyUsine().getGround() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"></div>
                 </td>

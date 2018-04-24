@@ -40,7 +40,7 @@ class SpaceShipyardController extends Controller
         if(($usePlanetNb < $spaceShip->getNiobium() || $usePlanetWt < $spaceShip->getWater()) ||
             ($spaceShip->getFinishAt() > $now || $newGround > $usePlanet->getGround()) ||
             ($newSky > $usePlanet->getSky() || $user->getResearch()->getIndustry()->getLevel() == 0) ||
-            ($usePlanet->getBuilding()->getConstruct() < $now)) {
+            ($usePlanet->getBuilding()->getConstruct() > $now)) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $prod = 0.1;
@@ -92,7 +92,7 @@ class SpaceShipyardController extends Controller
         $spaceShip = $usePlanet->getBuilding()->getSpaceShip();
         $newGround = $usePlanet->getGroundPlace() - $spaceShip->getGround();
         $newSky = $usePlanet->getSkyPlace() - $spaceShip->getSky();
-        if($spaceShip->getLevel() == 0 || $spaceShip->getFinishAt() > $now || $usePlanet->getBuilding()->getConstruct() < $now) {
+        if($spaceShip->getLevel() == 0 || $spaceShip->getFinishAt() > $now || $usePlanet->getBuilding()->getConstruct() > $now) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $prod = 0.1;
@@ -149,7 +149,7 @@ class SpaceShipyardController extends Controller
         if(($usePlanetNb < $lightUsine->getNiobium() || $usePlanetWt < $lightUsine->getWater()) ||
             ($lightUsine->getFinishAt() > $now || $newGround > $usePlanet->getGround()) ||
             ($lightUsine->getLevel() != 0 || $user->getResearch()->getLightShip()->getLevel() == 0) ||
-            ($usePlanet->getBuilding()->getConstruct() < $now)) {
+            ($usePlanet->getBuilding()->getConstruct() > $now)) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $now->add(new DateInterval('PT' . $lightUsine->getConstructTime() . 'S'));
@@ -186,7 +186,7 @@ class SpaceShipyardController extends Controller
 
         $lightUsine = $usePlanet->getBuilding()->getLightUsine();
         $newGround = $usePlanet->getGroundPlace() - $lightUsine->getGround();
-        if($lightUsine->getLevel() == 0 || $lightUsine->getFinishAt() > $now || $usePlanet->getBuilding()->getConstruct() < $now) {
+        if($lightUsine->getLevel() == 0 || $lightUsine->getFinishAt() > $now || $usePlanet->getBuilding()->getConstruct() > $now) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $now->add(new DateInterval('PT' . $lightUsine->getConstructTime() . 'S'));
@@ -229,7 +229,7 @@ class SpaceShipyardController extends Controller
         if(($usePlanetNb < $heavyUsine->getNiobium() || $usePlanetWt < $heavyUsine->getWater()) ||
             ($heavyUsine->getFinishAt() > $now || $newGround > $usePlanet->getGround()) ||
             ($heavyUsine->getLevel() != 0 || $user->getResearch()->getHeavyShip()->getLevel() == 0) ||
-            ($usePlanet->getBuilding()->getConstruct() < $now)) {
+            ($usePlanet->getBuilding()->getConstruct() > $now)) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $now->add(new DateInterval('PT' . $heavyUsine->getConstructTime() . 'S'));
@@ -266,7 +266,7 @@ class SpaceShipyardController extends Controller
 
         $heavyUsine = $usePlanet->getBuilding()->getHeavyUsine();
         $newGround = $usePlanet->getGroundPlace() - $heavyUsine->getGround();
-        if($heavyUsine->getLevel() == false || $heavyUsine->getFinishAt() > $now || $usePlanet->getBuilding()->getConstruct() < $now) {
+        if($heavyUsine->getLevel() == false || $heavyUsine->getFinishAt() > $now || $usePlanet->getBuilding()->getConstruct() > $now) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $now->add(new DateInterval('PT' . $heavyUsine->getConstructTime() . 'S'));
@@ -308,7 +308,7 @@ class SpaceShipyardController extends Controller
         $newGround = $usePlanet->getGroundPlace() + $caserne->getGround();
         if(($usePlanetNb < $caserne->getNiobium() || $usePlanetWt < $caserne->getWater()) ||
             ($caserne->getFinishAt() > $now || $newGround > $usePlanet->getGround()) ||
-            ($user->getResearch()->getDiscipline()->getLevel() < 3 || $usePlanet->getBuilding()->getConstruct() < $now)) {
+            ($user->getResearch()->getDiscipline()->getLevel() < 3 || $usePlanet->getBuilding()->getConstruct() > $now)) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $prod = 0.1;
@@ -358,7 +358,7 @@ class SpaceShipyardController extends Controller
 
         $caserne = $usePlanet->getBuilding()->getCaserne();
         $newGround = $usePlanet->getGroundPlace() - $caserne->getGround();
-        if($caserne->getLevel() == 0 || $caserne->getFinishAt() > $now || $usePlanet->getBuilding()->getConstruct() < $now) {
+        if($caserne->getLevel() == 0 || $caserne->getFinishAt() > $now || $usePlanet->getBuilding()->getConstruct() > $now) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $prod = 0.1;

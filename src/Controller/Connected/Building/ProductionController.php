@@ -2,6 +2,7 @@
 
 namespace App\Controller\Connected\Building;
 
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -38,7 +39,7 @@ class ProductionController extends Controller
         $newGround = $usePlanet->getGroundPlace() + $miner->getGround();
         if(($usePlanetNb < $miner->getNiobium() || $usePlanetWt < $miner->getWater()) ||
             ($miner->getFinishAt() > $now || $newGround > $usePlanet->getGround()) ||
-            ($usePlanet->getBuilding()->getConstruct() < $now)) {
+            ($usePlanet->getBuilding()->getConstruct() > $now)) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $prod = 1.3;
@@ -88,7 +89,7 @@ class ProductionController extends Controller
 
         $miner = $usePlanet->getBuilding()->getMiner();
         $newGround = $usePlanet->getGroundPlace() - $miner->getGround();
-        if($miner->getLevel() == 1 || $miner->getFinishAt() > $now || $usePlanet->getBuilding()->getConstruct() < $now) {
+        if($miner->getLevel() == 1 || $miner->getFinishAt() > $now || $usePlanet->getBuilding()->getConstruct() > $now) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $prod = 1.3;
@@ -144,7 +145,7 @@ class ProductionController extends Controller
         $newGround = $usePlanet->getGroundPlace() + $extract->getGround();
         if(($usePlanetNb < $extract->getNiobium() || $usePlanetWt < $extract->getWater()) ||
             ($extract->getFinishAt() > $now || $newGround > $usePlanet->getGround()) ||
-            ($usePlanet->getBuilding()->getConstruct() < $now)) {
+            ($usePlanet->getBuilding()->getConstruct() > $now)) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $prod = 1.3;
@@ -194,7 +195,7 @@ class ProductionController extends Controller
 
         $extract = $usePlanet->getBuilding()->getExtractor();
         $newGround = $usePlanet->getGroundPlace() - $extract->getGround();
-        if($extract->getLevel() == 1 || $extract->getFinishAt() > $now || $usePlanet->getBuilding()->getConstruct() < $now) {
+        if($extract->getLevel() == 1 || $extract->getFinishAt() > $now || $usePlanet->getBuilding()->getConstruct() > $now) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $prod = 1.3;

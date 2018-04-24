@@ -10,11 +10,48 @@
   color:#FFFFFF;
 }
 
+.galaxy-info {
+  margin-top: 2rem;
+  color: #fff;
+  width: 650px;
+  background-color: rgba(52,58,64,0.5);
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: 5px;
+  padding: 1.5rem;
+}
+
+.sector-info {
+  margin-top: 2rem;
+  color: #fff;
+  width: 600px;
+  background-color: rgba(52,58,64,0.5);
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: 5px;
+  padding: 1.5rem;
+}
+
+.pp-mine {
+  font-weight: 900;
+  color: deepskyblue;
+}
+
 .pp-ally {
-  color: greenyellow;
+  font-weight: 900;
+  color: darkgreen;
+}
+
+.pp-ia {
+  font-weight: 900;
+  color: rebeccapurple;
+}
+
+.pp-cdr {
+  font-weight: 900;
+  color: yellow;
 }
 
 .pp-enemy {
+  font-weight: 900;
   color: red;
 }
 
@@ -24,7 +61,7 @@
   .center-cells a {
     line-height: 1rem;
     font-size: 1rem;
-    letter-spacing: 4px;
+    letter-spacing: 2px;
     color: gainsboro;
     text-decoration: none;
   }
@@ -44,18 +81,26 @@
   }
 }
 
+.galaxy-table td.center-cells {
+  line-height: 0.1;
+}
+
 .sector td.center-cells {
   height: 120px;
+  border: none;
 }
 
 .sector-table {
   height: 400px!important;
   width: 600px!important;
+  background-color: black!important;
+  border: 1px solid white;
 }
 
 .galaxy-table {
-  height: 850px!important;
-  width: 850px!important;
+  height: 650px!important;
+  width: 650px!important;
+  background-color: black!important;
 }
 
 .glyphicon-plane.planet {

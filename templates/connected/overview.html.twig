@@ -32,7 +32,7 @@
                     </th>
                     <td class="center-cells">
                         <h4>
-                            <div class="my-2">{{ 'info.rank'|trans|raw }} {{ app.user.getRank().getPosition() }} <small>({% if app.user.getRank().getPosition() > app.user.getRank().getOldPosition() %}<span class="text-rouge">-{{ app.user.getRank().getPosition() - app.user.getRank().getOldPosition() }}</span>{% else %}<span class="text-vert">+{{ app.user.getRank().getPosition() - app.user.getRank().getOldPosition() }}</span>{% endif %})</small></div>
+                            <div class="my-2">{{ 'info.rank'|trans|raw }} {{ app.user.getRank().getPosition() }} <small>({% if app.user.getRank().getPosition() > app.user.getRank().getOldPosition() %}<span class="text-rouge">-{{ app.user.getRank().getPosition() - app.user.getRank().getOldPosition() }}</span>{% else %}<span class="text-vert">+{{ app.user.getRank().getOldPosition() - app.user.getRank().getPosition() }}</span>{% endif %})</small></div>
                             <div class="my-2">{{ 'info.planet'|trans|raw }} {{ app.user.getPlanets()|length }}</div>
                             {% if app.user.getAlly() %}
                                 <div class="my-2">{{ 'info.fleet'|trans|raw }} {{ app.user.getFleets()|length }}</div>
