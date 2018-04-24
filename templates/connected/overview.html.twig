@@ -40,7 +40,7 @@
                                 <div id="timeConstruct" hidden>{{ usePlanet.getBuilding().getConstruct()|date('Y/m/d H:m:s') }}</div>
                                 <h4>{{ 'cell.constructName'|trans|raw }}<span id="timeDisplay" class="my-2"></span></h4>
                             {% else %}
-                            {{ 'cell.batiment'|trans|raw }}
+                                <h4>{{ 'cell.batiment'|trans|raw }}</h4>
                             {% endif %}
                         </a>
                     </td>
@@ -53,7 +53,7 @@
                                 <div id="timeResearch" hidden>{{ app.user.getSearch()|date('Y/m/d H:m:s') }}</div>
                                 <h4>{{ 'cell.searchName'|trans|raw }}<span id="timeDisplayR" class="my-2"></span></h4>
                             {% else %}
-                                {{ 'cell.search'|trans|raw }}
+                                <h4>{{ 'cell.search'|trans|raw }}</h4>
                             {% endif %}
                         </a>
                     </td>
