@@ -147,7 +147,6 @@ class SecurityController extends Controller
             $em->persist($research);
             $user->setResearch($research);
             $rank = new Rank();
-            $rank->setPoint(50);
             $em->persist($rank);
             $user->setRank($rank);
             $em->persist($user);

@@ -25,7 +25,22 @@ class Rank
     /**
      * @ORM\Column(name="point",type="bigint")
      */
-    protected $point;
+    protected $point = 100;
+
+    /**
+     * @ORM\Column(name="oldPoint",type="bigint")
+     */
+    protected $oldPoint = 0;
+
+    /**
+     * @ORM\Column(name="position",type="integer")
+     */
+    protected $position = 0;
+
+    /**
+     * @ORM\Column(name="oldPosition",type="integer")
+     */
+    protected $oldPosition = 0;
 
     /**
      * @return mixed
@@ -57,6 +72,54 @@ class Rank
     public function setPoint($point): void
     {
         $this->point = $point;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * @param mixed $position
+     */
+    public function setPosition($position): void
+    {
+        $this->position = $position;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOldPoint()
+    {
+        return $this->oldPoint;
+    }
+
+    /**
+     * @param mixed $oldPoint
+     */
+    public function setOldPoint($oldPoint): void
+    {
+        $this->oldPoint = $oldPoint;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOldPosition()
+    {
+        return $this->oldPosition;
+    }
+
+    /**
+     * @param mixed $oldPosition
+     */
+    public function setOldPosition($oldPosition): void
+    {
+        $this->oldPosition = $oldPosition;
     }
 
     public function getId()

@@ -16,9 +16,12 @@ class DailyController extends Controller
 
         $users = $em->getRepository('App:User')
             ->createQueryBuilder('u')
+            ->join('u.rank', 'r')
+            ->orderBy('r.point', 'ASC')
             ->getQuery()
             ->getResult();
 
+        $x = 1;
         foreach ($users as $user) {
             $ally = $user->getAlly();
             $worker = 0;
@@ -38,9 +41,15 @@ class DailyController extends Controller
             }
             $cost = $user->getBitcoin();
             $cost = $cost - ($soldier * 2);
+            $point = ($worker / 100);
             $user->setBitcoin($cost);
+            $user->getRank()->setOldPoint($user->getRank()->getPoint());
+            $user->getRank()->setPoint($point - $user->getRank()->getPoint());
+            $user->getRank()->setOldPosition($user->getRank()->getPosition());
+            $user->getRank()->setPosition($x);
 
             $em->persist($user);
+            $x++;
         }
         $em->flush();
 

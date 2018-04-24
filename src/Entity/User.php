@@ -582,4 +582,15 @@ class User implements UserInterface, \Serializable
     {
         return $this->updatedAt;
     }
+
+//    /**
+//     * @return \Doctrine\Common\Collections\Collection
+//     */
+//    public function getAllShips()
+//    {
+//        $criteria = Criteria::create()
+//            ->andWhere(Criteria::expr()->gt('planet', $this->planet->getOldPlanet()));
+//
+//        return $this->user->matching($criteria);
+//    }
 }

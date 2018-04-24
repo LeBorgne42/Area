@@ -1,7 +1,6 @@
 title: 'Votre Empire'
 modify: modifier
 tooltip.modify: 'Modifier image !'
-cell.planet: 'Vous n''avez pas encore de planète'
 title.attack: 'Attaque en cours'
 cell.attack: 'Une attaque est en cours.'
 title.batiment: Bâtiment
@@ -14,3 +13,8 @@ title.fleet: Flotte
 cell.fleet: 'Aucune flotte en vol.'
 cell.constructName: 'Construction terminée dans '
 cell.searchName: 'Recherche effectuée dans '
+info.rank: 'Classement :'
+info.planet: 'Planètes :'
+info.fleet: 'Nombre de flotte :'
+info.ally: 'Alliance :'
+info.allyMissing: 'Rejoignez une alliance !'
