@@ -26,3 +26,5 @@ skyImg: Espace
 building.canBe: 'x 0'
 building.Activated: Construit
 '': 0
+0: 0
+1: 1

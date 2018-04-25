@@ -31,23 +31,20 @@ class SociologicController extends Controller
             ->setParameters(array('id' => $idp, 'user' => $user))
             ->getQuery()
             ->getOneOrNullResult();
-
-        $demography = $user->getResearch()->getDemography();
+        $level = $user->getDemography() + 1;
         $userBt = $user->getBitcoin();
-        if(($userBt < $demography->getBitcoin() || $demography->getFinishAt() > $now) ||
-            ($demography->getLevel() == 5 || $user->getSearch() > $now)) {
+
+        if(($userBt < ($level * 8000)) ||
+            ($level == 6 || $user->getSearchAt() > $now)) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
-        $cost = 2;
-        $time = 2;
-        $now->add(new DateInterval('PT' . $demography->getConstructTime() . 'S'));
-        $user->setSearch($now);
-        $user->setBitcoin($userBt - $demography->getBitcoin());
-        $demography->setBitcoin($demography->getBitcoin() * $cost);
-        $demography->setFinishAt($now);
-        $demography->setConstructTime($demography->getConstructTime() * $time);
+
+        $now->add(new DateInterval('PT' . ($level * 4800 / $user->getScientistProduction()) . 'S'));
+        $user->setSearch('demography');
+        $user->setSearchAt($now);
+        $user->setBitcoin($userBt - ($level * 8000));
+        $usePlanet->setWorkerProduction($usePlanet->getWorkerProduction() + 0.1);
         $em->persist($user);
-        $em->persist($demography);
         $em->flush();
 
         return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
@@ -70,23 +67,19 @@ class SociologicController extends Controller
             ->getQuery()
             ->getOneOrNullResult();
 
-        $discipline = $user->getResearch()->getDiscipline();
+        $level = $user->getDiscipline() + 1;
         $userBt = $user->getBitcoin();
-        if(($userBt < $discipline->getBitcoin() || $discipline->getFinishAt() > $now) ||
-            ($discipline->getLevel() == 3 || $user->getResearch()->getDemography()->getLevel() == 0) ||
-            $user->getSearch() > $now) {
+
+        if(($userBt < ($level * 11700) || $user->getDemography() == 0) ||
+            ($level == 4 || $user->getSearchAt() > $now)) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
-        $cost = 2;
-        $time = 2;
-        $now->add(new DateInterval('PT' . $discipline->getConstructTime() . 'S'));
-        $user->setSearch($now);
-        $user->setBitcoin($userBt - $discipline->getBitcoin());
-        $discipline->setBitcoin($discipline->getBitcoin() * $cost);
-        $discipline->setFinishAt($now);
-        $discipline->setConstructTime($discipline->getConstructTime() * $time);
+
+        $now->add(new DateInterval('PT' . ($level * 9300 / $user->getScientistProduction()) . 'S'));
+        $user->setSearch('discipline');
+        $user->setSearchAt($now);
+        $user->setBitcoin($userBt - ($level * 11700));
         $em->persist($user);
-        $em->persist($discipline);
         $em->flush();
 
         return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));

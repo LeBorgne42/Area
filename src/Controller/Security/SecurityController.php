@@ -8,23 +8,6 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Form\Front\UserRecoveryType;
 use App\Entity\User;
 use App\Entity\Rank;
-use App\Entity\Research;
-use App\Entity\Zearch_Demography;
-use App\Entity\Zearch_Discipline;
-use App\Entity\Zearch_HeavyShip;
-use App\Entity\Zearch_Hyperespace;
-use App\Entity\Zearch_Industry;
-use App\Entity\Zearch_LightShip;
-use App\Entity\Zearch_Onde;
-use App\Entity\Zearch_Terraformation;
-use App\Entity\Zearch_Utility;
-use App\Entity\Zearch_Armement;
-use App\Entity\Zearch_Missile;
-use App\Entity\Zearch_Laser;
-use App\Entity\Zearch_Plasma;
-use App\Entity\Zearch_Cargo;
-use App\Entity\Zearch_Recycleur;
-use App\Entity\Zearch_Barge;
 use DateTime;
 use DateTimeZone;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -89,41 +72,6 @@ class SecurityController extends Controller
             }
 
             $em->persist($planet);
-            $research = new Research();
-            $demography = new Zearch_Demography();
-            $discipline = new Zearch_Discipline();
-            $heavyShip = new Zearch_HeavyShip();
-            $lightShip = new Zearch_LightShip();
-            $hyperespace = new Zearch_Hyperespace();
-            $industry = new Zearch_Industry();
-            $onde = new Zearch_Onde();
-            $terraformation = new Zearch_Terraformation();
-            $utility = new Zearch_Utility();
-            $armement = new Zearch_Armement();
-            $missile = new Zearch_Missile();
-            $laser = new Zearch_Laser();
-            $plasma = new Zearch_Plasma();
-            $cargo = new Zearch_Cargo();
-            $sRecycleur = new Zearch_Recycleur();
-            $sBarge = new Zearch_Barge();
-            $research->setDemography($demography);
-            $research->setDiscipline($discipline);
-            $research->setHeavyShip($heavyShip);
-            $research->setLightShip($lightShip);
-            $research->setHyperespace($hyperespace);
-            $research->setIndustry($industry);
-            $research->setOnde($onde);
-            $research->setTerraformation($terraformation);
-            $research->setUtility($utility);
-            $research->setArmement($armement);
-            $research->setMissile($missile);
-            $research->setLaser($laser);
-            $research->setPlasma($plasma);
-            $research->setCargo($cargo);
-            $research->setRecycleur($sRecycleur);
-            $research->setBarge($sBarge);
-            $em->persist($research);
-            $user->setResearch($research);
             $rank = new Rank();
             $em->persist($rank);
             $user->setRank($rank);
@@ -153,13 +101,15 @@ class SecurityController extends Controller
                 $user->getRoles()
             );
 
-            $this->get('security.token_storage')->setToken($token);
+            return $this->redirectToRoute('login');
+
+           /* $this->get('security.token_storage')->setToken($token);
             $request->getSession()->set('_security_main', serialize($token));
 
             $event = new InteractiveLoginEvent($request, $token);
             $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
 
-            return $this->redirectToRoute('overview', array('idp' => $planet->getId()));
+            return $this->redirectToRoute('overview', array('idp' => $planet->getId()));*/
         }
         return $this->render('security/register.html.twig');
     }

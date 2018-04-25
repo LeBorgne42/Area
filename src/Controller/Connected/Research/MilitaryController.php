@@ -32,22 +32,19 @@ class MilitaryController extends Controller
             ->getQuery()
             ->getOneOrNullResult();
 
-        $industry = $user->getResearch()->getIndustry();
+        $level = $user->getIndustry() + 1;
         $userBt = $user->getBitcoin();
-        if(($userBt < $industry->getBitcoin() || $industry->getFinishAt() > $now) ||
-            ($industry->getLevel() == 5 || $user->getSearch() > $now)) {
+
+        if(($userBt < 1500) ||
+            ($level == 6 || $user->getSearchAt() > $now)) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
-        $cost = 2;
-        $time = 2;
-        $now->add(new DateInterval('PT' . $industry->getConstructTime() . 'S'));
-        $user->setSearch($now);
-        $user->setBitcoin($userBt - $industry->getBitcoin());
-        $industry->setBitcoin($industry->getBitcoin() * $cost);
-        $industry->setFinishAt($now);
-        $industry->setConstructTime($industry->getConstructTime() * $time);
+
+        $now->add(new DateInterval('PT' . ($level * 1500 / $user->getScientistProduction()) . 'S'));
+        $user->setSearch('industry');
+        $user->setSearchAt($now);
+        $user->setBitcoin($userBt - 1500);
         $em->persist($user);
-        $em->persist($industry);
         $em->flush();
 
         return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
@@ -70,23 +67,27 @@ class MilitaryController extends Controller
             ->getQuery()
             ->getOneOrNullResult();
 
-        $lightShip = $user->getResearch()->getLightShip();
+        $lightShip = $user->getLightShip();
         $userBt = $user->getBitcoin();
         if(($userBt < $lightShip->getBitcoin() || $lightShip->getFinishAt() > $now) ||
-            ($lightShip->getLevel() == 5 || $user->getResearch()->getIndustry()->getLevel() < 3) ||
+            ($lightShip == 5 || $user->getIndustry() < 3) ||
             $user->getSearch() > $now) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
-        $cost = 2;
-        $time = 2;
-        $now->add(new DateInterval('PT' . $lightShip->getConstructTime() . 'S'));
-        $user->setSearch($now);
-        $user->setBitcoin($userBt - $lightShip->getBitcoin());
-        $lightShip->setBitcoin($lightShip->getBitcoin() * $cost);
-        $lightShip->setFinishAt($now);
-        $lightShip->setConstructTime($lightShip->getConstructTime() * $time);
+
+        $level = $user->getLightShip() + 1;
+        $userBt = $user->getBitcoin();
+
+        if(($userBt < 9000 || $user->getIndustry() < 3) ||
+            ($level == 6 || $user->getSearchAt() > $now)) {
+            return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
+        }
+
+        $now->add(new DateInterval('PT' . ($level * 8600 / $user->getScientistProduction()) . 'S'));
+        $user->setSearch('lightShip');
+        $user->setSearchAt($now);
+        $user->setBitcoin($userBt - 9000);
         $em->persist($user);
-        $em->persist($lightShip);
         $em->flush();
 
         return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
@@ -109,23 +110,19 @@ class MilitaryController extends Controller
             ->getQuery()
             ->getOneOrNullResult();
 
-        $heavyShip = $user->getResearch()->getHeavyShip();
+        $level = $user->getHeavyShip() + 1;
         $userBt = $user->getBitcoin();
-        if(($userBt < $heavyShip->getBitcoin() || $heavyShip->getFinishAt() > $now) ||
-            ($heavyShip->getLevel() == 5 || $user->getResearch()->getIndustry()->getLevel() < 5) ||
-            $user->getSearch() > $now) {
+
+        if(($userBt < 42000 || $user->getIndustry() < 5) ||
+            ($level == 6 || $user->getSearchAt() > $now)) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
-        $cost = 2;
-        $time = 2;
-        $now->add(new DateInterval('PT' . $heavyShip->getConstructTime() . 'S'));
-        $user->setSearch($now);
-        $user->setBitcoin($userBt - $heavyShip->getBitcoin());
-        $heavyShip->setBitcoin($heavyShip->getBitcoin() * $cost);
-        $heavyShip->setFinishAt($now);
-        $heavyShip->setConstructTime($heavyShip->getConstructTime() * $time);
+
+        $now->add(new DateInterval('PT' . ($level * 35000 / $user->getScientistProduction()) . 'S'));
+        $user->setSearch('heavyShip');
+        $user->setSearchAt($now);
+        $user->setBitcoin($userBt - 42000);
         $em->persist($user);
-        $em->persist($heavyShip);
         $em->flush();
 
         return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));

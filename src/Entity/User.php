@@ -42,12 +42,6 @@ class User implements UserInterface, \Serializable
     protected $ally;
 
     /**
-     * @ORM\OneToOne(targetEntity="Research", inversedBy="user", fetch="EXTRA_LAZY")
-     * @ORM\JoinColumn(name="research_id", referencedColumnName="id")
-     */
-    protected $research;
-
-    /**
      * @ORM\OneToMany(targetEntity="Proposal", mappedBy="user", fetch="EXTRA_LAZY")
      */
     protected $proposals;
@@ -97,9 +91,99 @@ class User implements UserInterface, \Serializable
     protected $scientistProduction = 1;
 
     /**
+     * @ORM\Column(name="onde",type="integer", nullable=true)
+     */
+    protected $onde = 0;
+
+    /**
+     * @ORM\Column(name="industry",type="integer", nullable=true)
+     */
+    protected $industry = 0;
+
+    /**
+     * @ORM\Column(name="lightShip",type="integer", nullable=true)
+     */
+    protected $lightShip = 0;
+
+    /**
+     * @ORM\Column(name="heavyShip",type="integer", nullable=true)
+     */
+    protected $heavyShip = 0;
+
+    /**
+     * @ORM\Column(name="discipline",type="integer", nullable=true)
+     */
+    protected $discipline = 0;
+
+    /**
+     * @ORM\Column(name="hyperespace",type="integer", nullable=true)
+     */
+    protected $hyperespace = 0;
+
+    /**
+     * @ORM\Column(name="barge",type="integer", nullable=true)
+     */
+    protected $barge = 0;
+
+    /**
+     * @ORM\Column(name="utility",type="integer", nullable=true)
+     */
+    protected $utility = 0;
+
+    /**
+     * @ORM\Column(name="demography",type="integer", nullable=true)
+     */
+    protected $demography = 0;
+
+    /**
+     * @ORM\Column(name="terraformation",type="integer", nullable=true)
+     */
+    protected $terraformation = 0;
+
+    /**
+     * @ORM\Column(name="cargo",type="integer", nullable=true)
+     */
+    protected $cargo = 0;
+
+    /**
+     * @ORM\Column(name="recycleur",type="integer", nullable=true)
+     */
+    protected $recycleur = 0;
+
+    /**
+     * @ORM\Column(name="armement",type="integer", nullable=true)
+     */
+    protected $armement = 0;
+
+    /**
+     * @ORM\Column(name="missile",type="integer", nullable=true)
+     */
+    protected $missile = 0;
+
+    /**
+     * @ORM\Column(name="laser",type="integer", nullable=true)
+     */
+    protected $laser = 0;
+
+    /**
+     * @ORM\Column(name="plasma",type="integer", nullable=true)
+     */
+    protected $plasma = 0;
+
+    /**
+     * @ORM\Column(name="searchAt",type="datetime", nullable=true)
+     */
+    protected $searchAt;
+
+    /**
+     * @ORM\Column(name="search",type="string", nullable=true)
+     */
+    protected $search;
+
+    /**
      * @ORM\Column(name="created_at",type="datetime")
      */
-    protected $createdAt;
+    protected $createdAt = 0;
 
     /**
      * @ORM\Column(name="connected",type="boolean")
@@ -138,11 +222,6 @@ class User implements UserInterface, \Serializable
      * @var \DateTime
      */
     private $updatedAt;
-
-    /**
-     * @ORM\Column(name="search",type="datetime", nullable=true)
-     */
-    protected $search;
 
     /**
      * User constructor.
@@ -512,22 +591,6 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @return mixed
-     */
-    public function getResearch()
-    {
-        return $this->research;
-    }
-
-    /**
-     * @param mixed $research
-     */
-    public function setResearch($research): void
-    {
-        $this->research = $research;
-    }
-
-    /**
      * Add fleet
      *
      * @param \App\Entity\Fleet $fleet
@@ -567,22 +630,6 @@ class User implements UserInterface, \Serializable
         $this->fleets = $fleets;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getSearch()
-    {
-        return $this->search;
-    }
-
-    /**
-     * @param mixed $search
-     */
-    public function setSearch($search): void
-    {
-        $this->search = $search;
-    }
-
     public function getUpdatedAt()
     {
         return $this->updatedAt;
@@ -604,14 +651,291 @@ class User implements UserInterface, \Serializable
         $this->scientistProduction = $scientistProduction;
     }
 
-//    /**
-//     * @return \Doctrine\Common\Collections\Collection
-//     */
-//    public function getAllShips()
-//    {
-//        $criteria = Criteria::create()
-//            ->andWhere(Criteria::expr()->gt('planet', $this->planet->getOldPlanet()));
-//
-//        return $this->user->matching($criteria);
-//    }
+    /**
+     * @return mixed
+     */
+    public function getOnde()
+    {
+        return $this->onde;
+    }
+
+    /**
+     * @param mixed $onde
+     */
+    public function setOnde($onde): void
+    {
+        $this->onde = $onde;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIndustry()
+    {
+        return $this->industry;
+    }
+
+    /**
+     * @param mixed $industry
+     */
+    public function setIndustry($industry): void
+    {
+        $this->industry = $industry;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLightShip()
+    {
+        return $this->lightShip;
+    }
+
+    /**
+     * @param mixed $lightShip
+     */
+    public function setLightShip($lightShip): void
+    {
+        $this->lightShip = $lightShip;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHeavyShip()
+    {
+        return $this->heavyShip;
+    }
+
+    /**
+     * @param mixed $heavyShip
+     */
+    public function setHeavyShip($heavyShip): void
+    {
+        $this->heavyShip = $heavyShip;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDiscipline()
+    {
+        return $this->discipline;
+    }
+
+    /**
+     * @param mixed $discipline
+     */
+    public function setDiscipline($discipline): void
+    {
+        $this->discipline = $discipline;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHyperespace()
+    {
+        return $this->hyperespace;
+    }
+
+    /**
+     * @param mixed $hyperespace
+     */
+    public function setHyperespace($hyperespace): void
+    {
+        $this->hyperespace = $hyperespace;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBarge()
+    {
+        return $this->barge;
+    }
+
+    /**
+     * @param mixed $barge
+     */
+    public function setBarge($barge): void
+    {
+        $this->barge = $barge;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUtility()
+    {
+        return $this->utility;
+    }
+
+    /**
+     * @param mixed $utility
+     */
+    public function setUtility($utility): void
+    {
+        $this->utility = $utility;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDemography()
+    {
+        return $this->demography;
+    }
+
+    /**
+     * @param mixed $demography
+     */
+    public function setDemography($demography): void
+    {
+        $this->demography = $demography;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTerraformation()
+    {
+        return $this->terraformation;
+    }
+
+    /**
+     * @param mixed $terraformation
+     */
+    public function setTerraformation($terraformation): void
+    {
+        $this->terraformation = $terraformation;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCargo()
+    {
+        return $this->cargo;
+    }
+
+    /**
+     * @param mixed $cargo
+     */
+    public function setCargo($cargo): void
+    {
+        $this->cargo = $cargo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRecycleur()
+    {
+        return $this->recycleur;
+    }
+
+    /**
+     * @param mixed $recycleur
+     */
+    public function setRecycleur($recycleur): void
+    {
+        $this->recycleur = $recycleur;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArmement()
+    {
+        return $this->armement;
+    }
+
+    /**
+     * @param mixed $armement
+     */
+    public function setArmement($armement): void
+    {
+        $this->armement = $armement;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMissile()
+    {
+        return $this->missile;
+    }
+
+    /**
+     * @param mixed $missile
+     */
+    public function setMissile($missile): void
+    {
+        $this->missile = $missile;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLaser()
+    {
+        return $this->laser;
+    }
+
+    /**
+     * @param mixed $laser
+     */
+    public function setLaser($laser): void
+    {
+        $this->laser = $laser;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPlasma()
+    {
+        return $this->plasma;
+    }
+
+    /**
+     * @param mixed $plasma
+     */
+    public function setPlasma($plasma): void
+    {
+        $this->plasma = $plasma;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSearchAt()
+    {
+        return $this->searchAt;
+    }
+
+    /**
+     * @param mixed $searchAt
+     */
+    public function setSearchAt($searchAt): void
+    {
+        $this->searchAt = $searchAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSearch()
+    {
+        return $this->search;
+    }
+
+    /**
+     * @param mixed $search
+     */
+    public function setSearch($search): void
+    {
+        $this->search = $search;
+    }
 }

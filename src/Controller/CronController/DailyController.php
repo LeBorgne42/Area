@@ -53,6 +53,6 @@ class DailyController extends Controller
         }
         $em->flush();
 
-        return $this->redirectToRoute('home');
+        exit;
     }
 }

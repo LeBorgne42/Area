@@ -32,22 +32,17 @@ class ArmementController extends Controller
             ->getQuery()
             ->getOneOrNullResult();
 
-        $armement = $user->getResearch()->getArmement();
+        $level = $user->getArmement() + 1;
         $userBt = $user->getBitcoin();
-        if(($userBt < $armement->getBitcoin() || $armement->getFinishAt() > $now) ||
-            ($armement->getLevel() == 5 || $user->getSearch() > $now)) {
+        if(($userBt < ($level * 2000)) ||
+            ($level == 6 || $user->getSearchAt() > $now)) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
-        $cost = 2;
-        $time = 2;
-        $now->add(new DateInterval('PT' . $armement->getConstructTime() . 'S'));
-        $user->setSearch($now);
-        $user->setBitcoin($userBt - $armement->getBitcoin());
-        $armement->setBitcoin($armement->getBitcoin() * $cost);
-        $armement->setFinishAt($now);
-        $armement->setConstructTime($armement->getConstructTime() * $time);
+        $now->add(new DateInterval('PT' . ($level * 3700 / $user->getScientistProduction()) . 'S'));
+        $user->setSearch('armement');
+        $user->setSearchAt($now);
+        $user->setBitcoin($userBt - ($level * 2000));
         $em->persist($user);
-        $em->persist($armement);
         $em->flush();
 
         return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
@@ -70,23 +65,17 @@ class ArmementController extends Controller
             ->getQuery()
             ->getOneOrNullResult();
 
-        $missile = $user->getResearch()->getMissile();
+        $level = $user->getMissile() + 1;
         $userBt = $user->getBitcoin();
-        if(($userBt < $missile->getBitcoin() || $missile->getFinishAt() > $now) ||
-            ($missile->getLevel() == 3 || $user->getResearch()->getArmement()->getLevel() < 0) ||
-            $user->getSearch() > $now) {
+        if(($userBt < ($level * 2600) || $user->getArmement() < 0) ||
+            ($level == 4 || $user->getSearchAt() > $now)) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
-        $cost = 2;
-        $time = 2;
-        $now->add(new DateInterval('PT' . $missile->getConstructTime() . 'S'));
-        $user->setSearch($now);
-        $user->setBitcoin($userBt - $missile->getBitcoin());
-        $missile->setBitcoin($missile->getBitcoin() * $cost);
-        $missile->setFinishAt($now);
-        $missile->setConstructTime($missile->getConstructTime() * $time);
+        $now->add(new DateInterval('PT' . ($level * 4500 / $user->getScientistProduction()) . 'S'));
+        $user->setSearch('missile');
+        $user->setSearchAt($now);
+        $user->setBitcoin($userBt - ($level * 2600));
         $em->persist($user);
-        $em->persist($missile);
         $em->flush();
 
         return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
@@ -109,23 +98,17 @@ class ArmementController extends Controller
             ->getQuery()
             ->getOneOrNullResult();
 
-        $laser = $user->getResearch()->getLaser();
+        $level = $user->getLaser() + 1;
         $userBt = $user->getBitcoin();
-        if(($userBt < $laser->getBitcoin() || $laser->getFinishAt() > $now) ||
-            ($laser->getLevel() == 3 || $user->getResearch()->getArmement()->getLevel() < 2) ||
-            $user->getSearch() > $now) {
+        if(($userBt < ($level * 13000) || $user->getArmement() < 2) ||
+            ($level == 4 || $user->getSearchAt() > $now)) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
-        $cost = 2;
-        $time = 2;
-        $now->add(new DateInterval('PT' . $laser->getConstructTime() . 'S'));
-        $user->setSearch($now);
-        $user->setBitcoin($userBt - $laser->getBitcoin());
-        $laser->setBitcoin($laser->getBitcoin() * $cost);
-        $laser->setFinishAt($now);
-        $laser->setConstructTime($laser->getConstructTime() * $time);
+        $now->add(new DateInterval('PT' . ($level * 18000 / $user->getScientistProduction()) . 'S'));
+        $user->setSearch('laser');
+        $user->setSearchAt($now);
+        $user->setBitcoin($userBt - ($level * 13000));
         $em->persist($user);
-        $em->persist($laser);
         $em->flush();
 
         return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
@@ -147,24 +130,17 @@ class ArmementController extends Controller
             ->setParameters(array('id' => $idp, 'user' => $user))
             ->getQuery()
             ->getOneOrNullResult();
-        $plasma = $user->getResearch()->getPlasma();
+        $level = $user->getPlasma() + 1;
         $userBt = $user->getBitcoin();
-        if(($userBt < $plasma->getBitcoin() || $plasma->getFinishAt() > $now) ||
-            ($plasma->getLevel() == 3 || $user->getResearch()->getArmement()->getLevel() < 4) ||
-            $user->getSearch() > $now) {
+        if(($userBt < ($level * 29000) || $user->getArmement() < 4) ||
+            ($level == 4 || $user->getSearchAt() > $now)) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
-        $cost = 2;
-        $time = 2;
-
-        $now->add(new DateInterval('PT' . $plasma->getConstructTime() . 'S'));
-        $user->setSearch($now);
-        $user->setBitcoin($userBt - $plasma->getBitcoin());
-        $plasma->setBitcoin($plasma->getBitcoin() * $cost);
-        $plasma->setFinishAt($now);
-        $plasma->setConstructTime($plasma->getConstructTime() * $time);
+        $now->add(new DateInterval('PT' . ($level * 46800 / $user->getScientistProduction()) . 'S'));
+        $user->setSearch('plasma');
+        $user->setSearchAt($now);
+        $user->setBitcoin($userBt - ($level * 29000));
         $em->persist($user);
-        $em->persist($plasma);
         $em->flush();
 
         return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));

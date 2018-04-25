@@ -2,6 +2,7 @@ title: Recherche
 research.titleUtility: 'Recherche d''exploration'
 title.onde: 'Recherche sur les ondes'
 research.seek: Rechercher
+bitcoinImg: 'Bitcoin'
 title.terraformation: 'Technologie de terraformation'
 title.utility: 'Recherche de vaisseaux utilitaires'
 title.barge: 'Barge d''invasion'
@@ -23,3 +24,6 @@ title.plasma: 'Arme plasma'
 research.canBe: Inactive
 research.Activated: Activée
 research.level: 'Niveau :'
+'': 0
+1: 1
+0: 0

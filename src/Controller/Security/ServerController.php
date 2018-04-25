@@ -57,6 +57,8 @@ class ServerController extends Controller
                         $planet->setCdr(true);
                         $planet->setImageName('cdr.png');
                         $planet->setName('Astéroïdes');
+                        $planet->setNbCdr(9999999999);
+                        $planet->setWtCdr(9999999999);
                         $planet->setSector($sector);
                         $planet->setPosition($nbrPlanet);
                     }
@@ -115,10 +117,10 @@ class ServerController extends Controller
             $user->setSearch(null);
             $user->setGrade(null);
             $user->setJoinAllyAt(null);
-            foreach ($user->getProposals as $proposal) {
+            foreach ($user->getProposals() as $proposal) {
                 $user->removeProposal($proposal);
             }
-            foreach ($user->getFleets as $fleet) {
+            foreach ($user->getFleets() as $fleet) {
                 $user->removeFleet($fleet);
             }
             foreach ($user->getPlanets() as $planet) {

@@ -282,7 +282,7 @@ class SpaceShipyardController extends Controller
         $usePlanet->setNiobium($usePlanetNb - ($level * 23000));
         $usePlanet->setWater($usePlanetWt - ($level * 34000));
         $usePlanet->setGroundPlace($newGround);
-        $usePlanet->setShipProduction($usePlanet->getShipProduction() + 0.8);
+        $usePlanet->setMaxSoldier($usePlanet->getMaxSoldier() + 2500);
         $usePlanet->setConstruct('caserne');
         $usePlanet->setConstructAt($now);
         $em->persist($usePlanet);
@@ -312,13 +312,14 @@ class SpaceShipyardController extends Controller
         $level = $usePlanet->getCaserne();
         $newGround = $usePlanet->getGroundPlace() - 6;
 
-        if($level == 0 || $usePlanet->getConstructAt() > $now) {
+        if(($level == 0 || $usePlanet->getConstructAt() > $now) ||
+            ($usePlanet->getSoldier() < $usePlanet->getMaxSoldier() - 2500)) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
 
         $usePlanet->setMiner($level - 1);
         $usePlanet->setGroundPlace($newGround);
-        $usePlanet->setShipProduction($usePlanet->getShipProduction() - 0.8);
+        $usePlanet->setMaxSoldier($usePlanet->getMaxSoldier() - 2500);
         $em->persist($usePlanet);
         $em->flush();
 

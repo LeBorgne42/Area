@@ -42,6 +42,16 @@ class Planet
     protected $water = 1500;
 
     /**
+     * @ORM\Column(name="nbCdr",type="bigint", nullable=true)
+     */
+    protected $nbCdr = 0;
+
+    /**
+     * @ORM\Column(name="wtCdr",type="bigint", nullable=true)
+     */
+    protected $wtCdr = 0;
+
+    /**
      * @ORM\Column(name="shipProduction",type="decimal", precision=28, scale=5)
      */
     protected $shipProduction = 1;
@@ -50,6 +60,11 @@ class Planet
      * @ORM\Column(name="workerProduction",type="decimal", precision=28, scale=5)
      */
     protected $workerProduction = 1.1;
+
+    /**
+     * @ORM\Column(name="soldierMax",type="integer")
+     */
+    protected $soldierMax = 2500;
 
     /**
      * @ORM\Column(name="nbProduction",type="decimal", precision=28, scale=5)
@@ -1049,5 +1064,53 @@ class Planet
     public function setWtProduction($wtProduction): void
     {
         $this->wtProduction = $wtProduction;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNbCdr()
+    {
+        return $this->nbCdr;
+    }
+
+    /**
+     * @param mixed $nbCdr
+     */
+    public function setNbCdr($nbCdr): void
+    {
+        $this->nbCdr = $nbCdr;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWtCdr()
+    {
+        return $this->wtCdr;
+    }
+
+    /**
+     * @param mixed $wtCdr
+     */
+    public function setWtCdr($wtCdr): void
+    {
+        $this->wtCdr = $wtCdr;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSoldierMax()
+    {
+        return $this->soldierMax;
+    }
+
+    /**
+     * @param mixed $soldierMax
+     */
+    public function setSoldierMax($soldierMax): void
+    {
+        $this->soldierMax = $soldierMax;
     }
 }
