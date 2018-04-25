@@ -32,7 +32,7 @@
                     </th>
                     <td class="center-cells">
                         <h4>
-                            <div class="my-2">{{ 'info.rank'|trans|raw }} {{ app.user.getRank().getPosition() }} <small>({% if app.user.getRank().getPosition() > app.user.getRank().getOldPosition() %}<span class="text-rouge">-{{ app.user.getRank().getPosition() - app.user.getRank().getOldPosition() }}</span>{% else %}<span class="text-vert">+{{ app.user.getRank().getOldPosition() - app.user.getRank().getPosition() }}</span>{% endif %})</small></div>
+                            <div class="my-3">{{ 'info.rank'|trans|raw }} {{ app.user.getRank().getPosition() }} <small>({% if app.user.getRank().getPosition() > app.user.getRank().getOldPosition() %}<span class="text-rouge">-{{ app.user.getRank().getPosition() - app.user.getRank().getOldPosition() }}</span>{% else %}<span class="text-vert">+{{ app.user.getRank().getOldPosition() - app.user.getRank().getPosition() }}</span>{% endif %})</small></div>
                             <div class="my-2">{{ 'info.planet'|trans|raw }} {{ app.user.getPlanets()|length }}</div>
                             {% if app.user.getAlly() %}
                                 <div class="my-2">{{ 'info.fleet'|trans|raw }} {{ app.user.getFleets()|length }}</div>
@@ -40,7 +40,7 @@
                             {% if app.user.getAlly() %}
                                 <div class="my-2">{{ 'info.ally'|trans|raw }} [{{ app.user.getAlly().getSigle() }}] {{ app.user.getAlly().getName() }} - {{ app.user.getAlly().getUsers()|length }}/20</div>
                             {% else %}
-                                <a href="{{ path('ally', {'idp': usePlanet.getId()}) }}">{{ 'info.allyMissing'|trans|raw }}</a>
+                                <div class="mt-5"><span><a href="{{ path('ally', {'idp': usePlanet.getId()}) }}">{{ 'info.allyMissing'|trans|raw }}</a></span></div>
                             {% endif %}
                         </h4>
                     </td>
@@ -48,43 +48,43 @@
                 <tr>
                     <th class="tab-cells-name"><h4>{{ 'title.batiment'|trans|raw }}</h4></th>
                     <td class="center-cells">
-                        <a href="{{ path('building', {'idp': usePlanet.getId()}) }}">
+                        <span><a href="{{ path('building', {'idp': usePlanet.getId()}) }}">
                             {% if usePlanet.getConstruct() %}
                                 <div id="timeConstruct" hidden>{{ usePlanet.getConstructAt()|date('Y/m/d H:m:s') }}</div>
                                 <h4>{{ 'cell.constructName'|trans|raw }}<span id="timeDisplay" class="my-2"></span></h4>
                             {% else %}
                                 <h4>{{ 'cell.batiment'|trans|raw }}</h4>
                             {% endif %}
-                        </a>
+                            </a></span>
                     </td>
                 </tr>
                 <tr>
                     <th class="tab-cells-name"><h4>{{ 'title.search'|trans|raw }}</h4></th>
                     <td class="center-cells">
-                        <a href="{{ path('search', {'idp': usePlanet.getId()}) }}">
+                        <span><a href="{{ path('search', {'idp': usePlanet.getId()}) }}">
                             {% if app.user.getSearch() > date %}
                                 <div id="timeResearch" hidden>{{ app.user.getSearch()|date('Y/m/d H:m:s') }}</div>
                                 <h4>{{ 'cell.searchName'|trans|raw }}<span id="timeDisplayR" class="my-2"></span></h4>
                             {% else %}
                                 <h4>{{ 'cell.search'|trans|raw }}</h4>
                             {% endif %}
-                        </a>
+                            </a></span>
                     </td>
                 </tr>
                 <tr>
                     <th class="tab-cells-name"><h4>{{ 'title.spatial'|trans|raw }}</h4></th>
                     <td class="center-cells">
-                        <a href="{{ path('spatial', {'idp': usePlanet.getId()}) }}">
+                        <span><a href="{{ path('spatial', {'idp': usePlanet.getId()}) }}">
                             <h4>{{ 'cell.spatial'|trans|raw }}</h4>
-                        </a>
+                            </a></span>
                     </td>
                 </tr>
                 <tr>
                     <th class="tab-cells-name"><h4>{{ 'title.fleet'|trans|raw }}</h4></th>
                     <td class="center-cells">
-                        <a href="{{ path('fleet', {'idp': usePlanet.getId()}) }}">
+                        <span><a href="{{ path('fleet', {'idp': usePlanet.getId()}) }}">
                             <h4>{{ 'cell.fleet'|trans|raw }}</h4>
-                        </a>
+                            </a></span>
                     </td>
                 </tr>
             </tbody>

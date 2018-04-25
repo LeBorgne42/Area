@@ -1,14 +1,12 @@
 title: 'Votre Empire'
 modify: modifier
 tooltip.modify: 'Modifier image !'
-title.attack: 'Attaque en cours'
-cell.attack: 'Une attaque est en cours.'
 title.batiment: Bâtiment
-cell.batiment: 'Aucun bâtiment en construction.'
+cell.batiment: 'Aucun bâtiment en construction'
 title.search: Recherche
-cell.search: 'Aucune recherche en cours.'
+cell.search: 'Aucune recherche en cours'
 title.spatial: 'Chantier spatial'
-cell.spatial: 'Aucune production en cours.'
+cell.spatial: 'Aucune production en cours'
 title.fleet: Flotte
 cell.fleet: 'Aucune flotte en vol.'
 cell.constructName: 'Construction terminée dans '
