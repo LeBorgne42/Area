@@ -47,41 +47,37 @@
                             <span><a href="{{ path('map', {'id':leftSector, 'idp': usePlanet.getId()}) }}"><span class="glyphicon glyphicon-chevron-left"></span></a></span>
                         </td>
                     {% endif %}
-                    {% if planet.getEmpty == false and planet.getCdr == false and planet.getMerchant == false %}
-                        {% if (usePlanet.getRadar() + usePlanet.getSkyRadar()) > planet.getSkyBrouilleur() %}
+                    {% if planet.getEmpty == false %}
+                        {% if (usePlanet.getRadar() + usePlanet.getSkyRadar()) > planet.getSkyBrouilleur() or planet.getUser() == app.user %}
                             <td class="center-cells pt-4">
                                 <a {% if planet.getUser() == app.user %}href="{{ path('building', {'idp': usePlanet.getId()}) }}"{% else %}{% endif %}><img class="mr-4 mb-4" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planet'|trans({'%name%': planet.getName() }) }}" height="64" width="64" src="{{ vich_uploader_asset(planet, 'imageFile') }}"></a>
-                                {% if usePlanet.getSector().getPosition() == planet.getSector().getPosition() %}<span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planetInfos'|trans({'%land%': planet.getGround(),  '%sky%': planet.getSky()}) }}"></span>{% if planet.getNbrFleets() %}<span class="glyphicon glyphicon-plane planet" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planetOrbite'|trans({'%fleet%': planet.getNbrFleets()}) }}"></span>{% endif %}{% endif %}
+                                {% if usePlanet.getSector().getPosition() == planet.getSector().getPosition() and planet.getCdr() == false %}
+                                    <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planetInfos'|trans({'%land%': planet.getGround(),  '%sky%': planet.getSky()}) }}"></span>
+                                {% endif %}
+                                {% if planet.getNbCdr() or planet.getWtCdr() %}
+                                    <span class="glyphicon glyphicon-oil planet" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.cdr'|trans({'%niobium%': planet.getNbCdr(), '%water%': planet.getWtCdr()}) }}"></span>
+                                {% endif %}
+                                {% if planet.getNbrFleets() %}
+                                    <span class="glyphicon glyphicon-plane planet" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planetOrbite'|trans({'%fleet%': planet.getNbrFleets()}) }}"></span>
+                                {% endif %}
                                 <div class="planet-position text-center">{{ planet.getPosition() }}</div>
-                                <div class="text-center{% if planet.getUser() == app.user %} pp-ally{% elseif planet.getUser() %} pp-enemy{% endif %}">{{ planet.getName() }}</div>
+                                <div class="text-center{% if planet.getUser() == app.user %} pp-ally{% elseif planet.getUser() %} pp-enemy{% elseif planet.getCdr() %} pp-cdr{% elseif planet.getMerchant() %} pp-ia{% endif %}">{{ planet.getName() }}</div>
                             </td>
                         {% else %}
-                            {% if planet.getEmpty == false and planet.getCdr == false and planet.getMerchant == false %}
-                                <td class="center-cells pt-4">
-                                    <a {% if planet.getUser() == app.user %}href="{{ path('building', {'idp': usePlanet.getId()}) }}"{% else %}{% endif %}><img class="mr-4 mb-4" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planet'|trans({'%name%': planet.getName() }) }}" height="64" width="64" src="{{ vich_uploader_asset(planet, 'imageFile') }}"></a>
-                                    {% if usePlanet.getSector().getPosition() == planet.getSector().getPosition() and (usePlanet.getRadar() > planet.getSkyBrouilleur() or usePlanet.getSkyRadar() > planet.getSkyBrouilleur() ) %}<span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planetInfos'|trans({'%land%': planet.getGround(),  '%sky%': planet.getSky()}) }}"></span>{% if planet.getNbrFleets() %}<span class="glyphicon glyphicon-plane planet" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planetOrbite'|trans({'%fleet%': planet.getNbrFleets()}) }}"></span>{% endif %}{% endif %}
-                                   <div class="planet-position text-center">{{ planet.getPosition() }}</div>
-                                    <div class="text-center{% if planet.getUser() == app.user %} pp-ally">{{ planet.getName() }}</div>{% elseif planet.getUser() %} pp-enemy">{{ 'map.planetHostile'|trans }}</div>{% else %}">{{ planet.getName() }}</div>{% endif %}
-                                </td>
-                            {% else %}
-                                <td class="center-cells">
-                                    {% if planet.getNbrFleets() %}
-                                    <span class="glyphicon glyphicon-plane empty" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planetOrbite'|trans({'%fleet%': planet.getNbrFleets()}) }}"></span>
-                                    {% endif %}
-                                    <div class="planet-position-empty text-center">{{ planet.getPosition() }}</div>
-                                </td>
-                            {% endif %}
+                            <td class="center-cells pt-4">
+                                <img class="mr-4 mb-4" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planet'|trans({'%name%': planet.getName() }) }}" height="64" width="64" src="{{ vich_uploader_asset(planet, 'imageFile') }}">
+                                {% if planet.getSkyBrouilleur() and (usePlanet.getRadar() + usePlanet.getSkyRadar()) > 0 %}
+                                    <span class="glyphicon glyphicon-cd" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.brouillage'|trans() }}"></span>
+                                {% endif %}
+                               <div class="planet-position text-center">{{ planet.getPosition() }}</div>
+                                <div class="text-center{% if planet.getCdr() %} pp-cdr{% elseif planet.getMerchant() %} pp-ia{% endif %}{% if planet.getUser() %} pp-enemy">{{ 'map.planetHostile'|trans }}</div>{% else %}">{{ planet.getName() }}</div>{% endif %}
+                            </td>
                         {% endif %}
                     {% else %}
-                        {% if planet.getEmpty == false and planet.getCdr == false and planet.getMerchant == false %}
-                            {% if usePlanet.getRadar() > 0 or usePlanet.getSkyRadar() > 0 %}
-                                <td class="center-cells">{% if planet.getNbrFleets() %}<span class="glyphicon glyphicon-plane empty" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planetOrbite'|trans({'%fleet%': planet.getNbrFleets()}) }}"></span>{% endif %}<div class="planet-position-empty text-center">{{ planet.getPosition() }}</div></td>
-                            {% endif %}
+                        {% if usePlanet.getRadar() > 0 or usePlanet.getSkyRadar() > 0 %}
+                            <td class="center-cells">{% if planet.getNbrFleets() %}<span class="glyphicon glyphicon-plane empty" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planetOrbite'|trans({'%fleet%': planet.getNbrFleets()}) }}"></span>{% endif %}<div class="planet-position-empty text-center">{{ planet.getPosition() }}</div></td>
                         {% else %}
                             <td class="center-cells">
-                                {% if planet.getNbrFleets() %}
-                                    <span class="glyphicon glyphicon-plane empty" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planetOrbite'|trans({'%fleet%': planet.getNbrFleets()}) }}"></span>
-                                {% endif %}
                                 <div class="planet-position-empty text-center">{{ planet.getPosition() }}</div>
                             </td>
                         {% endif %}

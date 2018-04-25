@@ -42,7 +42,6 @@
 
 .pp-ia {
   font-weight: 900;
-  font-size: 1.5rem;
   color: rebeccapurple;
 }
 
@@ -119,6 +118,14 @@ td.special-cell {
 }
 
 .glyphicon-info-sign {
+  float: right;
+}
+
+.glyphicon-oil.planet {
+  float: right;
+}
+
+.glyphicon-cd {
   float: right;
 }
 
