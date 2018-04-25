@@ -43,14 +43,29 @@ class Fleet
     protected $planet;
 
     /**
-     * @ORM\Column(name="oldPlanet",type="integer", nullable=true)
+     * @ORM\Column(name="newPlanet",type="integer", nullable=true)
      */
-    protected $oldPlanet = null;
+    protected $newPlanet = null;
 
     /**
      * @ORM\Column(name="flightTime",type="datetime", nullable=true)
      */
     protected $flightTime = null;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Sector", inversedBy="fleets", fetch="EXTRA_LAZY")
+     */
+    protected $sector;
+
+    /**
+     * @ORM\Column(name="planete",type="integer", nullable=true)
+     */
+    protected $planete = null;
+
+    /**
+     * @ORM\Column(name="speed",type="decimal", precision=9, scale=3)
+     */
+    protected $speed = 1;
 
     /**
      * @ORM\Column(name="sonde",type="bigint", nullable=true)
@@ -135,17 +150,6 @@ class Fleet
     }
 
     /**
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getOrigin()
-    {
-        $criteria = Criteria::create()
-            ->andWhere(Criteria::expr()->gt('planet', $this->planet->getOldPlanet()));
-
-        return $this->fleet->matching($criteria);
-    }
-
-    /**
      * @return mixed
      */
     public function getBargeSignature()
@@ -183,6 +187,33 @@ class Fleet
     public function getRecycleurSignature()
     {
         return $this->getRecycleur() * 80;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTotalSpeed()
+    {
+        if($this->getColonizer()) {
+            return 3;
+        }
+        if($this->getBarge()) {
+            return 3;
+        }
+        if($this->getRecycleur()) {
+            return 2;
+        }
+        if($this->getFregate()) {
+            return 1.2;
+        }
+        if($this->getHunter()) {
+            return 0.8;
+        }
+        if($this->getSonde()) {
+            return 0.01;
+        }
+
+        return 1;
     }
 
     /**
@@ -247,22 +278,6 @@ class Fleet
     public function setPlanet($planet): void
     {
         $this->planet = $planet;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getOldPlanet()
-    {
-        return $this->oldPlanet;
-    }
-
-    /**
-     * @param mixed $oldPlanet
-     */
-    public function setOldPlanet($oldPlanet): void
-    {
-        $this->oldPlanet = $oldPlanet;
     }
 
     /**
@@ -423,5 +438,69 @@ class Fleet
     public function setScientist($scientist): void
     {
         $this->scientist = $scientist;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSector()
+    {
+        return $this->sector;
+    }
+
+    /**
+     * @param mixed $sector
+     */
+    public function setSector($sector): void
+    {
+        $this->sector = $sector;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPlanete()
+    {
+        return $this->planete;
+    }
+
+    /**
+     * @param mixed $planete
+     */
+    public function setPlanete($planete): void
+    {
+        $this->planete = $planete;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNewPlanet()
+    {
+        return $this->newPlanet;
+    }
+
+    /**
+     * @param mixed $newPlanet
+     */
+    public function setNewPlanet($newPlanet): void
+    {
+        $this->newPlanet = $newPlanet;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSpeed()
+    {
+        return $this->speed;
+    }
+
+    /**
+     * @param mixed $speed
+     */
+    public function setSpeed($speed): void
+    {
+        $this->speed = $speed;
     }
 }

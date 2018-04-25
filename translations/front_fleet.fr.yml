@@ -28,3 +28,4 @@ fleet.barge: Barge
 form.nbr: Nombre
 form.manageFleet: 'Changer composition'
 form.name: ''
+fleet.sendFleet: envoyer

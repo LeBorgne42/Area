@@ -7,6 +7,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\Front\SpatialEditFleetType;
+use App\Form\Front\FleetSendType;
+use Datetime;
+use DatetimeZone;
+use DateInterval;
 
 /**
  * @Route("/fr")
@@ -126,6 +130,7 @@ class FleetController extends Controller
                 return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
             }
 
+            $fleet->setSpeed($fleet->getTotalSpeed());
             $fleet->setName($form_manageFleet->get('name')->getData());
             if($fleet->getNbrShips() == 0) {
                 $em->remove($fleet);
@@ -199,6 +204,8 @@ class FleetController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
 
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
@@ -216,71 +223,56 @@ class FleetController extends Controller
             ->getQuery()
             ->getOneOrNullResult();
 
-        $form_manageFleet = $this->createForm(SpatialEditFleetType::class, $fleet);
-        $form_manageFleet->handleRequest($request);
+        $form_sendFleet = $this->createForm(FleetSendType::class);
+        $form_sendFleet->handleRequest($request);
 
         if($fleet || $usePlanet) {
         } else {
             return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
         }
-        if ($form_manageFleet->isSubmitted() && $form_manageFleet->isValid()) {
-            $colonizer = $usePlanet->getColonizer() - $form_manageFleet->get('moreColonizer')->getData();
-            $recycleur = $usePlanet->getRecycleur() - $form_manageFleet->get('moreRecycleur')->getData();
-            $barge = $usePlanet->getBarge() - $form_manageFleet->get('moreBarge')->getData();
-            $sonde = $usePlanet->getSonde() - $form_manageFleet->get('moreSonde')->getData();
-            $hunter = $usePlanet->getHunter() - $form_manageFleet->get('moreHunter')->getData();
-            $fregate = $usePlanet->getFregate() - $form_manageFleet->get('moreFregate')->getData();
-            $colonizerLess = $usePlanet->getColonizer() + $form_manageFleet->get('lessColonizer')->getData();
-            $recycleurLess = $usePlanet->getRecycleur() + $form_manageFleet->get('lessRecycleur')->getData();
-            $bargeLess = $usePlanet->getBarge() + $form_manageFleet->get('lessBarge')->getData();
-            $sondeLess = $usePlanet->getSonde() + $form_manageFleet->get('lessSonde')->getData();
-            $hunterLess = $usePlanet->getHunter() + $form_manageFleet->get('lessHunter')->getData();
-            $fregateLess = $usePlanet->getFregate() + $form_manageFleet->get('lessFregate')->getData();
+        if ($form_sendFleet->isSubmitted() && $form_sendFleet->isValid()) {
+            $galaxy = $form_sendFleet->get('galaxy')->getData();
+            $sector= $form_sendFleet->get('sector')->getData();
+            $planete= $form_sendFleet->get('planete')->getData();
 
-            if (($colonizer < 0 || $recycleur < 0) || ($barge < 0 || $sonde < 0) || ($hunter < 0 || $fregate < 0) ||
-                ($form_manageFleet->get('lessColonizer')->getData() > $fleet->getColonizer ||
-                    $form_manageFleet->get('lessRecycleur')->getData() > $fleet->getRecycleur) ||
-                ($form_manageFleet->get('lessBarge')->getData() > $fleet->getBarge ||
-                    $form_manageFleet->get('lessSonde')->getData() > $fleet->getSonde) ||
-                ($form_manageFleet->get('lessHunter')->getData() > $fleet->getHunter ||
-                    $form_manageFleet->get('lessFregate')->getData() > $fleet->getFregate)) {
+            if (($galaxy < 1 || $galaxy > 10) || ($sector < 1 || $sector > 100) || ($planete < 1 || $planete > 25)) {
                 return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
             }
-            $ship = $fleet;
-            $colonizer->setAmount($form_manageFleet->get('colonizer')->getData());
-            $recycleur->setAmount($form_manageFleet->get('recycleur')->getData());
-            $barge->setAmount($form_manageFleet->get('barge')->getData());
-            $sonde->setAmount($form_manageFleet->get('sonde')->getData());
-            $hunter->setAmount($form_manageFleet->get('hunter')->getData());
-            $fregate->setAmount($form_manageFleet->get('fregate')->getData());
-            $ship->setColonizer($colonizer);
-            $ship->setBarge($barge);
-            $ship->setRecycleur($recycleur);
-            $ship->setSonde($sonde);
-            $ship->setHunter($hunter);
-            $ship->setFregate($fregate);
-            $em->persist($ship);
-            $fleet->setShip($ship);
-            $fleet->setUser($user);
-            $fleet->setPlanet($usePlanet);
-            $fleet->setName($form_manageFleet->get('name')->getData());
+
+            $planet = $em->getRepository('App:Planet')
+                ->createQueryBuilder('p')
+                ->join('p.sector', 's')
+                ->where('s.position = :sector')
+                ->andWhere('s.galaxy = :galaxy')
+                ->andWhere('p.position = :planete')
+                ->setParameters(array('sector' => $sector, 'galaxy' => $galaxy, 'planete' => $planete))
+                ->getQuery()
+                ->getOneOrNullResult();
+
+            $sFleet= $fleet->getPlanet()->getSector()->getPosition();
+            if (stristr((-$sFleet - $sector), '0 -1 -10 -9' ) != false) {
+                $base= 3600;
+            } elseif (stristr((-$sFleet - $sector), '-20 -12 -11 -8 -2' ) != false) {
+                $base= 7200;
+            } elseif (stristr((-$sFleet - $sector), '-28 -29 -30 -31 -32 -33 -22 -13 -3 -7' ) != false) {
+                $base= 10800;
+            } else {
+                $base= 18000;
+            }
+            $now->add(new DateInterval('PT' . ($fleet->getSpeed() * $base) . 'S'));
+            $fleet->setNewPlanet($planet->getId());
+            $fleet->setFlightTime($now);
+            $fleet->setSector($planet->getSector());
+            $fleet->setPlanete($planete);
             $em->persist($fleet);
-            $usePlanet->getColonizer($usePlanet->getColonizer() - $colonizer);
-            $usePlanet->getRecycleur($usePlanet->getRecycleur() - $recycleur);
-            $usePlanet->getBarge($usePlanet->getBarge() - $barge);
-            $usePlanet->getSonde($usePlanet->getSonde() - $sonde);
-            $usePlanet->getHunter($usePlanet->getHunter() - $hunter);
-            $usePlanet->getFregate($usePlanet->getFregate() - $fregate);
-            $usePlanet->addFleet($fleet);
-            $em->persist($usePlanet);
             $em->flush();
-            return $this->redirectToRoute('spatial', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
         }
 
-        return $this->render('connected/fleet/edit.html.twig', [
-            'id' => $id,
+        return $this->render('connected/fleet/send.html.twig', [
+            'fleet' => $fleet,
             'usePlanet' => $usePlanet,
-            'form_manageFleet' => $form_manageFleet->createView(),
+            'form_sendFleet' => $form_sendFleet->createView(),
         ]);
     }
 }

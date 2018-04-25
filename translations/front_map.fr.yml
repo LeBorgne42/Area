@@ -11,4 +11,4 @@ map.fleetSignature: Signature
 map.out: 'Flotte sortant du secteur'
 map.planetHostile: Occupée
 tooltip.cdr: '%niobium% Niobium - %water% Water'
-tooltip.brouillage: 'Brouillage'
+tooltip.brouillage: Brouillage

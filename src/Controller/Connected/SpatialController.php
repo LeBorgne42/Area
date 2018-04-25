@@ -120,6 +120,7 @@ class SpatialController extends Controller
             $fleet->setUser($user);
             $fleet->setPlanet($usePlanet);
             $fleet->setName($form_createFleet->get('name')->getData());
+            $fleet->setSpeed($fleet->getTotalSpeed());
             $em->persist($fleet);
             $usePlanet->setColonizer($colonizer);
             $usePlanet->setRecycleur($recycleur);

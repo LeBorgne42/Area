@@ -5,8 +5,8 @@
 {% block title %}{{ 'title'|trans }}{% endblock %}
 
 {% block body %}
-    <div class="front-block spatial">
-        {% if usePlanet.getSpaceShip == 0 %}
+    <div class="front-block spatial pb-5">
+        {% if usePlanet.getSpaceShip == 1 %}
             {{ form_start(form_spatialShip) }}
             <div class="block-title"><h2>{{ 'spatial.constructShip'|trans }}</h2></div>
             <table class="table table-striped table-bordered table-dark">
@@ -83,7 +83,7 @@
             {% for fleet in usePlanet.getFleets() %}
                 <tr>
                     <th class="tab-cells-name">
-                       "{{  fleet.getName() }}" <span><a class="ml-3 float-right" href="{{ path('destroy_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}"><span>{{ 'spatial.destroyFleet'|trans }}</span></a></span><span><a class="ml-3 float-right" href="{{ path('manage_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId() }) }}" data-toggle="modal" data-target="#editModal"><span>{{ 'spatial.seeFlotte'|trans }}</span></a></span>
+                       "{{  fleet.getName() }}" <span><a class="ml-3 float-right" href="{{ path('destroy_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}"><span>{{ 'spatial.destroyFleet'|trans }}</span></a></span><span><a class="ml-3 float-right" href="{{ path('manage_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId() }) }}" data-toggle="modal" data-target="#editModal"><span>{{ 'spatial.seeFlotte'|trans }}</span></a></span> <span><a class="ml-3 float-right" href="{{ path('send_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}"><span>{{ 'spatial.sendFleet'|trans }}</span></a></span>
                     </th>
                     <td class="center-cells text-center">
                         {{ fleet.getNbrShips() }}

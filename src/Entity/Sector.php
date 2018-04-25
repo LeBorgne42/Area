@@ -26,6 +26,12 @@ class Sector
     protected $planets;
 
     /**
+     * @ORM\OneToMany(targetEntity="Fleet", mappedBy="sector", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\JoinColumn(name="fleet_id", referencedColumnName="id")
+     */
+    protected $fleets;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Galaxy", inversedBy="sectors", fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(name="galaxy_id", referencedColumnName="id")
      */
@@ -73,6 +79,30 @@ class Sector
     }
 
     /**
+     * Add fleet
+     *
+     * @param \App\Entity\Fleet $fleet
+     *
+     * @return Sector
+     */
+    public function addFleet(\App\Entity\Fleet $fleet)
+    {
+        $this->fleets[] = $fleet;
+
+        return $this;
+    }
+
+    /**
+     * Remove fleet
+     *
+     * @param \App\Entity\Fleet $fleet
+     */
+    public function removeFleet(\App\Entity\Fleet $fleet)
+    {
+        $this->fleets->removeElement($fleet);
+    }
+
+    /**
      * @return mixed
      */
     public function getPosition()
@@ -115,5 +145,21 @@ class Sector
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFleets()
+    {
+        return $this->fleets;
+    }
+
+    /**
+     * @param mixed $fleets
+     */
+    public function setFleets($fleets): void
+    {
+        $this->fleets = $fleets;
     }
 }

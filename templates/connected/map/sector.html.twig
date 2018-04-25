@@ -134,16 +134,16 @@
                             "{{  fleet.getName() }}"
                         </th>
                         <td class="center-cells text-center">
-                            {{ fleet.getplanet().getName() }}
+                            {{ fleet.getplanet().getSector().getGalaxy.getPosition() }}:{{ fleet.getplanet().getSector.getPosition() }}:{{ fleet.getplanet().getPosition() }}
                         </td>
                         <td class="center-cells text-center">
-                            {{ fleet.getplanet().getSector().getGalaxy.getPosition() }}:{{ fleet.getplanet().getSector.getPosition() }}:{{ fleet.getplanet().getPosition() }}
+                            {{ fleet.getplanet().getName() }}
                         </td>
                         <td class="center-cells text-center">
                             {{ fleet.getNbrSignatures() }}
                         </td>
                         <td class="center-cells text-center">
-                            {{ fleet.getFlightTime() }}
+                            {{ fleet.getFlightTime()|date('Y/m/d H:i:s') }}
                         </td>
                     </tr>
                 {% endfor %}
@@ -186,7 +186,7 @@
                             {{ fleet.getNbrSignatures() }}
                         </td>
                         <td class="center-cells text-center">
-                            {{ fleet.getFlightTime() }}
+                            {{ fleet.getFlightTime()|date('Y/m/d H:i:s') }}
                         </td>
                     </tr>
                 {% endfor %}

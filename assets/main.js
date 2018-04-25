@@ -38,9 +38,9 @@ function setNoDecimalDisplay() {
     setInterval(function() {
         var niobium = Math.trunc($('div.bg-top span.ressource.niobium span.reload').text());
         var water =   Math.trunc($('div.bg-top span.ressource.water span.reload').text());
-        $('div.bg-top span.ressource.niobium span.reload').text(Math.trunc(niobium + ($('div.bg-top span.ressource.niobium span.takeProd').text() / 60)));
-        $('div.bg-top span.ressource.water span.reload').text(Math.trunc(water + ($('div.bg-top span.ressource.water span.takeProd').text() / 60)));
-    }, 1000);
+        $('div.bg-top span.ressource.niobium span.reload').text(Math.trunc(niobium + ($('div.bg-top span.ressource.niobium span.takeProd').text() / 300)));
+        $('div.bg-top span.ressource.water span.reload').text(Math.trunc(water + ($('div.bg-top span.ressource.water span.takeProd').text() / 300)));
+    }, 12000);
 }
 
 function manageMaxShip() {
@@ -192,8 +192,12 @@ function manageConstructTime() {
             if(secondes == 0) {
                 secondes = 60;
                 minutes = minutes - 1;
+                if(minutes = 0) {
+                    minutes = 60;
+                    heures = heures - 1;
+                }
             }
-            if((secondes == 0 && minutes == 0) && (heures == 0 && jours == 0)) {
+            if((secondes == 0 && minutes == -1)) {
                 return false;
             }
         }, 1000);
