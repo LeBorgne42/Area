@@ -2,54 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97f042ea-d0ee-4bd9-bb02-3d850e24f659" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/Building/SpaceShipyardController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/Building/SpaceShipyardController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/Research/ArmementController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/Research/ArmementController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/Research/ExplorerController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/Research/ExplorerController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/Research/MilitaryController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/Research/MilitaryController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/Research/SociologicController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/Research/SociologicController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/CronController/DailyController.php" afterPath="$PROJECT_DIR$/src/Controller/CronController/DailyController.php" />
       <change beforePath="$PROJECT_DIR$/src/Controller/Security/SecurityController.php" afterPath="$PROJECT_DIR$/src/Controller/Security/SecurityController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Security/ServerController.php" afterPath="$PROJECT_DIR$/src/Controller/Security/ServerController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Building.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Planet.php" afterPath="$PROJECT_DIR$/src/Entity/Planet.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Research.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" afterPath="$PROJECT_DIR$/src/Entity/User.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Xuilding_Caserne.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Xuilding_City.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Xuilding_Extractor.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Xuilding_HeavyUsine.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Xuilding_LightUsine.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Xuilding_Metropole.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Xuilding_Miner.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Xuilding_Radar.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Xuilding_Search.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Xuilding_SkyBrouilleur.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Xuilding_SkyRadar.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Xuilding_SpaceShipyard.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Zearch_Armement.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Zearch_Barge.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Zearch_Cargo.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Zearch_Demography.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Zearch_Discipline.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Zearch_HeavyShip.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Zearch_Hyperespace.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Zearch_Industry.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Zearch_Laser.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Zearch_LightShip.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Zearch_Missile.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Zearch_Onde.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Zearch_Plasma.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Zearch_Recycleur.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Zearch_Terraformation.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Zearch_Utility.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180425020223.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180425042541.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180425051051.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180425070944.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180425071435.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/building.html.twig" afterPath="$PROJECT_DIR$/templates/connected/building.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/search.html.twig" afterPath="$PROJECT_DIR$/templates/connected/search.html.twig" />
       <change beforePath="$PROJECT_DIR$/translations/front_building.fr.yml" afterPath="$PROJECT_DIR$/translations/front_building.fr.yml" />
       <change beforePath="$PROJECT_DIR$/translations/front_search.fr.yml" afterPath="$PROJECT_DIR$/translations/front_search.fr.yml" />
     </list>
@@ -65,34 +18,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="SecurityController.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SecurityController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Controller/Security/SecurityController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="103" column="49" lean-forward="false" selection-start-line="103" selection-start-column="49" selection-end-line="103" selection-end-column="49" />
+            <state relative-caret-position="385">
+              <caret line="101" column="21" lean-forward="true" selection-start-line="101" selection-start-column="21" selection-end-line="101" selection-end-column="21" />
               <folding>
                 <element signature="e#43#90#0#PHP" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="front_building.fr.yml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/translations/front_building.fr.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="27" column="5" lean-forward="true" selection-start-line="27" selection-start-column="5" selection-end-line="28" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="front_search.fr.yml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/translations/front_search.fr.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="28" column="4" lean-forward="false" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="4" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -227,9 +160,9 @@
         <option value="$PROJECT_DIR$/src/Controller/Connected/Research/SociologicController.php" />
         <option value="$PROJECT_DIR$/src/Controller/Connected/Building/SpaceShipyardController.php" />
         <option value="$PROJECT_DIR$/src/Entity/User.php" />
-        <option value="$PROJECT_DIR$/src/Controller/Security/SecurityController.php" />
         <option value="$PROJECT_DIR$/translations/front_building.fr.yml" />
         <option value="$PROJECT_DIR$/translations/front_search.fr.yml" />
+        <option value="$PROJECT_DIR$/src/Controller/Security/SecurityController.php" />
       </list>
     </option>
   </component>
@@ -494,12 +427,12 @@
       <workItem from="1524222255619" duration="90792000" />
       <workItem from="1524516912557" duration="15994000" />
       <workItem from="1524575662051" duration="23504000" />
-      <workItem from="1524613328008" duration="30415000" />
+      <workItem from="1524613328008" duration="30477000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="485944000" />
+    <option name="totallyTimeSpent" value="486006000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -958,29 +891,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Security/SecurityController.php">
+    <entry file="file://$PROJECT_DIR$/translations/front_search.fr.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="103" column="49" lean-forward="false" selection-start-line="103" selection-start-column="49" selection-end-line="103" selection-end-column="49" />
-          <folding>
-            <element signature="e#43#90#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="435">
+          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/translations/front_building.fr.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
-          <caret line="27" column="5" lean-forward="true" selection-start-line="27" selection-start-column="5" selection-end-line="28" selection-end-column="4" />
+          <caret line="27" column="5" lean-forward="false" selection-start-line="27" selection-start-column="5" selection-end-line="28" selection-end-column="4" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/translations/front_search.fr.yml">
+    <entry file="file://$PROJECT_DIR$/src/Controller/Security/SecurityController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="4" lean-forward="false" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="4" />
-          <folding />
+        <state relative-caret-position="385">
+          <caret line="101" column="21" lean-forward="true" selection-start-line="101" selection-start-column="21" selection-end-line="101" selection-end-column="21" />
+          <folding>
+            <element signature="e#43#90#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

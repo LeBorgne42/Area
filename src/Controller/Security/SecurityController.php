@@ -94,16 +94,18 @@ class SecurityController extends Controller
 
             $mailer->send($message);
 
-            $token = new UsernamePasswordToken(
+
+            return $this->redirectToRoute('login');
+
+            /* $token = new UsernamePasswordToken(
                 $user->getUsername(),
                 null,
                 'my_entity_user_provider',
                 $user->getRoles()
             );
 
-            return $this->redirectToRoute('login');
 
-           /* $this->get('security.token_storage')->setToken($token);
+           $this->get('security.token_storage')->setToken($token);
             $request->getSession()->set('_security_main', serialize($token));
 
             $event = new InteractiveLoginEvent($request, $token);
