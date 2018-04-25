@@ -35,7 +35,7 @@ class SpatialController extends Controller
         $form_spatialShip = $this->createForm(SpatialShipType::class);
         $form_spatialShip->handleRequest($request);
 
-        if($usePlanet->getBuilding()->getSpaceShip()) {
+        if($usePlanet->getSpaceShip()) {
         } else {
             return $this->render('connected/spatial.html.twig', [
                 'usePlanet' => $usePlanet,
@@ -96,7 +96,7 @@ class SpatialController extends Controller
         $form_createFleet = $this->createForm(SpatialFleetType::class);
         $form_createFleet->handleRequest($request);
 
-        if($usePlanet->getBuilding()->getSpaceShip()) {
+        if($usePlanet->getSpaceShip()) {
         } else {
             return $this->render('connected/fleet/create.html.twig', [
                 'usePlanet' => $usePlanet,

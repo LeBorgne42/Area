@@ -36,12 +36,12 @@
     <div class="btn-left">
         <a href="{{ path('building', {'idp': usePlanet.getId()}) }}"><span>{{ 'building'|trans }}</span></a>
     </div>
-    {% if usePlanet.getBuilding().getSpaceShip().getLevel() == 0 %}
+    {% if usePlanet.getSpaceShip() == 0 %}
         <div class="btn-left">
             <a href="{{ path('spatial', {'idp': usePlanet.getId()}) }}"><span>{{ 'spatial'|trans }}</span></a>
         </div>
     {% endif %}
-    {% if usePlanet.getBuilding().getCaserne().getLevel() == 0 %}
+    {% if usePlanet.getCaserne() == 0 %}
         <div class="btn-left">
             <a href="{{ path('soldier', {'idp': usePlanet.getId()}) }}"><span class="text-jaune">{{ 'soldier'|trans }}</span></a>
         </div>

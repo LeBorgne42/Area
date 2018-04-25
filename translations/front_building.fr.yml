@@ -25,3 +25,4 @@ groundImg: Terrain
 skyImg: Espace
 building.canBe: 'x 0'
 building.Activated: Construit
+'': 0

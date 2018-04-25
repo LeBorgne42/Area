@@ -92,6 +92,11 @@ class User implements UserInterface, \Serializable
     protected $bitcoin = 50000;
 
     /**
+     * @ORM\Column(name="scientistProduction",type="decimal", precision=28, scale=5)
+     */
+    protected $scientistProduction = 1;
+
+    /**
      * @ORM\Column(name="created_at",type="datetime")
      */
     protected $createdAt;
@@ -581,6 +586,22 @@ class User implements UserInterface, \Serializable
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getScientistProduction()
+    {
+        return $this->scientistProduction;
+    }
+
+    /**
+     * @param mixed $scientistProduction
+     */
+    public function setScientistProduction($scientistProduction): void
+    {
+        $this->scientistProduction = $scientistProduction;
     }
 
 //    /**

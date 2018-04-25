@@ -12,24 +12,24 @@
             <tbody>
             <tr>
                 <td class="center-cells">
-                    <img class="float-left building-img ml-3" src="{{ asset('img/mining.png') }}">{{ 'building.mining'|trans }} x {{ usePlanet.getBuilding().getMiner().getLevel() }}
-                    <div class="mt-4">{{ usePlanet.getBuilding().getMiner().getNiobium() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ usePlanet.getBuilding().getMiner().getWater() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
-                    <div class="mt-4">{{ usePlanet.getBuilding().getMiner().getGround() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"></div>
+                    <img class="float-left building-img ml-3" src="{{ asset('img/mining.png') }}">{{ 'building.mining'|trans }} x {{ usePlanet.getMiner()|trans }}
+                    <div class="mt-4">{{ (usePlanet.getMiner() + 1) * 300 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ (usePlanet.getMiner() + 1) * 100 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
+                    <div class="mt-4">1 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"></div>
                 </td>
                 <td class="center-cells  p-4">
-                    {% if usePlanet.getBuilding().getMiner().getFinishAt() > date %}
-                        <div id="timeConstruct" hidden>{{ usePlanet.getBuilding().getMiner().getFinishAt()|date('Y/m/d H:m:s') }}</div>
+                    {% if usePlanet.getConstruct() == 'miner' %}
+                        <div id="timeConstruct" hidden>{{ usePlanet.getConstructAt()|date('Y/m/d H:m:s') }}</div>
                         <div id="timeDisplay" class="mt-5"></div>
                     {% else %}
-                        {% if usePlanet.getNiobium() >= usePlanet.getBuilding().getMiner().getNiobium() and usePlanet.getWater() >= usePlanet.getBuilding().getMiner().getWater() and usePlanet.getGroundPlace() + usePlanet.getBuilding().getMiner().getGround() <= usePlanet.getGround() and usePlanet.getBuilding().getConstruct() < date %}
-                                <a class="btn btn-lg btn-info mt-5" href="{{ path('building_add_mine', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
+                        {% if usePlanet.getNiobium() >= ((usePlanet.getMiner() + 1) * 300) and usePlanet.getWater() >= ((usePlanet.getMiner() + 1) * 100) and usePlanet.getGroundPlace() + 1 <= usePlanet.getGround() and usePlanet.getConstructAt() < date %}
+                            <a class="btn btn-lg btn-info mt-5" href="{{ path('building_add_mine', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
                         {% else %}
                             <a class="btn btn-lg btn-info mt-5" disabled>{{ 'building.build'|trans }}</a>
                         {% endif %}
                     {% endif %}
                 </td>
                 <td class="center-cells p-4">
-                    {% if usePlanet.getBuilding().getMiner().getLevel() > 1 %}
+                    {% if usePlanet.getMiner() > 1 %}
                         <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_mine', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
@@ -38,16 +38,16 @@
             </tr>
             <tr>
                 <td class="center-cells">
-                    <img class="float-left building-img ml-3" src="{{ asset('img/extract.png') }}">{{ 'building.extract'|trans }} x {{ usePlanet.getBuilding().getExtractor().getLevel() }}
-                    <div class="mt-4">{{ usePlanet.getBuilding().getExtractor().getNiobium() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ usePlanet.getBuilding().getExtractor().getWater() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
-                    <div class="mt-4">{{ usePlanet.getBuilding().getExtractor().getGround() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"></div>
+                    <img class="float-left building-img ml-3" src="{{ asset('img/extract.png') }}">{{ 'building.extract'|trans }} x {{ usePlanet.getExtractor()|trans }}
+                    <div class="mt-4">{{ (usePlanet.getExtractor() + 1) * 100 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ (usePlanet.getExtractor() + 1) * 300 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
+                    <div class="mt-4">1 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"></div>
                 </td>
                 <td class="center-cells p-4">
-                    {% if usePlanet.getBuilding().getExtractor().getFinishAt() > date %}
-                        <div id="timeConstruct" hidden>{{ usePlanet.getBuilding().getExtractor().getFinishAt()|date('Y/m/d H:m:s') }}</div>
+                    {% if usePlanet.getConstruct() == 'extractor' %}
+                        <div id="timeConstruct" hidden>{{ usePlanet.getConstructAt()|date('Y/m/d H:m:s') }}</div>
                         <div id="timeDisplay" class="mt-5"></div>
                     {% else %}
-                        {% if usePlanet.getNiobium() >= usePlanet.getBuilding().getExtractor().getNiobium() and usePlanet.getWater() >= usePlanet.getBuilding().getExtractor().getWater() and usePlanet.getGroundPlace() + usePlanet.getBuilding().getExtractor().getGround() <= usePlanet.getGround() and usePlanet.getBuilding().getConstruct() < date %}
+                        {% if usePlanet.getNiobium() >= ((usePlanet.getExtractor() + 1) * 100) and usePlanet.getWater() >= ((usePlanet.getExtractor() + 1) * 300) and usePlanet.getGroundPlace() + 1 <= usePlanet.getGround() and usePlanet.getConstructAt() < date %}
                         <a class="btn btn-lg btn-info mt-5" href="{{ path('building_add_extract', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
                         {% else %}
                             <a class="btn btn-lg btn-info mt-5" disabled>{{ 'building.build'|trans }}</a>
@@ -55,7 +55,7 @@
                     {% endif %}
                 </td>
                 <td class="center-cells p-4">
-                    {% if usePlanet.getBuilding().getExtractor().getLevel() > 1 %}
+                    {% if usePlanet.getExtractor() > 1 %}
                     <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_extract', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
@@ -69,16 +69,16 @@
             <tbody>
             <tr>
                 <td class="center-cells">
-                    <img class="float-left building-img ml-3" src="{{ asset('img/search.png') }}">{{ 'building.search'|trans }} x {{ usePlanet.getBuilding().getBuildSearch().getLevel() }}
-                    <div class="mt-4">{{ usePlanet.getBuilding().getBuildSearch().getNiobium() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ usePlanet.getBuilding().getBuildSearch().getWater() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
-                    <div class="mt-4">{{ usePlanet.getBuilding().getBuildSearch().getGround() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"></div>
+                    <img class="float-left building-img ml-3" src="{{ asset('img/search.png') }}">{{ 'building.search'|trans }} x {{ usePlanet.getCenterSearch()|trans }}
+                    <div class="mt-4">{{ (usePlanet.getCenterSearch() + 1) * 2850 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ (usePlanet.getCenterSearch() + 1) * 3580 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
+                    <div class="mt-4">5 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"></div>
                 </td>
                 <td class="center-cells  p-4">
-                    {% if usePlanet.getBuilding().getBuildSearch().getFinishAt() > date %}
-                        <div id="timeConstruct" hidden>{{ usePlanet.getBuilding().getBuildSearch().getFinishAt()|date('Y/m/d H:m:s') }}</div>
+                    {% if usePlanet.getConstruct() == 'centerSearch' %}
+                        <div id="timeConstruct" hidden>{{ usePlanet.getConstructAt()|date('Y/m/d H:m:s') }}</div>
                         <div id="timeDisplay" class="mt-5"></div>
                     {% else %}
-                        {% if usePlanet.getNiobium() >= usePlanet.getBuilding().getBuildSearch().getNiobium() and usePlanet.getWater() >= usePlanet.getBuilding().getBuildSearch().getWater() and usePlanet.getGroundPlace() + usePlanet.getBuilding().getBuildSearch().getGround() <= usePlanet.getGround() and usePlanet.getBuilding().getConstruct() < date %}
+                        {% if usePlanet.getNiobium() >= ((usePlanet.getCenterSearch() + 1) * 2850) and usePlanet.getWater() >= ((usePlanet.getCenterSearch() + 1) * 3580) and usePlanet.getGroundPlace() + 5 <= usePlanet.getGround() and usePlanet.getConstructAt() < date %}
                             <a class="btn btn-lg btn-info mt-5" href="{{ path('building_add_search', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
                         {% else %}
                             <a class="btn btn-lg btn-info mt-5" disabled>{{ 'building.build'|trans }}</a>
@@ -86,7 +86,7 @@
                     {% endif %}
                 </td>
                 <td class="center-cells p-4">
-                    {% if usePlanet.getBuilding().getBuildSearch().getLevel() > 0 %}
+                    {% if usePlanet.getCenterSearch() > 0 %}
                         <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_search', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
@@ -95,16 +95,16 @@
             </tr>
             <tr>
                 <td class="center-cells">
-                    <img class="float-left building-img ml-3" src="{{ asset('img/city.png') }}">{{ 'building.city'|trans }} x {{ usePlanet.getBuilding().getCity().getLevel() }}
-                    <div class="mt-4">{{ usePlanet.getBuilding().getCity().getNiobium() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ usePlanet.getBuilding().getCity().getWater() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
-                    <div class="mt-4">{{ usePlanet.getBuilding().getCity().getGround() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"></div>
+                    <img class="float-left building-img ml-3" src="{{ asset('img/city.png') }}">{{ 'building.city'|trans }} x {{ usePlanet.getCity()|trans }}
+                    <div class="mt-4">{{ (usePlanet.getCity() + 1) * 15000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ (usePlanet.getCity() + 1) * 11000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
+                    <div class="mt-4">6 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"></div>
                 </td>
                 <td class="center-cells  p-4">
-                    {% if usePlanet.getBuilding().getCity().getFinishAt() > date %}
-                        <div id="timeConstruct" hidden>{{ usePlanet.getBuilding().getCity().getFinishAt()|date('Y/m/d H:m:s') }}</div>
+                    {% if usePlanet.getConstruct() == 'city' %}
+                        <div id="timeConstruct" hidden>{{ usePlanet.getConstructAt()|date('Y/m/d H:m:s') }}</div>
                         <div id="timeDisplay" class="mt-5"></div>
                     {% else %}
-                        {% if usePlanet.getNiobium() >= usePlanet.getBuilding().getCity().getNiobium() and usePlanet.getWater() >= usePlanet.getBuilding().getCity().getWater() and usePlanet.getGroundPlace() + usePlanet.getBuilding().getCity().getGround() <= usePlanet.getGround() and app.user.getResearch().getDemography().getLevel() > 0 and usePlanet.getBuilding().getConstruct() < date %}
+                        {% if usePlanet.getNiobium() >= ((usePlanet.getCity() + 1) * 15000) and usePlanet.getWater() >= ((usePlanet.getCity() + 1) * 11000) and usePlanet.getGroundPlace() + 6 <= usePlanet.getGround() and app.user.getResearch().getDemography().getLevel() > 0 and usePlanet.getConstructAt() < date %}
                             <a class="btn btn-lg btn-info mt-5" href="{{ path('building_add_city', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
                         {% else %}
                             <a class="btn btn-lg btn-info mt-5" disabled>{{ 'building.build'|trans }}</a>
@@ -112,7 +112,7 @@
                     {% endif %}
                 </td>
                 <td class="center-cells p-4">
-                    {% if usePlanet.getBuilding().getCity().getLevel() > 0 %}
+                    {% if usePlanet.getCity() > 0 %}
                         <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_city', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
@@ -121,16 +121,16 @@
             </tr>
             <tr>
                 <td class="center-cells">
-                    <img class="float-left building-img ml-3" src="{{ asset('img/metropole.png') }}">{{ 'building.metropole'|trans }} x {{ usePlanet.getBuilding().getMetropole().getLevel() }}
-                    <div class="mt-4">{{ usePlanet.getBuilding().getMetropole().getNiobium() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ usePlanet.getBuilding().getMetropole().getWater() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
-                    <div class="mt-4">{{ usePlanet.getBuilding().getMetropole().getGround() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"><span class="ml-4">{{ usePlanet.getBuilding().getMetropole().getSky() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'skyImg'|trans }}" src="{{ asset('img/sky.png') }}"></span></div>
+                    <img class="float-left building-img ml-3" src="{{ asset('img/metropole.png') }}">{{ 'building.metropole'|trans }} x {{ usePlanet.getMetropole()|trans }}
+                    <div class="mt-4">{{ (usePlanet.getMetropole() + 1) * 750000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ (usePlanet.getMetropole() + 1) * 55000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
+                    <div class="mt-4">8 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"><span class="ml-4">8 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'skyImg'|trans }}" src="{{ asset('img/sky.png') }}"></span></div>
                 </td>
                 <td class="center-cells p-4">
-                    {% if usePlanet.getBuilding().getMetropole().getFinishAt() > date %}
-                        <div id="timeConstruct" hidden>{{ usePlanet.getBuilding().getMetropole().getFinishAt()|date('Y/m/d H:m:s') }}</div>
+                    {% if usePlanet.getConstruct() == 'metropole' %}
+                        <div id="timeConstruct" hidden>{{ usePlanet.getConstructAt()|date('Y/m/d H:m:s') }}</div>
                         <div id="timeDisplay" class="mt-5"></div>
                     {% else %}
-                        {% if usePlanet.getNiobium() >= usePlanet.getBuilding().getMetropole().getNiobium() and usePlanet.getWater() >= usePlanet.getBuilding().getMetropole().getWater() and usePlanet.getGroundPlace() + usePlanet.getBuilding().getMetropole().getGround() <= usePlanet.getGround() and app.user.getResearch().getDemography().getLevel() == 5 and usePlanet.getBuilding().getConstruct() < date %}
+                        {% if usePlanet.getNiobium() >= ((usePlanet.getMetropole() + 1) * 750000) and usePlanet.getWater() >= ((usePlanet.getMetropole() + 1) * 55000) and usePlanet.getGroundPlace() + 8 <= usePlanet.getGround() and usePlanet.getSkyPlace() + 8 <= usePlanet.getSky() and app.user.getResearch().getDemography().getLevel() == 5 and usePlanet.getConstructAt() < date %}
                             <a class="btn btn-lg btn-info mt-5" href="{{ path('building_add_metropole', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
                         {% else %}
                             <a class="btn btn-lg btn-info mt-5" disabled>{{ 'building.build'|trans }}</a>
@@ -138,7 +138,7 @@
                     {% endif %}
                 </td>
                 <td class="center-cells p-4">
-                    {% if usePlanet.getBuilding().getMetropole().getLevel() > 0 %}
+                    {% if usePlanet.getMetropole() > 0 %}
                         <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_metropole', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
@@ -152,16 +152,16 @@
             <tbody>
             <tr>
                 <td class="center-cells">
-                    <img class="float-left building-img ml-3" src="{{ asset('img/caserne.png') }}">{{ 'building.caserne'|trans }} x {{ usePlanet.getBuilding().getCaserne().getLevel() }}
-                    <div class="mt-4">{{ usePlanet.getBuilding().getCaserne().getNiobium() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ usePlanet.getBuilding().getCaserne().getWater() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
-                    <div class="mt-4">{{ usePlanet.getBuilding().getCaserne().getGround() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"></div>
+                    <img class="float-left building-img ml-3" src="{{ asset('img/caserne.png') }}">{{ 'building.caserne'|trans }} x {{ usePlanet.getCaserne()|trans }}
+                    <div class="mt-4">{{ (usePlanet.getCaserne() + 1) * 5000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ (usePlanet.getCaserne() + 1) * 750 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
+                    <div class="mt-4">6 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"></div>
                 </td>
                 <td class="center-cells  p-4">
-                    {% if usePlanet.getBuilding().getCaserne().getFinishAt() > date %}
-                        <div id="timeConstruct" hidden>{{ usePlanet.getBuilding().getCaserne().getFinishAt()|date('Y/m/d H:m:s') }}</div>
+                    {% if usePlanet.getConstruct() == 'caserne' %}
+                        <div id="timeConstruct" hidden>{{ usePlanet.getConstructAt()|date('Y/m/d H:m:s') }}</div>
                         <div id="timeDisplay" class="mt-5"></div>
                     {% else %}
-                        {% if usePlanet.getNiobium() >= usePlanet.getBuilding().getCaserne().getNiobium() and usePlanet.getWater() >= usePlanet.getBuilding().getCaserne().getWater() and usePlanet.getGroundPlace() + usePlanet.getBuilding().getCaserne().getGround() <= usePlanet.getGround() and app.user.getResearch().getDiscipline().getLevel() == 3 and usePlanet.getBuilding().getConstruct() < date %}
+                        {% if usePlanet.getNiobium() >= ((usePlanet.getCaserne() + 1) * 5000) and usePlanet.getWater() >= ((usePlanet.getCaserne() + 1) * 750) and usePlanet.getGroundPlace() + 6 <= usePlanet.getGround() and app.user.getResearch().getDiscipline().getLevel() == 3 and usePlanet.getConstructAt() < date %}
                             <a class="btn btn-lg btn-info mt-5" href="{{ path('building_add_caserne', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
                         {% else %}
                             <a class="btn btn-lg btn-info mt-5" disabled>{{ 'building.build'|trans }}</a>
@@ -169,7 +169,7 @@
                     {% endif %}
                 </td>
                 <td class="center-cells p-4">
-                    {% if usePlanet.getBuilding().getCaserne().getLevel() > 0 %}
+                    {% if usePlanet.getCaserne() > 0 %}
                         <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_caserne', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
@@ -178,16 +178,16 @@
             </tr>
             <tr>
                 <td class="center-cells">
-                    <img class="float-left building-img ml-3" src="{{ asset('img/chantier.png') }}">{{ 'building.chantier'|trans }} x {{ usePlanet.getBuilding().getSpaceShip().getLevel() }}
-                    <div class="mt-4">{{ usePlanet.getBuilding().getSpaceShip().getNiobium() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ usePlanet.getBuilding().getSpaceShip().getWater() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
-                    <div class="mt-4">{{ usePlanet.getBuilding().getSpaceShip().getGround() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"><span class="ml-4">{{ usePlanet.getBuilding().getSpaceShip().getSky() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'skyImg'|trans }}" src="{{ asset('img/sky.png') }}"></span></div>
+                    <img class="float-left building-img ml-3" src="{{ asset('img/chantier.png') }}">{{ 'building.chantier'|trans }} x {{ usePlanet.getSpaceShip()|trans }}
+                    <div class="mt-4">{{ (usePlanet.getSpaceShip() + 1) * 3000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ (usePlanet.getSpaceShip() + 1) * 2000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
+                    <div class="mt-4">10 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"><span class="ml-4">4 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'skyImg'|trans }}" src="{{ asset('img/sky.png') }}"></span></div>
                 </td>
                 <td class="center-cells  p-4">
-                    {% if usePlanet.getBuilding().getSpaceShip().getFinishAt() > date %}
-                        <div id="timeConstruct" hidden>{{ usePlanet.getBuilding().getSpaceShip().getFinishAt()|date('Y/m/d H:m:s') }}</div>
+                    {% if usePlanet.getConstruct() == 'spaceShip' %}
+                        <div id="timeConstruct" hidden>{{ usePlanet.getConstructAt()|date('Y/m/d H:m:s') }}</div>
                         <div id="timeDisplay" class="mt-5"></div>
                     {% else %}
-                        {% if usePlanet.getNiobium() >= usePlanet.getBuilding().getSpaceShip().getNiobium() and usePlanet.getWater() >= usePlanet.getBuilding().getSpaceShip().getWater() and usePlanet.getGroundPlace() + usePlanet.getBuilding().getSpaceShip().getGround() <= usePlanet.getGround() and app.user.getResearch().getIndustry().getLevel() > 0 and usePlanet.getBuilding().getConstruct() < date %}
+                        {% if usePlanet.getNiobium() >= ((usePlanet.getSpaceShip() + 1) * 3000) and usePlanet.getWater() >= ((usePlanet.getSpaceShip() + 1) * 2000) and usePlanet.getGroundPlace() + 10 <= usePlanet.getGround() and usePlanet.getSkyPlace() + 4 <= usePlanet.getSky() and app.user.getResearch().getIndustry().getLevel() > 0 and usePlanet.getConstructAt() < date %}
                             <a class="btn btn-lg btn-info mt-5" href="{{ path('building_add_spaceShipyard', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
                         {% else %}
                             <a class="btn btn-lg btn-info mt-5" disabled>{{ 'building.build'|trans }}</a>
@@ -195,7 +195,7 @@
                     {% endif %}
                 </td>
                 <td class="center-cells p-4">
-                    {% if usePlanet.getBuilding().getSpaceShip().getLevel() > 0 %}
+                    {% if usePlanet.getSpaceShip() > 0 %}
                         <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_spaceShipyard', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
@@ -204,16 +204,16 @@
             </tr>
             <tr>
                 <td class="center-cells">
-                    <img class="float-left building-img ml-3" src="{{ asset('img/light.png') }}">{{ 'building.light'|trans }} {% if usePlanet.getBuilding().getLightUsine().getLevel() == false %}{{ 'building.canBe'|trans }}{% else %}{{ 'building.Activated'|trans }}{% endif %}
-                    <div class="mt-4">{{ usePlanet.getBuilding().getLightUsine().getNiobium() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ usePlanet.getBuilding().getLightUsine().getWater() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
-                    <div class="mt-4">{{ usePlanet.getBuilding().getLightUsine().getGround() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"></div>
+                    <img class="float-left building-img ml-3" src="{{ asset('img/light.png') }}">{{ 'building.light'|trans }} {% if usePlanet.getLightUsine() == 0 %}{{ 'building.canBe'|trans }}{% else %}{{ 'building.Activated'|trans }}{% endif %}
+                    <div class="mt-4">{{ (usePlanet.getLightUsine() + 1) * 7000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ (usePlanet.getLightUsine() + 1) * 3900 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
+                    <div class="mt-4">6 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"></div>
                 </td>
                 <td class="center-cells  p-4">
-                    {% if usePlanet.getBuilding().getLightUsine().getFinishAt() > date %}
-                        <div id="timeConstruct" hidden>{{ usePlanet.getBuilding().getLightUsine().getFinishAt()|date('Y/m/d H:m:s') }}</div>
+                    {% if usePlanet.getConstruct() == 'lightUsine' %}
+                        <div id="timeConstruct" hidden>{{ usePlanet.getConstructAt()|date('Y/m/d H:m:s') }}</div>
                         <div id="timeDisplay" class="mt-5"></div>
                     {% else %}
-                        {% if usePlanet.getNiobium() >= usePlanet.getBuilding().getLightUsine().getNiobium() and usePlanet.getWater() >= usePlanet.getBuilding().getLightUsine().getWater() and usePlanet.getGroundPlace() + usePlanet.getBuilding().getLightUsine().getGround() <= usePlanet.getGround() and usePlanet.getBuilding().getLightUsine().getLevel() != 1 and app.user.getResearch().getLightShip().getLevel() > 0 and usePlanet.getBuilding().getConstruct() < date %}
+                        {% if usePlanet.getNiobium() >= ((usePlanet.getLightUsine() + 1) * 7000) and usePlanet.getWater() >= ((usePlanet.getLightUsine() + 1) * 3900) and usePlanet.getGroundPlace() + 6 <= usePlanet.getGround() and usePlanet.getLightUsine().getLevel() != 1 and app.user.getResearch().getLightShip().getLevel() > 0 and usePlanet.getConstructAt() < date %}
                             <a class="btn btn-lg btn-info mt-5" href="{{ path('building_add_lightUsine', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
                         {% else %}
                             <a class="btn btn-lg btn-info mt-5" disabled>{{ 'building.build'|trans }}</a>
@@ -221,7 +221,7 @@
                     {% endif %}
                 </td>
                 <td class="center-cells p-4">
-                    {% if usePlanet.getBuilding().getLightUsine().getLevel() > 0 %}
+                    {% if usePlanet.getLightUsine() > 0 %}
                         <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_lightUsine', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
@@ -230,16 +230,16 @@
             </tr>
             <tr>
                 <td class="center-cells">
-                    <img class="float-left building-img ml-3" src="{{ asset('img/heavy.png') }}">{{ 'building.heavy'|trans }} {% if usePlanet.getBuilding().getHeavyUsine().getLevel() == false %}{{ 'building.canBe'|trans }}{% else %}{{ 'building.Activated'|trans }}{% endif %}
-                    <div class="mt-4">{{ usePlanet.getBuilding().getHeavyUsine().getNiobium() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ usePlanet.getBuilding().getHeavyUsine().getWater() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
-                    <div class="mt-4">{{ usePlanet.getBuilding().getHeavyUsine().getGround() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"></div>
+                    <img class="float-left building-img ml-3" src="{{ asset('img/heavy.png') }}">{{ 'building.heavy'|trans }} {% if usePlanet.getHeavyUsine() == 0 %}{{ 'building.canBe'|trans }}{% else %}{{ 'building.Activated'|trans }}{% endif %}
+                    <div class="mt-4">{{ (usePlanet.getHeavyUsine() + 1) * 83000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ (usePlanet.getHeavyUsine() + 1) * 68000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
+                    <div class="mt-4">12 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"></div>
                 </td>
                 <td class="center-cells p-4">
-                    {% if usePlanet.getBuilding().getHeavyUsine().getFinishAt() > date %}
-                        <div id="timeConstruct" hidden>{{ usePlanet.getBuilding().getHeavyUsine().getFinishAt()|date('Y/m/d H:m:s') }}</div>
+                    {% if usePlanet.getConstruct() == 'heavyUsine' %}
+                        <div id="timeConstruct" hidden>{{ usePlanet.getConstructAt()|date('Y/m/d H:m:s') }}</div>
                         <div id="timeDisplay" class="mt-5"></div>
                     {% else %}
-                        {% if usePlanet.getNiobium() >= usePlanet.getBuilding().getHeavyUsine().getNiobium() and usePlanet.getWater() >= usePlanet.getBuilding().getHeavyUsine().getWater() and usePlanet.getGroundPlace() + usePlanet.getBuilding().getHeavyUsine().getGround() <= usePlanet.getGround() and usePlanet.getBuilding().getHeavyUsine().getLevel() != 1 and app.user.getResearch().getHeavyShip().getLevel() > 0 and usePlanet.getBuilding().getConstruct() < date %}
+                        {% if usePlanet.getNiobium() >= ((usePlanet.getHeavyUsine() + 1) * 83000) and usePlanet.getWater() >= ((usePlanet.getHeavyUsine() + 1) * 68000) and usePlanet.getGroundPlace() + 12 <= usePlanet.getGround() and usePlanet.getHeavyUsine().getLevel() != 1 and app.user.getResearch().getHeavyShip().getLevel() > 0 and usePlanet.getConstructAt() < date %}
                             <a class="btn btn-lg btn-info mt-5" href="{{ path('building_add_heavyUsine', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
                         {% else %}
                             <a class="btn btn-lg btn-info mt-5" disabled>{{ 'building.build'|trans }}</a>
@@ -247,7 +247,7 @@
                     {% endif %}
                 </td>
                 <td class="center-cells p-4">
-                    {% if usePlanet.getBuilding().getHeavyUsine().getLevel() > 0 %}
+                    {% if usePlanet.getHeavyUsine() > 0 %}
                         <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_heavyUsine', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
@@ -261,16 +261,16 @@
             <tbody>
             <tr>
                 <td class="center-cells">
-                    <img class="float-left building-img ml-3" src="{{ asset('img/radar.png') }}">{{ 'building.radar'|trans }} x {{ usePlanet.getBuilding().getRadar().getLevel() }}
-                    <div class="mt-4">{{ usePlanet.getBuilding().getRadar().getNiobium() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ usePlanet.getBuilding().getRadar().getWater() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
-                    <div class="mt-4">{{ usePlanet.getBuilding().getRadar().getGround() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"></div>
+                    <img class="float-left building-img ml-3" src="{{ asset('img/radar.png') }}">{{ 'building.radar'|trans }} x {{ usePlanet.getRadar()|trans }}
+                    <div class="mt-4">{{ (usePlanet.getRadar() + 1) * 1200 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ (usePlanet.getRadar() + 1) * 650 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
+                    <div class="mt-4">2 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"></div>
                 </td>
                 <td class="center-cells  p-4">
-                    {% if usePlanet.getBuilding().getRadar().getFinishAt() > date %}
-                        <div id="timeConstruct" hidden>{{ usePlanet.getBuilding().getRadar().getFinishAt()|date('Y/m/d H:m:s') }}</div>
+                    {% if usePlanet.getConstruct() == 'radar' %}
+                        <div id="timeConstruct" hidden>{{ usePlanet.getConstructAt()|date('Y/m/d H:m:s') }}</div>
                         <div id="timeDisplay" class="mt-5"></div>
                     {% else %}
-                        {% if usePlanet.getNiobium() >= usePlanet.getBuilding().getRadar().getNiobium() and usePlanet.getWater() >= usePlanet.getBuilding().getRadar().getWater() and usePlanet.getGroundPlace() + usePlanet.getBuilding().getRadar().getGround() <= usePlanet.getGround() and app.user.getResearch().getOnde().getLevel() > 0 and usePlanet.getBuilding().getConstruct() < date %}
+                        {% if usePlanet.getNiobium() >= ((usePlanet.getRadar() + 1) * 1200) and usePlanet.getWater() >= ((usePlanet.getRadar() + 1) * 650) and usePlanet.getGroundPlace() + 2 <= usePlanet.getGround() and app.user.getResearch().getOnde().getLevel() > 0 and usePlanet.getConstructAt() < date %}
                             <a class="btn btn-lg btn-info mt-5" href="{{ path('building_add_radar', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
                         {% else %}
                             <a class="btn btn-lg btn-info mt-5" disabled>{{ 'building.build'|trans }}</a>
@@ -278,7 +278,7 @@
                     {% endif %}
                 </td>
                 <td class="center-cells p-4">
-                    {% if usePlanet.getBuilding().getRadar().getLevel() > 0 %}
+                    {% if usePlanet.getRadar() > 0 %}
                         <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_radar', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
@@ -287,16 +287,16 @@
             </tr>
             <tr>
                 <td class="center-cells">
-                    <img class="float-left building-img ml-3" src="{{ asset('img/skyRadar.png') }}">{{ 'building.skyRadar'|trans }} x {{ usePlanet.getBuilding().getSkyRadar().getLevel() }}
-                    <div class="mt-4">{{ usePlanet.getBuilding().getSkyRadar().getNiobium() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ usePlanet.getBuilding().getSkyRadar().getWater() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
-                    <div class="mt-4">{{ usePlanet.getBuilding().getSkyRadar().getSky() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'skyImg'|trans }}" src="{{ asset('img/sky.png') }}"></div>
+                    <img class="float-left building-img ml-3" src="{{ asset('img/skyRadar.png') }}">{{ 'building.skyRadar'|trans }} x {{ usePlanet.getSkyRadar()|trans }}
+                    <div class="mt-4">{{ (usePlanet.getSkyRadar() + 1) * 20000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ (usePlanet.getSkyRadar() + 1) * 17200 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
+                    <div class="mt-4">2 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'skyImg'|trans }}" src="{{ asset('img/sky.png') }}"></div>
                 </td>
                 <td class="center-cells p-4">
-                    {% if usePlanet.getBuilding().getSkyRadar().getFinishAt() > date %}
-                        <div id="timeConstruct" hidden>{{ usePlanet.getBuilding().getSkyRadar().getFinishAt()|date('Y/m/d H:m:s') }}</div>
+                    {% if usePlanet.getConstruct() == 'skyRadar' %}
+                        <div id="timeConstruct" hidden>{{ usePlanet.getConstructAt()|date('Y/m/d H:m:s') }}</div>
                         <div id="timeDisplay" class="mt-5"></div>
                     {% else %}
-                        {% if usePlanet.getNiobium() >= usePlanet.getBuilding().getSkyRadar().getNiobium() and usePlanet.getWater() >= usePlanet.getBuilding().getSkyRadar().getWater() and usePlanet.getSkyPlace() + usePlanet.getBuilding().getSkyRadar().getSky() <= usePlanet.getSky() and app.user.getResearch().getOnde().getLevel() > 2 and usePlanet.getBuilding().getConstruct() < date %}
+                        {% if usePlanet.getNiobium() >= ((usePlanet.getSkyRadar() + 1) * 20000) and usePlanet.getWater() >= ((usePlanet.getSkyRadar() + 1) * 17200) and usePlanet.getSkyPlace() + 2 <= usePlanet.getSky() and app.user.getResearch().getOnde().getLevel() > 2 and usePlanet.getConstructAt() < date %}
                             <a class="btn btn-lg btn-info mt-5" href="{{ path('building_add_skyRadar', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
                         {% else %}
                             <a class="btn btn-lg btn-info mt-5" disabled>{{ 'building.build'|trans }}</a>
@@ -304,7 +304,7 @@
                     {% endif %}
                 </td>
                 <td class="center-cells p-4">
-                    {% if usePlanet.getBuilding().getSkyRadar().getLevel() > 0 %}
+                    {% if usePlanet.getSkyRadar() > 0 %}
                         <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_skyRadar', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
@@ -313,16 +313,16 @@
             </tr>
             <tr>
                 <td class="center-cells">
-                    <img class="float-left building-img ml-3" src="{{ asset('img/brouilleur.png') }}">{{ 'building.brouilleur'|trans }} x {{ usePlanet.getBuilding().getSkyBrouilleur().getLevel() }}
-                    <div class="mt-4">{{ usePlanet.getBuilding().getSkyBrouilleur().getNiobium() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ usePlanet.getBuilding().getSkyBrouilleur().getWater() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
-                    <div class="mt-4">{{ usePlanet.getBuilding().getSkyBrouilleur().getSky() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'skyImg'|trans }}" src="{{ asset('img/sky.png') }}"></div>
+                    <img class="float-left building-img ml-3" src="{{ asset('img/brouilleur.png') }}">{{ 'building.brouilleur'|trans }} x {{ usePlanet.getSkyBrouilleur()|trans }}
+                    <div class="mt-4">{{ (usePlanet.getSkyBrouilleur() + 1) * 51000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ (usePlanet.getSkyBrouilleur() + 1) * 32100 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
+                    <div class="mt-4">4 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'skyImg'|trans }}" src="{{ asset('img/sky.png') }}"></div>
                 </td>
                 <td class="center-cells  p-4">
-                    {% if usePlanet.getBuilding().getSkyBrouilleur().getFinishAt() > date %}
-                        <div id="timeConstruct" hidden>{{ usePlanet.getBuilding().getSkyBrouilleur().getFinishAt()|date('Y/m/d H:m:s') }}</div>
+                    {% if usePlanet.getConstruct() == 'skyBrouilleur' %}
+                        <div id="timeConstruct" hidden>{{ usePlanet.getConstructAt()|date('Y/m/d H:m:s') }}</div>
                         <div id="timeDisplay" class="mt-5"></div>
                     {% else %}
-                        {% if usePlanet.getNiobium() >= usePlanet.getBuilding().getSkyBrouilleur().getNiobium() and usePlanet.getWater() >= usePlanet.getBuilding().getSkyBrouilleur().getWater() and usePlanet.getSkyPlace() + usePlanet.getBuilding().getSkyBrouilleur().getSky() <= usePlanet.getSky() and app.user.getResearch().getOnde().getLevel() == 5 and usePlanet.getBuilding().getConstruct() < date %}
+                        {% if usePlanet.getNiobium() >= ((usePlanet.getSkyBrouilleur() + 1) * 51000) and usePlanet.getWater() >= ((usePlanet.getSkyBrouilleur() + 1) * 32100) and usePlanet.getSkyPlace() + 4 <= usePlanet.getSky() and app.user.getResearch().getOnde().getLevel() == 5 and usePlanet.getConstructAt() < date %}
                             <a class="btn btn-lg btn-info mt-5" href="{{ path('building_add_brouilleur', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
                         {% else %}
                             <a class="btn btn-lg btn-info mt-5" disabled>{{ 'building.build'|trans }}</a>
@@ -330,7 +330,7 @@
                     {% endif %}
                 </td>
                 <td class="center-cells p-4">
-                    {% if usePlanet.getBuilding().getSkyBrouilleur().getLevel() > 0 %}
+                    {% if usePlanet.getSkyBrouilleur() > 0 %}
                         <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_brouilleur', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>

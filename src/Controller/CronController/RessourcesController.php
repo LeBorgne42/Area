@@ -29,64 +29,15 @@ class RessourcesController extends Controller
                 $worker = $worker + $planet->getWorker();
                 $niobium = $planet->getNiobium();
                 $water = $planet->getWater();
-                $niobium = $niobium + ($planet->getBuilding()->getMiner()->getProduction());
-                $water = $water + ($planet->getBuilding()->getExtractor()->getProduction());
+                $niobium = $niobium + ($planet->getNbProduction());
+                $water = $water + ($planet->getWtProduction());
                 $planet->setNiobium($niobium);
                 $planet->setWater($water);
                 $em->persist($planet);
-                /*if($planet->getBuilding()->getConstruct() < $now) {
-                    $building = $planet->getBuilding();
-                    if($building->getMiner()->getFinishAt()) {
-                        $building->getMiner()->setLevel($building->getMiner()->getLevel() + 1);
-                        $building->getMiner()->setFinishAt(null);
-                    }
-                    if($building->getExtractor()->getFinishAt()) {
-                        $building->getExtractor()->setLevel($building->getExtractor()->getLevel() + 1);
-                        $building->getExtractor()->setFinishAt(null);
-                    }
-                    if($building->getMetropole()->getFinishAt()) {
-                        $building->getMetropole()->setLevel($building->getMetropole()->getLevel() + 1);
-                        $building->getMetropole()->setFinishAt(null);
-                    }
-                    if($building->getCity()->getFinishAt()) {
-                        $building->getCity()->setLevel($building->getCity()->getLevel() + 1);
-                        $building->getCity()->setFinishAt(null);
-                    }
-                    if($building->getCaserne()->getFinishAt()) {
-                        $building->getCaserne()->setLevel($building->getCaserne()->getLevel() + 1);
-                        $building->getCaserne()->setFinishAt(null);
-                    }
-                    if($building->getRadar()->getFinishAt()) {
-                        $building->getRadar()->setLevel($building->getRadar()->getLevel() + 1);
-                        $building->getRadar()->setFinishAt(null);
-                    }
-                    if($building->getSpaceShip()->getFinishAt()) {
-                        $building->getSpaceShip()->setLevel($building->getSpaceShip()->getLevel() + 1);
-                        $building->getSpaceShip()->setFinishAt(null);
-                    }
-                    if($building->getBuildSearch()->getFinishAt()) {
-                        $building->getBuildSearch()->setLevel($building->getBuildSearch()->getLevel() + 1);
-                        $building->getBuildSearch()->setFinishAt(null);
-                    }
-                    if($building->getSkyRadar()->getFinishAt()) {
-                        $building->getSkyRadar()->setLevel($building->getSkyRadar()->getLevel() + 1);
-                        $building->getSkyRadar()->setFinishAt(null);
-                    }
-                    if($building->getSkyBrouilleur()->getFinishAt()) {
-                        $building->getSkyBrouilleur()->setLevel($building->getSkyBrouilleur()->getLevel() + 1);
-                        $building->getSkyBrouilleur()->setFinishAt(null);
-                    }
-                    if($building->getLightUsine()->getFinishAt()) {
-                        $building->getLightUsine()->setLevel(1);
-                        $building->getLightUsine()->setFinishAt(null);
-                    }
-                    if($building->getHeavyUsine()->getFinishAt()) {
-                        $building->getHeavyUsine()->setLevel(1);
-                        $building->getHeavyUsine()->setFinishAt(null);
-                    }
-                    $building->setConstruct(null);
-                    $em->persist($building);
-                    $em->flush();
+                /*if($planet->getConstructAt() > $now) {
+                    $planet->setConstruct(+1);
+                    $planet->setConstruct(null);
+                    $planet->setConstructAt(null);
                 }*/
             }
             /*if($user->getSearch() < $now) {

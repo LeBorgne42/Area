@@ -9,19 +9,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use App\Entity\Planet;
 use App\Entity\Sector;
 use App\Entity\Galaxy;
-use App\Entity\Building;
-use App\Entity\Xuilding_Miner;
-use App\Entity\Xuilding_Extractor;
-use App\Entity\Xuilding_Caserne;
-use App\Entity\Xuilding_HeavyUsine;
-use App\Entity\Xuilding_LightUsine;
-use App\Entity\Xuilding_Radar;
-use App\Entity\Xuilding_SkyRadar;
-use App\Entity\Xuilding_Search;
-use App\Entity\Xuilding_SkyBrouilleur;
-use App\Entity\Xuilding_SpaceShipyard;
-use App\Entity\Xuilding_Metropole;
-use App\Entity\Xuilding_City;
 
 /**
  * @Route("/serveur")
@@ -76,47 +63,6 @@ class ServerController extends Controller
                     else {
                         $nbrPlanets++;
                         $planet = new Planet();
-                        $building = new Building();
-                        $miner = new Xuilding_Miner();
-                        $extractor = new Xuilding_Extractor();
-                        $spaceShip = new Xuilding_SpaceShipyard();
-                        $SkyBrouilleur = new Xuilding_SkyBrouilleur();
-                        $search = new Xuilding_Search();
-                        $SkyRadar = new Xuilding_SkyRadar();
-                        $radar = new Xuilding_Radar();
-                        $caserne = new Xuilding_Caserne();
-                        $heavy = new Xuilding_HeavyUsine();
-                        $light = new Xuilding_LightUsine();
-                        $metropole = new Xuilding_Metropole();
-                        $city = new Xuilding_City();
-
-                        $building->setMiner($miner);
-                        $building->setExtractor($extractor);
-                        $building->setSpaceShip($spaceShip);
-                        $building->setSkyBrouilleur($SkyBrouilleur);
-                        $building->setbuildSearch($search);
-                        $building->setSkyRadar($SkyRadar);
-                        $building->setRadar($radar);
-                        $building->setCaserne($caserne);
-                        $building->setHeavyUsine($heavy);
-                        $building->setLightUsine($light);
-                        $building->setMetropole($metropole);
-                        $building->setCity($city);
-                        $planet->setBuilding($building);
-
-                        $em->persist($building);
-                        $em->persist($spaceShip);
-                        $em->persist($SkyBrouilleur);
-                        $em->persist($search);
-                        $em->persist($SkyRadar);
-                        $em->persist($radar);
-                        $em->persist($caserne);
-                        $em->persist($heavy);
-                        $em->persist($light);
-                        $em->persist($metropole);
-                        $em->persist($city);
-                        $em->persist($miner);
-                        $em->persist($extractor);
 
                         $planet->setImageName($image[rand(0, 32)]);
                         $planet->setSector($sector);
@@ -157,6 +103,31 @@ class ServerController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
+        $users = $em->getRepository('App:User')
+            ->createQueryBuilder('u')
+            ->getQuery()
+            ->getResult();
+
+        foreach ($users as $user) {
+            $user->setBitcoin(50000);
+            $user->setAlly(null);
+            $user->setScientistProduction(1);
+            $user->setSearch(null);
+            $user->setGrade(null);
+            $user->setJoinAllyAt(null);
+            foreach ($user->getProposals as $proposal) {
+                $user->removeProposal($proposal);
+            }
+            foreach ($user->getFleets as $fleet) {
+                $user->removeFleet($fleet);
+            }
+            foreach ($user->getPlanets() as $planet) {
+                $user->removePlanet($planet);
+            }
+            $em->persist($user);
+            $em->flush();
+        }
+
         $allys = $em->getRepository('App:Ally')
             ->createQueryBuilder('al')
             ->getQuery()
@@ -167,16 +138,6 @@ class ServerController extends Controller
             $em->flush();
         }
 
-        $buildings = $em->getRepository('App:Building')
-            ->createQueryBuilder('bu')
-            ->getQuery()
-            ->getResult();
-
-        foreach ($buildings as $building) {
-            $em->remove($building);
-            $em->flush();
-        }
-
         $planets = $em->getRepository('App:Planet')
             ->createQueryBuilder('pl')
             ->getQuery()
@@ -184,36 +145,6 @@ class ServerController extends Controller
 
         foreach ($planets as $planet) {
             $em->remove($planet);
-            $em->flush();
-        }
-
-        $scientists = $em->getRepository('App:Scientist')
-            ->createQueryBuilder('scien')
-            ->getQuery()
-            ->getResult();
-
-        foreach ($scientists as $scientist) {
-            $em->remove($scientist);
-            $em->flush();
-        }
-
-        $soldiers = $em->getRepository('App:Soldier')
-            ->createQueryBuilder('sol')
-            ->getQuery()
-            ->getResult();
-
-        foreach ($soldiers as $soldier) {
-            $em->remove($soldier);
-            $em->flush();
-        }
-
-        $workers = $em->getRepository('App:Worker')
-            ->createQueryBuilder('wor')
-            ->getQuery()
-            ->getResult();
-
-        foreach ($workers as $worker) {
-            $em->remove($worker);
             $em->flush();
         }
 

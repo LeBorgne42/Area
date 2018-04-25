@@ -42,15 +42,99 @@ class Planet
     protected $water = 1500;
 
     /**
-     * @ORM\OneToOne(targetEntity="Building", inversedBy="planet", fetch="EXTRA_LAZY")
-     * @ORM\JoinColumn(name="building_id", referencedColumnName="id")
+     * @ORM\Column(name="shipProduction",type="decimal", precision=28, scale=5)
      */
-    protected $building;
+    protected $shipProduction = 1;
+
+    /**
+     * @ORM\Column(name="workerProduction",type="decimal", precision=28, scale=5)
+     */
+    protected $workerProduction = 1.1;
+
+    /**
+     * @ORM\Column(name="nbProduction",type="decimal", precision=28, scale=5)
+     */
+    protected $nbProduction = 5.2;
+
+    /**
+     * @ORM\Column(name="wtProduction",type="decimal", precision=28, scale=5)
+     */
+    protected $wtProduction = 4.3;
 
     /**
      * @ORM\OneToMany(targetEntity="Fleet", mappedBy="planet", fetch="EXTRA_LAZY")
      */
     protected $fleets;
+
+    /**
+     * @ORM\Column(name="construct",type="string", nullable=true)
+     */
+    protected $construct;
+
+    /**
+     * @ORM\Column(name="constructAt",type="datetime", nullable=true)
+     */
+    protected $constructAt;
+
+    /**
+     * @ORM\Column(name="miner",type="integer", nullable=true)
+     */
+    protected $miner = 0;
+
+    /**
+     * @ORM\Column(name="extractor",type="integer", nullable=true)
+     */
+    protected $extractor = 0;
+
+    /**
+     * @ORM\Column(name="spaceShip",type="integer", nullable=true)
+     */
+    protected $spaceShip = 0;
+
+    /**
+     * @ORM\Column(name="centerSearch",type="integer", nullable=true)
+     */
+    protected $centerSearch;
+
+    /**
+     * @ORM\Column(name="metropole",type="integer", nullable=true)
+     */
+    protected $metropole = 0;
+
+    /**
+     * @ORM\Column(name="city",type="integer", nullable=true)
+     */
+    protected $city = 0;
+
+    /**
+     * @ORM\Column(name="caserne",type="integer", nullable=true)
+     */
+    protected $caserne = 0;
+
+    /**
+     * @ORM\Column(name="radar",type="integer", nullable=true)
+     */
+    protected $radar = 0;
+
+    /**
+     * @ORM\Column(name="skyRadar",type="integer", nullable=true)
+     */
+    protected $skyRadar = 0;
+
+    /**
+     * @ORM\Column(name="skyBrouilleur",type="integer", nullable=true)
+     */
+    protected $skyBrouilleur = 0;
+
+    /**
+     * @ORM\Column(name="lightUsine",type="integer", nullable=true)
+     */
+    protected $lightUsine = 0;
+
+    /**
+     * @ORM\Column(name="heavyUsine",type="integer", nullable=true)
+     */
+    protected $heavyUsine = 0;
 
     /**
      * @ORM\Column(name="sonde",type="bigint", nullable=true)
@@ -378,22 +462,6 @@ class Planet
     /**
      * @return mixed
      */
-    public function getBuilding()
-    {
-        return $this->building;
-    }
-
-    /**
-     * @param mixed $building
-     */
-    public function setBuilding($building): void
-    {
-        $this->building = $building;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getFleets()
     {
         return $this->fleets;
@@ -693,5 +761,293 @@ class Planet
     public function setFregate($fregate): void
     {
         $this->fregate = $fregate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMiner()
+    {
+        return $this->miner;
+    }
+
+    /**
+     * @param mixed $miner
+     */
+    public function setMiner($miner): void
+    {
+        $this->miner = $miner;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getExtractor()
+    {
+        return $this->extractor;
+    }
+
+    /**
+     * @param mixed $extractor
+     */
+    public function setExtractor($extractor): void
+    {
+        $this->extractor = $extractor;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSpaceShip()
+    {
+        return $this->spaceShip;
+    }
+
+    /**
+     * @param mixed $spaceShip
+     */
+    public function setSpaceShip($spaceShip): void
+    {
+        $this->spaceShip = $spaceShip;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCenterSearch()
+    {
+        return $this->centerSearch;
+    }
+
+    /**
+     * @param mixed $centerSearch
+     */
+    public function setCenterSearch($centerSearch): void
+    {
+        $this->centerSearch = $centerSearch;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMetropole()
+    {
+        return $this->metropole;
+    }
+
+    /**
+     * @param mixed $metropole
+     */
+    public function setMetropole($metropole): void
+    {
+        $this->metropole = $metropole;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * @param mixed $city
+     */
+    public function setCity($city): void
+    {
+        $this->city = $city;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCaserne()
+    {
+        return $this->caserne;
+    }
+
+    /**
+     * @param mixed $caserne
+     */
+    public function setCaserne($caserne): void
+    {
+        $this->caserne = $caserne;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRadar()
+    {
+        return $this->radar;
+    }
+
+    /**
+     * @param mixed $radar
+     */
+    public function setRadar($radar): void
+    {
+        $this->radar = $radar;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSkyRadar()
+    {
+        return $this->skyRadar;
+    }
+
+    /**
+     * @param mixed $skyRadar
+     */
+    public function setSkyRadar($skyRadar): void
+    {
+        $this->skyRadar = $skyRadar;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSkyBrouilleur()
+    {
+        return $this->skyBrouilleur;
+    }
+
+    /**
+     * @param mixed $skyBrouilleur
+     */
+    public function setSkyBrouilleur($skyBrouilleur): void
+    {
+        $this->skyBrouilleur = $skyBrouilleur;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLightUsine()
+    {
+        return $this->lightUsine;
+    }
+
+    /**
+     * @param mixed $lightUsine
+     */
+    public function setLightUsine($lightUsine): void
+    {
+        $this->lightUsine = $lightUsine;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHeavyUsine()
+    {
+        return $this->heavyUsine;
+    }
+
+    /**
+     * @param mixed $heavyUsine
+     */
+    public function setHeavyUsine($heavyUsine): void
+    {
+        $this->heavyUsine = $heavyUsine;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShipProduction()
+    {
+        return $this->shipProduction;
+    }
+
+    /**
+     * @param mixed $shipProduction
+     */
+    public function setShipProduction($shipProduction): void
+    {
+        $this->shipProduction = $shipProduction;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWorkerProduction()
+    {
+        return $this->workerProduction;
+    }
+
+    /**
+     * @param mixed $workerProduction
+     */
+    public function setWorkerProduction($workerProduction): void
+    {
+        $this->workerProduction = $workerProduction;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConstruct()
+    {
+        return $this->construct;
+    }
+
+    /**
+     * @param mixed $construct
+     */
+    public function setConstruct($construct): void
+    {
+        $this->construct = $construct;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConstructAt()
+    {
+        return $this->constructAt;
+    }
+
+    /**
+     * @param mixed $constructAt
+     */
+    public function setConstructAt($constructAt): void
+    {
+        $this->constructAt = $constructAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNbProduction()
+    {
+        return $this->nbProduction;
+    }
+
+    /**
+     * @param mixed $nbProduction
+     */
+    public function setNbProduction($nbProduction): void
+    {
+        $this->nbProduction = $nbProduction;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWtProduction()
+    {
+        return $this->wtProduction;
+    }
+
+    /**
+     * @param mixed $wtProduction
+     */
+    public function setWtProduction($wtProduction): void
+    {
+        $this->wtProduction = $wtProduction;
     }
 }

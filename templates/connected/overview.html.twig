@@ -49,8 +49,8 @@
                     <th class="tab-cells-name"><h4>{{ 'title.batiment'|trans|raw }}</h4></th>
                     <td class="center-cells">
                         <a href="{{ path('building', {'idp': usePlanet.getId()}) }}">
-                            {% if usePlanet.getBuilding().getConstruct() > date %}
-                                <div id="timeConstruct" hidden>{{ usePlanet.getBuilding().getConstruct()|date('Y/m/d H:m:s') }}</div>
+                            {% if usePlanet.getConstruct() %}
+                                <div id="timeConstruct" hidden>{{ usePlanet.getConstructAt()|date('Y/m/d H:m:s') }}</div>
                                 <h4>{{ 'cell.constructName'|trans|raw }}<span id="timeDisplay" class="my-2"></span></h4>
                             {% else %}
                                 <h4>{{ 'cell.batiment'|trans|raw }}</h4>
