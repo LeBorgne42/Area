@@ -40,7 +40,7 @@ class SpaceShipyardController extends Controller
 
         if(($usePlanetNb < ($level * 3000) || $usePlanetWt < ($level * 2000)) ||
             ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround()) ||
-            ($user->getResearch()->getIndustry()->getLevel() == 0 || $newSky > $usePlanet->getSky())) {
+            ($user->getIndustry() == 0 || $newSky > $usePlanet->getSky())) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
 
@@ -118,7 +118,7 @@ class SpaceShipyardController extends Controller
 
         if(($usePlanetNb < ($level * 6000) || $usePlanetWt < ($level * 3900)) ||
             ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround()) ||
-            ($user->getResearch()->getLightShip()->getLevel() == 0)) {
+            ($user->getLightShip() == 0)) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
 
@@ -193,7 +193,7 @@ class SpaceShipyardController extends Controller
 
         if(($usePlanetNb < ($level * 83000) || $usePlanetWt < ($level * 68000)) ||
             ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround()) ||
-            ($user->getResearch()->getHeavyShip()->getLevel() == 0)) {
+            ($user->getHeavyShip() == 0)) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
 
@@ -270,7 +270,7 @@ class SpaceShipyardController extends Controller
 
         if(($usePlanetNb < ($level * 23000) || $usePlanetWt < ($level * 34000)) ||
             ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround()) ||
-            ($user->getResearch()->getDiscipline()->getLevel() < 3 == 0)) {
+            ($user->getDiscipline() < 3 == 0)) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
 
