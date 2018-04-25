@@ -89,7 +89,7 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\Column(name="bitcoin",type="decimal", precision=28, scale=5)
      */
-    protected $bitcoin = 5000;
+    protected $bitcoin = 50000;
 
     /**
      * @ORM\Column(name="created_at",type="datetime")

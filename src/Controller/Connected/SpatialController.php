@@ -9,13 +9,6 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Form\Front\SpatialShipType;
 use App\Form\Front\SpatialFleetType;
 use App\Entity\Fleet;
-use App\Entity\Ship;
-use App\Entity\Yhip_Colonizer;
-use App\Entity\Yhip_Sonde;
-use App\Entity\Yhip_Hunter;
-use App\Entity\Yhip_Fregate;
-use App\Entity\Yhip_Barge;
-use App\Entity\Yhip_Recycleur;
 
 /**
  * @Route("/fr")
@@ -50,40 +43,31 @@ class SpatialController extends Controller
             ]);
         }
         if ($form_spatialShip->isSubmitted() && $form_spatialShip->isValid()) {
-            $colonizer = $usePlanet->getShip()->getColonizer();
-            $recycleur = $usePlanet->getShip()->getRecycleur();
-            $barge = $usePlanet->getShip()->getBarge();
-            $sonde = $usePlanet->getShip()->getSonde();
-            $hunter = $usePlanet->getShip()->getHunter();
-            $fregate = $usePlanet->getShip()->getFregate();
-            $niobiumLess = ($colonizer->getNiobium() * $form_spatialShip->get('colonizer')->getData()) + ($recycleur->getNiobium() * $form_spatialShip->get('recycleur')->getData()) + ($barge->getNiobium() * $form_spatialShip->get('barge')->getData()) + ($sonde->getNiobium() * $form_spatialShip->get('sonde')->getData()) + ($hunter->getNiobium() * $form_spatialShip->get('hunter')->getData()) + ($fregate->getNiobium() * $form_spatialShip->get('fregate')->getData());
-            $waterLess =  ($colonizer->getWater() * $form_spatialShip->get('colonizer')->getData()) + ($recycleur->getWater() * $form_spatialShip->get('recycleur')->getData()) + ($barge->getWater() * $form_spatialShip->get('barge')->getData()) + ($hunter->getWater() * $form_spatialShip->get('hunter')->getData()) + ($fregate->getWater() * $form_spatialShip->get('fregate')->getData());
-            $bitcoinLess = ($colonizer->getBitcoin() * $form_spatialShip->get('colonizer')->getData()) + ($barge->getBitcoin() * $form_spatialShip->get('barge')->getData());
+            $colonizer = $form_spatialShip->get('colonizer')->getData();
+            $recycleur = $form_spatialShip->get('recycleur')->getData();
+            $barge = $form_spatialShip->get('barge')->getData();
+            $sonde = $form_spatialShip->get('sonde')->getData();
+            $hunter = $form_spatialShip->get('hunter')->getData();
+            $fregate = $form_spatialShip->get('fregate')->getData();
+            $niobiumLess = (20000 * $colonizer) + (10000 * $recycleur) + (15000 * $barge) + (20 * $sonde) + (50 * $hunter) + (300 * $fregate);
+            $waterLess =  (12000 * $colonizer) + (7000 * $recycleur) + (12000 * $barge) + (20 * $hunter) + (200 * $fregate);
 
-            if (($usePlanet->getNiobium() < $niobiumLess || $usePlanet->getWater() < $waterLess) || $user->getBitcoin() < $bitcoinLess) {
+            if (($usePlanet->getNiobium() < $niobiumLess || $usePlanet->getWater() < $waterLess)) {
                 return $this->render('connected/spatial.html.twig', [
                     'usePlanet' => $usePlanet,
                     'form_spatialShip' => $form_spatialShip->createView(),
                 ]);
             }
 
-            $colonizer->setAmount($colonizer->getAmount() + $form_spatialShip->get('colonizer')->getData());
-            $recycleur->setAmount($recycleur->getAmount() + $form_spatialShip->get('recycleur')->getData());
-            $barge->setAmount($barge->getAmount() + $form_spatialShip->get('barge')->getData());
-            $sonde->setAmount($sonde->getAmount() + $form_spatialShip->get('sonde')->getData());
-            $hunter->setAmount($hunter->getAmount() + $form_spatialShip->get('hunter')->getData());
-            $fregate->setAmount($fregate->getAmount() + $form_spatialShip->get('fregate')->getData());
+            $usePlanet->setColonizer($usePlanet->getColonizer() + $colonizer);
+            $usePlanet->setRecycleur($usePlanet->getRecycleur() + $recycleur);
+            $usePlanet->setBarge($usePlanet->getBarge() + $barge);
+            $usePlanet->setSonde($usePlanet->getSonde() + $sonde);
+            $usePlanet->setHunter($usePlanet->getHunter() + $hunter);
+            $usePlanet->setFregate($usePlanet->getFregate() + $fregate);
             $usePlanet->setNiobium($usePlanet->getNiobium() - $niobiumLess);
             $usePlanet->setWater($usePlanet->getWater() - $waterLess);
-            $user->setBitcoin($user->getBitcoin() - $bitcoinLess);
-            $em->persist($colonizer);
-            $em->persist($barge);
-            $em->persist($recycleur);
-            $em->persist($sonde);
-            $em->persist($hunter);
-            $em->persist($fregate);
             $em->persist($usePlanet);
-            $em->persist($user);
             $em->flush();
         }
 
@@ -120,12 +104,12 @@ class SpatialController extends Controller
             ]);
         }
         if ($form_createFleet->isSubmitted() && $form_createFleet->isValid()) {
-            $colonizer = $usePlanet->getShip()->getColonizer()->getAmount() - $form_createFleet->get('colonizer')->getData();
-            $recycleur = $usePlanet->getShip()->getRecycleur()->getAmount() - $form_createFleet->get('recycleur')->getData();
-            $barge = $usePlanet->getShip()->getBarge()->getAmount() - $form_createFleet->get('barge')->getData();
-            $sonde = $usePlanet->getShip()->getSonde()->getAmount() - $form_createFleet->get('sonde')->getData();
-            $hunter = $usePlanet->getShip()->getHunter()->getAmount() - $form_createFleet->get('hunter')->getData();
-            $fregate = $usePlanet->getShip()->getFregate()->getAmount() - $form_createFleet->get('fregate')->getData();
+            $colonizer = $usePlanet->getColonizer() - $form_createFleet->get('colonizer')->getData();
+            $recycleur = $usePlanet->getRecycleur() - $form_createFleet->get('recycleur')->getData();
+            $barge = $usePlanet->getBarge() - $form_createFleet->get('barge')->getData();
+            $sonde = $usePlanet->getSonde() - $form_createFleet->get('sonde')->getData();
+            $hunter = $usePlanet->getHunter() - $form_createFleet->get('hunter')->getData();
+            $fregate = $usePlanet->getFregate() - $form_createFleet->get('fregate')->getData();
 
             if (($colonizer < 0 || $recycleur < 0) || ($barge < 0 || $sonde < 0) || ($hunter < 0 || $fregate < 0)) {
                 return $this->render('connected/fleet/create.html.twig', [
@@ -134,37 +118,22 @@ class SpatialController extends Controller
                 ]);
             }
             $fleet = new Fleet();
-            $ship = new Ship();
-            $colonizer = new Yhip_Colonizer();
-            $barge = new Yhip_Barge();
-            $recycleur = new Yhip_Recycleur();
-            $sonde = new Yhip_Sonde();
-            $hunter = new Yhip_Hunter();
-            $fregate = new Yhip_Fregate();
-            $colonizer->setAmount($form_createFleet->get('colonizer')->getData());
-            $recycleur->setAmount($form_createFleet->get('recycleur')->getData());
-            $barge->setAmount($form_createFleet->get('barge')->getData());
-            $sonde->setAmount($form_createFleet->get('sonde')->getData());
-            $hunter->setAmount($form_createFleet->get('hunter')->getData());
-            $fregate->setAmount($form_createFleet->get('fregate')->getData());
-            $ship->setColonizer($colonizer);
-            $ship->setBarge($barge);
-            $ship->setRecycleur($recycleur);
-            $ship->setSonde($sonde);
-            $ship->setHunter($hunter);
-            $ship->setFregate($fregate);
-            $em->persist($ship);
-            $fleet->setShip($ship);
+            $fleet->setColonizer($form_createFleet->get('colonizer')->getData());
+            $fleet->setRecycleur($form_createFleet->get('recycleur')->getData());
+            $fleet->setBarge($form_createFleet->get('barge')->getData());
+            $fleet->setSonde($form_createFleet->get('sonde')->getData());
+            $fleet->setHunter($form_createFleet->get('hunter')->getData());
+            $fleet->setFregate($form_createFleet->get('fregate')->getData());
             $fleet->setUser($user);
             $fleet->setPlanet($usePlanet);
             $fleet->setName($form_createFleet->get('name')->getData());
             $em->persist($fleet);
-            $usePlanet->getShip()->getColonizer()->setAmount($usePlanet->getShip()->getColonizer()->getAmount() - $colonizer->getAmount());
-            $usePlanet->getShip()->getRecycleur()->setAmount($usePlanet->getShip()->getRecycleur()->getAmount() - $recycleur->getAmount());
-            $usePlanet->getShip()->getBarge()->setAmount($usePlanet->getShip()->getBarge()->getAmount() - $barge->getAmount());
-            $usePlanet->getShip()->getSonde()->setAmount($usePlanet->getShip()->getSonde()->getAmount() - $sonde->getAmount());
-            $usePlanet->getShip()->getHunter()->setAmount($usePlanet->getShip()->getHunter()->getAmount() - $hunter->getAmount());
-            $usePlanet->getShip()->getFregate()->setAmount($usePlanet->getShip()->getFregate()->getAmount() - $fregate->getAmount());
+            $usePlanet->setColonizer($colonizer);
+            $usePlanet->setRecycleur($recycleur);
+            $usePlanet->setBarge($barge);
+            $usePlanet->setSonde($sonde);
+            $usePlanet->setHunter($hunter);
+            $usePlanet->setFregate($fregate);
             $usePlanet->addFleet($fleet);
             $em->persist($usePlanet);
             $em->flush();

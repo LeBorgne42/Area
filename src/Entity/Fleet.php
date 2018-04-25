@@ -25,6 +25,12 @@ class Fleet
     protected $name;
 
     /**
+     * @ORM\Column(name="attack",type="boolean")
+     * @Assert\NotBlank(message = "required")
+     */
+    protected $attack = false;
+
+    /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="fleets", fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
@@ -47,10 +53,34 @@ class Fleet
     protected $flightTime = null;
 
     /**
-     * @ORM\OneToOne(targetEntity="Ship", mappedBy="fleet", fetch="EXTRA_LAZY")
-     * @ORM\JoinColumn(name="ship_id", referencedColumnName="id")
+     * @ORM\Column(name="sonde",type="bigint", nullable=true)
      */
-    protected $ship;
+    protected $sonde = 0;
+
+    /**
+     * @ORM\Column(name="colonizer",type="integer", nullable=true)
+     */
+    protected $colonizer = 0;
+
+    /**
+     * @ORM\Column(name="recycleur",type="integer", nullable=true)
+     */
+    protected $recycleur = 0;
+
+    /**
+     * @ORM\Column(name="barge",type="integer", nullable=true)
+     */
+    protected $barge = 0;
+
+    /**
+     * @ORM\Column(name="hunter",type="bigint", nullable=true)
+     */
+    protected $hunter = 0;
+
+    /**
+     * @ORM\Column(name="fregate",type="bigint", nullable=true)
+     */
+    protected $fregate = 0;
 
     /**
      * @ORM\Column(name="soldier",type="integer", nullable=true)
@@ -67,68 +97,124 @@ class Fleet
      */
     protected $scientist = null;
 
-    /**
-     * @param mixed $soldier
-     */
-    public function setSoldier($soldier): void
+    public function getId()
     {
-        $this->soldier = $soldier;
+        return $this->id;
     }
 
     /**
      * @return mixed
      */
-    public function getSoldier()
+    public function getNbrShips()
     {
-        return $this->soldier;
-    }
+        $fregate = $this->getFregate();
+        $colonizer = $this->getColonizer();
+        $barge = $this->getBarge();
+        $hunter = $this->getHunter();
+        $recycleur = $this->getRecycleur();
+        $sonde = $this->getSonde();
 
-    /**
-     * @param mixed $scientist
-     */
-    public function setScientist($scientist): void
-    {
-        $this->scientist = $scientist;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getScientist()
-    {
-        return $this->scientist;
+        $nbr = $fregate + $colonizer + $barge + $hunter + $recycleur + $sonde;
+        return $nbr;
     }
 
     /**
      * @return mixed
      */
-    public function getWorker()
+    public function getNbrSignatures()
     {
-        return $this->worker;
+        $fregate = $this->getFregate() * $this->getFregateSignature();
+        $colonizer = $this->getColonizer() * $this->getColonizerSignature();
+        $barge = $this->getBarge() * $this->getBargeSignature();
+        $hunter = $this->getHunter() * $this->getHunterSignature();
+        $recycleur = $this->getRecycleur() * $this->getRecycleurSignature();
+        $sonde = $this->getSonde();
+
+        $nbr = $fregate + $colonizer + $barge + $hunter + $recycleur + $sonde;
+        return $nbr;
     }
 
     /**
-     * @param mixed $worker
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function setWorker($worker): void
+    public function getOrigin()
     {
-        $this->worker = $worker;
+        $criteria = Criteria::create()
+            ->andWhere(Criteria::expr()->gt('planet', $this->planet->getOldPlanet()));
+
+        return $this->fleet->matching($criteria);
     }
 
     /**
      * @return mixed
      */
-    public function getShip()
+    public function getBargeSignature()
     {
-        return $this->ship;
+        return $this->getBarge() * 50;
     }
 
     /**
-     * @param mixed $ship
+     * @return mixed
      */
-    public function setShip($ship): void
+    public function getColonizerSignature()
     {
-        $this->ship = $ship;
+        return $this->getColonizer() * 200;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFregateSignature()
+    {
+        return $this->getFregate() * 85;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHunterSignature()
+    {
+        return $this->getHunter() * 3;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRecycleurSignature()
+    {
+        return $this->getRecycleur() * 80;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name): void
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAttack()
+    {
+        return $this->attack;
+    }
+
+    /**
+     * @param mixed $attack
+     */
+    public function setAttack($attack): void
+    {
+        $this->attack = $attack;
     }
 
     /**
@@ -166,54 +252,6 @@ class Fleet
     /**
      * @return mixed
      */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param mixed $name
-     */
-    public function setName($name): void
-    {
-        $this->name = $name;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getNbrShips()
-    {
-        $fregate = $this->getShip()->getFregate()->getAmount();
-        $colonizer = $this->getShip()->getColonizer()->getAmount();
-        $barge = $this->getShip()->getBarge()->getAmount();
-        $hunter = $this->getShip()->getHunter()->getAmount();
-        $recycleur = $this->getShip()->getRecycleur()->getAmount();
-        $sonde = $this->getShip()->getSonde()->getAmount();
-
-        $nbr = $fregate + $colonizer + $barge + $hunter + $recycleur + $sonde;
-        return $nbr;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getNbrSignatures()
-    {
-        $fregate = $this->getShip()->getFregate()->getAmount() * $this->getShip()->getFregate()->getSignature();
-        $colonizer = $this->getShip()->getColonizer()->getAmount() * $this->getShip()->getColonizer()->getSignature();
-        $barge = $this->getShip()->getBarge()->getAmount() * $this->getShip()->getBarge()->getSignature();
-        $hunter = $this->getShip()->getHunter()->getAmount() * $this->getShip()->getHunter()->getSignature();
-        $recycleur = $this->getShip()->getRecycleur()->getAmount() * $this->getShip()->getRecycleur()->getSignature();
-        $sonde = $this->getShip()->getSonde()->getAmount() * $this->getShip()->getSonde()->getSignature();
-
-        $nbr = $fregate + $colonizer + $barge + $hunter + $recycleur + $sonde;
-        return $nbr;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getOldPlanet()
     {
         return $this->oldPlanet;
@@ -225,17 +263,6 @@ class Fleet
     public function setOldPlanet($oldPlanet): void
     {
         $this->oldPlanet = $oldPlanet;
-    }
-
-    /**
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getOrigin()
-    {
-        $criteria = Criteria::create()
-            ->andWhere(Criteria::expr()->gt('planet', $this->planet->getOldPlanet()));
-
-        return $this->fleet->matching($criteria);
     }
 
     /**
@@ -254,8 +281,147 @@ class Fleet
         $this->flightTime = $flightTime;
     }
 
-    public function getId()
+    /**
+     * @return mixed
+     */
+    public function getSonde()
     {
-        return $this->id;
+        return $this->sonde;
+    }
+
+    /**
+     * @param mixed $sonde
+     */
+    public function setSonde($sonde): void
+    {
+        $this->sonde = $sonde;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getColonizer()
+    {
+        return $this->colonizer;
+    }
+
+    /**
+     * @param mixed $colonizer
+     */
+    public function setColonizer($colonizer): void
+    {
+        $this->colonizer = $colonizer;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRecycleur()
+    {
+        return $this->recycleur;
+    }
+
+    /**
+     * @param mixed $recycleur
+     */
+    public function setRecycleur($recycleur): void
+    {
+        $this->recycleur = $recycleur;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBarge()
+    {
+        return $this->barge;
+    }
+
+    /**
+     * @param mixed $barge
+     */
+    public function setBarge($barge): void
+    {
+        $this->barge = $barge;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHunter()
+    {
+        return $this->hunter;
+    }
+
+    /**
+     * @param mixed $hunter
+     */
+    public function setHunter($hunter): void
+    {
+        $this->hunter = $hunter;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFregate()
+    {
+        return $this->fregate;
+    }
+
+    /**
+     * @param mixed $fregate
+     */
+    public function setFregate($fregate): void
+    {
+        $this->fregate = $fregate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSoldier()
+    {
+        return $this->soldier;
+    }
+
+    /**
+     * @param mixed $soldier
+     */
+    public function setSoldier($soldier): void
+    {
+        $this->soldier = $soldier;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWorker()
+    {
+        return $this->worker;
+    }
+
+    /**
+     * @param mixed $worker
+     */
+    public function setWorker($worker): void
+    {
+        $this->worker = $worker;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getScientist()
+    {
+        return $this->scientist;
+    }
+
+    /**
+     * @param mixed $scientist
+     */
+    public function setScientist($scientist): void
+    {
+        $this->scientist = $scientist;
     }
 }

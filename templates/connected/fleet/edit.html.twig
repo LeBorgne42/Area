@@ -65,68 +65,68 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'fleet.sonde'|trans }} x {{ fleet.getShip().getSonde().getAmount() }}
+                    {{ 'fleet.sonde'|trans }} x {{ fleet.getSonde() }}
                 </th>
                 <td class="center-cells">
-                    {{ form_widget(form_manageFleet.moreSonde,{attr: { max: usePlanet.getShip().getSonde().getAmount()}}) }}
+                    {{ form_widget(form_manageFleet.moreSonde,{attr: { max: usePlanet.getSonde()}}) }}
                 </td>
                 <td class="center-cells">
-                    {{ form_widget(form_manageFleet.lessSonde,{attr: { max: fleet.getShip().getSonde().getAmount()}}) }}
+                    {{ form_widget(form_manageFleet.lessSonde,{attr: { max: fleet.getSonde()}}) }}
                 </td>
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'fleet.colonizer'|trans }} x {{ fleet.getShip().getColonizer().getAmount() }}
+                    {{ 'fleet.colonizer'|trans }} x {{ fleet.getColonizer() }}
                 </th>
                 <td class="center-cells">
-                    {{ form_widget(form_manageFleet.moreColonizer,{attr: { max: usePlanet.getShip().getColonizer().getAmount()}}) }}
+                    {{ form_widget(form_manageFleet.moreColonizer,{attr: { max: usePlanet.getColonizer()}}) }}
                 </td>
                 <td class="center-cells">
-                    {{ form_widget(form_manageFleet.lessColonizer,{attr: { max: fleet.getShip().getColonizer().getAmount()}}) }}
+                    {{ form_widget(form_manageFleet.lessColonizer,{attr: { max: fleet.getColonizer()}}) }}
                 </td>
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'fleet.recycleur'|trans }} x {{ fleet.getShip().getRecycleur().getAmount() }}
+                    {{ 'fleet.recycleur'|trans }} x {{ fleet.getRecycleur() }}
                 </th>
                 <td class="center-cells">
-                    {{ form_widget(form_manageFleet.moreRecycleur,{attr: { max: usePlanet.getShip().getRecycleur().getAmount()}}) }}
+                    {{ form_widget(form_manageFleet.moreRecycleur,{attr: { max: usePlanet.getRecycleur()}}) }}
                 </td>
                 <td class="center-cells">
-                    {{ form_widget(form_manageFleet.lessRecycleur,{attr: { max: fleet.getShip().getRecycleur().getAmount()}}) }}
+                    {{ form_widget(form_manageFleet.lessRecycleur,{attr: { max: fleet.getRecycleur()}}) }}
                 </td>
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'fleet.hunter'|trans }} x {{ fleet.getShip().getHunter().getAmount() }}
+                    {{ 'fleet.hunter'|trans }} x {{ fleet.getHunter() }}
                 </th>
                 <td class="center-cells">
-                    {{ form_widget(form_manageFleet.moreHunter,{attr: { max: usePlanet.getShip().getHunter().getAmount()}}) }}
+                    {{ form_widget(form_manageFleet.moreHunter,{attr: { max: usePlanet.getHunter()}}) }}
                 </td>
                 <td class="center-cells">
-                    {{ form_widget(form_manageFleet.lessHunter,{attr: { max: fleet.getShip().getHunter().getAmount()}}) }}
+                    {{ form_widget(form_manageFleet.lessHunter,{attr: { max: fleet.getHunter()}}) }}
                 </td>
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'fleet.fregate'|trans }} x {{ fleet.getShip().getFregate().getAmount() }}
+                    {{ 'fleet.fregate'|trans }} x {{ fleet.getFregate() }}
                 </th>
                 <td class="center-cells">
-                    {{ form_widget(form_manageFleet.moreFregate,{attr: { max: usePlanet.getShip().getFregate().getAmount()}}) }}
+                    {{ form_widget(form_manageFleet.moreFregate,{attr: { max: usePlanet.getFregate()}}) }}
                 </td>
                 <td class="center-cells">
-                    {{ form_widget(form_manageFleet.lessFregate,{attr: { max: fleet.getShip().getFregate().getAmount()}}) }}
+                    {{ form_widget(form_manageFleet.lessFregate,{attr: { max: fleet.getFregate()}}) }}
                 </td>
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'fleet.barge'|trans }} x {{ fleet.getShip().getBarge().getAmount() }}
+                    {{ 'fleet.barge'|trans }} x {{ fleet.getBarge() }}
                 </th>
                 <td class="center-cells">
-                    {{ form_widget(form_manageFleet.moreBarge,{attr: { max: usePlanet.getShip().getBarge().getAmount()}}) }}
+                    {{ form_widget(form_manageFleet.moreBarge,{attr: { max: usePlanet.getBarge()}}) }}
                 </td>
                 <td class="center-cells">
-                    {{ form_widget(form_manageFleet.lessBarge,{attr: { max: fleet.getShip().getBarge().getAmount()}}) }}
+                    {{ form_widget(form_manageFleet.lessBarge,{attr: { max: fleet.getBarge()}}) }}
                 </td>
             </tr>
             </tbody>

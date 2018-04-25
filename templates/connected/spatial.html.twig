@@ -12,50 +12,50 @@
             <tbody>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'spatial.sonde'|trans }} x {{ usePlanet.getShip().getSonde().getAmount() }} <span class="float-right"><span class="ml-5">{{ usePlanet.getShip().getSonde().getNiobium() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span></span>
+                    {{ 'spatial.sonde'|trans }} x {{ usePlanet.getSonde() }} <span class="float-right"><span class="ml-5">20 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span></span>
                 </th>
                 <td class="center-cells">
-                    {{ form_widget(form_spatialShip.sonde,{attr: { max: usePlanet.getShip().getSonde().getAmount()}}) }}
+                    {{ form_widget(form_spatialShip.sonde,{attr: { max: usePlanet.getSonde()}}) }}
                 </td>
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'spatial.colonizer'|trans }} x {{ usePlanet.getShip().getColonizer().getAmount() }} <span class="float-right"><span class="ml-5">{{ usePlanet.getShip().getColonizer().getNiobium() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3">{{ usePlanet.getShip().getColonizer().getWater() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span><span class="ml-3">{{ usePlanet.getShip().getColonizer().getBitcoin() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></span></span>
+                    {{ 'spatial.colonizer'|trans }} x {{ usePlanet.getColonizer() }} <span class="float-right"><span class="ml-5">20.000 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3">12.000 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></span>
                 </th>
                 <td class="center-cells">
-                    {{ form_widget(form_spatialShip.colonizer,{attr: { max: usePlanet.getShip().getColonizer().getAmount()}}) }}
+                    {{ form_widget(form_spatialShip.colonizer,{attr: { max: usePlanet.getColonizer()}}) }}
                 </td>
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'spatial.recycleur'|trans }} x {{ usePlanet.getShip().getRecycleur().getAmount() }} <span class="float-right"><span class="ml-5">{{ usePlanet.getShip().getRecycleur().getNiobium() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3">{{ usePlanet.getShip().getRecycleur().getWater() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></span>
+                    {{ 'spatial.recycleur'|trans }} x {{ usePlanet.getRecycleur() }} <span class="float-right"><span class="ml-5">10.000 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3">7.000 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></span>
                 </th>
                 <td class="center-cells">
-                    {{ form_widget(form_spatialShip.recycleur,{attr: { max: usePlanet.getShip().getRecycleur().getAmount()}}) }}
+                    {{ form_widget(form_spatialShip.recycleur,{attr: { max: usePlanet.getRecycleur()}}) }}
                 </td>
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'spatial.hunter'|trans }} x {{ usePlanet.getShip().getHunter().getAmount() }} <span class="float-right"><span class="ml-5">{{ usePlanet.getShip().getHunter().getNiobium() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3">{{ usePlanet.getShip().getHunter().getWater() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></span>
+                    {{ 'spatial.hunter'|trans }} x {{ usePlanet.getHunter() }} <span class="float-right"><span class="ml-5">50 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3">20 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></span>
                 </th>
                 <td class="center-cells">
-                    {{ form_widget(form_spatialShip.hunter,{attr: { max: usePlanet.getShip().getHunter().getAmount()}}) }}
+                    {{ form_widget(form_spatialShip.hunter,{attr: { max: usePlanet.getHunter()}}) }}
                 </td>
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'spatial.fregate'|trans }} x {{ usePlanet.getShip().getFregate().getAmount() }} <span class="float-right"><span class="ml-5">{{ usePlanet.getShip().getFregate().getNiobium() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3">{{ usePlanet.getShip().getFregate().getWater() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></span>
+                    {{ 'spatial.fregate'|trans }} x {{ usePlanet.getFregate() }} <span class="float-right"><span class="ml-5">300 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3">200 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></span>
                 </th>
                 <td class="center-cells">
-                    {{ form_widget(form_spatialShip.fregate,{attr: { max: usePlanet.getShip().getFregate().getAmount()}}) }}
+                    {{ form_widget(form_spatialShip.fregate,{attr: { max: usePlanet.getFregate()}}) }}
                 </td>
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'spatial.barge'|trans }} x {{ usePlanet.getShip().getBarge().getAmount() }} <span class="float-right"><span class="ml-5">{{ usePlanet.getShip().getBarge().getNiobium() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3">{{ usePlanet.getShip().getBarge().getWater() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span><span class="ml-3">{{ usePlanet.getShip().getBarge().getBitcoin() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></span></span>
+                    {{ 'spatial.barge'|trans }} x {{ usePlanet.getBarge() }} <span class="float-right"><span class="ml-5">15.000 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3">12.000 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></span>
                 </th>
                 <td class="center-cells">
-                    {{ form_widget(form_spatialShip.barge,{attr: { max: usePlanet.getShip().getBarge().getAmount()}}) }}
+                    {{ form_widget(form_spatialShip.barge,{attr: { max: usePlanet.getBarge()}}) }}
                 </td>
             </tr>
             </tbody>
@@ -81,7 +81,7 @@
             {% for fleet in usePlanet.getFleets() %}
                 <tr>
                     <th class="tab-cells-name">
-                       "{{  fleet.getName() }}" <a class="ml-3" href="{{ path('spatial', {'idp': usePlanet.getId()}) }}"><span>{{ 'spatial.seeFlotte'|trans }}</span></a>
+                       "{{  fleet.getName() }}" <a class="ml-3" href="{{ path('manage_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId() }) }}" data-toggle="modal" data-target="#editModal"><span>{{ 'spatial.seeFlotte'|trans }}</span></a>
                     </th>
                     <td class="center-cells text-center">
                         {{ fleet.getNbrShips() }}
@@ -96,6 +96,12 @@
     </div>
 
     <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-createFleet" role="document">
+            <div class="modal-content special">
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-createFleet" role="document">
             <div class="modal-content special">
             </div>

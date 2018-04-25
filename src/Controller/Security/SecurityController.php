@@ -25,13 +25,6 @@ use App\Entity\Zearch_Plasma;
 use App\Entity\Zearch_Cargo;
 use App\Entity\Zearch_Recycleur;
 use App\Entity\Zearch_Barge;
-use App\Entity\Yhip_Colonizer;
-use App\Entity\Yhip_Sonde;
-use App\Entity\Yhip_Hunter;
-use App\Entity\Yhip_Fregate;
-use App\Entity\Yhip_Barge;
-use App\Entity\Yhip_Recycleur;
-use App\Entity\Ship;
 use DateTime;
 use DateTimeZone;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -95,21 +88,6 @@ class SecurityController extends Controller
                 return $this->redirectToRoute('logout');
             }
 
-            $ship = new Ship();
-            $colonizer = new Yhip_Colonizer();
-            $vBarge = new Yhip_Barge();
-            $vRecycleur = new Yhip_Recycleur();
-            $sonde = new Yhip_Sonde();
-            $hunter = new Yhip_Hunter();
-            $fregate = new Yhip_Fregate();
-            $ship->setColonizer($colonizer);
-            $ship->setBarge($vBarge);
-            $ship->setRecycleur($vRecycleur);
-            $ship->setSonde($sonde);
-            $ship->setHunter($hunter);
-            $ship->setFregate($fregate);
-            $em->persist($ship);
-            $planet->setShip($ship);
             $em->persist($planet);
             $research = new Research();
             $demography = new Zearch_Demography();

@@ -34,12 +34,12 @@ class Planet
     /**
      * @ORM\Column(name="niobium",type="decimal", precision=28, scale=5)
      */
-    protected $niobium = 1500;
+    protected $niobium = 3000;
 
     /**
      * @ORM\Column(name="water",type="decimal", precision=28, scale=5)
      */
-    protected $water = 750;
+    protected $water = 1500;
 
     /**
      * @ORM\OneToOne(targetEntity="Building", inversedBy="planet", fetch="EXTRA_LAZY")
@@ -53,10 +53,34 @@ class Planet
     protected $fleets;
 
     /**
-     * @ORM\OneToOne(targetEntity="Ship", mappedBy="planet", fetch="EXTRA_LAZY")
-     * @ORM\JoinColumn(name="ship_id", referencedColumnName="id")
+     * @ORM\Column(name="sonde",type="bigint", nullable=true)
      */
-    protected $ship;
+    protected $sonde = 0;
+
+    /**
+     * @ORM\Column(name="colonizer",type="integer", nullable=true)
+     */
+    protected $colonizer = 0;
+
+    /**
+     * @ORM\Column(name="recycleur",type="integer", nullable=true)
+     */
+    protected $recycleur = 0;
+
+    /**
+     * @ORM\Column(name="barge",type="integer", nullable=true)
+     */
+    protected $barge = 0;
+
+    /**
+     * @ORM\Column(name="hunter",type="bigint", nullable=true)
+     */
+    protected $hunter = 0;
+
+    /**
+     * @ORM\Column(name="fregate",type="bigint", nullable=true)
+     */
+    protected $fregate = 0;
 
     /**
      * @ORM\Column(name="soldier",type="integer", nullable=true)
@@ -164,20 +188,90 @@ class Planet
         return $this->imageFile;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getEmpty()
+    public function getId()
     {
-        return $this->empty;
+        return $this->id;
     }
 
     /**
-     * @param mixed $empty
+     * @return mixed
      */
-    public function setEmpty($empty): void
+    public function getShipOn()
     {
-        $this->empty = $empty;
+        $fregate = $this->getFregate();
+        $colonizer = $this->getColonizer();
+        $barge = $this->getBarge();
+        $hunter = $this->getHunter();
+        $recycleur = $this->getRecycleur();
+        $sonde = $this->getSonde();
+
+        $nbr = $fregate + $colonizer + $barge + $hunter + $recycleur + $sonde;
+        return $nbr;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNbrSignatures()
+    {
+        $fregate = $this->getFregate() * $this->getFregateSignature();
+        $colonizer = $this->getColonizer() * $this->getColonizerSignature();
+        $barge = $this->getBarge() * $this->getBargeSignature();
+        $hunter = $this->getHunter() * $this->getHunterSignature();
+        $recycleur = $this->getRecycleur() * $this->getRecycleurSignature();
+        $sonde = $this->getSonde();
+
+        $nbr = $fregate + $colonizer + $barge + $hunter + $recycleur + $sonde;
+        return $nbr;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBargeSignature()
+    {
+        return $this->getBarge() * 50;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getColonizerSignature()
+    {
+        return $this->getColonizer() * 200;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFregateSignature()
+    {
+        return $this->getFregate() * 85;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHunterSignature()
+    {
+        return $this->getHunter() * 3;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRecycleurSignature()
+    {
+        return $this->getRecycleur() * 80;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNbrFleets()
+    {
+        $nbr = count($this->fleets);
+        return $nbr;
     }
 
     /**
@@ -199,7 +293,7 @@ class Planet
      *
      * @param \App\Entity\Fleet $fleet
      */
-    public function remove(\App\Entity\Fleet $fleet)
+    public function removeFleet(\App\Entity\Fleet $fleet)
     {
         $this->fleets->removeElement($fleet);
     }
@@ -223,20 +317,30 @@ class Planet
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getWater()
+    public function setImageName(?string $imageName): void
     {
-        return $this->water;
+        $this->imageName = $imageName;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
     }
 
     /**
-     * @param mixed $water
+     * @return mixed
      */
-    public function setWater($water): void
+    public function getName()
     {
-        $this->water = $water;
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name): void
+    {
+        $this->name = $name;
     }
 
     /**
@@ -258,6 +362,22 @@ class Planet
     /**
      * @return mixed
      */
+    public function getWater()
+    {
+        return $this->water;
+    }
+
+    /**
+     * @param mixed $water
+     */
+    public function setWater($water): void
+    {
+        $this->water = $water;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getBuilding()
     {
         return $this->building;
@@ -272,11 +392,19 @@ class Planet
     }
 
     /**
-     * @param mixed $soldier
+     * @return mixed
      */
-    public function setSoldier($soldier): void
+    public function getFleets()
     {
-        $this->soldier = $soldier;
+        return $this->fleets;
+    }
+
+    /**
+     * @param mixed $fleets
+     */
+    public function setFleets($fleets): void
+    {
+        $this->fleets = $fleets;
     }
 
     /**
@@ -288,19 +416,11 @@ class Planet
     }
 
     /**
-     * @param mixed $scientist
+     * @param mixed $soldier
      */
-    public function setScientist($scientist): void
+    public function setSoldier($soldier): void
     {
-        $this->scientist = $scientist;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getScientist()
-    {
-        return $this->scientist;
+        $this->soldier = $soldier;
     }
 
     /**
@@ -317,6 +437,22 @@ class Planet
     public function setWorker($worker): void
     {
         $this->worker = $worker;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getScientist()
+    {
+        return $this->scientist;
+    }
+
+    /**
+     * @param mixed $scientist
+     */
+    public function setScientist($scientist): void
+    {
+        $this->scientist = $scientist;
     }
 
     /**
@@ -349,47 +485,6 @@ class Planet
     public function setPosition($position): void
     {
         $this->position = $position;
-    }
-
-    public function setImageName(?string $imageName): void
-    {
-        $this->imageName = $imageName;
-    }
-
-    public function getImageName(): ?string
-    {
-        return $this->imageName;
-    }
-
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getSky()
-    {
-        return $this->sky;
-    }
-
-    /**
-     * @param mixed $sky
-     */
-    public function setSky($sky): void
-    {
-        $this->sky = $sky;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
     }
 
     /**
@@ -427,6 +522,22 @@ class Planet
     /**
      * @return mixed
      */
+    public function getSky()
+    {
+        return $this->sky;
+    }
+
+    /**
+     * @param mixed $sky
+     */
+    public function setSky($sky): void
+    {
+        $this->sky = $sky;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getSkyPlace()
     {
         return $this->skyPlace;
@@ -443,60 +554,17 @@ class Planet
     /**
      * @return mixed
      */
-    public function getShipOn()
+    public function getEmpty()
     {
-        $fregate = $this->ship->getFregate()->getAmount();
-        $hunter = $this->ship->getHunter()->getAmount();
-        $sonde = $this->ship->getSonde()->getAmount();
-        $colonizer = $this->ship->getColonizer()->getAmount();
-        $recycleur = $this->ship->getRecycleur()->getAmount();
-        $barge = $this->ship->getBarge()->getAmount();
-
-        $nbr = $fregate + $hunter + $sonde + $colonizer + $recycleur + $barge;
-
-        return $nbr;
+        return $this->empty;
     }
 
     /**
-     * @return mixed
+     * @param mixed $empty
      */
-    public function getShip()
+    public function setEmpty($empty): void
     {
-        return $this->ship;
-    }
-
-    /**
-     * @param mixed $ship
-     */
-    public function setShip($ship): void
-    {
-        $this->ship = $ship;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFleets()
-    {
-        return $this->fleets;
-    }
-
-    /**
-     * @param mixed $fleets
-     */
-    public function setFleets($fleets): void
-    {
-        $this->fleets = $fleets;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getNbrFleets()
-    {
-        $nbr = count($this->fleets);
-
-        return $nbr;
+        $this->empty = $empty;
     }
 
     /**
@@ -532,16 +600,98 @@ class Planet
     }
 
     /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Planet
+     * @return mixed
      */
-    public function setName($name)
+    public function getSonde()
     {
-        $this->name = $name;
+        return $this->sonde;
+    }
 
-        return $this;
+    /**
+     * @param mixed $sonde
+     */
+    public function setSonde($sonde): void
+    {
+        $this->sonde = $sonde;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getColonizer()
+    {
+        return $this->colonizer;
+    }
+
+    /**
+     * @param mixed $colonizer
+     */
+    public function setColonizer($colonizer): void
+    {
+        $this->colonizer = $colonizer;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRecycleur()
+    {
+        return $this->recycleur;
+    }
+
+    /**
+     * @param mixed $recycleur
+     */
+    public function setRecycleur($recycleur): void
+    {
+        $this->recycleur = $recycleur;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBarge()
+    {
+        return $this->barge;
+    }
+
+    /**
+     * @param mixed $barge
+     */
+    public function setBarge($barge): void
+    {
+        $this->barge = $barge;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHunter()
+    {
+        return $this->hunter;
+    }
+
+    /**
+     * @param mixed $hunter
+     */
+    public function setHunter($hunter): void
+    {
+        $this->hunter = $hunter;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFregate()
+    {
+        return $this->fregate;
+    }
+
+    /**
+     * @param mixed $fregate
+     */
+    public function setFregate($fregate): void
+    {
+        $this->fregate = $fregate;
     }
 }
