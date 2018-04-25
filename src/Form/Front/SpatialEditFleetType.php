@@ -28,7 +28,6 @@ class SpatialEditFleetType extends AbstractType
                         'minlength' => '2',
                     ),
                     'required' => true,
-                    'mapped' => true,
                 )
             )
             ->add(

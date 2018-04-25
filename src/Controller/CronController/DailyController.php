@@ -26,25 +26,28 @@ class DailyController extends Controller
             $ally = $user->getAlly();
             $worker = 0;
             $soldier = 0;
+            $scientist = 0;
             foreach ($user->getPlanets() as $planet) {
                 $worker = $worker + $planet->getWorker();
                 $soldier = $soldier + $planet->getSoldier();
+                $scientist = $scientist + $planet->getScientist();
             }
             if($ally) {
                 $userBitcoin = $user->getBitcoin();
-                $userBitcoin = $userBitcoin - (($ally->getTaxe() / 200) * $worker);
-                $user->setBitcoin($userBitcoin);
+                $taxe = (($ally->getTaxe() / 200) * $worker);
+                $user->setBitcoin($userBitcoin - $taxe);
                 $allyBitcoin = $ally->getBitcoin();
-                $allyBitcoin = $allyBitcoin + $userBitcoin;
+                $allyBitcoin = $allyBitcoin + $taxe;
                 $ally->setBitcoin($allyBitcoin);
                 $em->persist($ally);
             }
+            $ship = 0;
             $cost = $user->getBitcoin();
-            $cost = $cost - ($soldier * 2);
-            $point = ($worker / 100);
+            $cost = $cost - ($soldier * 2) - ($ship / 10);
+            $point = ($worker / 100) + ($ship / 5) + ($soldier);
             $user->setBitcoin($cost);
             $user->getRank()->setOldPoint($user->getRank()->getPoint());
-            $user->getRank()->setPoint($point - $user->getRank()->getPoint());
+            $user->getRank()->setPoint($point);
             $user->getRank()->setOldPosition($user->getRank()->getPosition());
             $user->getRank()->setPosition($x);
 

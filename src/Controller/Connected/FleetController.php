@@ -65,7 +65,8 @@ class FleetController extends Controller
         } else {
             return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
         }
-        if ($form_manageFleet->isSubmitted() && $form_manageFleet->isValid()) {
+
+        if ($form_manageFleet->isSubmitted()) {
 
             if ($form_manageFleet->get('moreColonizer')->getData()) {
                 $colonizer = $usePlanet->getColonizer() - $form_manageFleet->get('moreColonizer')->getData();
@@ -122,12 +123,15 @@ class FleetController extends Controller
                 $fregate = 0;
             }
             if (($colonizer < 0 || $recycleur < 0) || ($barge < 0 || $sonde < 0) || ($hunter < 0 || $fregate < 0)) {
-                exit;
                 return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
             }
 
             $fleet->setName($form_manageFleet->get('name')->getData());
-            $em->persist($fleet);
+            if($fleet->getNbrShips() == 0) {
+                $em->remove($fleet);
+            } else {
+                $em->persist($fleet);
+            }
             $usePlanet->setColonizer($colonizer);
             $usePlanet->setRecycleur($recycleur);
             $usePlanet->setBarge($barge);

@@ -20,3 +20,4 @@ spatial.seeFlotte: 'gerer flotte'
 spatial.fleetName: 'Nom de la flotte'
 spatial.fleetShips: Vaisseaux
 spatial.fleetSignature: Signature
+spatial.destroyFleet: 'mettre au sol'

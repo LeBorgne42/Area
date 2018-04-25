@@ -81,7 +81,7 @@
             {% for fleet in usePlanet.getFleets() %}
                 <tr>
                     <th class="tab-cells-name">
-                       "{{  fleet.getName() }}" <a class="ml-3" href="{{ path('manage_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId() }) }}" data-toggle="modal" data-target="#editModal"><span>{{ 'spatial.seeFlotte'|trans }}</span></a>
+                       "{{  fleet.getName() }}" <span><a class="ml-3 float-right" href="{{ path('destroy_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}"><span>{{ 'spatial.destroyFleet'|trans }}</span></a></span><span><a class="ml-3 float-right" href="{{ path('manage_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId() }) }}" data-toggle="modal" data-target="#editModal"><span>{{ 'spatial.seeFlotte'|trans }}</span></a></span>
                     </th>
                     <td class="center-cells text-center">
                         {{ fleet.getNbrShips() }}

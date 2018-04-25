@@ -103,7 +103,7 @@ function manageMaxShip() {
         if($('#spatial_edit_fleet_lessBarge').attr('max') - $('#spatial_edit_fleet_lessBarge').val() < 0) {
             $('#spatial_edit_fleet_lessBarge').val($('#spatial_edit_fleet_lessBarge').attr('max'));
         }
-    });
+    });/*
     $('#spatial_ship_sonde').off('change').on('change',function(e){
         if($('#spatial_ship_sonde').attr('max') - $('#spatial_ship_sonde').val() < 0) {
             $('#spatial_ship_sonde').val($('#spatial_ship_sonde').attr('max'));
@@ -163,7 +163,7 @@ function manageMaxShip() {
         if($('#spatial_fleet_barge').attr('max') - $('#spatial_fleet_barge').val() < 0) {
             $('#spatial_fleet_barge').val($('#spatial_fleet_barge').attr('max'));
         }
-    });
+    });*/
 }
 
 function manageConstructTime() {

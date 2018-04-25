@@ -83,7 +83,7 @@ class Ally
 
     /**
      * @Assert\File(
-     *     maxSize="800k",
+     *     maxSize="1000k",
      *     mimeTypes={"image/png", "image/jpeg", "image/bmp"}
      * )
      * @Vich\UploadableField(mapping="ally_img", fileNameProperty="imageName", size="imageSize" )
