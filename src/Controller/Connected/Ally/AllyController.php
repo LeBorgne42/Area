@@ -52,7 +52,7 @@ class AllyController extends Controller
         $form_allyImage->handleRequest($request);
 
         if ($form_allyImage->isSubmitted() && $form_allyImage->isValid()) {
-            $em->persist($user);
+            $em->persist($ally);
             $em->flush();
         }
 

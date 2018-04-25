@@ -13,7 +13,7 @@
                         <h2 class="mb-3">{{ app.user.getUsername() }}</h2>
                         <div class="modify">
                             {% if app.user %}
-                                {% if app.user.imageFile %}
+                                {% if app.user.imageName %}
                                     <img data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.modify'|trans }}" height="64" width="64" src="{{ vich_uploader_asset(app.user, 'imageFile') }}">
                                 {% else %}
                                     <img data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.modify'|trans }}" height="64" width="64" src="{{ asset('img/avatar.png') }}">
