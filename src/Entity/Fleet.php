@@ -53,22 +53,19 @@ class Fleet
     protected $ship;
 
     /**
-     * @ORM\OneToOne(targetEntity="Soldier", inversedBy="fleet", fetch="EXTRA_LAZY")
-     * @ORM\JoinColumn(name="soldier_id", referencedColumnName="id")
+     * @ORM\Column(name="soldier",type="integer", nullable=true)
      */
-    protected $soldier;
+    protected $soldier = null;
 
     /**
-     * @ORM\OneToOne(targetEntity="Worker", inversedBy="fleet", fetch="EXTRA_LAZY")
-     * @ORM\JoinColumn(name="worker_id", referencedColumnName="id")
+     * @ORM\Column(name="worker",type="integer", nullable=true)
      */
-    protected $worker;
+    protected $worker = null;
 
     /**
-     * @ORM\OneToOne(targetEntity="Scientist", inversedBy="fleet", fetch="EXTRA_LAZY")
-     * @ORM\JoinColumn(name="scientist_id", referencedColumnName="id")
+     * @ORM\Column(name="scientist",type="integer", nullable=true)
      */
-    protected $scientist;
+    protected $scientist = null;
 
     /**
      * @param mixed $soldier

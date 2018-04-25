@@ -30,23 +30,17 @@ function manageModalContact() {
     });
 }
 
-/*niobium = parseInt($('div.bg-top span.ressource.niobium span').text());
-water = parseInt($('div.bg-top span.ressource.water span').text());
-function manageReloadR() {
-    setTimeout(function(){
-        niobium = niobium + 4;
-        $('div.bg-top span.ressource.niobium span').text(niobium);
-        water = water + 2;
-        $('div.bg-top span.ressource.water span').text(water);
-        manageReloadR();
-        }, 1000);
-}*/
-
 function setNoDecimalDisplay() {
     $('div.bg-top span.ressource.niobium span.reload').text(Math.trunc($('div.bg-top span.ressource.niobium span.reload').text()));
     $('div.bg-top span.ressource.water span.reload').text(Math.trunc($('div.bg-top span.ressource.water span.reload').text()));
     $('div.bg-top span.ressource.bitcoin span.reload').text(Math.trunc($('div.bg-top span.ressource.bitcoin span.reload').text()));
-    $('div.bg-top span.ressource.worker span.reload').text(Math.trunc($('div.bg-top span.ressource.worker span.reload').text()));
+
+    setInterval(function() {
+        var niobium = Math.trunc($('div.bg-top span.ressource.niobium span.reload').text());
+        var water =   Math.trunc($('div.bg-top span.ressource.water span.reload').text());
+        $('div.bg-top span.ressource.niobium span.reload').text(Math.trunc(niobium + ($('div.bg-top span.ressource.niobium span.takeProd').text() / 60)));
+        $('div.bg-top span.ressource.water span.reload').text(Math.trunc(water + ($('div.bg-top span.ressource.water span.takeProd').text() / 60)));
+    }, 1000);
 }
 
 function manageMaxShip() {
@@ -181,18 +175,25 @@ function manageConstructTime() {
     var minutes = Math.floor((date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60))) / 60);
     var secondes = Math.floor(date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60 + minutes * 60)));
     if (date_now > 0) {
-        if (jours) {
-            $('#timeDisplay').text(jours + 'j ' + heures + 'heures ' + minutes + 'mins ' + secondes + 's');
-        } else if (heures)
-        {
-            $('#timeDisplay').text(heures + 'heures ' + minutes + 'mins ' + secondes + 's');
-        } else if (minutes)
-        {
-            $('#timeDisplay').text(minutes + 'mins ' + secondes + 's');
-        } else if (secondes)
-        {
-            $('#timeDisplay').text(secondes + ' secondes');
-        }
+        setInterval(function() {
+            if (jours) {
+                $('#timeDisplay').text(jours + 'j ' + heures + 'heures ' + minutes + 'mins ' + secondes + 's');
+            } else if (heures)
+            {
+                $('#timeDisplay').text(heures + 'heures ' + minutes + 'mins ' + secondes + 's');
+            } else if (minutes)
+            {
+                $('#timeDisplay').text(minutes + 'mins ' + secondes + 's');
+            } else if (secondes)
+            {
+                $('#timeDisplay').text(secondes + ' secondes');
+            }
+            secondes = secondes - 1;
+            if(secondes == 0) {
+                secondes = 60;
+                minutes = minutes - 1;
+            }
+        }, 1000);
     }
 }
 
@@ -205,18 +206,25 @@ function manageResearchTime() {
     var minutes = Math.floor((date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60))) / 60);
     var secondes = Math.floor(date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60 + minutes * 60)));
     if (date_now > 0) {
-        if (jours) {
-            $('#timeDisplayR').text(jours + 'j ' + heures + 'heures ' + minutes + 'mins ' + secondes + 's');
-        } else if (heures)
-        {
-            $('#timeDisplayR').text(heures + 'heures ' + minutes + 'mins ' + secondes + 's');
-        } else if (minutes)
-        {
-            $('#timeDisplayR').text(minutes + 'mins ' + secondes + 's');
-        } else if (secondes)
-        {
-            $('#timeDisplayR').text(secondes + ' secondes');
-        }
+        setInterval(function() {
+            if (jours) {
+                $('#timeDisplayR').text(jours + 'j ' + heures + 'heures ' + minutes + 'mins ' + secondes + 's');
+            } else if (heures)
+            {
+                $('#timeDisplayR').text(heures + 'heures ' + minutes + 'mins ' + secondes + 's');
+            } else if (minutes)
+            {
+                $('#timeDisplayR').text(minutes + 'mins ' + secondes + 's');
+            } else if (secondes)
+            {
+                $('#timeDisplayR').text(secondes + ' secondes');
+            }
+            secondes = secondes - 1;
+            if(secondes == 0) {
+                secondes = 60;
+                minutes = minutes - 1;
+            }
+        }, 1000);
     }
 }
 
@@ -232,8 +240,6 @@ $(document).ready(function() {
     manageModalContact();
     manageMaxShip();
     manageConstructTime();
-    manageResearchTime();
-    // manageReloadR();
     setNoDecimalDisplay();
     console.log("Toute utilisation de scripts sur le jeu seront puni d'un ban permanent, merci.");
 });

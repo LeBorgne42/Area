@@ -26,7 +26,7 @@ class RessourcesController extends Controller
         foreach ($users as $user) {
             $worker = 0;
             foreach ($user->getPlanets() as $planet) {
-                $worker = $worker + $planet->getWorker()->getAmount();
+                $worker = $worker + $planet->getWorker();
                 $niobium = $planet->getNiobium();
                 $water = $planet->getWater();
                 $niobium = $niobium + ($planet->getBuilding()->getMiner()->getProduction());
@@ -34,7 +34,7 @@ class RessourcesController extends Controller
                 $planet->setNiobium($niobium);
                 $planet->setWater($water);
                 $em->persist($planet);
-                if($planet->getBuilding()->getConstruct() < $now) {
+                /*if($planet->getBuilding()->getConstruct() < $now) {
                     $building = $planet->getBuilding();
                     if($building->getMiner()->getFinishAt()) {
                         $building->getMiner()->setLevel($building->getMiner()->getLevel() + 1);
@@ -87,9 +87,9 @@ class RessourcesController extends Controller
                     $building->setConstruct(null);
                     $em->persist($building);
                     $em->flush();
-                }
+                }*/
             }
-            if($user->getSearch() < $now) {
+            /*if($user->getSearch() < $now) {
                 $research = $user->getResearch();
                 if($research->getOnde()->getFinishAt()) {
                     $research->getOnde()->setLevel($research->getOnde()->getLevel() + 1);
@@ -159,9 +159,9 @@ class RessourcesController extends Controller
                 $em->persist($user);
                 $em->persist($research);
                 $em->flush();
-            }
+            }*/
             $bitcoin = $user->getBitcoin();
-            $bitcoin = $bitcoin + ($worker / 175000);
+            $bitcoin = $bitcoin + ($worker / 1400);
             $user->setBitcoin($bitcoin);
             $em->persist($user);
         }

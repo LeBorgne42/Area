@@ -22,9 +22,6 @@ use App\Entity\Xuilding_SkyBrouilleur;
 use App\Entity\Xuilding_SpaceShipyard;
 use App\Entity\Xuilding_Metropole;
 use App\Entity\Xuilding_City;
-use App\Entity\Soldier;
-use App\Entity\Worker;
-use App\Entity\Scientist;
 
 /**
  * @Route("/serveur")
@@ -53,89 +50,92 @@ class ServerController extends Controller
             $sector->setPosition($nbrSector);
             $em->persist($sector);
             while($nbrPlanet <= 25) {
-                if(rand(1, 20) < 6) {
+                if (($nbrSector == 34 || $nbrSector == 37 || $nbrSector == 64 || $nbrSector == 67) && $nbrPlanet == 13) {
                     $planet = new Planet();
-                    $planet->setEmpty(true);
+                    $planet->setMerchant(true);
+                    $planet->setGround(260);
+                    $planet->setSky(55);
+                    $planet->setImageName('merchant.png');
+                    $planet->setName('Marchands');
                     $planet->setSector($sector);
                     $planet->setPosition($nbrPlanet);
                 } else {
-                    $nbrPlanets++;
-                    $planet = new Planet();
-                    $soldier = new Soldier();
-                    $worker = new Worker();
-                    $scientist = new Scientist();
-                    $building = new Building();
-                    $miner = new Xuilding_Miner();
-                    $extractor = new Xuilding_Extractor();
-                    $spaceShip = new Xuilding_SpaceShipyard();
-                    $SkyBrouilleur = new Xuilding_SkyBrouilleur();
-                    $search = new Xuilding_Search();
-                    $SkyRadar = new Xuilding_SkyRadar();
-                    $radar = new Xuilding_Radar();
-                    $caserne = new Xuilding_Caserne();
-                    $heavy = new Xuilding_HeavyUsine();
-                    $light = new Xuilding_LightUsine();
-                    $metropole = new Xuilding_Metropole();
-                    $city = new Xuilding_City();
+                    if (rand(1, 20) < 12) {
+                        $planet = new Planet();
+                        $planet->setEmpty(true);
+                        $planet->setSector($sector);
+                        $planet->setPosition($nbrPlanet);
+                    } elseif (rand(0, 101) < 2) {
+                        $planet = new Planet();
+                        $planet->setCdr(true);
+                        $planet->setImageName('cdr.png');
+                        $planet->setName('Astéroïdes');
+                        $planet->setSector($sector);
+                        $planet->setPosition($nbrPlanet);
+                    }
+                    else {
+                        $nbrPlanets++;
+                        $planet = new Planet();
+                        $building = new Building();
+                        $miner = new Xuilding_Miner();
+                        $extractor = new Xuilding_Extractor();
+                        $spaceShip = new Xuilding_SpaceShipyard();
+                        $SkyBrouilleur = new Xuilding_SkyBrouilleur();
+                        $search = new Xuilding_Search();
+                        $SkyRadar = new Xuilding_SkyRadar();
+                        $radar = new Xuilding_Radar();
+                        $caserne = new Xuilding_Caserne();
+                        $heavy = new Xuilding_HeavyUsine();
+                        $light = new Xuilding_LightUsine();
+                        $metropole = new Xuilding_Metropole();
+                        $city = new Xuilding_City();
 
-                    $building->setMiner($miner);
-                    $building->setExtractor($extractor);
-                    $building->setSpaceShip($spaceShip);
-                    $building->setSkyBrouilleur($SkyBrouilleur);
-                    $building->setbuildSearch($search);
-                    $building->setSkyRadar($SkyRadar);
-                    $building->setRadar($radar);
-                    $building->setCaserne($caserne);
-                    $building->setHeavyUsine($heavy);
-                    $building->setLightUsine($light);
-                    $building->setMetropole($metropole);
-                    $building->setCity($city);
-                    $soldier->setPlanet($planet);
-                    $worker->setPlanet($planet);
-                    $scientist->setPlanet($planet);
-                    $soldier->setAmount(500);
-                    $worker->setAmount(10000);
-                    $scientist->setAmount(200);
-                    $planet->setSoldier($soldier);
-                    $planet->setWorker($worker);
-                    $planet->setScientist($scientist);
-                    $planet->setBuilding($building);
+                        $building->setMiner($miner);
+                        $building->setExtractor($extractor);
+                        $building->setSpaceShip($spaceShip);
+                        $building->setSkyBrouilleur($SkyBrouilleur);
+                        $building->setbuildSearch($search);
+                        $building->setSkyRadar($SkyRadar);
+                        $building->setRadar($radar);
+                        $building->setCaserne($caserne);
+                        $building->setHeavyUsine($heavy);
+                        $building->setLightUsine($light);
+                        $building->setMetropole($metropole);
+                        $building->setCity($city);
+                        $planet->setBuilding($building);
 
-                    $em->persist($building);
-                    $em->persist($spaceShip);
-                    $em->persist($SkyBrouilleur);
-                    $em->persist($search);
-                    $em->persist($SkyRadar);
-                    $em->persist($radar);
-                    $em->persist($caserne);
-                    $em->persist($heavy);
-                    $em->persist($light);
-                    $em->persist($metropole);
-                    $em->persist($city);
-                    $em->persist($miner);
-                    $em->persist($extractor);
-                    $em->persist($soldier);
-                    $em->persist($scientist);
-                    $em->persist($worker);
+                        $em->persist($building);
+                        $em->persist($spaceShip);
+                        $em->persist($SkyBrouilleur);
+                        $em->persist($search);
+                        $em->persist($SkyRadar);
+                        $em->persist($radar);
+                        $em->persist($caserne);
+                        $em->persist($heavy);
+                        $em->persist($light);
+                        $em->persist($metropole);
+                        $em->persist($city);
+                        $em->persist($miner);
+                        $em->persist($extractor);
 
-                    $planet->setName('Inhabitée');
-                    $planet->setImageName($image[rand(0, 35)]);
-                    $planet->setSector($sector);
-                    $planet->setPosition($nbrPlanet);
-                    if (($nbrSector >= 1 && $nbrSector <= 9) || ($nbrSector >= 92 && $nbrSector <= 99) || ($nbrSector % 10 == 0 && $nbrSector % 10 == 1)) {
-                        if ($nbrPlanet == 4 || $nbrPlanet == 6 || $nbrPlanet == 15 || $nbrPlanet == 17 || $nbrPlanet == 25) {
-                            $planet->setGround(60);
-                            $planet->setSky(10);
+                        $planet->setImageName($image[rand(0, 32)]);
+                        $planet->setSector($sector);
+                        $planet->setPosition($nbrPlanet);
+                        if (($nbrSector >= 1 && $nbrSector <= 9) || ($nbrSector >= 92 && $nbrSector <= 99) || ($nbrSector % 10 == 0 && $nbrSector % 10 == 1)) {
+                            if ($nbrPlanet == 4 || $nbrPlanet == 6 || $nbrPlanet == 15 || $nbrPlanet == 17 || $nbrPlanet == 25) {
+                                $planet->setGround(60);
+                                $planet->setSky(10);
+                            } else {
+                                $planet->setGround(rand(75, 95));
+                                $planet->setSky(rand(4, 15));
+                            }
+                        } elseif ($nbrSector == 55 || $nbrSector == 56 || $nbrSector == 65 || $nbrSector == 66) {
+                            $planet->setGround(rand(120, 160));
+                            $planet->setSky(rand(3, 20));
                         } else {
-                            $planet->setGround(rand(75, 95));
-                            $planet->setSky(rand(4, 15));
+                            $planet->setGround(rand(85, 125));
+                            $planet->setSky(rand(6, 30));
                         }
-                    } elseif ($nbrSector == 55 || $nbrSector == 56 || $nbrSector == 65 || $nbrSector == 66) {
-                        $planet->setGround(rand(120, 160));
-                        $planet->setSky(rand(3, 20));
-                    } else {
-                        $planet->setGround(rand(85, 125));
-                        $planet->setSky(rand(6, 30));
                     }
                 }
                 $em->persist($planet);

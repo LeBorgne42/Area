@@ -36,7 +36,7 @@ class Xuilding_Miner
     /**
      * @ORM\Column(name="production",type="decimal", precision=9, scale=5)
      */
-    protected $production = 0.02315;
+    protected $production = 5.2;
 
     /**
      * @ORM\Column(name="level",type="integer")

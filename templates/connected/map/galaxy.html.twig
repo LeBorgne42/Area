@@ -16,7 +16,7 @@
                     {% endif %}
                     <td class="center-cells"><a data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.sector'|trans({'%position%': sector.getPosition()}) }}" href="{{ path('map', {'id':sector.getPosition(), 'idp': usePlanet.getId()}) }}">
                         {% for planet in sector.getPlanets() %}
-                            <span class="{% if planet.getUser() == app.user %}pp-mine{% elseif planet.getUser() %}pp-enemy{% endif %}">{% if planet.getEmpty() == true %}&nbsp;{% else %}.{% endif %}</span>
+                            <span class="{% if planet.getUser() == app.user %}pp-mine{% elseif planet.getUser() %}pp-enemy{% elseif planet.getCdr() == true %}pp-cdr{% elseif planet.getMerchant() == true %}pp-ia{% endif %}">{% if planet.getEmpty() == true %}&nbsp;{% else %}.{% endif %}</span>
                         {% endfor %}
                         </a></td>
                     {% set x = x + 1 %}

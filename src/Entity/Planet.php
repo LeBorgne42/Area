@@ -23,7 +23,7 @@ class Planet
     /**
      * @ORM\Column(name="name",type="string", length=15, nullable=true)
      */
-    protected $name;
+    protected $name = 'Inhabitée';
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="planets", fetch="EXTRA_LAZY")
@@ -59,22 +59,19 @@ class Planet
     protected $ship;
 
     /**
-     * @ORM\OneToOne(targetEntity="Soldier", inversedBy="planet", fetch="EXTRA_LAZY")
-     * @ORM\JoinColumn(name="soldier_id", referencedColumnName="id")
+     * @ORM\Column(name="soldier",type="integer", nullable=true)
      */
-    protected $soldier;
+    protected $soldier = 50;
 
     /**
-     * @ORM\OneToOne(targetEntity="Worker", inversedBy="planet", fetch="EXTRA_LAZY")
-     * @ORM\JoinColumn(name="worker_id", referencedColumnName="id")
+     * @ORM\Column(name="worker",type="integer")
      */
-    protected $worker;
+    protected $worker = 10000;
 
     /**
-     * @ORM\OneToOne(targetEntity="Scientist", inversedBy="planet", fetch="EXTRA_LAZY")
-     * @ORM\JoinColumn(name="scientist_id", referencedColumnName="id")
+     * @ORM\Column(name="scientist",type="integer", nullable=true)
      */
-    protected $scientist;
+    protected $scientist = 100;
 
     /**
      * @ORM\ManyToOne(targetEntity="Sector", inversedBy="planets", fetch="EXTRA_LAZY")
@@ -112,6 +109,18 @@ class Planet
      * @Assert\NotBlank(message = "required")
      */
     protected $empty = false;
+
+    /**
+     * @ORM\Column(name="cdr",type="boolean")
+     * @Assert\NotBlank(message = "required")
+     */
+    protected $cdr = false;
+
+    /**
+     * @ORM\Column(name="merchant",type="boolean")
+     * @Assert\NotBlank(message = "required")
+     */
+    protected $merchant = false;
 
     /**
      * @Assert\File(
@@ -488,6 +497,38 @@ class Planet
         $nbr = count($this->fleets);
 
         return $nbr;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCdr()
+    {
+        return $this->cdr;
+    }
+
+    /**
+     * @param mixed $cdr
+     */
+    public function setCdr($cdr): void
+    {
+        $this->cdr = $cdr;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMerchant()
+    {
+        return $this->merchant;
+    }
+
+    /**
+     * @param mixed $merchant
+     */
+    public function setMerchant($merchant): void
+    {
+        $this->merchant = $merchant;
     }
 
     /**

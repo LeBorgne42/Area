@@ -27,8 +27,8 @@ class DailyController extends Controller
             $worker = 0;
             $soldier = 0;
             foreach ($user->getPlanets() as $planet) {
-                $worker = $worker + $planet->getWorker()->getAmount();
-                $soldier = $soldier + $planet->getSoldier()->getAmount();
+                $worker = $worker + $planet->getWorker();
+                $soldier = $soldier + $planet->getSoldier();
             }
             if($ally) {
                 $userBitcoin = $user->getBitcoin();

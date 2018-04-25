@@ -36,7 +36,7 @@ class Xuilding_Extractor
     /**
      * @ORM\Column(name="production",type="decimal", precision=9, scale=5)
      */
-    protected $production = 0.01736;
+    protected $production = 3.47;
 
     /**
      * @ORM\Column(name="level",type="integer")
