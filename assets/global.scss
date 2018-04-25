@@ -17,6 +17,8 @@ body.area {
   margin: 0 auto;
   color: #fff;
   background-image: url("../public/img/wall.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   max-width: 1280px;
   height: auto;
   font-size: 1.1rem;

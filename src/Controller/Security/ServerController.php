@@ -37,7 +37,7 @@ class ServerController extends Controller
             $sector->setPosition($nbrSector);
             $em->persist($sector);
             while($nbrPlanet <= 25) {
-                if (($nbrSector == 34 || $nbrSector == 37 || $nbrSector == 64 || $nbrSector == 67) && $nbrPlanet == 13) {
+                if (($nbrSector == 23 || $nbrSector == 28 || $nbrSector == 73 || $nbrSector == 78) && $nbrPlanet == 13) {
                     $planet = new Planet();
                     $planet->setMerchant(true);
                     $planet->setGround(260);
