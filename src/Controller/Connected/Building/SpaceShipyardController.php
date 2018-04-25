@@ -45,7 +45,6 @@ class SpaceShipyardController extends Controller
         }
 
         $now->add(new DateInterval('PT' . ($level * 7000) . 'S'));
-        $usePlanet->setMiner($level);
         $usePlanet->setNiobium($usePlanetNb - ($level * 75000));
         $usePlanet->setWater($usePlanetWt - ($level * 55000));
         $usePlanet->setGroundPlace($newGround);
@@ -124,7 +123,6 @@ class SpaceShipyardController extends Controller
         }
 
         $now->add(new DateInterval('PT' . ($level * 21600) . 'S'));
-        $usePlanet->setMiner($level);
         $usePlanet->setNiobium($usePlanetNb - ($level * 6000));
         $usePlanet->setWater($usePlanetWt - ($level * 3900));
         $usePlanet->setGroundPlace($newGround);
@@ -200,7 +198,6 @@ class SpaceShipyardController extends Controller
         }
 
         $now->add(new DateInterval('PT' . ($level * 72000) . 'S'));
-        $usePlanet->setMiner($level);
         $usePlanet->setNiobium($usePlanetNb - ($level * 83000));
         $usePlanet->setWater($usePlanetWt - ($level * 68000));
         $usePlanet->setGroundPlace($newGround);
@@ -278,7 +275,6 @@ class SpaceShipyardController extends Controller
         }
 
         $now->add(new DateInterval('PT' . ($level * 21000) . 'S'));
-        $usePlanet->setMiner($level);
         $usePlanet->setNiobium($usePlanetNb - ($level * 23000));
         $usePlanet->setWater($usePlanetWt - ($level * 34000));
         $usePlanet->setGroundPlace($newGround);

@@ -69,7 +69,7 @@
                                     <a href="{{ path('ally', {'idp': usePlanet.getId()}) }}">{{ user.getUsername() }}</a>
                                 </td>
                                 <td class="center-cells">
-                                    {{ user.getJoinAllyAt()|date('d/m/Y h:m') }}
+                                    {{ user.getJoinAllyAt()|date('d/m/Y H:i') }}
                                 </td>
                                 <td class="center-cells">
                                     {{ user.getRank().getPoint() }}

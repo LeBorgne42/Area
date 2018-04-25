@@ -48,7 +48,7 @@
                     <td class="center-cells">
                         <span><a href="{{ path('building', {'idp': usePlanet.getId()}) }}">
                             {% if usePlanet.getConstruct() %}
-                                <div id="timeConstruct" hidden>{{ usePlanet.getConstructAt()|date('Y/m/d H:m:s') }}</div>
+                                <div id="timeConstruct" hidden>{{ usePlanet.getConstructAt()|date('Y/m/d H:i:s') }}</div>
                                 <h4>{{ 'cell.constructName'|trans|raw }}<span id="timeDisplay" class="my-2"></span></h4>
                             {% else %}
                                 <h4>{{ 'cell.batiment'|trans|raw }}</h4>
@@ -60,8 +60,8 @@
                     <th class="tab-cells-name"><h4>{{ 'title.search'|trans|raw }}</h4></th>
                     <td class="center-cells">
                         <span><a href="{{ path('search', {'idp': usePlanet.getId()}) }}">
-                            {% if app.user.getSearch() > date %}
-                                <div id="timeResearch" hidden>{{ app.user.getSearch()|date('Y/m/d H:m:s') }}</div>
+                            {% if app.user.getSearch() %}
+                                <div id="timeResearch" hidden>{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
                                 <h4>{{ 'cell.searchName'|trans|raw }}<span id="timeDisplayR" class="my-2"></span></h4>
                             {% else %}
                                 <h4>{{ 'cell.search'|trans|raw }}</h4>

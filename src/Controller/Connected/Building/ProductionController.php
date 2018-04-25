@@ -42,7 +42,6 @@ class ProductionController extends Controller
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $now->add(new DateInterval('PT' . ($level * 180) . 'S'));
-        $usePlanet->setMiner($level);
         $usePlanet->setNiobium($usePlanetNb - ($level * 300));
         $usePlanet->setWater($usePlanetWt - ($level * 100));
         $usePlanet->setGroundPlace($newGround);
@@ -115,7 +114,6 @@ class ProductionController extends Controller
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $now->add(new DateInterval('PT' . ($level * 180) . 'S'));
-        $usePlanet->setExtractor($level);
         $usePlanet->setNiobium($usePlanetNb - ($level * 100));
         $usePlanet->setWater($usePlanetWt - ($level * 300));
         $usePlanet->setGroundPlace($newGround);

@@ -193,6 +193,9 @@ function manageConstructTime() {
                 secondes = 60;
                 minutes = minutes - 1;
             }
+            if((secondes == 0 && minutes == 0) && (heures == 0 && jours == 0)) {
+                return false;
+            }
         }, 1000);
     }
 }
@@ -200,6 +203,7 @@ function manageConstructTime() {
 function manageResearchTime() {
     var build = new Date($('#timeResearch').text());
     var now = new Date();
+    console.log($('#timeResearch').text());
     var date_now = Math.abs(build - now) / 1000;
     var jours = Math.floor(date_now / (60 * 60 * 24));
     var heures = Math.floor((date_now - (jours * 60 * 60 * 24)) / (60 * 60));
@@ -224,6 +228,9 @@ function manageResearchTime() {
                 secondes = 60;
                 minutes = minutes - 1;
             }
+            if((secondes == 0 && minutes == 0) && (heures == 0 && jours == 0)) {
+                return false;
+            }
         }, 1000);
     }
 }
@@ -240,6 +247,7 @@ $(document).ready(function() {
     manageModalContact();
     manageMaxShip();
     manageConstructTime();
+    manageResearchTime();
     setNoDecimalDisplay();
     console.log("Toute utilisation de scripts sur le jeu seront puni d'un ban permanent, merci.");
 });

@@ -44,7 +44,6 @@ class InformationController extends Controller
         }
 
         $now->add(new DateInterval('PT' . ($level * 3600) . 'S'));
-        $usePlanet->setMiner($level);
         $usePlanet->setNiobium($usePlanetNb - ($level * 1200));
         $usePlanet->setWater($usePlanetWt - ($level * 650));
         $usePlanet->setGroundPlace($newGround);
@@ -118,7 +117,6 @@ class InformationController extends Controller
         }
 
         $now->add(new DateInterval('PT' . ($level * 14400) . 'S'));
-        $usePlanet->setMiner($level);
         $usePlanet->setNiobium($usePlanetNb - ($level * 20000));
         $usePlanet->setWater($usePlanetWt - ($level * 17200));
         $usePlanet->setSkyPlace($newSky);
@@ -192,7 +190,6 @@ class InformationController extends Controller
         }
 
         $now->add(new DateInterval('PT' . ($level * 32400) . 'S'));
-        $usePlanet->setMiner($level);
         $usePlanet->setNiobium($usePlanetNb - ($level * 51000));
         $usePlanet->setWater($usePlanetWt - ($level * 32100));
         $usePlanet->setSkyPlace($newSky);

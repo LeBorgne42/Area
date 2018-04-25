@@ -45,7 +45,7 @@
                             {{ proposal.getAlly().getName() }}
                         </td>
                         <td class="center-cells">
-                            {{ proposal.getProposalAt()|date('d/m/Y h:m') }}
+                            {{ proposal.getProposalAt()|date('d/m/Y H:i') }}
                         </td>
                         <td class="center-cells">
                             <a href="{{ path('ally_accept', {id: proposal.getId(), 'idp': usePlanet.getId()}) }}"><span>{{ 'ally.accept'|trans }}</span></a>
