@@ -13,7 +13,7 @@
                 <tbody>
                 <tr>
                     <th class="tab-cells-name">
-                        {{ 'spatial.sonde'|trans }} x {{ usePlanet.getSonde() }} <span class="float-right"><span class="ml-5">20 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span></span>
+                        {{ 'spatial.sonde'|trans }} x {{ usePlanet.getSonde() }} <span class="float-right"><span class="ml-5">5 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span></span>
                     </th>
                     <td class="center-cells">
                         {{ form_widget(form_spatialShip.sonde,{attr: { max: usePlanet.getSonde()}}) }}
@@ -37,7 +37,7 @@
                 </tr>
                 <tr{% if app.user.getIndustry() > 0 or app.user.getMissile() == 0 %} hidden{% endif %}>
                     <th class="tab-cells-name">
-                        {{ 'spatial.hunter'|trans }} x {{ usePlanet.getHunter() }} <span class="float-right"><span class="ml-5">50 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3">20 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></span>
+                        {{ 'spatial.hunter'|trans }} x {{ usePlanet.getHunter() }} <span class="float-right"><span class="ml-5">25 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3">5 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></span>
                     </th>
                     <td class="center-cells">
                         {{ form_widget(form_spatialShip.hunter,{attr: { max: usePlanet.getHunter()}}) }}
@@ -83,7 +83,7 @@
             {% for fleet in usePlanet.getFleets() %}
                 <tr>
                     <th class="tab-cells-name">
-                       "{{  fleet.getName() }}" <span><a class="ml-3 float-right" href="{{ path('destroy_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}"><span>{{ 'spatial.destroyFleet'|trans }}</span></a></span><span><a class="ml-3 float-right" href="{{ path('manage_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId() }) }}" data-toggle="modal" data-target="#editModal"><span>{{ 'spatial.seeFlotte'|trans }}</span></a></span> <span><a class="ml-3 float-right" href="{{ path('send_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}"><span>{{ 'spatial.sendFleet'|trans }}</span></a></span>
+                       "{{  fleet.getName() }}" <span><a class="ml-3 float-right" href="{{ path('destroy_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}"><span>{{ 'spatial.destroyFleet'|trans }}</span></a></span><span><a class="ml-3 float-right" href="{{ path('manage_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId() }) }}" data-toggle="modal" data-target="#editModal"><span>{{ 'spatial.seeFlotte'|trans }}</span></a></span>
                     </th>
                     <td class="center-cells text-center">
                         {{ fleet.getNbrShips() }}

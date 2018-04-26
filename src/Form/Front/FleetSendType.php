@@ -29,7 +29,6 @@ class FleetSendType extends AbstractType
                         'max' => '20',
                     ),
                     'required' => true,
-                    'disabled' => 'disabled',
                 )
             )
             ->add(

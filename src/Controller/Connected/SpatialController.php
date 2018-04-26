@@ -49,8 +49,8 @@ class SpatialController extends Controller
             $sonde = $form_spatialShip->get('sonde')->getData();
             $hunter = $form_spatialShip->get('hunter')->getData();
             $fregate = $form_spatialShip->get('fregate')->getData();
-            $niobiumLess = (20000 * $colonizer) + (10000 * $recycleur) + (15000 * $barge) + (20 * $sonde) + (50 * $hunter) + (300 * $fregate);
-            $waterLess =  (12000 * $colonizer) + (7000 * $recycleur) + (12000 * $barge) + (20 * $hunter) + (200 * $fregate);
+            $niobiumLess = (20000 * $colonizer) + (10000 * $recycleur) + (15000 * $barge) + (5 * $sonde) + (25 * $hunter) + (300 * $fregate);
+            $waterLess =  (12000 * $colonizer) + (7000 * $recycleur) + (12000 * $barge) + (5 * $hunter) + (200 * $fregate);
 
             if (($usePlanet->getNiobium() < $niobiumLess || $usePlanet->getWater() < $waterLess)) {
                 return $this->render('connected/spatial.html.twig', [
@@ -120,7 +120,6 @@ class SpatialController extends Controller
             $fleet->setUser($user);
             $fleet->setPlanet($usePlanet);
             $fleet->setName($form_createFleet->get('name')->getData());
-            $fleet->setSpeed($fleet->getTotalSpeed());
             $em->persist($fleet);
             $usePlanet->setColonizer($colonizer);
             $usePlanet->setRecycleur($recycleur);

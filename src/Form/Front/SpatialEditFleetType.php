@@ -17,20 +17,6 @@ class SpatialEditFleetType extends AbstractType
     {
         $builder
             ->add(
-                'name',
-                null,
-                array(
-                    'label' => 'form.name',
-                    'attr'  => array(
-                        'placeholder' => 'form.name',
-                        'class' => 'form-control',
-                        'maxlength' => '15',
-                        'minlength' => '2',
-                    ),
-                    'required' => true,
-                )
-            )
-            ->add(
                 'moreSonde',
                 null,
                 array(

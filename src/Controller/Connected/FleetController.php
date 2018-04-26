@@ -7,7 +7,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\Front\SpatialEditFleetType;
+use App\Form\Front\FleetRenameType;
 use App\Form\Front\FleetSendType;
+use App\Form\Front\FleetAttackType;
 use Datetime;
 use DatetimeZone;
 use DateInterval;
@@ -62,11 +64,32 @@ class FleetController extends Controller
             ->getQuery()
             ->getOneOrNullResult();
 
-        $form_manageFleet = $this->createForm(SpatialEditFleetType::class, $fleet);
+        $form_manageFleet = $this->createForm(SpatialEditFleetType::class);
         $form_manageFleet->handleRequest($request);
+
+        $form_manageRenameFleet = $this->createForm(FleetRenameType::class, $fleet);
+        $form_manageRenameFleet->handleRequest($request);
+
+        $form_manageAttackFleet = $this->createForm(FleetAttackType::class, $fleet);
+        $form_manageAttackFleet->handleRequest($request);
+
+        $form_sendFleet = $this->createForm(FleetSendType::class);
+        $form_sendFleet->handleRequest($request);
 
         if($fleet || $usePlanet) {
         } else {
+            return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+        }
+
+        if ($form_manageRenameFleet->isSubmitted()) {
+            $em->persist($fleet);
+            $em->flush();
+            return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+        }
+
+        if ($form_manageAttackFleet->isSubmitted()) {
+            $em->persist($fleet);
+            $em->flush();
             return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
         }
 
@@ -130,8 +153,6 @@ class FleetController extends Controller
                 return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
             }
 
-            $fleet->setSpeed($fleet->getTotalSpeed());
-            $fleet->setName($form_manageFleet->get('name')->getData());
             if($fleet->getNbrShips() == 0) {
                 $em->remove($fleet);
             } else {
@@ -152,6 +173,9 @@ class FleetController extends Controller
             'fleet' => $fleet,
             'usePlanet' => $usePlanet,
             'form_manageFleet' => $form_manageFleet->createView(),
+            'form_sendFleet' => $form_sendFleet->createView(),
+            'form_manageRenameFleet' => $form_manageRenameFleet->createView(),
+            'form_manageAttackFleet' => $form_manageAttackFleet->createView(),
         ]);
     }
 
@@ -235,7 +259,8 @@ class FleetController extends Controller
             $sector= $form_sendFleet->get('sector')->getData();
             $planete= $form_sendFleet->get('planete')->getData();
 
-            if (($galaxy < 1 || $galaxy > 10) || ($sector < 1 || $sector > 100) || ($planete < 1 || $planete > 25)) {
+            if (($galaxy < 1 || $galaxy > 10) || ($sector < 1 || $sector > 100) || ($planete < 1 || $planete > 25) ||
+                ($galaxy != $user->getSector()->getGalaxy()->getPosition() && $user->getHyperespace() == 0)) {
                 return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
             }
 
@@ -268,11 +293,6 @@ class FleetController extends Controller
             $em->flush();
             return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
         }
-
-        return $this->render('connected/fleet/send.html.twig', [
-            'fleet' => $fleet,
-            'usePlanet' => $usePlanet,
-            'form_sendFleet' => $form_sendFleet->createView(),
-        ]);
+        return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
     }
 }

@@ -19,6 +19,12 @@ function manageAllyImageForm() {
     });
 }
 
+function manageAttackFleetForm() {
+    $('#fleet_attack_attack').off('change').on('change',function(e){
+        $(this).closest('form').submit();
+    });
+}
+
 function manageModalContact() {
     $('#contactModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
@@ -253,5 +259,6 @@ $(document).ready(function() {
     manageConstructTime();
     manageResearchTime();
     setNoDecimalDisplay();
+    manageAttackFleetForm();
     console.log("Toute utilisation de scripts sur le jeu seront puni d'un ban permanent, merci.");
 });

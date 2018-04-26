@@ -136,6 +136,141 @@ class Fleet
     /**
      * @return mixed
      */
+    public function getCargoFull()
+    {
+        $worker = $this->getWorker();
+        $soldier = $this->getSoldier();
+        $scientist = $this->getScientist();
+        $niobium = $this->getNiobium();
+        $water = $this->getWater();
+
+        $nbr = $worker + $soldier + $scientist + $niobium + $water;
+        return $nbr;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCargoPlace()
+    {
+        $barge = $this->getBarge() * $this->getBargeCargo();
+        $recycleur = $this->getRecycleur() * $this->getRecycleurCargo();
+
+        $nbr = $barge + $recycleur;
+        return $nbr;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBargeCargo()
+    {
+        return 2000;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRecycleurCargo()
+    {
+        return 10000;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArmor()
+    {
+        $fregate = $this->getFregate() * $this->getFregateArmor();
+        $hunter = $this->getHunter() * $this->getHunterArmor();
+        $nbr = $fregate + $hunter;
+        return $nbr;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFregateArmor()
+    {
+        return 120;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHunterArmor()
+    {
+        return 10;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMissile()
+    {
+        $fregate = $this->getFregate() * $this->getFregateMissile();
+        $hunter = $this->getHunter() * $this->getHunterMissile();
+        $nbr = $fregate + $hunter;
+        return $nbr;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFregateMissile()
+    {
+        return 50;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHunterMissile()
+    {
+        return 6;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShield()
+    {
+        $fregate = $this->getFregate() * $this->getFregateShield();
+
+        $nbr = $fregate;
+        return $nbr;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFregateShield()
+    {
+        return 20;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLaser()
+    {
+        $fregate = $this->getFregate() * $this->getFregateLaser();
+
+        $nbr = $fregate;
+        return $nbr;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFregateLaser()
+    {
+        return 34;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getNbrSignatures()
     {
         $fregate = $this->getFregate() * $this->getFregateSignature();
@@ -154,7 +289,7 @@ class Fleet
      */
     public function getBargeSignature()
     {
-        return $this->getBarge() * 50;
+        return 50;
     }
 
     /**
@@ -162,7 +297,7 @@ class Fleet
      */
     public function getColonizerSignature()
     {
-        return $this->getColonizer() * 200;
+        return 200;
     }
 
     /**
@@ -170,7 +305,7 @@ class Fleet
      */
     public function getFregateSignature()
     {
-        return $this->getFregate() * 85;
+        return 60;
     }
 
     /**
@@ -178,7 +313,7 @@ class Fleet
      */
     public function getHunterSignature()
     {
-        return $this->getHunter() * 3;
+        return 3;
     }
 
     /**
@@ -186,13 +321,13 @@ class Fleet
      */
     public function getRecycleurSignature()
     {
-        return $this->getRecycleur() * 80;
+        return 80;
     }
 
     /**
      * @return mixed
      */
-    public function getTotalSpeed()
+    public function getSpeed()
     {
         if($this->getColonizer()) {
             return 3;
@@ -486,21 +621,5 @@ class Fleet
     public function setNewPlanet($newPlanet): void
     {
         $this->newPlanet = $newPlanet;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getSpeed()
-    {
-        return $this->speed;
-    }
-
-    /**
-     * @param mixed $speed
-     */
-    public function setSpeed($speed): void
-    {
-        $this->speed = $speed;
     }
 }

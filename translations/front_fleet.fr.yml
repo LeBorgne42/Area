@@ -26,6 +26,12 @@ fleet.hunter: Chasseur
 fleet.fregate: Fregate
 fleet.barge: Barge
 form.nbr: Nombre
-form.manageFleet: 'Changer composition'
+form.manageFleet: 'Sauvegarder'
+form.renameFleet: 'renommer'
+form.sendFleet: 'envoyer flotte'
 form.name: ''
 fleet.sendFleet: envoyer
+fleet.attackMode: 'mode attaque (attention aux représailles)'
+fleet.galaxy: galaxie
+fleet.sector: secteur
+fleet.planete: planète
