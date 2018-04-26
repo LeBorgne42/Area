@@ -291,6 +291,14 @@ class User implements UserInterface, \Serializable
     /**
      * @return mixed
      */
+    public function getAllyEnnemy()
+    {
+        return $this->ally->getWars();
+    }
+
+    /**
+     * @return mixed
+     */
     public function getBitcoin()
     {
         return $this->bitcoin;

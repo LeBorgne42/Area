@@ -327,6 +327,22 @@ class Planet
     /**
      * @return mixed
      */
+    public function getFleetNoFriends()
+    {
+        $fullFleet = [];
+        $x = 0;
+        foreach($this->fleets as $fleet) {
+            if($fleet->getUser() == $this->user || $fleet->getUser()->getAlly() == $this->user->getAlly()) {
+            } else {
+                $fullFleet[$x] = $fleet;
+            }
+        }
+        return $fullFleet;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getBargeSignature()
     {
         return $this->getBarge() * 50;

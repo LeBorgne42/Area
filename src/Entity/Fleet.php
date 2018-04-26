@@ -31,6 +31,11 @@ class Fleet
     protected $attack = false;
 
     /**
+     * @ORM\Column(name="fightAt",type="datetime", nullable=true)
+     */
+    protected $fightAt = null;
+
+    /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="fleets", fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
@@ -621,5 +626,21 @@ class Fleet
     public function setNewPlanet($newPlanet): void
     {
         $this->newPlanet = $newPlanet;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFightAt()
+    {
+        return $this->fightAt;
+    }
+
+    /**
+     * @param mixed $fightAt
+     */
+    public function setFightAt($fightAt): void
+    {
+        $this->fightAt = $fightAt;
     }
 }

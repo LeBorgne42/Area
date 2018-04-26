@@ -76,7 +76,7 @@ class FleetController extends Controller
         $form_sendFleet = $this->createForm(FleetSendType::class);
         $form_sendFleet->handleRequest($request);
 
-        if($fleet || $usePlanet) {
+        if(($fleet || $usePlanet) || ($fleet->getFightAt() || $fleet->getFlightTime())) {
         } else {
             return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
         }
@@ -88,6 +88,42 @@ class FleetController extends Controller
         }
 
         if ($form_manageAttackFleet->isSubmitted()) {
+            $eAlly = $user->getAllyEnnemy();
+            $warAlly = [];
+            $x = 0;
+            foreach ($eAlly as $tmp) {
+                $warAlly[$x] = $tmp->getAllyTag();
+                $x++;
+            }
+            $fleets = $em->getRepository('App:Fleet')
+                ->createQueryBuilder('f')
+                ->join('f.user', 'u')
+                ->join('u.ally', 'a')
+                ->where('f.planet = :planet')
+                ->andWhere('f.attack = :true OR a.sigle in (:ally)')
+                ->andWhere('f.user != :user')
+                ->setParameters(array('planet' => $usePlanet, 'true' => true, 'ally' => $warAlly, 'user' => $user))
+                ->getQuery()
+                ->getResult();
+
+            if(($fleet->getAttack() == true && $usePlanet->getFleetNoFriends()) || $fleets) {
+                $allFleets = $em->getRepository('App:Fleet')
+                    ->createQueryBuilder('f')
+                    ->join('f.user', 'u')
+                    ->where('f.planet = :planet')
+                    ->andWhere('f.user != :user')
+                    ->setParameters(array('planet' => $usePlanet, 'user' => $user))
+                    ->getQuery()
+                    ->getResult();
+                $now = new DateTime();
+                $now->setTimezone(new DateTimeZone('Europe/Paris'));
+                $now->add(new DateInterval('PT' . 300 . 'S'));
+                foreach ($allFleets as $updateF) {
+                    $updateF->setFightAt($now);
+                    $em->persist($updateF);
+                }
+                $fleet->setFightAt($now);
+            }
             $em->persist($fleet);
             $em->flush();
             return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
@@ -203,7 +239,7 @@ class FleetController extends Controller
             ->getQuery()
             ->getOneOrNullResult();
 
-        if($fleet || $usePlanet) {
+        if(($fleet || $usePlanet) || ($fleet->getFightAt() || $fleet->getFlightTime())) {
         } else {
             return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
         }
@@ -250,7 +286,7 @@ class FleetController extends Controller
         $form_sendFleet = $this->createForm(FleetSendType::class);
         $form_sendFleet->handleRequest($request);
 
-        if($fleet || $usePlanet) {
+        if(($fleet || $usePlanet) || ($fleet->getFightAt() || $fleet->getFlightTime())) {
         } else {
             return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
         }
