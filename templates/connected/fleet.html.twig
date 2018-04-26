@@ -21,10 +21,10 @@
                 </th>
             </tr>
             {% for fleet in usePlanet.getFleets() %}
-                {% if fleet.getUser() == app.user %}
+                {% if fleet.getUser() == app.user and fleet.getPlanete() is null %}
                     <tr>
                         <th class="tab-cells-name">
-                            <span class="ml-3">{{ 'fleet.beforeName'|trans }} "{{  fleet.getName() }}"</span> <span><a class="ml-3 float-right" href="{{ path('destroy_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}"><span>{{ 'fleet.destroyFleet'|trans }}</span></a></span> <span><a class="ml-3 float-right" href="{{ path('manage_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}" data-toggle="modal" data-target="#editModal"><span>{{ 'fleet.seeFlotte'|trans }}</span></a></span> <span><a class="ml-3 float-right" href="{{ path('send_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}"  data-toggle="modal" data-target="#sendModal"><span>{{ 'fleet.depart'|trans }}</span></a></span>
+                            <span class="ml-3">{{ 'fleet.beforeName'|trans }} "{{  fleet.getName() }}"</span> <span><a class="ml-3 float-right" href="{{ path('destroy_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}"><span>{{ 'fleet.destroyFleet'|trans }}</span></a></span> <span><a class="ml-3 float-right" href="{{ path('manage_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}" data-toggle="modal" data-target="#editModal"><span>{{ 'fleet.seeFlotte'|trans }}</span></a></span>
                         </th>
                         <td class="center-cells text-center">
                             {{ fleet.getNbrShips() }}
@@ -65,7 +65,7 @@
                     {% if fleet.getNewPlanet() %}
                         <tr>
                             <th class="tab-cells-name">
-                                "{{  fleet.getName() }}" <span><a class="ml-3 float-right" href="{{ path('fleet', {'idp': usePlanet.getId()}) }}"><span>{{ 'fleet.seeFlotte'|trans }}</span></a></span>
+                                "{{  fleet.getName() }}"
                             </th>
                             <td class="center-cells text-center">
                                 {{ fleet.getplanet().getName() }}
@@ -149,7 +149,7 @@
                     {% if fleet.getPlanet().getUser() != app.user and fleet.getOrigin() is null %}
                         <tr>
                             <th class="tab-cells-name">
-                                "{{  fleet.getName() }}" <span><a class="ml-3 float-right" href="{{ path('manage_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}" data-toggle="modal" data-target="#createModal"><span>{{ 'fleet.seeFlotte'|trans }}</span></a></span> <span><a class="ml-3 float-right" href="{{ path('destroy_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}"><span>{{ 'fleet.destroyFleet'|trans }}</span></a></span><span><a class="ml-3 float-right" href="{{ path('send_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}" data-toggle="modal" data-target="#sendModal"><span>{{ 'fleet.sendFleet'|trans }}</span></a></span>
+                                "{{  fleet.getName() }}" <span><a class="ml-3 float-right" href="{{ path('manage_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}" data-toggle="modal" data-target="#createModal"><span>{{ 'fleet.seeFlotte'|trans }}</span></a></span> <span><a class="ml-3 float-right" href="{{ path('destroy_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}"><span>{{ 'fleet.destroyFleet'|trans }}</span></a></span>
                             </th>
                             <td class="center-cells text-center">
                                 {{ fleet.getPlanet().getName() }}
@@ -175,12 +175,6 @@
     </div>
     <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-createFleet" role="document">
-            <div class="modal-content special">
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="sendModal" tabindex="-1" role="dialog" aria-labelledby="sendModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content special">
             </div>
         </div>

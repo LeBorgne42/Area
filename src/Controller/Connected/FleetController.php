@@ -291,12 +291,12 @@ class FleetController extends Controller
             return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
         }
         if ($form_sendFleet->isSubmitted() && $form_sendFleet->isValid()) {
-            $galaxy = $form_sendFleet->get('galaxy')->getData();
+            $galaxy = 1;
             $sector= $form_sendFleet->get('sector')->getData();
             $planete= $form_sendFleet->get('planete')->getData();
 
             if (($galaxy < 1 || $galaxy > 10) || ($sector < 1 || $sector > 100) || ($planete < 1 || $planete > 25) ||
-                ($galaxy != $user->getSector()->getGalaxy()->getPosition() && $user->getHyperespace() == 0)) {
+                ($galaxy != 1 && $user->getHyperespace() == 0)) {
                 return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
             }
 

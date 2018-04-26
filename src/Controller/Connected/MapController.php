@@ -39,8 +39,29 @@ class MapController extends Controller
         $fleetIn = $em->getRepository('App:Fleet')
             ->createQueryBuilder('f')
             ->join('f.planet', 'p')
-            ->where('p.sector = :id')
-            ->setParameter('id', $id)
+            ->where('f.sector = :id')
+            ->andWhere('p.sector != :id')
+            ->setParameters(array('id' => $id))
+            ->orderBy('f.flightTime')
+            ->getQuery()
+            ->getResult();
+
+        $fleetOut = $em->getRepository('App:Fleet')
+            ->createQueryBuilder('f')
+            ->join('f.planet', 'p')
+            ->where('f.sector != :id')
+            ->andWhere('p.sector = :id')
+            ->setParameters(array('id' => $id))
+            ->orderBy('f.flightTime')
+            ->getQuery()
+            ->getResult();
+
+        $fleetCurrent = $em->getRepository('App:Fleet')
+            ->createQueryBuilder('f')
+            ->join('f.planet', 'p')
+            ->where('f.sector = :id')
+            ->andWhere('p.sector = :id')
+            ->setParameters(array('id' => $id))
             ->orderBy('f.flightTime')
             ->getQuery()
             ->getResult();
@@ -48,7 +69,10 @@ class MapController extends Controller
         return $this->render('connected/map/sector.html.twig', [
             'planets' => $planets,
             'usePlanet' => $usePlanet,
-            'id' => $id
+            'id' => $id,
+            'fleetIn' => $fleetIn,
+            'fleetOut' => $fleetOut,
+            'fleetCurrent' => $fleetCurrent,
         ]);
     }
 }
