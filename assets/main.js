@@ -182,15 +182,15 @@ function manageConstructTime() {
     var secondes = Math.floor(date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60 + minutes * 60)));
     if (date_now > 0) {
         setInterval(function() {
-            if (jours) {
+            if (jours > 0) {
                 $('#timeDisplay').text(jours + 'j ' + heures + 'heures ' + minutes + 'mins ' + secondes + 's');
-            } else if (heures)
+            } else if (heures > 0)
             {
                 $('#timeDisplay').text(heures + 'heures ' + minutes + 'mins ' + secondes + 's');
-            } else if (minutes)
+            } else if (minutes > 0)
             {
                 $('#timeDisplay').text(minutes + 'mins ' + secondes + 's');
-            } else if (secondes)
+            } else if (secondes > 0)
             {
                 $('#timeDisplay').text(secondes + ' secondes');
             }
@@ -198,7 +198,7 @@ function manageConstructTime() {
             if(secondes == 0) {
                 secondes = 60;
                 minutes = minutes - 1;
-                if(minutes = 0) {
+                if(minutes == 0) {
                     minutes = 60;
                     heures = heures - 1;
                 }
@@ -221,15 +221,15 @@ function manageResearchTime() {
     var secondes = Math.floor(date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60 + minutes * 60)));
     if (date_now > 0) {
         setInterval(function() {
-            if (jours) {
+            if (jours > 0) {
                 $('#timeDisplayR').text(jours + 'j ' + heures + 'heures ' + minutes + 'mins ' + secondes + 's');
-            } else if (heures)
+            } else if (heures > 0)
             {
                 $('#timeDisplayR').text(heures + 'heures ' + minutes + 'mins ' + secondes + 's');
-            } else if (minutes)
+            } else if (minutes > 0)
             {
                 $('#timeDisplayR').text(minutes + 'mins ' + secondes + 's');
-            } else if (secondes)
+            } else if (secondes > 0)
             {
                 $('#timeDisplayR').text(secondes + ' secondes');
             }

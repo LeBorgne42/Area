@@ -43,7 +43,7 @@ class DailyController extends Controller
             }
             $ship = 0;
             $cost = $user->getBitcoin();
-            $cost = $cost - ($soldier * 2) - ($ship / 10);
+            $cost = $cost - ($soldier * 2) - ($ship / 10) + ($worker);
             $point = ($worker / 100) + ($ship / 5) + ($soldier);
             $user->setBitcoin($cost);
             $user->getRank()->setOldPoint($user->getRank()->getPoint());
