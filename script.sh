@@ -2,7 +2,16 @@
 
 while true
 do
-    curl "http://192.168.0.10:8000/medisdfssSDFdfda37jnhb=&dgsgJHJH=UJHBJ=8==75I\
-HBJHKNj=&knbuih6=89&738=&273&74dsffDF990&7=64&7Y/"
-sleep 60
+    curl "http://192.168.0.10:8000/construction/"
+    sleep 10
+    curl "http://192.168.0.10:8000/construction/"
+    sleep 10
+    curl "http://192.168.0.10:8000/construction/"
+    sleep 10
+    curl "http://192.168.0.10:8000/resources/"
+    sleep 10
+    curl "http://192.168.0.10:8000/construction/"
+    sleep 10
+    curl "http://192.168.0.10:8000/construction/"
+    sleep 10
 done

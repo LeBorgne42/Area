@@ -80,9 +80,56 @@
                 <tr>
                     <th class="tab-cells-name"><h4>{{ 'title.fleet'|trans|raw }}</h4></th>
                     <td class="center-cells">
-                        <span><a href="{{ path('fleet', {'idp': usePlanet.getId()}) }}">
-                            <h4>{{ 'cell.fleet'|trans|raw }}</h4>
-                            </a></span>
+                        <table class="table table-striped table-bordered table-dark">
+                            <tbody>
+                            <tr>
+                                <th class="tab-cells-name text-center">
+                                    {{ 'overview.fleetName'|trans }}
+                                </th>
+                                <th class="tab-cells-name text-center">
+                                    {{ 'overview.from'|trans }}
+                                </th>
+                                <th class="tab-cells-name text-center">
+                                    {{ 'overview.goTo'|trans }}
+                                </th>
+                                <th class="tab-cells-name text-center">
+                                    {{ 'overview.time'|trans }}
+                                </th>
+                                <th class="tab-cells-name text-center">
+                                    {{ 'overview.fleetShips'|trans }}
+                                </th>
+                                <th class="tab-cells-name text-center">
+                                    {{ 'overview.fleetSignature'|trans }}
+                                </th>
+                            </tr>
+                            {% for fleet in app.user.getFleets() %}
+                                {% if fleet.getUser() == app.user %}
+                                    {% if fleet.Planete() %}
+                                        <tr>
+                                            <th class="tab-cells-name">
+                                                "{{  fleet.getName() }}"
+                                            </th>
+                                            <td class="center-cells text-center">
+                                                {{ fleet.getplanet().getName() }}
+                                            </td>
+                                            <td class="center-cells text-center">
+                                                <span><a href="{{ path('map', {id: fleet.getSector().getPosition(), 'idp': usePlanet.getId()}) }}">{{ fleet.getSector().getGalaxy.getPosition() }}:{{ fleet.getSector.getPosition() }}:{{ fleet.getPlanete() }}</a></span>
+                                            </td>
+                                            <td class="center-cells text-center">
+                                                {{ fleet.getFlightTime()|date('Y/m/d H:i:s') }}
+                                            </td>
+                                            <td class="center-cells text-center">
+                                                {{ fleet.getNbrShips() }}
+                                            </td>
+                                            <td class="center-cells text-center">
+                                                {{ fleet.getNbrSignatures() }}
+                                            </td>
+                                        </tr>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                            </tbody>
+                        </table>
                     </td>
                 </tr>
             </tbody>

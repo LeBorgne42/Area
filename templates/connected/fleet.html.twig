@@ -62,7 +62,7 @@
             </tr>
             {% for fleet in app.user.getFleets() %}
                 {% if fleet.getUser() == app.user %}
-                    {% if fleet.getNewPlanet() %}
+                    {% if fleet.Planete() %}
                         <tr>
                             <th class="tab-cells-name">
                                 "{{  fleet.getName() }}"
@@ -107,10 +107,10 @@
             </tr>
             {% for fleet in app.user.getFleets() %}
                 {% if fleet.getUser() == app.user %}
-                    {% if fleet.getPlanet() != usePlanet and fleet.getOrigin() is null %}
+                    {% if fleet.getPlanet() == usePlanet and fleet.getPlanete() is null %}
                         <tr>
                             <th class="tab-cells-name">
-                                "{{  fleet.getName() }}" <span><a class="ml-3 float-right" href="{{ path('manage_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}" data-toggle="modal" data-target="#createModal"><span>{{ 'fleet.seeFlotte'|trans }}</span></a></span> <span><a class="ml-3 float-right" href="{{ path('destroy_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}"><span>{{ 'fleet.destroyFleet'|trans }}</span></a></span> <span><a class="ml-3 float-right" href="{{ path('send_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}"  data-toggle="modal" data-target="#sendModal"><span>{{ 'fleet.sendFleet'|trans }}</span></a></span>
+                                "{{  fleet.getName() }}" <span><a class="ml-3 float-right" href="{{ path('destroy_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}"><span>{{ 'fleet.destroyFleet'|trans }}</span></a></span> <span><a class="ml-3 float-right" href="{{ path('manage_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}" data-toggle="modal" data-target="#createModal"><span>{{ 'fleet.seeFlotte'|trans }}</span></a></span> <span><a class="ml-3 float-right" href="{{ path('send_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}"  data-toggle="modal" data-target="#sendModal"><span>{{ 'fleet.sendFleet'|trans }}</span></a></span>
                             </th>
                             <td class="center-cells text-center">
                                 {{ fleet.getPlanet().getName() }}
@@ -146,10 +146,10 @@
             </tr>
             {% for fleet in app.user.getFleets() %}
                 {% if fleet.getUser() == app.user %}
-                    {% if fleet.getPlanet().getUser() != app.user and fleet.getOrigin() is null %}
+                    {% if fleet.getPlanet().getUser() != app.user and fleet.getPlanete() is null %}
                         <tr>
                             <th class="tab-cells-name">
-                                "{{  fleet.getName() }}" <span><a class="ml-3 float-right" href="{{ path('manage_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}" data-toggle="modal" data-target="#createModal"><span>{{ 'fleet.seeFlotte'|trans }}</span></a></span> <span><a class="ml-3 float-right" href="{{ path('destroy_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}"><span>{{ 'fleet.destroyFleet'|trans }}</span></a></span>
+                                "{{  fleet.getName() }}" <span><a class="ml-3 float-right" href="{{ path('manage_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}" data-toggle="modal" data-target="#createModal"><span>{{ 'fleet.seeFlotte'|trans }}</span></a></span>
                             </th>
                             <td class="center-cells text-center">
                                 {{ fleet.getPlanet().getName() }}

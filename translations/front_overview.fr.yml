@@ -16,3 +16,9 @@ info.planet: 'Planètes :'
 info.fleet: 'Nombre de flotte :'
 info.ally: 'Alliance :'
 info.allyMissing: 'Rejoignez une alliance !'
+overview.fleetName: Nom
+overview.from: De
+overview.goTo: Vers
+overview.time: Temps
+overview.fleetShips: Vaisseaux
+overview.fleetSignature: Signature
