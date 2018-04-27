@@ -60,31 +60,27 @@
                     {{ 'fleet.fleetSignature'|trans }}
                 </th>
             </tr>
-            {% for fleet in app.user.getFleets() %}
-                {% if fleet.getUser() == app.user %}
-                    {% if fleet.Planete() %}
-                        <tr>
-                            <th class="tab-cells-name">
-                                "{{  fleet.getName() }}"
-                            </th>
-                            <td class="center-cells text-center">
-                                {{ fleet.getplanet().getName() }}
-                            </td>
-                            <td class="center-cells text-center">
-                                <span><a href="{{ path('map', {id: fleet.getSector().getPosition(), 'idp': usePlanet.getId()}) }}">{{ fleet.getSector().getGalaxy.getPosition() }}:{{ fleet.getSector.getPosition() }}:{{ fleet.getPlanete() }}</a></span>
-                            </td>
-                            <td class="center-cells text-center">
-                                {{ fleet.getFlightTime()|date('Y/m/d H:i:s') }}
-                            </td>
-                            <td class="center-cells text-center">
-                                {{ fleet.getNbrShips() }}
-                            </td>
-                            <td class="center-cells text-center">
-                                {{ fleet.getNbrSignatures() }}
-                            </td>
-                        </tr>
-                    {% endif %}
-                {% endif %}
+            {% for fleet in fleetMove %}
+                <tr>
+                    <th class="tab-cells-name">
+                        "{{  fleet.getName() }}"
+                    </th>
+                    <td class="center-cells text-center">
+                        {{ fleet.getplanet().getName() }}
+                    </td>
+                    <td class="center-cells text-center">
+                        <span><a href="{{ path('map', {id: fleet.getSector().getPosition(), 'idp': usePlanet.getId()}) }}">{{ fleet.getSector().getGalaxy.getPosition() }}:{{ fleet.getSector.getPosition() }}:{{ fleet.getPlanete() }}</a></span>
+                    </td>
+                    <td class="center-cells text-center">
+                        {{ fleet.getFlightTime()|date('H:i:s d/m/Y') }}
+                    </td>
+                    <td class="center-cells text-center">
+                        {{ fleet.getNbrShips() }}
+                    </td>
+                    <td class="center-cells text-center">
+                        {{ fleet.getNbrSignatures() }}
+                    </td>
+                </tr>
             {% endfor %}
             </tbody>
         </table>
@@ -107,7 +103,7 @@
             </tr>
             {% for fleet in app.user.getFleets() %}
                 {% if fleet.getUser() == app.user %}
-                    {% if fleet.getPlanet() == usePlanet and fleet.getPlanete() is null %}
+                    {% if fleet.getPlanet() != usePlanet and fleet.getPlanete() is null %}
                         <tr>
                             <th class="tab-cells-name">
                                 "{{  fleet.getName() }}" <span><a class="ml-3 float-right" href="{{ path('destroy_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}"><span>{{ 'fleet.destroyFleet'|trans }}</span></a></span> <span><a class="ml-3 float-right" href="{{ path('manage_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}" data-toggle="modal" data-target="#createModal"><span>{{ 'fleet.seeFlotte'|trans }}</span></a></span> <span><a class="ml-3 float-right" href="{{ path('send_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}"  data-toggle="modal" data-target="#sendModal"><span>{{ 'fleet.sendFleet'|trans }}</span></a></span>

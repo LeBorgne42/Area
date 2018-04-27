@@ -68,11 +68,6 @@ class Fleet
     protected $planete = null;
 
     /**
-     * @ORM\Column(name="speed",type="decimal", precision=9, scale=3)
-     */
-    protected $speed = 1;
-
-    /**
      * @ORM\Column(name="sonde",type="bigint", nullable=true)
      */
     protected $sonde = 0;

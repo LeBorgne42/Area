@@ -22,6 +22,7 @@ class OverviewController extends Controller
     public function overviewAction(Request $request, $idp)
     {
         $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
 
@@ -32,6 +33,16 @@ class OverviewController extends Controller
             ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
             ->getQuery()
             ->getOneOrNullResult();
+
+        $fleetMove = $em->getRepository('App:Fleet')
+            ->createQueryBuilder('f')
+            ->where('f.user = :user')
+            ->andWhere('f.planete is not null')
+            ->setParameters(array('user' => $user))
+            ->orderBy('f.flightTime')
+            ->setMaxresults(5)
+            ->getQuery()
+            ->getResult();
 
         $user = $this->getUser();
         $form_image = $this->createForm(UserImageType::class,$user);
@@ -44,6 +55,7 @@ class OverviewController extends Controller
             'form_image' => $form_image->createView(),
             'usePlanet' => $usePlanet,
             'date' => $now,
+            'fleetMove' => $fleetMove,
         ]);
     }
 }

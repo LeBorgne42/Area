@@ -26,6 +26,7 @@ class FleetController extends Controller
     public function fleetAction($idp)
     {
         $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
 
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
@@ -35,8 +36,18 @@ class FleetController extends Controller
             ->getQuery()
             ->getOneOrNullResult();
 
+        $fleetMove = $em->getRepository('App:Fleet')
+            ->createQueryBuilder('f')
+            ->where('f.user = :user')
+            ->andWhere('f.planete is not null')
+            ->setParameters(array('user' => $user))
+            ->orderBy('f.flightTime')
+            ->getQuery()
+            ->getResult();
+
         return $this->render('connected/fleet.html.twig', [
             'usePlanet' => $usePlanet,
+            'fleetMove' => $fleetMove,
         ]);
     }
 
@@ -311,11 +322,11 @@ class FleetController extends Controller
                 ->getOneOrNullResult();
 
             $sFleet= $fleet->getPlanet()->getSector()->getPosition();
-            if (stristr((-$sFleet - $sector), '0 -1 -10 -9' ) != false) {
+            if (strpos('0 -1 1 -10 10 -9 9', (strval($sFleet - $sector)) ) != false) {
                 $base= 3600;
-            } elseif (stristr((-$sFleet - $sector), '-20 -12 -11 -8 -2' ) != false) {
+            } elseif (strpos('-20 20 12 11 8 2 -12 -11 -8 -2', (strval($sFleet - $sector)) ) != false) {
                 $base= 7200;
-            } elseif (stristr((-$sFleet - $sector), '-28 -29 -30 -31 -32 -33 -22 -13 -3 -7' ) != false) {
+            } elseif (strpos('-28 28 29 30 31 32 33 22 12 3 7 -29 -30 -31 -32 -33 -22 -13 -3 -7', (strval($sFleet - $sector)) ) != false) {
                 $base= 10800;
             } else {
                 $base= 18000;

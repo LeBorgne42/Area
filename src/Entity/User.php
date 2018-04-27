@@ -293,7 +293,11 @@ class User implements UserInterface, \Serializable
      */
     public function getAllyEnnemy()
     {
-        return $this->ally->getWars();
+        if($this->ally) {
+            return $this->ally->getWars();
+        } else {
+            return [];
+        }
     }
 
     /**
