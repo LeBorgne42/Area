@@ -5,10 +5,63 @@
 {% block title %}{{ 'title'|trans }}{% endblock %}
 
 {% block body %}
-    <div class="row">
-        <div class="offset-1 col-10">
-            <div class="front-block">
-            </div>
-        </div>
+    <div class="front-block">
+        <table class="table table-striped table-bordered table-dark">
+            <tbody>
+            <tr>
+                <th class="tab-cells-name text-center">
+                    {{ 'planet.name'|trans }}
+                </th>
+                <th class="tab-cells-name text-center">
+                    {{ 'planet.niobium'|trans }}
+                </th>
+                <th class="tab-cells-name text-center">
+                    {{ 'planet.water'|trans }}
+                </th>
+                <th class="tab-cells-name text-center">
+                    {{ 'planet.place'|trans }}
+                </th>
+                <th class="tab-cells-name text-center">
+                    {{ 'planet.worker'|trans }}
+                </th>
+                <th class="tab-cells-name text-center">
+                    {{ 'planet.soldier'|trans }}
+                </th>
+                <th class="tab-cells-name text-center">
+                    {{ 'planet.scientist'|trans }}
+                </th>
+                <th class="tab-cells-name text-center">
+                    {{ 'planet.fleet'|trans }}
+                </th>
+            </tr>
+            {% for planet in allPlanets %}
+                <tr>
+                    <td class="center-cells text-center">
+                        <span><a href="{{ path('building', {'idp': planet.getId()}) }}">{{  planet.getName() }}</a></span> - <span><a href="{{ path('map', {id: planet.getSector().getPosition(), 'idp': planet.getId()}) }}">{{ planet.getSector().getGalaxy.getPosition() }}:{{ planet.getSector().getPosition() }}:{{ planet.getPosition() }}</a></span>
+                    </td>
+                    <td class="center-cells text-center">
+                        <span data-toggle="tooltip" data-placement="bottom" title="{{ 'niobium'|trans }}"><span>{{ planet.getNiobium() }}</span> <span class="text-vert">+<span>{{ planet.getNbProduction() * 60 }}</span>/h</span> <img src="{{ asset('img/niobium.png') }}"></span>                    </td>
+                    <td class="center-cells text-center">
+                        <span data-toggle="tooltip" data-placement="bottom" title="{{ 'water'|trans }}"><span>{{ planet.getWater() }}</span> <span class="text-vert">+<span>{{ planet.getWtProduction() * 60 }}</span>/h</span> <img src="{{ asset('img/water.png') }}"></span>
+                    </td>
+                    <td class="center-cells text-center">
+                        <span>{{ planet.getGroundPlace() }}/{{ planet.getGround() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"> {{ planet.getSkyPlace() }}/{{ planet.getSky() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'SkyImg'|trans }}" src="{{ asset('img/sky.png') }}"></span>
+                    </td>
+                    <td class="center-cells text-center">
+                        {{ planet.getWorker() }} <img src="{{ asset('img/worker.png') }}">
+                    </td>
+                    <td class="center-cells text-center">
+                        {{ planet.getSoldier() }} <img src="{{ asset('img/soldier.png') }}">
+                    </td>
+                    <td class="center-cells text-center">
+                        {{ planet.getScientist() }} <img src="{{ asset('img/scientist.png') }}">
+                    </td>
+                    <td class="center-cells text-center">
+                        <span><a href="{{ path('fleet', {'idp': planet.getId()}) }}">{{ planet.nbrFleets }}</a></span>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
 {% endblock %}

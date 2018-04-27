@@ -50,6 +50,7 @@ class ServerController extends Controller
                     if (rand(1, 20) < 12) {
                         $planet = new Planet();
                         $planet->setEmpty(true);
+                        $planet->setName('Vide');
                         $planet->setSector($sector);
                         $planet->setPosition($nbrPlanet);
                     } elseif (rand(0, 101) < 2) {

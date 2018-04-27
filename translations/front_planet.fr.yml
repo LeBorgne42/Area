@@ -1,1 +1,13 @@
 title: Planète
+planet.name: Nom
+planet.niobium: Niobium
+planet.water: Eau
+planet.place: Place
+planet.worker: Travailleurs
+planet.soldier: Soldats
+planet.scientist: Scientifiques
+planet.fleet: Flottes
+niobium: Niobium
+water: Eau
+groundImg: Terrain
+SkyImg: Espace

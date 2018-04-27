@@ -6,6 +6,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use DateTime;
 use DateTimeZone;
+use Dateinterval;
 
 class InstantController extends Controller
 {
@@ -143,6 +144,24 @@ class InstantController extends Controller
         }
 
         foreach ($fleets as $fleet) {
+            $allFleets = $em->getRepository('App:Fleet')
+                ->createQueryBuilder('f')
+                ->join('f.user', 'u')
+                ->where('f.planet = :planet')
+                ->andWhere('f.user != :user')
+                ->setParameters(array('planet' => $fleet->getPlanet(), 'user' => $fleet->getUser()))
+                ->getQuery()
+                ->getResult();
+
+            $now = new DateTime();
+            $now->setTimezone(new DateTimeZone('Europe/Paris'));
+            $now->add(new DateInterval('PT' . 300 . 'S'));
+            foreach ($allFleets as $updateF) {
+                $updateF->setFightAt($now);
+                $em->persist($updateF);
+            }
+            $fleet->setFightAt($now);
+
             $newHome = $em->getRepository('App:Planet')
                 ->createQueryBuilder('p')
                 ->join('p.sector', 's')

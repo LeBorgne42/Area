@@ -18,17 +18,28 @@ class PlanetController extends Controller
     public function planetAction($idp)
     {
         $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
 
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->where('p.id = :id')
             ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
+            ->setParameters(array('id' => $idp, 'user' => $user))
             ->getQuery()
             ->getOneOrNullResult();
 
+        $allPlanets = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.user = :user')
+            ->setParameters(array('user' => $user))
+            ->orderBy('p.position')
+            ->orderBy('p.sector')
+            ->getQuery()
+            ->getResult();
+
         return $this->render('connected/planet.html.twig', [
             'usePlanet' => $usePlanet,
+            'allPlanets' => $allPlanets,
         ]);
     }
 }
