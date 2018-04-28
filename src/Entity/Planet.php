@@ -60,7 +60,7 @@ class Planet
     /**
      * @ORM\Column(name="workerProduction",type="decimal", precision=28, scale=5)
      */
-    protected $workerProduction = 1.1;
+    protected $workerProduction = 1.2;
 
     /**
      * @ORM\Column(name="soldierMax",type="integer")

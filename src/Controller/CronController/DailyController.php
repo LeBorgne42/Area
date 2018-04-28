@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class DailyController extends Controller
 {
     /**
-     * @Route("/medisdfssSDFdfda37jnhb=&dgsg4dsfgsd42556gd5gdsf&knbuih6=89&738=&273&74dsffDF9dfdfg90&7=64&7Y/", name="daily_load")
+     * @Route("/dailyPlop/", name="daily_load")
      */
     public function dailyLoadAction()
     {
@@ -28,6 +28,7 @@ class DailyController extends Controller
             $soldier = 0;
             $scientist = 0;
             foreach ($user->getPlanets() as $planet) {
+                $planet->setWorker($planet->getWorker() * $planet->getWorkerProduction());
                 $worker = $worker + $planet->getWorker();
                 $soldier = $soldier + $planet->getSoldier();
                 $scientist = $scientist + $planet->getScientist();

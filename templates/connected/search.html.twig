@@ -12,7 +12,7 @@
             <tbody>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.utility'|trans|raw }} {{ 'research.level'|trans|raw }} {{ app.user.getUtility()|trans }}
+                    <img class="float-left building-img ml-3" src="{{ asset('img/utility.png') }}"> {{ 'title.utility'|trans|raw }} - {{ 'research.level'|trans|raw }} {{ app.user.getUtility()|trans }}
                     <div class="mt-4">{{ (app.user.getUtility() + 1) * 2500 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
                 </th>
                 <td class="center-cells">
@@ -30,7 +30,7 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.terraformation'|trans|raw }} {% if app.user.getTerraformation() == false %}{{ 'research.canBe'|trans }}{% else %}<span class="text-vert">{{ 'research.Activated'|trans }}</span>{% endif %}
+                    <img class="float-left building-img ml-3" src="{{ asset('img/terra.png') }}"> {{ 'title.terraformation'|trans|raw }} - {% if app.user.getTerraformation() == false %}{{ 'research.canBe'|trans }}{% else %}<span class="text-vert">{{ 'research.Activated'|trans }}</span>{% endif %}
                     <div class="mt-4">12000 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
                 </th>
                 <td class="center-cells">
@@ -48,7 +48,7 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.cargo'|trans|raw }} {{ 'research.level'|trans|raw }} {{ app.user.getCargo()|trans }}
+                    <img class="float-left building-img ml-3" src="{{ asset('img/cargo.png') }}"> {{ 'title.cargo'|trans|raw }} - {{ 'research.level'|trans|raw }} {{ app.user.getCargo()|trans }}
                     <div class="mt-4">{{ (app.user.getCargo() + 1) * 3500 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
                 </th>
                 <td class="center-cells">
@@ -65,7 +65,7 @@
                 </td>
             </tr>
             <th class="tab-cells-name">
-                {{ 'title.barge'|trans|raw }} {% if app.user.getBarge() == false %}{{ 'research.canBe'|trans }}{% else %}<span class="text-vert">{{ 'research.Activated'|trans }}</span>{% endif %}
+                <img class="float-left building-img ml-3" src="{{ asset('img/invader.png') }}"> {{ 'title.barge'|trans|raw }} - {% if app.user.getBarge() == false %}{{ 'research.canBe'|trans }}{% else %}<span class="text-vert">{{ 'research.Activated'|trans }}</span>{% endif %}
                 <div class="mt-4">350000 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
             </th>
             <td class="center-cells">
@@ -83,7 +83,7 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.recycleur'|trans|raw }} {% if app.user.getRecycleur() == false %}{{ 'research.canBe'|trans }}{% else %}<span class="text-vert">{{ 'research.Activated'|trans }}</span>{% endif %}
+                    <img class="float-left building-img ml-3" src="{{ asset('img/recyclage.png') }}"> {{ 'title.recycleur'|trans|raw }} - {% if app.user.getRecycleur() == false %}{{ 'research.canBe'|trans }}{% else %}<span class="text-vert">{{ 'research.Activated'|trans }}</span>{% endif %}
                     <div class="mt-4">16900 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
                 </th>
                 <td class="center-cells">
@@ -101,7 +101,7 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.onde'|trans|raw }} {{ 'research.level'|trans|raw }} {{ app.user.getOnde()|trans }}
+                    <img class="float-left building-img ml-3" src="{{ asset('img/scanner.png') }}"> {{ 'title.onde'|trans|raw }} - {{ 'research.level'|trans|raw }} {{ app.user.getOnde()|trans }}
                     <div class="mt-4">{{ (app.user.getOnde() + 1) * 2300 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
                 </th>
                 <td class="center-cells">
@@ -119,7 +119,7 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.hyperespace'|trans|raw }} {% if app.user.getHyperespace() == false %}{{ 'research.canBe'|trans }}{% else %}<span class="text-vert">{{ 'research.Activated'|trans }}</span>{% endif %}
+                    <img class="float-left building-img ml-3" src="{{ asset('img/hyper.png') }}"> {{ 'title.hyperespace'|trans|raw }} - {% if app.user.getHyperespace() == false %}{{ 'research.canBe'|trans }}{% else %}<span class="text-vert">{{ 'research.Activated'|trans }}</span>{% endif %}
                     <div class="mt-4">5000000 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
                 </th>
                 <td class="center-cells">
@@ -142,7 +142,7 @@
             <tbody>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.demography'|trans|raw }} {{ 'research.level'|trans|raw }} {{ app.user.getDemography()|trans }}
+                    <img class="float-left building-img ml-3" src="{{ asset('img/urbain.png') }}"> {{ 'title.demography'|trans|raw }} - {{ 'research.level'|trans|raw }} {{ app.user.getDemography()|trans }}
                     <div class="mt-4">{{ (app.user.getDemography() + 1) * 8000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
                 </th>
                 <td class="center-cells">
@@ -160,7 +160,7 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.discipline'|trans|raw }} {{ 'research.level'|trans|raw }} {{ app.user.getDiscipline()|trans }}
+                    <img class="float-left building-img ml-3" src="{{ asset('img/military.png') }}"> {{ 'title.discipline'|trans|raw }} - {{ 'research.level'|trans|raw }} {{ app.user.getDiscipline()|trans }}
                     <div class="mt-4">{{ (app.user.getDiscipline() + 1) * 11700 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
                 </th>
                 <td class="center-cells">
@@ -183,7 +183,7 @@
             <tbody>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.armement'|trans|raw }} {{ 'research.level'|trans|raw }} {{ app.user.getArmement()|trans }}
+                    <img class="float-left building-img ml-3" src="{{ asset('img/armement.png') }}"> {{ 'title.armement'|trans|raw }} - {{ 'research.level'|trans|raw }} {{ app.user.getArmement()|trans }}
                     <div class="mt-4">{{ (app.user.getArmement() + 1) * 2000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
                 </th>
                 <td class="center-cells">
@@ -201,7 +201,7 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.missile'|trans|raw }} {{ 'research.level'|trans|raw }} {{ app.user.getMissile()|trans }}
+                    <img class="float-left building-img ml-3" src="{{ asset('img/missile.png') }}"> {{ 'title.missile'|trans|raw }} - {{ 'research.level'|trans|raw }} {{ app.user.getMissile()|trans }}
                     <div class="mt-4">{{ (app.user.getMissile() + 1) * 2600 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
                 </th>
                 <td class="center-cells">
@@ -219,7 +219,7 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.laser'|trans|raw }} {{ 'research.level'|trans|raw }} {{ app.user.getLaser()|trans }}
+                    <img class="float-left building-img ml-3" src="{{ asset('img/laser.png') }}"> {{ 'title.laser'|trans|raw }} - {{ 'research.level'|trans|raw }} {{ app.user.getLaser()|trans }}
                     <div class="mt-4">{{ (app.user.getLaser() + 1) * 13000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
                 </th>
                 <td class="center-cells">
@@ -237,7 +237,7 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.plasma'|trans|raw }} {{ 'research.level'|trans|raw }} {{ app.user.getPlasma()|trans }}
+                    <img class="float-left building-img ml-3" src="{{ asset('img/plasma.png') }}"> {{ 'title.plasma'|trans|raw }} - {{ 'research.level'|trans|raw }} {{ app.user.getPlasma()|trans }}
                     <div class="mt-4">{{ (app.user.getPlasma() + 1) * 29000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
                 </th>
                 <td class="center-cells">
@@ -260,7 +260,7 @@
             <tbody>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.industry'|trans|raw }} {{ 'research.level'|trans|raw }} {{ app.user.getIndustry()|trans }}
+                    <img class="float-left building-img ml-3" src="{{ asset('img/industry.png') }}"> {{ 'title.industry'|trans|raw }} - {{ 'research.level'|trans|raw }} {{ app.user.getIndustry()|trans }}
                     <div class="mt-4">{{ (app.user.getIndustry() + 1) * 1500 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
                 </th>
                 <td class="center-cells">
@@ -278,7 +278,7 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.lightShip'|trans|raw }} {{ 'research.level'|trans|raw }} {{ app.user.getLightShip()|trans }}
+                    <img class="float-left building-img ml-3" src="{{ asset('img/lightShip.png') }}"> {{ 'title.lightShip'|trans|raw }} - {{ 'research.level'|trans|raw }} {{ app.user.getLightShip()|trans }}
                     <div class="mt-4">{{ (app.user.getLightShip() + 1) * 9000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
                 </th>
                 <td class="center-cells">
@@ -296,7 +296,7 @@
             </tr>
             <tr>
                 <th class="tab-cells-name">
-                    {{ 'title.heavyShip'|trans|raw }} {{ 'research.level'|trans|raw }} {{ app.user.getHeavyShip()|trans }}
+                    <img class="float-left building-img ml-3" src="{{ asset('img/heavyShip.png') }}"> {{ 'title.heavyShip'|trans|raw }} - {{ 'research.level'|trans|raw }} {{ app.user.getHeavyShip()|trans }}
                     <div class="mt-4">{{ (app.user.getHeavyShip() + 1) * 42000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
                 </th>
                 <td class="center-cells">

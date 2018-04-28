@@ -45,7 +45,6 @@ class ProductionController extends Controller
         $usePlanet->setNiobium($usePlanetNb - ($level * 300));
         $usePlanet->setWater($usePlanetWt - ($level * 100));
         $usePlanet->setGroundPlace($newGround);
-        $usePlanet->setNbProduction($usePlanet->getNbProduction() + ($level * 1.1));
         $usePlanet->setConstruct('miner');
         $usePlanet->setConstructAt($now);
         $em->persist($usePlanet);
@@ -117,7 +116,6 @@ class ProductionController extends Controller
         $usePlanet->setNiobium($usePlanetNb - ($level * 100));
         $usePlanet->setWater($usePlanetWt - ($level * 300));
         $usePlanet->setGroundPlace($newGround);
-        $usePlanet->setNbProduction($usePlanet->getNbProduction() + ($level * 1.05));
         $usePlanet->setConstruct('extractor');
         $usePlanet->setConstructAt($now);
         $em->persist($usePlanet);

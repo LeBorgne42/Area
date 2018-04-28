@@ -64,6 +64,14 @@ class InstantController extends Controller
             ->getQuery()
             ->getResult();
 
+        $fleetsWar = $em->getRepository('App:Fleet')
+            ->createQueryBuilder('f')
+            ->where('f.fightAt < :now')
+            ->setParameters(array('now' => $now))
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult();
+
         $planets = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->where('p.constructAt < :now')
@@ -75,8 +83,10 @@ class InstantController extends Controller
             $build = $planet->getConstruct();
             if($build == 'miner') {
                 $planet->setMiner($planet->getMiner() + 1);
+                $planet->setNbProduction($planet->getNbProduction() + ($planet->getMiner() * 1.1));
             } elseif ($build == 'extractor') {
                 $planet->setExtractor($planet->getExtractor() + 1);
+                $planet->setWtProduction($planet->getWtProduction() + ($planet->getExtractor() * 1.05));
             } elseif ($build == 'city') {
                 $planet->setCity($planet->getCity() + 1);
             } elseif ($build == 'metropole') {
@@ -179,8 +189,13 @@ class InstantController extends Controller
             $fleet->setSector(null);
             $em->persist($fleet);
         }
-        $em->flush();
 
+        if ($fleetsWar) {
+            $em->flush();
+            return $this->redirectToRoute('fight_war');
+        }
+
+        $em->flush();
         exit;
     }
 }
