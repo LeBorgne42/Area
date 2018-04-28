@@ -76,6 +76,9 @@
                 <td class="center-cells text-center">
                     {{ 'spatial.fleetShips'|trans }}
                 </td>
+                <th class="tab-cells-name text-center">
+                    {{ 'spatial.cargo'|trans }}
+                </th>
                 <td class="center-cells text-center">
                     {{ 'spatial.fleetSignature'|trans }}
                 </td>
@@ -88,6 +91,9 @@
                         </th>
                         <td class="center-cells text-center">
                             {{ fleet.getNbrShips() }}
+                        </td>
+                        <td class="center-cells text-center">
+                            {{ fleet.getCargoFull() }} / {{ fleet.getCargoPlace() }}
                         </td>
                         <td class="center-cells text-center">
                             {{ fleet.getNbrSignatures() }}

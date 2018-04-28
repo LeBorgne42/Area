@@ -303,6 +303,23 @@ class User implements UserInterface, \Serializable
     /**
      * @return mixed
      */
+    public function getWhereRadar($sector)
+    {
+        $return = null;
+        foreach($this->getPlanets() as $planet) {
+            if ($planet->getSector()->getPosition() == $sector) {
+                $radar = $planet->getRadar() + $planet->getSkyRadar();
+                if($radar > $return || $return == null) {
+                    $return = $radar;
+                }
+            }
+        }
+        return $return;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getBitcoin()
     {
         return $this->bitcoin;

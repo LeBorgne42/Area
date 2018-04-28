@@ -18,7 +18,7 @@
     <div class="btn-left">
         <a href="{{ path('planet', {'idp': usePlanet.getId()}) }}"><span>{{ 'planet'|trans }}</span></a>
     </div>
-    <div class="btn-left">
+    <div class="btn-left{% if app.user.getSearch() is null %} freeSearchBuild{% endif %}">
         <a href="{{ path('search', {'idp': usePlanet.getId()}) }}"><span>{{ 'search'|trans }}</span></a>
     </div>
     <div class="btn-left">
@@ -33,7 +33,7 @@
     <div class="btn-left">
         <a href="{{ path('map', {'id':usePlanet.getSector().getPosition(), 'idp': usePlanet.getId()}) }}"><span>{{ 'map'|trans }}</span></a>
     </div>
-    <div class="btn-left">
+    <div class="btn-left{% if usePlanet.getConstruct() is null %} freeSearchBuild{% endif %}">
         <a href="{{ path('building', {'idp': usePlanet.getId()}) }}"><span>{{ 'building'|trans }}</span></a>
     </div>
     {% if usePlanet.getSpaceShip() == 1 %}

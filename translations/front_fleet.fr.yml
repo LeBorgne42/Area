@@ -35,3 +35,4 @@ fleet.attackMode: 'mode attaque (attention aux représailles)'
 fleet.galaxy: galaxie
 fleet.sector: secteur
 fleet.planete: planète
+fleet.cargo: Cargo

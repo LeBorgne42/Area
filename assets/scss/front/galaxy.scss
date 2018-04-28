@@ -108,21 +108,28 @@ td.special-cell {
 
 .glyphicon-plane.planet {
   float: right;
-  top: 2.5rem;
-  right: -1rem;
 }
 
 .glyphicon-plane.empty {
   float: right;
-  top: 2.5rem;
+  top: 1rem;
+  right: 1rem;
 }
 
 .glyphicon-info-sign {
   float: right;
+  right: 1rem;
 }
 
 .glyphicon-oil.planet {
   float: right;
+  right: 0.5rem;
+}
+
+.glyphicon-oil.empty {
+  float: right;
+  top: 1rem;
+
 }
 
 .glyphicon-cd {

@@ -22,3 +22,4 @@ spatial.fleetShips: Vaisseaux
 spatial.fleetSignature: Signature
 spatial.destroyFleet: 'mettre au sol'
 spatial.sendFleet: envoyer
+spatial.cargo: Cargo

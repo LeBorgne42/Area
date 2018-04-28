@@ -17,7 +17,7 @@ title.heavyShip: 'Vaisseaux lourds'
 title.cargo: 'Gestion des cargaisons'
 title.recycleur: 'Recyclage orbitale'
 research.titleArm: 'Recherche armes'
-title.armement: 'Armement'
+title.armement: Armement
 title.missile: 'Arme missile'
 title.laser: 'Arme laser'
 title.plasma: 'Arme plasma'
