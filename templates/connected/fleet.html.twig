@@ -103,22 +103,24 @@
             </tr>
             {% for fleet in app.user.getFleets() %}
                 {% if fleet.getUser() == app.user %}
-                    {% if fleet.getPlanet() != usePlanet and fleet.getPlanete() is null %}
-                        <tr>
-                            <th class="tab-cells-name">
-                                "{{  fleet.getName() }}" <span><a class="ml-3 float-right" href="{{ path('destroy_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}"><span>{{ 'fleet.destroyFleet'|trans }}</span></a></span> <span><a class="ml-3 float-right" href="{{ path('manage_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}" data-toggle="modal" data-target="#createModal"><span>{{ 'fleet.seeFlotte'|trans }}</span></a></span> <span><a class="ml-3 float-right" href="{{ path('send_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}"  data-toggle="modal" data-target="#sendModal"><span>{{ 'fleet.sendFleet'|trans }}</span></a></span>
-                            </th>
-                            <td class="center-cells text-center">
-                                {{ fleet.getPlanet().getName() }}
-                            </td>
-                            <td class="center-cells text-center">
-                                {{ fleet.getNbrShips() }}
-                            </td>
-                            <td class="center-cells text-center">
-                                {{ fleet.getNbrSignatures() }}
-                            </td>
-                        </tr>
-                    {% endif %}
+                    {% for planetUser in app.user.getPlanets() %}
+                        {% if fleet.getPlanet() == planetUser and fleet.getPlanete() is null and fleet.getPlanet() != usePlanet %}
+                            <tr>
+                                <th class="tab-cells-name">
+                                    "{{  fleet.getName() }}" <span><a class="ml-3 float-right" href="{{ path('destroy_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}"><span>{{ 'fleet.destroyFleet'|trans }}</span></a></span> <span><a class="ml-3 float-right" href="{{ path('manage_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}" data-toggle="modal" data-target="#createModal"><span>{{ 'fleet.seeFlotte'|trans }}</span></a></span> <span><a class="ml-3 float-right" href="{{ path('send_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}"  data-toggle="modal" data-target="#sendModal"><span>{{ 'fleet.sendFleet'|trans }}</span></a></span>
+                                </th>
+                                <td class="center-cells text-center">
+                                    {{ fleet.getPlanet().getName() }}
+                                </td>
+                                <td class="center-cells text-center">
+                                    {{ fleet.getNbrShips() }}
+                                </td>
+                                <td class="center-cells text-center">
+                                    {{ fleet.getNbrSignatures() }}
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
                 {% endif %}
             {% endfor %}
             </tbody>

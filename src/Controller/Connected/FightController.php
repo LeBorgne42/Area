@@ -31,10 +31,6 @@ class FightController extends Controller
             ->getQuery()
             ->getResult();
         foreach ($fleetsWar as $mdr) {
-            var_dump($mdr->getName());
-            var_dump($mdr->getLaser());
-            var_dump($mdr->getArmor());
-            var_dump($mdr->getMissile());
         }
         exit;
     }
