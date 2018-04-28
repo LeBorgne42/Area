@@ -112,6 +112,16 @@ class Fleet
      */
     protected $scientist = null;
 
+    /**
+     * @ORM\Column(name="niobium",type="integer", nullable=true)
+     */
+    protected $niobium = null;
+
+    /**
+     * @ORM\Column(name="water",type="integer", nullable=true)
+     */
+    protected $water = null;
+
     public function getId()
     {
         return $this->id;
@@ -638,4 +648,37 @@ class Fleet
     {
         $this->fightAt = $fightAt;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getNiobium()
+    {
+        return $this->niobium;
+    }
+
+    /**
+     * @param mixed $niobium
+     */
+    public function setNiobium($niobium): void
+    {
+        $this->niobium = $niobium;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWater()
+    {
+        return $this->water;
+    }
+
+    /**
+     * @param mixed $water
+     */
+    public function setWater($water): void
+    {
+        $this->water = $water;
+    }
+
 }
