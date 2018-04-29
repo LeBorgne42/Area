@@ -41,9 +41,9 @@
             <a href="{{ path('spatial', {'idp': usePlanet.getId()}) }}"><span>{{ 'spatial'|trans }}</span></a>
         </div>
     {% endif %}
-    {% if usePlanet.getCaserne() == 1 %}
+    {% if usePlanet.getCaserne() > 0 or usePlanet.getCenterSearch() > 0 %}
         <div class="btn-left">
-            <a href="{{ path('soldier', {'idp': usePlanet.getId()}) }}"><span class="text-jaune">{{ 'soldier'|trans }}</span></a>
+            <a href="{{ path('soldier', {'idp': usePlanet.getId()}) }}">{{ 'soldier'|trans }}</span></a>
         </div>
     {% endif %}
     <div class="btn-left">

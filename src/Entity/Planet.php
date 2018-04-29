@@ -350,6 +350,19 @@ class Planet
     /**
      * @return mixed
      */
+    public function getPlanetAlliance()
+    {
+        if ($this->getUser()) {
+            return $this->getUser()->getAlly();
+        } else {
+            return null;
+        }
+
+    }
+
+    /**
+     * @return mixed
+     */
     public function getBargeSignature()
     {
         return $this->getBarge() * 50;

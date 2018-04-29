@@ -14,7 +14,7 @@ fleet.planet: Planète
 fleet.createFleet: 'Gestion flotte'
 fleet.fleetShip: Vaisseaux
 fleet.destroyFleet: 'mettre au sol'
-fleet.exploration: 'Flotte en exploration'
+fleet.exploration: 'Flottes en explorations'
 fleet.beforeName: Flotte
 fleet.addShip: Ajouter
 fleet.depart: Envoyer

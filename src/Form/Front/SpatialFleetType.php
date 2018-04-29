@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\CallbackTransformer;
 
 class SpatialFleetType extends AbstractType
 {
@@ -122,6 +123,16 @@ class SpatialFleetType extends AbstractType
                 )
             )
             ->add('sendForm', SubmitType::class, array('label' => 'form.addFleet'));
+
+        $builder->get('name')
+            ->addModelTransformer(new CallbackTransformer(
+                function ($tagAsUpper) {
+                    return strtolower($tagAsUpper);
+                },
+                function ($tagAsUpper) {
+                    return strtoupper($tagAsUpper);
+                }
+            ));
     }
 
     /**

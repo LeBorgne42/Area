@@ -296,6 +296,26 @@ class Ally
     /**
      * @return mixed
      */
+    public function getRadarAlliance($sector)
+    {
+        $return = null;
+
+        foreach($this->getUsers() as $user) {
+            foreach ($user->getPlanets() as $planet) {
+                if ($planet->getSector()->getPosition() == $sector) {
+                    $radar = $planet->getRadar() + $planet->getSkyRadar();
+                    if ($radar > $return || $return == null) {
+                        $return = $radar;
+                    }
+                }
+            }
+        }
+        return $return;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getBitcoin()
     {
         return $this->bitcoin;

@@ -306,6 +306,7 @@ class User implements UserInterface, \Serializable
     public function getWhereRadar($sector)
     {
         $return = null;
+
         foreach($this->getPlanets() as $planet) {
             if ($planet->getSector()->getPosition() == $sector) {
                 $radar = $planet->getRadar() + $planet->getSkyRadar();
@@ -313,6 +314,9 @@ class User implements UserInterface, \Serializable
                     $return = $radar;
                 }
             }
+        }
+        if ($this->getAlly()->getRadarAlliance($sector) > $return || $return == null) {
+            $return = $this->getAlly()->getRadarAlliance($sector);
         }
         return $return;
     }

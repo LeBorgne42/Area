@@ -225,9 +225,9 @@ class Fleet
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getFregateMissile()
+    public function getFregateMissile(): int
     {
         return 50;
     }

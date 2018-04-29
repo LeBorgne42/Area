@@ -6,9 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\CallbackTransformer;
 
-class FleetRenameType extends AbstractType
+class ScientistRecruitType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -18,30 +17,21 @@ class FleetRenameType extends AbstractType
     {
         $builder
             ->add(
-                'name',
+                'scientist',
                 null,
                 array(
-                    'label' => 'form.name',
+                    'label' => 'form.nbr',
+                    'data' => 0,
                     'attr'  => array(
-                        'placeholder' => 'form.name',
+                        'placeholder' => 'form.nbr',
                         'class' => 'form-control',
-                        'maxlength' => '15',
-                        'minlength' => '2',
+                        'min' => '0',
+                        'max' => '50000',
                     ),
                     'required' => true,
                 )
             )
-            ->add('sendForm', SubmitType::class, array('label' => 'form.renameFleet'));
-
-        $builder->get('name')
-            ->addModelTransformer(new CallbackTransformer(
-                function ($tagAsUpper) {
-                    return strtolower($tagAsUpper);
-                },
-                function ($tagAsUpper) {
-                    return strtoupper($tagAsUpper);
-                }
-            ));
+            ->add('sendForm', SubmitType::class, array('label' => 'form.recruitScientist'));
     }
 
     /**
@@ -51,8 +41,8 @@ class FleetRenameType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class'         =>  'App\Entity\Fleet',
-                'translation_domain' => 'front_fleet',
+                'data_class'         =>  null,
+                'translation_domain' => 'front_soldier',
             )
         );
     }

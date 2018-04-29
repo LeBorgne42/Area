@@ -1,1 +1,9 @@
 title: Soldat
+soldier.recruit: 'Recruter des soldats'
+caserner.soldier: 'Soldats en caserne'
+bitcoinImg: Bitcoin
+scientist.recruit: 'Engager des scientifiques'
+caserner.scientist: 'Scientifiques dans les centres'
+form.nbr: 'nombre'
+form.recruitSoldier: 'Recruter'
+form.recruitScientist: 'Engager'
