@@ -122,7 +122,7 @@
                         {% if fleet.getPlanet() == planetUser and fleet.getPlanete() is null and fleet.getPlanet() != usePlanet %}
                             <tr>
                                 <th class="tab-cells-name">
-                                    "{{  fleet.getName() }}" <span><a class="ml-3 float-right" href="{{ path('destroy_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}"><span>{{ 'fleet.destroyFleet'|trans }}</span></a></span> <span><a class="ml-3 float-right" href="{{ path('manage_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}" data-toggle="modal" data-target="#createModal"><span>{{ 'fleet.seeFlotte'|trans }}</span></a></span> <span><a class="ml-3 float-right" href="{{ path('send_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}"  data-toggle="modal" data-target="#sendModal"><span>{{ 'fleet.sendFleet'|trans }}</span></a></span>
+                                    "{{  fleet.getName() }}" <span><a class="ml-3 float-right" href="{{ path('destroy_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}"><span>{{ 'fleet.destroyFleet'|trans }}</span></a></span> <span><a class="ml-3 float-right" href="{{ path('manage_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}" data-toggle="modal" data-target="#createModal"><span>{{ 'fleet.seeFlotte'|trans }}</span></a></span>
                                 </th>
                                 <td class="center-cells text-center">
                                     <span><a href="{{ path('map', {id: fleet.getPlanet().getSector.getPosition(), 'idp': usePlanet.getId()}) }}">{{ fleet.getplanet().getName() }} - {{ fleet.getPlanet().getSector().getGalaxy.getPosition() }}:{{ fleet.getPlanet().getSector.getPosition() }}:{{ fleet.getPlanet().getPosition() }}</a></span>
@@ -190,13 +190,13 @@
         </table>
     </div>
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-createFleet" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content special">
             </div>
         </div>
     </div>
     <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-createFleet" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content special">
             </div>
         </div>

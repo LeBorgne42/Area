@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Connected;
+namespace App\Controller\Connected\Map;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -10,12 +10,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
  * @Route("/fr")
  * @Security("has_role('ROLE_USER')")
  */
-class GalaxyController extends Controller
+class UniverseController extends Controller
 {
     /**
-     * @Route("/galaxie/{id}/{idp}", name="galaxy", requirements={"id"="\d+", "idp"="\d+"})
+     * @Route("/univers/{idp}", name="universe", requirements={"idp"="\d+"})
      */
-    public function galaxyAction($id, $idp)
+    public function universeAction($idp)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -27,17 +27,14 @@ class GalaxyController extends Controller
             ->getQuery()
             ->getOneOrNullResult();
 
-        $sectors = $em->getRepository('App:Sector')
-            ->createQueryBuilder('s')
-            ->join('s.galaxy', 'g')
-            ->where('g.position = :id')
-            ->setParameter('id', $id)
-            ->orderBy('s.position', 'ASC')
+        $galaxys = $em->getRepository('App:Galaxy')
+            ->createQueryBuilder('g')
+            ->orderBy('g.position', 'ASC')
             ->getQuery()
             ->getResult();
 
-        return $this->render('connected/map/galaxy.html.twig', [
-            'sectors' => $sectors,
+        return $this->render('connected/map/universe.html.twig', [
+            'galaxys' => $galaxys,
             'usePlanet' => $usePlanet,
         ]);
     }

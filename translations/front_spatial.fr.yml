@@ -16,7 +16,7 @@ bitcoinImg: Bitcoin
 spatial.orbiteFlotte: 'Flotte en orbite'
 spatial.createFlotte: 'Créer une nouvelle flotte'
 spatial.createFleet: 'Choix des vaisseaux'
-spatial.seeFlotte: 'gerer flotte'
+spatial.seeFlotte: 'gestion flotte'
 spatial.fleetName: 'Nom de la flotte'
 spatial.fleetShips: Vaisseaux
 spatial.fleetSignature: Signature

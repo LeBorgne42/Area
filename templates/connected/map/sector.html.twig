@@ -52,7 +52,7 @@
                             <td class="center-cells pt-4">
                                 <div class="planet-position text-center">{{ planet.getPosition() }}</div>
                                 {% if planet.getNbrFleets() %}
-                                    <a class="glyphicon glyphicon-plane planet" href="{{ path('recoveryPw') }}" data-toggle="modal" data-target="#fleetModal"></a>
+                                    <a class="glyphicon glyphicon-plane planet" href="{{ path('fleet_sector', {'id':planet.getId(), 'idp': usePlanet.getId()}) }}" data-toggle="modal" data-target="#fleetModal"></a>
                                 {% endif %}
                                 {% if planet.getNbCdr() or planet.getWtCdr() %}
                                     <span class="glyphicon glyphicon-oil planet" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.cdr'|trans({'%niobium%': planet.getNbCdr(), '%water%': planet.getWtCdr()}) }}"></span>
@@ -81,7 +81,7 @@
                                     <span class="glyphicon glyphicon-oil empty" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.cdr'|trans({'%niobium%': planet.getNbCdr(), '%water%': planet.getWtCdr()}) }}"></span>
                                 {% endif %}
                                 {% if planet.getNbrFleets() %}
-                                    <a class="glyphicon glyphicon-plane empty" href="{{ path('recoveryPw') }}" data-toggle="modal" data-target="#fleetModal"></a>
+                                    <a class="glyphicon glyphicon-plane empty" href="{{ path('fleet_sector', {'id':planet.getId(), 'idp': usePlanet.getId()}) }}" data-toggle="modal" data-target="#fleetModal"></a>
                                 {% endif %}
                             </td>
                         {% else %}
@@ -246,7 +246,7 @@
         </div>
     </div>
     <div class="modal fade" id="fleetModal" tabindex="-1" role="dialog" aria-labelledby="fleetModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
             <div class="modal-content special">
             </div>
         </div>
