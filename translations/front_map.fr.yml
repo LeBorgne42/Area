@@ -13,3 +13,4 @@ map.planetHostile: Occupée
 tooltip.cdr: '%niobium% Niobium - %water% Water'
 tooltip.brouillage: Brouillage
 map.current: 'Mouvement de flotte dans le secteur'
+sector.number: Secteur

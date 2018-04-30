@@ -130,6 +130,21 @@ class Fleet
     /**
      * @return mixed
      */
+    public function getAllianceUser()
+    {
+        $uAlly = $this->getUser()->getAlly()->getUsers();
+        $uFleet = $this->getPlanet()->getUser();
+        foreach ($uAlly as $user) {
+            if($uFleet == $user) {
+                return 'hello';
+            }
+        }
+        return null;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getNbrShips()
     {
         $fregate = $this->getFregate();

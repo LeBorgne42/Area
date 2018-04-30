@@ -213,7 +213,6 @@ function manageConstructTime() {
 function manageResearchTime() {
     var build = new Date($('#timeResearch').text());
     var now = new Date();
-    console.log($('#timeResearch').text());
     var date_now = Math.abs(build - now) / 1000;
     var jours = Math.floor(date_now / (60 * 60 * 24));
     var heures = Math.floor((date_now - (jours * 60 * 60 * 24)) / (60 * 60));

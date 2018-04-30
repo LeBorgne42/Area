@@ -22,6 +22,7 @@
         {% set leftSector = 100 %}
     {% endif %}
     <div class="map-block">
+        <div class="block-title ml-4"><h2>{{ 'sector.number'|trans }} {{ id }}</h2></div>
         <table class="table sector-table text-center sector">
             <tbody>
             <tr>
@@ -48,7 +49,7 @@
                         </td>
                     {% endif %}
                     {% if planet.getEmpty == false %}
-                        {% if app.user.getWhereRadar(id) > planet.getSkyBrouilleur() or planet.getUser() == app.user %}
+                        {% if app.user.getWhereRadar(id) > planet.getSkyBrouilleur() or planet.getUser() == app.user or planet.getOurFleet(app.user) %}
                             <td class="center-cells pt-4">
                                 <div class="planet-position text-center">{{ planet.getPosition() }}</div>
                                 {% if planet.getNbrFleets() %}
@@ -60,7 +61,7 @@
                                 {% if planet.getCdr() == false %}
                                     <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planetInfos'|trans({'%land%': planet.getGround(),  '%sky%': planet.getSky()}) }}"></span>
                                 {% endif %}
-                                <a {% if planet.getUser() == app.user %}href="{{ path('building', {'idp': usePlanet.getId()}) }}"{% else %}{% endif %}><img class="mr-4 mb-4" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planet'|trans({'%name%': planet.getName() }) }}" height="64" width="64" src="{{ vich_uploader_asset(planet, 'imageFile') }}"></a>
+                                <a {% if planet.getUser() == app.user %}href="{{ path('building', {'idp': planet.getId()}) }}"{% else %}{% endif %}><img class="mr-4 mb-4" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planet'|trans({'%name%': planet.getName() }) }}" height="64" width="64" src="{{ vich_uploader_asset(planet, 'imageFile') }}"></a>
                                 <div class="text-center{% if planet.getUser() == app.user %} pp-mine{% elseif planet.getPlanetAlliance() == app.user.getAlly() and planet.getPlanetAlliance() != null %} pp-ally{% elseif planet.getUser() %} pp-enemy{% elseif planet.getCdr() %} pp-cdr{% elseif planet.getMerchant() %} pp-ia{% endif %}">{{ planet.getName() }}</div>
                             </td>
                         {% else %}

@@ -192,6 +192,12 @@ class User implements UserInterface, \Serializable
     protected $connected = true;
 
     /**
+     * @ORM\Column(name="gameOver",type="boolean")
+     * @Assert\NotBlank(message = "required")
+     */
+    protected $gameOver = false;
+
+    /**
      * @Assert\File(
      *     maxSize="1000k",
      *     mimeTypes={"image/png", "image/jpeg", "image/bmp"}
@@ -970,5 +976,21 @@ class User implements UserInterface, \Serializable
     public function setSearch($search): void
     {
         $this->search = $search;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGameOver()
+    {
+        return $this->gameOver;
+    }
+
+    /**
+     * @param mixed $gameOver
+     */
+    public function setGameOver($gameOver): void
+    {
+        $this->gameOver = $gameOver;
     }
 }

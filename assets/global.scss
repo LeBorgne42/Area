@@ -57,8 +57,22 @@ body.area {
   margin-top: 40%;
 }
 
+.close.plus {
+  color: orange;
+}
+
+.close.plus:hover {
+  color: red;
+}
+
 .modal-content.special {
-  background-color: rgba(83,74,74,0.9);
+  background-color: rgba(52,58,64,0.8);
+  border-radius: 20px;
+  border: 1px solid white;
+}
+
+.modal-content.special-opaque {
+  background-color: rgba(52,58,64,1);
   border-radius: 20px;
   border: 1px solid white;
 }

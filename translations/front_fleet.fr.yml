@@ -28,7 +28,7 @@ fleet.barge: Barge
 form.nbr: Nombre
 form.manageFleet: Sauvegarder
 form.renameFleet: renommer
-form.sendFleet: 'envoyer'
+form.sendFleet: envoyer
 form.name: ''
 fleet.sendFleet: envoyer
 fleet.attackMode: 'mode attaque (attention aux représailles)'
@@ -37,3 +37,5 @@ fleet.sector: secteur
 fleet.planete: planète
 fleet.cargo: Cargo
 fleet.sendCoord: ordre
+fleet.invade: Envahir
+fleet.colonize: Coloniser

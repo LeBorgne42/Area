@@ -357,7 +357,20 @@ class Planet
         } else {
             return null;
         }
+    }
 
+    /**
+     * @return mixed
+     */
+    public function getOurFleet($user)
+    {
+
+        foreach($this->getFleets() as $fleet) {
+            if ($fleet->getUser() == $user) {
+                return 'hello';
+            }
+        }
+        return null;
     }
 
     /**
