@@ -1,1 +1,6 @@
 title: 'Page alliance'
+ally.name: 'Nom d''alliance :'
+ally.nbr: 'Nombre de membre :'
+ally.galaxy: 'Situé dans les galaxies :'
+ally.planet: 'Nombre de planètes :'
+ally.fleet: 'Nombre de flottes :'

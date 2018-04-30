@@ -316,6 +316,36 @@ class Ally
     /**
      * @return mixed
      */
+    public function getPlanets()
+    {
+        $return = 0;
+
+        foreach($this->getUsers() as $user) {
+            foreach ($user->getPlanets() as $planet) {
+                $return++;
+            }
+        }
+        return $return;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFleets()
+    {
+        $return = 0;
+
+        foreach($this->getUsers() as $user) {
+            foreach ($user->getFleets() as $planet) {
+                $return++;
+            }
+        }
+        return $return;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getBitcoin()
     {
         return $this->bitcoin;

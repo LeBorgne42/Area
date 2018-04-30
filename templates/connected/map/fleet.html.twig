@@ -13,7 +13,7 @@
     {%- endblock -%}
     <div class="p-5 createFleet">
         {% for fleet in fleets %}
-            <div class="my-3">{{ fleet.getUser().getUserName() }} - {{ fleet.name }} : {{ fleet.getNbrSignatures() }} {% if fleet.getUser() == app.user %}<span><a class="ml-3" href="{{ path('manage_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}" data-toggle="modal" data-target="#editModal"><span>{{ 'sector.manageFleet'|trans }}</span></a></span></div>{% endif %}
+            <div class="my-3">{{ fleet.getUser().getUserName() }} - {{ fleet.name }} : {{ fleet.getNbrSignatures()|number_format }} {% if fleet.getUser() == app.user %}<span><a class="ml-3" href="{{ path('manage_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}" data-toggle="modal" data-target="#editModal"><span>{{ 'sector.manageFleet'|trans }}</span></a></span></div>{% endif %}
         {% endfor %}
     </div>
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">

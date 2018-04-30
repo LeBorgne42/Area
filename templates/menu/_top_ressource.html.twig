@@ -2,12 +2,12 @@
 
 <div class="navbar navbar-ressource navbar-dark bg-top">
     <span>{{ usePlanet.getName() }} : <a href="{{ path('map', {id: usePlanet.getSector().getPosition(), 'idp': usePlanet.getId()}) }}">{{ usePlanet.getSector().getGalaxy.getPosition() }}:{{ usePlanet.getSector().getPosition() }}:{{ usePlanet.getPosition() }}</a></span>
-    <span class="ressource niobium" data-toggle="tooltip" data-placement="bottom" title="{{ 'niobium'|trans }}"><span class="reload">{{ usePlanet.getNiobium() }}</span> <span class="text-vert">+<span class="takeProd">{{ usePlanet.getNbProduction() * 60 }}</span>/h</span> <img src="{{ asset('img/niobium.png') }}"></span>
-    <span class="ressource water" data-toggle="tooltip" data-placement="bottom" title="{{ 'water'|trans }}"><span class="reload">{{ usePlanet.getWater() }}</span> <span class="text-vert">+<span class="takeProd">{{ usePlanet.getWtProduction() * 60 }}</span>/h</span> <img src="{{ asset('img/water.png') }}"></span>
-    <span class="ressource bitcoin" data-toggle="tooltip" data-placement="bottom" title="{{ 'coin'|trans }}"><span class="reload">{{ app.user.getBitcoin() }}</span> <img src="{{ asset('img/coin.png') }}"></span>
+    <span class="ressource niobium" data-toggle="tooltip" data-placement="bottom" title="{{ 'niobium'|trans }}"><span class="reload">{{ usePlanet.getNiobium()|number_format }}</span> <span class="text-vert">+<span class="takeProd">{{ usePlanet.getNbProduction() * 60 }}</span>/h</span> <img src="{{ asset('img/niobium.png') }}"></span>
+    <span class="ressource water" data-toggle="tooltip" data-placement="bottom" title="{{ 'water'|trans }}"><span class="reload">{{ usePlanet.getWater()|number_format }}</span> <span class="text-vert">+<span class="takeProd">{{ usePlanet.getWtProduction() * 60 }}</span>/h</span> <img src="{{ asset('img/water.png') }}"></span>
+    <span class="ressource bitcoin" data-toggle="tooltip" data-placement="bottom" title="{{ 'coin'|trans }}"><span class="reload">{{ app.user.getBitcoin()|number_format }}</span> <img src="{{ asset('img/coin.png') }}"></span>
     <span>{{ usePlanet.getGroundPlace() }}/{{ usePlanet.getGround() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"> {{ usePlanet.getSkyPlace() }}/{{ usePlanet.getSky() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'SkyImg'|trans }}" src="{{ asset('img/sky.png') }}"></span>
-    <span class="ressource" data-toggle="tooltip" data-placement="bottom" title="{{ 'workers'|trans }}">{{ usePlanet.getWorker() }} <img src="{{ asset('img/worker.png') }}"></span>
-    <span class="ressource" data-toggle="tooltip" data-placement="bottom" title="{{ 'soldiers'|trans }}">{{ usePlanet.getSoldier() }} <img src="{{ asset('img/soldier.png') }}"></span>
-    <span class="ressource" data-toggle="tooltip" data-placement="bottom" title="{{ 'scientists'|trans }}">{{ usePlanet.getScientist() }} <img src="{{ asset('img/scientist.png') }}"></span>
+    <span class="ressource" data-toggle="tooltip" data-placement="bottom" title="{{ 'workers'|trans }}">{{ usePlanet.getWorker()|number_format }} <img src="{{ asset('img/worker.png') }}"></span>
+    <span class="ressource" data-toggle="tooltip" data-placement="bottom" title="{{ 'soldiers'|trans }}">{{ usePlanet.getSoldier()|number_format }} <img src="{{ asset('img/soldier.png') }}"></span>
+    <span class="ressource" data-toggle="tooltip" data-placement="bottom" title="{{ 'scientists'|trans }}">{{ usePlanet.getScientist()|number_format }} <img src="{{ asset('img/scientist.png') }}"></span>
     <span><a class="top" target="_blank" href="http://area-control.forumactif.com/">{{ 'forum'|trans }}</a></span>
 </div>

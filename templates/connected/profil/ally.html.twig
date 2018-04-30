@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'front_page_ally' %}
+
+{% block title %}{{ 'title'|trans }}{% endblock %}
+
+{% block body %}
+    <div class="front-block allyPage text-center">
+        <div class="my-4 ml-5">[{{ ally.getSigle() }}] - {{ ally.getName() }}</div>
+        {% if ally.imageName %}
+            <img height="300" width="450" src="{{ vich_uploader_asset(app.user.getAlly(), 'imageFile') }}">
+        {% else %}
+            <div class="text-center"><img height="300" width="450" src="{{ asset('img/ally.jpg') }}"></div>
+        {% endif %}
+        <div class="my-5 ml-5">{{ ally.getSlogan() }}</div>
+        <div class="my-4 ml-5">{{ 'ally.nbr'|trans }} {{ ally.getUsers()|length }}</div>
+        <div class="my-4 ml-5">{{ 'ally.galaxy'|trans }} 1</div>
+        <div class="my-4 ml-5">{{ 'ally.planet'|trans }} {{ ally.getPlanets() }}</div>
+        <div class="my-4 ml-5">{{ 'ally.fleet'|trans }} {{ ally.getFleets() }}</div>
+    </div>
+{% endblock %}

@@ -118,10 +118,10 @@
                             {{ fleet.getFlightTime()|date('H:i:s d/m/Y') }}
                         </td>
                         <td class="center-cells text-center">
-                            {{ fleet.getNbrShips() }}
+                            {{ fleet.getNbrShips()|number_format }}
                         </td>
                         <td class="center-cells text-center">
-                            {{ fleet.getNbrSignatures() }}
+                            {{ fleet.getNbrSignatures()|number_format }}
                         </td>
                     </tr>
                 {% endfor %}

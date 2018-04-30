@@ -13,7 +13,7 @@
                 <tbody>
                 <tr>
                     <th class="tab-cells-name">
-                        <img class="mr-3" src="{{ asset('img/soldier.png') }}"> {{ 'caserner.soldier'|trans }} x {{ usePlanet.getSoldier() }} <span class="float-right"><span class="ml-5">10 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></span></span>
+                        <img class="mr-3" src="{{ asset('img/soldier.png') }}"> {{ 'caserner.soldier'|trans }} x {{ usePlanet.getSoldier()|number_format }} <span class="float-right"><span class="ml-5">10 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></span></span>
                     </th>
                     <td class="center-cells">
                         {{ form_widget(form_caserneRecruit.soldier,{attr: { max: app.user.getBitcoin() / 10 }}) }}
@@ -33,7 +33,7 @@
                 <tbody>
                 <tr>
                     <th class="tab-cells-name">
-                        <img class="mr-3" src="{{ asset('img/scientist.png') }}"> {{ 'caserner.scientist'|trans }} x {{ usePlanet.getScientist() }} <span class="float-right"><span class="ml-5">100 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></span></span>
+                        <img class="mr-3" src="{{ asset('img/scientist.png') }}"> {{ 'caserner.scientist'|trans }} x {{ usePlanet.getScientist()|number_format }} <span class="float-right"><span class="ml-5">100 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></span></span>
                     </th>
                     <td class="center-cells">
                         {{ form_widget(form_scientistRecruit.scientist,{attr: { max: app.user.getBitcoin() / 100 }}) }}

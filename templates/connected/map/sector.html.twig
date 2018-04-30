@@ -59,9 +59,9 @@
                                     <span class="glyphicon glyphicon-oil planet" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.cdr'|trans({'%niobium%': planet.getNbCdr(), '%water%': planet.getWtCdr()}) }}"></span>
                                 {% endif %}
                                 {% if planet.getCdr() == false %}
-                                    <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planetInfos'|trans({'%land%': planet.getGround(),  '%sky%': planet.getSky(),  '%ground%': planet.getNbrSignatures()}) }}"></span>
+                                    <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planetInfos'|trans({'%land%': planet.getGround(),  '%sky%': planet.getSky(),  '%ground%': planet.getNbrSignatures()|number_format}) }}"></span>
                                 {% endif %}
-                                <a {% if planet.getUser() == app.user %}href="{{ path('building', {'idp': planet.getId()}) }}"{% else %}{% endif %}><img class="mr-4 mb-4" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planet'|trans({'%name%': planet.getName() }) }}" height="64" width="64" src="{{ vich_uploader_asset(planet, 'imageFile') }}"></a>
+                                <a {% if planet.getUser() == app.user %}href="{{ path('building', {'idp': planet.getId()}) }}"{% elseif planet.getUser() %}href="{{ path('user_profil', {'idp': usePlanet.getId(), 'id': planet.getUser().getId()}) }}"{% endif %}><img class="mr-4 mb-4" {% if planet.getUser() %}data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planet'|trans({'%name%': planet.getUser().getUserName() }) }}"{% endif %} height="64" width="64" src="{{ vich_uploader_asset(planet, 'imageFile') }}"></a>
                                 <div class="text-center{% if planet.getUser() == app.user %} pp-mine{% elseif planet.getPlanetAlliance() == app.user.getAlly() and planet.getPlanetAlliance() != null %} pp-ally{% elseif planet.getUser() %} pp-enemy{% elseif planet.getCdr() %} pp-cdr{% elseif planet.getMerchant() %} pp-ia{% endif %}">{{ planet.getName() }}</div>
                             </td>
                         {% else %}
@@ -149,7 +149,7 @@
                         {{ fleet.getSector().getGalaxy.getPosition() }}:{{ fleet.getSector.getPosition() }}:{{ fleet.getPlanete() }}
                     </td>
                     <td class="center-cells text-center">
-                        {{ fleet.getNbrSignatures() }}
+                        {{ fleet.getNbrSignatures()|number_format }}
                     </td>
                     <td class="center-cells text-center">
                         {{ fleet.getFlightTime()|date('Y/m/d H:i:s') }}
@@ -192,7 +192,7 @@
                             <span><a href="{{ path('map', {id: fleet.getSector().getPosition(), 'idp': usePlanet.getId()}) }}">{{ fleet.getSector().getGalaxy.getPosition() }}:{{ fleet.getSector.getPosition() }}:{{ fleet.getPlanete() }}</a></span>
                         </td>
                         <td class="center-cells text-center">
-                            {{ fleet.getNbrSignatures() }}
+                            {{ fleet.getNbrSignatures()|number_format }}
                         </td>
                         <td class="center-cells text-center">
                             {{ fleet.getFlightTime()|date('Y/m/d H:i:s') }}
@@ -235,7 +235,7 @@
                             <span><a href="{{ path('map', {id: fleet.getSector().getPosition(), 'idp': usePlanet.getId()}) }}">{{ fleet.getSector().getGalaxy.getPosition() }}:{{ fleet.getSector.getPosition() }}:{{ fleet.getPlanete() }}</a></span>
                         </td>
                         <td class="center-cells text-center">
-                            {{ fleet.getNbrSignatures() }}
+                            {{ fleet.getNbrSignatures()|number_format }}
                         </td>
                         <td class="center-cells text-center">
                             {{ fleet.getFlightTime()|date('Y/m/d H:i:s') }}

@@ -13,7 +13,7 @@
                 <tbody>
                 <tr>
                     <th class="tab-cells-name">
-                        {{ 'spatial.sonde'|trans }} x {{ usePlanet.getSonde() }} <span class="float-right"><span class="ml-5">5 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span></span>
+                        {{ 'spatial.sonde'|trans }} x {{ usePlanet.getSonde()|number_format }} <span class="float-right"><span class="ml-5">5 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span></span>
                     </th>
                     <td class="center-cells">
                         {{ form_widget(form_spatialShip.sonde,{attr: { max: usePlanet.getSonde()}}) }}
@@ -21,7 +21,7 @@
                 </tr>
                 <tr{% if app.user.getTerraformation() == 0 %} hidden{% endif %}>
                     <th class="tab-cells-name">
-                        {{ 'spatial.colonizer'|trans }} x {{ usePlanet.getColonizer() }} <span class="float-right"><span class="ml-5">20.000 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3">12.000 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></span>
+                        {{ 'spatial.colonizer'|trans }} x {{ usePlanet.getColonizer()|number_format }} <span class="float-right"><span class="ml-5">20.000 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3">12.000 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></span>
                     </th>
                     <td class="center-cells">
                         {{ form_widget(form_spatialShip.colonizer,{attr: { max: usePlanet.getColonizer()}}) }}
@@ -29,7 +29,7 @@
                 </tr>
                 <tr{% if app.user.getRecycleur() == 0 %} hidden{% endif %}>
                     <th class="tab-cells-name">
-                        {{ 'spatial.recycleur'|trans }} x {{ usePlanet.getRecycleur() }} <span class="float-right"><span class="ml-5">10.000 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3">7.000 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></span>
+                        {{ 'spatial.recycleur'|trans }} x {{ usePlanet.getRecycleur()|number_format }} <span class="float-right"><span class="ml-5">10.000 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3">7.000 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></span>
                     </th>
                     <td class="center-cells">
                         {{ form_widget(form_spatialShip.recycleur,{attr: { max: usePlanet.getRecycleur()}}) }}
@@ -37,7 +37,7 @@
                 </tr>
                 <tr{% if app.user.getIndustry() > 0 or app.user.getMissile() == 0 %} hidden{% endif %}>
                     <th class="tab-cells-name">
-                        {{ 'spatial.hunter'|trans }} x {{ usePlanet.getHunter() }} <span class="float-right"><span class="ml-5">25 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3">5 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></span>
+                        {{ 'spatial.hunter'|trans }} x {{ usePlanet.getHunter()|number_format }} <span class="float-right"><span class="ml-5">25 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3">5 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></span>
                     </th>
                     <td class="center-cells">
                         {{ form_widget(form_spatialShip.hunter,{attr: { max: usePlanet.getHunter()}}) }}
@@ -45,7 +45,7 @@
                 </tr>
                 <tr{% if usePlanet.getHeavyUsine() == 0 or app.user.getMissile() < 2 or app.user.getLaser() == 0 %} hidden{% endif %}>
                     <th class="tab-cells-name">
-                        {{ 'spatial.fregate'|trans }} x {{ usePlanet.getFregate() }} <span class="float-right"><span class="ml-5">300 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3">200 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></span>
+                        {{ 'spatial.fregate'|trans }} x {{ usePlanet.getFregate()|number_format }} <span class="float-right"><span class="ml-5">300 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3">200 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></span>
                     </th>
                     <td class="center-cells">
                         {{ form_widget(form_spatialShip.fregate,{attr: { max: usePlanet.getFregate()}}) }}
@@ -53,7 +53,7 @@
                 </tr>
                 <tr{% if app.user.getBarge() == 0 %} hidden{% endif %}>
                     <th class="tab-cells-name">
-                        {{ 'spatial.barge'|trans }} x {{ usePlanet.getBarge() }} <span class="float-right"><span class="ml-5">15.000 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3">12.000 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></span>
+                        {{ 'spatial.barge'|trans }} x {{ usePlanet.getBarge()|number_format }} <span class="float-right"><span class="ml-5">15.000 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3">12.000 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></span>
                     </th>
                     <td class="center-cells">
                         {{ form_widget(form_spatialShip.barge,{attr: { max: usePlanet.getBarge()}}) }}
@@ -90,13 +90,13 @@
                            "{{  fleet.getName() }}" <span><a class="ml-3 float-right" href="{{ path('destroy_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}"><span>{{ 'spatial.destroyFleet'|trans }}</span></a></span><span><a class="ml-3 float-right" href="{{ path('manage_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId() }) }}" data-toggle="modal" data-target="#editModal"><span>{{ 'spatial.seeFlotte'|trans }}</span></a></span>
                         </th>
                         <td class="center-cells text-center">
-                            {{ fleet.getNbrShips() }}
+                            {{ fleet.getNbrShips()|number_format }}
                         </td>
                         <td class="center-cells text-center">
-                            {{ fleet.getCargoFull() }} / {{ fleet.getCargoPlace() }}
+                            {{ fleet.getCargoFull()|number_format }} / {{ fleet.getCargoPlace()|number_format }}
                         </td>
                         <td class="center-cells text-center">
-                            {{ fleet.getNbrSignatures() }}
+                            {{ fleet.getNbrSignatures()|number_format }}
                         </td>
                     </tr>
                 {% endif %}

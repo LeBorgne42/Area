@@ -37,10 +37,6 @@ function manageModalContact() {
 }
 
 function setNoDecimalDisplay() {
-    $('div.bg-top span.ressource.niobium span.reload').text(Math.trunc($('div.bg-top span.ressource.niobium span.reload').text()));
-    $('div.bg-top span.ressource.water span.reload').text(Math.trunc($('div.bg-top span.ressource.water span.reload').text()));
-    $('div.bg-top span.ressource.bitcoin span.reload').text(Math.trunc($('div.bg-top span.ressource.bitcoin span.reload').text()));
-
     setInterval(function() {
         var niobium = Math.trunc($('div.bg-top span.ressource.niobium span.reload').text());
         var water =   Math.trunc($('div.bg-top span.ressource.water span.reload').text());
