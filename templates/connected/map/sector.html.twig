@@ -59,7 +59,7 @@
                                     <span class="glyphicon glyphicon-oil planet" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.cdr'|trans({'%niobium%': planet.getNbCdr(), '%water%': planet.getWtCdr()}) }}"></span>
                                 {% endif %}
                                 {% if planet.getCdr() == false %}
-                                    <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planetInfos'|trans({'%land%': planet.getGround(),  '%sky%': planet.getSky(),  '%ground%': planet.getNbrSignatures()})|raw }}"></span>
+                                    <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planetInfos'|trans({'%land%': planet.getGround(),  '%sky%': planet.getSky(),  '%ground%': planet.getNbrSignatures()}) }}"></span>
                                 {% endif %}
                                 <a {% if planet.getUser() == app.user %}href="{{ path('building', {'idp': planet.getId()}) }}"{% else %}{% endif %}><img class="mr-4 mb-4" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planet'|trans({'%name%': planet.getName() }) }}" height="64" width="64" src="{{ vich_uploader_asset(planet, 'imageFile') }}"></a>
                                 <div class="text-center{% if planet.getUser() == app.user %} pp-mine{% elseif planet.getPlanetAlliance() == app.user.getAlly() and planet.getPlanetAlliance() != null %} pp-ally{% elseif planet.getUser() %} pp-enemy{% elseif planet.getCdr() %} pp-cdr{% elseif planet.getMerchant() %} pp-ia{% endif %}">{{ planet.getName() }}</div>

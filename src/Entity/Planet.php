@@ -378,7 +378,7 @@ class Planet
      */
     public function getBargeSignature()
     {
-        return $this->getBarge() * 50;
+        return 50;
     }
 
     /**
@@ -386,7 +386,7 @@ class Planet
      */
     public function getColonizerSignature()
     {
-        return $this->getColonizer() * 200;
+        return 200;
     }
 
     /**
@@ -394,7 +394,7 @@ class Planet
      */
     public function getFregateSignature()
     {
-        return $this->getFregate() * 85;
+        return 85;
     }
 
     /**
@@ -402,7 +402,7 @@ class Planet
      */
     public function getHunterSignature()
     {
-        return $this->getHunter() * 3;
+        return 3;
     }
 
     /**
@@ -410,7 +410,7 @@ class Planet
      */
     public function getRecycleurSignature()
     {
-        return $this->getRecycleur() * 80;
+        return 80;
     }
 
     /**

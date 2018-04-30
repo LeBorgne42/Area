@@ -108,91 +108,129 @@
                 </tr>
                 </tbody>
             </table>
-            {{ form_end(form_sendFleet) }}
-            {{ form_start(form_manageFleet,{attr: { action: path('manage_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}) }}
-            <table class="table table-striped table-bordered table-dark" {% if app.user != fleet.getPlanet().getUser() %} hidden{% endif %}>
-                <tbody>
-                <tr>
-                    <th class="tab-cells-name">
-                        {{ 'fleet.fleetShip'|trans }}
-                    </th>
-                    <td class="center-cells">
-                        {{ 'fleet.addShip'|trans }}
-                    </td>
-                    <td class="center-cells">
-                        {{ 'fleet.removeShip'|trans }}
-                    </td>
-                </tr>
-                <tr{% if usePlanet.getSonde()== 0 and fleet.getSonde()== 0 %} hidden{% endif %}>
-                    <th class="tab-cells-name">
-                        {{ 'fleet.sonde'|trans }} x {{ fleet.getSonde() }}
-                    </th>
-                    <td class="center-cells">
-                        {{ form_widget(form_manageFleet.moreSonde,{attr: { max: usePlanet.getSonde()}}) }}
-                    </td>
-                    <td class="center-cells">
-                        {{ form_widget(form_manageFleet.lessSonde,{attr: { max: fleet.getSonde()}}) }}
-                    </td>
-                </tr>
-                <tr{% if usePlanet.getColonizer()== 0 and fleet.getColonizer()== 0 %} hidden{% endif %}>
-                    <th class="tab-cells-name">
-                        {{ 'fleet.colonizer'|trans }} x {{ fleet.getColonizer() }}
-                    </th>
-                    <td class="center-cells">
-                        {{ form_widget(form_manageFleet.moreColonizer,{attr: { max: usePlanet.getColonizer()}}) }}
-                    </td>
-                    <td class="center-cells">
-                        {{ form_widget(form_manageFleet.lessColonizer,{attr: { max: fleet.getColonizer()}}) }}
-                    </td>
-                </tr>
-                <tr{% if usePlanet.getRecycleur() == 0 and fleet.getRecycleur()== 0 %} hidden{% endif %}>
-                    <th class="tab-cells-name">
-                        {{ 'fleet.recycleur'|trans }} x {{ fleet.getRecycleur() }}
-                    </th>
-                    <td class="center-cells">
-                        {{ form_widget(form_manageFleet.moreRecycleur,{attr: { max: usePlanet.getRecycleur()}}) }}
-                    </td>
-                    <td class="center-cells">
-                        {{ form_widget(form_manageFleet.lessRecycleur,{attr: { max: fleet.getRecycleur()}}) }}
-                    </td>
-                </tr>
-                <tr{% if usePlanet.getHunter()== 0 and fleet.getHunter()== 0 %} hidden{% endif %}>
-                    <th class="tab-cells-name">
-                        {{ 'fleet.hunter'|trans }} x {{ fleet.getHunter() }}
-                    </th>
-                    <td class="center-cells">
-                        {{ form_widget(form_manageFleet.moreHunter,{attr: { max: usePlanet.getHunter()}}) }}
-                    </td>
-                    <td class="center-cells">
-                        {{ form_widget(form_manageFleet.lessHunter,{attr: { max: fleet.getHunter()}}) }}
-                    </td>
-                </tr>
-                <tr{% if usePlanet.getFregate()== 0 and fleet.getFregate()== 0 %} hidden{% endif %}>
-                    <th class="tab-cells-name">
-                        {{ 'fleet.fregate'|trans }} x {{ fleet.getFregate() }}
-                    </th>
-                    <td class="center-cells">
-                        {{ form_widget(form_manageFleet.moreFregate,{attr: { max: usePlanet.getFregate()}}) }}
-                    </td>
-                    <td class="center-cells">
-                        {{ form_widget(form_manageFleet.lessFregate,{attr: { max: fleet.getFregate()}}) }}
-                    </td>
-                </tr>
-                <tr{% if usePlanet.getBarge()== 0 and fleet.getBarge()== 0 %} hidden{% endif %}>
-                    <th class="tab-cells-name">
-                        {{ 'fleet.barge'|trans }} x {{ fleet.getBarge() }}
-                    </th>
-                    <td class="center-cells">
-                        {{ form_widget(form_manageFleet.moreBarge,{attr: { max: usePlanet.getBarge()}}) }}
-                    </td>
-                    <td class="center-cells">
-                        {{ form_widget(form_manageFleet.lessBarge,{attr: { max: fleet.getBarge()}}) }}
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            {{ form_widget(form_manageFleet.sendForm,{attr: { class: 'btn btn-lg btn-info float-right'}}) }}
-            {{ form_end(form_manageFleet) }}
+            {% if app.user == fleet.getPlanet().getUser() %}
+                {{ form_end(form_sendFleet) }}
+                {{ form_start(form_manageFleet,{attr: { action: path('manage_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}) }}
+                <table class="table table-striped table-bordered table-dark">
+                    <tbody>
+                    <tr>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.fleetShip'|trans }}
+                        </th>
+                        <td class="center-cells">
+                            {{ 'fleet.addShip'|trans }}
+                        </td>
+                        <td class="center-cells">
+                            {{ 'fleet.removeShip'|trans }}
+                        </td>
+                    </tr>
+                    <tr{% if fleet.getPlanet().getSonde() == 0 and fleet.getSonde() == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.sonde'|trans }} x {{ fleet.getSonde() }}
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.moreSonde,{attr: { max: fleet.getPlanet().getSonde()}}) }}
+                        </td>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.lessSonde,{attr: { max: fleet.getSonde()}}) }}
+                        </td>
+                    </tr>
+                    <tr{% if fleet.getPlanet().getColonizer() == 0 and fleet.getColonizer() == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.colonizer'|trans }} x {{ fleet.getColonizer() }}
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.moreColonizer,{attr: { max: fleet.getPlanet().getColonizer()}}) }}
+                        </td>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.lessColonizer,{attr: { max: fleet.getColonizer()}}) }}
+                        </td>
+                    </tr>
+                    <tr{% if fleet.getPlanet().getRecycleur() == 0 and fleet.getRecycleur() == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.recycleur'|trans }} x {{ fleet.getRecycleur() }}
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.moreRecycleur,{attr: { max: fleet.getPlanet().getRecycleur()}}) }}
+                        </td>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.lessRecycleur,{attr: { max: fleet.getRecycleur()}}) }}
+                        </td>
+                    </tr>
+                    <tr{% if fleet.getPlanet().getHunter() == 0 and fleet.getHunter() == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.hunter'|trans }} x {{ fleet.getHunter() }}
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.moreHunter,{attr: { max: fleet.getPlanet().getHunter()}}) }}
+                        </td>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.lessHunter,{attr: { max: fleet.getHunter()}}) }}
+                        </td>
+                    </tr>
+                    <tr{% if fleet.getPlanet().getFregate() == 0 and fleet.getFregate() == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.fregate'|trans }} x {{ fleet.getFregate() }}
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.moreFregate,{attr: { max: fleet.getPlanet().getFregate()}}) }}
+                        </td>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.lessFregate,{attr: { max: fleet.getFregate()}}) }}
+                        </td>
+                    </tr>
+                    <tr{% if fleet.getPlanet().getBarge() == 0 and fleet.getBarge() == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.barge'|trans }} x {{ fleet.getBarge() }}
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.moreBarge,{attr: { max: fleet.getPlanet().getBarge()}}) }}
+                        </td>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.lessBarge,{attr: { max: fleet.getBarge()}}) }}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                {{ form_widget(form_manageFleet.sendForm,{attr: { class: 'btn btn-lg btn-info float-right'}}) }}
+                {{ form_end(form_manageFleet) }}
+            {% else %}
+                <table class="table table-striped table-bordered table-dark">
+                    <tbody>
+                    <tr>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.fleetShip'|trans }}
+                        </th>
+                    </tr>
+                    <tr{% if fleet.getSonde() == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.sonde'|trans }} x {{ fleet.getSonde() }}
+                        </th>
+                    <tr{% if fleet.getColonizer() == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.colonizer'|trans }} x {{ fleet.getColonizer() }}
+                        </th>
+                    <tr{% if fleet.getRecycleur() == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.recycleur'|trans }} x {{ fleet.getRecycleur() }}
+                        </th>
+                    <tr{% if fleet.getHunter() == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.hunter'|trans }} x {{ fleet.getHunter() }}
+                        </th>
+                    <tr{% if fleet.getFregate() == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.fregate'|trans }} x {{ fleet.getFregate() }}
+                        </th>
+                    </tr>
+                    <tr{% if fleet.getBarge() == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.barge'|trans }} x {{ fleet.getBarge() }}
+                        </th>
+                    </tr>
+                    </tbody>
+                </table>
+            {% endif %}
         </div>
     {% endif %}
 {% endblock %}
