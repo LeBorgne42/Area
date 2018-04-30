@@ -87,7 +87,7 @@ class FleetController extends Controller
         $form_sendFleet = $this->createForm(FleetSendType::class);
         $form_sendFleet->handleRequest($request);
 
-        if(($fleet || $usePlanet) || ($fleet->getFightAt() || $fleet->getFlightTime())) {
+        if(($fleet || $usePlanet) || ($fleet->getFightAt() || $fleet->getFlightTime()) || $fleet->getPlanet()->getUser() == $user) {
         } else {
             return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
         }
