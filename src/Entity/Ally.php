@@ -316,7 +316,45 @@ class Ally
     /**
      * @return mixed
      */
-    public function getPlanets()
+    public function getSigleAllied($sigle)
+    {
+        foreach($this->getPnas() as $pna) {
+            if ($pna->getAllyTag() == $sigle) {
+                return $sigle;
+            }
+        }
+        foreach($this->getAllieds() as $pact) {
+            if ($pact->getAllyTag() == $sigle) {
+                return $sigle;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSigleAlliedArray($sigles)
+    {
+        foreach($sigles as $sigle) {
+            foreach ($this->getPnas() as $pna) {
+                if ($pna->getAllyTag() == $sigle) {
+                    return null;
+                }
+            }
+            foreach ($this->getAllieds() as $pact) {
+                if ($pact->getAllyTag() == $sigle) {
+                    return null;
+                }
+            }
+        }
+        return 'toto';
+    }
+
+    /**
+     * @return int
+     */
+    public function getPlanets(): int
     {
         $return = 0;
 
@@ -329,9 +367,9 @@ class Ally
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getFleets()
+    public function getFleets(): int
     {
         $return = 0;
 

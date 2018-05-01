@@ -143,9 +143,9 @@ class Fleet
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getNbrShips()
+    public function getNbrShips(): int
     {
         $fregate = $this->getFregate();
         $colonizer = $this->getColonizer();
@@ -159,9 +159,9 @@ class Fleet
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getCargoFull()
+    public function getCargoFull(): int
     {
         $worker = $this->getWorker();
         $soldier = $this->getSoldier();
@@ -174,9 +174,9 @@ class Fleet
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getCargoPlace()
+    public function getCargoPlace(): int
     {
         $barge = $this->getBarge() * $this->getBargeCargo();
         $recycleur = $this->getRecycleur() * $this->getRecycleurCargo();
@@ -186,25 +186,25 @@ class Fleet
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getBargeCargo()
+    public function getBargeCargo(): int
     {
         return 2000;
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getRecycleurCargo()
+    public function getRecycleurCargo(): int
     {
         return 10000;
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getArmor()
+    public function getArmor(): int
     {
         $fregate = $this->getFregate() * $this->getFregateArmor();
         $hunter = $this->getHunter() * $this->getHunterArmor();
@@ -213,25 +213,33 @@ class Fleet
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getFregateArmor()
+    public function getFregateArmor(): int
     {
         return 120;
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getHunterArmor()
+    public function getHunterArmor(): int
     {
         return 10;
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getMissile()
+    public function getPlasma(): int
+    {
+        return 0;
+    }
+
+    /**
+     * @return int
+     */
+    public function getMissile(): int
     {
         $fregate = $this->getFregate() * $this->getFregateMissile();
         $hunter = $this->getHunter() * $this->getHunterMissile();
@@ -248,17 +256,17 @@ class Fleet
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getHunterMissile()
+    public function getHunterMissile(): int
     {
         return 6;
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getShield()
+    public function getShield(): int
     {
         $fregate = $this->getFregate() * $this->getFregateShield();
 
@@ -267,17 +275,17 @@ class Fleet
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getFregateShield()
+    public function getFregateShield(): int
     {
         return 20;
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getLaser()
+    public function getLaser(): int
     {
         $fregate = $this->getFregate() * $this->getFregateLaser();
 
@@ -286,17 +294,17 @@ class Fleet
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getFregateLaser()
+    public function getFregateLaser(): int
     {
         return 34;
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getNbrSignatures()
+    public function getNbrSignatures(): int
     {
         $fregate = $this->getFregate() * $this->getFregateSignature();
         $colonizer = $this->getColonizer() * $this->getColonizerSignature();
@@ -310,9 +318,9 @@ class Fleet
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getBargeSignature()
+    public function getBargeSignature(): int
     {
         return 50;
     }
@@ -320,39 +328,39 @@ class Fleet
     /**
      * @return mixed
      */
-    public function getColonizerSignature()
+    public function getColonizerSignature(): int
     {
         return 200;
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getFregateSignature()
+    public function getFregateSignature(): int
     {
         return 60;
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getHunterSignature()
+    public function getHunterSignature(): int
     {
         return 3;
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getRecycleurSignature()
+    public function getRecycleurSignature(): int
     {
         return 80;
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getSpeed()
+    public function getSpeed(): int
     {
         if($this->getColonizer()) {
             return 3;
@@ -377,6 +385,21 @@ class Fleet
     }
 
     /**
+     * @param $percent
+     */
+    public function setFleetWinRatio($percent): void
+    {
+        if($this->getFregate()) {
+            $newFregate = $this->getFregate() - ($this->getFregate() / $percent);
+            $this->setFregate(number_format($newFregate));
+        }
+        if($this->getHunter()) {
+            $newHunter = $this->getHunter() - ($this->getHunter() / $percent);
+            $this->setHunter(number_format($newHunter));
+        }
+    }
+
+    /**
      * @return mixed
      */
     public function getName()
@@ -393,9 +416,9 @@ class Fleet
     }
 
     /**
-     * @return mixed
+     * @return bool
      */
-    public function getAttack()
+    public function getAttack(): bool
     {
         return $this->attack;
     }

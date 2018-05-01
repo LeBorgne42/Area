@@ -63,7 +63,7 @@ class PactController extends Controller
     }
 
     /**
-     * @Route("/refuser-pacte/{id}", name="ally_refuseAllied", requirements={"id"="\d+", "idp"="\d+"})
+     * @Route("/refuser-pacte/{id}/{idp}", name="ally_refuseAllied", requirements={"id"="\d+", "idp"="\d+"})
      */
     public function pactRefuseAction($id, $idp)
     {
@@ -92,7 +92,7 @@ class PactController extends Controller
     }
 
     /**
-     * @Route("/accepter-pna/{id}", name="ally_acceptPna", requirements={"id"="\d+", "idp"="\d+"})
+     * @Route("/accepter-pna/{id}/{idp}", name="ally_acceptPna", requirements={"id"="\d+", "idp"="\d+"})
      */
     public function pnaAcceptAction($id, $idp)
     {
@@ -134,7 +134,7 @@ class PactController extends Controller
     }
 
     /**
-     * @Route("/refuser-pna/{id}", name="ally_refusePna", requirements={"id"="\d+", "idp"="\d+"})
+     * @Route("/refuser-pna/{id}/{idp}", name="ally_refusePna", requirements={"id"="\d+", "idp"="\d+"})
      */
     public function pnaRefuseAction($id, $idp)
     {
@@ -163,7 +163,7 @@ class PactController extends Controller
     }
 
     /**
-     * @Route("/detruire-pna/{id}", name="ally_remove_pna", requirements={"id"="\d+", "idp"="\d+"})
+     * @Route("/detruire-pna/{id}/{idp}", name="ally_remove_pna", requirements={"id"="\d+", "idp"="\d+"})
      */
     public function allyPnaRefuseAction($id, $idp)
     {
@@ -212,7 +212,7 @@ class PactController extends Controller
     }
 
     /**
-     * @Route("/detruire-pacte/{id}", name="ally_remove_pact", requirements={"id"="\d+", "idp"="\d+"})
+     * @Route("/detruire-pacte/{id}/{idp}", name="ally_remove_pact", requirements={"id"="\d+", "idp"="\d+"})
      */
     public function allyPactRefuseAction($id, $idp)
     {

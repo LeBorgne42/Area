@@ -16,7 +16,7 @@ use DateTimeZone;
 class FightController extends Controller
 {
     /**
-     * @Route("/weNeedABigBigFight/", name="fight_war")
+     * @Route("/big/", name="fight_war")
      */
     public function fightAction(Request $request)
     {
@@ -24,20 +24,201 @@ class FightController extends Controller
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
 
-        $fleetsWar = $em->getRepository('App:Fleet')
+        $firstFleet = $em->getRepository('App:Fleet')
             ->createQueryBuilder('f')
+            ->join('f.planet', 'p')
+            ->select('p.id')
             ->where('f.fightAt < :now')
             ->setParameters(array('now' => $now))
             ->getQuery()
+            ->setMaxResults(1)
             ->getResult();
-        foreach ($fleetsWar as $mdr) {
+
+        if(!$firstFleet) {
+            exit;
+        }
+
+        $fleetsWars = $em->getRepository('App:Fleet')
+            ->createQueryBuilder('f')
+            ->join('f.planet', 'p')
+            ->where('p.id = :id')
+            ->setParameters(array('id' => $firstFleet))
+            ->orderBy('f.attack', 'ASC')
+            ->getQuery()
+            ->getResult();
+
+        $teamBlock = [];
+        foreach ($fleetsWars as $fleetsWar) {
+            if($fleetsWar->getUser()->getAlly()) {
+                if (in_array($fleetsWar->getUser()->getAlly()->getSigle(), $teamBlock) == false) {
+                    $teamBlock[] = $fleetsWar->getUser()->getAlly()->getSigle();
+                }
+            } elseif (in_array($fleetsWar->getUser()->getUserName(), $teamBlock) == false) {
+                $teamBlock[] = $fleetsWar->getUser()->getUserName();
+            }
+        }
+        $tmpcount = count($teamBlock);
+        if($tmpcount < 2) {
+            foreach ($fleetsWars as $fleetsWar) {
+                $fleetsWar->setFightAt(null);
+                $em->persist($fleetsWar);
+                $em->flush();
+            }
+            exit;
+        }
+        $team = $tmpcount;
+        $isAttack = [];
+
+        while($team > 0) {
+            $team--;
+            ${'oneBlock'.$team} = new \ArrayObject();
+            foreach ($fleetsWars as $fleetsWar) {
+                if($fleetsWar->getUser()->getAlly()) {
+                    if ($teamBlock[$team] == $fleetsWar->getUser()->getAlly()->getSigle()) {
+                        ${'oneBlock'.$team}->append($fleetsWar);
+                        $isAttack[$team] = $fleetsWar->getAttack();
+                    }
+                } elseif ($teamBlock[$team] == $fleetsWar->getUser()->getUserName()) {
+                    ${'oneBlock'.$team}->append($fleetsWar);
+                    $isAttack[$team] = $fleetsWar->getAttack();
+                }
+            }
+        }
+        $team1 = $tmpcount - 1;
+        $team2 = $tmpcount - 2;
+
+        if ($isAttack[$team1] == true || $isAttack[$team2] == true) {
+            $winner = self::attackAction(${'oneBlock'.$team1}, ${'oneBlock'.$team2});
+        } else {
+            while($isAttack[$team2--] == true) {
+                $winner = self::attackAction(${'oneBlock'.$team1}, ${'oneBlock'.$team2});
+            }
+        }
+
+        if($winner == ${'oneBlock'.$team1}) {
+            $team2 = $team2 - 1;
+        } elseif ($winner == ${'oneBlock'.$team2}) {
+            $team1 = $team1 - $team2;
+        }
+
+        $team = $tmpcount - 2;
+        while($team > 0) {
+            $winner = self::attackAction(${'oneBlock'.$team1}, ${'oneBlock'.$team2});
+            $team--;
+            if($winner == ${'oneBlock'.$team1}) {
+                $team2 = $team2 - 1;
+            } elseif ($winner == ${'oneBlock'.$team2}) {
+                $team1 = $team1 - $team2;
+            }
+        }
+        $em->flush();
+        exit;
+      }
+
+
+    public function attackAction($blockAtt, $blockDef)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $armor = 0;
+        $shield = 0;
+        $missile = 0;
+        $laser = 0;
+        $plasma = 0;
+        $armorD = 0;
+        $shieldD = 0;
+        $missileD = 0;
+        $laserD = 0;
+        $plasmaD = 0;
+
+        foreach($blockAtt as $attacker) {
+            $armor = $armor + $attacker->getArmor();
+            $shield = $shield + $attacker->getShield();
+            $missile = $missile + $attacker->getMissile();
+            $laser = $laser + $attacker->getLaser();
+            $plasma = $plasma + $attacker->getPlasma();
+        }
+        foreach($blockDef as $defender) {
+            $armorD = $armorD + $defender->getArmor();
+            $shieldD = $shieldD + $defender->getShield();
+            $missileD = $missileD + $defender->getMissile();
+            $laserD = $laserD + $defender->getLaser();
+            $plasmaD = $plasmaD + $defender->getPlasma();
+        }
+        $firstBlood = ($plasma + $laser);
+        $firstBloodD = ($plasmaD + $laserD);
+        $countSAtt = 0;
+        $countSDef = 0;
+
+        if(($plasma + $laser > 0) && $shieldD > 0) {
+            while ($shieldD > 0) {
+                $countSAtt++;
+                $shieldD = $shieldD - $firstBlood;
+            }
+            $armorD = $armorD - $firstBlood;
+        } elseif ($shieldD < 0) {
+            $countSAtt = 1;
+            $armorD = $armorD - $firstBlood;
+        }
+        if(($plasmaD + $laserD > 0) && $shield > 0) {
+            while($shield > 0) {
+                $countSDef++;
+                $shield = $shield - $firstBloodD;
+            }
+            $armor = $armor - $firstBloodD;
+        } elseif ($shieldD < 0) {
+            $countSAtt = 1;
+            $armor = $armor - $firstBloodD;
+        }
+        $secondShot = ($missile + $plasma + $laser);
+        $secondShotD = ($missileD + $plasmaD + $laserD);
+        if($countSAtt - $countSDef > 0) {
+            $armorD = $armorD - ($firstBlood * ($countSAtt - $countSDef));
+            $secondShot = ($missile + $plasma + $laser) - ($firstBlood * ($countSAtt - $countSDef));
+        }
+        if($countSDef - $countSAtt > 0) {
+            $armor = $armor - ($firstBloodD * ($countSDef - $countSAtt));
+            $secondShotD = ($missileD + $plasmaD + $laserD) - ($firstBloodD * ($countSDef - $countSAtt));
+        }
+        while((($missileD + $plasmaD + $laserD > 0) && $armor > 0) &&
+            (($missile + $plasma + $laser > 0) && $armorD > 0)) {
+            if ($armorD > 0) {
+                $armorD = $armorD - $secondShot;
+            }
+            if($armor > 0) {
+                $armor = $armor - $secondShotD;
+            }
+            $tmpSecondShotD = ($missileD + $plasmaD + $laserD);
+            $secondShotD = ($missileD + $plasmaD + $laserD) - ($secondShot / 2);
+            $secondShot = ($missile + $plasma + $laser) - ($tmpSecondShotD / 2);
+        }
+        if ($armorD > $armor) {
+            foreach($blockAtt as $attackerLose) {
+                $em->remove($attackerLose);
+            }
+            foreach($blockDef as $defenderWin) {
+                $malus = ($defenderWin->getArmor()) / (($defenderWin->getArmor() - $armorD) / rand(2, 4));
+                $defenderWin->setFleetWinRatio(number_format($malus, 2));
+                $em->persist($defenderWin);
+            }
+            return($blockDef);
+        } else {
+            foreach($blockDef as $defenderLose) {
+                $em->remove($defenderLose);
+            }
+            foreach($blockAtt as $attackerWin) {
+                $malus = ($attackerWin->getArmor()) / (($attackerWin->getArmor() - $armor) / rand(2, 3));
+                $attackerWin->setFleetWinRatio(number_format($malus, 2));
+                $em->persist($attackerWin);
+            }
+            return($blockAtt);
         }
         exit;
     }
 
-    /**
-     * @Route("/hello-we-come-for-you/{idp}/{fleet}/", name="invader_planet", requirements={"idp"="\d+", "fleet"="\d+"})
-     */
+      /**
+       * @Route("/hello-we-come-for-you/{idp}/{fleet}/", name="invader_planet", requirements={"idp"="\d+", "fleet"="\d+"})
+       */
     public function invaderAction(Request $request, $idp, $fleet)
     {
         $em = $this->getDoctrine()->getManager();
