@@ -40,6 +40,15 @@ class MessageController extends Controller
             ->createQueryBuilder('m')
             ->where('m.idSender = :id')
             ->setParameters(array('id' => $user->getId()))
+            ->orderBy('m.sendAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+
+        $messagesR = $em->getRepository('App:Message')
+            ->createQueryBuilder('m')
+            ->where('m.user = :user')
+            ->setParameters(array('user' => $user))
+            ->orderBy('m.sendAt', 'DESC')
             ->getQuery()
             ->getResult();
 
@@ -56,6 +65,7 @@ class MessageController extends Controller
                 $message->setSender($user->getUsername());
             }
             $message->setIdSender($user->getId());
+            $message->setContent(nl2br($form_message->get('content')->getData()));
             $message->setSendAt($now);
             $recever->setBitcoin($recever->getBitcoin() + $form_message->get('bitcoin')->getData());
             $recever->setViewMessage(false);
@@ -69,6 +79,7 @@ class MessageController extends Controller
         return $this->render('connected/message.html.twig', [
             'usePlanet' => $usePlanet,
             'messages' => $messages,
+            'messagesR' => $messagesR,
             'form_message' => $form_message->createView(),
         ]);
     }
