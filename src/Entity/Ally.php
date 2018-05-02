@@ -336,15 +336,17 @@ class Ally
      */
     public function getSigleAlliedArray($sigles)
     {
-        foreach($sigles as $sigle) {
-            foreach ($this->getPnas() as $pna) {
-                if ($pna->getAllyTag() == $sigle) {
-                    return null;
+        if($sigles) {
+            foreach ($sigles as $sigle) {
+                foreach ($this->getPnas() as $pna) {
+                    if ($pna->getAllyTag() == $sigle) {
+                        return null;
+                    }
                 }
-            }
-            foreach ($this->getAllieds() as $pact) {
-                if ($pact->getAllyTag() == $sigle) {
-                    return null;
+                foreach ($this->getAllieds() as $pact) {
+                    if ($pact->getAllyTag() == $sigle) {
+                        return null;
+                    }
                 }
             }
         }

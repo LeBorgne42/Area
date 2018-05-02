@@ -50,7 +50,7 @@ class FightController extends Controller
         $teamBlock = [];
         foreach ($fleetsWars as $fleetsWar) {
             if($fleetsWar->getUser()->getAlly()) {
-                if (in_array($fleetsWar->getUser()->getAlly()->getSigle(), $teamBlock) == false) {
+                if (in_array($fleetsWar->getUser()->getAlly()->getSigle(), $teamBlock) == false && $fleetsWar->getUser()->getAlly()->getSigleAlliedArray($teamBlock)) {
                     $teamBlock[] = $fleetsWar->getUser()->getAlly()->getSigle();
                 }
             } elseif (in_array($fleetsWar->getUser()->getUserName(), $teamBlock) == false) {
@@ -74,7 +74,7 @@ class FightController extends Controller
             ${'oneBlock'.$team} = new \ArrayObject();
             foreach ($fleetsWars as $fleetsWar) {
                 if($fleetsWar->getUser()->getAlly()) {
-                    if ($teamBlock[$team] == $fleetsWar->getUser()->getAlly()->getSigle()) {
+                    if ($teamBlock[$team] == $fleetsWar->getUser()->getAlly()->getSigle() || $fleetsWar->getUser()->getAlly()->getSigleAllied($teamBlock[$team])) {
                         ${'oneBlock'.$team}->append($fleetsWar);
                         $isAttack[$team] = $fleetsWar->getAttack();
                     }
