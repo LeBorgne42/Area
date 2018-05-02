@@ -36,14 +36,15 @@ function manageModalContact() {
     });
 }
 
-function setNoDecimalDisplay() {
+/*function setNoDecimalDisplay() {
+    console.log($('div.bg-top span.ressource.niobium span.reload').text()+ ($('div.bg-top span.ressource.niobium span.takeProd').text() / 300));
     setInterval(function() {
         var niobium = Math.trunc($('div.bg-top span.ressource.niobium span.reload').text());
         var water =   Math.trunc($('div.bg-top span.ressource.water span.reload').text());
         $('div.bg-top span.ressource.niobium span.reload').text(Math.trunc(niobium + ($('div.bg-top span.ressource.niobium span.takeProd').text() / 300)));
         $('div.bg-top span.ressource.water span.reload').text(Math.trunc(water + ($('div.bg-top span.ressource.water span.takeProd').text() / 300)));
     }, 12000);
-}
+}*/
 
 function manageMaxShip() {
     $('#spatial_edit_fleet_moreSonde').off('change').on('change',function(e){
@@ -105,35 +106,55 @@ function manageMaxShip() {
         if($('#spatial_edit_fleet_lessBarge').attr('max') - $('#spatial_edit_fleet_lessBarge').val() < 0) {
             $('#spatial_edit_fleet_lessBarge').val($('#spatial_edit_fleet_lessBarge').attr('max'));
         }
-    });/*
-    $('#spatial_ship_sonde').off('change').on('change',function(e){
-        if($('#spatial_ship_sonde').attr('max') - $('#spatial_ship_sonde').val() < 0) {
-            $('#spatial_ship_sonde').val($('#spatial_ship_sonde').attr('max'));
+    });
+    $('#spatial_edit_fleet_moreNiobium').off('change').on('change',function(e){
+        if($('#spatial_edit_fleet_moreNiobium').attr('max') - $('#spatial_edit_fleet_moreNiobium').val() < 0) {
+            $('#spatial_edit_fleet_moreNiobium').val(Math.trunc($('#spatial_edit_fleet_moreNiobium').attr('max')));
         }
     });
-    $('#spatial_ship_colonizer').off('change').on('change',function(e){
-        if($('#spatial_ship_colonizer').attr('max') - $('#spatial_ship_colonizer').val() < 0) {
-            $('#spatial_ship_colonizer').val($('#spatial_ship_colonizer').attr('max'));
+    $('#spatial_edit_fleet_lessNiobium').off('change').on('change',function(e){
+        if($('#spatial_edit_fleet_lessNiobium').attr('max') - $('#spatial_edit_fleet_lessNiobium').val() < 0) {
+            $('#spatial_edit_fleet_lessNiobium').val(Math.trunc($('#spatial_edit_fleet_lessNiobium').attr('max')));
         }
     });
-    $('#spatial_ship_recycleur').off('change').on('change',function(e){
-        if($('#spatial_ship_recycleur').attr('max') - $('#spatial_ship_recycleur').val() < 0) {
-            $('#spatial_ship_recycleur').val($('#spatial_ship_recycleur').attr('max'));
+    $('#spatial_edit_fleet_moreWater').off('change').on('change',function(e){
+        if($('#spatial_edit_fleet_moreWater').attr('max') - $('#spatial_edit_fleet_moreWater').val() < 0) {
+            $('#spatial_edit_fleet_moreWater').val(Math.trunc($('#spatial_edit_fleet_moreWater').attr('max')));
         }
     });
-    $('#spatial_ship_hunter').off('change').on('change',function(e){
-        if($('#spatial_ship_hunter').attr('max') - $('#spatial_ship_hunter').val() < 0) {
-            $('#spatial_ship_hunter').val($('#spatial_ship_hunter').attr('max'));
+    $('#spatial_edit_fleet_lessWater').off('change').on('change',function(e){
+        if($('#spatial_edit_fleet_lessWater').attr('max') - $('#spatial_edit_fleet_lessWater').val() < 0) {
+            $('#spatial_edit_fleet_lessWater').val(Math.trunc($('#spatial_edit_fleet_lessWater').attr('max')));
         }
     });
-    $('#spatial_ship_fregate').off('change').on('change',function(e){
-        if($('#spatial_ship_fregate').attr('max') - $('#spatial_ship_fregate').val() < 0) {
-            $('#spatial_ship_fregate').val($('#spatial_ship_fregate').attr('max'));
+    $('#spatial_edit_fleet_moreSoldier').off('change').on('change',function(e){
+        if($('#spatial_edit_fleet_moreSoldier').attr('max') - $('#spatial_edit_fleet_moreSoldier').val() < 0) {
+            $('#spatial_edit_fleet_moreSoldier').val(Math.trunc($('#spatial_edit_fleet_moreSoldier').attr('max')));
         }
     });
-    $('#spatial_ship_barge').off('change').on('change',function(e){
-        if($('#spatial_ship_barge').attr('max') - $('#spatial_ship_barge').val() < 0) {
-            $('#spatial_ship_barge').val($('#spatial_ship_barge').attr('max'));
+    $('#spatial_edit_fleet_lessSoldier').off('change').on('change',function(e){
+        if($('#spatial_edit_fleet_lessSoldier').attr('max') - $('#spatial_edit_fleet_lessSoldier').val() < 0) {
+            $('#spatial_edit_fleet_lessSoldier').val(Math.trunc($('#spatial_edit_fleet_lessSoldier').attr('max')));
+        }
+    });
+    $('#spatial_edit_fleet_moreWorker').off('change').on('change',function(e){
+        if($('#spatial_edit_fleet_moreWorker').attr('max') - $('#spatial_edit_fleet_moreWorker').val() < 0) {
+            $('#spatial_edit_fleet_moreWorker').val(Math.trunc($('#spatial_edit_fleet_moreWorker').attr('max')));
+        }
+    });
+    $('#spatial_edit_fleet_lessWorker').off('change').on('change',function(e){
+        if($('#spatial_edit_fleet_lessWorker').attr('max') - $('#spatial_edit_fleet_lessWorker').val() < 0) {
+            $('#spatial_edit_fleet_lessWorker').val(Math.trunc($('#spatial_edit_fleet_lessWorker').attr('max')));
+        }
+    });
+    $('#spatial_edit_fleet_moreScientist').off('change').on('change',function(e){
+        if($('#spatial_edit_fleet_moreScientist').attr('max') - $('#spatial_edit_fleet_moreScientist').val() < 0) {
+            $('#spatial_edit_fleet_moreScientist').val(Math.trunc($('#spatial_edit_fleet_moreScientist').attr('max')));
+        }
+    });
+    $('#spatial_edit_fleet_lessScientist').off('change').on('change',function(e){
+        if($('#spatial_edit_fleet_lessScientist').attr('max') - $('#spatial_edit_fleet_lessScientist').val() < 0) {
+            $('#spatial_edit_fleet_lessScientist').val(Math.trunc($('#spatial_edit_fleet_lessScientist').attr('max')));
         }
     });
     $('#spatial_fleet_sonde').off('change').on('change',function(e){
@@ -165,7 +186,7 @@ function manageMaxShip() {
         if($('#spatial_fleet_barge').attr('max') - $('#spatial_fleet_barge').val() < 0) {
             $('#spatial_fleet_barge').val($('#spatial_fleet_barge').attr('max'));
         }
-    });*/
+    });
 }
 
 function manageConstructTime() {
@@ -253,7 +274,7 @@ $(document).ready(function() {
     manageMaxShip();
     manageConstructTime();
     manageResearchTime();
-    setNoDecimalDisplay();
+/*    setNoDecimalDisplay();*/
     manageAttackFleetForm();
     console.log("Toute utilisation de scripts sur le jeu seront puni d'un ban permanent, merci.");
 });

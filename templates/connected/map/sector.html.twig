@@ -75,7 +75,7 @@
                             </td>
                         {% endif %}
                     {% else %}
-                        {% if app.user.getWhereRadar(id) %}
+                        {% if app.user.getWhereRadar(id) or planet.getOurFleet(app.user) %}
                             <td class="center-cells">
                                 <div class="planet-position-empty text-center">{{ planet.getPosition() }}</div>
                                 {% if planet.getNbCdr() or planet.getWtCdr() %}

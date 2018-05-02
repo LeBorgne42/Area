@@ -39,3 +39,9 @@ fleet.cargo: Cargo
 fleet.sendCoord: ordre
 fleet.invade: Envahir
 fleet.colonize: Coloniser
+fleet.niobium: Niobium
+fleet.water: Water
+fleet.soldier: Soldats
+fleet.worker: Travailleurs
+fleet.scientist: Scientifiques
+fleet.discharge: Decharger

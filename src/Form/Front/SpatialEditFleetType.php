@@ -196,6 +196,156 @@ class SpatialEditFleetType extends AbstractType
                     'mapped' => false,
                 )
             )
+            ->add(
+                'moreNiobium',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                    ),
+                    'required' => false,
+                    'mapped' => false,
+                )
+            )
+            ->add(
+                'lessNiobium',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                    ),
+                    'required' => false,
+                    'mapped' => false,
+                )
+            )
+            ->add(
+                'moreWater',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                    ),
+                    'required' => false,
+                    'mapped' => false,
+                )
+            )
+            ->add(
+                'lessWater',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                    ),
+                    'required' => false,
+                    'mapped' => false,
+                )
+            )
+            ->add(
+                'moreSoldier',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                    ),
+                    'required' => false,
+                    'mapped' => false,
+                )
+            )
+            ->add(
+                'lessSoldier',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                    ),
+                    'required' => false,
+                    'mapped' => false,
+                )
+            )
+            ->add(
+                'moreWorker',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                    ),
+                    'required' => false,
+                    'mapped' => false,
+                )
+            )
+            ->add(
+                'lessWorker',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                    ),
+                    'required' => false,
+                    'mapped' => false,
+                )
+            )
+            ->add(
+                'moreScientist',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                    ),
+                    'required' => false,
+                    'mapped' => false,
+                )
+            )
+            ->add(
+                'lessScientist',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                    ),
+                    'required' => false,
+                    'mapped' => false,
+                )
+            )
             ->add('sendForm', SubmitType::class, array('label' => 'form.manageFleet'));
     }
 
@@ -206,7 +356,7 @@ class SpatialEditFleetType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class'         => 'App\Entity\Fleet',
+                'data_class'         => null,
                 'translation_domain' => 'front_fleet',
             )
         );

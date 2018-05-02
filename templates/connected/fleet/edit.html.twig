@@ -192,6 +192,76 @@
                     </tr>
                     </tbody>
                 </table>
+                <table class="table table-striped table-bordered table-dark">
+                    <tbody>
+                    <tr>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.cargo'|trans }} {{ fleet.getCargoFull()|number_format }} / {{ fleet.getCargoPlace()|number_format }}
+                        </th>
+                        <td class="center-cells">
+                            {{ 'fleet.addShip'|trans }}
+                        </td>
+                        <td class="center-cells">
+                            {{ 'fleet.removeShip'|trans }}
+                        </td>
+                    </tr>
+                    <tr{% if fleet.getPlanet().getNiobium() == 0 and fleet.getNiobium() == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.niobium'|trans }} = {{ fleet.getNiobium()|number_format }}
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.moreNiobium,{attr: { max: fleet.getPlanet().getNiobium()}}) }}
+                        </td>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.lessNiobium,{attr: { max: fleet.getNiobium()}}) }}
+                        </td>
+                    </tr>
+                    <tr{% if fleet.getPlanet().getWater() == 0 and fleet.getWater() == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.water'|trans }} = {{ fleet.getWater()|number_format }}
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.moreWater,{attr: { max: fleet.getPlanet().getWater()}}) }}
+                        </td>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.lessWater,{attr: { max: fleet.getWater()}}) }}
+                        </td>
+                    </tr>
+                    <tr{% if fleet.getPlanet().getSoldier() == 0 and fleet.getSoldier() == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.soldier'|trans }} = {{ fleet.getSoldier()|number_format }}
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.moreSoldier,{attr: { max: fleet.getPlanet().getSoldier()}}) }}
+                        </td>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.lessSoldier,{attr: { max: fleet.getSoldier()}}) }}
+                        </td>
+                    </tr>
+                    <tr{% if fleet.getPlanet().getWorker() == 0 and fleet.getWorker() == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.worker'|trans }} = {{ fleet.getWorker()|number_format }}
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.moreWorker,{attr: { max: fleet.getPlanet().getWorker()}}) }}
+                        </td>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.lessWorker,{attr: { max: fleet.getWorker()}}) }}
+                        </td>
+                    </tr>
+                    <tr{% if fleet.getPlanet().getScientist() == 0 and fleet.getScientist() == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.scientist'|trans }} x {{ fleet.getScientist()|number_format }}
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.moreScientist,{attr: { max: fleet.getPlanet().getScientist()}}) }}
+                        </td>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.lessScientist,{attr: { max: fleet.getScientist()}}) }}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
                 {{ form_widget(form_manageFleet.sendForm,{attr: { class: 'btn btn-lg btn-info float-right'}}) }}
                 {{ form_end(form_manageFleet) }}
             {% else %}
@@ -230,7 +300,40 @@
                     </tr>
                     </tbody>
                 </table>
+                {% if fleet.getCargoPlace() > 0 %}
+                    <table class="table table-striped table-bordered table-dark">
+                        <tbody>
+                        <tr>
+                            <th class="tab-cells-name">
+                                {{ 'fleet.cargo'|trans }} {{ fleet.getCargoFull()|number_format }} / {{ fleet.getCargoPlace()|number_format }}
+                            </th>
+                        </tr>
+                        <tr{% if fleet.getNiobium() == 0 %} hidden{% endif %}>
+                            <th class="tab-cells-name">
+                                {{ 'fleet.niobium'|trans }} x {{ fleet.getNiobium()|number_format }} <span class="float-right"><a href="{{ path('discharge_fleet_niobium', {'idp': usePlanet.getId(), 'id': fleet.getId() }) }}">{{ 'fleet.discharge'|trans }}</a></span>
+                            </th>
+                        <tr{% if fleet.getWater() == 0 %} hidden{% endif %}>
+                            <th class="tab-cells-name">
+                                {{ 'fleet.water'|trans }} x {{ fleet.getWater()|number_format }} <span class="float-right"><a href="{{ path('discharge_fleet_water', {'idp': usePlanet.getId(), 'id': fleet.getId() }) }}">{{ 'fleet.discharge'|trans }}</a></span>
+                            </th>
+                        <tr{% if fleet.getSoldier() == 0 %} hidden{% endif %}>
+                            <th class="tab-cells-name">
+                                {{ 'fleet.soldier'|trans }} x {{ fleet.getSoldier()|number_format }} <span class="float-right"><a href="{{ path('discharge_fleet_soldier', {'idp': usePlanet.getId(), 'id': fleet.getId() }) }}">{{ 'fleet.discharge'|trans }}</a></span>
+                            </th>
+                        <tr{% if fleet.getWorker() == 0 %} hidden{% endif %}>
+                            <th class="tab-cells-name">
+                                {{ 'fleet.worker'|trans }} x {{ fleet.getWorker()|number_format }} <span class="float-right"><a href="{{ path('discharge_fleet_worker', {'idp': usePlanet.getId(), 'id': fleet.getId() }) }}">{{ 'fleet.discharge'|trans }}</a></span>
+                            </th>
+                        <tr{% if fleet.getScientist() == 0 %} hidden{% endif %}>
+                            <th class="tab-cells-name">
+                                {{ 'fleet.scientist'|trans }} x {{ fleet.getScientist()|number_format }} <span class="float-right"><a href="{{ path('discharge_fleet_scientist', {'idp': usePlanet.getId(), 'id': fleet.getId() }) }}">{{ 'fleet.discharge'|trans }}</a></span>
+                            </th>
+                        </tr>
+                        </tbody>
+                    </table>
+                {% endif %}
             {% endif %}
+            {{ form_end(form_sendFleet) }}
         </div>
     {% endif %}
 {% endblock %}
