@@ -432,6 +432,9 @@ class FleetController extends Controller
             return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
         }
 
+        if($planet->getMerchant() == true) {
+            $user->setBitcoin($user->getBitcoin() + ($fleet->getNiobium()));
+        }
         $planet->setNiobium($planet->getNiobium() + $fleet->getNiobium());
         $fleet->setNiobium(0);
         $em->persist($fleet);
@@ -472,6 +475,9 @@ class FleetController extends Controller
         }
 
         $planet->setWater($planet->getWater() + $fleet->getWater());
+        if($planet->getMerchant() == true) {
+            $user->setBitcoin($user->getBitcoin() + ($fleet->getWater() / 1.5));
+        }
         $fleet->setWater(0);
         $em->persist($fleet);
         $em->persist($planet);
@@ -511,6 +517,9 @@ class FleetController extends Controller
         }
 
         $planet->setSoldier($planet->getSoldier() + $fleet->getSoldier());
+        if($planet->getMerchant() == true) {
+            $user->setBitcoin($user->getBitcoin() + ($fleet->getSoldier() * 7.5));
+        }
         $fleet->setSoldier(0);
         $em->persist($fleet);
         $em->persist($planet);
@@ -550,6 +559,9 @@ class FleetController extends Controller
         }
 
         $planet->setWorker($planet->getWorker() + $fleet->getWorker());
+        if($planet->getMerchant() == true) {
+            $user->setBitcoin($user->getBitcoin() + ($fleet->getWorker() / 4));
+        }
         $fleet->setWorker(0);
         $em->persist($fleet);
         $em->persist($planet);
@@ -589,6 +601,9 @@ class FleetController extends Controller
         }
 
         $planet->setScientist($planet->getScientist() + $fleet->getScientist());
+        if($planet->getMerchant() == true) {
+            $user->setBitcoin($user->getBitcoin() + ($fleet->getScientist() * 75));
+        }
         $fleet->setScientist(0);
         $em->persist($fleet);
         $em->persist($planet);
