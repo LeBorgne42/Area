@@ -358,6 +358,48 @@ class User implements UserInterface, \Serializable
     }
 
     /**
+     * @return int
+     */
+    public function getAllShips(): int
+    {
+        $return = 0;
+        foreach($this->planets as $planet) {
+            $return = $return + ($planet->getNbrSignatures() / 10);
+        }
+        foreach($this->fleets as $fleet) {
+            $return = $return + $fleet->getNbrSignatures();
+        }
+        return $return;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAllSoldier(): int
+    {
+        $return = 0;
+        foreach($this->planets as $planet) {
+            $return = $return + ($planet->getSoldier() / 5);
+        }
+        foreach($this->fleets as $fleet) {
+            $return = $return + $fleet->getSoldier();
+        }
+        return $return;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAllWorker(): int
+    {
+        $return = 0;
+        foreach($this->planets as $planet) {
+            $return = $return + ($planet->getWorker());
+        }
+        return $return;
+    }
+
+    /**
      * @return mixed
      */
     public function getWhereRadar($sector)

@@ -25,13 +25,9 @@ class DailyController extends Controller
         foreach ($users as $user) {
             $ally = $user->getAlly();
             $worker = 0;
-            $soldier = 0;
-            $scientist = 0;
             foreach ($user->getPlanets() as $planet) {
                 $planet->setWorker($planet->getWorker() * $planet->getWorkerProduction());
                 $worker = $worker + $planet->getWorker();
-                $soldier = $soldier + $planet->getSoldier();
-                $scientist = $scientist + $planet->getScientist();
             }
             if($ally) {
                 $userBitcoin = $user->getBitcoin();
@@ -42,7 +38,8 @@ class DailyController extends Controller
                 $ally->setBitcoin($allyBitcoin);
                 $em->persist($ally);
             }
-            $ship = 0;
+            $soldier = $user->getAllSoldier();
+            $ship = $user->getAllShips();
             $cost = $user->getBitcoin();
             $cost = $cost - ($soldier * 2) - ($ship / 10) + ($worker);
             $point = ($worker / 100) + ($ship / 5) + ($soldier);
