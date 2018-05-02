@@ -98,7 +98,7 @@ class TopMenuController extends Controller
 
         if ($form_contact->isSubmitted()) {
             $message = (new \Swift_Message('Reclamation joueur'))
-                ->setFrom('borntoswim42@gmail.com')
+                ->setFrom('areauniverse.game@gmail.com')
                 ->setTo('rivierematthieupro@gmail.com')
                 ->setBody(
                     $this->renderView(

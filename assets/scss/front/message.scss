@@ -1,0 +1,15 @@
+.display-message {
+  padding: 1.5rem 1rem 6rem 1rem;
+  margin-top: 6rem;
+  background-color: rgba(52, 58, 64, 0.5);
+  border-radius: 5px;
+}
+
+.display-message #myTab li.nav-item a {
+  color: orange;
+}
+
+.display-message .nav-tabs .nav-link.active {
+  background-color: black;
+  border: 1px solid orange;
+}

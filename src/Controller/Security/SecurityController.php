@@ -79,7 +79,7 @@ class SecurityController extends Controller
             $em->flush();
 
             $message = (new \Swift_Message('Confirmation email'))
-                ->setFrom('borntoswim42@gmail.com')
+                ->setFrom('areauniverse.game@gmail.com')
                 ->setTo($user->getEmail())
                 ->setBody(
                     $this->renderView(
@@ -141,7 +141,7 @@ class SecurityController extends Controller
                 $em->flush();
 
                 $message = (new \Swift_Message('Hello Email'))
-                    ->setFrom('borntoswim42@gmail.com')
+                    ->setFrom('areauniverse.game@gmail.com')
                     ->setTo($userPw->getEmail())
                     ->setBody(
                         $this->renderView(

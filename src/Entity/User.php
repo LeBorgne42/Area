@@ -75,6 +75,17 @@ class User implements UserInterface, \Serializable
     protected $planets;
 
     /**
+     * @ORM\OneToMany(targetEntity="Message", mappedBy="user", fetch="EXTRA_LAZY")
+     */
+    protected $messages;
+
+    /**
+     * @ORM\Column(name="viewMessage",type="boolean")
+     * @Assert\NotBlank(message = "required")
+     */
+    protected $viewMessage = true;
+
+    /**
      * @ORM\OneToMany(targetEntity="Fleet", mappedBy="user", fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(name="fleet_id", referencedColumnName="id")
      */
@@ -244,6 +255,46 @@ class User implements UserInterface, \Serializable
     public function getPlanets()
     {
         return $this->planets;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMessages()
+    {
+        return $this->messages;
+    }
+
+    /**
+     * @param mixed $messages
+     */
+    public function setMessages($messages): void
+    {
+        $this->messages = $messages;
+    }
+
+    /**
+     * Add message
+     *
+     * @param \App\Entity\Message $message
+     *
+     * @return User
+     */
+    public function addMessage(\App\Entity\Message $message)
+    {
+        $this->messages[] = $message;
+
+        return $this;
+    }
+
+    /**
+     * Remove message
+     *
+     * @param \App\Entity\Message $message
+     */
+    public function removeMessage(\App\Entity\Message $message)
+    {
+        $this->messages->removeElement($message);
     }
 
     /**
@@ -992,5 +1043,21 @@ class User implements UserInterface, \Serializable
     public function setGameOver($gameOver): void
     {
         $this->gameOver = $gameOver;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getViewMessage()
+    {
+        return $this->viewMessage;
+    }
+
+    /**
+     * @param mixed $viewMessage
+     */
+    public function setViewMessage($viewMessage): void
+    {
+        $this->viewMessage = $viewMessage;
     }
 }

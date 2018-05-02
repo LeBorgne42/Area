@@ -66,7 +66,7 @@
                                     {% endif %}
                                 </td>
                                 <td class="center-cells">
-                                    <a href="{{ path('ally', {'idp': usePlanet.getId()}) }}">{{ user.getUsername() }}</a>
+                                    <span><a href="{{ path('user_profil', {'idp': usePlanet.getId(), 'id': user.getId()}) }}">{{ user.getUsername() }}</a></span>
                                 </td>
                                 <td class="center-cells">
                                     {{ user.getJoinAllyAt()|date('d/m/Y H:i') }}

@@ -1,1 +1,18 @@
 title: Messagerie
+message.create: 'Envoyer message'
+message.anonymous: 'Envoyer un message anonyme'
+message.bitcoin: 'Joindre bitcoin'
+form.title: 'Titre du message'
+form.content: 'Attention les insultes sont interdites.'
+form.sendMessage: 'Envoyer le message'
+form.num: 'combien ?'
+form.user: Pseudo
+form.name: ''
+message.received: 'Messages reçus'
+message.sent: 'Messages envoyés'
+message.sender: 'Envoyé par :'
+message.bitcoinRe: 'Bitcoin :'
+message.title: 'Titre : '
+message.anonymousSender: Anonyme
+message.sendTo: 'Envoyé à : '
+message.sendAnonym: 'En anonyme'

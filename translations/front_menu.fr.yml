@@ -28,7 +28,7 @@ salon: Salon
 disconnect: Deconnexion
 rules: Reglement
 popover.title: 'Note version 0.1'
-popover.text: 'Actuellement en developpement, le jeu n''en est qu''à l''elaboration de sa page d''accueil et de connexion.'
+popover.text: 'Attention le système de combat n''est pas encore totalement terminé. La production de vaisseaux et de soldats/scientifiques ne sont pas encore régulés par un temps de production.'
 modal.to: 'Nouveau message à l''admin'
 modal.from: 'Votre email :'
 modal.text: 'Message :'

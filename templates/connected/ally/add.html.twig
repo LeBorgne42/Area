@@ -66,7 +66,7 @@
                         {% for proposal in app.user.getAlly().getProposals() %}
                             <tr>
                                 <td class="center-cells">
-                                    {{ proposal.getUser().getUserName() }}
+                                    <span><a href="{{ path('user_profil', {'idp': usePlanet.getId(), 'id': proposal.getUser().getId()}) }}">{{ proposal.getUser().getUserName() }}</a></span>
                                 </td>
                                 <td class="center-cells">
                                     {{ proposal.getProposalAt()|date('d/m/Y H:i') }}
