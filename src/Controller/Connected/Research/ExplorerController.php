@@ -83,7 +83,7 @@ class ExplorerController extends Controller
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
 
-        $now->add(new DateInterval('PT' . 3800 . 'S'));
+        $now->add(new DateInterval('PT' . 3800 / $user->getScientistProduction() . 'S'));
         $user->setSearch('terraformation');
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - 12000);

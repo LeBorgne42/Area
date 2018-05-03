@@ -212,16 +212,18 @@ function manageConstructTime() {
                 $('#timeDisplay').text(secondes + ' secondes');
             }
             secondes = secondes - 1;
+            if(secondes == 0 && minutes == 0 && heures == 0 && jours == 0) {
+                window.location.reload();
+            }
             if(secondes == 0) {
                 secondes = 60;
                 minutes = minutes - 1;
-                if(minutes == 0) {
+                if(minutes == 0 && heures != 0) {
                     minutes = 60;
                     heures = heures - 1;
+                } else if (minutes == 0) {
+                    minutes = null;
                 }
-            }
-            if((secondes == 0 && minutes == -1)) {
-                return false;
             }
         }, 1000);
     }
@@ -250,12 +252,18 @@ function manageResearchTime() {
                 $('#timeDisplayR').text(secondes + ' secondes');
             }
             secondes = secondes - 1;
+            if(secondes == 0 && minutes == 0 && heures == 0 && jours == 0) {
+                window.location.reload();
+            }
             if(secondes == 0) {
                 secondes = 60;
                 minutes = minutes - 1;
-            }
-            if((secondes == 0 && minutes == 0) && (heures == 0 && jours == 0)) {
-                return false;
+                if(minutes == 0 && heures != 0) {
+                    minutes = 60;
+                    heures = heures - 1;
+                } else if (minutes == 0) {
+                    minutes = null;
+                }
             }
         }, 1000);
     }

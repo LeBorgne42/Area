@@ -39,7 +39,7 @@ class InformationController extends Controller
 
         if(($usePlanetNb < ($level * 1200) || $usePlanetWt < ($level * 650)) ||
             ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround()) ||
-            $user->getResearch()->getOnde() == 0) {
+            $user->getOnde() == 0) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
 
@@ -112,7 +112,7 @@ class InformationController extends Controller
 
         if(($usePlanetNb < ($level * 20000) || $usePlanetWt < ($level * 17200)) ||
             ($usePlanet->getConstructAt() > $now || $newSky > $usePlanet->getSky()) ||
-            $user->getResearch()->getOnde() < 3) {
+            $user->getOnde() < 3) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
 
@@ -185,7 +185,7 @@ class InformationController extends Controller
 
         if(($usePlanetNb < ($level * 51000) || $usePlanetWt < ($level * 32100)) ||
             ($usePlanet->getConstructAt() > $now || $newSky > $usePlanet->getSky()) ||
-            $user->getResearch()->getOnde() < 5) {
+            $user->getOnde() < 5) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
 
