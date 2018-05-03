@@ -58,7 +58,9 @@ class SecurityController extends Controller
                         ->where('p.user is null')
                         ->andWhere('p.ground = :ground')
                         ->andWhere('p.sky = :sky')
-                        ->setParameters(array('ground' => 60, 'sky' => 10))
+                        ->andWhere('p.empty = :false')
+                        ->andWhere('p.cdr = :false')
+                        ->setParameters(array('ground' => 60, 'sky' => 10, 'false' => false))
                         ->setMaxResults(1)
                         ->getQuery()
                         ->getOneOrNullResult();

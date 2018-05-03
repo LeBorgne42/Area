@@ -449,8 +449,10 @@ class User implements UserInterface, \Serializable
                 }
             }
         }
-        if ($this->getAlly()->getRadarAlliance($sector) > $return || $return == null) {
-            $return = $this->getAlly()->getRadarAlliance($sector);
+        if ($this->getAlly()) {
+            if ($this->getAlly()->getRadarAlliance($sector) > $return || $return == null) {
+                $return = $this->getAlly()->getRadarAlliance($sector);
+            }
         }
         return $return;
     }

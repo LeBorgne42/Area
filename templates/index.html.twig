@@ -5,10 +5,16 @@
 {% block title %}{{ 'title'|trans }}{% endblock %}
 
 {% block body %}
+    {% for message in app.flashes('fail') %}
+        <div class="flash-notice mt-5 text-orange text-more text-center">
+            {{ message }}
+        </div>
+    {% endfor %}
     <div class="row my-5">
         <div class="col-6">
             <div class="unlogin-block">
                 <div class="text-center"><img width="80" src="{{ asset('img/logo.png') }}"></div>
+                <div class="mt-5 text-more text-orange text-center">{{ 'warning'|trans }}</div>
                 <div class="mt-5">{{ 'blockOne'|trans({'%nbrUsers%': allUsers})|raw }}</div>
                 <div class="mt-5">{{ 'blockTwo'|trans }}</div>
                 <div class="mt-5">{{ 'blockThree'|trans }}</div>

@@ -391,11 +391,11 @@ class Fleet
     {
         if($this->getFregate()) {
             $newFregate = $this->getFregate() - ($this->getFregate() / $percent);
-            $this->setFregate(number_format($newFregate));
+            $this->setFregate(round($newFregate));
         }
         if($this->getHunter()) {
             $newHunter = $this->getHunter() - ($this->getHunter() / $percent);
-            $this->setHunter(number_format($newHunter));
+            $this->setHunter(round($newHunter));
         }
     }
 

@@ -35,12 +35,12 @@ class Planet
     /**
      * @ORM\Column(name="niobium",type="decimal", precision=28, scale=5)
      */
-    protected $niobium = 3000;
+    protected $niobium = 7500;
 
     /**
      * @ORM\Column(name="water",type="decimal", precision=28, scale=5)
      */
-    protected $water = 1500;
+    protected $water = 5000;
 
     /**
      * @ORM\Column(name="nbCdr",type="bigint", nullable=true)
