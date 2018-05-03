@@ -113,7 +113,7 @@ class EconomicController extends Controller
 
         if(($usePlanetNb < ($level * 15000) || $usePlanetWt < ($level * 11000)) ||
             ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround()) ||
-            $user->getResearch()->getDemography()->getLevel() == 0) {
+            $user->getResearch()->getDemography() == 0) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
 
@@ -189,7 +189,7 @@ class EconomicController extends Controller
 
         if(($usePlanetNb < ($level * 75000) || $usePlanetWt < ($level * 55000)) ||
             ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround()) ||
-            ($user->getResearch()->getDemography()->getLevel() < 5 || $newSky > $usePlanet->getSky())) {
+            ($user->getResearch()->getDemography() < 5 || $newSky > $usePlanet->getSky())) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
 

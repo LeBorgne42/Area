@@ -270,7 +270,7 @@ class SpaceShipyardController extends Controller
 
         if(($usePlanetNb < ($level * 23000) || $usePlanetWt < ($level * 34000)) ||
             ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround()) ||
-            ($user->getDiscipline() < 3 == 0)) {
+            ($user->getDiscipline() < 3)) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
 

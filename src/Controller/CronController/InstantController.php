@@ -116,37 +116,37 @@ class InstantController extends Controller
         foreach ($users as $user) {
             $research = $user->getSearch();
             if($research == 'onde') {
-                $user->getOnde()($user->getOnde() + 1);
+                $user->setOnde($user->getOnde() + 1);
             } elseif($research == 'industry') {
-                $user->getIndustry($user->getIndustry() + 1);
+                $user->setIndustry($user->getIndustry() + 1);
             } elseif($research == 'discipline') {
-                $user->getDiscipline($user->getDiscipline() + 1);
+                $user->setDiscipline($user->getDiscipline() + 1);
             } elseif($research == 'hyperespace') {
-                $user->getHyperespace(1);
+                $user->setHyperespace(1);
             } elseif($research == 'barge') {
-                $user->getBarge(1);
+                $user->setBarge(1);
             } elseif($research == 'utility') {
-                $user->getUtility($user->getUtility() + 1);
+                $user->setUtility($user->getUtility() + 1);
             } elseif($research == 'demography') {
-                $user->getDemography($user->getDemography() + 1);
+                $user->setDemography($user->getDemography() + 1);
             } elseif($research == 'terraformation') {
-                $user->getTerraformation(1);
+                $user->setTerraformation(1);
             } elseif($research == 'cargo') {
-                $user->getCargo($user->getCargo() + 1);
+                $user->setCargo($user->getCargo() + 1);
             } elseif($research == 'recycleur') {
-                $user->getRecycleur(1);
+                $user->setRecycleur(1);
             } elseif($research == 'armement') {
-                $user->getArmement($user->getArmement() + 1);
+                $user->setArmement($user->getArmement() + 1);
             } elseif($research == 'missile') {
-                $user->getMissile($user->getMissile() + 1);
+                $user->setMissile($user->getMissile() + 1);
             } elseif($research == 'laser') {
-                $user->getLaser($user->getLaser() + 1);
+                $user->setLaser($user->getLaser() + 1);
             } elseif($research == 'plasma') {
-                $user->getPlasma($user->getPlasma() + 1);
+                $user->setPlasma($user->getPlasma() + 1);
             } elseif($research == 'lightShip') {
-                $user->getLightShip($user->getLightShip() + 1);
+                $user->setLightShip($user->getLightShip() + 1);
             } elseif($research == 'heavyShip') {
-                $user->getHeavyShip($user->getHeavyShip() + 1);
+                $user->setHeavyShip($user->getHeavyShip() + 1);
             }
             $user->setSearch(null);
             $user->setSearchAt(null);

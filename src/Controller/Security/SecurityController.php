@@ -201,12 +201,21 @@ class SecurityController extends Controller
      */
     public function logoutAction()
     {
+    }
+
+    /**
+     * @Route("/deconnexion", name="disconnect_me")
+     * @Route("/deconnexion/", name="disconnect_me_noSlash")
+     */
+    public function disconnectMeAction()
+    {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
 
         $user->setConnected(false);
         $em->persist($user);
         $em->flush();
+        return $this->redirectToRoute('logout');
     }
 
     /**

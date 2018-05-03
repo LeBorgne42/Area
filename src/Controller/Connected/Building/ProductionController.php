@@ -71,9 +71,9 @@ class ProductionController extends Controller
             ->getQuery()
             ->getOneOrNullResult();
 
-        $level = $usePlanet->getMiner() + 1;
+        $level = $usePlanet->getMiner();
         $newGround = $usePlanet->getGroundPlace() - 1;
-        if($level->getLevel() == 1 || $usePlanet->getConstructAt() > $now) {
+        if($level == 1 || $usePlanet->getConstructAt() > $now) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
 
@@ -144,7 +144,7 @@ class ProductionController extends Controller
 
         $level = $usePlanet->getExtractor() + 1;
         $newGround = $usePlanet->getGroundPlace() - 1;
-        if($level->getLevel() == 1 || $usePlanet->getConstructAt() > $now) {
+        if($level == 1 || $usePlanet->getConstructAt() > $now) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
 

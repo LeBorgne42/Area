@@ -215,7 +215,6 @@ class User implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(name="gameOver",type="boolean")
-     * @Assert\NotBlank(message = "required")
      */
     protected $gameOver = false;
 

@@ -56,6 +56,6 @@
         <a href="{{ path('report', {'idp': usePlanet.getId()}) }}">{% if app.user.getViewReport() == false %}<div class="text-orange glyphicon glyphicon-exclamation-sign"></div> {% endif %}{{ 'report'|trans }}</span></a>
     </div>
     <div>
-        <a href="{{ path('logout') }}" class="badge badge-danger my-4"><div class="glyphicon glyphicon-remove"></div> <span>{{ 'disconnect'|trans }}</span></a>
+        <a href="{{ path('disconnect_me') }}" class="badge badge-danger my-4"><div class="glyphicon glyphicon-remove"></div> <span>{{ 'disconnect'|trans }}</span></a>
     </div>
 </nav>
