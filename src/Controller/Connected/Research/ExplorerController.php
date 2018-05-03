@@ -67,14 +67,6 @@ class ExplorerController extends Controller
             ->getQuery()
             ->getOneOrNullResult();
 
-        $terraformation = $user->getTerraformation();
-        $userBt = $user->getBitcoin();
-        if(($userBt < $terraformation->getBitcoin() || $terraformation->getFinishAt() > $now) ||
-            ($terraformation == 1 || $user->getUtility() == 0) ||
-            $user->getSearch() > $now) {
-            return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
-        }
-
         $level = $user->getTerraformation();
         $userBt = $user->getBitcoin();
 

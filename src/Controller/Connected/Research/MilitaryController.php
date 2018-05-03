@@ -67,14 +67,6 @@ class MilitaryController extends Controller
             ->getQuery()
             ->getOneOrNullResult();
 
-        $lightShip = $user->getLightShip();
-        $userBt = $user->getBitcoin();
-        if(($userBt < $lightShip->getBitcoin() || $lightShip->getFinishAt() > $now) ||
-            ($lightShip == 5 || $user->getIndustry() < 3) ||
-            $user->getSearch() > $now) {
-            return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
-        }
-
         $level = $user->getLightShip() + 1;
         $userBt = $user->getBitcoin();
 
