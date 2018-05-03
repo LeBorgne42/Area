@@ -53,7 +53,7 @@
         <a href="{{ path('salon', {'idp': usePlanet.getId()}) }}"><span class="text-jaune"><div class="glyphicon glyphicon-comment"></div> {{ 'salon'|trans }}</span></a>
     </div>
     <div class="btn-left-bottom">
-        <a href="{{ path('report', {'idp': usePlanet.getId()}) }}"><span class="text-jaune"><div class="glyphicon glyphicon-exclamation-sign"></div> {{ 'report'|trans }}</span></a>
+        <a href="{{ path('report', {'idp': usePlanet.getId()}) }}">{% if app.user.getViewReport() == false %}<div class="text-orange glyphicon glyphicon-exclamation-sign"></div> {% endif %}{{ 'report'|trans }}</span></a>
     </div>
     <div>
         <a href="{{ path('logout') }}" class="badge badge-danger my-4"><div class="glyphicon glyphicon-remove"></div> <span>{{ 'disconnect'|trans }}</span></a>

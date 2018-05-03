@@ -18,17 +18,31 @@ class ReportController extends Controller
     public function reportAction($idp)
     {
         $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
 
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->where('p.id = :id')
             ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
+            ->setParameters(array('id' => $idp, 'user' => $user))
             ->getQuery()
             ->getOneOrNullResult();
 
+        $reports = $em->getRepository('App:Report')
+            ->createQueryBuilder('r')
+            ->where('r.user = :user')
+            ->setParameters(array('user' => $user))
+            ->orderBy('r.sendAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+
+        $user->setViewReport(true);
+        $em->persist($user);
+        $em->flush();
+
         return $this->render('connected/report.html.twig', [
             'usePlanet' => $usePlanet,
+            'reports' => $reports,
         ]);
     }
 }

@@ -80,10 +80,21 @@ class User implements UserInterface, \Serializable
     protected $messages;
 
     /**
+     * @ORM\OneToMany(targetEntity="Report", mappedBy="user", fetch="EXTRA_LAZY")
+     */
+    protected $reports;
+
+    /**
      * @ORM\Column(name="viewMessage",type="boolean")
      * @Assert\NotBlank(message = "required")
      */
     protected $viewMessage = true;
+
+    /**
+     * @ORM\Column(name="viewReport",type="boolean")
+     * @Assert\NotBlank(message = "required")
+     */
+    protected $viewReport = true;
 
     /**
      * @ORM\OneToMany(targetEntity="Fleet", mappedBy="user", fetch="EXTRA_LAZY")
@@ -295,6 +306,30 @@ class User implements UserInterface, \Serializable
     public function removeMessage(\App\Entity\Message $message)
     {
         $this->messages->removeElement($message);
+    }
+
+    /**
+     * Add report
+     *
+     * @param \App\Entity\Report $report
+     *
+     * @return User
+     */
+    public function addReport(\App\Entity\Report $report)
+    {
+        $this->reports[] = $report;
+
+        return $this;
+    }
+
+    /**
+     * Remove report
+     *
+     * @param \App\Entity\Report $report
+     */
+    public function removeReport(\App\Entity\Report $report)
+    {
+        $this->reports->removeElement($report);
     }
 
     /**
@@ -1093,6 +1128,38 @@ class User implements UserInterface, \Serializable
     public function getViewMessage()
     {
         return $this->viewMessage;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getReports()
+    {
+        return $this->reports;
+    }
+
+    /**
+     * @param mixed $reports
+     */
+    public function setReports($reports): void
+    {
+        $this->reports = $reports;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getViewReport()
+    {
+        return $this->viewReport;
+    }
+
+    /**
+     * @param mixed $viewReport
+     */
+    public function setViewReport($viewReport): void
+    {
+        $this->viewReport = $viewReport;
     }
 
     /**
