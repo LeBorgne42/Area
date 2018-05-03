@@ -183,7 +183,7 @@ class ExplorerController extends Controller
         $level = $user->getBarge();
         $userBt = $user->getBitcoin();
 
-        if(($userBt < 350000 || $user->getUtility() < 3) ||
+        if(($userBt < 35000 || $user->getUtility() < 3) ||
             ($level == 1 || $user->getSearchAt() > $now)) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
@@ -191,7 +191,7 @@ class ExplorerController extends Controller
         $now->add(new DateInterval('PT' . ($level * 28800 / $user->getScientistProduction()) . 'S'));
         $user->setSearch('barge');
         $user->setSearchAt($now);
-        $user->setBitcoin($userBt - 350000);
+        $user->setBitcoin($userBt - 35000);
         $em->persist($user);
         $em->flush();
 
