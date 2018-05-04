@@ -20,7 +20,7 @@ use DateTimeZone;
 class SpatialController extends Controller
 {
     /**
-     * @Route("/chantier-spatial/{idp}", name="spatial", requirements={"idp"="\d+"})
+     * @Route("/chantier-spatiale/{idp}", name="spatial", requirements={"idp"="\d+"})
      */
     public function spatialAction(Request $request, $idp)
     {
@@ -54,8 +54,9 @@ class SpatialController extends Controller
             $fregate = $form_spatialShip->get('fregate')->getData();
             $niobiumLess = (20000 * $colonizer) + (10000 * $recycleur) + (15000 * $barge) + (5 * $sonde) + (25 * $hunter) + (300 * $fregate);
             $waterLess =  (12000 * $colonizer) + (7000 * $recycleur) + (12000 * $barge) + (5 * $hunter) + (200 * $fregate);
+            $workerLess = (2500 * $colonizer);
 
-            if (($usePlanet->getNiobium() < $niobiumLess || $usePlanet->getWater() < $waterLess)) {
+            if (($usePlanet->getNiobium() < $niobiumLess || $usePlanet->getWater() < $waterLess) || $usePlanet->getWorker() < $workerLess) {
                 return $this->render('connected/spatial.html.twig', [
                     'usePlanet' => $usePlanet,
                     'form_spatialShip' => $form_spatialShip->createView(),
@@ -70,6 +71,7 @@ class SpatialController extends Controller
             $usePlanet->setFregate($usePlanet->getFregate() + $fregate);
             $usePlanet->setNiobium($usePlanet->getNiobium() - $niobiumLess);
             $usePlanet->setWater($usePlanet->getWater() - $waterLess);
+            $usePlanet->setWorker($usePlanet->getWorker() - $workerLess);
             $em->persist($usePlanet);
             $em->flush();
         }

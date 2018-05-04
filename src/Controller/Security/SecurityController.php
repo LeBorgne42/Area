@@ -73,10 +73,19 @@ class SecurityController extends Controller
                 return $this->redirectToRoute('logout');
             }
 
+            $salon = $em->getRepository('App:Salon')
+                ->createQueryBuilder('s')
+                ->where('s.id = :id')
+                ->setParameters(array('id' => 1))
+                ->getQuery()
+                ->getOneOrNullResult();
+
             $em->persist($planet);
             $rank = new Rank();
             $em->persist($rank);
             $user->setRank($rank);
+            $salon->addUser($user);
+            $em->persist($salon);
             $em->persist($user);
             $em->flush();
 

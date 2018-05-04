@@ -61,6 +61,11 @@ class Grade
      */
     protected $canPeace = false;
 
+    public function __construct()
+    {
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
     /**
      * @return mixed
      */

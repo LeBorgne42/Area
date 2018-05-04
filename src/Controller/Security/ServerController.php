@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use App\Entity\Planet;
 use App\Entity\Sector;
 use App\Entity\Galaxy;
+use App\Entity\Salon;
 
 /**
  * @Route("/serveur")
@@ -29,6 +30,9 @@ class ServerController extends Controller
         $galaxy = new Galaxy();
         $galaxy->setPosition(1);
         $em->persist($galaxy);
+        $salon = new Salon();
+        $salon->setName('Public');
+        $em->persist($salon);
 
         while($nbrSector <= 100) {
             $nbrPlanet = 1;

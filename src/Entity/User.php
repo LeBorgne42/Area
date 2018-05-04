@@ -80,6 +80,16 @@ class User implements UserInterface, \Serializable
     protected $messages;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Salon", mappedBy="users", fetch="EXTRA_LAZY")
+     */
+    protected $salons;
+
+    /**
+     * @ORM\OneToMany(targetEntity="S_Content", mappedBy="user", fetch="EXTRA_LAZY")
+     */
+    protected $sContents;
+
+    /**
      * @ORM\OneToMany(targetEntity="Report", mappedBy="user", fetch="EXTRA_LAZY")
      */
     protected $reports;
@@ -257,6 +267,10 @@ class User implements UserInterface, \Serializable
     {
         $this->planets = new \Doctrine\Common\Collections\ArrayCollection();
         $this->proposals = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->salons = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->messages = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->reports = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->fleets = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -281,6 +295,54 @@ class User implements UserInterface, \Serializable
     public function setMessages($messages): void
     {
         $this->messages = $messages;
+    }
+
+    /**
+     * Add salon
+     *
+     * @param \App\Entity\Salon $salon
+     *
+     * @return User
+     */
+    public function addSalon(\App\Entity\Salon $salon)
+    {
+        $this->salons[] = $salon;
+
+        return $this;
+    }
+
+    /**
+     * Remove salon
+     *
+     * @param \App\Entity\Salon $salon
+     */
+    public function removeSalon(\App\Entity\Salon $salon)
+    {
+        $this->salons->removeElement($salon);
+    }
+
+    /**
+     * Add content
+     *
+     * @param \App\Entity\S_Content $sContent
+     *
+     * @return User
+     */
+    public function addSContent(\App\Entity\S_Content $sContent)
+    {
+        $this->sContents[] = $sContent;
+
+        return $this;
+    }
+
+    /**
+     * Remove message
+     *
+     * @param \App\Entity\S_Content $sContent
+     */
+    public function removeSContent(\App\Entity\S_Content $sContent)
+    {
+        $this->sContents->removeElement($sContent);
     }
 
     /**
@@ -1169,5 +1231,21 @@ class User implements UserInterface, \Serializable
     public function setViewMessage($viewMessage): void
     {
         $this->viewMessage = $viewMessage;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSalons()
+    {
+        return $this->salons;
+    }
+
+    /**
+     * @param mixed $salons
+     */
+    public function setSalons($salons): void
+    {
+        $this->salons = $salons;
     }
 }

@@ -22,7 +22,7 @@ class DailyController extends Controller
         $users = $em->getRepository('App:User')
             ->createQueryBuilder('u')
             ->join('u.rank', 'r')
-            ->orderBy('r.point', 'ASC')
+            ->orderBy('r.point', 'DESC')
             ->getQuery()
             ->getResult();
 
@@ -40,7 +40,7 @@ class DailyController extends Controller
             }
             if($ally) {
                 $userBitcoin = $user->getBitcoin();
-                $taxe = (($ally->getTaxe() / 200) * $worker);
+                $taxe = (($ally->getTaxe() / 100) * $worker);
                 $user->setBitcoin($userBitcoin - $taxe);
                 $report->setContent("Le montant envoyé dans les fonds de votre alliance s'élève à " . round($taxe) . " Bitcoin.");
                 $allyBitcoin = $ally->getBitcoin();
@@ -52,12 +52,12 @@ class DailyController extends Controller
             $ship = $user->getAllShips();
             $cost = $user->getBitcoin();
             $report->setContent($report->getContent() . "Le travaille fournit par vos travailleurs vous rapporte " . round($worker) . " Bitcoin.");
-            $empireCost = ($soldier * 2) - ($ship / 10);
-            $cost = $cost + $empireCost + ($worker);
-            $report->setContent($report->getContent() . "L'entretien de votre empire vous coûte cependant " . round($empireCost) . " Bitcoin.");
+            $empireCost = ($soldier * 2) + ($ship / 10);
+            $cost = $cost - $empireCost + ($worker);
+            $report->setContent($report->getContent() . " L'entretien de votre empire vous coûte cependant " . round($empireCost) . " Bitcoin.");
             $point = ($worker / 100) + ($ship / 5) + ($soldier);
             $user->setBitcoin($cost);
-            $report->setContent($report->getContent() . "Ce qui vous donne un revenu de " . round($worker + $empireCost) . " Bitcoin. Bonne journée Commandant.");
+            $report->setContent($report->getContent() . " Ce qui vous donne un revenu de " . round($worker + $empireCost) . " Bitcoin. Bonne journée Commandant.");
             $user->getRank()->setOldPoint($user->getRank()->getPoint());
             $user->getRank()->setPoint($point);
             $user->getRank()->setOldPosition($user->getRank()->getPosition());

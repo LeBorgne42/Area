@@ -57,6 +57,11 @@ class Ally
     protected $grades;
 
     /**
+     * @ORM\OneToOne(targetEntity="Salon", mappedBy="ally", fetch="EXTRA_LAZY")
+     */
+    protected $salon;
+
+    /**
      * @ORM\Column(name="bitcoin",type="bigint")
      */
     protected $bitcoin;
@@ -123,6 +128,7 @@ class Ally
         $this->pnas = new \Doctrine\Common\Collections\ArrayCollection();
         $this->allieds = new \Doctrine\Common\Collections\ArrayCollection();
         $this->wars = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->grades = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

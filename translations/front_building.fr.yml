@@ -13,7 +13,7 @@ building.search: 'Centre de recherche'
 building.city: 'Grande ville'
 building.metropole: Metropole
 building.caserne: Caserne
-building.chantier: 'Chantier spatial'
+building.chantier: 'Chantier spatiale'
 building.light: 'Usine d''armement'
 building.heavy: 'Industrie lourde'
 building.radar: 'Radar au sol'
@@ -35,7 +35,7 @@ building.city.desc: 'Une ville augmenterais le nombre de travailleurs chaque jou
 building.metropole.desc: 'Quand a une metropole, elle l''augmenterais grandement.'
 building.caserne.desc: 'Besoin de plus de soldats, et plus rapidement ?'
 building.chantier.desc: 'Sans chantier spatiale n''ésperez pas produire le moindre vaisseaux.'
-building.light.desc: 'Cette petite usine fabrique des vaisseaux rapides et légés.'
+building.light.desc: 'Cette petite usine fabrique des vaisseaux rapides et légers.'
 building.heavy.desc: 'Ce mastodonte de l''industrie permet des constructions de vaisseaux très lourds.'
 building.radar.desc: 'Personne n''aime être aveugle, encore moins au milieu d''une galaxie hostile.'
 building.skyRadar.desc: 'Si votre planète manque de place, un radar en orbite vous en fera gagner.'

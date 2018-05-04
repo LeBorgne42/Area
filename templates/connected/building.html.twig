@@ -27,7 +27,7 @@
                         <div id="timeDisplay" class="mt-5"></div>
                     {% else %}
                         {% if planetNb >= ((usePlanet.getMiner() + 1) * 300) and planetWt >= ((usePlanet.getMiner() + 1) * 100) and usePlanet.getGroundPlace() + 1 <= usePlanet.getGround() and usePlanet.getConstructAt() < date %}
-                            <div>{% if (usePlanet.getMiner() + 1 * 180) < 3600 %}{{  (usePlanet.getMiner() + 1 * 180)|date('i:s') }}{% elseif (usePlanet.getMiner() + 1 * 180) < 86400 %}{{  (usePlanet.getMiner() + 1 * 180)|date('H:i:s') }}{% else %}{{  (usePlanet.getMiner() + 1 * 180)|date('d H:i:s') }}{% endif %}</div>
+                            <div>{% if ((usePlanet.getMiner() + 1) * 180) < 3600 %}{{  ((usePlanet.getMiner() + 1) * 180)|date('i:s') }}{% elseif ((usePlanet.getMiner() + 1) * 180) < 86400 %}{{  ((usePlanet.getMiner() + 1) * 180)|date('H:i:s') }}{% else %}{{  ((usePlanet.getMiner() + 1) * 180)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info mt-3" href="{{ path('building_add_mine', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
                         {% else %}
                             <a class="btn btn-lg btn-secondary mt-5" disabled>{{ 'building.build'|trans }}</a>
@@ -57,7 +57,7 @@
                         <div id="timeDisplay" class="mt-5"></div>
                     {% else %}
                         {% if planetNb >= ((usePlanet.getExtractor() + 1) * 100) and planetWt >= ((usePlanet.getExtractor() + 1) * 300) and usePlanet.getGroundPlace() + 1 <= usePlanet.getGround() and usePlanet.getConstructAt() < date %}
-                            <div>{% if (usePlanet.getExtractor() + 1 * 180) < 3600 %}{{  (usePlanet.getExtractor() + 1 * 180)|date('i:s') }}{% elseif (usePlanet.getExtractor() + 1 * 180) < 86400 %}{{  (usePlanet.getExtractor() + 1 * 180)|date('H:i:s') }}{% else %}{{  (usePlanet.getExtractor() + 1 * 180)|date('d H:i:s') }}{% endif %}</div>
+                            <div>{% if ((usePlanet.getExtractor() + 1) * 180) < 3600 %}{{  ((usePlanet.getExtractor() + 1) * 180)|date('i:s') }}{% elseif ((usePlanet.getExtractor() + 1) * 180) < 86400 %}{{  ((usePlanet.getExtractor() + 1) * 180)|date('H:i:s') }}{% else %}{{  ((usePlanet.getExtractor() + 1) * 180)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info mt-3" href="{{ path('building_add_extract', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
                         {% else %}
                             <a class="btn btn-lg btn-secondary mt-5" disabled>{{ 'building.build'|trans }}</a>
@@ -92,7 +92,7 @@
                         <div id="timeDisplay" class="mt-5"></div>
                     {% else %}
                         {% if planetNb >= ((usePlanet.getCenterSearch() + 1) * 2850) and planetWt >= ((usePlanet.getCenterSearch() + 1) * 3580) and usePlanet.getGroundPlace() + 5 <= usePlanet.getGround() and usePlanet.getConstructAt() < date %}
-                            <div>{% if (usePlanet.getCenterSearch() + 1 * 900) < 3600 %}{{  (usePlanet.getCenterSearch() + 1 * 900)|date('i:s') }}{% elseif (usePlanet.getCenterSearch() + 1 * 900) < 86400 %}{{  (usePlanet.getCenterSearch() + 1 * 900)|date('H:i:s') }}{% else %}{{  (usePlanet.getCenterSearch() + 1 * 900)|date('d H:i:s') }}{% endif %}</div>
+                            <div>{% if ((usePlanet.getCenterSearch() + 1) * 900) < 3600 %}{{  ((usePlanet.getCenterSearch() + 1) * 900)|date('i:s') }}{% elseif ((usePlanet.getCenterSearch() + 1) * 900) < 86400 %}{{  ((usePlanet.getCenterSearch() + 1) * 900)|date('H:i:s') }}{% else %}{{  ((usePlanet.getCenterSearch() + 1) * 900)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info mt-3" href="{{ path('building_add_search', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
                         {% else %}
                             <a class="btn btn-lg btn-secondary mt-5" disabled>{{ 'building.build'|trans }}</a>
@@ -122,7 +122,7 @@
                         <div id="timeDisplay" class="mt-5"></div>
                     {% else %}
                         {% if planetNb >= ((usePlanet.getCity() + 1) * 15000) and planetWt >= ((usePlanet.getCity() + 1) * 11000) and usePlanet.getGroundPlace() + 6 <= usePlanet.getGround() and app.user.getDemography() > 0 and usePlanet.getConstructAt() < date %}
-                            <div>{% if (usePlanet.getCity() + 1 * 18000) < 86400 %}{{  (usePlanet.getCity() + 1 * 18000)|date('H:i:s') }}{% else %}{{  (usePlanet.getCity() + 1 * 18000)|date('d H:i:s') }}{% endif %}</div>
+                            <div>{% if ((usePlanet.getCity() + 1) * 18000) < 86400 %}{{  ((usePlanet.getCity() + 1) * 18000)|date('H:i:s') }}{% else %}{{  ((usePlanet.getCity() + 1) * 18000)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info mt-3" href="{{ path('building_add_city', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
                         {% else %}
                             <a class="btn btn-lg btn-secondary mt-5" disabled>{{ 'building.build'|trans }}</a>
@@ -152,7 +152,7 @@
                         <div id="timeDisplay" class="mt-5"></div>
                     {% else %}
                         {% if planetNb >= ((usePlanet.getMetropole() + 1) * 750000) and planetWt >= ((usePlanet.getMetropole() + 1) * 55000) and usePlanet.getGroundPlace() + 8 <= usePlanet.getGround() and usePlanet.getSkyPlace() + 8 <= usePlanet.getSky() and app.user.getDemography() == 5 and usePlanet.getConstructAt() < date %}
-                            <div>{% if (usePlanet.getMetropole() + 1 * 54000) < 86400 %}{{  (usePlanet.getMetropole() + 1 * 54000)|date('H:i:s') }}{% else %}{{  (usePlanet.getMetropole() + 1 * 54000)|date('d H:i:s') }}{% endif %}</div>
+                            <div>{% if ((usePlanet.getMetropole() + 1) * 54000) < 86400 %}{{  ((usePlanet.getMetropole() + 1) * 54000)|date('H:i:s') }}{% else %}{{  ((usePlanet.getMetropole() + 1) * 54000)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info mt-3" href="{{ path('building_add_metropole', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
                         {% else %}
                             <a class="btn btn-lg btn-secondary mt-5" disabled>{{ 'building.build'|trans }}</a>
@@ -187,7 +187,7 @@
                         <div id="timeDisplay" class="mt-5"></div>
                     {% else %}
                         {% if planetNb >= ((usePlanet.getCaserne() + 1) * 5000) and planetWt >= ((usePlanet.getCaserne() + 1) * 750) and usePlanet.getGroundPlace() + 6 <= usePlanet.getGround() and app.user.getDiscipline() == 3 and usePlanet.getConstructAt() < date %}
-                            <div>{% if (usePlanet.getCaserne() + 1 * 21000) < 86400 %}{{  (usePlanet.getCaserne() + 1 * 21000)|date('H:i:s') }}{% else %}{{  (usePlanet.getCaserne() + 1 * 21000)|date('d H:i:s') }}{% endif %}</div>
+                            <div>{% if ((usePlanet.getCaserne() + 1) * 21000) < 86400 %}{{  ((usePlanet.getCaserne() + 1) * 21000)|date('H:i:s') }}{% else %}{{  ((usePlanet.getCaserne() + 1) * 21000)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info mt-3" href="{{ path('building_add_caserne', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
                         {% else %}
                             <a class="btn btn-lg btn-secondary mt-5" disabled>{{ 'building.build'|trans }}</a>
@@ -217,7 +217,7 @@
                         <div id="timeDisplay" class="mt-5"></div>
                     {% else %}
                         {% if planetNb >= ((usePlanet.getSpaceShip() + 1) * 3000) and planetWt >= ((usePlanet.getSpaceShip() + 1) * 2000) and usePlanet.getGroundPlace() + 10 <= usePlanet.getGround() and usePlanet.getSkyPlace() + 4 <= usePlanet.getSky() and app.user.getIndustry() > 0 and usePlanet.getConstructAt() < date %}
-                            <div>{% if (usePlanet.getSpaceShip() + 1 * 7000) < 86400 %}{{  (usePlanet.getSpaceShip() + 1 * 7000)|date('H:i:s') }}{% else %}{{  (usePlanet.getSpaceShip() + 1 * 7000)|date('d H:i:s') }}{% endif %}</div>
+                            <div>{% if ((usePlanet.getSpaceShip() + 1) * 7000) < 86400 %}{{  ((usePlanet.getSpaceShip() + 1) * 7000)|date('H:i:s') }}{% else %}{{  ((usePlanet.getSpaceShip() + 1) * 7000)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info mt-3" href="{{ path('building_add_spaceShipyard', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
                         {% else %}
                             <a class="btn btn-lg btn-secondary mt-5" disabled>{{ 'building.build'|trans }}</a>
@@ -247,7 +247,7 @@
                         <div id="timeDisplay" class="mt-5"></div>
                     {% else %}
                         {% if planetNb >= ((usePlanet.getLightUsine() + 1) * 7000) and planetWt >= ((usePlanet.getLightUsine() + 1) * 3900) and usePlanet.getGroundPlace() + 6 <= usePlanet.getGround() and usePlanet.getLightUsine() != 1 and app.user.getLightShip() > 0 and usePlanet.getConstructAt() < date %}
-                            <div>{% if (usePlanet.getLightUsine() + 1 * 21600) < 86400 %}{{  (usePlanet.getLightUsine() + 1 * 21600)|date('H:i:s') }}{% else %}{{  (usePlanet.getLightUsine() + 1 * 21600)|date('d H:i:s') }}{% endif %}</div>
+                            <div>{% if ((usePlanet.getLightUsine() + 1) * 21600) < 86400 %}{{  ((usePlanet.getLightUsine() + 1) * 21600)|date('H:i:s') }}{% else %}{{  ((usePlanet.getLightUsine() + 1) * 21600)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info mt-3" href="{{ path('building_add_lightUsine', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
                         {% else %}
                             <a class="btn btn-lg btn-secondary mt-5" disabled>{{ 'building.build'|trans }}</a>
@@ -277,7 +277,7 @@
                         <div id="timeDisplay" class="mt-5"></div>
                     {% else %}
                         {% if planetNb >= ((usePlanet.getHeavyUsine() + 1) * 83000) and planetWt >= ((usePlanet.getHeavyUsine() + 1) * 68000) and usePlanet.getGroundPlace() + 12 <= usePlanet.getGround() and usePlanet.getHeavyUsine() != 1 and app.user.getHeavyShip() > 0 and usePlanet.getConstructAt() < date %}
-                            <div>{% if (usePlanet.getHeavyUsine() + 1 * 72000) < 86400 %}{{  (usePlanet.getHeavyUsine() + 1 * 72000)|date('H:i:s') }}{% else %}{{  (usePlanet.getHeavyUsine() + 1 * 72000)|date('d H:i:s') }}{% endif %}</div>
+                            <div>{% if ((usePlanet.getHeavyUsine() + 1) * 72000) < 86400 %}{{  ((usePlanet.getHeavyUsine() + 1) * 72000)|date('H:i:s') }}{% else %}{{  ((usePlanet.getHeavyUsine() + 1) * 72000)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info mt-3" href="{{ path('building_add_heavyUsine', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
                         {% else %}
                             <a class="btn btn-lg btn-secondary mt-5" disabled>{{ 'building.build'|trans }}</a>
@@ -312,7 +312,7 @@
                         <div id="timeDisplay" class="mt-5"></div>
                     {% else %}
                         {% if planetNb >= ((usePlanet.getRadar() + 1) * 1200) and planetWt >= ((usePlanet.getRadar() + 1) * 650) and usePlanet.getGroundPlace() + 2 <= usePlanet.getGround() and app.user.getOnde() > 0 and usePlanet.getConstructAt() < date %}
-                            <div>{% if (usePlanet.getRadar() + 1 * 3600) < 86400 %}{{ (usePlanet.getRadar() + 1 * 3600)|date('H:i:s') }}{% else %}{{  (usePlanet.getRadar() + 1 * 3600)|date('d H:i:s') }}{% endif %}</div>
+                            <div>{% if ((usePlanet.getRadar() + 1) * 3600) < 86400 %}{{ ((usePlanet.getRadar() + 1) * 3600)|date('H:i:s') }}{% else %}{{  ((usePlanet.getRadar() + 1) * 3600)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info mt-3" href="{{ path('building_add_radar', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
                         {% else %}
                             <a class="btn btn-lg btn-secondary mt-5" disabled>{{ 'building.build'|trans }}</a>
@@ -342,7 +342,7 @@
                         <div id="timeDisplay" class="mt-5"></div>
                     {% else %}
                         {% if planetNb >= ((usePlanet.getSkyRadar() + 1) * 20000) and planetWt >= ((usePlanet.getSkyRadar() + 1) * 17200) and usePlanet.getSkyPlace() + 2 <= usePlanet.getSky() and app.user.getOnde() > 2 and usePlanet.getConstructAt() < date %}
-                            <div>{% if (usePlanet.getSkyRadar() + 1 * 14400) < 86400 %}{{  (usePlanet.getSkyRadar() + 1 * 14400)|date('H:i:s') }}{% else %}{{  (usePlanet.getSkyRadar() + 1 * 14400)|date('d H:i:s') }}{% endif %}</div>
+                            <div>{% if ((usePlanet.getSkyRadar() + 1) * 14400) < 86400 %}{{  ((usePlanet.getSkyRadar() + 1) * 14400)|date('H:i:s') }}{% else %}{{  ((usePlanet.getSkyRadar() + 1) * 14400)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info mt-3" href="{{ path('building_add_skyRadar', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
                         {% else %}
                             <a class="btn btn-lg btn-secondary mt-5" disabled>{{ 'building.build'|trans }}</a>
@@ -372,7 +372,7 @@
                         <div id="timeDisplay" class="mt-5"></div>
                     {% else %}
                         {% if planetNb >= ((usePlanet.getSkyBrouilleur() + 1) * 51000) and planetWt >= ((usePlanet.getSkyBrouilleur() + 1) * 32100) and usePlanet.getSkyPlace() + 4 <= usePlanet.getSky() and app.user.getOnde() == 5 and usePlanet.getConstructAt() < date %}
-                            <div>{% if (usePlanet.getSkyBrouilleur() + 1 * 32400) < 86400 %}{{  (usePlanet.getSkyBrouilleur() + 1 * 32400)|date('H:i:s') }}{% else %}{{  (usePlanet.getSkyBrouilleur() + 1 * 32400)|date('d H:i:s') }}{% endif %}</div>
+                            <div>{% if ((usePlanet.getSkyBrouilleur() + 1) * 32400) < 86400 %}{{  ((usePlanet.getSkyBrouilleur() + 1) * 32400)|date('H:i:s') }}{% else %}{{  ((usePlanet.getSkyBrouilleur() + 1) * 32400)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info mt-3" href="{{ path('building_add_brouilleur', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
                         {% else %}
                             <a class="btn btn-lg btn-secondary mt-5" disabled>{{ 'building.build'|trans }}</a>

@@ -274,6 +274,11 @@ class Planet
      */
     private $updatedAt;
 
+    public function __construct()
+    {
+        $this->fleets = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
     /**
      * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
      * of 'UploadedFile' is injected into this setter to trigger the  update. If this

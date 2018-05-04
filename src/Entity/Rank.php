@@ -17,6 +17,7 @@ class Rank
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
     /**
      * @ORM\OneToOne(targetEntity="User", mappedBy="rank", fetch="EXTRA_LAZY")
      */

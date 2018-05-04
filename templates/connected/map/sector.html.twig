@@ -49,7 +49,7 @@
                         </td>
                     {% endif %}
                     {% if planet.getEmpty == false %}
-                        {% if app.user.getWhereRadar(id) > planet.getSkyBrouilleur() or planet.getUser() == app.user or planet.getOurFleet(app.user) %}
+                        {% if app.user.getWhereRadar(id) > planet.getSkyBrouilleur() or planet.getUser() == app.user or planet.getOurFleet(app.user) or planet.getPlanetAlliance() == app.user.getAlly() %}
                             <td class="center-cells pt-4">
                                 <div class="planet-position text-center">{{ planet.getPosition() }}</div>
                                 {% if planet.getNbrFleets() %}

@@ -20,6 +20,7 @@ use App\Entity\Allied;
 use App\Entity\War;
 use DateTime;
 use DateTimeZone;
+use App\Entity\Salon;
 
 /**
  * @Route("/fr")
@@ -150,6 +151,12 @@ class AllyController extends Controller
             $grade->setCanWar(true);
             $grade->setCanPeace(true);
             $em->persist($grade);
+
+
+            $salon = new Salon();
+            $salon->setName($ally->getName());
+            $salon->setAlly($ally);
+            $em->persist($salon);
 
             $ally->addGrade($grade);
             $user->setAlly($ally);

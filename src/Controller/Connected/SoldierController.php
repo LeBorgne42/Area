@@ -38,9 +38,11 @@ class SoldierController extends Controller
         $form_scientistRecruit->handleRequest($request);
 
         if ($form_caserneRecruit->isSubmitted() && $form_caserneRecruit->isValid()) {
-            if($form_caserneRecruit->get('soldier')->getData() > ($user->getBitcoin() / 10) ) {
+            if($form_caserneRecruit->get('soldier')->getData() > ($user->getBitcoin() / 10) ||
+                ($form_caserneRecruit->get('soldier')->getData() > $usePlanet->getWorker() || ($usePlanet->getSoldier() + $form_caserneRecruit->get('soldier')->getData()) > $usePlanet->getSoldierMax())) {
                 return $this->redirectToRoute('soldier', array('idp' => $usePlanet->getId()));
             }
+            $usePlanet->setWorker($usePlanet->getWorker() - $form_caserneRecruit->get('soldier')->getData());
             $usePlanet->setSoldier($usePlanet->getSoldier() + $form_caserneRecruit->get('soldier')->getData());
             $user->setBitcoin($user->getBitcoin() - ($form_caserneRecruit->get('soldier')->getData() * 10));
             $em->persist($usePlanet);
@@ -50,9 +52,11 @@ class SoldierController extends Controller
         }
 
         if ($form_scientistRecruit->isSubmitted() && $form_scientistRecruit->isValid()) {
-            if($form_scientistRecruit->get('scientist')->getData() > ($user->getBitcoin() / 100) ) {
+            if($form_scientistRecruit->get('scientist')->getData() > ($user->getBitcoin() / 100) ||
+                $form_scientistRecruit->get('scientist')->getData() > ($usePlanet->getWorker() / 2) ) {
                 return $this->redirectToRoute('soldier', array('idp' => $usePlanet->getId()));
             }
+            $usePlanet->setWorker($usePlanet->getWorker() - ($form_scientistRecruit->get('scientist')->getData() * 2));
             $usePlanet->setScientist($usePlanet->getScientist() + $form_scientistRecruit->get('scientist')->getData());
             $user->setBitcoin($user->getBitcoin() - ($form_scientistRecruit->get('scientist')->getData() * 100));
             $em->persist($usePlanet);

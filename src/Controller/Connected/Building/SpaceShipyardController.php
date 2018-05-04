@@ -16,7 +16,7 @@ use DateTimeZone;
 class SpaceShipyardController extends Controller
 {
     /**
-     * @Route("/contruire-chantier-spatial/{idp}", name="building_add_spaceShipyard", requirements={"idp"="\d+"})
+     * @Route("/contruire-chantier-spatiale/{idp}", name="building_add_spaceShipyard", requirements={"idp"="\d+"})
      */
     public function buildingAddSpaceShipyardAction($idp)
     {
@@ -59,7 +59,7 @@ class SpaceShipyardController extends Controller
     }
 
     /**
-     * @Route("/detruire-chantier-spatial/{idp}", name="building_remove_spaceShipyard", requirements={"idp"="\d+"})
+     * @Route("/detruire-chantier-spatiale/{idp}", name="building_remove_spaceShipyard", requirements={"idp"="\d+"})
      */
     public function buildingRemoveSpaceShipyardAction($idp)
     {

@@ -29,6 +29,11 @@ class Galaxy
      */
     protected $position;
 
+    public function __construct()
+    {
+        $this->sectors = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
     /**
      * @return mixed
      */

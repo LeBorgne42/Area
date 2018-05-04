@@ -111,6 +111,7 @@ class FightController extends Controller
                 $team1 = $team1 - $team2;
             }
         }
+        var_dump('Flush Combat');
         $em->flush();
         exit;
       }

@@ -21,7 +21,7 @@
                 </tr>
                 <tr{% if app.user.getTerraformation() == 0 %} hidden{% endif %}>
                     <th class="tab-cells-name">
-                        {{ 'spatial.colonizer'|trans }} x {{ usePlanet.getColonizer()|number_format }} <span class="float-right"><span class="ml-5">20.000 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3">12.000 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></span>
+                        {{ 'spatial.colonizer'|trans }} x {{ usePlanet.getColonizer()|number_format }} <span class="float-right"><span class="ml-5">20.000 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3">12.000 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span> <span class="ml-3">2.500 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'workerImg'|trans }}" src="{{ asset('img/worker.png') }}"></span></span>
                     </th>
                     <td class="center-cells">
                         {{ form_widget(form_spatialShip.colonizer,{attr: { max: usePlanet.getColonizer()}}) }}

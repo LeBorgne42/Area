@@ -18,3 +18,14 @@
   line-height: 3rem;
   font-size: 1.2rem;
 }
+
+#salon_content {
+  height: 20px;
+}
+
+.chat-defil {
+  overflow: auto;
+  scroll-bottom: 0;
+  height: 700px;
+  width: 100%;
+}

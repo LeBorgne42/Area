@@ -13,7 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class SectorController extends Controller
 {
     /**
-     * @Route("/carte-spatial/{id}/{idp}", name="map", requirements={"id"="\d+", "idp"="\d+"})
+     * @Route("/carte-spatiale/{id}/{idp}", name="map", requirements={"id"="\d+", "idp"="\d+"})
      */
     public function mapAction($id, $idp)
     {

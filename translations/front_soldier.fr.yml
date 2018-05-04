@@ -7,3 +7,5 @@ caserner.scientist: 'Scientifiques dans les centres'
 form.nbr: nombre
 form.recruitSoldier: Recruter
 form.recruitScientist: Engager
+workerImg: Travailleurs
+scientistImg: Scientifiques

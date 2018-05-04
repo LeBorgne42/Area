@@ -189,13 +189,12 @@ class InstantController extends Controller
             $fleet->setSector(null);
             $em->persist($fleet);
         }
+        $em->flush();
 
         if ($fleetsWar) {
-            $em->flush();
             return $this->redirectToRoute('fight_war');
         }
-
-        $em->flush();
+        var_dump('Flush Paix');
         exit;
     }
 }

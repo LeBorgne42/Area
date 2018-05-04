@@ -43,6 +43,12 @@ class Sector
      */
     protected $position;
 
+    public function __construct()
+    {
+        $this->planets = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->fleets = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
     /**
      * Add planet
      *

@@ -1,4 +1,4 @@
-title: 'Chantier spatial'
+title: 'Chantier spatiale'
 spatial.constructShip: 'Construction de vaisseaux'
 spatial.sonde: Sonde
 spatial.colonizer: 'Vaisseau terraformeur'
@@ -23,3 +23,4 @@ spatial.fleetSignature: Signature
 spatial.destroyFleet: 'mettre au sol'
 spatial.sendFleet: envoyer
 spatial.cargo: Cargo
+workerImg: Travailleurs

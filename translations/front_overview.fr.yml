@@ -5,7 +5,7 @@ title.batiment: Bâtiment
 cell.batiment: 'Aucun bâtiment en construction'
 title.search: Recherche
 cell.search: 'Aucune recherche en cours'
-title.spatial: 'Chantier spatial'
+title.spatial: 'Chantier spatiale'
 cell.spatial: 'Aucune production en cours'
 title.fleet: Flotte
 cell.fleet: 'Aucune flotte en vol'

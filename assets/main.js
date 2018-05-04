@@ -212,10 +212,11 @@ function manageConstructTime() {
                 $('#timeDisplay').text(secondes + ' secondes');
             }
             secondes = secondes - 1;
-            if(secondes == 0 && minutes == 0 && heures == 0 && jours == 0) {
-                window.location.reload();
-            }
             if(secondes == 0) {
+                if(minutes == null) {
+                    secondes = null;
+                    window.location.reload();
+                }
                 secondes = 60;
                 minutes = minutes - 1;
                 if(minutes == 0 && heures != 0) {
@@ -252,10 +253,11 @@ function manageResearchTime() {
                 $('#timeDisplayR').text(secondes + ' secondes');
             }
             secondes = secondes - 1;
-            if(secondes == 0 && minutes == 0 && heures == 0 && jours == 0) {
-                window.location.reload();
-            }
             if(secondes == 0) {
+                if(minutes == null) {
+                    secondes = null;
+                    window.location.reload();
+                }
                 secondes = 60;
                 minutes = minutes - 1;
                 if(minutes == 0 && heures != 0) {
@@ -268,6 +270,43 @@ function manageResearchTime() {
         }, 1000);
     }
 }
+
+function manageSalon() {
+    $('#salon_sendForm').click(function(e) {
+        e.preventDefault();
+
+        var content = $('#salon_content').val();
+        $form = $('#salon_content').closest('form');
+        if (content != "") {
+            $.ajax({
+               url: $form.attr('action'),
+               type: "POST",
+                data: 'newMessage=' + content,
+            });
+            window.location.reload();
+        }
+    });
+    $('.chat-defil').scrollTop(150);
+}
+
+/*function manageDisplaySalon(){
+
+   setTimeout( function(){
+
+        $.ajax({
+            url : document.location.href,
+            type : "GET",
+            success : function(data){
+                console.log(data.name);
+                console.log(data.id);
+            }
+        });
+
+        manageDisplaySalon();
+
+    }, 1000);
+
+}*/
 
 $(document).ready(function() {
     $('[data-toggle="popover"]').popover();
@@ -282,7 +321,9 @@ $(document).ready(function() {
     manageMaxShip();
     manageConstructTime();
     manageResearchTime();
-/*    setNoDecimalDisplay();*/
+    manageSalon();
+    /*    manageDisplaySalon();
+        setNoDecimalDisplay();*/
     manageAttackFleetForm();
     console.log("Toute utilisation de scripts sur le jeu seront puni d'un ban permanent, merci.");
 });
