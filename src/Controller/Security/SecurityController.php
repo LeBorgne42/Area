@@ -221,7 +221,7 @@ class SecurityController extends Controller
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
 
-        $user->setConnected(false);
+        $user->setConnected(null);
         $em->persist($user);
         $em->flush();
         return $this->redirectToRoute('logout');

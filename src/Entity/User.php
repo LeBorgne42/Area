@@ -223,8 +223,7 @@ class User implements UserInterface, \Serializable
     protected $createdAt = 0;
 
     /**
-     * @ORM\Column(name="connected",type="boolean")
-     * @Assert\NotBlank(message = "required")
+     * @ORM\Column(name="connected",type="boolean", nullable=true)
      */
     protected $connected = true;
 

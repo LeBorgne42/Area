@@ -2,7 +2,6 @@
 
 while true
 do
-    echo 'Marche'
     curl "http://areauniverse.ddns.net/resources/"
     sleep 1
     curl "http://areauniverse.ddns.net/construction/"

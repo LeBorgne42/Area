@@ -10,6 +10,10 @@ use App\Entity\Planet;
 use App\Entity\Sector;
 use App\Entity\Galaxy;
 use App\Entity\Salon;
+use App\Entity\User;
+use App\Entity\Rank;
+use App\Entity\Fleet;
+use DateTime;
 
 /**
  * @Route("/serveur")
@@ -33,6 +37,31 @@ class ServerController extends Controller
         $salon = new Salon();
         $salon->setName('Public');
         $em->persist($salon);
+
+        $fossoyeurs = new User();
+        $now = new DateTime();
+        $fossoyeurs->setUsername('Les hydres');
+        $fossoyeurs->setEmail('areauniverse.game@gamil.com');
+        $fossoyeurs->setCreatedAt($now);
+        $fossoyeurs->setPassword(password_hash('ViolGratuit2018', PASSWORD_BCRYPT));
+        $fossoyeurs->setBitcoin(999999999999);
+        $fossoyeurs->setImageName('hydre.png');
+        $rank = new Rank();
+        $em->persist($rank);
+        $fossoyeurs->setRank($rank);
+        $em->persist($fossoyeurs);
+        $em->flush();
+
+        $fosSalon = $em->getRepository('App:Salon')
+            ->createQueryBuilder('s')
+            ->where('s.id = :id')
+            ->setParameters(array('id' => 1))
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $fosSalon->addUser($fossoyeurs);
+        $em->persist($fosSalon);
+
 
         while($nbrSector <= 100) {
             $nbrPlanet = 1;
@@ -83,8 +112,8 @@ class ServerController extends Controller
                                 $planet->setSky(rand(4, 15));
                             }
                         } elseif ($nbrSector == 55 || $nbrSector == 56 || $nbrSector == 65 || $nbrSector == 66) {
-                            $planet->setGround(rand(120, 160));
-                            $planet->setSky(rand(3, 20));
+                            $planet->setGround(rand(135, 180));
+                            $planet->setSky(rand(3, 25));
                         } else {
                             $planet->setGround(rand(85, 125));
                             $planet->setSky(rand(6, 30));
@@ -97,6 +126,52 @@ class ServerController extends Controller
             $nbrSector++;
         }
         $em->flush();
+
+        $fosPlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.user is null')
+            ->andWhere('p.ground > :ground')
+            ->andWhere('p.sky > :sky')
+            ->andWhere('p.ground < :limitG')
+            ->andWhere('p.sky < :limitS')
+            ->andWhere('p.empty = :false')
+            ->andWhere('p.cdr = :false')
+            ->setParameters(array('ground' => 134, 'sky' => 15, 'limitG' => 200, 'limitS' => 50, 'false' => false))
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $fosPlanet->setUser($fossoyeurs);
+        $fosPlanet->setWorker(10000000);
+        $fosPlanet->setSoldier(2500000);
+        $fosPlanet->setName('Fort Hydra');
+        $fossoyeurs->addPlanet($fosPlanet);
+        $em->persist($fosPlanet);
+
+        $em->flush();
+
+        $putFleets = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->join('p.sector', 's')
+            ->andWhere('p.empty = :false')
+            ->andWhere('p.cdr = :false')
+            ->andWhere('s.position in (:pos)')
+            ->setParameters(array('pos' => [55, 56, 65, 66], 'false' => false))
+            ->getQuery()
+            ->getResult();
+
+        foreach($putFleets as $putFleet) {
+            $fleet = new Fleet();
+            $fleet->setHunter(50);
+            $fleet->setFregate(300);
+            $fleet->setUser($fossoyeurs);
+            $fleet->setPlanet($putFleet);
+            $fleet->setAttack(1);
+            $fleet->setName('Hydra Force');
+            $em->persist($fleet);
+            $em->flush();
+        }
+
         return $this->render('server/create.html.twig', [
             'nbrPlanet' => $nbrPlanets,
         ]);

@@ -9,14 +9,10 @@ use Symfony\Component\HttpFoundation\Request;
 use DateTime;
 use DateTimeZone;
 
-/**
- * @Route("/fr")
- * @Security("has_role('ROLE_USER')")
- */
 class FightController extends Controller
 {
     /**
-     * @Route("/big/", name="fight_war")
+     * @Route("/clash/", name="fight_war_area")
      */
     public function fightAction(Request $request)
     {
@@ -111,7 +107,6 @@ class FightController extends Controller
                 $team1 = $team1 - $team2;
             }
         }
-        var_dump('Flush Combat');
         $em->flush();
         exit;
       }

@@ -192,9 +192,8 @@ class InstantController extends Controller
         $em->flush();
 
         if ($fleetsWar) {
-            return $this->redirectToRoute('fight_war');
+            return $this->redirectToRoute('fight_war_area');
         }
-        var_dump('Flush Paix');
         exit;
     }
 }
