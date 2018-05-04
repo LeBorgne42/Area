@@ -141,15 +141,16 @@ class SecurityController extends Controller
      * @Route("/login", name="login")
      * @Route("/login/", name="login_noSlash")
      */
-    public function loginAction(Request $request, AuthenticationUtils $authenticationUtils)
+    public function loginAction(AuthenticationUtils $authenticationUtils)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        if($user->getGameOver()) {
-            return $this->redirectToRoute('game_over');
-        }
 
         if($user) {
+            if($user->getGameOver()) {
+                return $this->redirectToRoute('game_over');
+            }
+
             $usePlanet = $em->getRepository('App:Planet')
                 ->createQueryBuilder('p')
                 ->join('p.user', 'u')

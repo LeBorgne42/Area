@@ -20,6 +20,7 @@
                         <input type="password" placeholder="{{ 'password'|trans }}" id="password" name="_password" />
                         <button class="btn btn-secondary" type="submit">{{ 'login'|trans }}</button>
                     </form>
+                    <div class="m-5 p-5 text-rouge text-middle">Le serveur a été réinitialisé pour le lancement de la beta, veuillez recréer un compte :)</div>
                     {% for message in app.flashes('fail') %}
                         <div class="flash-notice mt-5 text-orange text-more">
                             {{ message }}

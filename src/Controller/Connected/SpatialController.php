@@ -42,13 +42,6 @@ class SpatialController extends Controller
         $form_spatialShip = $this->createForm(SpatialShipType::class);
         $form_spatialShip->handleRequest($request);
 
-        if($usePlanet->getSpaceShip()) {
-        } else {
-            return $this->render('connected/spatial.html.twig', [
-                'usePlanet' => $usePlanet,
-                'form_spatialShip' => $form_spatialShip->createView(),
-            ]);
-        }
         if ($form_spatialShip->isSubmitted() && $form_spatialShip->isValid()) {
             $colonizer = $form_spatialShip->get('colonizer')->getData();
             $recycleur = $form_spatialShip->get('recycleur')->getData();

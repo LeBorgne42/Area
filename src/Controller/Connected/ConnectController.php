@@ -40,6 +40,7 @@ class ConnectController extends Controller
             $planet->setUser($user);
             $planet->setName('Nova Terra');
             $planet->setSonde(10);
+            $planet->setRadar(1);
             $planet->setHunter(20);
             $planet->setNiobium(25000);
             $planet->setWater(30000);

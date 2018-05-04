@@ -151,6 +151,14 @@ class AllyController extends Controller
             $grade->setCanWar(true);
             $grade->setCanPeace(true);
             $em->persist($grade);
+            $mGrade = new Grade();
+            $mGrade->setAlly($ally);
+            $mGrade->setName("Membre");
+            $mGrade->addUser($user);
+            $mGrade->setPlacement(5);
+            $em->persist($mGrade);
+
+            $ally->addGrade($mGrade);
 
 
             $salon = new Salon();
@@ -348,19 +356,11 @@ class AllyController extends Controller
         $ally->addUser($user);
         $em->persist($ally);
 
-        $grade = new Grade();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
-        $grade->setAlly($ally);
-        $grade->setName("Membre");
-        $grade->addUser($user);
-        $grade->setPlacement(5);
-        $em->persist($grade);
-
-        $ally->addGrade($grade);
         $user->setAlly($ally);
         $user->setJoinAllyAt($now);
-        $user->setGrade($grade);
+        $user->setGrade($ally->getNewMember());
         $em->remove($proposal);
 
         $em->persist($ally);

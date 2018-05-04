@@ -382,8 +382,23 @@ class Ally
         $return = 0;
 
         foreach($this->getUsers() as $user) {
-            foreach ($user->getFleets() as $planet) {
+            foreach ($user->getFleets() as $fleet) {
                 $return++;
+            }
+        }
+        return $return;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNewMember()
+    {
+        $return = null;
+
+        foreach($this->getGrades() as $grade) {
+            if($grade->getName() == "Membre") {
+                $return = $grade;
             }
         }
         return $return;

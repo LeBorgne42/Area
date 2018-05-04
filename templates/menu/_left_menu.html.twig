@@ -36,11 +36,9 @@
     <div class="btn-left{% if usePlanet.getConstruct() is null %} freeSearchBuild{% endif %}">
         <a href="{{ path('building', {'idp': usePlanet.getId()}) }}"><span>{{ 'building'|trans }}</span></a>
     </div>
-    {% if usePlanet.getSpaceShip() == 1 %}
-        <div class="btn-left">
-            <a href="{{ path('spatial', {'idp': usePlanet.getId()}) }}"><span>{{ 'spatial'|trans }}</span></a>
-        </div>
-    {% endif %}
+    <div class="btn-left">
+        <a href="{{ path('spatial', {'idp': usePlanet.getId()}) }}"><span>{{ 'spatial'|trans }}</span></a>
+    </div>
     {% if usePlanet.getCaserne() > 0 or usePlanet.getCenterSearch() > 0 %}
         <div class="btn-left">
             <a href="{{ path('soldier', {'idp': usePlanet.getId()}) }}">{{ 'soldier'|trans }}</span></a>
