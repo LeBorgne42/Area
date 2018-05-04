@@ -195,7 +195,7 @@ class Planet
     /**
      * @ORM\Column(name="worker",type="integer")
      */
-    protected $worker = 10000;
+    protected $worker = 20000;
 
     /**
      * @ORM\Column(name="scientist",type="integer", nullable=true)

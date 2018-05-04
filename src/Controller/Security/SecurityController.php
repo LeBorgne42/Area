@@ -67,6 +67,13 @@ class SecurityController extends Controller
             if($planet) {
                 $planet->setUser($user);
                 $planet->setName('Nova Terra');
+                $planet->setSonde(10);
+                $planet->setHunter(20);
+                $planet->setNiobium(25000);
+                $planet->setWater(30000);
+                $planet->setFregate(5);
+                $planet->setWorker(30000);
+                $planet->setColonizer(1);
                 $user->addPlanet($planet);
                 $em->persist($planet);
             } else {

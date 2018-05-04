@@ -104,7 +104,7 @@ class FleetController extends Controller
             return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
         }
 
-        if ($form_manageAttackFleet->isSubmitted()) {
+        if ($form_manageAttackFleet->isSubmitted() && $fleet->getMissile() > 0) {
             $eAlly = $user->getAllyEnnemy();
             $warAlly = [];
             $x = 0;
