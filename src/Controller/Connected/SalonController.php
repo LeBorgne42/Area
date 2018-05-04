@@ -100,7 +100,7 @@ class SalonController extends Controller
             }
         }*/
 
-        if ($form_message->isSubmitted() && $form_message->isValid()) {
+        if ($form_message->isSubmitted() && $form_message->isValid() && ($user->getSalonBan() > $now || $user->getSalonBan() == null)) {
             $attachSalon = $em->getRepository('App:Salon')
                             ->createQueryBuilder('s')
                             ->where('s.id = :id')

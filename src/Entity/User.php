@@ -85,6 +85,11 @@ class User implements UserInterface, \Serializable
     protected $salons;
 
     /**
+     * @ORM\Column(name="salonBan",type="datetime", nullable=true)
+     */
+    protected $salonBan = null;
+
+    /**
      * @ORM\OneToMany(targetEntity="S_Content", mappedBy="user", fetch="EXTRA_LAZY")
      */
     protected $sContents;
@@ -1239,6 +1244,38 @@ class User implements UserInterface, \Serializable
     public function getSalons()
     {
         return $this->salons;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSalonBan()
+    {
+        return $this->salonBan;
+    }
+
+    /**
+     * @param mixed $salonBan
+     */
+    public function setSalonBan($salonBan): void
+    {
+        $this->salonBan = $salonBan;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSContents()
+    {
+        return $this->sContents;
+    }
+
+    /**
+     * @param mixed $sContents
+     */
+    public function setSContents($sContents): void
+    {
+        $this->sContents = $sContents;
     }
 
     /**

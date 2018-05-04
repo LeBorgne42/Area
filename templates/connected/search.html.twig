@@ -21,13 +21,13 @@
                 <td class="center-cells">
                     {% if app.user.getSearch() == 'utility' %}
                         <div id="timeConstruct" hidden>{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
-                        <div id="timeDisplay" class="my-2"></div>
+                        <div id="timeDisplay" class="mt-4"></div>
                     {% else %}
                         {% if app.user.getBitcoin() >= ((app.user.getUtility() + 1) * 2500) and app.user.getUtility() < 3 and app.user.getSearchAt() < date %}
                             <div>{% if ((app.user.getUtility() + 1) * 2000) < 3600 %}{{  ((app.user.getUtility() + 1) * 2000)|date('i:s') }}{% elseif ((app.user.getUtility() + 1) * 2000) < 86400 %}{{  ((app.user.getUtility() + 1) * 2000)|date('H:i:s') }}{% else %}{{  ((app.user.getUtility() + 1) * 2000)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info" href="{{ path('research_utility', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                         {% else %}
-                            <a class="btn btn-lg btn-secondary" disabled>{{ 'research.seek'|trans }}</a>
+                            <a class="btn btn-lg btn-secondary mt-4" disabled>{{ 'research.seek'|trans }}</a>
                         {% endif %}
                     {% endif %}
                 </td>
@@ -43,13 +43,13 @@
                 <td class="center-cells">
                     {% if app.user.getSearch() == 'terraformation' %}
                         <div id="timeConstruct" hidden>{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
-                        <div id="timeDisplay" class="my-2"></div>
+                        <div id="timeDisplay" class="mt-4"></div>
                     {% else %}
                         {% if app.user.getBitcoin() >= 12000 and app.user.getTerraformation() == 0  and app.user.getUtility() > 0 and app.user.getSearchAt() < date %}
                             <div>{% if ((app.user.getTerraformation() + 1) * 3800) < 86400 %}{{  ((app.user.getTerraformation() + 1) * 3800)|date('H:i:s') }}{% else %}{{ ((app.user.getTerraformation() + 1) * 3800)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info" href="{{ path('research_terraformation', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                         {% else %}
-                            <a class="btn btn-lg btn-secondary" disabled>{{ 'research.seek'|trans }}</a>
+                            <a class="btn btn-lg btn-secondary mt-4" disabled>{{ 'research.seek'|trans }}</a>
                         {% endif %}
                     {% endif %}
                 </td>
@@ -65,13 +65,13 @@
                 <td class="center-cells">
                     {% if app.user.getSearch() == 'cargo' %}
                         <div id="timeConstruct" hidden>{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
-                        <div id="timeDisplay" class="my-2"></div>
+                        <div id="timeDisplay" class="mt-4"></div>
                     {% else %}
                         {% if app.user.getBitcoin() >= ((app.user.getCargo() + 1) * 3500) and app.user.getCargo() < 5  and app.user.getUtility() > 1 and app.user.getSearchAt() < date %}
                             <div>{% if ((app.user.getCargo() + 1) * 4000) < 86400 %}{{  ((app.user.getCargo() + 1) * 4000)|date('H:i:s') }}{% else %}{{  ((app.user.getCargo() + 1) * 4000)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info" href="{{ path('research_cargo', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                         {% else %}
-                            <a class="btn btn-lg btn-secondary" disabled>{{ 'research.seek'|trans }}</a>
+                            <a class="btn btn-lg btn-secondary mt-4" disabled>{{ 'research.seek'|trans }}</a>
                         {% endif %}
                     {% endif %}
                 </td>
@@ -92,7 +92,7 @@
                         <div>{% if ((app.user.getBarge() + 1) * 28000) < 86400 %}{{ ((app.user.getBarge() + 1) * 28000)|date('H:i:s') }}{% else %}{{  ((app.user.getBarge() + 1) * 28000)|date('d H:i:s') }}{% endif %}</div>
                         <a class="btn btn-lg btn-info" href="{{ path('research_barge', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                     {% else %}
-                        <a class="btn btn-lg btn-secondary" disabled>{{ 'research.seek'|trans }}</a>
+                        <a class="btn btn-lg btn-secondary mt-4" disabled>{{ 'research.seek'|trans }}</a>
                     {% endif %}
                 {% endif %}
             </td>
@@ -114,7 +114,7 @@
                             <div>{% if ((app.user.getRecycleur() + 1) * 4000) < 86400 %}{{ ((app.user.getRecycleur() + 1) * 4000)|date('H:i:s') }}{% else %}{{ ((app.user.getRecycleur() + 1) * 4000)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info" href="{{ path('research_recyclage', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                         {% else %}
-                            <a class="btn btn-lg btn-secondary" disabled>{{ 'research.seek'|trans }}</a>
+                            <a class="btn btn-lg btn-secondary mt-4" disabled>{{ 'research.seek'|trans }}</a>
                         {% endif %}
                     {% endif %}
                 </td>
@@ -136,7 +136,7 @@
                             <div>{% if ((app.user.getOnde() + 1) * 3000) < 3600 %}{{ ((app.user.getOnde() + 1) * 3000)|date('i:s') }}{% elseif ((app.user.getOnde() + 1) * 3000) < 86400 %}{{ ((app.user.getOnde() + 1) * 3000)|date('H:i:s') }}{% else %}{{ ((app.user.getOnde() + 1) * 3000)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info" href="{{ path('research_onde', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                         {% else %}
-                            <a class="btn btn-lg btn-secondary" disabled>{{ 'research.seek'|trans }}</a>
+                            <a class="btn btn-lg btn-secondary mt-4" disabled>{{ 'research.seek'|trans }}</a>
                         {% endif %}
                     {% endif %}
                 </td>
@@ -158,7 +158,7 @@
                             <div>{{  ((app.user.getHyperespace() + 1) * 604800)|date('d H:i:s') }}</div>
                             <a class="btn btn-lg btn-info" href="{{ path('research_hyperespace', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                         {% else %}
-                            <a class="btn btn-lg btn-secondary" disabled>{{ 'research.seek'|trans }}</a>
+                            <a class="btn btn-lg btn-secondary mt-4" disabled>{{ 'research.seek'|trans }}</a>
                         {% endif %}
                     {% endif %}
                 </td>
@@ -185,7 +185,7 @@
                             <div>{% if ((app.user.getDemography() + 1) * 4800) < 86400 %}{{  ((app.user.getDemography() + 1) * 4800)|date('H:i:s') }}{% else %}{{  ((app.user.getDemography() + 1) * 4800)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info" href="{{ path('research_demography', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                         {% else %}
-                            <a class="btn btn-lg btn-secondary" disabled>{{ 'research.seek'|trans }}</a>
+                            <a class="btn btn-lg btn-secondary mt-4" disabled>{{ 'research.seek'|trans }}</a>
                         {% endif %}
                     {% endif %}
                 </td>
@@ -207,7 +207,7 @@
                             <div>{% if ((app.user.getDiscipline() + 1) * 9300) < 86400 %}{{  ((app.user.getDiscipline() + 1) * 9300)|date('H:i:s') }}{% else %}{{  ((app.user.getDiscipline() + 1) * 9300)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info" href="{{ path('research_discipline', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                         {% else %}
-                            <a class="btn btn-lg btn-secondary" disabled>{{ 'research.seek'|trans }}</a>
+                            <a class="btn btn-lg btn-secondary mt-4" disabled>{{ 'research.seek'|trans }}</a>
                         {% endif %}
                     {% endif %}
                 </td>
@@ -234,7 +234,7 @@
                             <div>{% if ((app.user.getArmement() + 1) * 3700) < 86400 %}{{  ((app.user.getArmement() + 1) * 3700)|date('H:i:s') }}{% else %}{{  ((app.user.getArmement() + 1) * 3700)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info" href="{{ path('research_armement', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                         {% else %}
-                            <a class="btn btn-lg btn-secondary" disabled>{{ 'research.seek'|trans }}</a>
+                            <a class="btn btn-lg btn-secondary mt-4" disabled>{{ 'research.seek'|trans }}</a>
                         {% endif %}
                     {% endif %}
                 </td>
@@ -256,7 +256,7 @@
                             <div>{% if ((app.user.getMissile() + 1) * 4500) < 86400 %}{{ ((app.user.getMissile() + 1) * 4500)|date('H:i:s') }}{% else %}{{ ((app.user.getMissile() + 1) * 4500)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info" href="{{ path('research_missile', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                         {% else %}
-                            <a class="btn btn-lg btn-secondary" disabled>{{ 'research.seek'|trans }}</a>
+                            <a class="btn btn-lg btn-secondary mt-4" disabled>{{ 'research.seek'|trans }}</a>
                         {% endif %}
                     {% endif %}
                 </td>
@@ -278,7 +278,7 @@
                             <div>{% if ((app.user.getLaser() + 1) * 18000) < 86400 %}{{ ((app.user.getLaser() + 1) * 18000)|date('H:i:s') }}{% else %}{{ ((app.user.getLaser() + 1) * 18000)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info" href="{{ path('research_laser', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                         {% else %}
-                            <a class="btn btn-lg btn-secondary" disabled>{{ 'research.seek'|trans }}</a>
+                            <a class="btn btn-lg btn-secondary mt-4" disabled>{{ 'research.seek'|trans }}</a>
                         {% endif %}
                     {% endif %}
                 </td>
@@ -300,7 +300,7 @@
                             <div>{% if ((app.user.getPlasma() + 1) * 46800) < 86400 %}{{ ((app.user.getPlasma() + 1) * 46800)|date('H:i:s') }}{% else %}{{ ((app.user.getPlasma() + 1) * 46800)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info" href="{{ path('research_plasma', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                         {% else %}
-                            <a class="btn btn-lg btn-secondary" disabled>{{ 'research.seek'|trans }}</a>
+                            <a class="btn btn-lg btn-secondary mt-4" disabled>{{ 'research.seek'|trans }}</a>
                         {% endif %}
                     {% endif %}
                 </td>
@@ -327,7 +327,7 @@
                             <div>{% if ((app.user.getIndustry() + 1) * 1500) < 3600 %}{{ ((app.user.getIndustry() + 1) * 1500)|date('i:s') }}{% elseif ((app.user.getIndustry() + 1) * 1500) < 86400 %}{{ ((app.user.getIndustry() + 1) * 1500)|date('H:i:s') }}{% else %}{{ ((app.user.getIndustry() + 1) * 1500)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info" href="{{ path('research_industry', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                         {% else %}
-                            <a class="btn btn-lg btn-secondary" disabled>{{ 'research.seek'|trans }}</a>
+                            <a class="btn btn-lg btn-secondary mt-4" disabled>{{ 'research.seek'|trans }}</a>
                         {% endif %}
                     {% endif %}
                 </td>
@@ -349,7 +349,7 @@
                             <div>{% if ((app.user.getLightShip() + 1) * 8600) < 86400 %}{{ ((app.user.getLightShip() + 1) * 8600)|date('H:i:s') }}{% else %}{{ ((app.user.getLightShip() + 1) * 8600)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info" href="{{ path('research_light_ship', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                         {% else %}
-                            <a class="btn btn-lg btn-secondary" disabled>{{ 'research.seek'|trans }}</a>
+                            <a class="btn btn-lg btn-secondary mt-4" disabled>{{ 'research.seek'|trans }}</a>
                         {% endif %}
                     {% endif %}
                 </td>
@@ -371,7 +371,7 @@
                             <div>{% if ((app.user.getHeavyShip() + 1) * 9300) < 86400 %}{{ ((app.user.getHeavyShip() + 1) * 9300)|date('H:i:s') }}{% else %}{{ ((app.user.getHeavyShip() + 1) * 9300)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info" href="{{ path('research_heavy_ship', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                         {% else %}
-                            <a class="btn btn-lg btn-secondary" disabled>{{ 'research.seek'|trans }}</a>
+                            <a class="btn btn-lg btn-secondary mt-4" disabled>{{ 'research.seek'|trans }}</a>
                         {% endif %}
                     {% endif %}
                 </td>
