@@ -23,3 +23,6 @@ overview.time: Temps
 overview.fleetShips: Vaisseaux
 overview.fleetSignature: Signature
 title.lastFleet: 'Flottes en mouvement'
+title.planet: Planète
+form.name: 'nouveau nom'
+form.renamePlanet: 'Renommer la planète'

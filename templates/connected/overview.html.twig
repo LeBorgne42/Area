@@ -44,6 +44,21 @@
                     </td>
                 </tr>
                 <tr>
+                    <th class="tab-cells-name"><h4>{{ 'title.planet'|trans|raw }}</h4></th>
+                    <td class="center-cells">
+                        {{ form_start(form_rename) }}
+                        <div class="row">
+                            <div class="offset-3 col-3">
+                                {{ form_widget(form_rename.name) }}
+                            </div>
+                            <div class="col-2 float-left">
+                                {{ form_widget(form_rename.sendForm,{attr: { class: 'btn btn-sm btn-info'}}) }}
+                            </div>
+                        </div>
+                        {{ form_end(form_rename) }}
+                    </td>
+                </tr>
+                <tr>
                     <th class="tab-cells-name"><h4>{{ 'title.batiment'|trans|raw }}</h4></th>
                     <td class="center-cells">
                         <span><a href="{{ path('building', {'idp': usePlanet.getId()}) }}">

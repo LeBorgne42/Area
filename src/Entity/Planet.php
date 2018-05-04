@@ -235,19 +235,16 @@ class Planet
 
     /**
      * @ORM\Column(name="empty",type="boolean")
-     * @Assert\NotBlank(message = "required")
      */
     protected $empty = false;
 
     /**
      * @ORM\Column(name="cdr",type="boolean")
-     * @Assert\NotBlank(message = "required")
      */
     protected $cdr = false;
 
     /**
      * @ORM\Column(name="merchant",type="boolean")
-     * @Assert\NotBlank(message = "required")
      */
     protected $merchant = false;
 
