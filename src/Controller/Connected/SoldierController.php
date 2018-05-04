@@ -23,6 +23,10 @@ class SoldierController extends Controller
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
 
+        if($user->getGameOver()) {
+            return $this->redirectToRoute('game_over');
+        }
+
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->where('p.id = :id')

@@ -229,9 +229,9 @@ class User implements UserInterface, \Serializable
     protected $connected = true;
 
     /**
-     * @ORM\Column(name="gameOver",type="boolean")
+     * @ORM\Column(name="gameOver",type="string", nullable=true)
      */
-    protected $gameOver = false;
+    protected $gameOver = null;
 
     /**
      * @Assert\File(

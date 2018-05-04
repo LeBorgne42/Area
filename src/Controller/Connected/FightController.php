@@ -223,6 +223,7 @@ class FightController extends Controller
     public function invaderAction(Request $request, $idp, $fleet)
     {
         $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
 
@@ -230,7 +231,7 @@ class FightController extends Controller
             ->createQueryBuilder('p')
             ->where('p.id = :id')
             ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
+            ->setParameters(array('id' => $idp, 'user' => $user))
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -268,17 +269,17 @@ class FightController extends Controller
                 $defenser->setSoldier(0);
                 $defenser->setWorker(2000);
                 if(count($invader->getUser()->getPlanets()) < 21) {
-                    $defenser->setUser($invader->getUser());
+                    $defenser->setUser($user);
                 } else {
                     $defenser->setUser(null);
                     $defenser->setName('Abandonnée');
                 }
                 if(count($userDefender->getPlanets()) == 1) {
-                    $userDefender->setGameOver(true);
+                    $userDefender->setGameOver($user->getUserName());
                     $userDefender->setAlly(null);
                     $userDefender->setGrade(null);
                     foreach($userDefender->getFleets() as $tmpFleet) {
-                        $tmpFleet->setUser($invader->getUser());
+                        $tmpFleet->setUser($user);
                         $em->persist($tmpFleet);
                     }
                     $em->persist($userDefender);

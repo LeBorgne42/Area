@@ -27,6 +27,10 @@ class OverviewController extends Controller
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
 
+        if($user->getGameOver()) {
+            return $this->redirectToRoute('game_over');
+        }
+
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->where('p.id = :id')
@@ -70,5 +74,18 @@ class OverviewController extends Controller
             'date' => $now,
             'fleetMove' => $fleetMove,
         ]);
+    }
+
+    /**
+     * @Route("/dans-le-cul-lulu/", name="game_over")
+     */
+    public function gameOverAction()
+    {
+        if($this->getUser()->getGameOver()) {
+            return $this->render('connected/game_over.html.twig', [
+            ]);
+        } else {
+            return $this->redirectToRoute('home');
+        }
     }
 }

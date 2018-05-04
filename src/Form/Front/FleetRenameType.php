@@ -35,11 +35,11 @@ class FleetRenameType extends AbstractType
 
         $builder->get('name')
             ->addModelTransformer(new CallbackTransformer(
-                function ($tagAsUpper) {
-                    return strtolower($tagAsUpper);
+                function ($tagAsFirstUpper) {
+                    return lcfirst($tagAsFirstUpper);
                 },
-                function ($tagAsUpper) {
-                    return strtoupper($tagAsUpper);
+                function ($tagAsFirstUpper) {
+                    return ucfirst($tagAsFirstUpper);
                 }
             ));
     }

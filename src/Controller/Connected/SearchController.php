@@ -23,6 +23,10 @@ class SearchController extends Controller
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
 
+        if($user->getGameOver()) {
+            return $this->redirectToRoute('game_over');
+        }
+
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->where('p.id = :id')

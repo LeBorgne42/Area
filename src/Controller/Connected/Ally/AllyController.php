@@ -515,7 +515,8 @@ class AllyController extends Controller
             ->getQuery()
             ->getOneOrNullResult();
 
-        if($user->getAlly()) {
+        $maxMembers = count($user->getAlly()->getUsers()) + count($user->getAlly()->getProposals());
+        if($user->getAlly() && $maxMembers <= 20) {
             $ally = $user->getAlly();
         } else {
             return $this->redirectToRoute('ally_blank', array('idp' => $usePlanet->getId()));

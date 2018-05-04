@@ -27,6 +27,10 @@ class SpatialController extends Controller
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
 
+        if($user->getGameOver()) {
+            return $this->redirectToRoute('game_over');
+        }
+
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->where('p.id = :id')
@@ -108,12 +112,11 @@ class SpatialController extends Controller
             $sonde = $usePlanet->getSonde() - $form_createFleet->get('sonde')->getData();
             $hunter = $usePlanet->getHunter() - $form_createFleet->get('hunter')->getData();
             $fregate = $usePlanet->getFregate() - $form_createFleet->get('fregate')->getData();
+            $total = $form_createFleet->get('colonizer')->getData() + $form_createFleet->get('fregate')->getData() + $form_createFleet->get('hunter')->getData() + $form_createFleet->get('sonde')->getData() + $form_createFleet->get('barge')->getData() + $form_createFleet->get('recycleur')->getData();
 
-            if (($colonizer < 0 || $recycleur < 0) || ($barge < 0 || $sonde < 0) || ($hunter < 0 || $fregate < 0)) {
-                return $this->render('connected/fleet/create.html.twig', [
-                    'usePlanet' => $usePlanet,
-                    'form_createFleet' => $form_createFleet->createView(),
-                ]);
+            if (($colonizer < 0 || $recycleur < 0) || ($barge < 0 || $sonde < 0) || ($hunter < 0 || $fregate < 0) ||
+                $total == 0) {
+                return $this->redirectToRoute('spatial', array('idp' => $usePlanet->getId()));
             }
             $eAlly = $user->getAllyEnnemy();
             $warAlly = [];
