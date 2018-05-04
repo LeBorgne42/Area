@@ -144,13 +144,17 @@ class SecurityController extends Controller
     public function loginAction(Request $request, AuthenticationUtils $authenticationUtils)
     {
         $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        if($user->getGameOver()) {
+            return $this->redirectToRoute('game_over');
+        }
 
-        if($this->getUser()) {
+        if($user) {
             $usePlanet = $em->getRepository('App:Planet')
                 ->createQueryBuilder('p')
                 ->join('p.user', 'u')
                 ->where('u.username = :user')
-                ->setParameters(array('user' => $this->getUser()->getUsername()))
+                ->setParameters(array('user' => $user->getUsername()))
                 ->getQuery()
                 ->setMaxResults(1)
                 ->getOneOrNullResult();
@@ -190,7 +194,7 @@ class SecurityController extends Controller
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
 
-        $user->setConnected(null);
+        $user->setConnected(false);
         $em->persist($user);
         $em->flush();
         return $this->redirectToRoute('logout');
@@ -205,6 +209,10 @@ class SecurityController extends Controller
         if ($this->getUser()->getRoles()[0] == 'ROLE_USER') {
             $user = $this->getUser();
             $em = $this->getDoctrine()->getManager();
+
+            if($user->getGameOver()) {
+                return $this->redirectToRoute('game_over');
+            }
 
             $usePlanet = $em->getRepository('App:Planet')
                 ->createQueryBuilder('p')
