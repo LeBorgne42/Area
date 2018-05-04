@@ -181,7 +181,7 @@
                     </th>
                 </tr>
                 {% for fleet in fleetIn %}
-                    <tr>
+                    <tr class="{% if fleet.getUser() == app.user %}text-bleu{% elseif fleet.getUser().getAlly() == app.user.getAlly() %}text-vert{% else %}text-rouge{% endif %}">
                         <th class="tab-cells-name">
                             "{{  fleet.getName() }}"
                         </th>
@@ -224,7 +224,7 @@
                     </th>
                 </tr>
                 {% for fleet in fleetOut %}
-                    <tr>
+                    <tr class="{% if fleet.getUser() == app.user %}text-bleu{% elseif fleet.getUser().getAlly() == app.user.getAlly() %}text-vert{% else %}text-rouge{% endif %}">
                         <th class="tab-cells-name">
                             "{{  fleet.getName() }}"
                         </th>
