@@ -64,14 +64,6 @@ class InstantController extends Controller
             ->getQuery()
             ->getResult();
 
-        $fleetsWar = $em->getRepository('App:Fleet')
-            ->createQueryBuilder('f')
-            ->where('f.fightAt < :now')
-            ->setParameters(array('now' => $now))
-            ->setMaxResults(1)
-            ->getQuery()
-            ->getResult();
-
         $planets = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->where('p.constructAt < :now')
@@ -190,10 +182,6 @@ class InstantController extends Controller
             $em->persist($fleet);
         }
         $em->flush();
-
-        if ($fleetsWar) {
-            return $this->redirectToRoute('fight_war_area');
-        }
         exit;
     }
 }

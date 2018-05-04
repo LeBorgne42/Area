@@ -2,30 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97f042ea-d0ee-4bd9-bb02-3d850e24f659" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/s1.sh" afterPath="$PROJECT_DIR$/s1.sh" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/FightController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/FightController.php" />
       <change beforePath="$PROJECT_DIR$/src/Controller/CronController/InstantController.php" afterPath="$PROJECT_DIR$/src/Controller/CronController/InstantController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Security/SecurityController.php" afterPath="$PROJECT_DIR$/src/Controller/Security/SecurityController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Security/ServerController.php" afterPath="$PROJECT_DIR$/src/Controller/Security/ServerController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" afterPath="$PROJECT_DIR$/src/Entity/User.php" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180427205756.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180427211252.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180428154309.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180430123934.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180502132850.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180502132941.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180502145713.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180502154640.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180502160039.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180503001238.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180503001342.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180503105403.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180504005257.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180504005548.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180504011419.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180504015235.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180504132531.php" afterPath="" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -42,8 +20,8 @@
       <file leaf-file-name="InstantController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Controller/CronController/InstantController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="522">
-              <caret line="193" column="8" lean-forward="false" selection-start-line="193" selection-start-column="8" selection-end-line="193" selection-end-column="8" />
+            <state relative-caret-position="348">
+              <caret line="64" column="26" lean-forward="false" selection-start-line="64" selection-start-column="26" selection-end-line="64" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -460,12 +438,12 @@
       <workItem from="1524613328008" duration="44101000" />
       <workItem from="1524686237160" duration="49936000" />
       <workItem from="1524922720781" duration="128109000" />
-      <workItem from="1525305799071" duration="53366000" />
+      <workItem from="1525305799071" duration="53556000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="731041000" />
+    <option name="totallyTimeSpent" value="731231000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -952,8 +930,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/CronController/InstantController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="193" column="8" lean-forward="false" selection-start-line="193" selection-start-column="8" selection-end-line="193" selection-end-column="8" />
+        <state relative-caret-position="348">
+          <caret line="64" column="26" lean-forward="false" selection-start-line="64" selection-start-column="26" selection-end-line="64" selection-end-column="26" />
           <folding />
         </state>
       </provider>
