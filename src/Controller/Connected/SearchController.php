@@ -22,6 +22,7 @@ class SearchController extends Controller
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
+        $user = $this->getUser();
 
         if($user->getGameOver()) {
             return $this->redirectToRoute('game_over');
@@ -31,7 +32,7 @@ class SearchController extends Controller
             ->createQueryBuilder('p')
             ->where('p.id = :id')
             ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
+            ->setParameters(array('id' => $idp, 'user' => $user))
             ->getQuery()
             ->getOneOrNullResult();
 

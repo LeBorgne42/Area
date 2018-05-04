@@ -7,7 +7,6 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\Front\UserRecoveryType;
 use App\Entity\User;
-use App\Entity\Rank;
 use DateTime;
 use DateTimeZone;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -32,6 +31,8 @@ class SecurityController extends Controller
             $user->setEmail($_POST['_email']);
             $user->setCreatedAt($now);
             $user->setPassword(password_hash($_POST['_password'], PASSWORD_BCRYPT));
+            $em->persist($user);
+            $em->flush();
 
             $alreadyInBase = $em->getRepository('App:User')
                 ->createQueryBuilder('u')
@@ -53,49 +54,6 @@ class SecurityController extends Controller
                 }
             }
 
-            $planet = $em->getRepository('App:Planet')
-                        ->createQueryBuilder('p')
-                        ->where('p.user is null')
-                        ->andWhere('p.ground = :ground')
-                        ->andWhere('p.sky = :sky')
-                        ->andWhere('p.empty = :false')
-                        ->andWhere('p.cdr = :false')
-                        ->setParameters(array('ground' => 60, 'sky' => 10, 'false' => false))
-                        ->setMaxResults(1)
-                        ->getQuery()
-                        ->getOneOrNullResult();
-            if($planet) {
-                $planet->setUser($user);
-                $planet->setName('Nova Terra');
-                $planet->setSonde(10);
-                $planet->setHunter(20);
-                $planet->setNiobium(25000);
-                $planet->setWater(30000);
-                $planet->setFregate(5);
-                $planet->setWorker(30000);
-                $planet->setColonizer(1);
-                $user->addPlanet($planet);
-                $em->persist($planet);
-            } else {
-                return $this->redirectToRoute('logout');
-            }
-
-            $salon = $em->getRepository('App:Salon')
-                ->createQueryBuilder('s')
-                ->where('s.id = :id')
-                ->setParameters(array('id' => 1))
-                ->getQuery()
-                ->getOneOrNullResult();
-
-            $em->persist($planet);
-            $rank = new Rank();
-            $em->persist($rank);
-            $user->setRank($rank);
-            $salon->addUser($user);
-            $em->persist($salon);
-            $em->persist($user);
-            $em->flush();
-
             $message = (new \Swift_Message('Confirmation email'))
                 ->setFrom('areauniverse.game@gmail.com')
                 ->setTo($user->getEmail())
@@ -111,7 +69,6 @@ class SecurityController extends Controller
                 );
 
             $mailer->send($message);
-
 
             return $this->redirectToRoute('login');
 
@@ -198,7 +155,12 @@ class SecurityController extends Controller
                 ->setMaxResults(1)
                 ->getOneOrNullResult();
 
-            return $this->redirectToRoute('overview', array('idp' => $usePlanet->getId(), 'usePlanet' => $usePlanet));
+            if($usePlanet) {
+                return $this->redirectToRoute('overview', array('idp' => $usePlanet->getId(), 'usePlanet' => $usePlanet));
+            } else {
+                return $this->render('connected/play.html.twig', [
+                ]);
+            }
         }
 
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -257,7 +219,12 @@ class SecurityController extends Controller
             $em->persist($user);
             $em->flush();
 
-            return $this->redirectToRoute('overview', array('idp' => $usePlanet->getId(), 'usePlanet' => $usePlanet));
+            if($usePlanet) {
+                return $this->redirectToRoute('overview', array('idp' => $usePlanet->getId(), 'usePlanet' => $usePlanet));
+            } else {
+                return $this->render('connected/play.html.twig', [
+                ]);
+            }
         }
         if ($this->getUser()->getRoles()[0] == 'ROLE_MODO' || $this->getUser()->getRoles()[0] == 'ROLE_ADMIN') {
             return $this->redirectToRoute('easyadmin');
