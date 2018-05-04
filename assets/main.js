@@ -272,7 +272,7 @@ function manageResearchTime() {
 }
 
 function manageSalon() {
-    $('#salon_sendForm').click(function(e) {
+/*    $('#salon_sendForm').click(function(e) {
         e.preventDefault();
 
         var content = $('#salon_content').val();
@@ -285,8 +285,8 @@ function manageSalon() {
             });
             window.location.reload();
         }
-    });
-    $('.chat-defil').scrollTop(150);
+    });*/
+    $('.chat-defil').scrollTop(2000);
 }
 
 /*function manageDisplaySalon(){

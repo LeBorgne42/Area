@@ -48,7 +48,7 @@ class SalonController extends Controller
         $form_message = $this->createForm(SalonType::class);
         $form_message->handleRequest($request);
 
-        if($request->isXmlHttpRequest()) {
+        /* if($request->isXmlHttpRequest()) {
             if ($_POST['newMessage'] != "") {
                 $attachSalon = $em->getRepository('App:Salon')
                     ->createQueryBuilder('s')
@@ -62,18 +62,32 @@ class SalonController extends Controller
                 $message->setMessage(nl2br($_POST['newMessage']));
                 $message->setSendAt($now);
                 $message->setUser($user);
+
+                if(count($attachSalon->getMessages()) > 50) {
+                    $removeMessage = $em->getRepository('App:S_Content')
+                        ->createQueryBuilder('sc')
+                        ->setParameters(array('id' => $salon))
+                        ->orderBy('sc.sendAt', 'ASC')
+                        ->setMaxResults('10')
+                        ->getQuery()
+                        ->getResult();
+                    foreach($removeMessage as $oneMessage) {
+                        $em->remove($oneMessage);
+                    }
+                }
+
                 $em->persist($message);
                 $em->flush();
 
-             /*   $response = new JsonResponse();
+               $response = new JsonResponse();
                 $response->setData(
                     array(
                         'has_error' => false,
                         'messages' => $message,
                     )
                 );
-                return $response;*/
-            }
+                return $response;
+            }*/
            /* else {
                 $response = new JsonResponse();
                 $response->setData(
@@ -83,8 +97,8 @@ class SalonController extends Controller
                     )
                 );
                 return $response;
-            }*/
-        }
+            }
+        }*/
 
         if ($form_message->isSubmitted() && $form_message->isValid()) {
             $attachSalon = $em->getRepository('App:Salon')
@@ -99,6 +113,19 @@ class SalonController extends Controller
             $message->setMessage(nl2br($form_message->get('content')->getData()));
             $message->setSendAt($now);
             $message->setUser($user);
+
+            if(count($attachSalon->getContents()) > 50) {
+                $removeMessage = $em->getRepository('App:S_Content')
+                    ->createQueryBuilder('sc')
+                    ->orderBy('sc.sendAt', 'ASC')
+                    ->setMaxResults('10')
+                    ->getQuery()
+                    ->getResult();
+                foreach($removeMessage as $oneMessage) {
+                    $em->remove($oneMessage);
+                }
+            }
+
             $em->persist($message);
             $em->flush();
         }
