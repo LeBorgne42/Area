@@ -93,7 +93,7 @@ class FleetController extends Controller
         $form_sendFleet = $this->createForm(FleetSendType::class);
         $form_sendFleet->handleRequest($request);
 
-        if(($fleet || $usePlanet) || ($fleet->getFightAt() == null || $fleet->getFlightTime() == null) || $fleet->getPlanet()->getUser() == $user) {
+        if(($fleet || $usePlanet) && ($fleet->getFightAt() == null && $fleet->getFlightTime() == null) && $fleet->getUser() == $user) {
         } else {
             return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
         }
@@ -123,7 +123,7 @@ class FleetController extends Controller
                 ->getQuery()
                 ->getResult();
 
-            if(($fleet->getAttack() == true && $planet->getFleetNoFriends()) || $fleets) {
+            if(($fleet->getAttack() == true && $planet->getFleetNoFriends($user)) || $fleets) {
                 $allFleets = $em->getRepository('App:Fleet')
                     ->createQueryBuilder('f')
                     ->join('f.user', 'u')

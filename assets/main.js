@@ -214,8 +214,10 @@ function manageConstructTime() {
             secondes = secondes - 1;
             if(secondes == 0) {
                 if(minutes == null) {
-                    secondes = null;
-                    window.location.reload();
+                    $('#timeDisplay').text('Terminée');
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 2000);
                 }
                 secondes = 60;
                 minutes = minutes - 1;
@@ -255,8 +257,10 @@ function manageResearchTime() {
             secondes = secondes - 1;
             if(secondes == 0) {
                 if(minutes == null) {
-                    secondes = null;
-                    window.location.reload();
+                    $('#timeDisplayR').text('Terminée');
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 2000);
                 }
                 secondes = 60;
                 minutes = minutes - 1;

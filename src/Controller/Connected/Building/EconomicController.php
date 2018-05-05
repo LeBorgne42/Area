@@ -45,7 +45,6 @@ class EconomicController extends Controller
         $now->add(new DateInterval('PT' . ($level * 900) . 'S'));
         $usePlanet->setNiobium($usePlanetNb - ($level * 2850));
         $usePlanet->setWater($usePlanetWt - ($level * 3580));
-        $usePlanet->setScientistProduction($usePlanet->getScientistProduction() + 0.1);
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setConstruct('centerSearch');
         $usePlanet->setConstructAt($now);
@@ -120,7 +119,6 @@ class EconomicController extends Controller
         $now->add(new DateInterval('PT' . ($level * 18000) . 'S'));
         $usePlanet->setNiobium($usePlanetNb - ($level * 15000));
         $usePlanet->setWater($usePlanetWt - ($level * 11000));
-        $usePlanet->setWorkerProduction($usePlanet->getWorkerProduction() + 0.2);
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setConstruct('city');
         $usePlanet->setConstructAt($now);

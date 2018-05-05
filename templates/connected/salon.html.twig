@@ -26,7 +26,12 @@
                                 <tr>
                                     <th class="tab-cells-name">
                                         <div>
-                                            <span><a href="{{ path('user_profil', {'idp': usePlanet.getId(), 'id': message.getUser().getId()}) }}" {% if message.getUser() == app.user %} class="text-vert"{% endif %}>{{ message.getUser().getUserName() }}</a></span> :  <span class="ml-2">{{ message.getMessage()|raw }}</span>  <span class="float-right">{{ message.getSendAt()|date('H:i:s d/m/Y ') }}</span>
+                                            <span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'idp': usePlanet.getId(), 'id': message.getUser().getId()}) }}" {% if message.getUser() == app.user %} class="text-vert"{% endif %}>{{ message.getUser().getUserName() }}</a></span> :  <span class="ml-2">{{ message.getMessage()|raw }}</span>
+                                        </div>
+                                    </th>
+                                    <th width="125px" class="tab-cells-name cell-middle">
+                                        <div>
+                                            {{ message.getSendAt()|date('H:i:s d/m/Y ') }}
                                         </div>
                                     </th>
                                 </tr>
@@ -48,6 +53,12 @@
                 </div>
                 {% set x = 1 %}
             {% endfor %}
+        </div>
+    </div>
+    <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content special">
+            </div>
         </div>
     </div>
 {% endblock %}

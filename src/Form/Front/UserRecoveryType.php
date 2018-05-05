@@ -25,6 +25,7 @@ class UserRecoveryType extends AbstractType
                         'placeholder' => 'form.pseudoEmail',
                         'class' => 'form-control',
                         'minlength' => '4',
+                        'autocomplete' => 'off',
                     ),
                 )
             )

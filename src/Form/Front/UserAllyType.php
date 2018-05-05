@@ -27,6 +27,7 @@ class UserAllyType extends AbstractType
                         'class' => 'form-control',
                         'maxlength' => '15',
                         'minlength' => '3',
+                        'autocomplete' => 'off',
                     ),
                     'required' => true
                 )
@@ -41,6 +42,7 @@ class UserAllyType extends AbstractType
                         'class' => 'form-control',
                         'maxlength' => '4',
                         'minlength' => '2',
+                        'autocomplete' => 'off',
                     ),
                     'required' => true
                 )
@@ -55,6 +57,7 @@ class UserAllyType extends AbstractType
                         'class' => 'form-control',
                         'maxlength' => '30',
                         'minlength' => '3',
+                        'autocomplete' => 'off',
                     ),
                     'required' => true
                 )
@@ -86,7 +89,7 @@ class UserAllyType extends AbstractType
         $builder->get('name')
             ->addModelTransformer(new CallbackTransformer(
                 function ($tagAsFirstUpper) {
-                    return lcfirst($tagAsFirstUpper);
+                    return ucfirst($tagAsFirstUpper);
                 },
                 function ($tagAsFirstUpper) {
                     return ucfirst($tagAsFirstUpper);
@@ -95,7 +98,7 @@ class UserAllyType extends AbstractType
         $builder->get('slogan')
             ->addModelTransformer(new CallbackTransformer(
                 function ($tagAsFirstUpper) {
-                    return lcfirst($tagAsFirstUpper);
+                    return ucfirst($tagAsFirstUpper);
                 },
                 function ($tagAsFirstUpper) {
                     return ucfirst($tagAsFirstUpper);

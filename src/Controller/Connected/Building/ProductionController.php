@@ -78,7 +78,7 @@ class ProductionController extends Controller
         }
 
         $usePlanet->setMiner($level - 2);
-        $usePlanet->setNbProduction($usePlanet->getNbProduction() + ($level / 1.1));
+        $usePlanet->setNbProduction($usePlanet->getNbProduction() - ($level / 1.1));
         $usePlanet->setGroundPlace($newGround);
         $em->persist($usePlanet);
         $em->flush();
@@ -149,7 +149,7 @@ class ProductionController extends Controller
         }
 
         $usePlanet->setExtractor($level - 2);
-        $usePlanet->setNbProduction($usePlanet->getNbProduction() + ($level / 1.05));
+        $usePlanet->setNbProduction($usePlanet->getNbProduction() - ($level / 1.05));
         $usePlanet->setGroundPlace($newGround);
         $em->persist($usePlanet);
         $em->flush();

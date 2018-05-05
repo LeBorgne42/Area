@@ -42,6 +42,7 @@ class FleetSendType extends AbstractType
                         'class' => 'form-control',
                         'min' => '1',
                         'max' => '100',
+                        'autocomplete' => 'off',
                     ),
                     'required' => true,
                 )
@@ -57,6 +58,7 @@ class FleetSendType extends AbstractType
                         'class' => 'form-control',
                         'min' => '1',
                         'max' => '25',
+                        'autocomplete' => 'off',
                     ),
                     'required' => true,
                 )

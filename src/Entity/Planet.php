@@ -323,9 +323,9 @@ class Planet
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getNbrSignatures()
+    public function getNbrSignatures(): int
     {
         $fregate = $this->getFregate() * $this->getFregateSignature();
         $colonizer = $this->getColonizer() * $this->getColonizerSignature();
@@ -339,14 +339,35 @@ class Planet
     }
 
     /**
+     * @return int
+     */
+    public function getBuildingPoint(): int
+    {
+        $extractor = $this->getExtractor() * 2;
+        $miner = $this->getMiner() * 2;
+        $caserne = $this->getCaserne() * 8;
+        $center = $this->getCenterSearch() * 7;
+        $city = $this->getCity() * 21;
+        $light = $this->getLightUsine() * 10;
+        $heavy = $this->getHeavyUsine() * 200;
+        $space = $this->getSpaceShip() * 18;
+        $radar = $this->getRadar() * 10;
+        $skyr = $this->getSkyRadar() * 50;
+        $brouilleur = $this->getSkyBrouilleur() * 100;
+
+        $nbr = $extractor + $miner + $caserne + $center + $city + $light + $heavy + $space + $radar + $skyr + $brouilleur;
+        return $nbr;
+    }
+
+    /**
      * @return mixed
      */
-    public function getFleetNoFriends()
+    public function getFleetNoFriends($user)
     {
         $fullFleet = [];
         $x = 0;
         foreach($this->fleets as $fleet) {
-            if($fleet->getUser() == $this->user || $fleet->getUser()->getAlly() == $this->user->getAlly()) {
+            if($fleet->getUser() == $this->user || $fleet->getUser()->getAlly() == $user->getAlly()) {
             } else {
                 $fullFleet[$x] = $fleet;
             }
@@ -421,11 +442,16 @@ class Planet
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getNbrFleets()
+    public function getNbrFleets(): int
     {
-        $nbr = count($this->fleets);
+        $nbr = 0;
+        foreach($this->fleets as $fleet) {
+            if ($fleet->getFlightTime() == null ) {
+                $nbr++;
+            }
+        }
         return $nbr;
     }
 

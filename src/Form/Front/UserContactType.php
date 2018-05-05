@@ -28,6 +28,7 @@ class UserContactType extends AbstractType
                         'cols' => 75,
                         'maxlength' => '300',
                         'minlength' => '15',
+                        'autocomplete' => 'off',
                     ),
                     'required' => true
                 )
@@ -41,6 +42,7 @@ class UserContactType extends AbstractType
                         'placeholder' => 'form.email',
                         'class' => 'form-control',
                         'minlength' => '5',
+                        'autocomplete' => 'off',
                     ),
                     'required' => true
                 )

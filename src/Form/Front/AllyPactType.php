@@ -25,6 +25,7 @@ class AllyPactType extends AbstractType
                         'placeholder' => 'form.allyName',
                         'class' => 'form-control',
                         'minlength' => '1',
+                        'autocomplete' => 'off',
                     ),
                     'required' => true
                 )

@@ -27,6 +27,7 @@ class CaserneRecruitType extends AbstractType
                         'class' => 'form-control',
                         'min' => '0',
                         'max' => '50000',
+                        'autocomplete' => 'off',
                     ),
                     'required' => true,
                 )

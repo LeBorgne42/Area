@@ -27,6 +27,7 @@ class FleetRenameType extends AbstractType
                         'class' => 'form-control',
                         'maxlength' => '15',
                         'minlength' => '2',
+                        'autocomplete' => 'off',
                     ),
                     'required' => true,
                 )
@@ -36,7 +37,7 @@ class FleetRenameType extends AbstractType
         $builder->get('name')
             ->addModelTransformer(new CallbackTransformer(
                 function ($tagAsFirstUpper) {
-                    return lcfirst($tagAsFirstUpper);
+                    return ucfirst($tagAsFirstUpper);
                 },
                 function ($tagAsFirstUpper) {
                     return ucfirst($tagAsFirstUpper);

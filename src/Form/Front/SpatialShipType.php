@@ -25,7 +25,7 @@ class SpatialShipType extends AbstractType
                         'placeholder' => 'form.nbr',
                         'class' => 'form-control',
                         'min' => '0',
-                        'max' => '50000',
+                        'autocomplete' => 'off',
                     ),
                     'required' => false,
                 )
@@ -39,6 +39,7 @@ class SpatialShipType extends AbstractType
                         'placeholder' => 'form.nbr',
                         'class' => 'form-control',
                         'min' => '0',
+                        'autocomplete' => 'off',
                     ),
                     'required' => false,
                 )
@@ -52,6 +53,7 @@ class SpatialShipType extends AbstractType
                         'placeholder' => 'form.nbr',
                         'class' => 'form-control',
                         'min' => '0',
+                        'autocomplete' => 'off',
                     ),
                     'required' => false,
                 )
@@ -65,6 +67,7 @@ class SpatialShipType extends AbstractType
                         'placeholder' => 'form.nbr',
                         'class' => 'form-control',
                         'min' => '0',
+                        'autocomplete' => 'off',
                     ),
                     'required' => false,
                 )
@@ -78,6 +81,7 @@ class SpatialShipType extends AbstractType
                         'placeholder' => 'form.nbr',
                         'class' => 'form-control',
                         'min' => '0',
+                        'autocomplete' => 'off',
                     ),
                     'required' => false,
                 )
@@ -91,6 +95,7 @@ class SpatialShipType extends AbstractType
                         'placeholder' => 'form.nbr',
                         'class' => 'form-control',
                         'min' => '0',
+                        'autocomplete' => 'off',
                     ),
                     'required' => false,
                 )

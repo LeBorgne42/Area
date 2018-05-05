@@ -28,6 +28,7 @@ class AllyGradeType extends AbstractType
                         'class' => 'form-control',
                         'maxlength' => '15',
                         'minlength' => '3',
+                        'autocomplete' => 'off',
                     ),
                     'required' => true,
                     'mapped' => true,
@@ -91,6 +92,7 @@ class AllyGradeType extends AbstractType
                     'attr'  => array(
                         'placeholder' => 'form.placement',
                         'class' => 'form-control select2',
+                        'autocomplete' => 'off',
                     ),
                     'required' => true
                 )

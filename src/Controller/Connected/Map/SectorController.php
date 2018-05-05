@@ -95,6 +95,7 @@ class SectorController extends Controller
             ->createQueryBuilder('f')
             ->join('f.planet', 'p')
             ->where('p.id = :id')
+            ->andWhere('f.flightTime is null')
             ->setParameters(array('id' => $id))
             ->getQuery()
             ->getResult();

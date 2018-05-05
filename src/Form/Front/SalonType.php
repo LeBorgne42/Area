@@ -26,6 +26,7 @@ class SalonType extends AbstractType
                         'class' => 'form-control',
                         'maxlength' => '200',
                         'minlength' => '1',
+                        'autocomplete' => 'off',
                     ),
                     'required' => true,
                     'mapped' => true,

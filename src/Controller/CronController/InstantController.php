@@ -81,18 +81,25 @@ class InstantController extends Controller
                 $planet->setWtProduction($planet->getWtProduction() + ($planet->getExtractor() * 1.05));
             } elseif ($build == 'city') {
                 $planet->setCity($planet->getCity() + 1);
+                $planet->setWorkerProduction($planet->getWorkerProduction() + 0.2);
             } elseif ($build == 'metropole') {
                 $planet->setMetropole($planet->getMetropole() + 1);
+                $planet->setWorkerProduction($planet->getWorkerProduction() + 0.5);
             } elseif ($build == 'caserne') {
                 $planet->setCaserne($planet->getCaserne() + 1);
+                $planet->setSoldierMax($planet->getSoldierMax() + 2500);
             } elseif ($build == 'centerSearch') {
                 $planet->setCenterSearch($planet->getCenterSearch() + 1);
+                $planet->setScientistProduction($planet->getScientistProduction() + 0.1);
             } elseif ($build == 'lightUsine') {
                 $planet->setLightUsine($planet->getLightUsine() + 1);
+                $planet->setShipProduction($planet->getShipProduction() + 0.15);
             } elseif ($build == 'heavyUsine') {
                 $planet->setHeavyUsine($planet->getHeavyUsine() + 1);
+                $planet->setShipProduction($planet->getShipProduction() + 0.3);
             } elseif ($build == 'spaceShip') {
                 $planet->setSpaceShip($planet->getSpaceShip() + 1);
+                $planet->setShipProduction($planet->getShipProduction() + 0.1);
             } elseif ($build == 'radar') {
                 $planet->setRadar($planet->getRadar() + 1);
             } elseif ($build == 'skyRadar') {

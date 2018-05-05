@@ -25,6 +25,7 @@ class AllyAddType extends AbstractType
                         'placeholder' => 'form.nameUser',
                         'class' => 'form-control',
                         'minlength' => '3',
+                        'autocomplete' => 'off',
                     ),
                     'required' => true
                 )

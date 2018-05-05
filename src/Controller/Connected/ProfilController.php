@@ -69,4 +69,62 @@ class ProfilController extends Controller
             'ally' => $allyUser,
         ]);
     }
+
+    /**
+     * @Route("/profil-joueur-popup/{idp}/{id}", name="user_profil_modal", requirements={"idp"="\d+", "id"="\d+"})
+     */
+    public function userProfilModalAction($idp, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $userPlanet = $em->getRepository('App:User')
+            ->createQueryBuilder('u')
+            ->where('u.id = :id')
+            ->setParameters(array('id' => $id))
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        return $this->render('connected/profil/modal_user.html.twig', [
+            'usePlanet' => $usePlanet,
+            'user' => $userPlanet,
+        ]);
+    }
+
+    /**
+     * @Route("/profil-alliance-popup/{idp}/{id}", name="ally_profil_modal", requirements={"idp"="\d+", "id"="\d+"})
+     */
+    public function allyProfilModalAction($idp, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $allyUser = $em->getRepository('App:Ally')
+            ->createQueryBuilder('a')
+            ->where('a.id = :id')
+            ->setParameters(array('id' => $id))
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        return $this->render('connected/profil/modal_ally.html.twig', [
+            'usePlanet' => $usePlanet,
+            'ally' => $allyUser,
+        ]);
+    }
 }

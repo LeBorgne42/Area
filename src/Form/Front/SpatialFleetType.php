@@ -27,6 +27,7 @@ class SpatialFleetType extends AbstractType
                         'class' => 'form-control',
                         'maxlength' => '15',
                         'minlength' => '2',
+                        'autocomplete' => 'off',
                     ),
                     'required' => true,
                     'mapped' => true,
@@ -42,7 +43,7 @@ class SpatialFleetType extends AbstractType
                         'placeholder' => 'form.nbr',
                         'class' => 'form-control',
                         'min' => '0',
-                        'max' => '50000',
+                        'autocomplete' => 'off',
                     ),
                     'required' => false,
                 )
@@ -57,7 +58,7 @@ class SpatialFleetType extends AbstractType
                         'placeholder' => 'form.nbr',
                         'class' => 'form-control',
                         'min' => '0',
-                        'max' => '5',
+                        'autocomplete' => 'off',
                     ),
                     'required' => false,
                 )
@@ -72,7 +73,7 @@ class SpatialFleetType extends AbstractType
                         'placeholder' => 'form.nbr',
                         'class' => 'form-control',
                         'min' => '0',
-                        'max' => '5',
+                        'autocomplete' => 'off',
                     ),
                     'required' => false,
                 )
@@ -87,7 +88,7 @@ class SpatialFleetType extends AbstractType
                         'placeholder' => 'form.nbr',
                         'class' => 'form-control',
                         'min' => '0',
-                        'max' => '50000',
+                        'autocomplete' => 'off',
                     ),
                     'required' => false,
                 )
@@ -102,7 +103,7 @@ class SpatialFleetType extends AbstractType
                         'placeholder' => 'form.nbr',
                         'class' => 'form-control',
                         'min' => '0',
-                        'max' => '50000',
+                        'autocomplete' => 'off',
                     ),
                     'required' => false,
                 )
@@ -117,7 +118,7 @@ class SpatialFleetType extends AbstractType
                         'placeholder' => 'form.nbr',
                         'class' => 'form-control',
                         'min' => '0',
-                        'max' => '5',
+                        'autocomplete' => 'off',
                     ),
                     'required' => false,
                 )
@@ -126,11 +127,11 @@ class SpatialFleetType extends AbstractType
 
         $builder->get('name')
             ->addModelTransformer(new CallbackTransformer(
-                function ($tagAsUpper) {
-                    return strtolower($tagAsUpper);
+                function ($tagAsFirstUpper) {
+                    return ucfirst($tagAsFirstUpper);
                 },
-                function ($tagAsUpper) {
-                    return strtoupper($tagAsUpper);
+                function ($tagAsFirstUpper) {
+                    return ucfirst($tagAsFirstUpper);
                 }
             ));
     }

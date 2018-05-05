@@ -21,8 +21,6 @@ ally.memberDateJoin: Adhésion
 ally.memberPoint: Points
 ally.memberConnected: 'En ligne'
 ally.deleteText: 'Êtes vous bien sûr de vouloir supprimer votre alliance ?'
-0: Non
-1: Oui
 ally.proposalAt: 'Date de proposition'
 ally.cancelAsk: 'Annulez proposition'
 ally.cancel: 'Cliquez ici pour annuler'
@@ -63,3 +61,6 @@ ally.acceptPact: Accepter
 ally.refusePact: Refuser
 ally.refuseCancelPact: Annuler
 ally.priority: Priorité
+ally.connected: Oui
+ally.notConnected: Non
+tooltip.changeGrade: 'Cliquez sur le rang du joueur pour changer son grade.'

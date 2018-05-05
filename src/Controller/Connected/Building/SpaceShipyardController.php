@@ -48,7 +48,6 @@ class SpaceShipyardController extends Controller
         $usePlanet->setNiobium($usePlanetNb - ($level * 3000));
         $usePlanet->setWater($usePlanetWt - ($level * 2000));
         $usePlanet->setGroundPlace($newGround);
-        $usePlanet->setShipProduction($usePlanet->getShipProduction() + 0.1);
         $usePlanet->setSkyPlace($newSky);
         $usePlanet->setConstruct('spaceShip');
         $usePlanet->setConstructAt($now);
@@ -126,7 +125,6 @@ class SpaceShipyardController extends Controller
         $usePlanet->setNiobium($usePlanetNb - ($level * 6000));
         $usePlanet->setWater($usePlanetWt - ($level * 3900));
         $usePlanet->setGroundPlace($newGround);
-        $usePlanet->setShipProduction($usePlanet->getShipProduction() + 0.15);
         $usePlanet->setConstruct('lightUsine');
         $usePlanet->setConstructAt($now);
         $em->persist($usePlanet);
@@ -201,7 +199,6 @@ class SpaceShipyardController extends Controller
         $usePlanet->setNiobium($usePlanetNb - ($level * 83000));
         $usePlanet->setWater($usePlanetWt - ($level * 68000));
         $usePlanet->setGroundPlace($newGround);
-        $usePlanet->setShipProduction($usePlanet->getShipProduction() + 0.3);
         $usePlanet->setConstruct('heavyUsine');
         $usePlanet->setConstructAt($now);
         $em->persist($usePlanet);
@@ -278,7 +275,6 @@ class SpaceShipyardController extends Controller
         $usePlanet->setNiobium($usePlanetNb - ($level * 23000));
         $usePlanet->setWater($usePlanetWt - ($level * 34000));
         $usePlanet->setGroundPlace($newGround);
-        $usePlanet->setSoldierMax($usePlanet->getSoldierMax() + 2500);
         $usePlanet->setConstruct('caserne');
         $usePlanet->setConstructAt($now);
         $em->persist($usePlanet);

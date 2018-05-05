@@ -23,7 +23,8 @@ class UserRegisterType extends AbstractType
                     'label' => 'form.username',
                     'attr'  => array(
                         'placeholder' => 'form.username',
-                        'class' => ''
+                        'class' => 'form-control',
+                        'autocomplete' => 'off',
                     )
                 )
             )
@@ -34,7 +35,8 @@ class UserRegisterType extends AbstractType
                     'label' => 'form.password',
                     'attr'  => array(
                         'placeholder' => 'form.password',
-                        'class' => ''
+                        'class' => 'form-control',
+                        'autocomplete' => 'off',
                     )
                 )
             )
@@ -45,7 +47,8 @@ class UserRegisterType extends AbstractType
                     'label' => 'form.email',
                     'attr'  => array(
                         'placeholder' => 'form.email',
-                        'class' => ''
+                        'class' => 'form-control',
+                        'autocomplete' => 'off',
                     )
                 )
             )

@@ -141,7 +141,7 @@
                 {% for fleet in fleetCurrent %}
                     <tr class="{% if fleet.getUser() == app.user %}text-bleu{% elseif fleet.getUser().getAlly() == app.user.getAlly() and app.user.getAlly() %}text-vert{% else %}text-rouge{% endif %}">
                         <th class="tab-cells-name">
-                            "{{  fleet.getName() }}"
+                            "{{  fleet.getName() }}" <span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'idp': usePlanet.getId(), 'id': fleet.getUser().getId()}) }}">{{ 'sector.profilUser'|trans }}</a></span>
                         </th>
                         <td class="center-cells text-center">
                             {{ fleet.getPlanet().getName() }} - {{ fleet.getPlanet().getSector().getGalaxy.getPosition() }}:{{ fleet.getPlanet().getSector.getPosition() }}:{{ fleet.getPlanet().getPosition() }}
@@ -184,10 +184,10 @@
                     {% for fleet in fleetIn %}
                         <tr class="{% if fleet.getUser() == app.user %}text-bleu{% elseif fleet.getUser().getAlly() == app.user.getAlly() and app.user.getAlly() %}text-vert{% else %}text-rouge{% endif %}">
                             <th class="tab-cells-name">
-                                "{{  fleet.getName() }}"
+                                "{{  fleet.getName() }}" <span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'idp': usePlanet.getId(), 'id': fleet.getUser().getId()}) }}">{{ 'sector.profilUser'|trans }}</a></span>
                             </th>
                             <td class="center-cells text-center">
-                                {% if app.user.getWhereRadar(fleet.getPlanet().getSector.getPosition()) %}<span><a href="{{ path('map', {id: fleet.getPlanet().getSector.getPosition(), 'idp': usePlanet.getId()}) }}">{{ fleet.getPlanet().getName() }} - {{ fleet.getPlanet().getSector().getGalaxy.getPosition() }}:{{ fleet.getPlanet().getSector.getPosition() }}:{{ fleet.getPlanet().getPosition() }}</a></span>{% else %}???{% endif %}
+                                {% if app.user.getWhereRadar(fleet.getPlanet().getSector.getPosition()) or fleet.getUser() == app.user %}<span><a href="{{ path('map', {id: fleet.getPlanet().getSector.getPosition(), 'idp': usePlanet.getId()}) }}">{{ fleet.getPlanet().getName() }} - {{ fleet.getPlanet().getSector().getGalaxy.getPosition() }}:{{ fleet.getPlanet().getSector.getPosition() }}:{{ fleet.getPlanet().getPosition() }}</a></span>{% else %}???{% endif %}
                             </td>
                             <td class="tab-cells-name text-center">
                                 {{ fleet.getSector().getGalaxy.getPosition() }}:{{ fleet.getSector.getPosition() }}:{{ fleet.getPlanete() }}
@@ -227,13 +227,13 @@
                     {% for fleet in fleetOut %}
                         <tr class="{% if fleet.getUser() == app.user %}text-bleu{% elseif fleet.getUser().getAlly() == app.user.getAlly() and app.user.getAlly() %}text-vert{% else %}text-rouge{% endif %}">
                             <th class="tab-cells-name">
-                                "{{  fleet.getName() }}"
+                                "{{  fleet.getName() }}" <span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'idp': usePlanet.getId(), 'id': fleet.getUser().getId()}) }}">{{ 'sector.profilUser'|trans }}</a></span>
                             </th>
                             <td class="center-cells text-center">
                                 {{ fleet.getPlanet().getName() }} - {{ fleet.getPlanet().getSector().getGalaxy.getPosition() }}:{{ fleet.getPlanet().getSector.getPosition() }}:{{ fleet.getPlanet().getPosition() }}
                             </td>
                             <td class="tab-cells-name text-center">
-                                {% if app.user.getWhereRadar(fleet.getSector.getPosition()) %}<span><a href="{{ path('map', {id: fleet.getSector().getPosition(), 'idp': usePlanet.getId()}) }}">{{ fleet.getSector().getGalaxy.getPosition() }}:{{ fleet.getSector.getPosition() }}:{{ fleet.getPlanete() }}</a></span>{% else %}???{% endif %}
+                                {% if app.user.getWhereRadar(fleet.getSector.getPosition()) or fleet.getUser() == app.user %}<span><a href="{{ path('map', {id: fleet.getSector().getPosition(), 'idp': usePlanet.getId()}) }}">{{ fleet.getSector().getGalaxy.getPosition() }}:{{ fleet.getSector.getPosition() }}:{{ fleet.getPlanete() }}</a></span>{% else %}???{% endif %}
                             </td>
                             <td class="center-cells text-center">
                                 {{ fleet.getNbrSignatures()|number_format }}
@@ -249,6 +249,12 @@
     {% endif %}
     </div>
     <div class="modal fade" id="fleetModal" tabindex="-1" role="dialog" aria-labelledby="fleetModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content special">
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
             <div class="modal-content special">
             </div>

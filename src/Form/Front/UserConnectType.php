@@ -23,7 +23,8 @@ class UserConnectType extends AbstractType
                     'label' => 'form.pseudoEmail',
                     'attr'  => array(
                         'placeholder' => 'form.pseudoEmail',
-                        'class' => ''
+                        'class' => 'form-control',
+                        'autocomplete' => 'off',
                     ),
                     'mapped' => false,
                 )
@@ -35,7 +36,8 @@ class UserConnectType extends AbstractType
                     'label' => 'form.password',
                     'attr'  => array(
                         'placeholder' => 'form.password',
-                        'class' => ''
+                        'class' => 'form-control',
+                        'autocomplete' => 'off',
                     ),
                     'mapped' => false,
                 )

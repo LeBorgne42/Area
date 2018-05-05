@@ -47,6 +47,7 @@ class MessageType extends AbstractType
                     'attr'  => array(
                         'placeholder' => 'form.user',
                         'class' => 'form-control',
+                        'autocomplete' => 'off',
                     ),
                     'required' => true,
                     'mapped' => true,
@@ -62,7 +63,8 @@ class MessageType extends AbstractType
                         'class' => 'form-control',
                         'maxlength' => '20',
                         'minlength' => '1',
-                        'style' => 'height: 25px'
+                        'style' => 'height: 25px',
+                        'autocomplete' => 'off',
                     ),
                     'required' => true,
                     'mapped' => true,
@@ -80,6 +82,7 @@ class MessageType extends AbstractType
                         'cols' => 75,
                         'maxlength' => '500',
                         'minlength' => '1',
+                        'autocomplete' => 'off',
                     ),
                     'required' => true,
                     'mapped' => true,
@@ -95,7 +98,8 @@ class MessageType extends AbstractType
                         'placeholder' => 'form.num',
                         'class' => 'form-control',
                         'min' => '0',
-                        'style' => 'height: 20px'
+                        'style' => 'height: 20px',
+                        'autocomplete' => 'off',
                     ),
                     'required' => true,
                     'mapped' => true,
