@@ -2,56 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97f042ea-d0ee-4bd9-bb02-3d850e24f659" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/assets/main.js" afterPath="$PROJECT_DIR$/assets/main.js" />
-      <change beforePath="$PROJECT_DIR$/assets/scss/front/message.scss" afterPath="$PROJECT_DIR$/assets/scss/front/message.scss" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/Building/EconomicController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/Building/EconomicController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/Building/ProductionController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/Building/ProductionController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/Building/SpaceShipyardController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/Building/SpaceShipyardController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/FleetController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/FleetController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/Map/SectorController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/Map/SectorController.php" />
       <change beforePath="$PROJECT_DIR$/src/Controller/Connected/MessageController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/MessageController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/ProfilController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/ProfilController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/CronController/DailyController.php" afterPath="$PROJECT_DIR$/src/Controller/CronController/DailyController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/CronController/InstantController.php" afterPath="$PROJECT_DIR$/src/Controller/CronController/InstantController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Planet.php" afterPath="$PROJECT_DIR$/src/Entity/Planet.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/AllyAddType.php" afterPath="$PROJECT_DIR$/src/Form/Front/AllyAddType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/AllyGradeType.php" afterPath="$PROJECT_DIR$/src/Form/Front/AllyGradeType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/AllyPactType.php" afterPath="$PROJECT_DIR$/src/Form/Front/AllyPactType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/CaserneRecruitType.php" afterPath="$PROJECT_DIR$/src/Form/Front/CaserneRecruitType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/FleetRenameType.php" afterPath="$PROJECT_DIR$/src/Form/Front/FleetRenameType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/FleetSendType.php" afterPath="$PROJECT_DIR$/src/Form/Front/FleetSendType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/MessageType.php" afterPath="$PROJECT_DIR$/src/Form/Front/MessageType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/PlanetRenameType.php" afterPath="$PROJECT_DIR$/src/Form/Front/PlanetRenameType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/SalonType.php" afterPath="$PROJECT_DIR$/src/Form/Front/SalonType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/ScientistRecruitType.php" afterPath="$PROJECT_DIR$/src/Form/Front/ScientistRecruitType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/SpatialEditFleetType.php" afterPath="$PROJECT_DIR$/src/Form/Front/SpatialEditFleetType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/SpatialFleetType.php" afterPath="$PROJECT_DIR$/src/Form/Front/SpatialFleetType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/SpatialShipType.php" afterPath="$PROJECT_DIR$/src/Form/Front/SpatialShipType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/UserAllyType.php" afterPath="$PROJECT_DIR$/src/Form/Front/UserAllyType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/UserConnectType.php" afterPath="$PROJECT_DIR$/src/Form/Front/UserConnectType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/UserContactType.php" afterPath="$PROJECT_DIR$/src/Form/Front/UserContactType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/UserRecoveryType.php" afterPath="$PROJECT_DIR$/src/Form/Front/UserRecoveryType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/UserRegisterType.php" afterPath="$PROJECT_DIR$/src/Form/Front/UserRegisterType.php" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/ally.html.twig" afterPath="$PROJECT_DIR$/templates/connected/ally.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/building.html.twig" afterPath="$PROJECT_DIR$/templates/connected/building.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/map/fleet.html.twig" afterPath="$PROJECT_DIR$/templates/connected/map/fleet.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/map/sector.html.twig" afterPath="$PROJECT_DIR$/templates/connected/map/sector.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/message.html.twig" afterPath="$PROJECT_DIR$/templates/connected/message.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/profil/modal_ally.html.twig" afterPath="$PROJECT_DIR$/templates/connected/profil/modal_ally.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/profil/modal_user.html.twig" afterPath="$PROJECT_DIR$/templates/connected/profil/modal_user.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/profil/player.html.twig" afterPath="$PROJECT_DIR$/templates/connected/profil/player.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/salon.html.twig" afterPath="$PROJECT_DIR$/templates/connected/salon.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/search.html.twig" afterPath="$PROJECT_DIR$/templates/connected/search.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/menu/_left_menu.html.twig" afterPath="$PROJECT_DIR$/templates/menu/_left_menu.html.twig" />
-      <change beforePath="$PROJECT_DIR$/translations/front_ally.fr.yml" afterPath="$PROJECT_DIR$/translations/front_ally.fr.yml" />
-      <change beforePath="$PROJECT_DIR$/translations/front_building.fr.yml" afterPath="$PROJECT_DIR$/translations/front_building.fr.yml" />
-      <change beforePath="$PROJECT_DIR$/translations/front_map.fr.yml" afterPath="$PROJECT_DIR$/translations/front_map.fr.yml" />
-      <change beforePath="$PROJECT_DIR$/translations/front_message.fr.yml" afterPath="$PROJECT_DIR$/translations/front_message.fr.yml" />
-      <change beforePath="$PROJECT_DIR$/translations/front_modal_ally.fr.yml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/translations/front_modal_user.fr.yml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/translations/front_search.fr.yml" afterPath="$PROJECT_DIR$/translations/front_search.fr.yml" />
-      <change beforePath="$PROJECT_DIR$/translations/front_sector.fr.yml" afterPath="$PROJECT_DIR$/translations/front_sector.fr.yml" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/SalonController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/SalonController.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -65,11 +17,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="UserRegisterType.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="UserRegisterType.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Form/Front/UserRegisterType.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="342">
               <caret line="50" column="48" lean-forward="false" selection-start-line="50" selection-start-column="48" selection-end-line="50" selection-end-column="48" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SalonType.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Form/Front/SalonType.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="24" column="56" lean-forward="false" selection-start-line="24" selection-start-column="56" selection-end-line="24" selection-end-column="56" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SalonController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Controller/Connected/SalonController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="498">
+              <caret line="134" column="0" lean-forward="true" selection-start-line="134" selection-start-column="0" selection-end-line="136" selection-end-column="64" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MessageController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Controller/Connected/MessageController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="479">
+              <caret line="82" column="57" lean-forward="false" selection-start-line="82" selection-start-column="57" selection-end-line="82" selection-end-column="57" />
               <folding />
             </state>
           </provider>
@@ -160,7 +142,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/templates/connected/ally/noAlly.html.twig" />
         <option value="$PROJECT_DIR$/templates/connected/overview.html.twig" />
         <option value="$PROJECT_DIR$/translations/front_fleet.fr.yml" />
         <option value="$PROJECT_DIR$/translations/front_overview.fr.yml" />
@@ -174,7 +155,6 @@
         <option value="$PROJECT_DIR$/src/Controller/CronController/InstantController.php" />
         <option value="$PROJECT_DIR$/templates/connected/building.html.twig" />
         <option value="$PROJECT_DIR$/templates/menu/_left_menu.html.twig" />
-        <option value="$PROJECT_DIR$/src/Controller/Connected/MessageController.php" />
         <option value="$PROJECT_DIR$/templates/connected/profil/user_responde.html.twig" />
         <option value="$PROJECT_DIR$/translations/front_message.fr.yml" />
         <option value="$PROJECT_DIR$/assets/main.js" />
@@ -201,7 +181,6 @@
         <option value="$PROJECT_DIR$/src/Form/Front/FleetSendType.php" />
         <option value="$PROJECT_DIR$/src/Form/Front/MessageType.php" />
         <option value="$PROJECT_DIR$/src/Form/Front/PlanetRenameType.php" />
-        <option value="$PROJECT_DIR$/src/Form/Front/SalonType.php" />
         <option value="$PROJECT_DIR$/src/Form/Front/ScientistRecruitType.php" />
         <option value="$PROJECT_DIR$/src/Form/Front/SpatialEditFleetType.php" />
         <option value="$PROJECT_DIR$/src/Form/Front/SpatialFleetType.php" />
@@ -211,6 +190,9 @@
         <option value="$PROJECT_DIR$/src/Form/Front/UserContactType.php" />
         <option value="$PROJECT_DIR$/src/Form/Front/UserRecoveryType.php" />
         <option value="$PROJECT_DIR$/src/Form/Front/UserRegisterType.php" />
+        <option value="$PROJECT_DIR$/src/Form/Front/SalonType.php" />
+        <option value="$PROJECT_DIR$/src/Controller/Connected/SalonController.php" />
+        <option value="$PROJECT_DIR$/src/Controller/Connected/MessageController.php" />
       </list>
     </option>
   </component>
@@ -384,6 +366,19 @@
               <item name="Area" type="b2602c69:ProjectViewProjectNode" />
               <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Connected" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Form" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
@@ -467,12 +462,12 @@
       <workItem from="1524613328008" duration="44101000" />
       <workItem from="1524686237160" duration="49936000" />
       <workItem from="1524922720781" duration="128109000" />
-      <workItem from="1525305799071" duration="76868000" />
+      <workItem from="1525305799071" duration="77368000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="754543000" />
+    <option name="totallyTimeSpent" value="755043000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -547,14 +542,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/Building/ProductionController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1533">
-          <caret line="151" column="67" lean-forward="false" selection-start-line="151" selection-start-column="67" selection-end-line="151" selection-end-column="67" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/connected/building.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="183">
@@ -591,14 +578,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
           <caret line="29" column="30" lean-forward="true" selection-start-line="29" selection-start-column="30" selection-end-line="29" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/MessageController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="91" column="55" lean-forward="false" selection-start-line="91" selection-start-column="39" selection-end-line="91" selection-end-column="55" />
           <folding />
         </state>
       </provider>
@@ -851,14 +830,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/Front/SalonType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="28" column="48" lean-forward="false" selection-start-line="28" selection-start-column="48" selection-end-line="28" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Form/Front/PlanetRenameType.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="366">
@@ -951,6 +922,30 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="342">
           <caret line="50" column="48" lean-forward="false" selection-start-line="50" selection-start-column="48" selection-end-line="50" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Form/Front/SalonType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="24" column="56" lean-forward="false" selection-start-line="24" selection-start-column="56" selection-end-line="24" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/SalonController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="498">
+          <caret line="134" column="0" lean-forward="true" selection-start-line="134" selection-start-column="0" selection-end-line="136" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/MessageController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="479">
+          <caret line="82" column="57" lean-forward="false" selection-start-line="82" selection-start-column="57" selection-end-line="82" selection-end-column="57" />
           <folding />
         </state>
       </provider>

@@ -132,6 +132,9 @@ class SalonController extends Controller
 
             $em->persist($message);
             $em->flush();
+
+            $form_message = null;
+            $form_message = $this->createForm(SalonType::class);
         }
 
         return $this->render('connected/salon.html.twig', [

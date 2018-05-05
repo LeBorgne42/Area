@@ -78,6 +78,9 @@ class MessageController extends Controller
             $em->persist($recever);
             $em->persist($message);
             $em->flush();
+
+            $form_message = null;
+            $form_message = $this->createForm(MessageType::class);
         }
 
         return $this->render('connected/message.html.twig', [
