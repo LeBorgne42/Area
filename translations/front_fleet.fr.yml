@@ -45,3 +45,9 @@ fleet.soldier: Soldats
 fleet.worker: Travailleurs
 fleet.scientist: Scientifiques
 fleet.discharge: Decharger
+tooltip.fleetOnPlanet: 'Dans ce cadre vous pouvez voir les flottes que vous avez sur votre planète actuelle.'
+tooltip.cargo: 'Il s''agit de la place que votre flotte a en soute pour vos transports de ressources(niobium, eau) ou humains(soldat, travailleur, scientique).'
+tooltip.signature: 'Ici nous parlons de signature thermique, il serait trop facile que tout le monde sache ce qu''il y a dans la composition de votre flotte, ainsi la signature donne un ordre de grandeur sans rentrer dans le détails de la flotte.'
+tooltip.fleetMove: 'Toutes vos flottes qui sont en mouvement d''une planète vers une autre s''affiche ici.'
+tooltip.fleetOtherPlanet: 'Ici sont les flottes que vous avez sur vos autres planètes.'
+tooltip.fleetNoMyPlanet: 'Et enfin les flottes qui sont sur aucune de vos planètes.'

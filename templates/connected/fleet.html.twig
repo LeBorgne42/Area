@@ -6,7 +6,7 @@
 
 {% block body %}
     <div class="front-block display-allFleet">
-        <div class="block-title"><h2>{{ 'fleet.onThisPlanet'|trans({'%planet%': usePlanet.getName()}) }} {% if usePlanet.getShipOn() > 0 %}<a class="btn btn-lg btn-info float-right mb-2" href="{{ path('create_fleet', {'idp': usePlanet.getId()}) }}" data-toggle="modal" data-target="#createModal"><span>{{ 'fleet.createFlotte'|trans }}</span></a>{% endif %}</h2></div>
+        <div class="block-title"><h2>{{ 'fleet.onThisPlanet'|trans({'%planet%': usePlanet.getName()}) }} <span class="glyphicon glyphicon-question-sign text-orange text-middle" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.fleetOnPlanet'|trans }}"></span>  {% if usePlanet.getShipOn() > 0 %}<a class="btn btn-lg btn-info float-right mb-2" href="{{ path('create_fleet', {'idp': usePlanet.getId()}) }}" data-toggle="modal" data-target="#createModal"><span>{{ 'fleet.createFlotte'|trans }}</span></a>{% endif %}</h2></div>
         <table class="table table-striped table-bordered table-dark">
             <tbody>
             <tr>
@@ -17,10 +17,10 @@
                     {{ 'fleet.fleetShips'|trans }}
                 </th>
                 <th class="tab-cells-name text-center">
-                    {{ 'fleet.cargo'|trans }}
+                    {{ 'fleet.cargo'|trans }} <span class="glyphicon glyphicon-question-sign text-orange text-middle" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.cargo'|trans }}"></span>
                 </th>
                 <th class="tab-cells-name text-center">
-                    {{ 'fleet.fleetSignature'|trans }}
+                    {{ 'fleet.fleetSignature'|trans }} <span class="glyphicon glyphicon-question-sign text-orange" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.signature'|trans }}"></span>
                 </th>
             </tr>
             {% for fleet in usePlanet.getFleets() %}
@@ -43,7 +43,7 @@
             {% endfor %}
             </tbody>
         </table>
-        <div class="block-title mt-5"><h2>{{ 'fleet.inAir'|trans }}</h2></div>
+        <div class="block-title mt-5"><h2>{{ 'fleet.inAir'|trans }}</h2> <span class="glyphicon glyphicon-question-sign text-orange text-middle" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.fleetMove'|trans }}"></span></div>
         <table class="table table-striped table-bordered table-dark">
             <tbody>
             <tr>
@@ -96,7 +96,7 @@
             {% endfor %}
             </tbody>
         </table>
-        <div class="block-title mt-5"><h2>{{ 'fleet.otherPlanet'|trans }}</h2></div>
+        <div class="block-title mt-5"><h2>{{ 'fleet.otherPlanet'|trans }}</h2> <span class="glyphicon glyphicon-question-sign text-orange text-middle" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.fleetOtherPlanet'|trans }}"></span></div>
         <table class="table table-striped table-bordered table-dark">
             <tbody>
             <tr>
@@ -143,7 +143,7 @@
             {% endfor %}
             </tbody>
         </table>
-        <div class="block-title mt-5"><h2>{{ 'fleet.exploration'|trans }}</h2></div>
+        <div class="block-title mt-5"><h2>{{ 'fleet.exploration'|trans }}</h2><span class="glyphicon glyphicon-question-sign text-orange text-middle" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.fleetNoMyPlanet'|trans }}"></span></div>
         <table class="table table-striped table-bordered table-dark">
             <tbody>
             <tr>

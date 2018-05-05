@@ -26,3 +26,4 @@ title.lastFleet: 'Flottes en mouvement'
 title.planet: Planète
 form.name: 'nouveau nom'
 form.renamePlanet: 'Renommer la planète'
+tooltip.rank: 'Votre classement est affiché ici avec l''évolution positive ou négative depuis les dernière 24h.'
