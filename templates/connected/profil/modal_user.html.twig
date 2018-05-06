@@ -13,7 +13,7 @@
     {%- endblock -%}
     <div class="front-block userPage">
         {% if user.imageName %}
-            <img height="64" width="64" src="{{ vich_uploader_asset(user, 'imageFile') }}">
+            <div class="text-center"><img height="64" width="64" src="{{ vich_uploader_asset(user, 'imageFile') }}"></div>
         {% else %}
             <div class="text-center"><img height="64" width="64" src="{{ asset('img/avatar.png') }}"></div>
         {% endif %}
