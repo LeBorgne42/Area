@@ -145,7 +145,7 @@ class ExplorerController extends Controller
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
 
-        $now->add(new DateInterval('PT' . ($level * 4000 / $user->getScientistProduction()) . 'S'));
+        $now->add(new DateInterval('PT' . 4000 / $user->getScientistProduction() . 'S'));
         $user->setSearch('recycleur');
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - 16900);
@@ -180,7 +180,7 @@ class ExplorerController extends Controller
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
 
-        $now->add(new DateInterval('PT' . ($level * 28800 / $user->getScientistProduction()) . 'S'));
+        $now->add(new DateInterval('PT' . 28800 / $user->getScientistProduction() . 'S'));
         $user->setSearch('barge');
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - 35000);
@@ -250,7 +250,7 @@ class ExplorerController extends Controller
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
 
-        $now->add(new DateInterval('PT' . ($level * 604800 / $user->getScientistProduction()) . 'S'));
+        $now->add(new DateInterval('PT' . 604800 / $user->getScientistProduction() . 'S'));
         $user->setSearch('hyperespace');
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - 5000000);
