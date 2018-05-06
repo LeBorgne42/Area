@@ -121,7 +121,7 @@ class SpatialController extends Controller
             $fleets = $em->getRepository('App:Fleet')
                 ->createQueryBuilder('f')
                 ->join('f.user', 'u')
-                ->join('u.ally', 'a')
+                ->leftJoin('u.ally', 'a')
                 ->where('f.planet = :planet')
                 ->andWhere('f.attack = :true OR a.sigle in (:ally)')
                 ->andWhere('f.user != :user')
