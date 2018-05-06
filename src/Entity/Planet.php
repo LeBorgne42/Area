@@ -394,7 +394,7 @@ class Planet
     {
 
         foreach($this->getFleets() as $fleet) {
-            if ($fleet->getUser() == $user) {
+            if ($fleet->getUser() == $user && $fleet->getFlightTime() == null) {
                 return 'hello';
             }
         }

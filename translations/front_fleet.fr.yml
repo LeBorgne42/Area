@@ -51,3 +51,4 @@ tooltip.signature: 'Ici nous parlons de signature thermique, il serait trop faci
 tooltip.fleetMove: 'Toutes vos flottes qui sont en mouvement d''une planète vers une autre s''affiche ici.'
 tooltip.fleetOtherPlanet: 'Ici sont les flottes que vous avez sur vos autres planètes.'
 tooltip.fleetNoMyPlanet: 'Et enfin les flottes qui sont sur aucune de vos planètes.'
+fleet.combat: 'en combat'

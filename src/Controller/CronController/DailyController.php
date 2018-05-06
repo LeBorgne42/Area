@@ -59,7 +59,7 @@ class DailyController extends Controller
             $report->setContent($report->getContent() . " L'entretien de votre empire vous coûte cependant " . round($empireCost) . " Bitcoin.");
             $point = ($worker / 100) + ($ship / 5) + ($soldier) + $planetPoint;
             $user->setBitcoin($cost);
-            $report->setContent($report->getContent() . " Ce qui vous donne un revenu de " . round($worker + $empireCost) . " Bitcoin. Bonne journée Commandant.");
+            $report->setContent($report->getContent() . " Ce qui vous donne un revenu de " . round($worker - $empireCost) . " Bitcoin. Bonne journée Commandant.");
             $user->getRank()->setOldPoint($user->getRank()->getPoint());
             $user->getRank()->setPoint($point);
             $user->getRank()->setOldPosition($user->getRank()->getPosition());

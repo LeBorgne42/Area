@@ -641,6 +641,22 @@ class Ally
         $this->proposals = $proposals;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getSalon()
+    {
+        return $this->salon;
+    }
+
+    /**
+     * @param mixed $salon
+     */
+    public function setSalon($salon): void
+    {
+        $this->salon = $salon;
+    }
+
     public function getId()
     {
         return $this->id;

@@ -217,15 +217,16 @@ function manageConstructTime() {
                     $('#timeDisplay').text('Terminée');
                     setTimeout(function() {
                         window.location.reload();
-                    }, 2000);
-                }
-                secondes = 60;
-                minutes = minutes - 1;
-                if(minutes == 0 && heures != 0) {
-                    minutes = 60;
-                    heures = heures - 1;
-                } else if (minutes == 0) {
-                    minutes = null;
+                    }, 3000);
+                } else {
+                    secondes = 60;
+                    minutes = minutes - 1;
+                    if(minutes == 0 && heures != 0) {
+                        minutes = 60;
+                        heures = heures - 1;
+                    } else if (minutes == 0) {
+                        minutes = null;
+                    }
                 }
             }
         }, 1000);
@@ -260,15 +261,16 @@ function manageResearchTime() {
                     $('#timeDisplayR').text('Terminée');
                     setTimeout(function() {
                         window.location.reload();
-                    }, 2000);
-                }
-                secondes = 60;
-                minutes = minutes - 1;
-                if(minutes == 0 && heures != 0) {
-                    minutes = 60;
-                    heures = heures - 1;
-                } else if (minutes == 0) {
-                    minutes = null;
+                    }, 3000);
+                } else {
+                    secondes = 60;
+                    minutes = minutes - 1;
+                    if(minutes == 0 && heures != 0) {
+                        minutes = 60;
+                        heures = heures - 1;
+                    } else if (minutes == 0) {
+                        minutes = null;
+                    }
                 }
             }
         }, 1000);

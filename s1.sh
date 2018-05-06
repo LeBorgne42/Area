@@ -2,184 +2,184 @@
 
 while true
 do
-    curl "http://areauniverse.ddns.net/resources/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/resources/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-    curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+    curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
-    curl "http://areauniverse.ddns.net/construction/"
-curl "http://areauniverse.ddns.net/clash/"
+    curl "http://www.areauniverse.eu/construction/"
+curl "http://www.areauniverse.eu/clash/"
     sleep 1
 done

@@ -132,12 +132,16 @@ class Fleet
      */
     public function getAllianceUser()
     {
-        $uAlly = $this->getUser()->getAlly()->getUsers();
-        $uFleet = $this->getPlanet()->getUser();
-        foreach ($uAlly as $user) {
-            if($uFleet == $user) {
-                return 'hello';
+        if($this->getUser()->getAlly()) {
+            $uAlly = $this->getUser()->getAlly()->getUsers();
+            $uFleet = $this->getPlanet()->getUser();
+            foreach ($uAlly as $user) {
+                if ($uFleet == $user) {
+                    return 'hello';
+                }
             }
+        } elseif ($this->getUser() == $this->getPlanet()->getUser()) {
+            return 'hello';
         }
         return null;
     }

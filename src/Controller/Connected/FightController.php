@@ -5,7 +5,6 @@ namespace App\Controller\Connected;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Component\HttpFoundation\Request;
 use DateTime;
 use DateTimeZone;
 
@@ -14,7 +13,7 @@ class FightController extends Controller
     /**
      * @Route("/clash/", name="fight_war_area")
      */
-    public function fightAction(Request $request)
+    public function fightAction()
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
@@ -215,7 +214,7 @@ class FightController extends Controller
       /**
        * @Route("/hello-we-come-for-you/{idp}/{fleet}/", name="invader_planet", requirements={"idp"="\d+", "fleet"="\d+"})
        */
-    public function invaderAction(Request $request, $idp, $fleet)
+    public function invaderAction($idp, $fleet)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
@@ -294,7 +293,7 @@ class FightController extends Controller
     /**
      * @Route("/colonisation-planete/{idp}/{fleet}/", name="colonizer_planet", requirements={"idp"="\d+", "fleet"="\d+"})
      */
-    public function colonizeAction(Request $request, $idp, $fleet)
+    public function colonizeAction($idp, $fleet)
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();

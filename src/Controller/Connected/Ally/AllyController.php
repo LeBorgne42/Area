@@ -205,8 +205,9 @@ class AllyController extends Controller
 
         foreach ($ally->getGrades() as $grade) {
             $em->remove($grade);
-            $em->flush();
         }
+        $em->remove($ally->getSalon());
+        $em->flush();
 
         $pnas = $em->getRepository('App:Pna')
             ->createQueryBuilder('pna')

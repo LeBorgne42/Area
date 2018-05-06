@@ -31,7 +31,7 @@ class Salon
     private $users;
 
     /**
-     * @ORM\OneToMany(targetEntity="S_Content", mappedBy="salon", fetch="EXTRA_LAZY")
+     * @ORM\OneToMany(targetEntity="S_Content", mappedBy="salon", fetch="EXTRA_LAZY", cascade={"persist"})
      */
     protected $contents;
 

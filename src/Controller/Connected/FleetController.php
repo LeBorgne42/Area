@@ -104,7 +104,10 @@ class FleetController extends Controller
             return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
         }
 
-        if ($form_manageAttackFleet->isSubmitted() && $fleet->getMissile() > 0) {
+        if ($form_manageAttackFleet->isSubmitted()) {
+            if($fleet->getMissile() <= 0) {
+                return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+            }
             $eAlly = $user->getAllyEnnemy();
             $warAlly = [];
             $x = 0;
@@ -154,7 +157,7 @@ class FleetController extends Controller
                 $colonizer = $planet->getColonizer() + $form_manageFleet->get('lessColonizer')->getData();
                 $fleet->setColonizer($fleet->getColonizer() - $form_manageFleet->get('lessColonizer')->getData());
             } else {
-                $colonizer = 0;
+                $colonizer = $planet->getColonizer();
             }
             if ($form_manageFleet->get('moreRecycleur')->getData()) {
                 $recycleur = $planet->getRecycleur() - $form_manageFleet->get('moreRecycleur')->getData();
@@ -163,7 +166,7 @@ class FleetController extends Controller
                 $recycleur = $planet->getRecycleur() + $form_manageFleet->get('lessRecycleur')->getData();
                 $fleet->setRecycleur($fleet->getRecycleur() - $form_manageFleet->get('lessRecycleur')->getData());
             } else {
-                $recycleur = 0;
+                $recycleur = $planet->getRecycleur();
             }
             if ($form_manageFleet->get('moreBarge')->getData()) {
                 $barge = $planet->getBarge() - $form_manageFleet->get('moreBarge')->getData();
@@ -172,7 +175,7 @@ class FleetController extends Controller
                 $barge = $planet->getBarge() + $form_manageFleet->get('lessBarge')->getData();
                 $fleet->setBarge($fleet->getBarge() - $form_manageFleet->get('lessBarge')->getData());
             } else {
-                $barge = 0;
+                $barge = $planet->getBarge();
             }
             if ($form_manageFleet->get('moreSonde')->getData()) {
                 $sonde = $planet->getSonde() - $form_manageFleet->get('moreSonde')->getData();
@@ -181,7 +184,7 @@ class FleetController extends Controller
                 $sonde = $planet->getSonde() + $form_manageFleet->get('lessSonde')->getData();
                 $fleet->setSonde($fleet->getSonde() - $form_manageFleet->get('lessSonde')->getData());
             } else {
-                $sonde = 0;
+                $sonde = $planet->getSonde();
             }
             if ($form_manageFleet->get('moreHunter')->getData()) {
                 $hunter = $planet->getHunter() - $form_manageFleet->get('moreHunter')->getData();
@@ -190,7 +193,7 @@ class FleetController extends Controller
                 $hunter = $planet->getHunter() + $form_manageFleet->get('lessHunter')->getData();
                 $fleet->setHunter($fleet->getHunter() - $form_manageFleet->get('lessHunter')->getData());
             } else {
-                $hunter = 0;
+                $hunter = $planet->getHunter();
             }
             if ($form_manageFleet->get('moreFregate')->getData()) {
                 $fregate = $planet->getFregate() - $form_manageFleet->get('moreFregate')->getData();
@@ -199,7 +202,7 @@ class FleetController extends Controller
                 $fregate = $planet->getFregate() + $form_manageFleet->get('lessFregate')->getData();
                 $fleet->setFregate($fleet->getFregate() - $form_manageFleet->get('lessFregate')->getData());
             } else {
-                $fregate = 0;
+                $fregate = $planet->getFregate();
             }
             if ($form_manageFleet->get('moreNiobium')->getData()) {
                 $niobium = $planet->getNiobium() - $form_manageFleet->get('moreNiobium')->getData();
@@ -208,7 +211,7 @@ class FleetController extends Controller
                 $niobium = $planet->getNiobium() + $form_manageFleet->get('lessNiobium')->getData();
                 $fleet->setNiobium($fleet->getNiobium() - $form_manageFleet->get('lessNiobium')->getData());
             } else {
-                $niobium = 0;
+                $niobium = $planet->getNiobium();
             }
             if ($form_manageFleet->get('moreWater')->getData()) {
                 $water = $planet->getWater() - $form_manageFleet->get('moreWater')->getData();
@@ -217,7 +220,7 @@ class FleetController extends Controller
                 $water = $planet->getWater() + $form_manageFleet->get('lessWater')->getData();
                 $fleet->setWater($fleet->getWater() - $form_manageFleet->get('lessWater')->getData());
             } else {
-                $water = 0;
+                $water = $planet->getWater();
             }
             if ($form_manageFleet->get('moreSoldier')->getData()) {
                 $soldier = $planet->getSoldier() - $form_manageFleet->get('moreSoldier')->getData();
@@ -226,7 +229,7 @@ class FleetController extends Controller
                 $soldier = $planet->getSoldier() + $form_manageFleet->get('lessSoldier')->getData();
                 $fleet->setSoldier($fleet->getSoldier() - $form_manageFleet->get('lessSoldier')->getData());
             } else {
-                $soldier = 0;
+                $soldier = $planet->getSoldier();
             }
             if ($form_manageFleet->get('moreWorker')->getData()) {
                 $worker = $planet->getWorker() - $form_manageFleet->get('moreWorker')->getData();
@@ -235,7 +238,7 @@ class FleetController extends Controller
                 $worker = $planet->getWorker() + $form_manageFleet->get('lessWorker')->getData();
                 $fleet->setWorker($fleet->getWorker() - $form_manageFleet->get('lessWorker')->getData());
             } else {
-                $worker = 0;
+                $worker = $planet->getWorker();
             }
             if ($form_manageFleet->get('moreScientist')->getData()) {
                 $scientist = $planet->getScientist() - $form_manageFleet->get('moreScientist')->getData();
@@ -244,7 +247,7 @@ class FleetController extends Controller
                 $scientist = $planet->getScientist() + $form_manageFleet->get('lessScientist')->getData();
                 $fleet->setScientist($fleet->getScientist() - $form_manageFleet->get('lessScientist')->getData());
             } else {
-                $scientist = 0;
+                $scientist = $planet->getScientist();
             }
             $cargo = ($fleet->getCargoPlace() - $fleet->getCargoFull()) - $niobium + $water + $soldier + $worker + $scientist;
             if (($colonizer < 0 || $recycleur < 0) || ($barge < 0 || $sonde < 0) || ($hunter < 0 || $fregate < 0) ||
