@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97f042ea-d0ee-4bd9-bb02-3d850e24f659" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/Research/ExplorerController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/Research/ExplorerController.php" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/FightController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/FightController.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,21 +16,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ExplorerController.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Controller/Connected/Research/ExplorerController.php">
+      <file leaf-file-name="FightController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Controller/Connected/FightController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3582">
-              <caret line="252" column="82" lean-forward="false" selection-start-line="252" selection-start-column="82" selection-end-line="252" selection-end-column="82" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InstantController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Controller/CronController/InstantController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="125" column="35" lean-forward="true" selection-start-line="125" selection-start-column="35" selection-end-line="125" selection-end-column="35" />
+            <state relative-caret-position="295">
+              <caret line="194" column="55" lean-forward="false" selection-start-line="194" selection-start-column="55" selection-end-line="194" selection-end-column="55" />
               <folding />
             </state>
           </provider>
@@ -40,7 +30,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getPropo</find>
       <find>gameover</find>
       <find>$gameOver</find>
       <find>connect</find>
@@ -70,6 +59,7 @@
       <find>$request</find>
       <find>getSalon</find>
       <find>getOurFleet</find>
+      <find>$armor</find>
     </findStrings>
     <replaceStrings>
       <replace>moreWorker</replace>
@@ -150,11 +140,9 @@
         <option value="$PROJECT_DIR$/src/Controller/Connected/FleetController.php" />
         <option value="$PROJECT_DIR$/templates/connected/fleet.html.twig" />
         <option value="$PROJECT_DIR$/translations/front_fleet.fr.yml" />
-        <option value="$PROJECT_DIR$/src/Controller/Connected/FightController.php" />
         <option value="$PROJECT_DIR$/src/Entity/Salon.php" />
         <option value="$PROJECT_DIR$/src/Entity/Ally.php" />
         <option value="$PROJECT_DIR$/src/Controller/Connected/Ally/AllyController.php" />
-        <option value="$PROJECT_DIR$/src/Controller/CronController/DailyController.php" />
         <option value="$PROJECT_DIR$/src/Entity/Planet.php" />
         <option value="$PROJECT_DIR$/templates/connected/profil/modal_user.html.twig" />
         <option value="$PROJECT_DIR$/templates/connected/profil/player.html.twig" />
@@ -172,6 +160,8 @@
         <option value="$PROJECT_DIR$/src/Controller/CronController/InstantController.php" />
         <option value="$PROJECT_DIR$/src/Controller/Connected/Building/ProductionController.php" />
         <option value="$PROJECT_DIR$/src/Controller/Connected/Research/ExplorerController.php" />
+        <option value="$PROJECT_DIR$/src/Controller/CronController/DailyController.php" />
+        <option value="$PROJECT_DIR$/src/Controller/Connected/FightController.php" />
       </list>
     </option>
   </component>
@@ -354,21 +344,6 @@
               <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Connected" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
-            <path>
-              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Connected" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Research" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="CronController" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -443,12 +418,12 @@
       <workItem from="1524613328008" duration="44101000" />
       <workItem from="1524686237160" duration="49936000" />
       <workItem from="1524922720781" duration="128109000" />
-      <workItem from="1525305799071" duration="90912000" />
+      <workItem from="1525305799071" duration="91995000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="768587000" />
+    <option name="totallyTimeSpent" value="769670000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -523,30 +498,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Form/Front/AllyAddType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="26" column="43" lean-forward="true" selection-start-line="26" selection-start-column="43" selection-end-line="27" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/Front/AllyGradeType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="94" column="48" lean-forward="false" selection-start-line="94" selection-start-column="48" selection-end-line="94" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/Front/AllyImageType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Form/Front/AllyPactType.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-18">
@@ -747,14 +698,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/CronController/DailyController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="61" column="108" lean-forward="false" selection-start-line="61" selection-start-column="108" selection-end-line="61" selection-end-column="108" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Connected/Ally/AllyController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
@@ -792,16 +735,6 @@
         <state relative-caret-position="262">
           <caret line="51" column="138" lean-forward="false" selection-start-line="51" selection-start-column="127" selection-end-line="51" selection-end-column="138" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/FightController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4425">
-          <caret line="295" column="35" lean-forward="false" selection-start-line="295" selection-start-column="35" selection-end-line="295" selection-end-column="35" />
-          <folding>
-            <element signature="e#44#91#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -917,6 +850,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/Research/ArmementController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1075">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/Research/SociologicController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-603">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/CronController/InstantController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -925,10 +874,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/Research/MilitaryController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1128">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Connected/Research/ExplorerController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3582">
           <caret line="252" column="82" lean-forward="false" selection-start-line="252" selection-start-column="82" selection-end-line="252" selection-end-column="82" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/CronController/DailyController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="417">
+          <caret line="64" column="78" lean-forward="true" selection-start-line="64" selection-start-column="78" selection-end-line="64" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/FightController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="194" column="55" lean-forward="false" selection-start-line="194" selection-start-column="55" selection-end-line="194" selection-end-column="55" />
           <folding />
         </state>
       </provider>

@@ -192,9 +192,11 @@ class FightController extends Controller
                 $em->remove($attackerLose);
             }
             foreach($blockDef as $defenderWin) {
-                $malus = ($defenderWin->getArmor()) / (($defenderWin->getArmor() - $armorD) / rand(2, 4));
-                $defenderWin->setFleetWinRatio(number_format($malus, 2));
-                $em->persist($defenderWin);
+                if ($defenderWin->getArmor() != $armorD) {
+                    $malus = ($defenderWin->getArmor()) / (($defenderWin->getArmor() - $armorD) / rand(2, 4));
+                    $defenderWin->setFleetWinRatio(number_format($malus, 2));
+                    $em->persist($defenderWin);
+                }
             }
             return($blockDef);
         } else {
@@ -202,9 +204,11 @@ class FightController extends Controller
                 $em->remove($defenderLose);
             }
             foreach($blockAtt as $attackerWin) {
-                $malus = ($attackerWin->getArmor()) / (($attackerWin->getArmor() - $armor) / rand(2, 3));
-                $attackerWin->setFleetWinRatio(number_format($malus, 2));
-                $em->persist($attackerWin);
+                if($attackerWin->getArmor() != $armor) {
+                    $malus = ($attackerWin->getArmor()) / (($attackerWin->getArmor() - $armor) / rand(2, 3));
+                    $attackerWin->setFleetWinRatio(number_format($malus, 2));
+                    $em->persist($attackerWin);
+                }
             }
             return($blockAtt);
         }
