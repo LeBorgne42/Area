@@ -80,7 +80,7 @@ class InformationController extends Controller
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
 
-        $usePlanet->setMiner($level - 1);
+        $usePlanet->setRadar($level - 1);
         $usePlanet->setGroundPlace($newGround);
         $em->persist($usePlanet);
         $em->flush();
@@ -153,7 +153,7 @@ class InformationController extends Controller
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
 
-        $usePlanet->setMiner($level - 1);
+        $usePlanet->setSkyRadar($level - 1);
         $usePlanet->setSkyPlace($newSky);
         $em->persist($usePlanet);
         $em->flush();
@@ -226,7 +226,7 @@ class InformationController extends Controller
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
 
-        $usePlanet->setMiner($level - 1);
+        $usePlanet->setSkyBrouilleur($level - 1);
         $usePlanet->setSkyPlace($newSky);
         $em->persist($usePlanet);
         $em->flush();

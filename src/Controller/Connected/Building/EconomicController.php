@@ -79,7 +79,7 @@ class EconomicController extends Controller
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
 
-        $usePlanet->setMiner($level - 1);
+        $usePlanet->setCenterSearch($level - 1);
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setScientistProduction($usePlanet->getScientistProduction() - 0.1);
         $em->persist($usePlanet);
@@ -153,7 +153,7 @@ class EconomicController extends Controller
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
 
-        $usePlanet->setMiner($level - 1);
+        $usePlanet->setCity($level - 1);
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setWorkerProduction($usePlanet->getWorkerProduction() - 0.2);
         $em->persist($usePlanet);
@@ -231,7 +231,7 @@ class EconomicController extends Controller
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
 
-        $usePlanet->setMiner($level - 1);
+        $usePlanet->setMetropole($level - 1);
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setWorkerProduction($usePlanet->getWorkerProduction() - 0.5);
         $usePlanet->setSkyPlace($newSky);

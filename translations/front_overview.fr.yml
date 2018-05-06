@@ -27,3 +27,5 @@ title.planet: Planète
 form.name: 'nouveau nom'
 form.renamePlanet: 'Renommer la planète'
 tooltip.rank: 'Votre classement est affiché ici avec l''évolution positive ou négative depuis les dernière 24h.'
+title.tmpbeta: 'Info temporaire beta :'
+overview.tmpbeta: 'Je vais mettre ici les infos importantes pour que tout le monde puissent y avoir accès rapidement. Dans un premier temps ces éléments : <br> <br> - Le recyclage n''est pas encore opérationnel <br> - Le temps de contrustion vaisseaux/soldats/scientiques non plus <br> - Le temps décompté des trajets de flottes est en cours de codage <br> - Il peut y avoir des soucis liés aux combats et donc il faudra me le rapporter <br> - L''actualisation automatique des salons lorsqu''il y a un nouveau message'

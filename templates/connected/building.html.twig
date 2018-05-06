@@ -35,7 +35,7 @@
                     {% endif %}
                 </td>
                 <td class="center-cells p-4">
-                    {% if usePlanet.getMiner() > 0 %}
+                    {% if usePlanet.getMiner() > 0 and usePlanet.getConstructAt() == null %}
                         <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_mine', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
@@ -65,7 +65,7 @@
                     {% endif %}
                 </td>
                 <td class="center-cells p-4">
-                    {% if usePlanet.getExtractor() > 0 %}
+                    {% if usePlanet.getExtractor() > 0 and usePlanet.getConstructAt() == null %}
                     <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_extract', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
@@ -100,7 +100,7 @@
                     {% endif %}
                 </td>
                 <td class="center-cells p-4">
-                    {% if usePlanet.getCenterSearch() > 0 %}
+                    {% if usePlanet.getCenterSearch() > 0 and usePlanet.getConstructAt() == null %}
                         <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_search', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
@@ -130,7 +130,7 @@
                     {% endif %}
                 </td>
                 <td class="center-cells p-4">
-                    {% if usePlanet.getCity() > 0 %}
+                    {% if usePlanet.getCity() > 0 and usePlanet.getConstructAt() == null %}
                         <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_city', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
@@ -160,7 +160,7 @@
                     {% endif %}
                 </td>
                 <td class="center-cells p-4">
-                    {% if usePlanet.getMetropole() > 0 %}
+                    {% if usePlanet.getMetropole() > 0 and usePlanet.getConstructAt() == null %}
                         <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_metropole', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
@@ -195,7 +195,7 @@
                     {% endif %}
                 </td>
                 <td class="center-cells p-4">
-                    {% if usePlanet.getCaserne() > 0 %}
+                    {% if usePlanet.getCaserne() > 0 and usePlanet.getConstructAt() == null %}
                         <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_caserne', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
@@ -225,7 +225,7 @@
                     {% endif %}
                 </td>
                 <td class="center-cells p-4">
-                    {% if usePlanet.getSpaceShip() > 0 %}
+                    {% if usePlanet.getSpaceShip() > 0 and usePlanet.getConstructAt() == null %}
                         <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_spaceShipyard', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
@@ -255,7 +255,7 @@
                     {% endif %}
                 </td>
                 <td class="center-cells p-4">
-                    {% if usePlanet.getLightUsine() > 0 %}
+                    {% if usePlanet.getLightUsine() > 0 and usePlanet.getConstructAt() == null %}
                         <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_lightUsine', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
@@ -285,7 +285,7 @@
                     {% endif %}
                 </td>
                 <td class="center-cells p-4">
-                    {% if usePlanet.getHeavyUsine() > 0 %}
+                    {% if usePlanet.getHeavyUsine() > 0 and usePlanet.getConstructAt() == null %}
                         <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_heavyUsine', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
@@ -320,7 +320,7 @@
                     {% endif %}
                 </td>
                 <td class="center-cells p-4">
-                    {% if usePlanet.getRadar() > 0 %}
+                    {% if usePlanet.getRadar() > 0 and usePlanet.getConstructAt() == null %}
                         <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_radar', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
@@ -350,7 +350,7 @@
                     {% endif %}
                 </td>
                 <td class="center-cells p-4">
-                    {% if usePlanet.getSkyRadar() > 0 %}
+                    {% if usePlanet.getSkyRadar() > 0 and usePlanet.getConstructAt() == null %}
                         <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_skyRadar', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
@@ -380,7 +380,7 @@
                     {% endif %}
                 </td>
                 <td class="center-cells p-4">
-                    {% if usePlanet.getSkyBrouilleur() > 0 %}
+                    {% if usePlanet.getSkyBrouilleur() > 0 and usePlanet.getConstructAt() == null %}
                         <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_brouilleur', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>

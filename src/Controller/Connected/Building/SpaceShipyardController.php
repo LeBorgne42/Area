@@ -83,7 +83,7 @@ class SpaceShipyardController extends Controller
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
 
-        $usePlanet->setMiner($level - 1);
+        $usePlanet->setSpaceShip($level - 1);
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setShipProduction($usePlanet->getShipProduction() - 0.1);
         $usePlanet->setSkyPlace($newSky);
@@ -158,7 +158,7 @@ class SpaceShipyardController extends Controller
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
 
-        $usePlanet->setMiner($level - 1);
+        $usePlanet->setLightUsine($level - 1);
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setShipProduction($usePlanet->getShipProduction() - 0.15);
         $em->persist($usePlanet);
@@ -234,7 +234,7 @@ class SpaceShipyardController extends Controller
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
 
-        $usePlanet->setMiner($level - 1);
+        $usePlanet->setHeavyUsine($level - 1);
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setShipProduction($usePlanet->getShipProduction() - 0.3);
         $em->persist($usePlanet);

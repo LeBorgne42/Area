@@ -73,12 +73,12 @@ class ProductionController extends Controller
 
         $level = $usePlanet->getMiner();
         $newGround = $usePlanet->getGroundPlace() - 1;
-        if($level == 1 || $usePlanet->getConstructAt() > $now) {
+        if($level == 0 || $usePlanet->getConstructAt() > $now) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
 
-        $usePlanet->setMiner($level - 2);
-        $usePlanet->setNbProduction($usePlanet->getNbProduction() - ($level / 1.1));
+        $usePlanet->setMiner($level - 1);
+        $usePlanet->setNbProduction($usePlanet->getNbProduction() - ($level * 1.1));
         $usePlanet->setGroundPlace($newGround);
         $em->persist($usePlanet);
         $em->flush();
@@ -142,14 +142,14 @@ class ProductionController extends Controller
             ->getQuery()
             ->getOneOrNullResult();
 
-        $level = $usePlanet->getExtractor() + 1;
+        $level = $usePlanet->getExtractor();
         $newGround = $usePlanet->getGroundPlace() - 1;
-        if($level == 1 || $usePlanet->getConstructAt() > $now) {
+        if($level == 0 || $usePlanet->getConstructAt() > $now) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
 
-        $usePlanet->setExtractor($level - 2);
-        $usePlanet->setNbProduction($usePlanet->getNbProduction() - ($level / 1.05));
+        $usePlanet->setExtractor($level - 1);
+        $usePlanet->setWtProduction($usePlanet->getWtProduction() - ($level * 1.09));
         $usePlanet->setGroundPlace($newGround);
         $em->persist($usePlanet);
         $em->flush();

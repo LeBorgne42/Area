@@ -78,7 +78,7 @@ class InstantController extends Controller
                 $planet->setNbProduction($planet->getNbProduction() + ($planet->getMiner() * 1.1));
             } elseif ($build == 'extractor') {
                 $planet->setExtractor($planet->getExtractor() + 1);
-                $planet->setWtProduction($planet->getWtProduction() + ($planet->getExtractor() * 1.05));
+                $planet->setWtProduction($planet->getWtProduction() + ($planet->getExtractor() * 1.09));
             } elseif ($build == 'city') {
                 $planet->setCity($planet->getCity() + 1);
                 $planet->setWorkerProduction($planet->getWorkerProduction() + 0.2);

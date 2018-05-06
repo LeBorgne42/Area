@@ -277,10 +277,10 @@ function manageResearchTime() {
     }
 }
 
-function manageRightMenu(){
+/*function manageRightMenu(){
     var urlDisplay = document.URL.replace(/\d+/ , '');
     $('div.bg-right div.float-left a').attr('href', urlDisplay + $('div.bg-right div.float-left a').attr('href'));
-}
+}*/
 
 function manageSalon() {
 /*    $('#salon_sendForm').click(function(e) {
@@ -333,7 +333,7 @@ $(document).ready(function() {
     manageConstructTime();
     manageResearchTime();
     manageSalon();
-    manageRightMenu();
+    //manageRightMenu();
     /*    manageDisplaySalon();
         setNoDecimalDisplay();*/
     manageAttackFleetForm();
