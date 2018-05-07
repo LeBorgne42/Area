@@ -196,7 +196,20 @@ class InstantController extends Controller
                 ->getQuery()
                 ->getResult();
 
-            if ($attackFleets) {
+            if($fleet->getUser()->getAlly()) {
+                $ally = $em->getRepository('App:Fleet')
+                    ->createQueryBuilder('f')
+                    ->join('f.user', 'u')
+                    ->where('f.planet = :planet')
+                    ->andWhere('u.ally != :ally')
+                    ->setParameters(array('planet' => $newHome, 'true' => true, 'ally' => $fleet->getUser()->getAlly()))
+                    ->getQuery()
+                    ->getResult();
+            } else {
+                $ally = 'war';
+            }
+
+            if ($attackFleets || ($fleet->getAttack() == true && $ally)) {
                 $now = new DateTime();
                 $now->setTimezone(new DateTimeZone('Europe/Paris'));
                 $now->add(new DateInterval('PT' . 300 . 'S'));

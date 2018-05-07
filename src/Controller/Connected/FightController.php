@@ -28,7 +28,7 @@ class FightController extends Controller
             ->setParameters(array('now' => $now))
             ->getQuery()
             ->setMaxResults(1)
-            ->getResult();
+            ->getOneOrNullResult();
 
         if(!$firstFleet) {
             exit;
@@ -38,7 +38,7 @@ class FightController extends Controller
             ->createQueryBuilder('f')
             ->join('f.planet', 'p')
             ->where('p.id = :id')
-            ->setParameters(array('id' => $firstFleet))
+            ->setParameters(array('id' => $firstFleet['id']))
             ->orderBy('f.attack', 'ASC')
             ->getQuery()
             ->getResult();
@@ -93,8 +93,10 @@ class FightController extends Controller
 
         if($winner == ${'oneBlock'.$team1}) {
             $team2 = $team2 - 1;
+            ${'oneBlock'.$team1} = $winner;
         } elseif ($winner == ${'oneBlock'.$team2}) {
             $team1 = $team1 - $team2;
+            ${'oneBlock'.$team2} = $winner;
         }
 
         $team = $tmpcount - 2;
@@ -103,8 +105,10 @@ class FightController extends Controller
             $team--;
             if($winner == ${'oneBlock'.$team1}) {
                 $team2 = $team2 - 1;
+                ${'oneBlock'.$team1} = $winner;
             } elseif ($winner == ${'oneBlock'.$team2}) {
                 $team1 = $team1 - $team2;
+                ${'oneBlock'.$team2} = $winner;
             }
         }
         $em->flush();
@@ -199,10 +203,10 @@ class FightController extends Controller
         $attReport = '';
         $defReport = '';
         foreach($blockAtt as $tmpreport) {
-            $attReport = $attReport . ', ' . $tmpreport->getUser()->getUserName();
+            $attReport = $attReport . $tmpreport->getUser()->getUserName() . ', ';
         }
         foreach($blockDef as $tmpreport) {
-            $defReport = $defReport . ', ' . $tmpreport->getUser()->getUserName();
+            $defReport = $defReport . $tmpreport->getUser()->getUserName() . ', ';
         }
         if ($armorD > $armor || $shieldD > 0) {
             foreach($blockAtt as $attackerLose) {
@@ -237,7 +241,7 @@ class FightController extends Controller
                 $report->setTitle("Rapport de combat : Défaite");
                 $report->setSendAt($now);
                 $report->setUser($defenderLose->getUser());
-                $report->setContent($report->getContent() . "Tandis que vous " . $defReport . " exploriez tranquillement la galaxie en" . $defReport . "! Les dirigeants" . $attReport . " n'ont pas fait le poids face a votre flotte en "  . $defenderLose->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $defenderLose->getPlanet()->getSector()->getPosition() . ":" . $defenderLose->getPlanet()->getPosition() .  ", les flottes de" . $attReport . " vous ont littéralement VIOLÉES ! Mais c'est pas grave on est à la beta et ceci un rapport temporaire.");
+                $report->setContent($report->getContent() . "Tandis que vous " . $defReport . " exploriez tranquillement la galaxie en " . $defenderLose->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $defenderLose->getPlanet()->getSector()->getPosition() . ":" . $defenderLose->getPlanet()->getPosition() .  ", les flottes de" . $attReport . " vous ont littéralement VIOLÉES ! Mais c'est pas grave on est à la beta et ceci un rapport temporaire.");
                 $defenderLose->getUser()->setViewReport(false);
                 $em->persist($report);
                 $em->remove($defenderLose);
