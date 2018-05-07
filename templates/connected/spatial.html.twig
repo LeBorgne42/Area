@@ -35,7 +35,7 @@
                         {{ form_widget(form_spatialShip.recycleur,{attr: { max: usePlanet.getRecycleur()}}) }}
                     </td>
                 </tr>
-                <tr{% if app.user.getIndustry() > 0 or app.user.getMissile() == 0 %} hidden{% endif %}>
+                <tr{% if app.user.getIndustry() < 0 or app.user.getMissile() == 0 %} hidden{% endif %}>
                     <th class="tab-cells-name">
                         {{ 'spatial.hunter'|trans }} x {{ usePlanet.getHunter()|number_format }} <span class="float-right"><span class="ml-5">25 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3">5 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></span>
                     </th>
