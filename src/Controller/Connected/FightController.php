@@ -19,6 +19,7 @@ class FightController extends Controller
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
+        $winner = null;
 
         $firstFleet = $em->getRepository('App:Fleet')
             ->createQueryBuilder('f')
@@ -90,13 +91,21 @@ class FightController extends Controller
                 $winner = self::attackAction(${'oneBlock'.$team1}, ${'oneBlock'.$team2});
             }
         }
-
-        if($winner == ${'oneBlock'.$team1}) {
-            $team2 = $team2 - 1;
-            ${'oneBlock'.$team1} = $winner;
-        } elseif ($winner == ${'oneBlock'.$team2}) {
-            $team1 = $team1 - $team2;
-            ${'oneBlock'.$team2} = $winner;
+        if($winner != null) {
+            if($winner == ${'oneBlock'.$team1}) {
+                $team2 = $team2 - 1;
+                ${'oneBlock'.$team1} = $winner;
+            } elseif ($winner == ${'oneBlock'.$team2}) {
+                $team1 = $team1 - $team2;
+                ${'oneBlock'.$team2} = $winner;
+            }
+        } else {
+            foreach ($fleetsWars as $fleetsWar) {
+                $fleetsWar->setFightAt(null);
+                $em->persist($fleetsWar);
+                $em->flush();
+            }
+            exit;
         }
 
         $team = $tmpcount - 2;
