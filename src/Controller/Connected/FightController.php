@@ -5,6 +5,7 @@ namespace App\Controller\Connected;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use App\Entity\Report;
 use DateTime;
 use DateTimeZone;
 
@@ -114,6 +115,8 @@ class FightController extends Controller
     public function attackAction($blockAtt, $blockDef)
     {
         $em = $this->getDoctrine()->getManager();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
 
         $armor = 0;
         $shield = 0;
@@ -140,8 +143,8 @@ class FightController extends Controller
             $laserD = $laserD + $defender->getLaser();
             $plasmaD = $plasmaD + $defender->getPlasma();
         }
-        $firstBlood = ($plasma + $laser);
-        $firstBloodD = ($plasmaD + $laserD);
+        $firstBlood = (($plasma * 2) + $laser);
+        $firstBloodD = (($plasmaD * 2) + $laserD);
         $countSAtt = 0;
         $countSDef = 0;
 
@@ -176,37 +179,81 @@ class FightController extends Controller
             $secondShotD = ($missileD + $plasmaD + $laserD) - ($firstBloodD * ($countSDef - $countSAtt));
         }
         while((($missileD + $plasmaD + $laserD > 0) && $armor > 0) &&
-            (($missile + $plasma + $laser > 0) && $armorD > 0)) {
+            (($missile + $plasma + $laser > 0) && $armorD > 0) && ($shieldD <= 0 && $shield <= 0)) {
             if ($armorD > 0) {
                 $armorD = $armorD - $secondShot;
+                $tmpSecondShotD = $secondShotD;
+                $secondShot = ($missile + $plasma + $laser) - ($tmpSecondShotD / 2);
             }
             if($armor > 0) {
                 $armor = $armor - $secondShotD;
+                $secondShotD = ($missileD + $plasmaD + $laserD) - ($secondShot / 2);
             }
-            $tmpSecondShotD = ($missileD + $plasmaD + $laserD);
-            $secondShotD = ($missileD + $plasmaD + $laserD) - ($secondShot / 2);
-            $secondShot = ($missile + $plasma + $laser) - ($tmpSecondShotD / 2);
         }
-        if ($armorD > $armor) {
+        if($shieldD > 0) {
+            $armor = 0;
+        }
+        if($shield > 0) {
+            $armorD = 0;
+        }
+        $attReport = '';
+        $defReport = '';
+        foreach($blockAtt as $tmpreport) {
+            $attReport = $attReport . ', ' . $tmpreport->getUser()->getUserName();
+        }
+        foreach($blockDef as $tmpreport) {
+            $defReport = $defReport . ', ' . $tmpreport->getUser()->getUserName();
+        }
+        if ($armorD > $armor || $shieldD > 0) {
             foreach($blockAtt as $attackerLose) {
+                $report = new Report();
+                $report->setTitle("Rapport de combat : Défaite");
+                $report->setSendAt($now);
+                $report->setUser($attackerLose->getUser());
+                $report->setContent($report->getContent() . "Tandis que vous " . $attReport . " exploriez tranquillement la galaxie en " . $attackerLose->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $attackerLose->getPlanet()->getSector()->getPosition() . ":" . $attackerLose->getPlanet()->getPosition() . " les flottes de" . $defReport . " vous ont littéralement VIOLÉES ! Mais c'est pas grave on est à la beta et ceci un rapport temporaire.");
+                $attackerLose->getUser()->setViewReport(false);
+                $em->persist($report);
                 $em->remove($attackerLose);
             }
             foreach($blockDef as $defenderWin) {
+                $report = new Report();
+                $report->setTitle("Rapport de combat : Victoire");
+                $report->setSendAt($now);
+                $report->setUser($defenderWin->getUser());
+                $report->setContent($report->getContent() . "C'est une victoire pour vous " . $defReport . "! Les dirigeants" . $attReport . " n'ont pas fait le poids face a votre flotte en "  . $defenderWin->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $defenderWin->getPlanet()->getSector()->getPosition() . ":" . $defenderWin->getPlanet()->getPosition() .  " vous vous imposez toujours un peu plus dans cette galaxie lointaine jusqu'à atteindre les sommets !");
+                $defenderWin->getUser()->setViewReport(false);
+                $em->persist($report);
                 if ($defenderWin->getArmor() != $armorD) {
-                    $malus = ($defenderWin->getArmor()) / (($defenderWin->getArmor() - $armorD) / rand(2, 4));
+                    $malus = ($defenderWin->getArmor()) / (($defenderWin->getArmor() - $armorD) / rand(1, 3));
                     $defenderWin->setFleetWinRatio(number_format($malus, 2));
+                    $defenderWin->setFightAt(null);
                     $em->persist($defenderWin);
                 }
             }
             return($blockDef);
         } else {
             foreach($blockDef as $defenderLose) {
+                $report = new Report();
+                $report->setTitle("Rapport de combat : Défaite");
+                $report->setSendAt($now);
+                $report->setUser($defenderLose->getUser());
+                $report->setContent($report->getContent() . "Tandis que vous " . $defReport . " exploriez tranquillement la galaxie en" . $defReport . "! Les dirigeants" . $attReport . " n'ont pas fait le poids face a votre flotte en "  . $defenderLose->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $defenderLose->getPlanet()->getSector()->getPosition() . ":" . $defenderLose->getPlanet()->getPosition() .  ", les flottes de" . $attReport . " vous ont littéralement VIOLÉES ! Mais c'est pas grave on est à la beta et ceci un rapport temporaire.");
+                $defenderLose->getUser()->setViewReport(false);
+                $em->persist($report);
                 $em->remove($defenderLose);
             }
             foreach($blockAtt as $attackerWin) {
+                $report = new Report();
+                $report->setTitle("Rapport de combat : Victoire");
+                $report->setSendAt($now);
+                $report->setUser($attackerWin->getUser());
+                $report->setContent($report->getContent() . "C'est une victoire pour vous " . $attReport . "! Les dirigeants" . $defReport . " n'ont pas fait le poids face a votre flotte en" . $defReport . "! Les dirigeants" . $attReport . " n'ont pas fait le poids face a votre flotte en "  . $attackerWin->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $attackerWin->getPlanet()->getSector()->getPosition() . ":" . $attackerWin->getPlanet()->getPosition() .  " vous vous imposez toujours un peu plus dans cette galaxie lointaine jusqu'à atteindre les sommets !");
+                $attackerWin->getUser()->setViewReport(false);
+                $em->persist($report);
                 if($attackerWin->getArmor() != $armor) {
-                    $malus = ($attackerWin->getArmor()) / (($attackerWin->getArmor() - $armor) / rand(2, 3));
+                    $malus = ($attackerWin->getArmor()) / (($attackerWin->getArmor() - $armor) / rand(1, 2));
                     $attackerWin->setFleetWinRatio(number_format($malus, 2));
+                    $attackerWin->setFightAt(null);
                     $em->persist($attackerWin);
                 }
             }
@@ -245,11 +292,26 @@ class FightController extends Controller
         $userDefender= $invader->getPlanet()->getUser();
         $dMilitary = $defenser->getWorker() + ($defenser->getSoldier() * 6);
         $alea = rand(5, 9);
+
+
+        $reportInv = new Report();
+        $reportInv->setSendAt($now);
+        $reportInv->setUser($user);
+        $user->setViewReport(false);
+
+
+        $reportDef = new Report();
+        $reportDef->setSendAt($now);
+        $reportDef->setUser($userDefender);
+        $userDefender->setViewReport(false);
+
         if($barge and $invader->getPlanet()->getUser() and $invader->getAllianceUser() == null) {
             if($barge >= $invader->getSoldier()) {
                 $aMilitary = $invader->getSoldier() * $alea;
+                $soldierAtmp = $invader->getSoldier();
             } else {
                 $aMilitary = $barge * $alea;
+                $soldierAtmp = $barge;
             }
             if($dMilitary > $aMilitary) {
                 $aMilitary = ($defenser->getSoldier() * 6) - $aMilitary;
@@ -257,13 +319,25 @@ class FightController extends Controller
                 $defenser->setBarge($defenser->getBarge() + $invader->getBarge());
                 $invader->setBarge(0);
                 if($aMilitary < 0) {
+                    $soldierDtmp = $defenser->getSoldier();
+                    $workerDtmp = $defenser->getWorker();
                     $defenser->setSoldier(0);
                     $defenser->setWorker($defenser->getWorker() + $aMilitary);
+                    $soldierDtmp = $soldierDtmp - $defenser->getSoldier();
+                    $workerDtmp = $workerDtmp - $defenser->getWorker();
                 } else {
                     $defenser->setSoldier($aMilitary / 6);
                 }
+                $reportDef->setTitle("Rapport d'invasion : Victoire (défense)");
+                $reportDef->setContent("Bien joué ! Vos travailleurs et soldats ont repoussé l'invasion du joueur " . $user->getUserName() . " sur votre planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . ".  " . $soldierAtmp . " soldats vous ont attaqué, tous ont été tué. Vous avez ainsi prit le contrôle des barges de l'attaquant.");
+                $reportInv->setTitle("Rapport d'invasion : Défaite (attaque)");
+                $reportInv->setContent("'AH AH AH AH' le rire de " . $userDefender->getUserName() . " résonne à vos oreilles d'un curieuse façon. Votre sang bouillonne vous l'a vouliez cette planète. Qu'il rigole donc, vous reviendrez prendre " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . " et ferez effacer des livres d'histoires son ridicule nom. Vous avez tout de même tué " . $soldierDtmp . " soldats et " . $workerDtmp . " travailleurs à l'ennemi. Tous vos soldats sont morts et vos barges sont resté sur la planète. Courage commandant.");
             } else {
+                $soldierDtmp = $defenser->getSoldier();
+                $workerDtmp = $defenser->getWorker();
+                $soldierAtmp = $invader->getSoldier();
                 $invader->setSoldier(($aMilitary - $dMilitary) / $alea);
+                $soldierAtmp = $soldierAtmp - $invader->getSoldier();
                 $defenser->setSoldier(0);
                 $defenser->setWorker(2000);
                 if(count($invader->getUser()->getPlanets()) < 21) {
@@ -282,11 +356,17 @@ class FightController extends Controller
                     }
                     $em->persist($userDefender);
                 }
+                $reportDef->setTitle("Rapport d'invasion : Défaite (défense)");
+                $reportDef->setContent("Mais QUI ? QUI !!! Vous as donné un commandant si médiocre " . $user->getUserName() . " n'a pas eu a faire grand chose pour prendre votre planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . ".  " . round($soldierAtmp) . " soldats ennemis sont tout de même éliminé. C'est toujours ça de gagner. Vos " . $soldierDtmp . " soldats et " . $workerDtmp . " travailleurs sont tous mort. Votre empire en a prit un coup, mais il vous reste des planètes, il est l'heure de la revanche !");
+                $reportInv->setTitle("Rapport d'invasion : Victoire (attaque)");
+                $reportInv->setContent("Vous débarquez après que la planète ait été prise et vous installez sur le trône de " . $userDefender->getUserName() . ". Qu'il est bon d'entendre ses pleures lointain... La planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . " est désormais votre! Il est temps de remettre de l'ordre dans la galaxie. " . round($soldierAtmp) . " de vos soldats ont péri dans l'invasion. Mais les défenseurs ont aussi leurs pertes : " . $soldierDtmp . " soldats et " . $workerDtmp . " travailleurs ont péri. Cependant vous épargnez 2000 travailleurs dans votre bonté (surtout pour faire tourner la planète).");
             }
             $em->persist($invader);
             if($invader->getNbrShips() == 0) {
                 $em->remove($invader);
             }
+            $em->persist($reportInv);
+            $em->persist($reportDef);
             $em->persist($defenser);
             $em->flush();
         }

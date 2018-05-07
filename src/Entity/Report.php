@@ -26,13 +26,13 @@ class Report
     protected $user;
 
     /**
-     * @ORM\Column(name="title",type="string", length=20)
+     * @ORM\Column(name="title",type="string", length=40)
      * @Assert\NotBlank(message = "required")
      */
     protected $title;
 
     /**
-     * @ORM\Column(name="content",type="string", length=500)
+     * @ORM\Column(name="content",type="string", length=1500)
      * @Assert\NotBlank(message = "required")
      */
     protected $content;
@@ -88,7 +88,7 @@ class Report
     }
 
     /**
-     * @param mixed $content
+     * @param $content
      */
     public function setContent($content): void
     {
