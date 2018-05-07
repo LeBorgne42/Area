@@ -51,10 +51,10 @@ class DailyController extends Controller
                 $em->persist($ally);
             }
             $soldier = $user->getAllSoldier();
-            $ship = $user->getAllShips();
+            $ship = $user->getAllShipsCost();
             $cost = $user->getBitcoin();
             $report->setContent($report->getContent() . "Le travaille fournit par vos travailleurs vous rapporte " . round($worker) . " Bitcoin.");
-            $empireCost = ($soldier * 2) + ($ship / 10);
+            $empireCost = ($soldier * 2) + $ship;
             $cost = $cost - $empireCost + ($worker);
             $report->setContent($report->getContent() . " L'entretien de votre empire vous coûte cependant " . round($empireCost) . " Bitcoin.");
             $point = ($worker / 100) + ($ship / 5) + ($soldier) + $planetPoint;

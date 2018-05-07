@@ -464,6 +464,22 @@ class User implements UserInterface, \Serializable
     {
         $return = 0;
         foreach($this->planets as $planet) {
+            $return = $return + $planet->getShipOn();
+        }
+        foreach($this->fleets as $fleet) {
+            $return = $return + $fleet->getNbrShips();
+        }
+        return $return;
+    }
+
+
+    /**
+     * @return int
+     */
+    public function getAllShipsCost(): int
+    {
+        $return = 0;
+        foreach($this->planets as $planet) {
             $return = $return + ($planet->getNbrSignatures() / 10);
         }
         foreach($this->fleets as $fleet) {
@@ -479,7 +495,7 @@ class User implements UserInterface, \Serializable
     {
         $return = 0;
         foreach($this->planets as $planet) {
-            $return = $return + ($planet->getSoldier() / 5);
+            $return = $return + $planet->getSoldier();
         }
         foreach($this->fleets as $fleet) {
             $return = $return + $fleet->getSoldier();
