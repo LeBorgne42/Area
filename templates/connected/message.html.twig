@@ -47,7 +47,9 @@
                                 <div class="p-3">
                                     {{ message.getContent()|raw }}
                                 </div>
-                                <div class="float-right"><a class="btn-top" data-toggle="modal" data-target="#respondeModal" href="{{ path('message_responde', {'idp': usePlanet.getId()}) }}">{{ 'responde'|trans }}</a></div>
+                                {% if message.getSender() %}
+                                    <div class="float-right"><a class="btn-top" data-toggle="modal" data-target="#respondeModal" href="{{ path('message_responde', {'idp': usePlanet.getId(), 'id': message.getIdSender()}) }}">{{ 'responde'|trans }}</a></div>
+                                {% endif %}
                             </th>
                         </tr>
                         </tbody>

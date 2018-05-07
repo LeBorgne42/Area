@@ -214,7 +214,7 @@ class FightController extends Controller
                 $report->setTitle("Rapport de combat : Défaite");
                 $report->setSendAt($now);
                 $report->setUser($attackerLose->getUser());
-                $report->setContent($report->getContent() . "Tandis que vous " . $attReport . " exploriez tranquillement la galaxie en " . $attackerLose->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $attackerLose->getPlanet()->getSector()->getPosition() . ":" . $attackerLose->getPlanet()->getPosition() . " les flottes de" . $defReport . " vous ont littéralement VIOLÉES ! Mais c'est pas grave on est à la beta et ceci un rapport temporaire.");
+                $report->setContent($report->getContent() . "Tandis que vous " . $attReport . " exploriez tranquillement la galaxie en " . $attackerLose->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $attackerLose->getPlanet()->getSector()->getPosition() . ":" . $attackerLose->getPlanet()->getPosition() . " les flottes de " . $defReport . " vous ont littéralement VIOLÉES ! Mais c'est pas grave on est à la beta et ceci un rapport temporaire.");
                 $attackerLose->getUser()->setViewReport(false);
                 $em->persist($report);
                 $em->remove($attackerLose);
@@ -241,7 +241,7 @@ class FightController extends Controller
                 $report->setTitle("Rapport de combat : Défaite");
                 $report->setSendAt($now);
                 $report->setUser($defenderLose->getUser());
-                $report->setContent($report->getContent() . "Tandis que vous " . $defReport . " exploriez tranquillement la galaxie en " . $defenderLose->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $defenderLose->getPlanet()->getSector()->getPosition() . ":" . $defenderLose->getPlanet()->getPosition() .  ", les flottes de" . $attReport . " vous ont littéralement VIOLÉES ! Mais c'est pas grave on est à la beta et ceci un rapport temporaire.");
+                $report->setContent($report->getContent() . "Tandis que vous " . $defReport . " exploriez tranquillement la galaxie en " . $defenderLose->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $defenderLose->getPlanet()->getSector()->getPosition() . ":" . $defenderLose->getPlanet()->getPosition() .  ", les flottes de " . $attReport . " vous ont littéralement VIOLÉES ! Mais c'est pas grave on est à la beta et ceci un rapport temporaire.");
                 $defenderLose->getUser()->setViewReport(false);
                 $em->persist($report);
                 $em->remove($defenderLose);

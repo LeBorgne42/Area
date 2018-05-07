@@ -139,7 +139,8 @@ span a {
 .unlogin-block {
   margin-top: 2%;
   color: #fff;
-  min-height: 345px;
+  vertical-align: middle!important;
+  min-height: 400px;
   word-wrap: break-word;
   background-color: rgba(83,74,74,0.8);
   border: 1px solid rgba(0,0,0,.125);

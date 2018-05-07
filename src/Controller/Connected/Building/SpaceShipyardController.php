@@ -272,8 +272,8 @@ class SpaceShipyardController extends Controller
         }
 
         $now->add(new DateInterval('PT' . ($level * 21000) . 'S'));
-        $usePlanet->setNiobium($usePlanetNb - ($level * 23000));
-        $usePlanet->setWater($usePlanetWt - ($level * 34000));
+        $usePlanet->setNiobium($usePlanetNb - ($level * 13000));
+        $usePlanet->setWater($usePlanetWt - ($level * 19000));
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setConstruct('caserne');
         $usePlanet->setConstructAt($now);

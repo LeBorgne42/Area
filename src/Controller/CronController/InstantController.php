@@ -202,7 +202,7 @@ class InstantController extends Controller
                     ->join('f.user', 'u')
                     ->where('f.planet = :planet')
                     ->andWhere('u.ally != :ally')
-                    ->setParameters(array('planet' => $newHome, 'true' => true, 'ally' => $fleet->getUser()->getAlly()))
+                    ->setParameters(array('planet' => $newHome, 'ally' => $fleet->getUser()->getAlly()))
                     ->getQuery()
                     ->getResult();
             } else {

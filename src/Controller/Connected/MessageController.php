@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\Front\MessageType;
+use App\Form\Front\MessageRespondeType;
 use App\Entity\Message;
 use DateTime;
 use DateTimeZone;
@@ -92,9 +93,9 @@ class MessageController extends Controller
     }
 
     /**
-     * @Route("/repondre/{idp}", name="message_responde", requirements={"idp"="\d+"})
+     * @Route("/repondre/{idp}/{id}", name="message_responde", requirements={"idp"="\d+", "id"="\d+"})
      */
-    public function messageRespondeAction(Request $request, $idp)
+    public function messageRespondeAction(Request $request, $idp, $id)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
@@ -114,29 +115,38 @@ class MessageController extends Controller
             ->getQuery()
             ->getOneOrNullResult();
 
-        $form_message = $this->createForm(MessageType::class, $message);
+        $form_message = $this->createForm(MessageRespondeType::class, $message);
         $form_message->handleRequest($request);
 
         if ($form_message->isSubmitted() && $form_message->isValid() && $form_message->get('bitcoin')->getData() < $user->getBitcoin()) {
-            $recever = $form_message->get('user')->getData();
+            $userRecever = $em->getRepository('App:User')
+                ->createQueryBuilder('u')
+                ->where('u.id = :id')
+                ->setParameters(array('id' => $id))
+                ->getQuery()
+                ->getOneOrNullResult();
+
             if ($form_message->get('anonymous')->getData() == false) {
                 $message->setSender($user->getUsername());
             }
             $message->setIdSender($user->getId());
+            $message->setUser($userRecever);
             $message->setContent(nl2br($form_message->get('content')->getData()));
             $message->setSendAt($now);
-            $recever->setBitcoin($recever->getBitcoin() + $form_message->get('bitcoin')->getData());
-            $recever->setViewMessage(false);
+            $userRecever->setBitcoin($userRecever->getBitcoin() + $form_message->get('bitcoin')->getData());
+            $userRecever->setViewMessage(false);
             $user->setBitcoin($user->getBitcoin() - $form_message->get('bitcoin')->getData());
             $em->persist($user);
-            $em->persist($recever);
+            $em->persist($userRecever);
             $em->persist($message);
             $em->flush();
+            return $this->redirectToRoute('message', array('idp' => $usePlanet->getId()));
         }
 
         return $this->render('connected/profil/user_responde.html.twig', [
             'usePlanet' => $usePlanet,
             'form_message' => $form_message->createView(),
+            'id' => $id,
         ]);
     }
 }
