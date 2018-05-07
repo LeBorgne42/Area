@@ -389,13 +389,13 @@ class FleetController extends Controller
 
             $sFleet= $fleet->getPlanet()->getSector()->getPosition();
             if (strpos('0 -1 1 -10 10 -9 9', (strval($sFleet - $sector)) ) != false) {
-                $base= 3600;
+                $base= 3000;
             } elseif (strpos('-20 20 12 11 8 2 -12 -11 -8 -2', (strval($sFleet - $sector)) ) != false) {
-                $base= 7200;
+                $base= 6800;
             } elseif (strpos('-28 28 29 30 31 32 33 22 12 3 7 -29 -30 -31 -32 -33 -22 -13 -3 -7', (strval($sFleet - $sector)) ) != false) {
-                $base= 10800;
+                $base= 8000;
             } else {
-                $base= 18000;
+                $base= 15000;
             }
             $now->add(new DateInterval('PT' . ($fleet->getSpeed() * $base) . 'S'));
             $fleet->setNewPlanet($planet->getId());

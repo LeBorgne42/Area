@@ -362,21 +362,21 @@ class Fleet
     }
 
     /**
-     * @return int
+     * @return float
      */
-    public function getSpeed(): int
+    public function getSpeed(): float
     {
-        if($this->getColonizer()) {
-            return 3;
-        }
         if($this->getBarge()) {
             return 3;
         }
-        if($this->getRecycleur()) {
+        if($this->getColonizer()) {
             return 2;
         }
+        if($this->getRecycleur()) {
+            return 1.5;
+        }
         if($this->getFregate()) {
-            return 1.2;
+            return 1.1;
         }
         if($this->getHunter()) {
             return 0.8;
