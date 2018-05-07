@@ -57,6 +57,21 @@ function manageMaxShip() {
             $('#spatial_edit_fleet_moreColonizer').val($('#spatial_edit_fleet_moreColonizer').attr('max'));
         }
     });
+    $('#spatial_edit_fleet_moreCargoI').off('change').on('change',function(e){
+        if($('#spatial_edit_fleet_moreCargoI').attr('max') - $('#spatial_edit_fleet_moreCargoI').val() < 0) {
+            $('#spatial_edit_fleet_moreCargoI').val($('#spatial_edit_fleet_moreCargoI').attr('max'));
+        }
+    });
+    $('#spatial_edit_fleet_moreCargoV').off('change').on('change',function(e){
+        if($('#spatial_edit_fleet_moreCargoV').attr('max') - $('#spatial_edit_fleet_moreCargoV').val() < 0) {
+            $('#spatial_edit_fleet_moreCargoV').val($('#spatial_edit_fleet_moreCargoV').attr('max'));
+        }
+    });
+    $('#spatial_edit_fleet_moreCargoX').off('change').on('change',function(e){
+        if($('#spatial_edit_fleet_moreCargoX').attr('max') - $('#spatial_edit_fleet_moreCargoX').val() < 0) {
+            $('#spatial_edit_fleet_moreCargoX').val($('#spatial_edit_fleet_moreCargoX').attr('max'));
+        }
+    });
     $('#spatial_edit_fleet_moreRecycleur').off('change').on('change',function(e){
         if($('#spatial_edit_fleet_moreRecycleur').attr('max') - $('#spatial_edit_fleet_moreRecycleur').val() < 0) {
             $('#spatial_edit_fleet_moreRecycleur').val($('#spatial_edit_fleet_moreRecycleur').attr('max'));
@@ -67,9 +82,44 @@ function manageMaxShip() {
             $('#spatial_edit_fleet_moreHunter').val($('#spatial_edit_fleet_moreHunter').attr('max'));
         }
     });
+    $('#spatial_edit_fleet_moreHunterHeavy').off('change').on('change',function(e){
+        if($('#spatial_edit_fleet_moreHunterHeavy').attr('max') - $('#spatial_edit_fleet_moreHunterHeavy').val() < 0) {
+            $('#spatial_edit_fleet_moreHunterHeavy').val($('#spatial_edit_fleet_moreHunterHeavy').attr('max'));
+        }
+    });
+    $('#spatial_edit_fleet_moreCorvet').off('change').on('change',function(e){
+        if($('#spatial_edit_fleet_moreCorvet').attr('max') - $('#spatial_edit_fleet_moreCorvet').val() < 0) {
+            $('#spatial_edit_fleet_moreCorvet').val($('#spatial_edit_fleet_moreCorvet').attr('max'));
+        }
+    });
+    $('#spatial_edit_fleet_moreCorvetLaser').off('change').on('change',function(e){
+        if($('#spatial_edit_fleet_moreCorvetLaser').attr('max') - $('#spatial_edit_fleet_moreCorvetLaser').val() < 0) {
+            $('#spatial_edit_fleet_moreCorvetLaser').val($('#spatial_edit_fleet_moreCorvetLaser').attr('max'));
+        }
+    });
     $('#spatial_edit_fleet_moreFregate').off('change').on('change',function(e){
         if($('#spatial_edit_fleet_moreFregate').attr('max') - $('#spatial_edit_fleet_moreFregate').val() < 0) {
             $('#spatial_edit_fleet_moreFregate').val($('#spatial_edit_fleet_moreFregate').attr('max'));
+        }
+    });
+    $('#spatial_edit_fleet_moreFregatePlasma').off('change').on('change',function(e){
+        if($('#spatial_edit_fleet_moreFregatePlasma').attr('max') - $('#spatial_edit_fleet_moreFregatePlasma').val() < 0) {
+            $('#spatial_edit_fleet_moreFregatePlasma').val($('#spatial_edit_fleet_moreFregatePlasma').attr('max'));
+        }
+    });
+    $('#spatial_edit_fleet_moreCroiser').off('change').on('change',function(e){
+        if($('#spatial_edit_fleet_moreCroiser').attr('max') - $('#spatial_edit_fleet_moreCroiser').val() < 0) {
+            $('#spatial_edit_fleet_moreCroiser').val($('#spatial_edit_fleet_moreCroiser').attr('max'));
+        }
+    });
+    $('#spatial_edit_fleet_moreIronClad').off('change').on('change',function(e){
+        if($('#spatial_edit_fleet_moreIronClad').attr('max') - $('#spatial_edit_fleet_moreIronClad').val() < 0) {
+            $('#spatial_edit_fleet_moreIronClad').val($('#spatial_edit_fleet_moreIronClad').attr('max'));
+        }
+    });
+    $('#spatial_edit_fleet_moreDestroyer').off('change').on('change',function(e){
+        if($('#spatial_edit_fleet_moreDestroyer').attr('max') - $('#spatial_edit_fleet_moreDestroyer').val() < 0) {
+            $('#spatial_edit_fleet_moreDestroyer').val($('#spatial_edit_fleet_moreDestroyer').attr('max'));
         }
     });
     $('#spatial_edit_fleet_moreBarge').off('change').on('change',function(e){
@@ -87,6 +137,21 @@ function manageMaxShip() {
             $('#spatial_edit_fleet_lessColonizer').val($('#spatial_edit_fleet_lessColonizer').attr('max'));
         }
     });
+    $('#spatial_edit_fleet_lessCargoI').off('change').on('change',function(e){
+        if($('#spatial_edit_fleet_lessCargoI').attr('max') - $('#spatial_edit_fleet_lessCargoI').val() < 0) {
+            $('#spatial_edit_fleet_lessCargoI').val($('#spatial_edit_fleet_lessCargoI').attr('max'));
+        }
+    });
+    $('#spatial_edit_fleet_lessCargoV').off('change').on('change',function(e){
+        if($('#spatial_edit_fleet_lessCargoV').attr('max') - $('#spatial_edit_fleet_lessCargoV').val() < 0) {
+            $('#spatial_edit_fleet_lessCargoV').val($('#spatial_edit_fleet_lessCargoV').attr('max'));
+        }
+    });
+    $('#spatial_edit_fleet_lessCargoX').off('change').on('change',function(e){
+        if($('#spatial_edit_fleet_lessCargoX').attr('max') - $('#spatial_edit_fleet_lessCargoX').val() < 0) {
+            $('#spatial_edit_fleet_lessCargoX').val($('#spatial_edit_fleet_lessCargoX').attr('max'));
+        }
+    });
     $('#spatial_edit_fleet_lessRecycleur').off('change').on('change',function(e){
         if($('#spatial_edit_fleet_lessRecycleur').attr('max') - $('#spatial_edit_fleet_lessRecycleur').val() < 0) {
             $('#spatial_edit_fleet_lessRecycleur').val($('#spatial_edit_fleet_lessRecycleur').attr('max'));
@@ -97,9 +162,44 @@ function manageMaxShip() {
             $('#spatial_edit_fleet_lessHunter').val($('#spatial_edit_fleet_lessHunter').attr('max'));
         }
     });
+    $('#spatial_edit_fleet_lessHunterHeavy').off('change').on('change',function(e){
+        if($('#spatial_edit_fleet_lessHunterHeavy').attr('max') - $('#spatial_edit_fleet_lessHunterHeavy').val() < 0) {
+            $('#spatial_edit_fleet_lessHunterHeavy').val($('#spatial_edit_fleet_lessHunterHeavy').attr('max'));
+        }
+    });
+    $('#spatial_edit_fleet_lessCorvet').off('change').on('change',function(e){
+        if($('#spatial_edit_fleet_lessCorvet').attr('max') - $('#spatial_edit_fleet_lessCorvet').val() < 0) {
+            $('#spatial_edit_fleet_lessCorvet').val($('#spatial_edit_fleet_lessCorvet').attr('max'));
+        }
+    });
+    $('#spatial_edit_fleet_lessCorvetLaser').off('change').on('change',function(e){
+        if($('#spatial_edit_fleet_lessCorvetLaser').attr('max') - $('#spatial_edit_fleet_lessCorvetLaser').val() < 0) {
+            $('#spatial_edit_fleet_lessCorvetLaser').val($('#spatial_edit_fleet_lessCorvetLaser').attr('max'));
+        }
+    });
     $('#spatial_edit_fleet_lessFregate').off('change').on('change',function(e){
         if($('#spatial_edit_fleet_lessFregate').attr('max') - $('#spatial_edit_fleet_lessFregate').val() < 0) {
             $('#spatial_edit_fleet_lessFregate').val($('#spatial_edit_fleet_lessFregate').attr('max'));
+        }
+    });
+    $('#spatial_edit_fleet_lessFregatePlasma').off('change').on('change',function(e){
+        if($('#spatial_edit_fleet_lessFregatePlasma').attr('max') - $('#spatial_edit_fleet_lessFregatePlasma').val() < 0) {
+            $('#spatial_edit_fleet_lessFregatePlasma').val($('#spatial_edit_fleet_lessFregatePlasma').attr('max'));
+        }
+    });
+    $('#spatial_edit_fleet_lessCroiser').off('change').on('change',function(e){
+        if($('#spatial_edit_fleet_lessCroiser').attr('max') - $('#spatial_edit_fleet_lessCroiser').val() < 0) {
+            $('#spatial_edit_fleet_lessCroiser').val($('#spatial_edit_fleet_lessCroiser').attr('max'));
+        }
+    });
+    $('#spatial_edit_fleet_lessIronClad').off('change').on('change',function(e){
+        if($('#spatial_edit_fleet_lessIronClad').attr('max') - $('#spatial_edit_fleet_lessIronClad').val() < 0) {
+            $('#spatial_edit_fleet_lessIronClad').val($('#spatial_edit_fleet_lessIronClad').attr('max'));
+        }
+    });
+    $('#spatial_edit_fleet_lessDestroyer').off('change').on('change',function(e){
+        if($('#spatial_edit_fleet_lessDestroyer').attr('max') - $('#spatial_edit_fleet_lessDestroyer').val() < 0) {
+            $('#spatial_edit_fleet_lessDestroyer').val($('#spatial_edit_fleet_lessDestroyer').attr('max'));
         }
     });
     $('#spatial_edit_fleet_lessBarge').off('change').on('change',function(e){
@@ -167,6 +267,21 @@ function manageMaxShip() {
             $('#spatial_fleet_colonizer').val($('#spatial_fleet_colonizer').attr('max'));
         }
     });
+    $('#spatial_fleet_cargoI').off('change').on('change',function(e){
+        if($('#spatial_fleet_cargoI').attr('max') - $('#spatial_fleet_cargoI').val() < 0) {
+            $('#spatial_fleet_cargoI').val($('#spatial_fleet_cargoI').attr('max'));
+        }
+    });
+    $('#spatial_fleet_cargoV').off('change').on('change',function(e){
+        if($('#spatial_fleet_cargoV').attr('max') - $('#spatial_fleet_cargoV').val() < 0) {
+            $('#spatial_fleet_cargoV').val($('#spatial_fleet_cargoV').attr('max'));
+        }
+    });
+    $('#spatial_fleet_cargoX').off('change').on('change',function(e){
+        if($('#spatial_fleet_cargoX').attr('max') - $('#spatial_fleet_cargoX').val() < 0) {
+            $('#spatial_fleet_cargoX').val($('#spatial_fleet_cargoX').attr('max'));
+        }
+    });
     $('#spatial_fleet_recycleur').off('change').on('change',function(e){
         if($('#spatial_fleet_recycleur').attr('max') - $('#spatial_fleet_recycleur').val() < 0) {
             $('#spatial_fleet_recycleur').val($('#spatial_fleet_recycleur').attr('max'));
@@ -177,9 +292,44 @@ function manageMaxShip() {
             $('#spatial_fleet_hunter').val($('#spatial_fleet_hunter').attr('max'));
         }
     });
+    $('#spatial_fleet_hunterHeavy').off('change').on('change',function(e){
+        if($('#spatial_fleet_hunterHeavy').attr('max') - $('#spatial_fleet_hunterHeavy').val() < 0) {
+            $('#spatial_fleet_hunterHeavy').val($('#spatial_fleet_hunterHeavy').attr('max'));
+        }
+    });
+    $('#spatial_fleet_corvet').off('change').on('change',function(e){
+        if($('#spatial_fleet_corvet').attr('max') - $('#spatial_fleet_corvet').val() < 0) {
+            $('#spatial_fleet_corvet').val($('#spatial_fleet_corvet').attr('max'));
+        }
+    });
+    $('#spatial_fleet_corvetLaser').off('change').on('change',function(e){
+        if($('#spatial_fleet_corvetLaser').attr('max') - $('#spatial_fleet_corvetLaser').val() < 0) {
+            $('#spatial_fleet_corvetLaser').val($('#spatial_fleet_corvetLaser').attr('max'));
+        }
+    });
     $('#spatial_fleet_fregate').off('change').on('change',function(e){
         if($('#spatial_fleet_fregate').attr('max') - $('#spatial_fleet_fregate').val() < 0) {
             $('#spatial_fleet_fregate').val($('#spatial_fleet_fregate').attr('max'));
+        }
+    });
+    $('#spatial_fleet_fregatePlasma').off('change').on('change',function(e){
+        if($('#spatial_fleet_fregatePlasma').attr('max') - $('#spatial_fleet_fregatePlasma').val() < 0) {
+            $('#spatial_fleet_fregatePlasma').val($('#spatial_fleet_fregatePlasma').attr('max'));
+        }
+    });
+    $('#spatial_fleet_croiser').off('change').on('change',function(e){
+        if($('#spatial_fleet_croiser').attr('max') - $('#spatial_fleet_croiser').val() < 0) {
+            $('#spatial_fleet_croiser').val($('#spatial_fleet_croiser').attr('max'));
+        }
+    });
+    $('#spatial_fleet_ironClad').off('change').on('change',function(e){
+        if($('#spatial_fleet_ironClad').attr('max') - $('#spatial_fleet_ironClad').val() < 0) {
+            $('#spatial_fleet_ironClad').val($('#spatial_fleet_ironClad').attr('max'));
+        }
+    });
+    $('#spatial_fleet_destroyer').off('change').on('change',function(e){
+        if($('#spatial_fleet_destroyer').attr('max') - $('#spatial_fleet_destroyer').val() < 0) {
+            $('#spatial_fleet_destroyer').val($('#spatial_fleet_destroyer').attr('max'));
         }
     });
     $('#spatial_fleet_barge').off('change').on('change',function(e){

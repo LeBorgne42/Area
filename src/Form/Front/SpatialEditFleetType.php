@@ -17,6 +17,96 @@ class SpatialEditFleetType extends AbstractType
     {
         $builder
             ->add(
+                'moreCargoI',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                )
+            )
+            ->add(
+                'moreCargoV',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                )
+            )
+            ->add(
+                'moreCargoX',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                )
+            )
+            ->add(
+                'lessCargoI',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                )
+            )
+            ->add(
+                'lessCargoV',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                )
+            )
+            ->add(
+                'lessCargoX',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                )
+            )
+            ->add(
                 'moreSonde',
                 null,
                 array(
@@ -194,6 +284,231 @@ class SpatialEditFleetType extends AbstractType
             )
             ->add(
                 'lessBarge',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                    'mapped' => false,
+                )
+            )
+
+            ->add(
+                'moreHunterHeavy',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                    'mapped' => false,
+                )
+            )
+            ->add(
+                'moreCorvet',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                    'mapped' => false,
+                )
+            )
+            ->add(
+                'moreCorvetLaser',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                    'mapped' => false,
+                )
+            )
+            ->add(
+                'moreFregatePlasma',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                    'mapped' => false,
+                )
+            )
+            ->add(
+                'moreCroiser',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                    'mapped' => false,
+                )
+            )
+            ->add(
+                'moreIronClad',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                    'mapped' => false,
+                )
+            )
+            ->add(
+                'moreDestroyer',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                    'mapped' => false,
+                )
+            )
+            ->add(
+                'lessHunterHeavy',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                    'mapped' => false,
+                )
+            )
+            ->add(
+                'lessCorvet',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                    'mapped' => false,
+                )
+            )
+            ->add(
+                'lessCorvetLaser',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                    'mapped' => false,
+                )
+            )
+            ->add(
+                'lessFregatePlasma',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                    'mapped' => false,
+                )
+            )
+            ->add(
+                'lessCroiser',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                    'mapped' => false,
+                )
+            )
+            ->add(
+                'lessIronClad',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                    'mapped' => false,
+                )
+            )
+            ->add(
+                'lessDestroyer',
                 null,
                 array(
                     'label' => 'form.nbr',

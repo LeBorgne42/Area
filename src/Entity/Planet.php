@@ -163,6 +163,21 @@ class Planet
     protected $sonde = 0;
 
     /**
+     * @ORM\Column(name="cargoI",type="bigint", nullable=true)
+     */
+    protected $cargoI = 0;
+
+    /**
+     * @ORM\Column(name="cargoV",type="bigint", nullable=true)
+     */
+    protected $cargoV = 0;
+
+    /**
+     * @ORM\Column(name="cargoX",type="bigint", nullable=true)
+     */
+    protected $cargoX = 0;
+
+    /**
      * @ORM\Column(name="colonizer",type="integer", nullable=true)
      */
     protected $colonizer = 0;
@@ -183,9 +198,44 @@ class Planet
     protected $hunter = 0;
 
     /**
+     * @ORM\Column(name="hunterHeavy",type="bigint", nullable=true)
+     */
+    protected $hunterHeavy = 0;
+
+    /**
+     * @ORM\Column(name="corvet",type="bigint", nullable=true)
+     */
+    protected $corvet = 0;
+
+    /**
+     * @ORM\Column(name="corvetLaser",type="bigint", nullable=true)
+     */
+    protected $corvetLaser = 0;
+
+    /**
      * @ORM\Column(name="fregate",type="bigint", nullable=true)
      */
     protected $fregate = 0;
+
+    /**
+     * @ORM\Column(name="fregatePlasma",type="bigint", nullable=true)
+     */
+    protected $fregatePlasma = 0;
+
+    /**
+     * @ORM\Column(name="croiser",type="bigint", nullable=true)
+     */
+    protected $croiser = 0;
+
+    /**
+     * @ORM\Column(name="ironClad",type="bigint", nullable=true)
+     */
+    protected $ironClad = 0;
+
+    /**
+     * @ORM\Column(name="destroyer",type="bigint", nullable=true)
+     */
+    protected $destroyer = 0;
 
     /**
      * @ORM\Column(name="soldier",type="integer", nullable=true)
@@ -307,18 +357,28 @@ class Planet
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getShipOn()
+    public function getShipOn(): int
     {
-        $fregate = $this->getFregate();
+        $sonde = $this->getSonde();
         $colonizer = $this->getColonizer();
+        $recycleur = $this->getRecycleur();
+        $cargoI = $this->getCargoI();
+        $cargoV = $this->getCargoV();
+        $cargoX = $this->getCargoX();
         $barge = $this->getBarge();
         $hunter = $this->getHunter();
-        $recycleur = $this->getRecycleur();
-        $sonde = $this->getSonde();
+        $hunterHeavy = $this->getHunterHeavy();
+        $corvet = $this->getCorvet();
+        $corvetLaser = $this->getCorvetLaser();
+        $fregate = $this->getFregate();
+        $fregatePlasma = $this->getFregatePlasma();
+        $croiser = $this->getCroiser();
+        $ironClad = $this->getIronClad();
+        $destroyer = $this->getDestroyer();
 
-        $nbr = $fregate + $colonizer + $barge + $hunter + $recycleur + $sonde;
+        $nbr = $fregate + $colonizer + $barge + $hunter + $recycleur + $sonde + $cargoI + $cargoV + $cargoX + $hunterHeavy + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
         return $nbr;
     }
 
@@ -327,14 +387,24 @@ class Planet
      */
     public function getNbrSignatures(): int
     {
-        $fregate = $this->getFregate() * $this->getFregateSignature();
-        $colonizer = $this->getColonizer() * $this->getColonizerSignature();
-        $barge = $this->getBarge() * $this->getBargeSignature();
-        $hunter = $this->getHunter() * $this->getHunterSignature();
-        $recycleur = $this->getRecycleur() * $this->getRecycleurSignature();
         $sonde = $this->getSonde();
+        $colonizer = $this->getColonizer() * 200;
+        $recycleur = $this->getRecycleur() * 80;
+        $cargoI = $this->getCargoI() * 50;
+        $cargoV = $this->getCargoV() * 120;
+        $cargoX = $this->getCargoX() * 250;
+        $barge = $this->getBarge() * 50;
+        $hunter = $this->getHunter() * 5;
+        $hunterHeavy = $this->getHunterHeavy() * 8;
+        $corvet = $this->getCorvet() * 25;
+        $corvetLaser = $this->getCorvetLaser() * 40;
+        $fregate = $this->getFregate() * 60;
+        $fregatePlasma = $this->getFregatePlasma() * 150;
+        $croiser = $this->getCroiser() * 300;
+        $ironClad = $this->getIronClad() * 700;
+        $destroyer = $this->getDestroyer() * 1500;
 
-        $nbr = $fregate + $colonizer + $barge + $hunter + $recycleur + $sonde;
+        $nbr = $fregate + $colonizer + $barge + $hunter + $recycleur + $sonde + $cargoI + $cargoV + $cargoX + $hunterHeavy + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
         return $nbr;
     }
 
@@ -399,46 +469,6 @@ class Planet
             }
         }
         return null;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getBargeSignature()
-    {
-        return 50;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getColonizerSignature()
-    {
-        return 200;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFregateSignature()
-    {
-        return 85;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getHunterSignature()
-    {
-        return 3;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getRecycleurSignature()
-    {
-        return 80;
     }
 
     /**
@@ -1228,4 +1258,163 @@ class Planet
         $this->updatedAt = $updatedAt;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getCargoI()
+    {
+        return $this->cargoI;
+    }
+
+    /**
+     * @param mixed $cargoI
+     */
+    public function setCargoI($cargoI): void
+    {
+        $this->cargoI = $cargoI;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCargoV()
+    {
+        return $this->cargoV;
+    }
+
+    /**
+     * @param mixed $cargoV
+     */
+    public function setCargoV($cargoV): void
+    {
+        $this->cargoV = $cargoV;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCargoX()
+    {
+        return $this->cargoX;
+    }
+
+    /**
+     * @param mixed $cargoX
+     */
+    public function setCargoX($cargoX): void
+    {
+        $this->cargoX = $cargoX;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHunterHeavy()
+    {
+        return $this->hunterHeavy;
+    }
+
+    /**
+     * @param mixed $hunterHeavy
+     */
+    public function setHunterHeavy($hunterHeavy): void
+    {
+        $this->hunterHeavy = $hunterHeavy;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCorvet()
+    {
+        return $this->corvet;
+    }
+
+    /**
+     * @param mixed $corvet
+     */
+    public function setCorvet($corvet): void
+    {
+        $this->corvet = $corvet;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCorvetLaser()
+    {
+        return $this->corvetLaser;
+    }
+
+    /**
+     * @param mixed $corvetLaser
+     */
+    public function setCorvetLaser($corvetLaser): void
+    {
+        $this->corvetLaser = $corvetLaser;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFregatePlasma()
+    {
+        return $this->fregatePlasma;
+    }
+
+    /**
+     * @param mixed $fregatePlasma
+     */
+    public function setFregatePlasma($fregatePlasma): void
+    {
+        $this->fregatePlasma = $fregatePlasma;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCroiser()
+    {
+        return $this->croiser;
+    }
+
+    /**
+     * @param mixed $croiser
+     */
+    public function setCroiser($croiser): void
+    {
+        $this->croiser = $croiser;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIronClad()
+    {
+        return $this->ironClad;
+    }
+
+    /**
+     * @param mixed $ironClad
+     */
+    public function setIronClad($ironClad): void
+    {
+        $this->ironClad = $ironClad;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDestroyer()
+    {
+        return $this->destroyer;
+    }
+
+    /**
+     * @param mixed $destroyer
+     */
+    public function setDestroyer($destroyer): void
+    {
+        $this->destroyer = $destroyer;
+    }
 }

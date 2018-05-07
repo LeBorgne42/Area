@@ -51,12 +51,44 @@
                     {{ form_widget(form_createFleet.colonizer,{attr: { max: usePlanet.getColonizer()}}) }}
                 </td>
             </tr>
+            <tr{% if usePlanet.getCargoI() == 0 %} hidden{% endif %}>
+                <th class="tab-cells-name">
+                    {{ 'spatial.cargoI'|trans }} x {{ usePlanet.getCargoI() }}
+                </th>
+                <td class="center-cells">
+                    {{ form_widget(form_createFleet.cargoI,{attr: { max: usePlanet.getCargoI()}}) }}
+                </td>
+            </tr>
+            <tr{% if usePlanet.getCargoV() == 0 %} hidden{% endif %}>
+                <th class="tab-cells-name">
+                    {{ 'spatial.cargoV'|trans }} x {{ usePlanet.getCargoV() }}
+                </th>
+                <td class="center-cells">
+                    {{ form_widget(form_createFleet.cargoV,{attr: { max: usePlanet.getCargoV()}}) }}
+                </td>
+            </tr>
+            <tr{% if usePlanet.getCargoX() == 0 %} hidden{% endif %}>
+                <th class="tab-cells-name">
+                    {{ 'spatial.cargoX'|trans }} x {{ usePlanet.getCargoX() }}
+                </th>
+                <td class="center-cells">
+                    {{ form_widget(form_createFleet.cargoX,{attr: { max: usePlanet.getCargoX()}}) }}
+                </td>
+            </tr>
             <tr{% if usePlanet.getRecycleur() == 0 %} hidden{% endif %}>
                 <th class="tab-cells-name">
                     {{ 'spatial.recycleur'|trans }} x {{ usePlanet.getRecycleur() }}
                 </th>
                 <td class="center-cells">
                     {{ form_widget(form_createFleet.recycleur,{attr: { max: usePlanet.getRecycleur()}}) }}
+                </td>
+            </tr>
+            <tr{% if usePlanet.getBarge() == 0 %} hidden{% endif %}>
+                <th class="tab-cells-name">
+                    {{ 'spatial.barge'|trans }} x {{ usePlanet.getBarge() }}
+                </th>
+                <td class="center-cells">
+                    {{ form_widget(form_createFleet.barge,{attr: { max: usePlanet.getBarge()}}) }}
                 </td>
             </tr>
             <tr{% if usePlanet.getHunter() == 0 %} hidden{% endif %}>
@@ -67,6 +99,30 @@
                     {{ form_widget(form_createFleet.hunter,{attr: { max: usePlanet.getHunter()}}) }}
                 </td>
             </tr>
+            <tr{% if usePlanet.getHunterHeavy() == 0 %} hidden{% endif %}>
+                <th class="tab-cells-name">
+                    {{ 'spatial.hunterHeavy'|trans }} x {{ usePlanet.getHunterHeavy() }}
+                </th>
+                <td class="center-cells">
+                    {{ form_widget(form_createFleet.hunterHeavy,{attr: { max: usePlanet.getHunterHeavy()}}) }}
+                </td>
+            </tr>
+            <tr{% if usePlanet.getCorvet() == 0 %} hidden{% endif %}>
+                <th class="tab-cells-name">
+                    {{ 'spatial.corvet'|trans }} x {{ usePlanet.getCorvet() }}
+                </th>
+                <td class="center-cells">
+                    {{ form_widget(form_createFleet.corvet,{attr: { max: usePlanet.getCorvet()}}) }}
+                </td>
+            </tr>
+            <tr{% if usePlanet.getCorvetLaser() == 0 %} hidden{% endif %}>
+                <th class="tab-cells-name">
+                    {{ 'spatial.corvetLaser'|trans }} x {{ usePlanet.getCorvetLaser() }}
+                </th>
+                <td class="center-cells">
+                    {{ form_widget(form_createFleet.corvetLaser,{attr: { max: usePlanet.getCorvetLaser()}}) }}
+                </td>
+            </tr>
             <tr{% if usePlanet.getFregate() == 0 %} hidden{% endif %}>
                 <th class="tab-cells-name">
                     {{ 'spatial.fregate'|trans }} x {{ usePlanet.getFregate() }}
@@ -75,12 +131,36 @@
                     {{ form_widget(form_createFleet.fregate,{attr: { max: usePlanet.getFregate()}}) }}
                 </td>
             </tr>
-            <tr{% if usePlanet.getBarge() == 0 %} hidden{% endif %}>
+            <tr{% if usePlanet.getFregatePlasma() == 0 %} hidden{% endif %}>
                 <th class="tab-cells-name">
-                    {{ 'spatial.barge'|trans }} x {{ usePlanet.getBarge() }}
+                    {{ 'spatial.fregatePlasma'|trans }} x {{ usePlanet.getFregatePlasma() }}
                 </th>
                 <td class="center-cells">
-                    {{ form_widget(form_createFleet.barge,{attr: { max: usePlanet.getBarge()}}) }}
+                    {{ form_widget(form_createFleet.fregatePlasma,{attr: { max: usePlanet.getFregatePlasma()}}) }}
+                </td>
+            </tr>
+            <tr{% if usePlanet.getCroiser() == 0 %} hidden{% endif %}>
+                <th class="tab-cells-name">
+                    {{ 'spatial.croiser'|trans }} x {{ usePlanet.getCroiser() }}
+                </th>
+                <td class="center-cells">
+                    {{ form_widget(form_createFleet.croiser,{attr: { max: usePlanet.getCroiser()}}) }}
+                </td>
+            </tr>
+            <tr{% if usePlanet.getIronClad() == 0 %} hidden{% endif %}>
+                <th class="tab-cells-name">
+                    {{ 'spatial.ironClad'|trans }} x {{ usePlanet.getIronClad() }}
+                </th>
+                <td class="center-cells">
+                    {{ form_widget(form_createFleet.ironClad,{attr: { max: usePlanet.getIronClad()}}) }}
+                </td>
+            </tr>
+            <tr{% if usePlanet.getDestroyer() == 0 %} hidden{% endif %}>
+                <th class="tab-cells-name">
+                    {{ 'spatial.destroyer'|trans }} x {{ usePlanet.getDestroyer() }}
+                </th>
+                <td class="center-cells">
+                    {{ form_widget(form_createFleet.destroyer,{attr: { max: usePlanet.getDestroyer()}}) }}
                 </td>
             </tr>
             </tbody>

@@ -52,3 +52,13 @@ tooltip.fleetMove: 'Toutes vos flottes qui sont en mouvement d''une planète ver
 tooltip.fleetOtherPlanet: 'Ici sont les flottes que vous avez sur vos autres planètes.'
 tooltip.fleetNoMyPlanet: 'Et enfin les flottes qui sont sur aucune de vos planètes.'
 fleet.combat: 'en combat'
+fleet.cargoI: 'Cargo I'
+fleet.cargoV: 'Cargo V'
+fleet.cargoX: 'Cargo X'
+fleet.hunterHeavy: 'Chasseur lourd'
+fleet.corvet: Corvette
+fleet.corvetLaser: 'Corvette a laser'
+fleet.fregatePlasma: 'Frégate a plasma'
+fleet.croiser: Croiseur
+fleet.ironClad: Cuirassé
+fleet.destroyer: Destroyer

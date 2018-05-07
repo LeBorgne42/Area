@@ -100,6 +100,146 @@ class SpatialShipType extends AbstractType
                     'required' => false,
                 )
             )
+            ->add(
+                'cargoI',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                )
+            )
+            ->add(
+                'cargoV',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                )
+            )
+            ->add(
+                'cargoX',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                )
+            )
+            ->add(
+                'hunterHeavy',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                )
+            )
+            ->add(
+                'corvet',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                )
+            )
+            ->add(
+                'corvetLaser',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                )
+            )
+            ->add(
+                'fregatePlasma',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                )
+            )
+            ->add(
+                'croiser',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                )
+            )
+            ->add(
+                'ironClad',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                )
+            )
+            ->add(
+                'destroyer',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                )
+            )
             ->add('sendForm', SubmitType::class, array('label' => 'form.construct'));
     }
 

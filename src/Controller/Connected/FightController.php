@@ -223,14 +223,14 @@ class FightController extends Controller
                 $em->remove($attackerLose);
             }
             $planet->setNbCdr($planet->getNbCdr() + ($debrisAtt * 1.15));
-            $planet->setWbCdr($planet->getWtCdr() + $debrisAtt);
+            $planet->setWtCdr($planet->getWtCdr() + $debrisAtt);
             $em->persist($planet);
             foreach($blockDef as $defenderWin) {
                 $report = new Report();
                 $report->setTitle("Rapport de combat : Victoire");
                 $report->setSendAt($now);
                 $report->setUser($defenderWin->getUser());
-                $report->setContent($report->getContent() . "C'est une victoire pour vous " . $defReport . "! Les dirigeants" . $attReport . " n'ont pas fait le poids face a votre flotte en "  . $defenderWin->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $defenderWin->getPlanet()->getSector()->getPosition() . ":" . $defenderWin->getPlanet()->getPosition() .  " vous vous imposez toujours un peu plus dans cette galaxie lointaine jusqu'à atteindre les sommets !");
+                $report->setContent($report->getContent() . "C'est une victoire pour vous " . $defReport . "! Les dirigeants " . $attReport . " n'ont pas fait le poids face a votre flotte en "  . $defenderWin->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $defenderWin->getPlanet()->getSector()->getPosition() . ":" . $defenderWin->getPlanet()->getPosition() .  " vous vous imposez toujours un peu plus dans cette galaxie lointaine jusqu'à atteindre les sommets !");
                 $defenderWin->getUser()->setViewReport(false);
                 $em->persist($report);
                 if ($defenderWin->getArmor() != $armorD) {
@@ -254,14 +254,14 @@ class FightController extends Controller
                 $em->remove($defenderLose);
             }
             $planet->setNbCdr($planet->getNbCdr() + ($debrisDef * 1.15));
-            $planet->setWbCdr($planet->getWtCdr() + $debrisDef);
+            $planet->setWtCdr($planet->getWtCdr() + $debrisDef);
             $em->persist($planet);
             foreach($blockAtt as $attackerWin) {
                 $report = new Report();
                 $report->setTitle("Rapport de combat : Victoire");
                 $report->setSendAt($now);
                 $report->setUser($attackerWin->getUser());
-                $report->setContent($report->getContent() . "C'est une victoire pour vous " . $attReport . "! Les dirigeants" . $defReport . " n'ont pas fait le poids face a votre flotte en" . $defReport . "! Les dirigeants" . $attReport . " n'ont pas fait le poids face a votre flotte en "  . $attackerWin->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $attackerWin->getPlanet()->getSector()->getPosition() . ":" . $attackerWin->getPlanet()->getPosition() .  " vous vous imposez toujours un peu plus dans cette galaxie lointaine jusqu'à atteindre les sommets !");
+                $report->setContent($report->getContent() . "C'est une victoire pour vous " . $attReport . "! Les dirigeants " . $defReport . " n'ont pas fait le poids face a votre flotte en "  . $attackerWin->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $attackerWin->getPlanet()->getSector()->getPosition() . ":" . $attackerWin->getPlanet()->getPosition() .  " vous vous imposez toujours un peu plus dans cette galaxie lointaine jusqu'à atteindre les sommets !");
                 $attackerWin->getUser()->setViewReport(false);
                 $em->persist($report);
                 if($attackerWin->getArmor() != $armor) {

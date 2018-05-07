@@ -146,6 +146,39 @@
                             {{ form_widget(form_manageFleet.lessColonizer,{attr: { max: fleet.getColonizer()}}) }}
                         </td>
                     </tr>
+                    <tr{% if fleet.getPlanet().getCargoI() == 0 and fleet.getCargoI() == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.cargoI'|trans }} x {{ fleet.getCargoI()|number_format }}
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.moreCargoI,{attr: { max: fleet.getPlanet().getCargoI()}}) }}
+                        </td>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.lessCargoI,{attr: { max: fleet.getCargoI()}}) }}
+                        </td>
+                    </tr>
+                    <tr{% if fleet.getPlanet().getCargoV() == 0 and fleet.getCargoV() == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.cargoV'|trans }} x {{ fleet.getCargoV()|number_format }}
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.moreCargoV,{attr: { max: fleet.getPlanet().getCargoV()}}) }}
+                        </td>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.lessCargoV,{attr: { max: fleet.getCargoV()}}) }}
+                        </td>
+                    </tr>
+                    <tr{% if fleet.getPlanet().getCargoX() == 0 and fleet.getCargoX() == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.cargoX'|trans }} x {{ fleet.getCargoX()|number_format }}
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.moreCargoX,{attr: { max: fleet.getPlanet().getCargoX()}}) }}
+                        </td>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.lessCargoX,{attr: { max: fleet.getCargoX()}}) }}
+                        </td>
+                    </tr>
                     <tr{% if fleet.getPlanet().getRecycleur() == 0 and fleet.getRecycleur() == 0 %} hidden{% endif %}>
                         <th class="tab-cells-name">
                             {{ 'fleet.recycleur'|trans }} x {{ fleet.getRecycleur()|number_format }}
@@ -155,6 +188,17 @@
                         </td>
                         <td class="center-cells">
                             {{ form_widget(form_manageFleet.lessRecycleur,{attr: { max: fleet.getRecycleur()}}) }}
+                        </td>
+                    </tr>
+                    <tr{% if fleet.getPlanet().getBarge() == 0 and fleet.getBarge() == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.barge'|trans }} x {{ fleet.getBarge()|number_format }}
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.moreBarge,{attr: { max: fleet.getPlanet().getBarge()}}) }}
+                        </td>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.lessBarge,{attr: { max: fleet.getBarge()}}) }}
                         </td>
                     </tr>
                     <tr{% if fleet.getPlanet().getHunter() == 0 and fleet.getHunter() == 0 %} hidden{% endif %}>
@@ -168,6 +212,39 @@
                             {{ form_widget(form_manageFleet.lessHunter,{attr: { max: fleet.getHunter()}}) }}
                         </td>
                     </tr>
+                    <tr{% if fleet.getPlanet().getHunterHeavy() == 0 and fleet.getHunterHeavy() == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.hunterHeavy'|trans }} x {{ fleet.getHunterHeavy()|number_format }}
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.moreHunterHeavy,{attr: { max: fleet.getPlanet().getHunterHeavy()}}) }}
+                        </td>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.lessHunterHeavy,{attr: { max: fleet.getHunterHeavy()}}) }}
+                        </td>
+                    </tr>
+                    <tr{% if fleet.getPlanet().getCorvet() == 0 and fleet.getCorvet() == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.corvet'|trans }} x {{ fleet.getCorvet()|number_format }}
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.moreCorvet,{attr: { max: fleet.getPlanet().getCorvet()}}) }}
+                        </td>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.lessCorvet,{attr: { max: fleet.getCorvet()}}) }}
+                        </td>
+                    </tr>
+                    <tr{% if fleet.getPlanet().getCorvetLaser() == 0 and fleet.getCorvetLaser() == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.corvetLaser'|trans }} x {{ fleet.getCorvetLaser()|number_format }}
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.moreCorvetLaser,{attr: { max: fleet.getPlanet().getCorvetLaser()}}) }}
+                        </td>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.lessCorvetLaser,{attr: { max: fleet.getCorvetLaser()}}) }}
+                        </td>
+                    </tr>
                     <tr{% if fleet.getPlanet().getFregate() == 0 and fleet.getFregate() == 0 %} hidden{% endif %}>
                         <th class="tab-cells-name">
                             {{ 'fleet.fregate'|trans }} x {{ fleet.getFregate()|number_format }}
@@ -179,15 +256,48 @@
                             {{ form_widget(form_manageFleet.lessFregate,{attr: { max: fleet.getFregate()}}) }}
                         </td>
                     </tr>
-                    <tr{% if fleet.getPlanet().getBarge() == 0 and fleet.getBarge() == 0 %} hidden{% endif %}>
+                    <tr{% if fleet.getPlanet().getFregatePlasma() == 0 and fleet.getFregatePlasma() == 0 %} hidden{% endif %}>
                         <th class="tab-cells-name">
-                            {{ 'fleet.barge'|trans }} x {{ fleet.getBarge()|number_format }}
+                            {{ 'fleet.fregatePlasma'|trans }} x {{ fleet.getFregatePlasma()|number_format }}
                         </th>
                         <td class="center-cells">
-                            {{ form_widget(form_manageFleet.moreBarge,{attr: { max: fleet.getPlanet().getBarge()}}) }}
+                            {{ form_widget(form_manageFleet.moreFregatePlasma,{attr: { max: fleet.getPlanet().getFregatePlasma()}}) }}
                         </td>
                         <td class="center-cells">
-                            {{ form_widget(form_manageFleet.lessBarge,{attr: { max: fleet.getBarge()}}) }}
+                            {{ form_widget(form_manageFleet.lessFregatePlasma,{attr: { max: fleet.getFregatePlasma()}}) }}
+                        </td>
+                    </tr>
+                    <tr{% if fleet.getPlanet().getCroiser() == 0 and fleet.getCroiser() == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.croiser'|trans }} x {{ fleet.getCroiser()|number_format }}
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.moreCroiser,{attr: { max: fleet.getPlanet().getCroiser()}}) }}
+                        </td>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.lessCroiser,{attr: { max: fleet.getCroiser()}}) }}
+                        </td>
+                    </tr>
+                    <tr{% if fleet.getPlanet().getIronClad() == 0 and fleet.getIronClad() == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.ironClad'|trans }} x {{ fleet.getIronClad()|number_format }}
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.moreIronClad,{attr: { max: fleet.getPlanet().getIronClad()}}) }}
+                        </td>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.lessIronClad,{attr: { max: fleet.getIronClad()}}) }}
+                        </td>
+                    </tr>
+                    <tr{% if fleet.getPlanet().getDestroyer() == 0 and fleet.getDestroyer() == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.destroyer'|trans }} x {{ fleet.getDestroyer()|number_format }}
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.moreDestroyer,{attr: { max: fleet.getPlanet().getDestroyer()}}) }}
+                        </td>
+                        <td class="center-cells">
+                            {{ form_widget(form_manageFleet.lessDestroyer,{attr: { max: fleet.getDestroyer()}}) }}
                         </td>
                     </tr>
                     </tbody>
@@ -276,26 +386,80 @@
                         <th class="tab-cells-name">
                             {{ 'fleet.sonde'|trans }} x {{ fleet.getSonde()|number_format }}
                         </th>
+                    </tr>
                     <tr{% if fleet.getColonizer() == 0 %} hidden{% endif %}>
                         <th class="tab-cells-name">
                             {{ 'fleet.colonizer'|trans }} x {{ fleet.getColonizer()|number_format }}
                         </th>
+                    </tr>
+                    <tr{% if fleet.getCargoI() == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.cargoI'|trans }} x {{ fleet.getCargoI()|number_format }}
+                        </th>
+                    </tr>
+                    <tr{% if fleet.getCargoV() == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.cargoV'|trans }} x {{ fleet.getCargoV()|number_format }}
+                        </th>
+                    </tr>
+                    <tr{% if fleet.getCargoX() == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.cargoX'|trans }} x {{ fleet.getCargoX()|number_format }}
+                        </th>
+                    </tr>
                     <tr{% if fleet.getRecycleur() == 0 %} hidden{% endif %}>
                         <th class="tab-cells-name">
                             {{ 'fleet.recycleur'|trans }} x {{ fleet.getRecycleur()|number_format }}
-                        </th>
-                    <tr{% if fleet.getHunter() == 0 %} hidden{% endif %}>
-                        <th class="tab-cells-name">
-                            {{ 'fleet.hunter'|trans }} x {{ fleet.getHunter()|number_format }}
-                        </th>
-                    <tr{% if fleet.getFregate() == 0 %} hidden{% endif %}>
-                        <th class="tab-cells-name">
-                            {{ 'fleet.fregate'|trans }} x {{ fleet.getFregate()|number_format }}
                         </th>
                     </tr>
                     <tr{% if fleet.getBarge() == 0 %} hidden{% endif %}>
                         <th class="tab-cells-name">
                             {{ 'fleet.barge'|trans }} x {{ fleet.getBarge()|number_format }}
+                        </th>
+                    </tr>
+                    <tr{% if fleet.getHunter() == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.hunter'|trans }} x {{ fleet.getHunter()|number_format }}
+                        </th>
+                    </tr>
+                    <tr{% if fleet.getHunterHeavy() == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.hunterHeavy'|trans }} x {{ fleet.getHunterHeavy()|number_format }}
+                        </th>
+                    </tr>
+                    <tr{% if fleet.getCorvet() == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.corvet'|trans }} x {{ fleet.getCorvet()|number_format }}
+                        </th>
+                    </tr>
+                    <tr{% if fleet.getCorvetLaser() == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.corvetLaser'|trans }} x {{ fleet.getCorvetLaser()|number_format }}
+                        </th>
+                    </tr>
+                    <tr{% if fleet.getFregate() == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.fregate'|trans }} x {{ fleet.getFregate()|number_format }}
+                        </th>
+                    </tr>
+                    <tr{% if fleet.getFregatePlasma() == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.fregatePlasma'|trans }} x {{ fleet.getFregatePlasma()|number_format }}
+                        </th>
+                    </tr>
+                    <tr{% if fleet.getCroiser() == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.croiser'|trans }} x {{ fleet.getCroiser()|number_format }}
+                        </th>
+                    </tr>
+                    <tr{% if fleet.getIronClad() == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.ironClad'|trans }} x {{ fleet.getIronClad()|number_format }}
+                        </th>
+                    </tr>
+                    <tr{% if fleet.getDestroyer() == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.destroyer'|trans }} x {{ fleet.getDestroyer()|number_format }}
                         </th>
                     </tr>
                     </tbody>

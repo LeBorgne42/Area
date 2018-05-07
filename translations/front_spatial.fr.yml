@@ -24,3 +24,30 @@ spatial.destroyFleet: 'mettre au sol'
 spatial.sendFleet: envoyer
 spatial.cargo: Cargo
 workerImg: Travailleurs
+popover.title: 'Infos vaisseaux'
+popover.sonde: 'Un vaisseaux rapide et peu cher pour aller espionner vos voisins ou découvrir de belles planètes pour vos colonies.'
+popover.colo: 'Sans ce vaisseau il vous sera impossible de coloniser une nouvelle planète...'
+popover.rec: 'Vous aurez besoin de recycleurs pour récupérer les débris de ressources en orbite des planètes ou sur un astéroïdes.'
+popover.barge: 'Une barge d''invasion a une capacitée de 2000 soldats pour envahir une planète ennemie.'
+popover.hunter: 'Il est rapide et peu cher, ce vaisseau sera la base de votre flotte.'
+popover.fregate: 'La frégate est votre tout premier vaisseau avec un bouclier digne de ce nom, il fera le tampon pour vos chasseurs.'
+popover.cargoI: 'Avec sa capacité de cargo à 25.000 vous ne jurerez que par lui pour faire vos premiers transports.'
+spatial.cargoI: 'Cargo I'
+popover.cargoV: 'Et puis vous découvrirez le Cargo V ! 75.000 de capacité ! Se sont les marchands qui vont être content!'
+spatial.cargoV: 'Cargo V'
+popover.cargoX: 'Enfin le Cargo X, une capacité de 150.000 pour vos plus gros recyclage.'
+spatial.cargoX: 'Cargo X'
+popover.hunterHeavy: 'Doté d''une coque plus résistante et du dernier missile, le chasseur lourd est un bon investissement.'
+spatial.hunterHeavy: 'Chasseur lourd'
+popover.corvet: 'La corvette est votre tout premier vaisseau avec un bouclier, mais celui-ci est tellement petit qu''il ne servira que contre les chasseurs.'
+spatial.corvet: Corvette
+popover.corvetLaser: 'La corvette à laser est doté du tout dernier laser et lui donne une puissance qui dépasse même la frégate.'
+spatial.corvetLaser: 'Corvette a laser'
+popover.fregatePlasma: 'Doté de la dernière technologie de plasma, cette frégate est presque l''arme idéale contre une flotte dotée de forts boucliers.'
+spatial.fregatePlasma: 'Frégate a plasma'
+popover.croiser: 'Ce vaisseau est le plus équilibré de tous, rien a été délaissé sur son developpement, il est le plus polyvalent.'
+spatial.croiser: Croiseur
+popover.ironClad: 'Sa coque est tellement résistante que vous ne risquez pas d''en perdre souvent, il est doté d''une grand puissance.'
+spatial.ironClad: Cuirassé
+popover.destroyer: 'Équipé d''armes peu efficace contre des boucliers, il surpasse tout de même de 400 fois la puissance d''un chasseur et son bouclier est énorme.'
+spatial.destroyer: Destroyer
