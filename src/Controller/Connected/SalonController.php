@@ -122,6 +122,8 @@ class SalonController extends Controller
                 $removeMessage = $em->getRepository('App:S_Content')
                     ->createQueryBuilder('sc')
                     ->orderBy('sc.sendAt', 'ASC')
+                    ->where('sc.salon = :attachSalon')
+                    ->setParameters(array('attachSalon' => $attachSalon))
                     ->setMaxResults('10')
                     ->getQuery()
                     ->getResult();
