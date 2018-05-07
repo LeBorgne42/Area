@@ -139,6 +139,7 @@ class FightController extends Controller
             $missile = $missile + $attacker->getMissile();
             $laser = $laser + $attacker->getLaser();
             $plasma = $plasma + $attacker->getPlasma();
+            $debrisAtt = $attacker->getNbrSignatures();
         }
         foreach($blockDef as $defender) {
             $armorD = $armorD + $defender->getArmor();
@@ -146,6 +147,7 @@ class FightController extends Controller
             $missileD = $missileD + $defender->getMissile();
             $laserD = $laserD + $defender->getLaser();
             $plasmaD = $plasmaD + $defender->getPlasma();
+            $debrisDef = $defender->getNbrSignatures();
         }
         $firstBlood = (($plasma * 2) + $laser);
         $firstBloodD = (($plasmaD * 2) + $laserD);
@@ -216,9 +218,13 @@ class FightController extends Controller
                 $report->setUser($attackerLose->getUser());
                 $report->setContent($report->getContent() . "Tandis que vous " . $attReport . " exploriez tranquillement la galaxie en " . $attackerLose->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $attackerLose->getPlanet()->getSector()->getPosition() . ":" . $attackerLose->getPlanet()->getPosition() . " les flottes de " . $defReport . " vous ont littéralement VIOLÉES ! Mais c'est pas grave on est à la beta et ceci un rapport temporaire.");
                 $attackerLose->getUser()->setViewReport(false);
+                $planet = $attackerLose->getPlanet();
                 $em->persist($report);
                 $em->remove($attackerLose);
             }
+            $planet->setNbCdr($planet->getNbCdr() + ($debrisAtt * 1.15));
+            $planet->setWbCdr($planet->getWtCdr() + $debrisAtt);
+            $em->persist($planet);
             foreach($blockDef as $defenderWin) {
                 $report = new Report();
                 $report->setTitle("Rapport de combat : Victoire");
@@ -243,9 +249,13 @@ class FightController extends Controller
                 $report->setUser($defenderLose->getUser());
                 $report->setContent($report->getContent() . "Tandis que vous " . $defReport . " exploriez tranquillement la galaxie en " . $defenderLose->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $defenderLose->getPlanet()->getSector()->getPosition() . ":" . $defenderLose->getPlanet()->getPosition() .  ", les flottes de " . $attReport . " vous ont littéralement VIOLÉES ! Mais c'est pas grave on est à la beta et ceci un rapport temporaire.");
                 $defenderLose->getUser()->setViewReport(false);
+                $planet = $defenderLose->getPlanet();
                 $em->persist($report);
                 $em->remove($defenderLose);
             }
+            $planet->setNbCdr($planet->getNbCdr() + ($debrisDef * 1.15));
+            $planet->setWbCdr($planet->getWtCdr() + $debrisDef);
+            $em->persist($planet);
             foreach($blockAtt as $attackerWin) {
                 $report = new Report();
                 $report->setTitle("Rapport de combat : Victoire");

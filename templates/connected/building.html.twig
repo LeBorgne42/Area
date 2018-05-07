@@ -14,7 +14,7 @@
             <tbody>
             <tr>
                 <td class="center-cells">
-                    <img class="float-left building-img ml-3" src="{{ asset('img/mining.png') }}">{{ 'building.mining'|trans }} x {{ usePlanet.getMiner()|trans }}
+                    <img class="float-left building-img ml-3" src="{{ asset('img/mining.png') }}"><button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.miner'|trans({'%product%': (((usePlanet.getMiner() + 1) * 1.1)) * 60})|raw }}"><strong>{{ 'building.mining'|trans }} x {{ usePlanet.getMiner()|trans }}</strong></button>
                     <div class="mt-4">{{ (usePlanet.getMiner() + 1) * 300 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ (usePlanet.getMiner() + 1) * 100 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
                     <div class="mt-4">1 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"></div>
                 </td>
@@ -44,7 +44,7 @@
             </tr>
             <tr>
                 <td class="center-cells">
-                    <img class="float-left building-img ml-3" src="{{ asset('img/extract.png') }}">{{ 'building.extract'|trans }} x {{ usePlanet.getExtractor()|trans }}
+                    <img class="float-left building-img ml-3" src="{{ asset('img/extract.png') }}"><button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.extract'|trans({'%product%': (((usePlanet.getExtractor() + 1) * 1.09)) * 60})|raw }}"><strong>{{ 'building.extract'|trans }} x {{ usePlanet.getExtractor()|trans }}</strong></button>
                     <div class="mt-4">{{ (usePlanet.getExtractor() + 1) * 100 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ (usePlanet.getExtractor() + 1) * 300 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
                     <div class="mt-4">1 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"></div>
                 </td>
@@ -79,7 +79,7 @@
             <tbody>
             <tr>
                 <td class="center-cells">
-                    <img class="float-left building-img ml-3" src="{{ asset('img/search.png') }}">{{ 'building.search'|trans }} x {{ usePlanet.getCenterSearch()|trans }}
+                    <img class="float-left building-img ml-3" src="{{ asset('img/search.png') }}"><button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.search'|trans|raw }}"><strong>{{ 'building.search'|trans }} x {{ usePlanet.getCenterSearch()|trans }}</strong></button>
                     <div class="mt-4">{{ (usePlanet.getCenterSearch() + 1) * 2850 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ (usePlanet.getCenterSearch() + 1) * 3580 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
                     <div class="mt-4">5 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"></div>
                 </td>
@@ -109,7 +109,7 @@
             </tr>
             <tr>
                 <td class="center-cells">
-                    <img class="float-left building-img ml-3" src="{{ asset('img/city.png') }}">{{ 'building.city'|trans }} x {{ usePlanet.getCity()|trans }}
+                    <img class="float-left building-img ml-3" src="{{ asset('img/city.png') }}"><button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.city'|trans|raw }}"><strong>{{ 'building.city'|trans }} x {{ usePlanet.getCity()|trans }}</strong></button>
                     <div class="mt-4">{{ (usePlanet.getCity() + 1) * 15000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ (usePlanet.getCity() + 1) * 11000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
                     <div class="mt-4">6 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"></div>
                 </td>
@@ -139,7 +139,7 @@
             </tr>
             <tr>
                 <td class="center-cells">
-                    <img class="float-left building-img ml-3" src="{{ asset('img/metropole.png') }}">{{ 'building.metropole'|trans }} x {{ usePlanet.getMetropole()|trans }}
+                    <img class="float-left building-img ml-3" src="{{ asset('img/metropole.png') }}"><button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.metropole'|trans|raw }}"><strong>{{ 'building.metropole'|trans }} x {{ usePlanet.getMetropole()|trans }}</strong></button>
                     <div class="mt-4">{{ (usePlanet.getMetropole() + 1) * 750000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ (usePlanet.getMetropole() + 1) * 55000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
                     <div class="mt-4">8 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"><span class="ml-4">8 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'skyImg'|trans }}" src="{{ asset('img/sky.png') }}"></span></div>
                 </td>
@@ -174,7 +174,7 @@
             <tbody>
             <tr>
                 <td class="center-cells">
-                    <img class="float-left building-img ml-3" src="{{ asset('img/caserne.png') }}">{{ 'building.caserne'|trans }} x {{ usePlanet.getCaserne()|trans }}
+                    <img class="float-left building-img ml-3" src="{{ asset('img/caserne.png') }}"><button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.caserne'|trans|raw }}"><strong>{{ 'building.caserne'|trans }} x {{ usePlanet.getCaserne()|trans }}</strong></button>
                     <div class="mt-4">{{ (usePlanet.getCaserne() + 1) * 13000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ (usePlanet.getCaserne() + 1) * 19000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
                     <div class="mt-4">6 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"></div>
                 </td>
@@ -204,7 +204,7 @@
             </tr>
             <tr>
                 <td class="center-cells">
-                    <img class="float-left building-img ml-3" src="{{ asset('img/chantier.png') }}">{{ 'building.chantier'|trans }} x {{ usePlanet.getSpaceShip()|trans }}
+                    <img class="float-left building-img ml-3" src="{{ asset('img/chantier.png') }}"><button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.chantier'|trans|raw }}"><strong>{{ 'building.chantier'|trans }} x {{ usePlanet.getSpaceShip()|trans }}</strong></button>
                     <div class="mt-4">{{ (usePlanet.getSpaceShip() + 1) * 3000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ (usePlanet.getSpaceShip() + 1) * 2000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
                     <div class="mt-4">10 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"><span class="ml-4">4 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'skyImg'|trans }}" src="{{ asset('img/sky.png') }}"></span></div>
                 </td>
@@ -234,7 +234,7 @@
             </tr>
             <tr>
                 <td class="center-cells">
-                    <img class="float-left building-img ml-3" src="{{ asset('img/light.png') }}">{{ 'building.light'|trans }} {% if usePlanet.getLightUsine() == 0 %}{{ 'building.canBe'|trans }}{% else %}{{ 'building.Activated'|trans }}{% endif %}
+                    <img class="float-left building-img ml-3" src="{{ asset('img/light.png') }}">{% if usePlanet.getLightUsine() == 0 %}<button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.light'|trans|raw }}"><strong>{{ 'building.light'|trans }} {{ 'building.canBe'|trans }}</strong></button>{% else %}{{ 'building.light'|trans }} {{ 'building.Activated'|trans }}{% endif %}
                     <div class="mt-4">{{ (usePlanet.getLightUsine() + 1) * 7000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ (usePlanet.getLightUsine() + 1) * 3900 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
                     <div class="mt-4">6 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"></div>
                 </td>
@@ -264,7 +264,7 @@
             </tr>
             <tr>
                 <td class="center-cells">
-                    <img class="float-left building-img ml-3" src="{{ asset('img/heavy.png') }}">{{ 'building.heavy'|trans }} {% if usePlanet.getHeavyUsine() == 0 %}{{ 'building.canBe'|trans }}{% else %}{{ 'building.Activated'|trans }}{% endif %}
+                    <img class="float-left building-img ml-3" src="{{ asset('img/heavy.png') }}">{% if usePlanet.getHeavyUsine() == 0 %}<button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.heavy'|trans|raw }}"><strong>{{ 'building.heavy'|trans }} {{ 'building.canBe'|trans }}</strong></button>{% else %}{{ 'building.heavy'|trans }} {{ 'building.Activated'|trans }}{% endif %}
                     <div class="mt-4">{{ (usePlanet.getHeavyUsine() + 1) * 83000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ (usePlanet.getHeavyUsine() + 1) * 68000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
                     <div class="mt-4">12 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"></div>
                 </td>
@@ -299,7 +299,7 @@
             <tbody>
             <tr>
                 <td class="center-cells">
-                    <img class="float-left building-img ml-3" src="{{ asset('img/radar.png') }}">{{ 'building.radar'|trans }} x {{ usePlanet.getRadar()|trans }}
+                    <img class="float-left building-img ml-3" src="{{ asset('img/radar.png') }}"><button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.radar'|trans|raw }}"><strong>{{ 'building.radar'|trans }} x {{ usePlanet.getRadar()|trans }}</strong></button>
                     <div class="mt-4">{{ (usePlanet.getRadar() + 1) * 1200 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ (usePlanet.getRadar() + 1) * 650 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
                     <div class="mt-4">2 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"></div>
                 </td>
@@ -329,7 +329,7 @@
             </tr>
             <tr>
                 <td class="center-cells">
-                    <img class="float-left building-img ml-3" src="{{ asset('img/skyRadar.png') }}">{{ 'building.skyRadar'|trans }} x {{ usePlanet.getSkyRadar()|trans }}
+                    <img class="float-left building-img ml-3" src="{{ asset('img/skyRadar.png') }}"><button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.skyRadar'|trans|raw }}"><strong>{{ 'building.skyRadar'|trans }} x {{ usePlanet.getSkyRadar()|trans }}</strong></button>
                     <div class="mt-4">{{ (usePlanet.getSkyRadar() + 1) * 20000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ (usePlanet.getSkyRadar() + 1) * 17200 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
                     <div class="mt-4">2 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'skyImg'|trans }}" src="{{ asset('img/sky.png') }}"></div>
                 </td>
@@ -359,7 +359,7 @@
             </tr>
             <tr>
                 <td class="center-cells">
-                    <img class="float-left building-img ml-3" src="{{ asset('img/brouilleur.png') }}">{{ 'building.brouilleur'|trans }} x {{ usePlanet.getSkyBrouilleur()|trans }}
+                    <img class="float-left building-img ml-3" src="{{ asset('img/brouilleur.png') }}"><button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.brouilleur'|trans|raw }}"><strong>{{ 'building.brouilleur'|trans }} x {{ usePlanet.getSkyBrouilleur()|trans }}</strong></button>
                     <div class="mt-4">{{ (usePlanet.getSkyBrouilleur() + 1) * 51000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ (usePlanet.getSkyBrouilleur() + 1) * 32100 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
                     <div class="mt-4">4 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'skyImg'|trans }}" src="{{ asset('img/sky.png') }}"></div>
                 </td>
