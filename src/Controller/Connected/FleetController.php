@@ -513,7 +513,9 @@ class FleetController extends Controller
                 ->getOneOrNullResult();
 
             $sFleet= $fleet->getPlanet()->getSector()->getPosition();
-            if (strpos('0 -1 1 -10 10 -9 9', (strval($sFleet - $sector)) ) != false) {
+            if ($sFleet == $sector) {
+                $base= 2000;
+            } elseif (strpos('0 -1 1 -10 10 -9 9', (strval($sFleet - $sector)) ) != false) {
                 $base= 3000;
             } elseif (strpos('-20 20 12 11 8 2 -12 -11 -8 -2', (strval($sFleet - $sector)) ) != false) {
                 $base= 6800;

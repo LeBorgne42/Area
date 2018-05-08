@@ -1,5 +1,15 @@
 .front-block.spatial {
   width: 500px;
+  margin-right: auto;
+  padding: 1.5rem 1rem 5rem 1rem;
+  margin-bottom: 3rem;
+  margin-top: 6rem;
+  background-color: rgba(52, 58, 64, 0.5);
+  border-radius: 5px;
+}
+
+.front-block.soldier {
+  width: 500px;
   margin: auto;
   padding: 1.5rem 1rem 5rem 1rem;
   margin-bottom: 3rem;
@@ -28,6 +38,13 @@
 .spatial tr .tab-cells-name {
   width: 400px;
   vertical-align: middle;
+}
+
+.spatial tr .tab-cells-name span.btn{
+  background-color: white;
+  color: #FC7F23;
+  font-weight: 800;
+  border-radius: 0px;
 }
 
 .createFleet {

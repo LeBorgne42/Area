@@ -66,7 +66,7 @@
                                     {% endif %}
                                 </td>
                                 <td class="center-cells">
-                                    <span><a href="{{ path('user_profil', {'idp': usePlanet.getId(), 'id': user.getId()}) }}">{{ user.getUsername() }}</a></span>
+                                    <span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'idp': usePlanet.getId(), 'id': user.getId()}) }}">{{ user.getUsername() }}</a></span>
                                 </td>
                                 <td class="center-cells">
                                     {{ user.getJoinAllyAt()|date('d/m/Y H:i') }}
@@ -94,6 +94,12 @@
     </div>
     <div class="modal fade" id="openModal" tabindex="-1" role="dialog" aria-labelledby="openModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content special">
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
             <div class="modal-content special">
             </div>
         </div>

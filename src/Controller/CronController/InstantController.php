@@ -4,6 +4,7 @@ namespace App\Controller\CronController;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use App\Entity\Report;
 use DateTime;
 use DateTimeZone;
 use Dateinterval;
@@ -181,9 +182,20 @@ class InstantController extends Controller
                 ->getQuery()
                 ->getOneOrNullResult();
 
+
+            $userFleet = $fleet->getUser();
+            $report = new Report();
+            $report->setTitle("Votre flotte " . $fleet->getName() . " est arrivée");
+            $report->setSendAt($now);
+            $report->setUser($userFleet);
+            $report->setContent("Bonjour dirigeant " . $userFleet->getUserName() . " votre flotte " . $fleet->getName() . " vient d'arriver en " . $newHome->getSector()->getGalaxy()->getPosition() . ":" . $newHome->getSector()->getPosition() . ":" . $newHome->getPosition() . ".");
+            $userFleet->setViewReport(false);
+            $em->persist($userFleet);
+
             $fleet->setPlanet($newHome);
             $fleet->setPlanete(null);
             $fleet->setFlightTime(null);
+            $fleet->setNewPlanet(null);
             $fleet->setSector(null);
             $attackFleets = $em->getRepository('App:Fleet')
                 ->createQueryBuilder('f')
@@ -218,8 +230,9 @@ class InstantController extends Controller
                     $em->persist($updateF);
                 }
                 $fleet->setFightAt($now);
+                $report->setContent($report->getContent() . " Attention votre flotte est rentrée en combat !");
             }
-
+            $em->persist($report);
             $em->persist($fleet);
         }
         $em->flush();

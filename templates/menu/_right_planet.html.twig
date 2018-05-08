@@ -2,7 +2,7 @@
 
 <nav class="navbar-right text-center pr-4">
     {% for planet in app.user.getPlanets() %}
-        {% if planet == usePlanet and app.user.getPlanets()|length > 6 %}
+        {% if planet == usePlanet and app.user.getPlanets()|length > 9 %}
         {% else %}
             <div class="mb-4 bg-right p-4{% if planet.getConstruct() is null and (planet.getGround() != planet.getGroundPlace() or planet.getSkyPlace() != planet.getSky()) %} constructFree{% endif %}">
                 <div class="pt-2 float-left"><a href="{{ path('building', {'idp': planet.getId()}) }}"><img height="32" width="32" src="{{ vich_uploader_asset(planet, 'imageFile') }}"></a></div>

@@ -5,6 +5,7 @@
 {% block title %}{{ 'title'|trans }}{% endblock %}
 
 {% block body %}
+    {% set cost = (app.user.getAllSoldier() * 2) + app.user.getAllShipsCost() %}
     <div class="front-block">
         <table class="table table-striped table-bordered table-dark">
             <tbody>
@@ -20,7 +21,7 @@
             <tbody>
                 <tr>
                     <th class="tab-cells-name">
-                        <h2 class="mb-3">{{ app.user.getUsername() }}</h2>
+                        <h2 class="mb-3 mt-5 pt-4">{{ app.user.getUsername() }}</h2>
                         <div class="modify">
                             {% if app.user %}
                                 {% if app.user.imageName %}
@@ -38,20 +39,35 @@
                         {{ form_widget(form_image.sendForm) }}
                         {{ form_end(form_image) }}
                     </th>
-                    <td class="center-cells">
-                        <h4>
+                    <td class="center-cells text-left">
+                        <h4 class="float-left pl-5">
                             <div class="my-3">
                                 {{ 'info.rank'|trans|raw }} {{ app.user.getRank().getPosition() }} <small>({% if app.user.getRank().getPosition() > app.user.getRank().getOldPosition() %}<span class="text-rouge">-{{ app.user.getRank().getPosition() - app.user.getRank().getOldPosition() }}</span>{% else %}<span class="text-vert">+{{ app.user.getRank().getOldPosition() - app.user.getRank().getPosition() }}</span>{% endif %}) <span class="glyphicon glyphicon-question-sign text-orange" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.rank'|trans }}"></span></small>
                             </div>
+                            <div class="my-3">{{ 'info.cost'|trans|raw }} {{ cost|number_format }}</div>
                             <div class="my-2">{{ 'info.planet'|trans|raw }} {{ app.user.getPlanets()|length }}</div>
+                            <div class="my-3">{{ 'info.worker'|trans|raw }} {{ app.user.getAllWorker()|number_format }}</div>
+                            <div class="my-3">{{ 'info.soldier'|trans|raw }} {{ app.user.getAllSoldier()|number_format }}</div>
+                            <div class="my-3">{{ 'info.ship'|trans|raw }} {{ app.user.getAllShips()|number_format }}</div>
+                            <div class="my-3">{{ 'info.fleet'|trans|raw }} {{ app.user.getFleets()|length }}</div>
+                        </h4>
+                        <h4 class="float-right pr-5">
+
                             {% if app.user.getAlly() %}
-                                <div class="my-3">{{ 'info.fleet'|trans|raw }} {{ app.user.getFleets()|length }}</div>
-                            {% endif %}
-                            {% if app.user.getAlly() %}
+                                <br>
+                                <br>
+                                <br>
                                 <div class="my-3">{{ 'info.ally'|trans|raw }} [{{ app.user.getAlly().getSigle() }}] {{ app.user.getAlly().getName() }} - {{ app.user.getAlly().getUsers()|length }}/20</div>
+                                <div class="my-3">{{ 'info.allyPlanets'|trans|raw }} {{ app.user.getAlly().getPlanets() }}</div>
+                                <div class="my-3">{{ 'info.allyBitcoin'|trans|raw }} {{ app.user.getAlly().getBitcoin() }}</div>
+                                <div class="my-3">{{ 'info.allyFleets'|trans|raw }} {{ app.user.getAlly().getFleets() }}</div>
                             {% else %}
+                                <br>
+                                <br>
+                                <br>
                                 <div class="mt-5"><span><a href="{{ path('ally', {'idp': usePlanet.getId()}) }}">{{ 'info.allyMissing'|trans|raw }}</a></span></div>
                             {% endif %}
+
                         </h4>
                     </td>
                 </tr>

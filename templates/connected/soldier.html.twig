@@ -6,7 +6,7 @@
 
 {% block body %}
     {% if usePlanet.getCaserne() > 0 %}
-        <div class="front-block spatial">
+        <div class="front-block soldier">
             {{ form_start(form_caserneRecruit) }}
             <div class="block-title"><h2>{{ 'soldier.recruit'|trans }}</h2></div>
             <table class="table table-striped table-bordered table-dark">
@@ -26,7 +26,7 @@
         </div>
     {% endif %}
     {% if usePlanet.getCenterSearch() > 0 %}
-        <div class="front-block spatial">
+        <div class="front-block soldier">
             {{ form_start(form_scientistRecruit) }}
             <div class="block-title"><h2>{{ 'scientist.recruit'|trans }}</h2></div>
             <table class="table table-striped table-bordered table-dark">

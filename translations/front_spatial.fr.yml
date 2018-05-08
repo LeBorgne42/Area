@@ -6,6 +6,16 @@ spatial.recycleur: Recycleur
 spatial.barge: 'Barge d''invasion'
 spatial.hunter: Chasseur
 spatial.fregate: Fregate
+spatial.cargoV: 'Cargo V'
+spatial.cargoI: 'Cargo I'
+spatial.cargoX: 'Cargo X'
+spatial.hunterHeavy: 'Chasseur lourd'
+spatial.corvet: Corvette
+spatial.corvetLaser: 'Corvette a laser'
+spatial.fregatePlasma: 'Frégate a plasma'
+spatial.croiser: Croiseur
+spatial.ironClad: Cuirassé
+spatial.destroyer: Destroyer
 form.construct: Construire
 form.nbr: Nombre
 form.addFleet: 'Créer la flotte'
@@ -24,30 +34,21 @@ spatial.destroyFleet: 'mettre au sol'
 spatial.sendFleet: envoyer
 spatial.cargo: Cargo
 workerImg: Travailleurs
-popover.title: 'Infos vaisseaux'
-popover.sonde: 'Un vaisseaux rapide et peu cher pour aller espionner vos voisins ou découvrir de belles planètes pour vos colonies.'
-popover.colo: 'Sans ce vaisseau il vous sera impossible de coloniser une nouvelle planète...'
-popover.rec: 'Vous aurez besoin de recycleurs pour récupérer les débris de ressources en orbite des planètes ou sur un astéroïdes.'
-popover.barge: 'Une barge d''invasion a une capacitée de 2000 soldats pour envahir une planète ennemie.'
-popover.hunter: 'Il est rapide et peu cher, ce vaisseau sera la base de votre flotte.'
-popover.fregate: 'La frégate est votre tout premier vaisseau avec un bouclier digne de ce nom, il fera le tampon pour vos chasseurs.'
-popover.cargoI: 'Avec sa capacité de cargo à 25.000 vous ne jurerez que par lui pour faire vos premiers transports.'
-spatial.cargoI: 'Cargo I'
-popover.cargoV: 'Et puis vous découvrirez le Cargo V ! 75.000 de capacité ! Se sont les marchands qui vont être content!'
-spatial.cargoV: 'Cargo V'
-popover.cargoX: 'Enfin le Cargo X, une capacité de 150.000 pour vos plus gros recyclage.'
-spatial.cargoX: 'Cargo X'
-popover.hunterHeavy: 'Doté d''une coque plus résistante et du dernier missile, le chasseur lourd est un bon investissement.'
-spatial.hunterHeavy: 'Chasseur lourd'
-popover.corvet: 'La corvette est votre tout premier vaisseau avec un bouclier, mais celui-ci est tellement petit qu''il ne servira que contre les chasseurs.'
-spatial.corvet: Corvette
-popover.corvetLaser: 'La corvette à laser est doté du tout dernier laser et lui donne une puissance qui dépasse même la frégate.'
-spatial.corvetLaser: 'Corvette a laser'
-popover.fregatePlasma: 'Doté de la dernière technologie de plasma, cette frégate est presque l''arme idéale contre une flotte dotée de forts boucliers.'
-spatial.fregatePlasma: 'Frégate a plasma'
-popover.croiser: 'Ce vaisseau est le plus équilibré de tous, rien a été délaissé sur son developpement, il est le plus polyvalent.'
-spatial.croiser: Croiseur
-popover.ironClad: 'Sa coque est tellement résistante que vous ne risquez pas d''en perdre souvent, il est doté d''une grand puissance.'
-spatial.ironClad: Cuirassé
-popover.destroyer: 'Équipé d''armes peu efficace contre des boucliers, il surpasse tout de même de 400 fois la puissance d''un chasseur et son bouclier est énorme.'
-spatial.destroyer: Destroyer
+popover.title: 'Caractéristiques techniques'
+popover.sonde: '<h5>Signature thermique : 1<br>Vitesse : 1.000/lm</h5>'
+popover.colo: '<h5>Signature thermique : 200<br>Vitesse : 50/lm</h5>'
+popover.rec: '<h5>Signature thermique : 80<br>Vitesse : 75/lm<br>Cargo : 10.000</h5>'
+popover.barge: '<h5>Signature thermique : 50<br>Vitesse : 25/lm<br>Cargo : 2.000</h5>'
+popover.cargoI: '<h5>Signature thermique : 50<br>Vitesse : 150/lm<br>Cargo : 25.000</h5>'
+popover.cargoV: '<h5>Signature thermique : 120<br>Vitesse : 140/lm<br>Cargo : 75.000</h5>'
+popover.cargoX: '<h5>Signature thermique : 250<br>Vitesse : 130/lm<br>Cargo : 150.000</h5>'
+popover.hunter: '<h5>Signature thermique : 5<br>Vitesse : 120/lm<br>Coque : 10<br>Missile : 9</h5>'
+popover.hunterHeavy: '<h5>Signature thermique : 8<br>Vitesse : 120/lm<br>Coque : 20<br>Missile : 10</h5>'
+popover.corvet: '<h5>Signature thermique : 25<br>Vitesse : 110/lm<br>Coque : 38<br>Missile : 25<br>Bouclier : 2</h5>'
+popover.corvetLaser: '<h5>Signature thermique : 40<br>Vitesse : 100/lm<br>Coque : 53<br>Missile : 50<br>Laser : 40<br>Bouclier : 5</h5>'
+popover.fregate: '<h5>Signature thermique : 60<br>Vitesse : 90<br>Coque : 120<br>Missile : 50<br>Laser : 34<br>Bouclier : 20</h5>'
+popover.fregatePlasma: '<h5>Signature thermique : 150<br>Vitesse : 80<br>Coque : 200<br>Missile : 118<br>Laser : 10<br>Plasma : 150<br>Bouclier : 80</h5>'
+popover.croiser: '<h5>Signature thermique : 300<br>Vitesse : 70<br>Coque : 500<br>Missile : 350<br>Laser : 50<br>Plasma : 100<br>Bouclier : 120</h5>'
+popover.ironClad: '<h5>Signature thermique : 700<br>Vitesse : 50/lm<br>Coque : 1.100<br>Missile : 1.000<br>Laser : 200<br>Plasma : 200<br>Bouclier : 100</h5>'
+popover.destroyer: '<h5>Signature thermique : 1.500<br>Vitesse : 60/lm<br>Coque : 200<br>Missile : 3.300<br>Laser : 40<br>Plasma : 40<br>Bouclier : 2.000</h5>'
+spatial.noSpaceShip: 'Vous ne disposez pas d''un chantier spatial !'
