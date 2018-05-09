@@ -52,7 +52,7 @@ class SoldierController extends Controller
                 ($usePlanet->getWorker() < 5000)) {
                 return $this->redirectToRoute('soldier', array('idp' => $usePlanet->getId()));
             }
-            if($usePlanet->getSoldierAt() > $now) {
+            if($usePlanet->getSoldierAt()) {
                 if ($usePlanet->getSoldierAtNbr() + $form_caserneRecruit->get('soldier')->getData() > $usePlanet->getSoldierMax()) {
                     return $this->redirectToRoute('soldier', array('idp' => $usePlanet->getId()));
                 }
@@ -78,15 +78,15 @@ class SoldierController extends Controller
                 ($usePlanet->getWorker() < 5000 || ($usePlanet->getScientist() + $form_scientistRecruit->get('scientist')->getData()) > $usePlanet->getScientistMax())) {
                 return $this->redirectToRoute('soldier', array('idp' => $usePlanet->getId()));
             }
-            if($usePlanet->getScientistAt() > $now) {
+            if($usePlanet->getScientistAt()) {
                 if ($usePlanet->getScientistAtNbr() + $form_scientistRecruit->get('scientist')->getData() > $usePlanet->getScientistMax()) {
                     return $this->redirectToRoute('soldier', array('idp' => $usePlanet->getId()));
                 }
                 $tmpScientist = $usePlanet->getScientistAtNbr() - $usePlanet->getScientist();
-                $now->add(new DateInterval('PT' . ((($form_scientistRecruit->get('scientist')->getData() + $tmpScientist) * 60)/ $usePlanet->getScientistProduction()) . 'S'));
+                $now->add(new DateInterval('PT' . round((($form_scientistRecruit->get('scientist')->getData() + $tmpScientist) * 60)/ $usePlanet->getScientistProduction()) . 'S'));
                 $usePlanet->setScientistAtNbr($usePlanet->getScientistAtNbr() + $form_scientistRecruit->get('scientist')->getData());
             } else {
-                $now->add(new DateInterval('PT' . (($form_scientistRecruit->get('scientist')->getData() * 60)/ $usePlanet->getScientistProduction()) . 'S'));
+                $now->add(new DateInterval('PT' . round(($form_scientistRecruit->get('scientist')->getData() * 60)/ $usePlanet->getScientistProduction()) . 'S'));
                 $usePlanet->setScientistAtNbr($usePlanet->getScientist() + $form_scientistRecruit->get('scientist')->getData());
             }
             $usePlanet->setWorker($usePlanet->getWorker() - ($form_scientistRecruit->get('scientist')->getData() * 2));

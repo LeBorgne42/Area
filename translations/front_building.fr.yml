@@ -53,3 +53,4 @@ popover.heavy: '<h5>Production de vaisseaux : +30%<hr> Vaisseaux lourds 1</h5>'
 popover.radar: '<h5>Puissance radar : +1<hr> Scanner de système solaire 1</h5>'
 popover.skyRadar: '<h5>Puissance radar : +1<hr> Scanner de système solaire 3</h5>'
 popover.brouilleur: '<h5>Puissance brouilleur : +1<hr> Scanner de système solaire 5</h5>'
+building.finish: Construit
