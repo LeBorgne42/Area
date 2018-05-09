@@ -22,7 +22,7 @@ class Planet
     private $id;
 
     /**
-     * @ORM\Column(name="name",type="string", length=15, nullable=true)
+     * @ORM\Column(name="name",type="string", length=20, nullable=true)
      */
     protected $name = 'Inhabitée';
 

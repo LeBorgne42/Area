@@ -316,12 +316,10 @@ class FightController extends Controller
         $dMilitary = $defenser->getWorker() + ($defenser->getSoldier() * 6);
         $alea = rand(5, 9);
 
-
         $reportInv = new Report();
         $reportInv->setSendAt($now);
         $reportInv->setUser($user);
         $user->setViewReport(false);
-
 
         $reportDef = new Report();
         $reportDef->setSendAt($now);

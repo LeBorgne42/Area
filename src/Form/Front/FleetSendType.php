@@ -6,6 +6,11 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use function Couchbase\defaultEncoder;
+use Doctrine\ORM\EntityRepository;
+use PMA\libraries\config\Form;
+use App\Entity\Planet;
 
 class FleetSendType extends AbstractType
 {
@@ -21,7 +26,6 @@ class FleetSendType extends AbstractType
                 null,
                 array(
                     'label' => 'form.num',
-                    'data' => 1,
                     'attr'  => array(
                         'placeholder' => 'form.num',
                         'class' => 'form-control',
@@ -63,7 +67,52 @@ class FleetSendType extends AbstractType
                     'required' => true,
                 )
             )
+            ->add(
+                'planet',
+                EntityType::class,
+                array(
+                    'class' => Planet::class,
+                    'label' => 'form.planet',
+                    'query_builder' => function (EntityRepository $er) use($options) {
+                        return $er->createQueryBuilder('p')
+                            ->join('p.user', 'u')
+                            ->where('u.id = :user')
+                            ->setParameter('user', $options['user'])
+                            ->orderBy('p.sector', 'ASC');
+                    },
+                    'choice_label' => 'name',
+                    'attr'  => array(
+                        'placeholder' => 'form.planet',
+                        'class' => 'form-control',
+                    ),
+                    'required' => false,
+                    'mapped' => false,
+                )
+            )
+            ->add(
+                'flightType',
+                'Symfony\Component\Form\Extension\Core\Type\ChoiceType',
+                array(
+                    'choices' => $this->getFlightType(),
+                    'label' => 'form.flightType',
+                    'attr'  => array(
+                        'placeholder' => 'form.flightType',
+                        'class' => 'form-control select2',
+                    ),
+                    'required' => true
+                )
+            )
             ->add('sendForm', SubmitType::class, array('label' => 'form.sendFleet'));
+    }
+
+    protected function getFlightType()
+    {
+        return array(
+            'normal' => '1',
+            'decharger et revenir' => '2',
+            'coloniser' => '3',
+            'envahir' => '4',
+        );
     }
 
     /**
@@ -71,6 +120,7 @@ class FleetSendType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
+        $resolver->setRequired(array('user'));
         $resolver->setDefaults(
             array(
                 'data_class'         => null,

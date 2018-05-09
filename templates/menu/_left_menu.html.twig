@@ -33,7 +33,7 @@
     <div class="btn-left">
         <a href="{{ path('map', {'id':usePlanet.getSector().getPosition(), 'idp': usePlanet.getId()}) }}"><span>{{ 'map'|trans }}</span></a>
     </div>
-    <div class="btn-left{% if usePlanet.getConstruct() is null %} freeSearchBuild{% endif %}">
+    <div class="btn-left{% if usePlanet.getConstruct() is null and (usePlanet.getGround() != usePlanet.getGroundPlace()) %} freeSearchBuild{% endif %}">
         <a href="{{ path('building', {'idp': usePlanet.getId()}) }}"><span>{{ 'building'|trans }}</span></a>
     </div>
     <div class="btn-left">

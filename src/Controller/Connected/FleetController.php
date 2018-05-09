@@ -90,7 +90,7 @@ class FleetController extends Controller
         $form_manageAttackFleet = $this->createForm(FleetAttackType::class, $fleet);
         $form_manageAttackFleet->handleRequest($request);
 
-        $form_sendFleet = $this->createForm(FleetSendType::class);
+        $form_sendFleet = $this->createForm(FleetSendType::class, null, array("user" => $user->getId()));
         $form_sendFleet->handleRequest($request);
 
         if(($fleet || $usePlanet) && ($fleet->getFightAt() == null && $fleet->getFlightTime() == null) && $fleet->getUser() == $user) {
@@ -508,7 +508,7 @@ class FleetController extends Controller
             ->getQuery()
             ->getOneOrNullResult();
 
-        $form_sendFleet = $this->createForm(FleetSendType::class);
+        $form_sendFleet = $this->createForm(FleetSendType::class, null, array("user" => $user->getId()));
         $form_sendFleet->handleRequest($request);
 
         if(($fleet || $usePlanet) || ($fleet->getFightAt() == null || $fleet->getFlightTime() == null)) {
@@ -516,24 +516,36 @@ class FleetController extends Controller
             return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
         }
         if ($form_sendFleet->isSubmitted() && $form_sendFleet->isValid()) {
-            $galaxy = 1;
-            $sector= $form_sendFleet->get('sector')->getData();
-            $planete= $form_sendFleet->get('planete')->getData();
+            if($form_sendFleet->get('planet')->getData()) {
+                $planet = $form_sendFleet->get('planet')->getData();
+                $sector = $planet->getSector()->getPosition();
+                $planete = $planet->getPosition();
+                if($planet == $fleet->getPlanet()) {
+                    return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+                }
+            } else {
+                $galaxy = 1;
+                $sector = $form_sendFleet->get('sector')->getData();
+                $planete = $form_sendFleet->get('planete')->getData();
 
-            if (($galaxy < 1 || $galaxy > 10) || ($sector < 1 || $sector > 100) || ($planete < 1 || $planete > 25) ||
-                ($galaxy != 1 && $user->getHyperespace() == 0)) {
-                return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+                if (($galaxy < 1 || $galaxy > 10) || ($sector < 1 || $sector > 100) || ($planete < 1 || $planete > 25) ||
+                    ($galaxy != 1 && $user->getHyperespace() == 0)) {
+                    return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+                }
+
+                $planet = $em->getRepository('App:Planet')
+                    ->createQueryBuilder('p')
+                    ->join('p.sector', 's')
+                    ->where('s.position = :sector')
+                    ->andWhere('s.galaxy = :galaxy')
+                    ->andWhere('p.position = :planete')
+                    ->setParameters(array('sector' => $sector, 'galaxy' => $galaxy, 'planete' => $planete))
+                    ->getQuery()
+                    ->getOneOrNullResult();
+                if($planet == $fleet->getPlanet()) {
+                    return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+                }
             }
-
-            $planet = $em->getRepository('App:Planet')
-                ->createQueryBuilder('p')
-                ->join('p.sector', 's')
-                ->where('s.position = :sector')
-                ->andWhere('s.galaxy = :galaxy')
-                ->andWhere('p.position = :planete')
-                ->setParameters(array('sector' => $sector, 'galaxy' => $galaxy, 'planete' => $planete))
-                ->getQuery()
-                ->getOneOrNullResult();
 
             $sFleet= $fleet->getPlanet()->getSector()->getPosition();
             if ($sFleet == $sector) {
@@ -550,6 +562,7 @@ class FleetController extends Controller
             $now->add(new DateInterval('PT' . ($fleet->getSpeed() * $base) . 'S'));
             $fleet->setNewPlanet($planet->getId());
             $fleet->setFlightTime($now);
+            $fleet->setFlightType($form_sendFleet->get('flightType')->getData());
             $fleet->setSector($planet->getSector());
             $fleet->setPlanete($planete);
             $em->persist($fleet);
@@ -589,10 +602,10 @@ class FleetController extends Controller
             return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
         }
 
-        if($planet->getMerchant() == true) {
-            $user->setBitcoin($user->getBitcoin() + ($fleet->getNiobium()));
-        }
         $planet->setNiobium($planet->getNiobium() + $fleet->getNiobium());
+        if($planet->getMerchant() == true) {
+            $user->setBitcoin($user->getBitcoin() + ($fleet->getNiobium() / 1.5));
+        }
         $fleet->setNiobium(0);
         $em->persist($fleet);
         $em->persist($planet);
@@ -633,7 +646,7 @@ class FleetController extends Controller
 
         $planet->setWater($planet->getWater() + $fleet->getWater());
         if($planet->getMerchant() == true) {
-            $user->setBitcoin($user->getBitcoin() + ($fleet->getWater() / 1.5));
+            $user->setBitcoin($user->getBitcoin() + ($fleet->getWater() * 2));
         }
         $fleet->setWater(0);
         $em->persist($fleet);

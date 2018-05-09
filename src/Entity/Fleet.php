@@ -19,7 +19,7 @@ class Fleet
     private $id;
 
     /**
-     * @ORM\Column(name="name",type="string", length=15)
+     * @ORM\Column(name="name",type="string", length=20)
      * @Assert\NotBlank(message = "required")
      */
     protected $name;
@@ -56,6 +56,11 @@ class Fleet
      * @ORM\Column(name="flightTime",type="datetime", nullable=true)
      */
     protected $flightTime = null;
+
+    /**
+     * @ORM\Column(name="flightType",type="string", nullable=true)
+     */
+    protected $flightType = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Sector", inversedBy="fleets", fetch="EXTRA_LAZY")
@@ -919,6 +924,22 @@ class Fleet
     public function setIronClad($ironClad): void
     {
         $this->ironClad = $ironClad;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFlightType()
+    {
+        return $this->flightType;
+    }
+
+    /**
+     * @param mixed $flightType
+     */
+    public function setFlightType($flightType): void
+    {
+        $this->flightType = $flightType;
     }
 
     /**
