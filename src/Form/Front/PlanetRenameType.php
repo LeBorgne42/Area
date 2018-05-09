@@ -3,6 +3,7 @@
 namespace App\Form\Front;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -18,6 +19,18 @@ class PlanetRenameType extends AbstractType
     {
         $builder
             ->add(
+                'id',
+                HiddenType::class,
+                array(
+                    'label' => 'form.id',
+                    'attr'  => array(
+                        'placeholder' => 'form.id',
+                        'class' => 'form-control',
+                    ),
+                    'required' => false,
+                )
+            )
+            ->add(
                 'name',
                 null,
                 array(
@@ -30,7 +43,6 @@ class PlanetRenameType extends AbstractType
                         'autocomplete' => 'off',
                     ),
                     'required' => true,
-                    'mapped' => true,
                 )
             )
             ->add('sendForm', SubmitType::class, array('label' => 'form.renamePlanet'));
@@ -53,7 +65,7 @@ class PlanetRenameType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class'         =>  'App\Entity\Planet',
+                'data_class'         =>  null,
                 'translation_domain' => 'front_overview',
             )
         );

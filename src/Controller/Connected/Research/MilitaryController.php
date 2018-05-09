@@ -71,7 +71,7 @@ class MilitaryController extends Controller
         $userBt = $user->getBitcoin();
 
         if(($userBt < 9000 || $user->getIndustry() < 3) ||
-            ($level == 6 || $user->getSearchAt() > $now)) {
+            ($level == 4 || $user->getSearchAt() > $now)) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
 
@@ -106,7 +106,7 @@ class MilitaryController extends Controller
         $userBt = $user->getBitcoin();
 
         if(($userBt < 42000 || $user->getIndustry() < 5) ||
-            ($level == 6 || $user->getSearchAt() > $now)) {
+            ($level == 4 || $user->getSearchAt() > $now)) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
 

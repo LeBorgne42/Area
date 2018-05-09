@@ -340,47 +340,97 @@ function manageMaxShip() {
 }
 
 function manageConstructTime() {
-    var build = new Date($('#timeConstruct').text());
-    var now = new Date();
-    var date_now = Math.abs(build - now) / 1000;
-    var jours = Math.floor(date_now / (60 * 60 * 24));
-    var heures = Math.floor((date_now - (jours * 60 * 60 * 24)) / (60 * 60));
-    var minutes = Math.floor((date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60))) / 60);
-    var secondes = Math.floor(date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60 + minutes * 60)));
-    if (date_now > 0) {
-        setInterval(function() {
-            if (jours > 0) {
-                $('#timeDisplay').text(jours + 'j ' + heures + 'heures ' + minutes + 'mins ' + secondes + 's');
-            } else if (heures > 0)
-            {
-                $('#timeDisplay').text(heures + 'heures ' + minutes + 'mins ' + secondes + 's');
-            } else if (minutes > 0)
-            {
-                $('#timeDisplay').text(minutes + 'mins ' + secondes + 's');
-            } else if (secondes > 0)
-            {
-                $('#timeDisplay').text(secondes + ' secondes');
-            }
-            secondes = secondes - 1;
-            if(secondes == 0) {
-                if(minutes == null) {
-                    $('#timeDisplay').text('Terminée');
-                    setTimeout(function() {
-                        window.location.reload();
-                    }, 3000);
-                } else {
-                    secondes = 60;
-                    minutes = minutes - 1;
-                    if(minutes == 0 && heures != 0) {
-                        minutes = 60;
-                        heures = heures - 1;
-                    } else if (minutes == 0) {
-                        minutes = null;
+    $('#timeConstruct').each( function(){
+        var build = new Date($(this).text());
+        var area = $(this);
+        var now = new Date();
+        var date_now = Math.abs(build - now) / 1000;
+        var jours = Math.floor(date_now / (60 * 60 * 24));
+        var heures = Math.floor((date_now - (jours * 60 * 60 * 24)) / (60 * 60));
+        var minutes = Math.floor((date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60))) / 60);
+        var secondes = Math.floor(date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60 + minutes * 60)));
+        if (date_now > 0) {
+            setInterval(function() {
+                if (jours > 0) {
+                    area.text(jours + 'j ' + heures + 'heures ' + minutes + 'mins ' + secondes + 's');
+                } else if (heures > 0)
+                {
+                    area.text(heures + 'heures ' + minutes + 'mins ' + secondes + 's');
+                } else if (minutes > 0)
+                {
+                    area.text(minutes + 'mins ' + secondes + 's');
+                } else if (secondes > 0)
+                {
+                    area.text(secondes + ' secondes');
+                }
+                secondes = secondes - 1;
+                if(secondes == 0) {
+                    if(minutes == null) {
+                        area.text('Terminée');
+                        setTimeout(function() {
+                            window.location.reload();
+                        }, 3000);
+                    } else {
+                        secondes = 60;
+                        minutes = minutes - 1;
+                        if(minutes == 0 && heures != 0) {
+                            minutes = 60;
+                            heures = heures - 1;
+                        } else if (minutes == 0) {
+                            minutes = null;
+                        }
                     }
                 }
+            }, 1000);
+        }
+    } );
+}
+
+function manageProductTime() {
+    setInterval(function() {
+        $('#timeProduct').each( function(){
+            var build = new Date($(this).text());
+            var area = $(this);
+            var now = new Date();
+            var date_now = Math.abs(build - now) / 1000;
+            var jours = Math.floor(date_now / (60 * 60 * 24));
+            var heures = Math.floor((date_now - (jours * 60 * 60 * 24)) / (60 * 60));
+            var minutes = Math.floor((date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60))) / 60);
+            var secondes = Math.floor(date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60 + minutes * 60)));
+            if (date_now > 0) {
+                    if (jours > 0) {
+                        area.text(jours + 'j ' + heures + 'heures ' + minutes + 'mins ' + secondes + 's');
+                    } else if (heures > 0)
+                    {
+                        area.text(heures + 'heures ' + minutes + 'mins ' + secondes + 's');
+                    } else if (minutes > 0)
+                    {
+                        area.text(minutes + 'mins ' + secondes + 's');
+                    } else if (secondes > 0)
+                    {
+                        area.text(secondes + ' secondes');
+                    }
+                    secondes = secondes - 1;
+                    if(secondes == 0) {
+                        if(minutes == null) {
+                            area.text('Terminée');
+                            setTimeout(function() {
+                                window.location.reload();
+                            }, 3000);
+                        } else {
+                            secondes = 60;
+                            minutes = minutes - 1;
+                            if(minutes == 0 && heures != 0) {
+                                minutes = 60;
+                                heures = heures - 1;
+                            } else if (minutes == 0) {
+                                minutes = null;
+                            }
+                        }
+                    }
             }
-        }, 1000);
-    }
+        } );
+    }, 1000);
 }
 
 function manageResearchTime() {
@@ -394,21 +444,21 @@ function manageResearchTime() {
     if (date_now > 0) {
         setInterval(function() {
             if (jours > 0) {
-                $('#timeDisplayR').text(jours + 'j ' + heures + 'heures ' + minutes + 'mins ' + secondes + 's');
+                $('#timeResearch').text(jours + 'j ' + heures + 'heures ' + minutes + 'mins ' + secondes + 's');
             } else if (heures > 0)
             {
-                $('#timeDisplayR').text(heures + 'heures ' + minutes + 'mins ' + secondes + 's');
+                $('#timeResearch').text(heures + 'heures ' + minutes + 'mins ' + secondes + 's');
             } else if (minutes > 0)
             {
-                $('#timeDisplayR').text(minutes + 'mins ' + secondes + 's');
+                $('#timeResearch').text(minutes + 'mins ' + secondes + 's');
             } else if (secondes > 0)
             {
-                $('#timeDisplayR').text(secondes + ' secondes');
+                $('#timeResearch').text(secondes + ' secondes');
             }
             secondes = secondes - 1;
             if(secondes == 0) {
                 if(minutes == null) {
-                    $('#timeDisplayR').text('Terminée');
+                    $('#timeResearch').text('Terminée');
                     setTimeout(function() {
                         window.location.reload();
                     }, 3000);
@@ -483,6 +533,7 @@ $(document).ready(function() {
     manageConstructTime();
     manageResearchTime();
     manageSalon();
+    manageProductTime();
     //manageRightMenu();
     /*    manageDisplaySalon();
         setNoDecimalDisplay();*/

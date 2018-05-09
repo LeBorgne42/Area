@@ -6,7 +6,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\Front\UserImageType;
-use App\Form\Front\PlanetRenameType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use DateTime;
 use DateTimeZone;
@@ -39,40 +38,49 @@ class OverviewController extends Controller
             ->getQuery()
             ->getOneOrNullResult();
 
-        $fleetMove = $em->getRepository('App:Fleet')
-            ->createQueryBuilder('f')
-            ->where('f.user = :user')
-            ->andWhere('f.planete is not null')
-            ->setParameters(array('user' => $user))
-            ->orderBy('f.flightTime')
-            ->setMaxresults(5)
+        $allPlanets = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.user = :user')
+            ->setParameters(array('user' => $this->getUser()))
             ->getQuery()
             ->getResult();
+
+        $attackFleets = new \ArrayObject();
+        foreach ($allPlanets as $planet) {
+            $allFleets = $em->getRepository('App:Fleet')
+                ->createQueryBuilder('f')
+                ->join('f.sector', 's')
+                ->join('s.galaxy', 'g')
+                ->where('f.user != :user')
+                ->andWhere('f.planete = :planete')
+                ->andWhere('s.position = :sector')
+                ->andWhere('g.position = :galaxy')
+                ->setParameters(array('user' => $user, 'planete' => $planet->getPosition(), 'sector' => $planet->getSector()->getPosition(), 'galaxy' =>$planet->getSector()->getGalaxy()->getPosition()))
+                ->orderBy('f.flightTime')
+                ->getQuery()
+                ->getResult();
+            if($allFleets) {
+                $attackFleets = $allFleets;
+            }
+        }
+        if (count($attackFleets) == 0) {
+            $attackFleets = null;
+        }
 
         $user = $this->getUser();
         $form_image = $this->createForm(UserImageType::class,$user);
         $form_image->handleRequest($request);
-
-        $form_manageRenamePlanet = $this->createForm(PlanetRenameType::class, $usePlanet);
-        $form_manageRenamePlanet->handleRequest($request);
 
         if ($form_image->isSubmitted() && $form_image->isValid()) {
             $em->persist($user);
             $em->flush();
         }
 
-        if ($form_manageRenamePlanet->isSubmitted() && $form_manageRenamePlanet->isValid()) {
-            $em->persist($usePlanet);
-            $em->flush();
-            return $this->redirectToRoute('overview', array('idp' => $usePlanet->getId()));
-        }
-
         return $this->render('connected/overview.html.twig', [
-            'form_rename' => $form_manageRenamePlanet->createView(),
             'form_image' => $form_image->createView(),
             'usePlanet' => $usePlanet,
             'date' => $now,
-            'fleetMove' => $fleetMove,
+            'fleetMove' => $attackFleets,
         ]);
     }
 

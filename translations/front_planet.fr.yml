@@ -11,3 +11,8 @@ niobium: Niobium
 water: Eau
 groundImg: Terrain
 SkyImg: Espace
+planet.image: Planète
+planet.production: Production
+planet.population: Population
+planet.ship: Vaisseaux/Flottes
+position: 'Position :'

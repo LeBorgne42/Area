@@ -26,8 +26,20 @@ body.area {
   padding: 0 4rem 4rem 4rem;
 }
 
+a:focus {
+  color: orange;
+}
+
+a:hover {
+  color: orangered!important;
+}
+
 #planet_rename_name {
   height: 20px;
+}
+
+.borderOverview {
+  border: 1px solid white;
 }
 
 .table .table {

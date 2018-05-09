@@ -390,6 +390,19 @@ class Ally
     }
 
     /**
+     * @return int
+     */
+    public function getAllShips(): int
+    {
+        $return = 0;
+
+        foreach($this->getUsers() as $user) {
+            $return = $return + $user->getAllShips();
+        }
+        return $return;
+    }
+
+    /**
      * @return mixed
      */
     public function getNewMember()

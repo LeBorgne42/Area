@@ -60,3 +60,4 @@ popover.plasma: '<h5>Armement 5<hr>Niveau 1 : Croiseur</h5>'
 popover.industry: '<h5>Niveau 1 : Vaisseaux légers<br>Niveau 3 : Vaisseaux lourds</h5>'
 popover.light: '<h5>Industrie 1<hr>Niveau 1 : Usine d''armement</h5>'
 popover.heavy: '<h5>Industrie 3<hr>Niveau 1 : Industrie lourde</h5>'
+research.finish: Terminée

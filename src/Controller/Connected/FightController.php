@@ -338,7 +338,9 @@ class FightController extends Controller
             }
             if($dMilitary > $aMilitary) {
                 $aMilitary = ($defenser->getSoldier() * 6) - $aMilitary;
-                $invader->setSoldier(0);
+                if($barge < $invader->getSoldier()) {
+                    $invader->setSoldier($invader->getSoldier() - $barge);
+                }
                 $defenser->setBarge($defenser->getBarge() + $invader->getBarge());
                 $invader->setBarge(0);
                 if($aMilitary < 0) {

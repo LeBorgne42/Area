@@ -516,6 +516,42 @@ class User implements UserInterface, \Serializable
     }
 
     /**
+     * @return int
+     */
+    public function getAllScientist(): int
+    {
+        $return = 0;
+        foreach($this->planets as $planet) {
+            $return = $return + ($planet->getScientist());
+        }
+        return $return;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAllNiobium(): int
+    {
+        $return = 0;
+        foreach($this->planets as $planet) {
+            $return = $return + ($planet->getNbProduction() * 60);
+        }
+        return $return;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAllWater(): int
+    {
+        $return = 0;
+        foreach($this->planets as $planet) {
+            $return = $return + ($planet->getWtProduction() * 60);
+        }
+        return $return;
+    }
+
+    /**
      * @return mixed
      */
     public function getWhereRadar($sector)

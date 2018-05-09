@@ -355,7 +355,8 @@ class FleetController extends Controller
                 ($niobium < 0 || $water < 0) || ($soldier < 0 || $worker < 0) || ($scientist < 0 || $cargo < 0) ||
                 ($cargoI < 0 || $cargoV < 0) || ($hunterHeavy < 0 || $corvet < 0) ||
                 ($corvetLaser < 0 || $fregatePlasma < 0) || ($croiser < 0 || $ironClad < 0) ||
-                ($destroyer < 0 || $cargoX < 0)) {
+                ($destroyer < 0 || $cargoX < 0 || $soldier > $planet->getSoldierMax()) ||
+                ($worker > $planet->getWorkerMax() || $scientist > $planet->getScientistMax())) {
                 return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
             }
 
@@ -442,16 +443,38 @@ class FleetController extends Controller
         }
 
         $planet->setColonizer($planet->getColonizer() + $fleet->getColonizer());
+        $planet->setCargoI($planet->getCargoI() + $fleet->getCargoI());
+        $planet->setCargoV($planet->getCargoV() + $fleet->getCargoV());
+        $planet->setCargoX($planet->getCargoX() + $fleet->getCargoX());
         $planet->setRecycleur($planet->getRecycleur() + $fleet->getRecycleur());
         $planet->setBarge($planet->getBarge() + $fleet->getBarge());
         $planet->setSonde($planet->getSonde() + $fleet->getSonde());
         $planet->setHunter($planet->getHunter() + $fleet->getHunter());
+        $planet->setHunterHeavy($planet->getHunterHeavy() + $fleet->getHunterHeavy());
+        $planet->setCorvet($planet->getCorvet() + $fleet->getCorvet());
+        $planet->setCorvetLaser($planet->getCorvetLaser() + $fleet->getCorvetLaser());
         $planet->setFregate($planet->getFregate() + $fleet->getFregate());
+        $planet->setFregatePlasma($planet->getFregatePlasma() + $fleet->getFregatePlasma());
+        $planet->setCroiser($planet->getCroiser() + $fleet->getCroiser());
+        $planet->setIronClad($planet->getIronClad() + $fleet->getIronClad());
+        $planet->setDestroyer($planet->getDestroyer() + $fleet->getDestroyer());
         $planet->setNiobium($planet->getNiobium() + $fleet->getNiobium());
         $planet->setWater($planet->getWater() + $fleet->getWater());
-        $planet->setSoldier($planet->getSoldier() + $fleet->getSoldier());
-        $planet->setWorker($planet->getWorker() + $fleet->getWorker());
-        $planet->setScientist($planet->getScientist() + $fleet->getScientist());
+        if(($planet->getSoldier() + $fleet->getSoldier()) > $planet->getSoldierMax()) {
+            $planet->setSoldier($planet->getSoldierMax());
+        } else {
+            $planet->setSoldier($planet->getSoldier() + $fleet->getSoldier());
+        }
+        if(($planet->getWorker() + $fleet->getWorker()) > $planet->getWorkerMax()) {
+            $planet->setWorker($planet->getWorkerMax());
+        } else {
+            $planet->setWorker($planet->getWorker() + $fleet->getWorker());
+        }
+        if(($planet->getScientist() + $fleet->getScientist()) > $planet->getScientistMax()) {
+            $planet->setScientist($planet->getScientistMax());
+        } else {
+            $planet->setScientist($planet->getScientist() + $fleet->getScientist());
+        }
         $em->remove($fleet);
         $em->persist($planet);
         $em->flush();
