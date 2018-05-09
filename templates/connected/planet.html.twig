@@ -41,11 +41,14 @@
                             <div class="col-6">
                                 {{ form_widget(form_rename.name,{attr: { value: planet.getName()}}) }}
                             </div>
-                            <div class="col-4">
-                                {{ form_widget(form_rename.sendForm,{attr: { class: 'btn btn-sm btn-info'}}) }}
+                            <div class="col-5">
+                                {{ form_widget(form_rename.sendForm,{attr: { class: 'btn btn-sm btn-info float-right'}}) }}
                             </div>
                         </div>
-                        <div class="mt-4 text-left">{{ 'position'|trans }} <span><a href="{{ path('map', {id: planet.getSector().getPosition(), 'idp': planet.getId()}) }}">{{ planet.getSector().getGalaxy.getPosition() }}:{{ planet.getSector().getPosition() }}:{{ planet.getPosition() }}</a></span></div>
+                        <div class="mt-4 text-left">
+                            {{ 'position'|trans }} <span><a href="{{ path('map', {id: planet.getSector().getPosition(), 'idp': planet.getId()}) }}">{{ planet.getSector().getGalaxy.getPosition() }}:{{ planet.getSector().getPosition() }}:{{ planet.getPosition() }}</a></span>
+                            <a class="btn btn-sm btn-danger float-right mr-3" href="{{ path('planet_abandon', {'id': planet.getId(), 'idp': planet.getId()}) }}">{{ 'planet.abandon'|trans }}</a>
+                        </div>
                     </td>
                     <td class="center-cells text-center cell-middle">
                         <div data-toggle="tooltip" data-placement="bottom" title="{{ 'niobium'|trans }}"><span>{{ planet.getNiobium()|number_format }}</span> <span class="text-vert">+<span>{{ (planet.getNbProduction() * 60)|number_format }}</span>/h</span> <img src="{{ asset('img/niobium.png') }}"></div>

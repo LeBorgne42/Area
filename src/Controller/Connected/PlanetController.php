@@ -67,4 +67,65 @@ class PlanetController extends Controller
             'formObject' => $form_manageRenamePlanet,
         ]);
     }
+
+    /**
+     * @Route("/planete-abandon/{idp}/{id}", name="planet_abandon", requirements={"idp"="\d+","id"="\d+"})
+     */
+    public function planetAbandonAction($idp, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $abandonPlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $id, 'user' => $user))
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        if(count($abandonPlanet->getFleets()) > 0) {
+            return $this->redirectToRoute('planet', array('idp' => $usePlanet->getId()));
+        }
+
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id != :id')
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->getQuery()
+            ->setMaxResults(1)
+            ->getOneOrNullResult();
+
+        $hydra = $em->getRepository('App:User')
+            ->createQueryBuilder('u')
+            ->where('u.id = :id')
+            ->setParameters(array('id' => 1))
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $abandonPlanet->setUser($hydra);
+        $abandonPlanet->setName('Base avancée');
+        $em->persist($abandonPlanet);
+        $em->flush();
+        if(count($user->getPlanets()) == 0) {
+            foreach ($user->getFleets() as $fleet) {
+                $fleet->setUser($hydra);
+                $fleet->setName('Incursion H');
+                $em->persist($fleet);
+            }
+                $em->flush();
+            return $this->redirectToRoute('game_over');
+        }
+
+        return $this->redirectToRoute('planet', array('idp' => $usePlanet->getId()));
+    }
 }

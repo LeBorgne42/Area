@@ -16,3 +16,4 @@ planet.production: Production
 planet.population: Population
 planet.ship: Vaisseaux/Flottes
 position: 'Position :'
+planet.abandon: Abandonner

@@ -54,3 +54,7 @@ popover.radar: '<h5>Puissance radar : +1<hr> Scanner de système solaire 1</h5>'
 popover.skyRadar: '<h5>Puissance radar : +1<hr> Scanner de système solaire 3</h5>'
 popover.brouilleur: '<h5>Puissance brouilleur : +1<hr> Scanner de système solaire 5</h5>'
 building.finish: Construit
+building.delete: 'Supprimer bâtiment'
+building.deleteTxt: 'Êtes vous sûr de vouloir supprimer ce bâtiment ? Vous ne pourrez plus construire pendant une heure.'
+building.deleteSave: Détruire
+building.deleteCancel: Annuler

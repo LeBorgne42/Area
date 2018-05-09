@@ -193,7 +193,6 @@ class ServerController extends Controller
         foreach ($users as $user) {
             $user->setBitcoin(50000);
             $user->setAlly(null);
-            $user->setScientistProduction(1);
             $user->setSearch(null);
             $user->setGrade(null);
             $user->setJoinAllyAt(null);

@@ -36,6 +36,7 @@ class ConnectController extends Controller
             ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();
+
         if($planet) {
             $planet->setUser($user);
             $planet->setName('Nova Terra');
@@ -64,14 +65,11 @@ class ConnectController extends Controller
         $rank = new Rank();
         $em->persist($rank);
         $user->setRank($rank);
+        $user->setGameOver(null);
         $salon->addUser($user);
         $em->persist($salon);
         $em->persist($user);
         $em->flush();
-
-        if($user->getGameOver()) {
-            return $this->redirectToRoute('game_over');
-        }
 
         return $this->redirectToRoute('login');
     }

@@ -83,10 +83,10 @@ class SoldierController extends Controller
                     return $this->redirectToRoute('soldier', array('idp' => $usePlanet->getId()));
                 }
                 $tmpScientist = $usePlanet->getScientistAtNbr() - $usePlanet->getScientist();
-                $now->add(new DateInterval('PT' . round((($form_scientistRecruit->get('scientist')->getData() + $tmpScientist) * 60)/ $usePlanet->getScientistProduction()) . 'S'));
+                $now->add(new DateInterval('PT' . round((($form_scientistRecruit->get('scientist')->getData() + $tmpScientist) * 60)/ $user->getScientistProduction()) . 'S'));
                 $usePlanet->setScientistAtNbr($usePlanet->getScientistAtNbr() + $form_scientistRecruit->get('scientist')->getData());
             } else {
-                $now->add(new DateInterval('PT' . round(($form_scientistRecruit->get('scientist')->getData() * 60)/ $usePlanet->getScientistProduction()) . 'S'));
+                $now->add(new DateInterval('PT' . round(($form_scientistRecruit->get('scientist')->getData() * 60)/ $user->getScientistProduction()) . 'S'));
                 $usePlanet->setScientistAtNbr($usePlanet->getScientist() + $form_scientistRecruit->get('scientist')->getData());
             }
             $usePlanet->setWorker($usePlanet->getWorker() - ($form_scientistRecruit->get('scientist')->getData() * 2));

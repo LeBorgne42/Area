@@ -25,8 +25,7 @@ class OverviewController extends Controller
         $user = $this->getUser();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
-
-        if($user->getGameOver()) {
+        if($user->getGameOver() || count($user->getPlanets()) == 0) {
             return $this->redirectToRoute('game_over');
         }
 
@@ -59,6 +58,7 @@ class OverviewController extends Controller
                 ->orderBy('f.flightTime')
                 ->getQuery()
                 ->getResult();
+
             if($allFleets) {
                 $attackFleets = $allFleets;
             }
@@ -89,7 +89,47 @@ class OverviewController extends Controller
      */
     public function gameOverAction()
     {
-        if($this->getUser()->getGameOver()) {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        if($user->getGameOver() || count($user->getPlanets()) == 0) {
+            if(count($user->getPlanets()) == 0 && $user->getGameOver() == null) {
+                $user->setGameOver($user->getUserName());
+                $em->persist($user);
+                $em->flush();
+            }
+            if($user->getRank()) {
+                $user->setAlly(null);
+                $user->setGrade(null);
+                $user->setJoinAllyAt(null);
+                $user->setScientistProduction(1);
+                $user->setSearch(null);
+                $user->setSearchAt(null);
+                $user->setBitcoin(50000);
+                $user->setPlasma(0);
+                $user->setLaser(0);
+                $user->setMissile(0);
+                $user->setArmement(0);
+                $user->setRecycleur(0);
+                $user->setCargo(0);
+                $user->setTerraformation(0);
+                $user->setDemography(0);
+                $user->setUtility(0);
+                $user->setBarge(0);
+                $user->setHyperespace(0);
+                $user->setDiscipline(0);
+                $user->setHeavyShip(0);
+                $user->setLightShip(0);
+                $user->setIndustry(0);
+                $user->setOnde(0);
+                $user->setHyperespace(0);
+                $user->setDiscipline(0);
+                foreach ($user->getSalons() as $salon) {
+                    $salon->removeUser($user);
+                }
+                $user->setSalons(null);
+                $em->persist($user);
+                $em->flush();
+            }
             return $this->render('connected/game_over.html.twig', [
             ]);
         } else {

@@ -68,11 +68,27 @@ class DailyController extends Controller
             $report->setContent($report->getContent() . " Ce qui vous donne un revenu de " . round($worker - $empireCost) . " Bitcoin. Bonne journée Commandant.");
             $user->getRank()->setOldPoint($user->getRank()->getPoint());
             $user->getRank()->setPoint($point);
-            $user->getRank()->setOldPosition($user->getRank()->getPosition());
-            $user->getRank()->setPosition($x);
             $user->setViewReport(false);
 
             $em->persist($report);
+            $em->persist($user);
+            $x++;
+        }
+        $em->flush();
+
+        $users = $em->getRepository('App:User')
+            ->createQueryBuilder('u')
+            ->join('u.rank', 'r')
+            ->where('u.id != :one')
+            ->setParameters(array('one' => 1))
+            ->orderBy('r.point', 'DESC')
+            ->getQuery()
+            ->getResult();
+
+        $x = 1;
+        foreach ($users as $user) {
+            $user->getRank()->setOldPosition($user->getRank()->getPosition());
+            $user->getRank()->setPosition($x);
             $em->persist($user);
             $x++;
         }

@@ -63,11 +63,6 @@ class Planet
     protected $workerProduction = 1.1;
 
     /**
-     * @ORM\Column(name="scientistProduction",type="decimal", precision=28, scale=5)
-     */
-    protected $scientistProduction = 1;
-
-    /**
      * @ORM\Column(name="soldierMax",type="integer")
      */
     protected $soldierMax = 2500;
@@ -1267,22 +1262,6 @@ class Planet
     public function getUpdatedAt(): \DateTime
     {
         return $this->updatedAt;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getScientistProduction()
-    {
-        return $this->scientistProduction;
-    }
-
-    /**
-     * @param mixed $scientistProduction
-     */
-    public function setScientistProduction($scientistProduction): void
-    {
-        $this->scientistProduction = $scientistProduction;
     }
 
     /**
