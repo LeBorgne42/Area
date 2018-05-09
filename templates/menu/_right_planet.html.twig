@@ -5,7 +5,7 @@
         {% if planet == usePlanet and app.user.getPlanets()|length > 9 %}
         {% else %}
             <div class="mb-4 bg-right p-4{% if planet.getConstruct() is null and (planet.getGround() != planet.getGroundPlace()) %} constructFree{% endif %}">  {#or planet.getSkyPlace() != planet.getSky()#}
-                <div class="pt-2 float-left"><a href="{{ path('building', {'idp': planet.getId()}) }}"><img height="32" width="32" src="{{ vich_uploader_asset(planet, 'imageFile') }}"></a></div>
+                <div class="pt-2 float-left"><a href="{{ planet.getId() }}"><img height="32" width="32" src="{{ vich_uploader_asset(planet, 'imageFile') }}"></a></div>
                 <div class="float-right">
                     <div class="mt-2">
                         {{ planet.getName() }} - <span><a href="{{ path('map', {id: planet.getSector().getPosition(), 'idp': planet.getId()}) }}">{{ planet.getSector().getGalaxy.getPosition() }}:{{ planet.getSector().getPosition() }}:{{ planet.getPosition() }}</a></span>

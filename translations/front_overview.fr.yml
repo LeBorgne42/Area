@@ -28,7 +28,7 @@ form.name: 'nouveau nom'
 form.renamePlanet: renommer
 tooltip.rank: 'Votre classement est affiché ici avec l''évolution positive ou négative depuis les dernière 24h.'
 title.tmpbeta: 'Info temporaire beta :'
-overview.tmpbeta: 'Je vais mettre ici les infos importantes pour que tout le monde puissent y avoir accès rapidement. Dans un premier temps ces éléments : <br> <br> - Le recyclage n''est pas encore opérationnel <br> - Le temps de contrustion vaisseaux/soldats/scientiques non plus <br> - Le temps décompté des trajets de flottes est en cours de codage <br> - Il peut y avoir des soucis liés aux combats et donc il faudra me le rapporter <br> - L''actualisation automatique des salons lorsqu''il y a un nouveau message'
+overview.tmpbeta: '<br> 1/ Flotte : Selection de nos planètes - Envoyer/Décharger/Revenir - Recyclage ressources <br> 2/ Ajouter la ressource éléctricité pour les bâtiments <br> 3/ Une page listant toutes les alliances <br> 4/ Ajouter niveau radar/brouilleur sur la carte - Ajouter temps de construction vaisseaux  <br> 5/ Régler le décompte des constructions et des flottes <br> 6/ Actualisation automatique des salons <br> 7/ Permettre plusieurs constructions'
 info.worker: 'Total travailleurs :'
 info.cost: 'Coût d''entretien :'
 info.soldier: 'Total soldats :'
