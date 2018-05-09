@@ -36,7 +36,7 @@
                 </td>
                 <td class="center-cells p-4">
                     {% if usePlanet.getMiner() > 0 and usePlanet.getConstructAt() == null %}
-                        <a data-toggle="modal" data-target="#deleteModal" class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_mine', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
+                        <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_mine', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
                     {% endif %}
@@ -101,7 +101,7 @@
                 </td>
                 <td class="center-cells p-4">
                     {% if usePlanet.getCenterSearch() > 0 and usePlanet.getConstructAt() == null %}
-                        <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_search', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
+                        <a data-toggle="modal" data-target="#deleteModal" class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_search', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
                     {% endif %}

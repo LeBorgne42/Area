@@ -22,6 +22,8 @@ class DailyController extends Controller
         $users = $em->getRepository('App:User')
             ->createQueryBuilder('u')
             ->join('u.rank', 'r')
+            ->where('u.id != :one')
+            ->setParameters(array('one' => 1))
             ->orderBy('r.point', 'DESC')
             ->getQuery()
             ->getResult();
