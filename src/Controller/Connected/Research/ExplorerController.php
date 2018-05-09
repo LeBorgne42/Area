@@ -71,11 +71,11 @@ class ExplorerController extends Controller
         $userBt = $user->getBitcoin();
 
         if(($userBt < 12000 || $user->getUtility() == 0) ||
-            ($level == 1 || $user->getSearchAt() > $now)) {
+            ($level > 18 || $user->getSearchAt() > $now)) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
 
-        $now->add(new DateInterval('PT' . 3800 / $user->getScientistProduction() . 'S'));
+        $now->add(new DateInterval('PT' . 36000 / $user->getScientistProduction() . 'S'));
         $user->setSearch('terraformation');
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - 12000);

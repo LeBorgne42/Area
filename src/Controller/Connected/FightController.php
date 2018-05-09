@@ -405,12 +405,13 @@ class FightController extends Controller
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
+        $user = $this->getUser();
 
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->where('p.id = :id')
             ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
+            ->setParameters(array('id' => $idp, 'user' => $user))
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -424,7 +425,8 @@ class FightController extends Controller
         $newPlanet = $colonize->getPlanet();
         if($colonize->getColonizer() && $newPlanet->getUser() == null &&
             $newPlanet->getEmpty() == false && $newPlanet->getMerchant() == false &&
-            $newPlanet->getCdr() == false && count($colonize->getUser()->getPlanets()) < 21) {
+            $newPlanet->getCdr() == false && count($colonize->getUser()->getPlanets()) < 21 &&
+            count($colonize->getUser()->getPlanets()) <= ($user->getTerraformation() + 2)) {
             $colonize->setColonizer($colonize->getColonizer() - 1);
             $newPlanet->setUser($colonize->getUser());
             $newPlanet->setName('Colonie');

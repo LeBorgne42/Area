@@ -60,7 +60,7 @@ class Planet
     /**
      * @ORM\Column(name="workerProduction",type="decimal", precision=28, scale=5)
      */
-    protected $workerProduction = 1.2;
+    protected $workerProduction = 1.1;
 
     /**
      * @ORM\Column(name="scientistProduction",type="decimal", precision=28, scale=5)
@@ -71,6 +71,16 @@ class Planet
      * @ORM\Column(name="soldierMax",type="integer")
      */
     protected $soldierMax = 2500;
+
+    /**
+     * @ORM\Column(name="scientistMax",type="integer")
+     */
+    protected $scientistMax = 200;
+
+    /**
+     * @ORM\Column(name="workerMax",type="integer")
+     */
+    protected $workerMax = 100000;
 
     /**
      * @ORM\Column(name="nbProduction",type="decimal", precision=28, scale=5)
@@ -96,6 +106,31 @@ class Planet
      * @ORM\Column(name="constructAt",type="datetime", nullable=true)
      */
     protected $constructAt;
+
+    /**
+     * @ORM\Column(name="scientistAt",type="datetime", nullable=true)
+     */
+    protected $scientistAt;
+
+    /**
+     * @ORM\Column(name="scientistAtNbr",type="integer", nullable=true)
+     */
+    protected $scientistAtNbr;
+
+    /**
+     * @ORM\Column(name="soldierAt",type="datetime", nullable=true)
+     */
+    protected $soldierAt;
+
+    /**
+     * @ORM\Column(name="soldierAtNbr",type="integer", nullable=true)
+     */
+    protected $soldierAtNbr;
+
+    /**
+     * @ORM\Column(name="shipAt",type="datetime", nullable=true)
+     */
+    protected $shipAt;
 
     /**
      * @ORM\Column(name="miner",type="integer", nullable=true)
@@ -1416,5 +1451,117 @@ class Planet
     public function setDestroyer($destroyer): void
     {
         $this->destroyer = $destroyer;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getScientistMax()
+    {
+        return $this->scientistMax;
+    }
+
+    /**
+     * @param mixed $scientistMax
+     */
+    public function setScientistMax($scientistMax): void
+    {
+        $this->scientistMax = $scientistMax;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWorkerMax()
+    {
+        return $this->workerMax;
+    }
+
+    /**
+     * @param mixed $workerMax
+     */
+    public function setWorkerMax($workerMax): void
+    {
+        $this->workerMax = $workerMax;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getScientistAt()
+    {
+        return $this->scientistAt;
+    }
+
+    /**
+     * @param mixed $scientistAt
+     */
+    public function setScientistAt($scientistAt): void
+    {
+        $this->scientistAt = $scientistAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSoldierAt()
+    {
+        return $this->soldierAt;
+    }
+
+    /**
+     * @param mixed $soldierAt
+     */
+    public function setSoldierAt($soldierAt): void
+    {
+        $this->soldierAt = $soldierAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShipAt()
+    {
+        return $this->shipAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getScientistAtNbr()
+    {
+        return $this->scientistAtNbr;
+    }
+
+    /**
+     * @param mixed $scientistAtNbr
+     */
+    public function setScientistAtNbr($scientistAtNbr): void
+    {
+        $this->scientistAtNbr = $scientistAtNbr;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSoldierAtNbr()
+    {
+        return $this->soldierAtNbr;
+    }
+
+    /**
+     * @param mixed $soldierAtNbr
+     */
+    public function setSoldierAtNbr($soldierAtNbr): void
+    {
+        $this->soldierAtNbr = $soldierAtNbr;
+    }
+
+    /**
+     * @param mixed $shipAt
+     */
+    public function setShipAt($shipAt): void
+    {
+        $this->shipAt = $shipAt;
     }
 }

@@ -36,7 +36,11 @@ class DailyController extends Controller
             $worker = 0;
             $planetPoint= 0;
             foreach ($user->getPlanets() as $planet) {
-                $planet->setWorker($planet->getWorker() * $planet->getWorkerProduction());
+                if (($planet->getWorker() * $planet->getWorkerProduction() > $planet->getWorkerMax())) {
+                    $planet->setWorker($planet->getWorkerMax());
+                } else {
+                    $planet->setWorker($planet->getWorker() * $planet->getWorkerProduction());
+                }
                 $worker = $worker + $planet->getWorker();
                 $planetPoint = $planetPoint + $planet->getBuildingPoint();
             }

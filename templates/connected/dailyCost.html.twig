@@ -7,49 +7,6 @@
 {% block body %}
     {% set cost = (app.user.getAllSoldier() * 2) + app.user.getAllShipsCost() %}
     <div class="front-block building">
-        <div class="block-title ml-4"><h2>{{ 'daily.titleTwo'|trans }}</h2></div>
-        <div class="m-5 p-5 text-middle">
-            <table class="table table-striped table-bordered table-dark">
-                <tbody>
-                <tr>
-                    <th class="tab-cells-name text-center">
-                        {{ 'daily.win'|trans }}
-                    </th>
-                    <th class="tab-cells-name text-center">
-                        {{ 'daily.cost'|trans }}
-                    </th>
-                    <th class="tab-cells-name text-center">
-                        {{ 'daily.ships'|trans }}
-                    </th>
-                    <th class="tab-cells-name text-center">
-                        {{ 'daily.soldier'|trans }}
-                    </th>
-                    <th class="tab-cells-name text-center">
-                        {{ 'daily.rank'|trans }}
-                    </th>
-                </tr>
-                <tr>
-                    <th class="tab-cells-name text-center">
-                        {{ app.user.getAllWorker()|number_format }}
-                    </th>
-                    <th class="tab-cells-name text-center">
-                        {{ cost|number_format }}
-                    </th>
-                    <th class="tab-cells-name text-center">
-                        {{ app.user.getAllShips()|number_format }}
-                    </th>
-                    <th class="tab-cells-name text-center">
-                        {{ app.user.getAllSoldier()|number_format }}
-                    </th>
-                    <th class="tab-cells-name text-center">
-                        {{ app.user.getRank().getPosition() - app.user.getRank().getOldPosition() }}
-                    </th>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="front-block building">
         <div class="block-title ml-4"><h2>{{ 'daily.title'|trans }}</h2></div>
         <div class="m-5 p-5 text-middle">
             {{ 'daily.help'|trans|raw }}

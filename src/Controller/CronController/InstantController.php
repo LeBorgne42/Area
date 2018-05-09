@@ -58,6 +58,20 @@ class InstantController extends Controller
             ->getQuery()
             ->getResult();
 
+        $userSoldiers = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.soldierAt < :now')
+            ->setParameters(array('now' => $now))
+            ->getQuery()
+            ->getResult();
+
+        $userScientists = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.scientistAt < :now')
+            ->setParameters(array('now' => $now))
+            ->getQuery()
+            ->getResult();
+
         $fleets = $em->getRepository('App:Fleet')
             ->createQueryBuilder('f')
             ->where('f.flightTime < :now')
@@ -72,6 +86,19 @@ class InstantController extends Controller
             ->getQuery()
             ->getResult();
 
+        foreach ($userSoldiers as $soldierAt) {
+            $soldierAt->setSoldier($soldierAt->getSoldierAtNbr());
+            $soldierAt->setSoldierAt(null);
+            $soldierAt->setSoldierAtNbr(null);
+            $em->persist($soldierAt);
+        }
+        foreach ($userScientists as $scientistAt) {
+            $scientistAt->setScientist($scientistAt->GetScientistAtNbr());
+            $scientistAt->setScientistAt(null);
+            $scientistAt->setScientistAtNbr(null);
+            $em->persist($scientistAt);
+        }
+
         foreach ($planets as $planet) {
             $build = $planet->getConstruct();
             if($build == 'miner') {
@@ -83,15 +110,18 @@ class InstantController extends Controller
             } elseif ($build == 'city') {
                 $planet->setCity($planet->getCity() + 1);
                 $planet->setWorkerProduction($planet->getWorkerProduction() + 0.2);
+                $planet->setWorkerMax($planet->getWorkerMax() + 25000);
             } elseif ($build == 'metropole') {
                 $planet->setMetropole($planet->getMetropole() + 1);
                 $planet->setWorkerProduction($planet->getWorkerProduction() + 0.5);
+                $planet->setWorkerMax($planet->getWorkerMax() + 75000);
             } elseif ($build == 'caserne') {
                 $planet->setCaserne($planet->getCaserne() + 1);
                 $planet->setSoldierMax($planet->getSoldierMax() + 2500);
             } elseif ($build == 'centerSearch') {
                 $planet->setCenterSearch($planet->getCenterSearch() + 1);
                 $planet->setScientistProduction($planet->getScientistProduction() + 0.1);
+                $planet->setScientistMax($planet->getScientistMax() + 500);
             } elseif ($build == 'lightUsine') {
                 $planet->setLightUsine($planet->getLightUsine() + 1);
                 $planet->setShipProduction($planet->getShipProduction() + 0.15);

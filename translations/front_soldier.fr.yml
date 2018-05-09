@@ -9,3 +9,5 @@ form.recruitSoldier: Recruter
 form.recruitScientist: Engager
 workerImg: Travailleurs
 scientistImg: Scientifiques
+caserner.soldierProd: ' soldats en production'
+caserner.scientistProd: ' scientifiques en production'
