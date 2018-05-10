@@ -39,7 +39,7 @@
             <tr>
                 <th class="tab-cells-name">
                     <img class="float-left building-img ml-3" src="{{ asset('img/terra.png') }}"><button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.terra'|trans|raw }}">{{ 'title.terraformation'|trans|raw }} - {{ 'research.level'|trans|raw }} {{ app.user.getTerraformation()|trans }} / 18</button>
-                    <div class="mt-4">12000 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
+                    <div class="mt-4">{{ (app.user.getTerraformation() + 1) * 12000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
                 </th>
                 <td class="center-cells cell-middle">
                     {{ 'research.terraformation.desc'|trans }}

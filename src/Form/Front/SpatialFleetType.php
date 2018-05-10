@@ -82,6 +82,7 @@ class SpatialFleetType extends AbstractType
                 null,
                 array(
                     'label' => 'form.nbr',
+                    'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
                         'class' => 'form-control',
@@ -96,6 +97,7 @@ class SpatialFleetType extends AbstractType
                 null,
                 array(
                     'label' => 'form.nbr',
+                    'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
                         'class' => 'form-control',
@@ -110,6 +112,7 @@ class SpatialFleetType extends AbstractType
                 null,
                 array(
                     'label' => 'form.nbr',
+                    'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
                         'class' => 'form-control',
@@ -169,6 +172,7 @@ class SpatialFleetType extends AbstractType
                 null,
                 array(
                     'label' => 'form.nbr',
+                    'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
                         'class' => 'form-control',
@@ -183,6 +187,7 @@ class SpatialFleetType extends AbstractType
                 null,
                 array(
                     'label' => 'form.nbr',
+                    'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
                         'class' => 'form-control',
@@ -197,6 +202,7 @@ class SpatialFleetType extends AbstractType
                 null,
                 array(
                     'label' => 'form.nbr',
+                    'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
                         'class' => 'form-control',
@@ -211,6 +217,7 @@ class SpatialFleetType extends AbstractType
                 null,
                 array(
                     'label' => 'form.nbr',
+                    'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
                         'class' => 'form-control',
@@ -225,6 +232,7 @@ class SpatialFleetType extends AbstractType
                 null,
                 array(
                     'label' => 'form.nbr',
+                    'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
                         'class' => 'form-control',
@@ -239,6 +247,7 @@ class SpatialFleetType extends AbstractType
                 null,
                 array(
                     'label' => 'form.nbr',
+                    'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
                         'class' => 'form-control',
@@ -253,6 +262,7 @@ class SpatialFleetType extends AbstractType
                 null,
                 array(
                     'label' => 'form.nbr',
+                    'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
                         'class' => 'form-control',

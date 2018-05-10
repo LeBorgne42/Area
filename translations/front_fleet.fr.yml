@@ -26,7 +26,7 @@ fleet.hunter: Chasseur
 fleet.fregate: Fregate
 fleet.barge: Barge
 form.nbr: Nombre
-form.manageFleet: Sauvegarder
+form.manageFleet: Transferer
 form.renameFleet: renommer
 form.sendFleet: envoyer
 form.name: ''

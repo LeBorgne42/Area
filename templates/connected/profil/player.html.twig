@@ -16,9 +16,16 @@
         <div class="my-4 ml-5">{{ 'user.galaxy'|trans }} 1</div>
         <div class="my-4 ml-5">{{ 'user.planet'|trans }} {{ user.getPlanets()|length }}</div>
         <div class="my-4 ml-5">{{ 'user.fleet'|trans }} {{ user.getFleets()|length }}</div>
+        <div class="my-4 text-center"><a class="btn-top" data-toggle="modal" data-target="#respondeModal" href="{{ path('message_responde', {'idp': usePlanet.getId(), 'id': user.getId()}) }}">{{ 'responde'|trans }}</a></div>
     </div>
     <div class="modal fade" id="allyModal" tabindex="-1" role="dialog" aria-labelledby="allyModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content special">
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="respondeModal" tabindex="-1" role="dialog" aria-labelledby="respondeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content special">
             </div>
         </div>

@@ -62,6 +62,11 @@ class Ally
     protected $salon;
 
     /**
+     * @ORM\Column(name="rank",type="integer", nullable=true)
+     */
+    protected $rank = null;
+
+    /**
      * @ORM\Column(name="bitcoin",type="bigint")
      */
     protected $bitcoin;
@@ -110,6 +115,11 @@ class Ally
      * @var integer
      */
     private $imageSize;
+
+    /**
+     * @ORM\Column(name="created_at",type="datetime", nullable=true)
+     */
+    protected $createdAt = null;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -315,6 +325,19 @@ class Ally
                     }
                 }
             }
+        }
+        return $return;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUsersPoint()
+    {
+        $return = 0;
+
+        foreach($this->getUsers() as $user) {
+            $return = $return + $user->getRank()->getPoint();
         }
         return $return;
     }
@@ -668,6 +691,38 @@ class Ally
     public function setSalon($salon): void
     {
         $this->salon = $salon;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRank()
+    {
+        return $this->rank;
+    }
+
+    /**
+     * @param mixed $rank
+     */
+    public function setRank($rank): void
+    {
+        $this->rank = $rank;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param mixed $createdAt
+     */
+    public function setCreatedAt($createdAt): void
+    {
+        $this->createdAt = $createdAt;
     }
 
     public function getId()

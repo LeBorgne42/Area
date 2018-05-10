@@ -70,7 +70,7 @@ class ExplorerController extends Controller
         $level = $user->getTerraformation();
         $userBt = $user->getBitcoin();
 
-        if(($userBt < 12000 || $user->getUtility() == 0) ||
+        if(($userBt < ($level * 12000) || $user->getUtility() == 0) ||
             ($level > 18 || $user->getSearchAt() > $now)) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
@@ -78,7 +78,7 @@ class ExplorerController extends Controller
         $now->add(new DateInterval('PT' . 36000 / $user->getScientistProduction() . 'S'));
         $user->setSearch('terraformation');
         $user->setSearchAt($now);
-        $user->setBitcoin($userBt - 12000);
+        $user->setBitcoin($userBt - ($level * 12000));
         $em->persist($user);
         $em->flush();
 
@@ -210,7 +210,7 @@ class ExplorerController extends Controller
         $level = $user->getUtility() + 1;
         $userBt = $user->getBitcoin();
 
-        if(($userBt < 2500) ||
+        if(($userBt < ($level * 2500)) ||
             ($level == 4 || $user->getSearchAt() > $now)) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
@@ -218,7 +218,7 @@ class ExplorerController extends Controller
         $now->add(new DateInterval('PT' . ($level * 2000 / $user->getScientistProduction()) . 'S'));
         $user->setSearch('utility');
         $user->setSearchAt($now);
-        $user->setBitcoin($userBt - 2500);
+        $user->setBitcoin($userBt - ($level * 2500));
         $em->persist($user);
         $em->flush();
 

@@ -19,6 +19,7 @@
             <div class="text-center"><img height="300" width="450" src="{{ asset('img/ally.jpg') }}"></div>
         {% endif %}
         <div class="my-5 ml-5">{{ ally.getSlogan() }}</div>
+        <div class="my-4 ml-5">{{ 'ally.leader'|trans }} {% for user in ally.getUsers() %}{% if user.getGrade().getPlacement() == 1 %}<span><a href="{{ path('user_profil', {'idp': usePlanet.getId(), 'id': user.getId()}) }}">{{ user.getGrade().getName() }} {{ user.getUsername() }}</a></span> - {% endif %}{% endfor %}</div>
         <div class="my-4 ml-5">{{ 'ally.nbr'|trans }} {{ ally.getUsers()|length }}</div>
         <div class="my-4 ml-5">{{ 'ally.galaxy'|trans }} 1</div>
         <div class="my-4 ml-5">{{ 'ally.planet'|trans }} {{ ally.getPlanets() }}</div>

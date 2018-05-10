@@ -120,6 +120,7 @@ class PlanetController extends Controller
             foreach ($user->getFleets() as $fleet) {
                 $fleet->setUser($hydra);
                 $fleet->setName('Incursion H');
+                $fleet->setAttack(true);
                 $em->persist($fleet);
             }
                 $em->flush();

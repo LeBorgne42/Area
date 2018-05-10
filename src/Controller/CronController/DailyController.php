@@ -92,6 +92,16 @@ class DailyController extends Controller
             $em->persist($user);
             $x++;
         }
+
+        $allys = $em->getRepository('App:Ally')
+            ->createQueryBuilder('a')
+            ->getQuery()
+            ->getResult();
+        foreach ($allys as $ally) {
+            $ally->setRank($ally->getUsersPoint());
+            $em->persist($ally);
+        }
+
         $em->flush();
 
         exit;

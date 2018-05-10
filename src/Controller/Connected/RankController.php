@@ -13,7 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class RankController extends Controller
 {
     /**
-     * @Route("/classement/{idp}", name="rank", requirements={"idp"="\d+"})
+     * @Route("/classement-alliance/{idp}", name="rank_ally", requirements={"idp"="\d+"})
      */
     public function rankAction($idp)
     {
@@ -27,8 +27,16 @@ class RankController extends Controller
             ->getQuery()
             ->getOneOrNullResult();
 
-        return $this->render('connected/rank.html.twig', [
+        $allAllys = $em->getRepository('App:Ally')
+            ->createQueryBuilder('a')
+            ->where('a.rank is not null')
+            ->orderBy('a.rank', 'DESC')
+            ->getQuery()
+            ->getResult();
+
+        return $this->render('connected/ally/rank.html.twig', [
             'usePlanet' => $usePlanet,
+            'allAllys' => $allAllys,
         ]);
     }
 }

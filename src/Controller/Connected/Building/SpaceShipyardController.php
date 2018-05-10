@@ -265,7 +265,7 @@ class SpaceShipyardController extends Controller
         $usePlanetWt = $usePlanet->getWater();
         $newGround = $usePlanet->getGroundPlace() + 6;
 
-        if(($usePlanetNb < ($level * 23000) || $usePlanetWt < ($level * 34000)) ||
+        if(($usePlanetNb < ($level * 13000) || $usePlanetWt < ($level * 19000)) ||
             ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround()) ||
             ($user->getDiscipline() < 3)) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
@@ -309,7 +309,7 @@ class SpaceShipyardController extends Controller
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
 
-        $usePlanet->setMiner($level - 1);
+        $usePlanet->setCaserne($level - 1);
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setSoldierMax($usePlanet->getSoldierMax() - 2500);
         $em->persist($usePlanet);
