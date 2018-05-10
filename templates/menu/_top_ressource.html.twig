@@ -9,7 +9,6 @@
     <span class="ressource" data-toggle="tooltip" data-placement="bottom" title="{{ 'workers'|trans }}">{{ usePlanet.getWorker()|number_format }} / {{ usePlanet.getWorkerMax()|number_format }} <img src="{{ asset('img/worker.png') }}"></span>
     <span class="ressource" data-toggle="tooltip" data-placement="bottom" title="{{ 'soldiers'|trans }}">{{ usePlanet.getSoldier()|number_format }} / {{ usePlanet.getSoldierMax()|number_format }} <img src="{{ asset('img/soldier.png') }}"></span>
     <span class="ressource" data-toggle="tooltip" data-placement="bottom" title="{{ 'scientists'|trans }}">{{ usePlanet.getScientist()|number_format }} / {{ usePlanet.getScientistMax()|number_format }} <img src="{{ asset('img/scientist.png') }}"></span>
-    <span><a href="{{ path('rank_ally', {'idp': usePlanet.getId()}) }}"><span>{{ 'rank'|trans }}</span></a></span>
     <span><a class="top" target="_blank" href="http://area-control.forumactif.com/">{{ 'forum'|trans }}</a></span>
 </div>
 
