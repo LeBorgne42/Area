@@ -43,7 +43,7 @@ class SociologicController extends Controller
         $user->setSearch('demography');
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - ($level * 8000));
-        $usePlanet->setWorkerProduction($usePlanet->getWorkerProduction() + 0.1);
+        $usePlanet->setWorkerProduction($usePlanet->getWorkerProduction() + 500);
         $em->persist($user);
         $em->flush();
 

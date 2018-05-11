@@ -82,6 +82,8 @@ class InformationController extends Controller
 
         $usePlanet->setRadar($level - 1);
         $usePlanet->setGroundPlace($newGround);
+        $usePlanet->setConstruct('destruct');
+        $usePlanet->setConstructAt($now);
         $em->persist($usePlanet);
         $em->flush();
 
@@ -155,6 +157,8 @@ class InformationController extends Controller
 
         $usePlanet->setSkyRadar($level - 1);
         $usePlanet->setSkyPlace($newSky);
+        $usePlanet->setConstruct('destruct');
+        $usePlanet->setConstructAt($now);
         $em->persist($usePlanet);
         $em->flush();
 
@@ -228,6 +232,8 @@ class InformationController extends Controller
 
         $usePlanet->setSkyBrouilleur($level - 1);
         $usePlanet->setSkyPlace($newSky);
+        $usePlanet->setConstruct('destruct');
+        $usePlanet->setConstructAt($now);
         $em->persist($usePlanet);
         $em->flush();
 

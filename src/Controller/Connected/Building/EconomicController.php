@@ -76,14 +76,16 @@ class EconomicController extends Controller
         $newGround = $usePlanet->getGroundPlace() - 5;
 
         if(($level == 0 || $usePlanet->getConstructAt() > $now) ||
-            ($usePlanet->getScientist() < $usePlanet->getScientistMax() - 2500)) {
+            ($usePlanet->getScientist() < $usePlanet->getScientistMax() - 500)) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
-
+        $now->add(new DateInterval('PT' . 1800 . 'S'));
         $usePlanet->setCenterSearch($level - 1);
         $usePlanet->setGroundPlace($newGround);
         $user->setScientistProduction($user->getScientistProduction() - 0.1);
-        $usePlanet->setScientistMax($usePlanet->getScientistMax() + 500);
+        $usePlanet->setScientistMax($usePlanet->getScientistMax() - 500);
+        $usePlanet->setConstruct('destruct');
+        $usePlanet->setConstructAt($now);
         $em->persist($usePlanet);
         $em->flush();
 
@@ -154,11 +156,13 @@ class EconomicController extends Controller
         if($level == 0 || $usePlanet->getConstructAt() > $now) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
-
+        $now->add(new DateInterval('PT' . 1800 . 'S'));
         $usePlanet->setCity($level - 1);
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setWorkerMax($usePlanet->getWorkerMax() - 25000);
-        $usePlanet->setWorkerProduction($usePlanet->getWorkerProduction() - 0.2);
+        $usePlanet->setWorkerProduction($usePlanet->getWorkerProduction() - 2000);
+        $usePlanet->setConstruct('destruct');
+        $usePlanet->setConstructAt($now);
         $em->persist($usePlanet);
         $em->flush();
 
@@ -198,7 +202,6 @@ class EconomicController extends Controller
         $usePlanet->setNiobium($usePlanetNb - ($level * 75000));
         $usePlanet->setWater($usePlanetWt - ($level * 55000));
         $usePlanet->setGroundPlace($newGround);
-        $usePlanet->setWorkerProduction($usePlanet->getWorkerProduction() + 0.5);
         $usePlanet->setSkyPlace($newSky);
         $usePlanet->setConstruct('metropole');
         $usePlanet->setConstructAt($now);
@@ -233,12 +236,14 @@ class EconomicController extends Controller
         if($level == 0 || $usePlanet->getConstructAt() > $now) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
-
+        $now->add(new DateInterval('PT' . 1800 . 'S'));
         $usePlanet->setMetropole($level - 1);
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setWorkerMax($usePlanet->getWorkerMax() - 75000);
-        $usePlanet->setWorkerProduction($usePlanet->getWorkerProduction() - 0.5);
+        $usePlanet->setWorkerProduction($usePlanet->getWorkerProduction() - 5000);
         $usePlanet->setSkyPlace($newSky);
+        $usePlanet->setConstruct('destruct');
+        $usePlanet->setConstructAt($now);
         $em->persist($usePlanet);
         $em->flush();
 

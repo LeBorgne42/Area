@@ -1,6 +1,6 @@
 title: 'Carte spatiale'
 tooltip.planet: '%name%'
-tooltip.planetInfos: 'Terrain: %land% Espace: %sky% Au sol: %ground%'
+tooltip.planetInfos: 'Terrain: %land% <br> Espace: %sky% <br> Radar: %radar% <br> Brouilleur: %brouilleur% <br> Au sol: %ground%'
 tooltip.planetOrbite: '%orbite%'
 map.coming: 'Flotte entrant dans le secteur'
 map.fleetName: 'Nom de flotte'
@@ -10,7 +10,7 @@ map.time: Temps
 map.fleetSignature: Signature
 map.out: 'Flotte sortant du secteur'
 map.planetHostile: Occupée
-tooltip.cdr: '%niobium% Niobium - %water% Water'
+tooltip.cdr: '%niobium% Niobium <br> %water% Water'
 tooltip.brouillage: Brouillage
 map.current: 'Mouvement de flotte dans le secteur'
 sector.number: Secteur

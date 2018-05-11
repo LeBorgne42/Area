@@ -82,11 +82,13 @@ class SpaceShipyardController extends Controller
         if($level == 0 || $usePlanet->getConstructAt() > $now) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
-
+        $now->add(new DateInterval('PT' . 1800 . 'S'));
         $usePlanet->setSpaceShip($level - 1);
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setShipProduction($usePlanet->getShipProduction() - 0.1);
         $usePlanet->setSkyPlace($newSky);
+        $usePlanet->setConstruct('destruct');
+        $usePlanet->setConstructAt($now);
         $em->persist($usePlanet);
         $em->flush();
 
@@ -157,10 +159,12 @@ class SpaceShipyardController extends Controller
         if($level == 0 || $usePlanet->getConstructAt() > $now) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
-
+        $now->add(new DateInterval('PT' . 1800 . 'S'));
         $usePlanet->setLightUsine($level - 1);
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setShipProduction($usePlanet->getShipProduction() - 0.15);
+        $usePlanet->setConstruct('destruct');
+        $usePlanet->setConstructAt($now);
         $em->persist($usePlanet);
         $em->flush();
 
@@ -233,10 +237,12 @@ class SpaceShipyardController extends Controller
         if($level == 0 || $usePlanet->getConstructAt() > $now) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
-
+        $now->add(new DateInterval('PT' . 1800 . 'S'));
         $usePlanet->setHeavyUsine($level - 1);
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setShipProduction($usePlanet->getShipProduction() - 0.3);
+        $usePlanet->setConstruct('destruct');
+        $usePlanet->setConstructAt($now);
         $em->persist($usePlanet);
         $em->flush();
 
@@ -308,10 +314,12 @@ class SpaceShipyardController extends Controller
             ($usePlanet->getSoldier() < $usePlanet->getSoldierMax() - 2500)) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
-
+        $now->add(new DateInterval('PT' . 1800 . 'S'));
         $usePlanet->setCaserne($level - 1);
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setSoldierMax($usePlanet->getSoldierMax() - 2500);
+        $usePlanet->setConstruct('destruct');
+        $usePlanet->setConstructAt($now);
         $em->persist($usePlanet);
         $em->flush();
 

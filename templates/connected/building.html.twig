@@ -15,7 +15,7 @@
             <tr>
                 <td class="center-cells">
                     <img class="float-left building-img ml-3" src="{{ asset('img/mining.png') }}"><button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.miner'|trans({'%product%': (((usePlanet.getMiner() + 1) * 1.1)) * 60})|raw }}"><strong>{{ 'building.mining'|trans }} x {{ usePlanet.getMiner()|trans }}</strong></button>
-                    <div class="mt-4">{{ (usePlanet.getMiner() + 1) * 300 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ (usePlanet.getMiner() + 1) * 100 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
+                    <div class="mt-4">{{ (usePlanet.getMiner() + 1) * 450 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ (usePlanet.getMiner() + 1) * 200 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
                     <div class="mt-4">1 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"></div>
                 </td>
                 <td class="center-cells cell-middle">
@@ -26,7 +26,7 @@
                         <div id="timeConstruct" class="mt-5">{{ usePlanet.getConstructAt()|date('Y/m/d H:i:s') }}</div>
                         
                     {% else %}
-                        {% if planetNb >= ((usePlanet.getMiner() + 1) * 300) and planetWt >= ((usePlanet.getMiner() + 1) * 100) and usePlanet.getGroundPlace() + 1 <= usePlanet.getGround() and usePlanet.getConstructAt() < date %}
+                        {% if planetNb >= ((usePlanet.getMiner() + 1) * 450) and planetWt >= ((usePlanet.getMiner() + 1) * 200) and usePlanet.getGroundPlace() + 1 <= usePlanet.getGround() and usePlanet.getConstructAt() < date %}
                             <div>{% if ((usePlanet.getMiner() + 1) * 180) < 3600 %}{{  ((usePlanet.getMiner() + 1) * 180)|date('i:s') }}{% elseif ((usePlanet.getMiner() + 1) * 180) < 86400 %}{{  ((usePlanet.getMiner() + 1) * 180)|date('H:i:s') }}{% else %}{{  ((usePlanet.getMiner() + 1) * 180)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info mt-3" href="{{ path('building_add_mine', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
                         {% else %}
@@ -45,7 +45,7 @@
             <tr>
                 <td class="center-cells">
                     <img class="float-left building-img ml-3" src="{{ asset('img/extract.png') }}"><button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.extract'|trans({'%product%': (((usePlanet.getExtractor() + 1) * 1.09)) * 60})|raw }}"><strong>{{ 'building.extract'|trans }} x {{ usePlanet.getExtractor()|trans }}</strong></button>
-                    <div class="mt-4">{{ (usePlanet.getExtractor() + 1) * 100 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ (usePlanet.getExtractor() + 1) * 300 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
+                    <div class="mt-4">{{ (usePlanet.getExtractor() + 1) * 200 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ (usePlanet.getExtractor() + 1) * 500 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
                     <div class="mt-4">1 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"></div>
                 </td>
                 <td class="center-cells cell-middle">
@@ -56,7 +56,7 @@
                         <div id="timeConstruct" class="mt-5">{{ usePlanet.getConstructAt()|date('Y/m/d H:i:s') }}</div>
                         
                     {% else %}
-                        {% if planetNb >= ((usePlanet.getExtractor() + 1) * 100) and planetWt >= ((usePlanet.getExtractor() + 1) * 300) and usePlanet.getGroundPlace() + 1 <= usePlanet.getGround() and usePlanet.getConstructAt() < date %}
+                        {% if planetNb >= ((usePlanet.getExtractor() + 1) * 200) and planetWt >= ((usePlanet.getExtractor() + 1) * 500) and usePlanet.getGroundPlace() + 1 <= usePlanet.getGround() and usePlanet.getConstructAt() < date %}
                             <div>{% if ((usePlanet.getExtractor() + 1) * 180) < 3600 %}{{  ((usePlanet.getExtractor() + 1) * 180)|date('i:s') }}{% elseif ((usePlanet.getExtractor() + 1) * 180) < 86400 %}{{  ((usePlanet.getExtractor() + 1) * 180)|date('H:i:s') }}{% else %}{{  ((usePlanet.getExtractor() + 1) * 180)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info mt-3" href="{{ path('building_add_extract', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
                         {% else %}
@@ -140,7 +140,7 @@
             <tr>
                 <td class="center-cells">
                     <img class="float-left building-img ml-3" src="{{ asset('img/metropole.png') }}"><button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.metropole'|trans|raw }}"><strong>{{ 'building.metropole'|trans }} x {{ usePlanet.getMetropole()|trans }}</strong></button>
-                    <div class="mt-4">{{ (usePlanet.getMetropole() + 1) * 750000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ (usePlanet.getMetropole() + 1) * 55000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
+                    <div class="mt-4">{{ (usePlanet.getMetropole() + 1) * 75000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ (usePlanet.getMetropole() + 1) * 55000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
                     <div class="mt-4">8 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"><span class="ml-4">8 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'skyImg'|trans }}" src="{{ asset('img/sky.png') }}"></span></div>
                 </td>
                 <td class="center-cells cell-middle">

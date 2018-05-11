@@ -480,7 +480,7 @@ class User implements UserInterface, \Serializable
     {
         $return = 0;
         foreach($this->planets as $planet) {
-            $return = $return + ($planet->getNbrSignatures() / 10);
+            $return = $return + ($planet->getNbrSignatures() / 5);
         }
         foreach($this->fleets as $fleet) {
             $return = $return + $fleet->getNbrSignatures();

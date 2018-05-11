@@ -26,6 +26,7 @@ class FightController extends Controller
             ->join('f.planet', 'p')
             ->select('p.id')
             ->where('f.fightAt < :now')
+            ->andWhere('f.flightTime is null')
             ->setParameters(array('now' => $now))
             ->getQuery()
             ->setMaxResults(1)
@@ -39,6 +40,7 @@ class FightController extends Controller
             ->createQueryBuilder('f')
             ->join('f.planet', 'p')
             ->where('p.id = :id')
+            ->andWhere('f.flightTime is null')
             ->setParameters(array('id' => $firstFleet['id']))
             ->orderBy('f.attack', 'ASC')
             ->getQuery()
@@ -432,7 +434,7 @@ class FightController extends Controller
                 $soldierAtmp = $soldierAtmp - $invader->getSoldier();
                 $defenser->setSoldier(0);
                 $defenser->setWorker(2000);
-                if(count($invader->getUser()->getPlanets()) < 21) {
+                if(count($invader->getUser()->getPlanets()) < ($invader->getUser()->getTerraformation() + 2)) {
                     $defenser->setUser($user);
                 } else {
                     $defenser->setUser(null);

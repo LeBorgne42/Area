@@ -101,7 +101,8 @@ class InstantController extends Controller
 
         foreach ($planets as $planet) {
             $build = $planet->getConstruct();
-            if ($build == 'miner') {
+            if($build == 'destruct') {
+            } elseif ($build == 'miner') {
                 $planet->setMiner($planet->getMiner() + 1);
                 $planet->setNbProduction($planet->getNbProduction() + ($planet->getMiner() * 1.1));
             } elseif ($build == 'extractor') {
@@ -109,11 +110,11 @@ class InstantController extends Controller
                 $planet->setWtProduction($planet->getWtProduction() + ($planet->getExtractor() * 1.09));
             } elseif ($build == 'city') {
                 $planet->setCity($planet->getCity() + 1);
-                $planet->setWorkerProduction($planet->getWorkerProduction() + 0.2);
+                $planet->setWorkerProduction($planet->getWorkerProduction() + 2000);
                 $planet->setWorkerMax($planet->getWorkerMax() + 25000);
             } elseif ($build == 'metropole') {
                 $planet->setMetropole($planet->getMetropole() + 1);
-                $planet->setWorkerProduction($planet->getWorkerProduction() + 0.5);
+                $planet->setWorkerProduction($planet->getWorkerProduction() + 5000);
                 $planet->setWorkerMax($planet->getWorkerMax() + 75000);
             } elseif ($build == 'caserne') {
                 $planet->setCaserne($planet->getCaserne() + 1);
@@ -374,7 +375,7 @@ class InstantController extends Controller
                             $soldierAtmp = $soldierAtmp - $fleet->getSoldier();
                             $defenser->setSoldier(0);
                             $defenser->setWorker(2000);
-                            if(count($fleet->getUser()->getPlanets()) < 21) {
+                            if(count($fleet->getUser()->getPlanets()) < ($fleet->getUser()->getTerraformation() + 2)) {
                                 $defenser->setUser($user);
                             } else {
                                 $defenser->setUser(null);

@@ -38,17 +38,18 @@ class DailyController extends Controller
             $worker = 0;
             $planetPoint= 0;
             foreach ($user->getPlanets() as $planet) {
-                if (($planet->getWorker() * $planet->getWorkerProduction() > $planet->getWorkerMax())) {
+                if (($planet->getWorker() + $planet->getWorkerProduction() > $planet->getWorkerMax())) {
                     $planet->setWorker($planet->getWorkerMax());
                 } else {
-                    $planet->setWorker($planet->getWorker() * $planet->getWorkerProduction());
+                    $planet->setWorker($planet->getWorker() + $planet->getWorkerProduction());
                 }
                 $worker = $worker + $planet->getWorker();
                 $planetPoint = $planetPoint + $planet->getBuildingPoint();
             }
+            $gain = $worker / 1.25;
             if($ally) {
                 $userBitcoin = $user->getBitcoin();
-                $taxe = (($ally->getTaxe() / 100) * $worker);
+                $taxe = (($ally->getTaxe() / 100) * $gain);
                 $user->setBitcoin($userBitcoin - $taxe);
                 $report->setContent("Le montant envoyé dans les fonds de votre alliance s'élève à " . round($taxe) . " Bitcoin.");
                 $allyBitcoin = $ally->getBitcoin();
@@ -59,13 +60,13 @@ class DailyController extends Controller
             $soldier = $user->getAllSoldier();
             $ship = $user->getAllShipsCost();
             $cost = $user->getBitcoin();
-            $report->setContent($report->getContent() . "Le travaille fournit par vos travailleurs vous rapporte " . round($worker) . " Bitcoin.");
+            $report->setContent($report->getContent() . "Le travaille fournit par vos travailleurs vous rapporte " . round($gain) . " Bitcoin.");
             $empireCost = ($soldier * 2) + $ship;
-            $cost = $cost - $empireCost + ($worker);
+            $cost = $cost - $empireCost + ($gain);
             $report->setContent($report->getContent() . " L'entretien de votre empire vous coûte cependant " . round($empireCost) . " Bitcoin.");
-            $point = ($worker / 100) + ($ship / 5) + ($soldier) + $planetPoint;
+            $point = ($worker / 500) + ($ship / 5) + ($soldier) + $planetPoint;
             $user->setBitcoin($cost);
-            $report->setContent($report->getContent() . " Ce qui vous donne un revenu de " . round($worker - $empireCost) . " Bitcoin. Bonne journée Commandant.");
+            $report->setContent($report->getContent() . " Ce qui vous donne un revenu de " . round($gain - $empireCost) . " Bitcoin. Bonne journée Commandant.");
             $user->getRank()->setOldPoint($user->getRank()->getPoint());
             $user->getRank()->setPoint($point);
             $user->setViewReport(false);
