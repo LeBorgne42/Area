@@ -79,7 +79,7 @@ class InformationController extends Controller
         if($level == 0 || $usePlanet->getConstructAt() > $now) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
-
+        $now->add(new DateInterval('PT' . 1800 . 'S'));
         $usePlanet->setRadar($level - 1);
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setConstruct('destruct');
@@ -154,7 +154,7 @@ class InformationController extends Controller
         if($level == 0 || $usePlanet->getConstructAt() > $now) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
-
+        $now->add(new DateInterval('PT' . 1800 . 'S'));
         $usePlanet->setSkyRadar($level - 1);
         $usePlanet->setSkyPlace($newSky);
         $usePlanet->setConstruct('destruct');
@@ -229,7 +229,7 @@ class InformationController extends Controller
         if($level == 0 || $usePlanet->getConstructAt() > $now) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
-
+        $now->add(new DateInterval('PT' . 1800 . 'S'));
         $usePlanet->setSkyBrouilleur($level - 1);
         $usePlanet->setSkyPlace($newSky);
         $usePlanet->setConstruct('destruct');

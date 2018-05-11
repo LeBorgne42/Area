@@ -9,6 +9,9 @@
     {% set planetWt = usePlanet.getWater() %}
     <div class="front-block building">
         <div id="timeDefaut" hidden>{{ date|date('Y/m/d H:i:s') }}</div>
+        {% if usePlanet.getConstruct() == 'destruct' %}
+        <div class="block-title text-rouge text-center p-4"><h2>{{ 'building.destroyBuild'|trans }}<span id="timeConstruct">{{ usePlanet.getConstructAt()|date('Y/m/d H:i:s') }}</span></h2></div>
+        {% endif %}
         <div class="block-title ml-4"><h2>{{ 'building.titleRessource'|trans }}</h2></div>
         <table class="table table-striped table-bordered table-dark text-center">
             <tbody>

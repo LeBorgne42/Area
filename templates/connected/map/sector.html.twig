@@ -53,10 +53,10 @@
                             <td class="center-cells pt-4">
                                 <div class="planet-position text-center">{{ planet.getPosition() }}</div>
                                 {% if planet.getNbrFleets() %}
-                                    <a class="glyphicon glyphicon-plane planet" href="{{ path('fleet_sector', {'id':planet.getId(), 'idp': usePlanet.getId()}) }}" data-toggle="modal" data-target="#fleetModal"></a>
+                                    <a class="glyphicon glyphicon-plane planet {{ planet.getFleetsColor(app.user) }}" href="{{ path('fleet_sector', {'id':planet.getId(), 'idp': usePlanet.getId()}) }}" data-toggle="modal" data-target="#fleetModal"></a>
                                 {% endif %}
                                 {% if planet.getNbCdr() or planet.getWtCdr() %}
-                                    <span class="glyphicon glyphicon-oil planet" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.cdr'|trans({'%niobium%': planet.getNbCdr(), '%water%': planet.getWtCdr()}) }}"></span>
+                                    <span class="glyphicon glyphicon-oil planet" data-html="true" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.cdr'|trans({'%niobium%': planet.getNbCdr(), '%water%': planet.getWtCdr()}) }}"></span>
                                 {% endif %}
                                 {% if planet.getCdr() == false %}
                                     <span class="glyphicon glyphicon-info-sign" data-html="true" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planetInfos'|trans({'%land%': planet.getGround(), '%radar%': planet.getRadar() + planet.getSkyRadar(), '%brouilleur%': planet.getSkyBrouilleur(), '%sky%': planet.getSky(), '%ground%': planet.getNbrSignatures()|number_format}) }}"></span>
@@ -79,10 +79,10 @@
                             <td class="center-cells">
                                 <div class="planet-position-empty text-center">{{ planet.getPosition() }}</div>
                                 {% if planet.getNbCdr() or planet.getWtCdr() %}
-                                    <span class="glyphicon glyphicon-oil empty" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.cdr'|trans({'%niobium%': planet.getNbCdr(), '%water%': planet.getWtCdr()}) }}"></span>
+                                    <span class="glyphicon glyphicon-oil empty" data-html="true" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.cdr'|trans({'%niobium%': planet.getNbCdr(), '%water%': planet.getWtCdr()}) }}"></span>
                                 {% endif %}
                                 {% if planet.getNbrFleets() %}
-                                    <a class="glyphicon glyphicon-plane empty" href="{{ path('fleet_sector', {'id':planet.getId(), 'idp': usePlanet.getId()}) }}" data-toggle="modal" data-target="#fleetModal"></a>
+                                    <a class="glyphicon glyphicon-plane empty {{ planet.getFleetsColor(app.user) }}" href="{{ path('fleet_sector', {'id':planet.getId(), 'idp': usePlanet.getId()}) }}" data-toggle="modal" data-target="#fleetModal"></a>
                                 {% endif %}
                             </td>
                         {% else %}

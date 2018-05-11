@@ -476,6 +476,26 @@ class Planet
     }
 
     /**
+     * @return string
+     */
+    public function getFleetsColor($user): string
+    {
+        foreach($this->fleets as $fleet) {
+            if($fleet->getUser()->getAlly() == $user->getAlly()) {
+                $color = 'pp-ally';
+            }
+            if ($fleet->getUser() == $user) {
+                $color = 'pp-mine';
+            }
+            if($fleet->getUser()->getAlly() != $user->getAlly() && $fleet->getUser() != $user) {
+                $color = 'pp-enemy';
+                return $color;
+            }
+        }
+        return $color;
+    }
+
+    /**
      * @return mixed
      */
     public function getPlanetAlliance()
