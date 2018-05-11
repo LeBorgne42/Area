@@ -82,7 +82,7 @@ class EconomicController extends Controller
 
         $usePlanet->setCenterSearch($level - 1);
         $usePlanet->setGroundPlace($newGround);
-        $usePlanet->setScientistProduction($user->getScientistProduction() - 0.1);
+        $user->setScientistProduction($user->getScientistProduction() - 0.1);
         $usePlanet->setScientistMax($usePlanet->getScientistMax() + 500);
         $em->persist($usePlanet);
         $em->flush();

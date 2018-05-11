@@ -40,7 +40,7 @@ class MilitaryController extends Controller
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
 
-        $now->add(new DateInterval('PT' . ($level * 1500 / $user->getScientistProduction()) . 'S'));
+        $now->add(new DateInterval('PT' . round(($level * 1500 / $user->getScientistProduction())) . 'S'));
         $user->setSearch('industry');
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - ($level * 1500));
@@ -75,7 +75,7 @@ class MilitaryController extends Controller
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
 
-        $now->add(new DateInterval('PT' . ($level * 8600 / $user->getScientistProduction()) . 'S'));
+        $now->add(new DateInterval('PT' . round(($level * 8600 / $user->getScientistProduction())) . 'S'));
         $user->setSearch('lightShip');
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - ($level * 9000));
@@ -110,7 +110,7 @@ class MilitaryController extends Controller
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
 
-        $now->add(new DateInterval('PT' . ($level * 35000 / $user->getScientistProduction()) . 'S'));
+        $now->add(new DateInterval('PT' . round(($level * 35000 / $user->getScientistProduction())) . 'S'));
         $user->setSearch('heavyShip');
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - ($level * 42000));

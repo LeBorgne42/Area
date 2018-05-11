@@ -38,7 +38,7 @@ class ArmementController extends Controller
             ($level == 6 || $user->getSearchAt() > $now)) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
-        $now->add(new DateInterval('PT' . ($level * 3700 / $user->getScientistProduction()) . 'S'));
+        $now->add(new DateInterval('PT' . round(($level * 3700 / $user->getScientistProduction())) . 'S'));
         $user->setSearch('armement');
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - ($level * 2000));
@@ -71,7 +71,7 @@ class ArmementController extends Controller
             ($level == 4 || $user->getSearchAt() > $now)) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
-        $now->add(new DateInterval('PT' . ($level * 4500 / $user->getScientistProduction()) . 'S'));
+        $now->add(new DateInterval('PT' . round(($level * 4500 / $user->getScientistProduction())) . 'S'));
         $user->setSearch('missile');
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - ($level * 2600));
@@ -104,7 +104,7 @@ class ArmementController extends Controller
             ($level == 4 || $user->getSearchAt() > $now)) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
-        $now->add(new DateInterval('PT' . ($level * 18000 / $user->getScientistProduction()) . 'S'));
+        $now->add(new DateInterval('PT' . round(($level * 18000 / $user->getScientistProduction())) . 'S'));
         $user->setSearch('laser');
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - ($level * 13000));
@@ -136,7 +136,7 @@ class ArmementController extends Controller
             ($level == 4 || $user->getSearchAt() > $now)) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
-        $now->add(new DateInterval('PT' . ($level * 46800 / $user->getScientistProduction()) . 'S'));
+        $now->add(new DateInterval('PT' . round(($level * 46800 / $user->getScientistProduction())) . 'S'));
         $user->setSearch('plasma');
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - ($level * 29000));

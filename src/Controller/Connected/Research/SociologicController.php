@@ -39,7 +39,7 @@ class SociologicController extends Controller
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
 
-        $now->add(new DateInterval('PT' . ($level * 4800 / $user->getScientistProduction()) . 'S'));
+        $now->add(new DateInterval('PT' . round(($level * 4800 / $user->getScientistProduction())) . 'S'));
         $user->setSearch('demography');
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - ($level * 8000));
@@ -75,7 +75,7 @@ class SociologicController extends Controller
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
 
-        $now->add(new DateInterval('PT' . ($level * 9300 / $user->getScientistProduction()) . 'S'));
+        $now->add(new DateInterval('PT' . round(($level * 9300 / $user->getScientistProduction())) . 'S'));
         $user->setSearch('discipline');
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - ($level * 11700));
