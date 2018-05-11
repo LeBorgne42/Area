@@ -183,6 +183,130 @@ class Fleet
     }
 
     /**
+     * @return string
+     */
+    public function getFleetTags(): string
+    {
+        if($this->getUser()->getAlly()) {
+            $return = "<span class='text-orange'>[" . $this->getUser()->getAlly()->getSigle() . "]" . " " . $this->getUser()->getAlly()->getName() . "</span> - " . $this->getUser()->getUserName() . " -> " . $this->getName();
+        } else {
+            $return = $this->getUser()->getUserName();
+        }
+        return $return;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShipsReport($malus): string
+    {
+        $ships = '';
+        if($this->getHunter()) {
+            $ships = "Chasseurs : " . $this->getHunter() . " Perte : <span class=\"text-rouge\">" . round(($this->getHunter() / $malus)) . "</span><br>";
+        }
+        if($this->getHunterHeavy()) {
+            $ships = $ships . "Chasseurs lourds : " . $this->getHunterHeavy() . " Perte : <span class=\"text-rouge\">" . round(($this->getHunterHeavy() / $malus)) . "</span><br>";
+        }
+        if($this->getCorvet()) {
+            $ships = $ships . "Corvettes : " . $this->getCorvet() . " Perte : <span class=\"text-rouge\">" . round(($this->getCorvet() / $malus)) . "</span><br>";
+        }
+        if($this->getCorvetLaser()) {
+            $ships = $ships . "Corvettes à laser : " . $this->getCorvetLaser() . " Perte : <span class=\"text-rouge\">" . round(($this->getCorvetLaser() / $malus)) . "</span><br>";
+        }
+        if($this->getFregate()) {
+            $ships = $ships . "Frégates : " . $this->getFregate() . " Perte : <span class=\"text-rouge\">" . round(($this->getFregate() / $malus)) . "</span><br>";
+        }
+        if($this->getFregatePlasma()) {
+            $ships = $ships . "Frégates a plasma : " . $this->getFregatePlasma() . " Perte : <span class=\"text-rouge\">" . round(($this->getFregatePlasma() / $malus)) . "</span><br>";
+        }
+        if($this->getCroiser()) {
+            $ships = $ships . "Croiseurs : " . $this->getCroiser() . " Perte : <span class=\"text-rouge\">" . round(($this->getCroiser() / $malus)) . "</span><br>";
+        }
+        if($this->getIronClad()) {
+            $ships = $ships . "Cuirassés : " . $this->getIronClad() . " Perte : <span class=\"text-rouge\">" . round(($this->getIronClad() / $malus)) . "</span><br>";
+        }
+        if($this->getDestroyer()) {
+            $ships = $ships . "Destroyers : " . $this->getDestroyer() . " Perte : <span class=\"text-rouge\">" . round(($this->getDestroyer() / $malus)) . "</span><br>";
+        }
+
+        return $ships;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShipsReportNoLost(): string
+    {
+        $ships = '';
+        if($this->getHunter()) {
+            $ships = "Chasseurs : " . $this->getHunter() . " Perte : Aucune<br>";
+        }
+        if($this->getHunterHeavy()) {
+            $ships = $ships . "Chasseurs lourds : " . $this->getHunterHeavy() . " Perte : Aucune<br>";
+        }
+        if($this->getCorvet()) {
+            $ships = $ships . "Corvettes : " . $this->getCorvet() . " Perte : Aucune<br>";
+        }
+        if($this->getCorvetLaser()) {
+            $ships = $ships . "Corvettes à laser : " . $this->getCorvetLaser() . " Perte : Aucune<br>";
+        }
+        if($this->getFregate()) {
+            $ships = $ships . "Frégates : " . $this->getFregate() . " Perte : Aucune<br>";
+        }
+        if($this->getFregatePlasma()) {
+            $ships = $ships . "Frégates a plasma : " . $this->getFregatePlasma() . " Perte : Aucune<br>";
+        }
+        if($this->getCroiser()) {
+            $ships = $ships . "Croiseurs : " . $this->getCroiser() . " Perte : Aucune<br>";
+        }
+        if($this->getIronClad()) {
+            $ships = $ships . "Cuirassés : " . $this->getIronClad() . " Perte : Aucune<br>";
+        }
+        if($this->getDestroyer()) {
+            $ships = $ships . "Destroyers : " . $this->getDestroyer() . " Perte : Aucune<br>";
+        }
+
+        return $ships;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShipsLoseReport(): string
+    {
+        $ships = '';
+        if($this->getHunter()) {
+            $ships = "Chasseurs : " . $this->getHunter() . " Perte : " . "<span class=\"text-rouge\">" . "Totale</span><br>";
+        }
+        if($this->getHunterHeavy()) {
+            $ships = $ships . "Chasseurs lourds : " . $this->getHunterHeavy() . " Perte : " . "<span class=\"text-rouge\">" . "Totale</span><br>";
+        }
+        if($this->getCorvet()) {
+            $ships = $ships . "Corvettes : " . $this->getCorvet() . " Perte : " . "<span class=\"text-rouge\">" . "Totale</span><br>";
+        }
+        if($this->getCorvetLaser()) {
+            $ships = $ships . "Corvettes à laser : " . $this->getCorvetLaser() . " Perte : " . "<span class=\"text-rouge\">" . "Totale</span><br>";
+        }
+        if($this->getFregate()) {
+            $ships = $ships . "Frégates : " . $this->getFregate() . " Perte : " . "<span class=\"text-rouge\">" . "Totale</span><br>";
+        }
+        if($this->getFregatePlasma()) {
+            $ships = $ships . "Frégates a plasma : " . $this->getFregatePlasma() . " Perte : " . "<span class=\"text-rouge\">" . "Totale</span><br>";
+        }
+        if($this->getCroiser()) {
+            $ships = $ships . "Croiseurs : " . $this->getCroiser() . " Perte : " . "<span class=\"text-rouge\">" . "Totale</span><br>";
+        }
+        if($this->getIronClad()) {
+            $ships = $ships . "Cuirassés : " . $this->getIronClad() . " Perte : " . "<span class=\"text-rouge\">" . "Totale</span><br>";
+        }
+        if($this->getDestroyer()) {
+            $ships = $ships . "Destroyers : " . $this->getDestroyer() . " Perte : " . "<span class=\"text-rouge\">" . "Totale</span><br>";
+        }
+
+        return $ships;
+    }
+
+    /**
      * @return mixed
      */
     public function getAllianceUser()

@@ -177,8 +177,6 @@ class PactController extends Controller
             ->getQuery()
             ->getOneOrNullResult();
 
-        $user = $this->getUser();
-        $ally = $user->getAlly();
         $pact = $em->getRepository('App:Pna')
             ->createQueryBuilder('pna')
             ->where('pna.id = :id')
@@ -186,6 +184,8 @@ class PactController extends Controller
             ->getQuery()
             ->getOneOrNullResult();
 
+        $user = $this->getUser();
+        $ally = $user->getAlly();
         $otherAlly = $em->getRepository('App:Ally')
             ->createQueryBuilder('a')
             ->where('a.sigle = :sigle')
@@ -203,9 +203,10 @@ class PactController extends Controller
             ->getQuery()
             ->getOneOrNullResult();
 
+        if($pact2) {
+            $em->remove($pact2);
+        }
         $em->remove($pact);
-        $em->remove($pact2);
-
         $em->flush();
 
         return $this->redirectToRoute('ally_page_pacts', array('idp' => $usePlanet->getId()));
@@ -251,10 +252,11 @@ class PactController extends Controller
                 'ally' => $otherAlly))
             ->getQuery()
             ->getOneOrNullResult();
-
+        
+        if($pact2) {
+            $em->remove($pact2);
+        }
         $em->remove($pact);
-        $em->remove($pact2);
-
         $em->flush();
 
         return $this->redirectToRoute('ally_page_pacts', array('idp' => $usePlanet->getId()));

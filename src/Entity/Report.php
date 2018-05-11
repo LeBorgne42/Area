@@ -26,13 +26,13 @@ class Report
     protected $user;
 
     /**
-     * @ORM\Column(name="title",type="string", length=40)
+     * @ORM\Column(name="title",type="string", length=50)
      * @Assert\NotBlank(message = "required")
      */
     protected $title;
 
     /**
-     * @ORM\Column(name="content",type="string", length=1500)
+     * @ORM\Column(name="content",type="string", length=10000)
      * @Assert\NotBlank(message = "required")
      */
     protected $content;

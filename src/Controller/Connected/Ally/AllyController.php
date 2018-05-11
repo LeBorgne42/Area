@@ -677,7 +677,7 @@ class AllyController extends Controller
                 ->getQuery()
                 ->getOneOrNullResult();
 
-            if(!$allyPact) {
+            if(!$allyPact || $user->getAlly()->getAlreadyPact($allyPact->getSigle())) {
                 return $this->redirectToRoute('ally_page_pacts', array('idp' => $usePlanet->getId()));
             }
             if($form_allyPact->get('pactType')->getData() == 1 && $user->getGrade()->getCanPeace() == 1) {

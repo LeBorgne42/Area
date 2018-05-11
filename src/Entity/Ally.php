@@ -332,6 +332,29 @@ class Ally
     /**
      * @return mixed
      */
+    public function getAlreadyPact($sigle)
+    {
+        foreach($this->getPnas() as $pna) {
+            if($pna->getAllyTag() == $sigle) {
+                return 'pna';
+            }
+        }
+        foreach($this->getWars() as $war) {
+            if($war->getAllyTag() == $sigle) {
+                return 'pna';
+            }
+        }
+        foreach($this->getAllieds() as $allied) {
+            if($allied->getAllyTag() == $sigle) {
+                return 'pna';
+            }
+        }
+        return null;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getUsersPoint()
     {
         $return = 0;

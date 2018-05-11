@@ -193,8 +193,10 @@ class FightController extends Controller
             $armor = $armor - ($firstBloodD * ($countSDef - $countSAtt));
             $secondShotD = ($missileD + $plasmaD + $laserD) - ($firstBloodD * ($countSDef - $countSAtt));
         }
+        $countShot = 0;
         while((($missileD + $plasmaD + $laserD > 0) && $armor > 0) &&
             (($missile + $plasma + $laser > 0) && $armorD > 0) && ($shieldD <= 0 && $shield <= 0)) {
+            $countShot++;
             if ($armorD > 0) {
                 $armorD = $armorD - $secondShot;
                 $tmpSecondShotD = $secondShotD;
@@ -211,75 +213,142 @@ class FightController extends Controller
         if($shield > 0) {
             $armorD = 0;
         }
-        $attReport = '';
-        $defReport = '';
-        foreach($blockAtt as $tmpreport) {
-            $attReport = $attReport . $tmpreport->getUser()->getUserName() . ', ';
-        }
-        foreach($blockDef as $tmpreport) {
-            $defReport = $defReport . $tmpreport->getUser()->getUserName() . ', ';
-        }
+
         if ($armorD > $armor || $shieldD > 0) {
+            foreach($blockDef as $defenderWin) {
+                $malus = 0;
+                if ($defenderWin->getArmor() != $armorD) {
+                    $malus = ($defenderWin->getArmor()) / (($defenderWin->getArmor() - $armorD) / rand(1, 3));
+                }
+                $reportB = new Report();
+                $reportB->setSendAt($now);
+                $reportB->setContent("<table class=\"table table-striped table-bordered table-dark\"><tbody><tr><th class=\"tab-cells-name p-1 ml-2\">Groupe de combat 1</th><th class=\"tab-cells-name p-1 ml-2\">Il aura fallut " . $countSDef . " tir(s) pour percer les boucliers</th></tr>");
+                $reportB->setTitle("Rapport de combat : Victoire");
+                $reportB->setUser($defenderWin->getUser());
+                foreach ($blockDef as $fleetA) {
+                    $player = $fleetA->getFleetTags();
+                    if($malus != 0) {
+                        $ships = $fleetA->getShipsReport(number_format($malus, 2));
+                    } else {
+                        $ships = $fleetA->getShipsReportNoLost();
+                    }
+                    $reportB->setContent($reportB->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $player . "</th><th class=\"tab-cells-name p-1 ml-2\">" . $ships . "</th></tr>");
+                }
+                $reportB->setContent($reportB->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">Groupe de combat 2</th><th class=\"tab-cells-name p-1 ml-2\">Il aura fallut " . $countSAtt . " tir(s) pour percer les boucliers</th></tr>");
+                foreach ($blockAtt as $fleetB) {
+                    $player = $fleetB->getFleetTags();
+                    $lose = $fleetB->getShipsLoseReport();
+                    $reportB->setContent($reportB->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $player . "</th><th class=\"tab-cells-name p-1 ml-2\">" . $lose . "</th></tr>");
+                }
+                $reportB->setContent($reportB->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $countShot . " salves de notre armement auront suffit.</th></tr></tbody></table>");
+                $reportB->setContent($reportB->getContent() . "C'est une victoire pour vous ! Les dirigeants adverses n'ont pas fait le poids face a votre flotte en "  . $defenderWin->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $defenderWin->getPlanet()->getSector()->getPosition() . ":" . $defenderWin->getPlanet()->getPosition() .  " vous vous imposez toujours un peu plus dans cette galaxie lointaine jusqu'à atteindre les sommets !");
+                $defenderWin->getUser()->setViewReport(false);
+                $em->persist($reportB);
+            }
             foreach($blockAtt as $attackerLose) {
-                $report = new Report();
-                $report->setTitle("Rapport de combat : Défaite");
-                $report->setSendAt($now);
-                $report->setUser($attackerLose->getUser());
-                $report->setContent($report->getContent() . "Tandis que vous " . $attReport . " exploriez tranquillement la galaxie en " . $attackerLose->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $attackerLose->getPlanet()->getSector()->getPosition() . ":" . $attackerLose->getPlanet()->getPosition() . " les flottes de " . $defReport . " vous ont littéralement VIOLÉES ! Mais c'est pas grave on est à la beta et ceci un rapport temporaire.");
+                $reportA = new Report();
+                $reportA->setSendAt($now);
+                $reportA->setContent("<table class=\"table table-striped table-bordered table-dark\"><tbody><tr><th class=\"tab-cells-name p-1 ml-2\">Groupe de combat 1</th><th class=\"tab-cells-name p-1 ml-2\">Il aura fallut " . $countSAtt . " tir(s) pour percer les boucliers</th></tr>");
+                $reportA->setTitle("Rapport de combat : Défaite");
+                $reportA->setUser($attackerLose->getUser());
+                foreach ($blockAtt as $fleetB) {
+                    $player = $fleetB->getFleetTags();
+                    $lose = $fleetB->getShipsLoseReport();
+                    $reportA->setContent($reportA->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $player . "</th><th class=\"tab-cells-name p-1 ml-2\">" . $lose . "</th></tr>");
+                }
+                $reportA->setContent($reportA->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">Groupe de combat 2</th><th class=\"tab-cells-name p-1 ml-2\">Il aura fallut " . $countSDef . " tir(s) pour percer les boucliers</th></tr>");
+                foreach ($blockDef as $fleetA) {
+                    $player = $fleetA->getFleetTags();
+                    if($malus != 0) {
+                        $ships = $fleetA->getShipsReport(number_format($malus, 2));
+                    } else {
+                        $ships = $fleetA->getShipsReportNoLost();
+                    }
+                    $reportA->setContent($reportA->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $player . "</th><th class=\"tab-cells-name p-1 ml-2\">" . $ships . "</th></tr>");
+                }
+                $reportA->setContent($reportA->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $countShot . " salves de notre armement auront suffit.</th></tr></tbody></table>");
+                $reportA->setContent($reportA->getContent() . "Tandis que vous exploriez tranquillement la galaxie en " . $attackerLose->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $attackerLose->getPlanet()->getSector()->getPosition() . ":" . $attackerLose->getPlanet()->getPosition() . " les flottes ennemies vous ont littéralement VIOLÉES ! Mais c'est pas grave on est à la beta et ceci un rapport temporaire.");
                 $attackerLose->getUser()->setViewReport(false);
                 $planet = $attackerLose->getPlanet();
-                $em->persist($report);
+                $em->persist($reportA);
                 $em->remove($attackerLose);
+            }
+            foreach($blockDef as $defenderWin) {
+                $defenderWin->setFleetWinRatio(number_format($malus, 2));
+                $defenderWin->setFightAt(null);
+                $em->persist($defenderWin);
             }
             $planet->setNbCdr($planet->getNbCdr() + ($debrisAtt * 1.15));
             $planet->setWtCdr($planet->getWtCdr() + $debrisAtt);
             $em->persist($planet);
-            foreach($blockDef as $defenderWin) {
-                $report = new Report();
-                $report->setTitle("Rapport de combat : Victoire");
-                $report->setSendAt($now);
-                $report->setUser($defenderWin->getUser());
-                $report->setContent($report->getContent() . "C'est une victoire pour vous " . $defReport . "! Les dirigeants " . $attReport . " n'ont pas fait le poids face a votre flotte en "  . $defenderWin->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $defenderWin->getPlanet()->getSector()->getPosition() . ":" . $defenderWin->getPlanet()->getPosition() .  " vous vous imposez toujours un peu plus dans cette galaxie lointaine jusqu'à atteindre les sommets !");
-                $defenderWin->getUser()->setViewReport(false);
-                $em->persist($report);
-                if ($defenderWin->getArmor() != $armorD) {
-                    $malus = ($defenderWin->getArmor()) / (($defenderWin->getArmor() - $armorD) / rand(1, 3));
-                    $defenderWin->setFleetWinRatio(number_format($malus, 2));
-                    $defenderWin->setFightAt(null);
-                    $em->persist($defenderWin);
-                }
-            }
             return($blockDef);
         } else {
+            foreach($blockAtt as $attackerWin) {
+                $malus = 0;
+                if($attackerWin->getArmor() != $armor) {
+                    $malus = ($attackerWin->getArmor()) / (($attackerWin->getArmor() - $armor) / rand(1, 2));
+                }
+                $reportA = new Report();
+                $reportA->setSendAt($now);
+                $reportA->setContent("<table class=\"table table-striped table-bordered table-dark\"><tbody><tr><th class=\"tab-cells-name p-1 ml-2\">Groupe de combat 1</th><th class=\"tab-cells-name p-1 ml-2\">Il aura fallut " . $countSDef . " tir(s) pour percer les boucliers</th></tr>");
+                $reportA->setTitle("Rapport de combat : Victoire");
+                $reportA->setUser($attackerWin->getUser());
+                foreach ($blockDef as $fleetA) {
+                    $player = $fleetA->getFleetTags();
+                    $lose = $fleetA->getShipsLoseReport();
+                    $reportA->setContent($reportA->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $player . "</th><th class=\"tab-cells-name p-1 ml-2\">" . $lose . "</th></tr>");
+                }
+                $reportA->setContent($reportA->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">Groupe de combat 2</th><th class=\"tab-cells-name p-1 ml-2\">Il aura fallut " . $countSAtt . " tir(s) pour percer les boucliers</th></tr>");
+                foreach ($blockAtt as $fleetB) {
+                    $player = $fleetB->getFleetTags();
+                    if($malus != 0) {
+                        $ships = $fleetB->getShipsReport(number_format($malus, 2));
+                    } else {
+                        $ships = $fleetB->getShipsReportNoLost();
+                    }
+                    $reportA->setContent($reportA->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $player . "</th><th class=\"tab-cells-name p-1 ml-2\">" . $ships . "</th></tr>");
+                }
+                $reportA->setContent($reportA->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $countShot . " salves de notre armement auront suffit.</th></tr></tbody></table>");
+                $reportA->setContent($reportA->getContent() . "C'est une victoire pour vous ! Les dirigeants adverses n'ont pas fait le poids face a votre flotte en "  . $attackerWin->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $attackerWin->getPlanet()->getSector()->getPosition() . ":" . $attackerWin->getPlanet()->getPosition() .  " vous vous imposez toujours un peu plus dans cette galaxie lointaine jusqu'à atteindre les sommets !");
+                $attackerWin->getUser()->setViewReport(false);
+                $em->persist($reportA);
+            }
             foreach($blockDef as $defenderLose) {
-                $report = new Report();
-                $report->setTitle("Rapport de combat : Défaite");
-                $report->setSendAt($now);
-                $report->setUser($defenderLose->getUser());
-                $report->setContent($report->getContent() . "Tandis que vous " . $defReport . " exploriez tranquillement la galaxie en " . $defenderLose->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $defenderLose->getPlanet()->getSector()->getPosition() . ":" . $defenderLose->getPlanet()->getPosition() .  ", les flottes de " . $attReport . " vous ont littéralement VIOLÉES ! Mais c'est pas grave on est à la beta et ceci un rapport temporaire.");
+                $reportB = new Report();
+                $reportB->setSendAt($now);
+                $reportB->setContent("<table class=\"table table-striped table-bordered table-dark\"><tbody><tr><th class=\"tab-cells-name p-1 ml-2\">Groupe de combat 1</th><th class=\"tab-cells-name p-1 ml-2\">Il aura fallut " . $countSAtt . " tir(s) pour percer les boucliers</th></tr>");
+                $reportB->setTitle("Rapport de combat : Défaite");
+                $reportB->setUser($defenderLose->getUser());
+                foreach ($blockAtt as $fleetB) {
+                    $player = $fleetB->getFleetTags();
+                    if($malus != 0) {
+                        $ships = $fleetB->getShipsReport(number_format($malus, 2));
+                    } else {
+                        $ships = $fleetB->getShipsReportNoLost();
+                    }
+                    $reportB->setContent($reportB->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $player . "</th><th class=\"tab-cells-name p-1 ml-2\">" . $ships . "</th></tr>");
+                }
+                $reportB->setContent($reportB->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">Groupe de combat 2</th><th class=\"tab-cells-name p-1 ml-2\">Il aura fallut " . $countSDef . " tir(s) pour percer les boucliers</th></tr>");
+                foreach ($blockDef as $fleetA) {
+                    $player = $fleetA->getFleetTags();
+                    $lose = $fleetA->getShipsLoseReport();
+                    $reportB->setContent($reportB->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $player . "</th><th class=\"tab-cells-name p-1 ml-2\">" . $lose . "</th></tr>");
+                }
+                $reportB->setContent($reportB->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $countShot . " salves de notre armement auront suffit.</th></tr></tbody></table>");
+                $reportB->setContent($reportB->getContent() . "Tandis que vous exploriez tranquillement la galaxie en " . $defenderLose->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $defenderLose->getPlanet()->getSector()->getPosition() . ":" . $defenderLose->getPlanet()->getPosition() .  ", les flottes de ennemies vous ont littéralement VIOLÉES ! Mais c'est pas grave on est à la beta et ceci un rapport temporaire.");
                 $defenderLose->getUser()->setViewReport(false);
                 $planet = $defenderLose->getPlanet();
-                $em->persist($report);
+                $em->persist($reportB);
                 $em->remove($defenderLose);
+            }
+            foreach($blockAtt as $attackerWin) {
+                $attackerWin->setFleetWinRatio(number_format($malus, 2));
+                $attackerWin->setFightAt(null);
+                $em->persist($attackerWin);
             }
             $planet->setNbCdr($planet->getNbCdr() + ($debrisDef * 1.15));
             $planet->setWtCdr($planet->getWtCdr() + $debrisDef);
             $em->persist($planet);
-            foreach($blockAtt as $attackerWin) {
-                $report = new Report();
-                $report->setTitle("Rapport de combat : Victoire");
-                $report->setSendAt($now);
-                $report->setUser($attackerWin->getUser());
-                $report->setContent($report->getContent() . "C'est une victoire pour vous " . $attReport . "! Les dirigeants " . $defReport . " n'ont pas fait le poids face a votre flotte en "  . $attackerWin->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $attackerWin->getPlanet()->getSector()->getPosition() . ":" . $attackerWin->getPlanet()->getPosition() .  " vous vous imposez toujours un peu plus dans cette galaxie lointaine jusqu'à atteindre les sommets !");
-                $attackerWin->getUser()->setViewReport(false);
-                $em->persist($report);
-                if($attackerWin->getArmor() != $armor) {
-                    $malus = ($attackerWin->getArmor()) / (($attackerWin->getArmor() - $armor) / rand(1, 2));
-                    $attackerWin->setFleetWinRatio(number_format($malus, 2));
-                    $attackerWin->setFightAt(null);
-                    $em->persist($attackerWin);
-                }
-            }
             return($blockAtt);
         }
         exit;

@@ -28,7 +28,7 @@ form.name: 'nouveau nom'
 form.renamePlanet: renommer
 tooltip.rank: 'Votre classement est affiché ici avec l''évolution positive ou négative depuis les dernière 24h.'
 title.tmpbeta: 'Prochaines améliorations :'
-overview.tmpbeta: '1/ Flotte : Selection de nos planètes - Envoyer/Décharger/Revenir - Recyclage ressources <br> 2/ Ajouter la ressource éléctricité pour les bâtiments <br> 3/ Une page listant toutes les alliances <br> 4/ Ajouter niveau radar/brouilleur sur la carte - Ajouter temps de construction vaisseaux  <br> 5/ Régler le décompte des constructions et des flottes <br> 6/ Actualisation automatique des salons <br> 7/ Permettre plusieurs constructions'
+overview.tmpbeta: '1/ Flotte : Recyclage ressources <br> 2/ Ajouter la ressource éléctricité pour les bâtiments <br> 3/ Ajouter niveau radar/brouilleur sur la carte - Ajouter temps de construction vaisseaux  <br> 4/ Régler le décompte des constructions et des flottes <br> 5/ Actualisation automatique des salons <br> 6/ Permettre plusieurs constructions'
 info.worker: 'Total travailleurs :'
 info.cost: 'Coût d''entretien :'
 info.soldier: 'Total soldats :'
