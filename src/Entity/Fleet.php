@@ -548,41 +548,43 @@ class Fleet
      */
     public function setFleetWinRatio($percent): void
     {
-        if($this->getHunter()) {
-            $new = $this->getHunter() - ($this->getHunter() / $percent);
-            $this->setHunter(round($new));
-        }
-        if($this->getHunterHeavy()) {
-            $new = $this->getHunterHeavy() - ($this->getHunterHeavy() / $percent);
-            $this->setHunterHeavy(round($new));
-        }
-        if($this->getFregate()) {
-            $new = $this->getFregate() - ($this->getFregate() / $percent);
-            $this->setFregate(round($new));
-        }
-        if($this->getCorvet()) {
-            $new = $this->getCorvet() - ($this->getCorvet() / $percent);
-            $this->setCorvet(round($new));
-        }
-        if($this->getCorvetLaser()) {
-            $new = $this->getCorvetLaser() - ($this->getCorvetLaser() / $percent);
-            $this->setCorvetLaser(round($new));
-        }
-        if($this->getFregatePlasma()) {
-            $new = $this->getFregatePlasma() - ($this->getFregatePlasma() / $percent);
-            $this->setFregatePlasma(round($new));
-        }
-        if($this->getCroiser()) {
-            $new = $this->getCroiser() - ($this->getCroiser() / $percent);
-            $this->setCroiser(round($new));
-        }
-        if($this->getDestroyer()) {
-            $new = $this->getDestroyer() - ($this->getDestroyer() / $percent);
-            $this->setDestroyer(round($new));
-        }
-        if($this->getIronClad()) {
-            $new = $this->getIronClad() - ($this->getIronClad() / $percent);
-            $this->setIronClad(round($new));
+        if($percent != 0) {
+            if ($this->getHunter()) {
+                $new = $this->getHunter() - ($this->getHunter() / $percent);
+                $this->setHunter(round($new));
+            }
+            if ($this->getHunterHeavy()) {
+                $new = $this->getHunterHeavy() - ($this->getHunterHeavy() / $percent);
+                $this->setHunterHeavy(round($new));
+            }
+            if ($this->getFregate()) {
+                $new = $this->getFregate() - ($this->getFregate() / $percent);
+                $this->setFregate(round($new));
+            }
+            if ($this->getCorvet()) {
+                $new = $this->getCorvet() - ($this->getCorvet() / $percent);
+                $this->setCorvet(round($new));
+            }
+            if ($this->getCorvetLaser()) {
+                $new = $this->getCorvetLaser() - ($this->getCorvetLaser() / $percent);
+                $this->setCorvetLaser(round($new));
+            }
+            if ($this->getFregatePlasma()) {
+                $new = $this->getFregatePlasma() - ($this->getFregatePlasma() / $percent);
+                $this->setFregatePlasma(round($new));
+            }
+            if ($this->getCroiser()) {
+                $new = $this->getCroiser() - ($this->getCroiser() / $percent);
+                $this->setCroiser(round($new));
+            }
+            if ($this->getDestroyer()) {
+                $new = $this->getDestroyer() - ($this->getDestroyer() / $percent);
+                $this->setDestroyer(round($new));
+            }
+            if ($this->getIronClad()) {
+                $new = $this->getIronClad() - ($this->getIronClad() / $percent);
+                $this->setIronClad(round($new));
+            }
         }
     }
 

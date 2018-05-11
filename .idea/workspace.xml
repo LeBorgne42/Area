@@ -2,21 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97f042ea-d0ee-4bd9-bb02-3d850e24f659" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/Ally/AllyController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/Ally/AllyController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/Ally/PactController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/Ally/PactController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/FightController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/FightController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Ally.php" afterPath="$PROJECT_DIR$/src/Entity/Ally.php" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Fleet.php" afterPath="$PROJECT_DIR$/src/Entity/Fleet.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Report.php" afterPath="$PROJECT_DIR$/src/Entity/Report.php" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/ally/rank.html.twig" afterPath="$PROJECT_DIR$/templates/connected/ally/rank.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/fleet.html.twig" afterPath="$PROJECT_DIR$/templates/connected/fleet.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/map/fleet.html.twig" afterPath="$PROJECT_DIR$/templates/connected/map/fleet.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/map/sector.html.twig" afterPath="$PROJECT_DIR$/templates/connected/map/sector.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/overview.html.twig" afterPath="$PROJECT_DIR$/templates/connected/overview.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/profil/ally.html.twig" afterPath="$PROJECT_DIR$/templates/connected/profil/ally.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/profil/modal_ally.html.twig" afterPath="$PROJECT_DIR$/templates/connected/profil/modal_ally.html.twig" />
-      <change beforePath="$PROJECT_DIR$/translations/front_overview.fr.yml" afterPath="$PROJECT_DIR$/translations/front_overview.fr.yml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -30,29 +16,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="FightController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FightController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Controller/Connected/FightController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
+            <state relative-caret-position="630">
               <caret line="214" column="9" lean-forward="false" selection-start-line="214" selection-start-column="9" selection-end-line="214" selection-end-column="9" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Fleet.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Fleet.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Entity/Fleet.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="587">
-              <caret line="228" column="119" lean-forward="false" selection-start-line="228" selection-start-column="119" selection-end-line="228" selection-end-column="119" />
+            <state relative-caret-position="580">
+              <caret line="587" column="9" lean-forward="false" selection-start-line="587" selection-start-column="9" selection-end-line="587" selection-end-column="9" />
               <folding>
-                <marker date="1526010724368" expanded="true" signature="5243:6752" ph="..." />
-                <marker date="1526010724368" expanded="true" signature="5467:6752" ph="..." />
-                <marker date="1526010724368" expanded="true" signature="5679:6752" ph="..." />
-                <marker date="1526010724368" expanded="true" signature="5908:6752" ph="..." />
-                <marker date="1526010724368" expanded="true" signature="6123:6752" ph="..." />
-                <marker date="1526010724368" expanded="true" signature="6334:6752" ph="..." />
-                <marker date="1526010724368" expanded="true" signature="6549:6752" ph="..." />
+                <marker date="1526037587638" expanded="true" signature="5243:6752" ph="..." />
+                <marker date="1526037587638" expanded="true" signature="5467:6752" ph="..." />
+                <marker date="1526037587638" expanded="true" signature="5679:6752" ph="..." />
+                <marker date="1526037587638" expanded="true" signature="5908:6752" ph="..." />
+                <marker date="1526037587638" expanded="true" signature="6123:6752" ph="..." />
+                <marker date="1526037587638" expanded="true" signature="6334:6752" ph="..." />
+                <marker date="1526037587638" expanded="true" signature="6549:6752" ph="..." />
               </folding>
             </state>
           </provider>
@@ -204,8 +190,8 @@
         <option value="$PROJECT_DIR$/templates/connected/map/fleet.html.twig" />
         <option value="$PROJECT_DIR$/templates/connected/overview.html.twig" />
         <option value="$PROJECT_DIR$/src/Entity/Report.php" />
-        <option value="$PROJECT_DIR$/src/Entity/Fleet.php" />
         <option value="$PROJECT_DIR$/src/Controller/Connected/FightController.php" />
+        <option value="$PROJECT_DIR$/src/Entity/Fleet.php" />
       </list>
     </option>
   </component>
@@ -444,12 +430,12 @@
       <workItem from="1524613328008" duration="44101000" />
       <workItem from="1524686237160" duration="49936000" />
       <workItem from="1524922720781" duration="128109000" />
-      <workItem from="1525305799071" duration="225873000" />
+      <workItem from="1525305799071" duration="226832000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="903548000" />
+    <option name="totallyTimeSpent" value="904507000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -920,27 +906,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Fleet.php">
+    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/FightController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="587">
-          <caret line="228" column="119" lean-forward="false" selection-start-line="228" selection-start-column="119" selection-end-line="228" selection-end-column="119" />
-          <folding>
-            <marker date="1526010724368" expanded="true" signature="5243:6752" ph="..." />
-            <marker date="1526010724368" expanded="true" signature="5467:6752" ph="..." />
-            <marker date="1526010724368" expanded="true" signature="5679:6752" ph="..." />
-            <marker date="1526010724368" expanded="true" signature="5908:6752" ph="..." />
-            <marker date="1526010724368" expanded="true" signature="6123:6752" ph="..." />
-            <marker date="1526010724368" expanded="true" signature="6334:6752" ph="..." />
-            <marker date="1526010724368" expanded="true" signature="6549:6752" ph="..." />
-          </folding>
+        <state relative-caret-position="630">
+          <caret line="214" column="9" lean-forward="false" selection-start-line="214" selection-start-column="9" selection-end-line="214" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/FightController.php">
+    <entry file="file://$PROJECT_DIR$/src/Entity/Fleet.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="214" column="9" lean-forward="false" selection-start-line="214" selection-start-column="9" selection-end-line="214" selection-end-column="9" />
-          <folding />
+        <state relative-caret-position="580">
+          <caret line="587" column="9" lean-forward="false" selection-start-line="587" selection-start-column="9" selection-end-line="587" selection-end-column="9" />
+          <folding>
+            <marker date="1526037587638" expanded="true" signature="5243:6752" ph="..." />
+            <marker date="1526037587638" expanded="true" signature="5467:6752" ph="..." />
+            <marker date="1526037587638" expanded="true" signature="5679:6752" ph="..." />
+            <marker date="1526037587638" expanded="true" signature="5908:6752" ph="..." />
+            <marker date="1526037587638" expanded="true" signature="6123:6752" ph="..." />
+            <marker date="1526037587638" expanded="true" signature="6334:6752" ph="..." />
+            <marker date="1526037587638" expanded="true" signature="6549:6752" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
