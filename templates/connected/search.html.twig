@@ -48,7 +48,7 @@
                     {% if app.user.getSearch() == 'terraformation' %}
                         <div id="timeResearch">{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
                     {% else %}
-                        {% if app.user.getBitcoin() >= 12000 and app.user.getTerraformation() < 18  and app.user.getUtility() > 0 and app.user.getSearchAt() < date %}
+                        {% if app.user.getBitcoin() >= (app.user.getTerraformation() + 1) * 12000 and app.user.getTerraformation() < 18  and app.user.getUtility() > 0 and app.user.getSearchAt() < date %}
                             <div>{% if ((app.user.getTerraformation() + 1) * 36000) < 86400 %}{{  ((app.user.getTerraformation() + 1) * 36000)|date('H:i:s') }}{% else %}{{ ((app.user.getTerraformation() + 1) * 36000)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info" href="{{ path('research_terraformation', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                         {% else %}
@@ -163,7 +163,7 @@
             <tr>
                 <th class="tab-cells-name">
                     <img class="float-left building-img ml-3" src="{{ asset('img/hyper.png') }}">{% if app.user.getHyperespace() == false %}<button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.hyper'|trans|raw }}">{{ 'title.hyperespace'|trans|raw }} - {{ 'research.canBe'|trans }}</button>{% else %}{{ 'title.hyperespace'|trans|raw }} - <span class="text-vert">{{ 'research.Activated'|trans }}</span>{% endif %}
-                    <div class="mt-4">5000000 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
+                    <div class="mt-4">25000000 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
                 </th>
                 <td class="center-cells cell-middle">
                     {{ 'research.hyperespace.desc'|trans }}
@@ -173,7 +173,7 @@
                         <div id="timeResearch">{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
                         
                     {% else %}
-                        {% if app.user.getBitcoin() >= 5000000 and app.user.getHyperespace() == false and app.user.getSearchAt() < date %}
+                        {% if app.user.getBitcoin() >= 25000000 and app.user.getHyperespace() == false and app.user.getSearchAt() < date %}
                             <div>{{  ((app.user.getHyperespace() + 1) * 604800)|date('d H:i:s') }}</div>
                             <a class="btn btn-lg btn-info" href="{{ path('research_hyperespace', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                         {% else %}

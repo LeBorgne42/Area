@@ -160,11 +160,29 @@ class FightController extends Controller
             $plasmaD = $plasmaD + $defender->getPlasma();
             $debrisDef = $defender->getNbrSignatures();
         }
+        $attAll = $missileD + $laserD + $plasmaD;
+        $defAll = $missile + $laser + $plasma;
+        if($attAll > 0 && $defAll <= 0) {
+            foreach($blockDef as $removeOne) {
+                $em->remove($removeOne);
+                $em->persist();
+                $em->flush();
+            }
+            return($blockAtt);
+        }
+        if($defAll > 0 && $attAll <= 0) {
+            foreach($blockAtt as $removeTwo) {
+                $em->remove($removeTwo);
+                $em->persist();
+                $em->flush();
+            }
+            return($blockDef);
+        }
+
         $firstBlood = (($plasma * 2) + $laser);
         $firstBloodD = (($plasmaD * 2) + $laserD);
         $countSAtt = 0;
         $countSDef = 0;
-
         if(($plasma + $laser > 0) && $shieldD > 0) {
             while ($shieldD > 0) {
                 $countSAtt++;
@@ -187,13 +205,13 @@ class FightController extends Controller
         }
         $secondShot = ($missile + $plasma + $laser);
         $secondShotD = ($missileD + $plasmaD + $laserD);
-        if($countSAtt - $countSDef > 0) {
-            $armorD = $armorD - ($firstBlood * ($countSAtt - $countSDef));
-            $secondShot = ($missile + $plasma + $laser) - ($firstBlood * ($countSAtt - $countSDef));
-        }
         if($countSDef - $countSAtt > 0) {
-            $armor = $armor - ($firstBloodD * ($countSDef - $countSAtt));
-            $secondShotD = ($missileD + $plasmaD + $laserD) - ($firstBloodD * ($countSDef - $countSAtt));
+            $armorD = $armorD - ($secondShot * ($countSAtt - $countSDef));
+            $secondShot = ($missile + $plasma + $laser) - ($secondShot * ($countSAtt - $countSDef));
+        }
+        if($countSAtt - $countSDef > 0) {
+            $armor = $armor - ($secondShot * ($countSDef - $countSAtt));
+            $secondShotD = ($missileD + $plasmaD + $laserD) - ($secondShot * ($countSDef - $countSAtt));
         }
         $countShot = 0;
         while((($missileD + $plasmaD + $laserD > 0) && $armor > 0) &&
@@ -283,6 +301,7 @@ class FightController extends Controller
             $planet->setNbCdr($planet->getNbCdr() + ($debrisAtt * 1.15));
             $planet->setWtCdr($planet->getWtCdr() + $debrisAtt);
             $em->persist($planet);
+            $em->flush();
             return($blockDef);
         } else {
             foreach($blockAtt as $attackerWin) {
@@ -351,6 +370,7 @@ class FightController extends Controller
             $planet->setNbCdr($planet->getNbCdr() + ($debrisDef * 1.15));
             $planet->setWtCdr($planet->getWtCdr() + $debrisDef);
             $em->persist($planet);
+            $em->flush();
             return($blockAtt);
         }
         exit;

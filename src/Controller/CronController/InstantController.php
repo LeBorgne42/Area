@@ -161,7 +161,7 @@ class InstantController extends Controller
             } elseif ($research == 'demography') {
                 $user->setDemography($user->getDemography() + 1);
             } elseif ($research == 'terraformation') {
-                $user->setTerraformation(1);
+                $user->setTerraformation($user->getTerraformation() + 1);
             } elseif ($research == 'cargo') {
                 $user->setCargo($user->getCargo() + 1);
             } elseif ($research == 'recycleur') {

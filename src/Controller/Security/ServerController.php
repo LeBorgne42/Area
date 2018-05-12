@@ -111,7 +111,7 @@ class ServerController extends Controller
                                 $planet->setGround(rand(75, 95));
                                 $planet->setSky(rand(4, 15));
                             }
-                        } elseif ($nbrSector == 55 || $nbrSector == 56 || $nbrSector == 65 || $nbrSector == 66) {
+                        } elseif ($nbrSector == 45 || $nbrSector == 46 || $nbrSector == 55 || $nbrSector == 56) {
                             $planet->setGround(rand(135, 180));
                             $planet->setSky(rand(3, 25));
                         } else {
@@ -156,7 +156,7 @@ class ServerController extends Controller
             ->andWhere('p.empty = :false')
             ->andWhere('p.cdr = :false')
             ->andWhere('s.position in (:pos)')
-            ->setParameters(array('pos' => [55, 56, 65, 66], 'false' => false))
+            ->setParameters(array('pos' => [45, 46, 55, 56], 'false' => false))
             ->getQuery()
             ->getResult();
 

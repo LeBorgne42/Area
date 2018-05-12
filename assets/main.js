@@ -528,7 +528,6 @@ $(document).ready(function() {
     manageConstructTime();
     manageResearchTime();
     manageSalon();
-    manageTooltip();
     manageProductTime();
     /*    manageDisplaySalon();
         setNoDecimalDisplay();*/

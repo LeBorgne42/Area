@@ -480,8 +480,9 @@ class Planet
      */
     public function getFleetsColor($user): string
     {
+        $color = 'pp-enemy';
         foreach($this->fleets as $fleet) {
-            if($fleet->getUser()->getAlly() == $user->getAlly()) {
+            if($fleet->getUser()->getAlly() == $user->getAlly() && $color != 'pp-mine') {
                 $color = 'pp-ally';
             }
             if ($fleet->getUser() == $user) {
