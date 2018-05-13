@@ -160,12 +160,13 @@ class FightController extends Controller
             $plasmaD = $plasmaD + $defender->getPlasma();
             $debrisDef = $defender->getNbrSignatures();
         }
-        $attAll = $missileD + $laserD + $plasmaD;
-        $defAll = $missile + $laser + $plasma;
+        $armorSaveA = $armor;
+        $armorSaveD = $armorD;
+        $attAll = $missile + $laser + $plasma;
+        $defAll = $missileD + $laserD + $plasmaD;
         if($attAll > 0 && $defAll <= 0) {
             foreach($blockDef as $removeOne) {
                 $em->remove($removeOne);
-                $em->persist();
                 $em->flush();
             }
             return($blockAtt);
@@ -173,7 +174,6 @@ class FightController extends Controller
         if($defAll > 0 && $attAll <= 0) {
             foreach($blockAtt as $removeTwo) {
                 $em->remove($removeTwo);
-                $em->persist();
                 $em->flush();
             }
             return($blockDef);
@@ -235,11 +235,11 @@ class FightController extends Controller
         }
 
         if ($armorD > $armor || $shieldD > 0) {
+            $malus = 0;
+            if ($armorSaveD != $armorD) {
+                $malus = ($armorSaveD) / ($armorD / (rand(15, 20) / 10));
+            }
             foreach($blockDef as $defenderWin) {
-                $malus = 0;
-                if ($defenderWin->getArmor() != $armorD) {
-                    $malus = ($defenderWin->getArmor()) / (($defenderWin->getArmor() - $armorD) / rand(1, 3));
-                }
                 $reportB = new Report();
                 $reportB->setSendAt($now);
                 $reportB->setContent("<table class=\"table table-striped table-bordered table-dark\"><tbody><tr><th class=\"tab-cells-name p-1 ml-2\">Groupe de combat 1</th><th class=\"tab-cells-name p-1 ml-2\">Il aura fallut " . $countSDef . " tir(s) pour percer les boucliers</th></tr>");
@@ -304,11 +304,11 @@ class FightController extends Controller
             $em->flush();
             return($blockDef);
         } else {
+            $malus = 0;
+            if($armorSaveA != $armor) {
+                $malus = ($armorSaveA) / ($armor / (rand(15, 20) / 10));
+            }
             foreach($blockAtt as $attackerWin) {
-                $malus = 0;
-                if($attackerWin->getArmor() != $armor) {
-                    $malus = ($attackerWin->getArmor()) / (($attackerWin->getArmor() - $armor) / rand(1, 2));
-                }
                 $reportA = new Report();
                 $reportA->setSendAt($now);
                 $reportA->setContent("<table class=\"table table-striped table-bordered table-dark\"><tbody><tr><th class=\"tab-cells-name p-1 ml-2\">Groupe de combat 1</th><th class=\"tab-cells-name p-1 ml-2\">Il aura fallut " . $countSDef . " tir(s) pour percer les boucliers</th></tr>");
@@ -417,7 +417,7 @@ class FightController extends Controller
         $reportDef->setUser($userDefender);
         $userDefender->setViewReport(false);
 
-        if($barge and $invader->getPlanet()->getUser() and $invader->getAllianceUser() == null) {
+        if($barge and $invader->getPlanet()->getUser() and $invader->getAllianceUser() == null and $invader->getFightAt() == null and $invader->getFlightTime() == null) {
             if($barge >= $invader->getSoldier()) {
                 $aMilitary = $invader->getSoldier() * $alea;
                 $soldierAtmp = $invader->getSoldier();
