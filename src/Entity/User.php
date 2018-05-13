@@ -489,6 +489,15 @@ class User implements UserInterface, \Serializable
     }
 
     /**
+     * @param $time
+     * @return int
+     */
+    public function getTimeConstruct($time): int
+    {
+        return round($this->getScientistProduction() / $time);
+    }
+
+    /**
      * @return int
      */
     public function getAllSoldier(): int

@@ -94,6 +94,7 @@ class InstantController extends Controller
         }
         foreach ($userScientists as $scientistAt) {
             $scientistAt->setScientist($scientistAt->GetScientistAtNbr());
+            $scientistAt->getUser()->setScientistProduction(round($scientistAt->getUser()->getScientistProduction() + ($scientistAt->getScientist() / 10000)));
             $scientistAt->setScientistAt(null);
             $scientistAt->setScientistAtNbr(null);
             $em->persist($scientistAt);

@@ -52,3 +52,4 @@ popover.croiser: '<h5>Signature thermique : 300<br>Vitesse : 70<br>Coque : 500<b
 popover.ironClad: '<h5>Signature thermique : 700<br>Vitesse : 50/lm<br>Coque : 1.100<br>Missile : 1.000<br>Laser : 200<br>Plasma : 200<br>Bouclier : 100</h5>'
 popover.destroyer: '<h5>Signature thermique : 1.500<br>Vitesse : 60/lm<br>Coque : 200<br>Missile : 3.300<br>Laser : 40<br>Plasma : 40<br>Bouclier : 2.000</h5>'
 spatial.noSpaceShip: 'Vous ne disposez pas d''un chantier spatial !'
+fleet.combat: __fleet.combat

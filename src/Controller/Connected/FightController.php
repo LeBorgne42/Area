@@ -235,6 +235,9 @@ class FightController extends Controller
         }
 
         if ($armorD > $armor || $shieldD > 0) {
+            if($armorD < 0) {
+                $armorD = $armorSaveD / 20;
+            }
             $malus = 0;
             if ($armorSaveD != $armorD) {
                 $malus = ($armorSaveD) / ($armorD / (rand(15, 20) / 10));
@@ -304,6 +307,9 @@ class FightController extends Controller
             $em->flush();
             return($blockDef);
         } else {
+            if($armor < 0) {
+                $armor = $armorSaveA / 20;
+            }
             $malus = 0;
             if($armorSaveA != $armor) {
                 $malus = ($armorSaveA) / ($armor / (rand(15, 20) / 10));
