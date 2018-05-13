@@ -301,8 +301,8 @@ class FightController extends Controller
                 $defenderWin->setFightAt(null);
                 $em->persist($defenderWin);
             }
-            $planet->setNbCdr($planet->getNbCdr() + ($debrisAtt * 1.15));
-            $planet->setWtCdr($planet->getWtCdr() + $debrisAtt);
+            $planet->setNbCdr($planet->getNbCdr() + ($debrisAtt * 40));
+            $planet->setWtCdr($planet->getWtCdr() + $debrisAtt * 20);
             $em->persist($planet);
             $em->flush();
             return($blockDef);
@@ -373,8 +373,8 @@ class FightController extends Controller
                 $attackerWin->setFightAt(null);
                 $em->persist($attackerWin);
             }
-            $planet->setNbCdr($planet->getNbCdr() + ($debrisDef * 1.15));
-            $planet->setWtCdr($planet->getWtCdr() + $debrisDef);
+            $planet->setNbCdr($planet->getNbCdr() + ($debrisDef * 40));
+            $planet->setWtCdr($planet->getWtCdr() + $debrisDef * 20);
             $em->persist($planet);
             $em->flush();
             return($blockAtt);

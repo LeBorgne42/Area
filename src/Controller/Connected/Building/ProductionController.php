@@ -36,7 +36,7 @@ class ProductionController extends Controller
         $level = $usePlanet->getMiner() + 1;
         $usePlanetNb = $usePlanet->getNiobium();
         $usePlanetWt = $usePlanet->getWater();
-        $newGround = $usePlanet->getGroundPlace() + 1;
+        $newGround = $usePlanet->getGroundPlace() + 2;
         if(($usePlanetNb < ($level * 450) || $usePlanetWt < ($level * 200)) ||
             ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround())) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
@@ -72,7 +72,7 @@ class ProductionController extends Controller
             ->getOneOrNullResult();
 
         $level = $usePlanet->getMiner();
-        $newGround = $usePlanet->getGroundPlace() - 1;
+        $newGround = $usePlanet->getGroundPlace() - 2;
         if($level == 0 || $usePlanet->getConstructAt() > $now) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
@@ -109,7 +109,7 @@ class ProductionController extends Controller
         $level = $usePlanet->getExtractor() + 1;
         $usePlanetNb = $usePlanet->getNiobium();
         $usePlanetWt = $usePlanet->getWater();
-        $newGround = $usePlanet->getGroundPlace() + 1;
+        $newGround = $usePlanet->getGroundPlace() + 3;
         if(($usePlanetNb < ($level * 200) || $usePlanetWt < ($level * 500)) ||
             ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround())) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
@@ -145,7 +145,7 @@ class ProductionController extends Controller
             ->getOneOrNullResult();
 
         $level = $usePlanet->getExtractor();
-        $newGround = $usePlanet->getGroundPlace() - 1;
+        $newGround = $usePlanet->getGroundPlace() - 3;
         if($level == 0 || $usePlanet->getConstructAt() > $now) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
