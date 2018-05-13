@@ -41,7 +41,7 @@ class ServerController extends Controller
         $fossoyeurs = new User();
         $now = new DateTime();
         $fossoyeurs->setUsername('Les hydres');
-        $fossoyeurs->setEmail('areauniverse.game@gmail.com');
+        $fossoyeurs->setEmail('support@areauniverse.eu');
         $fossoyeurs->setCreatedAt($now);
         $fossoyeurs->setPassword(password_hash('ViolGratuit2018', PASSWORD_BCRYPT));
         $fossoyeurs->setBitcoin(999999999999);

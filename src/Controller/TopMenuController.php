@@ -98,8 +98,8 @@ class TopMenuController extends Controller
 
         if ($form_contact->isSubmitted()) {
             $message = (new \Swift_Message('Reclamation joueur'))
-                ->setFrom('areauniverse.game@gmail.com')
-                ->setTo('rivierematthieupro@gmail.com')
+                ->setFrom('support@areauniverse.eu')
+                ->setTo('areauniverse.game@gmail.com')
                 ->setBody(
                     $this->renderView(
                         'emails/contact.html.twig',

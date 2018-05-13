@@ -55,7 +55,7 @@ class SecurityController extends Controller
             }
 
             $message = (new \Swift_Message('Confirmation email'))
-                ->setFrom('areauniverse.game@gmail.com')
+                ->setFrom('support@areauniverse.eu')
                 ->setTo($user->getEmail())
                 ->setBody(
                     $this->renderView(
@@ -116,7 +116,7 @@ class SecurityController extends Controller
                 $em->flush();
 
                 $message = (new \Swift_Message('Hello Email'))
-                    ->setFrom('areauniverse.game@gmail.com')
+                    ->setFrom('support@areauniverse.eu')
                     ->setTo($userPw->getEmail())
                     ->setBody(
                         $this->renderView(
