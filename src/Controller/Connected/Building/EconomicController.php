@@ -82,7 +82,6 @@ class EconomicController extends Controller
         $now->add(new DateInterval('PT' . 1800 . 'S'));
         $usePlanet->setCenterSearch($level - 1);
         $usePlanet->setGroundPlace($newGround);
-        $user->setScientistProduction($user->getScientistProduction() - 0.1);
         $usePlanet->setScientistMax($usePlanet->getScientistMax() - 500);
         $usePlanet->setConstruct('destruct');
         $usePlanet->setConstructAt($now);

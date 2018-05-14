@@ -25,15 +25,6 @@ class SecurityController extends Controller
         $user = new User();
 
         if ($_POST) {
-            $now = new DateTime();
-            $now->setTimezone(new DateTimeZone('Europe/Paris'));
-            $user->setUsername($_POST['_username']);
-            $user->setEmail($_POST['_email']);
-            $user->setCreatedAt($now);
-            $user->setPassword(password_hash($_POST['_password'], PASSWORD_BCRYPT));
-            $em->persist($user);
-            $em->flush();
-
             $alreadyInBase = $em->getRepository('App:User')
                 ->createQueryBuilder('u')
                 ->where('u.username = :username')
@@ -54,9 +45,18 @@ class SecurityController extends Controller
                 }
             }
 
+            $now = new DateTime();
+            $now->setTimezone(new DateTimeZone('Europe/Paris'));
+            $user->setUsername($_POST['_username']);
+            $user->setEmail($_POST['_email']);
+            $user->setCreatedAt($now);
+            $user->setPassword(password_hash($_POST['_password'], PASSWORD_BCRYPT));
+            $em->persist($user);
+            $em->flush();
+
             $message = (new \Swift_Message('Confirmation email'))
                 ->setFrom('support@areauniverse.eu')
-                ->setTo($user->getEmail())
+                ->setTo($_POST['_email'])
                 ->setBody(
                     $this->renderView(
                         'emails/registration.html.twig',

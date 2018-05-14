@@ -43,7 +43,7 @@ building.brouilleur.desc: 'Besoin d''intimité ? Ce brouilleur cachera toutes le
 popover.title: 'Prochain niveau - Recherche'
 popover.miner: '<h5>Production de niobium : +%product%</h5>'
 popover.extract: '<h5>Production d''eau : +%product%</h5>'
-popover.search: '<h5>Production de scientifique : +10%<br> Capacitée scientifique : +500</h5>'
+popover.search: '<h5>Capacitée scientifique : +500</h5>'
 popover.city: '<h5>Production de travailleurs : +2000/j<br>Capacité travailleurs : +25.000<hr>Redéfinition urbaine 1</h5>'
 popover.metropole: '<h5>Production de travailleurs : +5000/j<br>Capacité travailleurs : +75.000<hr>Redéfinition urbaine 5</h5>'
 popover.caserne: '<h5>Capacitée soldats : +2500<hr>Accroissement militaire 3</h5>'

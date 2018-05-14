@@ -122,7 +122,6 @@ class InstantController extends Controller
                 $planet->setSoldierMax($planet->getSoldierMax() + 2500);
             } elseif ($build == 'centerSearch') {
                 $planet->setCenterSearch($planet->getCenterSearch() + 1);
-                $planet->getUser()->setScientistProduction($planet->getUser()->getScientistProduction() + 0.1);
                 $planet->setScientistMax($planet->getScientistMax() + 500);
             } elseif ($build == 'lightUsine') {
                 $planet->setLightUsine($planet->getLightUsine() + 1);

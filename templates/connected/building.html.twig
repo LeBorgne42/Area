@@ -104,7 +104,7 @@
                 </td>
                 <td class="center-cells p-4">
                     {% if usePlanet.getCenterSearch() > 0 and usePlanet.getConstructAt() == null %}
-                        <a data-toggle="modal" data-target="#deleteModal" class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_search', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
+                        <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_search', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
                     {% endif %}
@@ -401,7 +401,7 @@
             </tbody>
         </table>
     </div>
-    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    {#<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -419,5 +419,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>#}
 {% endblock %}
