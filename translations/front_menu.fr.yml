@@ -51,3 +51,4 @@ soldiers: Soldats
 groundImg: Terrain
 SkyImg: Espace
 rank: Classement
+tmpRank: 'Rank temporaire'

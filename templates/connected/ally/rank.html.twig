@@ -5,7 +5,6 @@
 {% block title %}{{ 'title'|trans }}{% endblock %}
 
 {% block body %}
-    {% set cost = (app.user.getAllSoldier() * 2) + app.user.getAllShipsCost() %}
     <div class="front-block">
         <table class="table table-striped borderOverview table-dark text-center">
             <tbody>

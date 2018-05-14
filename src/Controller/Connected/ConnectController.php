@@ -46,7 +46,7 @@ class ConnectController extends Controller
             $planet->setNiobium(15000);
             $planet->setWater(20000);
             $planet->setFregate(25);
-            $planet->setWorker(20000);
+            $planet->setWorker(25000);
             $planet->setColonizer(1);
             $user->addPlanet($planet);
             $em->persist($planet);

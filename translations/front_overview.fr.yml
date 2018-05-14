@@ -55,7 +55,7 @@ extractor: 'Extracteur d''eau'
 city: 'Grande ville'
 metropole: Metropole
 caserne: Caserne
-destruct: 'Destruction'
+destruct: Destruction
 centerSearch: 'Centre de recherche'
 lightUsine: 'Usine d''armement'
 heavyUsine: 'Usine lourde'

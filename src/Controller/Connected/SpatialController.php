@@ -64,7 +64,7 @@ class SpatialController extends Controller
             $destroyer = $form_spatialShip->get('destroyer')->getData();
             $niobiumLess = (8000 * $cargoI) + (25000 * $cargoV) + (70000 * $cargoX) + (20000 * $colonizer) + (10000 * $recycleur) + (15000 * $barge) + (5 * $sonde) + (250 * $hunter) + (2200 * $fregate) + (400 * $hunterHeavy) + (1000 * $corvet) + (400 * $corvetLaser) + (2000 * $fregatePlasma) + (10000 * $croiser) + (30000 * $ironClad) + (20000 * $destroyer);
             $waterLess =  (6500 * $cargoI) + (18600 * $cargoV) + (57000 * $cargoX) + (12000 * $colonizer) + (7000 * $recycleur) + (12000 * $barge) + (50 * $hunter) + (1400 * $fregate) + (80 * $hunterHeavy) + (500 * $corvet) + (2000 * $corvetLaser) + (7000 * $fregatePlasma) + (8000 * $croiser) + (12000 * $ironClad) + (70000 * $destroyer);
-            $workerLess = (2500 * $colonizer) + (500 * $destroyer) + (100 * $cargoX);
+            $workerLess = (5000 * $colonizer) + (500 * $destroyer) + (100 * $cargoX);
 
             if (($usePlanet->getNiobium() < $niobiumLess || $usePlanet->getWater() < $waterLess) ||
                 ($usePlanet->getWorker() < $workerLess) || ($cargoI && $user->getCargo() < 1) ||
