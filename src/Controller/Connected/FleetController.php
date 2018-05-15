@@ -93,7 +93,7 @@ class FleetController extends Controller
         $form_sendFleet = $this->createForm(FleetSendType::class, null, array("user" => $user->getId()));
         $form_sendFleet->handleRequest($request);
 
-        if(($fleetGive || $usePlanet) && ($fleetGive->getFightAt() == null && $fleetGive->getFlightTime() == null) && $fleetGive->getUser() == $user) {
+        if($fleetGive && $usePlanet && $fleetGive->getFightAt() == null && $fleetGive->getFlightTime() == null && $fleetGive->getUser() == $user) {
         } else {
             return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
         }
@@ -437,8 +437,9 @@ class FleetController extends Controller
             ->getOneOrNullResult();
 
         $fleetTake = $fleetGive->getPlanet();
-        if(($fleetGive || $usePlanet) || ($fleetGive->getFightAt() == null || $fleetGive->getFlightTime() == null) ||
-            (($fleetTake->getSoldier() + $fleetGive->getSoldier()) <= $fleetTake->getSoldierMax() || ($fleetTake->getWorker() + $fleetGive->getWorker()) < $fleetTake->getWorkerMax()) ||
+        if($fleetGive && $usePlanet && $fleetGive->getFightAt() == null && $fleetGive->getFlightTime() == null &&
+            ($fleetTake->getSoldier() + $fleetGive->getSoldier()) <= $fleetTake->getSoldierMax() &&
+                ($fleetTake->getWorker() + $fleetGive->getWorker()) < $fleetTake->getWorkerMax() &&
             ($fleetTake->getScientist() + $fleetGive->getScientist()) < $fleetTake->getScientistMax()) {
         } else {
             return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
@@ -501,7 +502,7 @@ class FleetController extends Controller
         $form_sendFleet = $this->createForm(FleetSendType::class, null, array("user" => $user->getId()));
         $form_sendFleet->handleRequest($request);
 
-        if(($fleetGive || $usePlanet) || ($fleetGive->getFightAt() == null || $fleetGive->getFlightTime() == null)) {
+        if($fleetGive && $usePlanet && $fleetGive->getFightAt() == null && $fleetGive->getFlightTime() == null) {
         } else {
             return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
         }
@@ -588,7 +589,7 @@ class FleetController extends Controller
             ->getOneOrNullResult();
 
         $fleetTake = $fleetGive->getPlanet();
-        if(($fleetGive || $usePlanet) || ($fleetGive->getFightAt() == null || $fleetGive->getFlightTime() == null)) {
+        if($fleetGive && $usePlanet && $fleetGive->getFightAt() == null && $fleetGive->getFlightTime() == null) {
         } else {
             return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
         }
@@ -630,7 +631,7 @@ class FleetController extends Controller
             ->getOneOrNullResult();
 
         $fleetTake = $fleetGive->getPlanet();
-        if(($fleetGive || $usePlanet) || ($fleetGive->getFightAt() == null || $fleetGive->getFlightTime() == null)) {
+        if($fleetGive && $usePlanet && $fleetGive->getFightAt() == null && $fleetGive->getFlightTime() == null) {
         } else {
             return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
         }
@@ -672,7 +673,7 @@ class FleetController extends Controller
             ->getOneOrNullResult();
 
         $fleetTake = $fleetGive->getPlanet();
-        if(($fleetGive || $usePlanet) || ($fleetGive->getFightAt() == null || $fleetGive->getFlightTime() == null)) {
+        if($fleetGive && $usePlanet && $fleetGive->getFightAt() == null && $fleetGive->getFlightTime() == null) {
         } else {
             return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
         }
@@ -714,7 +715,7 @@ class FleetController extends Controller
             ->getOneOrNullResult();
 
         $fleetTake = $fleetGive->getPlanet();
-        if(($fleetGive || $usePlanet) || ($fleetGive->getFightAt() == null || $fleetGive->getFlightTime() == null)) {
+        if($fleetGive && $usePlanet && $fleetGive->getFightAt() == null && $fleetGive->getFlightTime() == null) {
         } else {
             return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
         }
@@ -756,7 +757,7 @@ class FleetController extends Controller
             ->getOneOrNullResult();
 
         $fleetTake = $fleetGive->getPlanet();
-        if(($fleetGive || $usePlanet) || ($fleetGive->getFightAt() == null || $fleetGive->getFlightTime() == null)) {
+        if($fleetGive && $usePlanet && $fleetGive->getFightAt() == null && $fleetGive->getFlightTime() == null) {
         } else {
             return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
         }
@@ -804,7 +805,7 @@ class FleetController extends Controller
             ->setParameters(array('id' => $id2, 'user' => $user))
             ->getQuery()
             ->getOneOrNullResult();
-        if(($fleetGive || $usePlanet) || ($fleetGive->getFightAt() == null || $fleetGive->getFlightTime() == null)) {
+        if($fleetGive && $usePlanet && $fleetGive->getFightAt() == null && $fleetGive->getFlightTime() == null) {
         } else {
             return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
         }
@@ -863,9 +864,9 @@ class FleetController extends Controller
             ->getQuery()
             ->getOneOrNullResult();
 
-        if(($fleet || $usePlanet) || ($fleet->getFightAt() == null || $fleet->getFlightTime() == null) ||
-            ($fleet->getPlanet()->getNbCdr() > 0 || $fleet->getPlanet()->getWtCdr() > 0) ||
-            ($fleet->getRecycleur() || $fleet->getCargoPlace() > $fleet->getCargoFull())) {
+        if($fleet && $usePlanet && $fleet->getFightAt() == null && $fleet->getFlightTime() == null &&
+            $fleet->getPlanet()->getNbCdr() > 0 && $fleet->getPlanet()->getWtCdr() > 0 &&
+            $fleet->getRecycleur() && $fleet->getCargoPlace() > $fleet->getCargoFull()) {
         } else {
             return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
         }
