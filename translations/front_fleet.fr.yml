@@ -64,3 +64,5 @@ fleet.ironClad: Cuirassé
 fleet.destroyer: Destroyer
 tooltip.userFleet: '%name%'
 fleet.fusion: fusion
+recycler: recyclage
+recyclerCancel: annuler

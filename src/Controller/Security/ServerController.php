@@ -144,6 +144,8 @@ class ServerController extends Controller
         $fosPlanet->setUser($fossoyeurs);
         $fosPlanet->setWorker(10000000);
         $fosPlanet->setSoldier(2500000);
+        $fosPlanet->setGround(680);
+        $fosPlanet->setSky(55);
         $fosPlanet->setName('Fort Hydra');
         $fossoyeurs->addPlanet($fosPlanet);
         $em->persist($fosPlanet);

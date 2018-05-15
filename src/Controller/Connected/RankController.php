@@ -57,10 +57,11 @@ class RankController extends Controller
 
         $users = $em->getRepository('App:User')
             ->createQueryBuilder('u')
+            ->leftJoin('u.rank', 'r')
             ->where('u.rank is not null')
             ->andWhere('u.id != :one')
             ->setParameters(array('one' => 1))
-            ->orderBy('u.rank', 'DESC')
+            ->orderBy('r.point', 'DESC')
             ->getQuery()
             ->getResult();
 

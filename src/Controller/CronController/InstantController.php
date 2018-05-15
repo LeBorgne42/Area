@@ -79,6 +79,13 @@ class InstantController extends Controller
             ->getQuery()
             ->getResult();
 
+        $fleetCdrs = $em->getRepository('App:Fleet')
+            ->createQueryBuilder('f')
+            ->where('f.recycleAt < :now')
+            ->setParameters(array('now' => $now))
+            ->getQuery()
+            ->getResult();
+
         $planets = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->where('p.constructAt < :now')
@@ -98,6 +105,53 @@ class InstantController extends Controller
             $scientistAt->setScientistAt(null);
             $scientistAt->setScientistAtNbr(null);
             $em->persist($scientistAt);
+        }
+
+        foreach ($fleetCdrs as $fleetCdr) {
+            $recycle = $fleetCdr->getRecycleur() * 5000;
+            $planetCdr = $fleetCdr->getPlanet();
+            if($fleetCdr->getCargoPlace() < ($fleetCdr->getCargoFull() + ($recycle * 2))) {
+                $cargoFullCdr = round(($fleetCdr->getCargoPlace() - $fleetCdr->getCargoFull() / 2));
+                if($planetCdr->getNbCdr() > $cargoFullCdr) {
+                    $fleetCdr->setNiobium($fleetCdr->getNiobium() + $cargoFullCdr);
+                    $planetCdr->setNbCdr($planetCdr->getNbCdr() - $cargoFullCdr);
+                } else {
+                    $fleetCdr->setNiobium($fleetCdr->getNiobium() + $planetCdr->getNbCdr());
+                    $planetCdr->setNbCdr(0);
+                }
+                if($planetCdr->getWtCdr() > $cargoFullCdr) {
+                    $fleetCdr->setWater($fleetCdr->getWater() + $cargoFullCdr);
+                    $planetCdr->setWtCdr($planetCdr->getWtCdr() - $cargoFullCdr);
+                } else {
+                    $fleetCdr->setWater($fleetCdr->getWater() + $planetCdr->getWtCdr());
+                    $planetCdr->setWtCdr(0);
+                }
+                $fleetCdr->setRecycleAt(null);
+            } else {
+                if($planetCdr->getNbCdr() > $recycle) {
+                    $fleetCdr->setNiobium($fleetCdr->getNiobium() + $recycle);
+                    $planetCdr->setNbCdr($planetCdr->getNbCdr() - $recycle);
+                } else {
+                    $fleetCdr->setNiobium($fleetCdr->getNiobium() + $planetCdr->getNbCdr());
+                    $planetCdr->setNbCdr(0);
+                }
+                if($planetCdr->getWtCdr() > $recycle) {
+                    $fleetCdr->setWater($fleetCdr->getWater() + $recycle);
+                    $planetCdr->setWtCdr($planetCdr->getWtCdr() - $recycle);
+                } else {
+                    $fleetCdr->setWater($fleetCdr->getWater() + $planetCdr->getWtCdr());
+                    $planetCdr->setWtCdr(0);
+                }
+                if(($planetCdr->getNbCdr() > 0 || $planetCdr->getWtCdr() > 0) && $fleetCdr->getCargoPlace() > $fleetCdr->getCargoFull()) {
+                    $tmpNoCdr = $now;
+                    $tmpNoCdr->add(new DateInterval('PT' . 3600 . 'S'));
+                    $fleetCdr->setRecycleAt($now);
+                } else {
+                    $fleetCdr->setRecycleAt(null);
+                }
+            }
+            $em->persist($fleetCdr);
+            $em->persist($planetCdr);
         }
 
         foreach ($planets as $planet) {

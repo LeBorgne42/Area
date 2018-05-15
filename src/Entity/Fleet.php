@@ -63,6 +63,11 @@ class Fleet
     protected $flightType = null;
 
     /**
+     * @ORM\Column(name="recycleAt",type="datetime", nullable=true)
+     */
+    protected $recycleAt;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Sector", inversedBy="fleets", fetch="EXTRA_LAZY")
      */
     protected $sector;
@@ -794,6 +799,22 @@ class Fleet
     public function setWorker($worker): void
     {
         $this->worker = $worker;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRecycleAt()
+    {
+        return $this->recycleAt;
+    }
+
+    /**
+     * @param mixed $recycleAt
+     */
+    public function setRecycleAt($recycleAt): void
+    {
+        $this->recycleAt = $recycleAt;
     }
 
     /**

@@ -547,9 +547,10 @@ class FleetController extends Controller
             } elseif (strpos('-28 28 29 30 31 32 33 22 12 3 7 -29 -30 -31 -32 -33 -22 -13 -3 -7', (strval($sFleet - $sector)) ) != false) {
                 $base= 8000;
             } else {
-                $base= 15000;
+                $base= 12000;
             }
             $now->add(new DateInterval('PT' . ($fleetGive->getSpeed() * $base) . 'S'));
+            $fleetGive->setRecycleAt(null);
             $fleetGive->setNewPlanet($fleetTake->getId());
             $fleetGive->setFlightTime($now);
             $fleetGive->setFlightType($form_sendFleet->get('flightType')->getData());
@@ -834,5 +835,76 @@ class FleetController extends Controller
         $em->flush();
 
         return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+    }
+
+    /**
+     * @Route("/recycler-flotte/{idp}/{id}/", name="recycle_fleet", requirements={"idp"="\d+", "id"="\d+"})
+     */
+    public function recycleFleetAction($idp, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
+
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $fleet = $em->getRepository('App:Fleet')
+            ->createQueryBuilder('f')
+            ->where('f.id = :id')
+            ->andWhere('f.user = :user')
+            ->setParameters(array('id' => $id, 'user' => $user))
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        if(($fleet || $usePlanet) || ($fleet->getFightAt() == null || $fleet->getFlightTime() == null) ||
+            ($fleet->getPlanet()->getNbCdr() > 0 || $fleet->getPlanet()->getWtCdr() > 0) ||
+            $fleet->getRecycleur()) {
+        } else {
+            return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+        }
+        $now->add(new DateInterval('PT' . 3600 . 'S'));
+        $fleet->setRecycleAt($now);
+        $em->persist($fleet);
+        $em->flush();
+
+        return $this->redirectToRoute('map', array('idp' => $usePlanet->getId(), 'id' => $fleet->getPlanet()->getSector()->getPosition()));
+    }
+
+    /**
+     * @Route("/annuler-recycler-flotte/{idp}/{id}/", name="cancel_recycle_fleet", requirements={"idp"="\d+", "id"="\d+"})
+     */
+    public function cancelRecycleFleetAction($idp, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $fleet = $em->getRepository('App:Fleet')
+            ->createQueryBuilder('f')
+            ->where('f.id = :id')
+            ->andWhere('f.user = :user')
+            ->setParameters(array('id' => $id, 'user' => $user))
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $fleet->setRecycleAt(null);
+        $em->persist($fleet);
+        $em->flush();
+
+        return $this->redirectToRoute('map', array('idp' => $usePlanet->getId(), 'id' => $fleet->getPlanet()->getSector()->getPosition()));
     }
 }
