@@ -865,7 +865,7 @@ class FleetController extends Controller
 
         if(($fleet || $usePlanet) || ($fleet->getFightAt() == null || $fleet->getFlightTime() == null) ||
             ($fleet->getPlanet()->getNbCdr() > 0 || $fleet->getPlanet()->getWtCdr() > 0) ||
-            $fleet->getRecycleur()) {
+            ($fleet->getRecycleur() || $fleet->getCargoPlace() > $fleet->getCargoFull())) {
         } else {
             return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
         }

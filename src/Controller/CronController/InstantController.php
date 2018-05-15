@@ -111,7 +111,7 @@ class InstantController extends Controller
             $recycle = $fleetCdr->getRecycleur() * 5000;
             $planetCdr = $fleetCdr->getPlanet();
             if($fleetCdr->getCargoPlace() < ($fleetCdr->getCargoFull() + ($recycle * 2))) {
-                $cargoFullCdr = round(($fleetCdr->getCargoPlace() - $fleetCdr->getCargoFull() / 2));
+                $cargoFullCdr = round((($fleetCdr->getCargoPlace() - $fleetCdr->getCargoFull()) / 2));
                 if($planetCdr->getNbCdr() > $cargoFullCdr) {
                     $fleetCdr->setNiobium($fleetCdr->getNiobium() + $cargoFullCdr);
                     $planetCdr->setNbCdr($planetCdr->getNbCdr() - $cargoFullCdr);
