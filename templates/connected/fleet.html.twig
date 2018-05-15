@@ -81,7 +81,7 @@
                         <span><a href="{{ path('map', {id: fleet.getSector().getPosition(), 'idp': usePlanet.getId()}) }}">{{ fleet.getSector().getGalaxy.getPosition() }}:{{ fleet.getSector.getPosition() }}:{{ fleet.getPlanete() }}</a></span>
                     </td>
                     <td class="center-cells text-center">
-                        {{ fleet.getFlightTime()|date('H:i:s d/m/Y') }}
+                        <span class="timerArea">{{ fleet.getFlightTime()|date('Y/m/d H:i:s') }}</span>
                     </td>
                     <td class="center-cells text-center">
                         {{ fleet.getNbrShips()|number_format }}

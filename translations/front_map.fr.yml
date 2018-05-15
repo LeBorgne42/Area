@@ -19,3 +19,5 @@ tooltip.signature: 'Ici nous parlons de signature thermique, il serait trop faci
 tooltip.fleetEntrance: 'Les flottes qui viennent d''un autre secteur sont représenté là.'
 tooltip.fleetQuit: 'Ce cadre vous montre les flottes qui sortent de ce secteur.'
 sector.profilUser: 'voir profil'
+sector.manageFleet: gestion
+fleet.combat: 'en combat'

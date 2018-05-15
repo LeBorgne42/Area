@@ -20,7 +20,7 @@
                 </td>
                 <td width="101px" class="center-cells cell-middle">
                     {% if app.user.getSearch() == 'utility' %}
-                        <div id="timeResearch">{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
+                        <div class="timerArea">{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
                         
                     {% else %}
                         {% if app.user.getBitcoin() >= ((app.user.getUtility() + 1) * 2500) and app.user.getUtility() < 3 and app.user.getSearchAt() < date %}
@@ -46,7 +46,7 @@
                 </td>
                 <td width="101px" class="center-cells cell-middle">
                     {% if app.user.getSearch() == 'terraformation' %}
-                        <div id="timeResearch">{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
+                        <div class="timerArea">{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
                     {% else %}
                         {% if app.user.getBitcoin() >= (app.user.getTerraformation() + 1) * 12000 and app.user.getTerraformation() < 18  and app.user.getUtility() > 0 and app.user.getSearchAt() < date %}
                             <div>{% if ((app.user.getTerraformation() + 1) * app.user.getTimeConstruct(36000)) < 86400 %}{{  ((app.user.getTerraformation() + 1) * app.user.getTimeConstruct(36000))|date('H:i:s') }}{% else %}{{ ((app.user.getTerraformation() + 1) * app.user.getTimeConstruct(36000))|date('d H:i:s') }}{% endif %}</div>
@@ -67,7 +67,7 @@
                 </td>
                 <td width="101px" class="center-cells cell-middle">
                     {% if app.user.getSearch() == 'cargo' %}
-                        <div id="timeResearch">{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
+                        <div class="timerArea">{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
                         
                     {% else %}
                         {% if app.user.getBitcoin() >= ((app.user.getCargo() + 1) * 3500) and app.user.getCargo() < 5  and app.user.getUtility() > 1 and app.user.getSearchAt() < date %}
@@ -92,7 +92,7 @@
             </td>
             <td width="101px" class="center-cells cell-middle">
                 {% if app.user.getSearch() == 'barge' %}
-                    <div id="timeResearch">{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
+                    <div class="timerArea">{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
                     
                 {% else %}
                     {% if app.user.getBitcoin() >= 35000 and app.user.getBarge() == 0  and app.user.getUtility() == 3 and app.user.getSearchAt() < date %}
@@ -118,7 +118,7 @@
                 </td>
                 <td width="101px" class="center-cells cell-middle">
                     {% if app.user.getSearch() == 'recycleur' %}
-                        <div id="timeResearch">{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
+                        <div class="timerArea">{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
                         
                     {% else %}
                         {% if app.user.getBitcoin() >= 16900 and app.user.getRecycleur() == 0  and app.user.getUtility() == 3 and app.user.getSearchAt() < date %}
@@ -144,7 +144,7 @@
                 </td>
                 <td width="101px" class="center-cells cell-middle">
                     {% if app.user.getSearch() == 'onde' %}
-                        <div id="timeResearch">{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
+                        <div class="timerArea">{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
                         
                     {% else %}
                         {% if app.user.getBitcoin() >= ((app.user.getOnde() + 1) * 2300) and app.user.getOnde() < 5 and app.user.getSearchAt() < date %}
@@ -170,7 +170,7 @@
                 </td>
                 <td width="101px" class="center-cells cell-middle">
                     {% if app.user.getSearch() == 'hyperespace' %}
-                        <div id="timeResearch">{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
+                        <div class="timerArea">{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
                         
                     {% else %}
                         {% if app.user.getBitcoin() >= 25000000 and app.user.getHyperespace() == false and app.user.getSearchAt() < date %}
@@ -201,7 +201,7 @@
                 </td>
                 <td width="101px" class="center-cells cell-middle">
                     {% if app.user.getSearch() == 'demography' %}
-                        <div id="timeResearch">{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
+                        <div class="timerArea">{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
                         
                     {% else %}
                         {% if app.user.getBitcoin() >= ((app.user.getDemography() + 1) * 8000) and app.user.getDemography() < 5 and app.user.getSearchAt() < date %}
@@ -227,7 +227,7 @@
                 </td>
                 <td width="101px" class="center-cells cell-middle">
                     {% if app.user.getSearch() == 'discipline' %}
-                        <div id="timeResearch">{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
+                        <div class="timerArea">{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
                         
                     {% else %}
                         {% if app.user.getBitcoin() >= ((app.user.getDiscipline() + 1) * 11700) and app.user.getDemography() > 0 and app.user.getDiscipline() < 3 and app.user.getSearchAt() < date %}
@@ -258,7 +258,7 @@
                 </td>
                 <td width="101px" class="center-cells cell-middle">
                     {% if app.user.getSearch() == 'armement' %}
-                        <div id="timeResearch">{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
+                        <div class="timerArea">{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
                         
                     {% else %}
                         {% if app.user.getBitcoin() >= ((app.user.getArmement() + 1) * 2000) and app.user.getArmement() < 5 and app.user.getSearchAt() < date %}
@@ -284,7 +284,7 @@
                 </td>
                 <td width="101px" class="center-cells cell-middle">
                     {% if app.user.getSearch() == 'missile' %}
-                        <div id="timeResearch">{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
+                        <div class="timerArea">{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
                         
                     {% else %}
                         {% if app.user.getBitcoin() >= ((app.user.getMissile() + 1) * 2600) and app.user.getArmement() > 0 and app.user.getMissile() < 3 and app.user.getSearchAt() < date %}
@@ -310,7 +310,7 @@
                 </td>
                 <td width="101px" class="center-cells cell-middle">
                     {% if app.user.getSearch() == 'laser' %}
-                        <div id="timeResearch">{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
+                        <div class="timerArea">{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
                         
                     {% else %}
                         {% if app.user.getBitcoin() >= ((app.user.getLaser() + 1) * 13000) and app.user.getArmement() > 2 and app.user.getLaser() < 3 and app.user.getSearchAt() < date %}
@@ -336,7 +336,7 @@
                 </td>
                 <td width="101px" class="center-cells cell-middle">
                     {% if app.user.getSearch() == 'plasma' %}
-                        <div id="timeResearch">{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
+                        <div class="timerArea">{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
                         
                     {% else %}
                         {% if app.user.getBitcoin() >= ((app.user.getPlasma() + 1) * 29000) and app.user.getArmement() == 5 and app.user.getPlasma() < 3 and app.user.getSearchAt() < date %}
@@ -367,7 +367,7 @@
                 </td>
                 <td width="101px" class="center-cells cell-middle">
                     {% if app.user.getSearch() == 'industry' %}
-                        <div id="timeResearch">{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
+                        <div class="timerArea">{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
                         
                     {% else %}
                         {% if app.user.getBitcoin() >= ((app.user.getIndustry() + 1) * 1500) and app.user.getIndustry() < 5 and app.user.getSearchAt() < date %}
@@ -393,7 +393,7 @@
                 </td>
                 <td width="101px" class="center-cells cell-middle">
                     {% if app.user.getSearch() == 'lightShip' %}
-                        <div id="timeResearch">{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
+                        <div class="timerArea">{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
                         
                     {% else %}
                         {% if app.user.getBitcoin() >= ((app.user.getLightShip() + 1) * 9000) and app.user.getLightShip() < 3 and app.user.getIndustry() > 2 and app.user.getSearchAt() < date %}
@@ -419,7 +419,7 @@
                 </td>
                 <td width="101px" class="center-cells cell-middle">
                     {% if app.user.getSearch() == 'heavyShip' %}
-                        <div id="timeResearch">{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
+                        <div class="timerArea">{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
                         
                     {% else %}
                         {% if app.user.getBitcoin() >= ((app.user.getHeavyShip() + 1) * 42000) and app.user.getHeavyShip() < 3 and app.user.getIndustry() == 5 and app.user.getSearchAt() < date %}

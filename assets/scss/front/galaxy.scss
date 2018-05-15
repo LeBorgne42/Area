@@ -30,6 +30,22 @@
   padding: 1.5rem;
 }
 
+div.tooltip-inner {
+  max-width: 500px;
+}
+
+div.tooltip-inner span a.ally {
+  font-size: 1.2rem;
+  font-family: Arial, Helvetica, sans-serif;
+  color: orange!important;
+}
+
+div.tooltip-inner span a.manage {
+  font-size: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #00ffff!important;
+}
+
 .pp-mine {
   font-weight: 900;
   color: #00ffff!important;

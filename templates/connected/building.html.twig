@@ -10,7 +10,7 @@
     <div class="front-block building">
         <div id="timeDefaut" hidden>{{ date|date('Y/m/d H:i:s') }}</div>
         {% if usePlanet.getConstruct() == 'destruct' %}
-        <div class="block-title text-rouge text-center p-4"><h2>{{ 'building.destroyBuild'|trans }}<span id="timeConstruct">{{ usePlanet.getConstructAt()|date('Y/m/d H:i:s') }}</span></h2></div>
+        <div class="block-title text-rouge text-center p-4"><h2>{{ 'building.destroyBuild'|trans }}<span class="timeConstruct">{{ usePlanet.getConstructAt()|date('Y/m/d H:i:s') }}</span></h2></div>
         {% endif %}
         <div class="block-title ml-4"><h2>{{ 'building.titleRessource'|trans }}</h2></div>
         <table class="table table-striped table-bordered table-dark text-center">
@@ -26,7 +26,7 @@
                 </td>
                 <td class="center-cells  p-4">
                     {% if usePlanet.getConstruct() == 'miner' %}
-                        <div id="timeConstruct" class="mt-5">{{ usePlanet.getConstructAt()|date('Y/m/d H:i:s') }}</div>
+                        <div class="mt-5 timerArea">{{ usePlanet.getConstructAt()|date('Y/m/d H:i:s') }}</div>
                         
                     {% else %}
                         {% if planetNb >= ((usePlanet.getMiner() + 1) * 450) and planetWt >= ((usePlanet.getMiner() + 1) * 200) and usePlanet.getGroundPlace() + 1 <= usePlanet.getGround() and usePlanet.getConstructAt() < date %}
@@ -56,7 +56,7 @@
                 </td>
                 <td class="center-cells p-4">
                     {% if usePlanet.getConstruct() == 'extractor' %}
-                        <div id="timeConstruct" class="mt-5">{{ usePlanet.getConstructAt()|date('Y/m/d H:i:s') }}</div>
+                        <div class="mt-5 timerArea">{{ usePlanet.getConstructAt()|date('Y/m/d H:i:s') }}</div>
                         
                     {% else %}
                         {% if planetNb >= ((usePlanet.getExtractor() + 1) * 200) and planetWt >= ((usePlanet.getExtractor() + 1) * 500) and usePlanet.getGroundPlace() + 1 <= usePlanet.getGround() and usePlanet.getConstructAt() < date %}
@@ -91,7 +91,7 @@
                 </td>
                 <td class="center-cells  p-4">
                     {% if usePlanet.getConstruct() == 'centerSearch' %}
-                        <div id="timeConstruct" class="mt-5">{{ usePlanet.getConstructAt()|date('Y/m/d H:i:s') }}</div>
+                        <div class="mt-5 timerArea">{{ usePlanet.getConstructAt()|date('Y/m/d H:i:s') }}</div>
                         
                     {% else %}
                         {% if planetNb >= ((usePlanet.getCenterSearch() + 1) * 2850) and planetWt >= ((usePlanet.getCenterSearch() + 1) * 3580) and usePlanet.getGroundPlace() + 5 <= usePlanet.getGround() and usePlanet.getConstructAt() < date %}
@@ -121,7 +121,7 @@
                 </td>
                 <td class="center-cells  p-4">
                     {% if usePlanet.getConstruct() == 'city' %}
-                        <div id="timeConstruct" class="mt-5">{{ usePlanet.getConstructAt()|date('Y/m/d H:i:s') }}</div>
+                        <div class="mt-5 timerArea">{{ usePlanet.getConstructAt()|date('Y/m/d H:i:s') }}</div>
                         
                     {% else %}
                         {% if planetNb >= ((usePlanet.getCity() + 1) * 15000) and planetWt >= ((usePlanet.getCity() + 1) * 11000) and usePlanet.getGroundPlace() + 6 <= usePlanet.getGround() and app.user.getDemography() > 0 and usePlanet.getConstructAt() < date %}
@@ -151,7 +151,7 @@
                 </td>
                 <td class="center-cells p-4">
                     {% if usePlanet.getConstruct() == 'metropole' %}
-                        <div id="timeConstruct" class="mt-5">{{ usePlanet.getConstructAt()|date('Y/m/d H:i:s') }}</div>
+                        <div class="mt-5 timerArea">{{ usePlanet.getConstructAt()|date('Y/m/d H:i:s') }}</div>
                         
                     {% else %}
                         {% if planetNb >= ((usePlanet.getMetropole() + 1) * 75000) and planetWt >= ((usePlanet.getMetropole() + 1) * 55000) and usePlanet.getGroundPlace() + 8 <= usePlanet.getGround() and usePlanet.getSkyPlace() + 8 <= usePlanet.getSky() and app.user.getDemography() == 5 and usePlanet.getConstructAt() < date %}
@@ -186,7 +186,7 @@
                 </td>
                 <td class="center-cells  p-4">
                     {% if usePlanet.getConstruct() == 'caserne' %}
-                        <div id="timeConstruct" class="mt-5">{{ usePlanet.getConstructAt()|date('Y/m/d H:i:s') }}</div>
+                        <div class="mt-5 timerArea">{{ usePlanet.getConstructAt()|date('Y/m/d H:i:s') }}</div>
                         
                     {% else %}
                         {% if planetNb >= ((usePlanet.getCaserne() + 1) * 13000) and planetWt >= ((usePlanet.getCaserne() + 1) * 19000) and usePlanet.getGroundPlace() + 6 <= usePlanet.getGround() and app.user.getDiscipline() == 3 and usePlanet.getConstructAt() < date %}
@@ -216,7 +216,7 @@
                 </td>
                 <td class="center-cells  p-4">
                     {% if usePlanet.getConstruct() == 'spaceShip' %}
-                        <div id="timeConstruct" class="mt-5">{{ usePlanet.getConstructAt()|date('Y/m/d H:i:s') }}</div>
+                        <div class="mt-5 timerArea">{{ usePlanet.getConstructAt()|date('Y/m/d H:i:s') }}</div>
                         
                     {% else %}
                         {% if planetNb >= ((usePlanet.getSpaceShip() + 1) * 3000) and planetWt >= ((usePlanet.getSpaceShip() + 1) * 2000) and usePlanet.getGroundPlace() + 10 <= usePlanet.getGround() and usePlanet.getSkyPlace() + 4 <= usePlanet.getSky() and app.user.getIndustry() > 0 and usePlanet.getConstructAt() < date %}
@@ -319,7 +319,7 @@
                 </td>
                 <td class="center-cells  p-4">
                     {% if usePlanet.getConstruct() == 'radar' %}
-                        <div id="timeConstruct" class="mt-5">{{ usePlanet.getConstructAt()|date('Y/m/d H:i:s') }}</div>
+                        <div class="mt-5 timerArea">{{ usePlanet.getConstructAt()|date('Y/m/d H:i:s') }}</div>
                         
                     {% else %}
                         {% if planetNb >= ((usePlanet.getRadar() + 1) * 1200) and planetWt >= ((usePlanet.getRadar() + 1) * 650) and usePlanet.getGroundPlace() + 2 <= usePlanet.getGround() and app.user.getOnde() > 0 and usePlanet.getConstructAt() < date %}
@@ -349,7 +349,7 @@
                 </td>
                 <td class="center-cells p-4">
                     {% if usePlanet.getConstruct() == 'skyRadar' %}
-                        <div id="timeConstruct" class="mt-5">{{ usePlanet.getConstructAt()|date('Y/m/d H:i:s') }}</div>
+                        <div class="mt-5 timerArea">{{ usePlanet.getConstructAt()|date('Y/m/d H:i:s') }}</div>
                         
                     {% else %}
                         {% if planetNb >= ((usePlanet.getSkyRadar() + 1) * 20000) and planetWt >= ((usePlanet.getSkyRadar() + 1) * 17200) and usePlanet.getSkyPlace() + 2 <= usePlanet.getSky() and app.user.getOnde() > 2 and usePlanet.getConstructAt() < date %}
@@ -379,7 +379,7 @@
                 </td>
                 <td class="center-cells  p-4">
                     {% if usePlanet.getConstruct() == 'skyBrouilleur' %}
-                        <div id="timeConstruct" class="mt-5">{{ usePlanet.getConstructAt()|date('Y/m/d H:i:s') }}</div>
+                        <div class="mt-5 timerArea">{{ usePlanet.getConstructAt()|date('Y/m/d H:i:s') }}</div>
                         
                     {% else %}
                         {% if planetNb >= ((usePlanet.getSkyBrouilleur() + 1) * 51000) and planetWt >= ((usePlanet.getSkyBrouilleur() + 1) * 32100) and usePlanet.getSkyPlace() + 4 <= usePlanet.getSky() and app.user.getOnde() == 5 and usePlanet.getConstructAt() < date %}

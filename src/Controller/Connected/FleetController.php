@@ -439,8 +439,8 @@ class FleetController extends Controller
         $fleetTake = $fleetGive->getPlanet();
         if($fleetGive && $usePlanet && $fleetGive->getFightAt() == null && $fleetGive->getFlightTime() == null &&
             ($fleetTake->getSoldier() + $fleetGive->getSoldier()) <= $fleetTake->getSoldierMax() &&
-                ($fleetTake->getWorker() + $fleetGive->getWorker()) < $fleetTake->getWorkerMax() &&
-            ($fleetTake->getScientist() + $fleetGive->getScientist()) < $fleetTake->getScientistMax()) {
+                ($fleetTake->getWorker() + $fleetGive->getWorker()) <= $fleetTake->getWorkerMax() &&
+            ($fleetTake->getScientist() + $fleetGive->getScientist()) <= $fleetTake->getScientistMax()) {
         } else {
             return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
         }
