@@ -91,8 +91,6 @@ class ServerController extends Controller
                         $planet->setCdr(true);
                         $planet->setImageName('cdr.png');
                         $planet->setName('Astéroïdes');
-                        $planet->setNbCdr(9999999999);
-                        $planet->setWtCdr(9999999999);
                         $planet->setSector($sector);
                         $planet->setPosition($nbrPlanet);
                     }

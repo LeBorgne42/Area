@@ -48,6 +48,54 @@ class InstantController extends Controller
     public function buildFleetAction()
     {
         $em = $this->getDoctrine()->getManager();
+        if(time() % 3600) {
+            $asteroides = $em->getRepository('App:Planet')
+                ->createQueryBuilder('p')
+                ->where('p.cdr = :true')
+                ->setParameters(array('true' => true))
+                ->getQuery()
+                ->getResult();
+            if($asteroides) {
+                foreach ($asteroides as $asteroide) {
+                    $nbrFleet = count($asteroide->getFleets());
+                    foreach ($asteroide->getFleets() as $fleetAsteroide) {
+                        $asteroideRes = round(25000 / $nbrFleet);
+                        if ($fleetAsteroide->getRecycleur()) {
+                            if ($fleetAsteroide->getCargoPlace() < ($fleetAsteroide->getCargoFull() + ($asteroideRes * 2))) {
+                                $cargoFullAst = round((($fleetAsteroide->getCargoPlace() - $fleetAsteroide->getCargoFull()) / 2));
+                                $fleetAsteroide->setNiobium($fleetAsteroide->getNiobium() + $cargoFullAst);
+                                $fleetAsteroide->setWater($fleetAsteroide->getWater() + $cargoFullAst);
+                            } else {
+                                $fleetAsteroide->setNiobium($fleetAsteroide->getNiobium() + $asteroideRes);
+                                $fleetAsteroide->setWater($fleetAsteroide->getWater() + $asteroideRes);
+                            }
+                        }
+                        $em->persist($fleetAsteroide);
+                    }
+                    if(rand(1, 1000) > 950) {
+                        $asteroide->setCdr(false);
+                        $asteroide->setEmpty(true);
+                        $asteroide->setImageName(null);
+                        $asteroide->setName('Vide');
+                        $newAsteroides = $em->getRepository('App:Planet')
+                            ->createQueryBuilder('p')
+                            ->join('p.sector', 's')
+                            ->where('p.empty = :true')
+                            ->andWhere('s.id = :rand')
+                            ->setParameters(array('true' => true, 'rand' => rand(1, 100)))
+                            ->setMaxResults(1)
+                            ->getQuery()
+                            ->getResult();
+                        foreach($newAsteroides as $newAsteroide) {
+                            $newAsteroide->setEmpty(false);
+                            $newAsteroide->setCdr(true);
+                            $newAsteroide->setImageName('cdr.png');
+                            $newAsteroide->setName('Astéroïdes');
+                        }
+                    }
+                }
+            }
+        }
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
 
@@ -110,45 +158,49 @@ class InstantController extends Controller
         foreach ($fleetCdrs as $fleetCdr) {
             $recycle = $fleetCdr->getRecycleur() * 5000;
             $planetCdr = $fleetCdr->getPlanet();
-            if($fleetCdr->getCargoPlace() < ($fleetCdr->getCargoFull() + ($recycle * 2))) {
-                $cargoFullCdr = round((($fleetCdr->getCargoPlace() - $fleetCdr->getCargoFull()) / 2));
-                if($planetCdr->getNbCdr() > $cargoFullCdr) {
-                    $fleetCdr->setNiobium($fleetCdr->getNiobium() + $cargoFullCdr);
-                    $planetCdr->setNbCdr($planetCdr->getNbCdr() - $cargoFullCdr);
-                } else {
-                    $fleetCdr->setNiobium($fleetCdr->getNiobium() + $planetCdr->getNbCdr());
-                    $planetCdr->setNbCdr(0);
-                }
-                if($planetCdr->getWtCdr() > $cargoFullCdr) {
-                    $fleetCdr->setWater($fleetCdr->getWater() + $cargoFullCdr);
-                    $planetCdr->setWtCdr($planetCdr->getWtCdr() - $cargoFullCdr);
-                } else {
-                    $fleetCdr->setWater($fleetCdr->getWater() + $planetCdr->getWtCdr());
-                    $planetCdr->setWtCdr(0);
-                }
-                $fleetCdr->setRecycleAt(null);
-            } else {
-                if($planetCdr->getNbCdr() > $recycle) {
-                    $fleetCdr->setNiobium($fleetCdr->getNiobium() + $recycle);
-                    $planetCdr->setNbCdr($planetCdr->getNbCdr() - $recycle);
-                } else {
-                    $fleetCdr->setNiobium($fleetCdr->getNiobium() + $planetCdr->getNbCdr());
-                    $planetCdr->setNbCdr(0);
-                }
-                if($planetCdr->getWtCdr() > $recycle) {
-                    $fleetCdr->setWater($fleetCdr->getWater() + $recycle);
-                    $planetCdr->setWtCdr($planetCdr->getWtCdr() - $recycle);
-                } else {
-                    $fleetCdr->setWater($fleetCdr->getWater() + $planetCdr->getWtCdr());
-                    $planetCdr->setWtCdr(0);
-                }
-                if(($planetCdr->getNbCdr() > 0 || $planetCdr->getWtCdr() > 0) && $fleetCdr->getCargoPlace() > $fleetCdr->getCargoFull()) {
-                    $tmpNoCdr = $now;
-                    $tmpNoCdr->add(new DateInterval('PT' . 3600 . 'S'));
-                    $fleetCdr->setRecycleAt($now);
-                } else {
+            if($planetCdr->getCdr() == false) {
+                if ($fleetCdr->getCargoPlace() < ($fleetCdr->getCargoFull() + ($recycle * 2))) {
+                    $cargoFullCdr = round((($fleetCdr->getCargoPlace() - $fleetCdr->getCargoFull()) / 2));
+                    if ($planetCdr->getNbCdr() > $cargoFullCdr) {
+                        $fleetCdr->setNiobium($fleetCdr->getNiobium() + $cargoFullCdr);
+                        $planetCdr->setNbCdr($planetCdr->getNbCdr() - $cargoFullCdr);
+                    } else {
+                        $fleetCdr->setNiobium($fleetCdr->getNiobium() + $planetCdr->getNbCdr());
+                        $planetCdr->setNbCdr(0);
+                    }
+                    if ($planetCdr->getWtCdr() > $cargoFullCdr) {
+                        $fleetCdr->setWater($fleetCdr->getWater() + $cargoFullCdr);
+                        $planetCdr->setWtCdr($planetCdr->getWtCdr() - $cargoFullCdr);
+                    } else {
+                        $fleetCdr->setWater($fleetCdr->getWater() + $planetCdr->getWtCdr());
+                        $planetCdr->setWtCdr(0);
+                    }
                     $fleetCdr->setRecycleAt(null);
+                } else {
+                    if ($planetCdr->getNbCdr() > $recycle) {
+                        $fleetCdr->setNiobium($fleetCdr->getNiobium() + $recycle);
+                        $planetCdr->setNbCdr($planetCdr->getNbCdr() - $recycle);
+                    } else {
+                        $fleetCdr->setNiobium($fleetCdr->getNiobium() + $planetCdr->getNbCdr());
+                        $planetCdr->setNbCdr(0);
+                    }
+                    if ($planetCdr->getWtCdr() > $recycle) {
+                        $fleetCdr->setWater($fleetCdr->getWater() + $recycle);
+                        $planetCdr->setWtCdr($planetCdr->getWtCdr() - $recycle);
+                    } else {
+                        $fleetCdr->setWater($fleetCdr->getWater() + $planetCdr->getWtCdr());
+                        $planetCdr->setWtCdr(0);
+                    }
+                    if (($planetCdr->getNbCdr() > 0 || $planetCdr->getWtCdr() > 0) && $fleetCdr->getCargoPlace() > $fleetCdr->getCargoFull()) {
+                        $tmpNoCdr = $now;
+                        $tmpNoCdr->add(new DateInterval('PT' . 3600 . 'S'));
+                        $fleetCdr->setRecycleAt($now);
+                    } else {
+                        $fleetCdr->setRecycleAt(null);
+                    }
                 }
+            } else {
+                $fleetCdr->setRecycleAt(null);
             }
             $em->persist($fleetCdr);
             $em->persist($planetCdr);
@@ -244,6 +296,7 @@ class InstantController extends Controller
                 ->join('f.user', 'u')
                 ->where('f.planet = :planet')
                 ->andWhere('f.user != :user')
+                ->andWhere('f.flightTime is null')
                 ->setParameters(array('planet' => $fleet->getPlanet(), 'user' => $fleet->getUser()))
                 ->getQuery()
                 ->getResult();
@@ -289,6 +342,7 @@ class InstantController extends Controller
                 ->where('f.planet = :planet')
                 ->andWhere('f.attack = :true OR a.sigle in (:ally)')
                 ->andWhere('f.user != :user')
+                ->andWhere('f.flightTime is null')
                 ->setParameters(array('planet' => $newHome, 'true' => true, 'ally' => $warAlly, 'user' => $fleet->getUser()))
                 ->getQuery()
                 ->getResult();
@@ -299,6 +353,7 @@ class InstantController extends Controller
                     ->join('f.user', 'u')
                     ->where('f.planet = :planet')
                     ->andWhere('u.ally != :ally')
+                    ->andWhere('f.flightTime is null')
                     ->setParameters(array('planet' => $newHome, 'ally' => $fleet->getUser()->getAlly()))
                     ->getQuery()
                     ->getResult();

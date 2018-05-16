@@ -502,7 +502,7 @@ function manageDisplaySalon(){
                 url : document.location.href,
                 type : "GET",
                 success : function(data){
-                    if(data.has_error == false) {
+                    if(data.has_error == false && $('#salon_content').val() == "") {
                         location = location;
                     }
                 }

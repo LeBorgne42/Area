@@ -545,7 +545,7 @@
                                         {% if fleet.getPlanet().getEmpty() != 1 %}<a href="{{ path('map', {id: fleet.getPlanet().getSector().getPosition(), 'idp': usePlanet.getId()}) }}"><img height="25" width="25" src="{{ vich_uploader_asset(fleet.getPlanet(), 'imageFile') }}"></a>{% endif %}
                                         <div class="mt-2">{{ fleet.getPlanet().getNbCdr()|number_format }} <img src="{{ asset('img/niobium.png') }}"></div>
                                         <div>{{ fleet.getPlanet().getWtCdr()|number_format }} <img src="{{ asset('img/water.png') }}"></div>
-                                        {% if fleet.getRecycleur() %}{% if fleet.getRecycleAt() %}<div>{{ fleet.getRecycleAt()|date('Y/m/d H:i:s') }} <span><a href="{{ path('cancel_recycle_fleet', {id: fleet.getId(), 'idp': usePlanet.getId()}) }}">{{ 'recyclerCancel'|trans }}</a></span></div>{% else %}<div><span><a href="{{ path('recycle_fleet', {id: fleet.getId(), 'idp': usePlanet.getId()}) }}">{{ 'recycler'|trans }}</a></span></div>{% endif %}{% endif %}
+                                        {% if fleet.getRecycleur() and fleet.getPlanet().getCdr() == false %}{% if fleet.getRecycleAt() %}<div>{{ fleet.getRecycleAt()|date('Y/m/d H:i:s') }} <span><a href="{{ path('cancel_recycle_fleet', {id: fleet.getId(), 'idp': usePlanet.getId()}) }}">{{ 'recyclerCancel'|trans }}</a></span></div>{% else %}<div><span><a href="{{ path('recycle_fleet', {id: fleet.getId(), 'idp': usePlanet.getId()}) }}">{{ 'recycler'|trans }}</a></span></div>{% endif %}{% endif %}
                                     </th>
                                 </tr>
                             </tbody>

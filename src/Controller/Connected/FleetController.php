@@ -122,6 +122,7 @@ class FleetController extends Controller
                 ->where('f.planet = :planet')
                 ->andWhere('f.attack = :true OR a.sigle in (:ally)')
                 ->andWhere('f.user != :user')
+                ->andWhere('f.flightTime is null')
                 ->setParameters(array('planet' => $usePlanet, 'true' => true, 'ally' => $warAlly, 'user' => $user))
                 ->getQuery()
                 ->getResult();
@@ -132,6 +133,7 @@ class FleetController extends Controller
                     ->join('f.user', 'u')
                     ->where('f.planet = :planet')
                     ->andWhere('f.user != :user')
+                    ->andWhere('f.flightTime is null')
                     ->setParameters(array('planet' => $fleetTake, 'user' => $user))
                     ->getQuery()
                     ->getResult();
