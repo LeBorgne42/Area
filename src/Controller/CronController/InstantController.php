@@ -419,7 +419,7 @@ class InstantController extends Controller
                     if ($fleet->getColonizer() && $newPlanet->getUser() == null &&
                         $newPlanet->getEmpty() == false && $newPlanet->getMerchant() == false &&
                         $newPlanet->getCdr() == false && count($fleet->getUser()->getPlanets()) < 21 &&
-                        count($fleet->getUser()->getPlanets()) <= ($user->getTerraformation() + 2)) {
+                        count($fleet->getUser()->getPlanets()) <= ($user->getTerraformation() + 1)) {
                         $fleet->setColonizer($fleet->getColonizer() - 1);
                         $newPlanet->setUser($fleet->getUser());
                         $newPlanet->setName('Colonie');

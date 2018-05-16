@@ -531,7 +531,7 @@ class FightController extends Controller
         if($colonize->getColonizer() && $newPlanet->getUser() == null &&
             $newPlanet->getEmpty() == false && $newPlanet->getMerchant() == false &&
             $newPlanet->getCdr() == false && count($colonize->getUser()->getPlanets()) < 21 &&
-            count($colonize->getUser()->getPlanets()) <= ($user->getTerraformation() + 2)) {
+            count($colonize->getUser()->getPlanets()) <= ($user->getTerraformation() + 1)) {
             $colonize->setColonizer($colonize->getColonizer() - 1);
             $newPlanet->setUser($colonize->getUser());
             $newPlanet->setName('Colonie');

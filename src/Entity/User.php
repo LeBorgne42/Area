@@ -494,6 +494,21 @@ class User implements UserInterface, \Serializable
     }
 
     /**
+     * @return int
+     */
+    public function getAllShipsPoint(): int
+    {
+        $return = 0;
+        foreach($this->planets as $planet) {
+            $return = $return + $planet->getNbrSignatures();
+        }
+        foreach($this->fleets as $fleet) {
+            $return = $return + $fleet->getNbrSignatures();
+        }
+        return $return;
+    }
+
+    /**
      * @param $time
      * @return int
      */

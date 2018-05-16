@@ -65,7 +65,7 @@
                                 </a></h4>
                             </span>
                         {% endif %}
-                        {% if fleet.getColonizer() and fleet.getPlanet().getUser() == null and fleet.getPlanet().getEmpty() == false and fleet.getPlanet().getMerchant() == false and fleet.getPlanet().getCdr() == false and app.user.getPlanets()|length < 20 and app.user.getPlanets()|length <= (app.user.getTerraformation() + 2) %}
+                        {% if fleet.getColonizer() and fleet.getPlanet().getUser() == null and fleet.getPlanet().getEmpty() == false and fleet.getPlanet().getMerchant() == false and fleet.getPlanet().getCdr() == false and app.user.getPlanets()|length < 20 and app.user.getPlanets()|length <= (app.user.getTerraformation() + 1) %}
                             <span>
                                 <h4><a class="badge badge-success" href="{{ path('colonizer_planet', {'idp': usePlanet.getId(), 'fleet': fleet.getId()}) }}">
                                     {{ 'fleet.colonize'|trans }}
