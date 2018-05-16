@@ -85,6 +85,11 @@ class User implements UserInterface, \Serializable
     protected $salons;
 
     /**
+     * @ORM\Column(name="salonAt",type="datetime", nullable=true)
+     */
+    protected $salonAt = null;
+
+    /**
      * @ORM\Column(name="salonBan",type="datetime", nullable=true)
      */
     protected $salonBan = null;
@@ -1344,5 +1349,21 @@ class User implements UserInterface, \Serializable
     public function setSalons($salons): void
     {
         $this->salons = $salons;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSalonAt()
+    {
+        return $this->salonAt;
+    }
+
+    /**
+     * @param mixed $salonAt
+     */
+    public function setSalonAt($salonAt): void
+    {
+        $this->salonAt = $salonAt;
     }
 }

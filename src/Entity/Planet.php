@@ -443,19 +443,20 @@ class Planet
      */
     public function getBuildingPoint(): int
     {
-        $extractor = $this->getExtractor() * 2;
-        $miner = $this->getMiner() * 2;
-        $caserne = $this->getCaserne() * 8;
-        $center = $this->getCenterSearch() * 7;
-        $city = $this->getCity() * 21;
-        $light = $this->getLightUsine() * 10;
-        $heavy = $this->getHeavyUsine() * 200;
-        $space = $this->getSpaceShip() * 18;
-        $radar = $this->getRadar() * 10;
-        $skyr = $this->getSkyRadar() * 50;
-        $brouilleur = $this->getSkyBrouilleur() * 100;
+        $extractor = $this->getExtractor() * 100;
+        $miner = $this->getMiner() * 150;
+        $caserne = $this->getCaserne() * 250;
+        $center = $this->getCenterSearch() * 300;
+        $city = $this->getCity() * 650;
+        $metropole = $this->getMetropole() * 1200;
+        $light = $this->getLightUsine() * 500;
+        $heavy = $this->getHeavyUsine() * 1500;
+        $space = $this->getSpaceShip() * 300;
+        $radar = $this->getRadar() * 80;
+        $skyr = $this->getSkyRadar() * 600;
+        $brouilleur = $this->getSkyBrouilleur() * 1000;
 
-        $nbr = $extractor + $miner + $caserne + $center + $city + $light + $heavy + $space + $radar + $skyr + $brouilleur;
+        $nbr = $extractor + $miner + $caserne + $center + $city + $metropole + $light + $heavy + $space + $radar + $skyr + $brouilleur;
         return $nbr;
     }
 

@@ -489,30 +489,30 @@ function manageSalon() {
                type: "POST",
                 data: 'newMessage=' + content,
             });
-            window.location.reload();
         }
     });*/
     $('.chat-defil').scrollTop(2000);
 }
 
-/*function manageDisplaySalon(){
+function manageDisplaySalon(){
 
-   setTimeout( function(){
+    if(document.location.href.match('/salon(/|$)')) {
+        setTimeout( function(){
+            $.ajax({
+                url : document.location.href,
+                type : "GET",
+                success : function(data){
+                    if(data.has_error == false) {
+                        location = location;
+                    }
+                }
+            });
 
-        $.ajax({
-            url : document.location.href,
-            type : "GET",
-            success : function(data){
-                console.log(data.name);
-                console.log(data.id);
-            }
-        });
+            manageDisplaySalon();
 
-        manageDisplaySalon();
-
-    }, 1000);
-
-}*/
+        }, 1000);
+    }
+}
 
 
 $(document).ready(function() {
@@ -534,8 +534,7 @@ $(document).ready(function() {
     manageMaxShip();
     manageTime();
     manageSalon();
-    /*    manageDisplaySalon();
-        setNoDecimalDisplay();*/
+    manageDisplaySalon();
     manageAttackFleetForm();
     console.log("Toute utilisation de scripts sur le jeu seront puni d'un ban permanent, merci.");
 });

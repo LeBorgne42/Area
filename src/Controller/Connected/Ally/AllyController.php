@@ -680,14 +680,14 @@ class AllyController extends Controller
             if(!$allyPact || $user->getAlly()->getAlreadyPact($allyPact->getSigle())) {
                 return $this->redirectToRoute('ally_page_pacts', array('idp' => $usePlanet->getId()));
             }
-            if($form_allyPact->get('pactType')->getData() == 1 && $user->getGrade()->getCanPeace() == 1) {
+            if($form_allyPact->get('pactType')->getData() == 2 && $user->getGrade()->getCanPeace() == 1) {
                 $pna = new Pna();
                 $pna->setAlly($ally);
                 $pna->setAllyTag($allyPact->getSigle());
                 $pna->setSignedAt($now);
                 $em->persist($pna);
                 $ally->addAllyPna($pna);
-            } elseif($form_allyPact->get('pactType')->getData() == 2 && $user->getGrade()->getCanPeace() == 1) {
+            } elseif($form_allyPact->get('pactType')->getData() == 1 && $user->getGrade()->getCanPeace() == 1) {
                 $allied = new Allied();
                 $allied->setAlly($ally);
                 $allied->setAllyTag($allyPact->getSigle());

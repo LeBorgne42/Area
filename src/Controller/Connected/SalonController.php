@@ -22,7 +22,7 @@ class SalonController extends Controller
      * @Route("/salon/{idp}", name="salon", requirements={"idp"="\d+"})
      * @Route("/salon/{idp}/{salon}", name="salon_id", requirements={"idp"="\d+"})
      */
-    public function salonAction(Request $request, $idp, $salon = null)
+    public function salonAction(Request $request, $idp, $salon = 1)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
@@ -52,57 +52,72 @@ class SalonController extends Controller
         $form_message = $this->createForm(SalonType::class);
         $form_message->handleRequest($request);
 
-        /* if($request->isXmlHttpRequest()) {
-            if ($_POST['newMessage'] != "") {
-                $attachSalon = $em->getRepository('App:Salon')
-                    ->createQueryBuilder('s')
-                    ->where('s.id = :id')
-                    ->setParameters(array('id' => $salon))
-                    ->getQuery()
-                    ->getOneOrNullResult();
+         if($request->isXmlHttpRequest()) {
+             $attachSalon = $em->getRepository('App:Salon')
+                 ->createQueryBuilder('s')
+                 ->where('s.id = :id')
+                 ->setParameters(array('id' => $salon))
+                 ->getQuery()
+                 ->getOneOrNullResult();
+             /*if ($_POST) {
+                 if ($_POST['newMessage'] != "") {
+                     $message = new S_Content();
+                     $message->setSalon($attachSalon);
+                     $message->setMessage(nl2br($_POST['newMessage']));
+                     $message->setSendAt($now);
+                     $message->setUser($user);
+                     $user->setSalonAt($now);
 
-                $message = new S_Content();
-                $message->setSalon($attachSalon);
-                $message->setMessage(nl2br($_POST['newMessage']));
-                $message->setSendAt($now);
-                $message->setUser($user);
+                     if (count($attachSalon->getContents()) > 50) {
+                         $removeMessage = $em->getRepository('App:S_Content')
+                             ->createQueryBuilder('sc')
+                             ->orderBy('sc.sendAt', 'ASC')
+                             ->where('sc.salon = :attachSalon')
+                             ->setParameters(array('attachSalon' => $attachSalon))
+                             ->setMaxResults('10')
+                             ->getQuery()
+                             ->getResult();
+                         foreach ($removeMessage as $oneMessage) {
+                             $em->remove($oneMessage);
+                         }
+                     }
+                     $em->persist($message);
+                     $em->flush();
+                 }
+             }*/
 
-                if(count($attachSalon->getMessages()) > 50) {
-                    $removeMessage = $em->getRepository('App:S_Content')
-                        ->createQueryBuilder('sc')
-                        ->setParameters(array('id' => $salon))
-                        ->orderBy('sc.sendAt', 'ASC')
-                        ->setMaxResults('10')
-                        ->getQuery()
-                        ->getResult();
-                    foreach($removeMessage as $oneMessage) {
-                        $em->remove($oneMessage);
-                    }
-                }
+                 $newMessages = $em->getRepository('App:S_Content')
+                     ->createQueryBuilder('sc')
+                     ->orderBy('sc.sendAt', 'ASC')
+                     ->where('sc.salon = :attachSalon')
+                     ->andWhere('sc.user != :user')
+                     ->andWhere('sc.sendAt > :date')
+                     ->setParameters(array('attachSalon' => $attachSalon, 'user' => $user, 'date' => $user->getSalonAt()))
+                     ->setMaxResults('10')
+                     ->getQuery()
+                     ->getResult();
 
-                $em->persist($message);
-                $em->flush();
-
-               $response = new JsonResponse();
-                $response->setData(
-                    array(
-                        'has_error' => false,
-                        'messages' => $message,
-                    )
-                );
-                return $response;
-            }*/
-           /* else {
-                $response = new JsonResponse();
-                $response->setData(
-                    array(
-                        'has_error' => false,
-                        'messages' => ,
-                    )
-                );
-                return $response;
-            }
-        }*/
+                 if($newMessages) {
+                     $response = new JsonResponse();
+                     $response->setData(
+                         array(
+                             'has_error' => false,
+                     )
+                     );
+                     $user->setSalonAt($now);
+                     $em->persist($user);
+                     $em->flush();
+                     return $response;
+                 } else {
+                     $response = new JsonResponse();
+                     $response->setData(
+                         array(
+                             'has_error' => true,
+                     )
+                     );
+                     return $response;
+                 }
+         }
 
         if ($form_message->isSubmitted() && $form_message->isValid() && ($user->getSalonBan() > $now || $user->getSalonBan() == null)) {
             $attachSalon = $em->getRepository('App:Salon')
@@ -131,13 +146,15 @@ class SalonController extends Controller
                     $em->remove($oneMessage);
                 }
             }
-
             $em->persist($message);
             $em->flush();
 
             $form_message = null;
             $form_message = $this->createForm(SalonType::class);
         }
+        $user->setSalonAt($now);
+        $em->persist($user);
+        $em->flush();
 
         return $this->render('connected/salon.html.twig', [
             'usePlanet' => $usePlanet,

@@ -21,7 +21,7 @@
                 <div class="tab-pane{% if x == 0 %} fade show active{% endif %}" id="{{ salon.getName() }}" role="tabpanel" aria-labelledby="{{ salon.getName() }}-tab">
                     <div class="chat-defil">
                         <table class="table table-striped table-bordered table-dark">
-                            <tbody>
+                            <tbody class="messagesPost">
                             {% for message in salon.getContents() %}
                                 <tr>
                                     <th class="tab-cells-name">

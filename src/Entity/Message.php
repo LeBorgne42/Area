@@ -43,7 +43,7 @@ class Message
     protected $title;
 
     /**
-     * @ORM\Column(name="content",type="string", length=500)
+     * @ORM\Column(name="content",type="string", length=1000)
      * @Assert\NotBlank(message = "required")
      */
     protected $content;
