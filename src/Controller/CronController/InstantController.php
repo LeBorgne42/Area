@@ -48,7 +48,7 @@ class InstantController extends Controller
     public function buildFleetAction()
     {
         $em = $this->getDoctrine()->getManager();
-        if(time() % 3600) {
+        if(time() % 3600 == 0) {
             $asteroides = $em->getRepository('App:Planet')
                 ->createQueryBuilder('p')
                 ->where('p.cdr = :true')
@@ -72,7 +72,7 @@ class InstantController extends Controller
                         }
                         $em->persist($fleetAsteroide);
                     }
-                    if(rand(1, 1000) > 950) {
+                    if(rand(1, 200) == 200) {
                         $asteroide->setCdr(false);
                         $asteroide->setEmpty(true);
                         $asteroide->setImageName(null);
@@ -435,7 +435,7 @@ class InstantController extends Controller
                     $defenser = $fleet->getPlanet();
                     $userDefender= $fleet->getPlanet()->getUser();
                     $dMilitary = $defenser->getWorker() + ($defenser->getSoldier() * 6);
-                    $alea = rand(5, 9);
+                    $alea = rand(4, 8);
 
                     $reportInv = new Report();
                     $reportInv->setSendAt($now);

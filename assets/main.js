@@ -510,7 +510,7 @@ function manageDisplaySalon(){
 
             manageDisplaySalon();
 
-        }, 1000);
+        }, 2500);
     }
 }
 

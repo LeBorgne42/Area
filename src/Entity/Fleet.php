@@ -365,15 +365,15 @@ class Fleet
      */
     public function getArmor(): int
     {
-        $hunter = $this->getHunter() * 10;
-        $hunterHeavy = $this->getHunterHeavy() * 20;
-        $corvet = $this->getCorvet() * 38;
-        $corvetLaser = $this->getCorvetLaser() * 53;
-        $fregate = $this->getFregate() * 120;
-        $fregatePlasma = $this->getFregatePlasma() * 200;
-        $croiser = $this->getCroiser() * 500;
-        $ironClad = $this->getIronClad() * 1100;
-        $destroyer = $this->getDestroyer() * 200;
+        $hunter = $this->getHunter() * 15;
+        $hunterHeavy = $this->getHunterHeavy() * 25;
+        $corvet = $this->getCorvet() * 72;
+        $corvetLaser = $this->getCorvetLaser() * 110;
+        $fregate = $this->getFregate() * 158;
+        $fregatePlasma = $this->getFregatePlasma() * 436;
+        $croiser = $this->getCroiser() * 935;
+        $ironClad = $this->getIronClad() * 2390;
+        $destroyer = $this->getDestroyer() * 4376;
 
         $nbr = $fregate + $hunter + $hunterHeavy + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
         return $nbr;
@@ -384,10 +384,10 @@ class Fleet
      */
     public function getPlasma(): int
     {
-        $fregatePlasma = $this->getFregatePlasma() * 150;
-        $croiser = $this->getCroiser() * 100;
-        $ironClad = $this->getIronClad() * 200;
-        $destroyer = $this->getDestroyer() * 40;
+        $fregatePlasma = $this->getFregatePlasma() * 20;
+        $croiser = $this->getCroiser() * 10;
+        $ironClad = $this->getIronClad() * 15;
+        $destroyer = $this->getDestroyer() * 2;
 
         $nbr = $fregatePlasma + $croiser + $ironClad + $destroyer ;
         return $nbr;
@@ -398,15 +398,15 @@ class Fleet
      */
     public function getMissile(): int
     {
-        $hunter = $this->getHunter() * 9;
-        $hunterHeavy = $this->getHunterHeavy() * 10;
-        $corvet = $this->getCorvet() * 25;
-        $corvetLaser = $this->getCorvetLaser() * 50;
-        $fregate = $this->getFregate() * 50;
-        $fregatePlasma = $this->getFregatePlasma() * 118;
-        $croiser = $this->getCroiser() * 350;
-        $ironClad = $this->getIronClad() * 1000;
-        $destroyer = $this->getDestroyer() * 3300;
+        $hunter = $this->getHunter() * 4;
+        $hunterHeavy = $this->getHunterHeavy() * 5;
+        $corvet = $this->getCorvet() * 15;
+        $corvetLaser = $this->getCorvetLaser() * 20;
+        $fregate = $this->getFregate() * 40;
+        $fregatePlasma = $this->getFregatePlasma() * 55;
+        $croiser = $this->getCroiser() * 80;
+        $ironClad = $this->getIronClad() * 100;
+        $destroyer = $this->getDestroyer() * 200;
 
         $nbr = $fregate + $hunter + $hunterHeavy + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
         return $nbr;
@@ -417,13 +417,13 @@ class Fleet
      */
     public function getShield(): int
     {
-        $corvet = $this->getCorvet() * 2;
-        $corvetLaser = $this->getCorvetLaser() * 5;
+        $corvet = $this->getCorvet() * 5;
+        $corvetLaser = $this->getCorvetLaser() * 10;
         $fregate = $this->getFregate() * 20;
-        $fregatePlasma = $this->getFregatePlasma() * 80;
-        $croiser = $this->getCroiser() * 120;
-        $ironClad = $this->getIronClad() * 100;
-        $destroyer = $this->getDestroyer() * 2000;
+        $fregatePlasma = $this->getFregatePlasma() * 40;
+        $croiser = $this->getCroiser() * 75;
+        $ironClad = $this->getIronClad() * 80;
+        $destroyer = $this->getDestroyer() * 1000;
 
         $nbr = $fregate + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
         return $nbr;
@@ -434,12 +434,12 @@ class Fleet
      */
     public function getLaser(): int
     {
-        $corvetLaser = $this->getCorvetLaser() * 40;
-        $fregate = $this->getFregate() * 34;
-        $fregatePlasma = $this->getFregatePlasma() * 10;
-        $croiser = $this->getCroiser() * 50;
-        $ironClad = $this->getIronClad() * 200;
-        $destroyer = $this->getDestroyer() * 40;
+        $corvetLaser = $this->getCorvetLaser() * 8;
+        $fregate = $this->getFregate() * 6;
+        $fregatePlasma = $this->getFregatePlasma() * 7;
+        $croiser = $this->getCroiser() * 20;
+        $ironClad = $this->getIronClad() * 15;
+        $destroyer = $this->getDestroyer() * 2;
 
         $nbr = $fregate + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
         return $nbr;

@@ -206,12 +206,12 @@ class FightController extends Controller
         $secondShot = ($missile + $plasma + $laser);
         $secondShotD = ($missileD + $plasmaD + $laserD);
         if($countSDef - $countSAtt > 0) {
-            $armorD = $armorD - ($secondShot * ($countSAtt - $countSDef));
-            $secondShot = ($missile + $plasma + $laser) - ($secondShot * ($countSAtt - $countSDef));
+            $armorD = $armorD - ($secondShot * ($countSDef - $countSAtt));
+            $secondShotD = ($missileD + $plasmaD + $laserD) - ($secondShot * ($countSDef - $countSAtt));
         }
         if($countSAtt - $countSDef > 0) {
-            $armor = $armor - ($secondShot * ($countSDef - $countSAtt));
-            $secondShotD = ($missileD + $plasmaD + $laserD) - ($secondShot * ($countSDef - $countSAtt));
+            $armor = $armor - ($secondShot * ($countSAtt - $countSDef));
+            $secondShot = ($missile + $plasma + $laser) - ($secondShotD * ($countSAtt - $countSDef));
         }
         $countShot = 0;
         while((($missileD + $plasmaD + $laserD > 0) && $armor > 0) &&
@@ -240,7 +240,11 @@ class FightController extends Controller
             }
             $malus = 0;
             if ($armorSaveD != $armorD) {
-                $malus = ($armorSaveD) / ($armorD / (rand(15, 20) / 10));
+                if($countShot == 0) {
+                    $malus = 1;
+                } else {
+                    $malus = 1 + (((($armorSaveD - $armorD) * 100) / $armorSaveD) / (rand(15, 20) / 10));
+                }
             }
             foreach($blockDef as $defenderWin) {
                 $reportB = new Report();
@@ -312,7 +316,11 @@ class FightController extends Controller
             }
             $malus = 0;
             if($armorSaveA != $armor) {
-                $malus = ($armorSaveA) / ($armor / (rand(15, 20) / 10));
+                if($countShot == 0) {
+                    $malus = 1;
+                } else {
+                    $malus = 1 + (((($armorSaveA - $armor) * 100) / $armorSaveA) / (rand(15, 20) / 10));
+                }
             }
             foreach($blockAtt as $attackerWin) {
                 $reportA = new Report();
@@ -411,7 +419,7 @@ class FightController extends Controller
         $defenser = $invader->getPlanet();
         $userDefender= $invader->getPlanet()->getUser();
         $dMilitary = $defenser->getWorker() + ($defenser->getSoldier() * 6);
-        $alea = rand(5, 9);
+        $alea = rand(4, 8);
 
         $reportInv = new Report();
         $reportInv->setSendAt($now);
