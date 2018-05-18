@@ -72,6 +72,11 @@ class Ally
     protected $bitcoin;
 
     /**
+     * @ORM\OneToMany(targetEntity="Exchange", mappedBy="ally", fetch="EXTRA_LAZY")
+     */
+    protected $exchanges;
+
+    /**
      * @ORM\Column(name="taxe",type="integer")
      */
     protected $taxe;
@@ -751,5 +756,21 @@ class Ally
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getExchanges()
+    {
+        return $this->exchanges;
+    }
+
+    /**
+     * @param mixed $exchanges
+     */
+    public function setExchanges($exchanges): void
+    {
+        $this->exchanges = $exchanges;
     }
 }

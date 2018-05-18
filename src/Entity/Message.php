@@ -43,6 +43,11 @@ class Message
     protected $title;
 
     /**
+     * @ORM\Column(name="newMessage",type="boolean")
+     */
+    protected $newMessage = true;
+
+    /**
      * @ORM\Column(name="content",type="string", length=1000)
      * @Assert\NotBlank(message = "required")
      */
@@ -173,5 +178,21 @@ class Message
     public function setSendAt($sendAt): void
     {
         $this->sendAt = $sendAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNewMessage()
+    {
+        return $this->newMessage;
+    }
+
+    /**
+     * @param mixed $newMessage
+     */
+    public function setNewMessage($newMessage): void
+    {
+        $this->newMessage = $newMessage;
     }
 }

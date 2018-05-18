@@ -6,9 +6,7 @@
         <a class="btn-top" href="{{ path('overview', {'idp': usePlanet.getId()}) }}">{{ 'overview'|trans }}</a>
     {% endif %}
     <a class="btn-top" target="_blank" href="http://area-control.forumactif.com/">{{ 'forum'|trans }}</a>
-    <a class="btn-top" href="{{ path('media') }}">{{ 'media'|trans }}</a>
     <a class="btn-top" href="{{ path('rules') }}">{{ 'rules'|trans }}</a>
-    <a class="btn-top" href="{{ path('faq') }}">{{ 'faq'|trans }}</a>
     <a class="btn-top" href="{{ path('contact') }}" data-toggle="modal" data-target="#contactModal" data-whatever="@">{{ 'contact'|trans }}</a>
     {% if app.user is null %}
         <a class="btn-top" href="{{ path('register') }}" data-toggle="modal" data-target="#openModal">{{ 'register'|trans }}</a>

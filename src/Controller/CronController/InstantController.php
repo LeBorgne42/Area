@@ -20,22 +20,29 @@ class InstantController extends Controller
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
 
-        $users = $em->getRepository('App:User')
-            ->createQueryBuilder('u')
+        $planets = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.user is not null')
+            ->andWhere('p.niobiumMax > (p.niobium + p.nbProduction) or p.waterMax > (p.water + p.wtProduction)')
             ->getQuery()
             ->getResult();
 
-        foreach ($users as $user) {
-            foreach ($user->getPlanets() as $planet) {
-                $niobium = $planet->getNiobium();
-                $water = $planet->getWater();
-                $niobium = $niobium + ($planet->getNbProduction());
-                $water = $water + ($planet->getWtProduction());
+        foreach ($planets as $planet) {
+            $niobium = $planet->getNiobium();
+            $water = $planet->getWater();
+            $niobium = $niobium + ($planet->getNbProduction());
+            $water = $water + ($planet->getWtProduction());
+            if($planet->getNiobiumMax() > ($planet->getNiobium() + $planet->getNbProduction())) {
                 $planet->setNiobium($niobium);
-                $planet->setWater($water);
-                $em->persist($planet);
+            } else {
+                $planet->setNiobium($planet->getNiobiumMax());
             }
-            $em->persist($user);
+            if($planet->getWaterMax() > ($planet->getWater() + $planet->getWtProduction())) {
+                $planet->setWater($water);
+            } else {
+                $planet->setWater($planet->getWaterMax());
+            }
+            $em->persist($planet);
         }
         $em->flush();
 
@@ -57,9 +64,9 @@ class InstantController extends Controller
                 ->getResult();
             if($asteroides) {
                 foreach ($asteroides as $asteroide) {
-                    $nbrFleet = count($asteroide->getFleets());
+                    $nbrFleet = $asteroide->getFleetWithRec();
                     foreach ($asteroide->getFleets() as $fleetAsteroide) {
-                        $asteroideRes = round(25000 / $nbrFleet);
+                        $asteroideRes = round(50000 / $nbrFleet);
                         if ($fleetAsteroide->getRecycleur()) {
                             if ($fleetAsteroide->getCargoPlace() < ($fleetAsteroide->getCargoFull() + ($asteroideRes * 2))) {
                                 $cargoFullAst = round((($fleetAsteroide->getCargoPlace() - $fleetAsteroide->getCargoFull()) / 2));
@@ -72,7 +79,7 @@ class InstantController extends Controller
                         }
                         $em->persist($fleetAsteroide);
                     }
-                    if(rand(1, 200) == 200) {
+                    if(rand(1, 300) == 300) {
                         $asteroide->setCdr(false);
                         $asteroide->setEmpty(true);
                         $asteroide->setImageName(null);
@@ -137,6 +144,13 @@ class InstantController extends Controller
         $planets = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->where('p.constructAt < :now')
+            ->setParameters(array('now' => $now))
+            ->getQuery()
+            ->getResult();
+
+        $products = $em->getRepository('App:Product')
+            ->createQueryBuilder('p')
+            ->where('p.productAt < :now')
             ->setParameters(array('now' => $now))
             ->getQuery()
             ->getResult();
@@ -215,6 +229,12 @@ class InstantController extends Controller
             } elseif ($build == 'extractor') {
                 $planet->setExtractor($planet->getExtractor() + 1);
                 $planet->setWtProduction($planet->getWtProduction() + ($planet->getExtractor() * 1.09));
+            } elseif ($build == 'niobiumStock') {
+                $planet->setNiobiumStock($planet->getNiobiumStock() + 1);
+                $planet->setNiobiumMax($planet->getNiobiumMax() + 250000);
+            } elseif ($build == 'waterStock') {
+                $planet->setWaterStock($planet->getWaterStock() + 1);
+                $planet->setWaterMax($planet->getWaterMax() + 250000);
             } elseif ($build == 'city') {
                 $planet->setCity($planet->getCity() + 1);
                 $planet->setWorkerProduction($planet->getWorkerProduction() + 2000);
@@ -290,6 +310,28 @@ class InstantController extends Controller
             $em->persist($user);
         }
 
+        foreach ($products as $product) {
+            $planetProduct = $product->getPlanet();
+            $planetProduct->setCargoI($planetProduct->getCargoI() + $product->getCargoI());
+            $planetProduct->setCargoV($planetProduct->getCargoV() + $product->getCargoV());
+            $planetProduct->setCargoX($planetProduct->getCargoX() + $product->getCargoX());
+            $planetProduct->setColonizer($planetProduct->getColonizer() + $product->getColonizer());
+            $planetProduct->setRecycleur($planetProduct->getRecycleur() + $product->getRecycleur());
+            $planetProduct->setBarge($planetProduct->getBarge() + $product->getBarge());
+            $planetProduct->setSonde($planetProduct->getSonde() + $product->getSonde());
+            $planetProduct->setHunter($planetProduct->getHunter() + $product->getHunter());
+            $planetProduct->setFregate($planetProduct->getFregate() + $product->getFregate());
+            $planetProduct->setHunterHeavy($planetProduct->getHunterHeavy() + $product->getHunterHeavy());
+            $planetProduct->setCorvet($planetProduct->getCorvet() + $product->getCorvet());
+            $planetProduct->setCorvetLaser($planetProduct->getCorvetLaser() + $product->getCorvetLaser());
+            $planetProduct->setFregatePlasma($planetProduct->getFregatePlasma() + $product->getFregatePlasma());
+            $planetProduct->setCroiser($planetProduct->getCroiser() + $product->getCroiser());
+            $planetProduct->setIronClad($planetProduct->getIronClad() + $product->getIronClad());
+            $planetProduct->setDestroyer($planetProduct->getDestroyer() + $product->getDestroyer());
+            $em->persist($planetProduct);
+            $em->remove($product);
+        }
+
         foreach ($fleets as $fleet) {
             $allFleets = $em->getRepository('App:Fleet')
                 ->createQueryBuilder('f')
@@ -361,7 +403,7 @@ class InstantController extends Controller
                 $ally = 'war';
             }
 
-            if ($attackFleets || ($fleet->getAttack() == true && $ally)) {
+            if ($attackFleets || ($fleet->getAttack() == true && $ally == 'war')) {
                 $now = new DateTime();
                 $now->setTimezone(new DateTimeZone('Europe/Paris'));
                 $now->add(new DateInterval('PT' . 300 . 'S'));

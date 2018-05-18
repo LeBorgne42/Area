@@ -8,10 +8,15 @@ form.taxe: '(1 à 10%)'
 form.taxeAlly: 'Taxe d''alliance :'
 form.send: 'Créer une alliance'
 form.add: 'Envoyer proposition'
+form.transfert: Transfert
+form.num: nombre
+form.exchangeType: 'Type de transfert'
 form.pactType: 'Type de pacte'
 form.image: Image
 form.allyName: 'Sigle de l''alliance'
 form.nameUser: 'Pseudo du joueur'
+Donner: Donner
+Retirer: Retirer
 ally.admin: Administration
 ally.add: 'Ajouter un membre'
 ally.delete: 'Supprimer alliance'

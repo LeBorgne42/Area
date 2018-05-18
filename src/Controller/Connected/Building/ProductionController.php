@@ -160,4 +160,152 @@ class ProductionController extends Controller
 
         return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
     }
+
+    /**
+     * @Route("/contruire-stockage-niobium/{idp}", name="building_add_niobiumStock", requirements={"idp"="\d+"})
+     */
+    public function buildingAddNiobiumStockAction($idp)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
+        $user = $this->getUser();
+
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $level = $usePlanet->getNiobiumStock() + 1;
+        $usePlanetNb = $usePlanet->getNiobium();
+        $usePlanetWt = $usePlanet->getWater();
+        $newGround = $usePlanet->getGroundPlace() + 3;
+        if(($usePlanetNb < ($level * 75000) || $usePlanetWt < ($level * 50000)) ||
+            ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround()) ||
+        $user->getCargo() < 2) {
+            return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+        }
+        $now->add(new DateInterval('PT' . ($level * 21600) . 'S'));
+        $usePlanet->setNiobium($usePlanetNb - ($level * 75000));
+        $usePlanet->setWater($usePlanetWt - ($level * 50000));
+        $usePlanet->setGroundPlace($newGround);
+        $usePlanet->setConstruct('niobiumStock');
+        $usePlanet->setConstructAt($now);
+        $em->persist($usePlanet);
+        $em->flush();
+
+        return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+    }
+
+    /**
+     * @Route("/detruire-stockage-niobium/{idp}", name="building_remove_niobiumStock", requirements={"idp"="\d+"})
+     */
+    public function buildingRemoveNiobiumStockAction($idp)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
+        $user = $this->getUser();
+
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $level = $usePlanet->getNiobiumStock();
+        $newGround = $usePlanet->getGroundPlace() - 3;
+        if($level == 0 || $usePlanet->getConstructAt() > $now) {
+            return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+        }
+        $now->add(new DateInterval('PT' . 1800 . 'S'));
+        $usePlanet->setExtractor($level - 1);
+        $usePlanet->setNiobiumMax($usePlanet->getNiobiumMax() - 250000);
+        $usePlanet->setGroundPlace($newGround);
+        $usePlanet->setConstruct('destruct');
+        $usePlanet->setConstructAt($now);
+        $em->persist($usePlanet);
+        $em->flush();
+
+        return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+    }
+
+    /**
+     * @Route("/contruire-stockage-eau/{idp}", name="building_add_waterStock", requirements={"idp"="\d+"})
+     */
+    public function buildingAddWaterStockAction($idp)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
+        $user = $this->getUser();
+
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $level = $usePlanet->getWaterStock() + 1;
+        $usePlanetNb = $usePlanet->getNiobium();
+        $usePlanetWt = $usePlanet->getWater();
+        $newGround = $usePlanet->getGroundPlace() + 4;
+        if(($usePlanetNb < ($level * 50000) || $usePlanetWt < ($level * 90000)) ||
+            ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround()) ||
+            $user->getCargo() < 2) {
+            return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+        }
+        $now->add(new DateInterval('PT' . ($level * 21600) . 'S'));
+        $usePlanet->setNiobium($usePlanetNb - ($level * 50000));
+        $usePlanet->setWater($usePlanetWt - ($level * 90000));
+        $usePlanet->setGroundPlace($newGround);
+        $usePlanet->setConstruct('waterStock');
+        $usePlanet->setConstructAt($now);
+        $em->persist($usePlanet);
+        $em->flush();
+
+        return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+    }
+
+    /**
+     * @Route("/detruire-stockage-eau/{idp}", name="building_remove_waterStock", requirements={"idp"="\d+"})
+     */
+    public function buildingRemoveWaterStockAction($idp)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
+        $user = $this->getUser();
+
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $level = $usePlanet->getWaterStock();
+        $newGround = $usePlanet->getGroundPlace() - 4;
+        if($level == 0 || $usePlanet->getConstructAt() > $now) {
+            return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+        }
+        $now->add(new DateInterval('PT' . 1800 . 'S'));
+        $usePlanet->setWaterMax($usePlanet->getWaterMax() - 250000);
+        $usePlanet->setExtractor($level - 1);
+        $usePlanet->setGroundPlace($newGround);
+        $usePlanet->setConstruct('destruct');
+        $usePlanet->setConstructAt($now);
+        $em->persist($usePlanet);
+        $em->flush();
+
+        return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+    }
 }

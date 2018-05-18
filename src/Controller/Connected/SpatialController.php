@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Form\Front\SpatialShipType;
 use App\Form\Front\SpatialFleetType;
 use App\Entity\Fleet;
+use App\Entity\Product;
 use Dateinterval;
 use DateTime;
 use DateTimeZone;
@@ -26,6 +27,8 @@ class SpatialController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
 
         if($user->getGameOver()) {
             return $this->redirectToRoute('game_over');
@@ -65,6 +68,8 @@ class SpatialController extends Controller
             $niobiumLess = (8000 * $cargoI) + (25000 * $cargoV) + (70000 * $cargoX) + (20000 * $colonizer) + (10000 * $recycleur) + (15000 * $barge) + (5 * $sonde) + (250 * $hunter) + (2200 * $fregate) + (400 * $hunterHeavy) + (1000 * $corvet) + (400 * $corvetLaser) + (2000 * $fregatePlasma) + (10000 * $croiser) + (30000 * $ironClad) + (20000 * $destroyer);
             $waterLess =  (6500 * $cargoI) + (18600 * $cargoV) + (57000 * $cargoX) + (12000 * $colonizer) + (7000 * $recycleur) + (12000 * $barge) + (50 * $hunter) + (1400 * $fregate) + (80 * $hunterHeavy) + (500 * $corvet) + (2000 * $corvetLaser) + (7000 * $fregatePlasma) + (8000 * $croiser) + (12000 * $ironClad) + (70000 * $destroyer);
             $workerLess = (5000 * $colonizer) + (500 * $destroyer) + (100 * $cargoX);
+            $time = ((300 * $cargoI) + (600 * $cargoV) + (900 * $cargoX) + (10800 * $colonizer) + (400 * $recycleur) + (1800 * $barge) + (2 * $sonde) + (20 * $hunter) + (240 * $fregate) + (32 * $hunterHeavy) + (100 * $corvet) + (160 * $corvetLaser) + (600 * $fregatePlasma) + (1200 * $croiser) + (2800 * $ironClad) + (6000 * $destroyer)) / $usePlanet->getShipProduction();
+            $now->add(new DateInterval('PT' . round($time) . 'S'));
 
             if (($usePlanet->getNiobium() < $niobiumLess || $usePlanet->getWater() < $waterLess) ||
                 ($usePlanet->getWorker() < $workerLess) || ($cargoI && $user->getCargo() < 1) ||
@@ -82,27 +87,54 @@ class SpatialController extends Controller
             {
                 return $this->redirectToRoute('spatial', array('idp' => $usePlanet->getId()));
             }
+            if($usePlanet->getProduct()) {
+                $product = $usePlanet->getProduct();
+                $product->setCargoI($product->getCargoI() + $cargoI);
+                $product->setCargoV($product->getCargoV() + $cargoV);
+                $product->setCargoX($product->getCargoX() + $cargoX);
+                $product->setColonizer($product->getColonizer() + $colonizer);
+                $product->setRecycleur($product->getRecycleur() + $recycleur);
+                $product->setBarge($product->getBarge() + $barge);
+                $product->setSonde($product->getSonde() + $sonde);
+                $product->setHunter($product->getHunter() + $hunter);
+                $product->setFregate($product->getFregate() + $fregate);
+                $product->setHunterHeavy($product->getHunterHeavy() + $hunterHeavy);
+                $product->setCorvet($product->getCorvet() + $corvet);
+                $product->setCorvetLaser($product->getCorvetLaser() + $corvetLaser);
+                $product->setFregatePlasma($product->getFregatePlasma() + $fregatePlasma);
+                $product->setCroiser($product->getCroiser() + $croiser);
+                $product->setIronClad($product->getIronClad() + $ironClad);
+                $product->setDestroyer($product->getDestroyer() + $destroyer);
+                $oldNow = $product->getProductAt();
+                $oldNow->add(new DateInterval('PT' . round($time) . 'S'));
+                $product->setProductAt($oldNow);
+            } else {
+                $product = new Product();
+                $product->setPlanet($usePlanet);
+                $product->setCargoI($cargoI);
+                $product->setCargoV($cargoV);
+                $product->setCargoX($cargoX);
+                $product->setColonizer($colonizer);
+                $product->setRecycleur($recycleur);
+                $product->setBarge($barge);
+                $product->setSonde($sonde);
+                $product->setHunter($hunter);
+                $product->setFregate($fregate);
+                $product->setHunterHeavy($hunterHeavy);
+                $product->setCorvet($corvet);
+                $product->setCorvetLaser($corvetLaser);
+                $product->setFregatePlasma($fregatePlasma);
+                $product->setCroiser($croiser);
+                $product->setIronClad($ironClad);
+                $product->setDestroyer($destroyer);
+                $product->setProductAt($now);
+            }
 
-            $usePlanet->setCargoI($usePlanet->getCargoI() + $cargoI);
-            $usePlanet->setCargoV($usePlanet->getCargoV() + $cargoV);
-            $usePlanet->setCargoX($usePlanet->getCargoX() + $cargoX);
-            $usePlanet->setColonizer($usePlanet->getColonizer() + $colonizer);
-            $usePlanet->setRecycleur($usePlanet->getRecycleur() + $recycleur);
-            $usePlanet->setBarge($usePlanet->getBarge() + $barge);
-            $usePlanet->setSonde($usePlanet->getSonde() + $sonde);
-            $usePlanet->setHunter($usePlanet->getHunter() + $hunter);
-            $usePlanet->setFregate($usePlanet->getFregate() + $fregate);
-            $usePlanet->setHunterHeavy($usePlanet->getHunterHeavy() + $hunterHeavy);
-            $usePlanet->setCorvet($usePlanet->getCorvet() + $corvet);
-            $usePlanet->setCorvetLaser($usePlanet->getCorvetLaser() + $corvetLaser);
-            $usePlanet->setFregatePlasma($usePlanet->getFregatePlasma() + $fregatePlasma);
-            $usePlanet->setCroiser($usePlanet->getCroiser() + $croiser);
-            $usePlanet->setIronClad($usePlanet->getIronClad() + $ironClad);
-            $usePlanet->setDestroyer($usePlanet->getDestroyer() + $destroyer);
             $usePlanet->setNiobium($usePlanet->getNiobium() - $niobiumLess);
             $usePlanet->setWater($usePlanet->getWater() - $waterLess);
             $usePlanet->setWorker($usePlanet->getWorker() - $workerLess);
             $em->persist($usePlanet);
+            $em->persist($product);
             $em->flush();
 
             $form_spatialShip = null;

@@ -149,4 +149,68 @@ class MessageController extends Controller
             'id' => $id,
         ]);
     }
+
+    /**
+     * @Route("/message-view/{idp}/{id}", name="message_view", requirements={"idp"="\d+", "id"="\d+"})
+     */
+    public function messageViewAction($idp, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $message = $em->getRepository('App:Message')
+            ->createQueryBuilder('m')
+            ->where('m.id = :id')
+            ->andWhere('m.user = :user')
+            ->setParameters(array('id' => $id, 'user' => $user))
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $message->setNewMessage(false);
+        $em->persist($message);
+        $em->flush();
+
+        return $this->redirectToRoute('message', array('idp' => $usePlanet->getId()));
+    }
+
+    /**
+     * @Route("/message-view-all/{idp}/", name="message_all_view", requirements={"idp"="\d+"})
+     */
+    public function messageAllViewAction($idp)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $messages = $em->getRepository('App:Message')
+            ->createQueryBuilder('m')
+            ->where('m.newMessage = :true')
+            ->andWhere('m.user = :user')
+            ->setParameters(array('true' => true, 'user' => $user))
+            ->getQuery()
+            ->getResult();
+
+        foreach($messages as $message) {
+            $message->setNewMessage(false);
+            $em->persist($message);
+        }
+        $em->flush();
+
+        return $this->redirectToRoute('message', array('idp' => $usePlanet->getId()));
+    }
 }

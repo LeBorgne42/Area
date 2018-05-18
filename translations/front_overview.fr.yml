@@ -27,8 +27,8 @@ title.planet: Planète
 form.name: 'nouveau nom'
 form.renamePlanet: renommer
 tooltip.rank: 'Votre classement est affiché ici avec l''évolution positive ou négative depuis les dernière 24h.'
-title.tmpbeta: 'Prochaines améliorations :'
-overview.tmpbeta: '1/ Ajouter la ressource éléctricité pour les bâtiments <br> 2/ Ajouter temps de construction vaisseaux <br> 3/ Permettre plusieurs constructions<br> 4/ Régler page alliance : Fonds et Pacte<br> 5/ Ajouter vaisseaux radar et brouilleur<br> 6/ Régler fonctionnement astéroïdes'
+title.tmpbeta: 'Nouvelles améliorations :'
+overview.tmpbeta: '1/ La limitation des ressources sur les planètes <br> 2/ Ajout de deux bâtiments pour augmenter le stockage des ressources <br> 3/ Retirer des fonds à l''alliance ou en déposer<br> 4/ Ajout du bouton ''Nouveau'' pour les messages et rapports'
 info.worker: 'Total travailleurs :'
 info.cost: 'Coût d''entretien :'
 info.soldier: 'Total soldats :'

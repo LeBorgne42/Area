@@ -32,6 +32,11 @@ class Report
     protected $title;
 
     /**
+     * @ORM\Column(name="newReport",type="boolean")
+     */
+    protected $newReport = true;
+
+    /**
      * @ORM\Column(name="content",type="string", length=10000)
      * @Assert\NotBlank(message = "required")
      */
@@ -109,5 +114,21 @@ class Report
     public function setSendAt($sendAt): void
     {
         $this->sendAt = $sendAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNewReport()
+    {
+        return $this->newReport;
+    }
+
+    /**
+     * @param mixed $newReport
+     */
+    public function setNewReport($newReport): void
+    {
+        $this->newReport = $newReport;
     }
 }

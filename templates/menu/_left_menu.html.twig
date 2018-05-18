@@ -48,7 +48,7 @@
         <a href="{{ path('message', {'idp': usePlanet.getId()}) }}">{% if app.user.getViewMessage() == false %}<div class="text-orange glyphicon glyphicon-envelope"></div> {% endif %}{{ 'message'|trans }}</span></a>
     </div>
     <div class="btn-left">
-        <a href="{{ path('salon', {'idp': usePlanet.getId()}) }}"><span>{#<div class="glyphicon glyphicon-comment"></div>#} {{ 'salon'|trans }}</span></a>
+        <a href="{{ path('salon', {'idp': usePlanet.getId()}) }}"><span>{% if app.user.getSalonAt() == null %}<div class="text-orange glyphicon glyphicon-comment"></div> {% endif %}{{ 'salon'|trans }}</span></a>
     </div>
     <div class="btn-left">
         <a href="{{ path('report', {'idp': usePlanet.getId()}) }}">{% if app.user.getViewReport() == false %}<div class="text-orange glyphicon glyphicon-exclamation-sign"></div> {% endif %}{{ 'report'|trans }}</span></a>

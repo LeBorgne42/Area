@@ -51,8 +51,8 @@
                         </div>
                     </td>
                     <td class="center-cells text-center cell-middle">
-                        <div data-toggle="tooltip" data-placement="bottom" title="{{ 'niobium'|trans }}"><span>{{ planet.getNiobium()|number_format }}</span> <span class="text-vert">+<span>{{ (planet.getNbProduction() * 60)|number_format }}</span>/h</span> <img src="{{ asset('img/niobium.png') }}"></div>
-                        <div class="my-2" data-toggle="tooltip" data-placement="bottom" title="{{ 'water'|trans }}"><span>{{ planet.getWater()|number_format }}</span> <span class="text-vert">+<span>{{ (planet.getWtProduction() * 60)|number_format }}</span>/h</span> <img src="{{ asset('img/water.png') }}"></div>
+                        <div data-toggle="tooltip" data-placement="bottom" title="{{ 'niobium'|trans }}"><span>{{ planet.getNiobium()|number_format }} / {{ planet.getNiobiumMax()|number_format }}</span> <span class="text-vert">+<span>{{ (planet.getNbProduction() * 60)|number_format }}</span>/h</span> <img src="{{ asset('img/niobium.png') }}"></div>
+                        <div class="my-2" data-toggle="tooltip" data-placement="bottom" title="{{ 'water'|trans }}"><span>{{ planet.getWater()|number_format }} / {{ planet.getWaterMax()|number_format }}</span> <span class="text-vert">+<span>{{ (planet.getWtProduction() * 60)|number_format }}</span>/h</span> <img src="{{ asset('img/water.png') }}"></div>
                     </td>
                     <td width="100px" class="center-cells text-center cell-middle">
                         <div>{{ planet.getGroundPlace() }}/{{ planet.getGround() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"></div>

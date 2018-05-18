@@ -58,9 +58,24 @@ class Planet
     protected $shipProduction = 1;
 
     /**
+     * @ORM\OneToOne(targetEntity="Product", mappedBy="planet", fetch="EXTRA_LAZY")
+     */
+    protected $product;
+
+    /**
      * @ORM\Column(name="workerProduction",type="integer")
      */
     protected $workerProduction = 2000;
+
+    /**
+     * @ORM\Column(name="niobiumMax",type="integer")
+     */
+    protected $niobiumMax = 1250000;
+
+    /**
+     * @ORM\Column(name="waterMax",type="integer")
+     */
+    protected $waterMax = 1000000;
 
     /**
      * @ORM\Column(name="soldierMax",type="integer")
@@ -133,9 +148,19 @@ class Planet
     protected $miner = 0;
 
     /**
+     * @ORM\Column(name="niobiumStock",type="integer", nullable=true)
+     */
+    protected $niobiumStock = 0;
+
+    /**
      * @ORM\Column(name="extractor",type="integer", nullable=true)
      */
     protected $extractor = 0;
+
+    /**
+     * @ORM\Column(name="waterStock",type="integer", nullable=true)
+     */
+    protected $waterStock = 0;
 
     /**
      * @ORM\Column(name="spaceShip",type="integer", nullable=true)
@@ -445,6 +470,8 @@ class Planet
     {
         $extractor = $this->getExtractor() * 100;
         $miner = $this->getMiner() * 150;
+        $niobiumStock = $this->getNiobiumStock() * 400;
+        $waterStock = $this->getWaterStock() * 450;
         $caserne = $this->getCaserne() * 250;
         $center = $this->getCenterSearch() * 300;
         $city = $this->getCity() * 650;
@@ -456,7 +483,7 @@ class Planet
         $skyr = $this->getSkyRadar() * 600;
         $brouilleur = $this->getSkyBrouilleur() * 1000;
 
-        $nbr = $extractor + $miner + $caserne + $center + $city + $metropole + $light + $heavy + $space + $radar + $skyr + $brouilleur;
+        $nbr = $extractor + $niobiumStock + $waterStock + $miner + $caserne + $center + $city + $metropole + $light + $heavy + $space + $radar + $skyr + $brouilleur;
         return $nbr;
     }
 
@@ -474,6 +501,21 @@ class Planet
             }
         }
         return $fullFleet;
+    }
+
+    /**
+     * @return int
+     */
+    public function getFleetWithRec(): int
+    {
+        $nbr = 0;
+        foreach($this->fleets as $fleet) {
+            if($fleet->getRecycleur() > 0) {
+                $nbr++;
+            }
+        }
+
+        return $nbr;
     }
 
     /**
@@ -1564,5 +1606,85 @@ class Planet
     public function setShipAt($shipAt): void
     {
         $this->shipAt = $shipAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNiobiumMax()
+    {
+        return $this->niobiumMax;
+    }
+
+    /**
+     * @param mixed $niobiumMax
+     */
+    public function setNiobiumMax($niobiumMax): void
+    {
+        $this->niobiumMax = $niobiumMax;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWaterMax()
+    {
+        return $this->waterMax;
+    }
+
+    /**
+     * @param mixed $waterMax
+     */
+    public function setWaterMax($waterMax): void
+    {
+        $this->waterMax = $waterMax;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNiobiumStock()
+    {
+        return $this->niobiumStock;
+    }
+
+    /**
+     * @param mixed $niobiumStock
+     */
+    public function setNiobiumStock($niobiumStock): void
+    {
+        $this->niobiumStock = $niobiumStock;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWaterStock()
+    {
+        return $this->waterStock;
+    }
+
+    /**
+     * @param mixed $waterStock
+     */
+    public function setWaterStock($waterStock): void
+    {
+        $this->waterStock = $waterStock;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+
+    /**
+     * @param mixed $product
+     */
+    public function setProduct($product): void
+    {
+        $this->product = $product;
     }
 }

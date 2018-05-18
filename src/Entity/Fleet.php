@@ -527,19 +527,19 @@ class Fleet
             return 1;
         }
         if($this->getCorvet()) {
-            return 0.9;
-        }
-        if($this->getHunter() || $this->getHunterHeavy()) {
-            return 0.8;
-        }
-        if($this->getCargoX()) {
             return 0.7;
         }
-        if($this->getCargoV()) {
+        if($this->getHunter() || $this->getHunterHeavy()) {
+            return 0.5;
+        }
+        if($this->getCargoX()) {
             return 0.6;
         }
-        if($this->getCargoI()) {
+        if($this->getCargoV()) {
             return 0.5;
+        }
+        if($this->getCargoI()) {
+            return 0.4;
         }
         if($this->getSonde()) {
             return 0.01;

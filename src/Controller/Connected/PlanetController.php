@@ -113,6 +113,8 @@ class PlanetController extends Controller
             ->getOneOrNullResult();
 
         $abandonPlanet->setUser($hydra);
+        $abandonPlanet->setWorker(300000);
+        $abandonPlanet->setSoldier(100000);
         $abandonPlanet->setName('Base avancée');
         $em->persist($abandonPlanet);
         $em->flush();

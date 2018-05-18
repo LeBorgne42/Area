@@ -29,7 +29,7 @@
                         <div class="mt-5 timerArea">{{ usePlanet.getConstructAt()|date('Y/m/d H:i:s') }}</div>
                         
                     {% else %}
-                        {% if planetNb >= ((usePlanet.getMiner() + 1) * 450) and planetWt >= ((usePlanet.getMiner() + 1) * 200) and usePlanet.getGroundPlace() + 1 <= usePlanet.getGround() and usePlanet.getConstructAt() < date %}
+                        {% if planetNb >= ((usePlanet.getMiner() + 1) * 450) and planetWt >= ((usePlanet.getMiner() + 1) * 200) and usePlanet.getGroundPlace() + 2 <= usePlanet.getGround() and usePlanet.getConstructAt() < date %}
                             <div>{% if ((usePlanet.getMiner() + 1) * 180) < 3600 %}{{  ((usePlanet.getMiner() + 1) * 180)|date('i:s') }}{% elseif ((usePlanet.getMiner() + 1) * 180) < 86400 %}{{  ((usePlanet.getMiner() + 1) * 180)|date('H:i:s') }}{% else %}{{  ((usePlanet.getMiner() + 1) * 180)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info mt-3" href="{{ path('building_add_mine', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
                         {% else %}
@@ -59,7 +59,7 @@
                         <div class="mt-5 timerArea">{{ usePlanet.getConstructAt()|date('Y/m/d H:i:s') }}</div>
                         
                     {% else %}
-                        {% if planetNb >= ((usePlanet.getExtractor() + 1) * 200) and planetWt >= ((usePlanet.getExtractor() + 1) * 500) and usePlanet.getGroundPlace() + 1 <= usePlanet.getGround() and usePlanet.getConstructAt() < date %}
+                        {% if planetNb >= ((usePlanet.getExtractor() + 1) * 200) and planetWt >= ((usePlanet.getExtractor() + 1) * 500) and usePlanet.getGroundPlace() + 3 <= usePlanet.getGround() and usePlanet.getConstructAt() < date %}
                             <div>{% if ((usePlanet.getExtractor() + 1) * 180) < 3600 %}{{  ((usePlanet.getExtractor() + 1) * 180)|date('i:s') }}{% elseif ((usePlanet.getExtractor() + 1) * 180) < 86400 %}{{  ((usePlanet.getExtractor() + 1) * 180)|date('H:i:s') }}{% else %}{{  ((usePlanet.getExtractor() + 1) * 180)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info mt-3" href="{{ path('building_add_extract', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
                         {% else %}
@@ -70,6 +70,66 @@
                 <td class="center-cells p-4">
                     {% if usePlanet.getExtractor() > 0 and usePlanet.getConstructAt() == null %}
                     <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_extract', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
+                    {% else %}
+                        <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td class="center-cells">
+                    <img class="float-left building-img ml-3" src="{{ asset('img/niobiumStock.png') }}"><button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.niobiumStock'|trans|raw }}"><strong>{{ 'building.niobiumStock'|trans }} x {{ usePlanet.getNiobiumStock()|trans }}</strong></button>
+                    <div class="mt-4">{{ (usePlanet.getNiobiumStock() + 1) * 75000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ (usePlanet.getNiobiumStock() + 1) * 50000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
+                    <div class="mt-4">3 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"></div>
+                </td>
+                <td class="center-cells cell-middle">
+                    {{ 'building.niobiumStock.desc'|trans }}
+                </td>
+                <td class="center-cells p-4">
+                    {% if usePlanet.getConstruct() == 'niobiumStock' %}
+                        <div class="mt-5 timerArea">{{ usePlanet.getConstructAt()|date('Y/m/d H:i:s') }}</div>
+    
+                    {% else %}
+                        {% if planetNb >= ((usePlanet.getNiobiumStock() + 1) * 75000) and planetWt >= ((usePlanet.getNiobiumStock() + 1) * 50000) and usePlanet.getGroundPlace() + 3 <= usePlanet.getGround() and usePlanet.getConstructAt() < date and app.user.getCargo() > 1 %}
+                            <div>{% if ((usePlanet.getNiobiumStock() + 1) * 21600) < 3600 %}{{  ((usePlanet.getNiobiumStock() + 1) * 21600)|date('i:s') }}{% elseif ((usePlanet.getNiobiumStock() + 1) * 21600) < 86400 %}{{  ((usePlanet.getNiobiumStock() + 1) * 21600)|date('H:i:s') }}{% else %}{{  ((usePlanet.getNiobiumStock() + 1) * 21600)|date('d H:i:s') }}{% endif %}</div>
+                            <a class="btn btn-lg btn-info mt-3" href="{{ path('building_add_niobiumStock', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
+                        {% else %}
+                            <a class="btn btn-lg btn-secondary mt-5" disabled>{{ 'building.build'|trans }}</a>
+                        {% endif %}
+                    {% endif %}
+                </td>
+                <td class="center-cells p-4">
+                    {% if usePlanet.getNiobiumStock() > 0 and usePlanet.getConstructAt() == null %}
+                        <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_niobiumStock', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
+                    {% else %}
+                        <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td class="center-cells">
+                    <img class="float-left building-img ml-3" src="{{ asset('img/waterStock.png') }}"><button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.waterStock'|trans|raw }}"><strong>{{ 'building.waterStock'|trans }} x {{ usePlanet.getWaterStock()|trans }}</strong></button>
+                    <div class="mt-4">{{ (usePlanet.getWaterStock() + 1) * 50000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"><span class="ml-4">{{ (usePlanet.getWaterStock() + 1) * 90000 }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></div>
+                    <div class="mt-4">4 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"></div>
+                </td>
+                <td class="center-cells cell-middle">
+                    {{ 'building.waterStock.desc'|trans }}
+                </td>
+                <td class="center-cells p-4">
+                    {% if usePlanet.getConstruct() == 'waterStock' %}
+                        <div class="mt-5 timerArea">{{ usePlanet.getConstructAt()|date('Y/m/d H:i:s') }}</div>
+
+                    {% else %}
+                        {% if planetNb >= ((usePlanet.getWaterStock() + 1) * 50000) and planetWt >= ((usePlanet.getWaterStock() + 1) * 90000) and usePlanet.getGroundPlace() + 4 <= usePlanet.getGround() and usePlanet.getConstructAt() < date and app.user.getCargo() > 1 %}
+                            <div>{% if ((usePlanet.getWaterStock() + 1) * 21600) < 3600 %}{{  ((usePlanet.getWaterStock() + 1) * 21600)|date('i:s') }}{% elseif ((usePlanet.getWaterStock() + 1) * 21600) < 86400 %}{{  ((usePlanet.getWaterStock() + 1) * 21600)|date('H:i:s') }}{% else %}{{  ((usePlanet.getWaterStock() + 1) * 21600)|date('d H:i:s') }}{% endif %}</div>
+                            <a class="btn btn-lg btn-info mt-3" href="{{ path('building_add_waterStock', {'idp': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
+                        {% else %}
+                            <a class="btn btn-lg btn-secondary mt-5" disabled>{{ 'building.build'|trans }}</a>
+                        {% endif %}
+                    {% endif %}
+                </td>
+                <td class="center-cells p-4">
+                    {% if usePlanet.getWaterStock() > 0 and usePlanet.getConstructAt() == null %}
+                        <a class="btn btn-lg btn-danger mt-5" href="{{ path('building_remove_waterStock', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                     {% else %}
                         <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
                     {% endif %}

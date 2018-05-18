@@ -166,16 +166,44 @@ class FightController extends Controller
         $defAll = $missileD + $laserD + $plasmaD;
         if($attAll > 0 && $defAll <= 0) {
             foreach($blockDef as $removeOne) {
+                $reportB = new Report();
+                $reportB->setSendAt($now);
+                $reportB->setContent("Votre flotte utilitaire ne dispose pas des technologies nécessaires à l'identification des vaisseaux ennemis.");
+                $reportB->setTitle("Rapport de combat : Défaite");
+                $reportB->setUser($removeOne->getUser());
+                $em->persist($reportB);
                 $em->remove($removeOne);
-                $em->flush();
             }
+            foreach($blockAtt as $reportWin) {
+                $reportA = new Report();
+                $reportA->setSendAt($now);
+                $reportA->setContent("Vous venez de détruire une flotte utilitaire.");
+                $reportA->setTitle("Rapport de combat : Victoire");
+                $reportA->setUser($reportWin->getUser());
+                $em->persist($reportA);
+            }
+            $em->flush();
             return($blockAtt);
         }
         if($defAll > 0 && $attAll <= 0) {
             foreach($blockAtt as $removeTwo) {
+                $reportB = new Report();
+                $reportB->setSendAt($now);
+                $reportB->setContent("Votre flotte utilitaire ne dispose pas des technologies nécessaires à l'identification des vaisseaux ennemis.");
+                $reportB->setTitle("Rapport de combat : Défaite");
+                $reportB->setUser($removeTwo->getUser());
+                $em->persist($reportB);
                 $em->remove($removeTwo);
-                $em->flush();
             }
+            foreach($blockDef as $reportWin) {
+                $reportA = new Report();
+                $reportA->setSendAt($now);
+                $reportA->setContent("Vous venez de détruire une flotte utilitaire.");
+                $reportA->setTitle("Rapport de combat : Victoire");
+                $reportA->setUser($reportWin->getUser());
+                $em->persist($reportA);
+            }
+            $em->flush();
             return($blockDef);
         }
 
@@ -305,8 +333,8 @@ class FightController extends Controller
                 $defenderWin->setFightAt(null);
                 $em->persist($defenderWin);
             }
-            $planet->setNbCdr($planet->getNbCdr() + ($debrisAtt * 40));
-            $planet->setWtCdr($planet->getWtCdr() + $debrisAtt * 20);
+            $planet->setNbCdr($planet->getNbCdr() + ($debrisAtt * rand(30,40)));
+            $planet->setWtCdr($planet->getWtCdr() + $debrisAtt * rand(20,30));
             $em->persist($planet);
             $em->flush();
             return($blockDef);
@@ -381,8 +409,8 @@ class FightController extends Controller
                 $attackerWin->setFightAt(null);
                 $em->persist($attackerWin);
             }
-            $planet->setNbCdr($planet->getNbCdr() + ($debrisDef * 40));
-            $planet->setWtCdr($planet->getWtCdr() + $debrisDef * 20);
+            $planet->setNbCdr($planet->getNbCdr() + ($debrisDef * rand(30,40)));
+            $planet->setWtCdr($planet->getWtCdr() + $debrisDef * rand(20,30));
             $em->persist($planet);
             $em->flush();
             return($blockAtt);

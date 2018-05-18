@@ -146,8 +146,18 @@ class SalonController extends Controller
                     $em->remove($oneMessage);
                 }
             }
+            $userViews = $em->getRepository('App:User')
+                ->createQueryBuilder('u')
+                ->where('u.id != :user')
+                ->setParameters(array('user' => $user->getId()))
+                ->getQuery()
+                ->getResult();
+            foreach($userViews as $userView) {
+                $userView->setSalonAt(null);
+                $em->persist($userView);
+            }
+
             $em->persist($message);
-            $em->flush();
 
             $form_message = null;
             $form_message = $this->createForm(SalonType::class);

@@ -17,3 +17,5 @@ message.anonymousSender: Anonyme
 message.sendTo: 'Envoyé à : '
 message.sendAnonym: 'En anonyme'
 responde: Répondre
+AllNewView: 'Marquer tout les messages comme lus'
+NewMessage: Nouveau
