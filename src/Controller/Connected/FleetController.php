@@ -549,15 +549,22 @@ class FleetController extends Controller
 
             $sFleet= $fleetGive->getPlanet()->getSector()->getPosition();
             if ($sFleet == $sector) {
-                $base= 2000;
+                $pFleet = $fleetGive->getPlanet()->getPosition();
+                if (strpos('0 -1 1 -4 4 -5 5 6 -6', (strval($pFleet - $planetTakee)) ) != false) {
+                    $base = 1500;
+                } elseif (strpos('2 -2 3 -3 7 -7 8 -8 9 -9 10 -10 11 -11 12 -12', (strval($pFleet - $planetTakee)) ) != false) {
+                    $base = 1750;
+                } else {
+                    $base = 2000;
+                }
             } elseif (strpos('0 -1 1 -10 10 -9 9', (strval($sFleet - $sector)) ) != false) {
-                $base= 3000;
+                $base = 3000;
             } elseif (strpos('-20 20 12 11 8 2 -12 -11 -8 -2', (strval($sFleet - $sector)) ) != false) {
-                $base= 6800;
+                $base = 6800;
             } elseif (strpos('-28 28 29 30 31 32 33 22 12 3 7 -29 -30 -31 -32 -33 -22 -13 -3 -7', (strval($sFleet - $sector)) ) != false) {
-                $base= 8000;
+                $base = 8000;
             } else {
-                $base= 12000;
+                $base = 12000;
             }
             $now->add(new DateInterval('PT' . ($fleetGive->getSpeed() * $base) . 'S'));
             $fleetGive->setRecycleAt(null);

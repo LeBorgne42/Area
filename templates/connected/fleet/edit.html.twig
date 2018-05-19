@@ -47,7 +47,7 @@
                                         {{ form_widget(form_manageAttackFleet.sendForm,{attr: { hidden: 'hidden'}}) }}
                                         {{ form_widget(form_manageAttackFleet.attack) }}
                                     </div>
-                                    <div class="col-8 pt-2">
+                                    <div class="col-9 pt-2">
                                         {{ 'fleet.attackMode'|trans }}
                                     </div>
                                 </div>
@@ -57,6 +57,12 @@
                     </table>
                     {{ form_end(form_manageAttackFleet) }}
                     {{ form_start(form_sendFleet,{attr: { action: path('send_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}) }}
+                    <div id="positionFleet" hidden>{{ fleet.getPlanet().getSector().getPosition() }}</div>
+                    <div id="planeteFleet" hidden>{{ fleet.getPlanet().getPosition() }}</div>
+                    <div id="speedFleet" hidden>{{ fleet.getSpeed() }}</div>
+                    <div class="mb-3 text-center">
+                            {{ 'fleet.flightTime'|trans }} <span id="flightTime"></span>
+                    </div>
                     <div class="mb-3 text-center">
                         {% if fleet.getBarge() and fleet.getPlanet().getUser() and fleet.getAllianceUser() == null %}
                             <span>

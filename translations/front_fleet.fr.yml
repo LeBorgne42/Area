@@ -66,3 +66,4 @@ tooltip.userFleet: '%name%'
 fleet.fusion: fusion
 recycler: recyclage
 recyclerCancel: annuler
+fleet.flightTime: 'Temps de vol :'

@@ -514,6 +514,121 @@ function manageDisplaySalon(){
     }
 }
 
+function manageCoordonate(){
+    $('#fleet_send_planet').off('change').on('change',function(e){
+        if($('#fleet_send_planet').val() != '') {
+            $('#fleet_send_planete').attr('disabled', 'disabled');
+            $('#fleet_send_sector').attr('disabled', 'disabled');
+        } else {
+            $('#fleet_send_planete').removeAttr('disabled', 'disabled');
+            $('#fleet_send_sector').removeAttr('disabled', 'disabled');
+        }
+    });
+}
+
+function manageFlightTime(){
+    var position = $('#positionFleet').text();
+    var speed = $('#speedFleet').text();
+    var base = 2000;
+    $('#fleet_send_planete').off('change').on('change',function(e){
+        var newPosition = $('#fleet_send_sector').val();
+        newPosition = newPosition.toString();
+        if (position == newPosition) {
+            var planete = $('#planeteFleet').text();
+            var newPlanete = $('#fleet_send_planete').val();
+            newPlanete = newPlanete.toString();
+            var pOne = '0 -1 1 -4 4 -5 5 6 -6';
+            var pTwo = '2 -2 3 -3 7 -7 8 -8 9 -9 10 -10 11 -11 12 -12';
+            if (pOne.indexOf(planete - newPlanete) != -1) {
+                base = 1500;
+            } else if (pTwo.indexOf(planete - newPlanete) != -1) {
+                base = 1750;
+            } else {
+                base = 2000;
+            }
+        }
+        var now = new Date();
+        var travel = new Date();
+        travel.setSeconds(travel.getSeconds() + (base * speed));
+        var date_now = Math.abs((travel - now) / 1000);
+        var jours = Math.floor(date_now / (60 * 60 * 24));
+        var heures = Math.floor((date_now - (jours * 60 * 60 * 24)) / (60 * 60));
+        var minutes = Math.floor((date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60))) / 60);
+        var secondes = Math.floor(date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60 + minutes * 60)));
+        if (jours > 0) {
+            $('#flightTime').text(jours + 'j ' + heures + 'heures ' + minutes + 'mins ' + secondes + 's');
+        } else if (heures > 0)
+        {
+            $('#flightTime').text(heures + 'heures ' + minutes + 'mins ' + secondes + 's');
+        } else if (minutes > 0)
+        {
+            $('#flightTime').text(minutes + 'mins ' + secondes + 's');
+        } else if (secondes > 0)
+        {
+            $('#flightTime').text(secondes + ' secondes');
+        }
+    });
+
+    $('#fleet_send_sector').off('change').on('change',function(e){
+        var newPosition = $('#fleet_send_sector').val();
+        newPosition = newPosition.toString();
+        var first = '0 -1 1 -10 10 -9 9';
+        var second = '-20 20 12 11 8 2 -12 -11 -8 -2';
+        var third = '-28 28 29 30 31 32 33 22 12 3 7 -29 -30 -31 -32 -33 -22 -13 -3 -7';
+        if (position == newPosition) {
+            base = 2000;
+        } else if (first.indexOf(position - newPosition) != -1) {
+            base = 3000;
+        } else if (second.indexOf(position - newPosition) != -1) {
+            base = 6800;
+        } else if (third.indexOf(position - newPosition) != -1) {
+            base = 8000;
+        } else {
+            base = 12000;
+        }
+        var now = new Date();
+        var travel = new Date();
+        travel.setSeconds(travel.getSeconds() + (base * speed));
+        var date_now = Math.abs((travel - now) / 1000);
+        var jours = Math.floor(date_now / (60 * 60 * 24));
+        var heures = Math.floor((date_now - (jours * 60 * 60 * 24)) / (60 * 60));
+        var minutes = Math.floor((date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60))) / 60);
+        var secondes = Math.floor(date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60 + minutes * 60)));
+        if (jours > 0) {
+            $('#flightTime').text(jours + 'j ' + heures + 'heures ' + minutes + 'mins ' + secondes + 's');
+        } else if (heures > 0)
+        {
+            $('#flightTime').text(heures + 'heures ' + minutes + 'mins ' + secondes + 's');
+        } else if (minutes > 0)
+        {
+            $('#flightTime').text(minutes + 'mins ' + secondes + 's');
+        } else if (secondes > 0)
+        {
+            $('#flightTime').text(secondes + ' secondes');
+        }
+    });
+    var now = new Date();
+    var travel = new Date();
+    travel.setSeconds(travel.getSeconds() + (base * speed));
+    var date_now = Math.abs((travel - now) / 1000);
+    var jours = Math.floor(date_now / (60 * 60 * 24));
+    var heures = Math.floor((date_now - (jours * 60 * 60 * 24)) / (60 * 60));
+    var minutes = Math.floor((date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60))) / 60);
+    var secondes = Math.floor(date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60 + minutes * 60)));
+    if (jours > 0) {
+        $('#flightTime').text(jours + 'j ' + heures + 'heures ' + minutes + 'mins ' + secondes + 's');
+    } else if (heures > 0)
+    {
+        $('#flightTime').text(heures + 'heures ' + minutes + 'mins ' + secondes + 's');
+    } else if (minutes > 0)
+    {
+        $('#flightTime').text(minutes + 'mins ' + secondes + 's');
+    } else if (secondes > 0)
+    {
+        $('#flightTime').text(secondes + ' secondes');
+    }
+}
+
 
 $(document).ready(function() {
     $('[data-toggle="popover"]').popover();
@@ -532,6 +647,8 @@ $(document).ready(function() {
     manageAllyImageForm();
     manageModalContact();
     manageMaxShip();
+    manageCoordonate();
+    manageFlightTime();
     manageTime();
     manageSalon();
     manageDisplaySalon();
