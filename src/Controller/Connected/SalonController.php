@@ -41,11 +41,20 @@ class SalonController extends Controller
             ->getQuery()
             ->getOneOrNullResult();
 
+        if($user->getAlly()) {
+            $sigle = $user->getAlly()->getSigle();
+        } else {
+            $sigle = 'AKOUNAMATATA';
+        }
+
         $salons = $em->getRepository('App:Salon')
             ->createQueryBuilder('s')
-            ->where('s.ally = :ally')
+            ->leftJoin('s.allys', 'a')
+            ->leftJoin('s.users', 'u')
+            ->where('a.sigle = :sigle')
             ->orWhere('s.id = :id')
-            ->setParameters(array('ally' => $user->getAlly(), 'id' => 1))
+            ->orWhere('u.username = :user')
+            ->setParameters(array('sigle' => $sigle, 'id' => 1, 'user' => $user->getUserName()))
             ->getQuery()
             ->getResult();
 
@@ -171,5 +180,65 @@ class SalonController extends Controller
             'salons' => $salons,
             'formObject' => $form_message,
         ]);
+    }
+
+    /**
+     * @Route("/rejoindre-salon/{sigle}/{idp}", name="ally_join_salon", requirements={"sigle"="\w+", "idp"="\d+"})
+     */
+    public function addSalonAction($sigle, $idp)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $salon = $em->getRepository('App:Salon')
+            ->createQueryBuilder('s')
+            ->where('s.name = :name')
+            ->setParameter('name', "Ambassade - " . $sigle)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $salon->addUser($user);
+        $em->persist($salon);
+
+        $em->flush();
+
+        return $this->redirectToRoute('salon', array('idp' => $usePlanet->getId()));
+    }
+
+    /**
+     * @Route("/quitter-salon/{id}/{idp}", name="ally_leave_salon", requirements={"id"="\d+", "idp"="\d+"})
+     */
+    public function leaveSalonAction($id, $idp)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $salon = $em->getRepository('App:Salon')
+            ->createQueryBuilder('s')
+            ->where('s.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $salon->removeUser($user);
+        $em->persist($salon);
+
+        $em->flush();
+
+        return $this->redirectToRoute('salon', array('idp' => $usePlanet->getId()));
     }
 }

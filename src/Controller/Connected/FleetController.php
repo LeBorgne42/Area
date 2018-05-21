@@ -9,8 +9,10 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Form\Front\SpatialEditFleetType;
 use App\Form\Front\FleetRenameType;
 use App\Form\Front\FleetRessourcesType;
+use App\Form\Front\SpatialFleetType;
 use App\Form\Front\FleetSendType;
 use App\Form\Front\FleetAttackType;
+use App\Entity\Fleet;
 use Datetime;
 use DatetimeZone;
 use DateInterval;
@@ -980,5 +982,144 @@ class FleetController extends Controller
         $em->flush();
 
         return $this->redirectToRoute('map', array('idp' => $usePlanet->getId(), 'id' => $fleet->getPlanet()->getSector()->getPosition()));
+    }
+
+    /**
+     * @Route("/scinder-flotte/{idp}/{id}", name="fleet_split", requirements={"idp"="\d+", "id"="\d+"})
+     */
+    public function splitFleetAction(Request $request, $idp, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $oldFleet = $em->getRepository('App:Fleet')
+            ->createQueryBuilder('f')
+            ->where('f.id = :id')
+            ->andWhere('f.user = :user')
+            ->setParameters(array('id' => $id, 'user' => $user))
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $form_spatialShip = $this->createForm(SpatialFleetType::class);
+        $form_spatialShip->handleRequest($request);
+
+        if ($form_spatialShip->isSubmitted() && $form_spatialShip->isValid()) {
+            $cargoI = $oldFleet->getCargoI() - $form_spatialShip->get('cargoI')->getData();
+            $cargoV = $oldFleet->getCargoV() - $form_spatialShip->get('cargoV')->getData();
+            $cargoX = $oldFleet->getCargoX() - $form_spatialShip->get('cargoX')->getData();
+            $colonizer = $oldFleet->getColonizer() - $form_spatialShip->get('colonizer')->getData();
+            $recycleur = $oldFleet->getRecycleur() - $form_spatialShip->get('recycleur')->getData();
+            $barge = $oldFleet->getBarge() - $form_spatialShip->get('barge')->getData();
+            $sonde = $oldFleet->getSonde() - $form_spatialShip->get('sonde')->getData();
+            $hunter = $oldFleet->getHunter() - $form_spatialShip->get('hunter')->getData();
+            $fregate = $oldFleet->getFregate() - $form_spatialShip->get('fregate')->getData();
+            $hunterHeavy = $oldFleet->getHunterHeavy() - $form_spatialShip->get('hunterHeavy')->getData();
+            $corvet = $oldFleet->getCorvet() - $form_spatialShip->get('corvet')->getData();
+            $corvetLaser = $oldFleet->getCorvetLaser() - $form_spatialShip->get('corvetLaser')->getData();
+            $fregatePlasma = $oldFleet->getFregatePlasma() - $form_spatialShip->get('fregatePlasma')->getData();
+            $croiser = $oldFleet->getCroiser() - $form_spatialShip->get('croiser')->getData();
+            $ironClad = $oldFleet->getIronClad() - $form_spatialShip->get('ironClad')->getData();
+            $destroyer = $oldFleet->getDestroyer() - $form_spatialShip->get('destroyer')->getData();
+            $total = $form_spatialShip->get('cargoI')->getData() + $form_spatialShip->get('cargoV')->getData() + $form_spatialShip->get('cargoX')->getData() + $form_spatialShip->get('hunterHeavy')->getData() + $form_spatialShip->get('corvet')->getData() + $form_spatialShip->get('corvetLaser')->getData() + $form_spatialShip->get('fregatePlasma')->getData() + $form_spatialShip->get('croiser')->getData() + $form_spatialShip->get('ironClad')->getData() + $form_spatialShip->get('destroyer')->getData() + $form_spatialShip->get('colonizer')->getData() + $form_spatialShip->get('fregate')->getData() + $form_spatialShip->get('hunter')->getData() + $form_spatialShip->get('sonde')->getData() + $form_spatialShip->get('barge')->getData() + $form_spatialShip->get('recycleur')->getData();
+
+            if (($colonizer < 0 || $recycleur < 0) || ($barge < 0 || $sonde < 0) || ($hunter < 0 || $fregate < 0) ||
+                ($total == 0 || $cargoI < 0) || ($cargoV < 0 || $cargoX < 0) || ($hunterHeavy < 0 || $corvet < 0) ||
+                ($corvetLaser < 0 || $fregatePlasma < 0) || ($croiser < 0 || $ironClad < 0) || $destroyer < 0) {
+                return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+            }
+            $eAlly = $user->getAllyEnnemy();
+            $warAlly = [];
+            $x = 0;
+            foreach ($eAlly as $tmp) {
+                $warAlly[$x] = $tmp->getAllyTag();
+                $x++;
+            }
+            $fleets = $em->getRepository('App:Fleet')
+                ->createQueryBuilder('f')
+                ->join('f.user', 'u')
+                ->leftJoin('u.ally', 'a')
+                ->where('f.planet = :planet')
+                ->andWhere('f.attack = :true OR a.sigle in (:ally)')
+                ->andWhere('f.user != :user')
+                ->andWhere('f.flightTime is null')
+                ->setParameters(array('planet' => $oldFleet->getPlanet(), 'true' => true, 'ally' => $warAlly, 'user' => $user))
+                ->getQuery()
+                ->getResult();
+
+            $fleet = new Fleet();
+            $fleet->setCargoI($form_spatialShip->get('cargoI')->getData());
+            $fleet->setCargoV($form_spatialShip->get('cargoV')->getData());
+            $fleet->setCargoX($form_spatialShip->get('cargoX')->getData());
+            $fleet->setColonizer($form_spatialShip->get('colonizer')->getData());
+            $fleet->setRecycleur($form_spatialShip->get('recycleur')->getData());
+            $fleet->setBarge($form_spatialShip->get('barge')->getData());
+            $fleet->setSonde($form_spatialShip->get('sonde')->getData());
+            $fleet->setHunter($form_spatialShip->get('hunter')->getData());
+            $fleet->setFregate($form_spatialShip->get('fregate')->getData());
+            $fleet->setHunterHeavy($form_spatialShip->get('hunterHeavy')->getData());
+            $fleet->setCorvet($form_spatialShip->get('corvet')->getData());
+            $fleet->setCorvetLaser($form_spatialShip->get('corvetLaser')->getData());
+            $fleet->setFregatePlasma($form_spatialShip->get('fregatePlasma')->getData());
+            $fleet->setCroiser($form_spatialShip->get('croiser')->getData());
+            $fleet->setIronClad($form_spatialShip->get('ironClad')->getData());
+            $fleet->setDestroyer($form_spatialShip->get('destroyer')->getData());
+            if($fleets) {
+                $allFleets = $em->getRepository('App:Fleet')
+                    ->createQueryBuilder('f')
+                    ->join('f.user', 'u')
+                    ->where('f.planet = :planet')
+                    ->andWhere('f.user != :user')
+                    ->setParameters(array('planet' => $oldFleet->getPlanet(), 'user' => $user))
+                    ->getQuery()
+                    ->getResult();
+                $now = new DateTime();
+                $now->setTimezone(new DateTimeZone('Europe/Paris'));
+                $now->add(new DateInterval('PT' . 300 . 'S'));
+                foreach ($allFleets as $updateF) {
+                    $updateF->setFightAt($now);
+                    $em->persist($updateF);
+                }
+                $fleet->setFightAt($now);
+            }
+            $fleet->setUser($user);
+            $fleet->setPlanet($oldFleet->getPlanet());
+            $fleet->setName($form_spatialShip->get('name')->getData());
+            $em->persist($fleet);
+            $oldFleet->setCargoI($cargoI);
+            $oldFleet->setCargoV($cargoV);
+            $oldFleet->setCargoX($cargoX);
+            $oldFleet->setColonizer($colonizer);
+            $oldFleet->setRecycleur($recycleur);
+            $oldFleet->setBarge($barge);
+            $oldFleet->setSonde($sonde);
+            $oldFleet->setHunter($hunter);
+            $oldFleet->setFregate($fregate);
+            $oldFleet->setHunterHeavy($hunterHeavy);
+            $oldFleet->setCorvet($corvet);
+            $oldFleet->setCorvetLaser($corvetLaser);
+            $oldFleet->setFregatePlasma($fregatePlasma);
+            $oldFleet->setCroiser($croiser);
+            $oldFleet->setIronClad($ironClad);
+            $oldFleet->setDestroyer($destroyer);
+            $em->persist($oldFleet);
+            $em->flush();
+
+
+            return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+        }
+
+        return $this->render('connected/fleet/split.html.twig', [
+            'usePlanet' => $usePlanet,
+            'oldFleet' => $oldFleet,
+            'form_spatialShip' => $form_spatialShip->createView(),
+        ]);
     }
 }

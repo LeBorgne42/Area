@@ -5,12 +5,9 @@ namespace App\Controller\Connected\Ally;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use App\Entity\Grade;
-use App\Entity\Ally;
-use App\Entity\Proposal;
 use App\Entity\Pna;
 use App\Entity\Allied;
-use App\Entity\War;
+use App\Entity\Salon;
 use DateTime;
 use DateTimeZone;
 
@@ -55,6 +52,11 @@ class PactController extends Controller
         $em->persist($allied);
         $em->persist($pact);
         $ally->addAllyAllied($allied);
+        $salon = new Salon();
+        $salon->setName($pact->getAlly()->getSigle() . " - " . $ally->getSigle());
+        $salon->addAlly($pact->getAlly());
+        $salon->addAlly($ally);
+        $em->persist($salon);
         $em->persist($ally);
 
         $em->flush();

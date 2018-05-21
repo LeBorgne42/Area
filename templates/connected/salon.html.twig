@@ -10,7 +10,7 @@
             {% set x = 0 %}
             {% for salon in salons %}
                 <li class="nav-item">
-                    <a class="nav-link{% if x == 0 %} active{% endif %}" id="{{ salon.getName() }}-tab" data-toggle="tab" href="#{{ salon.getName() }}" role="tab" aria-controls="{{ salon.getName() }}" aria-selected="true"><h2>{{ salon.getName() }}</h2></a>
+                    <a class="py-2 nav-link{% if x == 0 %} active{% endif %}" id="{{ salon.getName() }}-tab" data-toggle="tab" href="#{{ salon.getName() }}" role="tab" aria-controls="{{ salon.getName() }}" aria-selected="true"><h4>{{ salon.getName() }}</h4></a>
                 </li>
                 {% set x = 1 %}
             {% endfor %}
@@ -40,7 +40,8 @@
                         </table>
                     </div>
                     {% set form_message = formObject.createView %}
-                    {{ form_start(form_message,{attr: { action: path('salon_id', {'idp': usePlanet.getId(), 'salon': salon.getId()}) }}) }}
+                    {% set action = path('salon_id', {'idp': usePlanet.getId(), 'salon': salon.getId()}) %}{#  ~ "#" ~ salon.getName() ~ "-tab"#}
+                    {{ form_start(form_message,{attr: { action: action }}) }}
                     <div class="row">
                         <div class="col-10">
                             {{ form_widget(form_message.content) }}
@@ -50,6 +51,13 @@
                         </div>
                     </div>
                     {{ form_end(form_message) }}
+                    {%  set isAlly = 'no' %}
+                    {% for sAlly in salon.getAllys() %}
+                        {% if sAlly == app.user.getAlly() %}
+                            {%  set isAlly = 'yes' %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if salon.getId() != 1 and isAlly == 'no' %}<span class="float-right mt-3"><a href="{{ path('ally_leave_salon', {'idp': usePlanet.getId(), 'id': salon.getId()}) }}">{{ 'salon.close'|trans }}</a></span>{% endif %}
                 </div>
                 {% set x = 1 %}
             {% endfor %}

@@ -495,7 +495,6 @@ function manageSalon() {
 }
 
 function manageDisplaySalon(){
-
     if(document.location.href.match('/salon(/|$)')) {
         setTimeout( function(){
             $.ajax({

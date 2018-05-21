@@ -35,7 +35,7 @@
                         {% if x == 1 %}<div class="text-or glyphicon glyphicon-star"></div> {{ x }}.{% elseif x == 2 %}<div class="text-argent glyphicon glyphicon-star"></div> {{ x }}.{% elseif x == 3 %}<div class="text-bronze glyphicon glyphicon-star"></div> {{ x }}.{% else %}<div class="glyphicon glyphicon-star" hidden></div> {{ x }}.{% endif %}
                     </th>
                     <th class="tab-cells-name p-2 text-left">
-                        <span><a data-toggle="modal" data-target="#userModal"  href="{{ path('ally_profil_modal', {'idp': usePlanet.getId(), 'id': ally.getId()}) }}">[{{ ally.getSigle() }}] {{ ally.getName() }}</a></span>
+                        <span><a data-toggle="modal" data-target="#userModal" href="{{ path('ally_profil_modal', {'idp': usePlanet.getId(), 'id': ally.getId()}) }}">[{{ ally.getSigle() }}] {{ ally.getName() }}</a></span>
                     </th>
                     <th class="tab-cells-name p-2">
                         {{ ally.getUsers()|length }} / 6
@@ -47,7 +47,7 @@
                         {{ ally.getcreatedAt()|date('H:i:s d/m/Y') }}
                     </th>
                     <th class="tab-cells-name p-2">
-                        {{ 'ally.ambassy'|trans|raw }}
+                        <span><a href="{{ path('ally_join_salon', {'idp': usePlanet.getId(), 'sigle': ally.getSigle()}) }}">{{ 'ally.ambassy'|trans|raw }}</a></span>
                     </th>
                 </tr>
                 {% set x = x + 1 %}

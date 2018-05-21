@@ -67,3 +67,6 @@ fleet.fusion: fusion
 recycler: recyclage
 recyclerCancel: annuler
 fleet.flightTime: 'Temps de vol :'
+fleet.split: scinder
+fleet.splitFleet: 'Scinder flotte en deux'
+fleet.name: 'Nom de flotte'

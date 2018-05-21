@@ -21,7 +21,7 @@ use DateTimeZone;
 class SpatialController extends Controller
 {
     /**
-     * @Route("/chantier-spatiale/{idp}", name="spatial", requirements={"idp"="\d+"})
+     * @Route("/chantier-spatial/{idp}", name="spatial", requirements={"idp"="\d+"})
      */
     public function spatialAction(Request $request, $idp)
     {

@@ -166,8 +166,13 @@ class AllyController extends Controller
 
             $salon = new Salon();
             $salon->setName($ally->getName());
-            $salon->setAlly($ally);
+            $salon->addAlly($ally);
             $em->persist($salon);
+
+            $salonPublic = new Salon();
+            $salonPublic->setName('Ambassade - ' . $ally->getSigle());
+            $salonPublic->addAlly($ally);
+            $em->persist($salonPublic);
 
             $ally->addGrade($grade);
             $user->setAlly($ally);
@@ -209,7 +214,12 @@ class AllyController extends Controller
         foreach ($ally->getGrades() as $grade) {
             $em->remove($grade);
         }
-        $em->remove($ally->getSalon());
+        foreach ($ally->getSalons() as $salon) {
+            $ally->removeSalon($salon);
+        }
+        foreach ($ally->getExchanges() as $exchange) {
+            $ally->remove($exchange);
+        }
         $em->flush();
 
         $pnas = $em->getRepository('App:Pna')
@@ -235,17 +245,14 @@ class AllyController extends Controller
 
         foreach ($pnas as $pna) {
             $em->remove($pna);
-            $em->flush();
         }
 
         foreach ($pacts as $pact) {
             $em->remove($pact);
-            $em->flush();
         }
 
         foreach ($wars as $war) {
             $em->remove($war);
-            $em->flush();
         }
 
         $em->remove($ally);

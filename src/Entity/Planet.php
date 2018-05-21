@@ -70,12 +70,12 @@ class Planet
     /**
      * @ORM\Column(name="niobiumMax",type="integer")
      */
-    protected $niobiumMax = 1250000;
+    protected $niobiumMax = 750000;
 
     /**
      * @ORM\Column(name="waterMax",type="integer")
      */
-    protected $waterMax = 1000000;
+    protected $waterMax = 750000;
 
     /**
      * @ORM\Column(name="soldierMax",type="integer")
@@ -136,11 +136,6 @@ class Planet
      * @ORM\Column(name="soldierAtNbr",type="integer", nullable=true)
      */
     protected $soldierAtNbr;
-
-    /**
-     * @ORM\Column(name="shipAt",type="datetime", nullable=true)
-     */
-    protected $shipAt;
 
     /**
      * @ORM\Column(name="miner",type="integer", nullable=true)
@@ -1563,14 +1558,6 @@ class Planet
     /**
      * @return mixed
      */
-    public function getShipAt()
-    {
-        return $this->shipAt;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getScientistAtNbr()
     {
         return $this->scientistAtNbr;
@@ -1598,14 +1585,6 @@ class Planet
     public function setSoldierAtNbr($soldierAtNbr): void
     {
         $this->soldierAtNbr = $soldierAtNbr;
-    }
-
-    /**
-     * @param mixed $shipAt
-     */
-    public function setShipAt($shipAt): void
-    {
-        $this->shipAt = $shipAt;
     }
 
     /**

@@ -1,0 +1,163 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'front_fleet' %}
+
+{% block title %}{{ 'title'|trans }}{% endblock %}
+
+{% block body %}
+    <div class="front-block">
+        <div class="row">
+            <div class="col-12">
+                {{ form_start(form_spatialShip) }}
+                <div class="block-title"><h2>{{ 'fleet.splitFleet'|trans }}</h2></div>
+                <table class="table table-striped table-bordered table-dark createFleet">
+                    <tbody>
+                    <tr{% if oldFleet.getSonde == 0 %} hidden{% endif %}>
+                        <td class="tab-cells-name">
+                            {{ 'fleet.sonde'|trans }} x {{ oldFleet.getSonde()|number_format }}                    </td>
+                        <td class="center-cells">
+                            {{ form_widget(form_spatialShip.sonde,{attr: { max: oldFleet.getSonde()}}) }}
+                        </td>
+                    </tr>
+                    <tr{% if oldFleet.getColonizer == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.colonizer'|trans }} x {{ oldFleet.getColonizer()|number_format }}
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_spatialShip.colonizer,{attr: { max: oldFleet.getColonizer()}}) }}
+                        </td>
+                    </tr>
+                    <tr{% if oldFleet.getCargoI == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.cargoI'|trans }} x {{ oldFleet.getCargoI()|number_format }}
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_spatialShip.cargoI,{attr: { max: oldFleet.getCargoI()}}) }}
+                        </td>
+                    </tr>
+                    <tr{% if oldFleet.getCargoV == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.cargoV'|trans }} x {{ oldFleet.getCargoV()|number_format }}
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_spatialShip.cargoV,{attr: { max: oldFleet.getCargoV()}}) }}
+                        </td>
+                    </tr>
+                    <tr{% if oldFleet.getCargoX == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.cargoX'|trans }} x {{ oldFleet.getCargoX()|number_format }}
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_spatialShip.cargoX,{attr: { max: oldFleet.getCargoX()}}) }}
+                        </td>
+                    </tr>
+                    <tr{% if oldFleet.getRecycleur == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.recycleur'|trans }} x {{ oldFleet.getRecycleur()|number_format }}
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_spatialShip.recycleur,{attr: { max: oldFleet.getRecycleur()}}) }}
+                        </td>
+                    </tr>
+                    <tr{% if oldFleet.getBarge == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.barge'|trans }} x {{ oldFleet.getBarge()|number_format }}
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_spatialShip.barge,{attr: { max: oldFleet.getBarge()}}) }}
+                        </td>
+                    </tr>
+                    <tr{% if oldFleet.getHunter == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.hunter'|trans }} x {{ oldFleet.getHunter()|number_format }}
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_spatialShip.hunter,{attr: { max: oldFleet.getHunter()}}) }}
+                        </td>
+                    </tr>
+                    <tr{% if oldFleet.getHunterHeavy == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.hunterHeavy'|trans }} x {{ oldFleet.getHunterHeavy()|number_format }}
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_spatialShip.hunterHeavy,{attr: { max: oldFleet.getHunterHeavy()}}) }}
+                        </td>
+                    </tr>
+                    <tr{% if oldFleet.getCorvet == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.corvet'|trans }} x {{ oldFleet.getCorvet()|number_format }}
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_spatialShip.corvet,{attr: { max: oldFleet.getCorvet()}}) }}
+                        </td>
+                    </tr>
+                    <tr{% if oldFleet.getCorvetLaser == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.corvetLaser'|trans }} x {{ oldFleet.getCorvetLaser()|number_format }}
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_spatialShip.corvetLaser,{attr: { max: oldFleet.getCorvetLaser()}}) }}
+                        </td>
+                    </tr>
+                    <tr{% if oldFleet.getFregate == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.fregate'|trans }} x {{ oldFleet.getFregate()|number_format }}
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_spatialShip.fregate,{attr: { max: oldFleet.getFregate()}}) }}
+                        </td>
+                    </tr>
+                    <tr{% if oldFleet.getFregatePlasma == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.fregatePlasma'|trans }} x {{ oldFleet.getFregatePlasma()|number_format }}
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_spatialShip.fregatePlasma,{attr: { max: oldFleet.getFregatePlasma()}}) }}
+                        </td>
+                    </tr>
+                    <tr{% if oldFleet.getCroiser == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.croiser'|trans }} x {{ oldFleet.getCroiser()|number_format }}
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_spatialShip.croiser,{attr: { max: oldFleet.getCroiser()}}) }}
+                        </td>
+                    </tr>
+                    <tr{% if oldFleet.getIronClad == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.ironClad'|trans }} x {{ oldFleet.getIronClad()|number_format }}
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_spatialShip.ironClad,{attr: { max: oldFleet.getIronClad()}}) }}
+                        </td>
+                    </tr>
+                    <tr{% if oldFleet.getDestroyer == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.destroyer'|trans }} x {{ oldFleet.getDestroyer()|number_format }}
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_spatialShip.destroyer,{attr: { max: oldFleet.getDestroyer()}}) }}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table class="table table-striped table-bordered table-dark createFleet">
+                    <tbody>
+                    <tr>
+                        <td class="center-cells">
+                            {{ 'fleet.name'|trans }}
+                        </td>
+                        <td class="center-cells">
+                            {{ form_widget(form_spatialShip.name) }}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <span>
+                    {{ form_widget(form_spatialShip.sendForm,{attr: { class: 'btn btn-lg btn-info float-right'}}) }}
+                    {{ form_end(form_spatialShip) }}
+                </span>
+            </div>
+        </div>
+    </div>
+{% endblock %}

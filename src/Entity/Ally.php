@@ -57,9 +57,9 @@ class Ally
     protected $grades;
 
     /**
-     * @ORM\OneToOne(targetEntity="Salon", mappedBy="ally", fetch="EXTRA_LAZY")
+     * @ORM\ManyToMany(targetEntity="Salon", mappedBy="allys", fetch="EXTRA_LAZY")
      */
-    protected $salon;
+    protected $salons;
 
     /**
      * @ORM\Column(name="rank",type="integer", nullable=true)
@@ -312,6 +312,30 @@ class Ally
     public function removeGrade(\App\Entity\Grade $grade)
     {
         $this->grade->removeElement($grade);
+    }
+
+    /**
+     * Add salon
+     *
+     * @param \App\Entity\Salon $salon
+     *
+     * @return Ally
+     */
+    public function addSalon(\App\Entity\Salon $salon)
+    {
+        $this->salons[] = $salon;
+
+        return $this;
+    }
+
+    /**
+     * Remove salon
+     *
+     * @param \App\Entity\Salon $salon
+     */
+    public function removeSalon(\App\Entity\Salon $salon)
+    {
+        $this->salons->removeElement($salon);
     }
 
     /**
@@ -708,17 +732,17 @@ class Ally
     /**
      * @return mixed
      */
-    public function getSalon()
+    public function getSalons()
     {
-        return $this->salon;
+        return $this->salons;
     }
 
     /**
-     * @param mixed $salon
+     * @param mixed $salons
      */
-    public function setSalon($salon): void
+    public function setSalons($salons): void
     {
-        $this->salon = $salon;
+        $this->salons = $salons;
     }
 
     /**

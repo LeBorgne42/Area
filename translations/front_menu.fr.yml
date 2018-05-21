@@ -1,4 +1,4 @@
-version: 'Version 0.1'
+version: 'Version beta'
 home: Accueil
 footer: 'Suivez nous sur facebook!'
 media: Medias
@@ -12,7 +12,7 @@ faq: F.A.Q
 overview: Empire
 contact: 'Nous contacter'
 globalView: 'Vue d''ensemble'
-dailyCost: 'Aide et gestion'
+dailyCost: 'Aide débutant'
 fleet: Flottes
 planet: Planètes
 search: Recherches
@@ -27,8 +27,8 @@ report: Rapport
 salon: Salon
 disconnect: Deconnexion
 rules: Reglement
-popover.title: 'Note version 0.1'
-popover.text: 'Attention le système de combat n''est pas encore totalement terminé. La production de vaisseaux et de soldats/scientifiques ne sont pas encore régulés par un temps de production.'
+popover.title: 'Note version beta'
+popover.text: 'Merci de privilégié le forum tant que nous sommes en beta.'
 modal.to: 'Nouveau message à l''admin'
 modal.from: 'Votre email :'
 modal.text: 'Message :'

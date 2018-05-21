@@ -138,7 +138,7 @@
                             <tbody>
                             <tr>
                                 <th class="tab-cells-name p-2 pl-3">
-                                    {{ 'fleet.fleetShip'|trans }}
+                                    {{ 'fleet.fleetShip'|trans }} <span class="float-right"><a href="{{ path('fleet_split', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}">{{ 'fleet.split'|trans }}</a></span>
                                 </th>
                                 <td class="center-cells p-2 text-center">
                                     {{ 'fleet.addShip'|trans }}
@@ -404,7 +404,7 @@
                             <tbody>
                             <tr>
                                 <th class="tab-cells-name p-2 text-center">
-                                    {{ 'fleet.fleetShip'|trans }}
+                                    {{ 'fleet.fleetShip'|trans }} <span class="float-right"><a href="{{ path('fleet_split', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}">{{ 'fleet.split'|trans }}</a></span>
                                 </th>
                             </tr>
                             <tr{% if fleet.getSonde() == 0 %} hidden{% endif %}>

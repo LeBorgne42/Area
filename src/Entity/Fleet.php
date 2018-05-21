@@ -350,7 +350,7 @@ class Fleet
      */
     public function getCargoPlace(): int
     {
-        $barge = $this->getBarge() * 2000;
+        $barge = $this->getBarge() * 2500;
         $recycleur = $this->getRecycleur() * 10000;
         $cargoI = $this->getCargoI() * 25000;
         $cargoV = $this->getCargoV() * 75000;
@@ -367,13 +367,13 @@ class Fleet
     {
         $hunter = $this->getHunter() * 15;
         $hunterHeavy = $this->getHunterHeavy() * 25;
-        $corvet = $this->getCorvet() * 72;
-        $corvetLaser = $this->getCorvetLaser() * 110;
-        $fregate = $this->getFregate() * 158;
-        $fregatePlasma = $this->getFregatePlasma() * 436;
-        $croiser = $this->getCroiser() * 935;
-        $ironClad = $this->getIronClad() * 2390;
-        $destroyer = $this->getDestroyer() * 4376;
+        $corvet = $this->getCorvet() * 74;
+        $corvetLaser = $this->getCorvetLaser() * 115;
+        $fregate = $this->getFregate() * 168;
+        $fregatePlasma = $this->getFregatePlasma() * 451;
+        $croiser = $this->getCroiser() * 957;
+        $ironClad = $this->getIronClad() * 2415;
+        $destroyer = $this->getDestroyer() * 5176;
 
         $nbr = $fregate + $hunter + $hunterHeavy + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
         return $nbr;
@@ -417,13 +417,13 @@ class Fleet
      */
     public function getShield(): int
     {
-        $corvet = $this->getCorvet() * 5;
-        $corvetLaser = $this->getCorvetLaser() * 10;
-        $fregate = $this->getFregate() * 20;
-        $fregatePlasma = $this->getFregatePlasma() * 40;
-        $croiser = $this->getCroiser() * 75;
-        $ironClad = $this->getIronClad() * 80;
-        $destroyer = $this->getDestroyer() * 1000;
+        $corvet = $this->getCorvet() * 2;
+        $corvetLaser = $this->getCorvetLaser() * 5;
+        $fregate = $this->getFregate() * 10;
+        $fregatePlasma = $this->getFregatePlasma() * 15;
+        $croiser = $this->getCroiser() * 22;
+        $ironClad = $this->getIronClad() * 25;
+        $destroyer = $this->getDestroyer() * 200;
 
         $nbr = $fregate + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
         return $nbr;

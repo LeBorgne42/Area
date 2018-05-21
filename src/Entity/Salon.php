@@ -20,10 +20,9 @@ class Salon
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="Ally", inversedBy="salon", fetch="EXTRA_LAZY", cascade={"persist"})
-     * @ORM\JoinColumn(name="ally_id", referencedColumnName="id")
+     * @ORM\ManyToMany(targetEntity="Ally", inversedBy="salons")
      */
-    protected $ally;
+    protected $allys;
 
     /**
      * @ORM\ManyToMany(targetEntity="User", inversedBy="salons")
@@ -36,7 +35,7 @@ class Salon
     protected $contents;
 
     /**
-     * @ORM\Column(name="name",type="string", length=20)
+     * @ORM\Column(name="name",type="string", length=30)
      * @Assert\NotBlank(message = "required")
      */
     protected $name;
@@ -99,19 +98,43 @@ class Salon
     }
 
     /**
-     * @return mixed
+     * Add ally
+     *
+     * @param \App\Entity\Ally $ally
+     *
+     * @return Salon
      */
-    public function getAlly()
+    public function addAlly(\App\Entity\Ally $ally)
     {
-        return $this->ally;
+        $this->allys[] = $ally;
+
+        return $this;
     }
 
     /**
-     * @param mixed $ally
+     * Remove ally
+     *
+     * @param \App\Entity\Ally $ally
      */
-    public function setAlly($ally): void
+    public function removeAlly(\App\Entity\Ally $ally)
     {
-        $this->ally = $ally;
+        $this->allys->removeElement($ally);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAllys()
+    {
+        return $this->allys;
+    }
+
+    /**
+     * @param mixed $allys
+     */
+    public function setAllys($allys): void
+    {
+        $this->allys = $allys;
     }
 
     /**
