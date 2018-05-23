@@ -28,7 +28,7 @@ form.name: 'nouveau nom'
 form.renamePlanet: renommer
 tooltip.rank: 'Votre classement est affiché ici avec l''évolution positive ou négative depuis les dernière 24h.'
 title.tmpbeta: 'Nouvelles améliorations :'
-overview.tmpbeta: '1/ La limitation des ressources sur les planètes <br> 2/ Ajout de deux bâtiments pour augmenter le stockage des ressources <br> 3/ Retirer des fonds à l''alliance ou en déposer<br> 4/ Ajout du bouton ''Nouveau'' pour les messages et rapports<br> 5/ Ajout du temps de construction pour les vaisseaux<br> 6/ Le timer pour l''envoi de flotte est en place (temps de trajet a peaufiner)<br> Ajout du salon ambassade et allié<br> 7/ Scinder flotte'
+overview.tmpbeta: '1/ Réglages des bugs salons <br> 2/ Réglages bugs suppression alliance <br> 3/'
 info.worker: 'Total travailleurs :'
 info.cost: 'Coût d''entretien :'
 info.soldier: 'Total soldats :'

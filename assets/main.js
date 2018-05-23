@@ -501,14 +501,12 @@ function manageDisplaySalon(){
                 url : document.location.href,
                 type : "GET",
                 success : function(data){
-                    if(data.has_error == false && $('#salon_content').val() == "") {
+                    if(data.has_error === false && $('#salon_content').val() === "") {
                         location = location;
                     }
                 }
             });
-
             manageDisplaySalon();
-
         }, 2500);
     }
 }

@@ -207,20 +207,40 @@ class AllyController extends Controller
 
         $user = $this->getUser();
         $ally = $user->getAlly();
-        $user->setAlly(null);
-        $user->setGrade(null);
-        $em->persist($user);
 
+        foreach ($ally->getUsers() as $user) {
+            $user->setAlly(null);
+            $user->setGrade(null);
+        }
         foreach ($ally->getGrades() as $grade) {
             $em->remove($grade);
         }
         foreach ($ally->getSalons() as $salon) {
-            $ally->removeSalon($salon);
+            foreach ($salon->getContents() as $content) {
+                $em->remove($content);
+            }
+            $em->remove($salon);
         }
         foreach ($ally->getExchanges() as $exchange) {
-            $ally->remove($exchange);
+            $em->remove($exchange);
         }
         $em->flush();
+
+        foreach ($ally->getPnas() as $pna) {
+            $em->remove($pna);
+        }
+
+        foreach ($ally->getWars() as $war) {
+            $em->remove($war);
+        }
+
+        foreach ($ally->getAllieds() as $allied) {
+            $em->remove($allied);
+        }
+
+        foreach ($ally->getProposals() as $proposal) {
+            $em->remove($proposal);
+        }
 
         $pnas = $em->getRepository('App:Pna')
             ->createQueryBuilder('pna')

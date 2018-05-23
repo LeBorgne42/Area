@@ -20,9 +20,9 @@ class SalonController extends Controller
 {
     /**
      * @Route("/salon/{idp}", name="salon", requirements={"idp"="\d+"})
-     * @Route("/salon/{idp}/{salon}", name="salon_id", requirements={"idp"="\d+"})
+     * @Route("/salon/{idp}/{id}", name="salon_id", requirements={"idp"="\d+", "id"="\d+"})
      */
-    public function salonAction(Request $request, $idp, $salon = 1)
+    public function salonAction(Request $request, $idp, $id = 1)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
@@ -47,6 +47,13 @@ class SalonController extends Controller
             $sigle = 'AKOUNAMATATA';
         }
 
+        $salon = $em->getRepository('App:Salon')
+            ->createQueryBuilder('s')
+            ->where('s.id = :id')
+            ->setParameters(array('id' => $id))
+            ->getQuery()
+            ->getOneOrNullResult();
+
         $salons = $em->getRepository('App:Salon')
             ->createQueryBuilder('s')
             ->leftJoin('s.allys', 'a')
@@ -58,96 +65,66 @@ class SalonController extends Controller
             ->getQuery()
             ->getResult();
 
+        $ok = 0;
+        foreach($salons as $one) {
+            if($one == $salon) {
+                $ok = 1;
+            }
+        }
+        if($ok == 0) {
+            return $this->redirectToRoute('salon', array('idp' => $usePlanet->getId()));
+        }
+
         $form_message = $this->createForm(SalonType::class);
         $form_message->handleRequest($request);
 
-         if($request->isXmlHttpRequest()) {
-             $attachSalon = $em->getRepository('App:Salon')
-                 ->createQueryBuilder('s')
-                 ->where('s.id = :id')
-                 ->setParameters(array('id' => $salon))
-                 ->getQuery()
-                 ->getOneOrNullResult();
-             /*if ($_POST) {
-                 if ($_POST['newMessage'] != "") {
-                     $message = new S_Content();
-                     $message->setSalon($attachSalon);
-                     $message->setMessage(nl2br($_POST['newMessage']));
-                     $message->setSendAt($now);
-                     $message->setUser($user);
-                     $user->setSalonAt($now);
+        if($request->isXmlHttpRequest()) {
+            $newMessages = $em->getRepository('App:S_Content')
+                ->createQueryBuilder('sc')
+                ->orderBy('sc.sendAt', 'ASC')
+                ->where('sc.salon = :attachSalon')
+                ->andWhere('sc.user != :user')
+                ->andWhere('sc.sendAt > :date')
+                ->setParameters(array('attachSalon' => $salon, 'user' => $user, 'date' => $user->getSalonAt()))
+                ->setMaxResults('1')
+                ->getQuery()
+                ->getResult();
 
-                     if (count($attachSalon->getContents()) > 50) {
-                         $removeMessage = $em->getRepository('App:S_Content')
-                             ->createQueryBuilder('sc')
-                             ->orderBy('sc.sendAt', 'ASC')
-                             ->where('sc.salon = :attachSalon')
-                             ->setParameters(array('attachSalon' => $attachSalon))
-                             ->setMaxResults('10')
-                             ->getQuery()
-                             ->getResult();
-                         foreach ($removeMessage as $oneMessage) {
-                             $em->remove($oneMessage);
-                         }
-                     }
-                     $em->persist($message);
-                     $em->flush();
-                 }
-             }*/
-
-                 $newMessages = $em->getRepository('App:S_Content')
-                     ->createQueryBuilder('sc')
-                     ->orderBy('sc.sendAt', 'ASC')
-                     ->where('sc.salon = :attachSalon')
-                     ->andWhere('sc.user != :user')
-                     ->andWhere('sc.sendAt > :date')
-                     ->setParameters(array('attachSalon' => $attachSalon, 'user' => $user, 'date' => $user->getSalonAt()))
-                     ->setMaxResults('10')
-                     ->getQuery()
-                     ->getResult();
-
-                 if($newMessages) {
-                     $response = new JsonResponse();
-                     $response->setData(
-                         array(
-                             'has_error' => false,
-                     )
-                     );
-                     $user->setSalonAt($now);
-                     $em->persist($user);
-                     $em->flush();
-                     return $response;
-                 } else {
-                     $response = new JsonResponse();
-                     $response->setData(
-                         array(
-                             'has_error' => true,
-                     )
-                     );
-                     return $response;
-                 }
-         }
+            if($newMessages || $user->getSalonAt() == null) {
+                $response = new JsonResponse();
+                $response->setData(
+                    array(
+                        'has_error' => false,
+                    )
+                );
+                $user->setSalonAt($now);
+                $em->persist($user);
+                $em->flush();
+                return $response;
+            } else {
+                $response = new JsonResponse();
+                $response->setData(
+                    array(
+                        'has_error' => true,
+                    )
+                );
+                return $response;
+            }
+        }
 
         if ($form_message->isSubmitted() && $form_message->isValid() && ($user->getSalonBan() > $now || $user->getSalonBan() == null)) {
-            $attachSalon = $em->getRepository('App:Salon')
-                            ->createQueryBuilder('s')
-                            ->where('s.id = :id')
-                            ->setParameters(array('id' => $salon))
-                            ->getQuery()
-                            ->getOneOrNullResult();
-
             $message = new S_Content();
-            $message->setSalon($attachSalon);
+            $message->setSalon($salon);
             $message->setMessage(nl2br($form_message->get('content')->getData()));
             $message->setSendAt($now);
             $message->setUser($user);
 
-            if(count($attachSalon->getContents()) > 50) {
+            if(count($salon->getContents()) > 50) {
                 $removeMessage = $em->getRepository('App:S_Content')
                     ->createQueryBuilder('sc')
                     ->orderBy('sc.sendAt', 'ASC')
                     ->where('sc.salon = :attachSalon')
-                    ->setParameters(array('attachSalon' => $attachSalon))
+                    ->setParameters(array('attachSalon' => $salon))
                     ->setMaxResults('10')
                     ->getQuery()
                     ->getResult();
@@ -178,7 +155,8 @@ class SalonController extends Controller
         return $this->render('connected/salon.html.twig', [
             'usePlanet' => $usePlanet,
             'salons' => $salons,
-            'formObject' => $form_message,
+            'salon' => $salon,
+            'form_message' => $form_message->createView(),
         ]);
     }
 
