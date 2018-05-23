@@ -36,6 +36,11 @@ class User implements UserInterface, \Serializable
     protected $email;
 
     /**
+     * @Assert\Ip
+     */
+    protected $ipAddress;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Ally", inversedBy="users", fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(name="ally_id", referencedColumnName="id")
      */
@@ -228,9 +233,9 @@ class User implements UserInterface, \Serializable
     protected $createdAt = 0;
 
     /**
-     * @ORM\Column(name="connected",type="boolean", nullable=true)
+     * @ORM\Column(name="lastActivity",type="datetime", nullable=true)
      */
-    protected $connected = true;
+    protected $lastActivity = null;
 
     /**
      * @ORM\Column(name="gameOver",type="string", nullable=true)
@@ -860,22 +865,6 @@ class User implements UserInterface, \Serializable
     /**
      * @return mixed
      */
-    public function getConnected()
-    {
-        return $this->connected;
-    }
-
-    /**
-     * @param mixed $connected
-     */
-    public function setConnected($connected): void
-    {
-        $this->connected = $connected;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getJoinAllyAt()
     {
         return $this->joinAllyAt;
@@ -1380,5 +1369,37 @@ class User implements UserInterface, \Serializable
     public function setSalonAt($salonAt): void
     {
         $this->salonAt = $salonAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIpAddress()
+    {
+        return $this->ipAddress;
+    }
+
+    /**
+     * @param mixed $ipAddress
+     */
+    public function setIpAddress($ipAddress): void
+    {
+        $this->ipAddress = $ipAddress;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastActivity()
+    {
+        return $this->lastActivity;
+    }
+
+    /**
+     * @param mixed $lastActivity
+     */
+    public function setLastActivity($lastActivity): void
+    {
+        $this->lastActivity = $lastActivity;
     }
 }

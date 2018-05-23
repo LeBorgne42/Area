@@ -269,9 +269,12 @@ class FightController extends Controller
             $malus = 0;
             if ($armorSaveD != $armorD) {
                 if($countShot == 0) {
-                    $malus = 1;
+                    $malus = 100;
                 } else {
-                    $malus = 1 + (((($armorSaveD - $armorD) * 100) / $armorSaveD) / (rand(15, 20) / 10));
+                    $malus = (((($armorSaveD - $armorD) * 100) / $armorSaveD) / (rand(15, 20) / 10));
+                    if($malus < 1) {
+                        $malus = 5;
+                    }
                 }
             }
             foreach($blockDef as $defenderWin) {
@@ -347,7 +350,10 @@ class FightController extends Controller
                 if($countShot == 0) {
                     $malus = 1;
                 } else {
-                    $malus = 1 + (((($armorSaveA - $armor) * 100) / $armorSaveA) / (rand(15, 20) / 10));
+                    $malus = (((($armorSaveA - $armor) * 100) / $armorSaveA) / (rand(15, 20) / 10));
+                    if($malus < 1) {
+                        $malus = 5;
+                    }
                 }
             }
             foreach($blockAtt as $attackerWin) {

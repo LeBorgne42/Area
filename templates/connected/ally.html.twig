@@ -75,7 +75,7 @@
                                     {{ user.getRank().getPoint() }}
                                 </td>
                                 <td class="center-cells">
-                                    {% if user.getConnected|trans %}{{ 'ally.connected'|trans }}{% else %}{{ 'ally.notConnected'|trans }}{% endif %}
+                                    {% if user.getLastActivity() %}{{ user.getLastActivity()|date('d/m/Y H:i') }}{% else %}{{ 'ally.notConnected'|trans }}{% endif %}
                                 </td>
                                 {% if app.user.getGrade().getCanKick() == 1 %}
                                     <td class="center-cells">

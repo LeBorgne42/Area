@@ -207,31 +207,31 @@ class Fleet
     {
         $ships = '';
         if($this->getHunter()) {
-            $ships = "Chasseurs : " . $this->getHunter() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round($this->getHunter() - ($this->getHunter() / $malus)) . "</span></span><br>";
+            $ships = "Chasseurs : " . $this->getHunter() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round($this->getHunter() - (($this->getHunter() * $malus) / 100)) . "</span></span><br>";
         }
         if($this->getHunterHeavy()) {
-            $ships = $ships . "Chasseurs lourds : " . $this->getHunterHeavy() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round($this->getHunterHeavy() - ($this->getHunterHeavy() / $malus)) . "</span></span><br>";
+            $ships = $ships . "Chasseurs lourds : " . $this->getHunterHeavy() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round($this->getHunterHeavy() - (($this->getHunterHeavy() * $malus) / 100)) . "</span></span><br>";
         }
         if($this->getCorvet()) {
-            $ships = $ships . "Corvettes : " . $this->getCorvet() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round($this->getCorvet() - ($this->getCorvet() / $malus)) . "</span></span><br>";
+            $ships = $ships . "Corvettes : " . $this->getCorvet() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round($this->getCorvet() - (($this->getCorvet() * $malus) / 100)) . "</span></span><br>";
         }
         if($this->getCorvetLaser()) {
-            $ships = $ships . "Corvettes à laser : " . $this->getCorvetLaser() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round($this->getCorvetLaser() - ($this->getCorvetLaser() / $malus)) . "</span></span><br>";
+            $ships = $ships . "Corvettes à laser : " . $this->getCorvetLaser() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round($this->getCorvetLaser() - (($this->getCorvetLaser() * $malus) / 100)) . "</span></span><br>";
         }
         if($this->getFregate()) {
-            $ships = $ships . "Frégates : " . $this->getFregate() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round($this->getFregate() - ($this->getFregate() / $malus)) . "</span></span><br>";
+            $ships = $ships . "Frégates : " . $this->getFregate() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round($this->getFregate() - (($this->getFregate() * $malus) / 100)) . "</span></span><br>";
         }
         if($this->getFregatePlasma()) {
-            $ships = $ships . "Frégates a plasma : " . $this->getFregatePlasma() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round($this->getFregatePlasma() - ($this->getFregatePlasma() / $malus)) . "</span></span><br>";
+            $ships = $ships . "Frégates a plasma : " . $this->getFregatePlasma() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round($this->getFregatePlasma() - (($this->getFregatePlasma() * $malus) / 100)) . "</span></span><br>";
         }
         if($this->getCroiser()) {
-            $ships = $ships . "Croiseurs : " . $this->getCroiser() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round($this->getCroiser() - ($this->getCroiser() / $malus)) . "</span></span><br>";
+            $ships = $ships . "Croiseurs : " . $this->getCroiser() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round($this->getCroiser() - (($this->getCroiser() * $malus) / 100)) . "</span></span><br>";
         }
         if($this->getIronClad()) {
-            $ships = $ships . "Cuirassés : " . $this->getIronClad() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round($this->getIronClad() - ($this->getIronClad() / $malus)) . "</span></span><br>";
+            $ships = $ships . "Cuirassés : " . $this->getIronClad() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round($this->getIronClad() - (($this->getIronClad() * $malus) / 100)) . "</span></span><br>";
         }
         if($this->getDestroyer()) {
-            $ships = $ships . "Destroyers : " . $this->getDestroyer() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round($this->getDestroyer() - ($this->getDestroyer() / $malus)) . "</span></span><br>";
+            $ships = $ships . "Destroyers : " . $this->getDestroyer() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round($this->getDestroyer() - (($this->getDestroyer() * $malus) / 100)) . "</span></span><br>";
         }
 
         return $ships;
@@ -555,39 +555,39 @@ class Fleet
     {
         if($percent != 0) {
             if ($this->getHunter()) {
-                $new = ($this->getHunter() / $percent);
+                $new = ($this->getHunter() * $percent) / 100;
                 $this->setHunter(round($new));
             }
             if ($this->getHunterHeavy()) {
-                $new = ($this->getHunterHeavy() / $percent);
+                $new = ($this->getHunterHeavy() * $percent) / 100;
                 $this->setHunterHeavy(round($new));
             }
             if ($this->getFregate()) {
-                $new = ($this->getFregate() / $percent);
+                $new = ($this->getFregate() * $percent) / 100;
                 $this->setFregate(round($new));
             }
             if ($this->getCorvet()) {
-                $new = ($this->getCorvet() / $percent);
+                $new = ($this->getCorvet() * $percent) / 100;
                 $this->setCorvet(round($new));
             }
             if ($this->getCorvetLaser()) {
-                $new = ($this->getCorvetLaser() / $percent);
+                $new = ($this->getCorvetLaser() * $percent) / 100;
                 $this->setCorvetLaser(round($new));
             }
             if ($this->getFregatePlasma()) {
-                $new = ($this->getFregatePlasma() / $percent);
+                $new = ($this->getFregatePlasma() * $percent) / 100;
                 $this->setFregatePlasma(round($new));
             }
             if ($this->getCroiser()) {
-                $new = ($this->getCroiser() / $percent);
+                $new = ($this->getCroiser() * $percent) / 100;
                 $this->setCroiser(round($new));
             }
             if ($this->getDestroyer()) {
-                $new = ($this->getDestroyer() / $percent);
+                $new = ($this->getDestroyer() * $percent) / 100;
                 $this->setDestroyer(round($new));
             }
             if ($this->getIronClad()) {
-                $new = ($this->getIronClad() / $percent);
+                $new = ($this->getIronClad() * $percent) / 100;
                 $this->setIronClad(round($new));
             }
         }

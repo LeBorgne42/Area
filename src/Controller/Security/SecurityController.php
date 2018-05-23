@@ -195,7 +195,7 @@ class SecurityController extends Controller
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
 
-        $user->setConnected(false);
+        $user->setLastActivity(null);
         $em->persist($user);
         $em->flush();
         return $this->redirectToRoute('logout');
@@ -209,7 +209,8 @@ class SecurityController extends Controller
     {
         if ($this->getUser()->getRoles()[0] == 'ROLE_USER') {
             $user = $this->getUser();
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->getDoctrine()->getManager();$now = new DateTime();
+            $now->setTimezone(new DateTimeZone('Europe/Paris'));
 
             if($user->getGameOver()) {
                 return $this->redirectToRoute('game_over');
@@ -224,7 +225,8 @@ class SecurityController extends Controller
                 ->setMaxResults(1)
                 ->getOneOrNullResult();
 
-            $user->setConnected(true);
+            $user->setIpAddress($_SERVER['REMOTE_ADDR']);
+            $user->setLastActivity($now);
             $em->persist($user);
             $em->flush();
 
