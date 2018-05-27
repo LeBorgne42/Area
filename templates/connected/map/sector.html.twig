@@ -161,7 +161,7 @@
                             {{ fleet.getNbrSignatures()|number_format }}
                         </td>
                         <td class="center-cells text-center">
-                            <span class="timerArea">{{ fleet.getFlightTime()|date('Y/m/d H:i:s') }}</span>
+                            <span class="timerArea" hidden>{{ fleet.getFlightTime()|date('Y/m/d H:i:s') }}</span>
                         </td>
                     </tr>
                 {% endfor %}
@@ -204,7 +204,7 @@
                                 {{ fleet.getNbrSignatures()|number_format }}
                             </td>
                             <td class="center-cells text-center">
-                                <span class="timerArea">{{ fleet.getFlightTime()|date('Y/m/d H:i:s') }}</span>
+                                <span class="timerArea" hidden>{{ fleet.getFlightTime()|date('Y/m/d H:i:s') }}</span>
                             </td>
                         </tr>
                     {% endfor %}
@@ -247,7 +247,7 @@
                                 {{ fleet.getNbrSignatures()|number_format }}
                             </td>
                             <td class="center-cells text-center">
-                                <span class="timerArea">{{ fleet.getFlightTime()|date('Y/m/d H:i:s') }}</span>
+                                <span class="timerArea" hidden>{{ fleet.getFlightTime()|date('Y/m/d H:i:s') }}</span>
                             </td>
                         </tr>
                     {% endfor %}

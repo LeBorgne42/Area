@@ -253,6 +253,11 @@ class Planet
     protected $hunterHeavy = 0;
 
     /**
+     * @ORM\Column(name="hunterWar",type="bigint", nullable=true)
+     */
+    protected $hunterWar = 0;
+
+    /**
      * @ORM\Column(name="corvet",type="bigint", nullable=true)
      */
     protected $corvet = 0;
@@ -261,6 +266,11 @@ class Planet
      * @ORM\Column(name="corvetLaser",type="bigint", nullable=true)
      */
     protected $corvetLaser = 0;
+
+    /**
+     * @ORM\Column(name="corvetWar",type="bigint", nullable=true)
+     */
+    protected $corvetWar = 0;
 
     /**
      * @ORM\Column(name="fregate",type="bigint", nullable=true)
@@ -1665,5 +1675,37 @@ class Planet
     public function setProduct($product): void
     {
         $this->product = $product;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHunterWar()
+    {
+        return $this->hunterWar;
+    }
+
+    /**
+     * @param mixed $hunterWar
+     */
+    public function setHunterWar($hunterWar): void
+    {
+        $this->hunterWar = $hunterWar;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCorvetWar()
+    {
+        return $this->corvetWar;
+    }
+
+    /**
+     * @param mixed $corvetWar
+     */
+    public function setCorvetWar($corvetWar): void
+    {
+        $this->corvetWar = $corvetWar;
     }
 }

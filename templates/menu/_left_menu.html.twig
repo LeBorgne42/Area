@@ -19,6 +19,9 @@
         <a href="{{ path('fleet', {'idp': usePlanet.getId()}) }}"><span>{{ 'fleet'|trans }}</span></a>
     </div>
     <div class="btn-left">
+        <a href="{{ path('market', {'idp': usePlanet.getId()}) }}"><span>{{ 'market'|trans }}</span></a>
+    </div>
+    <div class="btn-left">
         <a href="{{ path('universe', {'idp': usePlanet.getId()}) }}"><span>{{ 'universe'|trans }}</span></a>
     </div>
     <div class="btn-left">
@@ -39,6 +42,12 @@
         <a href="{{ path('spatial', {'idp': usePlanet.getId()}) }}"><span>{{ 'spatial'|trans }}</span></a>
     </div>
     <div class="btn-left">
+        <a href="{{ path('ally', {'idp': usePlanet.getId()}) }}"><span>{{ 'ally'|trans }}{% if app.user.getProposals() and app.user.getAlly() is null %} (<small>{{ app.user.getProposals()|length }}</small>){% endif %}</span></a>
+    </div>
+    <div class="btn-left">
+        <a href="{{ path('rank_ally', {'idp': usePlanet.getId()}) }}"><span>{{ 'rank'|trans }}</span></a>
+    </div>
+    <div class="btn-left">
         <a href="{{ path('message', {'idp': usePlanet.getId()}) }}">{% if app.user.getViewMessage() == false %}<div class="text-orange glyphicon glyphicon-envelope"></div> {% endif %}{{ 'message'|trans }}</span></a>
     </div>
     <div class="btn-left">
@@ -48,10 +57,7 @@
         <a href="{{ path('report', {'idp': usePlanet.getId()}) }}">{% if app.user.getViewReport() == false %}<div class="text-orange glyphicon glyphicon-exclamation-sign"></div> {% endif %}{{ 'report'|trans }}</span></a>
     </div>
     <div class="btn-left">
-        <a href="{{ path('ally', {'idp': usePlanet.getId()}) }}"><span>{{ 'ally'|trans }}{% if app.user.getProposals() and app.user.getAlly() is null %} (<small>{{ app.user.getProposals()|length }}</small>){% endif %}</span></a>
-    </div>
-    <div class="btn-left">
-        <a href="{{ path('rank_ally', {'idp': usePlanet.getId()}) }}">{{ 'rank'|trans }}</span></a>
+        <a target="_blank" href="http://area-control.forumactif.com/">{{ 'forum'|trans }}</a>
     </div>
     <div class="btn-left-bottom">
         <a href="{{ path('dailyCost', {'idp': usePlanet.getId()}) }}"><span>{{ 'dailyCost'|trans }}</span></a>

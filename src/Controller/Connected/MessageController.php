@@ -115,6 +115,10 @@ class MessageController extends Controller
             ->getQuery()
             ->getOneOrNullResult();
 
+        if($user->getSalonBan() > $now) {
+            return $this->redirectToRoute('message', array('idp' => $usePlanet->getId()));
+        }
+
         $form_message = $this->createForm(MessageRespondeType::class, $message);
         $form_message->handleRequest($request);
 

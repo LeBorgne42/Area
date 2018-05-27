@@ -123,6 +123,11 @@ class Fleet
     protected $hunterHeavy = 0;
 
     /**
+     * @ORM\Column(name="hunterWar",type="bigint", nullable=true)
+     */
+    protected $hunterWar = 0;
+
+    /**
      * @ORM\Column(name="corvet",type="bigint", nullable=true)
      */
     protected $corvet = 0;
@@ -131,6 +136,11 @@ class Fleet
      * @ORM\Column(name="corvetLaser",type="bigint", nullable=true)
      */
     protected $corvetLaser = 0;
+
+    /**
+     * @ORM\Column(name="corvetWar",type="bigint", nullable=true)
+     */
+    protected $corvetWar = 0;
 
     /**
      * @ORM\Column(name="fregate",type="bigint", nullable=true)
@@ -212,11 +222,17 @@ class Fleet
         if($this->getHunterHeavy()) {
             $ships = $ships . "Chasseurs lourds : " . $this->getHunterHeavy() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round($this->getHunterHeavy() - (($this->getHunterHeavy() * $malus) / 100)) . "</span></span><br>";
         }
+        if($this->getHunterWar()) {
+            $ships = $ships . "Chasseur à plasma : " . $this->getCorvet() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round($this->getHunterWar() - (($this->getHunterWar() * $malus) / 100)) . "</span></span><br>";
+        }
         if($this->getCorvet()) {
             $ships = $ships . "Corvettes : " . $this->getCorvet() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round($this->getCorvet() - (($this->getCorvet() * $malus) / 100)) . "</span></span><br>";
         }
         if($this->getCorvetLaser()) {
             $ships = $ships . "Corvettes à laser : " . $this->getCorvetLaser() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round($this->getCorvetLaser() - (($this->getCorvetLaser() * $malus) / 100)) . "</span></span><br>";
+        }
+        if($this->getCorvetWar()) {
+            $ships = $ships . "Corvettes Armageddon : " . $this->getCorvetLaser() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round($this->getCorvetWar() - (($this->getCorvetWar() * $malus) / 100)) . "</span></span><br>";
         }
         if($this->getFregate()) {
             $ships = $ships . "Frégates : " . $this->getFregate() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round($this->getFregate() - (($this->getFregate() * $malus) / 100)) . "</span></span><br>";
@@ -249,11 +265,17 @@ class Fleet
         if($this->getHunterHeavy()) {
             $ships = $ships . "Chasseurs lourds : " . $this->getHunterHeavy() . " <span class='float-right'>Perte : Aucune</span><br>";
         }
+        if($this->getHunterWar()) {
+            $ships = $ships . "Chasseurs à plasma : " . $this->getHunterWar() . " <span class='float-right'>Perte : Aucune</span><br>";
+        }
         if($this->getCorvet()) {
             $ships = $ships . "Corvettes : " . $this->getCorvet() . " <span class='float-right'>Perte : Aucune</span><br>";
         }
         if($this->getCorvetLaser()) {
             $ships = $ships . "Corvettes à laser : " . $this->getCorvetLaser() . " <span class='float-right'>Perte : Aucune</span><br>";
+        }
+        if($this->getCorvetWar()) {
+            $ships = $ships . "Corvettes Armageddon : " . $this->getCorvetWar() . " <span class='float-right'>Perte : Aucune</span><br>";
         }
         if($this->getFregate()) {
             $ships = $ships . "Frégates : " . $this->getFregate() . " <span class='float-right'>Perte : Aucune</span><br>";
@@ -286,11 +308,17 @@ class Fleet
         if($this->getHunterHeavy()) {
             $ships = $ships . "Chasseurs lourds : " . $this->getHunterHeavy() . " <span class='float-right'>Perte : " . "<span class=\"text-rouge\">" . "Totale</span></span><br>";
         }
+        if($this->getHunterWar()) {
+            $ships = $ships . "Chasseurs à plasma : " . $this->getHunterWar() . " <span class='float-right'>Perte : " . "<span class=\"text-rouge\">" . "Totale</span></span><br>";
+        }
         if($this->getCorvet()) {
             $ships = $ships . "Corvettes : " . $this->getCorvet() . " <span class='float-right'>Perte : " . "<span class=\"text-rouge\">" . "Totale</span></span><br>";
         }
         if($this->getCorvetLaser()) {
             $ships = $ships . "Corvettes à laser : " . $this->getCorvetLaser() . " <span class='float-right'>Perte : " . "<span class=\"text-rouge\">" . "Totale</span></span><br>";
+        }
+        if($this->getCorvetWar()) {
+            $ships = $ships . "Corvettes Armageddon : " . $this->getCorvetWar() . " <span class='float-right'>Perte : " . "<span class=\"text-rouge\">" . "Totale</span></span><br>";
         }
         if($this->getFregate()) {
             $ships = $ships . "Frégates : " . $this->getFregate() . " <span class='float-right'>Perte : " . "<span class=\"text-rouge\">" . "Totale</span></span><br>";
@@ -367,15 +395,17 @@ class Fleet
     {
         $hunter = $this->getHunter() * 15;
         $hunterHeavy = $this->getHunterHeavy() * 25;
+        $hunterWar = $this->getHunterWar() * 53;
         $corvet = $this->getCorvet() * 74;
         $corvetLaser = $this->getCorvetLaser() * 115;
+        $corvetWar = $this->getCorvetWar() * 135;
         $fregate = $this->getFregate() * 168;
         $fregatePlasma = $this->getFregatePlasma() * 451;
         $croiser = $this->getCroiser() * 957;
         $ironClad = $this->getIronClad() * 2415;
         $destroyer = $this->getDestroyer() * 5176;
 
-        $nbr = $fregate + $hunter + $hunterHeavy + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
+        $nbr = $hunterWar + $corvetWar +  $fregate + $hunter + $hunterHeavy + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
         return $nbr;
     }
 
@@ -384,12 +414,13 @@ class Fleet
      */
     public function getPlasma(): int
     {
+        $hunterWar = $this->getHunterWar() * 5;
         $fregatePlasma = $this->getFregatePlasma() * 20;
         $croiser = $this->getCroiser() * 10;
         $ironClad = $this->getIronClad() * 15;
         $destroyer = $this->getDestroyer() * 2;
 
-        $nbr = $fregatePlasma + $croiser + $ironClad + $destroyer ;
+        $nbr = $fregatePlasma + $croiser + $ironClad + $destroyer + $hunterWar;
         return $nbr;
     }
 
@@ -400,15 +431,17 @@ class Fleet
     {
         $hunter = $this->getHunter() * 4;
         $hunterHeavy = $this->getHunterHeavy() * 5;
+        $hunterWar = $this->getHunterWar() * 1;
         $corvet = $this->getCorvet() * 15;
         $corvetLaser = $this->getCorvetLaser() * 20;
+        $corvetWar = $this->getCorvetWar() * 26;
         $fregate = $this->getFregate() * 40;
         $fregatePlasma = $this->getFregatePlasma() * 55;
         $croiser = $this->getCroiser() * 80;
         $ironClad = $this->getIronClad() * 100;
         $destroyer = $this->getDestroyer() * 200;
 
-        $nbr = $fregate + $hunter + $hunterHeavy + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
+        $nbr = $hunterWar + $corvetWar + $fregate + $hunter + $hunterHeavy + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
         return $nbr;
     }
 
@@ -419,13 +452,14 @@ class Fleet
     {
         $corvet = $this->getCorvet() * 2;
         $corvetLaser = $this->getCorvetLaser() * 5;
+        $corvetWar = $this->getCorvetWar() * 10;
         $fregate = $this->getFregate() * 10;
         $fregatePlasma = $this->getFregatePlasma() * 15;
         $croiser = $this->getCroiser() * 22;
         $ironClad = $this->getIronClad() * 25;
         $destroyer = $this->getDestroyer() * 200;
 
-        $nbr = $fregate + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
+        $nbr = $corvetWar + $fregate + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
         return $nbr;
     }
 
@@ -434,14 +468,16 @@ class Fleet
      */
     public function getLaser(): int
     {
+        $hunterWar = $this->getHunterWar() * 1;
         $corvetLaser = $this->getCorvetLaser() * 8;
+        $corvetWar = $this->getCorvetWar() * 9;
         $fregate = $this->getFregate() * 6;
         $fregatePlasma = $this->getFregatePlasma() * 7;
         $croiser = $this->getCroiser() * 20;
         $ironClad = $this->getIronClad() * 15;
         $destroyer = $this->getDestroyer() * 2;
 
-        $nbr = $fregate + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
+        $nbr = $hunterWar + $corvetWar + $fregate + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
         return $nbr;
     }
 
@@ -459,15 +495,17 @@ class Fleet
         $barge = $this->getBarge();
         $hunter = $this->getHunter();
         $hunterHeavy = $this->getHunterHeavy();
+        $hunterWar = $this->getHunterWar();
         $corvet = $this->getCorvet();
         $corvetLaser = $this->getCorvetLaser();
+        $corvetWar = $this->getCorvetWar();
         $fregate = $this->getFregate();
         $fregatePlasma = $this->getFregatePlasma();
         $croiser = $this->getCroiser();
         $ironClad = $this->getIronClad();
         $destroyer = $this->getDestroyer();
 
-        $nbr = $fregate + $colonizer + $barge + $hunter + $recycleur + $sonde + $cargoI + $cargoV + $cargoX + $hunterHeavy + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
+        $nbr = $hunterWar + $corvetWar + $fregate + $colonizer + $barge + $hunter + $recycleur + $sonde + $cargoI + $cargoV + $cargoX + $hunterHeavy + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
         return $nbr;
     }
 
@@ -485,15 +523,17 @@ class Fleet
         $barge = $this->getBarge() * 50;
         $hunter = $this->getHunter() * 5;
         $hunterHeavy = $this->getHunterHeavy() * 8;
+        $hunterWar = $this->getHunterWar() * 15;
         $corvet = $this->getCorvet() * 25;
         $corvetLaser = $this->getCorvetLaser() * 40;
+        $corvetWar = $this->getCorvetWar() * 45;
         $fregate = $this->getFregate() * 60;
         $fregatePlasma = $this->getFregatePlasma() * 150;
         $croiser = $this->getCroiser() * 300;
         $ironClad = $this->getIronClad() * 700;
         $destroyer = $this->getDestroyer() * 1500;
 
-        $nbr = $fregate + $colonizer + $barge + $hunter + $recycleur + $sonde + $cargoI + $cargoV + $cargoX + $hunterHeavy + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
+        $nbr = $hunterWar + $corvetWar + $fregate + $colonizer + $barge + $hunter + $recycleur + $sonde + $cargoI + $cargoV + $cargoX + $hunterHeavy + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
         return $nbr;
     }
 
@@ -526,14 +566,14 @@ class Fleet
         if($this->getCorvetLaser()) {
             return 1;
         }
-        if($this->getCorvet()) {
+        if($this->getCorvet() || $this->getCorvetWar()) {
             return 0.7;
-        }
-        if($this->getHunter() || $this->getHunterHeavy()) {
-            return 0.5;
         }
         if($this->getCargoX()) {
             return 0.6;
+        }
+        if($this->getHunter() || $this->getHunterHeavy() || $this->getHunterWar()) {
+            return 0.5;
         }
         if($this->getCargoV()) {
             return 0.5;
@@ -562,6 +602,10 @@ class Fleet
                 $new = ($this->getHunterHeavy() * $percent) / 100;
                 $this->setHunterHeavy(round($new));
             }
+            if ($this->getHunterWar()) {
+                $new = ($this->getHunterWar() * $percent) / 100;
+                $this->setHunterWar(round($new));
+            }
             if ($this->getFregate()) {
                 $new = ($this->getFregate() * $percent) / 100;
                 $this->setFregate(round($new));
@@ -573,6 +617,10 @@ class Fleet
             if ($this->getCorvetLaser()) {
                 $new = ($this->getCorvetLaser() * $percent) / 100;
                 $this->setCorvetLaser(round($new));
+            }
+            if ($this->getCorvetWar()) {
+                $new = ($this->getCorvetWar() * $percent) / 100;
+                $this->setCorvetWar(round($new));
             }
             if ($this->getFregatePlasma()) {
                 $new = ($this->getFregatePlasma() * $percent) / 100;
@@ -1103,5 +1151,37 @@ class Fleet
     public function setDestroyer($destroyer): void
     {
         $this->destroyer = $destroyer;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHunterWar()
+    {
+        return $this->hunterWar;
+    }
+
+    /**
+     * @param mixed $hunterWar
+     */
+    public function setHunterWar($hunterWar): void
+    {
+        $this->hunterWar = $hunterWar;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCorvetWar()
+    {
+        return $this->corvetWar;
+    }
+
+    /**
+     * @param mixed $corvetWar
+     */
+    public function setCorvetWar($corvetWar): void
+    {
+        $this->corvetWar = $corvetWar;
     }
 }

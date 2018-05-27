@@ -59,8 +59,10 @@ class SpatialController extends Controller
             $hunter = $form_spatialShip->get('hunter')->getData();
             $fregate = $form_spatialShip->get('fregate')->getData();
             $hunterHeavy = $form_spatialShip->get('hunterHeavy')->getData();
+            $hunterWar = $form_spatialShip->get('hunterWar')->getData();
             $corvet = $form_spatialShip->get('corvet')->getData();
             $corvetLaser = $form_spatialShip->get('corvetLaser')->getData();
+            $corvetWar = $form_spatialShip->get('corvetWar')->getData();
             $fregatePlasma = $form_spatialShip->get('fregatePlasma')->getData();
             $croiser = $form_spatialShip->get('croiser')->getData();
             $ironClad = $form_spatialShip->get('ironClad')->getData();
@@ -68,7 +70,8 @@ class SpatialController extends Controller
             $niobiumLess = (8000 * $cargoI) + (25000 * $cargoV) + (70000 * $cargoX) + (20000 * $colonizer) + (10000 * $recycleur) + (15000 * $barge) + (5 * $sonde) + (250 * $hunter) + (2200 * $fregate) + (400 * $hunterHeavy) + (1000 * $corvet) + (400 * $corvetLaser) + (2000 * $fregatePlasma) + (10000 * $croiser) + (30000 * $ironClad) + (20000 * $destroyer);
             $waterLess =  (6500 * $cargoI) + (18600 * $cargoV) + (57000 * $cargoX) + (12000 * $colonizer) + (7000 * $recycleur) + (12000 * $barge) + (50 * $hunter) + (1400 * $fregate) + (80 * $hunterHeavy) + (500 * $corvet) + (2000 * $corvetLaser) + (7000 * $fregatePlasma) + (8000 * $croiser) + (12000 * $ironClad) + (70000 * $destroyer);
             $workerLess = (5000 * $colonizer) + (500 * $destroyer) + (100 * $cargoX);
-            $time = ((300 * $cargoI) + (600 * $cargoV) + (900 * $cargoX) + (10800 * $colonizer) + (400 * $recycleur) + (1800 * $barge) + (2 * $sonde) + (20 * $hunter) + (240 * $fregate) + (32 * $hunterHeavy) + (100 * $corvet) + (160 * $corvetLaser) + (600 * $fregatePlasma) + (1200 * $croiser) + (2800 * $ironClad) + (6000 * $destroyer)) / $usePlanet->getShipProduction();
+            $warPoint = (900 * $hunterWar) + (1800 * $corvetWar);
+            $time = ((300 * $cargoI) + (600 * $cargoV) + (900 * $cargoX) + (10800 * $colonizer) + (400 * $recycleur) + (1800 * $barge) + (2 * $sonde) + (60 * $hunterWar) + (300 * $corvetWar) + (20 * $hunter) + (240 * $fregate) + (32 * $hunterHeavy) + (100 * $corvet) + (160 * $corvetLaser) + (600 * $fregatePlasma) + (1200 * $croiser) + (2800 * $ironClad) + (6000 * $destroyer)) / $usePlanet->getShipProduction();
             $now->add(new DateInterval('PT' . round($time) . 'S'));
 
             if (($usePlanet->getNiobium() < $niobiumLess || $usePlanet->getWater() < $waterLess) ||
@@ -83,7 +86,8 @@ class SpatialController extends Controller
                 ($fregatePlasma && ($user->getMissile() != 3 || $usePlanet->getHeavyUsine() == 0 || $user->getPlasma() < 1 || $user->getLaser() < 1)) ||
                 ($croiser && ($user->getMissile() != 3 || $usePlanet->getHeavyUsine() == 0 || $user->getPlasma() < 2 || $user->getLaser() < 2)) ||
                 ($ironClad && ($user->getMissile() != 3 || $usePlanet->getHeavyUsine() == 0 || $user->getHeavyShip() < 2 || $user->getPlasma() != 3 || $user->getLaser() != 3)) ||
-                ($destroyer && ($user->getMissile() != 3 || $usePlanet->getHeavyUsine() == 0 || $user->getHeavyShip() != 3 || $user->getPlasma() != 3 || $user->getLaser() != 3)))
+                ($destroyer && ($user->getMissile() != 3 || $usePlanet->getHeavyUsine() == 0 || $user->getHeavyShip() != 3 || $user->getPlasma() != 3 || $user->getLaser() != 3)) ||
+                ($warPoint > $user->getRank()->getWarPoint()))
             {
                 return $this->redirectToRoute('spatial', array('idp' => $usePlanet->getId()));
             }
@@ -99,8 +103,10 @@ class SpatialController extends Controller
                 $product->setHunter($product->getHunter() + $hunter);
                 $product->setFregate($product->getFregate() + $fregate);
                 $product->setHunterHeavy($product->getHunterHeavy() + $hunterHeavy);
+                $product->setHunterWar($product->getHunterWar() + $hunterWar);
                 $product->setCorvet($product->getCorvet() + $corvet);
                 $product->setCorvetLaser($product->getCorvetLaser() + $corvetLaser);
+                $product->setCorvetWar($product->getCorvetWar() + $corvetWar);
                 $product->setFregatePlasma($product->getFregatePlasma() + $fregatePlasma);
                 $product->setCroiser($product->getCroiser() + $croiser);
                 $product->setIronClad($product->getIronClad() + $ironClad);
@@ -121,8 +127,10 @@ class SpatialController extends Controller
                 $product->setHunter($hunter);
                 $product->setFregate($fregate);
                 $product->setHunterHeavy($hunterHeavy);
+                $product->setHunterWar($hunterWar);
                 $product->setCorvet($corvet);
                 $product->setCorvetLaser($corvetLaser);
+                $product->setCorvetWar($corvetWar);
                 $product->setFregatePlasma($fregatePlasma);
                 $product->setCroiser($croiser);
                 $product->setIronClad($ironClad);
@@ -133,7 +141,9 @@ class SpatialController extends Controller
             $usePlanet->setNiobium($usePlanet->getNiobium() - $niobiumLess);
             $usePlanet->setWater($usePlanet->getWater() - $waterLess);
             $usePlanet->setWorker($usePlanet->getWorker() - $workerLess);
+            $user->getRank()->setWarPoint($user->getRank()->getWarPoint() - $warPoint);
             $em->persist($usePlanet);
+            $em->persist($user);
             $em->persist($product);
             $em->flush();
 
@@ -177,17 +187,20 @@ class SpatialController extends Controller
             $hunter = $usePlanet->getHunter() - $form_createFleet->get('hunter')->getData();
             $fregate = $usePlanet->getFregate() - $form_createFleet->get('fregate')->getData();
             $hunterHeavy = $usePlanet->getHunterHeavy() - $form_createFleet->get('hunterHeavy')->getData();
+            $hunterWar = $usePlanet->getHunterWar() - $form_createFleet->get('hunterWar')->getData();
             $corvet = $usePlanet->getCorvet() - $form_createFleet->get('corvet')->getData();
             $corvetLaser = $usePlanet->getCorvetLaser() - $form_createFleet->get('corvetLaser')->getData();
+            $corvetWar = $usePlanet->getCorvetWar() - $form_createFleet->get('corvetWar')->getData();
             $fregatePlasma = $usePlanet->getFregatePlasma() - $form_createFleet->get('fregatePlasma')->getData();
             $croiser = $usePlanet->getCroiser() - $form_createFleet->get('croiser')->getData();
             $ironClad = $usePlanet->getIronClad() - $form_createFleet->get('ironClad')->getData();
             $destroyer = $usePlanet->getDestroyer() - $form_createFleet->get('destroyer')->getData();
-            $total = $form_createFleet->get('cargoI')->getData() + $form_createFleet->get('cargoV')->getData() + $form_createFleet->get('cargoX')->getData() + $form_createFleet->get('hunterHeavy')->getData() + $form_createFleet->get('corvet')->getData() + $form_createFleet->get('corvetLaser')->getData() + $form_createFleet->get('fregatePlasma')->getData() + $form_createFleet->get('croiser')->getData() + $form_createFleet->get('ironClad')->getData() + $form_createFleet->get('destroyer')->getData() + $form_createFleet->get('colonizer')->getData() + $form_createFleet->get('fregate')->getData() + $form_createFleet->get('hunter')->getData() + $form_createFleet->get('sonde')->getData() + $form_createFleet->get('barge')->getData() + $form_createFleet->get('recycleur')->getData();
+            $total = $form_createFleet->get('corvetWar')->getData() + $form_createFleet->get('hunterWar')->getData() + $form_createFleet->get('cargoI')->getData() + $form_createFleet->get('cargoV')->getData() + $form_createFleet->get('cargoX')->getData() + $form_createFleet->get('hunterHeavy')->getData() + $form_createFleet->get('corvet')->getData() + $form_createFleet->get('corvetLaser')->getData() + $form_createFleet->get('fregatePlasma')->getData() + $form_createFleet->get('croiser')->getData() + $form_createFleet->get('ironClad')->getData() + $form_createFleet->get('destroyer')->getData() + $form_createFleet->get('colonizer')->getData() + $form_createFleet->get('fregate')->getData() + $form_createFleet->get('hunter')->getData() + $form_createFleet->get('sonde')->getData() + $form_createFleet->get('barge')->getData() + $form_createFleet->get('recycleur')->getData();
 
             if (($colonizer < 0 || $recycleur < 0) || ($barge < 0 || $sonde < 0) || ($hunter < 0 || $fregate < 0) ||
                 ($total == 0 || $cargoI < 0) || ($cargoV < 0 || $cargoX < 0) || ($hunterHeavy < 0 || $corvet < 0) ||
-                ($corvetLaser < 0 || $fregatePlasma < 0) || ($croiser < 0 || $ironClad < 0) || $destroyer < 0) {
+                ($corvetLaser < 0 || $fregatePlasma < 0) || ($croiser < 0 || $ironClad < 0) || ($destroyer < 0 || $hunterWar < 0) ||
+                ($corvetWar < 0)) {
                 return $this->redirectToRoute('spatial', array('idp' => $usePlanet->getId()));
             }
             $eAlly = $user->getAllyEnnemy();
@@ -220,8 +233,10 @@ class SpatialController extends Controller
             $fleet->setHunter($form_createFleet->get('hunter')->getData());
             $fleet->setFregate($form_createFleet->get('fregate')->getData());
             $fleet->setHunterHeavy($form_createFleet->get('hunterHeavy')->getData());
+            $fleet->setHunterWar($form_createFleet->get('hunterWar')->getData());
             $fleet->setCorvet($form_createFleet->get('corvet')->getData());
             $fleet->setCorvetLaser($form_createFleet->get('corvetLaser')->getData());
+            $fleet->setCorvetWar($form_createFleet->get('corvetWar')->getData());
             $fleet->setFregatePlasma($form_createFleet->get('fregatePlasma')->getData());
             $fleet->setCroiser($form_createFleet->get('croiser')->getData());
             $fleet->setIronClad($form_createFleet->get('ironClad')->getData());
@@ -258,8 +273,10 @@ class SpatialController extends Controller
             $usePlanet->setHunter($hunter);
             $usePlanet->setFregate($fregate);
             $usePlanet->setHunterHeavy($hunterHeavy);
+            $usePlanet->setHunterWar($hunterWar);
             $usePlanet->setCorvet($corvet);
             $usePlanet->setCorvetLaser($corvetLaser);
+            $usePlanet->setCorvetWar($corvetWar);
             $usePlanet->setFregatePlasma($fregatePlasma);
             $usePlanet->setCroiser($croiser);
             $usePlanet->setIronClad($ironClad);

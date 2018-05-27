@@ -157,6 +157,20 @@ class SpatialShipType extends AbstractType
                 )
             )
             ->add(
+                'hunterWar',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                )
+            )
+            ->add(
                 'corvet',
                 null,
                 array(
@@ -172,6 +186,20 @@ class SpatialShipType extends AbstractType
             )
             ->add(
                 'corvetLaser',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                )
+            )
+            ->add(
+                'corvetWar',
                 null,
                 array(
                     'label' => 'form.nbr',

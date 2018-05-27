@@ -107,6 +107,14 @@
                     {{ form_widget(form_createFleet.hunterHeavy,{attr: { max: usePlanet.getHunterHeavy()}}) }}
                 </td>
             </tr>
+            <tr{% if usePlanet.getHunterWar() == 0 %} hidden{% endif %}>
+                <th class="tab-cells-name p-1 pl-3">
+                    {{ 'spatial.hunterWar'|trans }} x {{ usePlanet.getHunterWar() }}
+                </th>
+                <td class="center-cells p-1">
+                    {{ form_widget(form_createFleet.hunterWar,{attr: { max: usePlanet.getHunterWar()}}) }}
+                </td>
+            </tr>
             <tr{% if usePlanet.getCorvet() == 0 %} hidden{% endif %}>
                 <th class="tab-cells-name p-1 pl-3">
                     {{ 'spatial.corvet'|trans }} x {{ usePlanet.getCorvet() }}
@@ -121,6 +129,14 @@
                 </th>
                 <td class="center-cells p-1">
                     {{ form_widget(form_createFleet.corvetLaser,{attr: { max: usePlanet.getCorvetLaser()}}) }}
+                </td>
+            </tr>
+            <tr{% if usePlanet.getCorvetWar() == 0 %} hidden{% endif %}>
+                <th class="tab-cells-name p-1 pl-3">
+                    {{ 'spatial.corvetWar'|trans }} x {{ usePlanet.getCorvetWar() }}
+                </th>
+                <td class="center-cells p-1">
+                    {{ form_widget(form_createFleet.corvetWar,{attr: { max: usePlanet.getCorvetWar()}}) }}
                 </td>
             </tr>
             <tr{% if usePlanet.getFregate() == 0 %} hidden{% endif %}>

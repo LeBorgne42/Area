@@ -172,49 +172,45 @@ class InstantController extends Controller
         foreach ($fleetCdrs as $fleetCdr) {
             $recycle = $fleetCdr->getRecycleur() * 5000;
             $planetCdr = $fleetCdr->getPlanet();
-            if($planetCdr->getCdr() == false) {
-                if ($fleetCdr->getCargoPlace() < ($fleetCdr->getCargoFull() + ($recycle * 2))) {
-                    $cargoFullCdr = round((($fleetCdr->getCargoPlace() - $fleetCdr->getCargoFull()) / 2));
-                    if ($planetCdr->getNbCdr() > $cargoFullCdr) {
-                        $fleetCdr->setNiobium($fleetCdr->getNiobium() + $cargoFullCdr);
-                        $planetCdr->setNbCdr($planetCdr->getNbCdr() - $cargoFullCdr);
-                    } else {
-                        $fleetCdr->setNiobium($fleetCdr->getNiobium() + $planetCdr->getNbCdr());
-                        $planetCdr->setNbCdr(0);
-                    }
-                    if ($planetCdr->getWtCdr() > $cargoFullCdr) {
-                        $fleetCdr->setWater($fleetCdr->getWater() + $cargoFullCdr);
-                        $planetCdr->setWtCdr($planetCdr->getWtCdr() - $cargoFullCdr);
-                    } else {
-                        $fleetCdr->setWater($fleetCdr->getWater() + $planetCdr->getWtCdr());
-                        $planetCdr->setWtCdr(0);
-                    }
-                    $fleetCdr->setRecycleAt(null);
+            if ($fleetCdr->getCargoPlace() < ($fleetCdr->getCargoFull() + ($recycle * 2))) {
+                $cargoFullCdr = round((($fleetCdr->getCargoPlace() - $fleetCdr->getCargoFull()) / 2));
+                if ($planetCdr->getNbCdr() > $cargoFullCdr) {
+                    $fleetCdr->setNiobium($fleetCdr->getNiobium() + $cargoFullCdr);
+                    $planetCdr->setNbCdr($planetCdr->getNbCdr() - $cargoFullCdr);
                 } else {
-                    if ($planetCdr->getNbCdr() > $recycle) {
-                        $fleetCdr->setNiobium($fleetCdr->getNiobium() + $recycle);
-                        $planetCdr->setNbCdr($planetCdr->getNbCdr() - $recycle);
-                    } else {
-                        $fleetCdr->setNiobium($fleetCdr->getNiobium() + $planetCdr->getNbCdr());
-                        $planetCdr->setNbCdr(0);
-                    }
-                    if ($planetCdr->getWtCdr() > $recycle) {
-                        $fleetCdr->setWater($fleetCdr->getWater() + $recycle);
-                        $planetCdr->setWtCdr($planetCdr->getWtCdr() - $recycle);
-                    } else {
-                        $fleetCdr->setWater($fleetCdr->getWater() + $planetCdr->getWtCdr());
-                        $planetCdr->setWtCdr(0);
-                    }
-                    if (($planetCdr->getNbCdr() > 0 || $planetCdr->getWtCdr() > 0) && $fleetCdr->getCargoPlace() > $fleetCdr->getCargoFull()) {
-                        $tmpNoCdr = $now;
-                        $tmpNoCdr->add(new DateInterval('PT' . 3600 . 'S'));
-                        $fleetCdr->setRecycleAt($now);
-                    } else {
-                        $fleetCdr->setRecycleAt(null);
-                    }
+                    $fleetCdr->setNiobium($fleetCdr->getNiobium() + $planetCdr->getNbCdr());
+                    $planetCdr->setNbCdr(0);
                 }
-            } else {
+                if ($planetCdr->getWtCdr() > $cargoFullCdr) {
+                    $fleetCdr->setWater($fleetCdr->getWater() + $cargoFullCdr);
+                    $planetCdr->setWtCdr($planetCdr->getWtCdr() - $cargoFullCdr);
+                } else {
+                    $fleetCdr->setWater($fleetCdr->getWater() + $planetCdr->getWtCdr());
+                    $planetCdr->setWtCdr(0);
+                }
                 $fleetCdr->setRecycleAt(null);
+            } else {
+                if ($planetCdr->getNbCdr() > $recycle) {
+                    $fleetCdr->setNiobium($fleetCdr->getNiobium() + $recycle);
+                    $planetCdr->setNbCdr($planetCdr->getNbCdr() - $recycle);
+                } else {
+                    $fleetCdr->setNiobium($fleetCdr->getNiobium() + $planetCdr->getNbCdr());
+                    $planetCdr->setNbCdr(0);
+                }
+                if ($planetCdr->getWtCdr() > $recycle) {
+                    $fleetCdr->setWater($fleetCdr->getWater() + $recycle);
+                    $planetCdr->setWtCdr($planetCdr->getWtCdr() - $recycle);
+                } else {
+                    $fleetCdr->setWater($fleetCdr->getWater() + $planetCdr->getWtCdr());
+                    $planetCdr->setWtCdr(0);
+                }
+                if (($planetCdr->getNbCdr() > 0 || $planetCdr->getWtCdr() > 0) && $fleetCdr->getCargoPlace() > $fleetCdr->getCargoFull()) {
+                    $tmpNoCdr = $now;
+                    $tmpNoCdr->add(new DateInterval('PT' . 3600 . 'S'));
+                    $fleetCdr->setRecycleAt($now);
+                } else {
+                    $fleetCdr->setRecycleAt(null);
+                }
             }
             $em->persist($fleetCdr);
             $em->persist($planetCdr);
@@ -322,8 +318,10 @@ class InstantController extends Controller
             $planetProduct->setHunter($planetProduct->getHunter() + $product->getHunter());
             $planetProduct->setFregate($planetProduct->getFregate() + $product->getFregate());
             $planetProduct->setHunterHeavy($planetProduct->getHunterHeavy() + $product->getHunterHeavy());
+            $planetProduct->setHunterWar($planetProduct->getHunterWar() + $product->getHunterWar());
             $planetProduct->setCorvet($planetProduct->getCorvet() + $product->getCorvet());
             $planetProduct->setCorvetLaser($planetProduct->getCorvetLaser() + $product->getCorvetLaser());
+            $planetProduct->setCorvetWar($planetProduct->getCorvetWar() + $product->getCorvetWar());
             $planetProduct->setFregatePlasma($planetProduct->getFregatePlasma() + $product->getFregatePlasma());
             $planetProduct->setCroiser($planetProduct->getCroiser() + $product->getCroiser());
             $planetProduct->setIronClad($planetProduct->getIronClad() + $product->getIronClad());

@@ -24,7 +24,7 @@
                         <span>{{ (usePlanet.getSoldierAtNbr() - usePlanet.getSoldier())|number_format }} {{ 'caserner.soldierProd'|trans }}</span>
                     </th>
                     <td class="center-cells">
-                        <span class="timerArea">{{ usePlanet.getSoldierAt()|date('Y/m/d H:i:s') }}</span>
+                        <span class="timerArea" hidden>{{ usePlanet.getSoldierAt()|date('Y/m/d H:i:s') }}</span>
                     </td>
                 </tr>
                 </tbody>
@@ -52,7 +52,7 @@
                         <span>{{ (usePlanet.getScientistAtNbr() - usePlanet.getScientist())|number_format }} {{ 'caserner.scientistProd'|trans }}</span>
                     </th>
                     <td class="center-cells">
-                        <span class="timerArea">{{ usePlanet.getScientistAt()|date('Y/m/d H:i:s') }}</span>
+                        <span class="timerArea" hidden>{{ usePlanet.getScientistAt()|date('Y/m/d H:i:s') }}</span>
                     </td>
                 </tr>
                 </tbody>

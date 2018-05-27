@@ -41,6 +41,10 @@ class SalonController extends Controller
             ->getQuery()
             ->getOneOrNullResult();
 
+        if($user->getSalonBan() > $now) {
+            return $this->redirectToRoute('salon', array('idp' => $usePlanet->getId()));
+        }
+
         if($user->getAlly()) {
             $sigle = $user->getAlly()->getSigle();
         } else {

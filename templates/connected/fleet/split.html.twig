@@ -83,6 +83,14 @@
                             {{ form_widget(form_spatialShip.hunterHeavy,{attr: { max: oldFleet.getHunterHeavy()}}) }}
                         </td>
                     </tr>
+                    <tr{% if oldFleet.getHunterWar == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.hunterWar'|trans }} x {{ oldFleet.getHunterWar()|number_format }}
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_spatialShip.hunterWar,{attr: { max: oldFleet.getHunterWar()}}) }}
+                        </td>
+                    </tr>
                     <tr{% if oldFleet.getCorvet == 0 %} hidden{% endif %}>
                         <th class="tab-cells-name">
                             {{ 'fleet.corvet'|trans }} x {{ oldFleet.getCorvet()|number_format }}
@@ -97,6 +105,14 @@
                         </th>
                         <td class="center-cells">
                             {{ form_widget(form_spatialShip.corvetLaser,{attr: { max: oldFleet.getCorvetLaser()}}) }}
+                        </td>
+                    </tr>
+                    <tr{% if oldFleet.getCorvetWar == 0 %} hidden{% endif %}>
+                        <th class="tab-cells-name">
+                            {{ 'fleet.corvetWar'|trans }} x {{ oldFleet.getCorvetWar()|number_format }}
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_spatialShip.corvetWar,{attr: { max: oldFleet.getCorvetWar()}}) }}
                         </td>
                     </tr>
                     <tr{% if oldFleet.getFregate == 0 %} hidden{% endif %}>

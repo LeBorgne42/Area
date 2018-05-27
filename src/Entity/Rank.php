@@ -24,6 +24,11 @@ class Rank
     protected $user;
 
     /**
+     * @ORM\Column(name="warPoint",type="bigint")
+     */
+    protected $warPoint = 0;
+
+    /**
      * @ORM\Column(name="point",type="bigint")
      */
     protected $point = 100;
@@ -121,6 +126,22 @@ class Rank
     public function setOldPosition($oldPosition): void
     {
         $this->oldPosition = $oldPosition;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWarPoint()
+    {
+        return $this->warPoint;
+    }
+
+    /**
+     * @param mixed $warPoint
+     */
+    public function setWarPoint($warPoint): void
+    {
+        $this->warPoint = $warPoint;
     }
 
     public function getId()

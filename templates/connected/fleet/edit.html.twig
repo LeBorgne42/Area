@@ -59,6 +59,7 @@
                     {{ form_start(form_sendFleet,{attr: { action: path('send_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}) }}
                     <div id="positionFleet" hidden>{{ fleet.getPlanet().getSector().getPosition() }}</div>
                     <div id="planeteFleet" hidden>{{ fleet.getPlanet().getPosition() }}</div>
+                    <div id="signatureFleet" hidden>{{ fleet.getNbrSignatures() }}</div>
                     <div id="speedFleet" hidden>{{ fleet.getSpeed() }}</div>
                     <div class="mb-3 text-center">
                             {{ 'fleet.flightTime'|trans }} <span id="flightTime"></span>
@@ -246,6 +247,17 @@
                                     {{ form_widget(form_manageFleet.lessHunterHeavy,{attr: { max: fleet.getHunterHeavy()}}) }}
                                 </td>
                             </tr>
+                            <tr{% if fleet.getPlanet().getHunterWar() == 0 and fleet.getHunterWar() == 0 %} hidden{% endif %}>
+                                <th class="tab-cells-name  p-1 pl-3">
+                                    {{ 'fleet.hunterWar'|trans }} x {{ fleet.getHunterWar()|number_format }}
+                                </th>
+                                <td class="center-cells p-1 px-4">
+                                    {{ form_widget(form_manageFleet.moreHunterWar,{attr: { max: fleet.getPlanet().getHunterWar()}}) }}
+                                </td>
+                                <td class="center-cells p-1 px-4">
+                                    {{ form_widget(form_manageFleet.lessHunterWar,{attr: { max: fleet.getHunterWar()}}) }}
+                                </td>
+                            </tr>
                             <tr{% if fleet.getPlanet().getCorvet() == 0 and fleet.getCorvet() == 0 %} hidden{% endif %}>
                                 <th class="tab-cells-name  p-1 pl-3">
                                     {{ 'fleet.corvet'|trans }} x {{ fleet.getCorvet()|number_format }}
@@ -266,6 +278,17 @@
                                 </td>
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.lessCorvetLaser,{attr: { max: fleet.getCorvetLaser()}}) }}
+                                </td>
+                            </tr>
+                            <tr{% if fleet.getPlanet().getCorvetWar() == 0 and fleet.getCorvetWar() == 0 %} hidden{% endif %}>
+                                <th class="tab-cells-name  p-1 pl-3">
+                                    {{ 'fleet.corvetWar'|trans }} x {{ fleet.getCorvetWar()|number_format }}
+                                </th>
+                                <td class="center-cells p-1 px-4">
+                                    {{ form_widget(form_manageFleet.moreCorvetWar,{attr: { max: fleet.getPlanet().getCorvetWar()}}) }}
+                                </td>
+                                <td class="center-cells p-1 px-4">
+                                    {{ form_widget(form_manageFleet.lessCorvetWar,{attr: { max: fleet.getCorvetWar()}}) }}
                                 </td>
                             </tr>
                             <tr{% if fleet.getPlanet().getFregate() == 0 and fleet.getFregate() == 0 %} hidden{% endif %}>
@@ -452,6 +475,11 @@
                                     {{ 'fleet.hunterHeavy'|trans }} x {{ fleet.getHunterHeavy()|number_format }}
                                 </th>
                             </tr>
+                            <tr{% if fleet.getHunterWar() == 0 %} hidden{% endif %}>
+                                <th class="tab-cells-name p-2 pl-4">
+                                    {{ 'fleet.hunterWar'|trans }} x {{ fleet.getHunterWar()|number_format }}
+                                </th>
+                            </tr>
                             <tr{% if fleet.getCorvet() == 0 %} hidden{% endif %}>
                                 <th class="tab-cells-name p-2 pl-4">
                                     {{ 'fleet.corvet'|trans }} x {{ fleet.getCorvet()|number_format }}
@@ -460,6 +488,11 @@
                             <tr{% if fleet.getCorvetLaser() == 0 %} hidden{% endif %}>
                                 <th class="tab-cells-name p-2 pl-4">
                                     {{ 'fleet.corvetLaser'|trans }} x {{ fleet.getCorvetLaser()|number_format }}
+                                </th>
+                            </tr>
+                            <tr{% if fleet.getCorvetWar() == 0 %} hidden{% endif %}>
+                                <th class="tab-cells-name p-2 pl-4">
+                                    {{ 'fleet.corvetWar'|trans }} x {{ fleet.getCorvetWar()|number_format }}
                                 </th>
                             </tr>
                             <tr{% if fleet.getFregate() == 0 %} hidden{% endif %}>
@@ -551,7 +584,7 @@
                                         {% if fleet.getPlanet().getEmpty() != 1 %}<a href="{{ path('map', {id: fleet.getPlanet().getSector().getPosition(), 'idp': usePlanet.getId()}) }}"><img height="25" width="25" src="{{ vich_uploader_asset(fleet.getPlanet(), 'imageFile') }}"></a>{% endif %}
                                         <div class="mt-2">{{ fleet.getPlanet().getNbCdr()|number_format }} <img src="{{ asset('img/niobium.png') }}"></div>
                                         <div>{{ fleet.getPlanet().getWtCdr()|number_format }} <img src="{{ asset('img/water.png') }}"></div>
-                                        {% if fleet.getRecycleur() and fleet.getPlanet().getCdr() == false %}{% if fleet.getRecycleAt() %}<div>{{ fleet.getRecycleAt()|date('Y/m/d H:i:s') }} <span><a href="{{ path('cancel_recycle_fleet', {id: fleet.getId(), 'idp': usePlanet.getId()}) }}">{{ 'recyclerCancel'|trans }}</a></span></div>{% else %}<div><span><a href="{{ path('recycle_fleet', {id: fleet.getId(), 'idp': usePlanet.getId()}) }}">{{ 'recycler'|trans }}</a></span></div>{% endif %}{% endif %}
+                                        {% if fleet.getRecycleur() and fleet.getPlanet().getCdr() == false %}{% if fleet.getRecycleAt() %}<div><span class="timerArea" hidden>{{ fleet.getRecycleAt()|date('Y/m/d H:i:s') }}</span> <span><a href="{{ path('cancel_recycle_fleet', {id: fleet.getId(), 'idp': usePlanet.getId()}) }}">{{ 'recyclerCancel'|trans }}</a></span></div>{% else %}<div><span><a href="{{ path('recycle_fleet', {id: fleet.getId(), 'idp': usePlanet.getId()}) }}">{{ 'recycler'|trans }}</a></span></div>{% endif %}{% endif %}
                                     </th>
                                 </tr>
                             </tbody>

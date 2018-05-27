@@ -84,6 +84,14 @@
                             {{ form_widget(form_spatialShip.hunterHeavy,{attr: { max: usePlanet.getHunterHeavy()}}) }}
                         </td>
                     </tr>
+                    <tr>
+                        <th class="tab-cells-name">
+                            <span tabindex="0" role="button" class="btn btn-secondary text-orange"  data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.hunterWar'|trans|raw }}">{{ 'spatial.hunterWar'|trans }} x {{ usePlanet.getHunterWar()|number_format }}</span> <span class="float-right"><span class="ml-3">900 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'pdgImg'|trans }}" src="{{ asset('img/pdg.png') }}"></span></span>
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_spatialShip.hunterWar,{attr: { max: usePlanet.getHunterWar()}}) }}
+                        </td>
+                    </tr>
                     <tr{% if usePlanet.getLightUsine() == 0 or app.user.getMissile() < 3 or app.user.getLightShip() < 2 %} hidden{% endif %}>
                         <th class="tab-cells-name">
                             <span tabindex="0" role="button" class="btn btn-secondary text-orange"  data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.corvet'|trans|raw }}">{{ 'spatial.corvet'|trans }} x {{ usePlanet.getCorvet()|number_format }}</span> <span class="float-right"><span class="ml-5">1.000 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3">500 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span></span>
@@ -98,6 +106,14 @@
                         </th>
                         <td class="center-cells">
                             {{ form_widget(form_spatialShip.corvetLaser,{attr: { max: usePlanet.getCorvetLaser()}}) }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="tab-cells-name">
+                            <span tabindex="0" role="button" class="btn btn-secondary text-orange"  data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.corvetWar'|trans|raw }}">{{ 'spatial.corvetWar'|trans }} x {{ usePlanet.getCorvetWar()|number_format }}</span> <span class="float-right"><span class="ml-3">1.800 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'pdgImg'|trans }}" src="{{ asset('img/pdg.png') }}"></span></span>
+                        </th>
+                        <td class="center-cells">
+                            {{ form_widget(form_spatialShip.corvetWar,{attr: { max: usePlanet.getCorvetWar()}}) }}
                         </td>
                     </tr>
                     <tr{% if usePlanet.getHeavyUsine() == 0 or app.user.getMissile() != 3 or app.user.getLaser() == 0 %} hidden{% endif %}>
@@ -206,6 +222,11 @@
                                 {{ 'spatial.hunterHeavy'|trans }} x {{ usePlanet.getProduct().getHunterHeavy() }}
                             </td>
                         </tr>
+                        <tr{% if usePlanet.getProduct().getHunterWar() == 0 %} hidden{% endif %}>
+                            <td class="center-cells">
+                                {{ 'spatial.hunterWar'|trans }} x {{ usePlanet.getProduct().getHunterWar() }}
+                            </td>
+                        </tr>
                         <tr{% if usePlanet.getProduct().getCorvet() == 0 %} hidden{% endif %}>
                             <td class="center-cells">
                                 {{ 'spatial.corvet'|trans }} x {{ usePlanet.getProduct().getCorvet() }}
@@ -214,6 +235,11 @@
                         <tr{% if usePlanet.getProduct().getCorvetLaser() == 0 %} hidden{% endif %}>
                             <td class="center-cells">
                                 {{ 'spatial.corvetLaser'|trans }} x {{ usePlanet.getProduct().getCorvetLaser() }}
+                            </td>
+                        </tr>
+                        <tr{% if usePlanet.getProduct().getCorvetWar() == 0 %} hidden{% endif %}>
+                            <td class="center-cells">
+                                {{ 'spatial.corvetWar'|trans }} x {{ usePlanet.getProduct().getCorvetWar() }}
                             </td>
                         </tr>
                         <tr{% if usePlanet.getProduct().getFregate() == 0 %} hidden{% endif %}>

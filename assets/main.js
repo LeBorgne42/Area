@@ -353,15 +353,19 @@ function manageTime() {
                 if (date_now > 0) {
                     if (jours > 0) {
                         area.text(jours + 'j ' + heures + 'heures ' + minutes + 'mins ' + secondes + 's');
+                        area.removeAttr('hidden');
                     } else if (heures > 0)
                     {
                         area.text(heures + 'heures ' + minutes + 'mins ' + secondes + 's');
+                        area.removeAttr('hidden');
                     } else if (minutes > 0)
                     {
                         area.text(minutes + 'mins ' + secondes + 's');
+                        area.removeAttr('hidden');
                     } else if (secondes > 0)
                     {
                         area.text(secondes + ' secondes');
+                        area.removeAttr('hidden');
                     }
                     secondes = secondes - 1;
                     if(secondes == 0) {
@@ -527,6 +531,8 @@ function manageFlightTime(){
     var position = $('#positionFleet').text();
     var speed = $('#speedFleet').text();
     var base = 2000;
+    var price = 1;
+    var carburant = 1;
     $('#fleet_send_planete').off('change').on('change',function(e){
         var newPosition = $('#fleet_send_sector').val();
         newPosition = newPosition.toString();
@@ -538,12 +544,16 @@ function manageFlightTime(){
             var pTwo = '2 -2 3 -3 7 -7 8 -8 9 -9 10 -10 11 -11 12 -12';
             if (pOne.indexOf(planete - newPlanete) != -1) {
                 base = 1500;
+                price = 0.7;
             } else if (pTwo.indexOf(planete - newPlanete) != -1) {
                 base = 1750;
+                price = 0.9;
             } else {
                 base = 2000;
+                price = 1;
             }
         }
+        carburant = Math.round(price * ($('#signatureFleet').text() / 200));
         var now = new Date();
         var travel = new Date();
         travel.setSeconds(travel.getSeconds() + (base * speed));
@@ -553,16 +563,16 @@ function manageFlightTime(){
         var minutes = Math.floor((date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60))) / 60);
         var secondes = Math.floor(date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60 + minutes * 60)));
         if (jours > 0) {
-            $('#flightTime').text(jours + 'j ' + heures + 'heures ' + minutes + 'mins ' + secondes + 's');
+            $('#flightTime').text(jours + 'j ' + heures + 'heures ' + minutes + 'mins ' + secondes + 's' + '   Prix : ' + carburant + ' bitcoin');
         } else if (heures > 0)
         {
-            $('#flightTime').text(heures + 'heures ' + minutes + 'mins ' + secondes + 's');
+            $('#flightTime').text(heures + 'heures ' + minutes + 'mins ' + secondes + 's' + '   Prix : ' + carburant + ' bitcoin');
         } else if (minutes > 0)
         {
-            $('#flightTime').text(minutes + 'mins ' + secondes + 's');
+            $('#flightTime').text(minutes + 'mins ' + secondes + 's' + '   Prix : ' + carburant + ' bitcoin');
         } else if (secondes > 0)
         {
-            $('#flightTime').text(secondes + ' secondes');
+            $('#flightTime').text(secondes + ' secondes' + '   Prix : ' + carburant + ' bitcoin');
         }
     });
 
@@ -574,15 +584,21 @@ function manageFlightTime(){
         var third = '-28 28 29 30 31 32 33 22 12 3 7 -29 -30 -31 -32 -33 -22 -13 -3 -7';
         if (position == newPosition) {
             base = 2000;
+            price = 1;
         } else if (first.indexOf(position - newPosition) != -1) {
             base = 3000;
+            price = 1.5;
         } else if (second.indexOf(position - newPosition) != -1) {
             base = 6800;
+            price = 3.4;
         } else if (third.indexOf(position - newPosition) != -1) {
             base = 8000;
+            price = 4;
         } else {
             base = 12000;
+            price = 6;
         }
+        carburant = Math.round(price * ($('#signatureFleet').text() / 200));
         var now = new Date();
         var travel = new Date();
         travel.setSeconds(travel.getSeconds() + (base * speed));
@@ -592,16 +608,16 @@ function manageFlightTime(){
         var minutes = Math.floor((date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60))) / 60);
         var secondes = Math.floor(date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60 + minutes * 60)));
         if (jours > 0) {
-            $('#flightTime').text(jours + 'j ' + heures + 'heures ' + minutes + 'mins ' + secondes + 's');
+            $('#flightTime').text(jours + 'j ' + heures + 'heures ' + minutes + 'mins ' + secondes + 's' + '   Prix : ' + carburant + ' bitcoin');
         } else if (heures > 0)
         {
-            $('#flightTime').text(heures + 'heures ' + minutes + 'mins ' + secondes + 's');
+            $('#flightTime').text(heures + 'heures ' + minutes + 'mins ' + secondes + 's' + '   Prix : ' + carburant + ' bitcoin');
         } else if (minutes > 0)
         {
-            $('#flightTime').text(minutes + 'mins ' + secondes + 's');
+            $('#flightTime').text(minutes + 'mins ' + secondes + 's' + '   Prix : ' + carburant + ' bitcoin');
         } else if (secondes > 0)
         {
-            $('#flightTime').text(secondes + ' secondes');
+            $('#flightTime').text(secondes + ' secondes' + '   Prix : ' + carburant + ' bitcoin');
         }
     });
     var now = new Date();

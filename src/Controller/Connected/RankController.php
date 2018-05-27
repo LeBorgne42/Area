@@ -61,7 +61,7 @@ class RankController extends Controller
             ->where('u.rank is not null')
             ->andWhere('u.id != :one')
             ->setParameters(array('one' => 1))
-            ->orderBy('r.point', 'DESC')
+            ->orderBy('r.warPoint', 'DESC')
             ->getQuery()
             ->getResult();
 
@@ -70,4 +70,35 @@ class RankController extends Controller
             'users' => $users,
         ]);
     }
+
+//    /**
+//     * @Route("/classement-joueurs/{idp}", name="rank_user", requirements={"idp"="\d+"})
+//     */
+//    public function rankUserAction($idp)
+//    {
+//        $em = $this->getDoctrine()->getManager();
+//
+//        $usePlanet = $em->getRepository('App:Planet')
+//            ->createQueryBuilder('p')
+//            ->where('p.id = :id')
+//            ->andWhere('p.user = :user')
+//            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
+//            ->getQuery()
+//            ->getOneOrNullResult();
+//
+//        $users = $em->getRepository('App:User')
+//            ->createQueryBuilder('u')
+//            ->leftJoin('u.rank', 'r')
+//            ->where('u.rank is not null')
+//            ->andWhere('u.id != :one')
+//            ->setParameters(array('one' => 1))
+//            ->orderBy('r.point', 'DESC')
+//            ->getQuery()
+//            ->getResult();
+//
+//        return $this->render('connected/rank.html.twig', [
+//            'usePlanet' => $usePlanet,
+//            'users' => $users,
+//        ]);
+//    }
 }

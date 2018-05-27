@@ -298,9 +298,24 @@ class SpatialEditFleetType extends AbstractType
                     'mapped' => false,
                 )
             )
-
             ->add(
                 'moreHunterHeavy',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                    'mapped' => false,
+                )
+            )
+            ->add(
+                'moreHunterWar',
                 null,
                 array(
                     'label' => 'form.nbr',
@@ -333,6 +348,22 @@ class SpatialEditFleetType extends AbstractType
             )
             ->add(
                 'moreCorvetLaser',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                    'mapped' => false,
+                )
+            )
+            ->add(
+                'moreCorvetWar',
                 null,
                 array(
                     'label' => 'form.nbr',
@@ -428,6 +459,22 @@ class SpatialEditFleetType extends AbstractType
                 )
             )
             ->add(
+                'lessHunterWar',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                    'mapped' => false,
+                )
+            )
+            ->add(
                 'lessCorvet',
                 null,
                 array(
@@ -445,6 +492,22 @@ class SpatialEditFleetType extends AbstractType
             )
             ->add(
                 'lessCorvetLaser',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                    'mapped' => false,
+                )
+            )
+            ->add(
+                'lessCorvetWar',
                 null,
                 array(
                     'label' => 'form.nbr',
