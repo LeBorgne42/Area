@@ -28,7 +28,7 @@ form.name: 'nouveau nom'
 form.renamePlanet: renommer
 tooltip.rank: 'Votre classement est affiché ici avec l''évolution positive ou négative depuis les dernière 24h.'
 title.tmpbeta: 'Nouvelles améliorations :'
-overview.tmpbeta: '1/ Ajout des points de Guerre lors de combats (seulement pour les vainqueurs)<br> 2/ Ajout de la page marchands pour échanger les points de Guerre.<br> 3/'
+overview.tmpbeta: '1/ Ajout des points de Guerre lors de combats (seulement pour les vainqueurs)<br> 2/ Ajout de la page marchands pour échanger les points de Guerre.<br> 3/ Ajout de deux vaisseaux à point de Guerre<br> 4/ Résolution bug recyclage<br> 5/ Refonte page aide aux débutants'
 info.worker: 'Total travailleurs :'
 info.cost: 'Coût d''entretien :'
 info.soldier: 'Total soldats :'

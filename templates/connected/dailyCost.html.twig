@@ -7,9 +7,21 @@
 {% block body %}
     {% set cost = (app.user.getAllSoldier() * 2) + app.user.getAllShipsCost() %}
     <div class="front-block building">
-        <div class="block-title ml-4"><h2>{{ 'daily.title'|trans }}</h2></div>
-        <div class="m-5 p-5 text-middle">
-            {{ 'daily.help'|trans|raw }}
-        </div>
+        <div class="block-title float-right mr-5 pr-5"><h2>{{ 'daily.title'|trans }}</h2></div>
+        <div class="m-5 p-5 row">
+            <div class="col-6">
+                <img src="{{ asset('img/help.png') }}">
+            </div>
+            <div class="col-6 text-center text-middle">
+            <div class="mt-5">1 - <span><a target="_blank" href="http://area-control.forumactif.com/">{{ 'daily.colonizer'|trans }}</a></span></div>
+            <div class="mt-5">2 - <span><a target="_blank" href="http://area-control.forumactif.com/">{{ 'daily.cost'|trans }}</a></span></div>
+            <div class="mt-5">3 - <span><a target="_blank" href="http://area-control.forumactif.com/">{{ 'daily.product'|trans }}</a></span></div>
+            <div class="mt-5">4 - <span><a target="_blank" href="http://area-control.forumactif.com/">{{ 'daily.reycleAst'|trans }}</a></span></div>
+            <div class="mt-5">5 - <span><a target="_blank" href="http://area-control.forumactif.com/">{{ 'daily.recycleCdr'|trans }}</a></span></div>
+            <div class="mt-5">6 - <span><a target="_blank" href="http://area-control.forumactif.com/">{{ 'daily.invade'|trans }}</a></span></div>
+            <div class="mt-5">7 - <span><a target="_blank" href="http://area-control.forumactif.com/">{{ 'daily.fight'|trans }}</a></span></div>
+            <div class="mt-5">8 - <span><a target="_blank" href="http://area-control.forumactif.com/">{{ 'daily.hydre'|trans }}</a></span></div>
+            </div>
+            </div>
     </div>
 {% endblock %}

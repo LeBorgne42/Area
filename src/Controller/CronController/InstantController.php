@@ -188,8 +188,13 @@ class InstantController extends Controller
                     $fleetCdr->setWater($fleetCdr->getWater() + $planetCdr->getWtCdr());
                     $planetCdr->setWtCdr(0);
                 }
-                $fleetCdr->setRecycleAt(null);
+                if($planetCdr->getNbCdr() == 0 && $planetCdr->getWtCdr() == 0) {
+                    $fleetCdr->setRecycleAt(null);
+                }
             } else {
+                if($planetCdr->getNbCdr() == 0 || $planetCdr->getWtCdr() == 0) {
+                    $recycle = $recycle * 2;
+                }
                 if ($planetCdr->getNbCdr() > $recycle) {
                     $fleetCdr->setNiobium($fleetCdr->getNiobium() + $recycle);
                     $planetCdr->setNbCdr($planetCdr->getNbCdr() - $recycle);

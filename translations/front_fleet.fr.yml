@@ -70,3 +70,5 @@ fleet.flightTime: 'Temps de vol :'
 fleet.split: scinder
 fleet.splitFleet: 'Scinder flotte en deux'
 fleet.name: 'Nom de flotte'
+fleet.hunterWar: 'Chasseur à plasma'
+fleet.corvetWar: 'Corvette de combat'

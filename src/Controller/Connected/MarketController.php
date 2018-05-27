@@ -50,6 +50,7 @@ class MarketController extends Controller
                 $planetBuy = $usePlanet;
             }
             $cost = ($form_market->get('bitcoin')->getData() / 5) + ($form_market->get('soldier')->getData() * 5) + ($form_market->get('worker')->getData() * 2);
+            $cost = ceil($cost);
             if(($cost > $user->getRank()->getWarPoint() ||
                 ($planetBuy->getSoldier() + $form_market->get('soldier')->getData()) > $planetBuy->getSoldierMax()) ||
                     ($planetBuy->getWorker() + $form_market->get('worker')->getData()) > $planetBuy->getWorkerMax()) {
