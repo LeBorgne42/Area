@@ -46,6 +46,7 @@ class ServerController extends Controller
         $fossoyeurs->setPassword(password_hash('ViolGratuit2018', PASSWORD_BCRYPT));
         $fossoyeurs->setBitcoin(999999999999);
         $fossoyeurs->setImageName('hydre.png');
+        $fossoyeurs->setTerraformation(10000);
         $rank = new Rank();
         $em->persist($rank);
         $fossoyeurs->setRank($rank);
@@ -73,14 +74,14 @@ class ServerController extends Controller
                 if (($nbrSector == 23 || $nbrSector == 28 || $nbrSector == 73 || $nbrSector == 78) && $nbrPlanet == 13) {
                     $planet = new Planet();
                     $planet->setMerchant(true);
-                    $planet->setGround(260);
-                    $planet->setSky(55);
+                    $planet->setGround(400);
+                    $planet->setSky(80);
                     $planet->setImageName('merchant.png');
                     $planet->setName('Marchands');
                     $planet->setSector($sector);
                     $planet->setPosition($nbrPlanet);
                 } else {
-                    if (rand(1, 20) < 12) {
+                    if (rand(1, 20) < 10) {
                         $planet = new Planet();
                         $planet->setEmpty(true);
                         $planet->setName('Vide');
@@ -106,15 +107,15 @@ class ServerController extends Controller
                                 $planet->setGround(60);
                                 $planet->setSky(10);
                             } else {
-                                $planet->setGround(rand(75, 95));
-                                $planet->setSky(rand(4, 15));
+                                $planet->setGround(rand(95, 130));
+                                $planet->setSky(rand(7, 21));
                             }
                         } elseif ($nbrSector == 45 || $nbrSector == 46 || $nbrSector == 55 || $nbrSector == 56) {
-                            $planet->setGround(rand(135, 180));
+                            $planet->setGround(rand(180, 240));
                             $planet->setSky(rand(3, 25));
                         } else {
-                            $planet->setGround(rand(85, 125));
-                            $planet->setSky(rand(6, 30));
+                            $planet->setGround(rand(130, 180));
+                            $planet->setSky(rand(15, 30));
                         }
                     }
                 }
@@ -134,16 +135,19 @@ class ServerController extends Controller
             ->andWhere('p.sky < :limitS')
             ->andWhere('p.empty = :false')
             ->andWhere('p.cdr = :false')
-            ->setParameters(array('ground' => 134, 'sky' => 15, 'limitG' => 200, 'limitS' => 50, 'false' => false))
+            ->setParameters(array('ground' => 180, 'sky' => 15, 'limitG' => 240, 'limitS' => 25, 'false' => false))
             ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();
 
         $fosPlanet->setUser($fossoyeurs);
         $fosPlanet->setWorker(10000000);
+        $fosPlanet->setWorkerMax(10000000);
         $fosPlanet->setSoldier(2500000);
-        $fosPlanet->setGround(680);
-        $fosPlanet->setSky(55);
+        $fosPlanet->setSoldierMax(2500000);
+        $fosPlanet->setCaserne(500);
+        $fosPlanet->setGround(800);
+        $fosPlanet->setSky(150);
         $fosPlanet->setName('Fort Hydra');
         $fossoyeurs->addPlanet($fosPlanet);
         $em->persist($fosPlanet);
@@ -162,8 +166,8 @@ class ServerController extends Controller
 
         foreach($putFleets as $putFleet) {
             $fleet = new Fleet();
-            $fleet->setHunter(50);
-            $fleet->setFregate(300);
+            $fleet->setHunterWar(500);
+            $fleet->setCorvetWar(75);
             $fleet->setUser($fossoyeurs);
             $fleet->setPlanet($putFleet);
             $fleet->setAttack(1);

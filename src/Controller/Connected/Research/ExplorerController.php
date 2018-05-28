@@ -67,11 +67,11 @@ class ExplorerController extends Controller
             ->getQuery()
             ->getOneOrNullResult();
 
-        $level = $user->getTerraformation();
+        $level = $user->getTerraformation() + 1;
         $userBt = $user->getBitcoin();
 
         if(($userBt < ($level * 12000) || $user->getUtility() == 0) ||
-            ($level > 18 || $user->getSearchAt() > $now)) {
+            ($level > 19 || $user->getSearchAt() > $now)) {
             return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
         }
 

@@ -36,6 +36,82 @@ function manageModalContact() {
     });
 }
 
+function manageTotalShip() {
+    $('.nbrProduct').off('change').on('change',function(e){
+        var niobium = 0;
+        var water = 0;
+        var worker = 0;
+        var bitcoin = 0;
+        var pdg = 0;
+        var product = 0;
+        $('.nbrProduct').each( function(){
+            if($(this).val() > 0) {
+                if (product == 0) {
+                    product = $(this).val();
+                } else {
+                    product = parseFloat(product) + parseFloat($(this).val());
+                }
+            }
+        });
+        $('tr').each( function(){
+            if($(this).find('.nbrProduct').val() > 0) {
+                var delPoint = $(this).find('.niobiumProduct').text().replace('.', '');
+                if (niobium == 0) {
+                    niobium = parseFloat($(this).find('.nbrProduct').val() * delPoint);
+                } else {
+                    niobium = niobium + parseFloat($(this).find('.nbrProduct').val() * delPoint);
+                }
+            }
+        });
+        $('tr').each( function(){
+            if($(this).find('.nbrProduct').val() > 0) {
+                var delPoint = $(this).find('.waterProduct').text().replace('.', '');
+                if (water == 0) {
+                    water = parseFloat($(this).find('.nbrProduct').val() * delPoint);
+                } else {
+                    water = water + parseFloat($(this).find('.nbrProduct').val() * delPoint);
+                }
+            }
+        });
+        $('tr').each( function(){
+            if($(this).find('.nbrProduct').val() > 0) {
+                var delPoint = $(this).find('.workerProduct').text().replace('.', '');
+                if (worker == 0) {
+                    worker = parseFloat($(this).find('.nbrProduct').val() * delPoint);
+                } else {
+                    worker = worker + parseFloat($(this).find('.nbrProduct').val() * delPoint);
+                }
+            }
+        });
+        $('tr').each( function(){
+            if($(this).find('.nbrProduct').val() > 0) {
+                var delPoint = $(this).find('.bitcoinProduct').text().replace('.', '');
+                if (bitcoin == 0) {
+                    bitcoin = parseFloat($(this).find('.nbrProduct').val() * delPoint);
+                } else {
+                    bitcoin = bitcoin + parseFloat($(this).find('.nbrProduct').val() * delPoint);
+                }
+            }
+        });
+        $('tr').each( function(){
+            if($(this).find('.nbrProduct').val() > 0) {
+                var delPoint = $(this).find('.pdgProduct').text().replace('.', '');
+                if (product == 0) {
+                    pdg = parseFloat($(this).find('.nbrProduct').val() * delPoint);
+                } else {
+                    pdg = pdg + parseFloat($(this).find('.nbrProduct').val() * delPoint);
+                }
+            }
+        });
+        $('#niobiumProduct').text(niobium);
+        $('#waterProduct').text(water);
+        $('#workerProduct').text(worker);
+        $('#bitcoinProduct').text(bitcoin);
+        $('#pdgProduct').text(pdg);
+        $('#nbrProduct').text(product);
+    });
+}
+
 /*function setNoDecimalDisplay() {
     console.log($('div.bg-top span.ressource.niobium span.reload').text()+ ($('div.bg-top span.ressource.niobium span.takeProd').text() / 300));
     setInterval(function() {
@@ -368,7 +444,7 @@ function manageTime() {
                         area.removeAttr('hidden');
                     }
                     secondes = secondes - 1;
-                    if(secondes == 0) {
+                    if(secondes == 0 || secondes < 0) {
                         if(minutes == null) {
                             area.text('Terminée');
                             setTimeout(function() {
@@ -660,6 +736,7 @@ $(document).ready(function() {
     manageAllyImageForm();
     manageModalContact();
     manageMaxShip();
+    manageTotalShip();
     manageCoordonate();
     manageFlightTime();
     manageTime();

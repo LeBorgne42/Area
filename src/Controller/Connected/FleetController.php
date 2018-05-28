@@ -601,7 +601,7 @@ class FleetController extends Controller
             if($carburant > $user->getBitcoin()) {
                 return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
             }
-            $now->add(new DateInterval('PT' . ($fleetGive->getSpeed() * $base) . 'S'));
+            $now->add(new DateInterval('PT' . round($fleetGive->getSpeed() * $base) . 'S'));
             $fleetGive->setRecycleAt(null);
             $fleetGive->setNewPlanet($planetTake->getId());
             $fleetGive->setFlightTime($now);

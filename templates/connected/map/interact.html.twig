@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'front_interact' %}
+
+{% block title %}{{ 'title'|trans }}{% endblock %}
+
+{% block body %}
+    {%- block left_menu -%}
+    {%- endblock -%}
+    {%- block top_ressource -%}
+    {%- endblock -%}
+    {%- block right_planet -%}
+    {%- endblock -%}
+    <div class="p-4 text-center">
+        {{ form_start(form_fleetMove,{attr: { action: path('planet_interact', {'idp': usePlanet.getId(), 'id': planet.getId()}) }}) }}
+        <table class="table table-striped table-bordered table-dark">
+            <tbody>
+            <tr>
+                <td class="center-cells">
+                    {{ form_widget(form_fleetMove.list) }}
+                </td>
+                <td class="center-cells">
+                    {{ form_widget(form_fleetMove.flightType) }}
+                </td>
+                <td class="center-cells">
+                    {{ form_widget(form_fleetMove.sendForm,{attr: { class: 'btn btn-lg btn-info'}}) }}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" class="center-cells">
+                    <span><a href="{{ path('send_sonde', {'idp': usePlanet.getId(), 'id': planet.getId()}) }}">{{ 'interact.sendSonde'|trans }}</a></span>
+                </td>
+            </tr>
+            {% if planet.getUser() and app.user.getWhereRadar(planet.getSector().getPosition()) %}
+                <tr>
+                    <td colspan="3" class="center-cells">
+                        <span><a data-toggle="modal" data-target="#userpModal" href="{{ path('user_profil_modal', {'idp': usePlanet.getId(), 'id': planet.getUser().getId()}) }}">{{ 'interact.seeProfil'|trans }} {{ planet.getUser().getUserName() }}</a></span>
+                    </td>
+                </tr>
+            {% endif %}
+            </tbody>
+        </table>
+        {{ form_end(form_fleetMove) }}
+    </div>
+    <div class="modal fade" id="userpModal" tabindex="-1" role="dialog" aria-labelledby="userpModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content special">
+            </div>
+        </div>
+    </div>
+{% endblock %}
