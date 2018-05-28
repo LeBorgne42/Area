@@ -424,19 +424,45 @@ class InstantController extends Controller
                 $newPlanet = $fleet->getPlanet();
                 
                 if ($fleet->getFlightType() == '2') {
-                    $newPlanet->setNiobium($newPlanet->getNiobium() + $fleet->getNiobium());
-                    $newPlanet->setWater($newPlanet->getWater() + $fleet->getWater());
-                    $newPlanet->setSoldier($newPlanet->getSoldier() + $fleet->getSoldier());
-                    $newPlanet->setWorker($newPlanet->getWorker() + $fleet->getWorker());
-                    $newPlanet->setScientist($newPlanet->getScientist() + $fleet->getScientist());
                     if($newPlanet->getMerchant() == true) {
                         $user->setBitcoin($user->getBitcoin() + ($fleet->getWater() * 2) + ($fleet->getSoldier() * 7.5) + ($fleet->getWorker() / 4) + ($fleet->getScientist() * 75) + ($fleet->getNiobium() / 1.5));
+                    } else {
+                        if($newPlanet->getNiobium() + $fleet->getNiobium() < $newPlanet->getNiobiumMax()) {
+                            $newPlanet->setNiobium($newPlanet->getNiobium() + $fleet->getNiobium());
+                            $fleet->setNiobium(0);
+                        } else {
+                            $newPlanet->setNiobium($newPlanet->getNiobiumMax());
+                            $fleet->setNiobium($fleet->getNiobium() - $newPlanet->getNiobiumMax() - $newPlanet->getNiobium());
+                        }
+                        if($newPlanet->getWater() + $fleet->getWater() < $newPlanet->getWaterMax()) {
+                            $newPlanet->setWater($newPlanet->getWater() + $fleet->getWater());
+                            $fleet->setWater(0);
+                        } else {
+                            $newPlanet->setWater($newPlanet->getWaterMax());
+                            $fleet->setWater($fleet->getWater() - $newPlanet->getWaterMax() - $newPlanet->getWater());
+                        }
+                        if($newPlanet->getSoldier() + $fleet->getSoldier() < $newPlanet->getSoldierMax()) {
+                            $newPlanet->setSoldier($newPlanet->getSoldier() + $fleet->getSoldier());
+                            $fleet->setSoldier(0);
+                        } else {
+                            $newPlanet->setSoldier($newPlanet->getSoldierMax());
+                            $fleet->setSoldier($fleet->getSoldier() - $newPlanet->getSoldierMax() - $newPlanet->getSoldier());
+                        }
+                        if($newPlanet->getWorker() + $fleet->getWorker() < $newPlanet->getWorkerMax()) {
+                            $newPlanet->setWorker($newPlanet->getWorker() + $fleet->getWorker());
+                            $fleet->setWorker(0);
+                        } else {
+                            $newPlanet->setWorker($newPlanet->getWorkerMax());
+                            $fleet->setWorker($fleet->getWorker() - $newPlanet->getWorkerMax() - $newPlanet->getWorker());
+                        }
+                        if($newPlanet->getScientist() + $fleet->getScientist() < $newPlanet->getScientistMax()) {
+                            $newPlanet->setScientist($newPlanet->getScientist() + $fleet->getScientist());
+                            $fleet->setScientist(0);
+                        } else {
+                            $newPlanet->setScientist($newPlanet->getScientistMax());
+                            $fleet->setScientist($fleet->getScientist() - $newPlanet->getScientistMax() - $newPlanet->getScientist());
+                        }
                     }
-                    $fleet->setNiobium(0);
-                    $fleet->setWater(0);
-                    $fleet->setSoldier(0);
-                    $fleet->setWorker(0);
-                    $fleet->setScientist(0);
                     $sFleet= $fleet->getPlanet()->getSector()->getPosition();
                     $sector = $oldPlanet->getSector()->getPosition();
                     if ($sFleet == $sector) {

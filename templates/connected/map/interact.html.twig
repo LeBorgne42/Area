@@ -31,7 +31,7 @@
                     <span><a href="{{ path('send_sonde', {'idp': usePlanet.getId(), 'id': planet.getId()}) }}">{{ 'interact.sendSonde'|trans }}</a></span>
                 </td>
             </tr>
-            {% if planet.getUser() and app.user.getWhereRadar(planet.getSector().getPosition()) %}
+            {% if planet.getUser() and (app.user.getWhereRadar(planet.getSector().getPosition()) or planet.getOurFleet(app.user)) %}
                 <tr>
                     <td colspan="3" class="center-cells">
                         <span><a data-toggle="modal" data-target="#userpModal" href="{{ path('user_profil_modal', {'idp': usePlanet.getId(), 'id': planet.getUser().getId()}) }}">{{ 'interact.seeProfil'|trans }} {{ planet.getUser().getUserName() }}</a></span>
