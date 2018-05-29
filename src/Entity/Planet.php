@@ -65,7 +65,7 @@ class Planet
     /**
      * @ORM\Column(name="workerProduction",type="integer")
      */
-    protected $workerProduction = 2000;
+    protected $workerProduction = 6000;
 
     /**
      * @ORM\Column(name="niobiumMax",type="integer")

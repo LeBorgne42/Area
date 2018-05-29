@@ -466,8 +466,8 @@ function manageTime() {
     });
 }
 
-/*function manageSalon() {
-    $('#salon_sendForm').click(function(e) {
+function manageSalon() {
+    /*$('#salon_sendForm').click(function(e) {
         e.preventDefault();
 
         var content = $('#salon_content').val();
@@ -479,8 +479,12 @@ function manageTime() {
                 data: 'newMessage=' + content,
             });
         }
-    });
-}*/
+    });*/
+    if(document.location.href.match('/salon(/|$)')) {
+        $('.chat-defil').scrollTop(2000);
+        $('#salon_content').select();
+    }
+}
 
 function manageDisplaySalon(){
     if(document.location.href.match('/salon(/|$)')) {
@@ -496,8 +500,6 @@ function manageDisplaySalon(){
             });
             manageDisplaySalon();
         }, 2500);
-        $('.chat-defil').scrollTop(2000);
-        $('#salon_content').select();
     }
 }
 
@@ -651,6 +653,7 @@ $(document).ready(function() {
     manageFlightTime();
     manageTime();
     manageDisplaySalon();
+    manageSalon();
     manageAttackFleetForm();
     console.log("Toute utilisation de scripts sur le jeu seront puni d'un ban permanent, merci.");
 });
