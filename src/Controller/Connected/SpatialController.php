@@ -67,9 +67,9 @@ class SpatialController extends Controller
             $croiser = $form_spatialShip->get('croiser')->getData();
             $ironClad = $form_spatialShip->get('ironClad')->getData();
             $destroyer = $form_spatialShip->get('destroyer')->getData();
-            $niobiumLess = (8000 * $cargoI) + (25000 * $cargoV) + (70000 * $cargoX) + (20000 * $colonizer) + (10000 * $recycleur) + (15000 * $barge) + (5 * $sonde) + (250 * $hunter) + (2200 * $fregate) + (400 * $hunterHeavy) + (1000 * $corvet) + (400 * $corvetLaser) + (2000 * $fregatePlasma) + (10000 * $croiser) + (30000 * $ironClad) + (20000 * $destroyer);
-            $waterLess =  (6500 * $cargoI) + (18600 * $cargoV) + (57000 * $cargoX) + (12000 * $colonizer) + (7000 * $recycleur) + (12000 * $barge) + (50 * $hunter) + (1400 * $fregate) + (80 * $hunterHeavy) + (500 * $corvet) + (2000 * $corvetLaser) + (7000 * $fregatePlasma) + (8000 * $croiser) + (12000 * $ironClad) + (70000 * $destroyer);
-            $workerLess = (5000 * $colonizer) + (500 * $destroyer) + (100 * $cargoX);
+            $niobiumLess = (8000 * $cargoI) + (22000 * $cargoV) + (45000 * $cargoX) + (20000 * $colonizer) + (10000 * $recycleur) + (15000 * $barge) + (5 * $sonde) + (250 * $hunter) + (2200 * $fregate) + (400 * $hunterHeavy) + (1000 * $corvet) + (400 * $corvetLaser) + (2000 * $fregatePlasma) + (10000 * $croiser) + (30000 * $ironClad) + (20000 * $destroyer);
+            $waterLess =  (6500 * $cargoI) + (15000 * $cargoV) + (38000 * $cargoX) + (12000 * $colonizer) + (7000 * $recycleur) + (12000 * $barge) + (50 * $hunter) + (1400 * $fregate) + (80 * $hunterHeavy) + (500 * $corvet) + (2000 * $corvetLaser) + (7000 * $fregatePlasma) + (8000 * $croiser) + (12000 * $ironClad) + (70000 * $destroyer);
+            $workerLess = (5000 * $colonizer) + (500 * $destroyer) + (50 * $cargoX);
             $warPoint = (900 * $hunterWar) + (1800 * $corvetWar);
             $time = ((300 * $cargoI) + (600 * $cargoV) + (900 * $cargoX) + (10800 * $colonizer) + (400 * $recycleur) + (1800 * $barge) + (2 * $sonde) + (60 * $hunterWar) + (300 * $corvetWar) + (20 * $hunter) + (240 * $fregate) + (32 * $hunterHeavy) + (100 * $corvet) + (160 * $corvetLaser) + (600 * $fregatePlasma) + (1200 * $croiser) + (2800 * $ironClad) + (6000 * $destroyer)) / $usePlanet->getShipProduction();
             $now->add(new DateInterval('PT' . round($time) . 'S'));
