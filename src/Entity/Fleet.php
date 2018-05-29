@@ -381,8 +381,8 @@ class Fleet
         $barge = $this->getBarge() * 2500;
         $recycleur = $this->getRecycleur() * 10000;
         $cargoI = $this->getCargoI() * 25000;
-        $cargoV = $this->getCargoV() * 75000;
-        $cargoX = $this->getCargoX() * 150000;
+        $cargoV = $this->getCargoV() * 100000;
+        $cargoX = $this->getCargoX() * 200000;
 
         $nbr = $barge + $recycleur + $cargoI + $cargoV + $cargoX;
         return $nbr;
@@ -572,10 +572,7 @@ class Fleet
         if($this->getCargoX()) {
             return 0.6;
         }
-        if($this->getHunter() || $this->getHunterHeavy() || $this->getHunterWar()) {
-            return 0.5;
-        }
-        if($this->getCargoV()) {
+        if($this->getHunter() || $this->getHunterHeavy() || $this->getHunterWar() || $this->getCargoV()) {
             return 0.5;
         }
         if($this->getCargoI()) {
