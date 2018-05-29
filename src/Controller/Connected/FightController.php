@@ -211,11 +211,11 @@ class FightController extends Controller
             return($blockDef);
         }
 
-        $firstBlood = (($plasma * 2) + $laser);
-        $firstBloodD = (($plasmaD * 2) + $laserD);
+        $firstBlood = (($missile / 5) + ($plasma * 3) + ($laser * 1.5));
+        $firstBloodD = (($missileD / 5) + ($plasmaD * 3) + ($laserD * 1.5));
         $countSAtt = 0;
         $countSDef = 0;
-        if(($plasma + $laser > 0) && $shieldD > 0) {
+        if(($firstBlood > 0) && $shieldD > 0) {
             while ($shieldD > 0) {
                 $countSAtt++;
                 $shieldD = $shieldD - $firstBlood;
@@ -225,7 +225,7 @@ class FightController extends Controller
             $countSAtt = 1;
             $armorD = $armorD - $firstBlood;
         }
-        if(($plasmaD + $laserD > 0) && $shield > 0) {
+        if(($firstBloodD > 0) && $shield > 0) {
             while($shield > 0) {
                 $countSDef++;
                 $shield = $shield - $firstBloodD;
@@ -235,37 +235,29 @@ class FightController extends Controller
             $countSAtt = 1;
             $armor = $armor - $firstBloodD;
         }
-        $secondShot = ($missile + $plasma + $laser);
-        $secondShotD = ($missileD + $plasmaD + $laserD);
+        $secondShot = (($missile * 2.5) + ($plasma / 2) + $laser);
+        $secondShotD = (($missileD * 2.5) + ($plasmaD / 2) + $laserD);
         if($countSDef - $countSAtt > 0) {
             $armorD = $armorD - ($secondShot * ($countSDef - $countSAtt));
-            $secondShotD = ($missileD + $plasmaD + $laserD) - ($secondShot * ($countSDef - $countSAtt));
+            $secondShotD = (($missileD * 2.5) + ($plasmaD / 2) + $laserD) - ($secondShot * ($countSDef - $countSAtt));
         }
         if($countSAtt - $countSDef > 0) {
             $armor = $armor - ($secondShot * ($countSAtt - $countSDef));
-            $secondShot = ($missile + $plasma + $laser) - ($secondShotD * ($countSAtt - $countSDef));
+            $secondShot = (($missile * 2.5) + ($plasma / 2) + $laser) - ($secondShotD * ($countSAtt - $countSDef));
         }
         $countShot = 0;
-        while((($missileD + $plasmaD + $laserD > 0) && $armor > 0) &&
-            (($missile + $plasma + $laser > 0) && $armorD > 0) && ($shieldD <= 0 && $shield <= 0)) {
+        while((($secondShotD > 0) && $armor > 0) &&
+            (($secondShot > 0) && $armorD > 0) && ($shieldD <= 0 && $shield <= 0)) {
             $countShot++;
             if ($armorD > 0) {
                 $armorD = $armorD - $secondShot;
                 $tmpSecondShotD = $secondShotD;
-                $secondShot = ($missile + $plasma + $laser) - ($tmpSecondShotD / 2);
+                $secondShot = $secondShot - ($tmpSecondShotD / 2);
             }
             if($armor > 0) {
                 $armor = $armor - $secondShotD;
-                $secondShotD = ($missileD + $plasmaD + $laserD) - ($secondShot / 2);
+                $secondShotD = $secondShotD - ($secondShot / 2);
             }
-        }
-        if($shieldD > 0) {
-            $armor = 0;
-            $armorD = $armorSaveD;
-        }
-        if($shield > 0) {
-            $armorD = 0;
-            $armor = $armorSaveA;
         }
 
         if ($armorD > $armor || $shieldD > 0) {
