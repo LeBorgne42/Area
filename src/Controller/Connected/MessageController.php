@@ -11,6 +11,7 @@ use App\Form\Front\MessageRespondeType;
 use App\Entity\Message;
 use DateTime;
 use DateTimeZone;
+use DateInterval;
 
 /**
  * @Route("/fr")
@@ -28,6 +29,9 @@ class MessageController extends Controller
         $message = new Message();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
+        $nowDel = new DateTime();
+        $nowDel->setTimezone(new DateTimeZone('Europe/Paris'));
+        $nowDel->sub(new DateInterval('PT' . 1209600 . 'S'));
 
         if($user->getGameOver()) {
             return $this->redirectToRoute('game_over');
@@ -40,6 +44,20 @@ class MessageController extends Controller
             ->setParameters(array('id' => $idp, 'user' => $user))
             ->getQuery()
             ->getOneOrNullResult();
+
+        $removeMessages = $em->getRepository('App:Message')
+            ->createQueryBuilder('m')
+            ->where('m.sendAt < :now')
+            ->setParameters(array('now' => $nowDel))
+            ->getQuery()
+            ->getResult();
+
+        if($removeMessages) {
+            foreach($removeMessages as $removeMessage) {
+                $em->remove($removeMessage);
+            }
+        }
+        $em->flush();
 
         $messages = $em->getRepository('App:Message')
             ->createQueryBuilder('m')

@@ -210,6 +210,14 @@ class SpatialController extends Controller
                 $warAlly[$x] = $tmp->getAllyTag();
                 $x++;
             }
+
+            $fAlly = $user->getAllyFriends();
+            $friendAlly = [];
+            $x = 0;
+            foreach ($fAlly as $tmp) {
+                $friendAlly[$x] = $tmp->getAllyTag();
+                $x++;
+            }
             $fleets = $em->getRepository('App:Fleet')
                 ->createQueryBuilder('f')
                 ->join('f.user', 'u')
@@ -218,7 +226,8 @@ class SpatialController extends Controller
                 ->andWhere('f.attack = :true OR a.sigle in (:ally)')
                 ->andWhere('f.user != :user')
                 ->andWhere('f.flightTime is null')
-                ->setParameters(array('planet' => $usePlanet, 'true' => true, 'ally' => $warAlly, 'user' => $user))
+                ->andWhere('a.sigle not in (:friend)')
+                ->setParameters(array('planet' => $usePlanet, 'true' => true, 'ally' => $warAlly, 'user' => $user, 'friend' => $friendAlly))
                 ->getQuery()
                 ->getResult();
 

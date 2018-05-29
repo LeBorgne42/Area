@@ -51,7 +51,7 @@ class AllyController extends Controller
         } else {
             return $this->redirectToRoute('ally_blank', array('idp' => $usePlanet->getId()));
         }
-        $form_allyImage = $this->createForm(AllyImageType::class,$ally);
+        $form_allyImage = $this->createForm(AllyImageType::class, $ally);
         $form_allyImage->handleRequest($request);
 
         if ($form_allyImage->isSubmitted() && $form_allyImage->isValid()) {
@@ -595,7 +595,7 @@ class AllyController extends Controller
             ->getOneOrNullResult();
 
         $maxMembers = count($user->getAlly()->getUsers()) + count($user->getAlly()->getProposals());
-        if($user->getAlly() && $maxMembers <= 6) {
+        if($user->getAlly() && $maxMembers <= 5) {
             $ally = $user->getAlly();
         } else {
             return $this->redirectToRoute('ally_blank', array('idp' => $usePlanet->getId()));

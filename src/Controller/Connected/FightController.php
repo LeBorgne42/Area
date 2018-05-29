@@ -279,7 +279,7 @@ class FightController extends Controller
                 } else {
                     $malus = (((($armorSaveD - $armorD) * 100) / $armorSaveD) / (rand(15, 20) / 10));
                     if($malus < 1) {
-                        $malus = 5;
+                        $malus = $malus;
                     }
                 }
             }
@@ -363,7 +363,7 @@ class FightController extends Controller
                 } else {
                     $malus = (((($armorSaveA - $armor) * 100) / $armorSaveA) / (rand(15, 20) / 10));
                     if($malus < 1) {
-                        $malus = 5;
+                        $malus = $malus;
                     }
                 }
             }

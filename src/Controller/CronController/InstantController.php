@@ -346,6 +346,14 @@ class InstantController extends Controller
                 ->getQuery()
                 ->getResult();
 
+            $fAlly = $fleet->getUser()->getAllyFriends();
+            $friendAlly = [];
+            $x = 0;
+            foreach ($fAlly as $tmp) {
+                $friendAlly[$x] = $tmp->getAllyTag();
+                $x++;
+            }
+
             $eAlly = $fleet->getUser()->getAllyEnnemy();
             $warAlly = [];
             $x = 0;
@@ -388,7 +396,8 @@ class InstantController extends Controller
                 ->andWhere('f.attack = :true OR a.sigle in (:ally)')
                 ->andWhere('f.user != :user')
                 ->andWhere('f.flightTime is null')
-                ->setParameters(array('planet' => $newHome, 'true' => true, 'ally' => $warAlly, 'user' => $fleet->getUser()))
+                ->andWhere('a.sigle not in (:friend)')
+                ->setParameters(array('planet' => $newHome, 'true' => true, 'ally' => $warAlly, 'user' => $fleet->getUser(), 'friend' => $friendAlly))
                 ->getQuery()
                 ->getResult();
 

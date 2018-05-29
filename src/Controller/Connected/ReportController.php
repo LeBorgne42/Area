@@ -5,6 +5,9 @@ namespace App\Controller\Connected;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use DateTime;
+use DateTimeZone;
+use DateInterval;
 
 /**
  * @Route("/fr")
@@ -19,6 +22,9 @@ class ReportController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
+        $now->sub(new DateInterval('PT' . 1209600 . 'S'));
 
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
@@ -27,6 +33,20 @@ class ReportController extends Controller
             ->setParameters(array('id' => $idp, 'user' => $user))
             ->getQuery()
             ->getOneOrNullResult();
+
+        $removeReports = $em->getRepository('App:Report')
+            ->createQueryBuilder('r')
+            ->where('r.sendAt < :now')
+            ->setParameters(array('now' => $now))
+            ->getQuery()
+            ->getResult();
+
+        if($removeReports) {
+            foreach($removeReports as $removeReport) {
+                $em->remove($removeReport);
+            }
+        }
+        $em->flush();
 
         $reports = $em->getRepository('App:Report')
             ->createQueryBuilder('r')

@@ -468,6 +468,18 @@ class User implements UserInterface, \Serializable
     }
 
     /**
+     * @return mixed
+     */
+    public function getAllyFriends()
+    {
+        if($this->ally) {
+            return $this->ally->getAllieds();
+        } else {
+            return [];
+        }
+    }
+
+    /**
      * @return int
      */
     public function getAllShips(): int

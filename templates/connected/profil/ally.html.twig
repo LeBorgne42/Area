@@ -8,7 +8,7 @@
     <div class="front-block allyPage text-center">
         <div class="my-4 ml-5">[{{ ally.getSigle() }}] - {{ ally.getName() }}</div>
         {% if ally.imageName %}
-            <div class="text-center"><img height="300" width="450" src="{{ vich_uploader_asset(app.user.getAlly(), 'imageFile') }}"></div>
+            <div class="text-center"><img height="300" width="450" src="{{ vich_uploader_asset(ally, 'imageFile') }}"></div>
         {% else %}
             <div class="text-center"><img height="300" width="450" src="{{ asset('img/ally.jpg') }}"></div>
         {% endif %}
