@@ -61,6 +61,25 @@
                 {% if salon.getId() != 1 and isAlly == 'no' %}<span class="float-right mt-3"><a href="{{ path('ally_leave_salon', {'idp': usePlanet.getId(), 'id': salon.getId()}) }}">{{ 'salon.close'|trans }}</a></span>{% endif %}
             </div>
         </div>
+        <div class="p-3">
+            {% if salon.getId() == 1 %}
+                {% for userCo in userCos %}
+                    <span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'idp': usePlanet.getId(), 'id': userCo.getId()}) }}">{{ userCo.getUserName() }}</a></span> -
+                {% endfor %}
+            {% endif %}
+            {% if salon.getAllys() and salon.getUsers()|length == 0 %}
+                {% for ally in salon.getAllys() %}
+                    {% for user in ally.getUsers() %}
+                        {% if user.lastActivity > connected %}
+                            <span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'idp': usePlanet.getId(), 'id': user.getId()}) }}">{{ user.getUserName() }}</a></span> -
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            {% endif %}
+            {% for user in salon.getUsers() %}
+                <span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'idp': usePlanet.getId(), 'id': user.getId()}) }}">{{ user.getUserName() }}</a></span> -
+            {% endfor %}
+        </div>
     </div>
     <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm modal-dialog-centered" role="document">

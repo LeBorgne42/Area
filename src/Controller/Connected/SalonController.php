@@ -11,6 +11,7 @@ use App\Form\Front\SalonType;
 use App\Entity\S_Content;
 use DateTime;
 use DateTimeZone;
+use DateInterval;
 
 /**
  * @Route("/fr")
@@ -28,6 +29,9 @@ class SalonController extends Controller
         $user = $this->getUser();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
+        $connected = new DateTime();
+        $connected->setTimezone(new DateTimeZone('Europe/Paris'));
+        $connected->sub(new DateInterval('PT' . 1800 . 'S'));
 
         if($user->getGameOver()) {
             return $this->redirectToRoute('game_over');
@@ -40,10 +44,6 @@ class SalonController extends Controller
             ->setParameters(array('id' => $idp, 'user' => $user))
             ->getQuery()
             ->getOneOrNullResult();
-
-        if($user->getSalonBan() > $now) {
-            return $this->redirectToRoute('salon', array('idp' => $usePlanet->getId()));
-        }
 
         if($user->getAlly()) {
             $sigle = $user->getAlly()->getSigle();
@@ -66,6 +66,13 @@ class SalonController extends Controller
             ->orWhere('s.id = :id')
             ->orWhere('u.username = :user')
             ->setParameters(array('sigle' => $sigle, 'id' => 1, 'user' => $user->getUserName()))
+            ->getQuery()
+            ->getResult();
+
+        $userCos = $em->getRepository('App:User')
+            ->createQueryBuilder('u')
+            ->where('u.lastActivity > :date')
+            ->setParameters(array('date' => $connected))
             ->getQuery()
             ->getResult();
 
@@ -159,6 +166,8 @@ class SalonController extends Controller
         return $this->render('connected/salon.html.twig', [
             'usePlanet' => $usePlanet,
             'salons' => $salons,
+            'userCos' => $userCos,
+            'connected' => $connected,
             'salon' => $salon,
             'form_message' => $form_message->createView(),
         ]);

@@ -69,13 +69,13 @@
                                     <span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'idp': usePlanet.getId(), 'id': user.getId()}) }}">{{ user.getUsername() }}</a></span>
                                 </td>
                                 <td class="center-cells">
-                                    {{ user.getJoinAllyAt()|date('d/m/Y H:i') }}
+                                    {{ user.getJoinAllyAt()|date('H:i d/m/Y') }}
                                 </td>
                                 <td class="center-cells">
                                     {{ user.getRank().getPoint() }}
                                 </td>
                                 <td class="center-cells">
-                                    {% if user.getLastActivity() %}{{ user.getLastActivity()|date('d/m/Y H:i') }}{% else %}{{ 'ally.notConnected'|trans }}{% endif %}
+                                    {% if user.getLastActivity() %}{{ user.getLastActivity()|date('H:i d/m/Y') }}{% else %}{{ 'ally.notConnected'|trans }}{% endif %}
                                 </td>
                                 {% if app.user.getGrade().getCanKick() == 1 %}
                                     <td class="center-cells">

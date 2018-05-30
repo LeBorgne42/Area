@@ -82,7 +82,8 @@ class MessageController extends Controller
         $form_message = $this->createForm(MessageType::class, $message);
         $form_message->handleRequest($request);
 
-        if ($form_message->isSubmitted() && $form_message->isValid() && $form_message->get('bitcoin')->getData() < $user->getBitcoin()) {
+        if ($form_message->isSubmitted() && $form_message->isValid() && $form_message->get('bitcoin')->getData() < $user->getBitcoin() &&
+            ($user->getSalonBan() > $now || $user->getSalonBan() == null)) {
             $recever = $form_message->get('user')->getData();
             if ($form_message->get('anonymous')->getData() == false) {
                 $message->setSender($user->getUsername());

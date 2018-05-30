@@ -466,10 +466,12 @@ class FleetController extends Controller
             ->getOneOrNullResult();
 
         $planetTake = $fleetGive->getPlanet();
-        if($fleetGive && $usePlanet &&
+        if(!$fleetGive && !$usePlanet &&
             ($planetTake->getSoldier() + $fleetGive->getSoldier()) <= $planetTake->getSoldierMax() &&
-                ($planetTake->getWorker() + $fleetGive->getWorker()) <= $planetTake->getWorkerMax() &&
-            ($planetTake->getScientist() + $fleetGive->getScientist()) <= $planetTake->getScientistMax()) {
+            ($planetTake->getWorker() + $fleetGive->getWorker()) <= $planetTake->getWorkerMax() &&
+            ($planetTake->getScientist() + $fleetGive->getScientist()) <= $planetTake->getScientistMax() &&
+            ($planetTake->getNiobium() + $fleetGive->getNiobium()) <= $planetTake->getNiobiumMax() &&
+            ($planetTake->getWater() + $fleetGive->getWater()) <= $planetTake->getWaterMax()) {
         } else {
             return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
         }
