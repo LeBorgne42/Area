@@ -64,7 +64,9 @@
         <div class="p-3">
             {% if salon.getId() == 1 %}
                 {% for userCo in userCos %}
-                    <span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'idp': usePlanet.getId(), 'id': userCo.getId()}) }}">{{ userCo.getUserName() }}</a></span> -
+                    {% if userCo.lastActivity > connected %}
+                        <span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'idp': usePlanet.getId(), 'id': userCo.getId()}) }}">{{ userCo.getUserName() }}</a></span> -
+                    {% endif %}
                 {% endfor %}
             {% endif %}
             {% if salon.getAllys() and salon.getUsers()|length == 0 %}
