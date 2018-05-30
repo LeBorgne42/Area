@@ -92,6 +92,8 @@ class SpatialController extends Controller
                 return $this->redirectToRoute('spatial', array('idp' => $usePlanet->getId()));
             }
             if($usePlanet->getProduct()) {
+                $reNow = new DateTime();
+                $reNow->setTimezone(new DateTimeZone('Europe/Paris'));
                 $product = $usePlanet->getProduct();
                 $product->setCargoI($product->getCargoI() + $cargoI);
                 $product->setCargoV($product->getCargoV() + $cargoV);
@@ -112,8 +114,10 @@ class SpatialController extends Controller
                 $product->setIronClad($product->getIronClad() + $ironClad);
                 $product->setDestroyer($product->getDestroyer() + $destroyer);
                 $oldNow = $product->getProductAt();
-                $oldNow->add(new DateInterval('PT' . round($time) . 'S'));
-                $product->setProductAt($oldNow);
+                $tmpDate = $oldNow->diff($reNow);
+                $reNow->add($tmpDate);
+                $reNow->add(new DateInterval('PT' . round($time) . 'S'));
+                $product->setProductAt($reNow);
             } else {
                 $product = new Product();
                 $product->setPlanet($usePlanet);
