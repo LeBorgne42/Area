@@ -9,6 +9,9 @@ use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\HttpKernel;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use DateTime;
+use DateTimeZone;
+
 /**
  * Class KernelControllerListener
  *
@@ -71,7 +74,8 @@ class UserEvent implements EventSubscriberInterface
         if($event->getRequestType() == HttpKernel::MASTER_REQUEST)
         {
             $user = $this->token->getToken()->getUser();
-            $delay = new \DateTime("1 minutes ago");
+            $delay = new DateTime("1 minutes ago");
+            $delay->setTimezone(new DateTimeZone('Europe/Paris'));
             if($user instanceof User && $user->getLastActivity() < $delay)
             {
                 $user->setLastActivity(new \DateTime());

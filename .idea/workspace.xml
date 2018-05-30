@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97f042ea-d0ee-4bd9-bb02-3d850e24f659" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/templates/connected/map/sector.html.twig" afterPath="$PROJECT_DIR$/templates/connected/map/sector.html.twig" />
+      <change beforePath="$PROJECT_DIR$/src/EventListener/UserEvent.php" afterPath="$PROJECT_DIR$/src/EventListener/UserEvent.php" />
       <change beforePath="$PROJECT_DIR$/templates/connected/salon.html.twig" afterPath="$PROJECT_DIR$/templates/connected/salon.html.twig" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,12 +17,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="sector.html.twig" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/connected/map/sector.html.twig">
+      <file leaf-file-name="UserEvent.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/EventListener/UserEvent.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="503">
-              <caret line="51" column="185" lean-forward="false" selection-start-line="51" selection-start-column="185" selection-end-line="51" selection-end-column="185" />
-              <folding />
+            <state relative-caret-position="787">
+              <caret line="77" column="18" lean-forward="false" selection-start-line="77" selection-start-column="18" selection-end-line="77" selection-end-column="18" />
+              <folding>
+                <element signature="e#37#57#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -162,9 +164,9 @@
         <option value="$PROJECT_DIR$/src/Controller/Connected/SalonController.php" />
         <option value="$PROJECT_DIR$/templates/connected/ally.html.twig" />
         <option value="$PROJECT_DIR$/src/Events/UserEvent.php" />
-        <option value="$PROJECT_DIR$/src/EventListener/UserEvent.php" />
-        <option value="$PROJECT_DIR$/templates/connected/salon.html.twig" />
         <option value="$PROJECT_DIR$/templates/connected/map/sector.html.twig" />
+        <option value="$PROJECT_DIR$/templates/connected/salon.html.twig" />
+        <option value="$PROJECT_DIR$/src/EventListener/UserEvent.php" />
       </list>
     </option>
   </component>
@@ -329,6 +331,30 @@
               <item name="Area" type="b2602c69:ProjectViewProjectNode" />
               <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
+            <path>
+              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Connected" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="EventListener" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -407,12 +433,12 @@
       <workItem from="1524922720781" duration="128109000" />
       <workItem from="1525305799071" duration="264174000" />
       <workItem from="1526251994568" duration="133593000" />
-      <workItem from="1527050234571" duration="105516000" />
+      <workItem from="1527050234571" duration="106497000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1180958000" />
+    <option name="totallyTimeSpent" value="1181939000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -757,14 +783,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/FightController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="786">
-          <caret line="358" column="21" lean-forward="false" selection-start-line="358" selection-start-column="21" selection-end-line="358" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/connected/game_over.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -867,28 +885,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/EventListener/UserEvent.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="38" column="84" lean-forward="false" selection-start-line="38" selection-start-column="84" selection-end-line="38" selection-end-column="84" />
-          <folding>
-            <element signature="e#37#57#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/connected/ally.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="603">
           <caret line="77" column="109" lean-forward="false" selection-start-line="77" selection-start-column="109" selection-end-line="77" selection-end-column="109" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/connected/salon.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="553">
-          <caret line="66" column="32" lean-forward="false" selection-start-line="66" selection-start-column="32" selection-end-line="66" selection-end-column="32" />
           <folding />
         </state>
       </provider>
@@ -906,6 +906,34 @@
         <state relative-caret-position="503">
           <caret line="51" column="185" lean-forward="false" selection-start-line="51" selection-start-column="185" selection-end-line="51" selection-end-column="185" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/connected/salon.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="808">
+          <caret line="83" column="31" lean-forward="false" selection-start-line="83" selection-start-column="31" selection-end-line="83" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/FightController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="49" lean-forward="true" selection-start-line="18" selection-start-column="49" selection-end-line="20" selection-end-column="60" />
+          <folding>
+            <element signature="e#44#91#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/EventListener/UserEvent.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="787">
+          <caret line="77" column="18" lean-forward="false" selection-start-line="77" selection-start-column="18" selection-end-line="77" selection-end-column="18" />
+          <folding>
+            <element signature="e#37#57#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

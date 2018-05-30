@@ -68,19 +68,22 @@
                         <span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'idp': usePlanet.getId(), 'id': userCo.getId()}) }}">{{ userCo.getUserName() }}</a></span> -
                     {% endif %}
                 {% endfor %}
-            {% endif %}
-            {% if salon.getAllys() and salon.getUsers()|length == 0 %}
-                {% for ally in salon.getAllys() %}
-                    {% for user in ally.getUsers() %}
-                        {% if user.lastActivity > connected %}
-                            <span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'idp': usePlanet.getId(), 'id': user.getId()}) }}">{{ user.getUserName() }}</a></span> -
-                        {% endif %}
+            {% else %}
+                {% if salon.getAllys() and salon.getUsers()|length == 0 %}
+                    {% for ally in salon.getAllys() %}
+                        {% for user in ally.getUsers() %}
+                            {% if user.lastActivity > connected %}
+                                <span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'idp': usePlanet.getId(), 'id': user.getId()}) }}">{{ user.getUserName() }}</a></span> -
+                            {% endif %}
+                        {% endfor %}
                     {% endfor %}
+                {% endif %}
+                {% for user in salon.getUsers() %}
+                    {% if user.lastActivity > connected %}
+                        <span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'idp': usePlanet.getId(), 'id': user.getId()}) }}">{{ user.getUserName() }}</a></span> -
+                    {% endif %}
                 {% endfor %}
             {% endif %}
-            {% for user in salon.getUsers() %}
-                <span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'idp': usePlanet.getId(), 'id': user.getId()}) }}">{{ user.getUserName() }}</a></span> -
-            {% endfor %}
         </div>
     </div>
     <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
