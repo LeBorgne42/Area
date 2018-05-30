@@ -115,8 +115,8 @@ class SpatialController extends Controller
                 $product->setDestroyer($product->getDestroyer() + $destroyer);
                 $oldNow = $product->getProductAt();
                 $tmpDate = $oldNow->diff($reNow);
-                $reNow->add($tmpDate);
                 $reNow->add(new DateInterval('PT' . round($time) . 'S'));
+                $reNow->sub($tmpDate);
                 $product->setProductAt($reNow);
             } else {
                 $product = new Product();
