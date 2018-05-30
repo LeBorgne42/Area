@@ -42,6 +42,9 @@
                 <td class="center-cells p-1">
                     {{ form_widget(form_createFleet.sonde,{attr: { max: usePlanet.getSonde()}}) }}
                 </td>
+                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                    <span class="maxInput">max</span>
+                </td>
             </tr>
             <tr{% if usePlanet.getColonizer() == 0 %} hidden{% endif %}>
                 <th class="tab-cells-name p-1 pl-3">
@@ -49,6 +52,9 @@
                 </th>
                 <td class="center-cells p-1">
                     {{ form_widget(form_createFleet.colonizer,{attr: { max: usePlanet.getColonizer()}}) }}
+                </td>
+                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                    <span class="maxInput">max</span>
                 </td>
             </tr>
             <tr{% if usePlanet.getCargoI() == 0 %} hidden{% endif %}>
@@ -58,6 +64,9 @@
                 <td class="center-cells p-1">
                     {{ form_widget(form_createFleet.cargoI,{attr: { max: usePlanet.getCargoI()}}) }}
                 </td>
+                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                    <span class="maxInput">max</span>
+                </td>
             </tr>
             <tr{% if usePlanet.getCargoV() == 0 %} hidden{% endif %}>
                 <th class="tab-cells-name p-1 pl-3">
@@ -65,6 +74,9 @@
                 </th>
                 <td class="center-cells p-1">
                     {{ form_widget(form_createFleet.cargoV,{attr: { max: usePlanet.getCargoV()}}) }}
+                </td>
+                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                    <span class="maxInput">max</span>
                 </td>
             </tr>
             <tr{% if usePlanet.getCargoX() == 0 %} hidden{% endif %}>
@@ -74,6 +86,9 @@
                 <td class="center-cells p-1">
                     {{ form_widget(form_createFleet.cargoX,{attr: { max: usePlanet.getCargoX()}}) }}
                 </td>
+                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                    <span class="maxInput">max</span>
+                </td>
             </tr>
             <tr{% if usePlanet.getRecycleur() == 0 %} hidden{% endif %}>
                 <th class="tab-cells-name p-1 pl-3">
@@ -81,6 +96,9 @@
                 </th>
                 <td class="center-cells p-1">
                     {{ form_widget(form_createFleet.recycleur,{attr: { max: usePlanet.getRecycleur()}}) }}
+                </td>
+                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                    <span class="maxInput">max</span>
                 </td>
             </tr>
             <tr{% if usePlanet.getBarge() == 0 %} hidden{% endif %}>
@@ -90,6 +108,9 @@
                 <td class="center-cells p-1">
                     {{ form_widget(form_createFleet.barge,{attr: { max: usePlanet.getBarge()}}) }}
                 </td>
+                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                    <span class="maxInput">max</span>
+                </td>
             </tr>
             <tr{% if usePlanet.getHunter() == 0 %} hidden{% endif %}>
                 <th class="tab-cells-name p-1 pl-3">
@@ -97,6 +118,9 @@
                 </th>
                 <td class="center-cells p-1">
                     {{ form_widget(form_createFleet.hunter,{attr: { max: usePlanet.getHunter()}}) }}
+                </td>
+                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                    <span class="maxInput">max</span>
                 </td>
             </tr>
             <tr{% if usePlanet.getHunterHeavy() == 0 %} hidden{% endif %}>
@@ -106,6 +130,9 @@
                 <td class="center-cells p-1">
                     {{ form_widget(form_createFleet.hunterHeavy,{attr: { max: usePlanet.getHunterHeavy()}}) }}
                 </td>
+                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                    <span class="maxInput">max</span>
+                </td>
             </tr>
             <tr{% if usePlanet.getHunterWar() == 0 %} hidden{% endif %}>
                 <th class="tab-cells-name p-1 pl-3">
@@ -113,6 +140,9 @@
                 </th>
                 <td class="center-cells p-1">
                     {{ form_widget(form_createFleet.hunterWar,{attr: { max: usePlanet.getHunterWar()}}) }}
+                </td>
+                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                    <span class="maxInput">max</span>
                 </td>
             </tr>
             <tr{% if usePlanet.getCorvet() == 0 %} hidden{% endif %}>
@@ -122,6 +152,9 @@
                 <td class="center-cells p-1">
                     {{ form_widget(form_createFleet.corvet,{attr: { max: usePlanet.getCorvet()}}) }}
                 </td>
+                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                    <span class="maxInput">max</span>
+                </td>
             </tr>
             <tr{% if usePlanet.getCorvetLaser() == 0 %} hidden{% endif %}>
                 <th class="tab-cells-name p-1 pl-3">
@@ -129,6 +162,9 @@
                 </th>
                 <td class="center-cells p-1">
                     {{ form_widget(form_createFleet.corvetLaser,{attr: { max: usePlanet.getCorvetLaser()}}) }}
+                </td>
+                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                    <span class="maxInput">max</span>
                 </td>
             </tr>
             <tr{% if usePlanet.getCorvetWar() == 0 %} hidden{% endif %}>
@@ -138,6 +174,9 @@
                 <td class="center-cells p-1">
                     {{ form_widget(form_createFleet.corvetWar,{attr: { max: usePlanet.getCorvetWar()}}) }}
                 </td>
+                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                    <span class="maxInput">max</span>
+                </td>
             </tr>
             <tr{% if usePlanet.getFregate() == 0 %} hidden{% endif %}>
                 <th class="tab-cells-name p-1 pl-3">
@@ -145,6 +184,9 @@
                 </th>
                 <td class="center-cells p-1">
                     {{ form_widget(form_createFleet.fregate,{attr: { max: usePlanet.getFregate()}}) }}
+                </td>
+                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                    <span class="maxInput">max</span>
                 </td>
             </tr>
             <tr{% if usePlanet.getFregatePlasma() == 0 %} hidden{% endif %}>
@@ -154,6 +196,9 @@
                 <td class="center-cells p-1">
                     {{ form_widget(form_createFleet.fregatePlasma,{attr: { max: usePlanet.getFregatePlasma()}}) }}
                 </td>
+                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                    <span class="maxInput">max</span>
+                </td>
             </tr>
             <tr{% if usePlanet.getCroiser() == 0 %} hidden{% endif %}>
                 <th class="tab-cells-name p-1 pl-3">
@@ -161,6 +206,9 @@
                 </th>
                 <td class="center-cells p-1">
                     {{ form_widget(form_createFleet.croiser,{attr: { max: usePlanet.getCroiser()}}) }}
+                </td>
+                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                    <span class="maxInput">max</span>
                 </td>
             </tr>
             <tr{% if usePlanet.getIronClad() == 0 %} hidden{% endif %}>
@@ -170,6 +218,9 @@
                 <td class="center-cells p-1">
                     {{ form_widget(form_createFleet.ironClad,{attr: { max: usePlanet.getIronClad()}}) }}
                 </td>
+                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                    <span class="maxInput">max</span>
+                </td>
             </tr>
             <tr{% if usePlanet.getDestroyer() == 0 %} hidden{% endif %}>
                 <th class="tab-cells-name p-1 pl-3">
@@ -177,6 +228,9 @@
                 </th>
                 <td class="center-cells p-1">
                     {{ form_widget(form_createFleet.destroyer,{attr: { max: usePlanet.getDestroyer()}}) }}
+                </td>
+                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                    <span class="maxInput">max</span>
                 </td>
             </tr>
             </tbody>

@@ -267,7 +267,7 @@ class FightController extends Controller
             $malus = 0;
             if ($armorSaveD != $armorD) {
                 if($countShot == 0) {
-                    $malus = 100;
+                    $malus = 1;
                 } else {
                     $malus = (((($armorSaveD - $armorD) * 100) / $armorSaveD) / (rand(15, 20) / 10));
                     if($malus < 1) {

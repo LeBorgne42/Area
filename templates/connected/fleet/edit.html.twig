@@ -144,9 +144,11 @@
                                 <td class="center-cells p-2 text-center">
                                     {{ 'fleet.addShip'|trans }}
                                 </td>
+                                <td class="center-cells p-2 text-center"></td>
                                 <td class="center-cells p-2 text-center">
                                     {{ 'fleet.removeShip'|trans }}
                                 </td>
+                                <td class="center-cells p-2 text-center"></td>
                             </tr>
                             <tr{% if fleet.getPlanet().getSonde() == 0 and fleet.getSonde() == 0 %} hidden{% endif %}>
                                 <th class="tab-cells-name  p-1 pl-3">
@@ -155,8 +157,14 @@
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.moreSonde,{attr: { max: fleet.getPlanet().getSonde()}}) }}
                                 </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInput">max</span>
+                                </td>
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.lessSonde,{attr: { max: fleet.getSonde()}}) }}
+                                </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInputLess">max</span>
                                 </td>
                             </tr>
                             <tr{% if fleet.getPlanet().getColonizer() == 0 and fleet.getColonizer() == 0 %} hidden{% endif %}>
@@ -166,8 +174,14 @@
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.moreColonizer,{attr: { max: fleet.getPlanet().getColonizer()}}) }}
                                 </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInput">max</span>
+                                </td>
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.lessColonizer,{attr: { max: fleet.getColonizer()}}) }}
+                                </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInputLess">max</span>
                                 </td>
                             </tr>
                             <tr{% if fleet.getPlanet().getCargoI() == 0 and fleet.getCargoI() == 0 %} hidden{% endif %}>
@@ -177,8 +191,14 @@
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.moreCargoI,{attr: { max: fleet.getPlanet().getCargoI()}}) }}
                                 </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInput">max</span>
+                                </td>
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.lessCargoI,{attr: { max: fleet.getCargoI()}}) }}
+                                </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInputLess">max</span>
                                 </td>
                             </tr>
                             <tr{% if fleet.getPlanet().getCargoV() == 0 and fleet.getCargoV() == 0 %} hidden{% endif %}>
@@ -188,8 +208,14 @@
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.moreCargoV,{attr: { max: fleet.getPlanet().getCargoV()}}) }}
                                 </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInput">max</span>
+                                </td>
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.lessCargoV,{attr: { max: fleet.getCargoV()}}) }}
+                                </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInputLess">max</span>
                                 </td>
                             </tr>
                             <tr{% if fleet.getPlanet().getCargoX() == 0 and fleet.getCargoX() == 0 %} hidden{% endif %}>
@@ -199,8 +225,14 @@
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.moreCargoX,{attr: { max: fleet.getPlanet().getCargoX()}}) }}
                                 </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInput">max</span>
+                                </td>
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.lessCargoX,{attr: { max: fleet.getCargoX()}}) }}
+                                </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInputLess">max</span>
                                 </td>
                             </tr>
                             <tr{% if fleet.getPlanet().getRecycleur() == 0 and fleet.getRecycleur() == 0 %} hidden{% endif %}>
@@ -210,8 +242,14 @@
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.moreRecycleur,{attr: { max: fleet.getPlanet().getRecycleur()}}) }}
                                 </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInput">max</span>
+                                </td>
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.lessRecycleur,{attr: { max: fleet.getRecycleur()}}) }}
+                                </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInputLess">max</span>
                                 </td>
                             </tr>
                             <tr{% if fleet.getPlanet().getBarge() == 0 and fleet.getBarge() == 0 %} hidden{% endif %}>
@@ -221,8 +259,14 @@
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.moreBarge,{attr: { max: fleet.getPlanet().getBarge()}}) }}
                                 </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInput">max</span>
+                                </td>
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.lessBarge,{attr: { max: fleet.getBarge()}}) }}
+                                </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInputLess">max</span>
                                 </td>
                             </tr>
                             <tr{% if fleet.getPlanet().getHunter() == 0 and fleet.getHunter() == 0 %} hidden{% endif %}>
@@ -232,8 +276,14 @@
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.moreHunter,{attr: { max: fleet.getPlanet().getHunter()}}) }}
                                 </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInput">max</span>
+                                </td>
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.lessHunter,{attr: { max: fleet.getHunter()}}) }}
+                                </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInputLess">max</span>
                                 </td>
                             </tr>
                             <tr{% if fleet.getPlanet().getHunterHeavy() == 0 and fleet.getHunterHeavy() == 0 %} hidden{% endif %}>
@@ -243,8 +293,14 @@
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.moreHunterHeavy,{attr: { max: fleet.getPlanet().getHunterHeavy()}}) }}
                                 </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInput">max</span>
+                                </td>
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.lessHunterHeavy,{attr: { max: fleet.getHunterHeavy()}}) }}
+                                </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInputLess">max</span>
                                 </td>
                             </tr>
                             <tr{% if fleet.getPlanet().getHunterWar() == 0 and fleet.getHunterWar() == 0 %} hidden{% endif %}>
@@ -254,8 +310,14 @@
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.moreHunterWar,{attr: { max: fleet.getPlanet().getHunterWar()}}) }}
                                 </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInput">max</span>
+                                </td>
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.lessHunterWar,{attr: { max: fleet.getHunterWar()}}) }}
+                                </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInputLess">max</span>
                                 </td>
                             </tr>
                             <tr{% if fleet.getPlanet().getCorvet() == 0 and fleet.getCorvet() == 0 %} hidden{% endif %}>
@@ -265,8 +327,14 @@
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.moreCorvet,{attr: { max: fleet.getPlanet().getCorvet()}}) }}
                                 </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInput">max</span>
+                                </td>
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.lessCorvet,{attr: { max: fleet.getCorvet()}}) }}
+                                </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInputLess">max</span>
                                 </td>
                             </tr>
                             <tr{% if fleet.getPlanet().getCorvetLaser() == 0 and fleet.getCorvetLaser() == 0 %} hidden{% endif %}>
@@ -276,8 +344,14 @@
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.moreCorvetLaser,{attr: { max: fleet.getPlanet().getCorvetLaser()}}) }}
                                 </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInput">max</span>
+                                </td>
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.lessCorvetLaser,{attr: { max: fleet.getCorvetLaser()}}) }}
+                                </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInputLess">max</span>
                                 </td>
                             </tr>
                             <tr{% if fleet.getPlanet().getCorvetWar() == 0 and fleet.getCorvetWar() == 0 %} hidden{% endif %}>
@@ -287,8 +361,14 @@
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.moreCorvetWar,{attr: { max: fleet.getPlanet().getCorvetWar()}}) }}
                                 </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInput">max</span>
+                                </td>
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.lessCorvetWar,{attr: { max: fleet.getCorvetWar()}}) }}
+                                </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInputLess">max</span>
                                 </td>
                             </tr>
                             <tr{% if fleet.getPlanet().getFregate() == 0 and fleet.getFregate() == 0 %} hidden{% endif %}>
@@ -298,8 +378,14 @@
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.moreFregate,{attr: { max: fleet.getPlanet().getFregate()}}) }}
                                 </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInput">max</span>
+                                </td>
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.lessFregate,{attr: { max: fleet.getFregate()}}) }}
+                                </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInputLess">max</span>
                                 </td>
                             </tr>
                             <tr{% if fleet.getPlanet().getFregatePlasma() == 0 and fleet.getFregatePlasma() == 0 %} hidden{% endif %}>
@@ -309,8 +395,14 @@
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.moreFregatePlasma,{attr: { max: fleet.getPlanet().getFregatePlasma()}}) }}
                                 </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInput">max</span>
+                                </td>
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.lessFregatePlasma,{attr: { max: fleet.getFregatePlasma()}}) }}
+                                </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInputLess">max</span>
                                 </td>
                             </tr>
                             <tr{% if fleet.getPlanet().getCroiser() == 0 and fleet.getCroiser() == 0 %} hidden{% endif %}>
@@ -320,8 +412,14 @@
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.moreCroiser,{attr: { max: fleet.getPlanet().getCroiser()}}) }}
                                 </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInput">max</span>
+                                </td>
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.lessCroiser,{attr: { max: fleet.getCroiser()}}) }}
+                                </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInputLess">max</span>
                                 </td>
                             </tr>
                             <tr{% if fleet.getPlanet().getIronClad() == 0 and fleet.getIronClad() == 0 %} hidden{% endif %}>
@@ -331,8 +429,14 @@
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.moreIronClad,{attr: { max: fleet.getPlanet().getIronClad()}}) }}
                                 </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInput">max</span>
+                                </td>
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.lessIronClad,{attr: { max: fleet.getIronClad()}}) }}
+                                </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInputLess">max</span>
                                 </td>
                             </tr>
                             <tr{% if fleet.getPlanet().getDestroyer() == 0 and fleet.getDestroyer() == 0 %} hidden{% endif %}>
@@ -342,8 +446,14 @@
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.moreDestroyer,{attr: { max: fleet.getPlanet().getDestroyer()}}) }}
                                 </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInput">max</span>
+                                </td>
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.lessDestroyer,{attr: { max: fleet.getDestroyer()}}) }}
+                                </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInputLess">max</span>
                                 </td>
                             </tr>
                             </tbody>
@@ -357,9 +467,11 @@
                                 <td class="center-cells p-2 text-center">
                                     {{ 'fleet.addShip'|trans }}
                                 </td>
+                                <td class="center-cells p-2 text-center"></td>
                                 <td class="center-cells p-2 text-center">
                                     {{ 'fleet.removeShip'|trans }}
                                 </td>
+                                <td class="center-cells p-2 text-center"></td>
                             </tr>
                             <tr{% if fleet.getPlanet().getNiobium() == 0 and fleet.getNiobium() == 0 %} hidden{% endif %}>
                                 <th class="tab-cells-name p-1 pl-3">
@@ -368,8 +480,14 @@
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.moreNiobium,{attr: { max: fleet.getPlanet().getNiobium()}}) }}
                                 </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInput">max</span>
+                                </td>
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.lessNiobium,{attr: { max: fleet.getNiobium()}}) }}
+                                </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInputLess">max</span>
                                 </td>
                             </tr>
                             <tr{% if fleet.getPlanet().getWater() == 0 and fleet.getWater() == 0 %} hidden{% endif %}>
@@ -379,8 +497,14 @@
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.moreWater,{attr: { max: fleet.getPlanet().getWater()}}) }}
                                 </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInput">max</span>
+                                </td>
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.lessWater,{attr: { max: fleet.getWater()}}) }}
+                                </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInputLess">max</span>
                                 </td>
                             </tr>
                             <tr{% if fleet.getPlanet().getSoldier() == 0 and fleet.getSoldier() == 0 %} hidden{% endif %}>
@@ -390,8 +514,14 @@
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.moreSoldier,{attr: { max: fleet.getPlanet().getSoldier()}}) }}
                                 </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInput">max</span>
+                                </td>
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.lessSoldier,{attr: { max: fleet.getSoldier()}}) }}
+                                </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInputLess">max</span>
                                 </td>
                             </tr>
                             <tr{% if fleet.getPlanet().getWorker() == 0 and fleet.getWorker() == 0 %} hidden{% endif %}>
@@ -401,8 +531,14 @@
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.moreWorker,{attr: { max: fleet.getPlanet().getWorker()}}) }}
                                 </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInput">max</span>
+                                </td>
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.lessWorker,{attr: { max: fleet.getWorker()}}) }}
+                                </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInputLess">max</span>
                                 </td>
                             </tr>
                             <tr{% if fleet.getPlanet().getScientist() == 0 and fleet.getScientist() == 0 %} hidden{% endif %}>
@@ -412,8 +548,14 @@
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.moreScientist,{attr: { max: fleet.getPlanet().getScientist()}}) }}
                                 </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInput">max</span>
+                                </td>
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.lessScientist,{attr: { max: fleet.getScientist()}}) }}
+                                </td>
+                                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                                    <span class="maxInputLess">max</span>
                                 </td>
                             </tr>
                             </tbody>

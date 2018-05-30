@@ -36,6 +36,17 @@ function manageModalContact() {
     });
 }
 
+function manageMaxClick() {
+    $('.maxInput').off('click').on('click',function(e){
+        var parent = $(this).parent().parent();
+        parent.find('input:first').val(parent.find('input:first').attr('max'));
+    });
+    $('.maxInputLess').off('click').on('click',function(e){
+        var parent = $(this).parent().parent();
+        parent.find('input:eq(1)').val(parent.find('input:eq(1)').attr('max'));
+    });
+}
+
 function manageTotalShip() {
     $('.nbrProduct').off('change').on('change',function(e){
         var niobium = 0;
@@ -648,6 +659,7 @@ $(document).ready(function() {
     manageAllyImageForm();
     manageModalContact();
     manageMaxShip();
+    manageMaxClick();
     manageTotalShip();
     manageCoordonate();
     manageFlightTime();
