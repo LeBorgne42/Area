@@ -52,9 +52,49 @@ class FleetController extends Controller
             ->getQuery()
             ->getResult();
 
+        $fleetUsePlanet = $em->getRepository('App:Fleet')
+            ->createQueryBuilder('f')
+            ->join('f.planet', 'p')
+            ->join('p.sector', 's')
+            ->where('f.user = :user')
+            ->andWhere('f.planete is null')
+            ->andWhere('f.planet = :planet')
+            ->setParameters(array('user' => $user, 'planet' => $usePlanet))
+            ->orderBy('s.position, p.position')
+            ->getQuery()
+            ->getResult();
+
+        $fleetPlanets = $em->getRepository('App:Fleet')
+            ->createQueryBuilder('f')
+            ->join('f.planet', 'p')
+            ->join('p.sector', 's')
+            ->where('f.user = :user')
+            ->andWhere('f.planete is null')
+            ->andWhere('f.planet != :planet')
+            ->andWhere('f.planet in (:planets)')
+            ->setParameters(array('user' => $user, 'planet' => $usePlanet, 'planets' => $user->getPlanets()))
+            ->orderBy('s.position, p.position')
+            ->getQuery()
+            ->getResult();
+
+        $fleetOther = $em->getRepository('App:Fleet')
+            ->createQueryBuilder('f')
+            ->join('f.planet', 'p')
+            ->join('p.sector', 's')
+            ->where('f.user = :user')
+            ->andWhere('f.planete is null')
+            ->andWhere('f.planet not in (:planets)')
+            ->setParameters(array('user' => $user, 'planets' => $user->getPlanets()))
+            ->orderBy('s.position, p.position')
+            ->getQuery()
+            ->getResult();
+
         return $this->render('connected/fleet.html.twig', [
             'usePlanet' => $usePlanet,
             'fleetMove' => $fleetGiveMove,
+            'fleetOther' => $fleetOther,
+            'fleetPlanets' => $fleetPlanets,
+            'fleetUsePlanet' => $fleetUsePlanet,
         ]);
     }
 
@@ -466,7 +506,7 @@ class FleetController extends Controller
             ->getOneOrNullResult();
 
         $planetTake = $fleetGive->getPlanet();
-        if(!$fleetGive && !$usePlanet &&
+        if($fleetGive && $usePlanet &&
             ($planetTake->getSoldier() + $fleetGive->getSoldier()) <= $planetTake->getSoldierMax() &&
             ($planetTake->getWorker() + $fleetGive->getWorker()) <= $planetTake->getWorkerMax() &&
             ($planetTake->getScientist() + $fleetGive->getScientist()) <= $planetTake->getScientistMax() &&

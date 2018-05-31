@@ -143,15 +143,28 @@ class SalonController extends Controller
                     $em->remove($oneMessage);
                 }
             }
-            $userViews = $em->getRepository('App:User')
-                ->createQueryBuilder('u')
-                ->where('u.id != :user')
-                ->setParameters(array('user' => $user->getId()))
-                ->getQuery()
-                ->getResult();
-            foreach($userViews as $userView) {
-                $userView->setSalonAt(null);
-                $em->persist($userView);
+            if($salon->getId() == 1) {
+                $userViews = $em->getRepository('App:User')
+                    ->createQueryBuilder('u')
+                    ->where('u.id != :user')
+                    ->setParameters(array('user' => $user->getId()))
+                    ->getQuery()
+                    ->getResult();
+                foreach($userViews as $userView) {
+                    $userView->setSalonAt(null);
+                    $em->persist($userView);
+                }
+            } else {
+                foreach($salon->getAllys() as $ally) {
+                    foreach($ally->getUsers() as $tmpuser) {
+                        $tmpuser->setSalonAt(null);
+                        $em->persist($tmpuser);
+                    }
+                }
+                foreach($salon->getUsers() as $tmpuser) {
+                    $tmpuser->setSalonAt(null);
+                    $em->persist($tmpuser);
+                }
             }
 
             $em->persist($message);

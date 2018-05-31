@@ -545,6 +545,25 @@ class Planet
     }
 
     /**
+     * @return int
+     */
+    public function getFleetsAbandon($user): int
+    {
+        $planete = 0;
+        foreach($this->fleets as $fleet) {
+            if($fleet->getPlanete()) {
+                $planete = 0;
+            } else {
+                if($fleet->getUser() != $user) {
+                    $planete = 1;
+                    break;
+                }
+            }
+        }
+        return $planete;
+    }
+
+    /**
      * @return mixed
      */
     public function getPlanetAlliance()

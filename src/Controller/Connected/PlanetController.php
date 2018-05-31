@@ -92,7 +92,19 @@ class PlanetController extends Controller
             ->getQuery()
             ->getOneOrNullResult();
 
-        if(count($abandonPlanet->getFleets()) > 0) {
+        $fleetComing = $em->getRepository('App:Fleet')
+            ->createQueryBuilder('f')
+            ->join('f.sector', 's')
+            ->join('s.galaxy', 'g')
+            ->where('f.planete = :planete')
+            ->andWhere('s.position = :sector')
+            ->andWhere('g.position = :galaxy')
+            ->andWhere('f.user != :user')
+            ->setParameters(array('planete' => $abandonPlanet->getPosition(), 'sector' => $abandonPlanet->getSector()->getPosition(), 'galaxy' => $abandonPlanet->getSector()->getGalaxy()->getPosition(), 'user' => $user))
+            ->getQuery()
+            ->getResult();
+
+        if($abandonPlanet->getFleetsAbandon($user) == 1 || $fleetComing) {
             return $this->redirectToRoute('planet', array('idp' => $usePlanet->getId()));
         }
 

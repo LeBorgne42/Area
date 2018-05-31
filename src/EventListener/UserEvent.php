@@ -28,17 +28,17 @@ use Dateinterval;
 class UserEvent implements EventSubscriberInterface
 {
     /**
-     * @var TokenStorage
+     * @var TokenStorageInterface
      */
     private $token;
     /**
-     * @var EntityManager
+     * @var EntityManagerInterface
      */
     private $em;
     /**
      * KernelControllerListener constructor.
-     * @param TokenStorage $token
-     * @param EntityManager $em
+     * @param TokenStorageInterface $token
+     * @param EntityManagerInterface $em
      */
     public function __construct(TokenStorageInterface $token, EntityManagerInterface $em)
     {
@@ -74,16 +74,18 @@ class UserEvent implements EventSubscriberInterface
     {
         if($event->getRequestType() == HttpKernel::MASTER_REQUEST)
         {
-            $user = $this->token->getToken()->getUser();
-            $delay = new DateTime();
-            $delay->setTimezone(new DateTimeZone('Europe/Paris'));
-            $delay->add(new DateInterval('PT' . 60 . 'S'));
-            $now = new DateTime();
-            $now->setTimezone(new DateTimeZone('Europe/Paris'));
-            if($user instanceof User && $user->getLastActivity() < $delay)
-            {
-                $user->setLastActivity($now);
-                $this->em->flush($user);
+            if($this->token->getToken()) {
+                $user = $this->token->getToken()->getUser();
+                /*$delay = new DateTime();
+                $delay->setTimezone(new DateTimeZone('Europe/Paris'));
+                $delay->add(new DateInterval('PT' . 60 . 'S'));*/
+                $now = new DateTime();
+                $now->setTimezone(new DateTimeZone('Europe/Paris'));
+                if($user instanceof User) // && $user->getLastActivity() < $delay
+                {
+                    $user->setLastActivity($now);
+                    $this->em->flush($user);
+                }
             }
         }
     }
