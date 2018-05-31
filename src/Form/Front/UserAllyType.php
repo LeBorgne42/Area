@@ -28,6 +28,7 @@ class UserAllyType extends AbstractType
                         'maxlength' => '15',
                         'minlength' => '3',
                         'autocomplete' => 'off',
+                        'style' => 'height: 25px',
                     ),
                     'required' => true
                 )
@@ -43,6 +44,7 @@ class UserAllyType extends AbstractType
                         'maxlength' => '4',
                         'minlength' => '2',
                         'autocomplete' => 'off',
+                        'style' => 'height: 25px',
                     ),
                     'required' => true
                 )
@@ -58,8 +60,37 @@ class UserAllyType extends AbstractType
                         'maxlength' => '30',
                         'minlength' => '3',
                         'autocomplete' => 'off',
+                        'style' => 'height: 25px',
                     ),
                     'required' => true
+                )
+            )
+            ->add(
+                'politic',
+                'Symfony\Component\Form\Extension\Core\Type\ChoiceType',
+                array(
+                    'choices' => $this->getPolitic(),
+                    'label' => 'form.politic',
+                    'attr'  => array(
+                        'placeholder' => 'form.politic',
+                        'class' => 'form-control select2',
+                    ),
+                    'required' => true
+                )
+            )
+            ->add(
+                'description',
+                'Symfony\Component\Form\Extension\Core\Type\TextareaType',
+                array(
+                    'label' => 'form.description',
+                    'attr'  => array(
+                        'placeholder' => 'form.description',
+                        'class' => 'form-control',
+                        'maxlength' => '1000',
+                        'rows' => 8,
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false
                 )
             )
             ->add(
@@ -104,6 +135,18 @@ class UserAllyType extends AbstractType
                     return ucfirst($tagAsFirstUpper);
                 }
             ));
+    }
+
+    protected function getPolitic()
+    {
+        return array(
+            'Neutre' => 'neutral',
+            'Démocratie' => 'democrat',
+            'Fascisme' => 'fascism',
+            'Anarchisme' => 'anarchism',
+            'Communisme' => 'communism',
+            'Théocratie' => 'theocrat'
+        );
     }
 
     protected function getPercentTaxe()

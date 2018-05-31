@@ -33,6 +33,12 @@ class Planet
     protected $user;
 
     /**
+     * @ORM\OneToOne(targetEntity="Commander", inversedBy="planet", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\JoinColumn(name="commander_id", referencedColumnName="id")
+     */
+    protected $commander;
+
+    /**
      * @ORM\Column(name="niobium",type="decimal", precision=28, scale=5)
      */
     protected $niobium = 7500;
@@ -1726,5 +1732,21 @@ class Planet
     public function setCorvetWar($corvetWar): void
     {
         $this->corvetWar = $corvetWar;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCommander()
+    {
+        return $this->commander;
+    }
+
+    /**
+     * @param mixed $commander
+     */
+    public function setCommander($commander): void
+    {
+        $this->commander = $commander;
     }
 }

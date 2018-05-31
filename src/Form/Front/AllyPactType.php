@@ -26,6 +26,7 @@ class AllyPactType extends AbstractType
                         'class' => 'form-control',
                         'minlength' => '1',
                         'autocomplete' => 'off',
+                        'style' => 'height: 25px',
                     ),
                     'required' => true
                 )
@@ -49,8 +50,8 @@ class AllyPactType extends AbstractType
     protected function getPactType()
     {
         return array(
-            'Proposer alliance' => '1',
-            'Proposer un pna' => '2',
+            'Pacte défensif' => '1',
+            'Pacte de non-agression' => '2',
             'Déclarer guerre' => '3',
         );
     }

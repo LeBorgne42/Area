@@ -93,7 +93,6 @@ class SpatialController extends Controller
             }
             if($usePlanet->getProduct()) {
                 $reNow = new DateTime();
-                $reNow->setTimezone(new DateTimeZone('Europe/Paris'));
                 $product = $usePlanet->getProduct();
                 $product->setCargoI($product->getCargoI() + $cargoI);
                 $product->setCargoV($product->getCargoV() + $cargoV);

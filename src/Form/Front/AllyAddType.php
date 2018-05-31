@@ -26,6 +26,7 @@ class AllyAddType extends AbstractType
                         'class' => 'form-control',
                         'minlength' => '3',
                         'autocomplete' => 'off',
+                        'style' => 'height: 25px',
                     ),
                     'required' => true
                 )

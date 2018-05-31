@@ -29,6 +29,7 @@ class AllyGradeType extends AbstractType
                         'maxlength' => '15',
                         'minlength' => '3',
                         'autocomplete' => 'off',
+                        'style' => 'height: 25px',
                     ),
                     'required' => true,
                     'mapped' => true,

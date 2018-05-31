@@ -7,19 +7,7 @@
 {% block body %}
     <div class="front-block-ally">
         {% if app.user.getAlly() %}
-            <h1 class="text-center text-orange mb-4">{{ app.user.getAlly().getName() }}<small> - [{{ app.user.getAlly().getSigle() }}]</small></h1>
-            <div class="text-center modify-allyImage">
-                {% if app.user.getAlly().getImageName() %}
-                    <img height="300" width="450" src="{{ vich_uploader_asset(app.user.getAlly(), 'imageFile') }}">
-                {% else %}
-                    <img height="300" width="450" src="{{ asset('img/ally.jpg') }}">
-                {% endif %}
-            </div>
-            {{ form_start(form_allyImage,{attr: { hidden: 'hidden'}}) }}
-            {{ form_widget(form_allyImage.imageFile) }}
-            {{ form_widget(form_allyImage.sendForm) }}
-            {{ form_end(form_allyImage) }}
-            <div class="text-center my-2">"{{ app.user.getAlly().getSlogan() }}"</div>
+            <h1 class="text-center p-4">{{ 'ally.addTitle'|trans }}</h1>
             <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
                 <li class="nav-item">
                     <a href="{{ path('ally', {'idp': usePlanet.getId()}) }}" >{{ app.user.getAlly().getUsers()|length }} {{ 'ally.members'|trans }}</a>
@@ -47,7 +35,7 @@
                     {% if app.user.getGrade().getCanRecruit() == 1 %}
                         {{ form_start(form_allyAdd) }}
                         <div class="row mt-5">
-                            <div class="offset-1 col-5 form-group">
+                            <div class="offset-1 col-5 form-group mt-1">
                                 {{ form_widget(form_allyAdd.nameUser) }}
                             </div>
                             <div class="offset-1 col-4 form-group">

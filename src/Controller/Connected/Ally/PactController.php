@@ -254,6 +254,21 @@ class PactController extends Controller
                 'ally' => $otherAlly))
             ->getQuery()
             ->getOneOrNullResult();
+
+        $salons = $em->getRepository('App:Salon')
+            ->createQueryBuilder('s')
+            ->where('s.name = :sigle1')
+            ->orWhere('s.name = :sigle2')
+            ->setParameters(array('sigle1' => $otherAlly->getSigle() . " - " . $ally->getSigle(), 'sigle2' => $ally->getSigle() . " - " . $otherAlly->getSigle()))
+            ->getQuery()
+            ->getResult();
+
+        foreach($salons as $salon) {
+            foreach($salon->getContents() as $content) {
+                $em->remove($content);
+            }
+            $em->remove($salon);
+        }
         
         if($pact2) {
             $em->remove($pact2);

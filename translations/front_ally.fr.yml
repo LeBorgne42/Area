@@ -46,8 +46,8 @@ ally.canPeace: Pacte/Pna
 ally.canKick: Exclure
 ally.canWar: Guerre
 ally.pacts: Pactes
-ally.alliedName: 'Alliance alliée'
-ally.cancelPact: 'Rompre traité'
+ally.alliedName: 'Pacte défensif'
+ally.cancelPact: 'Rompre pacte'
 ally.pnaName: 'Alliance en pna'
 ally.cancelPna: 'Rompre pna'
 ally.warName: 'Alliance ennemie'
@@ -69,3 +69,8 @@ ally.priority: Priorité
 ally.connected: Oui
 ally.notConnected: Non
 tooltip.changeGrade: 'Cliquez sur le rang du joueur pour changer son grade.'
+ally.banktitle: 'Banque de l''alliance'
+ally.taxe: 'taxe :'
+ally.pactsTitle: 'Gestion des Pactes/Pnas/Guerre de l''alliance'
+ally.gradeTitle: 'Création de grades'
+ally.addTitle: 'Recrutement de joueurs'

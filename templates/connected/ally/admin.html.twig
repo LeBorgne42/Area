@@ -7,19 +7,7 @@
 {% block body %}
     <div class="front-block-ally">
         {% if app.user.getAlly() %}
-            <h1 class="text-center text-orange mb-4">{{ app.user.getAlly().getName() }}<small> - [{{ app.user.getAlly().getSigle() }}]</small></h1>
-            <div class="text-center modify-allyImage">
-                {% if app.user.getAlly().getImageName() %}
-                    <img height="300" width="450" src="{{ vich_uploader_asset(app.user.getAlly(), 'imageFile') }}">
-                {% else %}
-                    <img height="300" width="450" src="{{ asset('img/ally.jpg') }}">
-                {% endif %}
-            </div>
-            {{ form_start(form_allyImage,{attr: { hidden: 'hidden'}}) }}
-            {{ form_widget(form_allyImage.imageFile) }}
-            {{ form_widget(form_allyImage.sendForm) }}
-            {{ form_end(form_allyImage) }}
-            <div class="text-center my-2">"{{ app.user.getAlly().getSlogan() }}"</div>
+            <h1 class="text-center p-4">{{ 'ally.gradeTitle'|trans }}</h1>
             <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
                 <li class="nav-item">
                     <a href="{{ path('ally', {'idp': usePlanet.getId()}) }}" >{{ app.user.getAlly().getUsers()|length }} {{ 'ally.members'|trans }}</a>
@@ -57,12 +45,12 @@
                             <th></th>
                         </tr>
                         <tr>
-                            <td class="center-cells">{{ form_widget(form_allyGrade.name) }}</td>
-                            <td class="center-cells">{{ form_widget(form_allyGrade.canRecruit) }}</td>
-                            <td class="center-cells">{{ form_widget(form_allyGrade.canPeace) }}</td>
-                            <td class="center-cells">{{ form_widget(form_allyGrade.canKick) }}</td>
-                            <td class="center-cells">{{ form_widget(form_allyGrade.canWar) }}</td>
-                            <td class="center-cells">{{ form_widget(form_allyGrade.placement) }}</td>
+                            <td class="center-cells pt-3">{{ form_widget(form_allyGrade.name) }}</td>
+                            <td class="center-cells cell-middle">{{ form_widget(form_allyGrade.canRecruit) }}</td>
+                            <td class="center-cells cell-middle">{{ form_widget(form_allyGrade.canPeace) }}</td>
+                            <td class="center-cells cell-middle">{{ form_widget(form_allyGrade.canKick) }}</td>
+                            <td class="center-cells cell-middle">{{ form_widget(form_allyGrade.canWar) }}</td>
+                            <td class="center-cells pt-3">{{ form_widget(form_allyGrade.placement) }}</td>
                             <td class="center-cells">{{ form_widget(form_allyGrade.sendForm,{attr: { class: 'btn btn-lg btn-info'}}) }}</td>
                         </tr>
                         </tbody>

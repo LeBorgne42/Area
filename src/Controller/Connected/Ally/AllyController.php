@@ -141,7 +141,7 @@ class AllyController extends Controller
             $grade = new Grade();
 
             $ally->addUser($user);
-            $ally->setBitcoin(200);
+            $ally->setBitcoin(5000);
             $ally->setCreatedAt($now);
             $em->persist($ally);
 
@@ -524,16 +524,8 @@ class AllyController extends Controller
             ->getQuery()
             ->getResult();
 
-        $form_allyImage = $this->createForm(AllyImageType::class,$ally);
-        $form_allyImage->handleRequest($request);
-
         $form_exchange = $this->createForm(ExchangeType::class);
         $form_exchange->handleRequest($request);
-
-        if ($form_allyImage->isSubmitted() && $form_allyImage->isValid()) {
-            $em->persist($ally);
-            $em->flush();
-        }
 
         if ($form_exchange->isSubmitted() && $form_exchange->isValid()) {
             if($form_exchange->get('exchangeType')->getData() == 1) {
@@ -569,7 +561,6 @@ class AllyController extends Controller
         }
 
         return $this->render('connected/ally/bank.html.twig', [
-            'form_allyImage' => $form_allyImage->createView(),
             'form_exchange' => $form_exchange->createView(),
             'usePlanet' => $usePlanet,
             'exchanges' => $exchanges,
@@ -600,16 +591,9 @@ class AllyController extends Controller
         } else {
             return $this->redirectToRoute('ally_blank', array('idp' => $usePlanet->getId()));
         }
-        $form_allyImage = $this->createForm(AllyImageType::class,$ally);
-        $form_allyImage->handleRequest($request);
 
         $form_allyAdd = $this->createForm(AllyAddType::class);
         $form_allyAdd->handleRequest($request);
-
-        if ($form_allyImage->isSubmitted() && $form_allyImage->isValid()) {
-            $em->persist($user);
-            $em->flush();
-        }
 
         if (($form_allyAdd->isSubmitted() && $form_allyAdd->isValid()) && $user->getGrade()->getCanRecruit() == 1) {
             $userProposal = $em->getRepository('App:User')
@@ -638,7 +622,6 @@ class AllyController extends Controller
         return $this->render('connected/ally/add.html.twig', [
             'usePlanet' => $usePlanet,
             'form_allyAdd' => $form_allyAdd->createView(),
-            'form_allyImage' => $form_allyImage->createView(),
         ]);
     }
 
@@ -664,16 +647,9 @@ class AllyController extends Controller
         } else {
             return $this->redirectToRoute('ally_blank', array('idp' => $usePlanet->getId()));
         }
-        $form_allyImage = $this->createForm(AllyImageType::class,$ally);
-        $form_allyImage->handleRequest($request);
 
         $form_allyGrade = $this->createForm(AllyGradeType::class,$grade);
         $form_allyGrade->handleRequest($request);
-
-        if ($form_allyImage->isSubmitted() && $form_allyImage->isValid()) {
-            $em->persist($user);
-            $em->flush();
-        }
 
         if (($form_allyGrade->isSubmitted() && $form_allyGrade->isValid())) {
             $grade->setAlly($ally);
@@ -688,7 +664,6 @@ class AllyController extends Controller
         return $this->render('connected/ally/admin.html.twig', [
             'usePlanet' => $usePlanet,
             'form_allyGrade' => $form_allyGrade->createView(),
-            'form_allyImage' => $form_allyImage->createView(),
         ]);
     }
 
@@ -734,16 +709,8 @@ class AllyController extends Controller
             ->getQuery()
             ->getResult();
 
-        $form_allyImage = $this->createForm(AllyImageType::class,$ally);
-        $form_allyImage->handleRequest($request);
-
         $form_allyPact = $this->createForm(AllyPactType::class);
         $form_allyPact->handleRequest($request);
-
-        if ($form_allyImage->isSubmitted() && $form_allyImage->isValid()) {
-            $em->persist($user);
-            $em->flush();
-        }
 
 
         if (($form_allyPact->isSubmitted() && $form_allyPact->isValid())) {
@@ -798,7 +765,6 @@ class AllyController extends Controller
             'usePlanet' => $usePlanet,
             'waitingAllied' => $waitingAllied,
             'form_allyPact' => $form_allyPact->createView(),
-            'form_allyImage' => $form_allyImage->createView(),
         ]);
     }
 }

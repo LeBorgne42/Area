@@ -29,6 +29,12 @@ class Ally
     protected $users;
 
     /**
+     * @ORM\Column(name="politic",type="string", length=25)
+     * @Assert\NotBlank(message = "required")
+     */
+    protected $politic = 'neutral';
+
+    /**
      * @ORM\OneToMany(targetEntity="Proposal", mappedBy="ally", fetch="EXTRA_LAZY")
      */
     protected $proposals;
@@ -50,6 +56,11 @@ class Ally
      * @Assert\NotBlank(message = "required")
      */
     protected $slogan;
+
+    /**
+     * @ORM\Column(name="description",type="string", length=1000, nullable=true)
+     */
+    protected $description = null;
 
     /**
      * @ORM\OneToMany(targetEntity="Grade", mappedBy="ally", fetch="EXTRA_LAZY", cascade={"persist"})
@@ -796,5 +807,37 @@ class Ally
     public function setExchanges($exchanges): void
     {
         $this->exchanges = $exchanges;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPolitic()
+    {
+        return $this->politic;
+    }
+
+    /**
+     * @param mixed $politic
+     */
+    public function setPolitic($politic): void
+    {
+        $this->politic = $politic;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param mixed $description
+     */
+    public function setDescription($description): void
+    {
+        $this->description = $description;
     }
 }

@@ -68,6 +68,12 @@ class User implements UserInterface, \Serializable
     protected $rank;
 
     /**
+     * @ORM\OneToOne(targetEntity="Commander", inversedBy="user", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\JoinColumn(name="commander_id", referencedColumnName="id")
+     */
+    protected $commander;
+
+    /**
      *
      * @ORM\Column(type="string", length=64)
      * @Assert\NotBlank(message = "required")
@@ -1413,5 +1419,21 @@ class User implements UserInterface, \Serializable
     public function setLastActivity($lastActivity): void
     {
         $this->lastActivity = $lastActivity;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCommander()
+    {
+        return $this->commander;
+    }
+
+    /**
+     * @param mixed $commander
+     */
+    public function setCommander($commander): void
+    {
+        $this->commander = $commander;
     }
 }

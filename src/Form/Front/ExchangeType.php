@@ -43,7 +43,7 @@ class ExchangeType extends AbstractType
                         'placeholder' => 'form.num',
                         'class' => 'form-control text-right',
                         'min' => '0',
-                        'style' => 'height: 20px',
+                        'style' => 'height: 25px',
                         'autocomplete' => 'off',
                     ),
                     'required' => true,
