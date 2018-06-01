@@ -119,6 +119,26 @@ class Fleet
     protected $barge = 0;
 
     /**
+     * @ORM\Column(name="moonMaker",type="integer", nullable=true)
+     */
+    protected $moonMaker = 0;
+
+    /**
+     * @ORM\Column(name="radarShip",type="integer", nullable=true)
+     */
+    protected $radarShip = 0;
+
+    /**
+     * @ORM\Column(name="brouilleurShip",type="integer", nullable=true)
+     */
+    protected $brouilleurShip = 0;
+
+    /**
+     * @ORM\Column(name="motherShip",type="integer", nullable=true)
+     */
+    protected $motherShip = 0;
+
+    /**
      * @ORM\Column(name="hunter",type="bigint", nullable=true)
      */
     protected $hunter = 0;
@@ -391,6 +411,9 @@ class Fleet
         $cargoX = $this->getCargoX() * 200000;
 
         $nbr = $barge + $recycleur + $cargoI + $cargoV + $cargoX;
+        if($this->getMotherShip() == 1) {
+            $nbr = $nbr / 0.10;
+        }
         return $nbr;
     }
 
@@ -410,8 +433,12 @@ class Fleet
         $croiser = $this->getCroiser() * 957;
         $ironClad = $this->getIronClad() * 2415;
         $destroyer = $this->getDestroyer() * 5176;
+        $motherShip = $this->getMotherShip() * 20000;
 
-        $nbr = $hunterWar + $corvetWar +  $fregate + $hunter + $hunterHeavy + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
+        $nbr = $motherShip + $hunterWar + $corvetWar +  $fregate + $hunter + $hunterHeavy + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
+        if($this->getMotherShip() == 1) {
+            $nbr = $nbr / 0.05;
+        }
         return $nbr;
     }
 
@@ -464,8 +491,12 @@ class Fleet
         $croiser = $this->getCroiser() * 22;
         $ironClad = $this->getIronClad() * 25;
         $destroyer = $this->getDestroyer() * 200;
+        $motherShip = $this->getMotherShip() * 5000;
 
-        $nbr = $corvetWar + $fregate + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
+        $nbr = $motherShip + $corvetWar + $fregate + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
+        if($this->getMotherShip() == 1) {
+            $nbr = $nbr / 0.05;
+        }
         return $nbr;
     }
 
@@ -499,6 +530,10 @@ class Fleet
         $cargoV = $this->getCargoV();
         $cargoX = $this->getCargoX();
         $barge = $this->getBarge();
+        $moonMaker = $this->getMoonMaker();
+        $radarShip = $this->getRadarShip();
+        $brouilleurShip = $this->getBrouilleurShip();
+        $motherShip = $this->getMotherShip();
         $hunter = $this->getHunter();
         $hunterHeavy = $this->getHunterHeavy();
         $hunterWar = $this->getHunterWar();
@@ -511,7 +546,7 @@ class Fleet
         $ironClad = $this->getIronClad();
         $destroyer = $this->getDestroyer();
 
-        $nbr = $hunterWar + $corvetWar + $fregate + $colonizer + $barge + $hunter + $recycleur + $sonde + $cargoI + $cargoV + $cargoX + $hunterHeavy + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
+        $nbr = $motherShip + $brouilleurShip + $radarShip + $moonMaker + $hunterWar + $corvetWar + $fregate + $colonizer + $barge + $hunter + $recycleur + $sonde + $cargoI + $cargoV + $cargoX + $hunterHeavy + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
         return $nbr;
     }
 
@@ -527,6 +562,10 @@ class Fleet
         $cargoV = $this->getCargoV() * 120;
         $cargoX = $this->getCargoX() * 250;
         $barge = $this->getBarge() * 50;
+        $moonMaker = $this->getMoonMaker() * 50000;
+        $radarShip = $this->getRadarShip() * 200;
+        $brouilleurShip = $this->getBrouilleurShip() * 500;
+        $motherShip = $this->getMotherShip() * 20000;
         $hunter = $this->getHunter() * 5;
         $hunterHeavy = $this->getHunterHeavy() * 8;
         $hunterWar = $this->getHunterWar() * 15;
@@ -539,7 +578,10 @@ class Fleet
         $ironClad = $this->getIronClad() * 700;
         $destroyer = $this->getDestroyer() * 1500;
 
-        $nbr = $hunterWar + $corvetWar + $fregate + $colonizer + $barge + $hunter + $recycleur + $sonde + $cargoI + $cargoV + $cargoX + $hunterHeavy + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
+        $nbr = $motherShip + $brouilleurShip + $radarShip + $moonMaker + $hunterWar + $corvetWar + $fregate + $colonizer + $barge + $hunter + $recycleur + $sonde + $cargoI + $cargoV + $cargoX + $hunterHeavy + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
+        if($this->getMotherShip() == 1) {
+            $nbr = $nbr * 0.1;
+        }
         return $nbr;
     }
 
@@ -548,6 +590,9 @@ class Fleet
      */
     public function getSpeed(): float
     {
+        if($this->getMoonMaker()) {
+            return 5;
+        }
         if($this->getBarge()) {
             return 3;
         }
@@ -569,7 +614,7 @@ class Fleet
         if($this->getFregate()) {
             return 1.1;
         }
-        if($this->getCorvetLaser()) {
+        if($this->getCorvetLaser() || $this->getMotherShip()) {
             return 1;
         }
         if($this->getCorvet() || $this->getCorvetWar()) {
@@ -584,7 +629,7 @@ class Fleet
         if($this->getCargoI()) {
             return 0.4;
         }
-        if($this->getSonde()) {
+        if($this->getSonde() || $this->getBrouilleurShip() || $this->getRadarShip()) {
             return 0.01;
         }
 
@@ -1202,5 +1247,69 @@ class Fleet
     public function setCommander($commander): void
     {
         $this->commander = $commander;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMoonMaker()
+    {
+        return $this->moonMaker;
+    }
+
+    /**
+     * @param mixed $moonMaker
+     */
+    public function setMoonMaker($moonMaker): void
+    {
+        $this->moonMaker = $moonMaker;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRadarShip()
+    {
+        return $this->radarShip;
+    }
+
+    /**
+     * @param mixed $radarShip
+     */
+    public function setRadarShip($radarShip): void
+    {
+        $this->radarShip = $radarShip;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBrouilleurShip()
+    {
+        return $this->brouilleurShip;
+    }
+
+    /**
+     * @param mixed $brouilleurShip
+     */
+    public function setBrouilleurShip($brouilleurShip): void
+    {
+        $this->brouilleurShip = $brouilleurShip;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMotherShip()
+    {
+        return $this->motherShip;
+    }
+
+    /**
+     * @param mixed $motherShip
+     */
+    public function setMotherShip($motherShip): void
+    {
+        $this->motherShip = $motherShip;
     }
 }

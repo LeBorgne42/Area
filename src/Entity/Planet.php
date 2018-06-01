@@ -249,6 +249,26 @@ class Planet
     protected $barge = 0;
 
     /**
+     * @ORM\Column(name="moonMaker",type="integer", nullable=true)
+     */
+    protected $moonMaker = 0;
+
+    /**
+     * @ORM\Column(name="radarShip",type="integer", nullable=true)
+     */
+    protected $radarShip = 0;
+
+    /**
+     * @ORM\Column(name="brouilleurShip",type="integer", nullable=true)
+     */
+    protected $brouilleurShip = 0;
+
+    /**
+     * @ORM\Column(name="motherShip",type="integer", nullable=true)
+     */
+    protected $motherShip = 0;
+
+    /**
      * @ORM\Column(name="hunter",type="bigint", nullable=true)
      */
     protected $hunter = 0;
@@ -1748,5 +1768,69 @@ class Planet
     public function setCommander($commander): void
     {
         $this->commander = $commander;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMoonMaker()
+    {
+        return $this->moonMaker;
+    }
+
+    /**
+     * @param mixed $moonMaker
+     */
+    public function setMoonMaker($moonMaker): void
+    {
+        $this->moonMaker = $moonMaker;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRadarShip()
+    {
+        return $this->radarShip;
+    }
+
+    /**
+     * @param mixed $radarShip
+     */
+    public function setRadarShip($radarShip): void
+    {
+        $this->radarShip = $radarShip;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBrouilleurShip()
+    {
+        return $this->brouilleurShip;
+    }
+
+    /**
+     * @param mixed $brouilleurShip
+     */
+    public function setBrouilleurShip($brouilleurShip): void
+    {
+        $this->brouilleurShip = $brouilleurShip;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMotherShip()
+    {
+        return $this->motherShip;
+    }
+
+    /**
+     * @param mixed $motherShip
+     */
+    public function setMotherShip($motherShip): void
+    {
+        $this->motherShip = $motherShip;
     }
 }

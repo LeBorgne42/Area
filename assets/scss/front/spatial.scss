@@ -57,10 +57,16 @@
 
 .createFleet {
   td.center-cells {
-    width: 75px;
+    width: 70px;
   }
   th.tab-cells-name {
     vertical-align: middle;
+  }
+  .btn-secondary {
+    padding: 0.1rem 0.7rem;
+  }
+  img {
+    width: 15px;
   }
 }
 

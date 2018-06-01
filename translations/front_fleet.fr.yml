@@ -40,7 +40,7 @@ fleet.sendCoord: ordre
 fleet.invade: Envahir
 fleet.colonize: Coloniser
 fleet.niobium: Niobium
-fleet.water: Water
+fleet.water: Eau
 fleet.soldier: Soldats
 fleet.worker: Travailleurs
 fleet.scientist: Scientifiques
@@ -72,3 +72,7 @@ fleet.splitFleet: 'Scinder flotte en deux'
 fleet.name: 'Nom de flotte'
 fleet.hunterWar: 'Chasseur à plasma'
 fleet.corvetWar: 'Corvette de combat'
+fleet.moonMaker: 'Tartar'
+fleet.radarShip: 'Vaisseau radar'
+fleet.brouilleurShip: 'Vaisseau brouilleur'
+fleet.motherShip: 'Vaisseau mère'

@@ -556,6 +556,24 @@ class User implements UserInterface, \Serializable
     }
 
     /**
+     * @return mixed
+     */
+    public function getMotherShip()
+    {
+        foreach($this->planets as $planet) {
+            if($planet->getMotherShip()) {
+                return 'gotOne';
+            }
+        }
+        foreach($this->fleets as $fleet) {
+            if($fleet->getMotherShip()) {
+                return 'gotOne';
+            }
+        }
+        return null;
+    }
+
+    /**
      * @return int
      */
     public function getAllWorker(): int

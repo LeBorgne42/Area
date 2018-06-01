@@ -203,6 +203,134 @@ class SpatialEditFleetType extends AbstractType
                 )
             )
             ->add(
+                'moreMoonMaker',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                    'mapped' => false,
+                )
+            )
+            ->add(
+                'lessMoonMaker',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                    'mapped' => false,
+                )
+            )
+            ->add(
+                'moreRadarShip',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                    'mapped' => false,
+                )
+            )
+            ->add(
+                'lessRadarShip',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                    'mapped' => false,
+                )
+            )
+            ->add(
+                'moreBrouilleurShip',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                    'mapped' => false,
+                )
+            )
+            ->add(
+                'lessBrouilleurShip',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                    'mapped' => false,
+                )
+            )
+            ->add(
+                'moreMotherShip',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                    'mapped' => false,
+                )
+            )
+            ->add(
+                'lessMotherShip',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                    'mapped' => false,
+                )
+            )
+            ->add(
                 'moreHunter',
                 null,
                 array(

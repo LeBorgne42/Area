@@ -319,6 +319,10 @@ class InstantController extends Controller
             $planetProduct->setColonizer($planetProduct->getColonizer() + $product->getColonizer());
             $planetProduct->setRecycleur($planetProduct->getRecycleur() + $product->getRecycleur());
             $planetProduct->setBarge($planetProduct->getBarge() + $product->getBarge());
+            $planetProduct->setMoonMaker($planetProduct->getMoonMaker() + $product->getMoonMaker());
+            $planetProduct->setRadarShip($planetProduct->getRadarShip() + $product->getRadarShip());
+            $planetProduct->setBrouilleurShip($planetProduct->getBrouilleurShip() + $product->getBrouilleurShip());
+            $planetProduct->setMotherShip($planetProduct->getMotherShip() + $product->getMotherShip());
             $planetProduct->setSonde($planetProduct->getSonde() + $product->getSonde());
             $planetProduct->setHunter($planetProduct->getHunter() + $product->getHunter());
             $planetProduct->setFregate($planetProduct->getFregate() + $product->getFregate());
@@ -490,8 +494,12 @@ class InstantController extends Controller
                     } else {
                         $base= 15000;
                     }
-
-                    $now->add(new DateInterval('PT' . ($fleet->getSpeed() * $base) . 'S'));
+                    if($fleet->getMotherShip()) {
+                        $speed = $fleet->getSpeed() / 0.10;
+                    } else {
+                        $speed = $fleet->getSpeed();
+                    }
+                    $now->add(new DateInterval('PT' . round($speed * $base) . 'S'));
                     $fleet->setNewPlanet($oldPlanet->getId());
                     $fleet->setFlightTime($now);
                     $fleet->setFlightType(1);

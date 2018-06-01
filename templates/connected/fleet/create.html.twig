@@ -112,6 +112,50 @@
                     <span class="maxInput">max</span>
                 </td>
             </tr>
+            <tr{% if usePlanet.getMoonMaker() == 0 %} hidden{% endif %}>
+                <th class="tab-cells-name p-1 pl-3">
+                    {{ 'spatial.moonMaker'|trans }} x {{ usePlanet.getMoonMaker() }}
+                </th>
+                <td class="center-cells p-1">
+                    {{ form_widget(form_createFleet.moonMaker,{attr: { max: usePlanet.getMoonMaker()}}) }}
+                </td>
+                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                    <span class="maxInput">max</span>
+                </td>
+            </tr>
+            <tr{% if usePlanet.getRadarShip() == 0 %} hidden{% endif %}>
+                <th class="tab-cells-name p-1 pl-3">
+                    {{ 'spatial.radarShip'|trans }} x {{ usePlanet.getRadarShip() }}
+                </th>
+                <td class="center-cells p-1">
+                    {{ form_widget(form_createFleet.radarShip,{attr: { max: usePlanet.getRadarShip()}}) }}
+                </td>
+                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                    <span class="maxInput">max</span>
+                </td>
+            </tr>
+            <tr{% if usePlanet.getBrouilleurShip() == 0 %} hidden{% endif %}>
+                <th class="tab-cells-name p-1 pl-3">
+                    {{ 'spatial.brouilleurShip'|trans }} x {{ usePlanet.getBrouilleurShip() }}
+                </th>
+                <td class="center-cells p-1">
+                    {{ form_widget(form_createFleet.brouilleurShip,{attr: { max: usePlanet.getBrouilleurShip()}}) }}
+                </td>
+                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                    <span class="maxInput">max</span>
+                </td>
+            </tr>
+            <tr{% if usePlanet.getMotherShip() == 0 %} hidden{% endif %}>
+                <th class="tab-cells-name p-1 pl-3">
+                    {{ 'spatial.motherShip'|trans }} x {{ usePlanet.getMotherShip() }}
+                </th>
+                <td class="center-cells p-1">
+                    {{ form_widget(form_createFleet.motherShip,{attr: { max: usePlanet.getMotherShip()}}) }}
+                </td>
+                <td width="35" class="tab-cells-name p-1 cell-middle text-center text-orange">
+                    <span class="maxInput">max</span>
+                </td>
+            </tr>
             <tr{% if usePlanet.getHunter() == 0 %} hidden{% endif %}>
                 <th class="tab-cells-name p-1 pl-3">
                     {{ 'spatial.hunter'|trans }} x {{ usePlanet.getHunter() }}

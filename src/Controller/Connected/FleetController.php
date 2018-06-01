@@ -251,6 +251,42 @@ class FleetController extends Controller
             } else {
                 $barge = $planetTake->getBarge();
             }
+            if ($form_manageFleet->get('moreMoonMaker')->getData()) {
+                $moonMaker = $planetTake->getMoonMaker() - $form_manageFleet->get('moreMoonMaker')->getData();
+                $fleetGive->setMoonMaker($fleetGive->getMoonMaker() + $form_manageFleet->get('moreMoonMaker')->getData());
+            } elseif ($form_manageFleet->get('lessMoonMaker')->getData() <= $fleetGive->getMoonMaker()) {
+                $moonMaker = $planetTake->getMoonMaker() + $form_manageFleet->get('lessMoonMaker')->getData();
+                $fleetGive->setMoonMaker($fleetGive->getMoonMaker() - $form_manageFleet->get('lessMoonMaker')->getData());
+            } else {
+                $moonMaker = $planetTake->getMoonMaker();
+            }
+            if ($form_manageFleet->get('moreRadarShip')->getData()) {
+                $radarShip = $planetTake->getRadarShip() - $form_manageFleet->get('moreRadarShip')->getData();
+                $fleetGive->setRadarShip($fleetGive->getRadarShip() + $form_manageFleet->get('moreRadarShip')->getData());
+            } elseif ($form_manageFleet->get('lessRadarShip')->getData() <= $fleetGive->getRadarShip()) {
+                $radarShip = $planetTake->getRadarShip() + $form_manageFleet->get('lessRadarShip')->getData();
+                $fleetGive->setRadarShip($fleetGive->getRadarShip() - $form_manageFleet->get('lessRadarShip')->getData());
+            } else {
+                $radarShip = $planetTake->getRadarShip();
+            }
+            if ($form_manageFleet->get('moreBrouilleurShip')->getData()) {
+                $brouilleurShip = $planetTake->getBrouilleurShip() - $form_manageFleet->get('moreBrouilleurShip')->getData();
+                $fleetGive->setBrouilleurShip($fleetGive->getBrouilleurShip() + $form_manageFleet->get('moreBrouilleurShip')->getData());
+            } elseif ($form_manageFleet->get('lessBrouilleurShip')->getData() <= $fleetGive->getBrouilleurShip()) {
+                $brouilleurShip = $planetTake->getBrouilleurShip() + $form_manageFleet->get('lessBrouilleurShip')->getData();
+                $fleetGive->setBrouilleurShip($fleetGive->getBrouilleurShip() - $form_manageFleet->get('lessBrouilleurShip')->getData());
+            } else {
+                $brouilleurShip = $planetTake->getBrouilleurShip();
+            }
+            if ($form_manageFleet->get('moreMotherShip')->getData()) {
+                $motherShip = $planetTake->getMotherShip() - $form_manageFleet->get('moreMotherShip')->getData();
+                $fleetGive->setMotherShip($fleetGive->getMotherShip() + $form_manageFleet->get('moreMotherShip')->getData());
+            } elseif ($form_manageFleet->get('lessMotherShip')->getData() <= $fleetGive->getMotherShip()) {
+                $motherShip = $planetTake->getMotherShip() + $form_manageFleet->get('lessMotherShip')->getData();
+                $fleetGive->setMotherShip($fleetGive->getMotherShip() - $form_manageFleet->get('lessMotherShip')->getData());
+            } else {
+                $motherShip = $planetTake->getMotherShip();
+            }
             if ($form_manageFleet->get('moreSonde')->getData()) {
                 $sonde = $planetTake->getSonde() - $form_manageFleet->get('moreSonde')->getData();
                 $fleetGive->setSonde($fleetGive->getSonde() + $form_manageFleet->get('moreSonde')->getData());
@@ -419,7 +455,9 @@ class FleetController extends Controller
                 ($niobium < 0 || $water < 0) || ($soldier < 0 || $worker < 0) || ($scientist < 0 || $cargo < 0) ||
                 ($cargoI < 0 || $cargoV < 0) || ($hunterHeavy < 0 || $corvet < 0) ||
                 ($corvetLaser < 0 || $fregatePlasma < 0) || ($croiser < 0 || $ironClad < 0) ||
-                ($destroyer < 0 || $cargoX < 0) || ($hunterWar < 0 || $corvetWar < 0) || ($soldier > $planetTake->getSoldierMax()) ||
+                ($destroyer < 0 || $cargoX < 0) || ($hunterWar < 0 || $corvetWar < 0) ||
+                ($moonMaker < 0 || $radarShip < 0) || ($brouilleurShip < 0 || $motherShip < 0) ||
+                ($soldier > $planetTake->getSoldierMax()) ||
                 ($worker > $planetTake->getWorkerMax() || $scientist > $planetTake->getScientistMax()) ||
                 ($niobium > $planetTake->getNiobiumMax() || $water > $planetTake->getWaterMax())) {
                 return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
@@ -436,6 +474,10 @@ class FleetController extends Controller
             $planetTake->setCargoX($cargoX);
             $planetTake->setRecycleur($recycleur);
             $planetTake->setBarge($barge);
+            $planetTake->setMoonMaker($moonMaker);
+            $planetTake->setRadarShip($radarShip);
+            $planetTake->setBrouilleurShip($brouilleurShip);
+            $planetTake->setMotherShip($motherShip);
             $planetTake->setSonde($sonde);
             $planetTake->setHunter($hunter);
             $planetTake->setHunterHeavy($hunterHeavy);
@@ -522,6 +564,10 @@ class FleetController extends Controller
         $planetTake->setCargoX($planetTake->getCargoX() + $fleetGive->getCargoX());
         $planetTake->setRecycleur($planetTake->getRecycleur() + $fleetGive->getRecycleur());
         $planetTake->setBarge($planetTake->getBarge() + $fleetGive->getBarge());
+        $planetTake->setMoonMaker($planetTake->getMoonMaker() + $fleetGive->getMoonMaker());
+        $planetTake->setRadarShip($planetTake->getRadarShip() + $fleetGive->getRadarShip());
+        $planetTake->setBrouilleurShip($planetTake->getBrouilleurShip() + $fleetGive->getBrouilleurShip());
+        $planetTake->setMotherShip($planetTake->getMotherShip() + $fleetGive->getMotherShip());
         $planetTake->setSonde($planetTake->getSonde() + $fleetGive->getSonde());
         $planetTake->setHunter($planetTake->getHunter() + $fleetGive->getHunter());
         $planetTake->setHunterHeavy($planetTake->getHunterHeavy() + $fleetGive->getHunterHeavy());
@@ -643,7 +689,12 @@ class FleetController extends Controller
             if($carburant > $user->getBitcoin()) {
                 return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
             }
-            $now->add(new DateInterval('PT' . round($fleetGive->getSpeed() * $base) . 'S'));
+            if($fleetGive->getMotherShip()) {
+                $speed = $fleetGive->getSpeed() / 0.10;
+            } else {
+                $speed = $fleetGive->getSpeed();
+            }
+            $now->add(new DateInterval('PT' . round($speed * $base) . 'S'));
             $fleetGive->setRecycleAt(null);
             $fleetGive->setNewPlanet($planetTake->getId());
             $fleetGive->setFlightTime($now);
@@ -966,6 +1017,10 @@ class FleetController extends Controller
         $fleetTake->setCargoX($fleetTake->getCargoX() + $fleetGive->getCargoX());
         $fleetTake->setRecycleur($fleetTake->getRecycleur() + $fleetGive->getRecycleur());
         $fleetTake->setBarge($fleetTake->getBarge() + $fleetGive->getBarge());
+        $fleetTake->setMoonMaker($fleetTake->getMoonMaker() + $fleetGive->getMoonMaker());
+        $fleetTake->setRadarShip($fleetTake->getRadarShip() + $fleetGive->getRadarShip());
+        $fleetTake->setBrouilleurShip($fleetTake->getBrouilleurShip() + $fleetGive->getBrouilleurShip());
+        $fleetTake->setMotherShip($fleetTake->getMotherShip() + $fleetGive->getMotherShip());
         $fleetTake->setSonde($fleetTake->getSonde() + $fleetGive->getSonde());
         $fleetTake->setHunter($fleetTake->getHunter() + $fleetGive->getHunter());
         $fleetTake->setHunterHeavy($fleetTake->getHunterHeavy() + $fleetGive->getHunterHeavy());
@@ -1098,6 +1153,10 @@ class FleetController extends Controller
             $colonizer = $oldFleet->getColonizer() - $form_spatialShip->get('colonizer')->getData();
             $recycleur = $oldFleet->getRecycleur() - $form_spatialShip->get('recycleur')->getData();
             $barge = $oldFleet->getBarge() - $form_spatialShip->get('barge')->getData();
+            $moonMaker = $oldFleet->getMoonMaker() - $form_spatialShip->get('moonMaker')->getData();
+            $radarShip = $oldFleet->getRadarShip() - $form_spatialShip->get('radarShip')->getData();
+            $brouilleurShip = $oldFleet->getBrouilleurShip() - $form_spatialShip->get('brouilleurShip')->getData();
+            $motherShip = $oldFleet->getMotherShip() - $form_spatialShip->get('motherShip')->getData();
             $sonde = $oldFleet->getSonde() - $form_spatialShip->get('sonde')->getData();
             $hunter = $oldFleet->getHunter() - $form_spatialShip->get('hunter')->getData();
             $fregate = $oldFleet->getFregate() - $form_spatialShip->get('fregate')->getData();
@@ -1110,12 +1169,12 @@ class FleetController extends Controller
             $croiser = $oldFleet->getCroiser() - $form_spatialShip->get('croiser')->getData();
             $ironClad = $oldFleet->getIronClad() - $form_spatialShip->get('ironClad')->getData();
             $destroyer = $oldFleet->getDestroyer() - $form_spatialShip->get('destroyer')->getData();
-            $total = $form_spatialShip->get('corvetWar')->getData() + $form_spatialShip->get('hunterWar')->getData() + $form_spatialShip->get('cargoI')->getData() + $form_spatialShip->get('cargoV')->getData() + $form_spatialShip->get('cargoX')->getData() + $form_spatialShip->get('hunterHeavy')->getData() + $form_spatialShip->get('corvet')->getData() + $form_spatialShip->get('corvetLaser')->getData() + $form_spatialShip->get('fregatePlasma')->getData() + $form_spatialShip->get('croiser')->getData() + $form_spatialShip->get('ironClad')->getData() + $form_spatialShip->get('destroyer')->getData() + $form_spatialShip->get('colonizer')->getData() + $form_spatialShip->get('fregate')->getData() + $form_spatialShip->get('hunter')->getData() + $form_spatialShip->get('sonde')->getData() + $form_spatialShip->get('barge')->getData() + $form_spatialShip->get('recycleur')->getData();
+            $total = $form_spatialShip->get('moonMaker')->getData() + $form_spatialShip->get('radarShip')->getData() + $form_spatialShip->get('brouilleurShip')->getData() + $form_spatialShip->get('motherShip')->getData() + $form_spatialShip->get('corvetWar')->getData() + $form_spatialShip->get('hunterWar')->getData() + $form_spatialShip->get('cargoI')->getData() + $form_spatialShip->get('cargoV')->getData() + $form_spatialShip->get('cargoX')->getData() + $form_spatialShip->get('hunterHeavy')->getData() + $form_spatialShip->get('corvet')->getData() + $form_spatialShip->get('corvetLaser')->getData() + $form_spatialShip->get('fregatePlasma')->getData() + $form_spatialShip->get('croiser')->getData() + $form_spatialShip->get('ironClad')->getData() + $form_spatialShip->get('destroyer')->getData() + $form_spatialShip->get('colonizer')->getData() + $form_spatialShip->get('fregate')->getData() + $form_spatialShip->get('hunter')->getData() + $form_spatialShip->get('sonde')->getData() + $form_spatialShip->get('barge')->getData() + $form_spatialShip->get('recycleur')->getData();
 
             if (($colonizer < 0 || $recycleur < 0) || ($barge < 0 || $sonde < 0) || ($hunter < 0 || $fregate < 0) ||
                 ($total == 0 || $cargoI < 0) || ($cargoV < 0 || $cargoX < 0) || ($hunterHeavy < 0 || $corvet < 0) ||
                 ($corvetLaser < 0 || $fregatePlasma < 0) || ($croiser < 0 || $ironClad < 0) || ($destroyer < 0 || $hunterWar < 0) ||
-                ($corvetWar < 0)) {
+                ($corvetWar < 0 || $moonMaker < 0) || ($radarShip < 0 || $brouilleurShip < 0) || ($motherShip < 0)) {
                 return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
             }
             $eAlly = $user->getAllyEnnemy();
@@ -1144,6 +1203,10 @@ class FleetController extends Controller
             $fleet->setColonizer($form_spatialShip->get('colonizer')->getData());
             $fleet->setRecycleur($form_spatialShip->get('recycleur')->getData());
             $fleet->setBarge($form_spatialShip->get('barge')->getData());
+            $fleet->setMoonMaker($form_spatialShip->get('moonMaker')->getData());
+            $fleet->setRadarShip($form_spatialShip->get('radarShip')->getData());
+            $fleet->setBrouilleurShip($form_spatialShip->get('brouilleurShip')->getData());
+            $fleet->setMotherShip($form_spatialShip->get('motherShip')->getData());
             $fleet->setSonde($form_spatialShip->get('sonde')->getData());
             $fleet->setHunter($form_spatialShip->get('hunter')->getData());
             $fleet->setFregate($form_spatialShip->get('fregate')->getData());
@@ -1184,6 +1247,10 @@ class FleetController extends Controller
             $oldFleet->setColonizer($colonizer);
             $oldFleet->setRecycleur($recycleur);
             $oldFleet->setBarge($barge);
+            $oldFleet->setMoonMaker($moonMaker);
+            $oldFleet->setRadarShip($radarShip);
+            $oldFleet->setBrouilleurShip($brouilleurShip);
+            $oldFleet->setMotherShip($motherShip);
             $oldFleet->setSonde($sonde);
             $oldFleet->setHunter($hunter);
             $oldFleet->setFregate($fregate);

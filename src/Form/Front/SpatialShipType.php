@@ -59,6 +59,63 @@ class SpatialShipType extends AbstractType
                 )
             )
             ->add(
+                'moonMaker',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                )
+            )
+            ->add(
+                'radarShip',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                )
+            )
+            ->add(
+                'brouilleurShip',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                )
+            )
+            ->add(
+                'motherShip',
+                null,
+                array(
+                    'label' => 'form.nbr',
+                    'attr'  => array(
+                        'placeholder' => 'form.nbr',
+                        'class' => 'form-control',
+                        'min' => '0',
+                        'max' => '1',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                )
+            )
+            ->add(
                 'hunter',
                 null,
                 array(
