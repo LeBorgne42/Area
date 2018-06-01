@@ -564,11 +564,43 @@ class User implements UserInterface, \Serializable
             if($planet->getMotherShip()) {
                 return 'gotOne';
             }
+            if($planet->getProduct()) {
+                if ($planet->getProduct()->getMotherShip()) {
+                    return 'gotOne';
+                }
+            }
         }
         foreach($this->fleets as $fleet) {
             if($fleet->getMotherShip()) {
                 return 'gotOne';
             }
+        }
+        return null;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getColonizer()
+    {
+        $nbr = 0;
+        foreach($this->planets as $planet) {
+            if($planet->getColonizer()) {
+                $nbr = $nbr + $planet->getColonizer();
+            }
+            if($planet->getProduct()) {
+                if ($planet->getProduct()->getColonizer()) {
+                    $nbr = $nbr + $planet->getColonizer();
+                }
+            }
+        }
+        foreach($this->fleets as $fleet) {
+            if($fleet->getColonizer()) {
+                $nbr = $nbr + $planet->getColonizer();
+            }
+        }
+        if($nbr > 2) {
+            return $nbr;
         }
         return null;
     }

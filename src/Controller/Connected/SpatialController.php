@@ -95,8 +95,9 @@ class SpatialController extends Controller
                 ($moonMaker && ($user->getTerraformation() < 15 || $usePlanet->getHeavyUsine() == 0)) ||
                 ($radarShip && ($user->getOnde() < 3 || $usePlanet->getLightUsine() == 0)) ||
                 ($brouilleurShip && ($user->getOnde() < 5 || $usePlanet->getLightUsine() == 0)) ||
-                ($motherShip && ($user->getUtility() != 3 || $usePlanet->getHeavyUsine() == 0) || $user->getMotherShip()) ||
-                ($warPoint > $user->getRank()->getWarPoint() || $bitcoinLess > $user->getBitcoin()))
+                ($motherShip && ($user->getUtility() != 3 || $usePlanet->getHeavyUsine() == 0)) ||
+                ($warPoint > $user->getRank()->getWarPoint() || $bitcoinLess > $user->getBitcoin()) ||
+                ($user->getColonizer() && $colonizer) || ($motherShip && $user->getMotherShip()))
             {
                 return $this->redirectToRoute('spatial', array('idp' => $usePlanet->getId()));
             }
