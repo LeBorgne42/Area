@@ -211,8 +211,8 @@ class FightController extends Controller
             return($blockDef);
         }
 
-        $firstBlood = (($missile / 5) + ($plasma * 3) + ($laser * 1.5));
-        $firstBloodD = (($missileD / 5) + ($plasmaD * 3) + ($laserD * 1.5));
+        $firstBlood = (($missile / 3) + ($plasma * 3) + ($laser * 1.5));
+        $firstBloodD = (($missileD / 3) + ($plasmaD * 3) + ($laserD * 1.5));
         $countSAtt = 0;
         $countSDef = 0;
         if(($firstBlood > 0) && $shieldD > 0) {
@@ -235,8 +235,8 @@ class FightController extends Controller
             $countSAtt = 1;
             $armor = $armor - $firstBloodD;
         }
-        $secondShot = (($missile * 2.5) + ($plasma / 2) + $laser);
-        $secondShotD = (($missileD * 2.5) + ($plasmaD / 2) + $laserD);
+        $secondShot = (($missile * 2) + ($plasma / 2) + $laser);
+        $secondShotD = (($missileD * 2) + ($plasmaD / 2) + $laserD);
         if($countSDef - $countSAtt > 0) {
             $armorD = $armorD - ($secondShot * ($countSDef - $countSAtt));
             $secondShotD = (($missileD * 2.5) + ($plasmaD / 2) + $laserD) - ($secondShot * ($countSDef - $countSAtt));
@@ -267,11 +267,11 @@ class FightController extends Controller
             $malus = 0;
             if ($armorSaveD != $armorD) {
                 if($countShot == 0) {
-                    $malus = 1;
+                    $malus = 0;
                 } else {
                     $malus = (((($armorSaveD - $armorD) * 100) / $armorSaveD) / (rand(15, 20) / 10));
                     if($malus < 1) {
-                        $malus = $malus;
+                        $malus = 0;
                     }
                 }
             }
@@ -351,11 +351,11 @@ class FightController extends Controller
             $malus = 0;
             if($armorSaveA != $armor) {
                 if($countShot == 0) {
-                    $malus = 1;
+                    $malus = 0;
                 } else {
                     $malus = (((($armorSaveA - $armor) * 100) / $armorSaveA) / (rand(15, 20) / 10));
                     if($malus < 1) {
-                        $malus = $malus;
+                        $malus = 0;
                     }
                 }
             }

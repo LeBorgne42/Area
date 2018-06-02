@@ -37,14 +37,16 @@ class DailyController extends Controller
             $ally = $user->getAlly();
             $worker = 0;
             $planetPoint= 0;
-            foreach ($user->getAllPlanets() as $planet) {
-                if (($planet->getWorker() + $planet->getWorkerProduction() > $planet->getWorkerMax())) {
-                    $planet->setWorker($planet->getWorkerMax());
-                } else {
-                    $planet->setWorker($planet->getWorker() + $planet->getWorkerProduction());
+            foreach ($user->getPlanets() as $planet) {
+                if($planet->getRadarAt() == null && $planet->getBrouilleurAt() == null) {
+                    if (($planet->getWorker() + $planet->getWorkerProduction() > $planet->getWorkerMax())) {
+                        $planet->setWorker($planet->getWorkerMax());
+                    } else {
+                        $planet->setWorker($planet->getWorker() + $planet->getWorkerProduction());
+                    }
+                    $worker = $worker + $planet->getWorker();
+                    $planetPoint = $planetPoint + $planet->getBuildingPoint();
                 }
-                $worker = $worker + $planet->getWorker();
-                $planetPoint = $planetPoint + $planet->getBuildingPoint();
             }
             $gain = $worker / 1.25;
             if($ally) {
