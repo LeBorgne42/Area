@@ -2,7 +2,7 @@
 
 <nav class="navbar-right text-center pr-4">
     {% for planet in app.user.getPlanets() %}
-        {% if planet == usePlanet and app.user.getPlanets()|length > 9 %}
+        {% if planet == usePlanet and app.user.getAllPlanets()|length > 9 %}
         {% else %}
             {% if planet.getEmpty() == true %}
                 <div class="mb-4 bg-right-empty px-4 py-2">

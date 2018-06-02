@@ -25,7 +25,7 @@ class OverviewController extends Controller
         $user = $this->getUser();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
-        if($user->getGameOver() || count($user->getPlanets()) == 0) {
+        if($user->getGameOver() || count($user->getAllPlanets()) == 0) {
             return $this->redirectToRoute('game_over');
         }
 
@@ -91,8 +91,8 @@ class OverviewController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        if($user->getGameOver() || count($user->getPlanets()) == 0) {
-            if(count($user->getPlanets()) == 0 && $user->getGameOver() == null) {
+        if($user->getGameOver() || count($user->getAllPlanets()) == 0) {
+            if(count($user->getAllPlanets()) == 0 && $user->getGameOver() == null) {
                 $user->setGameOver($user->getUserName());
                 $em->persist($user);
                 $em->flush();

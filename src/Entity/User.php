@@ -558,6 +558,34 @@ class User implements UserInterface, \Serializable
     /**
      * @return mixed
      */
+    public function getAllPlanets()
+    {
+        $nbr = 0;
+        foreach($this->planets as $planet) {
+            if($planet->getEmpty() == false) {
+                $nbr = $nbr + 1;
+            }
+        }
+        return $nbr;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getColPlanets()
+    {
+        $nbr = 0;
+        foreach($this->planets as $planet) {
+            if($planet->getMoon() == false && $planet->getEmpty() == false) {
+                $nbr = $nbr + 1;
+            }
+        }
+        return $nbr;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getMotherShip()
     {
         foreach($this->planets as $planet) {

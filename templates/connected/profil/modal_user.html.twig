@@ -20,7 +20,7 @@
         <div class="my-4 ml-5">{{ 'user.name'|trans }} {{ user.getUserName() }}</div>
         <div class="my-4 ml-5">{{ 'user.ally'|trans }} {% if user.getAlly() %}<span><a href="{{ path('ally_profil', {'idp': usePlanet.getId(), 'id': user.getAlly().getId()}) }}">{{ user.getAlly().getName() }}</a></span>{% else %}{{ 'user.allyNone'|trans }}{% endif %}</div>
         <div class="my-4 ml-5">{{ 'user.galaxy'|trans }} 1</div>
-        <div class="my-4 ml-5">{{ 'user.planet'|trans }} {{ user.getPlanets()|length }}</div>
+        <div class="my-4 ml-5">{{ 'user.planet'|trans }} {{ user.getAllPlanets()|length }}</div>
         <div class="my-4 ml-5">{{ 'user.fleet'|trans }} {{ user.getFleets()|length }}</div>
         <div class="my-4 text-center"><a class="btn-top" href="{{ path('message_responde', {'idp': usePlanet.getId(), 'id': user.getId()}) }}">{{ 'responde'|trans }}</a></div>
     </div>

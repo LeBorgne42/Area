@@ -37,7 +37,7 @@ class DailyController extends Controller
             $ally = $user->getAlly();
             $worker = 0;
             $planetPoint= 0;
-            foreach ($user->getPlanets() as $planet) {
+            foreach ($user->getAllPlanets() as $planet) {
                 if (($planet->getWorker() + $planet->getWorkerProduction() > $planet->getWorkerMax())) {
                     $planet->setWorker($planet->getWorkerMax());
                 } else {

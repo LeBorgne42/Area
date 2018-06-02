@@ -537,8 +537,8 @@ class InstantController extends Controller
                 } elseif ($fleet->getFlightType() == '3') {
                     if ($fleet->getColonizer() && $newPlanet->getUser() == null &&
                         $newPlanet->getEmpty() == false && $newPlanet->getMerchant() == false &&
-                        $newPlanet->getCdr() == false && count($fleet->getUser()->getPlanets()) < 21 &&
-                        count($fleet->getUser()->getPlanets()) <= ($user->getTerraformation() + 1)) {
+                        $newPlanet->getCdr() == false && count($fleet->getUser()->getColPlanets()) < 21 &&
+                        count($fleet->getUser()->getColPlanets()) <= ($user->getTerraformation() + 1)) {
                         $fleet->setColonizer($fleet->getColonizer() - 1);
                         $newPlanet->setUser($fleet->getUser());
                         $newPlanet->setName('Colonie');
@@ -603,13 +603,13 @@ class InstantController extends Controller
                             $soldierAtmp = $soldierAtmp - $fleet->getSoldier();
                             $defenser->setSoldier(0);
                             $defenser->setWorker(2000);
-                            if(count($fleet->getUser()->getPlanets()) < ($fleet->getUser()->getTerraformation() + 2)) {
+                            if(count($fleet->getUser()->getColPlanets()) < ($fleet->getUser()->getTerraformation() + 2)) {
                                 $defenser->setUser($user);
                             } else {
                                 $defenser->setUser(null);
                                 $defenser->setName('Abandonnée');
                             }
-                            if(count($userDefender->getPlanets()) == 1) {
+                            if(count($userDefender->getAllPlanets()) == 1) {
                                 $userDefender->setGameOver($user->getUserName());
                                 $userDefender->setAlly(null);
                                 $userDefender->setGrade(null);
