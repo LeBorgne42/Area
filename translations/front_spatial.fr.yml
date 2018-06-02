@@ -62,7 +62,7 @@ pdgImg: 'Point de Guerre'
 popover.corvetWar: '<h5>Signature thermique : 45<br>Vitesse : 130/lm<br>Coque : 135<br>Missile : 26<br>Laser : 9<br>Bouclier : 10</h5>'
 spatial.corvetWar: 'Corvette de combat'
 popover.moonMaker: '<h5>Signature thermique : 50.000<br>Vitesse : 5/lm<hr>Création de lune</h5>'
-spatial.moonMaker: Tartar
+spatial.moonMaker: Lunar
 popover.radarShip: '<h5>Signature thermique : 200<br>Vitesse : 1.000/lm<hr>Déployer un radar</h5>'
 spatial.radarShip: 'Vaisseau radar'
 popover.motherShip: '<h5>Signature thermique : 20.000<br>Vitesse : 100/lm<br>Coque : 20.000<br>Bouclier : 5.000<hr>+10% de coque<br>+5% de bouclier total<br>+10% de cargo total<br>+10% vitesse de flotte<br>-10% de signature totale</h5>'

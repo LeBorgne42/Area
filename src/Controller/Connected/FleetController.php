@@ -459,7 +459,8 @@ class FleetController extends Controller
                 ($moonMaker < 0 || $radarShip < 0) || ($brouilleurShip < 0 || $motherShip < 0) ||
                 ($soldier > $planetTake->getSoldierMax()) ||
                 ($worker > $planetTake->getWorkerMax() || $scientist > $planetTake->getScientistMax()) ||
-                ($niobium > $planetTake->getNiobiumMax() || $water > $planetTake->getWaterMax())) {
+                ($niobium > $planetTake->getNiobiumMax() || $water > $planetTake->getWaterMax()) ||
+                ($worker < 10000 && $form_manageFleet->get('moreWorker')->getData())) {
                 return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
             }
 

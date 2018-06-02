@@ -21,3 +21,4 @@ tooltip.fleetQuit: 'Ce cadre vous montre les flottes qui sortent de ce secteur.'
 sector.profilUser: 'voir profil'
 sector.manageFleet: gestion
 fleet.combat: 'en combat'
+tooltip.radarInfos: '<br>%user% <br> Radar: %radar% <br> Brouilleur: %brouilleur%'

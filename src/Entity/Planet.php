@@ -385,6 +385,21 @@ class Planet
     protected $merchant = false;
 
     /**
+     * @ORM\Column(name="moon",type="boolean")
+     */
+    protected $moon = false;
+
+    /**
+     * @ORM\Column(name="radarAt",type="datetime", nullable=true)
+     */
+    protected $radarAt = null;
+
+    /**
+     * @ORM\Column(name="brouilleurAt",type="datetime", nullable=true)
+     */
+    protected $brouilleurAt = null;
+
+    /**
      * @Assert\File(
      *     maxSize="400k",
      *     mimeTypes={"image/png", "image/jpeg", "image/bmp"}
@@ -1832,5 +1847,53 @@ class Planet
     public function setMotherShip($motherShip): void
     {
         $this->motherShip = $motherShip;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRadarAt()
+    {
+        return $this->radarAt;
+    }
+
+    /**
+     * @param mixed $radarAt
+     */
+    public function setRadarAt($radarAt): void
+    {
+        $this->radarAt = $radarAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBrouilleurAt()
+    {
+        return $this->brouilleurAt;
+    }
+
+    /**
+     * @param mixed $brouilleurAt
+     */
+    public function setBrouilleurAt($brouilleurAt): void
+    {
+        $this->brouilleurAt = $brouilleurAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMoon()
+    {
+        return $this->moon;
+    }
+
+    /**
+     * @param mixed $moon
+     */
+    public function setMoon($moon): void
+    {
+        $this->moon = $moon;
     }
 }

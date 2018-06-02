@@ -155,6 +155,13 @@ class InstantController extends Controller
             ->getQuery()
             ->getResult();
 
+        $radars = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.radarAt < :now or p.brouilleurAt < :now')
+            ->setParameters(array('now' => $now))
+            ->getQuery()
+            ->getResult();
+
         foreach ($userSoldiers as $soldierAt) {
             $soldierAt->setSoldier($soldierAt->getSoldierAtNbr());
             $soldierAt->setSoldierAt(null);
@@ -167,6 +174,25 @@ class InstantController extends Controller
             $scientistAt->setScientistAt(null);
             $scientistAt->setScientistAtNbr(null);
             $em->persist($scientistAt);
+        }
+
+        foreach ($radars as $radar) {
+            if($radar->getRadarAt() < $now) {
+                if(!$radar->getRadarAt()) {
+                    $radar->setUser(null);
+                }
+                $radar->setName('Vide');
+                $radar->setSkyRadar(0);
+                $radar->setRadarAt(null);
+            }
+            if($radar->getBrouilleurAt() < $now) {
+                if(!$radar->getBrouilleurAt()) {
+                    $radar->setUser(null);
+                }
+                $radar->setName('Vide');
+                $radar->setSkyBrouilleur(0);
+                $radar->setBrouilleurAt(null);
+            }
         }
 
         foreach ($fleetCdrs as $fleetCdr) {
