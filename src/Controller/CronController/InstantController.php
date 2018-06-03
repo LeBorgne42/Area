@@ -469,9 +469,9 @@ class InstantController extends Controller
                 $newPlanet = $fleet->getPlanet();
                 
                 if ($fleet->getFlightType() == '2') {
-                    $reportSell = new Report();
-                    $reportSell->setSendAt($now);
                     if($newPlanet->getMerchant() == true) {
+                        $reportSell = new Report();
+                        $reportSell->setSendAt($now);
                         $reportSell->setUser($user);
                         $reportSell->setTitle("Vente aux marchands");
                         $reportSell->setContent("Votre vente aux marchands vous a rapporté " . ($user->getBitcoin() + ($fleet->getWater() * 2) + ($fleet->getSoldier() * 7.5) + ($fleet->getWorker() / 4) + ($fleet->getScientist() * 75) + ($fleet->getNiobium() / 1.5)) . " bitcoin.");
@@ -483,6 +483,8 @@ class InstantController extends Controller
                         $fleet->setScientist(0);
                     } else {
                         if($user != $newPlanet->getUser()) {
+                            $reportSell = new Report();
+                            $reportSell->setSendAt($now);
                             $reportSell->setUser($newPlanet->getUser());
                             $reportSell->setTitle("Dépôt de ressources");
                             $reportSell->setContent("Le joueur " . $newPlanet->getUser()->getUserName() . " vient de déposer des ressources sur votre planète "  . $newPlanet->getSector()->getgalaxy()->getPosition() . ":" . $newPlanet->getSector()->getPosition() . ":" . $newPlanet->getPosition());

@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97f042ea-d0ee-4bd9-bb02-3d850e24f659" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/assets/scss/front/_rightPlanet.scss" afterPath="$PROJECT_DIR$/assets/scss/front/_rightPlanet.scss" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/Ally/AllyController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/Ally/AllyController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/DeployController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/DeployController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/FightController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/FightController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/OverviewController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/OverviewController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/PlanetController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/PlanetController.php" />
       <change beforePath="$PROJECT_DIR$/src/Controller/CronController/InstantController.php" afterPath="$PROJECT_DIR$/src/Controller/CronController/InstantController.php" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/profil/modal_user.html.twig" afterPath="$PROJECT_DIR$/templates/connected/profil/modal_user.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/menu/_right_planet.html.twig" afterPath="$PROJECT_DIR$/templates/menu/_right_planet.html.twig" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Planet.php" afterPath="$PROJECT_DIR$/src/Entity/Planet.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,31 +17,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="FleetController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Controller/Connected/FleetController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="715">
-              <caret line="996" column="33" lean-forward="true" selection-start-line="996" selection-start-column="33" selection-end-line="996" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="InstantController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Controller/CronController/InstantController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="377">
-              <caret line="622" column="63" lean-forward="false" selection-start-line="622" selection-start-column="50" selection-end-line="622" selection-end-column="63" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FightController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Controller/Connected/FightController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="303">
-              <caret line="511" column="53" lean-forward="false" selection-start-line="511" selection-start-column="40" selection-end-line="511" selection-end-column="53" />
+            <state relative-caret-position="543">
+              <caret line="486" column="57" lean-forward="false" selection-start-line="486" selection-start-column="57" selection-end-line="486" selection-end-column="57" />
               <folding />
             </state>
           </provider>
@@ -81,13 +54,13 @@
       <find>timerArea</find>
       <find>class=&quot;mt-5 timerArea&quot;</find>
       <find>getPlanets</find>
-      <find>getAllPlanets</find>
       <find>setFleetWinRatio</find>
       <find>getAllPla</find>
       <find>getColPl</find>
       <find>getMoon(</find>
       <find>ajouter</find>
       <find>$reportDef</find>
+      <find>getAllPlanets</find>
     </findStrings>
     <replaceStrings>
       <replace>oldFleet</replace>
@@ -180,7 +153,6 @@
         <option value="$PROJECT_DIR$/templates/connected/map/sector.html.twig" />
         <option value="$PROJECT_DIR$/templates/connected/fleet/edit.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/Connected/SpatialController.php" />
-        <option value="$PROJECT_DIR$/src/Entity/Planet.php" />
         <option value="$PROJECT_DIR$/templates/connected/planet.html.twig" />
         <option value="$PROJECT_DIR$/templates/connected/spatial.html.twig" />
         <option value="$PROJECT_DIR$/templates/connected/building.html.twig" />
@@ -191,6 +163,7 @@
         <option value="$PROJECT_DIR$/src/Controller/Connected/DeployController.php" />
         <option value="$PROJECT_DIR$/src/Controller/Connected/Ally/AllyController.php" />
         <option value="$PROJECT_DIR$/src/Controller/Connected/FightController.php" />
+        <option value="$PROJECT_DIR$/src/Entity/Planet.php" />
         <option value="$PROJECT_DIR$/src/Controller/CronController/InstantController.php" />
       </list>
     </option>
@@ -373,15 +346,7 @@
               <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Connected" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Connected" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Ally" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="CronController" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
@@ -461,12 +426,12 @@
       <workItem from="1525305799071" duration="264174000" />
       <workItem from="1526251994568" duration="133593000" />
       <workItem from="1527050234571" duration="137210000" />
-      <workItem from="1527854790615" duration="36987000" />
+      <workItem from="1527854790615" duration="37697000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1249639000" />
+    <option name="totallyTimeSpent" value="1250349000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -479,6 +444,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-640" y="-1080" width="1920" height="1080" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287483" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287483" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -782,14 +748,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Planet.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="358">
-          <caret line="338" column="24" lean-forward="false" selection-start-line="338" selection-start-column="14" selection-end-line="338" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/connected/planet.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="805">
@@ -926,10 +884,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Planet.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1575">
+          <caret line="108" column="32" lean-forward="true" selection-start-line="108" selection-start-column="32" selection-end-line="108" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/CronController/InstantController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="622" column="63" lean-forward="false" selection-start-line="622" selection-start-column="50" selection-end-line="622" selection-end-column="63" />
+        <state relative-caret-position="543">
+          <caret line="486" column="57" lean-forward="false" selection-start-line="486" selection-start-column="57" selection-end-line="486" selection-end-column="57" />
           <folding />
         </state>
       </provider>

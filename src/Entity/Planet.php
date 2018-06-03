@@ -76,12 +76,12 @@ class Planet
     /**
      * @ORM\Column(name="niobiumMax",type="integer")
      */
-    protected $niobiumMax = 750000;
+    protected $niobiumMax = 1000000;
 
     /**
      * @ORM\Column(name="waterMax",type="integer")
      */
-    protected $waterMax = 750000;
+    protected $waterMax = 1000000;
 
     /**
      * @ORM\Column(name="soldierMax",type="integer")
@@ -91,22 +91,22 @@ class Planet
     /**
      * @ORM\Column(name="scientistMax",type="integer")
      */
-    protected $scientistMax = 200;
+    protected $scientistMax = 500;
 
     /**
      * @ORM\Column(name="workerMax",type="integer")
      */
-    protected $workerMax = 100000;
+    protected $workerMax = 125000;
 
     /**
      * @ORM\Column(name="nbProduction",type="decimal", precision=28, scale=5)
      */
-    protected $nbProduction = 5.2;
+    protected $nbProduction = 6;
 
     /**
      * @ORM\Column(name="wtProduction",type="decimal", precision=28, scale=5)
      */
-    protected $wtProduction = 4.3;
+    protected $wtProduction = 5;
 
     /**
      * @ORM\OneToMany(targetEntity="Fleet", mappedBy="planet", fetch="EXTRA_LAZY")
