@@ -625,11 +625,15 @@ class InstantController extends Controller
                             $defenser->setWorker(2000);
                             if($fleet->getUser()->getColPlanets() <= ($fleet->getUser()->getTerraformation() + 2)) {
                                 $defenser->setUser($user);
+                                $em->persist($defenser);
+                                $em->flush();
                             } else {
                                 $defenser->setUser(null);
                                 $defenser->setName('Abandonnée');
+                                $em->persist($defenser);
+                                $em->flush();
                             }
-                            if($userDefender->getAllPlanets() == 1) {
+                            if($userDefender->getAllPlanets() == 0) {
                                 $userDefender->setGameOver($user->getUserName());
                                 $userDefender->setAlly(null);
                                 $userDefender->setGrade(null);
@@ -650,7 +654,6 @@ class InstantController extends Controller
                         }
                         $em->persist($reportInv);
                         $em->persist($reportDef);
-                        $em->persist($defenser);
                         $em->flush();
                     }
                 }

@@ -511,11 +511,15 @@ class FightController extends Controller
                 $defenser->setWorker(2000);
                 if($invader->getUser()->getColPlanets() <= ($invader->getUser()->getTerraformation() + 2)) {
                     $defenser->setUser($user);
+                    $em->persist($defenser);
+                    $em->flush();
                 } else {
                     $defenser->setUser(null);
                     $defenser->setName('Abandonnée');
+                    $em->persist($defenser);
+                    $em->flush();
                 }
-                if($userDefender->getColPlanets() == 1) {
+                if($userDefender->getColPlanets() == 0) {
                     $userDefender->setGameOver($user->getUserName());
                     $userDefender->setAlly(null);
                     $userDefender->setGrade(null);
@@ -536,7 +540,6 @@ class FightController extends Controller
             }
             $em->persist($reportInv);
             $em->persist($reportDef);
-            $em->persist($defenser);
             $em->flush();
         }
 
