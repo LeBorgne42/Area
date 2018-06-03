@@ -177,7 +177,7 @@ class InstantController extends Controller
         }
 
         foreach ($radars as $radar) {
-            if($radar->getRadarAt() < $now) {
+            if($radar->getRadarAt() < $now && $radar->getMoon() == false) {
                 if(!$radar->getRadarAt()) {
                     $radar->setUser(null);
                 }
@@ -185,13 +185,19 @@ class InstantController extends Controller
                 $radar->setSkyRadar(0);
                 $radar->setRadarAt(null);
             }
-            if($radar->getBrouilleurAt() < $now) {
+            if($radar->getBrouilleurAt() < $now && $radar->getMoon() == false) {
                 if(!$radar->getBrouilleurAt()) {
                     $radar->setUser(null);
                 }
                 $radar->setName('Vide');
                 $radar->setSkyBrouilleur(0);
                 $radar->setBrouilleurAt(null);
+            }
+            if($radar->getMoon() == true) {
+                $radar->setSkyBrouilleur(0);
+                $radar->setBrouilleurAt(null);
+                $radar->setSkyRadar(0);
+                $radar->setRadarAt(null);
             }
         }
 
@@ -463,7 +469,12 @@ class InstantController extends Controller
                 $newPlanet = $fleet->getPlanet();
                 
                 if ($fleet->getFlightType() == '2') {
+                    $reportSell = new Report();
+                    $reportSell->setSendAt($now);
                     if($newPlanet->getMerchant() == true) {
+                        $reportSell->setUser($user);
+                        $reportSell->setTitle("Vente aux marchands");
+                        $reportSell->setContent("Votre vente aux marchands vous a rapporté " . ($user->getBitcoin() + ($fleet->getWater() * 2) + ($fleet->getSoldier() * 7.5) + ($fleet->getWorker() / 4) + ($fleet->getScientist() * 75) + ($fleet->getNiobium() / 1.5)) . " bitcoin.");
                         $user->setBitcoin($user->getBitcoin() + ($fleet->getWater() * 2) + ($fleet->getSoldier() * 7.5) + ($fleet->getWorker() / 4) + ($fleet->getScientist() * 75) + ($fleet->getNiobium() / 1.5));
                         $fleet->setNiobium(0);
                         $fleet->setWater(0);
@@ -471,6 +482,11 @@ class InstantController extends Controller
                         $fleet->setWorker(0);
                         $fleet->setScientist(0);
                     } else {
+                        if($user != $newPlanet->getUser()) {
+                            $reportSell->setUser($newPlanet->getUser());
+                            $reportSell->setTitle("Dépôt de ressources");
+                            $reportSell->setContent("Le joueur " . $newPlanet->getUser()->getUserName() . " vient de déposer des ressources sur votre planète "  . $newPlanet->getSector()->getgalaxy()->getPosition() . ":" . $newPlanet->getSector()->getPosition() . ":" . $newPlanet->getPosition());
+                        }
                         if($newPlanet->getNiobium() + $fleet->getNiobium() < $newPlanet->getNiobiumMax()) {
                             $newPlanet->setNiobium($newPlanet->getNiobium() + $fleet->getNiobium());
                             $fleet->setNiobium(0);
@@ -532,13 +548,14 @@ class InstantController extends Controller
                     $fleet->setSector($oldPlanet->getSector());
                     $fleet->setPlanete($oldPlanet->getPosition());
                     $em->persist($fleet);
+                    $em->persist($reportSell);
                     $em->persist($newPlanet);
                     $em->flush();
                 } elseif ($fleet->getFlightType() == '3') {
                     if ($fleet->getColonizer() && $newPlanet->getUser() == null &&
                         $newPlanet->getEmpty() == false && $newPlanet->getMerchant() == false &&
-                        $newPlanet->getCdr() == false && count($fleet->getUser()->getColPlanets()) < 21 &&
-                        count($fleet->getUser()->getColPlanets()) <= ($user->getTerraformation() + 1)) {
+                        $newPlanet->getCdr() == false && $fleet->getUser()->getColPlanets() < 21 &&
+                        $fleet->getUser()->getColPlanets() <= ($user->getTerraformation() + 1)) {
                         $fleet->setColonizer($fleet->getColonizer() - 1);
                         $newPlanet->setUser($fleet->getUser());
                         $newPlanet->setName('Colonie');
@@ -603,13 +620,13 @@ class InstantController extends Controller
                             $soldierAtmp = $soldierAtmp - $fleet->getSoldier();
                             $defenser->setSoldier(0);
                             $defenser->setWorker(2000);
-                            if(count($fleet->getUser()->getColPlanets()) < ($fleet->getUser()->getTerraformation() + 2)) {
+                            if($fleet->getUser()->getColPlanets() < ($fleet->getUser()->getTerraformation() + 2)) {
                                 $defenser->setUser($user);
                             } else {
                                 $defenser->setUser(null);
                                 $defenser->setName('Abandonnée');
                             }
-                            if(count($userDefender->getAllPlanets()) == 1) {
+                            if($userDefender->getAllPlanets() == 1) {
                                 $userDefender->setGameOver($user->getUserName());
                                 $userDefender->setAlly(null);
                                 $userDefender->setGrade(null);

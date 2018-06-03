@@ -509,13 +509,13 @@ class FightController extends Controller
                 $soldierAtmp = $soldierAtmp - $invader->getSoldier();
                 $defenser->setSoldier(0);
                 $defenser->setWorker(2000);
-                if(count($invader->getUser()->getColPlanets()) < ($invader->getUser()->getTerraformation() + 2)) {
+                if($invader->getUser()->getColPlanets() < ($invader->getUser()->getTerraformation() + 2)) {
                     $defenser->setUser($user);
                 } else {
                     $defenser->setUser(null);
                     $defenser->setName('Abandonnée');
                 }
-                if(count($userDefender->getAllPlanets()) == 1) {
+                if($userDefender->getColPlanets() == 1) {
                     $userDefender->setGameOver($user->getUserName());
                     $userDefender->setAlly(null);
                     $userDefender->setGrade(null);
@@ -571,8 +571,8 @@ class FightController extends Controller
         $newPlanet = $colonize->getPlanet();
         if($colonize->getColonizer() && $newPlanet->getUser() == null &&
             $newPlanet->getEmpty() == false && $newPlanet->getMerchant() == false &&
-            $newPlanet->getCdr() == false && count($colonize->getUser()->getColPlanets()) < 21 &&
-            count($colonize->getUser()->getColPlanets()) <= ($user->getTerraformation() + 1)) {
+            $newPlanet->getCdr() == false && $colonize->getUser()->getColPlanets() < 21 &&
+            $colonize->getUser()->getColPlanets() <= ($user->getTerraformation() + 1)) {
             $colonize->setColonizer($colonize->getColonizer() - 1);
             $newPlanet->setUser($colonize->getUser());
             $newPlanet->setName('Colonie');

@@ -130,7 +130,7 @@ class PlanetController extends Controller
         $abandonPlanet->setName('Base avancée');
         $em->persist($abandonPlanet);
         $em->flush();
-        if(count($user->getAllPlanets()) == 0) {
+        if($user->getAllPlanets() == 0) {
             foreach ($user->getFleets() as $fleet) {
                 $fleet->setUser($hydra);
                 $fleet->setName('Incursion H');

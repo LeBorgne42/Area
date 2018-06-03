@@ -143,13 +143,29 @@ class DeployController extends Controller
             $planet->setName('Lune');
             $image = ['moon1.png', 'moon2.png', 'moon3.png', 'moon4.png', 'moon5.png'];
             $planet->setImageName($image[rand(0, 4)]);
-            if ($planet->getNbCdr() > 30000000 && $planet->getWtCdr() > 30000000) {
-                $planet->setGround(rand(180, 240));
-                $planet->setSky(rand(3, 25));
-            } else {
-                $planet->setGround(rand(130, 180));
-                $planet->setSky(rand(15, 30));
+            if ($planet->getNbCdr() > 2000000 && $planet->getWtCdr() > 2000000) {
+                if ($planet->getNbCdr() < 5000000 && $planet->getWtCdr() < 5000000) {
+                    $planet->setGround(rand(100, 150));
+                    $planet->setSky(rand(10, 25));
+                } elseif ($planet->getNbCdr() < 10000000 && $planet->getWtCdr() < 10000000) {
+                    $planet->setGround(rand(150, 180));
+                    $planet->setSky(rand(8, 23));
+                } elseif ($planet->getNbCdr() < 20000000 && $planet->getWtCdr() < 20000000) {
+                    $planet->setGround(rand(180, 210));
+                    $planet->setSky(rand(6, 21));
+                } elseif ($planet->getNbCdr() < 50000000 && $planet->getWtCdr() < 50000000) {
+                    $planet->setGround(rand(210, 240));
+                    $planet->setSky(rand(4, 19));
+                } elseif ($planet->getNbCdr() < 75000000 && $planet->getWtCdr() < 75000000) {
+                    $planet->setGround(rand(240, 280));
+                    $planet->setSky(rand(2, 17));
+                } else {
+                    $planet->setGround(rand(280, 350));
+                    $planet->setSky(rand(15, 50));
+                }
             }
+            $planet->setNbCdr(0);
+            $planet->setWtCdr(0);
             $em->persist($planet);
             if($fleet->getNbrShips() == 0) {
                 $em->remove($fleet);
