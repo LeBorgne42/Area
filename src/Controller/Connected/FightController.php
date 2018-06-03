@@ -509,7 +509,7 @@ class FightController extends Controller
                 $soldierAtmp = $soldierAtmp - $invader->getSoldier();
                 $defenser->setSoldier(0);
                 $defenser->setWorker(2000);
-                if($invader->getUser()->getColPlanets() < ($invader->getUser()->getTerraformation() + 2)) {
+                if($invader->getUser()->getColPlanets() <= ($invader->getUser()->getTerraformation() + 2)) {
                     $defenser->setUser($user);
                 } else {
                     $defenser->setUser(null);
@@ -572,7 +572,7 @@ class FightController extends Controller
         if($colonize->getColonizer() && $newPlanet->getUser() == null &&
             $newPlanet->getEmpty() == false && $newPlanet->getMerchant() == false &&
             $newPlanet->getCdr() == false && $colonize->getUser()->getColPlanets() < 21 &&
-            $colonize->getUser()->getColPlanets() <= ($user->getTerraformation() + 1)) {
+            $colonize->getUser()->getColPlanets() <= ($user->getTerraformation() + 2)) {
             $colonize->setColonizer($colonize->getColonizer() - 1);
             $newPlanet->setUser($colonize->getUser());
             $newPlanet->setName('Colonie');
