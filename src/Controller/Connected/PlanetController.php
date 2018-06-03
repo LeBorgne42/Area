@@ -100,7 +100,8 @@ class PlanetController extends Controller
             ->andWhere('s.position = :sector')
             ->andWhere('g.position = :galaxy')
             ->andWhere('f.user != :user')
-            ->setParameters(array('planete' => $abandonPlanet->getPosition(), 'sector' => $abandonPlanet->getSector()->getPosition(), 'galaxy' => $abandonPlanet->getSector()->getGalaxy()->getPosition(), 'user' => $user))
+            ->andWhere('f.attack = :true')
+            ->setParameters(array('planete' => $abandonPlanet->getPosition(), 'true' => 1, 'sector' => $abandonPlanet->getSector()->getPosition(), 'galaxy' => $abandonPlanet->getSector()->getGalaxy()->getPosition(), 'user' => $user))
             ->getQuery()
             ->getResult();
 

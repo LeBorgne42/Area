@@ -596,7 +596,9 @@ class Planet
                 $planete = 0;
             } else {
                 if($fleet->getUser() != $user) {
-                    $planete = 1;
+                    if($fleet->getAttack() == 1) {
+                        $planete = 1;
+                    }
                     break;
                 }
             }
