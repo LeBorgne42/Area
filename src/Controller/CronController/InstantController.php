@@ -475,6 +475,7 @@ class InstantController extends Controller
                         $reportSell->setUser($user);
                         $reportSell->setTitle("Vente aux marchands");
                         $reportSell->setContent("Votre vente aux marchands vous a rapporté " . ($user->getBitcoin() + ($fleet->getWater() * 2) + ($fleet->getSoldier() * 7.5) + ($fleet->getWorker() / 4) + ($fleet->getScientist() * 75) + ($fleet->getNiobium() / 1.5)) . " bitcoin.");
+                        $em->persist($reportSell);
                         $user->setBitcoin($user->getBitcoin() + ($fleet->getWater() * 2) + ($fleet->getSoldier() * 7.5) + ($fleet->getWorker() / 4) + ($fleet->getScientist() * 75) + ($fleet->getNiobium() / 1.5));
                         $fleet->setNiobium(0);
                         $fleet->setWater(0);
@@ -488,6 +489,7 @@ class InstantController extends Controller
                             $reportSell->setUser($newPlanet->getUser());
                             $reportSell->setTitle("Dépôt de ressources");
                             $reportSell->setContent("Le joueur " . $newPlanet->getUser()->getUserName() . " vient de déposer des ressources sur votre planète "  . $newPlanet->getSector()->getgalaxy()->getPosition() . ":" . $newPlanet->getSector()->getPosition() . ":" . $newPlanet->getPosition());
+                            $em->persist($reportSell);
                         }
                         if($newPlanet->getNiobium() + $fleet->getNiobium() < $newPlanet->getNiobiumMax()) {
                             $newPlanet->setNiobium($newPlanet->getNiobium() + $fleet->getNiobium());
@@ -550,7 +552,6 @@ class InstantController extends Controller
                     $fleet->setSector($oldPlanet->getSector());
                     $fleet->setPlanete($oldPlanet->getPosition());
                     $em->persist($fleet);
-                    $em->persist($reportSell);
                     $em->persist($newPlanet);
                     $em->flush();
                 } elseif ($fleet->getFlightType() == '3') {
