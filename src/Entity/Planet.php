@@ -571,15 +571,20 @@ class Planet
     {
         $color = 'pp-enemy';
         foreach($this->fleets as $fleet) {
-            if($fleet->getUser()->getAlly() == $user->getAlly() && $color != 'pp-mine') {
-                $color = 'pp-ally';
-            }
             if ($fleet->getUser() == $user) {
-                $color = 'pp-mine';
+                return 'pp-mine';
             }
-            if($fleet->getUser()->getAlly() != $user->getAlly() && $fleet->getUser() != $user) {
-                $color = 'pp-enemy';
-                return $color;
+            if($fleet->getUser()->getAlly() == $user->getAlly() && $color != 'pp-mine') {
+                return 'pp-ally';
+            }
+            if ($fleet->getUser()->getAlly() && $user->getAlly()) {
+                if (count($fleet->getUser()->getAlly()->getAllieds()) > 0) {
+                    foreach($fleet->getUser()->getAlly()->getAllieds() as $allied) {
+                        if($allied->getAllyTag() == $user->getAlly()->getSigle()) {
+                            return 'pp-ally';
+                        }
+                    }
+                }
             }
         }
         return $color;
@@ -616,6 +621,25 @@ class Planet
         } else {
             return null;
         }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOurAllyPact($user)
+    {
+        if ($this->getUser()) {
+            if ($this->getUser()->getAlly() && $user->getAlly()) {
+                if (count($this->getUser()->getAlly()->getAllieds()) > 0) {
+                    foreach($this->getUser()->getAlly()->getAllieds() as $allied) {
+                        if($allied->getAllyTag() == $user->getAlly()->getSigle()) {
+                            return 'pact';
+                        }
+                    }
+                }
+            }
+        }
+        return null;
     }
 
     /**
