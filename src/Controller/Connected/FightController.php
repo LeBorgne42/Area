@@ -164,8 +164,8 @@ class FightController extends Controller
         }
         $armorSaveA = $armor;
         $armorSaveD = $armorD;
-        $warPointA = round($armor / 6);
-        $warPointB = round($armorD / 6);
+        $warPointA = round($armor / 80);
+        $warPointB = round($armorD / 80);
         $attAll = $missile + $laser + $plasma;
         $defAll = $missileD + $laserD + $plasmaD;
         if($attAll > 0 && $defAll <= 0) {
@@ -211,8 +211,8 @@ class FightController extends Controller
             return($blockDef);
         }
 
-        $firstBlood = (($missile / 3) + ($plasma * 3) + ($laser * 1.5));
-        $firstBloodD = (($missileD / 3) + ($plasmaD * 3) + ($laserD * 1.5));
+        $firstBlood = (($missile / 10) + ($plasma * 3) + ($laser * 1.5));
+        $firstBloodD = (($missileD / 10) + ($plasmaD * 3) + ($laserD * 1.5));
         $countSAtt = 0;
         $countSDef = 0;
         if(($firstBlood > 0) && $shieldD > 0) {
@@ -323,9 +323,17 @@ class FightController extends Controller
                     $reportA->setContent($reportA->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $player . "</th><th class=\"tab-cells-name p-1 ml-2\">" . $ships . "</th></tr>");
                 }
                 $reportA->setContent($reportA->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $countShot . " rounds de combat.</th></tr></tbody></table>");
-                $reportA->setContent($reportA->getContent() . "Vous avez perdu le combat en " . $attackerLose->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $attackerLose->getPlanet()->getSector()->getPosition() . ":" . $attackerLose->getPlanet()->getPosition() . " , vos adversaires remportent " . $warPointA . " points de Guerre");
+                $reportA->setContent($reportA->getContent() . "Vous avez perdu le combat en " . $attackerLose->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $attackerLose->getPlanet()->getSector()->getPosition() . ":" . $attackerLose->getPlanet()->getPosition() . " , vos adversaires remportent " . $warPointA . " points de Guerre.");
                 $attackerLose->getUser()->setViewReport(false);
                 $planet = $attackerLose->getPlanet();
+
+                $loseArm = $attackerLose->getLaser() + $attackerLose->getMissile() + $attackerLose->getPlasma();
+                $percentWarPoint = ($loseArm * 100) / $armeSaveA;
+                $warPointB = ($warPointB - ($armorD / 80)) / 10;
+                $newWarPoint = round(($percentWarPoint * $warPointB) / 100);
+                $reportA->setContent($reportA->getContent() . " Mais vous remportez vous même " . $newWarPoint . " points de Guerre !");
+                $attackerLose->getUser()->getRank()->setWarPoint($attackerLose->getUser()->getRank()->getWarPoint() + $newWarPoint);
+                $em->persist($attackerLose);
                 $em->persist($reportA);
                 $em->remove($attackerLose);
             }
@@ -407,9 +415,16 @@ class FightController extends Controller
                     $reportB->setContent($reportB->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $player . "</th><th class=\"tab-cells-name p-1 ml-2\">" . $lose . "</th></tr>");
                 }
                 $reportB->setContent($reportB->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $countShot . " rounds de combat.</th></tr></tbody></table>");
-                $reportB->setContent($reportB->getContent() . "Vous avez perdu le combat en " . $defenderLose->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $defenderLose->getPlanet()->getSector()->getPosition() . ":" . $defenderLose->getPlanet()->getPosition() . " , vos adversaires remportent " . $warPointB . " points de Guerre");
+                $reportB->setContent($reportB->getContent() . "Vous avez perdu le combat en " . $defenderLose->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $defenderLose->getPlanet()->getSector()->getPosition() . ":" . $defenderLose->getPlanet()->getPosition() . " , vos adversaires remportent " . $warPointB . " points de Guerre.");
                 $defenderLose->getUser()->setViewReport(false);
                 $planet = $defenderLose->getPlanet();
+                $loseArm = $defenderLose->getLaser() + $defenderLose->getMissile() + $defenderLose->getPlasma();
+                $percentWarPoint = ($loseArm * 100) / $armeSaveB;
+                $warPointA = ($warPointA - ($armor / 80)) / 10;
+                $newWarPoint = round(($percentWarPoint * $warPointA) / 100);
+                $reportA->setContent($reportA->getContent() . " Mais vous remportez vous même " . $newWarPoint . " points de Guerre !");
+                $defenderLose->getUser()->getRank()->setWarPoint($defenderLose->getUser()->getRank()->getWarPoint() + $newWarPoint);
+                $em->persist($defenderLose);
                 $em->persist($reportB);
                 $em->remove($defenderLose);
             }
