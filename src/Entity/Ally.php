@@ -195,6 +195,18 @@ class Ally
     }
 
     /**
+     * @return int
+     */
+    public function getAllPdg() : int
+    {
+        $nbr = 0;
+        foreach($this->getUsers() as $user) {
+            $nbr = $nbr + $user->getRank()->getWarPoint();
+        }
+        return $nbr;
+    }
+
+    /**
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getUsers()

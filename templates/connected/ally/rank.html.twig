@@ -22,6 +22,9 @@
                     {{ 'rank.planets'|trans }}
                 </th>
                 <th class="tab-cells-name p-2">
+                    {{ 'rank.pdg'|trans }}
+                </th>
+                <th class="tab-cells-name p-2">
                     {{ 'rank.createdAt'|trans }}
                 </th>
                 <th class="tab-cells-name p-2">
@@ -42,6 +45,9 @@
                     </th>
                     <th class="tab-cells-name p-2">
                         {{ ally.getPlanets()|number_format }}
+                    </th>
+                    <th class="tab-cells-name p-2">
+                        {{ ally.getAllPdg()|number_format }}
                     </th>
                     <th class="tab-cells-name p-2">
                         {{ ally.getcreatedAt()|date('H:i:s d/m/Y') }}

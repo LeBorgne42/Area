@@ -60,6 +60,7 @@ class RankController extends Controller
             ->leftJoin('u.rank', 'r')
             ->where('u.rank is not null')
             ->andWhere('u.id != :one')
+            ->andWhere('r.warPoint > :one')
             ->setParameters(array('one' => 1))
             ->orderBy('r.warPoint', 'DESC')
             ->getQuery()

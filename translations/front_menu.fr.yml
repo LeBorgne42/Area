@@ -12,7 +12,7 @@ faq: F.A.Q
 overview: Empire
 contact: 'Nous contacter'
 globalView: 'Vue d''ensemble'
-dailyCost: 'Aide débutant'
+dailyCost: Entretien
 fleet: Flottes
 planet: Planètes
 search: Recherches
@@ -53,3 +53,4 @@ SkyImg: Espace
 rank: Classement
 tmpRank: 'Rank temporaire'
 market: Marchands
+helpNew: 'Aide débutant'

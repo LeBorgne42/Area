@@ -1,11 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% trans_default_domain 'front_dailyCost' %}
+{% trans_default_domain 'help_new' %}
 
 {% block title %}{{ 'title'|trans }}{% endblock %}
 
 {% block body %}
-    {% set cost = (app.user.getAllSoldier() * 2) + app.user.getAllShipsCost() %}
     <div class="front-block building">
         <div class="block-title float-right mr-5 pr-5"><h2>{{ 'daily.title'|trans }}</h2></div>
         <div class="m-5 p-5 row">

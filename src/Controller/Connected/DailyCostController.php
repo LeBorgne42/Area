@@ -13,9 +13,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class DailyCostController extends Controller
 {
     /**
-     * @Route("/entretien/{idp}", name="dailyCost", requirements={"idp"="\d+"})
+     * @Route("/aides/{idp}", name="help_new", requirements={"idp"="\d+"})
      */
-    public function dailyCostAction($idp)
+    public function helpNewAction($idp)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -27,7 +27,7 @@ class DailyCostController extends Controller
             ->getQuery()
             ->getOneOrNullResult();
 
-        return $this->render('connected/dailyCost.html.twig', [
+        return $this->render('connected/help_new.html.twig', [
             'usePlanet' => $usePlanet,
         ]);
     }
