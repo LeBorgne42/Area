@@ -596,6 +596,9 @@ class AllyController extends Controller
         $form_allyAdd->handleRequest($request);
 
         if (($form_allyAdd->isSubmitted() && $form_allyAdd->isValid()) && $user->getGrade()->getCanRecruit() == 1) {
+            if($maxMembers >= 6) {
+                return $this->redirectToRoute('ally_blank', array('idp' => $usePlanet->getId()));
+            }
             $userProposal = $em->getRepository('App:User')
                 ->createQueryBuilder('u')
                 ->where('u.username = :username')
