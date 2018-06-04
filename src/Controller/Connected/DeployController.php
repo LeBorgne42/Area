@@ -19,7 +19,7 @@ class DeployController extends Controller
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
-        $now->add(new DateInterval('PT' . 14400 . 'S'));
+        $now->add(new DateInterval('PT' . 7200 . 'S'));
         $user = $this->getUser();
 
         $usePlanet = $em->getRepository('App:Planet')
@@ -49,10 +49,10 @@ class DeployController extends Controller
                 $planet->setRadarAt($now);
             }
             $em->persist($planet);
+            $em->persist($fleet);
             if($fleet->getNbrShips() == 0) {
                 $em->remove($fleet);
             }
-            $em->persist($fleet);
             $em->flush();
         }
 
@@ -66,7 +66,7 @@ class DeployController extends Controller
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
-        $now->add(new DateInterval('PT' . 7200 . 'S'));
+        $now->add(new DateInterval('PT' . 3600 . 'S'));
         $user = $this->getUser();
 
         $usePlanet = $em->getRepository('App:Planet')
@@ -96,10 +96,10 @@ class DeployController extends Controller
                 $planet->setBrouilleurAt($now);
             }
             $em->persist($planet);
+            $em->persist($fleet);
             if($fleet->getNbrShips() == 0) {
                 $em->remove($fleet);
             }
-            $em->persist($fleet);
             $em->flush();
         }
 
@@ -167,10 +167,10 @@ class DeployController extends Controller
             $planet->setNbCdr(0);
             $planet->setWtCdr(0);
             $em->persist($planet);
+            $em->persist($fleet);
             if($fleet->getNbrShips() == 0) {
                 $em->remove($fleet);
             }
-            $em->persist($fleet);
             $em->flush();
         }
 
