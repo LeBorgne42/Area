@@ -691,7 +691,7 @@ class FleetController extends Controller
                 return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
             }
             if($fleetGive->getMotherShip()) {
-                $speed = $fleetGive->getSpeed() / 0.10;
+                $speed = $fleetGive->getSpeed() * 0.10;
             } else {
                 $speed = $fleetGive->getSpeed();
             }

@@ -524,13 +524,22 @@ class FightController extends Controller
                 $soldierAtmp = $soldierAtmp - $invader->getSoldier();
                 $defenser->setSoldier(0);
                 $defenser->setWorker(2000);
-                if($invader->getUser()->getColPlanets() <= ($invader->getUser()->getTerraformation() + 2)) {
+                if($invader->getUser()->getColPlanets() <= ($invader->getUser()->getTerraformation() + 1)) {
                     $defenser->setUser($user);
                     $em->persist($defenser);
                     $em->flush();
                 } else {
-                    $defenser->setUser(null);
-                    $defenser->setName('Abandonnée');
+                    $hydra = $em->getRepository('App:User')
+                        ->createQueryBuilder('u')
+                        ->where('u.id = :id')
+                        ->setParameters(array('id' => 1))
+                        ->getQuery()
+                        ->getOneOrNullResult();
+
+                    $defenser->setUser($hydra);
+                    $defenser->setWorker(25000);
+                    $defenser->setSoldier(500);
+                    $defenser->setName('Avant Poste');
                     $em->persist($defenser);
                     $em->flush();
                 }
@@ -590,7 +599,7 @@ class FightController extends Controller
         if($colonize->getColonizer() && $newPlanet->getUser() == null &&
             $newPlanet->getEmpty() == false && $newPlanet->getMerchant() == false &&
             $newPlanet->getCdr() == false && $colonize->getUser()->getColPlanets() < 21 &&
-            $colonize->getUser()->getColPlanets() <= ($user->getTerraformation() + 2)) {
+            $colonize->getUser()->getColPlanets() <= ($user->getTerraformation() + 1)) {
             $colonize->setColonizer($colonize->getColonizer() - 1);
             $newPlanet->setUser($colonize->getUser());
             $newPlanet->setName('Colonie');

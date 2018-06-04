@@ -126,12 +126,12 @@ class PlanetController extends Controller
             ->getOneOrNullResult();
 
         $abandonPlanet->setUser($hydra);
-        $abandonPlanet->setWorker(300000);
-        $abandonPlanet->setSoldier(100000);
+        $abandonPlanet->setWorker(100000);
+        $abandonPlanet->setSoldier(2500);
         $abandonPlanet->setName('Base avancée');
         $em->persist($abandonPlanet);
         $em->flush();
-        if($user->getAllPlanets() == 0) {
+        if($user->getColPlanets() == 0) {
             foreach ($user->getFleets() as $fleet) {
                 $fleet->setUser($hydra);
                 $fleet->setName('Incursion H');

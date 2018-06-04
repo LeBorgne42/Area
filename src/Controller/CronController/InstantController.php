@@ -474,7 +474,7 @@ class InstantController extends Controller
                         $reportSell->setSendAt($now);
                         $reportSell->setUser($user);
                         $reportSell->setTitle("Vente aux marchands");
-                        $reportSell->setContent("Votre vente aux marchands vous a rapporté " . ($user->getBitcoin() + ($fleet->getWater() * 2) + ($fleet->getSoldier() * 7.5) + ($fleet->getWorker() / 4) + ($fleet->getScientist() * 75) + ($fleet->getNiobium() / 1.5)) . " bitcoin.");
+                        $reportSell->setContent("Votre vente aux marchands vous a rapporté " . (($fleet->getWater() * 2) + ($fleet->getSoldier() * 7.5) + ($fleet->getWorker() / 4) + ($fleet->getScientist() * 75) + ($fleet->getNiobium() / 1.5)) . " bitcoin.");
                         $em->persist($reportSell);
                         $user->setBitcoin($user->getBitcoin() + ($fleet->getWater() * 2) + ($fleet->getSoldier() * 7.5) + ($fleet->getWorker() / 4) + ($fleet->getScientist() * 75) + ($fleet->getNiobium() / 1.5));
                         $fleet->setNiobium(0);
@@ -541,7 +541,7 @@ class InstantController extends Controller
                         $base= 15000;
                     }
                     if($fleet->getMotherShip()) {
-                        $speed = $fleet->getSpeed() / 0.10;
+                        $speed = $fleet->getSpeed() * 0.10;
                     } else {
                         $speed = $fleet->getSpeed();
                     }
@@ -558,7 +558,7 @@ class InstantController extends Controller
                     if ($fleet->getColonizer() && $newPlanet->getUser() == null &&
                         $newPlanet->getEmpty() == false && $newPlanet->getMerchant() == false &&
                         $newPlanet->getCdr() == false && $fleet->getUser()->getColPlanets() < 21 &&
-                        $fleet->getUser()->getColPlanets() <= ($user->getTerraformation() + 2)) {
+                        $fleet->getUser()->getColPlanets() <= ($user->getTerraformation() + 1)) {
                         $fleet->setColonizer($fleet->getColonizer() - 1);
                         $newPlanet->setUser($fleet->getUser());
                         $newPlanet->setName('Colonie');
@@ -623,13 +623,22 @@ class InstantController extends Controller
                             $soldierAtmp = $soldierAtmp - $fleet->getSoldier();
                             $defenser->setSoldier(0);
                             $defenser->setWorker(2000);
-                            if($fleet->getUser()->getColPlanets() <= ($fleet->getUser()->getTerraformation() + 2)) {
+                            if($fleet->getUser()->getColPlanets() <= ($fleet->getUser()->getTerraformation() + 1)) {
                                 $defenser->setUser($user);
                                 $em->persist($defenser);
                                 $em->flush();
                             } else {
-                                $defenser->setUser(null);
-                                $defenser->setName('Abandonnée');
+                                $hydra = $em->getRepository('App:User')
+                                    ->createQueryBuilder('u')
+                                    ->where('u.id = :id')
+                                    ->setParameters(array('id' => 1))
+                                    ->getQuery()
+                                    ->getOneOrNullResult();
+
+                                $defenser->setUser($hydra);
+                                $defenser->setWorker(25000);
+                                $defenser->setSoldier(500);
+                                $defenser->setName('Avant Poste');
                                 $em->persist($defenser);
                                 $em->flush();
                             }
