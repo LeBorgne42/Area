@@ -474,9 +474,11 @@ class InstantController extends Controller
                         $reportSell->setSendAt($now);
                         $reportSell->setUser($user);
                         $reportSell->setTitle("Vente aux marchands");
-                        $reportSell->setContent("Votre vente aux marchands vous a rapporté " . (($fleet->getWater() * 2) + ($fleet->getSoldier() * 7.5) + ($fleet->getWorker() / 4) + ($fleet->getScientist() * 75) + ($fleet->getNiobium() / 1.5)) . " bitcoin.");
+                        $newWarPointS = ((($fleet->getScientist() * 100) + ($fleet->getWorker() * 50) + ($fleet->getSoldier() * 10) + ($fleet->getWater() / 3) + ($fleet->getNiobium() / 6)) / 400);
+                        $reportSell->setContent("Votre vente aux marchands vous a rapporté " . (($fleet->getWater() * 2) + ($fleet->getSoldier() * 7.5) + ($fleet->getWorker() / 4) + ($fleet->getScientist() * 75) + ($fleet->getNiobium() / 1.5)) . " bitcoin. Et " . $newWarPointS . " points de Guerre.");
                         $em->persist($reportSell);
                         $user->setBitcoin($user->getBitcoin() + ($fleet->getWater() * 2) + ($fleet->getSoldier() * 7.5) + ($fleet->getWorker() / 4) + ($fleet->getScientist() * 75) + ($fleet->getNiobium() / 1.5));
+                        $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $newWarPointS);
                         $fleet->setNiobium(0);
                         $fleet->setWater(0);
                         $fleet->setSoldier(0);

@@ -45,6 +45,38 @@ function manageMaxClick() {
         var parent = $(this).parent().parent();
         parent.find('input:eq(1)').val(parent.find('input:eq(1)').attr('max'));
     });
+    $('.maxInputR').off('click').on('click',function(e){
+        var parent = $(this).parent().parent();
+        parent.find('input:first').val(parent.find('input:first').attr('max'));
+    });
+    $('.maxInputLessR').off('click').on('click',function(e){
+        var parent = $(this).parent().parent();
+        parent.find('input:eq(1)').val(parent.find('input:eq(1)').attr('max'));
+    });
+    $('.addAllShip').off('click').on('click',function(e){
+        $('.maxInput').each( function(){
+            var parent = $(this).parent().parent();
+            parent.find('input:first').val(parent.find('input:first').attr('max'));
+        });
+    });
+    $('.removeAllShip').off('click').on('click',function(e){
+        $('.maxInputLess').each( function(){
+            var parent = $(this).parent().parent();
+            parent.find('input:eq(1)').val(parent.find('input:eq(1)').attr('max'));
+        });
+    });
+    $('.addAllShipR').off('click').on('click',function(e){
+        $('.maxInputR').each( function(){
+            var parent = $(this).parent().parent();
+            parent.find('input:first').val(parent.find('input:first').attr('max'));
+        });
+    });
+    $('.removeAllShipR').off('click').on('click',function(e){
+        $('.maxInputLessR').each( function(){
+            var parent = $(this).parent().parent();
+            parent.find('input:eq(1)').val(parent.find('input:eq(1)').attr('max'));
+        });
+    });
 }
 
 function manageTotalShip() {

@@ -144,11 +144,11 @@
                                 <td class="center-cells p-2 text-center">
                                     {{ 'fleet.addShip'|trans }}
                                 </td>
-                                <td class="center-cells p-2 text-center"></td>
+                                <td class="center-cells p-2 text-center text-orange addAllShip">{{ 'fleet.allShip'|trans }}</td>
                                 <td class="center-cells p-2 text-center">
                                     {{ 'fleet.removeShip'|trans }}
                                 </td>
-                                <td class="center-cells p-2 text-center"></td>
+                                <td class="center-cells p-2 text-center text-orange removeAllShip">{{ 'fleet.allShip'|trans }}</td>
                             </tr>
                             <tr{% if fleet.getPlanet().getSonde() == 0 and fleet.getSonde() == 0 %} hidden{% endif %}>
                                 <th class="tab-cells-name  p-1 pl-3">
@@ -535,11 +535,11 @@
                                 <td class="center-cells p-2 text-center">
                                     {{ 'fleet.addShip'|trans }}
                                 </td>
-                                <td class="center-cells p-2 text-center"></td>
+                                <td class="center-cells p-2 text-center text-orange addAllShipR">{{ 'fleet.allShip'|trans }}</td>
                                 <td class="center-cells p-2 text-center">
                                     {{ 'fleet.removeShip'|trans }}
                                 </td>
-                                <td class="center-cells p-2 text-center"></td>
+                                <td class="center-cells p-2 text-center text-orange removeAllShipR">{{ 'fleet.allShip'|trans }}</td>
                             </tr>
                             <tr{% if fleet.getPlanet().getNiobium() == 0 and fleet.getNiobium() == 0 %} hidden{% endif %}>
                                 <th class="tab-cells-name p-1 pl-3">
@@ -549,13 +549,13 @@
                                     {{ form_widget(form_manageFleet.moreNiobium,{attr: { max: fleet.getPlanet().getNiobium()}}) }}
                                 </td>
                                 <td width="30" class="tab-cells-name p-1 cell-middle text-center text-orange">
-                                    <span class="maxInput">max</span>
+                                    <span class="maxInputR">max</span>
                                 </td>
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.lessNiobium,{attr: { max: fleet.getNiobium()}}) }}
                                 </td>
                                 <td width="30" class="tab-cells-name p-1 cell-middle text-center text-orange">
-                                    <span class="maxInputLess">max</span>
+                                    <span class="maxInputLessR">max</span>
                                 </td>
                             </tr>
                             <tr{% if fleet.getPlanet().getWater() == 0 and fleet.getWater() == 0 %} hidden{% endif %}>
@@ -566,13 +566,13 @@
                                     {{ form_widget(form_manageFleet.moreWater,{attr: { max: fleet.getPlanet().getWater()}}) }}
                                 </td>
                                 <td width="30" class="tab-cells-name p-1 cell-middle text-center text-orange">
-                                    <span class="maxInput">max</span>
+                                    <span class="maxInputR">max</span>
                                 </td>
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.lessWater,{attr: { max: fleet.getWater()}}) }}
                                 </td>
                                 <td width="30" class="tab-cells-name p-1 cell-middle text-center text-orange">
-                                    <span class="maxInputLess">max</span>
+                                    <span class="maxInputLessR">max</span>
                                 </td>
                             </tr>
                             <tr{% if fleet.getPlanet().getSoldier() == 0 and fleet.getSoldier() == 0 %} hidden{% endif %}>
@@ -583,13 +583,13 @@
                                     {{ form_widget(form_manageFleet.moreSoldier,{attr: { max: fleet.getPlanet().getSoldier()}}) }}
                                 </td>
                                 <td width="30" class="tab-cells-name p-1 cell-middle text-center text-orange">
-                                    <span class="maxInput">max</span>
+                                    <span class="maxInputR">max</span>
                                 </td>
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.lessSoldier,{attr: { max: fleet.getSoldier()}}) }}
                                 </td>
                                 <td width="30" class="tab-cells-name p-1 cell-middle text-center text-orange">
-                                    <span class="maxInputLess">max</span>
+                                    <span class="maxInputLessR">max</span>
                                 </td>
                             </tr>
                             <tr{% if fleet.getPlanet().getWorker() == 0 and fleet.getWorker() == 0 %} hidden{% endif %}>
@@ -600,13 +600,13 @@
                                     {{ form_widget(form_manageFleet.moreWorker,{attr: { max: (fleet.getPlanet().getWorker() - 10000)}}) }}
                                 </td>
                                 <td width="30" class="tab-cells-name p-1 cell-middle text-center text-orange">
-                                    <span class="maxInput">max</span>
+                                    <span class="maxInputR">max</span>
                                 </td>
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.lessWorker,{attr: { max: fleet.getWorker()}}) }}
                                 </td>
                                 <td width="30" class="tab-cells-name p-1 cell-middle text-center text-orange">
-                                    <span class="maxInputLess">max</span>
+                                    <span class="maxInputLessR">max</span>
                                 </td>
                             </tr>
                             <tr{% if fleet.getPlanet().getScientist() == 0 and fleet.getScientist() == 0 %} hidden{% endif %}>
@@ -617,13 +617,13 @@
                                     {{ form_widget(form_manageFleet.moreScientist,{attr: { max: fleet.getPlanet().getScientist()}}) }}
                                 </td>
                                 <td width="30" class="tab-cells-name p-1 cell-middle text-center text-orange">
-                                    <span class="maxInput">max</span>
+                                    <span class="maxInputR">max</span>
                                 </td>
                                 <td class="center-cells p-1 px-4">
                                     {{ form_widget(form_manageFleet.lessScientist,{attr: { max: fleet.getScientist()}}) }}
                                 </td>
                                 <td width="30" class="tab-cells-name p-1 cell-middle text-center text-orange">
-                                    <span class="maxInputLess">max</span>
+                                    <span class="maxInputLessR">max</span>
                                 </td>
                             </tr>
                             </tbody>
@@ -757,7 +757,7 @@
                                 <tbody>
                                 <tr>
                                     <th class="tab-cells-name p-2 pl-4">
-                                        {{ 'fleet.cargo'|trans }} {{ fleet.getCargoFull()|number_format }} / {{ fleet.getCargoPlace()|number_format }}
+                                        {{ 'fleet.cargo'|trans }} {{ fleet.getCargoFull()|number_format }} / {{ fleet.getCargoPlace()|number_format }} <span class="float-right"><a href="{{ path('discharge_fleet_all', {'idp': usePlanet.getId(), 'id': fleet.getId() }) }}">{{ 'fleet.allDischarge'|trans }}</a></span>
                                     </th>
                                 </tr>
                                 <tr{% if fleet.getNiobium() == 0 %} hidden{% endif %}>

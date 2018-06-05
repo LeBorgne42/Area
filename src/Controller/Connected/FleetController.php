@@ -973,6 +973,88 @@ class FleetController extends Controller
     }
 
     /**
+     * @Route("/decharger-tout/{idp}/{id}", name="discharge_fleet_all", requirements={"idp"="\d+", "id"="\d+"})
+     */
+    public function dischargeAllFleetAction($idp, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $fleetGive = $em->getRepository('App:Fleet')
+            ->createQueryBuilder('f')
+            ->join('f.planet', 'p')
+            ->where('f.id = :id')
+            ->andWhere('f.user = :user')
+            ->andWhere('f.fightAt is null')
+            ->andWhere('f.flightTime is null')
+            ->andWhere('p.user is not null or p.merchant = :true')
+            ->setParameters(array('id' => $id, 'user' => $user, 'true' => true))
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $planetTake = $fleetGive->getPlanet();
+        if($fleetGive && $usePlanet) {
+        } else {
+            return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+        }
+        if($planetTake->getMerchant() == true) {
+            $planetTake->setScientist($planetTake->getScientist() + $fleetGive->getScientist());
+            $planetTake->setWorker($planetTake->getWorker() + $fleetGive->getWorker());
+            $planetTake->setSoldier($planetTake->getSoldier() + $fleetGive->getSoldier());
+            $planetTake->setWater($planetTake->getWater() + $fleetGive->getWater());
+            $planetTake->setNiobium($planetTake->getNiobium() + $fleetGive->getNiobium());
+            $user->setBitcoin($user->getBitcoin() + ($fleetGive->getScientist() * 75) + ($fleetGive->getWorker() * 2) + ($fleetGive->getSoldier() * 7.5) + ($fleetGive->getWater() * 2) + ($fleetGive->getNiobium() / 1.5));
+            $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + ((($fleetGive->getScientist() * 100) + ($fleetGive->getWorker() * 50) + ($fleetGive->getSoldier() * 10) + ($fleetGive->getWater() / 3) + ($fleetGive->getNiobium() / 6)) / 400));
+            $fleetGive->setScientist(0);
+            $fleetGive->setNiobium(0);
+            $fleetGive->setSoldier(0);
+            $fleetGive->setWorker(0);
+            $fleetGive->setWater(0);
+        }
+        if(($planetTake->getScientist() + $fleetGive->getScientist()) <= $planetTake->getScientistMax() &&
+            ($planetTake->getWorker() + $fleetGive->getWorker()) <= $planetTake->getWorkerMax() &&
+            ($planetTake->getSoldier() + $fleetGive->getSoldier()) <= $planetTake->getSoldierMax() &&
+            ($planetTake->getWater() + $fleetGive->getWater()) <= $planetTake->getWaterMax() &&
+            ($planetTake->getNiobium() + $fleetGive->getNiobium()) <= $planetTake->getNiobiumMax()) {
+            $planetTake->setScientist($planetTake->getScientist() + $fleetGive->getScientist());
+            $planetTake->setWorker($planetTake->getWorker() + $fleetGive->getWorker());
+            $planetTake->setSoldier($planetTake->getSoldier() + $fleetGive->getSoldier());
+            $planetTake->setWater($planetTake->getWater() + $fleetGive->getWater());
+            $planetTake->setNiobium($planetTake->getNiobium() + $fleetGive->getNiobium());
+            $fleetGive->setNiobium(0);
+            $fleetGive->setWater(0);
+            $fleetGive->setSoldier(0);
+            $fleetGive->setWorker(0);
+            $fleetGive->setScientist(0);
+        } else {
+            $planetTake->setScientist($planetTake->getScientistMax());
+            $fleetGive->setScientist(($planetTake->getScientist() + $fleetGive->getScientist()) - $planetTake->getScientistMax());
+            $planetTake->setNiobium($planetTake->getNiobiumMax());
+            $fleetGive->setNiobium(($planetTake->getNiobium() + $fleetGive->getNiobium()) - $planetTake->getNiobiumMax());
+            $planetTake->setWater($planetTake->getWaterMax());
+            $fleetGive->setWater(($planetTake->getWater() + $fleetGive->getWater()) - $planetTake->getWaterMax());
+            $planetTake->setSoldier($planetTake->getSoldierMax());
+            $fleetGive->setSoldier(($planetTake->getSoldier() + $fleetGive->getSoldier()) - $planetTake->getSoldierMax());
+            $planetTake->setWorker($planetTake->getWorkerMax());
+            $fleetGive->setWorker(($planetTake->getWorker() + $fleetGive->getWorker()) - $planetTake->getWorkerMax());
+        }
+
+        $em->persist($fleetGive);
+        $em->persist($planetTake);
+        $em->flush();
+
+        return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+    }
+
+    /**
      * @Route("/fusionner-flotte/{idp}/{id}/{id2}", name="fusion_fleet", requirements={"idp"="\d+", "id"="\d+", "id2"="\d+"})
      */
     public function fusionFleetAction($idp, $id, $id2)
