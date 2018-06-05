@@ -541,7 +541,7 @@ class Planet
         $fullFleet = [];
         $x = 0;
         foreach($this->fleets as $fleet) {
-            if($fleet->getUser() == $this->user || $fleet->getUser()->getAlly() == $user->getAlly()) {
+            if($fleet->getUser() == $this->getUser() || $fleet->getUser()->getAlly() == $user->getAlly()) {
             } else {
                 $fullFleet[$x] = $fleet;
             }

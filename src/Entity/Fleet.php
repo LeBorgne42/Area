@@ -228,8 +228,12 @@ class Fleet
      */
     public function getFleetTags(): string
     {
+        $attack = '';
+        if($this->getAttack() == 1) {
+            $attack = "<span class='text-rouge'>Attaque</span>";
+        }
         if($this->getUser()->getAlly()) {
-            $return = "<span class='text-orange'>[" . $this->getUser()->getAlly()->getSigle() . "]" . " " . $this->getUser()->getAlly()->getName() . "</span> - " . $this->getUser()->getUserName() . " -> " . $this->getName();
+            $return = "<span class='text-orange'>[" . $this->getUser()->getAlly()->getSigle() . "]" . " " . $this->getUser()->getAlly()->getName() . "</span> - " . $this->getUser()->getUserName() . " -> " . $this->getName() . $attack;
         } else {
             $return = $this->getUser()->getUserName();
         }
