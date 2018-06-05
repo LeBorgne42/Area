@@ -230,7 +230,7 @@ class Fleet
     {
         $attack = '';
         if($this->getAttack() == 1) {
-            $attack = "<span class='text-rouge'>Attaque</span>";
+            $attack = "<span class='text-rouge'> [Attaque]</span>";
         }
         if($this->getUser()->getAlly()) {
             $return = "<span class='text-orange'>[" . $this->getUser()->getAlly()->getSigle() . "]" . " " . $this->getUser()->getAlly()->getName() . "</span> - " . $this->getUser()->getUserName() . " -> " . $this->getName() . $attack;
@@ -691,6 +691,30 @@ class Fleet
                 $this->setIronClad(round($new));
             }
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function getFleetsColor($user): string
+    {
+        $color = 'pp-enemy';
+        if ($this->getUser() == $user) {
+            return 'pp-mine';
+        }
+        if($this->getUser()->getAlly() == $user->getAlly() && $color != 'pp-mine') {
+            return 'pp-ally';
+        }
+        if ($this->getUser()->getAlly() && $user->getAlly()) {
+            if (count($this->getUser()->getAlly()->getAllieds()) > 0) {
+                foreach($this->getUser()->getAlly()->getAllieds() as $allied) {
+                    if($allied->getAllyTag() == $user->getAlly()->getSigle()) {
+                        return 'pp-ally';
+                    }
+                }
+            }
+        }
+        return $color;
     }
 
     /**
