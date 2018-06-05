@@ -469,17 +469,23 @@ class Planet
         $cargoV = $this->getCargoV();
         $cargoX = $this->getCargoX();
         $barge = $this->getBarge();
+        $moonMaker = $this->getMoonMaker();
+        $radarShip = $this->getRadarShip();
+        $brouilleurShip = $this->getBrouilleurShip();
+        $motherShip = $this->getMotherShip();
         $hunter = $this->getHunter();
         $hunterHeavy = $this->getHunterHeavy();
+        $hunterWar = $this->getHunterWar();
         $corvet = $this->getCorvet();
         $corvetLaser = $this->getCorvetLaser();
+        $corvetWar = $this->getCorvetWar();
         $fregate = $this->getFregate();
         $fregatePlasma = $this->getFregatePlasma();
         $croiser = $this->getCroiser();
         $ironClad = $this->getIronClad();
         $destroyer = $this->getDestroyer();
 
-        $nbr = $fregate + $colonizer + $barge + $hunter + $recycleur + $sonde + $cargoI + $cargoV + $cargoX + $hunterHeavy + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
+        $nbr = $corvetWar + $hunterWar + $motherShip + $brouilleurShip + $radarShip + $moonMaker + $fregate + $colonizer + $barge + $hunter + $recycleur + $sonde + $cargoI + $cargoV + $cargoX + $hunterHeavy + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
         return $nbr;
     }
 
@@ -495,17 +501,23 @@ class Planet
         $cargoV = $this->getCargoV() * 120;
         $cargoX = $this->getCargoX() * 250;
         $barge = $this->getBarge() * 50;
+        $moonMaker = $this->getMoonMaker() * 50000;
+        $radarShip = $this->getRadarShip() * 200;
+        $brouilleurShip = $this->getBrouilleurShip() * 500;
+        $motherShip = $this->getMotherShip() * 20000;
         $hunter = $this->getHunter() * 5;
         $hunterHeavy = $this->getHunterHeavy() * 8;
+        $hunterWar = $this->getHunterWar() * 15;
         $corvet = $this->getCorvet() * 25;
         $corvetLaser = $this->getCorvetLaser() * 40;
+        $corvetWar = $this->getCorvetWar() * 45;
         $fregate = $this->getFregate() * 60;
         $fregatePlasma = $this->getFregatePlasma() * 150;
         $croiser = $this->getCroiser() * 300;
         $ironClad = $this->getIronClad() * 700;
         $destroyer = $this->getDestroyer() * 1500;
 
-        $nbr = $fregate + $colonizer + $barge + $hunter + $recycleur + $sonde + $cargoI + $cargoV + $cargoX + $hunterHeavy + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
+        $nbr = $corvetWar + $hunterWar + $motherShip + $brouilleurShip + $radarShip + $radarShip + $moonMaker + $fregate + $colonizer + $barge + $hunter + $recycleur + $sonde + $cargoI + $cargoV + $cargoX + $hunterHeavy + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
         return $nbr;
     }
 
@@ -514,20 +526,20 @@ class Planet
      */
     public function getBuildingPoint(): int
     {
-        $extractor = $this->getExtractor() * 100;
-        $miner = $this->getMiner() * 150;
-        $niobiumStock = $this->getNiobiumStock() * 400;
-        $waterStock = $this->getWaterStock() * 450;
-        $caserne = $this->getCaserne() * 250;
-        $center = $this->getCenterSearch() * 300;
-        $city = $this->getCity() * 650;
-        $metropole = $this->getMetropole() * 1200;
-        $light = $this->getLightUsine() * 500;
-        $heavy = $this->getHeavyUsine() * 1500;
-        $space = $this->getSpaceShip() * 300;
-        $radar = $this->getRadar() * 80;
-        $skyr = $this->getSkyRadar() * 600;
-        $brouilleur = $this->getSkyBrouilleur() * 1000;
+        $extractor = $this->getExtractor() * 1000;
+        $miner = $this->getMiner() * 1500;
+        $niobiumStock = $this->getNiobiumStock() * 4000;
+        $waterStock = $this->getWaterStock() * 4500;
+        $caserne = $this->getCaserne() * 2500;
+        $center = $this->getCenterSearch() * 3000;
+        $city = $this->getCity() * 6500;
+        $metropole = $this->getMetropole() * 12000;
+        $light = $this->getLightUsine() * 5000;
+        $heavy = $this->getHeavyUsine() * 15000;
+        $space = $this->getSpaceShip() * 3000;
+        $radar = $this->getRadar() * 800;
+        $skyr = $this->getSkyRadar() * 6000;
+        $brouilleur = $this->getSkyBrouilleur() * 10000;
 
         $nbr = $extractor + $niobiumStock + $waterStock + $miner + $caserne + $center + $city + $metropole + $light + $heavy + $space + $radar + $skyr + $brouilleur;
         return $nbr;
@@ -588,6 +600,38 @@ class Planet
             }
         }
         return $color;
+    }
+
+    /**
+     * @param $user
+     * @return null|string
+     */
+    public function getOffensiveFleet($user)
+    {
+        $return = null;
+        foreach($this->fleets as $fleet) {
+            if($fleet->getAttack() == 1) {
+                $return = 'ennemy';
+            } else {
+                $return = 'neutre';
+            }
+            if ($fleet->getUser() == $user) {
+                $return = null;
+            }
+            if($fleet->getUser()->getAlly() == $user->getAlly() && $return != 'pp-mine') {
+                $return = null;
+            }
+            if ($fleet->getUser()->getAlly() && $user->getAlly()) {
+                if (count($fleet->getUser()->getAlly()->getAllieds()) > 0) {
+                    foreach($fleet->getUser()->getAlly()->getAllieds() as $allied) {
+                        if($allied->getAllyTag() == $user->getAlly()->getSigle()) {
+                            $return = null;
+                        }
+                    }
+                }
+            }
+        }
+        return $return;
     }
 
     /**

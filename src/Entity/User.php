@@ -486,6 +486,19 @@ class User implements UserInterface, \Serializable
     }
 
     /**
+     * @return null|string
+     */
+    public function getRessourceFull()
+    {
+        foreach($this->planets as $planet) {
+            if($planet->getNiobium() >= $planet->getNiobiumMax() || $planet->getWater() >= $planet->getWaterMax()) {
+                return ' planetFull';
+            }
+        }
+        return null;
+    }
+
+    /**
      * @return int
      */
     public function getAllShips(): int

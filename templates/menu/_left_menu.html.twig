@@ -9,7 +9,7 @@
     <div class="btn-left">
         <a href="{{ path('overview', {'idp': usePlanet.getId()}) }}"><span>{{ 'globalView'|trans }}</span></a>
     </div>
-    <div class="btn-left">
+    <div class="btn-left{{ app.user.getRessourceFull() }}">
         <a href="{{ path('planet', {'idp': usePlanet.getId()}) }}"><span>{{ 'planet'|trans }}</span></a>
     </div>
     <div class="btn-left{% if app.user.getSearch() is null %} freeSearchBuild{% endif %}">
