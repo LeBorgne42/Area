@@ -62,13 +62,13 @@
                                         [{{ allied.getAllytag() }}]
                                     </td>
                                     <td class="center-cells">
-                                        {% if allied.getAccepted() == 1 %}{{ 'ally.accepted'|trans }}{% else %}{{ 'ally.pactWaiting'|trans }}{% endif %}
+                                        {% if allied.getDismissBy() == app.user.getAlly().getSigle() %}{{ 'ally.machiavel'|trans }}{% elseif allied.getDismissBy() != app.user.getAlly().getSigle() and allied.getDismissBy() %}{{ 'ally.traitor'|trans }}{% elseif allied.getAccepted() == 1 %}{{ 'ally.accepted'|trans }}{% else %}{{ 'ally.pactWaiting'|trans }}{% endif %}
                                     </td>
                                     <td class="center-cells">
                                         {{ allied.getSignedAt()|date('d/m/Y H:i') }}
                                     </td>
                                     <td class="center-cells">
-                                        <a class="text-rouge" href="{{ path('ally_remove_pact',{'id': allied.getId(), 'idp': usePlanet.getId()}) }}"><div class="glyphicon glyphicon-remove"></div> <span>{{ 'ally.refuseCancelPact'|trans }}</span></a>
+                                        {% if allied.getDismissBy() %}<span class="timerArea" hidden>{{ allied.getDismissAt()|date('Y/m/d H:i:s') }}</span>{% else %}<a class="text-rouge" href="{{ path('ally_remove_pact',{'id': allied.getId(), 'idp': usePlanet.getId()}) }}"><div class="glyphicon glyphicon-remove"></div> <span>{{ 'ally.refuseCancelPact'|trans }}</span></a>{% endif %}
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -120,6 +120,7 @@
                                         {{ war.getSignedAt()|date('d/m/Y H:i') }}
                                     </td>
                                     <td class="center-cells">
+                                        <a class="text-orange" href="{{ path('ally_make_peace',{'id': war.getId(), 'idp': usePlanet.getId()}) }}"><div class="glyphicon glyphicon-flag"></div> <span>{{ 'ally.makePeace'|trans }}</span></a>
                                     </td>
                                 </tr>
                             {% endfor %}

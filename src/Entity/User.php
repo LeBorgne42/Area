@@ -47,6 +47,11 @@ class User implements UserInterface, \Serializable
     protected $ally;
 
     /**
+     * @ORM\Column(name="allyBan",type="datetime", nullable=true)
+     */
+    protected $allyBan;
+
+    /**
      * @ORM\OneToMany(targetEntity="Proposal", mappedBy="user", fetch="EXTRA_LAZY")
      */
     protected $proposals;
@@ -1526,5 +1531,21 @@ class User implements UserInterface, \Serializable
     public function setCommander($commander): void
     {
         $this->commander = $commander;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAllyBan()
+    {
+        return $this->allyBan;
+    }
+
+    /**
+     * @param mixed $allyBan
+     */
+    public function setAllyBan($allyBan): void
+    {
+        $this->allyBan = $allyBan;
     }
 }

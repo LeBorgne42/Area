@@ -412,7 +412,7 @@ class Fleet
         $recycleur = $this->getRecycleur() * 10000;
         $cargoI = $this->getCargoI() * 25000;
         $cargoV = $this->getCargoV() * 100000;
-        $cargoX = $this->getCargoX() * 200000;
+        $cargoX = $this->getCargoX() * 250000;
 
         $nbr = $barge + $recycleur + $cargoI + $cargoV + $cargoX;
         if($this->getMotherShip() == 1) {

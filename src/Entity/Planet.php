@@ -609,7 +609,7 @@ class Planet
     public function getOffensiveFleet($user)
     {
         $return = null;
-        foreach($this->fleets as $fleet) {
+        foreach($this->getFleets() as $fleet) {
             if($fleet->getAttack() == 1) {
                 $return = 'ennemy';
             } else {
@@ -640,7 +640,7 @@ class Planet
     public function getFleetsAbandon($user): int
     {
         $planete = 0;
-        foreach($this->fleets as $fleet) {
+        foreach($this->getFleets() as $fleet) {
             if($fleet->getPlanete()) {
                 $planete = 0;
             } else {
@@ -653,6 +653,41 @@ class Planet
             }
         }
         return $planete;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPreviousPlanet(): int
+    {
+        $id = $this->getId();
+        foreach($this->getUser()->getPlanets() as $planet) {
+            if($planet->getId() == $this->getId()) {
+                return $id;
+            }
+            if($planet->getEmpty() == false) {
+                $id = $planet->getId();
+            }
+        }
+        return $id;
+    }
+    /**
+     * @return int
+     */
+    public function getNextPlanet(): int
+    {
+        $id = $this->getId();
+        $next = 0;
+        foreach($this->getUser()->getPlanets() as $planet) {
+            $id = $planet->getId();
+            if($next == 1) {
+                return $id;
+            }
+            if($id == $this->getId()) {
+                $next = 1;
+            }
+        }
+        return $id;
     }
 
     /**

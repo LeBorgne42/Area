@@ -48,7 +48,7 @@ class DailyController extends Controller
                     $planetPoint = $planetPoint + $planet->getBuildingPoint();
                 }
             }
-            $gain = $worker / 1.25;
+            $gain = round($worker / 1.60);
             if($ally) {
                 $userBitcoin = $user->getBitcoin();
                 $taxe = (($ally->getTaxe() / 100) * $gain);

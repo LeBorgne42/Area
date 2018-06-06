@@ -147,27 +147,27 @@ function manageTotalShip() {
             }
         });
         var re = new RegExp(',', 'g')
-        if(niobium < parseFloat($('#niobium').text().replace(re, ''))) {
+        if(niobium <= parseFloat($('#niobium').text().replace(re, ''))) {
             $('#niobiumProduct').text(niobium);
         } else {
             $('#niobiumProduct').html("<span class='text-rouge'>" + niobium + "</span>");
         }
-        if(water < parseFloat($('#water').text().replace(re, ''))) {
+        if(water <= parseFloat($('#water').text().replace(re, ''))) {
             $('#waterProduct').text(water);
         } else {
             $('#waterProduct').html("<span class='text-rouge'>" + water + "</span>");
         }
-        if(worker < parseFloat($('#worker').text().replace(re, ''))) {
+        if(worker <= parseFloat($('#worker').text().replace(re, ''))) {
             $('#workerProduct').text(worker);
         } else {
             $('#workerProduct').html("<span class='text-rouge'>" + worker + "</span>");
         }
-        if(bitcoin < parseFloat($('#bitcoin').text().replace(re, ''))) {
+        if(bitcoin <= parseFloat($('#bitcoin').text().replace(re, ''))) {
             $('#bitcoinProduct').text(bitcoin);
         } else {
             $('#bitcoinProduct').html("<span class='text-rouge'>" + bitcoin + "</span>");
         }
-        if(pdg < parseFloat($('#pdg').text().replace(re, ''))) {
+        if(pdg <= parseFloat($('#pdg').text().replace(re, ''))) {
             $('#pdgProduct').text(pdg);
         } else {
             $('#pdgProduct').html("<span class='text-rouge'>" + pdg + "</span>");

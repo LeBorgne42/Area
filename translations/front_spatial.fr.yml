@@ -41,7 +41,7 @@ popover.rec: '<h5>Signature thermique : 80<br>Vitesse : 75/lm<br>Cargo : 10.000<
 popover.barge: '<h5>Signature thermique : 50<br>Vitesse : 25/lm<br>Cargo : 2.000<hr>Envahir une planète</h5>'
 popover.cargoI: '<h5>Signature thermique : 50<br>Vitesse : 160/lm<br>Cargo : 25.000</h5>'
 popover.cargoV: '<h5>Signature thermique : 120<br>Vitesse : 150/lm<br>Cargo : 100.000</h5>'
-popover.cargoX: '<h5>Signature thermique : 250<br>Vitesse : 140/lm<br>Cargo : 200.000</h5>'
+popover.cargoX: '<h5>Signature thermique : 250<br>Vitesse : 140/lm<br>Cargo : 250.000</h5>'
 popover.hunter: '<h5>Signature thermique : 5<br>Vitesse : 150/lm<br>Coque : 15<br>Missile : 4</h5>'
 popover.hunterHeavy: '<h5>Signature thermique : 8<br>Vitesse : 150/lm<br>Coque : 25<br>Missile : 5</h5>'
 popover.corvet: '<h5>Signature thermique : 25<br>Vitesse : 130/lm<br>Coque : 74<br>Missile : 15<br>Bouclier : 2</h5>'

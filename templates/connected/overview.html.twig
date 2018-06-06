@@ -118,7 +118,7 @@
                             {{ 'overview.search'|trans }}
                             {% if app.user.getSearch() %}<span><a href="{{ path('search', {'idp': usePlanet.getId()}) }}">{{ app.user.getSearch()|trans }}</a></span> (<span class="timerArea" hidden>{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</span>){% else %}<span><a href="{{ path('search', {'idp': usePlanet.getId()}) }}">{{ 'cell.searchNone'|trans|raw }}</a></span>{% endif %}
                         </div>
-                        <div class="col-6 pt-1"  data-html="true" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.dailyCost'|trans({'%soldier%': (app.user.getAllSoldier() * 2)|number_format, '%ship%': app.user.getAllShipsCost()|number_format}) }}">
+                        <div class="col-6 pt-1"  data-html="true" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.dailyCost'|trans({'%soldier%': (app.user.getAllSoldier() * 2)|number_format, '%ship%': app.user.getAllShipsCost()|number_format, '%bitcoin%': (app.user.getAllWorker() / 1.60)|number_format}) }}">
                             {{ 'info.cost'|trans|raw }} {{ cost|number_format }} <img src="{{ asset('img/coin.png') }}">
                         </div>
                     </div>

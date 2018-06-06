@@ -74,3 +74,15 @@ ally.taxe: 'taxe :'
 ally.pactsTitle: 'Gestion des Pactes/Pnas/Guerre de l''alliance'
 ally.gradeTitle: 'Création de grades'
 ally.addTitle: 'Recrutement de joueurs'
+ally.machiavel: 'Vous avez trahis vos alliés'
+ally.traitor: 'Vous avez été trahis'
+ally.banAlly: 'Vous pourrez rejoindre/créer une alliance dans : '
+ally.makePeace: 'Faire la paix'
+ally.makePeaceTitle: 'Proposition/demande de paix'
+ally.askFor: Type
+ally.attrRetr: Offre/Demande
+ally.listNbr: Valeurs
+ally.send: Signer
+ally.takePlanet: 'Nombre de planètes'
+ally.takeTaxe: 'Bitcoin reversé par jour'
+ally.takePdg: 'Pourcentage des pdg'

@@ -5,11 +5,14 @@ namespace App\Controller\Connected\Ally;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Request;
+use App\Form\Front\AllyPeaceType;
 use App\Entity\Pna;
 use App\Entity\Allied;
 use App\Entity\Salon;
 use DateTime;
 use DateTimeZone;
+use Dateinterval;
 
 /**
  * @Route("/fr")
@@ -220,23 +223,26 @@ class PactController extends Controller
     public function allyPactRefuseAction($id, $idp)
     {
         $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
+        $now->add(new DateInterval('PT' . 43200 . 'S'));
 
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->where('p.id = :id')
             ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
+            ->setParameters(array('id' => $idp, 'user' => $user))
             ->getQuery()
             ->getOneOrNullResult();
 
-        $user = $this->getUser();
-        $ally = $user->getAlly();
         $pact = $em->getRepository('App:Allied')
             ->createQueryBuilder('al')
             ->where('al.id = :id')
             ->setParameter('id', $id)
             ->getQuery()
             ->getOneOrNullResult();
+
 
         $otherAlly = $em->getRepository('App:Ally')
             ->createQueryBuilder('a')
@@ -250,32 +256,58 @@ class PactController extends Controller
             ->where('al.allyTag = :allytag')
             ->andWhere('al.ally = :ally')
             ->setParameters(array(
-                'allytag' => $ally->getSigle(),
+                'allytag' => $user->getAlly()->getSigle(),
                 'ally' => $otherAlly))
             ->getQuery()
             ->getOneOrNullResult();
 
-        $salons = $em->getRepository('App:Salon')
-            ->createQueryBuilder('s')
-            ->where('s.name = :sigle1')
-            ->orWhere('s.name = :sigle2')
-            ->setParameters(array('sigle1' => $otherAlly->getSigle() . " - " . $ally->getSigle(), 'sigle2' => $ally->getSigle() . " - " . $otherAlly->getSigle()))
-            ->getQuery()
-            ->getResult();
-
-        foreach($salons as $salon) {
-            foreach($salon->getContents() as $content) {
-                $em->remove($content);
-            }
-            $em->remove($salon);
-        }
-        
-        if($pact2) {
-            $em->remove($pact2);
-        }
-        $em->remove($pact);
+        $pact->setDismissAt($now);
+        $pact->setDismissBy($user->getAlly()->getSigle());
+        $pact2->setDismissAt($now);
+        $pact2->setDismissBy($user->getAlly()->getSigle());
+        $em->persist($pact2);
+        $em->persist($pact);
         $em->flush();
 
         return $this->redirectToRoute('ally_page_pacts', array('idp' => $usePlanet->getId()));
+    }
+
+    /**
+     * @Route("/faire-la-paix/{id}/{idp}", name="ally_make_peace", requirements={"id"="\d+", "idp"="\d+"})
+     */
+    public function allyMakePeaceAction(Request $request, $id, $idp)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
+        $now->add(new DateInterval('PT' . 43200 . 'S'));
+
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $war = $em->getRepository('App:War')
+            ->createQueryBuilder('w')
+            ->where('w.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $form_peace = $this->createForm(AllyPeaceType::class);
+        $form_peace->handleRequest($request);
+
+        if (($form_peace->isSubmitted() && $form_peace->isValid())) {
+
+        }
+
+        return $this->render('connected/ally/makePeace.html.twig', [
+            'form_peace' => $form_peace->createView(),
+            'usePlanet' => $usePlanet,
+        ]);
     }
 }

@@ -466,7 +466,9 @@ class Ally
 
         foreach($this->getUsers() as $user) {
             foreach ($user->getPlanets() as $planet) {
-                $return++;
+                if($planet->getEmpty() == false) {
+                    $return++;
+                }
             }
         }
         return $return;

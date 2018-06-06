@@ -92,7 +92,7 @@ class OverviewController extends Controller
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
         if($user->getGameOver() || $user->getAllPlanets() == 0) {
-            if($user->getAllPlanets() == 0 && $user->getGameOver() == null) {
+            if($user->getColPlanets() == 0 && $user->getGameOver() == null) {
                 $user->setGameOver($user->getUserName());
                 $em->persist($user);
                 $em->flush();
@@ -105,7 +105,7 @@ class OverviewController extends Controller
                 $user->setSearch(null);
                 $user->setSearchAt(null);
                 $user->setBitcoin(50000);
-                $user->setPlasma(0);
+                /*$user->setPlasma(0);
                 $user->setLaser(0);
                 $user->setMissile(0);
                 $user->setArmement(0);
@@ -122,7 +122,7 @@ class OverviewController extends Controller
                 $user->setIndustry(0);
                 $user->setOnde(0);
                 $user->setHyperespace(0);
-                $user->setDiscipline(0);
+                $user->setDiscipline(0);*/
                 foreach ($user->getSalons() as $salon) {
                     $salon->removeUser($user);
                 }

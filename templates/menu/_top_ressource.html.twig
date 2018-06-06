@@ -1,6 +1,7 @@
 {% trans_default_domain 'front_menu' %}
 
 <div class="navbar navbar-ressource navbar-dark bg-top">
+    {% if usePlanet.getPreviousPlanet() != usePlanet.getId() %}<h1><span data-toggle="tooltip" data-placement="bottom" title="{{ 'previousPlanet'|trans }}"><a href="{{ usePlanet.getPreviousPlanet() }}"><</a></span></h1>{% endif %}
     <span>{{ usePlanet.getName() }} : <a href="{{ path('map', {id: usePlanet.getSector().getPosition(), 'idp': usePlanet.getId()}) }}">{{ usePlanet.getSector().getGalaxy.getPosition() }}:{{ usePlanet.getSector().getPosition() }}:{{ usePlanet.getPosition() }}</a></span>
     <span data-toggle="tooltip" data-placement="bottom" title="{{ 'niobium'|trans }}"><span id="niobium">{{ usePlanet.getNiobium()|number_format }}</span> / {{ usePlanet.getNiobiumMax()|number_format }} <span class="text-vert">+<span class="takeProd">{{ (usePlanet.getNbProduction() * 60)|number_format }}</span>/h</span> <img src="{{ asset('img/niobium.png') }}"></span>
     <span data-toggle="tooltip" data-placement="bottom" title="{{ 'water'|trans }}"><span id="water">{{ usePlanet.getWater()|number_format }}</span> / {{ usePlanet.getWaterMax()|number_format }} <span class="text-vert">+<span class="takeProd">{{ (usePlanet.getWtProduction() * 60)|number_format }}</span>/h</span> <img src="{{ asset('img/water.png') }}"></span>
@@ -9,6 +10,7 @@
     <span data-toggle="tooltip" data-placement="bottom" title="{{ 'workers'|trans }}"><span id="worker">{{ usePlanet.getWorker()|number_format }}</span> / {{ usePlanet.getWorkerMax()|number_format }} <img src="{{ asset('img/worker.png') }}"></span>
     <span data-toggle="tooltip" data-placement="bottom" title="{{ 'soldiers'|trans }}"><span id="soldier">{{ usePlanet.getSoldier()|number_format }}</span> / {{ usePlanet.getSoldierMax()|number_format }} <img src="{{ asset('img/soldier.png') }}"></span>
     <span data-toggle="tooltip" data-placement="bottom" title="{{ 'scientists'|trans }}">{{ usePlanet.getScientist()|number_format }} / {{ usePlanet.getScientistMax()|number_format }} <img src="{{ asset('img/scientist.png') }}"></span>
+    {% if usePlanet.getNextPlanet() != usePlanet.getId() %}<h1><span data-toggle="tooltip" data-placement="bottom" title="{{ 'nextPlanet'|trans }}"><a href="{{ usePlanet.getNextPlanet() }}">></a></span></h1>{% endif %}
 </div>
 
 <div class="footer">

@@ -162,6 +162,53 @@ class InstantController extends Controller
             ->getQuery()
             ->getResult();
 
+        $pacts = $em->getRepository('App:Allied')
+            ->createQueryBuilder('al')
+            ->where('al.dismissAt < :now')
+            ->setParameters(array('now' => $now))
+            ->getQuery()
+            ->getResult();
+
+        foreach ($pacts as $pact) {
+            $otherAlly = $em->getRepository('App:Ally')
+                ->createQueryBuilder('a')
+                ->where('a.sigle = :sigle')
+                ->setParameter('sigle', $pact->getAllyTag())
+                ->getQuery()
+                ->getOneOrNullResult();
+
+            $pact2 = $em->getRepository('App:Allied')
+                ->createQueryBuilder('al')
+                ->where('al.allyTag = :allytag')
+                ->andWhere('al.ally = :ally')
+                ->setParameters(array(
+                    'allytag' => $pact->getDismissBy(),
+                    'ally' => $otherAlly))
+                ->getQuery()
+                ->getOneOrNullResult();
+
+            $salons = $em->getRepository('App:Salon')
+                ->createQueryBuilder('s')
+                ->where('s.name = :sigle1')
+                ->orWhere('s.name = :sigle2')
+                ->setParameters(array('sigle1' => $otherAlly->getSigle() . " - " . $pact->getDismissBy(), 'sigle2' => $pact->getDismissBy() . " - " . $otherAlly->getSigle()))
+                ->getQuery()
+                ->getResult();
+
+            foreach($salons as $salon) {
+                foreach($salon->getContents() as $content) {
+                    $em->remove($content);
+                }
+                $em->remove($salon);
+            }
+
+            if($pact2) {
+                $em->remove($pact2);
+            }
+            $em->remove($pact);
+            $em->flush();
+        }
+
         foreach ($userSoldiers as $soldierAt) {
             $soldierAt->setSoldier($soldierAt->getSoldierAtNbr());
             $soldierAt->setSoldierAt(null);

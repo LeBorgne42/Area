@@ -37,6 +37,16 @@ class Allied
     protected $signedAt;
 
     /**
+     * @ORM\Column(name="dismissAt",type="datetime", nullable=true)
+     */
+    protected $dismissAt;
+
+    /**
+     * @ORM\Column(name="dismissBy",type="string", length=5, nullable=true)
+     */
+    protected $dismissBy;
+
+    /**
      * @ORM\Column(name="accepted",type="boolean")
      * @Assert\NotBlank(message = "required")
      */
@@ -104,6 +114,38 @@ class Allied
     public function setAccepted($accepted): void
     {
         $this->accepted = $accepted;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDismissAt()
+    {
+        return $this->dismissAt;
+    }
+
+    /**
+     * @param mixed $dismissAt
+     */
+    public function setDismissAt($dismissAt): void
+    {
+        $this->dismissAt = $dismissAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDismissBy()
+    {
+        return $this->dismissBy;
+    }
+
+    /**
+     * @param mixed $dismissBy
+     */
+    public function setDismissBy($dismissBy): void
+    {
+        $this->dismissBy = $dismissBy;
     }
 
     public function getId()

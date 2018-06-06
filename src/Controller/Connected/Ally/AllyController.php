@@ -22,6 +22,7 @@ use App\Entity\Allied;
 use App\Entity\War;
 use DateTime;
 use DateTimeZone;
+use Dateinterval;
 use App\Entity\Salon;
 
 /**
@@ -138,6 +139,9 @@ class AllyController extends Controller
         $form_ally->handleRequest($request);
 
         if ($form_ally->isSubmitted() && $form_ally->isValid()) {
+            if($user->getAllyBan() > $now) {
+                return $this->redirectToRoute('ally_blank', array('idp' => $usePlanet->getId()));
+            }
             $grade = new Grade();
 
             $ally->addUser($user);
@@ -196,6 +200,9 @@ class AllyController extends Controller
     public function removeAllyAction($idp)
     {
         $em = $this->getDoctrine()->getManager();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
+        $now->add(new DateInterval('PT' . 172800 . 'S'));
 
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
@@ -211,6 +218,7 @@ class AllyController extends Controller
         foreach ($ally->getUsers() as $user) {
             $user->setAlly(null);
             $user->setGrade(null);
+            $user->setAllyBan($now);
         }
         foreach ($ally->getGrades() as $grade) {
             $em->remove($grade);
@@ -287,6 +295,9 @@ class AllyController extends Controller
     public function leaveAllyAction($idp)
     {
         $em = $this->getDoctrine()->getManager();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
+        $now->add(new DateInterval('PT' . 172800 . 'S'));
 
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
@@ -303,6 +314,7 @@ class AllyController extends Controller
         $user->setAlly(null);
         $user->setJoinAllyAt(null);
         $user->setGrade(null);
+        $user->setAllyBan($now);
         $em->persist($user);
 
         $em->flush();
@@ -316,6 +328,9 @@ class AllyController extends Controller
     public function kickAllyAction($id, $idp)
     {
         $em = $this->getDoctrine()->getManager();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
+        $now->add(new DateInterval('PT' . 172800 . 'S'));
 
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
@@ -348,6 +363,7 @@ class AllyController extends Controller
         $kicked->setAlly(null);
         $kicked->setJoinAllyAt(null);
         $kicked->setGrade(null);
+        $kicked->setAllyBan($now);
         $em->persist($kicked);
         $em->persist($ally);
 
@@ -362,6 +378,8 @@ class AllyController extends Controller
     public function allyAcceptAction($id, $idp)
     {
         $em = $this->getDoctrine()->getManager();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
 
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
@@ -374,6 +392,9 @@ class AllyController extends Controller
         $user = $this->getUser();
         if($user->getAlly()) {
             return $this->redirectToRoute('ally', array('idp' => $usePlanet->getId()));
+        }
+        if($user->getAllyBan() > $now) {
+            return $this->redirectToRoute('ally_blank', array('idp' => $usePlanet->getId()));
         }
         $proposal = $em->getRepository('App:Proposal')
             ->createQueryBuilder('p')
