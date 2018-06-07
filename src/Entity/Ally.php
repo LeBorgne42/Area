@@ -83,6 +83,11 @@ class Ally
     protected $bitcoin;
 
     /**
+     * @ORM\Column(name="pdg",type="bigint")
+     */
+    protected $pdg;
+
+    /**
      * @ORM\OneToMany(targetEntity="Exchange", mappedBy="ally", fetch="EXTRA_LAZY")
      */
     protected $exchanges;
@@ -101,6 +106,11 @@ class Ally
      * @ORM\OneToMany(targetEntity="Allied", mappedBy="ally", fetch="EXTRA_LAZY", cascade={"persist"})
      */
     protected $allieds;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Peace", mappedBy="ally", fetch="EXTRA_LAZY", cascade={"persist"})
+     */
+    protected $peaces;
 
     /**
      * @ORM\OneToMany(targetEntity="War", mappedBy="ally", fetch="EXTRA_LAZY", cascade={"persist"})
@@ -449,6 +459,11 @@ class Ally
                 }
                 foreach ($this->getAllieds() as $pact) {
                     if ($pact->getAllyTag() == $sigle) {
+                        return null;
+                    }
+                }
+                foreach ($this->getPeaces() as $peace) {
+                    if ($peace->getAllyTag() == $sigle) {
                         return null;
                     }
                 }
@@ -853,5 +868,37 @@ class Ally
     public function setDescription($description): void
     {
         $this->description = $description;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPeaces()
+    {
+        return $this->peaces;
+    }
+
+    /**
+     * @param mixed $peaces
+     */
+    public function setPeaces($peaces): void
+    {
+        $this->peaces = $peaces;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPdg()
+    {
+        return $this->pdg;
+    }
+
+    /**
+     * @param mixed $pdg
+     */
+    public function setPdg($pdg): void
+    {
+        $this->pdg = $pdg;
     }
 }

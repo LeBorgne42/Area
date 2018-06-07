@@ -169,6 +169,18 @@ class InstantController extends Controller
             ->getQuery()
             ->getResult();
 
+        $peaces = $em->getRepository('App:Peace')
+            ->createQueryBuilder('p')
+            ->where('p.signedAt < :now')
+            ->setParameters(array('now' => $now))
+            ->getQuery()
+            ->getResult();
+
+        foreach ($peaces as $peace) {
+            $em->remove($peace);
+            $em->flush();
+        }
+
         foreach ($pacts as $pact) {
             $otherAlly = $em->getRepository('App:Ally')
                 ->createQueryBuilder('a')
@@ -522,9 +534,9 @@ class InstantController extends Controller
                         $reportSell->setUser($user);
                         $reportSell->setTitle("Vente aux marchands");
                         $newWarPointS = ((($fleet->getScientist() * 100) + ($fleet->getWorker() * 50) + ($fleet->getSoldier() * 10) + ($fleet->getWater() / 3) + ($fleet->getNiobium() / 6)) / 400);
-                        $reportSell->setContent("Votre vente aux marchands vous a rapporté " . (($fleet->getWater() * 2) + ($fleet->getSoldier() * 7.5) + ($fleet->getWorker() / 4) + ($fleet->getScientist() * 75) + ($fleet->getNiobium() / 1.5)) . " bitcoin. Et " . $newWarPointS . " points de Guerre.");
+                        $reportSell->setContent("Votre vente aux marchands vous a rapporté " . round(($fleet->getWater() * 0.5) + ($fleet->getSoldier() * 5) + ($fleet->getWorker() * 2) + ($fleet->getScientist() * 50) + ($fleet->getNiobium() * 0.25)) . " bitcoin. Et " . $newWarPointS . " points de Guerre.");
                         $em->persist($reportSell);
-                        $user->setBitcoin($user->getBitcoin() + ($fleet->getWater() * 2) + ($fleet->getSoldier() * 7.5) + ($fleet->getWorker() / 4) + ($fleet->getScientist() * 75) + ($fleet->getNiobium() / 1.5));
+                        $user->setBitcoin($user->getBitcoin() + ($fleet->getWater() * 0.5) + ($fleet->getSoldier() * 5) + ($fleet->getWorker() * 2) + ($fleet->getScientist() * 50) + ($fleet->getNiobium() * 0.25));
                         $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $newWarPointS);
                         $fleet->setNiobium(0);
                         $fleet->setWater(0);
@@ -537,7 +549,7 @@ class InstantController extends Controller
                             $reportSell->setSendAt($now);
                             $reportSell->setUser($newPlanet->getUser());
                             $reportSell->setTitle("Dépôt de ressources");
-                            $reportSell->setContent("Le joueur " . $newPlanet->getUser()->getUserName() . " vient de déposer des ressources sur votre planète "  . $newPlanet->getSector()->getgalaxy()->getPosition() . ":" . $newPlanet->getSector()->getPosition() . ":" . $newPlanet->getPosition());
+                            $reportSell->setContent("Le joueur " . $newPlanet->getUser()->getUserName() . " vient de déposer des ressources sur votre planète "  . $newPlanet->getSector()->getgalaxy()->getPosition() . ":" . $newPlanet->getSector()->getPosition() . ":" . $newPlanet->getPosition() . " " . $fleet->getNiobium() . " Niobium, " . $fleet->getWater() . " Eau, " . $fleet->getWorker() . " Travailleurs, " . $fleet->getSoldier() . " Soldats, " . $fleet->getScientist() . " Scientifiques.");
                             $em->persist($reportSell);
                         }
                         if($newPlanet->getNiobium() + $fleet->getNiobium() < $newPlanet->getNiobiumMax()) {
@@ -634,8 +646,12 @@ class InstantController extends Controller
                     $reportDef->setSendAt($now);
                     $reportDef->setUser($userDefender);
                     $userDefender->setViewReport(false);
+                    $dSigle = null;
+                    if($userDefender->getAlly()) {
+                        $dSigle = $userDefender->getAlly()->getSigle();
+                    }
 
-                    if($barge and $fleet->getPlanet()->getUser() and $fleet->getAllianceUser() == null) {
+                    if($barge && $fleet->getPlanet()->getUser() && $fleet->getAllianceUser() == null && $ally->getSigleAlliedArray($dSigle)) {
                         if($barge >= $fleet->getSoldier()) {
                             $aMilitary = $fleet->getSoldier() * $alea;
                             $soldierAtmp = $fleet->getSoldier();

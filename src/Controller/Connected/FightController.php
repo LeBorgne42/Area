@@ -422,7 +422,7 @@ class FightController extends Controller
                 $percentWarPoint = ($loseArm * 100) / $armeSaveB;
                 $warPointA = ($warPointA - ($armor / 80)) / 10;
                 $newWarPoint = round(($percentWarPoint * $warPointA) / 100);
-                $reportA->setContent($reportA->getContent() . " Mais vous remportez vous même " . $newWarPoint . " points de Guerre !");
+                $reportB->setContent($reportA->getContent() . " Mais vous remportez vous même " . $newWarPoint . " points de Guerre !");
                 $defenderLose->getUser()->getRank()->setWarPoint($defenderLose->getUser()->getRank()->getWarPoint() + $newWarPoint);
                 $em->persist($defenderLose);
                 $em->persist($reportB);
@@ -453,6 +453,7 @@ class FightController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
+        $ally = $user->getAlly();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
 
@@ -486,8 +487,12 @@ class FightController extends Controller
         $reportDef->setSendAt($now);
         $reportDef->setUser($userDefender);
         $userDefender->setViewReport(false);
+        $dSigle = null;
+        if($userDefender->getAlly()) {
+            $dSigle = $userDefender->getAlly()->getSigle();
+        }
 
-        if($barge and $invader->getPlanet()->getUser() and $invader->getAllianceUser() == null and $invader->getFightAt() == null and $invader->getFlightTime() == null) {
+        if($barge && $invader->getPlanet()->getUser() && $invader->getAllianceUser() == null && $invader->getFightAt() == null && $invader->getFlightTime() == null && $ally->getSigleAlliedArray($dSigle)) {
             if($barge >= $invader->getSoldier()) {
                 $aMilitary = $invader->getSoldier() * $alea;
                 $soldierAtmp = $invader->getSoldier();

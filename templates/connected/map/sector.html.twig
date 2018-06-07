@@ -76,7 +76,7 @@
                                     <span class="glyphicon glyphicon-cd" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.brouillage'|trans() }}"></span>
                                 {% endif %}
                             <a {% if planet.getUser() == app.user %}href="{{ path('building', {'idp': planet.getId()}) }}"{% else %} data-toggle="modal" data-target="#planetModal" href="{{ path('planet_interact', {'idp': usePlanet.getId(), 'id': planet.getId()}) }}"{% endif %}><img class="mr-4 mb-4" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planet'|trans({'%name%': planet.getName() }) }}" height="64" width="64" src="{{ vich_uploader_asset(planet, 'imageFile') }}"></a>
-                                <div class="text-center{% if planet.getCdr() %} pp-cdr{% elseif planet.getMerchant() %} pp-ia{% endif %}{% if planet.getUser() %} pp-enemy">{{ 'map.planetHostile'|trans }}</div>{% else %}">{{ planet.getName() }}</div>{% endif %}
+                                <div class="text-center{% if planet.getCdr() %} pp-cdr{% elseif planet.getMerchant() %} pp-ia{% endif %}{% if planet.getUser() %}{% if planet.getUser() == app.user %} pp-mine{% elseif planet.getPlanetAlliance() == app.user.getAlly() and planet.getPlanetAlliance() != null or planet.getOurAllyPact(app.user) %} pp-ally{% else %} pp-enemy{% endif %}">{{ 'map.planetHostile'|trans }}</div>{% else %}">{{ planet.getName() }}</div>{% endif %}
                             </td>
                         {% endif %}
                     {% else %}

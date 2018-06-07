@@ -74,8 +74,8 @@ class AllyPeaceType extends AbstractType
     protected function getType()
     {
         return array(
-            'Proposer' => '1',
-            'Réclamer' => '2',
+            'Proposer' => '0',
+            'Réclamer' => '1',
         );
     }
 

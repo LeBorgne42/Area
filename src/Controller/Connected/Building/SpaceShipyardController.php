@@ -311,7 +311,7 @@ class SpaceShipyardController extends Controller
         $newGround = $usePlanet->getGroundPlace() - 6;
 
         if(($level == 0 || $usePlanet->getConstructAt() > $now) ||
-            ($usePlanet->getSoldier() < $usePlanet->getSoldierMax() - 2500)) {
+            ($usePlanet->getSoldier() > $usePlanet->getSoldierMax() - 2500)) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $now->add(new DateInterval('PT' . 1800 . 'S'));

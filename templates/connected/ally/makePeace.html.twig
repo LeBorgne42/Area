@@ -50,6 +50,106 @@
                 {{ form_end(form_peace) }}
                 </tbody>
             </table>
+            {% if app.user.getAlly().getPeaces()|length > 0 %}
+                <h1 class="text-center p-4">{{ 'ally.peacePropal'|trans }}</h1>
+                <table class="table table-striped table-bordered table-dark text-center mt-4">
+                    <tbody>
+                    {% for peace in app.user.getAlly().getPeaces() %}
+                        {% if peace.getAccepted() == 0 %}
+                            <tr>
+                                <th colspan="4" class="tab-cells-name text-orange">[{{ peace.getAllyTag() }}] {{ peace.getAlly().getName() }}</th>
+                            </tr>
+                            <tr>
+                                <th class="tab-cells-name">{{ 'ally.askFor'|trans }}</th>
+                                <th class="tab-cells-name">{{ 'ally.attrRetr'|trans }}</th>
+                                <th class="tab-cells-name">{{ 'ally.listNbr'|trans }}</th>
+                                <th class="tab-cells-name">{{ 'ally.send'|trans }}</th>
+                            </tr>
+                            <tr>
+                                <td rowspan="3" class="center-cells cell-middle">
+                                    {% if peace.getType() == 0 %}{{ 'ally.give'|trans }}{% else %}{{ 'ally.claim'|trans }}{% endif %}
+                                </td>
+                                <td class="center-cells cell-middle">
+                                    {{ 'ally.takePlanet'|trans }}
+                                </td>
+                                <td class="center-cells">
+                                    {{ peace.getPlanet() }}
+                                </td>
+                                <td rowspan="3" class="center-cells cell-middle">
+                                    <a class="text-vert" href="{{ path('ally_accept_peace',{'id': peace.getId(), 'idp': usePlanet.getId()}) }}"><div class="glyphicon glyphicon-ok"></div> <span>{{ 'ally.acceptPeace'|trans }}</span></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="center-cells cell-middle">
+                                    {{ 'ally.takeTaxe'|trans }}
+                                </td>
+                                <td class="center-cells">
+                                    {{ peace.getTaxe() }}%
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="center-cells cell-middle">
+                                    {{ 'ally.takePdg'|trans }}
+                                </td>
+                                <td class="center-cells">
+                                    {{ peace.getPdg() }}%
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+            {% if waitingPeaces %}
+                <h1 class="text-center p-4">{{ 'ally.peaceOffer'|trans }}</h1>
+                <table class="table table-striped table-bordered table-dark text-center mt-4">
+                    <tbody>
+                    {% for peace in waitingPeaces %}
+                        {% if peace.getAccepted() == 0 %}
+                            <tr>
+                                <th colspan="4" class="tab-cells-name text-orange">[{{ peace.getAlly().getSigle() }}] {{ peace.getAlly().getName() }}</th>
+                            </tr>
+                            <tr>
+                                <th class="tab-cells-name">{{ 'ally.askFor'|trans }}</th>
+                                <th class="tab-cells-name">{{ 'ally.attrRetr'|trans }}</th>
+                                <th class="tab-cells-name">{{ 'ally.listNbr'|trans }}</th>
+                                <th class="tab-cells-name">{{ 'ally.send'|trans }}</th>
+                            </tr>
+                            <tr>
+                                <td rowspan="3" class="center-cells cell-middle">
+                                    {% if peace.getType() == 0 %}{{ 'ally.give'|trans }}{% else %}{{ 'ally.claim'|trans }}{% endif %}
+                                </td>
+                                <td class="center-cells cell-middle">
+                                    {{ 'ally.takePlanet'|trans }}
+                                </td>
+                                <td class="center-cells">
+                                    {{ peace.getPlanet() }}
+                                </td>
+                                <td rowspan="3" class="center-cells cell-middle">
+                                    <a class="text-rouge" href="{{ path('ally_remove_peace',{'id': peace.getId(), 'idp': usePlanet.getId()}) }}"><div class="glyphicon glyphicon-remove"></div> <span>{{ 'ally.removePeace'|trans }}</span></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="center-cells cell-middle">
+                                    {{ 'ally.takeTaxe'|trans }}
+                                </td>
+                                <td class="center-cells">
+                                    {{ peace.getTaxe() }}%
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="center-cells cell-middle">
+                                    {{ 'ally.takePdg'|trans }}
+                                </td>
+                                <td class="center-cells">
+                                    {{ peace.getPdg() }}%
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
         {% endif %}
     </div>
 {% endblock %}

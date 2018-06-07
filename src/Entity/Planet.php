@@ -526,20 +526,20 @@ class Planet
      */
     public function getBuildingPoint(): int
     {
-        $extractor = $this->getExtractor() * 1000;
-        $miner = $this->getMiner() * 1500;
-        $niobiumStock = $this->getNiobiumStock() * 4000;
-        $waterStock = $this->getWaterStock() * 4500;
-        $caserne = $this->getCaserne() * 2500;
-        $center = $this->getCenterSearch() * 3000;
-        $city = $this->getCity() * 6500;
-        $metropole = $this->getMetropole() * 12000;
-        $light = $this->getLightUsine() * 5000;
-        $heavy = $this->getHeavyUsine() * 15000;
-        $space = $this->getSpaceShip() * 3000;
-        $radar = $this->getRadar() * 800;
-        $skyr = $this->getSkyRadar() * 6000;
-        $brouilleur = $this->getSkyBrouilleur() * 10000;
+        $extractor = $this->getExtractor() * 10;
+        $miner = $this->getMiner() * 15;
+        $niobiumStock = $this->getNiobiumStock() * 40;
+        $waterStock = $this->getWaterStock() * 45;
+        $caserne = $this->getCaserne() * 25;
+        $center = $this->getCenterSearch() * 3;
+        $city = $this->getCity() * 65;
+        $metropole = $this->getMetropole() * 120;
+        $light = $this->getLightUsine() * 50;
+        $heavy = $this->getHeavyUsine() * 150;
+        $space = $this->getSpaceShip() * 30;
+        $radar = $this->getRadar() * 8;
+        $skyr = $this->getSkyRadar() * 60;
+        $brouilleur = $this->getSkyBrouilleur() * 100;
 
         $nbr = $extractor + $niobiumStock + $waterStock + $miner + $caserne + $center + $city + $metropole + $light + $heavy + $space + $radar + $skyr + $brouilleur;
         return $nbr;

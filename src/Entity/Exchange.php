@@ -36,6 +36,12 @@ class Exchange
     protected $amount;
 
     /**
+     * @ORM\Column(name="type",type="boolean")
+     * @Assert\NotBlank(message = "required")
+     */
+    protected $type;
+
+    /**
      * @ORM\Column(name="createdAt",type="datetime")
      */
     protected $createdAt;
@@ -107,5 +113,21 @@ class Exchange
     public function setAlly($ally): void
     {
         $this->ally = $ally;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param mixed $type
+     */
+    public function setType($type): void
+    {
+        $this->type = $type;
     }
 }

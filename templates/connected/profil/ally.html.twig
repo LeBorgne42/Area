@@ -27,14 +27,18 @@
                     {{ 'ally.allied'|trans }}
                     <br>
                     {% for allied in ally.getAllieds() %}
-                        <span class="text-vert"><a href="{{ path('ally_profil', {'idp': usePlanet.getId(), 'id': ally.getId()}) }}">{{ allied.getAllytag() }}</a></span> -
+                        {% if allied.getAccepted() == 1 %}
+                            <span class="text-vert"><a href="{{ path('ally_profil', {'idp': usePlanet.getId(), 'id': ally.getId()}) }}">{{ allied.getAllytag() }}</a></span> -
+                        {% endif %}
                     {% endfor %}
                 </div>
                 <div class="my-4">
                     {{ 'ally.pna'|trans }}
                     <br>
                     {% for pna in ally.getPnas() %}
-                        <span class="text-bleu"><a href="{{ path('ally_profil', {'idp': usePlanet.getId(), 'id': ally.getId()}) }}">{{ pna.getAllytag() }}</a></span> -
+                        {% if pna.getAccepted() == 1 %}
+                            <span class="text-bleu"><a href="{{ path('ally_profil', {'idp': usePlanet.getId(), 'id': ally.getId()}) }}">{{ pna.getAllytag() }}</a></span> -
+                        {% endif %}
                     {% endfor %}
                 </div>
                 <div class="my-4">

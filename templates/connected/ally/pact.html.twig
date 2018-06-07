@@ -127,6 +127,32 @@
                             </tbody>
                         </table>
                     {% endif %}
+                    {% if app.user.getAlly().getPeaces()|length %}
+                        <table class="table table-striped table-bordered table-dark text-center mt-4">
+                            <tbody>
+                            <tr>
+                                <th class="tab-cells-name">{{ 'ally.peaceName'|trans }}</th>
+                                <th class="tab-cells-name">{{ 'ally.remainPeace'|trans }}</th>
+                                <th class="tab-cells-name">{{ 'ally.statusPeace'|trans }}</th>
+                            </tr>
+                            {% for peace in app.user.getAlly().getPeaces() %}
+                                {% if peace.getAccepted() == 1 %}
+                                    <tr>
+                                        <td class="center-cells">
+                                            {{ peace.getAllytag() }}
+                                        </td>
+                                        <td class="center-cells">
+                                            <div class="timerArea" hidden>{{ peace.getSignedAt|date('Y/m/d H:i:s') }}</div>
+                                        </td>
+                                        <td class="center-cells">
+                                            {% if peace.getType() == 1 %}<span class="text-vert">{{ 'ally.warWin'|trans }}</span>{% else %}<span class="text-rouge">{{ 'ally.warLose'|trans }}</span>{% endif %}
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endif %}
                     {% if waitingPna|length or waitingAllied|length %}
                         <table class="table table-striped table-bordered table-dark text-center mt-4">
                             <tbody>
@@ -156,7 +182,7 @@
                                         {{ allied.getSignedAt()|date('d/m/Y H:i') }}
                                     </td>
                                     <td class="center-cells">
-                                        <a href="{{ path('ally_acceptAllied',{'id': allied.getId(), 'idp': usePlanet.getId()}) }}"><div class="glyphicon glyphicon-remove"></div> <span>{{ 'ally.acceptPact'|trans }}</span></a>
+                                        <a href="{{ path('ally_acceptAllied',{'id': allied.getId(), 'idp': usePlanet.getId()}) }}"><div class="glyphicon glyphicon-ok"></div> <span>{{ 'ally.acceptPact'|trans }}</span></a>
                                         <a class="text-rouge" href="{{ path('ally_refuseAllied',{'id': allied.getId(), 'idp': usePlanet.getId()}) }}"><div class="glyphicon glyphicon-remove"></div> <span>{{ 'ally.refusePact'|trans }}</span></a>
                                     </td>
                                 {% endfor %}

@@ -12,6 +12,7 @@ use App\Form\Front\AllyAddType;
 use App\Form\Front\AllyPactType;
 use App\Form\Front\AllyGradeType;
 use App\Form\Front\ExchangeType;
+use App\Form\Front\PdgType;
 use App\Form\Front\UserAttrGradeType;
 use App\Entity\Grade;
 use App\Entity\Ally;
@@ -548,6 +549,44 @@ class AllyController extends Controller
         $form_exchange = $this->createForm(ExchangeType::class);
         $form_exchange->handleRequest($request);
 
+        $form_pdg = $this->createForm(PdgType::class);
+        $form_pdg->handleRequest($request);
+
+        if ($form_pdg->isSubmitted() && $form_pdg->isValid()) {
+            if($form_pdg->get('exchangeType')->getData() == 1) {
+                if($form_pdg->get('amount')->getData() < $user->getRank()->getWarPoint()) {
+                    $user->getRank()->setWarPoint(($user->getRank()->getWarPoint() - $form_pdg->get('amount')->getData()));
+                    $ally->setPdg($ally->getPdg() + $form_pdg->get('amount')->getData());
+                    $exchange = new Exchange();
+                    $exchange->setAlly($ally);
+                    $exchange->setType(1);
+                    $exchange->setCreatedAt($now);
+                    $exchange->setAmount($form_pdg->get('amount')->getData());
+                    $exchange->setName($user->getUserName());
+                    $em->persist($exchange);
+                    $em->persist($ally);
+                    $em->persist($user);
+                }
+            } else {
+                if($form_pdg->get('amount')->getData() < $ally->getPdg() && $user->getGrade()->getPlacement() == 1) {
+                    $user->getRank()->setWarPoint(($user->getRank()->getWarPoint() + $form_pdg->get('amount')->getData()));
+                    $ally->setPdg($ally->getPdg() - $form_pdg->get('amount')->getData());
+                    $exchange = new Exchange();
+                    $exchange->setAlly($ally);
+                    $exchange->setType(1);
+                    $exchange->setCreatedAt($now);
+                    $exchange->setAmount(-$form_pdg->get('amount')->getData());
+                    $exchange->setName($user->getUserName());
+                    $em->persist($exchange);
+                    $em->persist($ally);
+                    $em->persist($user);
+                }
+            }
+            $form_pdg = null;
+            $form_pdg = $this->createForm(ExchangeType::class);
+            $em->flush();
+        }
+
         if ($form_exchange->isSubmitted() && $form_exchange->isValid()) {
             if($form_exchange->get('exchangeType')->getData() == 1) {
                 if($form_exchange->get('amount')->getData() < $user->getBitcoin()) {
@@ -556,6 +595,7 @@ class AllyController extends Controller
                     $exchange = new Exchange();
                     $exchange->setAlly($ally);
                     $exchange->setCreatedAt($now);
+                    $exchange->setType(0);
                     $exchange->setAmount($form_exchange->get('amount')->getData());
                     $exchange->setName($user->getUserName());
                     $em->persist($exchange);
@@ -569,6 +609,7 @@ class AllyController extends Controller
                     $exchange = new Exchange();
                     $exchange->setAlly($ally);
                     $exchange->setCreatedAt($now);
+                    $exchange->setType(0);
                     $exchange->setAmount(-$form_exchange->get('amount')->getData());
                     $exchange->setName($user->getUserName());
                     $em->persist($exchange);
@@ -583,6 +624,7 @@ class AllyController extends Controller
 
         return $this->render('connected/ally/bank.html.twig', [
             'form_exchange' => $form_exchange->createView(),
+            'form_pdg' => $form_pdg->createView(),
             'usePlanet' => $usePlanet,
             'exchanges' => $exchanges,
         ]);
@@ -763,6 +805,11 @@ class AllyController extends Controller
                 $em->persist($allied);
                 $ally->addAllyAllied($allied);
             } elseif($form_allyPact->get('pactType')->getData() == 3 && $user->getGrade()->getCanWar() == 1) {
+                $salon = new Salon();
+                $salon->setName("Guerre : " . $allyPact->getSigle() . " - " . $ally->getSigle());
+                $salon->addAlly($allyPact->getAlly());
+                $salon->addAlly($ally);
+                $em->persist($salon);
                 $war = new War();
                 $war2 = new War();
                 $war2->setAlly($allyPact);

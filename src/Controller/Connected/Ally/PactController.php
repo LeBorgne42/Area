@@ -10,6 +10,7 @@ use App\Form\Front\AllyPeaceType;
 use App\Entity\Pna;
 use App\Entity\Allied;
 use App\Entity\Salon;
+use App\Entity\Peace;
 use DateTime;
 use DateTimeZone;
 use Dateinterval;
@@ -261,13 +262,18 @@ class PactController extends Controller
             ->getQuery()
             ->getOneOrNullResult();
 
-        $pact->setDismissAt($now);
-        $pact->setDismissBy($user->getAlly()->getSigle());
-        $pact2->setDismissAt($now);
-        $pact2->setDismissBy($user->getAlly()->getSigle());
-        $em->persist($pact2);
-        $em->persist($pact);
-        $em->flush();
+        if($pact2) {
+            $pact2->setDismissAt($now);
+            $pact2->setDismissBy($user->getAlly()->getSigle());
+            $em->persist($pact2);
+            $pact->setDismissAt($now);
+            $pact->setDismissBy($user->getAlly()->getSigle());
+            $em->persist($pact);
+            $em->flush();
+        } else {
+            $em->remove($pact);
+            $em->flush();
+        }
 
         return $this->redirectToRoute('ally_page_pacts', array('idp' => $usePlanet->getId()));
     }
@@ -279,9 +285,10 @@ class PactController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
+        $ally = $user->getAlly();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
-        $now->add(new DateInterval('PT' . 43200 . 'S'));
+        $now->add(new DateInterval('PT' . 864000 . 'S'));
 
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
@@ -298,16 +305,178 @@ class PactController extends Controller
             ->getQuery()
             ->getOneOrNullResult();
 
+        $warOther = $em->getRepository('App:War')
+            ->createQueryBuilder('w')
+            ->where('w.allyTag = :sigle')
+            ->andWhere('w.ally = :war')
+            ->setParameters(array(
+                'sigle' => $ally->getSigle(), 'war' => $war->getAlly()))
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $waitingPeaces = $em->getRepository('App:Peace')
+            ->createQueryBuilder('p')
+            ->where('p.allyTag = :sigle')
+            ->andWhere('p.accepted = :false')
+            ->setParameters(array(
+                'sigle' => $ally->getSigle(),
+                'false' => false))
+            ->getQuery()
+            ->getResult();
+
         $form_peace = $this->createForm(AllyPeaceType::class);
         $form_peace->handleRequest($request);
 
         if (($form_peace->isSubmitted() && $form_peace->isValid())) {
+            $peace = new Peace();
+            $peace->setAlly($warOther->getAlly());
+            $peace->setAllyTag($ally->getSigle());
+            $peace->setSignedAt($now);
+            $peace->setType($form_peace->get('type')->getData());
+            $peace->setPlanet($form_peace->get('planetNbr')->getData());
+            $peace->setTaxe($form_peace->get('taxeNbr')->getData());
+            $peace->setPdg($form_peace->get('pdgNbr')->getData());
+            $em->persist($peace);
+            $em->flush();
 
+            $form_peace->get('type')->getData();
         }
 
         return $this->render('connected/ally/makePeace.html.twig', [
             'form_peace' => $form_peace->createView(),
             'usePlanet' => $usePlanet,
+            'waitingPeaces' => $waitingPeaces,
         ]);
+    }
+
+    /**
+     * @Route("/accepter-paix/{id}/{idp}", name="ally_accept_peace", requirements={"id"="\d+", "idp"="\d+"})
+     */
+    public function allyAcceptPeaceAction($id, $idp)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $ally = $user->getAlly();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
+        $now->add(new DateInterval('PT' . 864000 . 'S'));
+
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $peace = $em->getRepository('App:Peace')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+
+        $otherAlly = $em->getRepository('App:Ally')
+            ->createQueryBuilder('a')
+            ->where('a.sigle = :sigle')
+            ->setParameter('sigle', $peace->getAllyTag())
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $war = $em->getRepository('App:War')
+            ->createQueryBuilder('w')
+            ->where('w.ally = :ally')
+            ->setParameter('ally', $ally)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $war2 = $em->getRepository('App:War')
+            ->createQueryBuilder('w')
+            ->where('w.ally = :ally')
+            ->setParameter('ally', $otherAlly)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        if($peace->getType() == 0) {
+            $type = 1;
+
+        } else {
+            $type = 0;
+
+        }
+        if($war && $war2) {
+            $em->remove($war);
+            $em->remove($war2);
+        }
+        $peace2 = new Peace();
+        $peace2->setAlly($otherAlly);
+        $peace2->setAllyTag($peace->getAlly()->getSigle());
+        $peace2->setSignedAt($now);
+        $peace2->setType($type);
+        $peace2->setPlanet($peace->getPlanet());
+        $peace2->setTaxe($peace->getTaxe());
+        $peace2->setPdg($peace->getPdg());
+        $peace->setSignedAt($now);
+        $peace2->setAccepted(true);
+        $peace->setAccepted(true);
+        $em->persist($peace);
+        $em->persist($peace2);
+        $em->flush();
+
+        return $this->redirectToRoute('ally_page_pacts', array('idp' => $usePlanet->getId()));
+    }
+
+    /**
+     * @Route("/refuser-paix/{id}/{idp}", name="ally_remove_peace", requirements={"id"="\d+", "idp"="\d+"})
+     */
+    public function allyRemovePeaceAction($id, $idp)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $peace = $em->getRepository('App:Peace')
+            ->createQueryBuilder('al')
+            ->where('al.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+
+        $otherAlly = $em->getRepository('App:Ally')
+            ->createQueryBuilder('a')
+            ->where('a.sigle = :sigle')
+            ->setParameter('sigle', $peace->getAllyTag())
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $peace2 = $em->getRepository('App:Allied')
+            ->createQueryBuilder('al')
+            ->where('al.allyTag = :allytag')
+            ->andWhere('al.ally = :ally')
+            ->setParameters(array(
+                'allytag' => $user->getAlly()->getSigle(),
+                'ally' => $otherAlly))
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        if($peace2) {
+            $em->remove($peace2);
+            $em->remove($peace);
+            $em->flush();
+        } else {
+            $em->remove($peace);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('ally_page_pacts', array('idp' => $usePlanet->getId()));
     }
 }
