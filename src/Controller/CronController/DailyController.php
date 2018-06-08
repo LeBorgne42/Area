@@ -37,6 +37,7 @@ class DailyController extends Controller
             $ally = $user->getAlly();
             $worker = 0;
             $planetPoint= 0;
+            $buildingCost = 0;
             foreach ($user->getPlanets() as $planet) {
                 if($planet->getRadarAt() == null && $planet->getBrouilleurAt() == null) {
                     if (($planet->getWorker() + $planet->getWorkerProduction() > $planet->getWorkerMax())) {
@@ -46,6 +47,7 @@ class DailyController extends Controller
                     }
                     $worker = $worker + $planet->getWorker();
                     $planetPoint = $planetPoint + $planet->getBuildingPoint();
+                    $buildingCost = $buildingCost + $planet->getBuildingCost();
                 }
             }
             $gain = round($worker / 1.60);
@@ -85,7 +87,7 @@ class DailyController extends Controller
             $ship = $user->getAllShipsCost();
             $cost = $user->getBitcoin();
             $report->setContent($report->getContent() . "Le travaille fournit par vos travailleurs vous rapporte " . round($gain) . " Bitcoin.");
-            $empireCost = ($soldier * 2) + $ship;
+            $empireCost = ($soldier * 2) + $ship + $buildingCost;
             $cost = $cost - $empireCost + ($gain);
             $report->setContent($report->getContent() . " L'entretien de votre empire vous coûte cependant " . round($empireCost) . " Bitcoin.");
             $point = round(round($worker / 100) + round($user->getAllShipsPoint() / 75) + round($soldier / 75) + $planetPoint);

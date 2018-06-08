@@ -546,6 +546,30 @@ class Planet
     }
 
     /**
+     * @return int
+     */
+    public function getBuildingCost(): int
+    {
+        $extractor = $this->getExtractor() * 10;
+        $miner = $this->getMiner() * 15;
+        $niobiumStock = $this->getNiobiumStock() * 40;
+        $waterStock = $this->getWaterStock() * 45;
+        $caserne = $this->getCaserne() * 1000;
+        $center = $this->getCenterSearch() * 800;
+        $city = $this->getCity() * 500;
+        $metropole = $this->getMetropole() * 750;
+        $light = $this->getLightUsine() * 2500;
+        $heavy = $this->getHeavyUsine() * 5000;
+        $space = $this->getSpaceShip() * 1500;
+        $radar = $this->getRadar() * 200;
+        $skyr = $this->getSkyRadar() * 800;
+        $brouilleur = $this->getSkyBrouilleur() * 1200;
+
+        $nbr = $extractor + $niobiumStock + $waterStock + $miner + $caserne + $center + $city + $metropole + $light + $heavy + $space + $radar + $skyr + $brouilleur;
+        return $nbr;
+    }
+
+    /**
      * @return mixed
      */
     public function getFleetNoFriends($user)
@@ -592,8 +616,15 @@ class Planet
             if ($fleet->getUser()->getAlly() && $user->getAlly()) {
                 if (count($fleet->getUser()->getAlly()->getAllieds()) > 0) {
                     foreach($fleet->getUser()->getAlly()->getAllieds() as $allied) {
-                        if($allied->getAllyTag() == $user->getAlly()->getSigle()) {
+                        if($allied->getAllyTag() == $user->getAlly()->getSigle() && $allied->getAccepted() == 1) {
                             return 'pp-ally';
+                        }
+                    }
+                }
+                if (count($fleet->getUser()->getAlly()->getPeaces()) > 0) {
+                    foreach($fleet->getUser()->getAlly()->getPeaces() as $peace) {
+                        if($peace->getAllyTag() == $user->getAlly()->getSigle() && $peace->getAccepted() == 1) {
+                            return 'pp-peace';
                         }
                     }
                 }
@@ -624,7 +655,7 @@ class Planet
             if ($fleet->getUser()->getAlly() && $user->getAlly()) {
                 if (count($fleet->getUser()->getAlly()->getAllieds()) > 0) {
                     foreach($fleet->getUser()->getAlly()->getAllieds() as $allied) {
-                        if($allied->getAllyTag() == $user->getAlly()->getSigle()) {
+                        if($allied->getAllyTag() == $user->getAlly()->getSigle() && $allied->getAccepted() == 1) {
                             $return = null;
                         }
                     }
@@ -711,7 +742,7 @@ class Planet
             if ($this->getUser()->getAlly() && $user->getAlly()) {
                 if (count($this->getUser()->getAlly()->getAllieds()) > 0) {
                     foreach($this->getUser()->getAlly()->getAllieds() as $allied) {
-                        if($allied->getAllyTag() == $user->getAlly()->getSigle()) {
+                        if($allied->getAllyTag() == $user->getAlly()->getSigle() && $allied->getAccepted() == 1) {
                             return 'pact';
                         }
                     }

@@ -22,18 +22,18 @@
                         {{ form_widget(form_peace.type) }}
                     </td>
                     <td class="center-cells cell-middle">
-                        {{ 'ally.takePlanet'|trans }}
+                        {{ 'ally.takePlanet'|trans }} <span class="glyphicon glyphicon-question-sign text-orange" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.takePlanet'|trans }}"></span>
                     </td>
                     <td class="center-cells">
                         {{ form_widget(form_peace.planetNbr) }}
                     </td>
                     <td rowspan="3" class="center-cells cell-middle">
-                        {{ form_widget(form_peace.sendForm,{attr: { class: 'btn btn-lg btn-info'}}) }}
+                        {{ form_widget(form_peace.sendForm,{attr: { class: 'btn btn-lg btn-info'}}) }} <span class="glyphicon glyphicon-question-sign text-orange" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.sendPeace'|trans }}"></span>
                     </td>
                 </tr>
                 <tr>
                     <td class="center-cells cell-middle">
-                        {{ 'ally.takeTaxe'|trans }}
+                        {{ 'ally.takeTaxe'|trans }} <span class="glyphicon glyphicon-question-sign text-orange" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.takeTaxe'|trans }}"></span>
                     </td>
                     <td class="center-cells">
                         {{ form_widget(form_peace.taxeNbr) }}
@@ -41,7 +41,7 @@
                 </tr>
                 <tr>
                     <td class="center-cells cell-middle">
-                        {{ 'ally.takePdg'|trans }}
+                        {{ 'ally.takePdg'|trans }} <span class="glyphicon glyphicon-question-sign text-orange" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.takePdg'|trans }}"></span>
                     </td>
                     <td class="center-cells">
                         {{ form_widget(form_peace.pdgNbr) }}

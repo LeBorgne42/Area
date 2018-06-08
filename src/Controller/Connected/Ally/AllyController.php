@@ -787,7 +787,7 @@ class AllyController extends Controller
                 ->getQuery()
                 ->getOneOrNullResult();
 
-            if(!$allyPact || $user->getAlly()->getAlreadyPact($allyPact->getSigle())) {
+            if((!$allyPact || $user->getAlly()->getAlreadyPact($allyPact->getSigle())) || $allyPact == $ally) {
                 return $this->redirectToRoute('ally_page_pacts', array('idp' => $usePlanet->getId()));
             }
             if($form_allyPact->get('pactType')->getData() == 2 && $user->getGrade()->getCanPeace() == 1) {
@@ -807,7 +807,7 @@ class AllyController extends Controller
             } elseif($form_allyPact->get('pactType')->getData() == 3 && $user->getGrade()->getCanWar() == 1) {
                 $salon = new Salon();
                 $salon->setName("Guerre : " . $allyPact->getSigle() . " - " . $ally->getSigle());
-                $salon->addAlly($allyPact->getAlly());
+                $salon->addAlly($allyPact);
                 $salon->addAlly($ally);
                 $em->persist($salon);
                 $war = new War();

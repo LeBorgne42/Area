@@ -332,8 +332,41 @@ class Fleet
     public function getShipsLoseReport(): string
     {
         $ships = '';
+        if($this->getSonde()) {
+            $ships = "<small>Sonde : " . $this->getSonde() . " <span class='float-right'>Perte : " . "<span class=\"text-rouge\">" . "Totale</span></span></small><br>";
+        }
+        if($this->getColonizer()) {
+            $ships = $ships . "<small>Colonisateur : " . $this->getColonizer() . " <span class='float-right'>Perte : " . "<span class=\"text-rouge\">" . "Totale</span></span></small><br>";
+        }
+        if($this->getCargoI()) {
+            $ships = $ships . "<small>Cargo I : " . $this->getCargoI() . " <span class='float-right'>Perte : " . "<span class=\"text-rouge\">" . "Totale</span></span></small><br>";
+        }
+        if($this->getCargoV()) {
+            $ships = $ships . "<small>Cargo V : " . $this->getCargoV() . " <span class='float-right'>Perte : " . "<span class=\"text-rouge\">" . "Totale</span></span></small><br>";
+        }
+        if($this->getCargoX()) {
+            $ships = $ships . "<small>Cargo X : " . $this->getCargoX() . " <span class='float-right'>Perte : " . "<span class=\"text-rouge\">" . "Totale</span></span></small><br>";
+        }
+        if($this->getRecycleur()) {
+            $ships = $ships . "<small>Recycleur : " . $this->getRecycleur() . " <span class='float-right'>Perte : " . "<span class=\"text-rouge\">" . "Totale</span></span></small><br>";
+        }
+        if($this->getBarge()) {
+            $ships = $ships . "<small>Barge : " . $this->getBarge() . " <span class='float-right'>Perte : " . "<span class=\"text-rouge\">" . "Totale</span></span></small><br>";
+        }
+        if($this->getMoonMaker()) {
+            $ships = $ships . "<small>Lunar : " . $this->getMoonMaker() . " <span class='float-right'>Perte : " . "<span class=\"text-rouge\">" . "Totale</span></span></small><br>";
+        }
+        if($this->getRadarShip()) {
+            $ships = $ships . "<small>Vaisseau radar : " . $this->getRadarShip() . " <span class='float-right'>Perte : " . "<span class=\"text-rouge\">" . "Totale</span></span></small><br>";
+        }
+        if($this->getBrouilleurShip()) {
+            $ships = $ships . "<small>Vaisseau brouilleur : " . $this->getBrouilleurShip() . " <span class='float-right'>Perte : " . "<span class=\"text-rouge\">" . "Totale</span></span></small><br>";
+        }
+        if($this->getMotherShip()) {
+            $ships = $ships . "<small>Vaisseau mère : " . $this->getMotherShip() . " <span class='float-right'>Perte : " . "<span class=\"text-rouge\">" . "Totale</span></span></small><br>";
+        }
         if($this->getHunter()) {
-            $ships = "Chasseurs : " . $this->getHunter() . " <span class='float-right'>Perte : " . "<span class=\"text-rouge\">" . "Totale</span></span><br>";
+            $ships = $ships . "Chasseurs : " . $this->getHunter() . " <span class='float-right'>Perte : " . "<span class=\"text-rouge\">" . "Totale</span></span><br>";
         }
         if($this->getHunterHeavy()) {
             $ships = $ships . "Chasseurs lourds : " . $this->getHunterHeavy() . " <span class='float-right'>Perte : " . "<span class=\"text-rouge\">" . "Totale</span></span><br>";
@@ -708,8 +741,15 @@ class Fleet
         if ($this->getUser()->getAlly() && $user->getAlly()) {
             if (count($this->getUser()->getAlly()->getAllieds()) > 0) {
                 foreach($this->getUser()->getAlly()->getAllieds() as $allied) {
-                    if($allied->getAllyTag() == $user->getAlly()->getSigle()) {
+                    if($allied->getAllyTag() == $user->getAlly()->getSigle() && $allied->getAccepted() == 1) {
                         return 'pp-ally';
+                    }
+                }
+            }
+            if (count($this->getUser()->getAlly()->getPeaces()) > 0) {
+                foreach($this->getUser()->getAlly()->getPeaces() as $peace) {
+                    if($peace->getAllyTag() == $user->getAlly()->getSigle() && $peace->getAccepted() == 1) {
+                        return 'pp-peace';
                     }
                 }
             }

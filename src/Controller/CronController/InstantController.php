@@ -445,8 +445,10 @@ class InstantController extends Controller
             $friendAlly = [];
             $x = 0;
             foreach ($fAlly as $tmp) {
-                $friendAlly[$x] = $tmp->getAllyTag();
-                $x++;
+                if($tmp->getAccepted() == 1) {
+                    $friendAlly[$x] = $tmp->getAllyTag();
+                    $x++;
+                }
             }
 
             $eAlly = $fleet->getUser()->getAllyEnnemy();

@@ -504,6 +504,25 @@ class User implements UserInterface, \Serializable
     }
 
     /**
+     * @return null|\App\Entity\Peace
+     */
+    public function getPeaces()
+    {
+        if($this->getAlly()) {
+            if($this->getAlly()->getPeaces()) {
+                foreach($this->getAlly()->getPeaces() as $peace) {
+                    if($peace->getAccepted() == 1 && $peace->getType() == false) {
+                        return $peace;
+                    }
+                }
+            }
+        } else {
+            return null;
+        }
+        return null;
+    }
+
+    /**
      * @return int
      */
     public function getAllShips(): int
@@ -518,7 +537,6 @@ class User implements UserInterface, \Serializable
         return $return;
     }
 
-
     /**
      * @return int
      */
@@ -526,10 +544,25 @@ class User implements UserInterface, \Serializable
     {
         $return = 0;
         foreach($this->planets as $planet) {
+            if($planet->getProduct()) {
+                $return = $return + ($planet->getNbrSignatures() / 3);
+            }
             $return = $return + ($planet->getNbrSignatures() / 5);
         }
         foreach($this->fleets as $fleet) {
             $return = $return + $fleet->getNbrSignatures();
+        }
+        return $return;
+    }
+
+    /**
+     * @return int
+     */
+    public function getBuildingCost(): int
+    {
+        $return = 0;
+        foreach($this->planets as $planet) {
+            $return = $return + $planet->getBuildingCost();
         }
         return $return;
     }

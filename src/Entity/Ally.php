@@ -433,12 +433,12 @@ class Ally
     public function getSigleAllied($sigle)
     {
         foreach($this->getPnas() as $pna) {
-            if ($pna->getAllyTag() == $sigle) {
+            if ($pna->getAllyTag() == $sigle && $pna->getAccepted() == 1) {
                 return $sigle;
             }
         }
         foreach($this->getAllieds() as $pact) {
-            if ($pact->getAllyTag() == $sigle) {
+            if ($pact->getAllyTag() == $sigle && $pact->getAccepted() == 1) {
                 return $sigle;
             }
         }
@@ -453,17 +453,17 @@ class Ally
         if($sigles) {
             foreach ($sigles as $sigle) {
                 foreach ($this->getPnas() as $pna) {
-                    if ($pna->getAllyTag() == $sigle) {
+                    if ($pna->getAllyTag() == $sigle && $pna->getAccepted() == 1) {
                         return null;
                     }
                 }
                 foreach ($this->getAllieds() as $pact) {
-                    if ($pact->getAllyTag() == $sigle) {
+                    if ($pact->getAllyTag() == $sigle && $pact->getAccepted() == 1) {
                         return null;
                     }
                 }
                 foreach ($this->getPeaces() as $peace) {
-                    if ($peace->getAllyTag() == $sigle) {
+                    if ($peace->getAllyTag() == $sigle && $peace->getAccepted() == 1) {
                         return null;
                     }
                 }

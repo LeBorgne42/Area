@@ -331,6 +331,22 @@ class FightController extends Controller
                 $percentWarPoint = ($loseArm * 100) / $armeSaveA;
                 $warPointB = ($warPointB - ($armorD / 80)) / 10;
                 $newWarPoint = round(($percentWarPoint * $warPointB) / 100);
+                if($newWarPoint < 0) {
+                    $newWarPoint = $newWarPoint * -1;
+                }
+                if($attackerLose->getUser()->getPeaces()) {
+                    $peace = $attackerLose->getUser()->getPeaces();
+                    $pdgPeace = $newWarPoint * ($peace->getPdg() / 100);
+                    $newWarPoint = $newWarPoint - $pdgPeace;
+                    $otherAlly = $em->getRepository('App:Ally')
+                        ->createQueryBuilder('a')
+                        ->where('a.sigle = :sigle')
+                        ->setParameter('sigle', $peace->getAllyTag())
+                        ->getQuery()
+                        ->getOneOrNullResult();
+                    $otherAlly->setPdg($otherAlly->getPdg() + $pdgPeace);
+                    $em->persist($otherAlly);
+                }
                 $reportA->setContent($reportA->getContent() . " Mais vous remportez vous même " . $newWarPoint . " points de Guerre !");
                 $attackerLose->getUser()->getRank()->setWarPoint($attackerLose->getUser()->getRank()->getWarPoint() + $newWarPoint);
                 $em->persist($attackerLose);
@@ -341,6 +357,19 @@ class FightController extends Controller
                 $defArm = $defenderWin->getLaser() + $defenderWin->getMissile() + $defenderWin->getPlasma();
                 $percentWarPoint = ($defArm * 100) / $armeSaveB;
                 $newWarPoint = round(($percentWarPoint * $warPointA) / 100);
+                if($defenderWin->getUser()->getPeaces()) {
+                    $peace = $defenderWin->getUser()->getPeaces();
+                    $pdgPeace = $newWarPoint * ($peace->getPdg() / 100);
+                    $newWarPoint = $newWarPoint - $pdgPeace;
+                    $otherAlly = $em->getRepository('App:Ally')
+                        ->createQueryBuilder('a')
+                        ->where('a.sigle = :sigle')
+                        ->setParameter('sigle', $peace->getAllyTag())
+                        ->getQuery()
+                        ->getOneOrNullResult();
+                    $otherAlly->setPdg($otherAlly->getPdg() + $pdgPeace);
+                    $em->persist($otherAlly);
+                }
                 $defenderWin->setFleetWinRatio(number_format($malus, 2));
                 $defenderWin->getUser()->getRank()->setWarPoint($defenderWin->getUser()->getRank()->getWarPoint() + $newWarPoint);
                 $defenderWin->setFightAt(null);
@@ -422,6 +451,22 @@ class FightController extends Controller
                 $percentWarPoint = ($loseArm * 100) / $armeSaveB;
                 $warPointA = ($warPointA - ($armor / 80)) / 10;
                 $newWarPoint = round(($percentWarPoint * $warPointA) / 100);
+                if($newWarPoint < 0) {
+                    $newWarPoint = $newWarPoint * -1;
+                }
+                if($defenderLose->getUser()->getPeaces()) {
+                    $peace = $defenderLose->getUser()->getPeaces();
+                    $pdgPeace = $newWarPoint * ($peace->getPdg() / 100);
+                    $newWarPoint = $newWarPoint - $pdgPeace;
+                    $otherAlly = $em->getRepository('App:Ally')
+                        ->createQueryBuilder('a')
+                        ->where('a.sigle = :sigle')
+                        ->setParameter('sigle', $peace->getAllyTag())
+                        ->getQuery()
+                        ->getOneOrNullResult();
+                    $otherAlly->setPdg($otherAlly->getPdg() + $pdgPeace);
+                    $em->persist($otherAlly);
+                }
                 $reportB->setContent($reportA->getContent() . " Mais vous remportez vous même " . $newWarPoint . " points de Guerre !");
                 $defenderLose->getUser()->getRank()->setWarPoint($defenderLose->getUser()->getRank()->getWarPoint() + $newWarPoint);
                 $em->persist($defenderLose);
@@ -432,6 +477,19 @@ class FightController extends Controller
                 $attArm = $attackerWin->getLaser() + $attackerWin->getMissile() + $attackerWin->getPlasma();
                 $percentWarPoint = ($attArm * 100) / $armeSaveA;
                 $newWarPoint = round(($percentWarPoint * $warPointB) / 100);
+                if($attackerWin->getUser()->getPeaces()) {
+                    $peace = $attackerWin->getUser()->getPeaces();
+                    $pdgPeace = $newWarPoint * ($peace->getPdg() / 100);
+                    $newWarPoint = $newWarPoint - $pdgPeace;
+                    $otherAlly = $em->getRepository('App:Ally')
+                        ->createQueryBuilder('a')
+                        ->where('a.sigle = :sigle')
+                        ->setParameter('sigle', $peace->getAllyTag())
+                        ->getQuery()
+                        ->getOneOrNullResult();
+                    $otherAlly->setPdg($otherAlly->getPdg() + $pdgPeace);
+                    $em->persist($otherAlly);
+                }
                 $attackerWin->setFleetWinRatio(number_format($malus, 2));
                 $attackerWin->getUser()->getRank()->setWarPoint($attackerWin->getUser()->getRank()->getWarPoint() + $newWarPoint);
                 $attackerWin->setFightAt(null);
