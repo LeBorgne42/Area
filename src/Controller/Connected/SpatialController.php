@@ -288,10 +288,16 @@ class SpatialController extends Controller
             if($fleets) {
                 foreach ($fleets as $setWar) {
                     if($setWar->getUser()->getAlly()) {
-                        $fleet->setAttack(1);
+                        $fleetArm = $fleet->getMissile() + $fleet->getLaser() + $fleet->getPlasma();
+                        if($fleetArm > 0) {
+                            $fleet->setAttack(1);
+                        }
                         foreach ($eAlly as $tmp) {
                             if ($setWar->getUser()->getAlly()->getSigle() == $tmp->getAllyTag()) {
-                                $setWar->setAttack(1);
+                                $fleetArm = $setWar->getMissile() + $setWar->getLaser() + $setWar->getPlasma();
+                                if($fleetArm > 0) {
+                                    $setWar->setAttack(1);
+                                }
                                 $em->persist($setWar);
                             }
                         }

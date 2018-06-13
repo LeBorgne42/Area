@@ -147,6 +147,7 @@ class AllyController extends Controller
 
             $ally->addUser($user);
             $ally->setBitcoin(5000);
+            $ally->setPdg(50);
             $ally->setCreatedAt($now);
             $em->persist($ally);
 

@@ -67,7 +67,6 @@ class FightController extends Controller
         }
         $team = $tmpcount;
         $isAttack = [];
-        $isWar = [];
 
         while($team > 0) {
             $team--;
@@ -169,6 +168,20 @@ class FightController extends Controller
         $warPointB = round($armorD / 80);
         $attAll = $missile + $laser + $plasma;
         $defAll = $missileD + $laserD + $plasmaD;
+
+        if($attAll <= 0 && $defAll <= 0) {
+            foreach($blockDef as $cancelAtt) {
+                $cancelAtt->setAttack(0);
+                $em->persist($cancelAtt);
+            }
+            foreach($blockAtt as $cancelAtt) {
+                $cancelAtt->setAttack(0);
+                $em->persist($cancelAtt);
+            }
+            $em->flush();
+            return($blockAtt);
+        }
+
         if($attAll > 0 && $defAll <= 0) {
             foreach($blockDef as $removeOne) {
                 $reportB = new Report();
