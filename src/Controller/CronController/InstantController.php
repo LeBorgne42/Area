@@ -431,15 +431,6 @@ class InstantController extends Controller
         }
 
         foreach ($fleets as $fleet) {
-            $allFleets = $em->getRepository('App:Fleet')
-                ->createQueryBuilder('f')
-                ->join('f.user', 'u')
-                ->where('f.planet = :planet')
-                ->andWhere('f.user != :user')
-                ->andWhere('f.flightTime is null')
-                ->setParameters(array('planet' => $fleet->getPlanet(), 'user' => $fleet->getUser()))
-                ->getQuery()
-                ->getResult();
 
             $fAlly = $fleet->getUser()->getAllyFriends();
             $friendAlly = [];
@@ -458,6 +449,9 @@ class InstantController extends Controller
                 $warAlly[$x] = $tmp->getAllyTag();
                 $x++;
             }
+            if(!$friendAlly) {
+                $friendAlly = ['plop', 'personne'];
+            }
 
             $newHome = $em->getRepository('App:Planet')
                 ->createQueryBuilder('p')
@@ -469,6 +463,17 @@ class InstantController extends Controller
                 ->setParameters(array('planete' => $fleet->getPlanete(), 'sector' => $fleet->getSector()->getPosition(), 'galaxy' => $fleet->getSector()->getGalaxy()->getPosition()))
                 ->getQuery()
                 ->getOneOrNullResult();
+
+
+            $allFleets = $em->getRepository('App:Fleet')
+                ->createQueryBuilder('f')
+                ->join('f.user', 'u')
+                ->where('f.planet = :planet')
+                ->andWhere('f.user != :user')
+                ->andWhere('f.flightTime is null')
+                ->setParameters(array('planet' => $newHome, 'user' => $fleet->getUser()))
+                ->getQuery()
+                ->getResult();
 
 
             $userFleet = $fleet->getUser();
@@ -511,11 +516,21 @@ class InstantController extends Controller
             } else {
                 $ally = 'war';
             }
-
-            if ($attackFleets || ($fleet->getAttack() == true && $ally == 'war')) {
+            if ($attackFleets || ($fleet->getAttack() == true && ($ally || $ally == 'war'))) {
                 $now = new DateTime();
                 $now->setTimezone(new DateTimeZone('Europe/Paris'));
                 $now->add(new DateInterval('PT' . 300 . 'S'));
+                foreach ($attackFleets as $setWar) {
+                    if($setWar->getUser()->getAlly()) {
+                        $fleet->setAttack(1);
+                        foreach ($eAlly as $tmp) {
+                            if ($setWar->getUser()->getAlly()->getSigle() == $tmp->getAllyTag()) {
+                                $setWar->setAttack(1);
+                                $em->persist($setWar);
+                            }
+                        }
+                    }
+                }
                 foreach ($allFleets as $updateF) {
                     $updateF->setFightAt($now);
                     $em->persist($updateF);
@@ -653,7 +668,7 @@ class InstantController extends Controller
                         $dSigle = $userDefender->getAlly()->getSigle();
                     }
 
-                    if($barge && $fleet->getPlanet()->getUser() && $fleet->getAllianceUser() == null && $ally->getSigleAlliedArray($dSigle)) {
+                    if($barge && $fleet->getPlanet()->getUser() && $fleet->getAllianceUser() && $ally->getSigleAlliedArray($dSigle)) {
                         if($barge >= $fleet->getSoldier()) {
                             $aMilitary = $fleet->getSoldier() * $alea;
                             $soldierAtmp = $fleet->getSoldier();

@@ -545,7 +545,7 @@ class User implements UserInterface, \Serializable
         $return = 0;
         foreach($this->planets as $planet) {
             if($planet->getProduct()) {
-                $return = $return + ($planet->getNbrSignatures() / 3);
+                $return = $return + ($planet->getProduct()->getNbrSignatures() / 3);
             }
             $return = $return + ($planet->getNbrSignatures() / 5);
         }

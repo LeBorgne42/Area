@@ -241,45 +241,174 @@ class Fleet
     }
 
     /**
+     * @param $armor
      * @return string
      */
-    public function getShipsReport($malus): string
+    public function getShipsReport($armor): string
     {
         $ships = '';
+        if($this->getMotherShip() == 1) {
+            $armor = $armor * 0.05;
+        }
         if($this->getHunter()) {
-            $ships = "Chasseurs : " . $this->getHunter() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round((($this->getHunter() * $malus) / 100)) . "</span></span><br>";
-        }
-        if($this->getHunterHeavy()) {
-            $ships = $ships . "Chasseurs lourds : " . $this->getHunterHeavy() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round((($this->getHunterHeavy() * $malus) / 100)) . "</span></span><br>";
-        }
-        if($this->getHunterWar()) {
-            $ships = $ships . "Chasseur à plasma : " . $this->getHunterWar() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round((($this->getHunterWar() * $malus) / 100)) . "</span></span><br>";
+            $new = (($this->getHunter() * 15) - $armor) / 15;
+            if($new < 0) {
+                $armor = $new * -15;
+                $new = $this->getHunter();
+            } else {
+                $armor = 0;
+                $new = $this->getHunter() - $new;
+            }
+            $ships = "Chasseurs : " . $this->getHunter() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round($new) . "</span></span><br>";
         }
         if($this->getCorvet()) {
-            $ships = $ships . "Corvettes : " . $this->getCorvet() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round((($this->getCorvet() * $malus) / 100)) . "</span></span><br>";
+            if($armor != 0) {
+                $new = (($this->getCorvet() * 74) - $armor) / 74;
+                if($new < 0) {
+                    $armor = $new * -74;
+                    $new = $this->getCorvet();
+                } else {
+                    $armor = 0;
+                    $new = $this->getCorvet() - $new;
+                }
+            } else {
+                $new = 0;
+            }
+            $ships = $ships . "Corvettes : " . $this->getCorvet() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round($new) . "</span></span><br>";
         }
-        if($this->getCorvetLaser()) {
-            $ships = $ships . "Corvettes à laser : " . $this->getCorvetLaser() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round((($this->getCorvetLaser() * $malus) / 100)) . "</span></span><br>";
-        }
-        if($this->getCorvetWar()) {
-            $ships = $ships . "Corvettes Armageddon : " . $this->getCorvetWar() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round((($this->getCorvetWar() * $malus) / 100)) . "</span></span><br>";
+        if($this->getHunterHeavy()) {
+            if($armor != 0) {
+                $new = (($this->getHunterHeavy() * 25) - $armor) / 25;
+                if ($new < 0) {
+                    $armor = $new * -25;
+                    $new = $this->getHunterHeavy();
+                } else {
+                    $armor = 0;
+                    $new = $this->getHunterHeavy() - $new;
+                }
+            } else {
+                $new = 0;
+            }
+            $ships = $ships . "Chasseurs lourds : " . $this->getHunterHeavy() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round($new) . "</span></span><br>";
         }
         if($this->getFregate()) {
-            $ships = $ships . "Frégates : " . $this->getFregate() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round((($this->getFregate() * $malus) / 100)) . "</span></span><br>";
+            if($armor != 0) {
+                $new = (($this->getFregate() * 168) - $armor) / 168;
+                if ($new < 0) {
+                    $armor = $new * -168;
+                    $new = $this->getFregate();
+                } else {
+                    $armor = 0;
+                    $new = $this->getFregate() - $new;
+                }
+            } else {
+                $new = 0;
+            }
+            $ships = $ships . "Frégates : " . $this->getFregate() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round($new) . "</span></span><br>";
+        }
+        if($this->getHunterWar()) {
+            if($armor != 0) {
+                $new = (($this->getHunterWar() * 53) - $armor) / 53;
+                if($new < 0) {
+                    $armor = $new * -53;
+                    $new = $this->getHunterWar();
+                } else {
+                    $armor = 0;
+                    $new = $this->getHunterWar() - $new;
+                }
+            } else {
+                $new = 0;
+            }
+            $ships = $ships . "Chasseur à plasma : " . $this->getHunterWar() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round($new) . "</span></span><br>";
+        }
+        if($this->getCorvetLaser()) {
+            if($armor != 0) {
+                $new = (($this->getCorvetLaser() * 115) - $armor) / 115;
+                if ($new < 0) {
+                    $armor = $new * -115;
+                    $new = $this->getCorvetLaser();
+                } else {
+                    $armor = 0;
+                    $new = $this->getCorvetLaser() - $new;
+                }
+            } else {
+                $new = 0;
+            }
+            $ships = $ships . "Corvettes à laser : " . $this->getCorvetLaser() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round($new) . "</span></span><br>";
+        }
+        if($this->getCorvetWar()) {
+            if($armor != 0) {
+                $new = (($this->getCorvetWar() * 135) - $armor) / 135;
+                if ($new < 0) {
+                    $armor = $new * -135;
+                    $new = $this->getCorvetWar();
+                } else {
+                    $armor = 0;
+                    $new = $this->getCorvetWar() - $new;
+                }
+            } else {
+                $new = 0;
+            }
+            $ships = $ships . "Corvettes Armageddon : " . $this->getCorvetWar() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round($new) . "</span></span><br>";
         }
         if($this->getFregatePlasma()) {
-            $ships = $ships . "Frégates a plasma : " . $this->getFregatePlasma() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round((($this->getFregatePlasma() * $malus) / 100)) . "</span></span><br>";
+            if($armor != 0) {
+                $new = (($this->getFregatePlasma() * 451) - $armor) / 451;
+                if($new < 0) {
+                    $armor = $new * -451;
+                    $new = $this->getFregatePlasma();
+                } else {
+                    $armor = 0;
+                    $new = $this->getFregatePlasma() - $new;
+                }
+            } else {
+                $new = 0;
+            }
+            $ships = $ships . "Frégates a plasma : " . $this->getFregatePlasma() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round($new) . "</span></span><br>";
         }
         if($this->getCroiser()) {
-            $ships = $ships . "Croiseurs : " . $this->getCroiser() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round((($this->getCroiser() * $malus) / 100)) . "</span></span><br>";
-        }
-        if($this->getIronClad()) {
-            $ships = $ships . "Cuirassés : " . $this->getIronClad() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round((($this->getIronClad() * $malus) / 100)) . "</span></span><br>";
+            if($armor != 0) {
+                $new = (($this->getCroiser() * 957) - $armor) / 957;
+                if ($new < 0) {
+                    $armor = $new * -957;
+                    $new = $this->getCroiser();
+                } else {
+                    $armor = 0;
+                    $new = $this->getCroiser() - $new;
+                }
+            } else {
+                $new = 0;
+            }
+            $ships = $ships . "Croiseurs : " . $this->getCroiser() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round($new) . "</span></span><br>";
         }
         if($this->getDestroyer()) {
-            $ships = $ships . "Destroyers : " . $this->getDestroyer() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round((($this->getDestroyer() * $malus) / 100)) . "</span></span><br>";
+            if($armor != 0) {
+                $new = (($this->getDestroyer() * 5176) - $armor) / 5176;
+                if ($new < 0) {
+                    $armor = $new * -5176;
+                    $new = $this->getDestroyer();
+                } else {
+                    $armor = 0;
+                    $new = $this->getDestroyer() - $new;
+                }
+            } else {
+                $new = 0;
+            }
+            $ships = $ships . "Destroyers : " . $this->getDestroyer() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round($new) . "</span></span><br>";
         }
-
+        if($this->getIronClad()) {
+            if($armor != 0) {
+                $new = (($this->getIronClad() * 2415) - $armor) / 2415;
+                if ($new < 0) {
+                    $new = $this->getIronClad();
+                } else {
+                    $new = $this->getIronClad() - $new;
+                }
+            } else {
+                $new = 0;
+            }
+            $ships = $ships . "Cuirassés : " . $this->getIronClad() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round($new) . "</span></span><br>";
+        }
         return $ships;
     }
 
@@ -470,7 +599,11 @@ class Fleet
         $croiser = $this->getCroiser() * 957;
         $ironClad = $this->getIronClad() * 2415;
         $destroyer = $this->getDestroyer() * 5176;
-        $motherShip = $this->getMotherShip() * 20000;
+        if($this->getMotherShip() == 1) {
+            $motherShip = 20000;
+        } else {
+            $motherShip = 0;
+        }
 
         $nbr = $motherShip + $hunterWar + $corvetWar +  $fregate + $hunter + $hunterHeavy + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
         if($this->getMotherShip() == 1) {
@@ -674,53 +807,139 @@ class Fleet
     }
 
     /**
-     * @param $percent
+     * @param $armor
      */
-    public function setFleetWinRatio($percent): void
+    public function setFleetWinRatio($armor): void
     {
-        if($percent != 0) {
+        if($this->getMotherShip() == 1) {
+            $armor = $armor * 0.05;
+        }
+        if($armor > 0) {
             if ($this->getHunter()) {
-                $new = ($this->getHunter() - ($this->getHunter() * $percent) / 100);
+                $new = (($this->getHunter() * 15) - $armor) / 15;
+                if($new < 0) {
+                    $armor = $new * -15;
+                } else {
+                    $armor = 0;
+                }
+                if($new < 0) {
+                    $new = 0;
+                }
                 $this->setHunter(round($new));
             }
-            if ($this->getHunterHeavy()) {
-                $new = ($this->getHunterHeavy() - ($this->getHunterHeavy() * $percent) / 100);
-                $this->setHunterHeavy(round($new));
-            }
-            if ($this->getHunterWar()) {
-                $new = ($this->getHunterWar() - ($this->getHunterWar() * $percent) / 100);
-                $this->setHunterWar(round($new));
-            }
-            if ($this->getFregate()) {
-                $new = ($this->getFregate() - ($this->getFregate() * $percent) / 100);
-                $this->setFregate(round($new));
-            }
-            if ($this->getCorvet()) {
-                $new = ($this->getCorvet() - ($this->getCorvet() * $percent) / 100);
+            if ($this->getCorvet() && $armor != 0) {
+                $new = (($this->getCorvet() * 74) - $armor) / 74;
+                if($new < 0) {
+                    $armor = $new * -74;
+                } else {
+                    $armor = 0;
+                }
+                if($new < 0) {
+                    $new = 0;
+                }
                 $this->setCorvet(round($new));
             }
-            if ($this->getCorvetLaser()) {
-                $new = ($this->getCorvetLaser() - ($this->getCorvetLaser() * $percent) / 100);
+            if ($this->getHunterHeavy() && $armor != 0) {
+                $new = (($this->getHunterHeavy() * 25) - $armor) / 25;
+                if($new < 0) {
+                    $armor = $new * -25;
+                } else {
+                    $armor = 0;
+                }
+                if($new < 0) {
+                    $new = 0;
+                }
+                $this->setHunterHeavy(round($new));
+            }
+            if ($this->getFregate() && $armor != 0) {
+                $new = (($this->getFregate() * 168) - $armor) / 168;
+                if($new < 0) {
+                    $armor = $new * -168;
+                } else {
+                    $armor = 0;
+                }
+                if($new < 0) {
+                    $new = 0;
+                }
+                $this->setFregate(round($new));
+            }
+            if ($this->getHunterWar() && $armor != 0) {
+                $new = (($this->getHunterWar() * 53) - $armor) / 53;
+                if($new < 0) {
+                    $armor = $new * -53;
+                } else {
+                    $armor = 0;
+                }
+                if($new < 0) {
+                    $new = 0;
+                }
+                $this->setHunterWar(round($new));
+            }
+            if ($this->getCorvetLaser() && $armor != 0) {
+                $new = (($this->getCorvetLaser() * 115) - $armor) / 115;
+                if($new < 0) {
+                    $armor = $new * -115;
+                } else {
+                    $armor = 0;
+                }
+                if($new < 0) {
+                    $new = 0;
+                }
                 $this->setCorvetLaser(round($new));
             }
-            if ($this->getCorvetWar()) {
-                $new = ($this->getCorvetWar() - ($this->getCorvetWar() * $percent) / 100);
+            if ($this->getCorvetWar() && $armor != 0) {
+                $new = (($this->getCorvetWar() * 135) - $armor) / 135;
+                if($new < 0) {
+                    $armor = $new * -135;
+                } else {
+                    $armor = 0;
+                }
+                if($new < 0) {
+                    $new = 0;
+                }
                 $this->setCorvetWar(round($new));
             }
-            if ($this->getFregatePlasma()) {
-                $new = ($this->getFregatePlasma() - ($this->getFregatePlasma() * $percent) / 100);
+            if ($this->getFregatePlasma() && $armor != 0) {
+                $new = (($this->getFregatePlasma() * 451) - $armor) / 451;
+                if($new < 0) {
+                    $armor = $new * -451;
+                } else {
+                    $armor = 0;
+                }
+                if($new < 0) {
+                    $new = 0;
+                }
                 $this->setFregatePlasma(round($new));
             }
-            if ($this->getCroiser()) {
-                $new = ($this->getCroiser() - ($this->getCroiser() * $percent) / 100);
+            if ($this->getCroiser() && $armor != 0) {
+                $new = (($this->getCroiser() * 957) - $armor) / 957;
+                if($new < 0) {
+                    $armor = $new * -957;
+                } else {
+                    $armor = 0;
+                }
+                if($new < 0) {
+                    $new = 0;
+                }
                 $this->setCroiser(round($new));
             }
-            if ($this->getDestroyer()) {
-                $new = ($this->getDestroyer() - ($this->getDestroyer() * $percent) / 100);
+            if ($this->getDestroyer() && $armor != 0) {
+                $new = (($this->getDestroyer() * 5176) - $armor) / 5176;
+                if($new < 0) {
+                    $armor = $new * -5176;
+                } else {
+                    $armor = 0;
+                }
+                if($new < 0) {
+                    $new = 0;
+                }
                 $this->setDestroyer(round($new));
             }
-            if ($this->getIronClad()) {
-                $new = ($this->getIronClad() - ($this->getIronClad() * $percent) / 100);
+            if ($this->getIronClad() && $armor != 0) {
+                $new = (($this->getIronClad() * 2415) - $armor) / 2415;
+                if($new < 0) {
+                    $new = 0;
+                }
                 $this->setIronClad(round($new));
             }
         }

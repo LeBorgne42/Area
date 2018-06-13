@@ -607,27 +607,31 @@ class Planet
     {
         $color = 'pp-enemy';
         foreach($this->fleets as $fleet) {
+            $color = 'pp-enemy';
             if ($fleet->getUser() == $user) {
-                return 'pp-mine';
+                $color = 'pp-mine';
             }
             if($fleet->getUser()->getAlly() == $user->getAlly() && $color != 'pp-mine') {
-                return 'pp-ally';
+                $color = 'pp-ally';
             }
             if ($fleet->getUser()->getAlly() && $user->getAlly()) {
                 if (count($fleet->getUser()->getAlly()->getAllieds()) > 0) {
                     foreach($fleet->getUser()->getAlly()->getAllieds() as $allied) {
                         if($allied->getAllyTag() == $user->getAlly()->getSigle() && $allied->getAccepted() == 1) {
-                            return 'pp-ally';
+                            $color = 'pp-ally';
                         }
                     }
                 }
                 if (count($fleet->getUser()->getAlly()->getPeaces()) > 0) {
                     foreach($fleet->getUser()->getAlly()->getPeaces() as $peace) {
                         if($peace->getAllyTag() == $user->getAlly()->getSigle() && $peace->getAccepted() == 1) {
-                            return 'pp-peace';
+                            $color = 'pp-peace';
                         }
                     }
                 }
+            }
+            if($color == 'pp-enemy') {
+                return $color;
             }
         }
         return $color;

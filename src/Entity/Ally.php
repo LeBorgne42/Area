@@ -453,17 +453,17 @@ class Ally
         if($sigles) {
             foreach ($sigles as $sigle) {
                 foreach ($this->getPnas() as $pna) {
-                    if ($pna->getAllyTag() == $sigle && $pna->getAccepted() == 1) {
+                    if ($pna->getAllyTag() == $sigle && $pna->getAccepted() == true) {
                         return null;
                     }
                 }
                 foreach ($this->getAllieds() as $pact) {
-                    if ($pact->getAllyTag() == $sigle && $pact->getAccepted() == 1) {
+                    if ($pact->getAllyTag() == $sigle && $pact->getAccepted() == true) {
                         return null;
                     }
                 }
                 foreach ($this->getPeaces() as $peace) {
-                    if ($peace->getAllyTag() == $sigle && $peace->getAccepted() == 1) {
+                    if ($peace->getAllyTag() == $sigle && $peace->getAccepted() == true) {
                         return null;
                     }
                 }

@@ -246,6 +246,9 @@ class SpatialController extends Controller
                     $x++;
                 }
             }
+            if(!$friendAlly) {
+                $friendAlly = ['plop', 'personne'];
+            }
             $fleets = $em->getRepository('App:Fleet')
                 ->createQueryBuilder('f')
                 ->join('f.user', 'u')
@@ -283,6 +286,17 @@ class SpatialController extends Controller
             $fleet->setIronClad($form_createFleet->get('ironClad')->getData());
             $fleet->setDestroyer($form_createFleet->get('destroyer')->getData());
             if($fleets) {
+                foreach ($fleets as $setWar) {
+                    if($setWar->getUser()->getAlly()) {
+                        $fleet->setAttack(1);
+                        foreach ($eAlly as $tmp) {
+                            if ($setWar->getUser()->getAlly()->getSigle() == $tmp->getAllyTag()) {
+                                $setWar->setAttack(1);
+                                $em->persist($setWar);
+                            }
+                        }
+                    }
+                }
                 $allFleets = $em->getRepository('App:Fleet')
                     ->createQueryBuilder('f')
                     ->join('f.user', 'u')

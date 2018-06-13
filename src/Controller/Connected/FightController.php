@@ -67,6 +67,7 @@ class FightController extends Controller
         }
         $team = $tmpcount;
         $isAttack = [];
+        $isWar = [];
 
         while($team > 0) {
             $team--;
@@ -211,8 +212,8 @@ class FightController extends Controller
             return($blockDef);
         }
 
-        $firstBlood = (($missile / 10) + ($plasma * 3) + ($laser * 1.5));
-        $firstBloodD = (($missileD / 10) + ($plasmaD * 3) + ($laserD * 1.5));
+        $firstBlood = (($missile / 4) + ($plasma * 1.5) + ($laser));
+        $firstBloodD = (($missileD / 4) + ($plasmaD * 1.5) + ($laserD));
         $countSAtt = 0;
         $countSDef = 0;
         if(($firstBlood > 0) && $shieldD > 0) {
@@ -235,45 +236,37 @@ class FightController extends Controller
             $countSAtt = 1;
             $armor = $armor - $firstBloodD;
         }
-        $secondShot = (($missile * 2) + ($plasma / 2) + $laser);
-        $secondShotD = (($missileD * 2) + ($plasmaD / 2) + $laserD);
+        $secondShot = ($missile + ($plasma / 1.5) + $laser);
+        $secondShotD = ($missileD + ($plasmaD / 1.5) + $laserD);
         if($countSDef - $countSAtt > 0) {
             $armorD = $armorD - ($secondShot * ($countSDef - $countSAtt));
-            $secondShotD = (($missileD * 2.5) + ($plasmaD / 2) + $laserD) - ($secondShot * ($countSDef - $countSAtt));
+            $secondShotD = ($missileD + ($plasmaD / 1.5) + $laserD);
         }
         if($countSAtt - $countSDef > 0) {
             $armor = $armor - ($secondShot * ($countSAtt - $countSDef));
-            $secondShot = (($missile * 2.5) + ($plasma / 2) + $laser) - ($secondShotD * ($countSAtt - $countSDef));
+            $secondShot = ($missile + ($plasma / 1.5) + $laser);
         }
+
         $countShot = 0;
-        while((($secondShotD > 0) && $armor > 0) &&
-            (($secondShot > 0) && $armorD > 0) && ($shieldD <= 0 && $shield <= 0)) {
+        while($armorD > 0 && $armor > 0 && $countShot < 100) {
             $countShot++;
             if ($armorD > 0) {
                 $armorD = $armorD - $secondShot;
-                $tmpSecondShotD = $secondShotD;
-                $secondShot = $secondShot - ($tmpSecondShotD / 2);
+                $tmpSecondShot = $secondShot;
+                $secondShot = $secondShot;
             }
             if($armor > 0) {
-                $armor = $armor - $secondShotD;
-                $secondShotD = $secondShotD - ($secondShot / 2);
+                $armor = $armor - $tmpSecondShot;
+                $secondShotD = $secondShotD;
             }
         }
 
         if ($armorD > $armor || $shieldD > 0) {
+            if($armorD * 1.1 < $armorSaveD) {
+                $armorD = $armorD * (rand(11, 13) / 10);
+            }
             if($armorD < 0) {
                 $armorD = $armorSaveD / 20;
-            }
-            $malus = 0;
-            if ($armorSaveD != $armorD) {
-                if($countShot == 0) {
-                    $malus = 0;
-                } else {
-                    $malus = (((($armorSaveD - $armorD) * 100) / $armorSaveD) / (rand(15, 20) / 10));
-                    if($malus < 1) {
-                        $malus = 0;
-                    }
-                }
             }
             foreach($blockDef as $defenderWin) {
                 $reportB = new Report();
@@ -283,8 +276,10 @@ class FightController extends Controller
                 $reportB->setUser($defenderWin->getUser());
                 foreach ($blockDef as $fleetA) {
                     $player = $fleetA->getFleetTags();
-                    if($malus != 0) {
-                        $ships = $fleetA->getShipsReport(number_format($malus, 2));
+                    if($armorSaveD != $armorD) {
+                        $percentArmor = ($fleetA->getArmor() * 100) / $armorSaveD;
+                        $newArmor = round($fleetA->getArmor() - (round($percentArmor * $armorD) / 100));
+                        $ships = $fleetA->getShipsReport($newArmor);
                     } else {
                         $ships = $fleetA->getShipsReportNoLost();
                     }
@@ -315,8 +310,10 @@ class FightController extends Controller
                 $reportA->setContent($reportA->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">Groupe de combat 2</th><th class=\"tab-cells-name p-1 ml-2\">" . $countSDef . " tir(s) pour percer les boucliers</th></tr>");
                 foreach ($blockDef as $fleetA) {
                     $player = $fleetA->getFleetTags();
-                    if($malus != 0) {
-                        $ships = $fleetA->getShipsReport(number_format($malus, 2));
+                    if($armorSaveD != $armorD) {
+                        $percentArmor = ($fleetA->getArmor() * 100) / $armorSaveD;
+                        $newArmor = $fleetA->getArmor() - (round($percentArmor * $armorD) / 100);
+                        $ships = $fleetA->getShipsReport($newArmor);
                     } else {
                         $ships = $fleetA->getShipsReportNoLost();
                     }
@@ -370,7 +367,9 @@ class FightController extends Controller
                     $otherAlly->setPdg($otherAlly->getPdg() + $pdgPeace);
                     $em->persist($otherAlly);
                 }
-                $defenderWin->setFleetWinRatio(number_format($malus, 2));
+                $percentArmor = ($defenderWin->getArmor() * 100) / $armorSaveD;
+                $newArmor = $defenderWin->getArmor() - (round($percentArmor * $armorD) / 100);
+                $defenderWin->setFleetWinRatio($newArmor);
                 $defenderWin->getUser()->getRank()->setWarPoint($defenderWin->getUser()->getRank()->getWarPoint() + $newWarPoint);
                 $defenderWin->setFightAt(null);
                 $em->persist($defenderWin);
@@ -382,19 +381,11 @@ class FightController extends Controller
             $em->flush();
             return($blockDef);
         } else {
+            if($armor * 1.1 < $armorSaveA) {
+                $armor = $armor * (rand(11, 13) / 10);
+            }
             if($armor < 0) {
                 $armor = $armorSaveA / 20;
-            }
-            $malus = 0;
-            if($armorSaveA != $armor) {
-                if($countShot == 0) {
-                    $malus = 0;
-                } else {
-                    $malus = (((($armorSaveA - $armor) * 100) / $armorSaveA) / (rand(15, 20) / 10));
-                    if($malus < 1) {
-                        $malus = 0;
-                    }
-                }
             }
             foreach($blockAtt as $attackerWin) {
                 $reportA = new Report();
@@ -410,8 +401,10 @@ class FightController extends Controller
                 $reportA->setContent($reportA->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">Groupe de combat 2</th><th class=\"tab-cells-name p-1 ml-2\">" . $countSAtt . " tir(s) pour percer les boucliers</th></tr>");
                 foreach ($blockAtt as $fleetB) {
                     $player = $fleetB->getFleetTags();
-                    if($malus != 0) {
-                        $ships = $fleetB->getShipsReport(number_format($malus, 2));
+                    if($armorSaveA != $armor) {
+                        $percentArmor = ($fleetB->getArmor() * 100) / $armorSaveA;
+                        $newArmor = $fleetB->getArmor() - (round($percentArmor * $armor) / 100);
+                        $ships = $fleetB->getShipsReport($newArmor);
                     } else {
                         $ships = $fleetB->getShipsReportNoLost();
                     }
@@ -430,8 +423,10 @@ class FightController extends Controller
                 $reportB->setUser($defenderLose->getUser());
                 foreach ($blockAtt as $fleetB) {
                     $player = $fleetB->getFleetTags();
-                    if($malus != 0) {
-                        $ships = $fleetB->getShipsReport(number_format($malus, 2));
+                    if($armorSaveA != $armor) {
+                        $percentArmor = ($fleetB->getArmor() * 100) / $armorSaveA;
+                        $newArmor = $fleetB->getArmor() - (round($percentArmor * $armor) / 100);
+                        $ships = $fleetB->getShipsReport($newArmor);
                     } else {
                         $ships = $fleetB->getShipsReportNoLost();
                     }
@@ -490,7 +485,9 @@ class FightController extends Controller
                     $otherAlly->setPdg($otherAlly->getPdg() + $pdgPeace);
                     $em->persist($otherAlly);
                 }
-                $attackerWin->setFleetWinRatio(number_format($malus, 2));
+                $percentArmor = ($attackerWin->getArmor() * 100) / $armorSaveA;
+                $newArmor = $attackerWin->getArmor() - (round($percentArmor * $armor) / 100);
+                $attackerWin->setFleetWinRatio($newArmor);
                 $attackerWin->getUser()->getRank()->setWarPoint($attackerWin->getUser()->getRank()->getWarPoint() + $newWarPoint);
                 $attackerWin->setFightAt(null);
                 $em->persist($attackerWin);

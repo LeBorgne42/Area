@@ -1,4 +1,4 @@
-version: 'Version beta'
+version: 'Beta v0.1'
 home: Accueil
 footer: 'Suivez nous sur facebook!'
 media: Medias
@@ -27,8 +27,6 @@ report: Rapport
 salon: Salon
 disconnect: Deconnexion
 rules: Reglement
-popover.title: 'Note version beta'
-popover.text: 'Merci de privilégié le forum tant que nous sommes en beta.'
 modal.to: 'Nouveau message à l''admin'
 modal.from: 'Votre email :'
 modal.text: 'Message :'

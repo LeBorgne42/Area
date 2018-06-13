@@ -305,15 +305,6 @@ class PactController extends Controller
             ->getQuery()
             ->getOneOrNullResult();
 
-        $warOther = $em->getRepository('App:War')
-            ->createQueryBuilder('w')
-            ->where('w.allyTag = :sigle')
-            ->andWhere('w.ally = :war')
-            ->setParameters(array(
-                'sigle' => $ally->getSigle(), 'war' => $war->getAlly()))
-            ->getQuery()
-            ->getOneOrNullResult();
-
         $waitingPeaces = $em->getRepository('App:Peace')
             ->createQueryBuilder('p')
             ->where('p.allyTag = :sigle')
@@ -329,8 +320,8 @@ class PactController extends Controller
 
         if (($form_peace->isSubmitted() && $form_peace->isValid())) {
             $peace = new Peace();
-            $peace->setAlly($warOther->getAlly());
-            $peace->setAllyTag($ally->getSigle());
+            $peace->setAlly($ally);
+            $peace->setAllyTag($war->getAllyTag());
             $peace->setSignedAt($now);
             $peace->setType($form_peace->get('type')->getData());
             $peace->setPlanet($form_peace->get('planetNbr')->getData());
