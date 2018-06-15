@@ -115,7 +115,7 @@
                     <div class="row">
                         <div class="col-6 pt-1">
                             {{ 'overview.search'|trans }}
-                            {% if app.user.getSearch() %}<span><a href="{{ path('search', {'idp': usePlanet.getId()}) }}">{{ app.user.getSearch()|trans }}</a></span> (<span class="timerArea" hidden>{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</span>){% else %}<span><a href="{{ path('search', {'idp': usePlanet.getId()}) }}">{{ 'cell.searchNone'|trans|raw }}</a></span>{% endif %}
+                            {% if app.user.getSearch() %}<span><a href="{{ path('search', {'idp': usePlanet.getId()}) }}">{{ app.user.getSearch()|trans }}</a></span> (<span class="timerArea" hidden>{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</span>) - <a class="text-rouge" href="{{ path('research_cancel', {'idp': usePlanet.getId()}) }}">X</a>{% else %}<span><a href="{{ path('search', {'idp': usePlanet.getId()}) }}">{{ 'cell.searchNone'|trans|raw }}</a></span>{% endif %}
                         </div>
                         <div class="col-6 pt-1"  data-html="true" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.dailyCost'|trans({'%soldier%': (app.user.getAllSoldier() * 2)|number_format, '%ship%': app.user.getAllShipsCost()|number_format, '%build%': app.user.getBuildingCost()|number_format, '%bitcoin%': (app.user.getAllWorker() / 1.60)|number_format}) }}">
                             {{ 'info.cost'|trans|raw }} {{ cost|number_format }} <img src="{{ asset('img/coin.png') }}">
@@ -138,7 +138,7 @@
                         {% if planet.getSky() != planet.getSkyPlace() or planet.getGround() != planet.getGroundPlace() %}
                             <tr>
                                 <th class="tab-cells-name p-2">
-                                    {{ planet.getName() }} : {% if planet.getConstruct() %}<span><a href="{{ path('building', {'idp': planet.getId()}) }}">{{ planet.getConstruct()|trans }}</a></span> (<span class="timerArea" hidden>{{ planet.getConstructAt()|date('Y/m/d H:i:s') }}</span>){% else %}<span><a href="{{ path('building', {'idp': planet.getId()}) }}">{{ 'cell.buildingNone'|trans|raw }}</a></span>{% endif %}
+                                    {{ planet.getName() }} : {% if planet.getConstruct() %}<span><a href="{{ path('building', {'idp': planet.getId()}) }}">{{ planet.getConstruct()|trans }}</a></span> (<span class="timerArea" hidden>{{ planet.getConstructAt()|date('Y/m/d H:i:s') }}</span>) - <a class="text-rouge" href="{{ path('cancel_construction', {'idp': usePlanet.getId(), 'id': planet.getId()}) }}">X</a>{% else %}<span><a href="{{ path('building', {'idp': planet.getId()}) }}">{{ 'cell.buildingNone'|trans|raw }}</a></span>{% endif %}
                                 </th>
                             </tr>
                         {% endif %}

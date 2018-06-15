@@ -27,7 +27,7 @@ title.planet: Planète
 form.name: 'nouveau nom'
 form.renamePlanet: renommer
 tooltip.rank: 'Votre classement est affiché ici avec l''évolution positive ou négative depuis les dernière 24h.'
-title.tmpbeta: '<-- Cliquez sur le bouton Beta vx.x pour accéder aux dernières mises à jour.'
+title.tmpbeta: '<-- Cliquez sur le bouton Beta vx.x pour accéder aux dernières mises à jour. (15/06/2018)'
 info.worker: 'Total travailleurs :'
 info.cost: 'Coût d''entretien :'
 info.soldier: 'Total soldats :'

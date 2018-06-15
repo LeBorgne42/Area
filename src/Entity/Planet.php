@@ -189,6 +189,11 @@ class Planet
     protected $caserne = 0;
 
     /**
+     * @ORM\Column(name="bunker",type="integer", nullable=true)
+     */
+    protected $bunker = 0;
+
+    /**
      * @ORM\Column(name="radar",type="integer", nullable=true)
      */
     protected $radar = 0;
@@ -531,6 +536,7 @@ class Planet
         $niobiumStock = $this->getNiobiumStock() * 40;
         $waterStock = $this->getWaterStock() * 45;
         $caserne = $this->getCaserne() * 25;
+        $bunker = $this->getBunker() * 130;
         $center = $this->getCenterSearch() * 3;
         $city = $this->getCity() * 65;
         $metropole = $this->getMetropole() * 120;
@@ -541,7 +547,7 @@ class Planet
         $skyr = $this->getSkyRadar() * 60;
         $brouilleur = $this->getSkyBrouilleur() * 100;
 
-        $nbr = $extractor + $niobiumStock + $waterStock + $miner + $caserne + $center + $city + $metropole + $light + $heavy + $space + $radar + $skyr + $brouilleur;
+        $nbr = $extractor + $niobiumStock + $waterStock + $miner + $caserne + $bunker + $center + $city + $metropole + $light + $heavy + $space + $radar + $skyr + $brouilleur;
         return $nbr;
     }
 
@@ -555,17 +561,18 @@ class Planet
         $niobiumStock = $this->getNiobiumStock() * 40;
         $waterStock = $this->getWaterStock() * 45;
         $caserne = $this->getCaserne() * 1000;
+        $bunker = $this->getBunker() * 12000;
         $center = $this->getCenterSearch() * 800;
-        $city = $this->getCity() * 500;
-        $metropole = $this->getMetropole() * 750;
-        $light = $this->getLightUsine() * 2500;
-        $heavy = $this->getHeavyUsine() * 5000;
+        $city = $this->getCity() * 200;
+        $metropole = $this->getMetropole() * 400;
+        $light = $this->getLightUsine() * 5000;
+        $heavy = $this->getHeavyUsine() * 10000;
         $space = $this->getSpaceShip() * 1500;
         $radar = $this->getRadar() * 200;
-        $skyr = $this->getSkyRadar() * 800;
-        $brouilleur = $this->getSkyBrouilleur() * 1200;
+        $skyr = $this->getSkyRadar() * 2000;
+        $brouilleur = $this->getSkyBrouilleur() * 6000;
 
-        $nbr = $extractor + $niobiumStock + $waterStock + $miner + $caserne + $center + $city + $metropole + $light + $heavy + $space + $radar + $skyr + $brouilleur;
+        $nbr = $extractor + $niobiumStock + $waterStock + $miner + $caserne + $bunker + $center + $city + $metropole + $light + $heavy + $space + $radar + $skyr + $brouilleur;
         return $nbr;
     }
 
@@ -2035,5 +2042,21 @@ class Planet
     public function setMoon($moon): void
     {
         $this->moon = $moon;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBunker()
+    {
+        return $this->bunker;
+    }
+
+    /**
+     * @param mixed $bunker
+     */
+    public function setBunker($bunker): void
+    {
+        $this->bunker = $bunker;
     }
 }

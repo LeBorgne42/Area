@@ -323,10 +323,10 @@ class InstantController extends Controller
                 $planet->setWtProduction($planet->getWtProduction() + ($planet->getExtractor() * 1.09));
             } elseif ($build == 'niobiumStock') {
                 $planet->setNiobiumStock($planet->getNiobiumStock() + 1);
-                $planet->setNiobiumMax($planet->getNiobiumMax() + 250000);
+                $planet->setNiobiumMax($planet->getNiobiumMax() + 750000);
             } elseif ($build == 'waterStock') {
                 $planet->setWaterStock($planet->getWaterStock() + 1);
-                $planet->setWaterMax($planet->getWaterMax() + 250000);
+                $planet->setWaterMax($planet->getWaterMax() + 750000);
             } elseif ($build == 'city') {
                 $planet->setCity($planet->getCity() + 1);
                 $planet->setWorkerProduction($planet->getWorkerProduction() + 2000);
@@ -338,6 +338,9 @@ class InstantController extends Controller
             } elseif ($build == 'caserne') {
                 $planet->setCaserne($planet->getCaserne() + 1);
                 $planet->setSoldierMax($planet->getSoldierMax() + 2500);
+            } elseif ($build == 'bunker') {
+                $planet->setBunker($planet->getBunker() + 1);
+                $planet->setSoldierMax($planet->getSoldierMax() + 20000);
             } elseif ($build == 'centerSearch') {
                 $planet->setCenterSearch($planet->getCenterSearch() + 1);
                 $planet->setScientistMax($planet->getScientistMax() + 500);

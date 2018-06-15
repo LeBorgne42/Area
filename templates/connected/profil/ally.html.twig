@@ -7,6 +7,7 @@
 {% block body %}
     <div class="front-block allyPage text-center">
         <div class="my-4">[{{ ally.getSigle() }}] - {{ ally.getName() }} <span class="ml-4"><a href="{{ path('ally_join_salon', {'idp': usePlanet.getId(), 'sigle': ally.getSigle()}) }}">{{ 'ally.ambassy'|trans|raw }}</a></span></div>
+        <div class="my-3">{{ ally.getPolitic()|trans }}</div>
         <div class="my-3">{{ ally.getSlogan() }}</div>
         {% if ally.imageName %}
             <div class="text-center"><img height="300" width="450" src="{{ vich_uploader_asset(ally, 'imageFile') }}"></div>

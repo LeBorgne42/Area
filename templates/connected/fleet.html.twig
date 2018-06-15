@@ -66,6 +66,9 @@
                 <th class="tab-cells-name text-center">
                     {{ 'fleet.fleetSignature'|trans }}
                 </th>
+                <th class="tab-cells-name text-center">
+                    {{ 'fleet.cancelFleet'|trans }}
+                </th>
             </tr>
             {% for fleet in fleetMove %}
                 <tr>
@@ -90,6 +93,14 @@
                     <td class="center-cells text-center">
                         {{ fleet.getNbrSignatures()|number_format }}
                     </td>
+                    {% if fleet.cancelFlight() > date %}
+                        <td class="center-cells text-center">
+                            <a class="text-rouge" href="{{ path('cancel_fleet', {'idp': usePlanet.getId(),'id': fleet.getId()}) }}"><span class="timerArea" hidden>{{ fleet.cancelFlight()|date('Y/m/d H:i:s') }}</span></a>
+                        </td>
+                    {% else %}
+                        <td class="center-cells text-center">
+                        </td>
+                    {% endif %}
                 </tr>
             {% endfor %}
             </tbody>

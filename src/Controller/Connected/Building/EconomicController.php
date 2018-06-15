@@ -188,8 +188,8 @@ class EconomicController extends Controller
         $level = $usePlanet->getMetropole() + 1;
         $usePlanetNb = $usePlanet->getNiobium();
         $usePlanetWt = $usePlanet->getWater();
-        $newGround = $usePlanet->getGroundPlace() + 8;
-        $newSky = $usePlanet->getSkyPlace() + 8;
+        $newGround = $usePlanet->getGroundPlace() + 6;
+        $newSky = $usePlanet->getSkyPlace() + 6;
 
         if(($usePlanetNb < ($level * 75000) || $usePlanetWt < ($level * 55000)) ||
             ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround()) ||
@@ -229,8 +229,8 @@ class EconomicController extends Controller
             ->getOneOrNullResult();
 
         $level = $usePlanet->getMetropole();
-        $newGround = $usePlanet->getGroundPlace() - 8;
-        $newSky = $usePlanet->getSkyPlace() - 8;
+        $newGround = $usePlanet->getGroundPlace() - 6;
+        $newSky = $usePlanet->getSkyPlace() - 6;
 
         if($level == 0 || $usePlanet->getConstructAt() > $now) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));

@@ -183,14 +183,14 @@ class ProductionController extends Controller
         $usePlanetNb = $usePlanet->getNiobium();
         $usePlanetWt = $usePlanet->getWater();
         $newGround = $usePlanet->getGroundPlace() + 3;
-        if(($usePlanetNb < ($level * 75000) || $usePlanetWt < ($level * 50000)) ||
+        if(($usePlanetNb < ($level * 150000) || $usePlanetWt < ($level * 100000)) ||
             ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround()) ||
         $user->getCargo() < 2) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $now->add(new DateInterval('PT' . ($level * 21600) . 'S'));
-        $usePlanet->setNiobium($usePlanetNb - ($level * 75000));
-        $usePlanet->setWater($usePlanetWt - ($level * 50000));
+        $usePlanet->setNiobium($usePlanetNb - ($level * 150000));
+        $usePlanet->setWater($usePlanetWt - ($level * 100000));
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setConstruct('niobiumStock');
         $usePlanet->setConstructAt($now);
@@ -225,7 +225,7 @@ class ProductionController extends Controller
         }
         $now->add(new DateInterval('PT' . 1800 . 'S'));
         $usePlanet->setExtractor($level - 1);
-        $usePlanet->setNiobiumMax($usePlanet->getNiobiumMax() - 250000);
+        $usePlanet->setNiobiumMax($usePlanet->getNiobiumMax() - 750000);
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setConstruct('destruct');
         $usePlanet->setConstructAt($now);
@@ -257,14 +257,14 @@ class ProductionController extends Controller
         $usePlanetNb = $usePlanet->getNiobium();
         $usePlanetWt = $usePlanet->getWater();
         $newGround = $usePlanet->getGroundPlace() + 4;
-        if(($usePlanetNb < ($level * 50000) || $usePlanetWt < ($level * 90000)) ||
+        if(($usePlanetNb < ($level * 110000) || $usePlanetWt < ($level * 180000)) ||
             ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround()) ||
             $user->getCargo() < 2) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $now->add(new DateInterval('PT' . ($level * 21600) . 'S'));
-        $usePlanet->setNiobium($usePlanetNb - ($level * 50000));
-        $usePlanet->setWater($usePlanetWt - ($level * 90000));
+        $usePlanet->setNiobium($usePlanetNb - ($level * 110000));
+        $usePlanet->setWater($usePlanetWt - ($level * 180000));
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setConstruct('waterStock');
         $usePlanet->setConstructAt($now);
@@ -298,7 +298,7 @@ class ProductionController extends Controller
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
         $now->add(new DateInterval('PT' . 1800 . 'S'));
-        $usePlanet->setWaterMax($usePlanet->getWaterMax() - 250000);
+        $usePlanet->setWaterMax($usePlanet->getWaterMax() - 750000);
         $usePlanet->setExtractor($level - 1);
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setConstruct('destruct');

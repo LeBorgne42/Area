@@ -31,6 +31,8 @@ class FleetController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
 
         if($user->getGameOver()) {
             return $this->redirectToRoute('game_over');
@@ -91,6 +93,7 @@ class FleetController extends Controller
             ->getResult();
 
         return $this->render('connected/fleet.html.twig', [
+            'date' => $now,
             'usePlanet' => $usePlanet,
             'fleetMove' => $fleetGiveMove,
             'fleetOther' => $fleetOther,
@@ -603,6 +606,9 @@ class FleetController extends Controller
         $user = $this->getUser();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
+        $moreNow = new DateTime();
+        $moreNow->setTimezone(new DateTimeZone('Europe/Paris'));
+        $moreNow->add(new DateInterval('PT' . 120 . 'S'));
 
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
@@ -700,6 +706,7 @@ class FleetController extends Controller
             $fleetGive->setRecycleAt(null);
             $fleetGive->setNewPlanet($planetTake->getId());
             $fleetGive->setFlightTime($now);
+            $fleetGive->setCancelFlight($moreNow);
             $fleetGive->setFlightType($form_sendFleet->get('flightType')->getData());
             $fleetGive->setSector($planetTake->getSector());
             $fleetGive->setPlanete($planetTakee);
@@ -1367,5 +1374,43 @@ class FleetController extends Controller
             'oldFleet' => $oldFleet,
             'form_spatialShip' => $form_spatialShip->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/annuler-flotte/{idp}/{id}/", name="cancel_fleet", requirements={"idp"="\d+", "id"="\d+"})
+     */
+    public function cancelFleetAction($idp, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
+
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $fleet = $em->getRepository('App:Fleet')
+            ->createQueryBuilder('f')
+            ->where('f.id = :id')
+            ->andWhere('f.user = :user')
+            ->setParameters(array('id' => $id, 'user' => $user))
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        if($fleet->getCancelFlight() > $now) {
+            $fleet->setFlightTime(null);
+            $fleet->setPlanete(null);
+            $fleet->setSector(null);
+            $fleet->setNewPlanet(null);
+            $em->persist($fleet);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
     }
 }

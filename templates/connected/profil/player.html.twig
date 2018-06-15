@@ -13,6 +13,7 @@
         {% endif %}
         <div class="my-4 ml-5">{{ 'user.name'|trans }} {{ user.getUserName() }}</div>
         <div class="my-4 ml-5">{{ 'user.ally'|trans }} {% if user.getAlly() %}<span><a data-toggle="modal" data-target="#allyModal" href="{{ path('ally_profil', {'idp': usePlanet.getId(), 'id': user.getAlly().getId()}) }}">{{ user.getAlly().getName() }}</a></span>{% else %}{{ 'user.allyNone'|trans }}{% endif %}</div>
+        {% if user.getAlly() %}<div class="my-4 ml-5">{{ 'user.politic'|trans }} {{ user.getAlly().getPolitic()|trans }}</div>{% endif %}
         <div class="my-4 ml-5">{{ 'user.galaxy'|trans }} 1</div>
         <div class="my-4 ml-5">{{ 'user.planet'|trans }} {{ user.getAllPlanets()|length }}</div>
         <div class="my-4 ml-5">{{ 'user.fleet'|trans }} {{ user.getFleets()|length }}</div>

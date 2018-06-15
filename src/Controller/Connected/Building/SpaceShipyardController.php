@@ -273,7 +273,7 @@ class SpaceShipyardController extends Controller
 
         if(($usePlanetNb < ($level * 13000) || $usePlanetWt < ($level * 19000)) ||
             ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround()) ||
-            ($user->getDiscipline() < 3)) {
+            ($user->getDiscipline() == 0)) {
             return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
         }
 
@@ -318,6 +318,83 @@ class SpaceShipyardController extends Controller
         $usePlanet->setCaserne($level - 1);
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setSoldierMax($usePlanet->getSoldierMax() - 2500);
+        $usePlanet->setConstruct('destruct');
+        $usePlanet->setConstructAt($now);
+        $em->persist($usePlanet);
+        $em->flush();
+
+        return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+    }
+
+    /**
+     * @Route("/contruire-bunker/{idp}", name="building_add_bunker", requirements={"idp"="\d+"})
+     */
+    public function buildingAddBunkerAction($idp)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
+        $user = $this->getUser();
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $level = $usePlanet->getBunker() + 1;
+        $usePlanetNb = $usePlanet->getNiobium();
+        $usePlanetWt = $usePlanet->getWater();
+        $newGround = $usePlanet->getGroundPlace() + 10;
+
+        if(($usePlanetNb < ($level * 200000) || $usePlanetWt < ($level * 190000)) ||
+            ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround()) ||
+            ($user->getDiscipline() == 0)) {
+            return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+        }
+
+        $now->add(new DateInterval('PT' . ($level * 43200) . 'S'));
+        $usePlanet->setNiobium($usePlanetNb - ($level * 200000));
+        $usePlanet->setWater($usePlanetWt - ($level * 190000));
+        $usePlanet->setGroundPlace($newGround);
+        $usePlanet->setConstruct('bunker');
+        $usePlanet->setConstructAt($now);
+        $em->persist($usePlanet);
+        $em->flush();
+
+        return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+    }
+
+    /**
+     * @Route("/detruire-bunker/{idp}", name="building_remove_bunker", requirements={"idp"="\d+"})
+     */
+    public function buildingRemoveBunkerAction($idp)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
+        $user = $this->getUser();
+
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->andWhere('p.user = :user')
+            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $level = $usePlanet->getBunker();
+        $newGround = $usePlanet->getGroundPlace() - 10;
+
+        if(($level == 0 || $usePlanet->getConstructAt() > $now) ||
+            ($usePlanet->getSoldier() > $usePlanet->getSoldierMax() - 20000)) {
+            return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+        }
+        $now->add(new DateInterval('PT' . 1800 . 'S'));
+        $usePlanet->setBunker($level - 1);
+        $usePlanet->setGroundPlace($newGround);
+        $usePlanet->setSoldierMax($usePlanet->getSoldierMax() - 20000);
         $usePlanet->setConstruct('destruct');
         $usePlanet->setConstructAt($now);
         $em->persist($usePlanet);

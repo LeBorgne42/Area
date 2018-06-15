@@ -64,6 +64,11 @@ class Fleet
     protected $flightTime = null;
 
     /**
+     * @ORM\Column(name="cancelFlight",type="datetime", nullable=true)
+     */
+    protected $cancelFlight = null;
+
+    /**
      * @ORM\Column(name="flightType",type="string", nullable=true)
      */
     protected $flightType = null;
@@ -1598,5 +1603,21 @@ class Fleet
     public function setMotherShip($motherShip): void
     {
         $this->motherShip = $motherShip;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCancelFlight()
+    {
+        return $this->cancelFlight;
+    }
+
+    /**
+     * @param mixed $cancelFlight
+     */
+    public function setCancelFlight($cancelFlight): void
+    {
+        $this->cancelFlight = $cancelFlight;
     }
 }
