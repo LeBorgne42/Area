@@ -560,7 +560,7 @@ class FightController extends Controller
             $dSigle = $userDefender->getAlly()->getSigle();
         }
 
-        if($barge && $invader->getPlanet()->getUser() && $invader->getAllianceUser() == null && $invader->getFightAt() == null && $invader->getFlightTime() == null && $ally->getSigleAlliedArray($dSigle)) {
+        if($barge && $invader->getPlanet()->getUser() && $invader->getAllianceUser() == null && $invader->getFightAt() == null && $invader->getFlightTime() == null && $user->getSigleAlliedArray($dSigle)) {
             if($barge >= $invader->getSoldier()) {
                 $aMilitary = $invader->getSoldier() * $alea;
                 $soldierAtmp = $invader->getSoldier();
@@ -583,7 +583,9 @@ class FightController extends Controller
                     $soldierDtmp = $soldierDtmp - $defenser->getSoldier();
                     $workerDtmp = $workerDtmp - $defenser->getWorker();
                 } else {
-                    $defenser->setSoldier($aMilitary / 6);
+                    $defenser->setSoldier(round($aMilitary / 6));
+                    $soldierDtmp = round($aMilitary / 6);
+                    $workerDtmp = $defenser->getWorker();
                 }
                 $reportDef->setTitle("Rapport d'invasion : Victoire (défense)");
                 $reportDef->setContent("Bien joué ! Vos travailleurs et soldats ont repoussé l'invasion du joueur " . $user->getUserName() . " sur votre planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . ".  " . $soldierAtmp . " soldats vous ont attaqué, tous ont été tué. Vous avez ainsi prit le contrôle des barges de l'attaquant.");

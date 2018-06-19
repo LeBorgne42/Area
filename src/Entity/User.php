@@ -481,6 +481,34 @@ class User implements UserInterface, \Serializable
     /**
      * @return mixed
      */
+    public function getSigleAlliedArray($sigles)
+    {
+        $ally = $this->getAlly();
+        if($sigles && $ally) {
+            foreach ($sigles as $sigle) {
+                foreach ($ally->getPnas() as $pna) {
+                    if ($pna->getAllyTag() == $sigle && $pna->getAccepted() == true) {
+                        return null;
+                    }
+                }
+                foreach ($ally->getAllieds() as $pact) {
+                    if ($pact->getAllyTag() == $sigle && $pact->getAccepted() == true) {
+                        return null;
+                    }
+                }
+                foreach ($ally->getPeaces() as $peace) {
+                    if ($peace->getAllyTag() == $sigle && $peace->getAccepted() == true) {
+                        return null;
+                    }
+                }
+            }
+        }
+        return 'toto';
+    }
+
+    /**
+     * @return mixed
+     */
     public function getAllyFriends()
     {
         if($this->ally) {

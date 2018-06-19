@@ -677,7 +677,7 @@ class InstantController extends Controller
                         $dSigle = $userDefender->getAlly()->getSigle();
                     }
 
-                    if($barge && $fleet->getPlanet()->getUser() && $fleet->getAllianceUser() && $ally->getSigleAlliedArray($dSigle)) {
+                    if($barge && $fleet->getPlanet()->getUser() && $fleet->getAllianceUser() && $user->getSigleAlliedArray($dSigle)) {
                         if($barge >= $fleet->getSoldier()) {
                             $aMilitary = $fleet->getSoldier() * $alea;
                             $soldierAtmp = $fleet->getSoldier();
@@ -701,6 +701,8 @@ class InstantController extends Controller
                                 $workerDtmp = $workerDtmp - $defenser->getWorker();
                             } else {
                                 $defenser->setSoldier($aMilitary / 6);
+                                $soldierDtmp = round($aMilitary / 6);
+                                $workerDtmp = $defenser->getWorker();
                             }
                             $reportDef->setTitle("Rapport d'invasion : Victoire (défense)");
                             $reportDef->setContent("Bien joué ! Vos travailleurs et soldats ont repoussé l'invasion du joueur " . $user->getUserName() . " sur votre planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . ".  " . $soldierAtmp . " soldats vous ont attaqué, tous ont été tué. Vous avez ainsi prit le contrôle des barges de l'attaquant.");
