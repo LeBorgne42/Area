@@ -47,13 +47,18 @@ class FightController extends Controller
             ->getResult();
 
         $teamBlock = [];
+        $fleetsId = [];
         foreach ($fleetsWars as $fleetsWar) {
             if($fleetsWar->getUser()->getAlly()) {
-                if (in_array($fleetsWar->getUser()->getAlly()->getSigle(), $teamBlock) == false && $fleetsWar->getUser()->getAlly()->getSigleAlliedArray($teamBlock)) {
+                if (in_array($fleetsWar->getUser()->getAlly()->getSigle(), $teamBlock) == false && $fleetsWar->getUser()->getAlly()->getSigleAlliedArray($teamBlock) &&
+                    in_array($fleetsWar->getId(), $fleetsId) == false) {
                     $teamBlock[] = $fleetsWar->getUser()->getAlly()->getSigle();
+                    $fleetsId[] = $fleetsWar->getId();
                 }
-            } elseif (in_array($fleetsWar->getUser()->getUserName(), $teamBlock) == false) {
+            } elseif (in_array($fleetsWar->getUser()->getUserName(), $teamBlock) == false &&
+                    in_array($fleetsWar->getId(), $fleetsId) == false) {
                 $teamBlock[] = $fleetsWar->getUser()->getUserName();
+                $fleetsId[] = $fleetsWar->getId();
             }
         }
         $tmpcount = count($teamBlock);

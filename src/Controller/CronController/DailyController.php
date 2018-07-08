@@ -50,7 +50,7 @@ class DailyController extends Controller
                     $buildingCost = $buildingCost + $planet->getBuildingCost();
                 }
             }
-            $gain = round($worker / 1.60);
+            $gain = round($worker / 2);
             if($ally) {
                 if($ally->getPeaces()) {
                     foreach($ally->getPeaces() as $peace) {

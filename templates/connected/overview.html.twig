@@ -7,15 +7,6 @@
 {% block body %}
     {% set cost = (app.user.getAllSoldier() * 2) + app.user.getAllShipsCost() + app.user.getBuildingCost() %}
     <div class="front-block">
-        <table class="table table-striped table-bordered table-dark">
-            <tbody>
-            <tr>
-                <th class="tab-cells-name">
-                    <h3 class="float-left mt-1">{{ 'title.tmpbeta'|trans|raw }}</h3>
-                </th>
-            </tr>
-            </tbody>
-        </table>
         <table class="table table-striped table-dark text-center borderOverview">
             <tbody>
                 <tr>

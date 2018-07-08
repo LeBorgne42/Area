@@ -66,7 +66,7 @@ class InstantController extends Controller
                 foreach ($asteroides as $asteroide) {
                     $nbrFleet = $asteroide->getFleetWithRec();
                     foreach ($asteroide->getFleets() as $fleetAsteroide) {
-                        $asteroideRes = round(50000 / $nbrFleet);
+                        $asteroideRes = round(25000 / $nbrFleet);
                         if ($fleetAsteroide->getRecycleur()) {
                             if ($fleetAsteroide->getCargoPlace() < ($fleetAsteroide->getCargoFull() + ($asteroideRes * 2))) {
                                 $cargoFullAst = round((($fleetAsteroide->getCargoPlace() - $fleetAsteroide->getCargoFull()) / 2));
@@ -506,6 +506,7 @@ class InstantController extends Controller
                 ->getQuery()
                 ->getResult();
 
+            $ally = null;
             if ($fleet->getUser()->getAlly()) {
                 $ally = $em->getRepository('App:Fleet')
                     ->createQueryBuilder('f')
@@ -517,9 +518,9 @@ class InstantController extends Controller
                     ->getQuery()
                     ->getResult();
             } else {
-                $ally = 'war';
+                $allyN = 'war';
             }
-            if ($attackFleets || ($fleet->getAttack() == true && ($ally || $ally == 'war'))) {
+            if ($attackFleets || ($fleet->getAttack() == true && ($ally || $allyN == 'war'))) {
                 $now = new DateTime();
                 $now->setTimezone(new DateTimeZone('Europe/Paris'));
                 $now->add(new DateInterval('PT' . 300 . 'S'));

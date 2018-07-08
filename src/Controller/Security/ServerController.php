@@ -25,7 +25,7 @@ class ServerController extends Controller
      * @Route("/creation-serveur", name="create")
      * @Route("/creation-serveur/", name="create_withSlash")
      */
-    public function createServerAction(Request $request)
+    public function createServerAction()
     {
         $em = $this->getDoctrine()->getManager();
         $nbrSector = 1;
@@ -34,29 +34,37 @@ class ServerController extends Controller
         $galaxy = new Galaxy();
         $galaxy->setPosition(2);
         $em->persist($galaxy);
-        $salon = new Salon();
+        /*$salon = new Salon();
         $salon->setName('Public');
         $em->persist($salon);
+        $em->flush();*/
 
-        $fossoyeurs = new User();
-        $now = new DateTime();
-        $fossoyeurs->setUsername('Les hydres');
-        $fossoyeurs->setEmail('support@areauniverse.eu');
-        $fossoyeurs->setCreatedAt($now);
-        $fossoyeurs->setPassword(password_hash('ViolGratuit2018', PASSWORD_BCRYPT));
-        $fossoyeurs->setBitcoin(999999999999);
-        $fossoyeurs->setImageName('hydre.png');
-        $fossoyeurs->setTerraformation(10000);
-        $rank = new Rank();
-        $em->persist($rank);
-        $fossoyeurs->setRank($rank);
-        $em->persist($fossoyeurs);
-        $em->flush();
+        $fossoyeurs = $em->getRepository('App:User')
+            ->createQueryBuilder('u')
+            ->where('u.id = :id')
+            ->setParameters(array('id' => 1))
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        if($fossoyeurs == null) {
+            $fossoyeurs = new User();
+            $now = new DateTime();
+            $fossoyeurs->setUsername('Les hydres');
+            $fossoyeurs->setEmail('support@areauniverse.eu');
+            $fossoyeurs->setCreatedAt($now);
+            $fossoyeurs->setPassword(password_hash('ViolGratuit2018', PASSWORD_BCRYPT));
+            $fossoyeurs->setBitcoin(100);
+            $fossoyeurs->setImageName('hydre.png');
+            $fossoyeurs->setTerraformation(10000);
+            $rank = new Rank();
+            $em->persist($rank);
+            $fossoyeurs->setRank($rank);
+            $em->persist($fossoyeurs);
+            $em->flush();
+        }
 
         $fosSalon = $em->getRepository('App:Salon')
             ->createQueryBuilder('s')
-            ->where('s.id = :id')
-            ->setParameters(array('id' => 1))
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -141,13 +149,13 @@ class ServerController extends Controller
             ->getOneOrNullResult();
 
         $fosPlanet->setUser($fossoyeurs);
-        $fosPlanet->setWorker(10000000);
-        $fosPlanet->setWorkerMax(10000000);
-        $fosPlanet->setSoldier(2500000);
-        $fosPlanet->setSoldierMax(2500000);
+        $fosPlanet->setWorker(500000);
+        $fosPlanet->setWorkerMax(500000);
+        $fosPlanet->setSoldier(150000);
+        $fosPlanet->setSoldierMax(150000);
         $fosPlanet->setCaserne(500);
-        $fosPlanet->setGround(800);
-        $fosPlanet->setSky(150);
+        $fosPlanet->setGround(1300);
+        $fosPlanet->setSky(180);
         $fosPlanet->setName('Fort Hydra');
         $fossoyeurs->addPlanet($fosPlanet);
         $em->persist($fosPlanet);
@@ -166,8 +174,10 @@ class ServerController extends Controller
 
         foreach($putFleets as $putFleet) {
             $fleet = new Fleet();
-            $fleet->setHunterWar(500);
-            $fleet->setCorvetWar(75);
+            $fleet->setHunterWar(750);
+            $fleet->setCorvetWar(125);
+            $fleet->setFregatePlasma(50);
+            $fleet->setDestroyer(10);
             $fleet->setUser($fossoyeurs);
             $fleet->setPlanet($putFleet);
             $fleet->setAttack(1);
@@ -185,7 +195,7 @@ class ServerController extends Controller
      * @Route("/destruction-serveur", name="destroy")
      * @Route("/destruction-serveur/", name="destroy_withSlash")
      */
-    public function destroyServerAction(Request $request)
+    public function destroyServerAction()
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -195,11 +205,33 @@ class ServerController extends Controller
             ->getResult();
 
         foreach ($users as $user) {
-            $user->setBitcoin(50000);
+            $user->setBitcoin(25000);
             $user->setAlly(null);
             $user->setSearch(null);
+            $user->setRank(null);
             $user->setGrade(null);
             $user->setJoinAllyAt(null);
+            $user->setAllyBan(null);
+            $user->setScientistProduction(1);
+            $user->setSearchAt(null);
+            $user->setPlasma(0);
+            $user->setLaser(0);
+            $user->setMissile(0);
+            $user->setArmement(0);
+            $user->setRecycleur(0);
+            $user->setCargo(0);
+            $user->setTerraformation(0);
+            $user->setDemography(0);
+            $user->setUtility(0);
+            $user->setBarge(0);
+            $user->setHyperespace(0);
+            $user->setDiscipline(0);
+            $user->setHeavyShip(0);
+            $user->setLightShip(0);
+            $user->setIndustry(0);
+            $user->setOnde(0);
+            $user->setHyperespace(0);
+            $user->setDiscipline(0);
             foreach ($user->getProposals() as $proposal) {
                 $user->removeProposal($proposal);
             }
@@ -210,6 +242,98 @@ class ServerController extends Controller
                 $user->removePlanet($planet);
             }
             $em->persist($user);
+            $em->flush();
+        }
+
+        $sContents = $em->getRepository('App:S_Content')
+            ->createQueryBuilder('sc')
+            ->getQuery()
+            ->getResult();
+
+        foreach ($sContents as $sContent) {
+            $em->remove($sContent);
+            $em->flush();
+        }
+
+        $salons = $em->getRepository('App:Salon')
+            ->createQueryBuilder('s')
+            ->where('s.id != :id')
+            ->setParameters(array('id' => 1))
+            ->getQuery()
+            ->getResult();
+
+        foreach ($salons as $salon) {
+            $em->remove($salon);
+            $em->flush();
+        }
+
+        $reports = $em->getRepository('App:Report')
+            ->createQueryBuilder('r')
+            ->getQuery()
+            ->getResult();
+
+        foreach ($reports as $report) {
+            $em->remove($report);
+            $em->flush();
+        }
+
+        $messages = $em->getRepository('App:Message')
+            ->createQueryBuilder('m')
+            ->getQuery()
+            ->getResult();
+
+        foreach ($messages as $message) {
+            $em->remove($message);
+            $em->flush();
+        }
+
+        $ranks = $em->getRepository('App:Rank')
+            ->createQueryBuilder('r')
+            ->getQuery()
+            ->getResult();
+
+        foreach ($ranks as $rank) {
+            $em->remove($rank);
+            $em->flush();
+        }
+
+        $exchanges = $em->getRepository('App:Exchange')
+            ->createQueryBuilder('ex')
+            ->getQuery()
+            ->getResult();
+
+        foreach ($exchanges as $exchange) {
+            $em->remove($exchange);
+            $em->flush();
+        }
+
+        $grades = $em->getRepository('App:Grade')
+            ->createQueryBuilder('g')
+            ->getQuery()
+            ->getResult();
+
+        foreach ($grades as $grade) {
+            $em->remove($grade);
+            $em->flush();
+        }
+
+        $products = $em->getRepository('App:Product')
+            ->createQueryBuilder('pr')
+            ->getQuery()
+            ->getResult();
+
+        foreach ($products as $product) {
+            $em->remove($product);
+            $em->flush();
+        }
+
+        $fleets = $em->getRepository('App:Fleet')
+            ->createQueryBuilder('fl')
+            ->getQuery()
+            ->getResult();
+
+        foreach ($fleets as $fleet) {
+            $em->remove($fleet);
             $em->flush();
         }
 

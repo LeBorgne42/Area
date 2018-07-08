@@ -98,13 +98,15 @@ class OverviewController extends Controller
                 $em->flush();
             }
             if($user->getRank()) {
+                $user->setBitcoin(25000);
                 $user->setAlly(null);
+                $user->setSearch(null);
+                $user->setRank(null);
                 $user->setGrade(null);
                 $user->setJoinAllyAt(null);
+                $user->setAllyBan(null);
                 $user->setScientistProduction(1);
-                $user->setSearch(null);
                 $user->setSearchAt(null);
-                $user->setBitcoin(50000);
                 /*$user->setPlasma(0);
                 $user->setLaser(0);
                 $user->setMissile(0);

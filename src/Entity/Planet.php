@@ -41,12 +41,12 @@ class Planet
     /**
      * @ORM\Column(name="niobium",type="decimal", precision=28, scale=5)
      */
-    protected $niobium = 7500;
+    protected $niobium = 10000;
 
     /**
      * @ORM\Column(name="water",type="decimal", precision=28, scale=5)
      */
-    protected $water = 5000;
+    protected $water = 6500;
 
     /**
      * @ORM\Column(name="nbCdr",type="bigint", nullable=true)
@@ -76,12 +76,12 @@ class Planet
     /**
      * @ORM\Column(name="niobiumMax",type="integer")
      */
-    protected $niobiumMax = 1000000;
+    protected $niobiumMax = 500000;
 
     /**
      * @ORM\Column(name="waterMax",type="integer")
      */
-    protected $waterMax = 1000000;
+    protected $waterMax = 400000;
 
     /**
      * @ORM\Column(name="soldierMax",type="integer")

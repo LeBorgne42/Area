@@ -141,7 +141,7 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\Column(name="bitcoin",type="decimal", precision=28, scale=5)
      */
-    protected $bitcoin = 125000;
+    protected $bitcoin = 25000;
 
     /**
      * @ORM\Column(name="scientistProduction",type="decimal", precision=28, scale=5)

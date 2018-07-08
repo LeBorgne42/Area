@@ -63,9 +63,9 @@ class SalonController extends Controller
             ->leftJoin('s.allys', 'a')
             ->leftJoin('s.users', 'u')
             ->where('a.sigle = :sigle')
-            ->orWhere('s.id = :id')
+            ->orWhere('s.name = :name')
             ->orWhere('u.username = :user')
-            ->setParameters(array('sigle' => $sigle, 'id' => 1, 'user' => $user->getUserName()))
+            ->setParameters(array('sigle' => $sigle, 'name' => 'Public', 'user' => $user->getUserName()))
             ->getQuery()
             ->getResult();
 

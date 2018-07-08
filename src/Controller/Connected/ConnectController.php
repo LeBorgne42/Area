@@ -56,8 +56,8 @@ class ConnectController extends Controller
 
         $salon = $em->getRepository('App:Salon')
             ->createQueryBuilder('s')
-            ->where('s.id = :id')
-            ->setParameters(array('id' => 1))
+            ->where('s.name = :name')
+            ->setParameters(array('name' => 'Public'))
             ->getQuery()
             ->getOneOrNullResult();
 
