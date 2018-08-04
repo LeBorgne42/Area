@@ -511,8 +511,8 @@ class User implements UserInterface, \Serializable
      */
     public function getAllyFriends()
     {
-        if($this->ally) {
-            return $this->ally->getAllieds();
+        if($this->getAlly()) {
+            return $this->getAlly()->getAllieds();
         } else {
             return [];
         }

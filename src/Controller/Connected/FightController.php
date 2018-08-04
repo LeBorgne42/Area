@@ -363,7 +363,9 @@ class FightController extends Controller
                     $em->persist($otherAlly);
                 }
                 $reportA->setContent($reportA->getContent() . " Mais vous remportez vous même " . $newWarPoint . " points de Guerre !");
-                $attackerLose->getUser()->getRank()->setWarPoint($attackerLose->getUser()->getRank()->getWarPoint() + $newWarPoint);
+                if($attackerLose->getUser()->getRank()) {
+                    $attackerLose->getUser()->getRank()->setWarPoint($attackerLose->getUser()->getRank()->getWarPoint() + $newWarPoint);
+                }
                 $em->persist($attackerLose);
                 $em->persist($reportA);
                 $em->remove($attackerLose);
@@ -388,7 +390,9 @@ class FightController extends Controller
                 $percentArmor = ($defenderWin->getArmor() * 100) / $armorSaveD;
                 $newArmor = $defenderWin->getArmor() - (round($percentArmor * $armorD) / 100);
                 $defenderWin->setFleetWinRatio($newArmor);
-                $defenderWin->getUser()->getRank()->setWarPoint($defenderWin->getUser()->getRank()->getWarPoint() + $newWarPoint);
+                if($defenderWin->getUser()->getRank()) {
+                    $defenderWin->getUser()->getRank()->setWarPoint($defenderWin->getUser()->getRank()->getWarPoint() + $newWarPoint);
+                }
                 $defenderWin->setFightAt(null);
                 $em->persist($defenderWin);
                 $em->flush();
@@ -481,7 +485,9 @@ class FightController extends Controller
                     $em->persist($otherAlly);
                 }
                 $reportB->setContent($reportA->getContent() . " Mais vous remportez vous même " . $newWarPoint . " points de Guerre !");
-                $defenderLose->getUser()->getRank()->setWarPoint($defenderLose->getUser()->getRank()->getWarPoint() + $newWarPoint);
+                if($defenderLose->getUser()->getRank()) {
+                    $defenderLose->getUser()->getRank()->setWarPoint($defenderLose->getUser()->getRank()->getWarPoint() + $newWarPoint);
+                }
                 $em->persist($defenderLose);
                 $em->persist($reportB);
                 $em->remove($defenderLose);
@@ -506,7 +512,9 @@ class FightController extends Controller
                 $percentArmor = ($attackerWin->getArmor() * 100) / $armorSaveA;
                 $newArmor = $attackerWin->getArmor() - (round($percentArmor * $armor) / 100);
                 $attackerWin->setFleetWinRatio($newArmor);
-                $attackerWin->getUser()->getRank()->setWarPoint($attackerWin->getUser()->getRank()->getWarPoint() + $newWarPoint);
+                if($attackerWin->getUser()->getRank()) {
+                    $attackerWin->getUser()->getRank()->setWarPoint($attackerWin->getUser()->getRank()->getWarPoint() + $newWarPoint);
+                }
                 $attackerWin->setFightAt(null);
                 $em->persist($attackerWin);
             }

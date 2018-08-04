@@ -546,13 +546,13 @@ class Fleet
             $uFleet = $this->getPlanet()->getUser();
             foreach ($uAlly as $user) {
                 if ($uFleet == $user) {
-                    return 'hello';
+                    return null;
                 }
             }
         } elseif ($this->getUser() == $this->getPlanet()->getUser()) {
-            return 'hello';
+            return null;
         }
-        return null;
+        return 'ok';
     }
 
     /**
@@ -959,7 +959,7 @@ class Fleet
         if ($this->getUser() == $user) {
             return 'pp-mine';
         }
-        if($this->getUser()->getAlly() == $user->getAlly() && $color != 'pp-mine') {
+        if($this->getUser()->getAlly() == $user->getAlly() && $color != 'pp-mine' && $user->getAlly()) {
             return 'pp-ally';
         }
         if ($this->getUser()->getAlly() && $user->getAlly()) {

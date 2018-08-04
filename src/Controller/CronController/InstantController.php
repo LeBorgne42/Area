@@ -453,7 +453,7 @@ class InstantController extends Controller
                 $x++;
             }
             if(!$friendAlly) {
-                $friendAlly = ['plop', 'personne'];
+                $friendAlly = ['nononon', 'personne'];
             }
 
             $newHome = $em->getRepository('App:Planet')
@@ -511,10 +511,11 @@ class InstantController extends Controller
                 $ally = $em->getRepository('App:Fleet')
                     ->createQueryBuilder('f')
                     ->join('f.user', 'u')
+                    ->leftJoin('u.ally', 'a')
                     ->where('f.planet = :planet')
-                    ->andWhere('u.ally != :ally')
+                    ->andWhere('a.sigle != :ally')
                     ->andWhere('f.flightTime is null')
-                    ->setParameters(array('planet' => $newHome, 'ally' => $fleet->getUser()->getAlly()))
+                    ->setParameters(array('planet' => $newHome, 'ally' => $fleet->getUser()->getAlly()->getSigle()))
                     ->getQuery()
                     ->getResult();
             } else {
@@ -571,7 +572,7 @@ class InstantController extends Controller
                         $fleet->setWorker(0);
                         $fleet->setScientist(0);
                     } else {
-                        if($user != $newPlanet->getUser()) {
+                        if($user != $newPlanet->getUser() && $newPlanet->getUser()) {
                             $reportSell = new Report();
                             $reportSell->setSendAt($now);
                             $reportSell->setUser($newPlanet->getUser());
@@ -657,7 +658,7 @@ class InstantController extends Controller
                         $em->persist($newPlanet);
                         $em->flush();
                     }
-                } elseif ($fleet->getFlightType() == '4') {
+                } elseif ($fleet->getFlightType() == '4' && $fleet->getPlanet()->getUser()) {
                     $barge = $fleet->getBarge() * 2500;
                     $defenser = $fleet->getPlanet();
                     $userDefender= $fleet->getPlanet()->getUser();
@@ -679,6 +680,7 @@ class InstantController extends Controller
                     }
 
                     if($barge && $fleet->getPlanet()->getUser() && $fleet->getAllianceUser() && $user->getSigleAlliedArray($dSigle)) {
+
                         if($barge >= $fleet->getSoldier()) {
                             $aMilitary = $fleet->getSoldier() * $alea;
                             $soldierAtmp = $fleet->getSoldier();

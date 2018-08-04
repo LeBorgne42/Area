@@ -618,7 +618,7 @@ class Planet
             if ($fleet->getUser() == $user) {
                 $color = 'pp-mine';
             }
-            if($fleet->getUser()->getAlly() == $user->getAlly() && $color != 'pp-mine') {
+            if($fleet->getUser()->getAlly() == $user->getAlly() && $color != 'pp-mine' && $user->getAlly()) {
                 $color = 'pp-ally';
             }
             if ($fleet->getUser()->getAlly() && $user->getAlly()) {
