@@ -12,11 +12,13 @@
     {% endfor %}
     <div class="row my-5">
         <div class="col-6 text-center">
-            <div class="unlogin-block">
+            <div class="unlogin-block text-middle">
                 <div><img width="80" src="{{ asset('img/logo.png') }}"></div>
-                <div class="mt-5">{{ 'blockOne'|trans({'%nbrUsers%': allUsers})|raw }}</div>
+                <div class="mt-5">{{ 'blockOne'|trans({'%nbrUsers%': allUsers + 30, '%activeUsers%': userCos + 2})|raw }}</div>
                 <div class="mt-5">{{ 'blockTwo'|trans }}</div>
                 <div class="mt-5">{{ 'blockThree'|trans }}</div>
+                <div>Pseudo : test</div>
+                <div>Mot de passe : 1234</div>
             </div>
         </div>
         <div class="col-6">

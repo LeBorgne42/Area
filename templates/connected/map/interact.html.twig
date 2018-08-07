@@ -38,7 +38,7 @@
                     </td>
                 </tr>
             {% endif %}
-            {% if planet.getUser() and fleet.getAllianceUser() == null %}
+            {% if planet.getUser() and fleet.getAllianceUser() %}
                 <tr>
                     <td colspan="3" class="center-cells">
                         <span><a href="{{ path('send_sonde', {'idp': usePlanet.getId(), 'id': planet.getId()}) }}">{{ 'interact.invader'|trans }}</a></span>

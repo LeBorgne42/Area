@@ -26,13 +26,14 @@ class SalonType extends AbstractType
                         'class' => 'form-control',
                         'maxlength' => '200',
                         'minlength' => '1',
+                        'style' => 'height: 30px; font-size: 1.8rem;',
                         'autocomplete' => 'off',
                     ),
                     'required' => true,
                     'mapped' => true,
                 )
             )
-            ->add('sendForm', SubmitType::class, array('label' => 'form.sendMessage'));
+            ->add('sendForm', SubmitType::class, array('label' => 'form.sendMessage', 'attr'  => array('style' => 'height: 30px; font-size: 1.5rem;')));
     }
 
     /**

@@ -707,7 +707,16 @@ class FleetController extends Controller
             $fleetGive->setNewPlanet($planetTake->getId());
             $fleetGive->setFlightTime($now);
             $fleetGive->setCancelFlight($moreNow);
-            $fleetGive->setFlightType($form_sendFleet->get('flightType')->getData());
+            if($form_sendFleet->get('flightType')->getData() == '2' && ($planetTake->getUser() || $planetTake->getMerchant() == true)) {
+                $fleetGive->setFlightType(2);
+                $carburant = $carburant * 2;
+            } elseif($form_sendFleet->get('flightType')->getData() == '3' && $planetTake->getUser() == null) {
+                $fleetGive->setFlightType(3);
+            } elseif($form_sendFleet->get('flightType')->getData() == '4' && $planetTake->getUser()) {
+                $fleetGive->setFlightType(4);
+            } else {
+                $fleetGive->setFlightType(1);
+            }
             $fleetGive->setSector($planetTake->getSector());
             $fleetGive->setPlanete($planetTakee);
             $user->setBitcoin($user->getBitcoin() - $carburant);

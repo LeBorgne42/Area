@@ -435,27 +435,6 @@ class InstantController extends Controller
 
         foreach ($fleets as $fleet) {
 
-            $fAlly = $fleet->getUser()->getAllyFriends();
-            $friendAlly = [];
-            $x = 0;
-            foreach ($fAlly as $tmp) {
-                if($tmp->getAccepted() == 1) {
-                    $friendAlly[$x] = $tmp->getAllyTag();
-                    $x++;
-                }
-            }
-
-            $eAlly = $fleet->getUser()->getAllyEnnemy();
-            $warAlly = [];
-            $x = 0;
-            foreach ($eAlly as $tmp) {
-                $warAlly[$x] = $tmp->getAllyTag();
-                $x++;
-            }
-            if(!$friendAlly) {
-                $friendAlly = ['nononon', 'personne'];
-            }
-
             $newHome = $em->getRepository('App:Planet')
                 ->createQueryBuilder('p')
                 ->join('p.sector', 's')
@@ -472,9 +451,8 @@ class InstantController extends Controller
                 ->createQueryBuilder('f')
                 ->join('f.user', 'u')
                 ->where('f.planet = :planet')
-                ->andWhere('f.user != :user')
                 ->andWhere('f.flightTime is null')
-                ->setParameters(array('planet' => $newHome, 'user' => $fleet->getUser()))
+                ->setParameters(array('planet' => $newHome))
                 ->getQuery()
                 ->getResult();
 
@@ -493,6 +471,28 @@ class InstantController extends Controller
             $fleet->setFlightTime(null);
             $fleet->setNewPlanet(null);
             $fleet->setSector(null);
+
+            $fAlly = $fleet->getUser()->getAllyFriends();
+            $friendAlly = [];
+            $x = 0;
+            foreach ($fAlly as $tmp) {
+                if($tmp->getAccepted() == 1) {
+                    $friendAlly[$x] = $tmp->getAllyTag();
+                    $x++;
+                }
+            }
+
+            $eAlly = $fleet->getUser()->getAllyEnnemy();
+            $warAlly = [];
+            $x = 0;
+            foreach ($eAlly as $tmp) {
+                $warAlly[$x] = $tmp->getAllyTag();
+                $x++;
+            }
+            if(!$friendAlly) {
+                $friendAlly = ['impossible', 'personne'];
+            }
+
             $attackFleets = $em->getRepository('App:Fleet')
                 ->createQueryBuilder('f')
                 ->join('f.user', 'u')
@@ -501,7 +501,7 @@ class InstantController extends Controller
                 ->andWhere('f.attack = :true OR a.sigle in (:ally)')
                 ->andWhere('f.user != :user')
                 ->andWhere('f.flightTime is null')
-                ->andWhere('a.sigle not in (:friend)')
+                ->andWhere('u.ally is null OR a.sigle not in (:friend)')
                 ->setParameters(array('planet' => $newHome, 'true' => true, 'ally' => $warAlly, 'user' => $fleet->getUser(), 'friend' => $friendAlly))
                 ->getQuery()
                 ->getResult();
@@ -616,10 +616,19 @@ class InstantController extends Controller
                             $fleet->setScientist($fleet->getScientist() - ($newPlanet->getScientistMax() - $newPlanet->getScientist()));
                         }
                     }
+
+                    $planetTakee = $fleet->getPlanete();
                     $sFleet= $fleet->getPlanet()->getSector()->getPosition();
                     $sector = $oldPlanet->getSector()->getPosition();
                     if ($sFleet == $sector) {
-                        $base= 2000;
+                        $pFleet = $fleet->getPlanet()->getPosition();
+                        if (strpos('0 -1 1 -4 4 -5 5 6 -6', (strval($pFleet - $planetTakee)) ) != false) {
+                            $base = 1500;
+                        } elseif (strpos('2 -2 3 -3 7 -7 8 -8 9 -9 10 -10 11 -11 12 -12', (strval($pFleet - $planetTakee)) ) != false) {
+                            $base = 1750;
+                        } else {
+                            $base = 2000;
+                        }
                     } elseif (strpos('0 -1 1 -10 10 -9 9', (strval($sFleet - $sector)) ) != false) {
                         $base= 3000;
                     } elseif (strpos('-20 20 12 11 8 2 -12 -11 -8 -2', (strval($sFleet - $sector)) ) != false) {

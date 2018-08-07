@@ -17,117 +17,120 @@ class FightController extends Controller
     public function fightAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $now = new DateTime();
-        $now->setTimezone(new DateTimeZone('Europe/Paris'));
-        $winner = null;
 
-        $firstFleet = $em->getRepository('App:Fleet')
-            ->createQueryBuilder('f')
-            ->join('f.planet', 'p')
-            ->select('p.id')
-            ->where('f.fightAt < :now')
-            ->andWhere('f.flightTime is null')
-            ->setParameters(array('now' => $now))
-            ->getQuery()
-            ->setMaxResults(1)
-            ->getOneOrNullResult();
+        while(1) {
+            $winner = null;
+            $now = new DateTime();
+            $now->setTimezone(new DateTimeZone('Europe/Paris'));
 
-        if(!$firstFleet) {
-            exit;
-        }
+            $firstFleet = $em->getRepository('App:Fleet')
+                ->createQueryBuilder('f')
+                ->join('f.planet', 'p')
+                ->select('p.id')
+                ->where('f.fightAt < :now')
+                ->andWhere('f.flightTime is null')
+                ->setParameters(array('now' => $now))
+                ->getQuery()
+                ->setMaxResults(1)
+                ->getOneOrNullResult();
 
-        $fleetsWars = $em->getRepository('App:Fleet')
-            ->createQueryBuilder('f')
-            ->join('f.planet', 'p')
-            ->where('p.id = :id')
-            ->andWhere('f.flightTime is null')
-            ->setParameters(array('id' => $firstFleet['id']))
-            ->orderBy('f.attack', 'ASC')
-            ->getQuery()
-            ->getResult();
+            if (!$firstFleet) {
+                exit;
+            }
 
-        $teamBlock = [];
-        $fleetsId = [];
-        foreach ($fleetsWars as $fleetsWar) {
-            if($fleetsWar->getUser()->getAlly()) {
-                if (in_array($fleetsWar->getUser()->getAlly()->getSigle(), $teamBlock) == false && $fleetsWar->getUser()->getAlly()->getSigleAlliedArray($teamBlock) &&
+            $fleetsWars = $em->getRepository('App:Fleet')
+                ->createQueryBuilder('f')
+                ->join('f.planet', 'p')
+                ->where('p.id = :id')
+                ->andWhere('f.flightTime is null')
+                ->setParameters(array('id' => $firstFleet['id']))
+                ->orderBy('f.attack', 'ASC')
+                ->getQuery()
+                ->getResult();
+
+            $teamBlock = [];
+            $fleetsId = [];
+            foreach ($fleetsWars as $fleetsWar) {
+                if ($fleetsWar->getUser()->getAlly()) {
+                    if (in_array($fleetsWar->getUser()->getAlly()->getSigle(), $teamBlock) == false && $fleetsWar->getUser()->getAlly()->getSigleAlliedArray($teamBlock) &&
+                        in_array($fleetsWar->getId(), $fleetsId) == false) {
+                        $teamBlock[] = $fleetsWar->getUser()->getAlly()->getSigle();
+                        $fleetsId[] = $fleetsWar->getId();
+                    }
+                } elseif (in_array($fleetsWar->getUser()->getUserName(), $teamBlock) == false &&
                     in_array($fleetsWar->getId(), $fleetsId) == false) {
-                    $teamBlock[] = $fleetsWar->getUser()->getAlly()->getSigle();
+                    $teamBlock[] = $fleetsWar->getUser()->getUserName();
                     $fleetsId[] = $fleetsWar->getId();
                 }
-            } elseif (in_array($fleetsWar->getUser()->getUserName(), $teamBlock) == false &&
-                    in_array($fleetsWar->getId(), $fleetsId) == false) {
-                $teamBlock[] = $fleetsWar->getUser()->getUserName();
-                $fleetsId[] = $fleetsWar->getId();
             }
-        }
-        $tmpcount = count($teamBlock);
-        if($tmpcount < 2) {
-            foreach ($fleetsWars as $fleetsWar) {
-                $fleetsWar->setFightAt(null);
-                $em->persist($fleetsWar);
-                $em->flush();
+            $tmpcount = count($teamBlock);
+            if ($tmpcount < 2) {
+                foreach ($fleetsWars as $fleetsWar) {
+                    $fleetsWar->setFightAt(null);
+                    $em->persist($fleetsWar);
+                    $em->flush();
+                }
+                exit;
             }
-            exit;
-        }
-        $team = $tmpcount;
-        $isAttack = [];
+            $team = $tmpcount;
+            $isAttack = [];
 
-        while($team > 0) {
-            $team--;
-            ${'oneBlock'.$team} = new \ArrayObject();
-            foreach ($fleetsWars as $fleetsWar) {
-                if($fleetsWar->getUser()->getAlly()) {
-                    if ($teamBlock[$team] == $fleetsWar->getUser()->getAlly()->getSigle() || $fleetsWar->getUser()->getAlly()->getSigleAllied($teamBlock[$team])) {
-                        ${'oneBlock'.$team}->append($fleetsWar);
+            while ($team > 0) {
+                $team--;
+                ${'oneBlock' . $team} = new \ArrayObject();
+                foreach ($fleetsWars as $fleetsWar) {
+                    if ($fleetsWar->getUser()->getAlly()) {
+                        if ($teamBlock[$team] == $fleetsWar->getUser()->getAlly()->getSigle() || $fleetsWar->getUser()->getAlly()->getSigleAllied($teamBlock[$team])) {
+                            ${'oneBlock' . $team}->append($fleetsWar);
+                            $isAttack[$team] = $fleetsWar->getAttack();
+                        }
+                    } elseif ($teamBlock[$team] == $fleetsWar->getUser()->getUserName()) {
+                        ${'oneBlock' . $team}->append($fleetsWar);
                         $isAttack[$team] = $fleetsWar->getAttack();
                     }
-                } elseif ($teamBlock[$team] == $fleetsWar->getUser()->getUserName()) {
-                    ${'oneBlock'.$team}->append($fleetsWar);
-                    $isAttack[$team] = $fleetsWar->getAttack();
                 }
             }
-        }
-        $team1 = $tmpcount - 1;
-        $team2 = $tmpcount - 2;
+            $team1 = $tmpcount - 1;
+            $team2 = $tmpcount - 2;
 
-        if ($isAttack[$team1] == true || $isAttack[$team2] == true) {
-            $winner = self::attackAction(${'oneBlock'.$team1}, ${'oneBlock'.$team2});
-        } else {
-            while($isAttack[$team2--] == true) {
-                $winner = self::attackAction(${'oneBlock'.$team1}, ${'oneBlock'.$team2});
+            if ($isAttack[$team1] == true || $isAttack[$team2] == true) {
+                $winner = self::attackAction(${'oneBlock' . $team1}, ${'oneBlock' . $team2});
+            } else {
+                while ($isAttack[$team2--] == true) {
+                    $winner = self::attackAction(${'oneBlock' . $team1}, ${'oneBlock' . $team2});
+                }
             }
-        }
-        if($winner != null) {
-            if($winner == ${'oneBlock'.$team1}) {
-                $team2 = $team2 - 1;
-                ${'oneBlock'.$team1} = $winner;
-            } elseif ($winner == ${'oneBlock'.$team2}) {
-                $team1 = $team1 - $team2;
-                ${'oneBlock'.$team2} = $winner;
+            if ($winner != null) {
+                if ($winner == ${'oneBlock' . $team1}) {
+                    $team2 = $team2 - 1;
+                    ${'oneBlock' . $team1} = $winner;
+                } elseif ($winner == ${'oneBlock' . $team2}) {
+                    $team1 = $team1 - $team2;
+                    ${'oneBlock' . $team2} = $winner;
+                }
+            } else {
+                foreach ($fleetsWars as $fleetsWar) {
+                    $fleetsWar->setFightAt(null);
+                    $em->persist($fleetsWar);
+                    $em->flush();
+                }
+                exit;
             }
-        } else {
-            foreach ($fleetsWars as $fleetsWar) {
-                $fleetsWar->setFightAt(null);
-                $em->persist($fleetsWar);
-                $em->flush();
-            }
-            exit;
-        }
 
-        $team = $tmpcount - 2;
-        while($team > 0) {
-            $winner = self::attackAction(${'oneBlock'.$team1}, ${'oneBlock'.$team2});
-            $team--;
-            if($winner == ${'oneBlock'.$team1}) {
-                $team2 = $team2 - 1;
-                ${'oneBlock'.$team1} = $winner;
-            } elseif ($winner == ${'oneBlock'.$team2}) {
-                $team1 = $team1 - $team2;
-                ${'oneBlock'.$team2} = $winner;
+            $team = $tmpcount - 2;
+            while ($team > 0) {
+                $winner = self::attackAction(${'oneBlock' . $team1}, ${'oneBlock' . $team2});
+                $team--;
+                if ($winner == ${'oneBlock' . $team1}) {
+                    $team2 = $team2 - 1;
+                    ${'oneBlock' . $team1} = $winner;
+                } elseif ($winner == ${'oneBlock' . $team2}) {
+                    $team1 = $team1 - $team2;
+                    ${'oneBlock' . $team2} = $winner;
+                }
             }
+            $em->flush();
         }
-        $em->flush();
         exit;
       }
 
@@ -573,7 +576,7 @@ class FightController extends Controller
             $dSigle = $userDefender->getAlly()->getSigle();
         }
 
-        if($barge && $invader->getPlanet()->getUser() && $invader->getAllianceUser() == null && $invader->getFightAt() == null && $invader->getFlightTime() == null && $user->getSigleAlliedArray($dSigle)) {
+        if($barge && $invader->getPlanet()->getUser() && $invader->getAllianceUser() && $invader->getFightAt() == null && $invader->getFlightTime() == null && $user->getSigleAlliedArray($dSigle)) {
             if($barge >= $invader->getSoldier()) {
                 $aMilitary = $invader->getSoldier() * $alea;
                 $soldierAtmp = $invader->getSoldier();

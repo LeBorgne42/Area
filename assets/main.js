@@ -513,7 +513,7 @@ function manageTime() {
                             area.text('Terminée');
                             setTimeout(function() {
                                 window.location.reload();
-                            }, 3000);
+                            }, 5000);
                         } else {
                             secondes = 60;
                             minutes = minutes - 1;

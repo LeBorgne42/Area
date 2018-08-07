@@ -65,7 +65,7 @@
                             {{ 'fleet.flightTime'|trans }} <span id="flightTime"></span>
                     </div>
                     <div class="mb-3 text-center">
-                        {% if fleet.getBarge() and fleet.getPlanet().getUser() and fleet.getAllianceUser() == null %}
+                        {% if fleet.getBarge() and fleet.getPlanet().getUser() and fleet.getAllianceUser() %}
                             <span>
                                 <h4><a class="badge badge-danger" href="{{ path('invader_planet', {'idp': usePlanet.getId(), 'fleet': fleet.getId()}) }}">
                                    {{ 'fleet.invade'|trans }}

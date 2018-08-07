@@ -229,38 +229,6 @@ class SpatialController extends Controller
                 ($corvetWar < 0 || $moonMaker < 0 ) || ($radarShip < 0  || $brouilleurShip < 0 ) || ($motherShip < 0 )) {
                 return $this->redirectToRoute('spatial', array('idp' => $usePlanet->getId()));
             }
-            $eAlly = $user->getAllyEnnemy();
-            $warAlly = [];
-            $x = 0;
-            foreach ($eAlly as $tmp) {
-                $warAlly[$x] = $tmp->getAllyTag();
-                $x++;
-            }
-
-            $fAlly = $user->getAllyFriends();
-            $friendAlly = [];
-            $x = 0;
-            foreach ($fAlly as $tmp) {
-                if($tmp->getAccepted() == 1) {
-                    $friendAlly[$x] = $tmp->getAllyTag();
-                    $x++;
-                }
-            }
-            if(!$friendAlly) {
-                $friendAlly = ['plop', 'personne'];
-            }
-            $fleets = $em->getRepository('App:Fleet')
-                ->createQueryBuilder('f')
-                ->join('f.user', 'u')
-                ->leftJoin('u.ally', 'a')
-                ->where('f.planet = :planet')
-                ->andWhere('f.attack = :true OR a.sigle in (:ally)')
-                ->andWhere('f.user != :user')
-                ->andWhere('f.flightTime is null')
-                ->andWhere('a.sigle not in (:friend)')
-                ->setParameters(array('planet' => $usePlanet, 'true' => true, 'ally' => $warAlly, 'user' => $user, 'friend' => $friendAlly))
-                ->getQuery()
-                ->getResult();
 
             $fleet = new Fleet();
             $fleet->setCargoI($form_createFleet->get('cargoI')->getData());
@@ -285,6 +253,41 @@ class SpatialController extends Controller
             $fleet->setCroiser($form_createFleet->get('croiser')->getData());
             $fleet->setIronClad($form_createFleet->get('ironClad')->getData());
             $fleet->setDestroyer($form_createFleet->get('destroyer')->getData());
+
+            $eAlly = $user->getAllyEnnemy();
+            $warAlly = [];
+            $x = 0;
+            foreach ($eAlly as $tmp) {
+                $warAlly[$x] = $tmp->getAllyTag();
+                $x++;
+            }
+
+            $fAlly = $user->getAllyFriends();
+            $friendAlly = [];
+            $x = 0;
+            foreach ($fAlly as $tmp) {
+                if($tmp->getAccepted() == 1) {
+                    $friendAlly[$x] = $tmp->getAllyTag();
+                    $x++;
+                }
+            }
+            if(!$friendAlly) {
+                $friendAlly = ['impossible', 'personne'];
+            }
+
+            $fleets = $em->getRepository('App:Fleet')
+                ->createQueryBuilder('f')
+                ->join('f.user', 'u')
+                ->leftJoin('u.ally', 'a')
+                ->where('f.planet = :planet')
+                ->andWhere('f.attack = :true OR a.sigle in (:ally)')
+                ->andWhere('f.user != :user')
+                ->andWhere('f.flightTime is null')
+                ->andWhere('u.ally is null OR a.sigle not in (:friend)')
+                ->setParameters(array('planet' => $usePlanet, 'true' => true, 'ally' => $warAlly, 'user' => $user, 'friend' => $friendAlly))
+                ->getQuery()
+                ->getResult();
+
             if($fleets) {
                 foreach ($fleets as $setWar) {
                     if($setWar->getUser()->getAlly()) {
@@ -307,19 +310,22 @@ class SpatialController extends Controller
                     ->createQueryBuilder('f')
                     ->join('f.user', 'u')
                     ->where('f.planet = :planet')
-                    ->andWhere('f.user != :user')
-                    ->setParameters(array('planet' => $usePlanet, 'user' => $user))
+                    ->andWhere('f.flightTime is null')
+                    ->setParameters(array('planet' => $usePlanet))
                     ->getQuery()
                     ->getResult();
+
                 $now = new DateTime();
                 $now->setTimezone(new DateTimeZone('Europe/Paris'));
                 $now->add(new DateInterval('PT' . 300 . 'S'));
+
                 foreach ($allFleets as $updateF) {
                     $updateF->setFightAt($now);
                     $em->persist($updateF);
                 }
                 $fleet->setFightAt($now);
             }
+
             $fleet->setUser($user);
             $fleet->setPlanet($usePlanet);
             $fleet->setName($form_createFleet->get('name')->getData());
