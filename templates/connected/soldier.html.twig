@@ -21,7 +21,7 @@
                 </tr>
                 <tr class="text-center" {% if usePlanet.getSoldierAtNbr() == null %} hidden{% endif %}>
                     <th class="tab-cells-name">
-                        <span>{{ (usePlanet.getSoldierAtNbr() - usePlanet.getSoldier())|number_format }} {{ 'caserner.soldierProd'|trans }}</span>
+                        <span>{{ usePlanet.getSoldierAtNbr()|number_format }} {{ 'caserner.soldierProd'|trans }}</span>
                     </th>
                     <td class="center-cells">
                         <span class="timerArea" hidden>{{ usePlanet.getSoldierAt()|date('Y/m/d H:i:s') }}</span>
@@ -49,7 +49,7 @@
                 </tr>
                 <tr class="text-center" {% if usePlanet.getScientistAtNbr() == null %} hidden{% endif %}>
                     <th class="tab-cells-name">
-                        <span>{{ (usePlanet.getScientistAtNbr() - usePlanet.getScientist())|number_format }} {{ 'caserner.scientistProd'|trans }}</span>
+                        <span>{{ usePlanet.getScientistAtNbr()|number_format }} {{ 'caserner.scientistProd'|trans }}</span>
                     </th>
                     <td class="center-cells">
                         <span class="timerArea" hidden>{{ usePlanet.getScientistAt()|date('Y/m/d H:i:s') }}</span>

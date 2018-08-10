@@ -200,256 +200,256 @@ class FleetController extends Controller
         }
 
         if ($form_manageFleet->isSubmitted()) {
-            $cargoRessources = $fleetGive->getCargoFull() + $form_manageFleet->get('moreNiobium')->getData() + $form_manageFleet->get('moreWater')->getData() + $form_manageFleet->get('moreSoldier')->getData() + $form_manageFleet->get('moreWorker')->getData() + $form_manageFleet->get('moreScientist')->getData();
-            if ($form_manageFleet->get('moreColonizer')->getData()) {
-                $colonizer = $planetTake->getColonizer() - $form_manageFleet->get('moreColonizer')->getData();
-                $fleetGive->setColonizer($fleetGive->getColonizer() + $form_manageFleet->get('moreColonizer')->getData());
-            } elseif ($form_manageFleet->get('lessColonizer')->getData() <= $fleetGive->getColonizer()) {
-                $colonizer = $planetTake->getColonizer() + $form_manageFleet->get('lessColonizer')->getData();
-                $fleetGive->setColonizer($fleetGive->getColonizer() - $form_manageFleet->get('lessColonizer')->getData());
+            $cargoRessources = $fleetGive->getCargoFull() + abs($form_manageFleet->get('moreNiobium')->getData()) + abs($form_manageFleet->get('moreWater')->getData()) + abs($form_manageFleet->get('moreSoldier')->getData()) + abs($form_manageFleet->get('moreWorker')->getData()) + abs($form_manageFleet->get('moreScientist')->getData());
+            if (abs($form_manageFleet->get('moreColonizer')->getData())) {
+                $colonizer = $planetTake->getColonizer() - abs($form_manageFleet->get('moreColonizer')->getData());
+                $fleetGive->setColonizer($fleetGive->getColonizer() + abs($form_manageFleet->get('moreColonizer')->getData()));
+            } elseif (abs($form_manageFleet->get('lessColonizer')->getData()) <= $fleetGive->getColonizer()) {
+                $colonizer = $planetTake->getColonizer() + abs($form_manageFleet->get('lessColonizer')->getData());
+                $fleetGive->setColonizer($fleetGive->getColonizer() - abs($form_manageFleet->get('lessColonizer')->getData()));
             } else {
                 $colonizer = $planetTake->getColonizer();
             }
-            if ($form_manageFleet->get('moreRecycleur')->getData()) {
-                $recycleur = $planetTake->getRecycleur() - $form_manageFleet->get('moreRecycleur')->getData();
-                $fleetGive->setRecycleur($fleetGive->getRecycleur() + $form_manageFleet->get('moreRecycleur')->getData());
-            } elseif ($form_manageFleet->get('lessRecycleur')->getData() <= $fleetGive->getRecycleur()) {
-                $recycleur = $planetTake->getRecycleur() + $form_manageFleet->get('lessRecycleur')->getData();
-                $fleetGive->setRecycleur($fleetGive->getRecycleur() - $form_manageFleet->get('lessRecycleur')->getData());
+            if (abs($form_manageFleet->get('moreRecycleur')->getData())) {
+                $recycleur = $planetTake->getRecycleur() - abs($form_manageFleet->get('moreRecycleur')->getData());
+                $fleetGive->setRecycleur($fleetGive->getRecycleur() + abs($form_manageFleet->get('moreRecycleur')->getData()));
+            } elseif (abs($form_manageFleet->get('lessRecycleur')->getData()) <= $fleetGive->getRecycleur()) {
+                $recycleur = $planetTake->getRecycleur() + abs($form_manageFleet->get('lessRecycleur')->getData());
+                $fleetGive->setRecycleur($fleetGive->getRecycleur() - abs($form_manageFleet->get('lessRecycleur')->getData()));
             } else {
                 $recycleur = $planetTake->getRecycleur();
             }
-            if ($form_manageFleet->get('moreCargoI')->getData()) {
-                $cargoI = $planetTake->getCargoI() - $form_manageFleet->get('moreCargoI')->getData();
-                $fleetGive->setCargoI($fleetGive->getCargoI() + $form_manageFleet->get('moreCargoI')->getData());
-            } elseif ($form_manageFleet->get('lessCargoI')->getData() <= $fleetGive->getCargoI()) {
-                $cargoI = $planetTake->getCargoI() + $form_manageFleet->get('lessCargoI')->getData();
-                $fleetGive->setCargoI($fleetGive->getCargoI() - $form_manageFleet->get('lessCargoI')->getData());
+            if (abs($form_manageFleet->get('moreCargoI')->getData())) {
+                $cargoI = $planetTake->getCargoI() - abs($form_manageFleet->get('moreCargoI')->getData());
+                $fleetGive->setCargoI($fleetGive->getCargoI() + abs($form_manageFleet->get('moreCargoI')->getData()));
+            } elseif (abs($form_manageFleet->get('lessCargoI')->getData()) <= $fleetGive->getCargoI()) {
+                $cargoI = $planetTake->getCargoI() + abs($form_manageFleet->get('lessCargoI')->getData());
+                $fleetGive->setCargoI($fleetGive->getCargoI() - abs($form_manageFleet->get('lessCargoI')->getData()));
             } else {
                 $cargoI = $planetTake->getCargoI();
             }
-            if ($form_manageFleet->get('moreCargoV')->getData()) {
-                $cargoV = $planetTake->getCargoV() - $form_manageFleet->get('moreCargoV')->getData();
-                $fleetGive->setCargoV($fleetGive->getCargoV() + $form_manageFleet->get('moreCargoV')->getData());
-            } elseif ($form_manageFleet->get('lessCargoV')->getData() <= $fleetGive->getCargoV()) {
-                $cargoV = $planetTake->getCargoV() + $form_manageFleet->get('lessCargoV')->getData();
-                $fleetGive->setCargoV($fleetGive->getCargoV() - $form_manageFleet->get('lessCargoV')->getData());
+            if (abs($form_manageFleet->get('moreCargoV')->getData())) {
+                $cargoV = $planetTake->getCargoV() - abs($form_manageFleet->get('moreCargoV')->getData());
+                $fleetGive->setCargoV($fleetGive->getCargoV() + abs($form_manageFleet->get('moreCargoV')->getData()));
+            } elseif (abs($form_manageFleet->get('lessCargoV')->getData()) <= $fleetGive->getCargoV()) {
+                $cargoV = $planetTake->getCargoV() + abs($form_manageFleet->get('lessCargoV')->getData());
+                $fleetGive->setCargoV($fleetGive->getCargoV() - abs($form_manageFleet->get('lessCargoV')->getData()));
             } else {
                 $cargoV = $planetTake->getCargoV();
             }
-            if ($form_manageFleet->get('moreCargoX')->getData()) {
-                $cargoX = $planetTake->getCargoX() - $form_manageFleet->get('moreCargoX')->getData();
-                $fleetGive->setCargoX($fleetGive->getCargoX() + $form_manageFleet->get('moreCargoX')->getData());
-            } elseif ($form_manageFleet->get('lessCargoX')->getData() <= $fleetGive->getCargoX()) {
-                $cargoX = $planetTake->getCargoX() + $form_manageFleet->get('lessCargoX')->getData();
-                $fleetGive->setCargoX($fleetGive->getCargoX() - $form_manageFleet->get('lessCargoX')->getData());
+            if (abs($form_manageFleet->get('moreCargoX')->getData())) {
+                $cargoX = $planetTake->getCargoX() - abs($form_manageFleet->get('moreCargoX')->getData());
+                $fleetGive->setCargoX($fleetGive->getCargoX() + abs($form_manageFleet->get('moreCargoX')->getData()));
+            } elseif (abs($form_manageFleet->get('lessCargoX')->getData()) <= $fleetGive->getCargoX()) {
+                $cargoX = $planetTake->getCargoX() + abs($form_manageFleet->get('lessCargoX')->getData());
+                $fleetGive->setCargoX($fleetGive->getCargoX() - abs($form_manageFleet->get('lessCargoX')->getData()));
             } else {
                 $cargoX = $planetTake->getCargoX();
             }
-            if ($form_manageFleet->get('moreBarge')->getData()) {
-                $barge = $planetTake->getBarge() - $form_manageFleet->get('moreBarge')->getData();
-                $fleetGive->setBarge($fleetGive->getBarge() + $form_manageFleet->get('moreBarge')->getData());
-            } elseif ($form_manageFleet->get('lessBarge')->getData() <= $fleetGive->getBarge()) {
-                $barge = $planetTake->getBarge() + $form_manageFleet->get('lessBarge')->getData();
-                $fleetGive->setBarge($fleetGive->getBarge() - $form_manageFleet->get('lessBarge')->getData());
+            if (abs($form_manageFleet->get('moreBarge')->getData())) {
+                $barge = $planetTake->getBarge() - abs($form_manageFleet->get('moreBarge')->getData());
+                $fleetGive->setBarge($fleetGive->getBarge() + abs($form_manageFleet->get('moreBarge')->getData()));
+            } elseif (abs($form_manageFleet->get('lessBarge')->getData()) <= $fleetGive->getBarge()) {
+                $barge = $planetTake->getBarge() + abs($form_manageFleet->get('lessBarge')->getData());
+                $fleetGive->setBarge($fleetGive->getBarge() - abs($form_manageFleet->get('lessBarge')->getData()));
             } else {
                 $barge = $planetTake->getBarge();
             }
-            if ($form_manageFleet->get('moreMoonMaker')->getData()) {
-                $moonMaker = $planetTake->getMoonMaker() - $form_manageFleet->get('moreMoonMaker')->getData();
-                $fleetGive->setMoonMaker($fleetGive->getMoonMaker() + $form_manageFleet->get('moreMoonMaker')->getData());
-            } elseif ($form_manageFleet->get('lessMoonMaker')->getData() <= $fleetGive->getMoonMaker()) {
-                $moonMaker = $planetTake->getMoonMaker() + $form_manageFleet->get('lessMoonMaker')->getData();
-                $fleetGive->setMoonMaker($fleetGive->getMoonMaker() - $form_manageFleet->get('lessMoonMaker')->getData());
+            if (abs($form_manageFleet->get('moreMoonMaker')->getData())) {
+                $moonMaker = $planetTake->getMoonMaker() - abs($form_manageFleet->get('moreMoonMaker')->getData());
+                $fleetGive->setMoonMaker($fleetGive->getMoonMaker() + abs($form_manageFleet->get('moreMoonMaker')->getData()));
+            } elseif (abs($form_manageFleet->get('lessMoonMaker')->getData()) <= $fleetGive->getMoonMaker()) {
+                $moonMaker = $planetTake->getMoonMaker() + abs($form_manageFleet->get('lessMoonMaker')->getData());
+                $fleetGive->setMoonMaker($fleetGive->getMoonMaker() - abs($form_manageFleet->get('lessMoonMaker')->getData()));
             } else {
                 $moonMaker = $planetTake->getMoonMaker();
             }
-            if ($form_manageFleet->get('moreRadarShip')->getData()) {
-                $radarShip = $planetTake->getRadarShip() - $form_manageFleet->get('moreRadarShip')->getData();
-                $fleetGive->setRadarShip($fleetGive->getRadarShip() + $form_manageFleet->get('moreRadarShip')->getData());
-            } elseif ($form_manageFleet->get('lessRadarShip')->getData() <= $fleetGive->getRadarShip()) {
-                $radarShip = $planetTake->getRadarShip() + $form_manageFleet->get('lessRadarShip')->getData();
-                $fleetGive->setRadarShip($fleetGive->getRadarShip() - $form_manageFleet->get('lessRadarShip')->getData());
+            if (abs($form_manageFleet->get('moreRadarShip')->getData())) {
+                $radarShip = $planetTake->getRadarShip() - abs($form_manageFleet->get('moreRadarShip')->getData());
+                $fleetGive->setRadarShip($fleetGive->getRadarShip() + abs($form_manageFleet->get('moreRadarShip')->getData()));
+            } elseif (abs($form_manageFleet->get('lessRadarShip')->getData()) <= $fleetGive->getRadarShip()) {
+                $radarShip = $planetTake->getRadarShip() + abs($form_manageFleet->get('lessRadarShip')->getData());
+                $fleetGive->setRadarShip($fleetGive->getRadarShip() - abs($form_manageFleet->get('lessRadarShip')->getData()));
             } else {
                 $radarShip = $planetTake->getRadarShip();
             }
-            if ($form_manageFleet->get('moreBrouilleurShip')->getData()) {
-                $brouilleurShip = $planetTake->getBrouilleurShip() - $form_manageFleet->get('moreBrouilleurShip')->getData();
-                $fleetGive->setBrouilleurShip($fleetGive->getBrouilleurShip() + $form_manageFleet->get('moreBrouilleurShip')->getData());
-            } elseif ($form_manageFleet->get('lessBrouilleurShip')->getData() <= $fleetGive->getBrouilleurShip()) {
-                $brouilleurShip = $planetTake->getBrouilleurShip() + $form_manageFleet->get('lessBrouilleurShip')->getData();
-                $fleetGive->setBrouilleurShip($fleetGive->getBrouilleurShip() - $form_manageFleet->get('lessBrouilleurShip')->getData());
+            if (abs($form_manageFleet->get('moreBrouilleurShip')->getData())) {
+                $brouilleurShip = $planetTake->getBrouilleurShip() - abs($form_manageFleet->get('moreBrouilleurShip')->getData());
+                $fleetGive->setBrouilleurShip($fleetGive->getBrouilleurShip() + abs($form_manageFleet->get('moreBrouilleurShip')->getData()));
+            } elseif (abs($form_manageFleet->get('lessBrouilleurShip')->getData()) <= $fleetGive->getBrouilleurShip()) {
+                $brouilleurShip = $planetTake->getBrouilleurShip() + abs($form_manageFleet->get('lessBrouilleurShip')->getData());
+                $fleetGive->setBrouilleurShip($fleetGive->getBrouilleurShip() - abs($form_manageFleet->get('lessBrouilleurShip')->getData()));
             } else {
                 $brouilleurShip = $planetTake->getBrouilleurShip();
             }
-            if ($form_manageFleet->get('moreMotherShip')->getData()) {
-                $motherShip = $planetTake->getMotherShip() - $form_manageFleet->get('moreMotherShip')->getData();
-                $fleetGive->setMotherShip($fleetGive->getMotherShip() + $form_manageFleet->get('moreMotherShip')->getData());
-            } elseif ($form_manageFleet->get('lessMotherShip')->getData() <= $fleetGive->getMotherShip()) {
-                $motherShip = $planetTake->getMotherShip() + $form_manageFleet->get('lessMotherShip')->getData();
-                $fleetGive->setMotherShip($fleetGive->getMotherShip() - $form_manageFleet->get('lessMotherShip')->getData());
+            if (abs($form_manageFleet->get('moreMotherShip')->getData())) {
+                $motherShip = $planetTake->getMotherShip() - abs($form_manageFleet->get('moreMotherShip')->getData());
+                $fleetGive->setMotherShip($fleetGive->getMotherShip() + abs($form_manageFleet->get('moreMotherShip')->getData()));
+            } elseif (abs($form_manageFleet->get('lessMotherShip')->getData()) <= $fleetGive->getMotherShip()) {
+                $motherShip = $planetTake->getMotherShip() + abs($form_manageFleet->get('lessMotherShip')->getData());
+                $fleetGive->setMotherShip($fleetGive->getMotherShip() - abs($form_manageFleet->get('lessMotherShip')->getData()));
             } else {
                 $motherShip = $planetTake->getMotherShip();
             }
-            if ($form_manageFleet->get('moreSonde')->getData()) {
-                $sonde = $planetTake->getSonde() - $form_manageFleet->get('moreSonde')->getData();
-                $fleetGive->setSonde($fleetGive->getSonde() + $form_manageFleet->get('moreSonde')->getData());
-            } elseif ($form_manageFleet->get('lessSonde')->getData() <= $fleetGive->getSonde()) {
-                $sonde = $planetTake->getSonde() + $form_manageFleet->get('lessSonde')->getData();
-                $fleetGive->setSonde($fleetGive->getSonde() - $form_manageFleet->get('lessSonde')->getData());
+            if (abs($form_manageFleet->get('moreSonde')->getData())) {
+                $sonde = $planetTake->getSonde() - abs($form_manageFleet->get('moreSonde')->getData());
+                $fleetGive->setSonde($fleetGive->getSonde() + abs($form_manageFleet->get('moreSonde')->getData()));
+            } elseif (abs($form_manageFleet->get('lessSonde')->getData()) <= $fleetGive->getSonde()) {
+                $sonde = $planetTake->getSonde() + abs($form_manageFleet->get('lessSonde')->getData());
+                $fleetGive->setSonde($fleetGive->getSonde() - abs($form_manageFleet->get('lessSonde')->getData()));
             } else {
                 $sonde = $planetTake->getSonde();
             }
-            if ($form_manageFleet->get('moreHunter')->getData()) {
-                $hunter = $planetTake->getHunter() - $form_manageFleet->get('moreHunter')->getData();
-                $fleetGive->setHunter($fleetGive->getHunter() + $form_manageFleet->get('moreHunter')->getData());
-            } elseif ($form_manageFleet->get('lessHunter')->getData() <= $fleetGive->getHunter()) {
-                $hunter = $planetTake->getHunter() + $form_manageFleet->get('lessHunter')->getData();
-                $fleetGive->setHunter($fleetGive->getHunter() - $form_manageFleet->get('lessHunter')->getData());
+            if (abs($form_manageFleet->get('moreHunter')->getData())) {
+                $hunter = $planetTake->getHunter() - abs($form_manageFleet->get('moreHunter')->getData());
+                $fleetGive->setHunter($fleetGive->getHunter() + abs($form_manageFleet->get('moreHunter')->getData()));
+            } elseif (abs($form_manageFleet->get('lessHunter')->getData()) <= $fleetGive->getHunter()) {
+                $hunter = $planetTake->getHunter() + abs($form_manageFleet->get('lessHunter')->getData());
+                $fleetGive->setHunter($fleetGive->getHunter() - abs($form_manageFleet->get('lessHunter')->getData()));
             } else {
                 $hunter = $planetTake->getHunter();
             }
-            if ($form_manageFleet->get('moreHunterHeavy')->getData()) {
-                $hunterHeavy = $planetTake->getHunterHeavy() - $form_manageFleet->get('moreHunterHeavy')->getData();
-                $fleetGive->setHunterHeavy($fleetGive->getHunterHeavy() + $form_manageFleet->get('moreHunterHeavy')->getData());
-            } elseif ($form_manageFleet->get('lessHunterHeavy')->getData() <= $fleetGive->getHunterHeavy()) {
-                $hunterHeavy = $planetTake->getHunterHeavy() + $form_manageFleet->get('lessHunterHeavy')->getData();
-                $fleetGive->setHunterHeavy($fleetGive->getHunterHeavy() - $form_manageFleet->get('lessHunterHeavy')->getData());
+            if (abs($form_manageFleet->get('moreHunterHeavy')->getData())) {
+                $hunterHeavy = $planetTake->getHunterHeavy() - abs($form_manageFleet->get('moreHunterHeavy')->getData());
+                $fleetGive->setHunterHeavy($fleetGive->getHunterHeavy() + abs($form_manageFleet->get('moreHunterHeavy')->getData()));
+            } elseif (abs($form_manageFleet->get('lessHunterHeavy')->getData()) <= $fleetGive->getHunterHeavy()) {
+                $hunterHeavy = $planetTake->getHunterHeavy() + abs($form_manageFleet->get('lessHunterHeavy')->getData());
+                $fleetGive->setHunterHeavy($fleetGive->getHunterHeavy() - abs($form_manageFleet->get('lessHunterHeavy')->getData()));
             } else {
                 $hunterHeavy = $planetTake->getHunterHeavy();
             }
-            if ($form_manageFleet->get('moreHunterWar')->getData()) {
-                $hunterWar = $planetTake->getHunterWar() - $form_manageFleet->get('moreHunterWar')->getData();
-                $fleetGive->setHunterWar($fleetGive->getHunterWar() + $form_manageFleet->get('moreHunterWar')->getData());
-            } elseif ($form_manageFleet->get('lessHunterWar')->getData() <= $fleetGive->getHunterWar()) {
-                $hunterWar = $planetTake->getHunterWar() + $form_manageFleet->get('lessHunterWar')->getData();
-                $fleetGive->setHunterWar($fleetGive->getHunterWar() - $form_manageFleet->get('lessHunterWar')->getData());
+            if (abs($form_manageFleet->get('moreHunterWar')->getData())) {
+                $hunterWar = $planetTake->getHunterWar() - abs($form_manageFleet->get('moreHunterWar')->getData());
+                $fleetGive->setHunterWar($fleetGive->getHunterWar() + abs($form_manageFleet->get('moreHunterWar')->getData()));
+            } elseif (abs($form_manageFleet->get('lessHunterWar')->getData()) <= $fleetGive->getHunterWar()) {
+                $hunterWar = $planetTake->getHunterWar() + abs($form_manageFleet->get('lessHunterWar')->getData());
+                $fleetGive->setHunterWar($fleetGive->getHunterWar() - abs($form_manageFleet->get('lessHunterWar')->getData()));
             } else {
                 $hunterWar = $planetTake->getHunterWar();
             }
-            if ($form_manageFleet->get('moreCorvet')->getData()) {
-                $corvet = $planetTake->getCorvet() - $form_manageFleet->get('moreCorvet')->getData();
-                $fleetGive->setCorvet($fleetGive->getCorvet() + $form_manageFleet->get('moreCorvet')->getData());
-            } elseif ($form_manageFleet->get('lessCorvet')->getData() <= $fleetGive->getCorvet()) {
-                $corvet = $planetTake->getCorvet() + $form_manageFleet->get('lessCorvet')->getData();
-                $fleetGive->setCorvet($fleetGive->getCorvet() - $form_manageFleet->get('lessCorvet')->getData());
+            if (abs($form_manageFleet->get('moreCorvet')->getData())) {
+                $corvet = $planetTake->getCorvet() - abs($form_manageFleet->get('moreCorvet')->getData());
+                $fleetGive->setCorvet($fleetGive->getCorvet() + abs($form_manageFleet->get('moreCorvet')->getData()));
+            } elseif (abs($form_manageFleet->get('lessCorvet')->getData()) <= $fleetGive->getCorvet()) {
+                $corvet = $planetTake->getCorvet() + abs($form_manageFleet->get('lessCorvet')->getData());
+                $fleetGive->setCorvet($fleetGive->getCorvet() - abs($form_manageFleet->get('lessCorvet')->getData()));
             } else {
                 $corvet = $planetTake->getCorvet();
             }
-            if ($form_manageFleet->get('moreCorvetLaser')->getData()) {
-                $corvetLaser = $planetTake->getCorvetLaser() - $form_manageFleet->get('moreCorvetLaser')->getData();
-                $fleetGive->setCorvetLaser($fleetGive->getCorvetLaser() + $form_manageFleet->get('moreCorvetLaser')->getData());
-            } elseif ($form_manageFleet->get('lessCorvetLaser')->getData() <= $fleetGive->getCorvetLaser()) {
-                $corvetLaser = $planetTake->getCorvetLaser() + $form_manageFleet->get('lessCorvetLaser')->getData();
-                $fleetGive->setCorvetLaser($fleetGive->getCorvetLaser() - $form_manageFleet->get('lessCorvetLaser')->getData());
+            if (abs($form_manageFleet->get('moreCorvetLaser')->getData())) {
+                $corvetLaser = $planetTake->getCorvetLaser() - abs($form_manageFleet->get('moreCorvetLaser')->getData());
+                $fleetGive->setCorvetLaser($fleetGive->getCorvetLaser() + abs($form_manageFleet->get('moreCorvetLaser')->getData()));
+            } elseif (abs($form_manageFleet->get('lessCorvetLaser')->getData()) <= $fleetGive->getCorvetLaser()) {
+                $corvetLaser = $planetTake->getCorvetLaser() + abs($form_manageFleet->get('lessCorvetLaser')->getData());
+                $fleetGive->setCorvetLaser($fleetGive->getCorvetLaser() - abs($form_manageFleet->get('lessCorvetLaser')->getData()));
             } else {
                 $corvetLaser = $planetTake->getCorvetLaser();
             }
-            if ($form_manageFleet->get('moreCorvetWar')->getData()) {
-                $corvetWar = $planetTake->getCorvetWar() - $form_manageFleet->get('moreCorvetWar')->getData();
-                $fleetGive->setCorvetWar($fleetGive->getCorvetWar() + $form_manageFleet->get('moreCorvetWar')->getData());
-            } elseif ($form_manageFleet->get('lessCorvetWar')->getData() <= $fleetGive->getCorvetWar()) {
-                $corvetWar = $planetTake->getCorvetWar() + $form_manageFleet->get('lessCorvetWar')->getData();
-                $fleetGive->setCorvetWar($fleetGive->getCorvetWar() - $form_manageFleet->get('lessCorvetWar')->getData());
+            if (abs($form_manageFleet->get('moreCorvetWar')->getData())) {
+                $corvetWar = $planetTake->getCorvetWar() - abs($form_manageFleet->get('moreCorvetWar')->getData());
+                $fleetGive->setCorvetWar($fleetGive->getCorvetWar() + abs($form_manageFleet->get('moreCorvetWar')->getData()));
+            } elseif (abs($form_manageFleet->get('lessCorvetWar')->getData()) <= $fleetGive->getCorvetWar()) {
+                $corvetWar = $planetTake->getCorvetWar() + abs($form_manageFleet->get('lessCorvetWar')->getData());
+                $fleetGive->setCorvetWar($fleetGive->getCorvetWar() - abs($form_manageFleet->get('lessCorvetWar')->getData()));
             } else {
                 $corvetWar = $planetTake->getCorvetLaser();
             }
-            if ($form_manageFleet->get('moreFregate')->getData()) {
-                $fregate = $planetTake->getFregate() - $form_manageFleet->get('moreFregate')->getData();
-                $fleetGive->setFregate($fleetGive->getFregate() + $form_manageFleet->get('moreFregate')->getData());
-            } elseif ($form_manageFleet->get('lessFregate')->getData() <= $fleetGive->getFregate()) {
-                $fregate = $planetTake->getFregate() + $form_manageFleet->get('lessFregate')->getData();
-                $fleetGive->setFregate($fleetGive->getFregate() - $form_manageFleet->get('lessFregate')->getData());
+            if (abs($form_manageFleet->get('moreFregate')->getData())) {
+                $fregate = $planetTake->getFregate() - abs($form_manageFleet->get('moreFregate')->getData());
+                $fleetGive->setFregate($fleetGive->getFregate() + abs($form_manageFleet->get('moreFregate')->getData()));
+            } elseif (abs($form_manageFleet->get('lessFregate')->getData()) <= $fleetGive->getFregate()) {
+                $fregate = $planetTake->getFregate() + abs($form_manageFleet->get('lessFregate')->getData());
+                $fleetGive->setFregate($fleetGive->getFregate() - abs($form_manageFleet->get('lessFregate')->getData()));
             } else {
                 $fregate = $planetTake->getFregate();
             }
-            if ($form_manageFleet->get('moreFregatePlasma')->getData()) {
-                $fregatePlasma = $planetTake->getFregatePlasma() - $form_manageFleet->get('moreFregatePlasma')->getData();
-                $fleetGive->setFregatePlasma($fleetGive->getFregatePlasma() + $form_manageFleet->get('moreFregatePlasma')->getData());
-            } elseif ($form_manageFleet->get('lessFregatePlasma')->getData() <= $fleetGive->getFregatePlasma()) {
-                $fregatePlasma = $planetTake->getFregatePlasma() + $form_manageFleet->get('lessFregatePlasma')->getData();
-                $fleetGive->setFregatePlasma($fleetGive->getFregatePlasma() - $form_manageFleet->get('lessFregatePlasma')->getData());
+            if (abs($form_manageFleet->get('moreFregatePlasma')->getData())) {
+                $fregatePlasma = $planetTake->getFregatePlasma() - abs($form_manageFleet->get('moreFregatePlasma')->getData());
+                $fleetGive->setFregatePlasma($fleetGive->getFregatePlasma() + abs($form_manageFleet->get('moreFregatePlasma')->getData()));
+            } elseif (abs($form_manageFleet->get('lessFregatePlasma')->getData()) <= $fleetGive->getFregatePlasma()) {
+                $fregatePlasma = $planetTake->getFregatePlasma() + abs($form_manageFleet->get('lessFregatePlasma')->getData());
+                $fleetGive->setFregatePlasma($fleetGive->getFregatePlasma() - abs($form_manageFleet->get('lessFregatePlasma')->getData()));
             } else {
                 $fregatePlasma = $planetTake->getFregatePlasma();
             }
-            if ($form_manageFleet->get('moreCroiser')->getData()) {
-                $croiser = $planetTake->getCroiser() - $form_manageFleet->get('moreCroiser')->getData();
-                $fleetGive->setCroiser($fleetGive->getCroiser() + $form_manageFleet->get('moreCroiser')->getData());
-            } elseif ($form_manageFleet->get('lessCroiser')->getData() <= $fleetGive->getCroiser()) {
-                $croiser = $planetTake->getCroiser() + $form_manageFleet->get('lessCroiser')->getData();
-                $fleetGive->setCroiser($fleetGive->getCroiser() - $form_manageFleet->get('lessCroiser')->getData());
+            if (abs($form_manageFleet->get('moreCroiser')->getData())) {
+                $croiser = $planetTake->getCroiser() - abs($form_manageFleet->get('moreCroiser')->getData());
+                $fleetGive->setCroiser($fleetGive->getCroiser() + abs($form_manageFleet->get('moreCroiser')->getData()));
+            } elseif (abs($form_manageFleet->get('lessCroiser')->getData()) <= $fleetGive->getCroiser()) {
+                $croiser = $planetTake->getCroiser() + abs($form_manageFleet->get('lessCroiser')->getData());
+                $fleetGive->setCroiser($fleetGive->getCroiser() - abs($form_manageFleet->get('lessCroiser')->getData()));
             } else {
                 $croiser = $planetTake->getCroiser();
             }
-            if ($form_manageFleet->get('moreIronClad')->getData()) {
-                $ironClad = $planetTake->getIronClad() - $form_manageFleet->get('moreIronClad')->getData();
-                $fleetGive->setIronClad($fleetGive->getIronClad() + $form_manageFleet->get('moreIronClad')->getData());
-            } elseif ($form_manageFleet->get('lessIronClad')->getData() <= $fleetGive->getIronClad()) {
-                $ironClad = $planetTake->getIronClad() + $form_manageFleet->get('lessIronClad')->getData();
-                $fleetGive->setIronClad($fleetGive->getIronClad() - $form_manageFleet->get('lessIronClad')->getData());
+            if (abs($form_manageFleet->get('moreIronClad')->getData())) {
+                $ironClad = $planetTake->getIronClad() - abs($form_manageFleet->get('moreIronClad')->getData());
+                $fleetGive->setIronClad($fleetGive->getIronClad() + abs($form_manageFleet->get('moreIronClad')->getData()));
+            } elseif (abs($form_manageFleet->get('lessIronClad')->getData()) <= $fleetGive->getIronClad()) {
+                $ironClad = $planetTake->getIronClad() + abs($form_manageFleet->get('lessIronClad')->getData());
+                $fleetGive->setIronClad($fleetGive->getIronClad() - abs($form_manageFleet->get('lessIronClad')->getData()));
             } else {
                 $ironClad = $planetTake->getIronClad();
             }
-            if ($form_manageFleet->get('moreDestroyer')->getData()) {
-                $destroyer = $planetTake->getDestroyer() - $form_manageFleet->get('moreDestroyer')->getData();
-                $fleetGive->setDestroyer($fleetGive->getDestroyer() + $form_manageFleet->get('moreDestroyer')->getData());
-            } elseif ($form_manageFleet->get('lessDestroyer')->getData() <= $fleetGive->getDestroyer()) {
-                $destroyer = $planetTake->getDestroyer() + $form_manageFleet->get('lessDestroyer')->getData();
-                $fleetGive->setDestroyer($fleetGive->getDestroyer() - $form_manageFleet->get('lessDestroyer')->getData());
+            if (abs($form_manageFleet->get('moreDestroyer')->getData())) {
+                $destroyer = $planetTake->getDestroyer() - abs($form_manageFleet->get('moreDestroyer')->getData());
+                $fleetGive->setDestroyer($fleetGive->getDestroyer() + abs($form_manageFleet->get('moreDestroyer')->getData()));
+            } elseif (abs($form_manageFleet->get('lessDestroyer')->getData()) <= $fleetGive->getDestroyer()) {
+                $destroyer = $planetTake->getDestroyer() + abs($form_manageFleet->get('lessDestroyer')->getData());
+                $fleetGive->setDestroyer($fleetGive->getDestroyer() - abs($form_manageFleet->get('lessDestroyer')->getData()));
             } else {
                 $destroyer = $planetTake->getDestroyer();
             }
             $nbKeep = 0;
-            if ($form_manageFleet->get('moreNiobium')->getData()) {
-                $niobium = $planetTake->getNiobium() - $form_manageFleet->get('moreNiobium')->getData();
-                $fleetGive->setNiobium($fleetGive->getNiobium() + $form_manageFleet->get('moreNiobium')->getData());
-            } elseif ($form_manageFleet->get('lessNiobium')->getData() <= $fleetGive->getNiobium()) {
-                $niobium = $planetTake->getNiobium() + $form_manageFleet->get('lessNiobium')->getData();
-                $fleetGive->setNiobium($fleetGive->getNiobium() - $form_manageFleet->get('lessNiobium')->getData());
+            if (abs($form_manageFleet->get('moreNiobium')->getData())) {
+                $niobium = $planetTake->getNiobium() - abs($form_manageFleet->get('moreNiobium')->getData());
+                $fleetGive->setNiobium($fleetGive->getNiobium() + abs($form_manageFleet->get('moreNiobium')->getData()));
+            } elseif (abs($form_manageFleet->get('lessNiobium')->getData()) <= $fleetGive->getNiobium()) {
+                $niobium = $planetTake->getNiobium() + abs($form_manageFleet->get('lessNiobium')->getData());
+                $fleetGive->setNiobium($fleetGive->getNiobium() - abs($form_manageFleet->get('lessNiobium')->getData()));
             } else {
                 $niobium = 0;
                 $nbKeep = 1;
             }
             $wtKeep = 0;
-            if ($form_manageFleet->get('moreWater')->getData()) {
-                $water = $planetTake->getWater() - $form_manageFleet->get('moreWater')->getData();
-                $fleetGive->setWater($fleetGive->getWater() + $form_manageFleet->get('moreWater')->getData());
-            } elseif ($form_manageFleet->get('lessWater')->getData() <= $fleetGive->getWater()) {
-                $water = $planetTake->getWater() + $form_manageFleet->get('lessWater')->getData();
-                $fleetGive->setWater($fleetGive->getWater() - $form_manageFleet->get('lessWater')->getData());
+            if (abs($form_manageFleet->get('moreWater')->getData())) {
+                $water = $planetTake->getWater() - abs($form_manageFleet->get('moreWater')->getData());
+                $fleetGive->setWater($fleetGive->getWater() + abs($form_manageFleet->get('moreWater')->getData()));
+            } elseif (abs($form_manageFleet->get('lessWater')->getData()) <= $fleetGive->getWater()) {
+                $water = $planetTake->getWater() + abs($form_manageFleet->get('lessWater')->getData());
+                $fleetGive->setWater($fleetGive->getWater() - abs($form_manageFleet->get('lessWater')->getData()));
             } else {
                 $water = 0;
                 $wtKeep = 1;
             }
             $solKeep = 0;
-            if ($form_manageFleet->get('moreSoldier')->getData()) {
-                $soldier = $planetTake->getSoldier() - $form_manageFleet->get('moreSoldier')->getData();
-                $fleetGive->setSoldier($fleetGive->getSoldier() + $form_manageFleet->get('moreSoldier')->getData());
-            } elseif ($form_manageFleet->get('lessSoldier')->getData() <= $fleetGive->getSoldier()) {
-                $soldier = $planetTake->getSoldier() + $form_manageFleet->get('lessSoldier')->getData();
-                $fleetGive->setSoldier($fleetGive->getSoldier() - $form_manageFleet->get('lessSoldier')->getData());
+            if (abs($form_manageFleet->get('moreSoldier')->getData())) {
+                $soldier = $planetTake->getSoldier() - abs($form_manageFleet->get('moreSoldier')->getData());
+                $fleetGive->setSoldier($fleetGive->getSoldier() + abs($form_manageFleet->get('moreSoldier')->getData()));
+            } elseif (abs($form_manageFleet->get('lessSoldier')->getData()) <= $fleetGive->getSoldier()) {
+                $soldier = $planetTake->getSoldier() + abs($form_manageFleet->get('lessSoldier')->getData());
+                $fleetGive->setSoldier($fleetGive->getSoldier() - abs($form_manageFleet->get('lessSoldier')->getData()));
             } else {
                 $soldier = 0;
                 $solKeep = 1;
             }
             $wkKeep = 0;
-            if ($form_manageFleet->get('moreWorker')->getData()) {
-                $worker = $planetTake->getWorker() - $form_manageFleet->get('moreWorker')->getData();
-                $fleetGive->setWorker($fleetGive->getWorker() + $form_manageFleet->get('moreWorker')->getData());
-            } elseif ($form_manageFleet->get('lessWorker')->getData() <= $fleetGive->getWorker()) {
-                $worker = $planetTake->getWorker() + $form_manageFleet->get('lessWorker')->getData();
-                $fleetGive->setWorker($fleetGive->getWorker() - $form_manageFleet->get('lessWorker')->getData());
+            if (abs($form_manageFleet->get('moreWorker')->getData())) {
+                $worker = $planetTake->getWorker() - abs($form_manageFleet->get('moreWorker')->getData());
+                $fleetGive->setWorker($fleetGive->getWorker() + abs($form_manageFleet->get('moreWorker')->getData()));
+            } elseif (abs($form_manageFleet->get('lessWorker')->getData()) <= $fleetGive->getWorker()) {
+                $worker = $planetTake->getWorker() + abs($form_manageFleet->get('lessWorker')->getData());
+                $fleetGive->setWorker($fleetGive->getWorker() - abs($form_manageFleet->get('lessWorker')->getData()));
             } else {
                 $worker = 0;
                 $wkKeep = 1;
             }
             $scKeep = 0;
-            if ($form_manageFleet->get('moreScientist')->getData()) {
-                $scientist = $planetTake->getScientist() - $form_manageFleet->get('moreScientist')->getData();
-                $fleetGive->setScientist($fleetGive->getScientist() + $form_manageFleet->get('moreScientist')->getData());
-            } elseif ($form_manageFleet->get('lessScientist')->getData() <= $fleetGive->getScientist()) {
-                $scientist = $planetTake->getScientist() + $form_manageFleet->get('lessScientist')->getData();
-                $fleetGive->setScientist($fleetGive->getScientist() - $form_manageFleet->get('lessScientist')->getData());
+            if (abs($form_manageFleet->get('moreScientist')->getData())) {
+                $scientist = $planetTake->getScientist() - abs($form_manageFleet->get('moreScientist')->getData());
+                $fleetGive->setScientist($fleetGive->getScientist() + abs($form_manageFleet->get('moreScientist')->getData()));
+            } elseif (abs($form_manageFleet->get('lessScientist')->getData()) <= $fleetGive->getScientist()) {
+                $scientist = $planetTake->getScientist() + abs($form_manageFleet->get('lessScientist')->getData());
+                $fleetGive->setScientist($fleetGive->getScientist() - abs($form_manageFleet->get('lessScientist')->getData()));
             } else {
                 $scientist = 0;
                 $scKeep = 1;
@@ -464,7 +464,7 @@ class FleetController extends Controller
                 ($soldier > $planetTake->getSoldierMax()) ||
                 ($worker > $planetTake->getWorkerMax() || $scientist > $planetTake->getScientistMax()) ||
                 ($niobium > $planetTake->getNiobiumMax() || $water > $planetTake->getWaterMax()) ||
-                ($worker < 10000 && $form_manageFleet->get('moreWorker')->getData())) {
+                ($worker < 10000 && abs($form_manageFleet->get('moreWorker')->getData()))) {
                 return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
             }
 
@@ -1255,34 +1255,35 @@ class FleetController extends Controller
         $form_spatialShip->handleRequest($request);
 
         if ($form_spatialShip->isSubmitted() && $form_spatialShip->isValid()) {
-            $cargoI = $oldFleet->getCargoI() - $form_spatialShip->get('cargoI')->getData();
-            $cargoV = $oldFleet->getCargoV() - $form_spatialShip->get('cargoV')->getData();
-            $cargoX = $oldFleet->getCargoX() - $form_spatialShip->get('cargoX')->getData();
-            $colonizer = $oldFleet->getColonizer() - $form_spatialShip->get('colonizer')->getData();
-            $recycleur = $oldFleet->getRecycleur() - $form_spatialShip->get('recycleur')->getData();
-            $barge = $oldFleet->getBarge() - $form_spatialShip->get('barge')->getData();
-            $moonMaker = $oldFleet->getMoonMaker() - $form_spatialShip->get('moonMaker')->getData();
-            $radarShip = $oldFleet->getRadarShip() - $form_spatialShip->get('radarShip')->getData();
-            $brouilleurShip = $oldFleet->getBrouilleurShip() - $form_spatialShip->get('brouilleurShip')->getData();
-            $motherShip = $oldFleet->getMotherShip() - $form_spatialShip->get('motherShip')->getData();
-            $sonde = $oldFleet->getSonde() - $form_spatialShip->get('sonde')->getData();
-            $hunter = $oldFleet->getHunter() - $form_spatialShip->get('hunter')->getData();
-            $fregate = $oldFleet->getFregate() - $form_spatialShip->get('fregate')->getData();
-            $hunterHeavy = $oldFleet->getHunterHeavy() - $form_spatialShip->get('hunterHeavy')->getData();
-            $hunterWar = $oldFleet->getHunterWar() - $form_spatialShip->get('hunterWar')->getData();
-            $corvet = $oldFleet->getCorvet() - $form_spatialShip->get('corvet')->getData();
-            $corvetLaser = $oldFleet->getCorvetLaser() - $form_spatialShip->get('corvetLaser')->getData();
-            $corvetWar = $oldFleet->getCorvetWar() - $form_spatialShip->get('corvetWar')->getData();
-            $fregatePlasma = $oldFleet->getFregatePlasma() - $form_spatialShip->get('fregatePlasma')->getData();
-            $croiser = $oldFleet->getCroiser() - $form_spatialShip->get('croiser')->getData();
-            $ironClad = $oldFleet->getIronClad() - $form_spatialShip->get('ironClad')->getData();
-            $destroyer = $oldFleet->getDestroyer() - $form_spatialShip->get('destroyer')->getData();
+            $cargoI = $oldFleet->getCargoI() - abs($form_spatialShip->get('cargoI')->getData());
+            $cargoV = $oldFleet->getCargoV() - abs($form_spatialShip->get('cargoV')->getData());
+            $cargoX = $oldFleet->getCargoX() - abs($form_spatialShip->get('cargoX')->getData());
+            $colonizer = $oldFleet->getColonizer() - abs($form_spatialShip->get('colonizer')->getData());
+            $recycleur = $oldFleet->getRecycleur() - abs($form_spatialShip->get('recycleur')->getData());
+            $barge = $oldFleet->getBarge() - abs($form_spatialShip->get('barge')->getData());
+            $moonMaker = $oldFleet->getMoonMaker() - abs($form_spatialShip->get('moonMaker')->getData());
+            $radarShip = $oldFleet->getRadarShip() - abs($form_spatialShip->get('radarShip')->getData());
+            $brouilleurShip = $oldFleet->getBrouilleurShip() - abs($form_spatialShip->get('brouilleurShip')->getData());
+            $motherShip = $oldFleet->getMotherShip() - abs($form_spatialShip->get('motherShip')->getData());
+            $sonde = $oldFleet->getSonde() - abs($form_spatialShip->get('sonde')->getData());
+            $hunter = $oldFleet->getHunter() - abs($form_spatialShip->get('hunter')->getData());
+            $fregate = $oldFleet->getFregate() - abs($form_spatialShip->get('fregate')->getData());
+            $hunterHeavy = $oldFleet->getHunterHeavy() - abs($form_spatialShip->get('hunterHeavy')->getData());
+            $hunterWar = $oldFleet->getHunterWar() - abs($form_spatialShip->get('hunterWar')->getData());
+            $corvet = $oldFleet->getCorvet() - abs($form_spatialShip->get('corvet')->getData());
+            $corvetLaser = $oldFleet->getCorvetLaser() - abs($form_spatialShip->get('corvetLaser')->getData());
+            $corvetWar = $oldFleet->getCorvetWar() - abs($form_spatialShip->get('corvetWar')->getData());
+            $fregatePlasma = $oldFleet->getFregatePlasma() - abs($form_spatialShip->get('fregatePlasma')->getData());
+            $croiser = $oldFleet->getCroiser() - abs($form_spatialShip->get('croiser')->getData());
+            $ironClad = $oldFleet->getIronClad() - abs($form_spatialShip->get('ironClad')->getData());
+            $destroyer = $oldFleet->getDestroyer() - abs($form_spatialShip->get('destroyer')->getData());
             $total = $form_spatialShip->get('moonMaker')->getData() + $form_spatialShip->get('radarShip')->getData() + $form_spatialShip->get('brouilleurShip')->getData() + $form_spatialShip->get('motherShip')->getData() + $form_spatialShip->get('corvetWar')->getData() + $form_spatialShip->get('hunterWar')->getData() + $form_spatialShip->get('cargoI')->getData() + $form_spatialShip->get('cargoV')->getData() + $form_spatialShip->get('cargoX')->getData() + $form_spatialShip->get('hunterHeavy')->getData() + $form_spatialShip->get('corvet')->getData() + $form_spatialShip->get('corvetLaser')->getData() + $form_spatialShip->get('fregatePlasma')->getData() + $form_spatialShip->get('croiser')->getData() + $form_spatialShip->get('ironClad')->getData() + $form_spatialShip->get('destroyer')->getData() + $form_spatialShip->get('colonizer')->getData() + $form_spatialShip->get('fregate')->getData() + $form_spatialShip->get('hunter')->getData() + $form_spatialShip->get('sonde')->getData() + $form_spatialShip->get('barge')->getData() + $form_spatialShip->get('recycleur')->getData();
+            $cargoTotal = (($cargoI * 25000) + ($cargoV * 100000) + ($cargoX * 250000) + ($barge * 2500) + ($recycleur * 10000)) - $oldFleet->getCargoFull();
 
             if (($colonizer < 0 || $recycleur < 0) || ($barge < 0 || $sonde < 0) || ($hunter < 0 || $fregate < 0) ||
                 ($total == 0 || $cargoI < 0) || ($cargoV < 0 || $cargoX < 0) || ($hunterHeavy < 0 || $corvet < 0) ||
                 ($corvetLaser < 0 || $fregatePlasma < 0) || ($croiser < 0 || $ironClad < 0) || ($destroyer < 0 || $hunterWar < 0) ||
-                ($corvetWar < 0 || $moonMaker < 0) || ($radarShip < 0 || $brouilleurShip < 0) || ($motherShip < 0)) {
+                ($corvetWar < 0 || $moonMaker < 0) || ($radarShip < 0 || $brouilleurShip < 0) || ($motherShip < 0 || $cargoTotal < 0)) {
                 return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
             }
             $eAlly = $user->getAllyEnnemy();

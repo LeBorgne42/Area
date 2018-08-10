@@ -65,7 +65,9 @@ class BuildingController extends Controller
 
 
         $build = $cancelPlanet->getConstruct();
-        if ($build == 'miner') {
+        if ($build == 'destruct') {
+            return $this->redirectToRoute('overview', array('idp' => $usePlanet->getId()));
+        } elseif ($build == 'miner') {
             $level = $cancelPlanet->getMiner() + 1;
             $cancelPlanet->setNiobium($cancelPlanet->getNiobium() + ($level * 225));
             $cancelPlanet->setWater($cancelPlanet->getWater() + ($level * 100));

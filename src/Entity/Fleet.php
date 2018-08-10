@@ -583,7 +583,7 @@ class Fleet
 
         $nbr = $barge + $recycleur + $cargoI + $cargoV + $cargoX;
         if($this->getMotherShip() == 1) {
-            $nbr = $nbr / 0.10;
+            $nbr = $nbr * 1.10;
         }
         return $nbr;
     }
@@ -612,7 +612,7 @@ class Fleet
 
         $nbr = $motherShip + $hunterWar + $corvetWar +  $fregate + $hunter + $hunterHeavy + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
         if($this->getMotherShip() == 1) {
-            $nbr = $nbr / 0.05;
+            $nbr = $nbr * 1.05;
         }
         return $nbr;
     }
@@ -629,6 +629,9 @@ class Fleet
         $destroyer = $this->getDestroyer() * 2;
 
         $nbr = $fregatePlasma + $croiser + $ironClad + $destroyer + $hunterWar;
+        if($this->getMotherShip() == 1) {
+            $nbr = $nbr * 1.10;
+        }
         return $nbr;
     }
 
@@ -670,7 +673,7 @@ class Fleet
 
         $nbr = $motherShip + $corvetWar + $fregate + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
         if($this->getMotherShip() == 1) {
-            $nbr = $nbr / 0.05;
+            $nbr = $nbr * 1.05;
         }
         return $nbr;
     }
@@ -755,7 +758,7 @@ class Fleet
 
         $nbr = $motherShip + $brouilleurShip + $radarShip + $moonMaker + $hunterWar + $corvetWar + $fregate + $colonizer + $barge + $hunter + $recycleur + $sonde + $cargoI + $cargoV + $cargoX + $hunterHeavy + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
         if($this->getMotherShip() == 1) {
-            $nbr = $nbr * 0.1;
+            $nbr = $nbr * 0.9;
         }
         return $nbr;
     }

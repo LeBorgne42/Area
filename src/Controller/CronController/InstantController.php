@@ -113,14 +113,14 @@ class InstantController extends Controller
             ->getQuery()
             ->getResult();
 
-        $userSoldiers = $em->getRepository('App:Planet')
+        $planetSoldiers = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->where('p.soldierAt < :now')
             ->setParameters(array('now' => $now))
             ->getQuery()
             ->getResult();
 
-        $userScientists = $em->getRepository('App:Planet')
+        $planetScientists = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->where('p.scientistAt < :now')
             ->setParameters(array('now' => $now))
@@ -221,14 +221,14 @@ class InstantController extends Controller
             $em->flush();
         }
 
-        foreach ($userSoldiers as $soldierAt) {
-            $soldierAt->setSoldier($soldierAt->getSoldierAtNbr());
+        foreach ($planetSoldiers as $soldierAt) {
+            $soldierAt->setSoldier($soldierAt->getSoldier() + $soldierAt->getSoldierAtNbr());
             $soldierAt->setSoldierAt(null);
             $soldierAt->setSoldierAtNbr(null);
             $em->persist($soldierAt);
         }
-        foreach ($userScientists as $scientistAt) {
-            $scientistAt->setScientist($scientistAt->GetScientistAtNbr());
+        foreach ($planetScientists as $scientistAt) {
+            $scientistAt->setScientist($scientistAt->getScientist() + $scientistAt->GetScientistAtNbr());
             $scientistAt->getUser()->setScientistProduction(round($scientistAt->getUser()->getScientistProduction() + ($scientistAt->getScientist() / 10000)));
             $scientistAt->setScientistAt(null);
             $scientistAt->setScientistAtNbr(null);
@@ -580,40 +580,40 @@ class InstantController extends Controller
                             $reportSell->setContent("Le joueur " . $newPlanet->getUser()->getUserName() . " vient de déposer des ressources sur votre planète "  . $newPlanet->getSector()->getgalaxy()->getPosition() . ":" . $newPlanet->getSector()->getPosition() . ":" . $newPlanet->getPosition() . " " . $fleet->getNiobium() . " Niobium, " . $fleet->getWater() . " Eau, " . $fleet->getWorker() . " Travailleurs, " . $fleet->getSoldier() . " Soldats, " . $fleet->getScientist() . " Scientifiques.");
                             $em->persist($reportSell);
                         }
-                        if($newPlanet->getNiobium() + $fleet->getNiobium() < $newPlanet->getNiobiumMax()) {
+                        if($newPlanet->getNiobium() + $fleet->getNiobium() <= $newPlanet->getNiobiumMax()) {
                             $newPlanet->setNiobium($newPlanet->getNiobium() + $fleet->getNiobium());
                             $fleet->setNiobium(0);
                         } else {
-                            $newPlanet->setNiobium($newPlanet->getNiobiumMax());
                             $fleet->setNiobium($fleet->getNiobium() - ($newPlanet->getNiobiumMax() - $newPlanet->getNiobium()));
+                            $newPlanet->setNiobium($newPlanet->getNiobiumMax());
                         }
-                        if($newPlanet->getWater() + $fleet->getWater() < $newPlanet->getWaterMax()) {
+                        if($newPlanet->getWater() + $fleet->getWater() <= $newPlanet->getWaterMax()) {
                             $newPlanet->setWater($newPlanet->getWater() + $fleet->getWater());
                             $fleet->setWater(0);
                         } else {
-                            $newPlanet->setWater($newPlanet->getWaterMax());
                             $fleet->setWater($fleet->getWater() - ($newPlanet->getWaterMax() - $newPlanet->getWater()));
+                            $newPlanet->setWater($newPlanet->getWaterMax());
                         }
-                        if($newPlanet->getSoldier() + $fleet->getSoldier() < $newPlanet->getSoldierMax()) {
+                        if($newPlanet->getSoldier() + $fleet->getSoldier() <= $newPlanet->getSoldierMax()) {
                             $newPlanet->setSoldier($newPlanet->getSoldier() + $fleet->getSoldier());
                             $fleet->setSoldier(0);
                         } else {
-                            $newPlanet->setSoldier($newPlanet->getSoldierMax());
                             $fleet->setSoldier($fleet->getSoldier() - ($newPlanet->getSoldierMax() - $newPlanet->getSoldier()));
+                            $newPlanet->setSoldier($newPlanet->getSoldierMax());
                         }
-                        if($newPlanet->getWorker() + $fleet->getWorker() < $newPlanet->getWorkerMax()) {
+                        if($newPlanet->getWorker() + $fleet->getWorker() <= $newPlanet->getWorkerMax()) {
                             $newPlanet->setWorker($newPlanet->getWorker() + $fleet->getWorker());
                             $fleet->setWorker(0);
                         } else {
-                            $newPlanet->setWorker($newPlanet->getWorkerMax());
                             $fleet->setWorker($fleet->getWorker() - ($newPlanet->getWorkerMax() - $newPlanet->getWorker()));
+                            $newPlanet->setWorker($newPlanet->getWorkerMax());
                         }
-                        if($newPlanet->getScientist() + $fleet->getScientist() < $newPlanet->getScientistMax()) {
+                        if($newPlanet->getScientist() + $fleet->getScientist() <= $newPlanet->getScientistMax()) {
                             $newPlanet->setScientist($newPlanet->getScientist() + $fleet->getScientist());
                             $fleet->setScientist(0);
                         } else {
-                            $newPlanet->setScientist($newPlanet->getScientistMax());
                             $fleet->setScientist($fleet->getScientist() - ($newPlanet->getScientistMax() - $newPlanet->getScientist()));
+                            $newPlanet->setScientist($newPlanet->getScientistMax());
                         }
                     }
 
@@ -639,7 +639,7 @@ class InstantController extends Controller
                         $base= 15000;
                     }
                     if($fleet->getMotherShip()) {
-                        $speed = $fleet->getSpeed() * 0.10;
+                        $speed = $fleet->getSpeed()  - ($fleet->getSpeed() * 0.10);
                     } else {
                         $speed = $fleet->getSpeed();
                     }

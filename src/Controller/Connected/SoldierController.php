@@ -61,7 +61,7 @@ class SoldierController extends Controller
                 $usePlanet->setSoldierAtNbr($usePlanet->getSoldierAtNbr() + $form_caserneRecruit->get('soldier')->getData());
             } else {
                 $now->add(new DateInterval('PT' . $form_caserneRecruit->get('soldier')->getData() . 'S'));
-                $usePlanet->setSoldierAtNbr($usePlanet->getSoldier() + $form_caserneRecruit->get('soldier')->getData());
+                $usePlanet->setSoldierAtNbr($form_caserneRecruit->get('soldier')->getData());
             }
             $usePlanet->setWorker($usePlanet->getWorker() - $form_caserneRecruit->get('soldier')->getData());
             $usePlanet->setSoldierAt($now);
@@ -87,7 +87,7 @@ class SoldierController extends Controller
                 $usePlanet->setScientistAtNbr($usePlanet->getScientistAtNbr() + $form_scientistRecruit->get('scientist')->getData());
             } else {
                 $now->add(new DateInterval('PT' . round(($form_scientistRecruit->get('scientist')->getData() * 60)/ $user->getScientistProduction()) . 'S'));
-                $usePlanet->setScientistAtNbr($usePlanet->getScientist() + $form_scientistRecruit->get('scientist')->getData());
+                $usePlanet->setScientistAtNbr($form_scientistRecruit->get('scientist')->getData());
             }
             $usePlanet->setWorker($usePlanet->getWorker() - ($form_scientistRecruit->get('scientist')->getData() * 2));
             $user->setBitcoin($user->getBitcoin() - ($form_scientistRecruit->get('scientist')->getData() * 100));
