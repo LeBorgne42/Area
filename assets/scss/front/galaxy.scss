@@ -2,6 +2,16 @@
   border: 1px solid #fff;
 }
 
+.size-little-galaxy {
+  font-size: 7.2rem!important;
+}
+
+.red-border {
+  border: 2px solid red!important;
+  height: 161px;
+  width: 162px;
+}
+
 .galaxy-position {
   position:absolute;
   margin-left: -9.5rem;
@@ -85,9 +95,9 @@ div.tooltip-inner span a.manage {
   margin: 7rem 6% 2% 21rem;
   color: #fff;
   .center-cells a {
-    line-height: 1rem;
-    font-size: 1rem;
-    letter-spacing: 2px;
+    //line-height: 1rem; galaxy100
+    //font-size: 1rem; galaxy100
+    letter-spacing: 5px; // 2 en galaxy100
     color: gainsboro;
     text-decoration: none;
   }
@@ -104,7 +114,8 @@ div.tooltip-inner span a.manage {
 }
 
 .galaxy-table td.center-cells {
-  line-height: 0.1;
+  line-height: 0.01; // 0.1 galaxy100
+  padding-top: 0.01rem;
 }
 
 .sector td.center-cells {
@@ -128,7 +139,7 @@ td.special-cell {
 
 .galaxy-table {
   height: 650px!important;
-  width: 650px!important;
+  width: 650px!important; // 650 en galaxy100
   background-color: black!important;
 }
 

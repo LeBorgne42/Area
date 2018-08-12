@@ -109,28 +109,38 @@ class PlanetController extends Controller
             return $this->redirectToRoute('planet', array('idp' => $usePlanet->getId()));
         }
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id != :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->setMaxResults(1)
-            ->getOneOrNullResult();
+        if($abandonPlanet->getSky() == 10 && $abandonPlanet->getGround() == 60) {
+            if($abandonPlanet->getWorker() < 10000) {
+                $abandonPlanet->setWorker(10000);
+            }
+            $abandonPlanet->setUser(null);
+            $abandonPlanet->setName('Abandonnée');
+        } else {
+            $usePlanet = $em->getRepository('App:Planet')
+                ->createQueryBuilder('p')
+                ->where('p.id != :id')
+                ->andWhere('p.user = :user')
+                ->setParameters(array('id' => $idp, 'user' => $user))
+                ->getQuery()
+                ->setMaxResults(1)
+                ->getOneOrNullResult();
 
-        $hydra = $em->getRepository('App:User')
-            ->createQueryBuilder('u')
-            ->where('u.id = :id')
-            ->setParameters(array('id' => 1))
-            ->getQuery()
-            ->getOneOrNullResult();
+            $hydra = $em->getRepository('App:User')
+                ->createQueryBuilder('u')
+                ->where('u.id = :id')
+                ->setParameters(array('id' => 1))
+                ->getQuery()
+                ->getOneOrNullResult();
 
-        $abandonPlanet->setUser($hydra);
-        $abandonPlanet->setWorker(100000);
-        $abandonPlanet->setSoldier(2500);
-        $abandonPlanet->setName('Base avancée');
+            $abandonPlanet->setUser($hydra);
+            $abandonPlanet->setWorker(100000);
+            $abandonPlanet->setSoldier(2500);
+            $abandonPlanet->setName('Base avancée');
+        }
+
         $em->persist($abandonPlanet);
         $em->flush();
+
         if($user->getColPlanets() == 0) {
             foreach ($user->getFleets() as $fleet) {
                 $fleet->setUser($hydra);

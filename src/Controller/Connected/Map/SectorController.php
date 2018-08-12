@@ -44,9 +44,9 @@ class SectorController extends Controller
 
         $fleetIn = $em->getRepository('App:Fleet')
             ->createQueryBuilder('f')
-            ->join('f.planet', 'p')
+            ->leftJoin('f.planet', 'p')
             ->where('f.sector = :id')
-            ->andWhere('p.sector != :id')
+            ->andWhere('p.sector != :id OR f.planet is null')
             ->setParameters(array('id' => $id))
             ->orderBy('f.flightTime')
             ->getQuery()

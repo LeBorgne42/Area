@@ -636,6 +636,18 @@ class FleetController extends Controller
             return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
         }
         if ($form_sendFleet->isSubmitted() && $form_sendFleet->isValid()) {
+            $sectorDestroy = $em->getRepository('App:Sector')
+                ->createQueryBuilder('s')
+                ->where('s.position = :sector')
+                ->andWhere('s.destroy = :true')
+                ->setParameters(array('sector' => $form_sendFleet->get('sector')->getData(), 'true' => 1))
+                ->getQuery()
+                ->getOneOrNullResult();
+
+            if($sectorDestroy && $form_sendFleet->get('sector')->getData() != $fleetGive->getPlanet()->getSector()->getPosition()) {
+                return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+            }
+
             if($form_sendFleet->get('planet')->getData()) {
                 $planetTake = $form_sendFleet->get('planet')->getData();
                 $sector = $planetTake->getSector()->getPosition();
@@ -662,6 +674,7 @@ class FleetController extends Controller
                     ->setParameters(array('sector' => $sector, 'galaxy' => $galaxy, 'planete' => $planetTakee))
                     ->getQuery()
                     ->getOneOrNullResult();
+
                 if($planetTake == $fleetGive->getPlanet()) {
                     return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
                 }

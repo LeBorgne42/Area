@@ -128,6 +128,16 @@ class OverviewController extends Controller
                 foreach ($user->getSalons() as $salon) {
                     $salon->removeUser($user);
                 }
+
+                $salon = $em->getRepository('App:Salon')
+                    ->createQueryBuilder('s')
+                    ->where('s.name = :name')
+                    ->setParameters(array('name' => 'Public'))
+                    ->getQuery()
+                    ->getOneOrNullResult();
+
+                $salon->removeUser($user);
+                $em->persist($salon);
                 $user->setSalons(null);
                 $em->persist($user);
                 $em->flush();

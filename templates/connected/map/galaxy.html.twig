@@ -8,6 +8,40 @@
     <div class="map-block">
         <table class="table table-bordered table-dark galaxy-table text-center">
             <tbody>
+            {% set x = 1 %}
+            {% for sector in sectors %}
+                {% if x == 1 %}
+                    <tr>
+                    {% set x = 1 %}
+                {% endif %}
+                <td class="center-cells{% if sector.getDestroy() == true %} red-border{% endif %}"><a data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.sector'|trans({'%position%': sector.getPosition()}) }}" href="{{ path('map', {'id':sector.getPosition(), 'idp': usePlanet.getId()}) }}">
+                        {% for planet in sector.getPlanets() %}
+                            <span class="{% if planet.getUser() == app.user %}pp-mine{% elseif planet.getPlanetAlliance() == app.user.getAlly() and planet.getPlanetAlliance() != null or planet.getOurAllyPact(app.user) %}pp-ally{% elseif planet.getUser() %}pp-enemy{% elseif planet.getCdr() == true %}pp-cdr{% elseif planet.getMerchant() == true %}pp-ia{% endif %} size-little-galaxy">{% if planet.getEmpty() == true %}&nbsp;{% else %}.{% endif %}</span>
+                        {% endfor %}
+                    </a></td>
+                {% set x = x + 1 %}
+                {% if x == 5 %}
+                    </tr>
+                    {% set x = 1 %}
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="mt-3 galaxy-info text-center">
+            <span class="pp-mine text-more">.</span> {{ 'galaxy.mine'|trans }} <span class="pp-ally ml-4 text-more">.</span> {{ 'galaxy.ally'|trans }} <span class="pp-enemy ml-4 text-more">.</span> {{ 'galaxy.enemy'|trans }} <span class="pp-ia ml-4 text-more">.</span> {{ 'galaxy.ia'|trans }} <span class="pp-cdr ml-4 text-more">.</span> {{ 'galaxy.cdr'|trans }} <span class="ml-4 text-more">.</span> {{ 'galaxy.empty'|trans }}
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+{# VUE GALAXY AVEC 100 SECTEUR
+
+{% block body %}
+    <div class="map-block">
+        <table class="table table-bordered table-dark galaxy-table text-center">
+            <tbody>
                 {% set x = 1 %}
                 {% for sector in sectors %}
                     {% if x == 1 %}
@@ -31,4 +65,4 @@
             <span class="pp-mine text-more">.</span> {{ 'galaxy.mine'|trans }} <span class="pp-ally ml-4 text-more">.</span> {{ 'galaxy.ally'|trans }} <span class="pp-enemy ml-4 text-more">.</span> {{ 'galaxy.enemy'|trans }} <span class="pp-ia ml-4 text-more">.</span> {{ 'galaxy.ia'|trans }} <span class="pp-cdr ml-4 text-more">.</span> {{ 'galaxy.cdr'|trans }} <span class="ml-4 text-more">.</span> {{ 'galaxy.empty'|trans }}
         </div>
     </div>
-{% endblock %}
+{% endblock %}#}

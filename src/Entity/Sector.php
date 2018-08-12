@@ -43,6 +43,12 @@ class Sector
      */
     protected $position;
 
+    /**
+     * @ORM\Column(name="destroy",type="boolean")
+     * @Assert\NotBlank(message = "required")
+     */
+    protected $destroy = false;
+
     public function __construct()
     {
         $this->planets = new \Doctrine\Common\Collections\ArrayCollection();
@@ -167,5 +173,21 @@ class Sector
     public function setFleets($fleets): void
     {
         $this->fleets = $fleets;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDestroy()
+    {
+        return $this->destroy;
+    }
+
+    /**
+     * @param mixed $destroy
+     */
+    public function setDestroy($destroy): void
+    {
+        $this->destroy = $destroy;
     }
 }

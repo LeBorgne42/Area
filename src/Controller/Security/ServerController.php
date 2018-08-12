@@ -22,8 +22,8 @@ use DateTime;
 class ServerController extends Controller
 {
     /**
-     * @Route("/creation-serveur", name="create")
-     * @Route("/creation-serveur/", name="create_withSlash")
+     * @Route("/creation-serveur-final", name="create")
+     * @Route("/creation-serveur-final/", name="create_withSlash")
      */
     public function createServerAction()
     {
@@ -192,6 +192,87 @@ class ServerController extends Controller
     }
 
     /**
+     * @Route("/creation-serveur-petit", name="create_little")
+     * @Route("/creation-serveur-petit/", name="create_little_withSlash")
+     */
+    public function createServerLittleAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $nbrSector = 1;
+        $nbrPlanets = 0;
+        $image = ['planet1.png', 'planet2.png', 'planet3.png', 'planet4.png', 'planet5.png', 'planet6.png', 'planet7.png', 'planet8.png', 'planet9.png', 'planet10.png', 'planet11.png', 'planet12.png', 'planet13.png', 'planet14.png', 'planet15.png', 'planet16.png', 'planet17.png', 'planet18.png', 'planet19.png', 'planet20.png', 'planet21.png', 'planet22.png', 'planet23.png', 'planet24.png', 'planet25.png', 'planet26.png', 'planet27.png', 'planet28.png', 'planet29.png', 'planet30.png', 'planet31.png', 'planet32.png', 'planet33.png'];
+        $galaxy = new Galaxy();
+        $galaxy->setPosition(1);
+        $em->persist($galaxy);
+
+        while($nbrSector <= 16) {
+            $nbrPlanet = 1;
+            $sector = new Sector();
+            $sector->setGalaxy($galaxy);
+            $sector->setPosition($nbrSector);
+            $em->persist($sector);
+            while($nbrPlanet <= 25) {
+                if (($nbrSector == 7 || $nbrSector == 10) && $nbrPlanet == 13) {
+                    $planet = new Planet();
+                    $planet->setMerchant(true);
+                    $planet->setGround(400);
+                    $planet->setSky(80);
+                    $planet->setImageName('merchant.png');
+                    $planet->setName('Marchands');
+                    $planet->setSector($sector);
+                    $planet->setPosition($nbrPlanet);
+                } else {
+                    if (rand(1, 20) < 2) {
+                        $planet = new Planet();
+                        $planet->setEmpty(true);
+                        $planet->setName('Vide');
+                        $planet->setSector($sector);
+                        $planet->setPosition($nbrPlanet);
+                    } elseif (rand(0, 101) < 1) {
+                        $planet = new Planet();
+                        $planet->setCdr(true);
+                        $planet->setImageName('cdr.png');
+                        $planet->setName('Astéroïdes');
+                        $planet->setSector($sector);
+                        $planet->setPosition($nbrPlanet);
+                    }
+                    else {
+                        $nbrPlanets++;
+                        $planet = new Planet();
+
+                        $planet->setImageName($image[rand(0, 32)]);
+                        $planet->setSector($sector);
+                        $planet->setPosition($nbrPlanet);
+                        if (($nbrSector >= 1 && $nbrSector <= 5) || ($nbrSector >= 12 && $nbrSector <= 16) || ($nbrSector == 8 || $nbrSector == 9)) {
+                            if ($nbrPlanet == 4 || $nbrPlanet == 6 || $nbrPlanet == 15 || $nbrPlanet == 17 || $nbrPlanet == 25) {
+                                $planet->setGround(60);
+                                $planet->setSky(10);
+                            } else {
+                                $planet->setGround(rand(95, 130));
+                                $planet->setSky(rand(7, 21));
+                            }
+                        } elseif ($nbrSector == 6 || $nbrSector == 7 || $nbrSector == 10 || $nbrSector == 11) {
+                            $planet->setGround(rand(180, 240));
+                            $planet->setSky(rand(3, 25));
+                        } else {
+                            $planet->setGround(rand(130, 180));
+                            $planet->setSky(rand(15, 30));
+                        }
+                    }
+                }
+                $em->persist($planet);
+                $nbrPlanet++;
+            }
+            $nbrSector++;
+        }
+        $em->flush();
+
+        return $this->render('server/create.html.twig', [
+            'nbrPlanet' => $nbrPlanets,
+        ]);
+    }
+
+    /**
      * @Route("/destruction-serveur", name="destroy")
      * @Route("/destruction-serveur/", name="destroy_withSlash")
      */
@@ -203,6 +284,13 @@ class ServerController extends Controller
             ->createQueryBuilder('u')
             ->getQuery()
             ->getResult();
+
+        $salon = $em->getRepository('App:Salon')
+            ->createQueryBuilder('s')
+            ->where('s.name = :name')
+            ->setParameters(array('name' => 'Public'))
+            ->getQuery()
+            ->getOneOrNullResult();
 
         foreach ($users as $user) {
             $user->setBitcoin(25000);
@@ -241,6 +329,7 @@ class ServerController extends Controller
             foreach ($user->getPlanets() as $planet) {
                 $user->removePlanet($planet);
             }
+            $salon->removeUser($user);
             $em->persist($user);
             $em->flush();
         }
@@ -377,5 +466,60 @@ class ServerController extends Controller
             $em->flush();
         }
         return $this->render('server/destroy.html.twig');
+    }
+
+
+
+    /**
+     * @Route("/destroy-sectors", name="destroy_sectors")
+     * @Route("/destroy-sectors/", name="destroy_sectors_withSlash")
+     */
+    public function destroySectorsAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $sectors = $em->getRepository('App:Sector')
+            ->createQueryBuilder('s')
+            ->where('s.destroy = :true')
+            ->setParameters(array('true' => 1))
+            ->getQuery()
+            ->getResult();
+
+        foreach ($sectors as $sector) {
+            foreach ($sector->getPlanets() as $planet) {
+                foreach ($planet->getFleets() as $fleet) {
+                    $fleet->setPlanet(null);
+                    $em->persist($fleet);
+                }
+                $em->remove($planet);
+                $em->flush();
+            }
+        }
+
+        $fleets = $em->getRepository('App:Fleet')
+            ->createQueryBuilder('f')
+            ->where('f.planet is null')
+            ->andWhere('f.flightTime is null')
+            ->getQuery()
+            ->getResult();
+
+        foreach ($fleets as $fleet) {
+            $em->remove($fleet);
+            $em->flush();
+        }
+
+        $users = $em->getRepository('App:User')
+            ->createQueryBuilder('u')
+            ->join('u.planets', 'p')
+            ->where('p.id is null')
+            ->getQuery()
+            ->getResult();
+
+        foreach ($users as $user) {
+            $user->setGameOver(1);
+            $em->flush();
+        }
+
+        exit;
     }
 }
