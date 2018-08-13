@@ -13,7 +13,7 @@
         <a href="{{ path('planet', {'idp': usePlanet.getId()}) }}"><span>{{ 'planet'|trans }}</span></a>
     </div>
     <div class="btn-left{% if app.user.getSearch() is null %} freeSearchBuild{% endif %}">
-        <a href="{{ path('search', {'idp': usePlanet.getId()}) }}"><span>{{ 'search'|trans }}</span></a>
+        <a href="{{ path('search', {'idp': usePlanet.getId()}) }}"><span>{{ 'search'|trans }}</span>{% if app.user.getSearch() is null %} <span class="glyphicon glyphicon-question-sign text-orange" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.search'|trans }}"></span>{% endif %}</a>
     </div>
     <div class="btn-left">
         <a href="{{ path('fleet', {'idp': usePlanet.getId()}) }}"><span>{{ 'fleet'|trans }}</span></a>
@@ -31,7 +31,7 @@
         <a href="{{ path('map', {'id':usePlanet.getSector().getPosition(), 'idp': usePlanet.getId()}) }}"><span>{{ 'map'|trans }}</span></a>
     </div>
     <div class="btn-left{% if usePlanet.getConstruct() is null and (usePlanet.getGround() != usePlanet.getGroundPlace()) %} freeSearchBuild{% endif %}">
-        <a href="{{ path('building', {'idp': usePlanet.getId()}) }}"><span>{{ 'building'|trans }}</span></a>
+        <a href="{{ path('building', {'idp': usePlanet.getId()}) }}"><span>{{ 'building'|trans }}</span>{% if usePlanet.getConstruct() is null and (usePlanet.getGround() != usePlanet.getGroundPlace()) %} <span class="glyphicon glyphicon-question-sign text-orange" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.building'|trans }}"></span>{% endif %}</a>
     </div>
     {% if usePlanet.getCaserne() > 0 or usePlanet.getCenterSearch() > 0 %}
         <div class="btn-left">

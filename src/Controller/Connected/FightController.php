@@ -194,7 +194,7 @@ class FightController extends Controller
             foreach($blockDef as $removeOne) {
                 $reportB = new Report();
                 $reportB->setSendAt($now);
-                $reportB->setContent("Votre flotte utilitaire " . $removeOne->getName() . " ne dispose pas des technologies nécessaires à l'identification des vaisseaux ennemis en " . $removeOne->getSector()->getgalaxy()->getPosition() . ":" . $removeOne->getSector()->getPosition() . ":" . $removeOne->getPosition() . " .");
+                $reportB->setContent("Votre flotte utilitaire " . $removeOne->getName() . " ne dispose pas des technologies nécessaires à l'identification des vaisseaux ennemis en " . $removeOne->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $removeOne->getPlanet()->getSector()->getPosition() . ":" . $removeOne->getPlanet()->getPosition() . " .");
                 $reportB->setTitle("Rapport de combat : Défaite");
                 $reportB->setUser($removeOne->getUser());
                 $em->persist($reportB);
@@ -203,7 +203,7 @@ class FightController extends Controller
             foreach($blockAtt as $reportWin) {
                 $reportA = new Report();
                 $reportA->setSendAt($now);
-                $reportA->setContent("Vous venez de détruire une flotte utilitaire en " . $reportWin->getSector()->getgalaxy()->getPosition() . ":" . $reportWin->getSector()->getPosition() . ":" . $reportWin->getPosition() . " .");
+                $reportA->setContent("Vous venez de détruire une flotte utilitaire en " . $reportWin->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $reportWin->getPlanet()->getSector()->getPosition() . ":" . $reportWin->getPlanet()->getPosition() . " .");
                 $reportA->setTitle("Rapport de combat : Victoire");
                 $reportA->setUser($reportWin->getUser());
                 $em->persist($reportA);
@@ -215,7 +215,7 @@ class FightController extends Controller
             foreach($blockAtt as $removeTwo) {
                 $reportB = new Report();
                 $reportB->setSendAt($now);
-                $reportB->setContent("Votre flotte utilitaire " . $removeTwo->getName() . " ne dispose pas des technologies nécessaires à l'identification des vaisseaux ennemis " . $removeTwo->getSector()->getgalaxy()->getPosition() . ":" . $removeTwo->getSector()->getPosition() . ":" . $removeTwo->getPosition() . " .");
+                $reportB->setContent("Votre flotte utilitaire " . $removeTwo->getName() . " ne dispose pas des technologies nécessaires à l'identification des vaisseaux ennemis " . $removeTwo->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $removeTwo->getPlanet()->getSector()->getPosition() . ":" . $removeTwo->getPlanet()->getPosition() . " .");
                 $reportB->setTitle("Rapport de combat : Défaite");
                 $reportB->setUser($removeTwo->getUser());
                 $em->persist($reportB);
@@ -224,7 +224,7 @@ class FightController extends Controller
             foreach($blockDef as $reportWin) {
                 $reportA = new Report();
                 $reportA->setSendAt($now);
-                $reportA->setContent("Vous venez de détruire une flotte utilitaire en " . $reportWin->getSector()->getgalaxy()->getPosition() . ":" . $reportWin->getSector()->getPosition() . ":" . $reportWin->getPosition() . " .");
+                $reportA->setContent("Vous venez de détruire une flotte utilitaire en " . $reportWin->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $reportWin->getPlanet()->getSector()->getPosition() . ":" . $reportWin->getPlanet()->getPosition() . " .");
                 $reportA->setTitle("Rapport de combat : Victoire");
                 $reportA->setUser($reportWin->getUser());
                 $em->persist($reportA);

@@ -56,3 +56,5 @@ fleetNoAlly: 'Des flottes non alliées ont été repérées en orbite de notre p
 embargo: 'Cette planète subit actuellement un embargo.'
 previousPlanet: 'Planète précédente'
 nextPlanet: 'Planète suivante'
+tooltip.search: 'Vous pouvez lancer une recherche !'
+tooltip.building: 'Vous pouvez construire un bâtiment !'
