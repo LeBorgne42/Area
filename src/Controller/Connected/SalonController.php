@@ -73,6 +73,7 @@ class SalonController extends Controller
             ->createQueryBuilder('u')
             ->where('u.lastActivity > :date')
             ->setParameters(array('date' => $connected))
+            ->orderBy('u.username', 'ASC')
             ->getQuery()
             ->getResult();
 

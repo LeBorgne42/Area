@@ -41,6 +41,7 @@ class MessageType extends AbstractType
                     'label' => 'form.user',
                     'query_builder' => function (EntityRepository $er) {
                         return $er->createQueryBuilder('u')
+                            ->where('u.rank is not null')
                             ->orderBy('u.username', 'ASC');
                     },
                     'choice_label' => 'username',

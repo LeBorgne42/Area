@@ -508,20 +508,21 @@ function manageTime() {
                         area.removeAttr('hidden');
                     }
                     secondes = secondes - 1;
+                    console.log(secondes);
+                    console.log(minutes);
+                    console.log(heures);
                     if(secondes == 0 || secondes < 0) {
-                        if(minutes == null) {
+                        if(minutes == 0 && heures == 0 && jours == 0) {
                             area.text('Terminée');
                             setTimeout(function() {
                                 window.location.reload();
-                            }, 5000);
+                            }, 2000);
                         } else {
                             secondes = 60;
                             minutes = minutes - 1;
                             if(minutes == 0 && heures != 0) {
                                 minutes = 60;
                                 heures = heures - 1;
-                            } else if (minutes == 0) {
-                                minutes = null;
                             }
                         }
                     }
