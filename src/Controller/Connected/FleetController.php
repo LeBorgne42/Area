@@ -693,7 +693,8 @@ class FleetController extends Controller
                     $base = 2000;
                     $price = 1;
                 }
-            } elseif (strpos('0 -1 1 -10 10 -9 9', (strval($sFleet - $sector)) ) != false) {
+            }
+            /*elseif (strpos('0 -1 1 -10 10 -9 9', (strval($sFleet - $sector)) ) != false) {
                 $base = 3000;
                 $price = 1.5;
             } elseif (strpos('-20 20 12 11 8 2 -12 -11 -8 -2', (strval($sFleet - $sector)) ) != false) {
@@ -705,6 +706,10 @@ class FleetController extends Controller
             } else {
                 $base = 12000;
                 $price = 6;
+            }*/
+            else {
+                $base = 3000;
+                $price = 3;
             }
             $carburant = round($price * ($fleetGive->getNbrSignatures() / 200));
             if($carburant > $user->getBitcoin()) {

@@ -508,9 +508,6 @@ function manageTime() {
                         area.removeAttr('hidden');
                     }
                     secondes = secondes - 1;
-                    console.log(secondes);
-                    console.log(minutes);
-                    console.log(heures);
                     if(secondes == 0 || secondes < 0) {
                         if(minutes == 0 && heures == 0 && jours == 0) {
                             area.text('Terminée');
