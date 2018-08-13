@@ -6,60 +6,60 @@
         <br>
         <a target="_blank" href="http://area-control.forumactif.com/f8-mise-a-jour"><button class="text-orange my-4"><strong>{{ 'version'|trans }}</strong></button></a>
     </div>
-    <div class="btn-left">
+    <div class="btn-left{% if app.request.attributes.get('_route') == 'overview' %} currentRoute{% endif %}">
         <a href="{{ path('overview', {'idp': usePlanet.getId()}) }}"><span>{{ 'globalView'|trans }}</span></a>
     </div>
-    <div class="btn-left{{ app.user.getRessourceFull() }}">
+    <div class="btn-left{{ app.user.getRessourceFull() }}{% if app.request.attributes.get('_route') == 'planet' %} currentRoute{% endif %}">
         <a href="{{ path('planet', {'idp': usePlanet.getId()}) }}"><span>{{ 'planet'|trans }}</span></a>
     </div>
-    <div class="btn-left{% if app.user.getSearch() is null %} freeSearchBuild{% endif %}">
+    <div class="btn-left{% if app.user.getSearch() is null %} freeSearchBuild{% endif %}{% if app.request.attributes.get('_route') == 'search' %} currentRoute{% endif %}">
         <a href="{{ path('search', {'idp': usePlanet.getId()}) }}"><span>{{ 'search'|trans }}</span>{% if app.user.getSearch() is null %} <span class="glyphicon glyphicon-question-sign text-orange" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.search'|trans }}"></span>{% endif %}</a>
     </div>
-    <div class="btn-left">
+    <div class="btn-left{% if app.request.attributes.get('_route') == 'fleet' %} currentRoute{% endif %}">
         <a href="{{ path('fleet', {'idp': usePlanet.getId()}) }}"><span>{{ 'fleet'|trans }}</span></a>
     </div>
-    <div class="btn-left">
+    <div class="btn-left{% if app.request.attributes.get('_route') == 'market' %} currentRoute{% endif %}">
         <a href="{{ path('market', {'idp': usePlanet.getId()}) }}"><span>{{ 'market'|trans }}</span></a>
     </div>
-    <div class="btn-left">
+    <div class="btn-left{% if app.request.attributes.get('_route') == 'universe' %} currentRoute{% endif %}">
         <a href="{{ path('universe', {'idp': usePlanet.getId()}) }}"><span>{{ 'universe'|trans }}</span></a>
     </div>
-    <div class="btn-left">
+    <div class="btn-left{% if app.request.attributes.get('_route') == 'galaxy' %} currentRoute{% endif %}">
         <a href="{{ path('galaxy', {'id': usePlanet.getSector().getGalaxy().getPosition(), 'idp': usePlanet.getId()}) }}"><span>{{ 'galaxy'|trans }}</span></a>
     </div>
-    <div class="btn-left">
+    <div class="btn-left{% if app.request.attributes.get('_route') == 'map' %} currentRoute{% endif %}">
         <a href="{{ path('map', {'id':usePlanet.getSector().getPosition(), 'idp': usePlanet.getId()}) }}"><span>{{ 'map'|trans }}</span></a>
     </div>
-    <div class="btn-left{% if usePlanet.getConstruct() is null and (usePlanet.getGround() != usePlanet.getGroundPlace()) %} freeSearchBuild{% endif %}">
+    <div class="btn-left{% if usePlanet.getConstruct() is null and (usePlanet.getGround() != usePlanet.getGroundPlace()) %} freeSearchBuild{% endif %}{% if app.request.attributes.get('_route') == 'building' %} currentRoute{% endif %}">
         <a href="{{ path('building', {'idp': usePlanet.getId()}) }}"><span>{{ 'building'|trans }}</span>{% if usePlanet.getConstruct() is null and (usePlanet.getGround() != usePlanet.getGroundPlace()) %} <span class="glyphicon glyphicon-question-sign text-orange" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.building'|trans }}"></span>{% endif %}</a>
     </div>
     {% if usePlanet.getCaserne() > 0 or usePlanet.getCenterSearch() > 0 %}
-        <div class="btn-left">
+        <div class="btn-left{% if app.request.attributes.get('_route') == 'soldier' %} currentRoute{% endif %}">
             <a href="{{ path('soldier', {'idp': usePlanet.getId()}) }}">{{ 'soldier'|trans }}</span></a>
         </div>
     {% endif %}
-    <div class="btn-left">
+    <div class="btn-left{% if app.request.attributes.get('_route') == 'spatial' %} currentRoute{% endif %}">
         <a href="{{ path('spatial', {'idp': usePlanet.getId()}) }}"><span>{{ 'spatial'|trans }}</span></a>
     </div>
-    <div class="btn-left">
+    <div class="btn-left{% if app.request.attributes.get('_route') == 'ally_blank' or app.request.attributes.get('_route') == 'ally' %} currentRoute{% endif %}">
         <a href="{{ path('ally', {'idp': usePlanet.getId()}) }}"><span>{{ 'ally'|trans }}{% if app.user.getProposals() and app.user.getAlly() is null %} (<small>{{ app.user.getProposals()|length }}</small>){% endif %}</span></a>
     </div>
-    <div class="btn-left">
+    <div class="btn-left{% if app.request.attributes.get('_route') == 'rank_ally' %} currentRoute{% endif %}">
         <a href="{{ path('rank_ally', {'idp': usePlanet.getId()}) }}"><span>{{ 'rank'|trans }}</span></a>
     </div>
-    <div class="btn-left">
+    <div class="btn-left{% if app.request.attributes.get('_route') == 'message' %} currentRoute{% endif %}">
         <a href="{{ path('message', {'idp': usePlanet.getId()}) }}">{% if app.user.getViewMessage() == false %}<div class="text-orange glyphicon glyphicon-envelope"></div> {% endif %}{{ 'message'|trans }}</span></a>
     </div>
-    <div class="btn-left">
+    <div class="btn-left{% if app.request.attributes.get('_route') == 'salon' %} currentRoute{% endif %}">
         <a href="{{ path('salon', {'idp': usePlanet.getId()}) }}"><span>{% if app.user.getSalonAt() == null %}<div class="text-orange glyphicon glyphicon-comment"></div> {% endif %}{{ 'salon'|trans }}</span></a>
     </div>
-    <div class="btn-left">
+    <div class="btn-left{% if app.request.attributes.get('_route') == 'report' %} currentRoute{% endif %}">
         <a href="{{ path('report', {'idp': usePlanet.getId()}) }}">{% if app.user.getViewReport() == false %}<div class="text-orange glyphicon glyphicon-exclamation-sign"></div> {% endif %}{{ 'report'|trans }}</span></a>
     </div>
     <div class="btn-left">
         <a target="_blank" href="http://area-control.forumactif.com/">{{ 'forum'|trans }}</a>
     </div>
-    <div class="btn-left-bottom">
+    <div class="btn-left-bottom{% if app.request.attributes.get('_route') == 'help_new' %} currentRoute{% endif %}">
         <a href="{{ path('help_new', {'idp': usePlanet.getId()}) }}"><span>{{ 'helpNew'|trans }}</span></a>
     </div>
     <div>
