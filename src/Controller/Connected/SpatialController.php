@@ -288,7 +288,21 @@ class SpatialController extends Controller
                 ->getQuery()
                 ->getResult();
 
-            if($fleets) {
+            $fleetFight = $em->getRepository('App:Fleet')
+                ->createQueryBuilder('f')
+                ->join('f.user', 'u')
+                ->leftJoin('u.ally', 'a')
+                ->where('f.planet = :planet')
+                ->andWhere('f.fightAt is not null')
+                ->andWhere('f.flightTime is null')
+                ->setParameters(array('planet' => $usePlanet))
+                ->getQuery()
+                ->setMaxResults(1)
+                ->getOneOrNullResult();
+
+            if($fleetFight) {
+                $fleet->setFightAt($fleetFight->getFightAt());
+            } elseif ($fleets) {
                 foreach ($fleets as $setWar) {
                     if($setWar->getUser()->getAlly()) {
                         $fleetArm = $fleet->getMissile() + $fleet->getLaser() + $fleet->getPlasma();

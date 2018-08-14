@@ -446,17 +446,6 @@ class InstantController extends Controller
                 ->getQuery()
                 ->getOneOrNullResult();
 
-
-            $allFleets = $em->getRepository('App:Fleet')
-                ->createQueryBuilder('f')
-                ->join('f.user', 'u')
-                ->where('f.planet = :planet')
-                ->andWhere('f.flightTime is null')
-                ->setParameters(array('planet' => $newHome))
-                ->getQuery()
-                ->getResult();
-
-
             $userFleet = $fleet->getUser();
             $report = new Report();
             $report->setTitle("Votre flotte " . $fleet->getName() . " est arrivée");
@@ -472,7 +461,16 @@ class InstantController extends Controller
             $fleet->setNewPlanet(null);
             $fleet->setSector(null);
 
-            $fAlly = $fleet->getUser()->getAllyFriends();
+            $user = $fleet->getUser();
+            $eAlly = $user->getAllyEnnemy();
+            $warAlly = [];
+            $x = 0;
+            foreach ($eAlly as $tmp) {
+                $warAlly[$x] = $tmp->getAllyTag();
+                $x++;
+            }
+
+            $fAlly = $user->getAllyFriends();
             $friendAlly = [];
             $x = 0;
             foreach ($fAlly as $tmp) {
@@ -481,19 +479,11 @@ class InstantController extends Controller
                     $x++;
                 }
             }
-
-            $eAlly = $fleet->getUser()->getAllyEnnemy();
-            $warAlly = [];
-            $x = 0;
-            foreach ($eAlly as $tmp) {
-                $warAlly[$x] = $tmp->getAllyTag();
-                $x++;
-            }
             if(!$friendAlly) {
                 $friendAlly = ['impossible', 'personne'];
             }
 
-            $attackFleets = $em->getRepository('App:Fleet')
+            $warFleets = $em->getRepository('App:Fleet')
                 ->createQueryBuilder('f')
                 ->join('f.user', 'u')
                 ->leftJoin('u.ally', 'a')
@@ -502,30 +492,38 @@ class InstantController extends Controller
                 ->andWhere('f.user != :user')
                 ->andWhere('f.flightTime is null')
                 ->andWhere('u.ally is null OR a.sigle not in (:friend)')
-                ->setParameters(array('planet' => $newHome, 'true' => true, 'ally' => $warAlly, 'user' => $fleet->getUser(), 'friend' => $friendAlly))
+                ->setParameters(array('planet' => $newHome, 'true' => true, 'ally' => $warAlly, 'user' => $user, 'friend' => $friendAlly))
                 ->getQuery()
                 ->getResult();
 
-            $ally = null;
-            if ($fleet->getUser()->getAlly()) {
-                $ally = $em->getRepository('App:Fleet')
-                    ->createQueryBuilder('f')
-                    ->join('f.user', 'u')
-                    ->leftJoin('u.ally', 'a')
-                    ->where('f.planet = :planet')
-                    ->andWhere('a.sigle != :ally')
-                    ->andWhere('f.flightTime is null')
-                    ->setParameters(array('planet' => $newHome, 'ally' => $fleet->getUser()->getAlly()->getSigle()))
-                    ->getQuery()
-                    ->getResult();
-            } else {
-                $allyN = 'war';
-            }
-            if ($attackFleets || ($fleet->getAttack() == true && ($ally || $allyN == 'war'))) {
-                $now = new DateTime();
-                $now->setTimezone(new DateTimeZone('Europe/Paris'));
-                $now->add(new DateInterval('PT' . 300 . 'S'));
-                foreach ($attackFleets as $setWar) {
+            $neutralFleets = $em->getRepository('App:Fleet')
+                ->createQueryBuilder('f')
+                ->join('f.user', 'u')
+                ->leftJoin('u.ally', 'a')
+                ->where('f.planet = :planet')
+                ->andWhere('f.user != :user')
+                ->andWhere('f.flightTime is null')
+                ->andWhere('u.ally is null OR a.sigle not in (:friend)')
+                ->setParameters(array('planet' => $newHome, 'user' => $user, 'friend' => $friendAlly))
+                ->getQuery()
+                ->getResult();
+
+            $fleetFight = $em->getRepository('App:Fleet')
+                ->createQueryBuilder('f')
+                ->join('f.user', 'u')
+                ->leftJoin('u.ally', 'a')
+                ->where('f.planet = :planet')
+                ->andWhere('f.fightAt is not null')
+                ->andWhere('f.flightTime is null')
+                ->setParameters(array('planet' => $newHome))
+                ->getQuery()
+                ->setMaxResults(1)
+                ->getOneOrNullResult();
+
+            if($fleetFight) {
+                $fleet->setFightAt($fleetFight->getFightAt());
+            } elseif ($warFleets) {
+                foreach ($warFleets as $setWar) {
                     if($setWar->getUser()->getAlly()) {
                         $fleetArm = $fleet->getMissile() + $fleet->getLaser() + $fleet->getPlasma();
                         if($fleetArm > 0) {
@@ -542,6 +540,39 @@ class InstantController extends Controller
                         }
                     }
                 }
+                $allFleets = $em->getRepository('App:Fleet')
+                    ->createQueryBuilder('f')
+                    ->join('f.user', 'u')
+                    ->where('f.planet = :planet')
+                    ->andWhere('f.flightTime is null')
+                    ->setParameters(array('planet' => $newHome))
+                    ->getQuery()
+                    ->getResult();
+
+                $now = new DateTime();
+                $now->setTimezone(new DateTimeZone('Europe/Paris'));
+                $now->add(new DateInterval('PT' . 300 . 'S'));
+
+                foreach ($allFleets as $updateF) {
+                    $updateF->setFightAt($now);
+                    $em->persist($updateF);
+                }
+                $fleet->setFightAt($now);
+                $report->setContent($report->getContent() . " Attention votre flotte est rentrée en combat !");
+            } elseif ($neutralFleets && $fleet->getAttack() == 1) {
+                $allFleets = $em->getRepository('App:Fleet')
+                    ->createQueryBuilder('f')
+                    ->join('f.user', 'u')
+                    ->where('f.planet = :planet')
+                    ->andWhere('f.flightTime is null')
+                    ->setParameters(array('planet' => $newHome))
+                    ->getQuery()
+                    ->getResult();
+
+                $now = new DateTime();
+                $now->setTimezone(new DateTimeZone('Europe/Paris'));
+                $now->add(new DateInterval('PT' . 300 . 'S'));
+
                 foreach ($allFleets as $updateF) {
                     $updateF->setFightAt($now);
                     $em->persist($updateF);
@@ -668,6 +699,14 @@ class InstantController extends Controller
                         if ($fleet->getNbrShips() == 0) {
                             $em->remove($fleet);
                         }
+                        $reportColo = new Report();
+                        $reportColo->setSendAt($now);
+                        $reportColo->setUser($user);
+                        $reportColo->setTitle("Colonisation de planète");
+                        $reportColo->setContent("Vous venez de coloniser une planète inhabitée en : " .  $newPlanet->getSector()->getgalaxy()->getPosition() . ":" . $newPlanet->getSector()->getPosition() . ":" . $newPlanet->getPosition() . ". Cette planète fait désormais partit de votre Empire, pensez a la renommer sur la page Planètes.");
+                        $user->setViewReport(false);
+                        $em->persist($reportColo);
+                        $em->persist($user);
                         $em->persist($newPlanet);
                         $em->flush();
                     }

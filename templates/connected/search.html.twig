@@ -24,7 +24,7 @@
                         
                     {% else %}
                         {% if app.user.getBitcoin() >= ((app.user.getUtility() + 1) * 2500) and app.user.getUtility() < 3 and app.user.getSearchAt() < date %}
-                            <div>{% if ((app.user.getUtility() + 1) * app.user.getTimeConstruct(2000)) < 3600 %}{{  ((app.user.getUtility() + 1) * app.user.getTimeConstruct(2000))|date('i:s') }}{% elseif ((app.user.getUtility() + 1) * app.user.getTimeConstruct(2000)) < 86400 %}{{  ((app.user.getUtility() + 1) * app.user.getTimeConstruct(2000))|date('H:i:s') }}{% else %}{{  ((app.user.getUtility() + 1) * app.user.getTimeConstruct(2000))|date('d H:i:s') }}{% endif %}</div>
+                            <div>{% if ((app.user.getUtility() + 1) * app.user.getTimeConstruct(2000)) < 3600 %}{{  ((app.user.getUtility() + 1) * app.user.getTimeConstruct(2000) - 3600)|date('i:s') }}{% elseif ((app.user.getUtility() + 1) * app.user.getTimeConstruct(2000)) < 86400 %}{{  ((app.user.getUtility() + 1) * app.user.getTimeConstruct(2000) - 3600- 3600)|date('H:i:s') }}{% else %}{{  ((app.user.getUtility() + 1) * app.user.getTimeConstruct(2000) - 3600- 3600)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info" href="{{ path('research_utility', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                         {% else %}
                             {% if app.user.getUtility() == 3 %}
@@ -49,7 +49,7 @@
                         <div class="timerArea">{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
                     {% else %}
                         {% if app.user.getBitcoin() >= (app.user.getTerraformation() + 1) * 12000 and app.user.getTerraformation() < 18  and app.user.getUtility() > 0 and app.user.getSearchAt() < date %}
-                            <div>{% if ((app.user.getTerraformation() + 1) * app.user.getTimeConstruct(36000)) < 86400 %}{{  ((app.user.getTerraformation() + 1) * app.user.getTimeConstruct(36000))|date('H:i:s') }}{% else %}{{ ((app.user.getTerraformation() + 1) * app.user.getTimeConstruct(36000))|date('d H:i:s') }}{% endif %}</div>
+                            <div>{% if ((app.user.getTerraformation() + 1) * app.user.getTimeConstruct(36000)) < 86400 %}{{  ((app.user.getTerraformation() + 1) * app.user.getTimeConstruct(36000)- 3600)|date('H:i:s') }}{% else %}{{ ((app.user.getTerraformation() + 1) * app.user.getTimeConstruct(36000)- 3600)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info" href="{{ path('research_terraformation', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                         {% else %}
                             <a class="btn btn-lg btn-secondary" disabled>{{ 'research.seek'|trans }}</a>
@@ -71,7 +71,7 @@
                         
                     {% else %}
                         {% if app.user.getBitcoin() >= ((app.user.getCargo() + 1) * 3500) and app.user.getCargo() < 5  and app.user.getUtility() > 1 and app.user.getSearchAt() < date %}
-                            <div>{% if ((app.user.getCargo() + 1) * app.user.getTimeConstruct(4000)) < 86400 %}{{  ((app.user.getCargo() + 1) * app.user.getTimeConstruct(4000))|date('H:i:s') }}{% else %}{{  ((app.user.getCargo() + 1) * app.user.getTimeConstruct(4000))|date('d H:i:s') }}{% endif %}</div>
+                            <div>{% if ((app.user.getCargo() + 1) * app.user.getTimeConstruct(4000)) < 86400 %}{{  ((app.user.getCargo() + 1) * app.user.getTimeConstruct(4000)- 3600)|date('H:i:s') }}{% else %}{{  ((app.user.getCargo() + 1) * app.user.getTimeConstruct(4000)- 3600)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info" href="{{ path('research_cargo', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                         {% else %}
                             {% if app.user.getCargo() == 5 %}
@@ -96,7 +96,7 @@
                     
                 {% else %}
                     {% if app.user.getBitcoin() >= 35000 and app.user.getBarge() == 0  and app.user.getUtility() == 3 and app.user.getSearchAt() < date %}
-                        <div>{% if ((app.user.getBarge() + 1) * app.user.getTimeConstruct(28000)) < 86400 %}{{ ((app.user.getBarge() + 1) * app.user.getTimeConstruct(28000))|date('H:i:s') }}{% else %}{{  ((app.user.getBarge() + 1) * app.user.getTimeConstruct(28000))|date('d H:i:s') }}{% endif %}</div>
+                        <div>{% if ((app.user.getBarge() + 1) * app.user.getTimeConstruct(28000)) < 86400 %}{{ ((app.user.getBarge() + 1) * app.user.getTimeConstruct(28000)- 3600)|date('H:i:s') }}{% else %}{{  ((app.user.getBarge() + 1) * app.user.getTimeConstruct(28000)- 3600)|date('d H:i:s') }}{% endif %}</div>
                         <a class="btn btn-lg btn-info" href="{{ path('research_barge', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                     {% else %}
                         {% if app.user.getBarge() == 1 %}
@@ -122,7 +122,7 @@
                         
                     {% else %}
                         {% if app.user.getBitcoin() >= 16900 and app.user.getRecycleur() == 0  and app.user.getUtility() == 3 and app.user.getSearchAt() < date %}
-                            <div>{% if ((app.user.getRecycleur() + 1) * app.user.getTimeConstruct(4000)) < 86400 %}{{ ((app.user.getRecycleur() + 1) * app.user.getTimeConstruct(4000))|date('H:i:s') }}{% else %}{{ ((app.user.getRecycleur() + 1) * app.user.getTimeConstruct(4000))|date('d H:i:s') }}{% endif %}</div>
+                            <div>{% if ((app.user.getRecycleur() + 1) * app.user.getTimeConstruct(4000)) < 86400 %}{{ ((app.user.getRecycleur() + 1) * app.user.getTimeConstruct(4000)- 3600)|date('H:i:s') }}{% else %}{{ ((app.user.getRecycleur() + 1) * app.user.getTimeConstruct(4000)- 3600)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info" href="{{ path('research_recyclage', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                         {% else %}
                             {% if app.user.getRecycleur() == 1 %}
@@ -148,7 +148,7 @@
                         
                     {% else %}
                         {% if app.user.getBitcoin() >= ((app.user.getOnde() + 1) * 2300) and app.user.getOnde() < 5 and app.user.getSearchAt() < date %}
-                            <div>{% if ((app.user.getOnde() + 1) * app.user.getTimeConstruct(3000)) < 3600 %}{{ ((app.user.getOnde() + 1) * app.user.getTimeConstruct(3000))|date('i:s') }}{% elseif ((app.user.getOnde() + 1) * app.user.getTimeConstruct(3000)) < 86400 %}{{ ((app.user.getOnde() + 1) * app.user.getTimeConstruct(3000))|date('H:i:s') }}{% else %}{{ ((app.user.getOnde() + 1) * app.user.getTimeConstruct(3000))|date('d H:i:s') }}{% endif %}</div>
+                            <div>{% if ((app.user.getOnde() + 1) * app.user.getTimeConstruct(3000)) < 3600 %}{{ ((app.user.getOnde() + 1) * app.user.getTimeConstruct(3000))|date('i:s') }}{% elseif ((app.user.getOnde() + 1) * app.user.getTimeConstruct(3000)) < 86400 %}{{ ((app.user.getOnde() + 1) * app.user.getTimeConstruct(3000)- 3600)|date('H:i:s') }}{% else %}{{ ((app.user.getOnde() + 1) * app.user.getTimeConstruct(3000)- 3600)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info" href="{{ path('research_onde', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                         {% else %}
                             {% if app.user.getOnde() == 5 %}
@@ -174,7 +174,7 @@
                         
                     {% else %}
                         {% if app.user.getBitcoin() >= 25000000 and app.user.getHyperespace() == false and app.user.getSearchAt() < date %}
-                            <div>{{  ((app.user.getHyperespace() + 1) * app.user.getTimeConstruct(604800))|date('d H:i:s') }}</div>
+                            <div>{{  ((app.user.getHyperespace() + 1) * app.user.getTimeConstruct(604800)- 3600)|date('d H:i:s') }}</div>
                             <a class="btn btn-lg btn-info" href="{{ path('research_hyperespace', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                         {% else %}
                             {% if app.user.getHyperespace() == true %}
@@ -205,7 +205,7 @@
                         
                     {% else %}
                         {% if app.user.getBitcoin() >= ((app.user.getDemography() + 1) * 8000) and app.user.getDemography() < 5 and app.user.getSearchAt() < date %}
-                            <div>{% if ((app.user.getDemography() + 1) * app.user.getTimeConstruct(4800)) < 86400 %}{{  ((app.user.getDemography() + 1) * app.user.getTimeConstruct(4800))|date('H:i:s') }}{% else %}{{  ((app.user.getDemography() + 1) * app.user.getTimeConstruct(4800))|date('d H:i:s') }}{% endif %}</div>
+                            <div>{% if ((app.user.getDemography() + 1) * app.user.getTimeConstruct(4800)) < 86400 %}{{  ((app.user.getDemography() + 1) * app.user.getTimeConstruct(4800)- 3600)|date('H:i:s') }}{% else %}{{  ((app.user.getDemography() + 1) * app.user.getTimeConstruct(4800)- 3600)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info" href="{{ path('research_demography', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                         {% else %}
                             {% if app.user.getDemography() == 5 %}
@@ -231,7 +231,7 @@
                         
                     {% else %}
                         {% if app.user.getBitcoin() >= ((app.user.getDiscipline() + 1) * 11700) and app.user.getDemography() > 0 and app.user.getDiscipline() < 3 and app.user.getSearchAt() < date %}
-                            <div>{% if ((app.user.getDiscipline() + 1) * app.user.getTimeConstruct(9300)) < 86400 %}{{  ((app.user.getDiscipline() + 1) * app.user.getTimeConstruct(9300))|date('H:i:s') }}{% else %}{{  ((app.user.getDiscipline() + 1) * app.user.getTimeConstruct(9300))|date('d H:i:s') }}{% endif %}</div>
+                            <div>{% if ((app.user.getDiscipline() + 1) * app.user.getTimeConstruct(9300)) < 86400 %}{{  ((app.user.getDiscipline() + 1) * app.user.getTimeConstruct(9300)- 3600)|date('H:i:s') }}{% else %}{{  ((app.user.getDiscipline() + 1) * app.user.getTimeConstruct(9300)- 3600)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info" href="{{ path('research_discipline', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                         {% else %}
                             {% if app.user.getDiscipline() == 3 %}
@@ -262,7 +262,7 @@
                         
                     {% else %}
                         {% if app.user.getBitcoin() >= ((app.user.getArmement() + 1) * 2000) and app.user.getArmement() < 5 and app.user.getSearchAt() < date %}
-                            <div>{% if ((app.user.getArmement() + 1) * app.user.getTimeConstruct(3700)) < 86400 %}{{  ((app.user.getArmement() + 1) * app.user.getTimeConstruct(3700))|date('H:i:s') }}{% else %}{{  ((app.user.getArmement(3700) + 1) * app.user.getTimeConstruct())|date('d H:i:s') }}{% endif %}</div>
+                            <div>{% if ((app.user.getArmement() + 1) * app.user.getTimeConstruct(3700)) < 86400 %}{{  ((app.user.getArmement() + 1) * app.user.getTimeConstruct(3700)- 3600)|date('H:i:s') }}{% else %}{{  ((app.user.getArmement(3700) + 1) * app.user.getTimeConstruct()- 3600)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info" href="{{ path('research_armement', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                         {% else %}
                             {% if app.user.getArmement() == 5 %}
@@ -288,7 +288,7 @@
                         
                     {% else %}
                         {% if app.user.getBitcoin() >= ((app.user.getMissile() + 1) * 2600) and app.user.getArmement() > 0 and app.user.getMissile() < 3 and app.user.getSearchAt() < date %}
-                            <div>{% if ((app.user.getMissile() + 1) * app.user.getTimeConstruct(4500)) < 86400 %}{{ ((app.user.getMissile() + 1) * app.user.getTimeConstruct(4500))|date('H:i:s') }}{% else %}{{ ((app.user.getMissile() + 1) * app.user.getTimeConstruct(4500))|date('d H:i:s') }}{% endif %}</div>
+                            <div>{% if ((app.user.getMissile() + 1) * app.user.getTimeConstruct(4500)) < 86400 %}{{ ((app.user.getMissile() + 1) * app.user.getTimeConstruct(4500)- 3600)|date('H:i:s') }}{% else %}{{ ((app.user.getMissile() + 1) * app.user.getTimeConstruct(4500)- 3600)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info" href="{{ path('research_missile', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                         {% else %}
                             {% if app.user.getMissile() == 3 %}
@@ -314,7 +314,7 @@
                         
                     {% else %}
                         {% if app.user.getBitcoin() >= ((app.user.getLaser() + 1) * 13000) and app.user.getArmement() > 2 and app.user.getLaser() < 3 and app.user.getSearchAt() < date %}
-                            <div>{% if ((app.user.getLaser() + 1) * app.user.getTimeConstruct(18000)) < 86400 %}{{ ((app.user.getLaser() + 1) * app.user.getTimeConstruct(18000))|date('H:i:s') }}{% else %}{{ ((app.user.getLaser() + 1) * app.user.getTimeConstruct(18000))|date('d H:i:s') }}{% endif %}</div>
+                            <div>{% if ((app.user.getLaser() + 1) * app.user.getTimeConstruct(18000)) < 86400 %}{{ ((app.user.getLaser() + 1) * app.user.getTimeConstruct(18000)- 3600)|date('H:i:s') }}{% else %}{{ ((app.user.getLaser() + 1) * app.user.getTimeConstruct(18000)- 3600)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info" href="{{ path('research_laser', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                         {% else %}
                             {% if app.user.getLaser() == 3 %}
@@ -340,7 +340,7 @@
                         
                     {% else %}
                         {% if app.user.getBitcoin() >= ((app.user.getPlasma() + 1) * 29000) and app.user.getArmement() == 5 and app.user.getPlasma() < 3 and app.user.getSearchAt() < date %}
-                            <div>{% if ((app.user.getPlasma() + 1) * app.user.getTimeConstruct(46800)) < 86400 %}{{ ((app.user.getPlasma() + 1) * app.user.getTimeConstruct(46800))|date('H:i:s') }}{% else %}{{ ((app.user.getPlasma() + 1) * app.user.getTimeConstruct(46800))|date('d H:i:s') }}{% endif %}</div>
+                            <div>{% if ((app.user.getPlasma() + 1) * app.user.getTimeConstruct(46800)) < 86400 %}{{ ((app.user.getPlasma() + 1) * app.user.getTimeConstruct(46800)- 3600)|date('H:i:s') }}{% else %}{{ ((app.user.getPlasma() + 1) * app.user.getTimeConstruct(46800)- 3600)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info" href="{{ path('research_plasma', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                         {% else %}
                             {% if app.user.getPlasma() == 3 %}
@@ -371,7 +371,7 @@
                         
                     {% else %}
                         {% if app.user.getBitcoin() >= ((app.user.getIndustry() + 1) * 1500) and app.user.getIndustry() < 5 and app.user.getSearchAt() < date %}
-                            <div>{% if ((app.user.getIndustry() + 1) * app.user.getTimeConstruct(1500)) < 3600 %}{{ ((app.user.getIndustry() + 1) * app.user.getTimeConstruct(1500))|date('i:s') }}{% elseif ((app.user.getIndustry() + 1) * app.user.getTimeConstruct(1500)) < 86400 %}{{ ((app.user.getIndustry() + 1) * app.user.getTimeConstruct(1500))|date('H:i:s') }}{% else %}{{ ((app.user.getIndustry() + 1) * app.user.getTimeConstruct(1500))|date('d H:i:s') }}{% endif %}</div>
+                            <div>{% if ((app.user.getIndustry() + 1) * app.user.getTimeConstruct(1500)) < 3600 %}{{ ((app.user.getIndustry() + 1) * app.user.getTimeConstruct(1500))|date('i:s') }}{% elseif ((app.user.getIndustry() + 1) * app.user.getTimeConstruct(1500)) < 86400 %}{{ ((app.user.getIndustry() + 1) * app.user.getTimeConstruct(1500)- 3600)|date('H:i:s') }}{% else %}{{ ((app.user.getIndustry() + 1) * app.user.getTimeConstruct(1500)- 3600)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info" href="{{ path('research_industry', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                         {% else %}
                             {% if app.user.getIndustry() == 5 %}
@@ -397,7 +397,7 @@
                         
                     {% else %}
                         {% if app.user.getBitcoin() >= ((app.user.getLightShip() + 1) * 9000) and app.user.getLightShip() < 3 and app.user.getIndustry() > 2 and app.user.getSearchAt() < date %}
-                            <div>{% if ((app.user.getLightShip() + 1) * app.user.getTimeConstruct(8600)) < 86400 %}{{ ((app.user.getLightShip() + 1) * app.user.getTimeConstruct(8600))|date('H:i:s') }}{% else %}{{ ((app.user.getLightShip() + 1) * app.user.getTimeConstruct(8600))|date('d H:i:s') }}{% endif %}</div>
+                            <div>{% if ((app.user.getLightShip() + 1) * app.user.getTimeConstruct(8600)) < 86400 %}{{ ((app.user.getLightShip() + 1) * app.user.getTimeConstruct(8600)- 3600)|date('H:i:s') }}{% else %}{{ ((app.user.getLightShip() + 1) * app.user.getTimeConstruct(8600)- 3600)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info" href="{{ path('research_light_ship', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                         {% else %}
                             {% if app.user.getLightShip() == 3 %}
@@ -423,7 +423,7 @@
                         
                     {% else %}
                         {% if app.user.getBitcoin() >= ((app.user.getHeavyShip() + 1) * 42000) and app.user.getHeavyShip() < 3 and app.user.getIndustry() == 5 and app.user.getSearchAt() < date %}
-                            <div>{% if ((app.user.getHeavyShip() + 1) * app.user.getTimeConstruct(9300)) < 86400 %}{{ ((app.user.getHeavyShip() + 1) * app.user.getTimeConstruct(9300))|date('H:i:s') }}{% else %}{{ ((app.user.getHeavyShip() + 1) * app.user.getTimeConstruct(9300))|date('d H:i:s') }}{% endif %}</div>
+                            <div>{% if ((app.user.getHeavyShip() + 1) * app.user.getTimeConstruct(9300)) < 86400 %}{{ ((app.user.getHeavyShip() + 1) * app.user.getTimeConstruct(9300)- 3600)|date('H:i:s') }}{% else %}{{ ((app.user.getHeavyShip() + 1) * app.user.getTimeConstruct(9300)- 3600)|date('d H:i:s') }}{% endif %}</div>
                             <a class="btn btn-lg btn-info" href="{{ path('research_heavy_ship', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                         {% else %}
                             {% if app.user.getHeavyShip() == 3 %}

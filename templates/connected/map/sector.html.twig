@@ -5,15 +5,15 @@
 {% block title %}{{ 'title'|trans }}{% endblock %}
 
 {% block body %}
-{% set topSector = id - 6 %}
-    {% if topSector < 0 %}
+{% set topSector = id - 4 %}
+    {% if topSector <= 0 %}
         {% set topSector = id + 12 %}
     {% endif %}
     {% set rightSector = id + 1 %}
     {% if rightSector == 17 %}
         {% set rightSector = 1 %}
     {% endif %}
-    {% set bottomSector = id + 6 %}
+    {% set bottomSector = id + 4 %}
     {% if bottomSector > 16 %}
         {% set bottomSector = id - 12 %}
     {% endif %}

@@ -7,6 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Doctrine\Common\Collections\Criteria;
 
 /**
  * @ORM\Table(name="app_users")
@@ -303,7 +304,11 @@ class User implements UserInterface, \Serializable
      */
     public function getPlanets()
     {
-        return $this->planets;
+        $criteria = Criteria::create()
+            ->orderBy(array('position' => 'ASC'))
+            ->orderBy(array('sector' => 'ASC'));
+
+        return $this->planets->matching($criteria);
     }
 
     /**

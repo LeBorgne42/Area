@@ -197,6 +197,8 @@ class FightController extends Controller
                 $reportB->setContent("Votre flotte utilitaire " . $removeOne->getName() . " ne dispose pas des technologies nécessaires à l'identification des vaisseaux ennemis en " . $removeOne->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $removeOne->getPlanet()->getSector()->getPosition() . ":" . $removeOne->getPlanet()->getPosition() . " .");
                 $reportB->setTitle("Rapport de combat : Défaite");
                 $reportB->setUser($removeOne->getUser());
+                $removeOne->getUser()->setViewReport(false);
+                $em->persist($removeOne->getUser());
                 $em->persist($reportB);
                 $em->remove($removeOne);
             }
@@ -205,6 +207,8 @@ class FightController extends Controller
                 $reportA->setSendAt($now);
                 $reportA->setContent("Vous venez de détruire une flotte utilitaire en " . $reportWin->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $reportWin->getPlanet()->getSector()->getPosition() . ":" . $reportWin->getPlanet()->getPosition() . " .");
                 $reportA->setTitle("Rapport de combat : Victoire");
+                $reportWin->getUser()->setViewReport(false);
+                $em->persist($reportWin->getUser());
                 $reportA->setUser($reportWin->getUser());
                 $em->persist($reportA);
             }
@@ -218,6 +222,8 @@ class FightController extends Controller
                 $reportB->setContent("Votre flotte utilitaire " . $removeTwo->getName() . " ne dispose pas des technologies nécessaires à l'identification des vaisseaux ennemis " . $removeTwo->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $removeTwo->getPlanet()->getSector()->getPosition() . ":" . $removeTwo->getPlanet()->getPosition() . " .");
                 $reportB->setTitle("Rapport de combat : Défaite");
                 $reportB->setUser($removeTwo->getUser());
+                $removeTwo->getUser()->setViewReport(false);
+                $em->persist($removeTwo->getUser());
                 $em->persist($reportB);
                 $em->remove($removeTwo);
             }
@@ -227,6 +233,8 @@ class FightController extends Controller
                 $reportA->setContent("Vous venez de détruire une flotte utilitaire en " . $reportWin->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $reportWin->getPlanet()->getSector()->getPosition() . ":" . $reportWin->getPlanet()->getPosition() . " .");
                 $reportA->setTitle("Rapport de combat : Victoire");
                 $reportA->setUser($reportWin->getUser());
+                $reportWin->getUser()->setViewReport(false);
+                $em->persist($reportWin->getUser());
                 $em->persist($reportA);
             }
             $em->flush();
@@ -698,6 +706,14 @@ class FightController extends Controller
             if($colonize->getNbrShips() == 0) {
                 $em->remove($colonize);
             }
+            $reportColo = new Report();
+            $reportColo->setSendAt($now);
+            $reportColo->setUser($user);
+            $reportColo->setTitle("Colonisation de planète");
+            $reportColo->setContent("Vous venez de coloniser une planète inhabitée en : " .  $newPlanet->getSector()->getgalaxy()->getPosition() . ":" . $newPlanet->getSector()->getPosition() . ":" . $newPlanet->getPosition() . ". Cette planète fait désormais partit de votre Empire, pensez a la renommer sur la page Planètes.");
+            $user->setViewReport(false);
+            $em->persist($reportColo);
+            $em->persist($user);
             $em->persist($newPlanet);
             $em->flush();
         }
