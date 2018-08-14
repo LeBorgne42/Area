@@ -578,7 +578,7 @@ class InstantController extends Controller
                     $em->persist($updateF);
                 }
                 $fleet->setFightAt($now);
-                $report->setContent($report->getContent() . " Attention votre flotte est rentrée en combat !");
+                $report->setContent($report->getContent() . " Votre flotte vient d''engager le combat !");
             }
             $em->persist($report);
             $em->persist($fleet);
