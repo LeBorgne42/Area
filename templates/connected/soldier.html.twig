@@ -23,9 +23,11 @@
                     <th class="tab-cells-name">
                         <span>{{ usePlanet.getSoldierAtNbr()|number_format }} {{ 'caserner.soldierProd'|trans }}</span>
                     </th>
-                    <td class="center-cells">
-                        <span class="timerArea" hidden>{{ usePlanet.getSoldierAt()|date('Y/m/d H:i:s') }}</span>
-                    </td>
+                    {% if usePlanet.getSoldierAt() %}
+                        <td class="center-cells">
+                            <span class="timerArea" hidden>{{ usePlanet.getSoldierAt()|date('Y/m/d H:i:s') }}</span>
+                        </td>
+                    {% endif %}
                 </tr>
                 </tbody>
             </table>
@@ -51,9 +53,11 @@
                     <th class="tab-cells-name">
                         <span>{{ usePlanet.getScientistAtNbr()|number_format }} {{ 'caserner.scientistProd'|trans }}</span>
                     </th>
-                    <td class="center-cells">
-                        <span class="timerArea" hidden>{{ usePlanet.getScientistAt()|date('Y/m/d H:i:s') }}</span>
-                    </td>
+                    {% if usePlanet.getScientistAt() %}
+                        <td class="center-cells">
+                            <span class="timerArea" hidden>{{ usePlanet.getScientistAt()|date('Y/m/d H:i:s') }}</span>
+                        </td>
+                    {% endif %}
                 </tr>
                 </tbody>
             </table>

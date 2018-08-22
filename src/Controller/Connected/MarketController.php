@@ -49,17 +49,17 @@ class MarketController extends Controller
             if(!$planetBuy) {
                 $planetBuy = $usePlanet;
             }
-            $cost = ($form_market->get('bitcoin')->getData() / 5) + ($form_market->get('soldier')->getData() * 5) + ($form_market->get('worker')->getData() * 2);
+            $cost = (abs($form_market->get('bitcoin')->getData()) / 5) + (abs($form_market->get('soldier')->getData()) * 5) + (abs($form_market->get('worker')->getData()) * 2);
             $cost = ceil($cost);
             if(($cost > $user->getRank()->getWarPoint() ||
-                ($planetBuy->getSoldier() + $form_market->get('soldier')->getData()) > $planetBuy->getSoldierMax()) ||
-                    ($planetBuy->getWorker() + $form_market->get('worker')->getData()) > $planetBuy->getWorkerMax()) {
+                ($planetBuy->getSoldier() + abs($form_market->get('soldier')->getData())) > $planetBuy->getSoldierMax()) ||
+                    ($planetBuy->getWorker() + abs($form_market->get('worker')->getData())) > $planetBuy->getWorkerMax()) {
                 return $this->redirectToRoute('market', array('idp' => $usePlanet->getId()));
             }
 
-            $user->setBitcoin($user->getBitcoin() + $form_market->get('bitcoin')->getData());
-            $planetBuy->setSoldier($planetBuy->getSoldier() + $form_market->get('soldier')->getData());
-            $planetBuy->setWorker($planetBuy->getWorker() + $form_market->get('worker')->getData());
+            $user->setBitcoin($user->getBitcoin() + abs($form_market->get('bitcoin')->getData()));
+            $planetBuy->setSoldier($planetBuy->getSoldier() + abs($form_market->get('soldier')->getData()));
+            $planetBuy->setWorker($planetBuy->getWorker() + abs($form_market->get('worker')->getData()));
             $user->getRank()->setWarPoint($user->getRank()->getWarPoint() - $cost);
             $em->persist($planetBuy);
             $em->persist($user);

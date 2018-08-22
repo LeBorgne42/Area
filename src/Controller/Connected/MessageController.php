@@ -82,7 +82,7 @@ class MessageController extends Controller
         $form_message = $this->createForm(MessageType::class, $message);
         $form_message->handleRequest($request);
 
-        if ($form_message->isSubmitted() && $form_message->isValid() && $form_message->get('bitcoin')->getData() < $user->getBitcoin() &&
+        if ($form_message->isSubmitted() && $form_message->isValid() && abs($form_message->get('bitcoin')->getData()) < $user->getBitcoin() &&
             ($user->getSalonBan() > $now || $user->getSalonBan() == null)) {
             $recever = $form_message->get('user')->getData();
             if ($form_message->get('anonymous')->getData() == false) {
@@ -91,9 +91,9 @@ class MessageController extends Controller
             $message->setIdSender($user->getId());
             $message->setContent(nl2br($form_message->get('content')->getData()));
             $message->setSendAt($now);
-            $recever->setBitcoin($recever->getBitcoin() + $form_message->get('bitcoin')->getData());
+            $recever->setBitcoin($recever->getBitcoin() + abs($form_message->get('bitcoin')->getData()));
             $recever->setViewMessage(false);
-            $user->setBitcoin($user->getBitcoin() - $form_message->get('bitcoin')->getData());
+            $user->setBitcoin($user->getBitcoin() - abs($form_message->get('bitcoin')->getData()));
             $em->persist($user);
             $em->persist($recever);
             $em->persist($message);
@@ -141,7 +141,7 @@ class MessageController extends Controller
         $form_message = $this->createForm(MessageRespondeType::class, $message);
         $form_message->handleRequest($request);
 
-        if ($form_message->isSubmitted() && $form_message->isValid() && $form_message->get('bitcoin')->getData() < $user->getBitcoin()) {
+        if ($form_message->isSubmitted() && $form_message->isValid() && abs($form_message->get('bitcoin')->getData()) < $user->getBitcoin()) {
             $userRecever = $em->getRepository('App:User')
                 ->createQueryBuilder('u')
                 ->where('u.id = :id')
@@ -156,9 +156,9 @@ class MessageController extends Controller
             $message->setUser($userRecever);
             $message->setContent(nl2br($form_message->get('content')->getData()));
             $message->setSendAt($now);
-            $userRecever->setBitcoin($userRecever->getBitcoin() + $form_message->get('bitcoin')->getData());
+            $userRecever->setBitcoin($userRecever->getBitcoin() + abs($form_message->get('bitcoin')->getData()));
             $userRecever->setViewMessage(false);
-            $user->setBitcoin($user->getBitcoin() - $form_message->get('bitcoin')->getData());
+            $user->setBitcoin($user->getBitcoin() - abs($form_message->get('bitcoin')->getData()));
             $em->persist($user);
             $em->persist($userRecever);
             $em->persist($message);

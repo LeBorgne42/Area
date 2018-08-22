@@ -554,29 +554,30 @@ class AllyController extends Controller
         $form_pdg->handleRequest($request);
 
         if ($form_pdg->isSubmitted() && $form_pdg->isValid()) {
+            $amountPdg = abs($form_pdg->get('amount')->getData());
             if($form_pdg->get('exchangeType')->getData() == 1) {
-                if($form_pdg->get('amount')->getData() < $user->getRank()->getWarPoint()) {
-                    $user->getRank()->setWarPoint(($user->getRank()->getWarPoint() - $form_pdg->get('amount')->getData()));
-                    $ally->setPdg($ally->getPdg() + $form_pdg->get('amount')->getData());
+                if($amountPdg < $user->getRank()->getWarPoint()) {
+                    $user->getRank()->setWarPoint(($user->getRank()->getWarPoint() - $amountPdg));
+                    $ally->setPdg($ally->getPdg() + $amountPdg);
                     $exchange = new Exchange();
                     $exchange->setAlly($ally);
                     $exchange->setType(1);
                     $exchange->setCreatedAt($now);
-                    $exchange->setAmount($form_pdg->get('amount')->getData());
+                    $exchange->setAmount($amountPdg);
                     $exchange->setName($user->getUserName());
                     $em->persist($exchange);
                     $em->persist($ally);
                     $em->persist($user);
                 }
             } else {
-                if($form_pdg->get('amount')->getData() < $ally->getPdg() && $user->getGrade()->getPlacement() == 1) {
-                    $user->getRank()->setWarPoint(($user->getRank()->getWarPoint() + $form_pdg->get('amount')->getData()));
-                    $ally->setPdg($ally->getPdg() - $form_pdg->get('amount')->getData());
+                if($amountPdg < $ally->getPdg() && $user->getGrade()->getPlacement() == 1) {
+                    $user->getRank()->setWarPoint(($user->getRank()->getWarPoint() + $amountPdg));
+                    $ally->setPdg($ally->getPdg() - $amountPdg);
                     $exchange = new Exchange();
                     $exchange->setAlly($ally);
                     $exchange->setType(1);
                     $exchange->setCreatedAt($now);
-                    $exchange->setAmount(-$form_pdg->get('amount')->getData());
+                    $exchange->setAmount(-$amountPdg);
                     $exchange->setName($user->getUserName());
                     $em->persist($exchange);
                     $em->persist($ally);
@@ -589,29 +590,30 @@ class AllyController extends Controller
         }
 
         if ($form_exchange->isSubmitted() && $form_exchange->isValid()) {
+            $amountExchange = abs($form_exchange->get('amount')->getData());
             if($form_exchange->get('exchangeType')->getData() == 1) {
-                if($form_exchange->get('amount')->getData() < $user->getBitcoin()) {
-                    $user->setBitcoin($user->getBitcoin() - $form_exchange->get('amount')->getData());
-                    $ally->setBitcoin($ally->getBitcoin() + $form_exchange->get('amount')->getData());
+                if($amountExchange < $user->getBitcoin()) {
+                    $user->setBitcoin($user->getBitcoin() - $amountExchange);
+                    $ally->setBitcoin($ally->getBitcoin() + $amountExchange);
                     $exchange = new Exchange();
                     $exchange->setAlly($ally);
                     $exchange->setCreatedAt($now);
                     $exchange->setType(0);
-                    $exchange->setAmount($form_exchange->get('amount')->getData());
+                    $exchange->setAmount($amountExchange);
                     $exchange->setName($user->getUserName());
                     $em->persist($exchange);
                     $em->persist($ally);
                     $em->persist($user);
                 }
             } else {
-                if($form_exchange->get('amount')->getData() < $ally->getBitcoin() && $user->getGrade()->getPlacement() == 1) {
-                    $user->setBitcoin($user->getBitcoin() + $form_exchange->get('amount')->getData());
-                    $ally->setBitcoin($ally->getBitcoin() - $form_exchange->get('amount')->getData());
+                if($amountExchange < $ally->getBitcoin() && $user->getGrade()->getPlacement() == 1) {
+                    $user->setBitcoin($user->getBitcoin() + $amountExchange);
+                    $ally->setBitcoin($ally->getBitcoin() - $amountExchange);
                     $exchange = new Exchange();
                     $exchange->setAlly($ally);
                     $exchange->setCreatedAt($now);
                     $exchange->setType(0);
-                    $exchange->setAmount(-$form_exchange->get('amount')->getData());
+                    $exchange->setAmount(-$amountExchange);
                     $exchange->setName($user->getUserName());
                     $em->persist($exchange);
                     $em->persist($ally);
