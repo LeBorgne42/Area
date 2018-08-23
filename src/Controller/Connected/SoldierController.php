@@ -47,25 +47,26 @@ class SoldierController extends Controller
         $form_scientistRecruit->handleRequest($request);
 
         if ($form_caserneRecruit->isSubmitted() && $form_caserneRecruit->isValid()) {
-            if($form_caserneRecruit->get('soldier')->getData() > ($user->getBitcoin() / 10) ||
-                ($form_caserneRecruit->get('soldier')->getData() > $usePlanet->getWorker() || ($usePlanet->getSoldier() + $form_caserneRecruit->get('soldier')->getData()) > $usePlanet->getSoldierMax()) ||
+            $nbrSoldier = abs($form_caserneRecruit->get('soldier')->getData());
+            if($nbrSoldier > ($user->getBitcoin() / 75) ||
+                ($nbrSoldier > ($usePlanet->getWorker() / 3) || ($usePlanet->getSoldier() + $nbrSoldier) > $usePlanet->getSoldierMax()) ||
                 ($usePlanet->getWorker() < 5000)) {
                 return $this->redirectToRoute('soldier', array('idp' => $usePlanet->getId()));
             }
             if($usePlanet->getSoldierAt()) {
-                if ($usePlanet->getSoldierAtNbr() + $form_caserneRecruit->get('soldier')->getData() > $usePlanet->getSoldierMax()) {
+                if ($usePlanet->getSoldierAtNbr() + $nbrSoldier > $usePlanet->getSoldierMax()) {
                     return $this->redirectToRoute('soldier', array('idp' => $usePlanet->getId()));
                 }
                 $tmpSoldier = $usePlanet->getSoldierAtNbr() - $usePlanet->getSoldier();
-                $now->add(new DateInterval('PT' . ((($form_caserneRecruit->get('soldier')->getData() + $tmpSoldier))) . 'S'));
-                $usePlanet->setSoldierAtNbr($usePlanet->getSoldierAtNbr() + $form_caserneRecruit->get('soldier')->getData());
+                $now->add(new DateInterval('PT' . ((($nbrSoldier + $tmpSoldier))) . 'S'));
+                $usePlanet->setSoldierAtNbr($usePlanet->getSoldierAtNbr() + $nbrSoldier);
             } else {
-                $now->add(new DateInterval('PT' . $form_caserneRecruit->get('soldier')->getData() . 'S'));
-                $usePlanet->setSoldierAtNbr($form_caserneRecruit->get('soldier')->getData());
+                $now->add(new DateInterval('PT' . $nbrSoldier . 'S'));
+                $usePlanet->setSoldierAtNbr($nbrSoldier);
             }
-            $usePlanet->setWorker($usePlanet->getWorker() - $form_caserneRecruit->get('soldier')->getData());
+            $usePlanet->setWorker($usePlanet->getWorker() - ($nbrSoldier * 3));
             $usePlanet->setSoldierAt($now);
-            $user->setBitcoin($user->getBitcoin() - ($form_caserneRecruit->get('soldier')->getData() * 10));
+            $user->setBitcoin($user->getBitcoin() - ($nbrSoldier * 75));
             $em->persist($usePlanet);
             $em->persist($user);
             $em->flush();
@@ -73,24 +74,25 @@ class SoldierController extends Controller
         }
 
         if ($form_scientistRecruit->isSubmitted() && $form_scientistRecruit->isValid()) {
-            if($form_scientistRecruit->get('scientist')->getData() > ($user->getBitcoin() / 100) ||
-                $form_scientistRecruit->get('scientist')->getData() > ($usePlanet->getWorker() / 2) ||
-                ($usePlanet->getWorker() < 5000 || ($usePlanet->getScientist() + $form_scientistRecruit->get('scientist')->getData()) > $usePlanet->getScientistMax())) {
+            $nbrScientist = abs($form_scientistRecruit->get('scientist')->getData());
+            if($nbrScientist > ($user->getBitcoin() / 250) ||
+                $nbrScientist > ($usePlanet->getWorker() / 10) ||
+                ($usePlanet->getWorker() < 5000 || ($usePlanet->getScientist() + $nbrScientist) > $usePlanet->getScientistMax())) {
                 return $this->redirectToRoute('soldier', array('idp' => $usePlanet->getId()));
             }
             if($usePlanet->getScientistAt()) {
-                if ($usePlanet->getScientistAtNbr() + $form_scientistRecruit->get('scientist')->getData() > $usePlanet->getScientistMax()) {
+                if ($usePlanet->getScientistAtNbr() + $nbrScientist > $usePlanet->getScientistMax()) {
                     return $this->redirectToRoute('soldier', array('idp' => $usePlanet->getId()));
                 }
                 $tmpScientist = $usePlanet->getScientistAtNbr() - $usePlanet->getScientist();
-                $now->add(new DateInterval('PT' . round((($form_scientistRecruit->get('scientist')->getData() + $tmpScientist) * 60)/ $user->getScientistProduction()) . 'S'));
-                $usePlanet->setScientistAtNbr($usePlanet->getScientistAtNbr() + $form_scientistRecruit->get('scientist')->getData());
+                $now->add(new DateInterval('PT' . round((($nbrScientist + $tmpScientist) * 60)/ $user->getScientistProduction()) . 'S'));
+                $usePlanet->setScientistAtNbr($usePlanet->getScientistAtNbr() + $nbrScientist);
             } else {
-                $now->add(new DateInterval('PT' . round(($form_scientistRecruit->get('scientist')->getData() * 60)/ $user->getScientistProduction()) . 'S'));
-                $usePlanet->setScientistAtNbr($form_scientistRecruit->get('scientist')->getData());
+                $now->add(new DateInterval('PT' . round(($nbrScientist * 60)/ $user->getScientistProduction()) . 'S'));
+                $usePlanet->setScientistAtNbr($nbrScientist);
             }
-            $usePlanet->setWorker($usePlanet->getWorker() - ($form_scientistRecruit->get('scientist')->getData() * 2));
-            $user->setBitcoin($user->getBitcoin() - ($form_scientistRecruit->get('scientist')->getData() * 100));
+            $usePlanet->setWorker($usePlanet->getWorker() - ($nbrScientist * 10));
+            $user->setBitcoin($user->getBitcoin() - ($nbrScientist * 250));
             $usePlanet->setScientistAt($now);
             $em->persist($usePlanet);
             $em->persist($user);

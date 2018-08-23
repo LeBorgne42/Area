@@ -753,6 +753,8 @@ class FleetController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
 
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
@@ -781,8 +783,16 @@ class FleetController extends Controller
         }
         
         if($planetTake->getMerchant() == true) {
+            $newWarPointS = ($fleetGive->getNiobium() / 6) / 400;
+            $reportSell = new Report();
+            $reportSell->setSendAt($now);
+            $reportSell->setUser($user);
+            $reportSell->setTitle("Vente aux marchands");
+            $reportSell->setContent("Votre vente aux marchands vous a rapporté " . round(($fleetGive->getNiobium() * 0.25)) . " bitcoin. Et " . $newWarPointS . " points de Guerre.");
+            $em->persist($reportSell);
             $planetTake->setNiobium($planetTake->getNiobium() + $fleetGive->getNiobium());
             $user->setBitcoin($user->getBitcoin() + ($fleetGive->getNiobium() * 0.25));
+            $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $newWarPointS);
             $fleetGive->setNiobium(0);
         }
         if(($planetTake->getNiobium() + $fleetGive->getNiobium()) <= $planetTake->getNiobiumMax()) {
@@ -806,6 +816,8 @@ class FleetController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
 
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
@@ -833,8 +845,16 @@ class FleetController extends Controller
             return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
         }
         if($planetTake->getMerchant() == true) {
+            $newWarPointS = ($fleetGive->getWater() / 3) / 400;
+            $reportSell = new Report();
+            $reportSell->setSendAt($now);
+            $reportSell->setUser($user);
+            $reportSell->setTitle("Vente aux marchands");
+            $reportSell->setContent("Votre vente aux marchands vous a rapporté " . round(($fleetGive->getWater() * 0.5)) . " bitcoin. Et " . $newWarPointS . " points de Guerre.");
+            $em->persist($reportSell);
             $planetTake->setWater($planetTake->getWater() + $fleetGive->getWater());
             $user->setBitcoin($user->getBitcoin() + ($fleetGive->getWater() * 0.5));
+            $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $newWarPointS);
             $fleetGive->setWater(0);
         }
         if(($planetTake->getWater() + $fleetGive->getWater()) <= $planetTake->getWaterMax()) {
@@ -858,6 +878,8 @@ class FleetController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
 
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
@@ -885,8 +907,16 @@ class FleetController extends Controller
             return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
         }
         if($planetTake->getMerchant() == true) {
+            $newWarPointS = ($fleetGive->getSoldier() * 10) / 400;
+            $reportSell = new Report();
+            $reportSell->setSendAt($now);
+            $reportSell->setUser($user);
+            $reportSell->setTitle("Vente aux marchands");
+            $reportSell->setContent("Votre vente aux marchands vous a rapporté " . round(($fleetGive->getSoldier() * 5)) . " bitcoin. Et " . $newWarPointS . " points de Guerre.");
+            $em->persist($reportSell);
             $planetTake->setSoldier($planetTake->getSoldier() + $fleetGive->getSoldier());
             $user->setBitcoin($user->getBitcoin() + ($fleetGive->getSoldier() * 5));
+            $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $newWarPointS);
             $fleetGive->setSoldier(0);
         }
         if(($planetTake->getSoldier() + $fleetGive->getSoldier()) <= $planetTake->getSoldierMax()) {
@@ -910,6 +940,8 @@ class FleetController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
 
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
@@ -937,8 +969,16 @@ class FleetController extends Controller
             return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
         }
         if($planetTake->getMerchant() == true) {
+            $newWarPointS = ($fleetGive->getWorker() * 50) / 400;
+            $reportSell = new Report();
+            $reportSell->setSendAt($now);
+            $reportSell->setUser($user);
+            $reportSell->setTitle("Vente aux marchands");
+            $reportSell->setContent("Votre vente aux marchands vous a rapporté " . round(($fleetGive->getWorker() * 2)) . " bitcoin. Et " . $newWarPointS . " points de Guerre.");
+            $em->persist($reportSell);
             $planetTake->setWorker($planetTake->getWorker() + $fleetGive->getWorker());
             $user->setBitcoin($user->getBitcoin() + ($fleetGive->getWorker() * 2));
+            $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $newWarPointS);
             $fleetGive->setWorker(0);
         }
         if(($planetTake->getWorker() + $fleetGive->getWorker()) <= $planetTake->getWorkerMax()) {
@@ -962,6 +1002,8 @@ class FleetController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
 
         $usePlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
@@ -988,9 +1030,17 @@ class FleetController extends Controller
         } else {
             return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
         }
-        if($planetTake->getMerchant() == true) {
+        if($planetTake->getMerchant() == true) {$reportSell = new Report();
+            $newWarPointS = ($fleetGive->getScientist() * 100) / 400;
+            $reportSell = new Report();
+            $reportSell->setSendAt($now);
+            $reportSell->setUser($user);
+            $reportSell->setTitle("Vente aux marchands");
+            $reportSell->setContent("Votre vente aux marchands vous a rapporté " . round(($fleetGive->getScientist() * 50)) . " bitcoin. Et " . $newWarPointS . " points de Guerre.");
+            $em->persist($reportSell);
             $planetTake->setScientist($planetTake->getScientist() + $fleetGive->getScientist());
             $user->setBitcoin($user->getBitcoin() + ($fleetGive->getScientist() * 50));
+            $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $newWarPointS);
             $fleetGive->setScientist(0);
         }
         if(($planetTake->getScientist() + $fleetGive->getScientist()) <= $planetTake->getScientistMax()) {
@@ -1047,6 +1097,7 @@ class FleetController extends Controller
             $reportSell->setSendAt($now);
             $reportSell->setUser($user);
             $reportSell->setTitle("Vente aux marchands");
+            $newWarPointS = ((($fleetGive->getScientist() * 100) + ($fleetGive->getWorker() * 50) + ($fleetGive->getSoldier() * 10) + ($fleetGive->getWater() / 3) + ($fleetGive->getNiobium() / 6)) / 400);
             $reportSell->setContent("Votre vente aux marchands vous a rapporté " . round(($fleetGive->getWater() * 0.5) + ($fleetGive->getSoldier() * 5) + ($fleetGive->getWorker() * 2) + ($fleetGive->getScientist() * 50) + ($fleetGive->getNiobium() * 0.25)) . " bitcoin. Et " . $newWarPointS . " points de Guerre.");
             $em->persist($reportSell);
             $planetTake->setScientist($planetTake->getScientist() + $fleetGive->getScientist());
@@ -1055,7 +1106,7 @@ class FleetController extends Controller
             $planetTake->setWater($planetTake->getWater() + $fleetGive->getWater());
             $planetTake->setNiobium($planetTake->getNiobium() + $fleetGive->getNiobium());
             $user->setBitcoin($user->getBitcoin() + ($fleetGive->getScientist() * 50) + ($fleetGive->getWorker() * 2) + ($fleetGive->getSoldier() * 5) + ($fleetGive->getWater() * 0.5) + ($fleetGive->getNiobium() * 0.25));
-            $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + ((($fleetGive->getScientist() * 100) + ($fleetGive->getWorker() * 50) + ($fleetGive->getSoldier() * 10) + ($fleetGive->getWater() / 3) + ($fleetGive->getNiobium() / 6)) / 400));
+            $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $newWarPointS);
             $fleetGive->setScientist(0);
             $fleetGive->setNiobium(0);
             $fleetGive->setSoldier(0);

@@ -1,5 +1,6 @@
 title: 'Carte spatiale'
 tooltip.planet: '%name%'
+tooltip.planetAlly: '[%ally%] %name%'
 tooltip.planetInfos: 'Terrain: %land% <img class="mb-1" src="http://www.areauniverse.eu/img/ground.png"> <br> Espace: %sky% <img class="mb-1" src="http://www.areauniverse.eu/img/sky.png"> <br> Radar: %radar% <br> Brouilleur: %brouilleur% <br> Au sol: %ground%'
 tooltip.planetOrbite: '%orbite%'
 map.coming: 'Flotte entrant dans le secteur'

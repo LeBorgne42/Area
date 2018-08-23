@@ -85,7 +85,7 @@
                                     {% if planet.getCdr() == false %}
                                         <span class="glyphicon glyphicon-info-sign{% if planet.getSkyBrouilleur() %} text-orange{% elseif planet.getRadar() or planet.getSkyRadar() %} text-jaune{% endif %}" data-html="true" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planetInfos'|trans({'%land%': planet.getGround(), '%radar%': planet.getRadar() + planet.getSkyRadar(), '%brouilleur%': planet.getSkyBrouilleur(), '%sky%': planet.getSky(), '%ground%': planet.getNbrSignatures()|number_format}) }}"></span>
                                     {% endif %}
-                                    <a {% if planet.getUser() == app.user %}href="{{ path('building', {'idp': planet.getId()}) }}"{% else %} data-toggle="modal" data-target="#planetModal" href="{{ path('planet_interact', {'idp': usePlanet.getId(), 'id': planet.getId()}) }}"{% endif %}><img class="mr-4 mb-4" {% if planet.getUser() %}data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planet'|trans({'%name%': planet.getUser().getUserName() }) }}"{% endif %} height="64" width="64" src="{{ vich_uploader_asset(planet, 'imageFile') }}"></a>
+                                    <a {% if planet.getUser() == app.user %}href="{{ path('building', {'idp': planet.getId()}) }}"{% else %} data-toggle="modal" data-target="#planetModal" href="{{ path('planet_interact', {'idp': usePlanet.getId(), 'id': planet.getId()}) }}"{% endif %}><img class="mr-4 mb-4" {% if planet.getUser() and planet.getUser().getAlly() %}data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planetAlly'|trans({'%name%': planet.getUser().getUserName(), '%ally%': planet.getUser().getAlly().getSigle() }) }}"{% elseif planet.getUser() %}data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planet'|trans({'%name%': planet.getUser().getUserName() }) }}"{% endif %} height="64" width="64" src="{{ vich_uploader_asset(planet, 'imageFile') }}"></a>
                                     <div class="text-center{% if planet.getUser() == app.user %} pp-mine{% elseif planet.getPlanetAlliance() == app.user.getAlly() and planet.getPlanetAlliance() != null or planet.getOurAllyPact(app.user) %} pp-ally{% elseif planet.getUser() %} pp-enemy{% elseif planet.getCdr() %} pp-cdr{% elseif planet.getMerchant() %} pp-ia{% endif %}">{{ planet.getName() }}</div>
                                 </td>
                             {% else %}
@@ -172,7 +172,7 @@
                 {% for fleet in fleetCurrent %}
                     <tr class="{% if fleet.getUser() == app.user %}text-bleu{% elseif fleet.getUser().getAlly() == app.user.getAlly() and app.user.getAlly() %}text-vert{% else %}text-rouge{% endif %}">
                         <th class="tab-cells-name">
-                            "{{  fleet.getName() }}" <span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'idp': usePlanet.getId(), 'id': fleet.getUser().getId()}) }}">{{ fleet.getUser().getUserName() }}</a></span>
+                            "{{  fleet.getName() }}" <span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'idp': usePlanet.getId(), 'id': fleet.getUser().getId()}) }}">{% if fleet.getUser().getAlly() %}[{{ fleet.getUser().getAlly().getSigle() }}] {% endif %}{{ fleet.getUser().getUserName() }}</a></span>
                         </th>
                         <td class="center-cells text-center">
                             {{ fleet.getPlanet().getName() }} - {{ fleet.getPlanet().getSector().getGalaxy.getPosition() }}:{{ fleet.getPlanet().getSector.getPosition() }}:{{ fleet.getPlanet().getPosition() }}
@@ -215,7 +215,7 @@
                     {% for fleet in fleetIn %}
                         <tr class="{% if fleet.getUser() == app.user %}text-bleu{% elseif fleet.getUser().getAlly() == app.user.getAlly() and app.user.getAlly() %}text-vert{% else %}text-rouge{% endif %}">
                             <th class="tab-cells-name">
-                                "{{  fleet.getName() }}" <span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'idp': usePlanet.getId(), 'id': fleet.getUser().getId()}) }}">{{ fleet.getUser().getUserName() }}</a></span>
+                                "{{  fleet.getName() }}" <span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'idp': usePlanet.getId(), 'id': fleet.getUser().getId()}) }}">{% if fleet.getUser().getAlly() %}[{{ fleet.getUser().getAlly().getSigle() }}] {% endif %}{{ fleet.getUser().getUserName() }}</a></span>
                             </th>
                             <td class="center-cells text-center">
                             {% if fleet.getPlanet() %}
@@ -260,7 +260,7 @@
                     {% for fleet in fleetOut %}
                         <tr class="{% if fleet.getUser() == app.user %}text-bleu{% elseif fleet.getUser().getAlly() == app.user.getAlly() and app.user.getAlly() %}text-vert{% else %}text-rouge{% endif %}">
                             <th class="tab-cells-name">
-                                "{{  fleet.getName() }}" <span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'idp': usePlanet.getId(), 'id': fleet.getUser().getId()}) }}">{{ fleet.getUser().getUserName() }}</a></span>
+                                "{{  fleet.getName() }}" <span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'idp': usePlanet.getId(), 'id': fleet.getUser().getId()}) }}">{% if fleet.getUser().getAlly() %}[{{ fleet.getUser().getAlly().getSigle() }}] {% endif %}{{ fleet.getUser().getUserName() }}</a></span>
                             </th>
                             <td class="center-cells text-center">
                                 {{ fleet.getPlanet().getName() }} - {{ fleet.getPlanet().getSector().getGalaxy.getPosition() }}:{{ fleet.getPlanet().getSector.getPosition() }}:{{ fleet.getPlanet().getPosition() }}
