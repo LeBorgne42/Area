@@ -483,6 +483,12 @@ class InstantController extends Controller
                 $friendAlly = ['impossible', 'personne'];
             }
 
+            if($user->getAlly()) {
+                $allyF = $user->getAlly();
+            } else {
+                $allyF = 'war';
+            }
+
             $warFleets = $em->getRepository('App:Fleet')
                 ->createQueryBuilder('f')
                 ->join('f.user', 'u')
@@ -492,7 +498,7 @@ class InstantController extends Controller
                 ->andWhere('f.user != :user')
                 ->andWhere('f.flightTime is null')
                 ->andWhere('u.ally is null OR a.sigle not in (:friend)')
-                ->setParameters(array('planet' => $newHome, 'true' => true, 'ally' => $warAlly, 'user' => $user, 'friend' => $friendAlly))
+                ->setParameters(array('planet' => $newHome, 'true' => true, 'ally' => $warAlly, 'user' => $user, 'friend' => $friendAlly, 'myAlly' => $allyF))
                 ->getQuery()
                 ->getResult();
 

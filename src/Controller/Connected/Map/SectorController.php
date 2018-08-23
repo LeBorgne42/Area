@@ -254,7 +254,10 @@ class SectorController extends Controller
             } else {
                 $base = 2000;
             }
-        } elseif (strpos('0 -1 1 -10 10 -9 9', (strval($sFleet - $sector)) ) != false) {
+        } else {
+            $base = 3000;
+        }
+        /*elseif (strpos('0 -1 1 -10 10 -9 9', (strval($sFleet - $sector)) ) != false) {
             $base = 3000;
         } elseif (strpos('-20 20 12 11 8 2 -12 -11 -8 -2', (strval($sFleet - $sector)) ) != false) {
             $base = 6800;
@@ -262,7 +265,7 @@ class SectorController extends Controller
             $base = 8000;
         } else {
             $base = 12000;
-        }
+        }*/
         if(1 > $user->getBitcoin()) {
             return $this->redirectToRoute('map', array('idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition()));
         }

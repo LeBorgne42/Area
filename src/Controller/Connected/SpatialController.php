@@ -71,7 +71,7 @@ class SpatialController extends Controller
             $croiser = abs($form_spatialShip->get('croiser')->getData());
             $ironClad = abs($form_spatialShip->get('ironClad')->getData());
             $destroyer = abs($form_spatialShip->get('destroyer')->getData());
-            $niobiumLess = (175000 * $motherShip) + (11000 * $brouilleurShip) + (5000 * $radarShip) + (500000 * $moonMaker) + (8000 * $cargoI) + (22000 * $cargoV) + (45000 * $cargoX) + (20000 * $colonizer) + (10000 * $recycleur) + (15000 * $barge) + (5 * $sonde) + (250 * $hunter) + (2200 * $fregate) + (400 * $hunterHeavy) + (1000 * $corvet) + (400 * $corvetLaser) + (2000 * $fregatePlasma) + (10000 * $croiser) + (30000 * $ironClad) + (20000 * $destroyer);
+            $niobiumLess = (175000 * $motherShip) + (11000 * $brouilleurShip) + (5000 * $radarShip) + (500000 * $moonMaker) + (8000 * $cargoI) + (22000 * $cargoV) + (45000 * $cargoX) + (20000 * $colonizer) + (10000 * $recycleur) + (15000 * $barge) + (15000 * $sonde) + (250 * $hunter) + (2200 * $fregate) + (400 * $hunterHeavy) + (1000 * $corvet) + (400 * $corvetLaser) + (2000 * $fregatePlasma) + (10000 * $croiser) + (30000 * $ironClad) + (20000 * $destroyer);
             $waterLess =  (95000 * $motherShip) + (13000 * $brouilleurShip) + (6000 * $radarShip) + (230000 * $moonMaker) + (6500 * $cargoI) + (15000 * $cargoV) + (38000 * $cargoX) + (12000 * $colonizer) + (7000 * $recycleur) + (12000 * $barge) + (50 * $hunter) + (1400 * $fregate) + (80 * $hunterHeavy) + (500 * $corvet) + (2000 * $corvetLaser) + (7000 * $fregatePlasma) + (8000 * $croiser) + (12000 * $ironClad) + (70000 * $destroyer);
             $workerLess = (2000 * $motherShip) + (20000 * $moonMaker) + (10000 * $colonizer) + (500 * $destroyer) + (50 * $cargoX);
             $warPoint = (500 * $motherShip) + (900 * $hunterWar) + (1800 * $corvetWar);
@@ -275,6 +275,12 @@ class SpatialController extends Controller
                 $friendAlly = ['impossible', 'personne'];
             }
 
+            if($user->getAlly()) {
+                $allyF = $user->getAlly();
+            } else {
+                $allyF = 'war';
+            }
+
             $fleets = $em->getRepository('App:Fleet')
                 ->createQueryBuilder('f')
                 ->join('f.user', 'u')
@@ -284,7 +290,8 @@ class SpatialController extends Controller
                 ->andWhere('f.user != :user')
                 ->andWhere('f.flightTime is null')
                 ->andWhere('u.ally is null OR a.sigle not in (:friend)')
-                ->setParameters(array('planet' => $usePlanet, 'true' => true, 'ally' => $warAlly, 'user' => $user, 'friend' => $friendAlly))
+                ->andWhere('u.ally is null OR u.ally != :myAlly')
+                ->setParameters(array('planet' => $usePlanet, 'true' => true, 'ally' => $warAlly, 'user' => $user, 'friend' => $friendAlly, 'myAlly' => $allyF))
                 ->getQuery()
                 ->getResult();
 

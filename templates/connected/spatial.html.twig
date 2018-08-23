@@ -15,7 +15,7 @@
                     <tbody>
                     <tr{% if usePlanet.getSpaceShip == 0 and usePlanet.getSonde() == 0 %} hidden{% endif %}>
                         <td class="tab-cells-name">
-                            <span tabindex="0" role="button" class="btn btn-secondary text-orange"  data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.sonde'|trans|raw }}">{{ 'spatial.sonde'|trans }} x {{ usePlanet.getSonde()|number_format }}</span> <span class="float-right"><span class="ml-5"><span class="niobiumProduct">5</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span><span class="ml-3">2s</span></span>
+                            <span tabindex="0" role="button" class="btn btn-secondary text-orange"  data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.sonde'|trans|raw }}">{{ 'spatial.sonde'|trans }} x {{ usePlanet.getSonde()|number_format }}</span> <span class="float-right"><span class="ml-5"><span class="niobiumProduct">15000</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span><span class="ml-3">2s</span></span>
                         </td>
                         <td class="center-cells"{% if usePlanet.getSpaceShip == 0 %} hidden{% endif %}>
                             {{ form_widget(form_spatialShip.sonde,{attr: { max: usePlanet.getSonde(), class: 'nbrProduct form-control'}}) }}

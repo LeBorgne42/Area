@@ -629,7 +629,7 @@ function manageFlightTime(){
     $('#fleet_send_sector').off('change').on('change',function(e){
         var newPosition = $('#fleet_send_sector').val();
         newPosition = newPosition.toString();
-        var first = '0 -1 1 -10 10 -9 9';
+        /*var first = '0 -1 1 -10 10 -9 9';
         var second = '-20 20 12 11 8 2 -12 -11 -8 -2';
         var third = '-28 28 29 30 31 32 33 22 12 3 7 -29 -30 -31 -32 -33 -22 -13 -3 -7';
         if (position == newPosition) {
@@ -647,6 +647,13 @@ function manageFlightTime(){
         } else {
             base = 12000;
             price = 6;
+        }*/
+        if (position == newPosition) {
+            base = 2000;
+            price = 1;
+        } else {
+            base = 3000;
+            price = 3;
         }
         carburant = Math.round(price * ($('#signatureFleet').text() / 200));
         var now = new Date();
