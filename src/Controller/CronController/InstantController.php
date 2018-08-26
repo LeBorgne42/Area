@@ -498,6 +498,7 @@ class InstantController extends Controller
                 ->andWhere('f.user != :user')
                 ->andWhere('f.flightTime is null')
                 ->andWhere('u.ally is null OR a.sigle not in (:friend)')
+                ->andWhere('u.ally is null OR u.ally != :myAlly')
                 ->setParameters(array('planet' => $newHome, 'true' => true, 'ally' => $warAlly, 'user' => $user, 'friend' => $friendAlly, 'myAlly' => $allyF))
                 ->getQuery()
                 ->getResult();
@@ -701,6 +702,7 @@ class InstantController extends Controller
                         $fleet->setColonizer($fleet->getColonizer() - 1);
                         $newPlanet->setUser($fleet->getUser());
                         $newPlanet->setName('Colonie');
+                        $newPlanet->setNbColo(count($fleet->getUser()->getPlanets()) + 1);
                         $em->persist($fleet);
                         if ($fleet->getNbrShips() == 0) {
                             $em->remove($fleet);

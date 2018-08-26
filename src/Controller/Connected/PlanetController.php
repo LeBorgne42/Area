@@ -34,15 +34,6 @@ class PlanetController extends Controller
             ->getQuery()
             ->getOneOrNullResult();
 
-        $allPlanets = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.user = :user')
-            ->setParameters(array('user' => $user))
-            ->orderBy('p.position')
-            ->orderBy('p.sector')
-            ->getQuery()
-            ->getResult();
-
         $form_manageRenamePlanet = $this->createForm(PlanetRenameType::class);
         $form_manageRenamePlanet->handleRequest($request);
 
@@ -63,7 +54,6 @@ class PlanetController extends Controller
 
         return $this->render('connected/planet.html.twig', [
             'usePlanet' => $usePlanet,
-            'allPlanets' => $allPlanets,
             'formObject' => $form_manageRenamePlanet,
         ]);
     }

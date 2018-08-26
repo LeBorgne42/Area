@@ -33,6 +33,11 @@ class Planet
     protected $user;
 
     /**
+     * @ORM\Column(name="nbColo",type="integer", nullable=true)
+     */
+    protected $nbColo;
+
+    /**
      * @ORM\OneToOne(targetEntity="Commander", inversedBy="planet", fetch="EXTRA_LAZY", cascade={"persist"})
      * @ORM\JoinColumn(name="commander_id", referencedColumnName="id")
      */
@@ -2050,6 +2055,22 @@ class Planet
     public function getBunker()
     {
         return $this->bunker;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNbColo()
+    {
+        return $this->nbColo;
+    }
+
+    /**
+     * @param mixed $nbColo
+     */
+    public function setNbColo($nbColo): void
+    {
+        $this->nbColo = $nbColo;
     }
 
     /**

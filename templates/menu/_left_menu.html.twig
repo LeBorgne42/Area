@@ -59,8 +59,11 @@
     <div class="btn-left">
         <a target="_blank" href="http://area-control.forumactif.com/">{{ 'forum'|trans }}</a>
     </div>
-    <div class="btn-left-bottom{% if app.request.attributes.get('_route') == 'help_new' %} currentRoute{% endif %}">
+    <div class="btn-left{% if app.request.attributes.get('_route') == 'help_new' %} currentRoute{% endif %}">
         <a href="{{ path('help_new', {'idp': usePlanet.getId()}) }}"><span>{{ 'helpNew'|trans }}</span></a>
+    </div>
+    <div class="btn-left-bottom{% if app.request.attributes.get('_route') == 'my_options' %} currentRoute{% endif %}">
+        <a href="{{ path('my_options', {'idp': usePlanet.getId()}) }}"><span>{{ 'modifyOptions'|trans }}</span></a>
     </div>
     <div>
         <a href="{{ path('disconnect_me') }}" class="badge badge-danger my-4"><div class="glyphicon glyphicon-remove"></div> <span>{{ 'disconnect'|trans }}</span></a>

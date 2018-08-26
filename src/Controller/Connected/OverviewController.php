@@ -41,8 +41,7 @@ class OverviewController extends Controller
             ->createQueryBuilder('p')
             ->where('p.user = :user')
             ->setParameters(array('user' => $this->getUser()))
-            ->orderBy('p.position')
-            ->orderBy('p.sector')
+            ->orderBy('p.id')
             ->getQuery()
             ->getResult();
 

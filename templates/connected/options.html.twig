@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'front_options' %}
+
+{% block title %}{{ 'title'|trans }}{% endblock %}
+
+{% block body %}
+
+<div class="front-block">
+    <table class="table table-striped table-dark text-center borderOverview">
+        <tbody>
+        <tr>
+            <td width="200" class="center-cells">
+                {{ 'modifPassword'|trans }}
+            </td>
+            <td class="center-cells">
+                {{ 'planetOrder'|trans }}
+            </td>
+        </tr>
+        {{ form_start(form_pass) }}
+        <tr>
+            <td width="200" class="center-cells">
+                {{ form_widget(form_pass.oldPassword) }}
+                {{ form_widget(form_pass.password) }}
+            </td>
+            <td>
+                {{ form_widget(form_pass.planetOrder,{attr: { class: 'planetOrder'}}) }}
+                </br>
+                </br>
+                {{ form_widget(form_pass.sendForm,{attr: { class: 'btn btn-lg btn-info float-right'}}) }}
+            </td>
+        </tr>
+        {{ form_end(form_pass) }}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

@@ -28,7 +28,7 @@
                     {{ 'planet.ship'|trans }}
                 </th>
             </tr>
-            {% for planet in allPlanets %}
+            {% for planet in app.user.getPlanets() %}
                 {% if planet.getEmpty() == true %}
                 {% else %}
                     {% set form_rename = formObject.createView %}

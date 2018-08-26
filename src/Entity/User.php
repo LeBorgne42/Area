@@ -30,6 +30,12 @@ class User implements UserInterface, \Serializable
     protected $username;
 
     /**
+     * @ORM\Column(name="orderPlanet",type="string", length=10)
+     * @Assert\NotBlank(message = "required")
+     */
+    protected $orderPlanet = 'pos';
+
+    /**
      * @ORM\Column(type="string", length=40, unique=true)
      * @Assert\Email(message = "email.mail_format")
      * @Assert\NotBlank(message = "required")
@@ -304,9 +310,16 @@ class User implements UserInterface, \Serializable
      */
     public function getPlanets()
     {
+        if ($this->getOrderPlanet() == 'alpha') {
+            $criteria = Criteria::create()
+                ->orderBy(array('name' => 'ASC'));
+        } elseif ($this->getOrderPlanet() == 'colo') {
+            $criteria = Criteria::create()
+                ->orderBy(array('nbColo' => 'ASC'));
+        } else {
         $criteria = Criteria::create()
-            ->orderBy(array('position' => 'ASC'))
-            ->orderBy(array('sector' => 'ASC'));
+            ->orderBy(array('id' => 'ASC'));
+        }
 
         return $this->planets->matching($criteria);
     }
@@ -1605,6 +1618,22 @@ class User implements UserInterface, \Serializable
     public function getAllyBan()
     {
         return $this->allyBan;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOrderPlanet()
+    {
+        return $this->orderPlanet;
+    }
+
+    /**
+     * @param mixed $orderPlanet
+     */
+    public function setOrderPlanet($orderPlanet): void
+    {
+        $this->orderPlanet = $orderPlanet;
     }
 
     /**

@@ -702,6 +702,7 @@ class FightController extends Controller
             $colonize->setColonizer($colonize->getColonizer() - 1);
             $newPlanet->setUser($colonize->getUser());
             $newPlanet->setName('Colonie');
+            $newPlanet->setNbColo(count($fleet->getUser()->getPlanets()) + 1);
             $em->persist($colonize);
             if($colonize->getNbrShips() == 0) {
                 $em->remove($colonize);
