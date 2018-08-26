@@ -38,8 +38,8 @@ class OptionsController extends Controller
         $form_password->handleRequest($request);
 
         if ($form_password->isSubmitted() && $form_password->isValid()) {
-            if($user->getPassword() == password_hash($form_password->get('oldPassword')->getData(), PASSWORD_BCRYPT)) {
-                if(count($form_password->get('password')->getData()) > 4) {
+            if(password_verify($form_password->get('oldPassword')->getData(), $user->getPassword())) {
+                if(count($form_password->get('password')->getData()) == 1 && $form_password->get('password')->getData() == $form_password->get('confirmPassword')->getData()) {
                     $user->setPassword(password_hash($form_password->get('password')->getData(), PASSWORD_BCRYPT));
                 }
             }

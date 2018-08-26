@@ -43,6 +43,19 @@ class ModifPasswordType extends AbstractType
                 )
             )
             ->add(
+                'confirmPassword',
+                null,
+                array(
+                    'label' => 'form.confirmPassword',
+                    'attr'  => array(
+                        'placeholder' => 'form.confirmPassword',
+                        'class' => 'form-control',
+                        'autocomplete' => 'off',
+                    ),
+                    'required' => false,
+                )
+            )
+            ->add(
                 'planetOrder',
                 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',
                 array(
