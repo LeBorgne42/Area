@@ -42,7 +42,7 @@ class DeployController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getId()]);
+        return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getPosition()]);
     }
     /**
      * @Route("/deployer-brouilleur/{idp}/{fleet}/", name="deploy_brouilleur", requirements={"idp"="\d+", "fleet"="\d+"})
@@ -75,7 +75,7 @@ class DeployController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getId()]);
+        return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getPosition()]);
     }
     /**
      * @Route("/deployer-lunar/{idp}/{fleet}/", name="deploy_moonMaker", requirements={"idp"="\d+", "fleet"="\d+"})
@@ -132,6 +132,6 @@ class DeployController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getId()]);
+        return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getPosition()]);
     }
 }

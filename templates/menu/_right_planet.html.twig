@@ -6,10 +6,10 @@
         {% else %}
             {% if planet.getEmpty() == true %}
                 <div class="mb-4 bg-right-empty px-4 py-2">
-                    <div class="pt-1 float-left"><a class="ml-2" href="{{ path('map', {id: planet.getSector().getPosition(), 'idp': usePlanet.getId(), 'gal': planet.getSector().getGalaxy().getId()}) }}"><img height="15" src="{{ asset('img/vradar.png') }}"></a></div>
+                    <div class="pt-1 float-left"><a class="ml-2" href="{{ path('map', {id: planet.getSector().getPosition(), 'idp': usePlanet.getId(), 'gal': planet.getSector().getGalaxy().getPosition()}) }}"><img height="15" src="{{ asset('img/vradar.png') }}"></a></div>
                     <div class="float-right">
                         <div class="mt-2">
-                            {{ planet.getName() }} - <span><a href="{{ path('map', {id: planet.getSector().getPosition(), 'idp': usePlanet.getId(), 'gal': planet.getSector().getGalaxy().getId()}) }}">{{ planet.getSector().getGalaxy.getPosition() }}:{{ planet.getSector().getPosition() }}:{{ planet.getPosition() }}</a></span>
+                            {{ planet.getName() }} - <span><a href="{{ path('map', {id: planet.getSector().getPosition(), 'idp': usePlanet.getId(), 'gal': planet.getSector().getGalaxy().getPosition()}) }}">{{ planet.getSector().getGalaxy.getPosition() }}:{{ planet.getSector().getPosition() }}:{{ planet.getPosition() }}</a></span>
                             <br>
                             <span class="mt-5 timerArea" hidden>{% if planet.getRadarAt() %}{{ planet.getRadarAt()|date('Y/m/d H:i:s') }}{% elseif planet.getBrouilleurAt() %}{{ planet.getBrouilleurAt()|date('Y/m/d H:i:s') }}{% endif %}</span>
                         </div>
@@ -20,7 +20,7 @@
                         <div class="pt-2 float-left"><a href="{{ planet.getId() }}"><img height="32" width="32" src="{{ vich_uploader_asset(planet, 'imageFile') }}"></a></div>
                         <div class="float-right">
                             <div class="mt-2">
-                                {% if planet.getOffensiveFleet(app.user) == 'neutre' %}<span data-toggle="tooltip" data-placement="bottom" title="{{ 'fleetNoAlly'|trans }}" class="text-rouge">{{ planet.getName() }}</span>{% else %}{{ planet.getName() }}{% endif %} - <span><a href="{{ path('map', {id: planet.getSector().getPosition(), 'idp': planet.getId(), 'gal': planet.getSector().getGalaxy().getId()}) }}">{{ planet.getSector().getGalaxy.getPosition() }}:{{ planet.getSector().getPosition() }}:{{ planet.getPosition() }}</a></span>
+                                {% if planet.getOffensiveFleet(app.user) == 'neutre' %}<span data-toggle="tooltip" data-placement="bottom" title="{{ 'fleetNoAlly'|trans }}" class="text-rouge">{{ planet.getName() }}</span>{% else %}{{ planet.getName() }}{% endif %} - <span><a href="{{ path('map', {id: planet.getSector().getPosition(), 'idp': planet.getId(), 'gal': planet.getSector().getGalaxy().getPosition()}) }}">{{ planet.getSector().getGalaxy.getPosition() }}:{{ planet.getSector().getPosition() }}:{{ planet.getPosition() }}</a></span>
                             </div>
                             <div class="ml-2">
                                 {{ planet.getGroundPlace() }}/{{ planet.getGround() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"> {{ planet.getSkyPlace() }}/{{ planet.getSky() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'SkyImg'|trans }}" src="{{ asset('img/sky.png') }}">

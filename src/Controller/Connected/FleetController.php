@@ -1191,7 +1191,7 @@ class FleetController extends Controller
 
         $em->flush();
 
-        return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $fleet->getPlanet()->getSector()->getPosition(), 'gal' => $fleet->getPlanet()->getSector()->getGalaxy()->getId()]);
+        return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $fleet->getPlanet()->getSector()->getPosition(), 'gal' => $fleet->getPlanet()->getSector()->getGalaxy()->getPosition()]);
     }
 
     /**
@@ -1216,7 +1216,7 @@ class FleetController extends Controller
 
         $em->flush();
 
-        return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $fleet->getPlanet()->getSector()->getPosition(), 'gal' => $fleet->getPlanet()->getSector()->getGalaxy()->getId()]);
+        return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $fleet->getPlanet()->getSector()->getPosition(), 'gal' => $fleet->getPlanet()->getSector()->getGalaxy()->getPosition()]);
     }
 
     /**

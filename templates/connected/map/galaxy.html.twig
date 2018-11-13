@@ -14,7 +14,7 @@
                     <tr>
                     {% set x = 1 %}
                 {% endif %}
-                <td class="center-cells{% if sector.getDestroy() == true %} red-border{% endif %}"><a data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.sector'|trans({'%position%': sector.getPosition()}) }}" href="{{ path('map', {'id':sector.getPosition(), 'idp': usePlanet.getId(), 'gal': sector.getGalaxy().getId()}) }}">
+                <td class="center-cells{% if sector.getDestroy() == true %} red-border{% endif %}"><a data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.sector'|trans({'%position%': sector.getPosition()}) }}" href="{{ path('map', {'id':sector.getPosition(), 'idp': usePlanet.getId(), 'gal': sector.getGalaxy().getPosition()}) }}">
                         {% for planet in sector.getPlanets() %}
                             <span class="{% if planet.getEmpty() == true %}pp-no{% endif %}{% if planet.getUser() == app.user %}pp-mine{% elseif planet.getPlanetAlliance() == app.user.getAlly() and planet.getPlanetAlliance() != null or planet.getOurAllyPact(app.user) %}pp-ally{% elseif planet.getUser() %}pp-enemy{% elseif planet.getCdr() == true %}pp-cdr{% elseif planet.getMerchant() == true %}pp-ia{% endif %} size-little-galaxy">{% if planet.getEmpty() == true %}.{% else %}.{% endif %}</span>
                         {% endfor %}
@@ -48,7 +48,7 @@
                         <tr>
                         {% set x = 1 %}
                     {% endif %}
-                    <td class="center-cells"><a data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.sector'|trans({'%position%': sector.getPosition()}) }}" href="{{ path('map', {'id':sector.getPostion(), 'idp': usePlanet.getId(), 'gal': sector.getGalaxy().getId()}) }}">
+                    <td class="center-cells"><a data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.sector'|trans({'%position%': sector.getPosition()}) }}" href="{{ path('map', {'id':sector.getPostion(), 'idp': usePlanet.getId(), 'gal': sector.getGalaxy().getPosition()}) }}">
                         {% for planet in sector.getPlanets() %}
                             <span class="{% if planet.getUser() == app.user %}pp-mine{% elseif planet.getPlanetAlliance() == app.user.getAlly() and planet.getPlanetAlliance() != null or planet.getOurAllyPact(app.user) %}pp-ally{% elseif planet.getUser() %}pp-enemy{% elseif planet.getCdr() == true %}pp-cdr{% elseif planet.getMerchant() == true %}pp-ia{% endif %}">{% if planet.getEmpty() == true %}&nbsp;{% else %}.{% endif %}</span>
                         {% endfor %}

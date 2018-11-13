@@ -793,7 +793,7 @@ class User implements UserInterface, \Serializable
         $return = null;
 
         foreach($this->getPlanets() as $planet) {
-            if ($planet->getSector()->getPosition() == $sector && $planet->getSector()->getGalaxy()->getId() == $gal) {
+            if ($planet->getSector()->getPosition() == $sector && $planet->getSector()->getGalaxy()->getPosition() == $gal) {
                 $radar = $planet->getRadar() + $planet->getSkyRadar();
                 if($radar > $return || $return == null) {
                     $return = $radar;

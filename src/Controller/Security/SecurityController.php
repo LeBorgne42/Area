@@ -147,7 +147,7 @@ class SecurityController extends Controller
         $server = $em->getRepository('App:Server')->find(['id' => 1]);
 
         if($server->getOpen() == false) {
-        return $this->redirectToRoute('logout');
+            return $this->redirectToRoute('logout');
         }
 
         if($user) {

@@ -628,7 +628,7 @@ class FightController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $defenser->getSector()->getPosition(), 'gal' => $defenser->getSector()->getGalaxy()->getId()]);
+        return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $defenser->getSector()->getPosition(), 'gal' => $defenser->getSector()->getGalaxy()->getPosition()]);
     }
 
     /**
@@ -667,6 +667,6 @@ class FightController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $newPlanet->getSector()->getPosition(), 'gal' => $newPlanet->getSector()->getGalaxy()->getId()]);
+        return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $newPlanet->getSector()->getPosition(), 'gal' => $newPlanet->getSector()->getGalaxy()->getPosition()]);
     }
 }

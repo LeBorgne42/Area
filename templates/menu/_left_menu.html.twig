@@ -28,7 +28,7 @@
         <a href="{{ path('galaxy', {'id': usePlanet.getSector().getGalaxy().getPosition(), 'idp': usePlanet.getId()}) }}"><span>{{ 'galaxy'|trans }}</span></a>
     </div>
     <div class="btn-left{% if app.request.attributes.get('_route') == 'map' %} currentRoute{% endif %}">
-        <a href="{{ path('map', {'id':usePlanet.getSector().getPosition(), 'idp': usePlanet.getId(), 'gal': usePlanet.getSector().getGalaxy().getId()}) }}"><span>{{ 'map'|trans }}</span></a>
+        <a href="{{ path('map', {'id':usePlanet.getSector().getPosition(), 'idp': usePlanet.getId(), 'gal': usePlanet.getSector().getGalaxy().getPosition()}) }}"><span>{{ 'map'|trans }}</span></a>
     </div>
     <div class="btn-left{% if usePlanet.getConstruct() is null and (usePlanet.getGround() != usePlanet.getGroundPlace()) %} freeSearchBuild{% endif %}{% if app.request.attributes.get('_route') == 'building' %} currentRoute{% endif %}">
         <a href="{{ path('building', {'idp': usePlanet.getId()}) }}"><span>{{ 'building'|trans }}</span>{% if usePlanet.getConstruct() is null and (usePlanet.getGround() != usePlanet.getGroundPlace()) %} <span class="glyphicon glyphicon-question-sign text-orange" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.building'|trans }}"></span>{% endif %}</a>

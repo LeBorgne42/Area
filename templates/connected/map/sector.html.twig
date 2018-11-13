@@ -40,7 +40,7 @@
         {% set leftSector = 100 %}
     {% endif %}#}
     <div class="map-block">
-        <div class="block-title ml-4"><h2>{{ 'sector.number'|trans }} {{ id }}</h2></div>
+        <div class="block-title ml-4"><h2>{{ 'galaxy.number'|trans }} {{ gal }} - {{ 'sector.number'|trans }} {{ id }}</h2></div>
         <table class="table sector-table text-center sector">
             {% if planets|length > 1 %}
                 <tbody>
@@ -219,7 +219,7 @@
                             </th>
                             <td class="center-cells text-center">
                             {% if fleet.getPlanet() %}
-                                {% if app.user.getWhereRadar(fleet.getPlanet().getSector.getPosition(), gal) or fleet.getUser() == app.user %}<span><a href="{{ path('map', {id: fleet.getPlanet().getSector().getPosition(), 'idp': usePlanet.getId(), 'gal': fleet.getSector().getGalaxy().getId()}) }}">{{ fleet.getPlanet().getName() }} - {{ fleet.getPlanet().getSector().getGalaxy.getPosition() }}:{{ fleet.getPlanet().getSector.getPosition() }}:{{ fleet.getPlanet().getPosition() }}</a></span>{% else %}???{% endif %}
+                                {% if app.user.getWhereRadar(fleet.getPlanet().getSector.getPosition(), gal) or fleet.getUser() == app.user %}<span><a href="{{ path('map', {id: fleet.getPlanet().getSector().getPosition(), 'idp': usePlanet.getId(), 'gal': fleet.getSector().getGalaxy().getPosition()}) }}">{{ fleet.getPlanet().getName() }} - {{ fleet.getPlanet().getSector().getGalaxy.getPosition() }}:{{ fleet.getPlanet().getSector.getPosition() }}:{{ fleet.getPlanet().getPosition() }}</a></span>{% else %}???{% endif %}
                             {% endif %}
                             </td>
                             <td class="tab-cells-name text-center">
@@ -266,7 +266,7 @@
                                 {{ fleet.getPlanet().getName() }} - {{ fleet.getPlanet().getSector().getGalaxy.getPosition() }}:{{ fleet.getPlanet().getSector.getPosition() }}:{{ fleet.getPlanet().getPosition() }}
                             </td>
                             <td class="tab-cells-name text-center">
-                                {% if app.user.getWhereRadar(fleet.getSector.getPosition(), gal) or fleet.getUser() == app.user %}<span><a href="{{ path('map', {id: fleet.getSector().getPosition(), 'idp': usePlanet.getId(), 'gal': fleet.getSector().getGalaxy().getId()}) }}">{{ fleet.getSector().getGalaxy.getPosition() }}:{{ fleet.getSector.getPosition() }}:{{ fleet.getPlanete() }}</a></span>{% else %}???{% endif %}
+                                {% if app.user.getWhereRadar(fleet.getSector.getPosition(), gal) or fleet.getUser() == app.user %}<span><a href="{{ path('map', {id: fleet.getSector().getPosition(), 'idp': usePlanet.getId(), 'gal': fleet.getSector().getGalaxy().getPosition()}) }}">{{ fleet.getSector().getGalaxy.getPosition() }}:{{ fleet.getSector.getPosition() }}:{{ fleet.getPlanete() }}</a></span>{% else %}???{% endif %}
                             </td>
                             <td class="center-cells text-center">
                                 {{ fleet.getNbrSignatures()|number_format }}
