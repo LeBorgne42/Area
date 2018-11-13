@@ -3,6 +3,12 @@ home: Accueil
 footer: 'Suivez nous sur facebook!'
 media: Medias
 easyadmin: 'Pannel Admin'
+serveur.activate: 'Activer'
+serveur.deactivate: 'Désactiver'
+serveur.createBig: 'Créer Univers'
+serveur.createLittle: 'Créer petit Univers'
+serveur.kill.sector: 'Détruire secteur'
+serveur.kill.serveur: 'Détruire Univers'
 logout: Deconnexion
 username: Pseudo
 password: 'mot de passe'

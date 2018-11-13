@@ -12,7 +12,32 @@
         <a class="btn-top" href="{{ path('register') }}" data-toggle="modal" data-target="#openModal">{{ 'register'|trans }}</a>
     {% endif %}
     {% if is_granted('ROLE_ADMIN') %}
-        <a class="btn-top" href="{{ path('easyadmin') }}">{{ 'easyadmin'|trans }}</a>
+        <div class="btn-group btn-top">
+            <button type="button" class="admin-button" data-toggle="dropdown">{{ 'easyadmin'|trans }}</button>
+            <ul class="dropdown-menu" role="menu">
+                <li>
+                    <a class="btn-top" href="{{ path('active_server') }}" target="_blank">{{ 'serveur.activate'|trans }}</a>
+                </li>
+                <li>
+                    <a class="btn-top" href="{{ path('deactive_server') }}" target="_blank">{{ 'serveur.deactivate'|trans }}</a>
+                </li>
+                <li>
+                    <a class="btn-top" href="{{ path('create') }}" target="_blank">{{ 'serveur.createBig'|trans }}</a>
+                </li>
+                <li>
+                    <a class="btn-top" href="{{ path('create_little') }}" target="_blank">{{ 'serveur.createLittle'|trans }}</a>
+                </li>
+                <li>
+                    <a class="btn-top" href="{{ path('destroy_sectors') }}" target="_blank">{{ 'serveur.kill.sector'|trans }}</a>
+                </li>
+                <li>
+                    <a class="btn-top" href="{{ path('destroy') }}" target="_blank">{{ 'serveur.kill.serveur'|trans }}</a>
+                </li>
+                <li>
+                    <a class="btn-top" href="{{ path('easyadmin') }}" target="_blank">{{ 'easyadmin'|trans }}</a>
+                </li>
+            </ul>
+        </div>
     {% endif %}
     {% if app.user %}
         <a class="btn-top" href="{{ path('logout') }}">{{ 'logout'|trans }}</a>

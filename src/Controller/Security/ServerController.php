@@ -22,8 +22,8 @@ use DateTime;
 class ServerController extends Controller
 {
     /**
-     * @Route("/creation-serveur-final", name="create")
-     * @Route("/creation-serveur-final/", name="create_withSlash")
+     * @Route("/creation-univers", name="create")
+     * @Route("/creation-univers/", name="create_withSlash")
      */
     public function createServerAction()
     {
@@ -187,8 +187,8 @@ class ServerController extends Controller
     }
 
     /**
-     * @Route("/creation-serveur-petit", name="create_little")
-     * @Route("/creation-serveur-petit/", name="create_little_withSlash")
+     * @Route("/creation-univers-petit", name="create_little")
+     * @Route("/creation-univers-petit/", name="create_little_withSlash")
      */
     public function createServerLittleAction()
     {
@@ -278,8 +278,8 @@ class ServerController extends Controller
     }
 
     /**
-     * @Route("/destruction-serveur", name="destroy")
-     * @Route("/destruction-serveur/", name="destroy_withSlash")
+     * @Route("/destruction-univers", name="destroy")
+     * @Route("/destruction-univers/", name="destroy_withSlash")
      */
     public function destroyServerAction()
     {
@@ -418,8 +418,8 @@ class ServerController extends Controller
     }
 
     /**
-     * @Route("/detruire", name="destroy_sectors")
-     * @Route("/detruire/", name="destroy_sectors_withSlash")
+     * @Route("/destruction-secteur", name="destroy_sectors")
+     * @Route("/destruction-secteur/", name="destroy_sectors_withSlash")
      */
     public function destroySectorsAction()
     {
@@ -467,8 +467,8 @@ class ServerController extends Controller
     }
 
     /**
-     * @Route("/activer", name="active_server")
-     * @Route("/activer/", name="active_server_withSlash")
+     * @Route("/activer-connexion", name="active_server")
+     * @Route("/activer-connexion/", name="active_server_withSlash")
      */
     public function activeServerAction()
     {
@@ -483,8 +483,8 @@ class ServerController extends Controller
     }
 
     /**
-     * @Route("/desactiver", name="deactive_server")
-     * @Route("/desactiver/", name="deactive_server_withSlash")
+     * @Route("/desactiver-connexion", name="deactive_server")
+     * @Route("/desactiver-connexion/", name="deactive_server_withSlash")
      */
     public function deactivateServerAction()
     {
