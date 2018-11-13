@@ -70,23 +70,23 @@ class SecurityController extends Controller
 
             $mailer->send($message);
 
-            return $this->redirectToRoute('login');
+            //return $this->redirectToRoute('login');
 
-            /* $token = new UsernamePasswordToken(
-                $user->getUsername(),
+            $token = new UsernamePasswordToken(
+                $user,
                 null,
-                'my_entity_user_provider',
+                'main',
                 $user->getRoles()
             );
 
 
            $this->get('security.token_storage')->setToken($token);
-            $request->getSession()->set('_security_main', serialize($token));
+           $request->getSession()->set('_security_main', serialize($token));
 
-            $event = new InteractiveLoginEvent($request, $token);
-            $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
+           $event = new InteractiveLoginEvent($request, $token);
+           $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
 
-            return $this->redirectToRoute('overview', ['idp' => $planet->getId()]);*/
+           return $this->redirectToRoute('login');
         }
         return $this->render('security/register.html.twig');
     }
@@ -144,6 +144,10 @@ class SecurityController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
+        if(!$user) {
+            $token = $this->get('security.token_storage')->getToken();
+            $user = $this->get('security.token_storage')->getToken()->getUser();
+        }
         $server = $em->getRepository('App:Server')->find(['id' => 1]);
 
         if($server->getOpen() == false) {
@@ -251,15 +255,14 @@ class SecurityController extends Controller
      */
     public function confirmEmailAction(Request $request, $key)
     {
-        exit;
         $userId = decrypt($key);
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository('App:User')->find(['id' => $userId]);
 
         $token = new UsernamePasswordToken(
-            $user->getUsername(),
-            $user->getPassword(),
-            'my_entity_user_provider',
+            $user,
+            null,
+            'main',
             $user->getRoles()
         );
 
