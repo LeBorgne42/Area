@@ -22,14 +22,8 @@ class BuildingController extends Controller
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
-
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $user = $this->getUser();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         return $this->render('connected/building.html.twig', [
             'usePlanet' => $usePlanet,
@@ -46,27 +40,21 @@ class BuildingController extends Controller
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
 
         $cancelPlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->where('p.id = :id')
             ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $id, 'user' => $user))
+            ->setParameters(['id' => $id, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
 
         $build = $cancelPlanet->getConstruct();
         if ($build == 'destruct') {
-            return $this->redirectToRoute('overview', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('overview', ['idp' => $usePlanet->getId()]);
         } elseif ($build == 'miner') {
             $level = $cancelPlanet->getMiner() + 1;
             $cancelPlanet->setNiobium($cancelPlanet->getNiobium() + ($level * 225));
@@ -147,9 +135,8 @@ class BuildingController extends Controller
         }
         $cancelPlanet->setConstruct(null);
         $cancelPlanet->setConstructAt(null);
-        $em->persist($cancelPlanet);
         $em->flush();
 
-        return $this->redirectToRoute('overview', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('overview', ['idp' => $usePlanet->getId()]);
     }
 }

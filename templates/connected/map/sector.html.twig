@@ -51,7 +51,7 @@
                     <td class="special-cell"></td>
                     <td class="special-cell"></td>
                     <td class="special-cell">
-                        <span><a href="{{ path('map', {'id':topSector, 'idp': usePlanet.getId()}) }}"><span class="glyphicon glyphicon-chevron-up"></span></a></span>
+                        <span><a href="{{ path('map', {'id':topSector, 'idp': usePlanet.getId(), 'gal': gal}) }}"><span class="glyphicon glyphicon-chevron-up"></span></a></span>
                     </td>
                 </tr>
                     {% set x = 1 %}
@@ -64,11 +64,11 @@
                         {% endif %}
                         {% if planet.getPosition() == 11 %}
                             <td class="special-cell">
-                                <span><a href="{{ path('map', {'id':leftSector, 'idp': usePlanet.getId()}) }}"><span class="glyphicon glyphicon-chevron-left"></span></a></span>
+                                <span><a href="{{ path('map', {'id':leftSector, 'idp': usePlanet.getId(), 'gal': gal}) }}"><span class="glyphicon glyphicon-chevron-left"></span></a></span>
                             </td>
                         {% endif %}
                         {% if planet.getEmpty == false %}
-                            {% if app.user.getWhereRadar(id) > planet.getSkyBrouilleur() or planet.getUser() == app.user or (planet.getOurFleet(app.user) and planet.getSkyBrouilleur() == 0) or (planet.getPlanetAlliance() == app.user.getAlly() and app.user.getAlly()) %}
+                            {% if app.user.getWhereRadar(id, gal) > planet.getSkyBrouilleur() or planet.getUser() == app.user or (planet.getOurFleet(app.user) and planet.getSkyBrouilleur() == 0) or (planet.getPlanetAlliance() == app.user.getAlly() and app.user.getAlly()) %}
                                 <td class="center-cells pt-4">
                                     <div class="planet-position text-center">{{ planet.getPosition() }}</div>
                                     {% if planet.getNbrFleets() %}
@@ -91,7 +91,7 @@
                             {% else %}
                                 <td class="center-cells pt-4">
                                 <div class="planet-position text-center">{{ planet.getPosition() }}</div>
-                                    {% if planet.getSkyBrouilleur() and app.user.getWhereRadar(id) > 0 %}
+                                    {% if planet.getSkyBrouilleur() and app.user.getWhereRadar(id, gal) > 0 %}
                                         <span class="glyphicon glyphicon-cd" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.brouillage'|trans() }}"></span>
                                     {% endif %}
                                 <a {% if planet.getUser() == app.user %}href="{{ path('building', {'idp': planet.getId()}) }}"{% else %} data-toggle="modal" data-target="#planetModal" href="{{ path('planet_interact', {'idp': usePlanet.getId(), 'id': planet.getId()}) }}"{% endif %}><img class="mr-4 mb-4" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planet'|trans({'%name%': planet.getName() }) }}" height="64" width="64" src="{{ vich_uploader_asset(planet, 'imageFile') }}"></a>
@@ -99,7 +99,7 @@
                                 </td>
                             {% endif %}
                         {% else %}
-                            {% if app.user.getWhereRadar(id) or planet.getOurFleet(app.user) %}
+                            {% if app.user.getWhereRadar(id, gal) or planet.getOurFleet(app.user) %}
                                 <td class="center-cells">
                                     <div class="planet-position-empty text-center">{{ planet.getPosition() }}</div>
                                     {% if planet.getNbCdr() or planet.getWtCdr() %}
@@ -123,7 +123,7 @@
                         {% endif %}
                         {% if planet.getPosition() == 15 %}
                             <td class="special-cell">
-                                <span><a href="{{ path('map', {'id':rightSector, 'idp': usePlanet.getId()}) }}"><span class="glyphicon glyphicon-chevron-right"></span></a></span>
+                                <span><a href="{{ path('map', {'id':rightSector, 'idp': usePlanet.getId(), 'gal': gal}) }}"><span class="glyphicon glyphicon-chevron-right"></span></a></span>
                             </td>
                         {% else %}
                             <td class="special-cell"></td>
@@ -141,13 +141,13 @@
                     <td class="special-cell"></td>
                     <td class="special-cell"></td>
                     <td class="special-cell">
-                        <span><a href="{{ path('map', {'id':bottomSector, 'idp': usePlanet.getId()}) }}"><span class="glyphicon glyphicon-chevron-down"></span></a></span>
+                        <span><a href="{{ path('map', {'id':bottomSector, 'idp': usePlanet.getId(), 'gal': gal}) }}"><span class="glyphicon glyphicon-chevron-down"></span></a></span>
                     </td>
                 </tr>
                 </tbody>
             {% endif %}
         </table>
-    {% if app.user.getWhereRadar(id) %}
+    {% if app.user.getWhereRadar(id, gal) %}
         <div class="mt-5 sector-info">
             <div class="block-title"><h2>{{ 'map.current'|trans }} <span class="glyphicon glyphicon-question-sign text-orange text-middle" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.fleetHere'|trans }}"></span></h2></div>
             <table class="table table-striped table-bordered table-dark">
@@ -219,7 +219,7 @@
                             </th>
                             <td class="center-cells text-center">
                             {% if fleet.getPlanet() %}
-                                {% if app.user.getWhereRadar(fleet.getPlanet().getSector.getPosition()) or fleet.getUser() == app.user %}<span><a href="{{ path('map', {id: fleet.getPlanet().getSector.getPosition(), 'idp': usePlanet.getId()}) }}">{{ fleet.getPlanet().getName() }} - {{ fleet.getPlanet().getSector().getGalaxy.getPosition() }}:{{ fleet.getPlanet().getSector.getPosition() }}:{{ fleet.getPlanet().getPosition() }}</a></span>{% else %}???{% endif %}
+                                {% if app.user.getWhereRadar(fleet.getPlanet().getSector.getPosition(), gal) or fleet.getUser() == app.user %}<span><a href="{{ path('map', {id: fleet.getPlanet().getSector().getPosition(), 'idp': usePlanet.getId(), 'gal': fleet.getSector().getGalaxy().getId()}) }}">{{ fleet.getPlanet().getName() }} - {{ fleet.getPlanet().getSector().getGalaxy.getPosition() }}:{{ fleet.getPlanet().getSector.getPosition() }}:{{ fleet.getPlanet().getPosition() }}</a></span>{% else %}???{% endif %}
                             {% endif %}
                             </td>
                             <td class="tab-cells-name text-center">
@@ -266,7 +266,7 @@
                                 {{ fleet.getPlanet().getName() }} - {{ fleet.getPlanet().getSector().getGalaxy.getPosition() }}:{{ fleet.getPlanet().getSector.getPosition() }}:{{ fleet.getPlanet().getPosition() }}
                             </td>
                             <td class="tab-cells-name text-center">
-                                {% if app.user.getWhereRadar(fleet.getSector.getPosition()) or fleet.getUser() == app.user %}<span><a href="{{ path('map', {id: fleet.getSector().getPosition(), 'idp': usePlanet.getId()}) }}">{{ fleet.getSector().getGalaxy.getPosition() }}:{{ fleet.getSector.getPosition() }}:{{ fleet.getPlanete() }}</a></span>{% else %}???{% endif %}
+                                {% if app.user.getWhereRadar(fleet.getSector.getPosition(), gal) or fleet.getUser() == app.user %}<span><a href="{{ path('map', {id: fleet.getSector().getPosition(), 'idp': usePlanet.getId(), 'gal': fleet.getSector().getGalaxy().getId()}) }}">{{ fleet.getSector().getGalaxy.getPosition() }}:{{ fleet.getSector.getPosition() }}:{{ fleet.getPlanete() }}</a></span>{% else %}???{% endif %}
                             </td>
                             <td class="center-cells text-center">
                                 {{ fleet.getNbrSignatures()|number_format }}

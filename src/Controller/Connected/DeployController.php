@@ -21,23 +21,10 @@ class DeployController extends Controller
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $now->add(new DateInterval('PT' . 7200 . 'S'));
         $user = $this->getUser();
-
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
-
-        $fleet = $em->getRepository('App:Fleet')
-            ->createQueryBuilder('f')
-            ->where('f.id = :id')
-            ->setParameters(array('id' => $fleet))
-            ->getQuery()
-            ->getOneOrNullResult();
-
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        $fleet = $em->getRepository('App:Fleet')->find(['id' => $fleet]);
         $planet = $fleet->getPlanet();
+
         if($fleet->getRadarShip() && $planet->getEmpty() == true) {
             $fleet->setRadarShip($fleet->getRadarShip() - 1);
             if($planet->getSkyRadar()) {
@@ -48,15 +35,14 @@ class DeployController extends Controller
                 $planet->setSkyRadar(1);
                 $planet->setRadarAt($now);
             }
-            $em->persist($planet);
-            $em->persist($fleet);
+
             if($fleet->getNbrShips() == 0) {
                 $em->remove($fleet);
             }
             $em->flush();
         }
 
-        return $this->redirectToRoute('map', array('idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition()));
+        return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getId()]);
     }
     /**
      * @Route("/deployer-brouilleur/{idp}/{fleet}/", name="deploy_brouilleur", requirements={"idp"="\d+", "fleet"="\d+"})
@@ -68,23 +54,10 @@ class DeployController extends Controller
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $now->add(new DateInterval('PT' . 3600 . 'S'));
         $user = $this->getUser();
-
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
-
-        $fleet = $em->getRepository('App:Fleet')
-            ->createQueryBuilder('f')
-            ->where('f.id = :id')
-            ->setParameters(array('id' => $fleet))
-            ->getQuery()
-            ->getOneOrNullResult();
-
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
         $planet = $fleet->getPlanet();
+        $fleet = $em->getRepository('App:Fleet')->find(['id' => $fleet]);
+
         if($fleet->getBrouilleurShip() && $planet->getEmpty() == true) {
             $fleet->setBrouilleurShip($fleet->getBrouilleurShip() - 1);
             if($planet->getSkyBrouilleur()) {
@@ -95,15 +68,14 @@ class DeployController extends Controller
                 $planet->setSkyBrouilleur(1);
                 $planet->setBrouilleurAt($now);
             }
-            $em->persist($planet);
-            $em->persist($fleet);
+
             if($fleet->getNbrShips() == 0) {
                 $em->remove($fleet);
             }
             $em->flush();
         }
 
-        return $this->redirectToRoute('map', array('idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition()));
+        return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getId()]);
     }
     /**
      * @Route("/deployer-lunar/{idp}/{fleet}/", name="deploy_moonMaker", requirements={"idp"="\d+", "fleet"="\d+"})
@@ -114,23 +86,10 @@ class DeployController extends Controller
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
-
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
-
-        $fleet = $em->getRepository('App:Fleet')
-            ->createQueryBuilder('f')
-            ->where('f.id = :id')
-            ->setParameters(array('id' => $fleet))
-            ->getQuery()
-            ->getOneOrNullResult();
-
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        $fleet = $em->getRepository('App:Fleet')->find(['id' => $fleet]);
         $planet = $fleet->getPlanet();
+
         if($fleet->getMoonMaker() && $planet->getEmpty() == true &&
             $planet->getNbCdr() > 10000000 && $planet->getWtCdr() > 10000000) {
             $fleet->setMoonMaker($fleet->getMoonMaker() - 1);
@@ -166,14 +125,13 @@ class DeployController extends Controller
             }
             $planet->setNbCdr(0);
             $planet->setWtCdr(0);
-            $em->persist($planet);
-            $em->persist($fleet);
+
             if($fleet->getNbrShips() == 0) {
                 $em->remove($fleet);
             }
             $em->flush();
         }
 
-        return $this->redirectToRoute('map', array('idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition()));
+        return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getId()]);
     }
 }

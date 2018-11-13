@@ -29,18 +29,12 @@ class OverviewController extends Controller
             return $this->redirectToRoute('game_over');
         }
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $allPlanets = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->where('p.user = :user')
-            ->setParameters(array('user' => $this->getUser()))
+            ->setParameters(['user' => $this->getUser()])
             ->orderBy('p.id')
             ->getQuery()
             ->getResult();
@@ -55,7 +49,7 @@ class OverviewController extends Controller
                 ->andWhere('f.planete = :planete')
                 ->andWhere('s.position = :sector')
                 ->andWhere('g.position = :galaxy')
-                ->setParameters(array('user' => $user, 'planete' => $planet->getPosition(), 'sector' => $planet->getSector()->getPosition(), 'galaxy' =>$planet->getSector()->getGalaxy()->getPosition()))
+                ->setParameters(['user' => $user, 'planete' => $planet->getPosition(), 'sector' => $planet->getSector()->getPosition(), 'galaxy' =>$planet->getSector()->getGalaxy()->getPosition()])
                 ->orderBy('f.flightTime')
                 ->getQuery()
                 ->getResult();
@@ -86,7 +80,7 @@ class OverviewController extends Controller
     }
 
     /**
-     * @Route("/dans-le-cul-lulu/", name="game_over")
+     * @Route("/game-over/", name="game_over")
      */
     public function gameOverAction()
     {
@@ -95,7 +89,7 @@ class OverviewController extends Controller
         if($user->getGameOver() || $user->getAllPlanets() == 0) {
             if($user->getColPlanets() == 0 && $user->getGameOver() == null) {
                 $user->setGameOver($user->getUserName());
-                $em->persist($user);
+
                 $em->flush();
             }
             if($user->getRank()) {
@@ -133,14 +127,13 @@ class OverviewController extends Controller
                 $salon = $em->getRepository('App:Salon')
                     ->createQueryBuilder('s')
                     ->where('s.name = :name')
-                    ->setParameters(array('name' => 'Public'))
+                    ->setParameters(['name' => 'Public'])
                     ->getQuery()
                     ->getOneOrNullResult();
 
                 $salon->removeUser($user);
-                $em->persist($salon);
                 $user->setSalons(null);
-                $em->persist($user);
+
                 $em->flush();
             }
             return $this->render('connected/game_over.html.twig', [

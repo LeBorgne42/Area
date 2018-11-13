@@ -56,7 +56,7 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\Column(name="allyBan",type="datetime", nullable=true)
      */
-    protected $allyBan;
+    protected $allyBan = null;
 
     /**
      * @ORM\OneToMany(targetEntity="Proposal", mappedBy="user", fetch="EXTRA_LAZY")
@@ -66,7 +66,7 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\Column(name="joinAllyAt",type="datetime", nullable=true)
      */
-    protected $joinAllyAt;
+    protected $joinAllyAt = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Grade", inversedBy="users", fetch="EXTRA_LAZY")
@@ -138,6 +138,12 @@ class User implements UserInterface, \Serializable
      * @Assert\NotBlank(message = "required")
      */
     protected $viewReport = true;
+
+    /**
+     * @ORM\Column(name="tutorial",type="boolean")
+     * @Assert\NotBlank(message = "required")
+     */
+    protected $tutorial = true;
 
     /**
      * @ORM\OneToMany(targetEntity="Fleet", mappedBy="user", fetch="EXTRA_LAZY")
@@ -238,17 +244,17 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\Column(name="searchAt",type="datetime", nullable=true)
      */
-    protected $searchAt;
+    protected $searchAt = null;
 
     /**
      * @ORM\Column(name="search",type="string", nullable=true)
      */
-    protected $search;
+    protected $search = null;
 
     /**
      * @ORM\Column(name="created_at",type="datetime")
      */
-    protected $createdAt = 0;
+    protected $createdAt = null;
 
     /**
      * @ORM\Column(name="lastActivity",type="datetime", nullable=true)
@@ -303,6 +309,7 @@ class User implements UserInterface, \Serializable
         $this->messages = new \Doctrine\Common\Collections\ArrayCollection();
         $this->reports = new \Doctrine\Common\Collections\ArrayCollection();
         $this->fleets = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->scientistProduction = 1;
     }
 
     /**
@@ -318,7 +325,7 @@ class User implements UserInterface, \Serializable
                 ->orderBy(array('nbColo' => 'ASC'));
         } else {
         $criteria = Criteria::create()
-            ->orderBy(array('id' => 'ASC'));
+            ->orderBy(['id' => 'ASC']);
         }
 
         return $this->planets->matching($criteria);
@@ -781,12 +788,12 @@ class User implements UserInterface, \Serializable
     /**
      * @return mixed
      */
-    public function getWhereRadar($sector)
+    public function getWhereRadar($sector, $gal)
     {
         $return = null;
 
         foreach($this->getPlanets() as $planet) {
-            if ($planet->getSector()->getPosition() == $sector) {
+            if ($planet->getSector()->getPosition() == $sector && $planet->getSector()->getGalaxy()->getId() == $gal) {
                 $radar = $planet->getRadar() + $planet->getSkyRadar();
                 if($radar > $return || $return == null) {
                     $return = $radar;
@@ -1634,6 +1641,22 @@ class User implements UserInterface, \Serializable
     public function setOrderPlanet($orderPlanet): void
     {
         $this->orderPlanet = $orderPlanet;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTutorial()
+    {
+        return $this->tutorial;
+    }
+
+    /**
+     * @param mixed $tutorial
+     */
+    public function setTutorial($tutorial): void
+    {
+        $this->tutorial = $tutorial;
     }
 
     /**

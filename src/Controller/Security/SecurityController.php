@@ -29,7 +29,7 @@ class SecurityController extends Controller
                 ->createQueryBuilder('u')
                 ->where('u.username = :username')
                 ->orWhere('u.email = :email')
-                ->setParameters(array('username' => $_POST['_username'], 'email' => $_POST['_email']))
+                ->setParameters(['username' => $_POST['_username'], 'email' => $_POST['_email']])
                 ->setMaxResults(1)
                 ->getQuery()
                 ->getResult();
@@ -60,10 +60,10 @@ class SecurityController extends Controller
                 ->setBody(
                     $this->renderView(
                         'emails/registration.html.twig',
-                        array(
+                        [
                             'password' => $_POST['_password'],
                             'username' => $user->getUsername(),
-                            )
+                        ]
                     ),
                     'text/html'
                 );
@@ -86,7 +86,7 @@ class SecurityController extends Controller
             $event = new InteractiveLoginEvent($request, $token);
             $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
 
-            return $this->redirectToRoute('overview', array('idp' => $planet->getId()));*/
+            return $this->redirectToRoute('overview', ['idp' => $planet->getId()]);*/
         }
         return $this->render('security/register.html.twig');
     }
@@ -112,7 +112,6 @@ class SecurityController extends Controller
                 $alpha = ['a', '8', 'c', '&', 'e', 'f', 'g', '5', 'i', '-', 'k', 'l', '(', 'n', 'o', 'M', 'A', 'F', ':', 'w', 'Z'];
                 $newPassword = $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)];
                 $userPw->setPassword(password_hash($newPassword, PASSWORD_BCRYPT));
-                $em->persist($userPw);
                 $em->flush();
 
                 $message = (new \Swift_Message('Hello Email'))
@@ -121,7 +120,7 @@ class SecurityController extends Controller
                     ->setBody(
                         $this->renderView(
                             'emails/recoveryPw.html.twig',
-                            array('password' => $newPassword)
+                            ['password' => $newPassword]
                         ),
                         'text/html'
                     );
@@ -145,25 +144,30 @@ class SecurityController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
+        $server = $em->getRepository('App:Server')->find(['id' => 1]);
+
+        if($server->getOpen() == false) {
+        return $this->redirectToRoute('logout');
+        }
 
         if($user) {
             if($user->getGameOver()) {
                 return $this->redirectToRoute('game_over');
             }
 
-            $usePlanet = $em->getRepository('App:Planet')
-                ->createQueryBuilder('p')
-                ->join('p.user', 'u')
-                ->where('u.username = :user')
-                ->setParameters(array('user' => $user->getUsername()))
-                ->getQuery()
-                ->setMaxResults(1)
-                ->getOneOrNullResult();
+            $usePlanet = $em->getRepository('App:Planet')->findByFirstPlanet($user->getUsername());
 
             if($usePlanet) {
-                return $this->redirectToRoute('overview', array('idp' => $usePlanet->getId(), 'usePlanet' => $usePlanet));
+                return $this->redirectToRoute('overview', ['idp' => $usePlanet->getId(), 'usePlanet' => $usePlanet]);
             } else {
+                $galaxys = $em->getRepository('App:Galaxy')
+                    ->createQueryBuilder('g')
+                    ->orderBy('g.position', 'ASC')
+                    ->getQuery()
+                    ->getResult();
+
                 return $this->render('connected/play.html.twig', [
+                    'galaxys' => $galaxys
                 ]);
             }
         }
@@ -172,10 +176,10 @@ class SecurityController extends Controller
 
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('security/login.html.twig', array(
+        return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername,
             'error'         => $error,
-        ));
+        ]);
     }
 
     /**
@@ -196,7 +200,6 @@ class SecurityController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $user->setLastActivity(null);
-        $em->persist($user);
         $em->flush();
         return $this->redirectToRoute('logout');
     }
@@ -209,31 +212,30 @@ class SecurityController extends Controller
     {
         if ($this->getUser()->getRoles()[0] == 'ROLE_USER') {
             $user = $this->getUser();
-            $em = $this->getDoctrine()->getManager();$now = new DateTime();
+            $em = $this->getDoctrine()->getManager();
+            $now = new DateTime();
             $now->setTimezone(new DateTimeZone('Europe/Paris'));
 
             if($user->getGameOver()) {
                 return $this->redirectToRoute('game_over');
             }
-
-            $usePlanet = $em->getRepository('App:Planet')
-                ->createQueryBuilder('p')
-                ->join('p.user', 'u')
-                ->where('u.username = :user')
-                ->setParameters(array('user' => $this->getUser()->getUsername()))
-                ->getQuery()
-                ->setMaxResults(1)
-                ->getOneOrNullResult();
+            $usePlanet = $em->getRepository('App:Planet')->findByFirstPlanet($this->getUser()->getUsername());
 
             $user->setIpAddress($_SERVER['REMOTE_ADDR']);
             $user->setLastActivity($now);
-            $em->persist($user);
             $em->flush();
 
             if($usePlanet) {
-                return $this->redirectToRoute('overview', array('idp' => $usePlanet->getId(), 'usePlanet' => $usePlanet));
+                return $this->redirectToRoute('overview', ['idp' => $usePlanet->getId(), 'usePlanet' => $usePlanet]);
             } else {
+                $galaxys = $em->getRepository('App:Galaxy')
+                    ->createQueryBuilder('g')
+                    ->orderBy('g.position', 'ASC')
+                    ->getQuery()
+                    ->getResult();
+
                 return $this->render('connected/play.html.twig', [
+                    'galaxys' => $galaxys
                 ]);
             }
         }
@@ -252,12 +254,7 @@ class SecurityController extends Controller
         exit;
         $userId = decrypt($key);
         $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository('App:User')
-            ->createQueryBuilder('u')
-            ->where('u.id = :id')
-            ->setParameter('id', $userId)
-            ->getQuery()
-            ->getOneOrNullResult();
+        $user = $em->getRepository('App:User')->find(['id' => $userId]);
 
         $token = new UsernamePasswordToken(
             $user->getUsername(),

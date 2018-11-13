@@ -28,7 +28,7 @@ class ArmementController extends Controller
             ->createQueryBuilder('p')
             ->where('p.id = :id')
             ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->setParameters(['id' => $idp, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -36,16 +36,15 @@ class ArmementController extends Controller
         $userBt = $user->getBitcoin();
         if(($userBt < ($level * 2000)) ||
             ($level == 6 || $user->getSearchAt() > $now)) {
-            return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
         }
         $now->add(new DateInterval('PT' . round(($level * 3700 / $user->getScientistProduction())) . 'S'));
         $user->setSearch('armement');
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - ($level * 2000));
-        $em->persist($user);
         $em->flush();
 
-        return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -61,7 +60,7 @@ class ArmementController extends Controller
             ->createQueryBuilder('p')
             ->where('p.id = :id')
             ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->setParameters(['id' => $idp, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -69,16 +68,15 @@ class ArmementController extends Controller
         $userBt = $user->getBitcoin();
         if(($userBt < ($level * 2600) || $user->getArmement() < 0) ||
             ($level == 4 || $user->getSearchAt() > $now)) {
-            return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
         }
         $now->add(new DateInterval('PT' . round(($level * 4500 / $user->getScientistProduction())) . 'S'));
         $user->setSearch('missile');
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - ($level * 2600));
-        $em->persist($user);
         $em->flush();
 
-        return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -94,7 +92,7 @@ class ArmementController extends Controller
             ->createQueryBuilder('p')
             ->where('p.id = :id')
             ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->setParameters(['id' => $idp, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -102,16 +100,15 @@ class ArmementController extends Controller
         $userBt = $user->getBitcoin();
         if(($userBt < ($level * 13000) || $user->getArmement() < 2) ||
             ($level == 4 || $user->getSearchAt() > $now)) {
-            return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
         }
         $now->add(new DateInterval('PT' . round(($level * 18000 / $user->getScientistProduction())) . 'S'));
         $user->setSearch('laser');
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - ($level * 13000));
-        $em->persist($user);
         $em->flush();
 
-        return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -127,22 +124,21 @@ class ArmementController extends Controller
             ->createQueryBuilder('p')
             ->where('p.id = :id')
             ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->setParameters(['id' => $idp, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
         $level = $user->getPlasma() + 1;
         $userBt = $user->getBitcoin();
         if(($userBt < ($level * 29000) || $user->getArmement() < 4) ||
             ($level == 4 || $user->getSearchAt() > $now)) {
-            return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
         }
         $now->add(new DateInterval('PT' . round(($level * 46800 / $user->getScientistProduction())) . 'S'));
         $user->setSearch('plasma');
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - ($level * 29000));
-        $em->persist($user);
         $em->flush();
 
-        return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
     }
 }

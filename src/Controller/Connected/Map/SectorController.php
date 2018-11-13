@@ -19,17 +19,19 @@ use DateInterval;
 class SectorController extends Controller
 {
     /**
-     * @Route("/carte-spatiale/{id}/{idp}", name="map", requirements={"id"="\d+", "idp"="\d+"})
+     * @Route("/carte-spatiale/{id}/{gal}/{idp}", name="map", requirements={"id"="\d+", "idp"="\d+", "gal"="\d+"})
      */
-    public function mapAction($id, $idp)
+    public function mapAction($id, $idp, $gal)
     {
         $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
+        $sectorId = $em->getRepository('App:Sector')
+            ->createQueryBuilder('s')
+            ->where('s.position = :id')
+            ->andWhere('s.galaxy = :gal')
+            ->setParameters(['id' => $id, 'gal' => $gal])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -37,7 +39,8 @@ class SectorController extends Controller
             ->createQueryBuilder('p')
             ->join('p.sector', 's')
             ->where('s.position = :id')
-            ->setParameter('id', $id)
+            ->andWhere('s.galaxy = :gal')
+            ->setParameters(['id' => $id, 'gal' => $gal])
             ->orderBy('p.position')
             ->getQuery()
             ->getResult();
@@ -47,9 +50,9 @@ class SectorController extends Controller
             ->leftJoin('f.planet', 'p')
             ->join('p.sector', 'ps')
             ->leftJoin('f.sector', 'fs')
-            ->where('fs.position = :id')
-            ->andWhere('ps.position != :id OR f.planet is null')
-            ->setParameters(array('id' => $id))
+            ->where('fs.id = :sec')
+            ->andWhere('fs.galaxy = :gal')
+            ->setParameters(['gal' => $gal, 'sec' => $sectorId->getId()])
             ->orderBy('f.flightTime')
             ->getQuery()
             ->getResult();
@@ -59,9 +62,10 @@ class SectorController extends Controller
             ->join('f.planet', 'p')
             ->join('p.sector', 'ps')
             ->join('f.sector', 'fs')
-            ->where('fs.position != :id')
+            ->where('fs.id != :sec')
             ->andWhere('ps.position = :id')
-            ->setParameters(array('id' => $id))
+            ->andWhere('ps.galaxy = :gal')
+            ->setParameters(['id' => $id, 'gal' => $gal, 'sec' => $sectorId->getId()])
             ->orderBy('f.flightTime')
             ->getQuery()
             ->getResult();
@@ -73,15 +77,24 @@ class SectorController extends Controller
             ->join('f.sector', 'fs')
             ->where('ps.position = :id')
             ->andWhere('fs.position = :id')
-            ->setParameters(array('id' => $id))
+            ->andWhere('fs.galaxy = :gal')
+            ->andWhere('ps.galaxy = :gal')
+            ->setParameters(['id' => $id, 'gal' => $gal])
             ->orderBy('f.flightTime')
             ->getQuery()
             ->getResult();
+
+        foreach ($planets as $planet) {
+            $id = $planet->getSector()->getPosition();
+            $gal = $planet->getSector()->getGalaxy()->getPosition();
+            break;
+        }
 
         return $this->render('connected/map/sector.html.twig', [
             'planets' => $planets,
             'usePlanet' => $usePlanet,
             'id' => $id,
+            'gal' => $gal,
             'fleetIn' => $fleetIn,
             'fleetOut' => $fleetOut,
             'fleetCurrent' => $fleetCurrent,
@@ -94,21 +107,15 @@ class SectorController extends Controller
     public function fleetAction($id, $idp)
     {
         $em = $this->getDoctrine()->getManager();
-
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $user = $this->getUser();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $fleets = $em->getRepository('App:Fleet')
             ->createQueryBuilder('f')
             ->join('f.planet', 'p')
             ->where('p.id = :id')
             ->andWhere('f.flightTime is null')
-            ->setParameters(array('id' => $id))
+            ->setParameters(['id' => $id])
             ->getQuery()
             ->getResult();
 
@@ -128,46 +135,46 @@ class SectorController extends Controller
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        $planet = $em->getRepository('App:Planet')->find(['id' => $id]);
 
-        $planet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->setParameters(array('id' => $id))
-            ->getQuery()
-            ->getOneOrNullResult();
-
-        $form_sendFleet = $this->createForm(InteractFleetType::class, null, array("user" => $user->getId()));
+        $form_sendFleet = $this->createForm(InteractFleetType::class, null, ["user" => $user->getId()]);
         $form_sendFleet->handleRequest($request);
 
         if($planet && $usePlanet) {
         } else {
-            return $this->redirectToRoute('map', array('idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition()));
+            return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getId()]);
         }
         if ($form_sendFleet->isSubmitted() && $form_sendFleet->isValid()) {
             $fleet = $form_sendFleet->get('list')->getData();
             $sFleet= $fleet->getPlanet()->getSector()->getPosition();
             $sector = $planet->getSector()->getPosition();
             $planete = $planet->getPosition();
-            if ($sFleet == $sector) {
-                $pFleet = $fleet->getPlanet()->getPosition();
-                if (strpos('0 -1 1 -4 4 -5 5 6 -6', (strval($pFleet - $planete)) ) != false) {
-                    $base = 1500;
-                    $price = 0.7;
-                } elseif (strpos('2 -2 3 -3 7 -7 8 -8 9 -9 10 -10 11 -11 12 -12', (strval($pFleet - $planete)) ) != false) {
-                    $base = 1750;
-                    $price = 0.9;
+            if($user->getHyperespace() == 1) {
+                $galaxy = $planet->getSector()->getGalaxy()->getPosition();
+            }
+            if($fleet->getPlanet()->getSector()->getGalaxy()->getPosition() != $galaxy) {
+                $base = 100000;
+                $price = 50;
+            } else {
+                if ($sFleet == $sector) {
+                    $pFleet = $fleet->getPlanet()->getPosition();
+                    if (strpos('0 -1 1 -4 4 -5 5 6 -6', (strval($pFleet - $planete))) != false) {
+                        $base = 1500;
+                        $price = 0.7;
+                    } elseif (strpos('2 -2 3 -3 7 -7 8 -8 9 -9 10 -10 11 -11 12 -12', (strval($pFleet - $planete))) != false) {
+                        $base = 1750;
+                        $price = 0.9;
+                    } else {
+                        $base = 2000;
+                        $price = 1;
+                    }
                 } else {
-                    $base = 2000;
-                    $price = 1;
+                    $base = 3000;
+                    $price = 3;
                 }
-            } elseif (strpos('0 -1 1 -10 10 -9 9', (strval($sFleet - $sector)) ) != false) {
+            }
+            /*elseif (strpos('0 -1 1 -10 10 -9 9', (strval($sFleet - $sector)) ) != false) {
                 $base = 3000;
                 $price = 1.5;
             } elseif (strpos('-20 20 12 11 8 2 -12 -11 -8 -2', (strval($sFleet - $sector)) ) != false) {
@@ -179,10 +186,10 @@ class SectorController extends Controller
             } else {
                 $base = 12000;
                 $price = 6;
-            }
+            }*/
             $carburant = round($price * ($fleet->getNbrSignatures() / 200));
             if($carburant > $user->getBitcoin()) {
-                return $this->redirectToRoute('map', array('idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition()));
+                return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getId(), 'gal' => $planet->getSector()->getGalaxy()->getId()]);
             }
             $now->add(new DateInterval('PT' . round($fleet->getSpeed() * $base) . 'S'));
             $fleet->setRecycleAt(null);
@@ -192,10 +199,9 @@ class SectorController extends Controller
             $fleet->setPlanete($planete);
             $fleet->setFlightType($form_sendFleet->get('flightType')->getData());
             $user->setBitcoin($user->getBitcoin() - $carburant);
-            $em->persist($fleet);
-            $em->persist($user);
+
             $em->flush();
-            return $this->redirectToRoute('map', array('idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition()));
+            return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getId()]);
         }
 
         return $this->render('connected/map/interact.html.twig', [
@@ -215,47 +221,47 @@ class SectorController extends Controller
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
-
-        $planet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->setParameters(array('id' => $id))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        $planet = $em->getRepository('App:Planet')->find(['id' => $id]);
 
         $fPlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->andWhere('p.user = :user')
             ->andwhere('p.sonde > :zero')
-            ->setParameters(array('user' => $user, 'zero' => 0))
+            ->setParameters(['user' => $user, 'zero' => 0])
             ->getQuery()
             ->setMaxResults(1)
             ->getOneOrNullResult();
 
         if($fPlanet == null) {
-            return $this->redirectToRoute('map', array('idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition()));
+            return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getId()]);
         }
         $sFleet= $fPlanet->getSector()->getPosition();
         $sector = $planet->getSector()->getPosition();
         $planete = $planet->getPosition();
-        if ($sFleet == $sector) {
-            $pFleet = $fPlanet->getPosition();
-            if (strpos('0 -1 1 -4 4 -5 5 6 -6', (strval($pFleet - $planete)) ) != false) {
-                $base = 1500;
-            } elseif (strpos('2 -2 3 -3 7 -7 8 -8 9 -9 10 -10 11 -11 12 -12', (strval($pFleet - $planete)) ) != false) {
-                $base = 1750;
-            } else {
-                $base = 2000;
-            }
+        if($user->getHyperespace() == 1) {
+            $galaxy = $planet->getSector()->getGalaxy()->getPosition();
+        }
+        if($fPlanet->getSector()->getGalaxy()->getPosition() != $galaxy) {
+            $base = 100000;
+            $price = 50;
         } else {
-            $base = 3000;
+            if ($sFleet == $sector) {
+                $pFleet = $fPlanet->getPosition();
+                if (strpos('0 -1 1 -4 4 -5 5 6 -6', (strval($pFleet - $planete))) != false) {
+                    $base = 1500;
+                    $price = 0.7;
+                } elseif (strpos('2 -2 3 -3 7 -7 8 -8 9 -9 10 -10 11 -11 12 -12', (strval($pFleet - $planete))) != false) {
+                    $base = 1750;
+                    $price = 0.9;
+                } else {
+                    $base = 2000;
+                    $price = 1;
+                }
+            } else {
+                $base = 3000;
+                $price = 3;
+            }
         }
         /*elseif (strpos('0 -1 1 -10 10 -9 9', (strval($sFleet - $sector)) ) != false) {
             $base = 3000;
@@ -266,8 +272,9 @@ class SectorController extends Controller
         } else {
             $base = 12000;
         }*/
+        $carburant = round($price * ($fPlanet->getNbrSignatures() / 200));
         if(1 > $user->getBitcoin()) {
-            return $this->redirectToRoute('map', array('idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition()));
+            return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getId()]);
         }
         $fleet = new Fleet();
         $fleet->setSonde(1);
@@ -281,11 +288,10 @@ class SectorController extends Controller
         $fleet->setSector($planet->getSector());
         $fleet->setPlanete($planete);
         $fleet->setFlightType(1);
-        $user->setBitcoin($user->getBitcoin() - 1);
+        $user->setBitcoin($user->getBitcoin() - $carburant);
         $em->persist($fleet);
-        $em->persist($user);
-        $em->persist($fPlanet);
+
         $em->flush();
-        return $this->redirectToRoute('map', array('idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition()));
+        return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getId()]);
     }
 }

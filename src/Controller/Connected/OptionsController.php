@@ -26,13 +26,7 @@ class OptionsController extends Controller
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $form_password = $this->createForm(ModifPasswordType::class);
         $form_password->handleRequest($request);
@@ -46,7 +40,7 @@ class OptionsController extends Controller
             if($form_password->get('planetOrder')->getData()) {
                 $user->setOrderPlanet($form_password->get('planetOrder')->getData());
             }
-            $em->persist($user);
+
             $em->flush();
         }
 

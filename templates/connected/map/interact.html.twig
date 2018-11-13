@@ -59,7 +59,7 @@
                     </td>
                 </tr>
             {% endif %}#}
-            {% if planet.getUser() and (app.user.getWhereRadar(planet.getSector().getPosition()) or planet.getOurFleet(app.user)) %}
+            {% if planet.getUser() and (app.user.getWhereRadar(planet.getSector().getPosition(), planet.getSector().getGalaxy().getId()) or planet.getOurFleet(app.user)) %}
                 <tr>
                     <td colspan="3" class="center-cells">
                         <span><a data-toggle="modal" data-target="#userpModal" href="{{ path('user_profil_modal', {'idp': usePlanet.getId(), 'id': planet.getUser().getId()}) }}">{{ 'interact.seeProfil'|trans }} {{ planet.getUser().getUserName() }}</a></span>

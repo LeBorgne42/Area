@@ -28,7 +28,7 @@ class InformationController extends Controller
             ->createQueryBuilder('p')
             ->where('p.id = :id')
             ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->setParameters(['id' => $idp, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -40,7 +40,7 @@ class InformationController extends Controller
         if(($usePlanetNb < ($level * 1200) || $usePlanetWt < ($level * 650)) ||
             ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround()) ||
             $user->getOnde() == 0) {
-            return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
 
         $now->add(new DateInterval('PT' . ($level * 3600) . 'S'));
@@ -49,10 +49,9 @@ class InformationController extends Controller
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setConstruct('radar');
         $usePlanet->setConstructAt($now);
-        $em->persist($usePlanet);
         $em->flush();
 
-        return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -69,7 +68,7 @@ class InformationController extends Controller
             ->createQueryBuilder('p')
             ->where('p.id = :id')
             ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->setParameters(['id' => $idp, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -77,17 +76,16 @@ class InformationController extends Controller
         $newGround = $usePlanet->getGroundPlace() - 2;
 
         if($level == 0 || $usePlanet->getConstructAt() > $now) {
-            return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
         $now->add(new DateInterval('PT' . 1800 . 'S'));
         $usePlanet->setRadar($level - 1);
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setConstruct('destruct');
         $usePlanet->setConstructAt($now);
-        $em->persist($usePlanet);
         $em->flush();
 
-        return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -103,7 +101,7 @@ class InformationController extends Controller
             ->createQueryBuilder('p')
             ->where('p.id = :id')
             ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->setParameters(['id' => $idp, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -115,7 +113,7 @@ class InformationController extends Controller
         if(($usePlanetNb < ($level * 20000) || $usePlanetWt < ($level * 17200)) ||
             ($usePlanet->getConstructAt() > $now || $newSky > $usePlanet->getSky()) ||
             $user->getOnde() < 3) {
-            return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
 
         $now->add(new DateInterval('PT' . ($level * 14400) . 'S'));
@@ -124,10 +122,9 @@ class InformationController extends Controller
         $usePlanet->setSkyPlace($newSky);
         $usePlanet->setConstruct('skyRadar');
         $usePlanet->setConstructAt($now);
-        $em->persist($usePlanet);
         $em->flush();
 
-        return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -144,7 +141,7 @@ class InformationController extends Controller
             ->createQueryBuilder('p')
             ->where('p.id = :id')
             ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->setParameters(['id' => $idp, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -152,17 +149,16 @@ class InformationController extends Controller
         $newSky = $usePlanet->getSkyPlace() - 2;
 
         if($level == 0 || $usePlanet->getConstructAt() > $now) {
-            return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
         $now->add(new DateInterval('PT' . 1800 . 'S'));
         $usePlanet->setSkyRadar($level - 1);
         $usePlanet->setSkyPlace($newSky);
         $usePlanet->setConstruct('destruct');
         $usePlanet->setConstructAt($now);
-        $em->persist($usePlanet);
         $em->flush();
 
-        return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -178,7 +174,7 @@ class InformationController extends Controller
             ->createQueryBuilder('p')
             ->where('p.id = :id')
             ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->setParameters(['id' => $idp, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -190,7 +186,7 @@ class InformationController extends Controller
         if(($usePlanetNb < ($level * 51000) || $usePlanetWt < ($level * 32100)) ||
             ($usePlanet->getConstructAt() > $now || $newSky > $usePlanet->getSky()) ||
             $user->getOnde() < 5) {
-            return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
 
         $now->add(new DateInterval('PT' . ($level * 32400) . 'S'));
@@ -199,10 +195,9 @@ class InformationController extends Controller
         $usePlanet->setSkyPlace($newSky);
         $usePlanet->setConstruct('skyBrouilleur');
         $usePlanet->setConstructAt($now);
-        $em->persist($usePlanet);
         $em->flush();
 
-        return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -219,7 +214,7 @@ class InformationController extends Controller
             ->createQueryBuilder('p')
             ->where('p.id = :id')
             ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->setParameters(['id' => $idp, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -227,16 +222,15 @@ class InformationController extends Controller
         $newSky = $usePlanet->getSkyPlace() - 4;
 
         if($level == 0 || $usePlanet->getConstructAt() > $now) {
-            return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
         $now->add(new DateInterval('PT' . 1800 . 'S'));
         $usePlanet->setSkyBrouilleur($level - 1);
         $usePlanet->setSkyPlace($newSky);
         $usePlanet->setConstruct('destruct');
         $usePlanet->setConstructAt($now);
-        $em->persist($usePlanet);
         $em->flush();
 
-        return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
     }
 }

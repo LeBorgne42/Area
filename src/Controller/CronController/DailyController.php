@@ -11,7 +11,7 @@ use App\Entity\Report;
 class DailyController extends Controller
 {
     /**
-     * @Route("/dailyPlop/", name="daily_load")
+     * @Route("/dailyReport/", name="daily_load")
      */
     public function dailyLoadAction()
     {
@@ -23,7 +23,7 @@ class DailyController extends Controller
             ->createQueryBuilder('u')
             ->join('u.rank', 'r')
             ->where('u.id != :one')
-            ->setParameters(array('one' => 1))
+            ->setParameters(['one' => 1])
             ->orderBy('r.point', 'DESC')
             ->getQuery()
             ->getResult();
@@ -68,9 +68,6 @@ class DailyController extends Controller
                             }
                             $user->setBitcoin($user->getBitcoin() - $lose);
                             $otherAlly->setBitcoin($otherAlly->getBitcoin() + $lose);
-                            $em->persist($otherAlly);
-                            $em->persist($user);
-                            $em->flush();
                         }
                     }
                 }
@@ -81,7 +78,6 @@ class DailyController extends Controller
                 $allyBitcoin = $ally->getBitcoin();
                 $allyBitcoin = $allyBitcoin + $taxe;
                 $ally->setBitcoin($allyBitcoin);
-                $em->persist($ally);
             }
             $soldier = $user->getAllSoldier();
             $ship = $user->getAllShipsCost();
@@ -98,16 +94,14 @@ class DailyController extends Controller
             $user->setViewReport(false);
 
             $em->persist($report);
-            $em->persist($user);
             $x++;
         }
-        $em->flush();
 
         $users = $em->getRepository('App:User')
             ->createQueryBuilder('u')
             ->join('u.rank', 'r')
             ->where('u.id != :one')
-            ->setParameters(array('one' => 1))
+            ->setParameters(['one' => 1])
             ->orderBy('r.point', 'DESC')
             ->getQuery()
             ->getResult();
@@ -116,17 +110,13 @@ class DailyController extends Controller
         foreach ($users as $user) {
             $user->getRank()->setOldPosition($user->getRank()->getPosition());
             $user->getRank()->setPosition($x);
-            $em->persist($user);
             $x++;
         }
 
-        $allys = $em->getRepository('App:Ally')
-            ->createQueryBuilder('a')
-            ->getQuery()
-            ->getResult();
+        $allys = $em->getRepository('App:Ally')->findAll();
+
         foreach ($allys as $ally) {
             $ally->setRank($ally->getUsersPoint());
-            $em->persist($ally);
         }
 
         $em->flush();

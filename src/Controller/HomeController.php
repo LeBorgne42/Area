@@ -16,45 +16,46 @@ class HomeController extends Controller
     public function index()
     {
         $em = $this->getDoctrine()->getManager();
-        $connected = new DateTime();
-        $connected->setTimezone(new DateTimeZone('Europe/Paris'));
-        $connected->sub(new DateInterval('PT' . 1800 . 'S'));
+        $lastActivity = new DateTime();
+        $lastActivity->setTimezone(new DateTimeZone('Europe/Paris'));
+        $lastActivity->sub(new DateInterval('PT' . 1800 . 'S'));
 
         if($this->getUser()) {
             $usePlanet = $em->getRepository('App:Planet')
                 ->createQueryBuilder('p')
                 ->join('p.user', 'u')
                 ->where('u.username = :user')
-                ->setParameters(array('user' => $this->getUser()->getUsername()))
+                ->setParameters(['user' => $this->getUser()->getUsername()])
                 ->getQuery()
                 ->setMaxResults(1)
                 ->getOneOrNullResult();
         } else {
-                $usePlanet = null;
+            $usePlanet = null;
         }
 
-        $allUsers = $em->getRepository('App:User')
+        $nbrUsers = $em->getRepository('App:User')
                         ->createQueryBuilder('u')
                         ->select('count(u)')
                         ->getQuery()
                         ->getSingleScalarResult();
 
-        $userCos = $em->getRepository('App:User')
+        $nbrUsersConnected = $em->getRepository('App:User')
             ->createQueryBuilder('u')
             ->where('u.lastActivity > :date')
-            ->setParameters(array('date' => $connected))
+            ->setParameters(['date' => $lastActivity])
+            ->select('count(u)')
             ->getQuery()
-            ->getResult();
+            ->getSingleScalarResult();
 
-        $userCos = count($userCos);
-        if(!$userCos) {
-            $userCos = 1;
+        $nbrUsersConnected = count($nbrUsersConnected);
+        if(!$nbrUsersConnected) {
+            $nbrUsersConnected = 1;
         }
 
         return $this->render('index.html.twig', [
-            'allUsers' => $allUsers,
+            'allUsers' => $nbrUsers,
             'usePlanet' => $usePlanet,
-            'userCos' => $userCos,
+            'userCos' => $nbrUsersConnected,
         ]);
     }
 }

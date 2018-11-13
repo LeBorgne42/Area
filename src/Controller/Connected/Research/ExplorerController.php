@@ -28,7 +28,7 @@ class ExplorerController extends Controller
             ->createQueryBuilder('p')
             ->where('p.id = :id')
             ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->setParameters(['id' => $idp, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -37,17 +37,16 @@ class ExplorerController extends Controller
 
         if(($userBt < ($level * 2300)) ||
             ($level == 6 || $user->getSearchAt() > $now)) {
-            return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
         }
 
         $now->add(new DateInterval('PT' . round(($level * 3000 / $user->getScientistProduction())) . 'S'));
         $user->setSearch('onde');
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - ($level * 2300));
-        $em->persist($user);
         $em->flush();
 
-        return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -63,7 +62,7 @@ class ExplorerController extends Controller
             ->createQueryBuilder('p')
             ->where('p.id = :id')
             ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->setParameters(['id' => $idp, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -72,17 +71,16 @@ class ExplorerController extends Controller
 
         if(($userBt < ($level * 12000) || $user->getUtility() == 0) ||
             ($level > 19 || $user->getSearchAt() > $now)) {
-            return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
         }
 
         $now->add(new DateInterval('PT' . round(($level * 36000) / $user->getScientistProduction()) . 'S'));
         $user->setSearch('terraformation');
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - ($level * 12000));
-        $em->persist($user);
         $em->flush();
 
-        return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -98,7 +96,7 @@ class ExplorerController extends Controller
             ->createQueryBuilder('p')
             ->where('p.id = :id')
             ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->setParameters(['id' => $idp, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -107,17 +105,16 @@ class ExplorerController extends Controller
 
         if(($userBt < ($level * 3500) || $user->getUtility() < 2) ||
             ($level == 6 || $user->getSearchAt() > $now)) {
-            return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
         }
 
         $now->add(new DateInterval('PT' . round(($level * 4000 / $user->getScientistProduction())) . 'S'));
         $user->setSearch('cargo');
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - ($level * 3500));
-        $em->persist($user);
         $em->flush();
 
-        return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -133,7 +130,7 @@ class ExplorerController extends Controller
             ->createQueryBuilder('p')
             ->where('p.id = :id')
             ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->setParameters(['id' => $idp, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -142,17 +139,16 @@ class ExplorerController extends Controller
 
         if(($userBt < 16900 || $user->getUtility() < 3) ||
             ($level == 1 || $user->getSearchAt() > $now)) {
-            return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
         }
 
         $now->add(new DateInterval('PT' . round(4000 / $user->getScientistProduction()) . 'S'));
         $user->setSearch('recycleur');
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - 16900);
-        $em->persist($user);
         $em->flush();
 
-        return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -168,7 +164,7 @@ class ExplorerController extends Controller
             ->createQueryBuilder('p')
             ->where('p.id = :id')
             ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->setParameters(['id' => $idp, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -177,17 +173,16 @@ class ExplorerController extends Controller
 
         if(($userBt < 35000 || $user->getUtility() < 3) ||
             ($level == 1 || $user->getSearchAt() > $now)) {
-            return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
         }
 
         $now->add(new DateInterval('PT' . round(28800 / $user->getScientistProduction()) . 'S'));
         $user->setSearch('barge');
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - 35000);
-        $em->persist($user);
         $em->flush();
 
-        return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -203,7 +198,7 @@ class ExplorerController extends Controller
             ->createQueryBuilder('p')
             ->where('p.id = :id')
             ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->setParameters(['id' => $idp, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -212,17 +207,16 @@ class ExplorerController extends Controller
 
         if(($userBt < ($level * 2500)) ||
             ($level == 4 || $user->getSearchAt() > $now)) {
-            return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
         }
 
         $now->add(new DateInterval('PT' . round(($level * 2000 / $user->getScientistProduction())) . 'S'));
         $user->setSearch('utility');
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - ($level * 2500));
-        $em->persist($user);
         $em->flush();
 
-        return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -238,7 +232,7 @@ class ExplorerController extends Controller
             ->createQueryBuilder('p')
             ->where('p.id = :id')
             ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->setParameters(['id' => $idp, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -247,16 +241,15 @@ class ExplorerController extends Controller
 
         if(($userBt < 25000000 || $user->getUtility() < 3) ||
             ($level == 1 || $user->getSearchAt() > $now)) {
-            return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
         }
 
         $now->add(new DateInterval('PT' . round(604800 / $user->getScientistProduction()) . 'S'));
         $user->setSearch('hyperespace');
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - 25000000);
-        $em->persist($user);
         $em->flush();
 
-        return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
     }
 }

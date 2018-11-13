@@ -24,13 +24,7 @@ class SpaceShipyardController extends Controller
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $level = $usePlanet->getSpaceShip() + 1;
         $usePlanetNb = $usePlanet->getNiobium();
@@ -41,7 +35,7 @@ class SpaceShipyardController extends Controller
         if(($usePlanetNb < ($level * 3000) || $usePlanetWt < ($level * 2000)) ||
             ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround()) ||
             ($user->getIndustry() == 0 || $newSky > $usePlanet->getSky())) {
-            return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
 
         $now->add(new DateInterval('PT' . ($level * 7000) . 'S'));
@@ -51,10 +45,9 @@ class SpaceShipyardController extends Controller
         $usePlanet->setSkyPlace($newSky);
         $usePlanet->setConstruct('spaceShip');
         $usePlanet->setConstructAt($now);
-        $em->persist($usePlanet);
         $em->flush();
 
-        return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -67,20 +60,14 @@ class SpaceShipyardController extends Controller
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $level = $usePlanet->getSpaceShip();
         $newGround = $usePlanet->getGroundPlace() - 10;
         $newSky = $usePlanet->getSkyPlace() - 4;
 
         if($level == 0 || $usePlanet->getConstructAt() > $now) {
-            return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
         $now->add(new DateInterval('PT' . 1800 . 'S'));
         $usePlanet->setSpaceShip($level - 1);
@@ -89,10 +76,9 @@ class SpaceShipyardController extends Controller
         $usePlanet->setSkyPlace($newSky);
         $usePlanet->setConstruct('destruct');
         $usePlanet->setConstructAt($now);
-        $em->persist($usePlanet);
         $em->flush();
 
-        return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -108,7 +94,7 @@ class SpaceShipyardController extends Controller
             ->createQueryBuilder('p')
             ->where('p.id = :id')
             ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->setParameters(['id' => $idp, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -120,7 +106,7 @@ class SpaceShipyardController extends Controller
         if(($usePlanetNb < ($level * 6000) || $usePlanetWt < ($level * 3900)) ||
             ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround()) ||
             ($user->getLightShip() == 0)) {
-            return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
 
         $now->add(new DateInterval('PT' . ($level * 21600) . 'S'));
@@ -129,10 +115,9 @@ class SpaceShipyardController extends Controller
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setConstruct('lightUsine');
         $usePlanet->setConstructAt($now);
-        $em->persist($usePlanet);
         $em->flush();
 
-        return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -149,7 +134,7 @@ class SpaceShipyardController extends Controller
             ->createQueryBuilder('p')
             ->where('p.id = :id')
             ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->setParameters(['id' => $idp, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -157,7 +142,7 @@ class SpaceShipyardController extends Controller
         $newGround = $usePlanet->getGroundPlace() - 6;
 
         if($level == 0 || $usePlanet->getConstructAt() > $now) {
-            return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
         $now->add(new DateInterval('PT' . 1800 . 'S'));
         $usePlanet->setLightUsine($level - 1);
@@ -165,10 +150,9 @@ class SpaceShipyardController extends Controller
         $usePlanet->setShipProduction($usePlanet->getShipProduction() - 0.15);
         $usePlanet->setConstruct('destruct');
         $usePlanet->setConstructAt($now);
-        $em->persist($usePlanet);
         $em->flush();
 
-        return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -184,7 +168,7 @@ class SpaceShipyardController extends Controller
             ->createQueryBuilder('p')
             ->where('p.id = :id')
             ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->setParameters(['id' => $idp, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -196,7 +180,7 @@ class SpaceShipyardController extends Controller
         if(($usePlanetNb < ($level * 83000) || $usePlanetWt < ($level * 68000)) ||
             ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround()) ||
             ($user->getHeavyShip() == 0)) {
-            return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
 
         $now->add(new DateInterval('PT' . ($level * 72000) . 'S'));
@@ -205,12 +189,11 @@ class SpaceShipyardController extends Controller
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setConstruct('heavyUsine');
         $usePlanet->setConstructAt($now);
-        $em->persist($usePlanet);
         $em->flush();
 
 
 
-        return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -227,7 +210,7 @@ class SpaceShipyardController extends Controller
             ->createQueryBuilder('p')
             ->where('p.id = :id')
             ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->setParameters(['id' => $idp, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -235,7 +218,7 @@ class SpaceShipyardController extends Controller
         $newGround = $usePlanet->getGroundPlace() - 12;
 
         if($level == 0 || $usePlanet->getConstructAt() > $now) {
-            return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
         $now->add(new DateInterval('PT' . 1800 . 'S'));
         $usePlanet->setHeavyUsine($level - 1);
@@ -243,10 +226,9 @@ class SpaceShipyardController extends Controller
         $usePlanet->setShipProduction($usePlanet->getShipProduction() - 0.3);
         $usePlanet->setConstruct('destruct');
         $usePlanet->setConstructAt($now);
-        $em->persist($usePlanet);
         $em->flush();
 
-        return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -262,7 +244,7 @@ class SpaceShipyardController extends Controller
             ->createQueryBuilder('p')
             ->where('p.id = :id')
             ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->setParameters(['id' => $idp, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -274,7 +256,7 @@ class SpaceShipyardController extends Controller
         if(($usePlanetNb < ($level * 13000) || $usePlanetWt < ($level * 19000)) ||
             ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround()) ||
             ($user->getDiscipline() == 0)) {
-            return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
 
         $now->add(new DateInterval('PT' . ($level * 21000) . 'S'));
@@ -283,10 +265,9 @@ class SpaceShipyardController extends Controller
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setConstruct('caserne');
         $usePlanet->setConstructAt($now);
-        $em->persist($usePlanet);
         $em->flush();
 
-        return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -303,7 +284,7 @@ class SpaceShipyardController extends Controller
             ->createQueryBuilder('p')
             ->where('p.id = :id')
             ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->setParameters(['id' => $idp, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -312,7 +293,7 @@ class SpaceShipyardController extends Controller
 
         if(($level == 0 || $usePlanet->getConstructAt() > $now) ||
             ($usePlanet->getSoldier() > $usePlanet->getSoldierMax() - 2500)) {
-            return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
         $now->add(new DateInterval('PT' . 1800 . 'S'));
         $usePlanet->setCaserne($level - 1);
@@ -320,10 +301,9 @@ class SpaceShipyardController extends Controller
         $usePlanet->setSoldierMax($usePlanet->getSoldierMax() - 2500);
         $usePlanet->setConstruct('destruct');
         $usePlanet->setConstructAt($now);
-        $em->persist($usePlanet);
         $em->flush();
 
-        return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -339,7 +319,7 @@ class SpaceShipyardController extends Controller
             ->createQueryBuilder('p')
             ->where('p.id = :id')
             ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->setParameters(['id' => $idp, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -351,7 +331,7 @@ class SpaceShipyardController extends Controller
         if(($usePlanetNb < ($level * 200000) || $usePlanetWt < ($level * 190000)) ||
             ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround()) ||
             ($user->getDiscipline() == 0)) {
-            return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
 
         $now->add(new DateInterval('PT' . ($level * 43200) . 'S'));
@@ -360,10 +340,9 @@ class SpaceShipyardController extends Controller
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setConstruct('bunker');
         $usePlanet->setConstructAt($now);
-        $em->persist($usePlanet);
         $em->flush();
 
-        return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -380,7 +359,7 @@ class SpaceShipyardController extends Controller
             ->createQueryBuilder('p')
             ->where('p.id = :id')
             ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->setParameters(['id' => $idp, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -389,7 +368,7 @@ class SpaceShipyardController extends Controller
 
         if(($level == 0 || $usePlanet->getConstructAt() > $now) ||
             ($usePlanet->getSoldier() > $usePlanet->getSoldierMax() - 20000)) {
-            return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
         $now->add(new DateInterval('PT' . 1800 . 'S'));
         $usePlanet->setBunker($level - 1);
@@ -397,9 +376,8 @@ class SpaceShipyardController extends Controller
         $usePlanet->setSoldierMax($usePlanet->getSoldierMax() - 20000);
         $usePlanet->setConstruct('destruct');
         $usePlanet->setConstructAt($now);
-        $em->persist($usePlanet);
         $em->flush();
 
-        return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
     }
 }

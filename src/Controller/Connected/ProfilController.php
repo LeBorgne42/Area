@@ -19,21 +19,8 @@ class ProfilController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
-
-        $userPlanet = $em->getRepository('App:User')
-            ->createQueryBuilder('u')
-            ->where('u.id = :id')
-            ->setParameters(array('id' => $id))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        $userPlanet = $em->getRepository('App:User')->find(['id' => $id]);
 
         return $this->render('connected/profil/player.html.twig', [
             'usePlanet' => $usePlanet,
@@ -48,21 +35,8 @@ class ProfilController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
-
-        $allyUser = $em->getRepository('App:Ally')
-            ->createQueryBuilder('a')
-            ->where('a.id = :id')
-            ->setParameters(array('id' => $id))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        $allyUser = $em->getRepository('App:Ally')->find(['id' => $id]);
 
         return $this->render('connected/profil/ally.html.twig', [
             'usePlanet' => $usePlanet,
@@ -77,21 +51,8 @@ class ProfilController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
-
-        $userPlanet = $em->getRepository('App:User')
-            ->createQueryBuilder('u')
-            ->where('u.id = :id')
-            ->setParameters(array('id' => $id))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        $userPlanet = $em->getRepository('App:User')->find(['id' => $id]);
 
         return $this->render('connected/profil/modal_user.html.twig', [
             'usePlanet' => $usePlanet,
@@ -106,21 +67,8 @@ class ProfilController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
-
-        $allyUser = $em->getRepository('App:Ally')
-            ->createQueryBuilder('a')
-            ->where('a.id = :id')
-            ->setParameters(array('id' => $id))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        $allyUser = $em->getRepository('App:Ally')->find(['id' => $id]);
 
         return $this->render('connected/profil/modal_ally.html.twig', [
             'usePlanet' => $usePlanet,

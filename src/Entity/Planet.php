@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @ORM\Table(name="planet")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\PlanetRepository")
  * @Vich\Uploadable
  */
 class Planet

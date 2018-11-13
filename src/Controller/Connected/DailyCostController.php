@@ -18,14 +18,8 @@ class DailyCostController extends Controller
     public function helpNewAction($idp)
     {
         $em = $this->getDoctrine()->getManager();
-
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $user = $this->getUser();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         return $this->render('connected/help_new.html.twig', [
             'usePlanet' => $usePlanet,

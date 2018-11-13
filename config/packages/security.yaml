@@ -50,7 +50,7 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/fr, roles: ROLE_USER }
-        - { path: ^/admin-edr, roles: ROLE_MODO }
-        - { path: ^/serveur, roles: ROLE_ADMIN }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        - { path: ^/fr, roles: ROLE_USER, requires_channel: https }
+        - { path: ^/admin-edr, roles: ROLE_MODO, requires_channel: https }
+        - { path: ^/serveur, roles: ROLE_ADMIN, requires_channel: https }

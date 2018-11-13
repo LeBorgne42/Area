@@ -32,7 +32,7 @@ class SearchController extends Controller
             ->createQueryBuilder('p')
             ->where('p.id = :id')
             ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->setParameters(['id' => $idp, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -55,7 +55,7 @@ class SearchController extends Controller
             ->createQueryBuilder('p')
             ->where('p.id = :id')
             ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->setParameters(['id' => $idp, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -111,9 +111,9 @@ class SearchController extends Controller
         }
         $user->setSearch(null);
         $user->setSearchAt(null);
-        $em->persist($user);
+
         $em->flush();
 
-        return $this->redirectToRoute('overview', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('overview', ['idp' => $usePlanet->getId()]);
     }
 }

@@ -18,14 +18,8 @@ class UniverseController extends Controller
     public function universeAction($idp)
     {
         $em = $this->getDoctrine()->getManager();
-
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $user = $this->getUser();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $galaxys = $em->getRepository('App:Galaxy')
             ->createQueryBuilder('g')

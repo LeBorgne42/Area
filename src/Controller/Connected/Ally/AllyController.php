@@ -40,30 +40,23 @@ class AllyController extends Controller
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         if($user->getAlly()) {
             $ally = $user->getAlly();
         } else {
-            return $this->redirectToRoute('ally_blank', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('ally_blank', ['idp' => $usePlanet->getId()]);
         }
         $form_allyImage = $this->createForm(AllyImageType::class, $ally);
         $form_allyImage->handleRequest($request);
 
         if ($form_allyImage->isSubmitted() && $form_allyImage->isValid()) {
-            $em->persist($ally);
             $em->flush();
         }
 
         return $this->render('connected/ally.html.twig', [
             'form_allyImage' => $form_allyImage->createView(),
-            'usePlanet' => $usePlanet,
+            'usePlanet' => $usePlanet
         ]);
     }
 
@@ -74,35 +67,22 @@ class AllyController extends Controller
     {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
-            ->getQuery()
-            ->getOneOrNullResult();
-
-        $form_userAttrGrade = $this->createForm(UserAttrGradeType::class, null, array("allyId" => $user->getAlly()->getId()));
+        $form_userAttrGrade = $this->createForm(UserAttrGradeType::class, null, ["allyId" => $user->getAlly()->getId()]);
         $form_userAttrGrade->handleRequest($request);
 
 
         if (($form_userAttrGrade->isSubmitted() && $form_userAttrGrade->isValid())) {
-            $newGradeUser = $em->getRepository('App:User')
-                ->createQueryBuilder('u')
-                ->where('u.id = :id')
-                ->setParameter('id', $id)
-                ->getQuery()
-                ->getOneOrNullResult();
+            $newGradeUser = $em->getRepository('App:User')->find(['id' => $id]);
 
             if(($user->getGrade()->getPlacement() == 1 && $newGradeUser->getId() == $user->getId()) && $form_userAttrGrade->get('grade')->getData()->getPlacement() != 1) {
-                return $this->redirectToRoute('ally', array('idp' => $usePlanet->getId()));
+                return $this->redirectToRoute('ally', ['idp' => $usePlanet->getId()]);
             }
             $newGradeUser->setGrade($form_userAttrGrade->get('grade')->getData());
-            $em->persist($newGradeUser);
             $em->flush();
 
-            return $this->redirectToRoute('ally', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('ally', ['idp' => $usePlanet->getId()]);
         }
 
         return $this->render('connected/ally/grade.html.twig', [
@@ -122,16 +102,10 @@ class AllyController extends Controller
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $em = $this->getDoctrine()->getManager();
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         if($user->getAlly()) {
-            return $this->redirectToRoute('ally', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('ally', ['idp' => $usePlanet->getId()]);
         } else {
             $ally = new Ally();
         }
@@ -141,7 +115,7 @@ class AllyController extends Controller
 
         if ($form_ally->isSubmitted() && $form_ally->isValid()) {
             if($user->getAllyBan() > $now) {
-                return $this->redirectToRoute('ally_blank', array('idp' => $usePlanet->getId()));
+                return $this->redirectToRoute('ally_blank', ['idp' => $usePlanet->getId()]);
             }
             $grade = new Grade();
 
@@ -184,11 +158,10 @@ class AllyController extends Controller
             $user->setAlly($ally);
             $user->setJoinAllyAt($now);
             $user->setGrade($grade);
-            $em->persist($user);
             $em->persist($ally);
             $em->flush();
 
-            return $this->redirectToRoute('ally', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('ally', ['idp' => $usePlanet->getId()]);
         }
         return $this->render('connected/ally/noAlly.html.twig', [
             'form_ally' => $form_ally->createView(),
@@ -205,17 +178,9 @@ class AllyController extends Controller
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $now->add(new DateInterval('PT' . 172800 . 'S'));
-
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
-            ->getQuery()
-            ->getOneOrNullResult();
-
         $user = $this->getUser();
         $ally = $user->getAlly();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         foreach ($ally->getUsers() as $user) {
             $user->setAlly(null);
@@ -234,7 +199,6 @@ class AllyController extends Controller
         foreach ($ally->getExchanges() as $exchange) {
             $em->remove($exchange);
         }
-        $em->flush();
 
         foreach ($ally->getPnas() as $pna) {
             $em->remove($pna);
@@ -251,27 +215,11 @@ class AllyController extends Controller
         foreach ($ally->getProposals() as $proposal) {
             $em->remove($proposal);
         }
+        $em->flush();
 
-        $pnas = $em->getRepository('App:Pna')
-            ->createQueryBuilder('pna')
-            ->where('pna.allyTag = :allytag')
-            ->setParameter('allytag', $ally->getSigle())
-            ->getQuery()
-            ->getResult();
-
-        $pacts = $em->getRepository('App:Allied')
-            ->createQueryBuilder('al')
-            ->where('al.allyTag = :allytag')
-            ->setParameter('allytag', $ally->getSigle())
-            ->getQuery()
-            ->getResult();
-
-        $wars = $em->getRepository('App:War')
-            ->createQueryBuilder('w')
-            ->where('w.allyTag = :allytag')
-            ->setParameter('allytag', $ally->getSigle())
-            ->getQuery()
-            ->getResult();
+        $pnas = $em->getRepository('App:Pna')->findBy([],['allyTag' => $ally->getSigle()]);
+        $pacts = $em->getRepository('App:Allied')->findBy([],['allyTag' => $ally->getSigle()]);
+        $wars = $em->getRepository('App:War')->findBy([],['allyTag' => $ally->getSigle()]);
 
         foreach ($pnas as $pna) {
             $em->remove($pna);
@@ -288,7 +236,7 @@ class AllyController extends Controller
         $em->remove($ally);
         $em->flush();
 
-        return $this->redirectToRoute('ally', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('ally', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -300,28 +248,21 @@ class AllyController extends Controller
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $now->add(new DateInterval('PT' . 172800 . 'S'));
-
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
-            ->getQuery()
-            ->getOneOrNullResult();
-
         $user = $this->getUser();
+
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+
         if($user->getGrade()->getPlacement() == 1 || count($user->getAlly()->getUsers()) == 1) {
-            return $this->redirectToRoute('ally', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('ally', ['idp' => $usePlanet->getId()]);
         }
         $user->setAlly(null);
         $user->setJoinAllyAt(null);
         $user->setGrade(null);
         $user->setAllyBan($now);
-        $em->persist($user);
 
         $em->flush();
 
-        return $this->redirectToRoute('ally', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('ally', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -333,32 +274,25 @@ class AllyController extends Controller
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $now->add(new DateInterval('PT' . 172800 . 'S'));
-
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
-            ->getQuery()
-            ->getOneOrNullResult();
-
         $user = $this->getUser();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+
         if($user->getGrade()->getCanKick() == 0) {
-            return $this->redirectToRoute('ally', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('ally', ['idp' => $usePlanet->getId()]);
         }
         $kicked = $em->getRepository('App:User')
             ->createQueryBuilder('u')
             ->join('u.grade', 'g')
             ->where('u.id = :id')
             ->andWhere('g.placement > :nbr')
-            ->setParameters(array(
+            ->setParameters([
                 'id' => $id,
-                'nbr' => 1))
+                'nbr' => 1])
             ->getQuery()
             ->getOneOrNullResult();
 
         if(!$kicked) {
-            return $this->redirectToRoute('ally', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('ally', ['idp' => $usePlanet->getId()]);
         }
         $ally = $user->getAlly();
         $ally->removeUser($kicked);
@@ -366,12 +300,10 @@ class AllyController extends Controller
         $kicked->setJoinAllyAt(null);
         $kicked->setGrade(null);
         $kicked->setAllyBan($now);
-        $em->persist($kicked);
-        $em->persist($ally);
 
         $em->flush();
 
-        return $this->redirectToRoute('ally', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('ally', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -382,46 +314,29 @@ class AllyController extends Controller
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
-
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
-            ->getQuery()
-            ->getOneOrNullResult();
-
         $user = $this->getUser();
+
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+
         if($user->getAlly()) {
-            return $this->redirectToRoute('ally', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('ally', ['idp' => $usePlanet->getId()]);
         }
         if($user->getAllyBan() > $now) {
-            return $this->redirectToRoute('ally_blank', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('ally_blank', ['idp' => $usePlanet->getId()]);
         }
-        $proposal = $em->getRepository('App:Proposal')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->setParameter('id', $id)
-            ->getQuery()
-            ->getOneOrNullResult();
+        $proposal = $em->getRepository('App:Proposal')->find(['id' => $id]);
 
 
         $ally = $proposal->getAlly();
         $ally->addUser($user);
-        $em->persist($ally);
-
-        $now = new DateTime();
-        $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user->setAlly($ally);
         $user->setJoinAllyAt($now);
         $user->setGrade($ally->getNewMember());
         $em->remove($proposal);
 
-        $em->persist($ally);
-        $em->persist($user);
         $em->flush();
 
-        return $this->redirectToRoute('ally', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('ally', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -430,26 +345,14 @@ class AllyController extends Controller
     public function allyRefusetAction($id, $idp)
     {
         $em = $this->getDoctrine()->getManager();
-
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
-            ->getQuery()
-            ->getOneOrNullResult();
-
-        $proposal = $em->getRepository('App:Proposal')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->setParameter('id', $id)
-            ->getQuery()
-            ->getOneOrNullResult();
+        $user = $this->getUser();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        $proposal = $em->getRepository('App:Proposal')->find(['id' => $id]);
 
         $em->remove($proposal);
         $em->flush();
 
-        return $this->redirectToRoute('ally', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('ally', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -458,26 +361,14 @@ class AllyController extends Controller
     public function allyCanceltAction($id, $idp)
     {
         $em = $this->getDoctrine()->getManager();
-
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
-            ->getQuery()
-            ->getOneOrNullResult();
-
-        $proposal = $em->getRepository('App:Proposal')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->setParameter('id', $id)
-            ->getQuery()
-            ->getOneOrNullResult();
+        $user = $this->getUser();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        $proposal = $em->getRepository('App:Proposal')->find(['id' => $id]);
 
         $em->remove($proposal);
         $em->flush();
 
-        return $this->redirectToRoute('ally', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('ally', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -488,18 +379,12 @@ class AllyController extends Controller
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         if($user->getAlly()) {
             $ally = $user->getAlly();
         } else {
-            return $this->redirectToRoute('ally_blank', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('ally_blank', ['idp' => $usePlanet->getId()]);
         }
         $form_allyImage = $this->createForm(AllyImageType::class,$ally);
         $form_allyImage->handleRequest($request);
@@ -507,7 +392,7 @@ class AllyController extends Controller
         if ($form_allyImage->isSubmitted() && $form_allyImage->isValid()) {
             $em->persist($user);
             $em->flush();
-            return $this->redirectToRoute('ally', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('ally', ['idp' => $usePlanet->getId()]);
         }
 
         return $this->render('connected/ally/exit.html.twig', [
@@ -526,23 +411,17 @@ class AllyController extends Controller
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         if($user->getAlly()) {
             $ally = $user->getAlly();
         } else {
-            return $this->redirectToRoute('ally_blank', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('ally_blank', ['idp' => $usePlanet->getId()]);
         }
         $exchanges = $em->getRepository('App:Exchange')
             ->createQueryBuilder('e')
             ->andWhere('e.ally = :ally')
-            ->setParameters(array('ally' => $user->getAlly()))
+            ->setParameters(['ally' => $user->getAlly()])
             ->orderBy('e.createdAt', 'DESC')
             ->getQuery()
             ->getResult();
@@ -566,8 +445,6 @@ class AllyController extends Controller
                     $exchange->setAmount($amountPdg);
                     $exchange->setName($user->getUserName());
                     $em->persist($exchange);
-                    $em->persist($ally);
-                    $em->persist($user);
                 }
             } else {
                 if($amountPdg < $ally->getPdg() && $user->getGrade()->getPlacement() == 1) {
@@ -580,8 +457,6 @@ class AllyController extends Controller
                     $exchange->setAmount(-$amountPdg);
                     $exchange->setName($user->getUserName());
                     $em->persist($exchange);
-                    $em->persist($ally);
-                    $em->persist($user);
                 }
             }
             $form_pdg = null;
@@ -602,8 +477,6 @@ class AllyController extends Controller
                     $exchange->setAmount($amountExchange);
                     $exchange->setName($user->getUserName());
                     $em->persist($exchange);
-                    $em->persist($ally);
-                    $em->persist($user);
                 }
             } else {
                 if($amountExchange < $ally->getBitcoin() && $user->getGrade()->getPlacement() == 1) {
@@ -616,8 +489,6 @@ class AllyController extends Controller
                     $exchange->setAmount(-$amountExchange);
                     $exchange->setName($user->getUserName());
                     $em->persist($exchange);
-                    $em->persist($ally);
-                    $em->persist($user);
                 }
             }
             $form_exchange = null;
@@ -643,19 +514,13 @@ class AllyController extends Controller
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $em = $this->getDoctrine()->getManager();
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $maxMembers = count($user->getAlly()->getUsers()) + count($user->getAlly()->getProposals());
         if($user->getAlly()) {
             $ally = $user->getAlly();
         } else {
-            return $this->redirectToRoute('ally_blank', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('ally_blank', ['idp' => $usePlanet->getId()]);
         }
 
         $form_allyAdd = $this->createForm(AllyAddType::class);
@@ -663,7 +528,7 @@ class AllyController extends Controller
 
         if (($form_allyAdd->isSubmitted() && $form_allyAdd->isValid()) && $user->getGrade()->getCanRecruit() == 1) {
             if($maxMembers >= 6) {
-                return $this->redirectToRoute('ally_blank', array('idp' => $usePlanet->getId()));
+                return $this->redirectToRoute('ally_blank', ['idp' => $usePlanet->getId()]);
             }
             $userProposal = $em->getRepository('App:User')
                 ->createQueryBuilder('u')
@@ -681,11 +546,9 @@ class AllyController extends Controller
                 $em->persist($proposal);
                 $ally->addProposal($proposal);
                 $userProposal->addProposal($proposal);
-                $em->persist($ally);
-                $em->persist($userProposal);
                 $em->flush();
             }
-            return $this->redirectToRoute('ally_page_add', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('ally_page_add', ['idp' => $usePlanet->getId()]);
         }
 
         return $this->render('connected/ally/add.html.twig', [
@@ -702,19 +565,13 @@ class AllyController extends Controller
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $grade = new Grade();
         if($user->getAlly()) {
             $ally = $user->getAlly();
         } else {
-            return $this->redirectToRoute('ally_blank', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('ally_blank', ['idp' => $usePlanet->getId()]);
         }
 
         $form_allyGrade = $this->createForm(AllyGradeType::class,$grade);
@@ -724,10 +581,9 @@ class AllyController extends Controller
             $grade->setAlly($ally);
             $em->persist($grade);
             $ally->addGrade($grade);
-            $em->persist($ally);
             $em->flush();
 
-            return $this->redirectToRoute('ally_page_admin', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('ally_page_admin', ['idp' => $usePlanet->getId()]);
         }
 
         return $this->render('connected/ally/admin.html.twig', [
@@ -746,35 +602,26 @@ class AllyController extends Controller
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $em = $this->getDoctrine()->getManager();
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         if($user->getAlly()) {
             $ally = $user->getAlly();
         } else {
-            return $this->redirectToRoute('ally_blank', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('ally_blank', ['idp' => $usePlanet->getId()]);
         }
         $waitingPna = $em->getRepository('App:Pna')
             ->createQueryBuilder('pna')
             ->where('pna.allyTag = :sigle')
-            ->andWhere('pna.accepted = :false')
-            ->setParameters(array(
-                'sigle' => $ally->getSigle(),
-                'false' => false))
+            ->andWhere('pna.accepted = false')
+            ->setParameters(['sigle' => $ally->getSigle()])
             ->getQuery()
             ->getResult();
+
         $waitingAllied = $em->getRepository('App:Allied')
             ->createQueryBuilder('al')
             ->where('al.allyTag = :sigle')
-            ->andWhere('al.accepted = :false')
-            ->setParameters(array(
-                'sigle' => $ally->getSigle(),
-                'false' => false))
+            ->andWhere('al.accepted = false')
+            ->setParameters(['sigle' => $ally->getSigle()])
             ->getQuery()
             ->getResult();
 
@@ -783,7 +630,7 @@ class AllyController extends Controller
 
 
         if (($form_allyPact->isSubmitted() && $form_allyPact->isValid())) {
-            $allyPact = $em->getRepository('App:Ally', array('idp' => $usePlanet->getId()))
+            $allyPact = $em->getRepository('App:Ally', ['idp' => $usePlanet->getId()])
                 ->createQueryBuilder('a')
                 ->where('a.sigle = :sigle')
                 ->setParameter('sigle', $form_allyPact->get('allyName')->getData())
@@ -791,7 +638,7 @@ class AllyController extends Controller
                 ->getOneOrNullResult();
 
             if((!$allyPact || $user->getAlly()->getAlreadyPact($allyPact->getSigle())) || $allyPact == $ally) {
-                return $this->redirectToRoute('ally_page_pacts', array('idp' => $usePlanet->getId()));
+                return $this->redirectToRoute('ally_page_pacts', ['idp' => $usePlanet->getId()]);
             }
             if($form_allyPact->get('pactType')->getData() == 2 && $user->getGrade()->getCanPeace() == 1) {
                 $pna = new Pna();
@@ -827,11 +674,9 @@ class AllyController extends Controller
                 $em->persist($war2);
                 $ally->addAllyWar($war);
                 $allyPact->addAllyWar($war2);
-                $em->persist($allyPact);
             }
-            $em->persist($ally);
             $em->flush();
-            return $this->redirectToRoute('ally_page_pacts', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('ally_page_pacts', ['idp' => $usePlanet->getId()]);
         }
 
         return $this->render('connected/ally/pact.html.twig', [

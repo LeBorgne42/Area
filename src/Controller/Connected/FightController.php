@@ -29,7 +29,7 @@ class FightController extends Controller
                 ->select('p.id')
                 ->where('f.fightAt < :now')
                 ->andWhere('f.flightTime is null')
-                ->setParameters(array('now' => $now))
+                ->setParameters(['now' => $now])
                 ->getQuery()
                 ->setMaxResults(1)
                 ->getOneOrNullResult();
@@ -43,7 +43,7 @@ class FightController extends Controller
                 ->join('f.planet', 'p')
                 ->where('p.id = :id')
                 ->andWhere('f.flightTime is null')
-                ->setParameters(array('id' => $firstFleet['id']))
+                ->setParameters(['id' => $firstFleet['id']])
                 ->orderBy('f.attack', 'ASC')
                 ->getQuery()
                 ->getResult();
@@ -67,7 +67,6 @@ class FightController extends Controller
             if ($tmpcount < 2) {
                 foreach ($fleetsWars as $fleetsWar) {
                     $fleetsWar->setFightAt(null);
-                    $em->persist($fleetsWar);
                     $em->flush();
                 }
                 exit;
@@ -111,7 +110,6 @@ class FightController extends Controller
             } else {
                 foreach ($fleetsWars as $fleetsWar) {
                     $fleetsWar->setFightAt(null);
-                    $em->persist($fleetsWar);
                     $em->flush();
                 }
                 exit;
@@ -140,6 +138,8 @@ class FightController extends Controller
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
+        $server = $em->getRepository('App:Server')->find(['id' => 1]);
+        $server->setNbrBattle($server->getNbrBattle() + 1);
 
         $armor = 0;
         $shield = 0;
@@ -180,11 +180,9 @@ class FightController extends Controller
         if($attAll <= 0 && $defAll <= 0) {
             foreach($blockDef as $cancelAtt) {
                 $cancelAtt->setAttack(0);
-                $em->persist($cancelAtt);
             }
             foreach($blockAtt as $cancelAtt) {
                 $cancelAtt->setAttack(0);
-                $em->persist($cancelAtt);
             }
             $em->flush();
             return($blockAtt);
@@ -198,7 +196,6 @@ class FightController extends Controller
                 $reportB->setTitle("Rapport de combat : Défaite");
                 $reportB->setUser($removeOne->getUser());
                 $removeOne->getUser()->setViewReport(false);
-                $em->persist($removeOne->getUser());
                 $em->persist($reportB);
                 $em->remove($removeOne);
             }
@@ -208,7 +205,6 @@ class FightController extends Controller
                 $reportA->setContent("Vous venez de détruire une flotte utilitaire en " . $reportWin->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $reportWin->getPlanet()->getSector()->getPosition() . ":" . $reportWin->getPlanet()->getPosition() . " .");
                 $reportA->setTitle("Rapport de combat : Victoire");
                 $reportWin->getUser()->setViewReport(false);
-                $em->persist($reportWin->getUser());
                 $reportA->setUser($reportWin->getUser());
                 $em->persist($reportA);
             }
@@ -223,7 +219,6 @@ class FightController extends Controller
                 $reportB->setTitle("Rapport de combat : Défaite");
                 $reportB->setUser($removeTwo->getUser());
                 $removeTwo->getUser()->setViewReport(false);
-                $em->persist($removeTwo->getUser());
                 $em->persist($reportB);
                 $em->remove($removeTwo);
             }
@@ -234,7 +229,6 @@ class FightController extends Controller
                 $reportA->setTitle("Rapport de combat : Victoire");
                 $reportA->setUser($reportWin->getUser());
                 $reportWin->getUser()->setViewReport(false);
-                $em->persist($reportWin->getUser());
                 $em->persist($reportA);
             }
             $em->flush();
@@ -371,13 +365,11 @@ class FightController extends Controller
                         ->getQuery()
                         ->getOneOrNullResult();
                     $otherAlly->setPdg($otherAlly->getPdg() + $pdgPeace);
-                    $em->persist($otherAlly);
                 }
                 $reportA->setContent($reportA->getContent() . " Mais vous remportez vous même " . $newWarPoint . " points de Guerre !");
                 if($attackerLose->getUser()->getRank()) {
                     $attackerLose->getUser()->getRank()->setWarPoint($attackerLose->getUser()->getRank()->getWarPoint() + $newWarPoint);
                 }
-                $em->persist($attackerLose);
                 $em->persist($reportA);
                 $em->remove($attackerLose);
             }
@@ -396,7 +388,6 @@ class FightController extends Controller
                         ->getQuery()
                         ->getOneOrNullResult();
                     $otherAlly->setPdg($otherAlly->getPdg() + $pdgPeace);
-                    $em->persist($otherAlly);
                 }
                 $percentArmor = ($defenderWin->getArmor() * 100) / $armorSaveD;
                 $newArmor = $defenderWin->getArmor() - (round($percentArmor * $armorD) / 100);
@@ -405,12 +396,10 @@ class FightController extends Controller
                     $defenderWin->getUser()->getRank()->setWarPoint($defenderWin->getUser()->getRank()->getWarPoint() + $newWarPoint);
                 }
                 $defenderWin->setFightAt(null);
-                $em->persist($defenderWin);
                 $em->flush();
             }
             $planet->setNbCdr($planet->getNbCdr() + ($debrisAtt * rand(30,40)));
             $planet->setWtCdr($planet->getWtCdr() + $debrisAtt * rand(20,30));
-            $em->persist($planet);
             $em->flush();
             return($blockDef);
         } else {
@@ -493,13 +482,11 @@ class FightController extends Controller
                         ->getQuery()
                         ->getOneOrNullResult();
                     $otherAlly->setPdg($otherAlly->getPdg() + $pdgPeace);
-                    $em->persist($otherAlly);
                 }
                 $reportB->setContent($reportA->getContent() . " Mais vous remportez vous même " . $newWarPoint . " points de Guerre !");
                 if($defenderLose->getUser()->getRank()) {
                     $defenderLose->getUser()->getRank()->setWarPoint($defenderLose->getUser()->getRank()->getWarPoint() + $newWarPoint);
                 }
-                $em->persist($defenderLose);
                 $em->persist($reportB);
                 $em->remove($defenderLose);
             }
@@ -518,7 +505,6 @@ class FightController extends Controller
                         ->getQuery()
                         ->getOneOrNullResult();
                     $otherAlly->setPdg($otherAlly->getPdg() + $pdgPeace);
-                    $em->persist($otherAlly);
                 }
                 $percentArmor = ($attackerWin->getArmor() * 100) / $armorSaveA;
                 $newArmor = $attackerWin->getArmor() - (round($percentArmor * $armor) / 100);
@@ -531,7 +517,6 @@ class FightController extends Controller
             }
             $planet->setNbCdr($planet->getNbCdr() + ($debrisDef * rand(30,40)));
             $planet->setWtCdr($planet->getWtCdr() + $debrisDef * rand(20,30));
-            $em->persist($planet);
             $em->flush();
             return($blockAtt);
         }
@@ -545,25 +530,11 @@ class FightController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        $ally = $user->getAlly();
+        $server = $em->getRepository('App:Server')->find(['id' => 1]);
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
-
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
-
-        $invader = $em->getRepository('App:Fleet')
-            ->createQueryBuilder('f')
-            ->where('f.id = :id')
-            ->setParameters(array('id' => $fleet))
-            ->getQuery()
-            ->getOneOrNullResult();
-
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        $invader = $em->getRepository('App:Fleet')->find(['id' => $fleet]);
         $barge = $invader->getBarge() * 2500;
         $defenser = $invader->getPlanet();
         $userDefender= $invader->getPlanet()->getUser();
@@ -625,21 +596,14 @@ class FightController extends Controller
                 $defenser->setWorker(2000);
                 if($invader->getUser()->getColPlanets() <= ($invader->getUser()->getTerraformation() + 1)) {
                     $defenser->setUser($user);
-                    $em->persist($defenser);
                     $em->flush();
                 } else {
-                    $hydra = $em->getRepository('App:User')
-                        ->createQueryBuilder('u')
-                        ->where('u.id = :id')
-                        ->setParameters(array('id' => 1))
-                        ->getQuery()
-                        ->getOneOrNullResult();
+                    $hydra = $em->getRepository('App:User')->find(['id' => 1]);
 
                     $defenser->setUser($hydra);
                     $defenser->setWorker(25000);
                     $defenser->setSoldier(500);
                     $defenser->setName('Avant Poste');
-                    $em->persist($defenser);
                     $em->flush();
                 }
                 if($userDefender->getColPlanets() == 0) {
@@ -648,25 +612,23 @@ class FightController extends Controller
                     $userDefender->setGrade(null);
                     foreach($userDefender->getFleets() as $tmpFleet) {
                         $tmpFleet->setUser($user);
-                        $em->persist($tmpFleet);
                     }
-                    $em->persist($userDefender);
                 }
                 $reportDef->setTitle("Rapport d'invasion : Défaite (défense)");
                 $reportDef->setContent("Mais QUI ? QUI !!! Vous as donné un commandant si médiocre " . $user->getUserName() . " n'a pas eu a faire grand chose pour prendre votre planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . ".  " . round($soldierAtmp) . " soldats ennemis sont tout de même éliminé. C'est toujours ça de gagner. Vos " . $soldierDtmp . " soldats et " . $workerDtmp . " travailleurs sont tous mort. Votre empire en a prit un coup, mais il vous reste des planètes, il est l'heure de la revanche !");
                 $reportInv->setTitle("Rapport d'invasion : Victoire (attaque)");
                 $reportInv->setContent("Vous débarquez après que la planète ait été prise et vous installez sur le trône de " . $userDefender->getUserName() . ". Qu'il est bon d'entendre ses pleures lointain... La planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . " est désormais votre! Il est temps de remettre de l'ordre dans la galaxie. " . round($soldierAtmp) . " de vos soldats ont péri dans l'invasion. Mais les défenseurs ont aussi leurs pertes : " . $soldierDtmp . " soldats et " . $workerDtmp . " travailleurs ont péri. Cependant vous épargnez 2000 travailleurs dans votre bonté (surtout pour faire tourner la planète).");
             }
-            $em->persist($invader);
             if($invader->getNbrShips() == 0) {
                 $em->remove($invader);
             }
+            $server->setNbrInvasion($server->getNbrInvasion() + 1);
             $em->persist($reportInv);
             $em->persist($reportDef);
             $em->flush();
         }
 
-        return $this->redirectToRoute('map', array('idp' => $usePlanet->getId(), 'id' => $defenser->getSector()->getPosition()));
+        return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $defenser->getSector()->getPosition(), 'gal' => $defenser->getSector()->getGalaxy()->getId()]);
     }
 
     /**
@@ -678,23 +640,11 @@ class FightController extends Controller
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
-
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
-
-        $colonize = $em->getRepository('App:Fleet')
-            ->createQueryBuilder('f')
-            ->where('f.id = :id')
-            ->setParameters(array('id' => $fleet))
-            ->getQuery()
-            ->getOneOrNullResult();
-
+        $server = $em->getRepository('App:Server')->find(['id' => 1]);
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        $colonize = $em->getRepository('App:Fleet')->find(['id' => $fleet]);
         $newPlanet = $colonize->getPlanet();
+
         if($colonize->getColonizer() && $newPlanet->getUser() == null &&
             $newPlanet->getEmpty() == false && $newPlanet->getMerchant() == false &&
             $newPlanet->getCdr() == false && $colonize->getUser()->getColPlanets() < 21 &&
@@ -703,7 +653,6 @@ class FightController extends Controller
             $newPlanet->setUser($colonize->getUser());
             $newPlanet->setName('Colonie');
             $newPlanet->setNbColo(count($fleet->getUser()->getPlanets()) + 1);
-            $em->persist($colonize);
             if($colonize->getNbrShips() == 0) {
                 $em->remove($colonize);
             }
@@ -714,11 +663,10 @@ class FightController extends Controller
             $reportColo->setContent("Vous venez de coloniser une planète inhabitée en : " .  $newPlanet->getSector()->getgalaxy()->getPosition() . ":" . $newPlanet->getSector()->getPosition() . ":" . $newPlanet->getPosition() . ". Cette planète fait désormais partit de votre Empire, pensez a la renommer sur la page Planètes.");
             $user->setViewReport(false);
             $em->persist($reportColo);
-            $em->persist($user);
-            $em->persist($newPlanet);
+            $server->setNbrColonize($server->getNbrColonize() + 1);
             $em->flush();
         }
 
-        return $this->redirectToRoute('map', array('idp' => $usePlanet->getId(), 'id' => $newPlanet->getSector()->getPosition()));
+        return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $newPlanet->getSector()->getPosition(), 'gal' => $newPlanet->getSector()->getGalaxy()->getId()]);
     }
 }

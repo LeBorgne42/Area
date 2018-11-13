@@ -27,22 +27,16 @@ class MarketController extends Controller
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
-        $form_market = $this->createForm(MarketType::class, null, array("user" => $user->getId()));
+        $form_market = $this->createForm(MarketType::class, null, ["user" => $user->getId()]);
         $form_market->handleRequest($request);
 
         if ($form_market->isSubmitted() && $form_market->isValid()) {
             $planetBuy = $em->getRepository('App:Planet')
                 ->createQueryBuilder('p')
                 ->where('p.id = :id')
-                ->setParameters(array('id' => $form_market->get('planet')->getData()))
+                ->setParameters(['id' => $form_market->get('planet')->getData()])
                 ->getQuery()
                 ->getOneOrNullResult();
 
@@ -54,17 +48,16 @@ class MarketController extends Controller
             if(($cost > $user->getRank()->getWarPoint() ||
                 ($planetBuy->getSoldier() + abs($form_market->get('soldier')->getData())) > $planetBuy->getSoldierMax()) ||
                     ($planetBuy->getWorker() + abs($form_market->get('worker')->getData())) > $planetBuy->getWorkerMax()) {
-                return $this->redirectToRoute('market', array('idp' => $usePlanet->getId()));
+                return $this->redirectToRoute('market', ['idp' => $usePlanet->getId()]);
             }
 
             $user->setBitcoin($user->getBitcoin() + abs($form_market->get('bitcoin')->getData()));
             $planetBuy->setSoldier($planetBuy->getSoldier() + abs($form_market->get('soldier')->getData()));
             $planetBuy->setWorker($planetBuy->getWorker() + abs($form_market->get('worker')->getData()));
             $user->getRank()->setWarPoint($user->getRank()->getWarPoint() - $cost);
-            $em->persist($planetBuy);
-            $em->persist($user);
+
             $em->flush();
-            return $this->redirectToRoute('market', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('market', ['idp' => $usePlanet->getId()]);
         }
 
         return $this->render('connected/market.html.twig', [

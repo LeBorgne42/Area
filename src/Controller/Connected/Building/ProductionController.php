@@ -25,13 +25,7 @@ class ProductionController extends Controller
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $level = $usePlanet->getMiner() + 1;
         $usePlanetNb = $usePlanet->getNiobium();
@@ -39,7 +33,7 @@ class ProductionController extends Controller
         $newGround = $usePlanet->getGroundPlace() + 2;
         if(($usePlanetNb < ($level * 450) || $usePlanetWt < ($level * 200)) ||
             ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround())) {
-            return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
         $now->add(new DateInterval('PT' . ($level * 180) . 'S'));
         $usePlanet->setNiobium($usePlanetNb - ($level * 450));
@@ -47,10 +41,9 @@ class ProductionController extends Controller
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setConstruct('miner');
         $usePlanet->setConstructAt($now);
-        $em->persist($usePlanet);
         $em->flush();
 
-        return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -63,18 +56,12 @@ class ProductionController extends Controller
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $level = $usePlanet->getMiner();
         $newGround = $usePlanet->getGroundPlace() - 2;
         if($level == 0 || $usePlanet->getConstructAt() > $now) {
-            return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
         $now->add(new DateInterval('PT' . 1800 . 'S'));
         $usePlanet->setMiner($level - 1);
@@ -82,10 +69,9 @@ class ProductionController extends Controller
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setConstruct('destruct');
         $usePlanet->setConstructAt($now);
-        $em->persist($usePlanet);
         $em->flush();
 
-        return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -98,13 +84,7 @@ class ProductionController extends Controller
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $level = $usePlanet->getExtractor() + 1;
         $usePlanetNb = $usePlanet->getNiobium();
@@ -112,7 +92,7 @@ class ProductionController extends Controller
         $newGround = $usePlanet->getGroundPlace() + 3;
         if(($usePlanetNb < ($level * 200) || $usePlanetWt < ($level * 500)) ||
             ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround())) {
-            return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
         $now->add(new DateInterval('PT' . ($level * 180) . 'S'));
         $usePlanet->setNiobium($usePlanetNb - ($level * 200));
@@ -120,10 +100,9 @@ class ProductionController extends Controller
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setConstruct('extractor');
         $usePlanet->setConstructAt($now);
-        $em->persist($usePlanet);
         $em->flush();
 
-        return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -136,18 +115,12 @@ class ProductionController extends Controller
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $level = $usePlanet->getExtractor();
         $newGround = $usePlanet->getGroundPlace() - 3;
         if($level == 0 || $usePlanet->getConstructAt() > $now) {
-            return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
         $now->add(new DateInterval('PT' . 1800 . 'S'));
         $usePlanet->setExtractor($level - 1);
@@ -155,10 +128,9 @@ class ProductionController extends Controller
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setConstruct('destruct');
         $usePlanet->setConstructAt($now);
-        $em->persist($usePlanet);
         $em->flush();
 
-        return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -171,13 +143,7 @@ class ProductionController extends Controller
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $level = $usePlanet->getNiobiumStock() + 1;
         $usePlanetNb = $usePlanet->getNiobium();
@@ -186,7 +152,7 @@ class ProductionController extends Controller
         if(($usePlanetNb < ($level * 150000) || $usePlanetWt < ($level * 100000)) ||
             ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround()) ||
         $user->getCargo() < 2) {
-            return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
         $now->add(new DateInterval('PT' . ($level * 21600) . 'S'));
         $usePlanet->setNiobium($usePlanetNb - ($level * 150000));
@@ -194,10 +160,9 @@ class ProductionController extends Controller
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setConstruct('niobiumStock');
         $usePlanet->setConstructAt($now);
-        $em->persist($usePlanet);
         $em->flush();
 
-        return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -210,18 +175,12 @@ class ProductionController extends Controller
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $level = $usePlanet->getNiobiumStock();
         $newGround = $usePlanet->getGroundPlace() - 3;
         if($level == 0 || $usePlanet->getConstructAt() > $now) {
-            return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
         $now->add(new DateInterval('PT' . 1800 . 'S'));
         $usePlanet->setExtractor($level - 1);
@@ -229,10 +188,9 @@ class ProductionController extends Controller
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setConstruct('destruct');
         $usePlanet->setConstructAt($now);
-        $em->persist($usePlanet);
         $em->flush();
 
-        return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -245,13 +203,7 @@ class ProductionController extends Controller
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $level = $usePlanet->getWaterStock() + 1;
         $usePlanetNb = $usePlanet->getNiobium();
@@ -260,7 +212,7 @@ class ProductionController extends Controller
         if(($usePlanetNb < ($level * 110000) || $usePlanetWt < ($level * 180000)) ||
             ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround()) ||
             $user->getCargo() < 2) {
-            return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
         $now->add(new DateInterval('PT' . ($level * 21600) . 'S'));
         $usePlanet->setNiobium($usePlanetNb - ($level * 110000));
@@ -268,10 +220,9 @@ class ProductionController extends Controller
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setConstruct('waterStock');
         $usePlanet->setConstructAt($now);
-        $em->persist($usePlanet);
         $em->flush();
 
-        return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -284,18 +235,12 @@ class ProductionController extends Controller
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $level = $usePlanet->getWaterStock();
         $newGround = $usePlanet->getGroundPlace() - 4;
         if($level == 0 || $usePlanet->getConstructAt() > $now) {
-            return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
         $now->add(new DateInterval('PT' . 1800 . 'S'));
         $usePlanet->setWaterMax($usePlanet->getWaterMax() - 750000);
@@ -303,9 +248,8 @@ class ProductionController extends Controller
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setConstruct('destruct');
         $usePlanet->setConstructAt($now);
-        $em->persist($usePlanet);
         $em->flush();
 
-        return $this->redirectToRoute('building', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
     }
 }

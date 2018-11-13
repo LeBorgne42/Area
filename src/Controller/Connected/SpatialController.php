@@ -34,20 +34,14 @@ class SpatialController extends Controller
             return $this->redirectToRoute('game_over');
         }
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $form_spatialShip = $this->createForm(SpatialShipType::class);
         $form_spatialShip->handleRequest($request);
 
         if ($form_spatialShip->isSubmitted() && $form_spatialShip->isValid()) {
             if($usePlanet->getSpaceShip() == 0) {
-                return $this->redirectToRoute('spatial', array('idp' => $usePlanet->getId()));
+                return $this->redirectToRoute('spatial', ['idp' => $usePlanet->getId()]);
             }
             $cargoI = abs($form_spatialShip->get('cargoI')->getData());
             $cargoV = abs($form_spatialShip->get('cargoV')->getData());
@@ -99,7 +93,7 @@ class SpatialController extends Controller
                 ($warPoint > $user->getRank()->getWarPoint() || $bitcoinLess > $user->getBitcoin()) ||
                 ($user->getColonizer() && $colonizer) || ($motherShip && $user->getMotherShip()))
             {
-                return $this->redirectToRoute('spatial', array('idp' => $usePlanet->getId()));
+                return $this->redirectToRoute('spatial', ['idp' => $usePlanet->getId()]);
             }
             if($usePlanet->getProduct()) {
                 $reNow = new DateTime();
@@ -164,9 +158,8 @@ class SpatialController extends Controller
             $usePlanet->setWorker($usePlanet->getWorker() - $workerLess);
             $user->getRank()->setWarPoint($user->getRank()->getWarPoint() - $warPoint);
             $user->setBitcoin($user->getBitcoin() - $bitcoinLess);
-            $em->persist($usePlanet);
-            $em->persist($user);
             $em->persist($product);
+
             $em->flush();
 
             $form_spatialShip = null;
@@ -187,13 +180,7 @@ class SpatialController extends Controller
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $form_createFleet = $this->createForm(SpatialFleetType::class);
         $form_createFleet->handleRequest($request);
@@ -227,7 +214,7 @@ class SpatialController extends Controller
                 ($total == 0 || $cargoI < 0) || ($cargoV < 0 || $cargoX < 0) || ($hunterHeavy < 0 || $corvet < 0) ||
                 ($corvetLaser < 0 || $fregatePlasma < 0) || ($croiser < 0 || $ironClad < 0) || ($destroyer < 0 || $hunterWar < 0) ||
                 ($corvetWar < 0 || $moonMaker < 0 ) || ($radarShip < 0  || $brouilleurShip < 0 ) || ($motherShip < 0 )) {
-                return $this->redirectToRoute('spatial', array('idp' => $usePlanet->getId()));
+                return $this->redirectToRoute('spatial', ['idp' => $usePlanet->getId()]);
             }
 
             $fleet = new Fleet();
@@ -291,7 +278,7 @@ class SpatialController extends Controller
                 ->andWhere('f.flightTime is null')
                 ->andWhere('u.ally is null OR a.sigle not in (:friend)')
                 ->andWhere('u.ally is null OR u.ally != :myAlly')
-                ->setParameters(array('planet' => $usePlanet, 'true' => true, 'ally' => $warAlly, 'user' => $user, 'friend' => $friendAlly, 'myAlly' => $allyF))
+                ->setParameters(['planet' => $usePlanet, 'true' => true, 'ally' => $warAlly, 'user' => $user, 'friend' => $friendAlly, 'myAlly' => $allyF])
                 ->getQuery()
                 ->getResult();
 
@@ -302,7 +289,7 @@ class SpatialController extends Controller
                 ->where('f.planet = :planet')
                 ->andWhere('f.fightAt is not null')
                 ->andWhere('f.flightTime is null')
-                ->setParameters(array('planet' => $usePlanet))
+                ->setParameters(['planet' => $usePlanet])
                 ->getQuery()
                 ->setMaxResults(1)
                 ->getOneOrNullResult();
@@ -322,7 +309,6 @@ class SpatialController extends Controller
                                 if($fleetArm > 0) {
                                     $setWar->setAttack(1);
                                 }
-                                $em->persist($setWar);
                             }
                         }
                     }
@@ -332,7 +318,7 @@ class SpatialController extends Controller
                     ->join('f.user', 'u')
                     ->where('f.planet = :planet')
                     ->andWhere('f.flightTime is null')
-                    ->setParameters(array('planet' => $usePlanet))
+                    ->setParameters(['planet' => $usePlanet])
                     ->getQuery()
                     ->getResult();
 
@@ -342,7 +328,6 @@ class SpatialController extends Controller
 
                 foreach ($allFleets as $updateF) {
                     $updateF->setFightAt($now);
-                    $em->persist($updateF);
                 }
                 $fleet->setFightAt($now);
             }
@@ -374,11 +359,11 @@ class SpatialController extends Controller
             $usePlanet->setIronClad($ironClad);
             $usePlanet->setDestroyer($destroyer);
             $usePlanet->addFleet($fleet);
-            $em->persist($usePlanet);
+
             $em->flush();
 
 
-            return $this->redirectToRoute('spatial', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('spatial', ['idp' => $usePlanet->getId()]);
         }
 
         return $this->render('connected/fleet/create.html.twig', [

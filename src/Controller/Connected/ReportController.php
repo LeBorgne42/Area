@@ -26,18 +26,12 @@ class ReportController extends Controller
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $now->sub(new DateInterval('PT' . 1209600 . 'S'));
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $removeReports = $em->getRepository('App:Report')
             ->createQueryBuilder('r')
             ->where('r.sendAt < :now')
-            ->setParameters(array('now' => $now))
+            ->setParameters(['now' => $now])
             ->getQuery()
             ->getResult();
 
@@ -51,13 +45,13 @@ class ReportController extends Controller
         $reports = $em->getRepository('App:Report')
             ->createQueryBuilder('r')
             ->where('r.user = :user')
-            ->setParameters(array('user' => $user))
+            ->setParameters(['user' => $user])
             ->orderBy('r.sendAt', 'DESC')
             ->getQuery()
             ->getResult();
 
         $user->setViewReport(true);
-        $em->persist($user);
+
         $em->flush();
 
         return $this->render('connected/report.html.twig', [
@@ -74,27 +68,21 @@ class ReportController extends Controller
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $report = $em->getRepository('App:Report')
             ->createQueryBuilder('r')
             ->where('r.id = :id')
             ->andWhere('r.user = :user')
-            ->setParameters(array('id' => $id, 'user' => $user))
+            ->setParameters(['id' => $id, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
         $report->setNewReport(false);
-        $em->persist($report);
+
         $em->flush();
 
-        return $this->redirectToRoute('report', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('report', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -105,28 +93,21 @@ class ReportController extends Controller
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $reports = $em->getRepository('App:Report')
             ->createQueryBuilder('r')
             ->where('r.newReport = :true')
             ->andWhere('r.user = :user')
-            ->setParameters(array('true' => true, 'user' => $user))
+            ->setParameters(['true' => true, 'user' => $user])
             ->getQuery()
             ->getResult();
 
         foreach($reports as $report) {
             $report->setNewReport(false);
-            $em->persist($report);
         }
         $em->flush();
 
-        return $this->redirectToRoute('report', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('report', ['idp' => $usePlanet->getId()]);
     }
 }

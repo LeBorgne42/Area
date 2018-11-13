@@ -38,19 +38,13 @@ class FleetController extends Controller
             return $this->redirectToRoute('game_over');
         }
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $fleetGiveMove = $em->getRepository('App:Fleet')
             ->createQueryBuilder('f')
             ->where('f.user = :user')
             ->andWhere('f.planete is not null')
-            ->setParameters(array('user' => $user))
+            ->setParameters(['user' => $user])
             ->orderBy('f.flightTime')
             ->getQuery()
             ->getResult();
@@ -62,7 +56,7 @@ class FleetController extends Controller
             ->where('f.user = :user')
             ->andWhere('f.planete is null')
             ->andWhere('f.planet = :planet')
-            ->setParameters(array('user' => $user, 'planet' => $usePlanet))
+            ->setParameters(['user' => $user, 'planet' => $usePlanet])
             ->orderBy('s.position, p.position')
             ->getQuery()
             ->getResult();
@@ -75,7 +69,7 @@ class FleetController extends Controller
             ->andWhere('f.planete is null')
             ->andWhere('f.planet != :planet')
             ->andWhere('f.planet in (:planets)')
-            ->setParameters(array('user' => $user, 'planet' => $usePlanet, 'planets' => $user->getPlanets()))
+            ->setParameters(['user' => $user, 'planet' => $usePlanet, 'planets' => $user->getPlanets()])
             ->orderBy('s.position, p.position')
             ->getQuery()
             ->getResult();
@@ -87,7 +81,7 @@ class FleetController extends Controller
             ->where('f.user = :user')
             ->andWhere('f.planete is null')
             ->andWhere('f.planet not in (:planets)')
-            ->setParameters(array('user' => $user, 'planets' => $user->getPlanets()))
+            ->setParameters(['user' => $user, 'planets' => $user->getPlanets()])
             ->orderBy('s.position, p.position')
             ->getQuery()
             ->getResult();
@@ -110,13 +104,7 @@ class FleetController extends Controller
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $fleetGive = $em->getRepository('App:Fleet')
             ->createQueryBuilder('f')
@@ -124,7 +112,7 @@ class FleetController extends Controller
             ->andWhere('f.user = :user')
             ->andWhere('f.fightAt is null')
             ->andWhere('f.flightTime is null')
-            ->setParameters(array('id' => $id, 'user' => $user))
+            ->setParameters(['id' => $id, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -138,23 +126,23 @@ class FleetController extends Controller
         $form_manageAttackFleet = $this->createForm(FleetAttackType::class, $fleetGive);
         $form_manageAttackFleet->handleRequest($request);
 
-        $form_sendFleet = $this->createForm(FleetSendType::class, null, array("user" => $user->getId()));
+        $form_sendFleet = $this->createForm(FleetSendType::class, null, ["user" => $user->getId()]);
         $form_sendFleet->handleRequest($request);
 
         if($fleetGive && $usePlanet) {
         } else {
-            return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
         }
 
         if ($form_manageRenameFleet->isSubmitted()) {
             $em->persist($fleetGive);
             $em->flush();
-            return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
         }
 
         if ($form_manageAttackFleet->isSubmitted()) {
             if($fleetGive->getMissile() <= 0) {
-                return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+                return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
             }
             $eAlly = $user->getAllyEnnemy();
             $warAlly = [];
@@ -171,7 +159,7 @@ class FleetController extends Controller
                 ->andWhere('f.attack = :true OR a.sigle in (:ally)')
                 ->andWhere('f.user != :user')
                 ->andWhere('f.flightTime is null')
-                ->setParameters(array('planet' => $usePlanet, 'true' => true, 'ally' => $warAlly, 'user' => $user))
+                ->setParameters(['planet' => $usePlanet, 'true' => true, 'ally' => $warAlly, 'user' => $user])
                 ->getQuery()
                 ->getResult();
 
@@ -182,7 +170,7 @@ class FleetController extends Controller
                     ->where('f.planet = :planet')
                     ->andWhere('f.user != :user')
                     ->andWhere('f.flightTime is null')
-                    ->setParameters(array('planet' => $planetTake, 'user' => $user))
+                    ->setParameters(['planet' => $planetTake, 'user' => $user])
                     ->getQuery()
                     ->getResult();
                 $now = new DateTime();
@@ -190,13 +178,12 @@ class FleetController extends Controller
                 $now->add(new DateInterval('PT' . 300 . 'S'));
                 foreach ($allFleets as $updateF) {
                     $updateF->setFightAt($now);
-                    $em->persist($updateF);
                 }
                 $fleetGive->setFightAt($now);
             }
-            $em->persist($fleetGive);
+
             $em->flush();
-            return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
         }
 
         if ($form_manageFleet->isSubmitted()) {
@@ -465,13 +452,11 @@ class FleetController extends Controller
                 ($worker > $planetTake->getWorkerMax() || $scientist > $planetTake->getScientistMax()) ||
                 ($niobium > $planetTake->getNiobiumMax() || $water > $planetTake->getWaterMax()) ||
                 ($worker < 10000 && abs($form_manageFleet->get('moreWorker')->getData()))) {
-                return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+                return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
             }
 
             if($fleetGive->getNbrShips() == 0) {
                 $em->remove($fleetGive);
-            } else {
-                $em->persist($fleetGive);
             }
             $planetTake->setColonizer($colonizer);
             $planetTake->setCargoI($cargoI);
@@ -511,9 +496,8 @@ class FleetController extends Controller
                 $planetTake->setScientist($scientist);
             }
 
-            $em->persist($planetTake);
             $em->flush();
-            return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
         }
 
         return $this->render('connected/fleet/edit.html.twig', [
@@ -534,13 +518,7 @@ class FleetController extends Controller
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $fleetGive = $em->getRepository('App:Fleet')
             ->createQueryBuilder('f')
@@ -548,7 +526,7 @@ class FleetController extends Controller
             ->andWhere('f.user = :user')
             ->andWhere('f.fightAt is null')
             ->andWhere('f.flightTime is null')
-            ->setParameters(array('id' => $id, 'user' => $user))
+            ->setParameters(['id' => $id, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -560,7 +538,7 @@ class FleetController extends Controller
             ($planetTake->getNiobium() + $fleetGive->getNiobium()) <= $planetTake->getNiobiumMax() &&
             ($planetTake->getWater() + $fleetGive->getWater()) <= $planetTake->getWaterMax()) {
         } else {
-            return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
         }
 
         $planetTake->setColonizer($planetTake->getColonizer() + $fleetGive->getColonizer());
@@ -591,10 +569,10 @@ class FleetController extends Controller
         $planetTake->setWorker($planetTake->getWorker() + $fleetGive->getWorker());
         $planetTake->setScientist($planetTake->getScientist() + $fleetGive->getScientist());
         $em->remove($fleetGive);
-        $em->persist($planetTake);
+
         $em->flush();
 
-        return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -610,13 +588,7 @@ class FleetController extends Controller
         $moreNow->setTimezone(new DateTimeZone('Europe/Paris'));
         $moreNow->add(new DateInterval('PT' . 120 . 'S'));
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $fleetGive = $em->getRepository('App:Fleet')
             ->createQueryBuilder('f')
@@ -624,28 +596,28 @@ class FleetController extends Controller
             ->andWhere('f.user = :user')
             ->andWhere('f.fightAt is null')
             ->andWhere('f.flightTime is null')
-            ->setParameters(array('id' => $id, 'user' => $user))
+            ->setParameters(['id' => $id, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
-        $form_sendFleet = $this->createForm(FleetSendType::class, null, array("user" => $user->getId()));
+        $form_sendFleet = $this->createForm(FleetSendType::class, null, ["user" => $user->getId()]);
         $form_sendFleet->handleRequest($request);
 
         if($fleetGive && $usePlanet) {
         } else {
-            return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
         }
         if ($form_sendFleet->isSubmitted() && $form_sendFleet->isValid()) {
             $sectorDestroy = $em->getRepository('App:Sector')
                 ->createQueryBuilder('s')
                 ->where('s.position = :sector')
                 ->andWhere('s.destroy = :true')
-                ->setParameters(array('sector' => $form_sendFleet->get('sector')->getData(), 'true' => 1))
+                ->setParameters(['sector' => $form_sendFleet->get('sector')->getData(), 'true' => 1])
                 ->getQuery()
                 ->getOneOrNullResult();
 
             if($sectorDestroy && $form_sendFleet->get('sector')->getData() != $fleetGive->getPlanet()->getSector()->getPosition()) {
-                return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+                return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
             }
 
             if($form_sendFleet->get('planet')->getData()) {
@@ -653,67 +625,75 @@ class FleetController extends Controller
                 $sector = $planetTake->getSector()->getPosition();
                 $planetTakee = $planetTake->getPosition();
                 if($planetTake == $fleetGive->getPlanet()) {
-                    return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+                    return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
                 }
             } else {
-                $galaxy = 1;
+                if($user->getHyperespace() == 1) {
+                    $galaxy = $form_sendFleet->get('galaxy')->getData();
+                } else {
+                    $galaxy = $fleetGive->getPlanet()->getSector()->getGalaxy()->getPosition();
+                }
                 $sector = $form_sendFleet->get('sector')->getData();
                 $planetTakee = $form_sendFleet->get('planete')->getData();
 
-                if (($galaxy < 1 || $galaxy > 10) || ($sector < 1 || $sector > 100) || ($planetTakee < 1 || $planetTakee > 25) ||
-                    ($galaxy != 1 && $user->getHyperespace() == 0)) {
-                    return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+                if (($galaxy < 1 || $galaxy > 5) || ($sector < 1 || $sector > 100) || ($planetTakee < 1 || $planetTakee > 25)) {
+                    return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
                 }
 
                 $planetTake = $em->getRepository('App:Planet')
                     ->createQueryBuilder('p')
                     ->join('p.sector', 's')
+                    ->join('s.galaxy', 'g')
                     ->where('s.position = :sector')
-                    ->andWhere('s.galaxy = :galaxy')
+                    ->andWhere('g.position = :galaxy')
                     ->andWhere('p.position = :planete')
-                    ->setParameters(array('sector' => $sector, 'galaxy' => $galaxy, 'planete' => $planetTakee))
+                    ->setParameters(['sector' => $sector, 'galaxy' => $galaxy, 'planete' => $planetTakee])
                     ->getQuery()
                     ->getOneOrNullResult();
 
                 if($planetTake == $fleetGive->getPlanet()) {
-                    return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+                    return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
                 }
             }
-
             $sFleet= $fleetGive->getPlanet()->getSector()->getPosition();
-            if ($sFleet == $sector) {
-                $pFleet = $fleetGive->getPlanet()->getPosition();
-                if (strpos('0 -1 1 -4 4 -5 5 6 -6', (strval($pFleet - $planetTakee)) ) != false) {
-                    $base = 1500;
-                    $price = 0.7;
-                } elseif (strpos('2 -2 3 -3 7 -7 8 -8 9 -9 10 -10 11 -11 12 -12', (strval($pFleet - $planetTakee)) ) != false) {
-                    $base = 1750;
-                    $price = 0.9;
-                } else {
-                    $base = 2000;
-                    $price = 1;
-                }
-            }
-            /*elseif (strpos('0 -1 1 -10 10 -9 9', (strval($sFleet - $sector)) ) != false) {
-                $base = 3000;
-                $price = 1.5;
-            } elseif (strpos('-20 20 12 11 8 2 -12 -11 -8 -2', (strval($sFleet - $sector)) ) != false) {
-                $base = 6800;
-                $price = 3.4;
-            } elseif (strpos('-28 28 29 30 31 32 33 22 12 3 7 -29 -30 -31 -32 -33 -22 -13 -3 -7', (strval($sFleet - $sector)) ) != false) {
-                $base = 8000;
-                $price = 4;
+            if($fleetGive->getPlanet()->getSector()->getGalaxy()->getPosition() != $galaxy) {
+                $base = 100000;
+                $price = 50;
             } else {
-                $base = 12000;
-                $price = 6;
-            }*/
-            else {
-                $base = 3000;
-                $price = 3;
+                if ($sFleet == $sector) {
+                    $pFleet = $fleetGive->getPlanet()->getPosition();
+                    if (strpos('0 -1 1 -4 4 -5 5 6 -6', (strval($pFleet - $planetTakee)) ) != false) {
+                        $base = 1500;
+                        $price = 0.7;
+                    } elseif (strpos('2 -2 3 -3 7 -7 8 -8 9 -9 10 -10 11 -11 12 -12', (strval($pFleet - $planetTakee)) ) != false) {
+                        $base = 1750;
+                        $price = 0.9;
+                    } else {
+                        $base = 2000;
+                        $price = 1;
+                    }
+                }
+                /*elseif (strpos('0 -1 1 -10 10 -9 9', (strval($sFleet - $sector)) ) != false) {
+                    $base = 3000;
+                    $price = 1.5;
+                } elseif (strpos('-20 20 12 11 8 2 -12 -11 -8 -2', (strval($sFleet - $sector)) ) != false) {
+                    $base = 6800;
+                    $price = 3.4;
+                } elseif (strpos('-28 28 29 30 31 32 33 22 12 3 7 -29 -30 -31 -32 -33 -22 -13 -3 -7', (strval($sFleet - $sector)) ) != false) {
+                    $base = 8000;
+                    $price = 4;
+                } else {
+                    $base = 12000;
+                    $price = 6;
+                }*/
+                else {
+                    $base = 3000;
+                    $price = 3;
+                }
             }
             $carburant = round($price * ($fleetGive->getNbrSignatures() / 200));
             if($carburant > $user->getBitcoin()) {
-                return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+                return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
             }
             if($fleetGive->getMotherShip()) {
                 $speed = $fleetGive->getSpeed() - ($fleetGive->getSpeed() * 0.10);
@@ -738,12 +718,11 @@ class FleetController extends Controller
             $fleetGive->setSector($planetTake->getSector());
             $fleetGive->setPlanete($planetTakee);
             $user->setBitcoin($user->getBitcoin() - $carburant);
-            $em->persist($fleetGive);
-            $em->persist($user);
+
             $em->flush();
-            return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
         }
-        return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -755,14 +734,8 @@ class FleetController extends Controller
         $user = $this->getUser();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
-
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $server = $em->getRepository('App:Server')->find(['id' => 1]);
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $fleetGive = $em->getRepository('App:Fleet')
             ->createQueryBuilder('f')
@@ -772,14 +745,14 @@ class FleetController extends Controller
             ->andWhere('f.fightAt is null')
             ->andWhere('f.flightTime is null')
             ->andWhere('p.user is not null or p.merchant = :true')
-            ->setParameters(array('id' => $id, 'user' => $user, 'true' => true))
+            ->setParameters(['id' => $id, 'user' => $user, 'true' => true])
             ->getQuery()
             ->getOneOrNullResult();
 
         $planetTake = $fleetGive->getPlanet();
         if($fleetGive && $usePlanet) {
         } else {
-            return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
         }
         
         if($planetTake->getMerchant() == true) {
@@ -802,11 +775,11 @@ class FleetController extends Controller
             $planetTake->setNiobium($planetTake->getNiobiumMax());
             $fleetGive->setNiobium(($planetTake->getNiobium() + $fleetGive->getNiobium()) - $planetTake->getNiobiumMax());
         }
-        $em->persist($fleetGive);
-        $em->persist($planetTake);
+        $server->setNbrSell($server->getNbrSell() + 1);
+
         $em->flush();
 
-        return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -818,14 +791,8 @@ class FleetController extends Controller
         $user = $this->getUser();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
-
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $server = $em->getRepository('App:Server')->find(['id' => 1]);
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $fleetGive = $em->getRepository('App:Fleet')
             ->createQueryBuilder('f')
@@ -835,14 +802,14 @@ class FleetController extends Controller
             ->andWhere('f.fightAt is null')
             ->andWhere('f.flightTime is null')
             ->andWhere('p.user is not null or p.merchant = :true')
-            ->setParameters(array('id' => $id, 'user' => $user, 'true' => true))
+            ->setParameters(['id' => $id, 'user' => $user, 'true' => true])
             ->getQuery()
             ->getOneOrNullResult();
 
         $planetTake = $fleetGive->getPlanet();
         if($fleetGive && $usePlanet) {
         } else {
-            return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
         }
         if($planetTake->getMerchant() == true) {
             $newWarPointS = ($fleetGive->getWater() / 3) / 400;
@@ -864,11 +831,11 @@ class FleetController extends Controller
             $planetTake->setWater($planetTake->getWaterMax());
             $fleetGive->setWater(($planetTake->getWater() + $fleetGive->getWater()) - $planetTake->getWaterMax());
         }
-        $em->persist($fleetGive);
-        $em->persist($planetTake);
+        $server->setNbrSell($server->getNbrSell() + 1);
+
         $em->flush();
 
-        return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -880,14 +847,8 @@ class FleetController extends Controller
         $user = $this->getUser();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
-
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $server = $em->getRepository('App:Server')->find(['id' => 1]);
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $fleetGive = $em->getRepository('App:Fleet')
             ->createQueryBuilder('f')
@@ -897,14 +858,14 @@ class FleetController extends Controller
             ->andWhere('f.fightAt is null')
             ->andWhere('f.flightTime is null')
             ->andWhere('p.user is not null or p.merchant = :true')
-            ->setParameters(array('id' => $id, 'user' => $user, 'true' => true))
+            ->setParameters(['id' => $id, 'user' => $user, 'true' => true])
             ->getQuery()
             ->getOneOrNullResult();
 
         $planetTake = $fleetGive->getPlanet();
         if($fleetGive && $usePlanet) {
         } else {
-            return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
         }
         if($planetTake->getMerchant() == true) {
             $newWarPointS = ($fleetGive->getSoldier() * 10) / 400;
@@ -926,11 +887,11 @@ class FleetController extends Controller
             $planetTake->setSoldier($planetTake->getSoldierMax());
             $fleetGive->setSoldier(($planetTake->getSoldier() + $fleetGive->getSoldier()) - $planetTake->getSoldierMax());
         }
-        $em->persist($fleetGive);
-        $em->persist($planetTake);
+        $server->setNbrSell($server->getNbrSell() + 1);
+
         $em->flush();
 
-        return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -942,14 +903,8 @@ class FleetController extends Controller
         $user = $this->getUser();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
-
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $server = $em->getRepository('App:Server')->find(['id' => 1]);
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $fleetGive = $em->getRepository('App:Fleet')
             ->createQueryBuilder('f')
@@ -959,14 +914,14 @@ class FleetController extends Controller
             ->andWhere('f.fightAt is null')
             ->andWhere('f.flightTime is null')
             ->andWhere('p.user is not null or p.merchant = :true')
-            ->setParameters(array('id' => $id, 'user' => $user, 'true' => true))
+            ->setParameters(['id' => $id, 'user' => $user, 'true' => true])
             ->getQuery()
             ->getOneOrNullResult();
 
         $planetTake = $fleetGive->getPlanet();
         if($fleetGive && $usePlanet) {
         } else {
-            return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
         }
         if($planetTake->getMerchant() == true) {
             $newWarPointS = ($fleetGive->getWorker() * 50) / 400;
@@ -988,11 +943,11 @@ class FleetController extends Controller
             $planetTake->setWorker($planetTake->getWorkerMax());
             $fleetGive->setWorker(($planetTake->getWorker() + $fleetGive->getWorker()) - $planetTake->getWorkerMax());
         }
-        $em->persist($fleetGive);
-        $em->persist($planetTake);
+        $server->setNbrSell($server->getNbrSell() + 1);
+
         $em->flush();
 
-        return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -1004,14 +959,8 @@ class FleetController extends Controller
         $user = $this->getUser();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
-
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $server = $em->getRepository('App:Server')->find(['id' => 1]);
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $fleetGive = $em->getRepository('App:Fleet')
             ->createQueryBuilder('f')
@@ -1021,14 +970,14 @@ class FleetController extends Controller
             ->andWhere('f.fightAt is null')
             ->andWhere('f.flightTime is null')
             ->andWhere('p.user is not null or p.merchant = :true')
-            ->setParameters(array('id' => $id, 'user' => $user, 'true' => true))
+            ->setParameters(['id' => $id, 'user' => $user, 'true' => true])
             ->getQuery()
             ->getOneOrNullResult();
 
         $planetTake = $fleetGive->getPlanet();
         if($fleetGive && $usePlanet) {
         } else {
-            return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
         }
         if($planetTake->getMerchant() == true) {$reportSell = new Report();
             $newWarPointS = ($fleetGive->getScientist() * 100) / 400;
@@ -1050,11 +999,11 @@ class FleetController extends Controller
             $planetTake->setScientist($planetTake->getScientistMax());
             $fleetGive->setScientist(($planetTake->getScientist() + $fleetGive->getScientist()) - $planetTake->getScientistMax());
         }
-        $em->persist($fleetGive);
-        $em->persist($planetTake);
+        $server->setNbrSell($server->getNbrSell() + 1);
+
         $em->flush();
 
-        return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -1066,14 +1015,8 @@ class FleetController extends Controller
         $user = $this->getUser();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
-
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $server = $em->getRepository('App:Server')->find(['id' => 1]);
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $fleetGive = $em->getRepository('App:Fleet')
             ->createQueryBuilder('f')
@@ -1083,14 +1026,14 @@ class FleetController extends Controller
             ->andWhere('f.fightAt is null')
             ->andWhere('f.flightTime is null')
             ->andWhere('p.user is not null or p.merchant = :true')
-            ->setParameters(array('id' => $id, 'user' => $user, 'true' => true))
+            ->setParameters(['id' => $id, 'user' => $user, 'true' => true])
             ->getQuery()
             ->getOneOrNullResult();
 
         $planetTake = $fleetGive->getPlanet();
         if($fleetGive && $usePlanet) {
         } else {
-            return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
         }
         if($planetTake->getMerchant() == true) {
             $reportSell = new Report();
@@ -1140,12 +1083,11 @@ class FleetController extends Controller
             $planetTake->setWorker($planetTake->getWorkerMax());
             $fleetGive->setWorker(($planetTake->getWorker() + $fleetGive->getWorker()) - $planetTake->getWorkerMax());
         }
+        $server->setNbrSell($server->getNbrSell() + 1);
 
-        $em->persist($fleetGive);
-        $em->persist($planetTake);
         $em->flush();
 
-        return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -1156,13 +1098,7 @@ class FleetController extends Controller
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $fleetGive = $em->getRepository('App:Fleet')
             ->createQueryBuilder('f')
@@ -1170,7 +1106,7 @@ class FleetController extends Controller
             ->andWhere('f.user = :user')
             ->andWhere('f.fightAt is null')
             ->andWhere('f.flightTime is null')
-            ->setParameters(array('id' => $id, 'user' => $user))
+            ->setParameters(['id' => $id, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -1180,12 +1116,12 @@ class FleetController extends Controller
             ->andWhere('f.user = :user')
             ->andWhere('f.fightAt is null')
             ->andWhere('f.flightTime is null')
-            ->setParameters(array('id' => $id2, 'user' => $user))
+            ->setParameters(['id' => $id2, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
         if($fleetGive && $usePlanet) {
         } else {
-            return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
         }
 
         $fleetTake->setColonizer($fleetTake->getColonizer() + $fleetGive->getColonizer());
@@ -1217,10 +1153,9 @@ class FleetController extends Controller
         $fleetTake->setScientist($fleetTake->getScientist() + $fleetGive->getScientist());
         $em->remove($fleetGive);
         $fleetTake->setRecycleAt(null);
-        $em->persist($fleetTake);
         $em->flush();
 
-        return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -1233,13 +1168,7 @@ class FleetController extends Controller
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $fleet = $em->getRepository('App:Fleet')
             ->createQueryBuilder('f')
@@ -1247,7 +1176,7 @@ class FleetController extends Controller
             ->andWhere('f.user = :user')
             ->andWhere('f.fightAt is null')
             ->andWhere('f.flightTime is null')
-            ->setParameters(array('id' => $id, 'user' => $user))
+            ->setParameters(['id' => $id, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -1255,14 +1184,14 @@ class FleetController extends Controller
             ($fleet->getPlanet()->getNbCdr() > 0 || $fleet->getPlanet()->getWtCdr() > 0) &&
             $fleet->getRecycleur() && $fleet->getCargoPlace() > $fleet->getCargoFull()) {
         } else {
-            return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
         }
         $now->add(new DateInterval('PT' . 3600 . 'S'));
         $fleet->setRecycleAt($now);
-        $em->persist($fleet);
+
         $em->flush();
 
-        return $this->redirectToRoute('map', array('idp' => $usePlanet->getId(), 'id' => $fleet->getPlanet()->getSector()->getPosition()));
+        return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $fleet->getPlanet()->getSector()->getPosition(), 'gal' => $fleet->getPlanet()->getSector()->getGalaxy()->getId()]);
     }
 
     /**
@@ -1273,27 +1202,21 @@ class FleetController extends Controller
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $fleet = $em->getRepository('App:Fleet')
             ->createQueryBuilder('f')
             ->where('f.id = :id')
             ->andWhere('f.user = :user')
-            ->setParameters(array('id' => $id, 'user' => $user))
+            ->setParameters(['id' => $id, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
         $fleet->setRecycleAt(null);
-        $em->persist($fleet);
+
         $em->flush();
 
-        return $this->redirectToRoute('map', array('idp' => $usePlanet->getId(), 'id' => $fleet->getPlanet()->getSector()->getPosition()));
+        return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $fleet->getPlanet()->getSector()->getPosition(), 'gal' => $fleet->getPlanet()->getSector()->getGalaxy()->getId()]);
     }
 
     /**
@@ -1304,19 +1227,13 @@ class FleetController extends Controller
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $oldFleet = $em->getRepository('App:Fleet')
             ->createQueryBuilder('f')
             ->where('f.id = :id')
             ->andWhere('f.user = :user')
-            ->setParameters(array('id' => $id, 'user' => $user))
+            ->setParameters(['id' => $id, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -1353,7 +1270,7 @@ class FleetController extends Controller
                 ($total == 0 || $cargoI < 0) || ($cargoV < 0 || $cargoX < 0) || ($hunterHeavy < 0 || $corvet < 0) ||
                 ($corvetLaser < 0 || $fregatePlasma < 0) || ($croiser < 0 || $ironClad < 0) || ($destroyer < 0 || $hunterWar < 0) ||
                 ($corvetWar < 0 || $moonMaker < 0) || ($radarShip < 0 || $brouilleurShip < 0) || ($motherShip < 0 || $cargoTotal < 0)) {
-                return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+                return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
             }
             $eAlly = $user->getAllyEnnemy();
             $warAlly = [];
@@ -1370,7 +1287,7 @@ class FleetController extends Controller
                 ->andWhere('f.attack = :true OR a.sigle in (:ally)')
                 ->andWhere('f.user != :user')
                 ->andWhere('f.flightTime is null')
-                ->setParameters(array('planet' => $oldFleet->getPlanet(), 'true' => true, 'ally' => $warAlly, 'user' => $user))
+                ->setParameters(['planet' => $oldFleet->getPlanet(), 'true' => true, 'ally' => $warAlly, 'user' => $user])
                 ->getQuery()
                 ->getResult();
 
@@ -1403,7 +1320,7 @@ class FleetController extends Controller
                     ->join('f.user', 'u')
                     ->where('f.planet = :planet')
                     ->andWhere('f.user != :user')
-                    ->setParameters(array('planet' => $oldFleet->getPlanet(), 'user' => $user))
+                    ->setParameters(['planet' => $oldFleet->getPlanet(), 'user' => $user])
                     ->getQuery()
                     ->getResult();
                 $now = new DateTime();
@@ -1411,7 +1328,6 @@ class FleetController extends Controller
                 $now->add(new DateInterval('PT' . 300 . 'S'));
                 foreach ($allFleets as $updateF) {
                     $updateF->setFightAt($now);
-                    $em->persist($updateF);
                 }
                 $fleet->setFightAt($now);
             }
@@ -1441,11 +1357,11 @@ class FleetController extends Controller
             $oldFleet->setCroiser($croiser);
             $oldFleet->setIronClad($ironClad);
             $oldFleet->setDestroyer($destroyer);
-            $em->persist($oldFleet);
+
             $em->flush();
 
 
-            return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
         }
 
         return $this->render('connected/fleet/split.html.twig', [
@@ -1465,19 +1381,13 @@ class FleetController extends Controller
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $fleet = $em->getRepository('App:Fleet')
             ->createQueryBuilder('f')
             ->where('f.id = :id')
             ->andWhere('f.user = :user')
-            ->setParameters(array('id' => $id, 'user' => $user))
+            ->setParameters(['id' => $id, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -1486,10 +1396,10 @@ class FleetController extends Controller
             $fleet->setPlanete(null);
             $fleet->setSector(null);
             $fleet->setNewPlanet(null);
-            $em->persist($fleet);
+
             $em->flush();
         }
 
-        return $this->redirectToRoute('fleet', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
     }
 }

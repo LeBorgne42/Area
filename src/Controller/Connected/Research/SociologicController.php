@@ -28,7 +28,7 @@ class SociologicController extends Controller
             ->createQueryBuilder('p')
             ->where('p.id = :id')
             ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->setParameters(['id' => $idp, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
         $level = $user->getDemography() + 1;
@@ -36,7 +36,7 @@ class SociologicController extends Controller
 
         if(($userBt < ($level * 8000)) ||
             ($level == 6 || $user->getSearchAt() > $now)) {
-            return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
         }
 
         $now->add(new DateInterval('PT' . round(($level * 4800 / $user->getScientistProduction())) . 'S'));
@@ -44,10 +44,9 @@ class SociologicController extends Controller
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - ($level * 8000));
         $usePlanet->setWorkerProduction($usePlanet->getWorkerProduction() + 500);
-        $em->persist($user);
         $em->flush();
 
-        return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -63,7 +62,7 @@ class SociologicController extends Controller
             ->createQueryBuilder('p')
             ->where('p.id = :id')
             ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
+            ->setParameters(['id' => $idp, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -72,16 +71,15 @@ class SociologicController extends Controller
 
         if(($userBt < ($level * 11700) || $user->getDemography() == 0) ||
             ($level == 4 || $user->getSearchAt() > $now)) {
-            return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
         }
 
         $now->add(new DateInterval('PT' . round(($level * 9300 / $user->getScientistProduction())) . 'S'));
         $user->setSearch('discipline');
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - ($level * 11700));
-        $em->persist($user);
         $em->flush();
 
-        return $this->redirectToRoute('search', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
     }
 }

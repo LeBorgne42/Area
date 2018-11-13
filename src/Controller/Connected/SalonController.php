@@ -37,13 +37,7 @@ class SalonController extends Controller
             return $this->redirectToRoute('game_over');
         }
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         if($user->getAlly()) {
             $sigle = $user->getAlly()->getSigle();
@@ -51,12 +45,7 @@ class SalonController extends Controller
             $sigle = 'AKOUNAMATATA';
         }
 
-        $salon = $em->getRepository('App:Salon')
-            ->createQueryBuilder('s')
-            ->where('s.id = :id')
-            ->setParameters(array('id' => $id))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $salon = $em->getRepository('App:Salon')->find(['id' => $id]);
 
         $salons = $em->getRepository('App:Salon')
             ->createQueryBuilder('s')
@@ -65,14 +54,14 @@ class SalonController extends Controller
             ->where('a.sigle = :sigle')
             ->orWhere('s.name = :name')
             ->orWhere('u.username = :user')
-            ->setParameters(array('sigle' => $sigle, 'name' => 'Public', 'user' => $user->getUserName()))
+            ->setParameters(['sigle' => $sigle, 'name' => 'Public', 'user' => $user->getUserName()])
             ->getQuery()
             ->getResult();
 
         $userCos = $em->getRepository('App:User')
             ->createQueryBuilder('u')
             ->where('u.lastActivity > :date')
-            ->setParameters(array('date' => $connected))
+            ->setParameters(['date' => $connected])
             ->orderBy('u.username', 'ASC')
             ->getQuery()
             ->getResult();
@@ -84,7 +73,7 @@ class SalonController extends Controller
             }
         }
         if($ok == 0) {
-            return $this->redirectToRoute('salon', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('salon', ['idp' => $usePlanet->getId()]);
         }
 
         $form_message = $this->createForm(SalonType::class);
@@ -97,7 +86,7 @@ class SalonController extends Controller
                 ->where('sc.salon = :attachSalon')
                 ->andWhere('sc.user != :user')
                 ->andWhere('sc.sendAt > :date')
-                ->setParameters(array('attachSalon' => $salon, 'user' => $user, 'date' => $user->getSalonAt()))
+                ->setParameters(['attachSalon' => $salon, 'user' => $user, 'date' => $user->getSalonAt()])
                 ->setMaxResults('1')
                 ->getQuery()
                 ->getResult();
@@ -105,20 +94,20 @@ class SalonController extends Controller
             if($newMessages || $user->getSalonAt() == null) {
                 $response = new JsonResponse();
                 $response->setData(
-                    array(
+                    [
                         'has_error' => false,
-                    )
+                    ]
                 );
                 $user->setSalonAt($now);
-                $em->persist($user);
+
                 $em->flush();
                 return $response;
             } else {
                 $response = new JsonResponse();
                 $response->setData(
-                    array(
+                    [
                         'has_error' => true,
-                    )
+                    ]
                 );
                 return $response;
             }
@@ -136,7 +125,7 @@ class SalonController extends Controller
                     ->createQueryBuilder('sc')
                     ->orderBy('sc.sendAt', 'ASC')
                     ->where('sc.salon = :attachSalon')
-                    ->setParameters(array('attachSalon' => $salon))
+                    ->setParameters(['attachSalon' => $salon])
                     ->setMaxResults('10')
                     ->getQuery()
                     ->getResult();
@@ -148,23 +137,20 @@ class SalonController extends Controller
                 $userViews = $em->getRepository('App:User')
                     ->createQueryBuilder('u')
                     ->where('u.id != :user')
-                    ->setParameters(array('user' => $user->getId()))
+                    ->setParameters(['user' => $user->getId()])
                     ->getQuery()
                     ->getResult();
                 foreach($userViews as $userView) {
                     $userView->setSalonAt(null);
-                    $em->persist($userView);
                 }
             } else {
                 foreach($salon->getAllys() as $ally) {
                     foreach($ally->getUsers() as $tmpuser) {
                         $tmpuser->setSalonAt(null);
-                        $em->persist($tmpuser);
                     }
                 }
                 foreach($salon->getUsers() as $tmpuser) {
                     $tmpuser->setSalonAt(null);
-                    $em->persist($tmpuser);
                 }
             }
 
@@ -174,7 +160,7 @@ class SalonController extends Controller
             $form_message = $this->createForm(SalonType::class);
         }
         $user->setSalonAt($now);
-        $em->persist($user);
+
         $em->flush();
 
         return $this->render('connected/salon.html.twig', [
@@ -194,13 +180,8 @@ class SalonController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $salon = $em->getRepository('App:Salon')
             ->createQueryBuilder('s')
@@ -210,11 +191,10 @@ class SalonController extends Controller
             ->getOneOrNullResult();
 
         $salon->addUser($user);
-        $em->persist($salon);
 
         $em->flush();
 
-        return $this->redirectToRoute('salon', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('salon', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -224,13 +204,7 @@ class SalonController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $salon = $em->getRepository('App:Salon')
             ->createQueryBuilder('s')
@@ -240,10 +214,9 @@ class SalonController extends Controller
             ->getOneOrNullResult();
 
         $salon->removeUser($user);
-        $em->persist($salon);
 
         $em->flush();
 
-        return $this->redirectToRoute('salon', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('salon', ['idp' => $usePlanet->getId()]);
     }
 }

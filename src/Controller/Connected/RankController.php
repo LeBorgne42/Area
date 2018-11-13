@@ -18,14 +18,8 @@ class RankController extends Controller
     public function rankAction($idp)
     {
         $em = $this->getDoctrine()->getManager();
-
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $user = $this->getUser();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $allAllys = $em->getRepository('App:Ally')
             ->createQueryBuilder('a')
@@ -46,14 +40,8 @@ class RankController extends Controller
     public function rankUserAction($idp)
     {
         $em = $this->getDoctrine()->getManager();
-
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $user = $this->getUser();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $users = $em->getRepository('App:User')
             ->createQueryBuilder('u')
@@ -61,7 +49,7 @@ class RankController extends Controller
             ->where('u.rank is not null')
             ->andWhere('u.id != :one')
             ->andWhere('r.warPoint > :one')
-            ->setParameters(array('one' => 1))
+            ->setParameters(['one' => 1])
             ->orderBy('r.warPoint', 'DESC')
             ->getQuery()
             ->getResult();
@@ -78,14 +66,8 @@ class RankController extends Controller
 //    public function rankUserAction($idp)
 //    {
 //        $em = $this->getDoctrine()->getManager();
-//
-//        $usePlanet = $em->getRepository('App:Planet')
-//            ->createQueryBuilder('p')
-//            ->where('p.id = :id')
-//            ->andWhere('p.user = :user')
-//            ->setParameters(array('id' => $idp, 'user' => $this->getUser()))
-//            ->getQuery()
-//            ->getOneOrNullResult();
+//        $user = $this->getUser();
+//        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 //
 //        $users = $em->getRepository('App:User')
 //            ->createQueryBuilder('u')

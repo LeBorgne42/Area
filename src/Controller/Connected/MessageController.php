@@ -37,18 +37,12 @@ class MessageController extends Controller
             return $this->redirectToRoute('game_over');
         }
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $removeMessages = $em->getRepository('App:Message')
             ->createQueryBuilder('m')
             ->where('m.sendAt < :now')
-            ->setParameters(array('now' => $nowDel))
+            ->setParameters(['now' => $nowDel])
             ->getQuery()
             ->getResult();
 
@@ -62,7 +56,7 @@ class MessageController extends Controller
         $messages = $em->getRepository('App:Message')
             ->createQueryBuilder('m')
             ->where('m.idSender = :id')
-            ->setParameters(array('id' => $user->getId()))
+            ->setParameters(['id' => $user->getId()])
             ->orderBy('m.sendAt', 'DESC')
             ->getQuery()
             ->getResult();
@@ -70,13 +64,13 @@ class MessageController extends Controller
         $messagesR = $em->getRepository('App:Message')
             ->createQueryBuilder('m')
             ->where('m.user = :user')
-            ->setParameters(array('user' => $user))
+            ->setParameters(['user' => $user])
             ->orderBy('m.sendAt', 'DESC')
             ->getQuery()
             ->getResult();
 
         $user->setViewMessage(true);
-        $em->persist($user);
+
         $em->flush();
 
         $form_message = $this->createForm(MessageType::class, $message);
@@ -94,9 +88,8 @@ class MessageController extends Controller
             $recever->setBitcoin($recever->getBitcoin() + abs($form_message->get('bitcoin')->getData()));
             $recever->setViewMessage(false);
             $user->setBitcoin($user->getBitcoin() - abs($form_message->get('bitcoin')->getData()));
-            $em->persist($user);
-            $em->persist($recever);
             $em->persist($message);
+
             $em->flush();
 
             $form_message = null;
@@ -126,28 +119,17 @@ class MessageController extends Controller
             return $this->redirectToRoute('game_over');
         }
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         if($user->getSalonBan() > $now) {
-            return $this->redirectToRoute('message', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('message', ['idp' => $usePlanet->getId()]);
         }
 
         $form_message = $this->createForm(MessageRespondeType::class, $message);
         $form_message->handleRequest($request);
 
         if ($form_message->isSubmitted() && $form_message->isValid() && abs($form_message->get('bitcoin')->getData()) < $user->getBitcoin()) {
-            $userRecever = $em->getRepository('App:User')
-                ->createQueryBuilder('u')
-                ->where('u.id = :id')
-                ->setParameters(array('id' => $id))
-                ->getQuery()
-                ->getOneOrNullResult();
+            $userRecever = $em->getRepository('App:User')->find(['id' => $id]);
 
             if ($form_message->get('anonymous')->getData() == false) {
                 $message->setSender($user->getUsername());
@@ -159,11 +141,10 @@ class MessageController extends Controller
             $userRecever->setBitcoin($userRecever->getBitcoin() + abs($form_message->get('bitcoin')->getData()));
             $userRecever->setViewMessage(false);
             $user->setBitcoin($user->getBitcoin() - abs($form_message->get('bitcoin')->getData()));
-            $em->persist($user);
-            $em->persist($userRecever);
             $em->persist($message);
+
             $em->flush();
-            return $this->redirectToRoute('message', array('idp' => $usePlanet->getId()));
+            return $this->redirectToRoute('message', ['idp' => $usePlanet->getId()]);
         }
 
         return $this->render('connected/profil/user_responde.html.twig', [
@@ -181,27 +162,21 @@ class MessageController extends Controller
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $message = $em->getRepository('App:Message')
             ->createQueryBuilder('m')
             ->where('m.id = :id')
             ->andWhere('m.user = :user')
-            ->setParameters(array('id' => $id, 'user' => $user))
+            ->setParameters(['id' => $id, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
         $message->setNewMessage(false);
-        $em->persist($message);
+
         $em->flush();
 
-        return $this->redirectToRoute('message', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('message', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -212,28 +187,22 @@ class MessageController extends Controller
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
 
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(array('id' => $idp, 'user' => $user))
-            ->getQuery()
-            ->getOneOrNullResult();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $messages = $em->getRepository('App:Message')
             ->createQueryBuilder('m')
             ->where('m.newMessage = :true')
             ->andWhere('m.user = :user')
-            ->setParameters(array('true' => true, 'user' => $user))
+            ->setParameters(['true' => true, 'user' => $user])
             ->getQuery()
             ->getResult();
 
         foreach($messages as $message) {
             $message->setNewMessage(false);
-            $em->persist($message);
         }
+
         $em->flush();
 
-        return $this->redirectToRoute('message', array('idp' => $usePlanet->getId()));
+        return $this->redirectToRoute('message', ['idp' => $usePlanet->getId()]);
     }
 }

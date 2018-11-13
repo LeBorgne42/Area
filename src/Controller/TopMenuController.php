@@ -10,32 +10,6 @@ use App\Form\Front\UserContactType;
 class TopMenuController extends Controller
 {
     /**
-     * @Route("/media/", name="media")
-     * @Route("/media/", name="media_noSlash")
-     */
-    public function mediaAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        if($this->getUser()) {
-            $usePlanet = $em->getRepository('App:Planet')
-                ->createQueryBuilder('p')
-                ->join('p.user', 'u')
-                ->where('u.username = :user')
-                ->setParameters(array('user' => $this->getUser()->getUsername()))
-                ->getQuery()
-                ->setMaxResults(1)
-                ->getOneOrNullResult();
-        } else {
-            $usePlanet = null;
-        }
-
-        return $this->render('anonymous/media.html.twig', [
-            'usePlanet' => $usePlanet,
-        ]);
-    }
-
-    /**
      * @Route("/reglement/", name="rules")
      * @Route("/reglement/", name="rules_noSlash")
      */
@@ -48,7 +22,7 @@ class TopMenuController extends Controller
                 ->createQueryBuilder('p')
                 ->join('p.user', 'u')
                 ->where('u.username = :user')
-                ->setParameters(array('user' => $this->getUser()->getUsername()))
+                ->setParameters(['user' => $this->getUser()->getUsername()])
                 ->getQuery()
                 ->setMaxResults(1)
                 ->getOneOrNullResult();
@@ -57,32 +31,6 @@ class TopMenuController extends Controller
         }
 
         return $this->render('anonymous/rules.html.twig', [
-            'usePlanet' => $usePlanet,
-        ]);
-    }
-
-    /**
-     * @Route("/faq/", name="faq")
-     * @Route("/faq/", name="faq_noSlash")
-     */
-    public function faqAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        if($this->getUser()) {
-            $usePlanet = $em->getRepository('App:Planet')
-                ->createQueryBuilder('p')
-                ->join('p.user', 'u')
-                ->where('u.username = :user')
-                ->setParameters(array('user' => $this->getUser()->getUsername()))
-                ->getQuery()
-                ->setMaxResults(1)
-                ->getOneOrNullResult();
-        } else {
-            $usePlanet = null;
-        }
-
-        return $this->render('anonymous/faq.html.twig', [
             'usePlanet' => $usePlanet,
         ]);
     }
@@ -103,7 +51,7 @@ class TopMenuController extends Controller
                 ->setBody(
                     $this->renderView(
                         'emails/contact.html.twig',
-                        array('text' => $form_contact->get('text')->getData(), 'email' => $form_contact->get('email')->getData())
+                        ['text' => $form_contact->get('text')->getData(), 'email' => $form_contact->get('email')->getData()]
                     ),
                     'text/html'
                 );
@@ -111,7 +59,7 @@ class TopMenuController extends Controller
             $mailer->send($message);
 
             $this->addFlash("success", "This is a success message");
-            return $this->redirectToRoute('faq');
+            return $this->redirectToRoute('home');
         }
 
         return $this->render('anonymous/contact.html.twig', [

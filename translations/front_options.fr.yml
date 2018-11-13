@@ -3,4 +3,5 @@ modifPassword: 'Changer le mot de passe'
 planetOrder: 'Ordre des planètes'
 form.oldPassword: 'Ancien mdp'
 form.password: 'Nouveau mdp'
+form.confirmPassword: 'Confirmer mdp'
 form.newOptions: Sauvegarder
