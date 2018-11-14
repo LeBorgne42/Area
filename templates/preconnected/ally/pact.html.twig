@@ -1,0 +1,212 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'front_ally' %}
+
+{% block title %}{{ 'title'|trans }}{% endblock %}
+
+{% block body %}
+    {%- block left_menu -%}
+    {%- endblock -%}
+    {%- block top_ressource -%}
+    {%- endblock -%}
+    {%- block right_planet -%}
+    {%- endblock -%}
+    <div class="front-block-ally">
+        {% if app.user.getAlly() %}
+            <h1 class="text-center text-orange mb-4">{{ app.user.getAlly().getName() }}<small> - [{{ app.user.getAlly().getSigle() }}]</small></h1>
+            <div class="text-center modify-allyImage">
+                {% if app.user.getAlly().getImageName() %}
+                    <img height="300" width="450" src="{{ vich_uploader_asset(app.user.getAlly(), 'imageFile') }}">
+                {% else %}
+                    <img height="300" width="450" src="{{ asset('img/ally.jpg') }}">
+                {% endif %}
+            </div>
+            <h1 class="text-center p-4">{{ 'ally.pactsTitle'|trans }}</h1>
+            <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a href="{{ path('pre_ally') }}" >{{ app.user.getAlly().getUsers()|length }} {{ 'ally.members'|trans }}</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ path('pre_ally_page_bank') }}" >{{ 'ally.found'|trans }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" id="pacts-tab" data-toggle="tab" href="#pacts" role="tab" aria-controls="pacts" aria-selected="true">{{ app.user.getAlly().getPacts() }}  {{ 'ally.pacts'|trans }}</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ path('pre_ally_page_add') }}" >{{ 'ally.add'|trans }}</a>
+                </li>
+                {% if app.user.getGrade().getPlacement() == 1 %}
+                    <li class="nav-item">
+                        <a href="{{ path('pre_ally_page_admin') }}" >{{ 'ally.admin'|trans }}</a>
+                    </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a href="{{ path('pre_ally_page_exit') }}" >{{ 'ally.leave'|trans }}</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="pacts" role="tabpanel" aria-labelledby="pacts-tab">
+                    {% if app.user.getGrade().getCanPeace() == 1 or app.user.getGrade().getCanWar() == 1 %}
+                        {{ form_start(form_allyPact) }}
+                        <div class="row mt-5">
+                            <div class="offset-1 col-3 form-group">
+                                {{ form_widget(form_allyPact.allyName) }}
+                            </div>
+                            <div class="col-3 form-group">
+                                {{ form_widget(form_allyPact.pactType) }}
+                            </div>
+                            <div class="col-4 form-group">
+                                {{ form_widget(form_allyPact.sendForm,{attr: { class: 'btn btn-lg btn-info'}}) }}
+                            </div>
+                        </div>
+                        {{ form_end(form_allyPact) }}
+                    {% endif %}
+                    {% if app.user.getAlly().getAllieds()|length %}
+                        <table class="table table-striped table-bordered table-dark text-center mt-4">
+                            <tbody>
+                            <tr>
+                                <th class="tab-cells-name">{{ 'ally.alliedName'|trans }}</th>
+                                <th class="tab-cells-name">{{ 'ally.statut'|trans }}</th>
+                                <th class="tab-cells-name">{{ 'ally.signedAt'|trans }}</th>
+                                <th class="tab-cells-name">{{ 'ally.cancelPact'|trans }}</th>
+                            </tr>
+                            {% for allied in app.user.getAlly().getAllieds() %}
+                                <tr>
+                                    <td class="center-cells">
+                                        [{{ allied.getAllytag() }}]
+                                    </td>
+                                    <td class="center-cells">
+                                        {% if allied.getDismissBy() == app.user.getAlly().getSigle() %}{{ 'ally.machiavel'|trans }}{% elseif allied.getDismissBy() != app.user.getAlly().getSigle() and allied.getDismissBy() %}{{ 'ally.traitor'|trans }}{% elseif allied.getAccepted() == 1 %}{{ 'ally.accepted'|trans }}{% else %}{{ 'ally.pactWaiting'|trans }}{% endif %}
+                                    </td>
+                                    <td class="center-cells">
+                                        {{ allied.getSignedAt()|date('d/m/Y H:i') }}
+                                    </td>
+                                    <td class="center-cells">
+                                        {% if allied.getDismissBy() %}<span class="timerArea" hidden>{{ allied.getDismissAt()|date('Y/m/d H:i:s') }}</span>{% else %}<a class="text-rouge" href="{{ path('pre_ally_remove_pact',{'id': allied.getId()}) }}"><div class="glyphicon glyphicon-remove"></div> <span>{{ 'ally.refuseCancelPact'|trans }}</span></a>{% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endif %}
+                    {% if app.user.getAlly().getPnas()|length %}
+                        <table class="table table-striped table-bordered table-dark text-center mt-4">
+                            <tbody>
+                            <tr>
+                                <th class="tab-cells-name">{{ 'ally.pnaName'|trans }}</th>
+                                <th class="tab-cells-name">{{ 'ally.statut'|trans }}</th>
+                                <th class="tab-cells-name">{{ 'ally.signedAt'|trans }}</th>
+                                <th class="tab-cells-name">{{ 'ally.cancelPna'|trans }}</th>
+                            </tr>
+                            {% for pna in app.user.getAlly().getPnas() %}
+                                <tr>
+                                    <td class="center-cells">
+                                        {{ pna.getAllytag() }}
+                                    </td>
+                                    <td class="center-cells">
+                                        {% if pna.getAccepted() == 1 %}{{ 'ally.accepted'|trans }}{% else %}{{ 'ally.pactWaiting'|trans }}{% endif %}
+                                    </td>
+                                    <td class="center-cells">
+                                        {{ pna.getSignedAt()|date('d/m/Y H:i') }}
+                                    </td>
+                                    <td class="center-cells">
+                                        <a class="text-rouge" href="{{ path('pre_ally_remove_pna',{'id': pna.getId()}) }}"><div class="glyphicon glyphicon-remove"></div> <span>{{ 'ally.refuseCancelPact'|trans }}</span></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endif %}
+                    {% if app.user.getAlly().getWars()|length %}
+                        <table class="table table-striped table-bordered table-dark text-center mt-4">
+                            <tbody>
+                            <tr>
+                                <th class="tab-cells-name">{{ 'ally.warName'|trans }}</th>
+                                <th class="tab-cells-name">{{ 'ally.signedAt'|trans }}</th>
+                                <th class="tab-cells-name">{{ 'ally.cancelwar'|trans }}</th>
+                            </tr>
+                            {% for war in app.user.getAlly().getWars() %}
+                                <tr>
+                                    <td class="center-cells">
+                                        {{ war.getAllytag() }}
+                                    </td>
+                                    <td class="center-cells">
+                                        {{ war.getSignedAt()|date('d/m/Y H:i') }}
+                                    </td>
+                                    <td class="center-cells">
+                                        <a class="text-orange" href="{{ path('pre_ally_make_peace',{'id': war.getId()}) }}"><div class="glyphicon glyphicon-flag"></div> <span>{{ 'ally.makePeace'|trans }}</span></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endif %}
+                    {% if app.user.getAlly().getPeaces()|length %}
+                        <table class="table table-striped table-bordered table-dark text-center mt-4">
+                            <tbody>
+                            <tr>
+                                <th class="tab-cells-name">{{ 'ally.peaceName'|trans }}</th>
+                                <th class="tab-cells-name">{{ 'ally.remainPeace'|trans }}</th>
+                                <th class="tab-cells-name">{{ 'ally.statusPeace'|trans }}</th>
+                            </tr>
+                            {% for peace in app.user.getAlly().getPeaces() %}
+                                {% if peace.getAccepted() == 1 %}
+                                    <tr>
+                                        <td class="center-cells">
+                                            {{ peace.getAllytag() }}
+                                        </td>
+                                        <td class="center-cells">
+                                            <div class="timerArea" hidden>{{ peace.getSignedAt|date('Y/m/d H:i:s') }}</div>
+                                        </td>
+                                        <td class="center-cells">
+                                            {% if peace.getType() == 1 %}<span class="text-vert">{{ 'ally.warWin'|trans }}</span>{% else %}<span class="text-rouge">{{ 'ally.warLose'|trans }}</span>{% endif %}
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endif %}
+                    {% if waitingPna|length or waitingAllied|length %}
+                        <table class="table table-striped table-bordered table-dark text-center mt-4">
+                            <tbody>
+                            <tr>
+                                <th class="tab-cells-name">{{ 'ally.allyName'|trans }}</th>
+                                <th class="tab-cells-name">{{ 'ally.signedAt'|trans }}</th>
+                                <th class="tab-cells-name">{{ 'ally.acceptCancel'|trans }}</th>
+                            </tr>
+                            <tr>
+                                {% for pna in waitingPna %}
+                                    <td class="center-cells">
+                                        {{ pna.getAllytag() }}
+                                    </td>
+                                    <td class="center-cells">
+                                        {{ pna.getSignedAt()|date('d/m/Y H:i') }}
+                                    </td>
+                                    <td class="center-cells">
+                                        <a href="{{ path('pre_ally_acceptPna',{'id': pna.getId()}) }}"><div class="glyphicon glyphicon-ok"></div> <span>{{ 'ally.acceptPact'|trans }}</span></a>
+                                        <a class="text-rouge" href="{{ path('pre_ally_refusePna',{'id': pna.getId()}) }}"><div class="glyphicon glyphicon-remove"></div> <span>{{ 'ally.refusePact'|trans }}</span></a>
+                                    </td>
+                                {% endfor %}
+                                {% for allied in waitingAllied %}
+                                    <td class="center-cells">
+                                        {{ allied.getAllytag() }}
+                                    </td>
+                                    <td class="center-cells">
+                                        {{ allied.getSignedAt()|date('d/m/Y H:i') }}
+                                    </td>
+                                    <td class="center-cells">
+                                        <a href="{{ path('pre_ally_acceptAllied',{'id': allied.getId()}) }}"><div class="glyphicon glyphicon-ok"></div> <span>{{ 'ally.acceptPact'|trans }}</span></a>
+                                        <a class="text-rouge" href="{{ path('pre_ally_refuseAllied',{'id': allied.getId()}) }}"><div class="glyphicon glyphicon-remove"></div> <span>{{ 'ally.refusePact'|trans }}</span></a>
+                                    </td>
+                                {% endfor %}
+                            </tr>
+                            </tbody>
+                        </table>
+                    {% endif %}
+                </div>
+            </div>
+        {% else %}
+        {% endif %}
+    </div>
+{% endblock %}

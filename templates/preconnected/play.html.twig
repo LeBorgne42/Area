@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'front_universe' %}
+
+{% block title %}{{ 'title'|trans }}{% endblock %}
+
+{% block body %}
+    {%- block left_menu -%}
+    {%- endblock -%}
+    {%- block top_ressource -%}
+    {%- endblock -%}
+    {%- block right_planet -%}
+    {%- endblock -%}
+    <div class="front-block display-message text-center">
+        {% for message in app.flashes('full') %}
+            <div class="flash-notice mt-5 text-orange text-more">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <div>
+            <button class="text-orange m-5 text-more p-3">{{ 'joinServer'|trans }}</button>
+        </div>
+        {% for galaxy in galaxys %}
+            <a href="{{ path('connect_server', {'id': galaxy.getPosition()}) }}"><span><img class="galaxy-block mr-4 mb-4" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.galaxy'|trans({'%position%': galaxy.getPosition()}) }}" src="{{ asset('img/galaxy.png') }}"><span class="galaxy-position">{{ 'galaxy.nbr'|trans({'%position%': galaxy.getPosition()}) }}</span></span></a>
+        {% endfor %}
+        <div>
+            <button class="text-orange m-5 text-more p-3">{{ 'choseGalaxy'|trans }}</button>
+        </div>
+    </div>
+{% endblock %}

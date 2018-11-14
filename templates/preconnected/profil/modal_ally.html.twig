@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'front_page_ally' %}
+
+{% block title %}{{ 'title'|trans }}{% endblock %}
+
+{% block body %}
+    {%- block left_menu -%}
+    {%- endblock -%}
+    {%- block top_ressource -%}
+    {%- endblock -%}
+    {%- block right_planet -%}
+    {%- endblock -%}
+    <div class="front-block allyPage text-center">
+        <div class="my-3">{{ ally.getPolitic()|trans }}</div>
+        <div class="my-3">{{ ally.getSlogan() }}</div>
+        {% if ally.imageName %}
+            <div class="text-center"><img height="300" width="450" src="{{ vich_uploader_asset(ally, 'imageFile') }}"></div>
+        {% else %}
+            <div class="text-center"><img height="300" width="450" src="{{ asset('img/ally.jpg') }}"></div>
+        {% endif %}
+        <div class="ml-3 my-5 text-left">{{ ally.getDescription() }}</div>
+        <div class="my-4">{{ 'ally.leader'|trans }} {% for user in ally.getUsers() %}{% if user.getGrade().getPlacement() == 1 %}[<span class="text-vert">{{ user.getGrade().getName() }}</span><span><a data-toggle="modal" data-target="#userModal" href="{{ path('pre_user_profil_modal', {'id': user.getId()}) }}"> {{ user.getUsername() }}</a></span>] - {% endif %}{% endfor %}</div>
+        <div class="row">
+            <div class="col-6">
+                <div class="my-4 ml-5">{{ 'ally.nbr'|trans }} {{ ally.getUsers()|length }}</div>
+                <div class="my-4 ml-5">{{ 'ally.galaxy'|trans }} 1</div>
+                <div class="my-4 ml-5">{{ 'ally.planet'|trans }} {{ ally.getPlanets() }}</div>
+                <div class="my-4 ml-5">{{ 'ally.fleet'|trans }} {{ ally.getFleets() }}</div>
+            </div>
+            <div class="col-6">
+                <div class="my-4">
+                    {{ 'ally.allied'|trans }}
+                    <br>
+                    {% for allied in ally.getAllieds() %}
+                        {% if allied.getAccepted() == 1 %}
+                            <span class="text-vert"><a href="{{ path('pre_ally_profil', {'id': ally.getId()}) }}">{{ allied.getAllytag() }}</a></span> -
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="my-4">
+                    {{ 'ally.pna'|trans }}
+                    <br>
+                    {% for pna in ally.getPnas() %}
+                        {% if pna.getAccepted() == 1 %}
+                            <span class="text-bleu"><a href="{{ path('pre_ally_profil', {'id': ally.getId()}) }}">{{ pna.getAllytag() }}</a></span> -
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="my-4">
+                    {{ 'ally.war'|trans }}
+                    <br>
+                    {% for war in ally.getWars() %}
+                        <span class="text-rouge"><a href="{{ path('pre_ally_profil', {'id': ally.getId()}) }}">{{ war.getAllytag() }}</a></span> -
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

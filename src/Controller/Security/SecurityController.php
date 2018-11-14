@@ -70,8 +70,6 @@ class SecurityController extends Controller
 
             $mailer->send($message);
 
-            //return $this->redirectToRoute('login');
-
             $token = new UsernamePasswordToken(
                 $user,
                 null,
@@ -144,14 +142,10 @@ class SecurityController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        if(!$user) {
-            $token = $this->get('security.token_storage')->getToken();
-            $user = $this->get('security.token_storage')->getToken()->getUser();
-        }
         $server = $em->getRepository('App:Server')->find(['id' => 1]);
 
         if($server->getOpen() == false) {
-            return $this->redirectToRoute('logout');
+            return $this->redirectToRoute('pre_ally');
         }
 
         if($user) {
@@ -214,6 +208,12 @@ class SecurityController extends Controller
      */
     public function loginRedirectAction()
     {
+        $em = $this->getDoctrine()->getManager();
+        $server = $em->getRepository('App:Server')->find(['id' => 1]);
+
+        if($server->getOpen() == false) {
+            return $this->redirectToRoute('pre_ally');
+        }
         if ($this->getUser()->getRoles()[0] == 'ROLE_USER') {
             $user = $this->getUser();
             $em = $this->getDoctrine()->getManager();

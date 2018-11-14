@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'front_page_user' %}
+
+{% block title %}{{ 'title'|trans }}{% endblock %}
+
+{% block body %}
+    {%- block left_menu -%}
+    {%- endblock -%}
+    {%- block top_ressource -%}
+    {%- endblock -%}
+    {%- block right_planet -%}
+    {%- endblock -%}
+    <div class="front-block userPage">
+        {% if user.imageName %}
+            <div class="text-center"><img height="64" width="64" src="{{ vich_uploader_asset(user, 'imageFile') }}"></div>
+        {% else %}
+            <div class="text-center"><img height="64" width="64" src="{{ asset('img/avatar.png') }}"></div>
+        {% endif %}
+        <div class="my-4 ml-5">{{ 'user.name'|trans }} {{ user.getUserName() }}</div>
+        <div class="my-4 ml-5">{{ 'user.ally'|trans }} {% if user.getAlly() %}<span><a href="{{ path('pre_ally_profil', {'id': user.getAlly().getId()}) }}">{{ user.getAlly().getName() }}</a></span>{% else %}{{ 'user.allyNone'|trans }}{% endif %}</div>
+        {% if user.getAlly() %}<div class="my-4 ml-5">{{ 'user.politic'|trans }} {{ user.getAlly().getPolitic()|trans }}</div>{% endif %}
+        <div class="my-4 ml-5">{{ 'user.galaxy'|trans }} 1</div>
+        <div class="my-4 ml-5">{{ 'user.planet'|trans }} {{ user.getAllPlanets() }}</div>
+        <div class="my-4 ml-5">{{ 'user.fleet'|trans }} {{ user.getFleets()|length }}</div>
+    </div>
+{% endblock %}
