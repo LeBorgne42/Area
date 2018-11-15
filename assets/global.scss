@@ -18,14 +18,18 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 body.area {
   margin: 0 auto;
   color: #fff;
-  background-image: url("../public/img/wall.png");
+  background-image: url("../public/img/wall5.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
+  background-size: cover;
   background-color: black;
   max-width: 1280px;
   height: auto;
   font-size: 1.1rem;
   padding: 0 4rem 4rem 4rem;
+}
+
+#connect-register {
 }
 
 a:focus {
@@ -179,13 +183,13 @@ span a {
   padding: 0.8rem;
   right: 0;
   bottom: 0;
-  background-color: rgba(52, 58, 64, 0.5);
-  border-radius: 5px;
   a {
     color: #fff;
+    text-shadow: 1.5px 1.5px 2px rgba(0,0,0, 0.8);
   }
   a:hover {
-    color: orange;
+    color: #fff!important;
+    background-color: rgba(0,0,0, 0.4);
     text-decoration: none;
   }
 }

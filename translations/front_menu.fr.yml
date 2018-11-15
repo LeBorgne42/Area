@@ -16,6 +16,7 @@ login: Connexion
 error: 'Pseudo/mot de passe erroné'
 faq: F.A.Q
 overview: Empire
+game: Jeu
 contact: 'Nous contacter'
 globalView: 'Vue d''ensemble'
 dailyCost: Entretien
@@ -32,7 +33,9 @@ message: Messagerie
 report: Rapport
 salon: Salon
 disconnect: Deconnexion
-rules: Reglement
+rules: Règlement
+statistic: 'Statistiques'
+objective: 'But du jeu'
 modal.to: 'Nouveau message à l''admin'
 modal.from: 'Votre email :'
 modal.text: 'Message :'

@@ -38,7 +38,7 @@ class SecurityController extends Controller
                 if ($check->getUsername() == $_POST['_username']) {
                     $this->addFlash("fail", "Ce pseudo est déjà prit.");
 
-                    return $this->redirectToRoute('home');
+                    return $this->redirectToRoute('login');
                 } elseif ($check->getEmail() == $_POST['_email']) {
                     $this->addFlash("fail", "Il y a déjà un compte rattaché a cet email.");
                     return $this->redirectToRoute('login');
@@ -144,7 +144,7 @@ class SecurityController extends Controller
         $user = $this->getUser();
         $server = $em->getRepository('App:Server')->find(['id' => 1]);
 
-        if($server->getOpen() == false) {
+        if($server->getOpen() == false && $this->getUser()->getRoles()[0] == 'ROLE_USER') {
             return $this->redirectToRoute('pre_ally');
         }
 
@@ -211,7 +211,7 @@ class SecurityController extends Controller
         $em = $this->getDoctrine()->getManager();
         $server = $em->getRepository('App:Server')->find(['id' => 1]);
 
-        if($server->getOpen() == false) {
+        if($server->getOpen() == false && $this->getUser()->getRoles()[0] == 'ROLE_USER') {
             return $this->redirectToRoute('pre_ally');
         }
         if ($this->getUser()->getRoles()[0] == 'ROLE_USER') {
@@ -244,7 +244,7 @@ class SecurityController extends Controller
             }
         }
         if ($this->getUser()->getRoles()[0] == 'ROLE_MODO' || $this->getUser()->getRoles()[0] == 'ROLE_ADMIN') {
-            return $this->redirectToRoute('easyadmin');
+            return $this->redirectToRoute('home');
         }
         return $this->redirectToRoute('logout');
     }

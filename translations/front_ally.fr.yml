@@ -104,7 +104,7 @@ ally.pdgDonate: 'Points de Guerre'
 ally.bitcoinDonate: Bitcoins
 ally.formGiveBitcoin: 'Transaction de Bitcoin'
 ally.formGivePdg: 'Transaction de pdg'
-ally.ranked: 'Liste d''Alliances crée'
+ally.ranked: 'Liste d''Alliances crées'
 ally.proposals: 'Proposition(s) de recrutement'
 tooltip.takePlanet: 'Nombre de planète que vous demandez/offrez pour la paix(selectionné parmit les meilleurs).'
 tooltip.takeTaxe: 'Taxe que vous percevrez chaque jour pendant 2 semaines sur leurs revenus.'

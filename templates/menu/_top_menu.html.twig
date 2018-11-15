@@ -1,75 +1,58 @@
 {% trans_default_domain 'front_menu' %}
 
-<div class="navbar navbar-dark bg-top">
-    <a class="btn-top" href="/">{{ 'home'|trans }}</a>
-    {% if is_granted('ROLE_USER') and usePlanet %}
-        <a class="btn-top" href="{{ path('overview', {'idp': usePlanet.getId()}) }}">{{ 'overview'|trans }}</a>
-    {% endif %}
-    {% if usePlanet == NULL %}
-        <a class="btn-top" href="{{ path('login_redirect') }}">{{ 'overview'|trans }}</a>
-    {% endif %}
+<div class="navbar">
+    <div class="btn-group">
+        <span class="btn-top dropdown-toggle" data-toggle="dropdown">{{ 'game'|trans }}</span>
+        <ul class="dropdown-menu menu-home" role="menu">
+            <li>
+                <a class="btn-menu" href="{{ path('home') }}" target="_blank">{{ 'objective'|trans }}</a>
+            </li>
+            <li>
+                <a class="btn-menu" href="{{ path('rules') }}" target="_blank">{{ 'rules'|trans }}</a>
+            </li>
+            <li>
+                <a class="btn-menu" href="{{ path('home') }}" target="_blank">{{ 'statistic'|trans }}</a>
+            </li>
+        </ul>
+    </div>
+    <a class="btn-top" href="{{ path('rules') }}">{{ 'media'|trans }}</a>
     <a class="btn-top" target="_blank" href="http://area-control.forumactif.com/">{{ 'forum'|trans }}</a>
-    <a class="btn-top" href="{{ path('rules') }}">{{ 'rules'|trans }}</a>
-    <a class="btn-top" href="{{ path('contact') }}" data-toggle="modal" data-target="#contactModal" data-whatever="@">{{ 'contact'|trans }}</a>
-    {% if app.user is null %}
-        <a class="btn-top" href="{{ path('register') }}" data-toggle="modal" data-target="#openModal">{{ 'register'|trans }}</a>
-    {% endif %}
+    <div><a href="{{ path('home') }}"><img width="80" src="{{ asset('img/logo.png') }}"><span class="uni-title">UNIVERSE</span></a></div>
     {% if is_granted('ROLE_ADMIN') %}
-        <div class="btn-group btn-top">
-            <button type="button" class="admin-button" data-toggle="dropdown">{{ 'easyadmin'|trans }}</button>
-            <ul class="dropdown-menu" role="menu">
+        <div class="btn-group">
+            <span class="btn-top dropdown-toggle" data-toggle="dropdown">{{ 'easyadmin'|trans }}</span>
+            <ul class="dropdown-menu menu-home" role="menu">
                 <li>
-                    <a class="btn-top" href="{{ path('active_server') }}" target="_blank">{{ 'serveur.activate'|trans }}</a>
+                    <a class="btn-menu" href="{{ path('active_server') }}" target="_blank">{{ 'serveur.activate'|trans }}</a>
                 </li>
                 <li>
-                    <a class="btn-top" href="{{ path('deactive_server') }}" target="_blank">{{ 'serveur.deactivate'|trans }}</a>
+                    <a class="btn-menu" href="{{ path('deactive_server') }}" target="_blank">{{ 'serveur.deactivate'|trans }}</a>
                 </li>
                 <li>
-                    <a class="btn-top" href="{{ path('create') }}" target="_blank">{{ 'serveur.createBig'|trans }}</a>
+                    <a class="btn-menu" href="{{ path('create') }}" target="_blank">{{ 'serveur.createBig'|trans }}</a>
                 </li>
                 <li>
-                    <a class="btn-top" href="{{ path('create_little') }}" target="_blank">{{ 'serveur.createLittle'|trans }}</a>
+                    <a class="btn-menu" href="{{ path('create_little') }}" target="_blank">{{ 'serveur.createLittle'|trans }}</a>
                 </li>
                 <li>
-                    <a class="btn-top" href="{{ path('destroy_sectors') }}" target="_blank">{{ 'serveur.kill.sector'|trans }}</a>
+                    <a class="btn-menu" href="{{ path('destroy_sectors') }}" target="_blank">{{ 'serveur.kill.sector'|trans }}</a>
                 </li>
                 <li>
-                    <a class="btn-top" href="{{ path('destroy') }}" target="_blank">{{ 'serveur.kill.serveur'|trans }}</a>
+                    <a class="btn-menu" href="{{ path('destroy') }}" target="_blank">{{ 'serveur.kill.serveur'|trans }}</a>
                 </li>
                 <li>
-                    <a class="btn-top" href="{{ path('easyadmin') }}" target="_blank">{{ 'easyadmin'|trans }}</a>
+                    <a class="btn-menu" href="{{ path('easyadmin') }}" target="_blank">{{ 'easyadmin'|trans }}</a>
+                </li>
+                <li>
+                    <a class="btn-menu" href="{{ path('logout') }}">{{ 'logout'|trans }}</a>
                 </li>
             </ul>
         </div>
     {% endif %}
-    {% if app.user %}
+    {% if is_granted('ROLE_USER') %}
         <a class="btn-top" href="{{ path('logout') }}">{{ 'logout'|trans }}</a>
-    {% endif %}
-    {% if app.user is null %}
-        <div class="text-right">
-            <form action="{{ path('login') }}" method="post">
-                <input type="text" id="username" minlength="2" maxlength="30" placeholder="{{ 'username'|trans }}" name="_username"/>
-                <input type="password" minlength="2" maxlength="30" placeholder="{{ 'password'|trans }}" id="password" name="_password"/>
-                <button class="btn btn-secondary" type="submit">{{ 'login'|trans }}</button>
-            </form>
-        </div>
-    {% endif %}
-    {% if app.user is null %}
-        <a class="btn-top" href="{{ path('recoveryPw') }}" data-toggle="modal" data-target="#openModal">{{ 'recoveryPw'|trans }}</a>
     {% endif %}
 </div>
 <div class="footer">
     <a href="http://www.facebook.com/areauniverse/" target="_blank">{{ 'footer'|trans }}</a>
-</div>
-<div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content special">
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="openModal" tabindex="-1" role="dialog" aria-labelledby="openModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
-        <div class="modal-content special">
-        </div>
-    </div>
 </div>
