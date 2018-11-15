@@ -30,18 +30,16 @@ class SecurityController extends Controller
                 ->where('u.username = :username')
                 ->orWhere('u.email = :email')
                 ->setParameters(['username' => $_POST['_username'], 'email' => $_POST['_email']])
-                ->setMaxResults(1)
                 ->getQuery()
                 ->getResult();
 
             foreach ($alreadyInBase as $check) {
-                if ($check->getUsername() == $_POST['_username']) {
-                    $this->addFlash("fail", "Ce pseudo est déjà prit.");
-
-                    return $this->redirectToRoute('login');
-                } elseif ($check->getEmail() == $_POST['_email']) {
-                    $this->addFlash("fail", "Il y a déjà un compte rattaché a cet email.");
-                    return $this->redirectToRoute('login');
+                if (strtoupper($check->getUsername()) == strtoupper($_POST['_username'])) {
+                    $this->addFlash("fail", "Ce pseudo existe déjà sur le jeu.");
+                    return $this->redirectToRoute('home');
+                } elseif (strtoupper($check->getEmail()) == strtoupper($_POST['_email'])) {
+                    $this->addFlash("fail", "Un compte existe déjà avec cet email.");
+                    return $this->redirectToRoute('home');
                 }
             }
 
@@ -144,11 +142,12 @@ class SecurityController extends Controller
         $user = $this->getUser();
         $server = $em->getRepository('App:Server')->find(['id' => 1]);
 
-        if($server->getOpen() == false && $this->getUser()->getRoles()[0] == 'ROLE_USER') {
-            return $this->redirectToRoute('pre_ally');
-        }
 
         if($user) {
+            if($server->getOpen() == false && $this->getUser()->getRoles()[0] == 'ROLE_USER') {
+                return $this->redirectToRoute('pre_ally');
+            }
+
             if($user->getGameOver()) {
                 return $this->redirectToRoute('game_over');
             }
@@ -174,10 +173,7 @@ class SecurityController extends Controller
 
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('security/login.html.twig', [
-            'last_username' => $lastUsername,
-            'error'         => $error,
-        ]);
+        return $this->redirectToRoute('home');
     }
 
     /**

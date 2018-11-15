@@ -19,6 +19,16 @@ function manageAllyImageForm() {
     });
 }
 
+function manageRegistrationCheck() {
+    $('#registration-check').off('click').on('click',function(e){
+        console.log('plop');
+        $('#email').removeAttr('hidden');
+        $(this).hide();
+        $('#email').attr('required', 'required');
+        $('form').attr('action', '/enregistrement');
+    });
+}
+
 function manageAttackFleetForm() {
     $('#fleet_attack_attack').off('change').on('change',function(e){
         $(this).closest('form').submit();
@@ -725,5 +735,6 @@ $(document).ready(function() {
     manageDisplaySalon();
     manageSalon();
     manageAttackFleetForm();
+    manageRegistrationCheck();
     console.log("Toute utilisation de scripts sur le jeu seront puni d'un ban permanent, merci.");
 });

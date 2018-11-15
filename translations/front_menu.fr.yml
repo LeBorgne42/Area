@@ -1,5 +1,4 @@
 version: 'Beta v0.3'
-home: Accueil
 footer: 'Suivez nous sur facebook!'
 media: Medias
 easyadmin: 'Pannel Admin'
@@ -9,11 +8,7 @@ serveur.createBig: 'Créer Univers'
 serveur.createLittle: 'Créer petit Univers'
 serveur.kill.sector: 'Détruire secteur'
 serveur.kill.serveur: 'Détruire Univers'
-logout: Deconnexion
-username: Pseudo
-password: 'mot de passe'
-login: Connexion
-error: 'Pseudo/mot de passe erroné'
+logout: Déconnexion
 faq: F.A.Q
 overview: Empire
 game: Jeu
@@ -36,17 +31,6 @@ disconnect: Deconnexion
 rules: Règlement
 statistic: 'Statistiques'
 objective: 'But du jeu'
-modal.to: 'Nouveau message à l''admin'
-modal.from: 'Votre email :'
-modal.text: 'Message :'
-modal.close: Fermer
-modal.save: Envoyer
-register: Inscription
-modal.title: 'Créer un compte'
-modal.pseudo: Pseudo
-modal.password: 'Mot de passe'
-modal.email: Email
-recoveryPw: 'Mot de passe oublié'
 niobium: Niobium
 water: Eau
 coin: Bitcoin

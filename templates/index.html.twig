@@ -10,7 +10,7 @@
             {{ message }}
         </div>
     {% endfor %}
-   {# {% if is_granted('ROLE_USER') %}
+    {% if is_granted('ROLE_USER') %}
         <div class="row mt-5">
             <div class="offset-3 col-6 text-center">
                 <div id="connect-register">
@@ -21,37 +21,32 @@
     {% else %}
         <div class="row mt-5">
             <div class="offset-3 col-6 text-center">
-                <div id="connect-register">
-                    {% if app.user is null %}
-                         <div class="">
-                             <form action="{{ path('login') }}" method="post">
-                                 <div>
-                                     <input type="text" id="username" minlength="2" maxlength="30" placeholder="{{ 'username'|trans }}" name="_username"/>
-                                 </div>
-                                 <div>
-                                     <input type="password" minlength="2" maxlength="30" placeholder="{{ 'password'|trans }}" id="password" name="_password"/>
-                                 </div>
-                                 <div>
-                                     <input type="email" minlength="5" placeholder="{{ 'email'|trans }}" maxlength="30" id="email" name="_email">
-                                 </div>
-                                 <div>
-                                     <a href="{{ path('recoveryPw') }}" data-toggle="modal" data-target="#openModal">{{ 'recoveryPw'|trans }}</a>
-                                     <button class="btn btn-secondary" type="submit">{{ 'login'|trans }}</button>
-                                     <a href="{{ path('contact') }}" data-toggle="modal" data-target="#contactModal" data-whatever="@">{{ 'contact'|trans }}</a>
-                                 </div>
-                             </form>
+                {% if app.user is null %}
+                     <div id="connect-register">
+                         <div>
+                             <input disabled="disabled" class="login-input text-center{% if server.getOpen() == 1 %} server-on{% else %} server-off{% endif %}" value="{% if server.getOpen() == 1 %}{{ 'server.on'|trans }}{% else %}{{ 'server.off'|trans }}{% endif %}"/>
                          </div>
-                     {% endif %}
-                </div>
+                         <form action="{{ path('login') }}" method="post">
+                             <div>
+                                 <input class="login-input" required="required" type="text" id="username" minlength="4" maxlength="20" placeholder="{{ 'username'|trans }}" name="_username"/>
+                             </div>
+                             <div>
+                                 <input class="login-input" required="required" type="password" minlength="4" placeholder="{{ 'password'|trans }}" id="password" name="_password"/>
+                             </div>
+                             <div>
+                                 <input class="login-input" type="email" minlength="5" placeholder="{{ 'email'|trans }}" maxlength="30" id="email" name="_email" hidden/>
+                             </div>
+                             <div>
+                                 {#<a class="recovery-button" href="{{ path('recoveryPw') }}" data-toggle="modal" data-target="#openModal">{{ 'recoveryPw'|trans }}</a>#}
+                                 <span id="registration-check" class="login-button">{{ 'register'|trans }}</span>
+                                 <button class="login-button" type="submit">{{ 'login'|trans }}</button>
+                             </div>
+                         </form>
+                     </div>
+                 {% endif %}
             </div>
         </div>
-    {% endif %}#}
-    <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content special">
-            </div>
-        </div>
-    </div>
+    {% endif %}
     <div class="modal fade" id="openModal" tabindex="-1" role="dialog" aria-labelledby="openModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
             <div class="modal-content special">

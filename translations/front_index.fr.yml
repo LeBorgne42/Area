@@ -1,17 +1,10 @@
 title: 'Area Universe'
-form.connect: Connexion
-form.email: 'Adresse email'
-form.getPassword: 'Renvoyer mot de passe'
-form.password: 'mot de passe'
-form.username: Pseudo
-form.image: upload
-form.pseudoEmail: 'Pseudo ou email'
-form.register: 's''enregistrer'
-blockOne: 'Area Universe est actuellement en beta avec %nbrUsers% beta testeurs (dont %activeUsers% actuellement connectés) que je remercie pour leur patience.'
-blockTwo: 'Ce jeu se déroule dans un futur proche, il demande une dose de gestion pour gérer et aggrandir son empire et de la stratégie pour attaquer ou se défendre contre les autres joueurs.'
-blockThree: 'Vous pouvez vous connecter via un compte test pour avoir un aperçu du jeu :'
-modal.title: 'Réinitialiser mot de passe'
-modal.txt: 'Êtes vous sûr de vouloir réinitialiser votre mot de passe ?'
-modal.close: Fermer
-modal.save: Envoyer
-warning: 'Attention ! Le jeu n''est pas encore fini, merci de ne pas le juger encore trop sévèrement.'
+server.off: 'Pré-connexion ouverte'
+server.on: 'Serveur ouvert'
+username: Pseudo
+password: 'Mot de passe'
+email: Email
+recoveryPw: 'Mdp perdu'
+login: Connexion
+register: Inscription
+contact: 'Contacter administrateur'

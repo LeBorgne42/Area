@@ -5,17 +5,17 @@
         <span class="btn-top dropdown-toggle" data-toggle="dropdown">{{ 'game'|trans }}</span>
         <ul class="dropdown-menu menu-home" role="menu">
             <li>
-                <a class="btn-menu" href="{{ path('home') }}" target="_blank">{{ 'objective'|trans }}</a>
+                <a class="btn-menu" href="{{ path('point_game') }}">{{ 'objective'|trans }}</a>
             </li>
             <li>
-                <a class="btn-menu" href="{{ path('rules') }}" target="_blank">{{ 'rules'|trans }}</a>
+                <a class="btn-menu" href="{{ path('rules') }}">{{ 'rules'|trans }}</a>
             </li>
             <li>
-                <a class="btn-menu" href="{{ path('home') }}" target="_blank">{{ 'statistic'|trans }}</a>
+                <a class="btn-menu" href="{{ path('statistics') }}">{{ 'statistic'|trans }}</a>
             </li>
         </ul>
     </div>
-    <a class="btn-top" href="{{ path('rules') }}">{{ 'media'|trans }}</a>
+    <a class="btn-top" href="{{ path('medias') }}">{{ 'media'|trans }}</a>
     <a class="btn-top" target="_blank" href="http://area-control.forumactif.com/">{{ 'forum'|trans }}</a>
     <div><a href="{{ path('home') }}"><img width="80" src="{{ asset('img/logo.png') }}"><span class="uni-title">UNIVERSE</span></a></div>
     {% if is_granted('ROLE_ADMIN') %}
