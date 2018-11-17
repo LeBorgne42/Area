@@ -1,3 +1,64 @@
+.login-input {
+  color: #fff;
+  font-size: 2rem;
+  width: 281px;
+  height: 38px;
+  background-image: url("../public/img/form.png");
+  margin-bottom: 1rem;
+  line-height: 4rem;
+  padding-left: 1rem;
+  text-shadow: 1.5px 1.5px 2px rgba(0,0,0, 0.8);
+  border: 1px solid silver;
+  border-radius: 5px;
+}
+
+.login-button {
+  color: #000000;
+  font-size: 2rem;
+  width: 115px;
+  height: 38px;
+  background-image: url("../public/img/form.png");
+  margin-left: 0.6rem;
+  text-shadow: 1.5px 1.5px 2px rgba(255,255,255, 0.3);
+  border: 1px solid silver;
+  border-radius: 5px;
+}
+
+#registration-check {
+  cursor: pointer;
+  padding: 0.2rem 1rem;
+}
+
+@-webkit-keyframes autofill {
+  to {
+    background-image: url("../public/img/form.png");
+    color: #fff;
+    text-shadow: 1.5px 1.5px 2px rgba(0,0,0, 0.8);
+  }
+}
+
+#connect-register {
+  margin-top: 20%;
+  input:-webkit-autofill {
+    -webkit-animation-name: autofill;
+    -webkit-animation-fill-mode: both;
+  }
+  ::-webkit-input-placeholder {
+    color: #999999;
+    text-shadow: 1.5px 1.5px 2px rgba(0,0,0, 0.8);
+  }
+}
+
+.server-on {
+  color: #00cc00;
+  text-shadow: 1.5px 1.5px 2px rgba(0,0,0, 0.8);
+}
+
+.server-off {
+  color: #FC7F23;
+  text-shadow: 1.5px 1.5px 2px rgba(0,0,0, 0.8);
+}
+
 .navbar-rules {
   h1 {
     color: #fff;
@@ -16,4 +77,23 @@
 
 .sticky-top {
   z-index: 0!important;
+}
+
+.unlogin-block {
+  margin-top: 12%;
+  color: #fff;
+  font-size: 1.5rem;
+  vertical-align: middle!important;
+  min-height: 400px;
+  word-wrap: break-word;
+  background-color: rgba(83,74,74,0.8);
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: 5px;
+  padding: 1.5rem;
+}
+
+.nbr-stats {
+  font-size: 1.6rem;
+  color: #dd8e27;
+  text-shadow: 1.5px 1.5px 2px rgba(0,0,0, 0.8);
 }

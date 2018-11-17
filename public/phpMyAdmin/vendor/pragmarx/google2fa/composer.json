@@ -2,7 +2,7 @@
     "name": "pragmarx/google2fa",
     "description": "A One Time Password Authentication package, compatible with Google Authenticator.",
     "keywords": ["authentication", "two factor authentication", "google2fa", "laravel", "2fa"],
-    "license": "BSD-3-Clause",
+    "license": "MIT",
     "authors": [
         {
             "name": "Antonio Carlos Ribeiro",
@@ -13,7 +13,7 @@
     "require": {
         "php": ">=5.4",
         "paragonie/constant_time_encoding": "~1.0|~2.0",
-        "paragonie/random_compat": "~1.4|~2.0",
+        "paragonie/random_compat": ">=1 <9.99",
         "symfony/polyfill-php56": "~1.2"
     },
     "require-dev": {

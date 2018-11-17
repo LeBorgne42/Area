@@ -112,6 +112,12 @@ class TopMenuController extends Controller
             $usePlanet = null;
         }
 
+        $nbrAlly = $em->getRepository('App:Ally')
+            ->createQueryBuilder('a')
+            ->select('count(a)')
+            ->getQuery()
+            ->getSingleScalarResult();
+
         $nbrUsers = $em->getRepository('App:User')
             ->createQueryBuilder('u')
             ->select('count(u)')
@@ -134,6 +140,7 @@ class TopMenuController extends Controller
         return $this->render('anonymous/statistics.html.twig', [
             'usePlanet' => $usePlanet,
             'allUsers' => $nbrUsers,
+            'nbrAlly' => $nbrAlly,
             'userCos' => $nbrUsersConnected,
             'server' => $server
         ]);

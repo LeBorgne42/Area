@@ -19,19 +19,18 @@ class AllyAddType extends AbstractType
             ->add(
                 'nameUser',
                 null,
-                array(
+                [
                     'label' => 'form.nameUser',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.nameUser',
-                        'class' => 'form-control',
+                        'class' => 'game-input',
                         'minlength' => '3',
                         'autocomplete' => 'off',
-                        'style' => 'height: 25px',
-                    ),
+                    ],
                     'required' => true
-                )
+                ]
             )
-            ->add('sendForm', SubmitType::class, array('label' => 'form.add'));
+            ->add('sendForm', SubmitType::class, ['label' => 'form.add', 'attr' => ['class' => 'confirm-button']]);
     }
 
     /**
@@ -40,10 +39,10 @@ class AllyAddType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array(
+            [
                 'data_class'         => null,
                 'translation_domain' => 'front_ally',
-            )
+            ]
         );
     }
 }

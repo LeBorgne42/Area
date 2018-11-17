@@ -599,7 +599,7 @@ class PreAllyController extends Controller
             $allyPact = $em->getRepository('App:Ally')
                 ->createQueryBuilder('a')
                 ->where('a.sigle = :sigle')
-                ->setParameter('sigle', $form_allyPact->get('pre_allyName')->getData())
+                ->setParameter('sigle', $form_allyPact->get('allyName')->getData())
                 ->getQuery()
                 ->getOneOrNullResult();
 

@@ -19,41 +19,40 @@ class AllyPactType extends AbstractType
             ->add(
                 'allyName',
                 null,
-                array(
+                [
                     'label' => 'form.allyName',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.allyName',
-                        'class' => 'form-control',
+                        'class' => 'game-input',
                         'minlength' => '1',
                         'autocomplete' => 'off',
-                        'style' => 'height: 25px',
-                    ),
+                    ],
                     'required' => true
-                )
+                ]
             )
             ->add(
                 'pactType',
                 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',
-                array(
+                [
                     'choices' => $this->getPactType(),
                     'label' => 'form.pactType',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.pactType',
-                        'class' => 'form-control select2',
-                    ),
+                        'class' => 'select2 game-input',
+                    ],
                     'required' => true
-                )
+                ]
             )
-            ->add('sendForm', SubmitType::class, array('label' => 'form.add'));
+            ->add('sendForm', SubmitType::class, ['label' => 'form.add', 'attr' => ['class' => 'confirm-button']]);
     }
 
     protected function getPactType()
     {
-        return array(
+        return [
             'Pacte défensif' => '1',
             'Pacte de non-agression' => '2',
             'Déclarer guerre' => '3',
-        );
+        ];
     }
 
     /**
@@ -62,10 +61,10 @@ class AllyPactType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array(
+            [
                 'data_class'         => null,
                 'translation_domain' => 'front_ally',
-            )
+            ]
         );
     }
 }

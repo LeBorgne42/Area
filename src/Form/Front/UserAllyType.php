@@ -20,93 +20,91 @@ class UserAllyType extends AbstractType
             ->add(
                 'name',
                 null,
-                array(
+                [
                     'label' => 'form.name',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.name',
-                        'class' => 'form-control',
+                        'class' => 'game-input',
                         'maxlength' => '15',
                         'minlength' => '3',
                         'autocomplete' => 'off',
-                        'style' => 'height: 25px',
-                    ),
+                    ],
                     'required' => true
-                )
+                ]
             )
             ->add(
                 'sigle',
                 null,
-                array(
+                [
                     'label' => 'form.sigle',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.sigle',
-                        'class' => 'form-control',
+                        'class' => 'game-input',
                         'maxlength' => '4',
                         'minlength' => '2',
                         'autocomplete' => 'off',
-                        'style' => 'height: 25px',
-                    ),
+                    ],
                     'required' => true
-                )
+                ]
             )
             ->add(
                 'slogan',
                 null,
-                array(
+                [
                     'label' => 'form.slogan',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.slogan',
-                        'class' => 'form-control',
+                        'class' => 'game-input',
                         'maxlength' => '30',
                         'minlength' => '3',
                         'autocomplete' => 'off',
-                        'style' => 'height: 25px',
-                    ),
+                    ],
                     'required' => true
-                )
+                ]
             )
             ->add(
                 'politic',
                 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',
-                array(
+                [
                     'choices' => $this->getPolitic(),
                     'label' => 'form.politic',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.politic',
-                        'class' => 'form-control select2',
-                    ),
+                        'class' => 'select2 game-input',
+                    ],
                     'required' => true
-                )
+                ]
             )
             ->add(
                 'description',
                 'Symfony\Component\Form\Extension\Core\Type\TextareaType',
-                array(
+                [
                     'label' => 'form.description',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.description',
-                        'class' => 'form-control',
+                        'class' => 'game-input',
                         'maxlength' => '1000',
                         'rows' => 8,
                         'autocomplete' => 'off',
-                    ),
+                        'style' => 'height:100px;',
+                    ],
                     'required' => false
-                )
+                ]
             )
             ->add(
                 'taxe',
                 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',
-                array(
+                [
                     'choices' => $this->getPercentTaxe(),
                     'label' => 'form.taxeAlly',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.taxe',
-                        'class' => 'form-control select2',
-                    ),
+                        'class' => 'select2 game-input',
+                    ],
                     'required' => true
-                )
+                ]
             )
-            ->add('sendForm', SubmitType::class, array('label' => 'form.send'));
+            ->add('sendForm', SubmitType::class, ['label' => 'form.send']);
 
         $builder->get('sigle')
             ->addModelTransformer(new CallbackTransformer(
@@ -139,19 +137,19 @@ class UserAllyType extends AbstractType
 
     protected function getPolitic()
     {
-        return array(
+        return [
             'Neutre' => 'neutral',
             'Démocratie' => 'democrat',
             'Fascisme' => 'fascism',
             'Anarchisme' => 'anarchism',
             'Communisme' => 'communism',
             'Théocratie' => 'theocrat'
-        );
+        ];
     }
 
     protected function getPercentTaxe()
     {
-        return array(
+        return [
             '01%' => '1',
             '02%' => '2',
             '03%' => '3',
@@ -162,7 +160,7 @@ class UserAllyType extends AbstractType
             '08%' => '8',
             '09%' => '9',
             '10%' => '10'
-        );
+        ];
     }
 
     /**
@@ -171,10 +169,10 @@ class UserAllyType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array(
+            [
                 'data_class'         => 'App\Entity\Ally',
                 'translation_domain' => 'front_ally',
-            )
+            ]
         );
     }
 }

@@ -19,80 +19,80 @@ class AllyPeaceType extends AbstractType
             ->add(
                 'type',
                 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',
-                array(
+                [
                     'choices' => $this->getType(),
                     'label' => 'form.type',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.type',
-                        'class' => 'form-control select2',
-                    ),
+                        'class' => 'select2 game-input',
+                    ],
                     'required' => true
-                )
+                ]
             )
             ->add(
                 'planetNbr',
                 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',
-                array(
+                [
                     'choices' => $this->getPlanetNbr(),
                     'label' => 'form.type',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.type',
-                        'class' => 'form-control select2',
-                    ),
+                        'class' => 'select2 game-input',
+                    ],
                     'required' => true
-                )
+                ]
             )
             ->add(
                 'taxeNbr',
                 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',
-                array(
+                [
                     'choices' => $this->getTaxeNbr(),
                     'label' => 'form.type',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.type',
-                        'class' => 'form-control select2',
-                    ),
+                        'class' => 'select2 game-input',
+                    ],
                     'required' => true
-                )
+                ]
             )
             ->add(
                 'pdgNbr',
                 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',
-                array(
+                [
                     'choices' => $this->getPdgNbr(),
                     'label' => 'form.type',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.type',
-                        'class' => 'form-control select2',
-                    ),
+                        'class' => 'select2 game-input',
+                    ],
                     'required' => true
-                )
+                ]
             )
-            ->add('sendForm', SubmitType::class, array('label' => 'form.add'));
+            ->add('sendForm', SubmitType::class, ['label' => 'form.add', 'attr' => ['class' => 'confirm-button']]);
     }
 
     protected function getType()
     {
-        return array(
+        return [
             'Proposer' => '0',
             'Réclamer' => '1',
-        );
+        ];
     }
 
     protected function getPlanetNbr()
     {
-        return array(
+        return [
             'aucune' => '0',
             '2' => '2',
             '3' => '3',
             '4' => '4',
             '5' => '5',
-        );
+        ];
     }
 
     protected function getTaxeNbr()
     {
-        return array(
+        return [
             'aucun' => '0',
             '10%' => '10',
             '11%' => '11',
@@ -110,12 +110,12 @@ class AllyPeaceType extends AbstractType
             '23%' => '23',
             '24%' => '24',
             '25%' => '25',
-        );
+        ];
     }
 
     protected function getPdgNbr()
     {
-        return array(
+        return [
             'aucun' => '0',
             '25%' => '25',
             '26%' => '26',
@@ -143,7 +143,7 @@ class AllyPeaceType extends AbstractType
             '48%' => '48',
             '49%' => '49',
             '50%' => '50',
-        );
+        ];
     }
 
     /**
@@ -152,10 +152,10 @@ class AllyPeaceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array(
+            [
                 'data_class'         => null,
                 'translation_domain' => 'front_ally',
-            )
+            ]
         );
     }
 }

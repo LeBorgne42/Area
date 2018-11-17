@@ -84,7 +84,7 @@ class SecurityController extends Controller
 
            return $this->redirectToRoute('login');
         }
-        return $this->render('security/register.html.twig');
+        return $this->redirectToRoute('home');
     }
 
     /**
@@ -168,10 +168,6 @@ class SecurityController extends Controller
                 ]);
             }
         }
-
-        $error = $authenticationUtils->getLastAuthenticationError();
-
-        $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->redirectToRoute('home');
     }

@@ -21,84 +21,83 @@ class AllyGradeType extends AbstractType
             ->add(
                 'name',
                 null,
-                array(
+                [
                     'label' => 'form.name',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.name',
-                        'class' => 'form-control',
+                        'class' => 'game-input',
                         'maxlength' => '15',
                         'minlength' => '3',
                         'autocomplete' => 'off',
-                        'style' => 'height: 25px',
-                    ),
+                    ],
                     'required' => true,
                     'mapped' => true,
-                )
+                ]
             )
             ->add(
                 'canRecruit',
                 CheckboxType::class,
-                array(
+                [
                     'label' => 'form.name',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.name',
                         'class' => '',
-                    ),
+                    ],
                     'required' => false,
                     'mapped' => true,
-                )
+                ]
             )
             ->add(
                 'canKick',
                 CheckboxType::class,
-                array(
+                [
                     'label' => 'form.name',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.name',
                         'class' => '',
-                    ),
+                    ],
                     'required' => false
-                )
+                ]
             )
             ->add(
                 'canWar',
                 CheckboxType::class,
-                array(
+                [
                     'label' => 'form.name',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.name',
                         'class' => '',
-                    ),
+                    ],
                     'required' => false
-                )
+                ]
             )
             ->add(
                 'canPeace',
                 CheckboxType::class,
-                array(
+                [
                     'label' => 'form.name',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.name',
                         'class' => '',
-                    ),
+                    ],
                     'required' => false
-                )
+                ]
             )
             ->add(
                 'placement',
                 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',
-                array(
+                [
                     'choices' => $this->getPlacement(),
                     'label' => 'form.placement',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.placement',
-                        'class' => 'form-control select2',
+                        'class' => 'game-input select2',
                         'autocomplete' => 'off',
-                    ),
+                    ],
                     'required' => true
-                )
+                ]
             )
-            ->add('sendForm', SubmitType::class, array('label' => 'form.send'));
+            ->add('sendForm', SubmitType::class, ['label' => 'form.send', 'attr' => ['class' => 'confirm-button']]);
 
         $builder->get('name')
             ->addModelTransformer(new CallbackTransformer(
@@ -113,12 +112,12 @@ class AllyGradeType extends AbstractType
 
     protected function getPlacement()
     {
-        return array(
+        return [
             'Dirigeant' => '1',
             'Bras droit' => '2',
             'Officier' => '3',
             'Normal' => '4'
-        );
+        ];
     }
 
     /**
@@ -127,10 +126,10 @@ class AllyGradeType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array(
+            [
                 'data_class'         => 'App\Entity\Grade',
                 'translation_domain' => 'front_grade',
-            )
+            ]
         );
     }
 }
