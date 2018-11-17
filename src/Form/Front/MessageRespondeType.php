@@ -23,69 +23,68 @@ class MessageRespondeType extends AbstractType
             ->add(
                 'anonymous',
                 CheckboxType::class,
-                array(
+                [
                     'label' => 'form.name',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.name',
                         'class' => '',
-                    ),
+                    ],
                     'mapped' => false,
                     'required' => false,
-                )
+                ]
             )
             ->add(
                 'title',
                 null,
-                array(
+                [
                     'label' => 'form.title',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.title',
-                        'class' => 'form-control',
+                        'class' => 'game-input',
                         'maxlength' => '20',
                         'minlength' => '1',
-                        'style' => 'height: 25px',
                         'autocomplete' => 'off',
-                    ),
+                    ],
                     'required' => true,
                     'mapped' => true,
-                )
+                ]
             )
             ->add(
                 'content',
                 'Symfony\Component\Form\Extension\Core\Type\TextareaType',
-                array(
+                [
                     'label' => 'form.content',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.content',
-                        'class' => 'form-control',
+                        'class' => 'game-input',
+                        'style' => 'height:100px;',
                         'rows' => 10,
                         'cols' => 75,
                         'maxlength' => '500',
                         'minlength' => '1',
                         'autocomplete' => 'off',
-                    ),
+                    ],
                     'required' => true,
                     'mapped' => true,
-                )
+                ]
             )
             ->add(
                 'bitcoin',
                 null,
-                array(
+                [
                     'label' => 'form.num',
                     'data' => 0,
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.num',
-                        'class' => 'form-control',
+                        'class' => 'game-input',
                         'min' => '0',
-                        'style' => 'height: 20px',
                         'autocomplete' => 'off',
-                    ),
+                    ],
                     'required' => true,
                     'mapped' => true,
-                )
+                ]
             )
-            ->add('sendForm', SubmitType::class, array('label' => 'form.sendMessage'));
+            ->add('sendForm', SubmitType::class, ['label' => 'form.sendMessage', 'attr' => ['class' => 'confirm-button float-right mt-3']]);
     }
 
     /**
@@ -94,10 +93,10 @@ class MessageRespondeType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array(
+            [
                 'data_class'         => 'App\Entity\Message',
                 'translation_domain' => 'front_message',
-            )
+            ]
         );
     }
 }

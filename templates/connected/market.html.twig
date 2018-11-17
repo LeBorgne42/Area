@@ -37,7 +37,7 @@
                 {{ form_widget(form_market.soldier,{attr: { max: app.user.getRank().getWarPoint() }}) }}
             </div>
             <div class="col-12 mt-5">
-                {{ form_widget(form_market.sendForm,{attr: { class: 'btn btn-lg btn-info float-right'}}) }}
+                {{ form_widget(form_market.sendForm) }}
             </div>
             <div class="col-12 mt-5">
                 {{ 'market.pdg'|trans }} {{ app.user.getRank().getWarPoint()|number_format }} <img src="{{ asset('img/pdg.png') }}"> {{ 'market.pdgs'|trans }}

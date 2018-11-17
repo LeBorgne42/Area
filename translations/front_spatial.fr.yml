@@ -17,7 +17,7 @@ spatial.croiser: Croiseur
 spatial.ironClad: Cuirassé
 spatial.destroyer: Destroyer
 form.construct: Construire
-form.nbr: Nombre
+form.nbr: 0
 form.addFleet: 'Créer la flotte'
 form.name: ''
 niobiumImg: Niobium

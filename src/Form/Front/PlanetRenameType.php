@@ -21,31 +21,31 @@ class PlanetRenameType extends AbstractType
             ->add(
                 'id',
                 HiddenType::class,
-                array(
+                [
                     'label' => 'form.id',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.id',
                         'class' => 'form-control',
-                    ),
+                    ],
                     'required' => false,
-                )
+                ]
             )
             ->add(
                 'name',
                 null,
-                array(
+                [
                     'label' => 'form.name',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.name',
-                        'class' => 'form-control',
+                        'class' => 'game-input',
                         'maxlength' => '15',
                         'minlength' => '2',
                         'autocomplete' => 'off',
-                    ),
+                    ],
                     'required' => true,
-                )
+                ]
             )
-            ->add('sendForm', SubmitType::class, array('label' => 'form.renamePlanet'));
+            ->add('sendForm', SubmitType::class, ['label' => 'form.renamePlanet', 'attr' => ['class' => 'btn-sm confirm-button float-right', 'style' => 'padding:0.1rem 1rem;']]);
 
         $builder->get('name')
             ->addModelTransformer(new CallbackTransformer(
@@ -64,10 +64,10 @@ class PlanetRenameType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array(
+            [
                 'data_class'         =>  null,
                 'translation_domain' => 'front_overview',
-            )
+            ]
         );
     }
 }

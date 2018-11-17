@@ -29,7 +29,7 @@
                                         {{ form_widget(form_manageRenameFleet.name) }}
                                     </div>
                                     <div class="col-3">
-                                        {{ form_widget(form_manageRenameFleet.sendForm,{attr: { class: 'btn btn-sm btn-info'}}) }}
+                                        {{ form_widget(form_manageRenameFleet.sendForm) }}
                                     </div>
                                 </div>
                             </td>
@@ -127,7 +127,7 @@
                                 {{ form_widget(form_sendFleet.planete,{attr: { value: fleet.getPlanet().getPosition()}}) }}
                             </td>
                             <td class="center-cells p-1 text-center">
-                                {{ form_widget(form_sendFleet.sendForm,{attr: { class: 'btn btn-sm btn-info'}}) }}
+                                {{ form_widget(form_sendFleet.sendForm) }}
                             </td>
                         </tr>
                         </tbody>
@@ -629,7 +629,7 @@
                             </tbody>
                         </table>
                         <div class="text-center">
-                            {{ form_widget(form_manageFleet.sendForm,{attr: { class: 'btn btn-lg btn-info'}}) }}
+                            {{ form_widget(form_manageFleet.sendForm) }}
                             {{ form_end(form_manageFleet) }}
                         </div>
                     {% else %}

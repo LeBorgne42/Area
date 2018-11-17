@@ -22,7 +22,7 @@ class InteractFleetType extends AbstractType
             ->add(
                 'list',
                 EntityType::class,
-                array(
+                [
                     'class' => Fleet::class,
                     'label' => 'form.fleet',
                     'query_builder' => function (EntityRepository $er) use($options) {
@@ -31,42 +31,42 @@ class InteractFleetType extends AbstractType
                             ->where('u.id = :user')
                             ->andWhere('f.flightTime is null')
                             ->andWhere('f.fightAt is null')
-                            ->setParameters(array('user' => $options['user']))
+                            ->setParameters(['user' => $options['user']])
                             ->orderBy('f.name', 'ASC');
                     },
                     'choice_label' => 'name',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.fleet',
-                        'class' => 'form-control',
-                    ),
+                        'class' => 'game-input',
+                    ],
                     'required' => true,
                     'mapped' => false,
-                )
+                ]
             )
             ->add(
                 'flightType',
                 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',
-                array(
+                [
                     'choices' => $this->getFlightType(),
                     'label' => 'form.flightType',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.flightType',
-                        'class' => 'form-control select2',
-                    ),
+                        'class' => 'game-input select2',
+                    ],
                     'required' => true
-                )
+                ]
             )
-            ->add('sendForm', SubmitType::class, array('label' => 'form.sendFleet'));
+            ->add('sendForm', SubmitType::class, ['label' => 'form.sendFleet', 'attr' => ['class' => 'confirm-button']]);
     }
 
     protected function getFlightType()
     {
-        return array(
-            'normal' => '1',
-            'decharger et revenir' => '2',
-            'coloniser' => '3',
-            'envahir' => '4',
-        );
+        return [
+            'Normal' => '1',
+            'Décharger et revenir' => '2',
+            'Coloniser' => '3',
+            'Envahir' => '4',
+        ];
     }
 
     /**
@@ -74,12 +74,12 @@ class InteractFleetType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setRequired(array('user'));
+        $resolver->setRequired(['user']);
         $resolver->setDefaults(
-            array(
+            [
                 'data_class'         => null,
                 'translation_domain' => 'front_fleet',
-            )
+            ]
         );
     }
 }

@@ -27,10 +27,10 @@ fleet.fregate: Fregate
 fleet.barge: Barge
 form.nbr: Nombre
 form.manageFleet: Transferer
-form.renameFleet: renommer
-form.sendFleet: envoyer
+form.renameFleet: Renommer
+form.sendFleet: Envoyer
 form.name: ''
-fleet.sendFleet: envoyer
+fleet.sendFleet: Envoyer
 fleet.attackMode: 'mode attaque (attention aux représailles)'
 fleet.galaxy: galaxie
 fleet.sector: secteur

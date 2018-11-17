@@ -24,7 +24,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -39,7 +39,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -54,7 +54,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -69,7 +69,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -84,7 +84,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -99,7 +99,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -114,7 +114,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -130,7 +130,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -146,7 +146,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -162,7 +162,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -178,7 +178,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -194,7 +194,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -210,7 +210,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -226,7 +226,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -242,7 +242,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -258,7 +258,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -274,7 +274,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -290,7 +290,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -306,7 +306,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -322,7 +322,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -338,7 +338,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -354,7 +354,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -370,7 +370,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -386,7 +386,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -402,7 +402,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -418,7 +418,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -434,7 +434,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -450,7 +450,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -466,7 +466,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -482,7 +482,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -498,7 +498,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -514,7 +514,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -530,7 +530,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -546,7 +546,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -562,7 +562,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -578,7 +578,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -594,7 +594,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -610,7 +610,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -626,7 +626,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -642,7 +642,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -658,7 +658,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -674,7 +674,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -690,7 +690,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -706,7 +706,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -722,7 +722,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -738,7 +738,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -754,7 +754,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -770,7 +770,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -786,7 +786,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -802,7 +802,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -818,7 +818,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -834,7 +834,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -850,7 +850,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -866,7 +866,7 @@ class SpatialEditFleetType extends AbstractType
                     'data' => 0,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -874,7 +874,7 @@ class SpatialEditFleetType extends AbstractType
                     'mapped' => false,
                 )
             )
-            ->add('sendForm', SubmitType::class, array('label' => 'form.manageFleet'));
+            ->add('sendForm', SubmitType::class, ['label' => 'form.manageFleet', 'attr' => ['class' => 'confirm-button float-right']]);
     }
 
     /**
@@ -883,10 +883,10 @@ class SpatialEditFleetType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array(
+            [
                 'data_class'         => null,
                 'translation_domain' => 'front_fleet',
-            )
+            ]
         );
     }
 }

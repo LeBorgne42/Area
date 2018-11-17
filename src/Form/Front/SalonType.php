@@ -19,21 +19,21 @@ class SalonType extends AbstractType
             ->add(
                 'content',
                 null,
-                array(
+                [
                     'label' => 'form.content',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.content',
-                        'class' => 'form-control',
+                        'class' => 'game-input ',
+                        'style' => 'height: 30px; font-size: 1.5rem;',
                         'maxlength' => '200',
                         'minlength' => '1',
-                        'style' => 'height: 30px; font-size: 1.8rem;',
                         'autocomplete' => 'off',
-                    ),
+                    ],
                     'required' => true,
                     'mapped' => true,
-                )
+                ]
             )
-            ->add('sendForm', SubmitType::class, array('label' => 'form.sendMessage', 'attr'  => array('style' => 'height: 30px; font-size: 1.5rem;')));
+            ->add('sendForm', SubmitType::class, ['label' => 'form.sendMessage', 'attr' => ['class' => 'confirm-button', 'style' => 'height: 30px; font-size: 1.5rem;']]);
     }
 
     /**
@@ -42,10 +42,10 @@ class SalonType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array(
+            [
                 'data_class'         => null,
                 'translation_domain' => 'front_salon',
-            )
+            ]
         );
     }
 }

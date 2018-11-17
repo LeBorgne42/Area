@@ -23,42 +23,41 @@ class PdgType extends AbstractType
             ->add(
                 'exchangeType',
                 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',
-                array(
+                [
                     'choices' => $this->getTrade(),
                     'label' => 'form.pactType',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.exchangeType',
-                        'class' => 'form-control select2',
-                    ),
+                        'class' => 'game-input select2',
+                    ],
                     'required' => true
-                )
+                ]
             )
             ->add(
                 'amount',
                 null,
-                array(
+                [
                     'label' => 'form.num',
                     'data' => 0,
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.num',
-                        'class' => 'form-control text-right',
+                        'class' => 'game-input text-right',
                         'min' => '0',
-                        'style' => 'height: 25px',
                         'autocomplete' => 'off',
-                    ),
+                    ],
                     'required' => true,
                     'mapped' => true,
-                )
+                ]
             )
-            ->add('sendForm', SubmitType::class, array('label' => 'form.transfert'));
+            ->add('sendForm', SubmitType::class, ['label' => 'form.transfert', 'attr' => ['class' => 'confirm-button']]);
     }
 
     protected function getTrade()
     {
-        return array(
+        return [
             'Donner' => '1',
             'Retirer' => '2',
-        );
+        ];
     }
 
     /**
@@ -67,10 +66,10 @@ class PdgType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array(
+            [
                 'data_class'         => null,
                 'translation_domain' => 'front_ally',
-            )
+            ]
         );
     }
 }

@@ -14,7 +14,8 @@
                     <tbody>
                     <tr{% if oldFleet.getSonde == 0 %} hidden{% endif %}>
                         <td class="tab-cells-name">
-                            {{ 'fleet.sonde'|trans }} x {{ oldFleet.getSonde()|number_format }}                    </td>
+                            {{ 'fleet.sonde'|trans }} x {{ oldFleet.getSonde()|number_format }}
+                        </td>
                         <td class="center-cells">
                             {{ form_widget(form_spatialShip.sonde,{attr: { max: oldFleet.getSonde()}}) }}
                         </td>
@@ -268,7 +269,7 @@
                     </tbody>
                 </table>
                 <span>
-                    {{ form_widget(form_spatialShip.sendForm,{attr: { class: 'btn btn-lg btn-info float-right'}}) }}
+                    {{ form_widget(form_spatialShip.sendForm) }}
                     {{ form_end(form_spatialShip) }}
                 </span>
             </div>

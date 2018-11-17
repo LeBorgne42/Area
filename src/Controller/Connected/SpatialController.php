@@ -363,7 +363,7 @@ class SpatialController extends Controller
             $em->flush();
 
 
-            return $this->redirectToRoute('spatial', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
         }
 
         return $this->render('connected/fleet/create.html.twig', [

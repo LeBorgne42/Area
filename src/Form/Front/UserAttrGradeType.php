@@ -24,7 +24,7 @@ class UserAttrGradeType extends AbstractType
             ->add(
                 'grade',
                 EntityType::class,
-                array(
+                [
                     'class' => Grade::class,
                     'label' => 'form.grade',
                     'query_builder' => function (EntityRepository $er) use($options) {
@@ -35,15 +35,15 @@ class UserAttrGradeType extends AbstractType
                             ->orderBy('g.placement', 'ASC');
                     },
                     'choice_label' => 'name',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.grade',
-                        'class' => 'form-control',
-                    ),
+                        'class' => 'game-input',
+                    ],
                     'required' => true,
                     'mapped' => false,
-                )
+                ]
             )
-            ->add('sendForm', SubmitType::class, array('label' => 'form.send'));
+            ->add('sendForm', SubmitType::class, ['label' => 'form.send', 'attr' => ['class' => 'confirm-button']]);
     }
 
     /**
@@ -51,12 +51,12 @@ class UserAttrGradeType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setRequired(array('allyId'));
+        $resolver->setRequired(['allyId']);
         $resolver->setDefaults(
-            array(
+            [
                 'data_class'         => null,
                 'translation_domain' => 'front_grade',
-            )
+            ]
         );
     }
 }

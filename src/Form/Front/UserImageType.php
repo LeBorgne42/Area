@@ -19,18 +19,18 @@ class UserImageType extends AbstractType
             ->add(
                 'imageFile',
                 'Vich\UploaderBundle\Form\Type\VichImageType',
-                array(
+                [
                     'label' => 'form.changeImageFile',
                     'required' => false,
-                    'attr'  => array(
+                    'attr'  => [
                         'class'       => '',
                         'accept'      => '.jpg,.jpeg,.bmp,.png',
                         'autocomplete' => 'off',
                         'data-max-size' => '1'
-                    )
-                )
+                    ]
+                ]
             )
-            ->add('sendForm', SubmitType::class, array('label' => 'form.image'));
+            ->add('sendForm', SubmitType::class, ['label' => 'form.image']);
     }
 
     /**
@@ -39,10 +39,10 @@ class UserImageType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array(
+            [
                 'data_class'         => 'App\Entity\User',
                 'translation_domain' => 'front_index',
-            )
+            ]
         );
     }
 }

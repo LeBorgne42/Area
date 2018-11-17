@@ -14,7 +14,7 @@
             <div class="offset-1 col-10">
                 <div class="wrapper-page">
                     <div class="text-center">
-                        {{ form_start(form_userAttrGrade,{attr: { action: path('ally_addUser_grade', {'id': idUser, 'idp': usePlanet.getId()}) }}) }}
+                        {{ form_start(form_userAttrGrade,{attr: { action: path('pre_ally_addUser_grade', {'id': idUser}) }}) }}
                         <div class="form-group">
                             {{ form_widget(form_userAttrGrade.grade) }}
                         </div>

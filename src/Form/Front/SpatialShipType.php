@@ -23,7 +23,7 @@ class SpatialShipType extends AbstractType
                     'label' => 'form.nbr',
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -37,7 +37,7 @@ class SpatialShipType extends AbstractType
                     'label' => 'form.nbr',
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -51,7 +51,7 @@ class SpatialShipType extends AbstractType
                     'label' => 'form.nbr',
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -65,7 +65,7 @@ class SpatialShipType extends AbstractType
                     'label' => 'form.nbr',
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -79,7 +79,7 @@ class SpatialShipType extends AbstractType
                     'label' => 'form.nbr',
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -93,7 +93,7 @@ class SpatialShipType extends AbstractType
                     'label' => 'form.nbr',
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -107,7 +107,7 @@ class SpatialShipType extends AbstractType
                     'label' => 'form.nbr',
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'max' => '1',
                         'autocomplete' => 'off',
@@ -122,7 +122,7 @@ class SpatialShipType extends AbstractType
                     'label' => 'form.nbr',
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -136,7 +136,7 @@ class SpatialShipType extends AbstractType
                     'label' => 'form.nbr',
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -150,7 +150,7 @@ class SpatialShipType extends AbstractType
                     'label' => 'form.nbr',
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -164,7 +164,7 @@ class SpatialShipType extends AbstractType
                     'label' => 'form.nbr',
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -178,7 +178,7 @@ class SpatialShipType extends AbstractType
                     'label' => 'form.nbr',
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -192,7 +192,7 @@ class SpatialShipType extends AbstractType
                     'label' => 'form.nbr',
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -206,7 +206,7 @@ class SpatialShipType extends AbstractType
                     'label' => 'form.nbr',
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -220,7 +220,7 @@ class SpatialShipType extends AbstractType
                     'label' => 'form.nbr',
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -234,7 +234,7 @@ class SpatialShipType extends AbstractType
                     'label' => 'form.nbr',
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -248,7 +248,7 @@ class SpatialShipType extends AbstractType
                     'label' => 'form.nbr',
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -262,7 +262,7 @@ class SpatialShipType extends AbstractType
                     'label' => 'form.nbr',
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -276,7 +276,7 @@ class SpatialShipType extends AbstractType
                     'label' => 'form.nbr',
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -290,7 +290,7 @@ class SpatialShipType extends AbstractType
                     'label' => 'form.nbr',
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -304,7 +304,7 @@ class SpatialShipType extends AbstractType
                     'label' => 'form.nbr',
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
@@ -318,14 +318,14 @@ class SpatialShipType extends AbstractType
                     'label' => 'form.nbr',
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
                     ),
                     'required' => false,
                 )
             )
-            ->add('sendForm', SubmitType::class, array('label' => 'form.construct'));
+            ->add('sendForm', SubmitType::class, ['label' => 'form.construct', 'attr' => ['class' => 'confirm-button float-right']]);
     }
 
     /**
@@ -334,10 +334,10 @@ class SpatialShipType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array(
+            [
                 'data_class'         => null,
                 'translation_domain' => 'front_spatial',
-            )
+            ]
         );
     }
 }

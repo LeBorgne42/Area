@@ -24,53 +24,53 @@ class FleetSendType extends AbstractType
             ->add(
                 'galaxy',
                 null,
-                array(
+                [
                     'label' => 'form.num',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.num',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '1',
                         'max' => '20',
-                    ),
+                    ],
                     'required' => true,
-                )
+                ]
             )
             ->add(
                 'sector',
                 null,
-                array(
+                [
                     'label' => 'form.num',
                     'data' => 0,
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.num',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '1',
                         'max' => '100',
                         'autocomplete' => 'off',
-                    ),
+                    ],
                     'required' => true,
-                )
+                ]
             )
             ->add(
                 'planete',
                 null,
-                array(
+                [
                     'label' => 'form.num',
                     'data' => 0,
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.num',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '1',
                         'max' => '25',
                         'autocomplete' => 'off',
-                    ),
+                    ],
                     'required' => true,
-                )
+                ]
             )
             ->add(
                 'planet',
                 EntityType::class,
-                array(
+                [
                     'class' => Planet::class,
                     'label' => 'form.planet',
                     'query_builder' => function (EntityRepository $er) use($options) {
@@ -81,38 +81,40 @@ class FleetSendType extends AbstractType
                             ->orderBy('p.sector', 'ASC');
                     },
                     'choice_label' => 'name',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.planet',
-                        'class' => 'form-control',
-                    ),
+                        'class' => 'game-input',
+                        'style' => 'width:180px;',
+                    ],
                     'required' => false,
                     'mapped' => false,
-                )
+                ]
             )
             ->add(
                 'flightType',
                 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',
-                array(
+                [
                     'choices' => $this->getFlightType(),
                     'label' => 'form.flightType',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.flightType',
-                        'class' => 'form-control select2',
-                    ),
+                        'class' => 'game-input select2',
+                        'style' => 'width:180px;',
+                    ],
                     'required' => true
-                )
+                ]
             )
-            ->add('sendForm', SubmitType::class, array('label' => 'form.sendFleet'));
+            ->add('sendForm', SubmitType::class, ['label' => 'form.sendFleet', 'attr' => ['class' => 'confirm-button']]);
     }
 
     protected function getFlightType()
     {
-        return array(
-            'normal' => '1',
-            'decharger et revenir' => '2',
-            'coloniser' => '3',
-            'envahir' => '4',
-        );
+        return [
+            'Normal' => '1',
+            'Décharger et revenir' => '2',
+            'Coloniser' => '3',
+            'Envahir' => '4',
+        ];
     }
 
     /**
@@ -120,12 +122,12 @@ class FleetSendType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setRequired(array('user'));
+        $resolver->setRequired(['user']);
         $resolver->setDefaults(
-            array(
+            [
                 'data_class'         => null,
                 'translation_domain' => 'front_fleet',
-            )
+            ]
         );
     }
 }

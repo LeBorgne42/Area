@@ -19,17 +19,17 @@ class UserRecoveryType extends AbstractType
             ->add(
                 'pseudoEmail',
                 null,
-                array(
+                [
                     'label' => 'form.pseudoEmail',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.pseudoEmail',
                         'class' => 'form-control',
                         'minlength' => '4',
                         'autocomplete' => 'off',
-                    ),
-                )
+                    ],
+                ]
             )
-            ->add('sendForm', SubmitType::class, array('label' => 'form.getPassword'));
+            ->add('sendForm', SubmitType::class, ['label' => 'form.getPassword']);
     }
 
     /**
@@ -38,10 +38,10 @@ class UserRecoveryType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array(
+            [
                 'data_class'         => null,
                 'translation_domain' => 'front_recoveryPw',
-            )
+            ]
         );
     }
 }

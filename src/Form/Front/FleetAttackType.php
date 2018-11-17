@@ -20,16 +20,16 @@ class FleetAttackType extends AbstractType
             ->add(
                 'attack',
                 CheckboxType::class,
-                array(
+                [
                     'label' => 'form.name',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.name',
                         'class' => '',
-                    ),
+                    ],
                     'mapped' => true,
-                )
+                ]
             )
-            ->add('sendForm', SubmitType::class, array('label' => 'form.attackFleet'));
+            ->add('sendForm', SubmitType::class, ['label' => 'form.attackFleet']);
     }
 
     /**
@@ -38,10 +38,10 @@ class FleetAttackType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array(
+            [
                 'data_class'         => 'App\Entity\Fleet',
                 'translation_domain' => 'front_fleet',
-            )
+            ]
         );
     }
 }

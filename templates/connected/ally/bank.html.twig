@@ -44,7 +44,7 @@
                             {{ form_widget(form_exchange.exchangeType) }}
                         </div>
                         <div class="col-3 form-group">
-                            {{ form_widget(form_exchange.sendForm,{attr: { class: 'btn btn-lg btn-info'}}) }}
+                            {{ form_widget(form_exchange.sendForm) }}
                         </div>
                     </div>
                     {{ form_end(form_exchange) }}
@@ -53,14 +53,14 @@
                         <div class="offset-1 col-3 form-text text-right">
                             {{ 'ally.formGivePdg'|trans }}
                         </div>
-                        <div class="col-2 form-group mt-1">
+                        <div class="col-2 form-group">
                             {{ form_widget(form_pdg.amount) }}
                         </div>
-                        <div class="col-2 form-group mt-1">
+                        <div class="col-2 form-group">
                             {{ form_widget(form_pdg.exchangeType) }}
                         </div>
                         <div class="col-3 form-group">
-                            {{ form_widget(form_pdg.sendForm,{attr: { class: 'btn btn-lg btn-info'}}) }}
+                            {{ form_widget(form_pdg.sendForm) }}
                         </div>
                     </div>
                     {{ form_end(form_pdg) }}

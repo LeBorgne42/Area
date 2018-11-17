@@ -19,20 +19,20 @@ class CaserneRecruitType extends AbstractType
             ->add(
                 'soldier',
                 null,
-                array(
+                [
                     'label' => 'form.nbr',
                     'data' => 0,
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
                         'max' => '50000',
                         'autocomplete' => 'off',
-                    ),
+                    ],
                     'required' => true,
-                )
+                ]
             )
-            ->add('sendForm', SubmitType::class, array('label' => 'form.recruitSoldier'));
+            ->add('sendForm', SubmitType::class, ['label' => 'form.recruitSoldier', 'attr' => ['class' => 'confirm-button float-right']]);
     }
 
     /**
@@ -41,10 +41,10 @@ class CaserneRecruitType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array(
+            [
                 'data_class'         =>  null,
                 'translation_domain' => 'front_soldier',
-            )
+            ]
         );
     }
 }

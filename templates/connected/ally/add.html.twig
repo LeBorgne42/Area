@@ -35,11 +35,11 @@
                     {% if app.user.getGrade().getCanRecruit() == 1 %}
                         {{ form_start(form_allyAdd) }}
                         <div class="row mt-5">
-                            <div class="offset-1 col-5 form-group mt-1">
+                            <div class="offset-1 col-5 form-group">
                                 {{ form_widget(form_allyAdd.nameUser) }}
                             </div>
                             <div class="offset-1 col-4 form-group">
-                                {{ form_widget(form_allyAdd.sendForm,{attr: { class: 'btn btn-lg btn-info'}}) }}
+                                {{ form_widget(form_allyAdd.sendForm) }}
                             </div>
                         </div>
                         {{ form_end(form_allyAdd) }}

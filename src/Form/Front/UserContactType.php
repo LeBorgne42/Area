@@ -19,9 +19,9 @@ class UserContactType extends AbstractType
             ->add(
                 'text',
                 'Symfony\Component\Form\Extension\Core\Type\TextareaType',
-                array(
+                [
                     'label' => 'form.text',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.text',
                         'class' => 'form-control',
                         'rows' => 10,
@@ -29,25 +29,25 @@ class UserContactType extends AbstractType
                         'maxlength' => '300',
                         'minlength' => '15',
                         'autocomplete' => 'off',
-                    ),
+                    ],
                     'required' => true
-                )
+                ]
             )
             ->add(
                 'email',
                 null,
-                array(
+                [
                     'label' => 'form.email',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.email',
                         'class' => 'form-control',
                         'minlength' => '5',
                         'autocomplete' => 'off',
-                    ),
+                    ],
                     'required' => true
-                )
+                ]
             )
-            ->add('sendForm', SubmitType::class, array('label' => 'form.contact'));
+            ->add('sendForm', SubmitType::class, ['label' => 'form.contact']);
     }
 
     /**
@@ -56,10 +56,10 @@ class UserContactType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array(
+            [
                 'data_class'         => null,
                 'translation_domain' => 'front_contact',
-            )
+            ]
         );
     }
 }

@@ -20,19 +20,20 @@ class FleetRenameType extends AbstractType
             ->add(
                 'name',
                 null,
-                array(
+                [
                     'label' => 'form.name',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.name',
-                        'class' => 'form-control',
+                        'class' => 'game-input',
+                        'style' => 'height:30px;',
                         'maxlength' => '15',
                         'minlength' => '2',
                         'autocomplete' => 'off',
-                    ),
+                    ],
                     'required' => true,
-                )
+                ]
             )
-            ->add('sendForm', SubmitType::class, array('label' => 'form.renameFleet'));
+            ->add('sendForm', SubmitType::class, ['label' => 'form.renameFleet', 'attr' => ['class' => 'confirm-button']]);
 
         $builder->get('name')
             ->addModelTransformer(new CallbackTransformer(
@@ -51,10 +52,10 @@ class FleetRenameType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array(
+            [
                 'data_class'         =>  'App\Entity\Fleet',
                 'translation_domain' => 'front_fleet',
-            )
+            ]
         );
     }
 }

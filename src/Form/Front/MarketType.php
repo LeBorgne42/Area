@@ -24,7 +24,7 @@ class MarketType extends AbstractType
             ->add(
                 'planet',
                 EntityType::class,
-                array(
+                [
                     'class' => Planet::class,
                     'label' => 'form.planet',
                     'query_builder' => function (EntityRepository $er) use($options) {
@@ -35,63 +35,60 @@ class MarketType extends AbstractType
                             ->orderBy('p.sector', 'ASC');
                     },
                     'choice_label' => 'name',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.planet',
-                        'class' => 'form-control',
-                    ),
+                        'class' => 'game-input',
+                    ],
                     'required' => false,
                     'mapped' => false,
-                )
+                ]
             )
             ->add(
                 'bitcoin',
                 null,
-                array(
+                [
                     'label' => 'form.nbr',
                     'data' => 0,
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
-                        'style' => 'height: 20px',
                         'autocomplete' => 'off',
-                    ),
+                    ],
                     'required' => true,
-                )
+                ]
             )
             ->add(
                 'worker',
                 null,
-                array(
+                [
                     'label' => 'form.nbr',
                     'data' => 0,
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
-                        'style' => 'height: 20px',
                         'autocomplete' => 'off',
-                    ),
+                    ],
                     'required' => true,
-                )
+                ]
             )
             ->add(
                 'soldier',
                 null,
-                array(
+                [
                     'label' => 'form.nbr',
                     'data' => 0,
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.nbr',
-                        'class' => 'form-control',
+                        'class' => 'game-input text-right',
                         'min' => '0',
-                        'style' => 'height: 20px',
                         'autocomplete' => 'off',
-                    ),
+                    ],
                     'required' => true,
-                )
+                ]
             )
-            ->add('sendForm', SubmitType::class, array('label' => 'form.buyMarket'));
+            ->add('sendForm', SubmitType::class, ['label' => 'form.buyMarket', 'attr' => ['class' => 'confirm-button float-right']]);
     }
 
     /**
@@ -99,12 +96,12 @@ class MarketType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setRequired(array('user'));
+        $resolver->setRequired(['user']);
         $resolver->setDefaults(
-            array(
+            [
                 'data_class'         => null,
                 'translation_domain' => 'front_market',
-            )
+            ]
         );
     }
 }

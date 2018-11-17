@@ -19,66 +19,66 @@ class ModifPasswordType extends AbstractType
             ->add(
                 'oldPassword',
                 null,
-                array(
+                [
                     'label' => 'form.oldPassword',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.oldPassword',
-                        'class' => 'form-control',
+                        'class' => 'game-input',
                         'autocomplete' => 'off',
-                    ),
+                    ],
                     'required' => false,
-                )
+                ]
             )
             ->add(
                 'password',
                 null,
-                array(
+                [
                     'label' => 'form.password',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.password',
-                        'class' => 'form-control',
+                        'class' => 'game-input',
                         'autocomplete' => 'off',
-                    ),
+                    ],
                     'required' => false,
-                )
+                ]
             )
             ->add(
                 'confirmPassword',
                 null,
-                array(
+                [
                     'label' => 'form.confirmPassword',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.confirmPassword',
-                        'class' => 'form-control',
+                        'class' => 'game-input',
                         'autocomplete' => 'off',
-                    ),
+                    ],
                     'required' => false,
-                )
+                ]
             )
             ->add(
                 'planetOrder',
                 'Symfony\Component\Form\Extension\Core\Type\ChoiceType',
-                array(
+                [
                     'choices' => $this->getChoices(),
                     'label' => 'form.planetOrder',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.planetOrder',
-                        'class' => 'form-control select2',
-                    ),
+                        'class' => 'planetOrder select2',
+                    ],
                     'required' => true
-                )
+                ]
             )
-            ->add('sendForm', SubmitType::class, array('label' => 'form.newOptions'));
+            ->add('sendForm', SubmitType::class, ['label' => 'form.newOptions', 'attr' => ['class' => 'confirm-button float-right']]);
     }
 
     protected function getChoices()
     {
-        return array(
+        return [
             '' => null,
             'Alphabétique' => 'alpha',
             'Position' => 'pos',
             'Colonisation' => 'colo'
-        );
+        ];
     }
 
     /**
@@ -87,10 +87,10 @@ class ModifPasswordType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array(
+            [
                 'data_class'         => null,
                 'translation_domain' => 'front_options',
-            )
+            ]
         );
     }
 }
