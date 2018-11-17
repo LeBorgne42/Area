@@ -65,7 +65,7 @@
                             <tr>
                                 <td class="center-cells">
                                     {% if app.user.getGrade().getPlacement() == 1 %}
-                                        <a class="btn-top" href="{{ path('pre_ally_addUser_grade', {'id': user.getId() }) }}" data-toggle="modal" data-target="#openModal">{{ user.getGrade().getName() }}</a> <span class="glyphicon glyphicon-question-sign text-orange" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.changeGrade'|trans }}"></span>
+                                        <button class="confirm-button" href="{{ path('pre_ally_addUser_grade', {'id': user.getId() }) }}" data-toggle="modal" data-target="#openModal">{{ user.getGrade().getName() }}</button> <span class="glyphicon glyphicon-question-sign text-orange" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.changeGrade'|trans }}"></span>
                                     {% else %}
                                         {{ user.getGrade().getName() }}
                                     {% endif %}
