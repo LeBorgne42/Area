@@ -2,57 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97f042ea-d0ee-4bd9-bb02-3d850e24f659" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/assets/global.scss" afterPath="$PROJECT_DIR$/assets/global.scss" />
-      <change beforePath="$PROJECT_DIR$/assets/scss/front/options.scss" afterPath="$PROJECT_DIR$/assets/scss/front/options.scss" />
-      <change beforePath="$PROJECT_DIR$/assets/scss/front/spatial.scss" afterPath="$PROJECT_DIR$/assets/scss/front/spatial.scss" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/SpatialController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/SpatialController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/CaserneRecruitType.php" afterPath="$PROJECT_DIR$/src/Form/Front/CaserneRecruitType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/ExchangeType.php" afterPath="$PROJECT_DIR$/src/Form/Front/ExchangeType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/FleetAttackType.php" afterPath="$PROJECT_DIR$/src/Form/Front/FleetAttackType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/FleetRenameType.php" afterPath="$PROJECT_DIR$/src/Form/Front/FleetRenameType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/FleetSendType.php" afterPath="$PROJECT_DIR$/src/Form/Front/FleetSendType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/InteractFleetType.php" afterPath="$PROJECT_DIR$/src/Form/Front/InteractFleetType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/MarketType.php" afterPath="$PROJECT_DIR$/src/Form/Front/MarketType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/MessageRespondeType.php" afterPath="$PROJECT_DIR$/src/Form/Front/MessageRespondeType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/MessageType.php" afterPath="$PROJECT_DIR$/src/Form/Front/MessageType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/ModifPasswordType.php" afterPath="$PROJECT_DIR$/src/Form/Front/ModifPasswordType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/PdgType.php" afterPath="$PROJECT_DIR$/src/Form/Front/PdgType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/PlanetRenameType.php" afterPath="$PROJECT_DIR$/src/Form/Front/PlanetRenameType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/SalonType.php" afterPath="$PROJECT_DIR$/src/Form/Front/SalonType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/ScientistRecruitType.php" afterPath="$PROJECT_DIR$/src/Form/Front/ScientistRecruitType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/SpatialEditFleetType.php" afterPath="$PROJECT_DIR$/src/Form/Front/SpatialEditFleetType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/SpatialFleetType.php" afterPath="$PROJECT_DIR$/src/Form/Front/SpatialFleetType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/SpatialShipType.php" afterPath="$PROJECT_DIR$/src/Form/Front/SpatialShipType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/UserAttrGradeType.php" afterPath="$PROJECT_DIR$/src/Form/Front/UserAttrGradeType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/UserConnectType.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/UserContactType.php" afterPath="$PROJECT_DIR$/src/Form/Front/UserContactType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/UserImageType.php" afterPath="$PROJECT_DIR$/src/Form/Front/UserImageType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/UserRecoveryType.php" afterPath="$PROJECT_DIR$/src/Form/Front/UserRecoveryType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Form/Front/UserRegisterType.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/ally.html.twig" afterPath="$PROJECT_DIR$/templates/connected/ally.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/ally/add.html.twig" afterPath="$PROJECT_DIR$/templates/connected/ally/add.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/ally/admin.html.twig" afterPath="$PROJECT_DIR$/templates/connected/ally/admin.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/ally/bank.html.twig" afterPath="$PROJECT_DIR$/templates/connected/ally/bank.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/ally/grade.html.twig" afterPath="$PROJECT_DIR$/templates/connected/ally/grade.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/ally/makePeace.html.twig" afterPath="$PROJECT_DIR$/templates/connected/ally/makePeace.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/ally/noAlly.html.twig" afterPath="$PROJECT_DIR$/templates/connected/ally/noAlly.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/ally/pact.html.twig" afterPath="$PROJECT_DIR$/templates/connected/ally/pact.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/fleet/create.html.twig" afterPath="$PROJECT_DIR$/templates/connected/fleet/create.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/fleet/edit.html.twig" afterPath="$PROJECT_DIR$/templates/connected/fleet/edit.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/fleet/split.html.twig" afterPath="$PROJECT_DIR$/templates/connected/fleet/split.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/map/interact.html.twig" afterPath="$PROJECT_DIR$/templates/connected/map/interact.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/market.html.twig" afterPath="$PROJECT_DIR$/templates/connected/market.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/message.html.twig" afterPath="$PROJECT_DIR$/templates/connected/message.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/options.html.twig" afterPath="$PROJECT_DIR$/templates/connected/options.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/planet.html.twig" afterPath="$PROJECT_DIR$/templates/connected/planet.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/profil/user_responde.html.twig" afterPath="$PROJECT_DIR$/templates/connected/profil/user_responde.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/salon.html.twig" afterPath="$PROJECT_DIR$/templates/connected/salon.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/soldier.html.twig" afterPath="$PROJECT_DIR$/templates/connected/soldier.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/spatial.html.twig" afterPath="$PROJECT_DIR$/templates/connected/spatial.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/preconnected/ally/grade.html.twig" afterPath="$PROJECT_DIR$/templates/preconnected/ally/grade.html.twig" />
-      <change beforePath="$PROJECT_DIR$/translations/front_fleet.fr.yml" afterPath="$PROJECT_DIR$/translations/front_fleet.fr.yml" />
-      <change beforePath="$PROJECT_DIR$/translations/front_overview.fr.yml" afterPath="$PROJECT_DIR$/translations/front_overview.fr.yml" />
-      <change beforePath="$PROJECT_DIR$/translations/front_spatial.fr.yml" afterPath="$PROJECT_DIR$/translations/front_spatial.fr.yml" />
+      <change beforePath="$PROJECT_DIR$/assets/scss/front/_leftMenu.scss" afterPath="$PROJECT_DIR$/assets/scss/front/_leftMenu.scss" />
+      <change beforePath="$PROJECT_DIR$/assets/scss/front/_rightPlanet.scss" afterPath="$PROJECT_DIR$/assets/scss/front/_rightPlanet.scss" />
+      <change beforePath="$PROJECT_DIR$/assets/scss/front/_topMenu.scss" afterPath="$PROJECT_DIR$/assets/scss/front/_topMenu.scss" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -69,18 +21,18 @@
       <file leaf-file-name="ExchangeType.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Form/Front/ExchangeType.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="445">
-              <caret line="43" column="36" lean-forward="false" selection-start-line="43" selection-start-column="36" selection-end-line="43" selection-end-column="57" />
+            <state relative-caret-position="370">
+              <caret line="38" column="17" lean-forward="true" selection-start-line="38" selection-start-column="17" selection-end-line="38" selection-end-column="17" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserContactType.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Form/Front/UserContactType.php">
+      <file leaf-file-name="_leftMenu.scss" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/assets/scss/front/_leftMenu.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="21" column="17" lean-forward="false" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
+            <state relative-caret-position="690">
+              <caret line="46" column="2" lean-forward="false" selection-start-line="46" selection-start-column="2" selection-end-line="46" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -90,7 +42,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>= 0;</find>
       <find>}}</find>
       <find>span</find>
       <find>&lt;span&gt;</find>
@@ -120,6 +71,7 @@
       <find>.center-cells</find>
       <find>array(</find>
       <find>btn-info</find>
+      <find>bg-left</find>
     </findStrings>
     <replaceStrings>
       <replace>$nbrSoldier</replace>
@@ -177,7 +129,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/templates/preconnected/ally/makePeace.html.twig" />
         <option value="$PROJECT_DIR$/templates/preconnected/ally/add.html.twig" />
         <option value="$PROJECT_DIR$/templates/index.html.twig" />
         <option value="$PROJECT_DIR$/assets/scss/front/_topMenu.scss" />
@@ -228,6 +179,7 @@
         <option value="$PROJECT_DIR$/src/Form/Front/UserImageType.php" />
         <option value="$PROJECT_DIR$/src/Form/Front/UserRecoveryType.php" />
         <option value="$PROJECT_DIR$/src/Form/Front/UserContactType.php" />
+        <option value="$PROJECT_DIR$/assets/scss/front/_leftMenu.scss" />
       </list>
     </option>
   </component>
@@ -554,12 +506,12 @@
       <workItem from="1542029757113" duration="27297000" />
       <workItem from="1542116417352" duration="4164000" />
       <workItem from="1542128199387" duration="53775000" />
-      <workItem from="1542400957910" duration="15246000" />
+      <workItem from="1542400957910" duration="15389000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1591451000" />
+    <option name="totallyTimeSpent" value="1591594000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -572,7 +524,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-640" y="-1080" width="1920" height="1080" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287483" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287483" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -635,14 +586,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/templates/connected/ally/grade.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="70" lean-forward="false" selection-start-line="21" selection-start-column="70" selection-end-line="21" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/connected/ally.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="484">
@@ -1027,18 +970,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Form/Front/ExchangeType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="445">
-          <caret line="43" column="36" lean-forward="false" selection-start-line="43" selection-start-column="36" selection-end-line="43" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Form/Front/UserContactType.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="21" column="17" lean-forward="false" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Form/Front/ExchangeType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="370">
+          <caret line="38" column="17" lean-forward="true" selection-start-line="38" selection-start-column="17" selection-end-line="38" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/scss/front/_leftMenu.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="690">
+          <caret line="46" column="2" lean-forward="false" selection-start-line="46" selection-start-column="2" selection-end-line="46" selection-end-column="42" />
           <folding />
         </state>
       </provider>
