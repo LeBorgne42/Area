@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\Criteria;
 
 /**
  * @ORM\Table(name="galaxy")
@@ -69,9 +70,18 @@ class Galaxy
     /**
      * @return mixed
      */
-    public function getPlanet()
+    public function getPlayers()
     {
-        return $this->planet;
+        $players = 0;
+        $criteria = Criteria::create();
+        $criteria->where($criteria::expr()->neq('user', null))
+            ->andWhere($criteria::expr()->eq('ground', 25))
+            ->andWhere($criteria::expr()->eq('sky', 5));
+
+        foreach($this->getSectors() as $sector) {
+            $players += count($sector->getPlanets()->matching($criteria));
+        }
+        return $players;
     }
 
     /**

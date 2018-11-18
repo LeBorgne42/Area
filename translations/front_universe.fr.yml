@@ -1,5 +1,5 @@
 title: Univers
 tooltip.galaxy: 'Galaxy %position%'
 galaxy.nbr: 'Galaxy %position%'
-joinServer: 'Rejoignez vos amis !'
+galaxy.players: '%players% joueurs'
 choseGalaxy: 'Choisissez une Galaxie !'

@@ -8,6 +8,7 @@ user.fleet: 'Nombre de flotte :'
 responde: 'Écrire au joueur'
 user.politic: 'Politique :'
 neutral: Neutre
+monarchy: Monarchie
 democrat: Démocratie
 fascism: Fascisme
 anarchism: Anarchisme

@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'anonymous/base.html.twig' %}
 
 {% trans_default_domain 'front_universe' %}
 
@@ -11,20 +11,19 @@
     {%- endblock -%}
     {%- block right_planet -%}
     {%- endblock -%}
-    <div class="front-block display-message text-center">
+    <div class="galaxy-select text-center">
         {% for message in app.flashes('full') %}
             <div class="flash-notice mt-5 text-orange text-more">
                 {{ message }}
             </div>
         {% endfor %}
-        <div>
-            <button class="text-orange m-5 text-more p-3">{{ 'joinServer'|trans }}</button>
+        <div class="mb-5">
+            <h1>{{ 'choseGalaxy'|trans }}</h1>
         </div>
         {% for galaxy in galaxys %}
-            <a href="{{ path('connect_server', {'id': galaxy.getPosition()}) }}"><span><img class="galaxy-block mr-4 mb-4" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.galaxy'|trans({'%position%': galaxy.getPosition()}) }}" src="{{ asset('img/galaxy.png') }}"><span class="galaxy-position">{{ 'galaxy.nbr'|trans({'%position%': galaxy.getPosition()}) }}</span></span></a>
+            <a href="{{ path('connect_server', {'id': galaxy.getPosition()}) }}"><span><img class="galaxy-block mr-4 mb-4" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.galaxy'|trans({'%position%': galaxy.getPosition()}) }}" src="{{ asset('img/galaxy.png') }}"><span class="galaxy-position">{{ 'galaxy.nbr'|trans({'%position%': galaxy.getPosition()}) }}</span><span class="galaxy-players">{{ 'galaxy.players'|trans({'%players%': galaxy.getPlayers()}) }}</span></span></a>
         {% endfor %}
         <div>
-            <button class="text-orange m-5 text-more p-3">{{ 'choseGalaxy'|trans }}</button>
         </div>
     </div>
 {% endblock %}

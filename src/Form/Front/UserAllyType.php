@@ -139,6 +139,7 @@ class UserAllyType extends AbstractType
     {
         return [
             'Neutre' => 'neutral',
+            'Monarchie' => 'monarchy',
             'Démocratie' => 'democrat',
             'Fascisme' => 'fascism',
             'Anarchisme' => 'anarchism',
