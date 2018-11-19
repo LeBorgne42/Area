@@ -68,6 +68,11 @@ class Ally
     protected $grades;
 
     /**
+     * @ORM\Column(name="defcon",type="bigint")
+     */
+    protected $defcon = 0;
+
+    /**
      * @ORM\ManyToMany(targetEntity="Salon", mappedBy="allys", fetch="EXTRA_LAZY")
      */
     protected $salons;
@@ -165,6 +170,7 @@ class Ally
         $this->allieds = new \Doctrine\Common\Collections\ArrayCollection();
         $this->wars = new \Doctrine\Common\Collections\ArrayCollection();
         $this->grades = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->defcon = 0;
     }
 
     /**
@@ -311,6 +317,22 @@ class Ally
         $this->wars[] = $war;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDefcon()
+    {
+        return $this->defcon;
+    }
+
+    /**
+     * @param mixed $defcon
+     */
+    public function setDefcon($defcon): void
+    {
+        $this->defcon = $defcon;
     }
 
     /**

@@ -43,6 +43,11 @@ class Message
     protected $title;
 
     /**
+     * @ORM\Column(name="share_key",type="string", length=20, nullable=true)
+     */
+    protected $shareKey;
+
+    /**
      * @ORM\Column(name="newMessage",type="boolean")
      */
     protected $newMessage = true;
@@ -82,6 +87,22 @@ class Message
     public function setUser($user): void
     {
         $this->user = $user;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShareKey()
+    {
+        return $this->shareKey;
+    }
+
+    /**
+     * @param mixed $shareKey
+     */
+    public function setShareKey($shareKey): void
+    {
+        $this->shareKey = $shareKey;
     }
 
     /**

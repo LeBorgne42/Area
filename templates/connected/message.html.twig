@@ -49,7 +49,12 @@
                                 <div class="p-3">
                                     {{ message.getContent()|raw }}
                                 </div>
-                                <div class="float-right"><a class="btn-top" data-toggle="modal" data-target="#respondeModal" href="{{ path('message_responde', {'idp': usePlanet.getId(), 'id': message.getIdSender()}) }}">{{ 'responde'|trans }}</a></div>
+                                <div class="float-right"><a class="confirm-button p-1" data-toggle="modal" data-target="#respondeModal" href="{{ path('message_responde', {'idp': usePlanet.getId(), 'id': message.getIdSender()}) }}">{{ 'responde'|trans }}</a></div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="2" class="tab-cells-name">
+                                <div class="p-1">{% if message.getShareKey() %}<a class="p-1" href="{{ path('message_share_display', {'id': message.getShareKey()}) }}" target="_blank">https://www.areauniverse.eu/fr/message/share/{{ message.getShareKey() }}</a>{% endif %}<a class="confirm-button btn-sm" href="{{ path('message_share', {'idp': usePlanet.getId(), 'id': message.getId()}) }}">{{ 'share'|trans }}</a></div>
                             </th>
                         </tr>
                         </tbody>

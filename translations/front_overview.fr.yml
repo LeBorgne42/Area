@@ -16,6 +16,7 @@ info.planet: 'Nombre de planètes :'
 info.fleet: 'Nombre de flotte :'
 info.ally: 'Votre alliance :'
 info.allyMissing: 'Rejoignez une alliance !'
+info.defcon: 'Niveau d''alerte Alliance :'
 overview.fleetName: 'Flotte en approche'
 overview.from: De
 overview.goTo: Vers
@@ -81,3 +82,7 @@ heavyShip: 'Vaisseaux lourds'
 info.warPoint: 'Points de Guerre :'
 overview.inProduct: 'En production '
 tooltip.dailyCost: 'Revenu journalier : %bitcoin% bitcoin<br>Coût des soldats : %soldier% bitcoin<br>Coût des vaisseaux : %ship% bitcoin<br>Coût des bâtiments : %build% bitcoin'
+0: Paix
+1: 'Préparation militaire'
+2: 'Guerre imminente'
+3: 'En guerre'

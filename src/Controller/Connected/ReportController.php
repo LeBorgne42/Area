@@ -5,6 +5,7 @@ namespace App\Controller\Connected;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use App\Entity\Report;
 use DateTime;
 use DateTimeZone;
 use DateInterval;
@@ -81,6 +82,27 @@ class ReportController extends Controller
         $report->setNewReport(false);
 
         $em->flush();
+
+        return $this->redirectToRoute('report', ['idp' => $usePlanet->getId()]);
+    }
+
+    /**
+     * @Route("/rapport-share/{idp}/{id}", name="report_share", requirements={"idp"="\d+", "id"="\d+"})
+     */
+    public function reportShareAction($idp, Report $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($user == $id->getUser()) {
+            $alpha = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-'];
+            $newShareKey = $alpha[rand(0, 36)] . $alpha[rand(0, 36)] . $alpha[rand(0, 36)] . $alpha[rand(0, 36)] . $alpha[rand(0, 36)] . $alpha[rand(0, 36)]
+                . $alpha[rand(0, 36)] . $alpha[rand(0, 36)] . $alpha[rand(0, 36)] . $alpha[rand(0, 36)] . $alpha[rand(0, 36)] . $alpha[rand(0, 36)] . $alpha[rand(0, 36)]
+                . $alpha[rand(0, 36)] . $alpha[rand(0, 36)] . $alpha[rand(0, 36)] . $alpha[rand(0, 36)] . $alpha[rand(0, 36)] . $alpha[rand(0, 36)] . $alpha[rand(0, 36)];
+
+            $id->setShareKey($newShareKey);
+            $em->flush();
+        }
 
         return $this->redirectToRoute('report', ['idp' => $usePlanet->getId()]);
     }

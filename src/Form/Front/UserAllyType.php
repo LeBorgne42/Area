@@ -104,7 +104,7 @@ class UserAllyType extends AbstractType
                     'required' => true
                 ]
             )
-            ->add('sendForm', SubmitType::class, ['label' => 'form.send']);
+            ->add('sendForm', SubmitType::class, ['label' => 'form.send', 'attr' => ['class' => 'confirm-button pull-right mt-3']]);
 
         $builder->get('sigle')
             ->addModelTransformer(new CallbackTransformer(

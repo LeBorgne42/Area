@@ -11,6 +11,7 @@ use App\Form\Front\AllyImageType;
 use App\Form\Front\AllyAddType;
 use App\Form\Front\AllyPactType;
 use App\Form\Front\AllyGradeType;
+use App\Form\Front\AllyDefconType;
 use App\Form\Front\ExchangeType;
 use App\Form\Front\PdgType;
 use App\Form\Front\UserAttrGradeType;
@@ -217,9 +218,26 @@ class AllyController extends Controller
         }
         $em->flush();
 
-        $pnas = $em->getRepository('App:Pna')->findBy([],['allyTag' => $ally->getSigle()]);
-        $pacts = $em->getRepository('App:Allied')->findBy([],['allyTag' => $ally->getSigle()]);
-        $wars = $em->getRepository('App:War')->findBy([],['allyTag' => $ally->getSigle()]);
+        $pnas = $em->getRepository('App:Pna')
+            ->createQueryBuilder('p')
+            ->where('p.allyTag = :allytag')
+            ->setParameters(['allytag' => $ally->getSigle()])
+            ->getQuery()
+            ->getResult();
+
+        $pacts = $em->getRepository('App:Allied')
+            ->createQueryBuilder('a')
+            ->where('a.allyTag = :allytag')
+            ->setParameters(['allytag' => $ally->getSigle()])
+            ->getQuery()
+            ->getResult();
+
+        $wars = $em->getRepository('App:War')
+            ->createQueryBuilder('w')
+            ->where('w.allyTag = :allytag')
+            ->setParameters(['allytag' => $ally->getSigle()])
+            ->getQuery()
+            ->getResult();
 
         foreach ($pnas as $pna) {
             $em->remove($pna);
@@ -574,21 +592,27 @@ class AllyController extends Controller
             return $this->redirectToRoute('ally_blank', ['idp' => $usePlanet->getId()]);
         }
 
+        $form_allyDecon = $this->createForm(AllyDefconType::class,$ally);
+        $form_allyDecon->handleRequest($request);
+
         $form_allyGrade = $this->createForm(AllyGradeType::class,$grade);
         $form_allyGrade->handleRequest($request);
+
+        if (($form_allyDecon->isSubmitted() && $form_allyDecon->isValid())) {
+            $em->flush();
+        }
 
         if (($form_allyGrade->isSubmitted() && $form_allyGrade->isValid())) {
             $grade->setAlly($ally);
             $em->persist($grade);
             $ally->addGrade($grade);
             $em->flush();
-
-            return $this->redirectToRoute('ally_page_admin', ['idp' => $usePlanet->getId()]);
         }
 
         return $this->render('connected/ally/admin.html.twig', [
             'usePlanet' => $usePlanet,
             'form_allyGrade' => $form_allyGrade->createView(),
+            'form_allyDefcon' => $form_allyDecon->createView()
         ]);
     }
 

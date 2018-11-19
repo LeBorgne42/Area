@@ -2,3 +2,6 @@ title: 'Rapport Automatique'
 report.title: Titre
 AllNewView: 'Marquer tout les rapports comme lus'
 NewReport: Nouveau
+share: 'Générer lien de partage'
+of: 'de'
+share.title: 'Rapport'

@@ -19,3 +19,6 @@ message.sendAnonym: 'En anonyme'
 responde: Répondre
 AllNewView: 'Marquer tout les messages comme lus'
 NewMessage: Nouveau
+share: 'Générer lien de partage'
+to: 'à'
+share.title: 'Message'

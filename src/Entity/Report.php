@@ -43,6 +43,11 @@ class Report
     protected $content;
 
     /**
+     * @ORM\Column(name="share_key",type="string", length=20, nullable=true)
+     */
+    protected $shareKey;
+
+    /**
      * @ORM\Column(name="sendAt",type="datetime")
      */
     protected $sendAt;
@@ -82,6 +87,22 @@ class Report
     public function setTitle($title): void
     {
         $this->title = $title;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShareKey()
+    {
+        return $this->shareKey;
+    }
+
+    /**
+     * @param mixed $shareKey
+     */
+    public function setShareKey($shareKey): void
+    {
+        $this->shareKey = $shareKey;
     }
 
     /**

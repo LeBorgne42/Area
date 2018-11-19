@@ -157,24 +157,38 @@ class MessageController extends Controller
     /**
      * @Route("/message-view/{idp}/{id}", name="message_view", requirements={"idp"="\d+", "id"="\d+"})
      */
-    public function messageViewAction($idp, $id)
+    public function messageViewAction($idp, Message $id)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
 
         $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
-        $message = $em->getRepository('App:Message')
-            ->createQueryBuilder('m')
-            ->where('m.id = :id')
-            ->andWhere('m.user = :user')
-            ->setParameters(['id' => $id, 'user' => $user])
-            ->getQuery()
-            ->getOneOrNullResult();
+        if ($user == $id->getUser()) {
+            $id->setNewMessage(false);
+            $em->flush();
+        }
 
-        $message->setNewMessage(false);
+        return $this->redirectToRoute('message', ['idp' => $usePlanet->getId()]);
+    }
 
-        $em->flush();
+    /**
+     * @Route("/message-share/{idp}/{id}", name="message_share", requirements={"idp"="\d+", "id"="\d+"})
+     */
+    public function messageShareAction($idp, Message $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($user == $id->getUser()) {
+            $alpha = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-'];
+            $newShareKey = $alpha[rand(0, 36)] . $alpha[rand(0, 36)] . $alpha[rand(0, 36)] . $alpha[rand(0, 36)] . $alpha[rand(0, 36)] . $alpha[rand(0, 36)]
+                . $alpha[rand(0, 36)] . $alpha[rand(0, 36)] . $alpha[rand(0, 36)] . $alpha[rand(0, 36)] . $alpha[rand(0, 36)] . $alpha[rand(0, 36)] . $alpha[rand(0, 36)]
+                . $alpha[rand(0, 36)] . $alpha[rand(0, 36)] . $alpha[rand(0, 36)] . $alpha[rand(0, 36)] . $alpha[rand(0, 36)] . $alpha[rand(0, 36)] . $alpha[rand(0, 36)];
+
+            $id->setShareKey($newShareKey);
+            $em->flush();
+        }
 
         return $this->redirectToRoute('message', ['idp' => $usePlanet->getId()]);
     }

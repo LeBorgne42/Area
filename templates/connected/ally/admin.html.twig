@@ -30,6 +30,11 @@
                     <a href="{{ path('ally_page_exit', {'idp': usePlanet.getId()}) }}" >{{ 'ally.leave'|trans }}</a>
                 </li>
             </ul>
+            <div class="mt-5 text-center">
+                {{ form_start(form_allyDefcon) }}
+                {{ form_label(form_allyDefcon.defcon) }} {{ form_widget(form_allyDefcon.defcon) }} {{ form_widget(form_allyDefcon.sendForm) }}
+                {{ form_end(form_allyDefcon) }}
+            </div>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="admin" role="tabpanel" aria-labelledby="admin-tab">
                     {{ form_start(form_allyGrade) }}
