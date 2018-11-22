@@ -203,7 +203,7 @@
                     {{ form_widget(form_spatialShip.sendForm) }}
                     {{ form_end(form_spatialShip) }}
                 </span>
-                {% if usePlanet.getSpaceShip == 0 %}<span class="float-right text-rouge">{{ 'spatial.noSpaceShip'|trans }}</span>{% endif %}
+                {% if usePlanet.getSpaceShip == 0 %}<span class="confirm-button float-right text-rouge">{{ 'spatial.noSpaceShip'|trans }}</span>{% endif %}
             </div>
             {% if usePlanet.getProduct() %}
                 <div class="col-4">

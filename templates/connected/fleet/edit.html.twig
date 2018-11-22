@@ -14,7 +14,7 @@
     {% if fleet.getUser() == app.user %}
         <div class="modal-header">
             <div class="block-title ml-2"><h2>{{ 'fleet.createFleet'|trans }}</h2></div>
-            <button type="button" class="close plus" data-dismiss="modal">X</button>
+            <button type="button" class="close plus"><a href="{{ path('fleet', {'idp': usePlanet.getId()}) }}">X</a></button>
         </div>
         <div class="p-5 createFleet">
             <div class="row">

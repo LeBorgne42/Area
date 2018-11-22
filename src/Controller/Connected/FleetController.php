@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\Front\SpatialEditFleetType;
 use App\Form\Front\FleetRenameType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Form\Front\FleetRessourcesType;
 use App\Form\Front\SpatialFleetType;
 use App\Form\Front\FleetSendType;
@@ -134,56 +135,80 @@ class FleetController extends Controller
             return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
         }
 
-        if ($form_manageRenameFleet->isSubmitted()) {
-            $em->persist($fleetGive);
-            $em->flush();
-            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
-        }
-
-        if ($form_manageAttackFleet->isSubmitted()) {
-            if($fleetGive->getMissile() <= 0) {
-                return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+        if($request->isXmlHttpRequest()) {
+            $response = new JsonResponse();
+            if ($request->get('name') == 'name') {
+                $fleetGive->setName($request->get('data'));
+                $em->flush();
+                $response->setData(
+                    [
+                        'has_error' => false,
+                    ]
+                );
             }
-            $eAlly = $user->getAllyEnnemy();
-            $warAlly = [];
-            $x = 0;
-            foreach ($eAlly as $tmp) {
-                $warAlly[$x] = $tmp->getAllyTag();
-                $x++;
-            }
-            $fleetGives = $em->getRepository('App:Fleet')
-                ->createQueryBuilder('f')
-                ->join('f.user', 'u')
-                ->join('u.ally', 'a')
-                ->where('f.planet = :planet')
-                ->andWhere('f.attack = :true OR a.sigle in (:ally)')
-                ->andWhere('f.user != :user')
-                ->andWhere('f.flightTime is null')
-                ->setParameters(['planet' => $usePlanet, 'true' => true, 'ally' => $warAlly, 'user' => $user])
-                ->getQuery()
-                ->getResult();
-
-            if(($fleetGive->getAttack() == true && $planetTake->getFleetNoFriends($user)) || $fleetGives) {
-                $allFleets = $em->getRepository('App:Fleet')
+            if ($request->get('name') == 'attack') {
+                if ($fleetGive->getMissile() <= 0) {
+                    $response->setData(
+                        [
+                            'has_error' => true,
+                        ]
+                    );
+                    exit;
+                }
+                $fleetGive->setAttack($request->get('data'));
+                $eAlly = $user->getAllyEnnemy();
+                $warAlly = [];
+                $x = 0;
+                foreach ($eAlly as $tmp) {
+                    $warAlly[$x] = $tmp->getAllyTag();
+                    $x++;
+                }
+                $fleetGives = $em->getRepository('App:Fleet')
                     ->createQueryBuilder('f')
                     ->join('f.user', 'u')
+                    ->join('u.ally', 'a')
                     ->where('f.planet = :planet')
+                    ->andWhere('f.attack = :true OR a.sigle in (:ally)')
                     ->andWhere('f.user != :user')
                     ->andWhere('f.flightTime is null')
-                    ->setParameters(['planet' => $planetTake, 'user' => $user])
+                    ->setParameters(['planet' => $usePlanet, 'true' => true, 'ally' => $warAlly, 'user' => $user])
                     ->getQuery()
                     ->getResult();
-                $now = new DateTime();
-                $now->setTimezone(new DateTimeZone('Europe/Paris'));
-                $now->add(new DateInterval('PT' . 300 . 'S'));
-                foreach ($allFleets as $updateF) {
-                    $updateF->setFightAt($now);
-                }
-                $fleetGive->setFightAt($now);
-            }
 
-            $em->flush();
-            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+                if (($fleetGive->getAttack() == true && $planetTake->getFleetNoFriends($user)) || $fleetGives) {
+                    $allFleets = $em->getRepository('App:Fleet')
+                        ->createQueryBuilder('f')
+                        ->join('f.user', 'u')
+                        ->where('f.planet = :planet')
+                        ->andWhere('f.user != :user')
+                        ->andWhere('f.flightTime is null')
+                        ->setParameters(['planet' => $planetTake, 'user' => $user])
+                        ->getQuery()
+                        ->getResult();
+                    $now = new DateTime();
+                    $now->setTimezone(new DateTimeZone('Europe/Paris'));
+                    $now->add(new DateInterval('PT' . 300 . 'S'));
+                    foreach ($allFleets as $updateF) {
+                        $updateF->setFightAt($now);
+                    }
+                    $fleetGive->setFightAt($now);
+                    $em->flush();
+
+                    return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+                }
+
+                $em->flush();
+                $response->setData(
+                    [
+                        'has_error' => false,
+                    ]
+                );
+            }
+            $response->setData(
+                [
+                    'has_error' => true,
+                ]
+            );
         }
 
         if ($form_manageFleet->isSubmitted()) {

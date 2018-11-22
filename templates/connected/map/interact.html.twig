@@ -15,7 +15,7 @@
         {{ form_start(form_fleetMove,{attr: { action: path('planet_interact', {'idp': usePlanet.getId(), 'id': planet.getId()}) }}) }}
         <table class="table table-striped table-bordered table-dark">
             <tbody>
-            <tr>
+            <tr {% if app.user.getFleets()|length == 0 %}hidden{% endif %}>
                 <td class="center-cells">
                     {{ form_widget(form_fleetMove.list) }}
                 </td>

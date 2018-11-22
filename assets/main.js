@@ -21,7 +21,6 @@ function manageAllyImageForm() {
 
 function manageRegistrationCheck() {
     $('#registration-check').off('click').on('click',function(e){
-        console.log('plop');
         $('#email').removeAttr('hidden');
         $(this).hide();
         $('#email').attr('required', 'required');
@@ -31,7 +30,31 @@ function manageRegistrationCheck() {
 
 function manageAttackFleetForm() {
     $('#fleet_attack_attack').off('change').on('change',function(e){
-        $(this).closest('form').submit();
+        e.preventDefault();
+
+        var formContent = $(this).closest('form')[0][1].checked;
+            content = formContent ? 1 : 0;
+        $form = $(this).closest('form');
+        $.ajax({
+            url: $form.attr('action'),
+            type: "POST",
+            data: {name: 'attack', data: content}
+        });
+        //$(this).closest('form').submit();
+    });
+}
+
+function manageRenameFleetForm() {
+    $('#fleet_rename_sendForm').off('click').on('click',function(e){
+        e.preventDefault();
+
+        var content = $(this).closest('form')[0][0].value;
+        $form = $(this).closest('form');
+        $.ajax({
+            url: $form.attr('action'),
+            type: "POST",
+            data: {name: 'name', data: content}
+        });
     });
 }
 
@@ -736,5 +759,6 @@ $(document).ready(function() {
     manageSalon();
     manageAttackFleetForm();
     manageRegistrationCheck();
+    manageRenameFleetForm();
     console.log("Toute utilisation de scripts sur le jeu seront puni d'un ban permanent, merci.");
 });
