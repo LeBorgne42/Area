@@ -70,7 +70,7 @@ class Ally
     /**
      * @ORM\Column(name="defcon",type="bigint")
      */
-    protected $defcon = 0;
+    protected $defcon;
 
     /**
      * @ORM\ManyToMany(targetEntity="Salon", mappedBy="allys", fetch="EXTRA_LAZY")
@@ -165,6 +165,7 @@ class Ally
     public function __construct()
     {
         $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->salons = new \Doctrine\Common\Collections\ArrayCollection();
         $this->proposals = new \Doctrine\Common\Collections\ArrayCollection();
         $this->pnas = new \Doctrine\Common\Collections\ArrayCollection();
         $this->allieds = new \Doctrine\Common\Collections\ArrayCollection();

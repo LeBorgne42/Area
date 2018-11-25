@@ -154,12 +154,12 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\Column(name="bitcoin",type="decimal", precision=28, scale=5)
      */
-    protected $bitcoin = 25000;
+    protected $bitcoin;
 
     /**
      * @ORM\Column(name="scientistProduction",type="decimal", precision=28, scale=5)
      */
-    protected $scientistProduction = 1;
+    protected $scientistProduction;
 
     /**
      * @ORM\Column(name="onde",type="integer", nullable=true)
@@ -310,6 +310,7 @@ class User implements UserInterface, \Serializable
         $this->reports = new \Doctrine\Common\Collections\ArrayCollection();
         $this->fleets = new \Doctrine\Common\Collections\ArrayCollection();
         $this->scientistProduction = 1;
+        $this->bitcoin = 25000;
     }
 
     /**

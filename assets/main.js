@@ -545,7 +545,7 @@ function manageTime() {
                         if(minutes == 0 && heures == 0 && jours == 0) {
                             area.text('Terminée');
                             setTimeout(function() {
-                                window.location.reload();
+                                window.location.href = window.location.href;
                             }, 2000);
                         } else {
                             secondes = 60;

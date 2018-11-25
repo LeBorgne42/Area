@@ -46,6 +46,7 @@ class Salon
     public function __construct()
     {
         $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->allys = new \Doctrine\Common\Collections\ArrayCollection();
         $this->contents = new \Doctrine\Common\Collections\ArrayCollection();
     }
 

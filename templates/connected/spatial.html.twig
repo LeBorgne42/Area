@@ -18,7 +18,7 @@
                             <span tabindex="0" role="button" class="btn btn-secondary text-orange"  data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.sonde'|trans|raw }}">{{ 'spatial.sonde'|trans }} x {{ usePlanet.getSonde()|number_format }}</span> <span class="float-right"><span class="ml-5"><span class="niobiumProduct">15000</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span><span class="ml-3">2s</span></span>
                         </td>
                         <td class="center-cells"{% if usePlanet.getSpaceShip == 0 %} hidden{% endif %}>
-                            {{ form_widget(form_spatialShip.sonde,{attr: { max: usePlanet.getSonde(), class: 'nbrProduct game-input text-right'}}) }}
+                            {{ form_widget(form_spatialShip.sonde,{attr: { class: 'nbrProduct game-input text-right'}}) }}
                         </td>
                     </tr>
                     <tr{% if app.user.getTerraformation() == 0 and usePlanet.getColonizer() == 0 %} hidden{% endif %}>
@@ -26,7 +26,7 @@
                             <span tabindex="0" role="button" class="btn btn-secondary text-orange"  data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.colo'|trans|raw }}">{{ 'spatial.colonizer'|trans }} x {{ usePlanet.getColonizer()|number_format }}</span> <span class="float-right"><span class="ml-5"><span class="niobiumProduct">20.000</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3"><span class="waterProduct">12.000</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span> <span class="ml-3"><span class="workerProduct">10.000</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'workerImg'|trans }}" src="{{ asset('img/worker.png') }}"></span><span class="ml-3">3h</span></span>
                         </th>
                         <td class="center-cells"{% if app.user.getTerraformation() == 0 %} hidden{% endif %}>
-                            {{ form_widget(form_spatialShip.colonizer,{attr: { max: usePlanet.getColonizer(), class: 'nbrProduct game-input text-right' }}) }}
+                            {{ form_widget(form_spatialShip.colonizer,{attr: { class: 'nbrProduct game-input text-right' }}) }}
                         </td>
                     </tr>
                     <tr{% if app.user.getCargo() < 1 and usePlanet.getCargoI() == 0 %} hidden{% endif %}>
@@ -34,7 +34,7 @@
                             <span tabindex="0" role="button" class="btn btn-secondary text-orange"  data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.cargoI'|trans|raw }}">{{ 'spatial.cargoI'|trans }} x {{ usePlanet.getCargoI()|number_format }}</span> <span class="float-right"><span class="ml-5"><span class="niobiumProduct">8.000</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3"><span class="waterProduct">6.500</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span><span class="ml-3">5mn</span></span>
                         </th>
                         <td class="center-cells"{% if app.user.getCargo() < 1 %} hidden{% endif %}>
-                            {{ form_widget(form_spatialShip.cargoI,{attr: { max: usePlanet.getCargoI(), class: 'nbrProduct game-input text-right' }}) }}
+                            {{ form_widget(form_spatialShip.cargoI,{attr: { class: 'nbrProduct game-input text-right' }}) }}
                         </td>
                     </tr>
                     <tr{% if app.user.getCargo() < 3 and usePlanet.getCargoV() == 0 %} hidden{% endif %}>
@@ -42,7 +42,7 @@
                             <span tabindex="0" role="button" class="btn btn-secondary text-orange"  data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.cargoV'|trans|raw }}">{{ 'spatial.cargoV'|trans }} x {{ usePlanet.getCargoV()|number_format }}</span> <span class="float-right"><span class="ml-5"><span class="niobiumProduct">22.000</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3"><span class="waterProduct">15.000</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span><span class="ml-3">10mn</span></span>
                         </th>
                         <td class="center-cells"{% if app.user.getCargo() < 3 %} hidden{% endif %}>
-                            {{ form_widget(form_spatialShip.cargoV,{attr: { max: usePlanet.getCargoV(), class: 'nbrProduct game-input text-right' }}) }}
+                            {{ form_widget(form_spatialShip.cargoV,{attr: { class: 'nbrProduct game-input text-right' }}) }}
                         </td>
                     </tr>
                     <tr{% if app.user.getCargo() < 5 and usePlanet.getCargoX() == 0 %} hidden{% endif %}>
@@ -50,7 +50,7 @@
                             <span tabindex="0" role="button" class="btn btn-secondary text-orange"  data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.cargoX'|trans|raw }}">{{ 'spatial.cargoX'|trans }} x {{ usePlanet.getCargoX()|number_format }}</span> <span class="float-right"><span class="ml-5"><span class="niobiumProduct">45.000</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3"><span class="waterProduct">38.000</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span> <span class="ml-3"><span class="workerProduct">50</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'workerImg'|trans }}" src="{{ asset('img/worker.png') }}"></span><span class="ml-3">15mn</span></span>
                         </th>
                         <td class="center-cells"{% if app.user.getCargo() < 5 %} hidden{% endif %}>
-                            {{ form_widget(form_spatialShip.cargoX,{attr: { max: usePlanet.getCargoX(), class: 'nbrProduct game-input text-right' }}) }}
+                            {{ form_widget(form_spatialShip.cargoX,{attr: { class: 'nbrProduct game-input text-right' }}) }}
                         </td>
                     </tr>
                     <tr{% if app.user.getRecycleur() == 0 and usePlanet.getRecycleur() == 0 %} hidden{% endif %}>
@@ -58,7 +58,7 @@
                             <span tabindex="0" role="button" class="btn btn-secondary text-orange"  data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.rec'|trans|raw }}">{{ 'spatial.recycleur'|trans }} x {{ usePlanet.getRecycleur()|number_format }}</span> <span class="float-right"><span class="ml-5"><span class="niobiumProduct">10.000</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3"><span class="waterProduct">7.000</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span><span class="ml-3">6min30s</span></span>
                         </th>
                         <td class="center-cells"{% if app.user.getRecycleur() == 0 %} hidden{% endif %}>
-                            {{ form_widget(form_spatialShip.recycleur,{attr: { max: usePlanet.getRecycleur(), class: 'nbrProduct game-input text-right' }}) }}
+                            {{ form_widget(form_spatialShip.recycleur,{attr: { class: 'nbrProduct game-input text-right' }}) }}
                         </td>
                     </tr>
                     <tr{% if app.user.getBarge() == 0 and usePlanet.getBarge() == 0 %} hidden{% endif %}>
@@ -66,7 +66,7 @@
                             <span tabindex="0" role="button" class="btn btn-secondary text-orange"  data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.barge'|trans|raw }}">{{ 'spatial.barge'|trans }} x {{ usePlanet.getBarge()|number_format }}</span> <span class="float-right"><span class="ml-5"><span class="niobiumProduct">15.000</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3"><span class="waterProduct">12.000</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span><span class="ml-3">30mn</span></span>
                         </th>
                         <td class="center-cells"{% if app.user.getBarge() == 0 %} hidden{% endif %}>
-                            {{ form_widget(form_spatialShip.barge,{attr: { max: usePlanet.getBarge(), class: 'nbrProduct game-input text-right' }}) }}
+                            {{ form_widget(form_spatialShip.barge,{attr: { class: 'nbrProduct game-input text-right' }}) }}
                         </td>
                     </tr>
                     <tr{% if (app.user.getTerraformation() < 15 or usePlanet.getHeavyUsine() == 0) and usePlanet.getMoonMaker() == 0 %} hidden{% endif %}>
@@ -74,7 +74,7 @@
                             <span tabindex="0" role="button" class="btn btn-secondary text-orange"  data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.moonMaker'|trans|raw }}">{{ 'spatial.moonMaker'|trans }} x {{ usePlanet.getMoonMaker()|number_format }}</span> <span class="float-right"><span class="ml-5"><span class="niobiumProduct">500.000</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3"><span class="waterProduct">230.000</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span><span class="ml-3"><span class="workerProduct">20.000</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'workerImg'|trans }}" src="{{ asset('img/worker.png') }}"></span><span class="ml-3"><span class="bitcoinProduct">200.000</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></span><span class="ml-3">5h</span></span>
                         </th>
                         <td class="center-cells"{% if app.user.getTerraformation() < 15 or usePlanet.getHeavyUsine() == 0 %} hidden{% endif %}>
-                            {{ form_widget(form_spatialShip.moonMaker,{attr: { max: usePlanet.getMoonMaker(), class: 'nbrProduct game-input text-right' }}) }}
+                            {{ form_widget(form_spatialShip.moonMaker,{attr: { class: 'nbrProduct game-input text-right' }}) }}
                         </td>
                     </tr>
                     <tr{% if (app.user.getOnde() < 3 or usePlanet.getLightUsine() == 0) and usePlanet.getRadarShip() == 0 %} hidden{% endif %}>
@@ -82,7 +82,7 @@
                             <span tabindex="0" role="button" class="btn btn-secondary text-orange"  data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.radarShip'|trans|raw }}">{{ 'spatial.radarShip'|trans }} x {{ usePlanet.getRadarShip()|number_format }}</span> <span class="float-right"><span class="ml-5"><span class="niobiumProduct">5.000</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3"><span class="waterProduct">6.000</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span><span class="ml-3"><span class="bitcoinProduct">25.000</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></span><span class="ml-3">3mn20s</span></span>
                         </th>
                         <td class="center-cells"{% if app.user.getOnde() < 3 or usePlanet.getLightUsine() == 0 %} hidden{% endif %}>
-                            {{ form_widget(form_spatialShip.radarShip,{attr: { max: usePlanet.getRadarShip(), class: 'nbrProduct game-input text-right' }}) }}
+                            {{ form_widget(form_spatialShip.radarShip,{attr: { class: 'nbrProduct game-input text-right' }}) }}
                         </td>
                     </tr>
                     <tr{% if (app.user.getOnde() < 5 or usePlanet.getLightUsine() == 0) and usePlanet.getBrouilleurShip() == 0 %} hidden{% endif %}>
@@ -90,7 +90,7 @@
                             <span tabindex="0" role="button" class="btn btn-secondary text-orange"  data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.brouilleurShip'|trans|raw }}">{{ 'spatial.brouilleurShip'|trans }} x {{ usePlanet.getBrouilleurShip()|number_format }}</span> <span class="float-right"><span class="ml-5"><span class="niobiumProduct">11.000</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3"><span class="waterProduct">13.000</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span><span class="ml-3"><span class="bitcoinProduct">55.000</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></span><span class="ml-3">6mn40s</span></span>
                         </th>
                         <td class="center-cells"{% if app.user.getOnde() < 5 or usePlanet.getLightUsine() == 0 %} hidden{% endif %}>
-                            {{ form_widget(form_spatialShip.brouilleurShip,{attr: { max: usePlanet.getBrouilleurShip(), class: 'nbrProduct game-input text-right' }}) }}
+                            {{ form_widget(form_spatialShip.brouilleurShip,{attr: { class: 'nbrProduct game-input text-right' }}) }}
                         </td>
                     </tr>
                     <tr{% if (app.user.getUtility() < 3 or usePlanet.getHeavyUsine() == 0) and usePlanet.getMotherShip() == 0 %} hidden{% endif %}>
@@ -98,7 +98,7 @@
                             <span tabindex="0" role="button" class="btn btn-secondary text-orange"  data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.motherShip'|trans|raw }}">{{ 'spatial.motherShip'|trans }} x {{ usePlanet.getMotherShip()|number_format }}</span> <span class="float-right"><span class="ml-5"><span class="niobiumProduct">175.000</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3"><span class="waterProduct">95.000</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span><span class="ml-3"><span class="workerProduct">2.000</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'workerImg'|trans }}" src="{{ asset('img/worker.png') }}"></span><span class="ml-3"><span class="pdgProduct">500</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'pdgImg'|trans }}" src="{{ asset('img/pdg.png') }}"></span><span class="ml-3">1h</span></span>
                         </th>
                         <td class="center-cells"{% if app.user.getUtility() < 3 or usePlanet.getHeavyUsine() == 0 %} hidden{% endif %}>
-                            {{ form_widget(form_spatialShip.motherShip,{attr: { max: usePlanet.getMotherShip(), class: 'nbrProduct game-input text-right' }}) }}
+                            {{ form_widget(form_spatialShip.motherShip,{attr: { class: 'nbrProduct game-input text-right' }}) }}
                         </td>
                     </tr>
                     <tr{% if (app.user.getIndustry() == 0 or app.user.getMissile() == 0) and usePlanet.getHunter() == 0 %} hidden{% endif %}>
@@ -106,7 +106,7 @@
                             <span tabindex="0" role="button" class="btn btn-secondary text-orange"  data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.hunter'|trans|raw }}">{{ 'spatial.hunter'|trans }} x {{ usePlanet.getHunter()|number_format }}</span> <span class="float-right"><span class="ml-5"><span class="niobiumProduct">250</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3"><span class="waterProduct">50</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span><span class="ml-3">20s</span></span>
                         </th>
                         <td class="center-cells"{% if app.user.getIndustry() == 0 or app.user.getMissile() == 0 %} hidden{% endif %}>
-                            {{ form_widget(form_spatialShip.hunter,{attr: { max: usePlanet.getHunter(), class: 'nbrProduct game-input text-right' }}) }}
+                            {{ form_widget(form_spatialShip.hunter,{attr: { class: 'nbrProduct game-input text-right' }}) }}
                         </td>
                     </tr>
                     <tr{% if (usePlanet.getLightUsine() == 0 or app.user.getMissile() < 2) and usePlanet.getHunterHeavy() == 0 %} hidden{% endif %}>
@@ -114,7 +114,7 @@
                             <span tabindex="0" role="button" class="btn btn-secondary text-orange"  data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.hunterHeavy'|trans|raw }}">{{ 'spatial.hunterHeavy'|trans }} x {{ usePlanet.getHunterHeavy()|number_format }}</span> <span class="float-right"><span class="ml-5"><span class="niobiumProduct">400</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3"><span class="waterProduct">80</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span><span class="ml-3">32s</span></span>
                         </th>
                         <td class="center-cells"{% if usePlanet.getLightUsine() == 0 or app.user.getMissile() < 2 %} hidden{% endif %}>
-                            {{ form_widget(form_spatialShip.hunterHeavy,{attr: { max: usePlanet.getHunterHeavy(), class: 'nbrProduct game-input text-right' }}) }}
+                            {{ form_widget(form_spatialShip.hunterHeavy,{attr: { class: 'nbrProduct game-input text-right' }}) }}
                         </td>
                     </tr>
                     <tr>
@@ -122,7 +122,7 @@
                             <span tabindex="0" role="button" class="btn btn-secondary text-orange"  data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.hunterWar'|trans|raw }}">{{ 'spatial.hunterWar'|trans }} x {{ usePlanet.getHunterWar()|number_format }}</span> <span class="float-right"><span class="ml-3"><span class="pdgProduct">900</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'pdgImg'|trans }}" src="{{ asset('img/pdg.png') }}"></span><span class="ml-3">60s</span></span>
                         </th>
                         <td class="center-cells">
-                            {{ form_widget(form_spatialShip.hunterWar,{attr: { max: usePlanet.getHunterWar(), class: 'nbrProduct game-input text-right' }}) }}
+                            {{ form_widget(form_spatialShip.hunterWar,{attr: { class: 'nbrProduct game-input text-right' }}) }}
                         </td>
                     </tr>
                     <tr{% if (usePlanet.getLightUsine() == 0 or app.user.getMissile() < 3 or app.user.getLightShip() < 2) and usePlanet.getCorvet() == 0 %} hidden{% endif %}>
@@ -130,7 +130,7 @@
                             <span tabindex="0" role="button" class="btn btn-secondary text-orange"  data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.corvet'|trans|raw }}">{{ 'spatial.corvet'|trans }} x {{ usePlanet.getCorvet()|number_format }}</span> <span class="float-right"><span class="ml-5"><span class="niobiumProduct">1.000</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3"><span class="waterProduct">500</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span><span class="ml-3">1mn40s</span></span>
                         </th>
                         <td class="center-cells"{% if usePlanet.getLightUsine() == 0 or app.user.getMissile() < 3 or app.user.getLightShip() < 2 %} hidden{% endif %}>
-                            {{ form_widget(form_spatialShip.corvet,{attr: { max: usePlanet.getCorvet(), class: 'nbrProduct game-input text-right' }}) }}
+                            {{ form_widget(form_spatialShip.corvet,{attr: { class: 'nbrProduct game-input text-right' }}) }}
                         </td>
                     </tr>
                     <tr{% if (usePlanet.getLightUsine() == 0 or app.user.getMissile() != 3 or app.user.getLightShip() != 3 or app.user.getLaser() == 0) and usePlanet.getCorvetLaser() == 0 %} hidden{% endif %}>
@@ -138,7 +138,7 @@
                             <span tabindex="0" role="button" class="btn btn-secondary text-orange"  data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.corvetLaser'|trans|raw }}">{{ 'spatial.corvetLaser'|trans }} x {{ usePlanet.getCorvetLaser()|number_format }}</span> <span class="float-right"><span class="ml-5"><span class="niobiumProduct">400</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3"><span class="waterProduct">2.000</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span><span class="ml-3">2mn40s</span></span>
                         </th>
                         <td class="center-cells"{% if usePlanet.getLightUsine() == 0 or app.user.getMissile() != 3 or app.user.getLightShip() != 3 or app.user.getLaser() == 0 %} hidden{% endif %}>
-                            {{ form_widget(form_spatialShip.corvetLaser,{attr: { max: usePlanet.getCorvetLaser(), class: 'nbrProduct game-input text-right' }}) }}
+                            {{ form_widget(form_spatialShip.corvetLaser,{attr: { class: 'nbrProduct game-input text-right' }}) }}
                         </td>
                     </tr>
                     <tr>
@@ -146,7 +146,7 @@
                             <span tabindex="0" role="button" class="btn btn-secondary text-orange"  data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.corvetWar'|trans|raw }}">{{ 'spatial.corvetWar'|trans }} x {{ usePlanet.getCorvetWar()|number_format }}</span> <span class="float-right"><span class="ml-3"><span class="pdgProduct">1.800</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'pdgImg'|trans }}" src="{{ asset('img/pdg.png') }}"></span><span class="ml-3">5mn</span></span>
                         </th>
                         <td class="center-cells">
-                            {{ form_widget(form_spatialShip.corvetWar,{attr: { max: usePlanet.getCorvetWar(), class: 'nbrProduct game-input text-right' }}) }}
+                            {{ form_widget(form_spatialShip.corvetWar,{attr: { class: 'nbrProduct game-input text-right' }}) }}
                         </td>
                     </tr>
                     <tr{% if (usePlanet.getHeavyUsine() == 0 or app.user.getMissile() != 3 or app.user.getLaser() == 0) and usePlanet.getFregate() == 0 %} hidden{% endif %}>
@@ -154,7 +154,7 @@
                             <span tabindex="0" role="button" class="btn btn-secondary text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.fregate'|trans|raw }}">{{ 'spatial.fregate'|trans }} x {{ usePlanet.getFregate()|number_format }}</span> <span class="float-right"><span class="ml-5"><span class="niobiumProduct">2.200</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3"><span class="waterProduct">1.400</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span><span class="ml-3">4mn</span></span>
                         </th>
                         <td class="center-cells"{% if usePlanet.getHeavyUsine() == 0 or app.user.getMissile() != 3 or app.user.getLaser() == 0 %} hidden{% endif %}>
-                            {{ form_widget(form_spatialShip.fregate,{attr: { max: usePlanet.getFregate(), class: 'nbrProduct game-input text-right' }}) }}
+                            {{ form_widget(form_spatialShip.fregate,{attr: { class: 'nbrProduct game-input text-right' }}) }}
                         </td>
                     </tr>
                     <tr{% if (usePlanet.getHeavyUsine() == 0 or app.user.getMissile() != 3 or app.user.getLaser() == 0 or app.user.getPlasma() == 0) and usePlanet.getFregatePlasma() == 0 %} hidden{% endif %}>
@@ -162,7 +162,7 @@
                             <span tabindex="0" role="button" class="btn btn-secondary text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.fregatePlasma'|trans|raw }}">{{ 'spatial.fregatePlasma'|trans }} x {{ usePlanet.getFregatePlasma()|number_format }}</span> <span class="float-right"><span class="ml-5"><span class="niobiumProduct">2.000</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3"><span class="waterProduct">7.000</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span><span class="ml-3">10mn</span></span>
                         </th>
                         <td class="center-cells"{% if usePlanet.getHeavyUsine() == 0 or app.user.getMissile() != 3 or app.user.getLaser() == 0 or app.user.getPlasma() == 0 %} hidden{% endif %}>
-                            {{ form_widget(form_spatialShip.fregatePlasma,{attr: { max: usePlanet.getFregatePlasma(), class: 'nbrProduct game-input text-right' }}) }}
+                            {{ form_widget(form_spatialShip.fregatePlasma,{attr: { class: 'nbrProduct game-input text-right' }}) }}
                         </td>
                     </tr>
                     <tr{% if (usePlanet.getHeavyUsine() == 0 or app.user.getMissile() != 3 or app.user.getLaser() < 2 or app.user.getPlasma() < 2) and usePlanet.getCroiser() == 0 %} hidden{% endif %}>
@@ -170,7 +170,7 @@
                             <span tabindex="0" role="button" class="btn btn-secondary text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.croiser'|trans|raw }}">{{ 'spatial.croiser'|trans }} x {{ usePlanet.getCroiser()|number_format }}</span> <span class="float-right"><span class="ml-5"><span class="niobiumProduct">10.000</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3"><span class="waterProduct">8.000</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span><span class="ml-3">20mn</span></span>
                         </th>
                         <td class="center-cells"{% if usePlanet.getHeavyUsine() == 0 or app.user.getMissile() != 3 or app.user.getLaser() < 2 or app.user.getPlasma() < 2 %} hidden{% endif %}>
-                            {{ form_widget(form_spatialShip.croiser,{attr: { max: usePlanet.getCroiser(), class: 'nbrProduct game-input text-right' }}) }}
+                            {{ form_widget(form_spatialShip.croiser,{attr: { class: 'nbrProduct game-input text-right' }}) }}
                         </td>
                     </tr>
                     <tr{% if (usePlanet.getHeavyUsine() == 0 or app.user.getMissile() != 3 or app.user.getLaser() != 3 or app.user.getPlasma() != 3 or app.user.getHeavyShip() < 2) and usePlanet.getIronClad() == 0 %} hidden{% endif %}>
@@ -178,7 +178,7 @@
                             <span tabindex="0" role="button" class="btn btn-secondary text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.ironClad'|trans|raw }}">{{ 'spatial.ironClad'|trans }} x {{ usePlanet.getIronClad()|number_format }}</span> <span class="float-right"><span class="ml-5"><span class="niobiumProduct">30.000</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3"><span class="waterProduct">12.000</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span><span class="ml-3">46mn40s</span></span>
                         </th>
                         <td class="center-cells"{% if usePlanet.getHeavyUsine() == 0 or app.user.getMissile() != 3 or app.user.getLaser() != 3 or app.user.getPlasma() != 3 or app.user.getHeavyShip() < 2 %} hidden{% endif %}>
-                            {{ form_widget(form_spatialShip.ironClad,{attr: { max: usePlanet.getIronClad(), class: 'nbrProduct game-input text-right' }}) }}
+                            {{ form_widget(form_spatialShip.ironClad,{attr: { class: 'nbrProduct game-input text-right' }}) }}
                         </td>
                     </tr>
                     <tr{% if (usePlanet.getHeavyUsine() == 0 or app.user.getMissile() != 3 or app.user.getLaser() != 3 or app.user.getPlasma() != 3 or app.user.getHeavyShip() != 3) and usePlanet.getDestroyer() == 0 %} hidden{% endif %}>
@@ -186,7 +186,7 @@
                             <span tabindex="0" role="button" class="btn btn-secondary text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.destroyer'|trans|raw }}">{{ 'spatial.destroyer'|trans }} x {{ usePlanet.getDestroyer()|number_format }}</span> <span class="float-right"><span class="ml-5"><span class="niobiumProduct">20.000</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></span> <span class="ml-3"><span class="waterProduct">70.000</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'waterImg'|trans }}" src="{{ asset('img/water.png') }}"></span><span class="ml-3"><span class="workerProduct">500</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'workerImg'|trans }}" src="{{ asset('img/worker.png') }}"></span><span class="ml-3">1h40mn</span></span>
                         </th>
                         <td class="center-cells"{% if usePlanet.getHeavyUsine() == 0 or app.user.getMissile() != 3 or app.user.getLaser() != 3 or app.user.getPlasma() != 3 or app.user.getHeavyShip() != 3 %} hidden{% endif %}>
-                            {{ form_widget(form_spatialShip.destroyer,{attr: { max: usePlanet.getDestroyer(), class: 'nbrProduct game-input text-right' }}) }}
+                            {{ form_widget(form_spatialShip.destroyer,{attr: { class: 'nbrProduct game-input text-right' }}) }}
                         </td>
                     </tr>
                     <tr>
