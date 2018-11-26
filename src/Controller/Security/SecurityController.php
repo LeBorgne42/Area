@@ -144,7 +144,11 @@ class SecurityController extends Controller
 
 
         if($user) {
-            if($server->getOpen() == false && $this->getUser()->getRoles()[0] == 'ROLE_USER') {
+            if($user->getRoles()[0] == 'ROLE_PRIVATE') {
+                return $this->redirectToRoute('private_home');
+            }
+
+            if($server->getOpen() == false && $user->getRoles()[0] == 'ROLE_USER') {
                 return $this->redirectToRoute('pre_ally');
             }
 

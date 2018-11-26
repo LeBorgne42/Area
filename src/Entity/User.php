@@ -840,7 +840,11 @@ class User implements UserInterface, \Serializable
 
     public function getRoles()
     {
-        return array('ROLE_USER');
+        if($this->username === 'Thea' || $this->username === 'EndeR') {
+            return ['ROLE_PRIVATE'];
+        } else {
+            return ['ROLE_USER'];
+        }
     }
 
     public function eraseCredentials()

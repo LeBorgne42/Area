@@ -8,3 +8,4 @@ recoveryPw: 'Mdp perdu'
 login: Connexion
 register: Inscription
 contact: 'Contacter administrateur'
+logout: Disconnect

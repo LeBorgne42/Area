@@ -14,8 +14,13 @@ class HomeController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $server = $em->getRepository('App:Server')->find(['id' => 1]);
+        $user = $this->getUser();
 
-        if($this->getUser()) {
+        if($user) {
+            if($user->getRoles()[0] == 'ROLE_PRIVATE') {
+                return $this->redirectToRoute('private_home');
+            }
+
             $usePlanet = $em->getRepository('App:Planet')
                 ->createQueryBuilder('p')
                 ->join('p.user', 'u')
