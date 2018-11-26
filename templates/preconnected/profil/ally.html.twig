@@ -12,14 +12,14 @@
     {%- block right_planet -%}
     {%- endblock -%}
     <div class="front-block allyPage text-center">
-        <div class="my-3">{{ ally.getPolitic()|trans }}</div>
-        <div class="my-3">{{ ally.getSlogan() }}</div>
+        <h2 class="mb-3">[{{ ally.getSigle() }}] - {{ ally.getName() }}</h2>
+        <div class="my-3">{{ ally.getPolitic()|trans }} : {{ ally.getSlogan() }}</div>
         {% if ally.imageName %}
             <div class="text-center"><img height="300" width="450" src="{{ vich_uploader_asset(ally, 'imageFile') }}"></div>
         {% else %}
             <div class="text-center"><img height="300" width="450" src="{{ asset('img/ally.jpg') }}"></div>
         {% endif %}
-        <div class="ml-3 my-5 text-left">{{ ally.getDescription() }}</div>
+        <div class="ml-3 my-5 text-center">« {{ ally.getDescription() }} »</div>
         <div class="my-4">{{ 'ally.leader'|trans }} {% for user in ally.getUsers() %}{% if user.getGrade().getPlacement() == 1 %}[<span class="text-vert">{{ user.getGrade().getName() }}</span><span><a data-toggle="modal" data-target="#userModal" href="{{ path('pre_user_profil_modal', {'id': user.getId()}) }}"> {{ user.getUsername() }}</a></span>] - {% endif %}{% endfor %}</div>
         <div class="row">
             <div class="col-6">

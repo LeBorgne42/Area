@@ -106,6 +106,7 @@ ally.formGiveBitcoin: 'Transaction de Bitcoin'
 ally.formGivePdg: 'Transaction de pdg'
 ally.ranked: 'Liste d''Alliances crées'
 ally.proposals: 'Proposition(s) de recrutement'
+ally.usersRecrut: 'Joueurs actifs sans alliance :'
 tooltip.takePlanet: 'Nombre de planète que vous demandez/offrez pour la paix(selectionné parmit les meilleurs).'
 tooltip.takeTaxe: 'Taxe que vous percevrez chaque jour pendant 2 semaines sur leurs revenus.'
 tooltip.takePdg: 'Taxe que vous recevrez pour chaque gain de pdg gagner en combat.'
@@ -113,3 +114,13 @@ tooltip.sendPeace: 'Si la paix est signé, celle-ci durera 2 semaines, aucun com
 rank.ally: 'Nom d''Alliance'
 rank.members: Membres
 rank.createdAt: 'Crée le'
+rank.user: 'Nom du joueur'
+rank.lastActivity: 'Dernière activitée le'
+rank.politic: 'Régime politique'
+neutral: Neutre
+monarchy: Monarchie
+democrat: Démocratie
+fascism: Fascisme
+anarchism: Anarchisme
+communism: Communisme
+theocrat: Théocratie

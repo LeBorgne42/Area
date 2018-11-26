@@ -569,9 +569,22 @@ class AllyController extends Controller
             return $this->redirectToRoute('ally_page_add', ['idp' => $usePlanet->getId()]);
         }
 
+        $lastActivity = new DateTime();
+        $lastActivity->setTimezone(new DateTimeZone('Europe/Paris'));
+        $lastActivity->sub(new DateInterval('PT' . 5184000 . 'S'));
+        $usersRecruitable = $em->getRepository('App:User')
+            ->createQueryBuilder('u')
+            ->where('u.lastActivity > :date')
+            ->andWhere('u.ally is null')
+            ->setParameters(['date' => $lastActivity])
+            ->orderBy('u.lastActivity', 'DESC')
+            ->getQuery()
+            ->getResult();
+
         return $this->render('connected/ally/add.html.twig', [
             'usePlanet' => $usePlanet,
             'form_allyAdd' => $form_allyAdd->createView(),
+            'usersRecrutable' => $usersRecruitable,
         ]);
     }
 

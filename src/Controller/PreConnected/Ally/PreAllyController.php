@@ -515,8 +515,21 @@ class PreAllyController extends Controller
             return $this->redirectToRoute('pre_ally_page_add');
         }
 
+        $lastActivity = new DateTime();
+        $lastActivity->setTimezone(new DateTimeZone('Europe/Paris'));
+        $lastActivity->sub(new DateInterval('PT' . 5184000 . 'S'));
+        $usersRecruitable = $em->getRepository('App:User')
+            ->createQueryBuilder('u')
+            ->where('u.lastActivity > :date')
+            ->andWhere('u.ally is null')
+            ->setParameters(['date' => $lastActivity])
+            ->orderBy('u.lastActivity', 'DESC')
+            ->getQuery()
+            ->getResult();
+
         return $this->render('preconnected/ally/add.html.twig', [
             'form_allyAdd' => $form_allyAdd->createView(),
+            'usersRecrutable' => $usersRecruitable,
         ]);
     }
 
