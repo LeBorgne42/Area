@@ -73,6 +73,14 @@ a:focus {
   color: orange;
 }
 
+.table-bordered tr th {
+  vertical-align: middle!important;
+}
+
+.table-bordered tr td {
+  vertical-align: middle!important;
+}
+
 a:hover {
   color: orangered!important;
 }

@@ -172,7 +172,20 @@
                 {% for fleet in fleetCurrent %}
                     <tr class="{% if fleet.getUser() == app.user %}text-bleu{% elseif fleet.getUser().getAlly() == app.user.getAlly() and app.user.getAlly() %}text-vert{% else %}text-rouge{% endif %}">
                         <th class="tab-cells-name">
-                            "{{  fleet.getName() }}" <span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'idp': usePlanet.getId(), 'id': fleet.getUser().getId()}) }}">{% if fleet.getUser().getAlly() %}[{{ fleet.getUser().getAlly().getSigle() }}] {% endif %}{{ fleet.getUser().getUserName() }}</a></span>
+                            {% if fleet.getUser().getAlly() %}
+                                {% if fleet.getUser().getAlly().getImageName() %}
+                                    <img height="10" width="15" src="{{ vich_uploader_asset(fleet.getUser().getAlly(), 'imageFile') }}">
+                                {% else %}
+                                    <img height="10" width="15" src="{{ asset('img/ally.jpg') }}">
+                                {% endif %}
+                            {% else %}
+                                {% if fleet.getUser().getImageName() %}
+                                    <img height="15" width="15" src="{{ vich_uploader_asset(fleet.getUser(), 'imageFile') }}">
+                                {% else %}
+                                    <img height="15" width="15" src="{{ asset('img/avatar.png') }}">
+                                {% endif %}
+                            {% endif %}
+                            <span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'idp': usePlanet.getId(), 'id': fleet.getUser().getId()}) }}">{% if fleet.getUser().getAlly() %}[{{ fleet.getUser().getAlly().getSigle() }}] {% endif %}{{ fleet.getUser().getUserName() }}</a></span> "{{  fleet.getName() }}"
                         </th>
                         <td class="center-cells text-center">
                             {{ fleet.getPlanet().getName() }} - {{ fleet.getPlanet().getSector().getGalaxy.getPosition() }}:{{ fleet.getPlanet().getSector.getPosition() }}:{{ fleet.getPlanet().getPosition() }}
@@ -215,7 +228,20 @@
                     {% for fleet in fleetIn %}
                         <tr class="{% if fleet.getUser() == app.user %}text-bleu{% elseif fleet.getUser().getAlly() == app.user.getAlly() and app.user.getAlly() %}text-vert{% else %}text-rouge{% endif %}">
                             <th class="tab-cells-name">
-                                "{{  fleet.getName() }}" <span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'idp': usePlanet.getId(), 'id': fleet.getUser().getId()}) }}">{% if fleet.getUser().getAlly() %}[{{ fleet.getUser().getAlly().getSigle() }}] {% endif %}{{ fleet.getUser().getUserName() }}</a></span>
+                            {% if fleet.getUser().getAlly() %}
+                                {% if fleet.getUser().getAlly().getImageName() %}
+                                    <img height="10" width="15" src="{{ vich_uploader_asset(fleet.getUser().getAlly(), 'imageFile') }}">
+                                {% else %}
+                                    <img height="10" width="15" src="{{ asset('img/ally.jpg') }}">
+                                {% endif %}
+                            {% else %}
+                                {% if fleet.getUser().getImageName() %}
+                                    <img height="15" width="15" src="{{ vich_uploader_asset(fleet.getUser(), 'imageFile') }}">
+                                {% else %}
+                                    <img height="15" width="15" src="{{ asset('img/avatar.png') }}">
+                                {% endif %}
+                            {% endif %}
+                                <span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'idp': usePlanet.getId(), 'id': fleet.getUser().getId()}) }}">{% if fleet.getUser().getAlly() %}[{{ fleet.getUser().getAlly().getSigle() }}] {% endif %}{{ fleet.getUser().getUserName() }}</a></span> "{{  fleet.getName() }}"
                             </th>
                             <td class="center-cells text-center">
                             {% if fleet.getPlanet() %}
@@ -260,7 +286,20 @@
                     {% for fleet in fleetOut %}
                         <tr class="{% if fleet.getUser() == app.user %}text-bleu{% elseif fleet.getUser().getAlly() == app.user.getAlly() and app.user.getAlly() %}text-vert{% else %}text-rouge{% endif %}">
                             <th class="tab-cells-name">
-                                "{{  fleet.getName() }}" <span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'idp': usePlanet.getId(), 'id': fleet.getUser().getId()}) }}">{% if fleet.getUser().getAlly() %}[{{ fleet.getUser().getAlly().getSigle() }}] {% endif %}{{ fleet.getUser().getUserName() }}</a></span>
+                            {% if fleet.getUser().getAlly() %}
+                                {% if fleet.getUser().getAlly().getImageName() %}
+                                    <img height="10" width="15" src="{{ vich_uploader_asset(fleet.getUser().getAlly(), 'imageFile') }}">
+                                {% else %}
+                                    <img height="10" width="15" src="{{ asset('img/ally.jpg') }}">
+                                {% endif %}
+                            {% else %}
+                                {% if fleet.getUser().getImageName() %}
+                                    <img height="15" width="15" src="{{ vich_uploader_asset(fleet.getUser(), 'imageFile') }}">
+                                {% else %}
+                                    <img height="15" width="15" src="{{ asset('img/avatar.png') }}">
+                                {% endif %}
+                            {% endif %}
+                                <span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'idp': usePlanet.getId(), 'id': fleet.getUser().getId()}) }}">{% if fleet.getUser().getAlly() %}[{{ fleet.getUser().getAlly().getSigle() }}] {% endif %}{{ fleet.getUser().getUserName() }}</a></span> "{{  fleet.getName() }}"
                             </th>
                             <td class="center-cells text-center">
                                 {{ fleet.getPlanet().getName() }} - {{ fleet.getPlanet().getSector().getGalaxy.getPosition() }}:{{ fleet.getPlanet().getSector.getPosition() }}:{{ fleet.getPlanet().getPosition() }}

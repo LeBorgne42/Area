@@ -28,6 +28,11 @@
                             <tr>
                                 <th class="tab-cells-name">
                                     <div>
+                                        {% if message.getUser().getImageName() %}
+                                            <img height="15" width="15" src="{{ vich_uploader_asset(message.getUser(), 'imageFile') }}">
+                                        {% else %}
+                                            <img height="15" width="15" src="{{ asset('img/avatar.png') }}">
+                                        {% endif %}
                                         {% if message.getUser().getAlly() %}<span><a data-toggle="modal" data-target="#allyModal" href="{{ path('ally_profil_modal', {'idp': usePlanet.getId(), 'id': message.getUser().getAlly().getId()}) }}">[{{ message.getUser().getAlly().getSigle() }}] </a></span>{% endif %}<span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'idp': usePlanet.getId(), 'id': message.getUser().getId()}) }}" {% if message.getUser() == app.user %} class="text-vert"{% endif %}>{{ message.getUser().getUserName() }}</a></span> :  <span class="ml-2">{{ message.getMessage()|raw }}</span>
                                     </div>
                                 </th>

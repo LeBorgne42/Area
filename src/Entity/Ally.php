@@ -218,7 +218,9 @@ class Ally
     {
         $nbr = 0;
         foreach($this->getUsers() as $user) {
-            $nbr = $nbr + $user->getRank()->getWarPoint();
+            if($user->getRank()) {
+                $nbr = $nbr + $user->getRank()->getWarPoint();
+            }
         }
         return $nbr;
     }
@@ -445,7 +447,9 @@ class Ally
         $return = 0;
 
         foreach($this->getUsers() as $user) {
-            $return = $return + $user->getRank()->getPoint();
+            if($user->getRank()) {
+                $return = $return + $user->getRank()->getPoint();
+            }
         }
         return $return;
     }

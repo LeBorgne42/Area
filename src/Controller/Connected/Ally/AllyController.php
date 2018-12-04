@@ -716,11 +716,14 @@ class AllyController extends Controller
             return $this->redirectToRoute('ally_page_pacts', ['idp' => $usePlanet->getId()]);
         }
 
+        $allAllys = $em->getRepository('App:Ally')->findAll();
+
         return $this->render('connected/ally/pact.html.twig', [
             'waitingPna' => $waitingPna,
             'usePlanet' => $usePlanet,
             'waitingAllied' => $waitingAllied,
             'form_allyPact' => $form_allyPact->createView(),
+            'allAllys' => $allAllys
         ]);
     }
 }

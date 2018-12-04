@@ -658,10 +658,13 @@ class PreAllyController extends Controller
             return $this->redirectToRoute('pre_ally_page_pacts');
         }
 
+        $allAllys = $em->getRepository('App:Ally')->findAll();
+
         return $this->render('preconnected/ally/pact.html.twig', [
             'waitingPna' => $waitingPna,
             'waitingAllied' => $waitingAllied,
             'form_allyPact' => $form_allyPact->createView(),
+            'allAllys' => $allAllys
         ]);
     }
 }

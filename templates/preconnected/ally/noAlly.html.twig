@@ -50,6 +50,11 @@
                 {% for proposal in app.user.getProposals() %}
                     <tr>
                         <td class="center-cells">
+                        {% if proposal.getAlly().getImageName() %}
+                            <img height="10" width="15" src="{{ vich_uploader_asset(proposal.getAlly(), 'imageFile') }}">
+                        {% else %}
+                            <img height="10" width="15" src="{{ asset('img/ally.jpg') }}">
+                        {% endif %}
                             <span><a href="{{ path('pre_ally_profil', {'id': proposal.getAlly().getId()}) }}">{{ proposal.getAlly().getName() }}</a></span>
                         </td>
                         <td class="center-cells">
@@ -72,6 +77,9 @@
             <table class="table table-striped table-bordered table-dark text-center">
                 <tbody>
                 <tr>
+                    <th width="45" class="tab-cells-name p-2">
+                        {{ 'rank.logo'|trans }}
+                    </th>
                     <th class="tab-cells-name p-2">
                         {{ 'rank.ally'|trans }}
                     </th>
@@ -87,6 +95,13 @@
                 </tr>
                 {% for ally in allAllys %}
                     <tr>
+                        <th class="tab-cells-name borderAlly p-0">
+                            {% if ally.getImageName() %}
+                                <img height="30" width="45" src="{{ vich_uploader_asset(ally, 'imageFile') }}">
+                            {% else %}
+                                <img height="30" width="45" src="{{ asset('img/ally.jpg') }}">
+                            {% endif %}
+                        </th>
                         <th class="tab-cells-name p-2">
                             <span><a data-toggle="modal" data-target="#userModal" href="{{ path('pre_ally_profil_modal', {'id': ally.getId()}) }}">[{{ ally.getSigle() }}] {{ ally.getName() }}</a></span>
                         </th>

@@ -4,13 +4,23 @@
     <list default="true" id="97f042ea-d0ee-4bd9-bb02-3d850e24f659" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/assets/global.scss" afterPath="$PROJECT_DIR$/assets/global.scss" />
-      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" afterPath="$PROJECT_DIR$/config/packages/security.yaml" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/HomeController.php" afterPath="$PROJECT_DIR$/src/Controller/HomeController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Security/SecurityController.php" afterPath="$PROJECT_DIR$/src/Controller/Security/SecurityController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/S_Content.php" afterPath="$PROJECT_DIR$/src/Entity/S_Content.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" afterPath="$PROJECT_DIR$/src/Entity/User.php" />
-      <change beforePath="$PROJECT_DIR$/translations/front_index.fr.yml" afterPath="$PROJECT_DIR$/translations/front_index.fr.yml" />
-      <change beforePath="$PROJECT_DIR$/translations/front_salon.fr.yml" afterPath="$PROJECT_DIR$/translations/front_salon.fr.yml" />
+      <change beforePath="$PROJECT_DIR$/assets/scss/front/ally.scss" afterPath="$PROJECT_DIR$/assets/scss/front/ally.scss" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/Ally/AllyController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/Ally/AllyController.php" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/Map/SectorController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/Map/SectorController.php" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/PreConnected/Ally/PreAllyController.php" afterPath="$PROJECT_DIR$/src/Controller/PreConnected/Ally/PreAllyController.php" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Ally.php" afterPath="$PROJECT_DIR$/src/Entity/Ally.php" />
+      <change beforePath="$PROJECT_DIR$/templates/connected/ally/add.html.twig" afterPath="$PROJECT_DIR$/templates/connected/ally/add.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/connected/ally/noAlly.html.twig" afterPath="$PROJECT_DIR$/templates/connected/ally/noAlly.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/connected/ally/pact.html.twig" afterPath="$PROJECT_DIR$/templates/connected/ally/pact.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/connected/ally/rank.html.twig" afterPath="$PROJECT_DIR$/templates/connected/ally/rank.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/connected/map/sector.html.twig" afterPath="$PROJECT_DIR$/templates/connected/map/sector.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/connected/salon.html.twig" afterPath="$PROJECT_DIR$/templates/connected/salon.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/preconnected/ally.html.twig" afterPath="$PROJECT_DIR$/templates/preconnected/ally.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/preconnected/ally/add.html.twig" afterPath="$PROJECT_DIR$/templates/preconnected/ally/add.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/preconnected/ally/noAlly.html.twig" afterPath="$PROJECT_DIR$/templates/preconnected/ally/noAlly.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/preconnected/ally/pact.html.twig" afterPath="$PROJECT_DIR$/templates/preconnected/ally/pact.html.twig" />
+      <change beforePath="$PROJECT_DIR$/translations/front_ally.fr.yml" afterPath="$PROJECT_DIR$/translations/front_ally.fr.yml" />
+      <change beforePath="$PROJECT_DIR$/translations/front_ally_rank.fr.yml" afterPath="$PROJECT_DIR$/translations/front_ally_rank.fr.yml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,14 +34,62 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="PrivateController.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Controller/Security/PrivateController.php">
+      <file leaf-file-name="noAlly.html.twig" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/connected/ally/noAlly.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="367">
-              <caret line="81" column="91" lean-forward="false" selection-start-line="81" selection-start-column="91" selection-end-line="81" selection-end-column="91" />
-              <folding>
-                <element signature="e#43#90#0#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="681">
+              <caret line="52" column="106" lean-forward="false" selection-start-line="52" selection-start-column="106" selection-end-line="52" selection-end-column="106" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="add.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/preconnected/ally/add.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="531">
+              <caret line="68" column="47" lean-forward="false" selection-start-line="68" selection-start-column="47" selection-end-line="68" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="add.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/connected/ally/add.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="545">
+              <caret line="55" column="57" lean-forward="true" selection-start-line="55" selection-start-column="57" selection-end-line="60" selection-end-column="47" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="salon.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/connected/salon.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="435">
+              <caret line="29" column="41" lean-forward="true" selection-start-line="29" selection-start-column="41" selection-end-line="34" selection-end-column="51" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pact.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/preconnected/ally/pact.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="637">
+              <caret line="227" column="24" lean-forward="true" selection-start-line="227" selection-start-column="24" selection-end-line="234" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="noAlly.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/preconnected/ally/noAlly.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="274">
+              <caret line="52" column="48" lean-forward="false" selection-start-line="52" selection-start-column="48" selection-end-line="52" selection-end-column="48" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -40,16 +98,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>manageSalon</find>
-      <find>fleet_attac</find>
-      <find>console</find>
-      <find>ajax</find>
-      <find>json</find>
-      <find>close plus</find>
-      <find>path('create_fleet', {'idp': usePlanet.getId()})</find>
-      <find>manageRenameFleetForm</find>
-      <find>()|</find>
-      <find>salons</find>
       <find>manageTime</find>
       <find>reload</find>
       <find>max: usePlanet.getSonde(),</find>
@@ -70,6 +118,16 @@
       <find>logout</find>
       <find>nl</find>
       <find>Roles</find>
+      <find>ambassade</find>
+      <find>modify-allyImage</find>
+      <find>.table-bordered</find>
+      <find>rank.logo</find>
+      <find>dailyReport</find>
+      <find>$users</find>
+      <find>getUsersPoint</find>
+      <find>-&gt;getRank()</find>
+      <find>getUser</find>
+      <find>amba</find>
     </findStrings>
     <replaceStrings>
       <replace>$nbrSoldier</replace>
@@ -127,19 +185,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/templates/connected/share/message_share.html.twig" />
-        <option value="$PROJECT_DIR$/templates/connected/share/report_share.html.twig" />
-        <option value="$PROJECT_DIR$/translations/front_message.fr.yml" />
-        <option value="$PROJECT_DIR$/translations/front_report.fr.yml" />
-        <option value="$PROJECT_DIR$/src/Controller/Connected/ReportController.php" />
-        <option value="$PROJECT_DIR$/src/Controller/Connected/MessageController.php" />
-        <option value="$PROJECT_DIR$/src/Controller/Share/ShareController.php" />
-        <option value="$PROJECT_DIR$/src/Controller/Connected/FleetController.php" />
-        <option value="$PROJECT_DIR$/templates/connected/fleet/create.html.twig" />
         <option value="$PROJECT_DIR$/templates/connected/fleet/edit.html.twig" />
         <option value="$PROJECT_DIR$/templates/connected/map/interact.html.twig" />
         <option value="$PROJECT_DIR$/templates/connected/help_new.html.twig" />
-        <option value="$PROJECT_DIR$/src/Entity/Ally.php" />
         <option value="$PROJECT_DIR$/src/Controller/Connected/OverviewController.php" />
         <option value="$PROJECT_DIR$/assets/main.js" />
         <option value="$PROJECT_DIR$/templates/connected/spatial.html.twig" />
@@ -147,21 +195,12 @@
         <option value="$PROJECT_DIR$/assets/scss/front/unconnected.scss" />
         <option value="$PROJECT_DIR$/templates/preconnected/profil/modal_ally.html.twig" />
         <option value="$PROJECT_DIR$/templates/preconnected/profil/ally.html.twig" />
-        <option value="$PROJECT_DIR$/src/Controller/PreConnected/Ally/PreAllyController.php" />
-        <option value="$PROJECT_DIR$/translations/front_ally.fr.yml" />
         <option value="$PROJECT_DIR$/templates/connected/profil/ally.html.twig" />
         <option value="$PROJECT_DIR$/templates/connected/profil/modal_ally.html.twig" />
-        <option value="$PROJECT_DIR$/templates/connected/ally/add.html.twig" />
-        <option value="$PROJECT_DIR$/src/Controller/Connected/Ally/AllyController.php" />
         <option value="$PROJECT_DIR$/templates/preconnected/ally/admin.html.twig" />
-        <option value="$PROJECT_DIR$/assets/scss/front/ally.scss" />
-        <option value="$PROJECT_DIR$/templates/preconnected/ally/add.html.twig" />
         <option value="$PROJECT_DIR$/templates/preconnected/ally/bank.html.twig" />
         <option value="$PROJECT_DIR$/templates/preconnected/ally/exit.html.twig" />
         <option value="$PROJECT_DIR$/templates/preconnected/ally/makePeace.html.twig" />
-        <option value="$PROJECT_DIR$/templates/preconnected/ally/noAlly.html.twig" />
-        <option value="$PROJECT_DIR$/templates/preconnected/ally/pact.html.twig" />
-        <option value="$PROJECT_DIR$/templates/preconnected/ally.html.twig" />
         <option value="$PROJECT_DIR$/src/Entity/Private.php" />
         <option value="$PROJECT_DIR$/src/Entity/PrivateU.php" />
         <option value="$PROJECT_DIR$/src/Entity/Privacy.php" />
@@ -173,11 +212,30 @@
         <option value="$PROJECT_DIR$/src/Entity/Salon.php" />
         <option value="$PROJECT_DIR$/src/Entity/S_Content.php" />
         <option value="$PROJECT_DIR$/templates/private/salon.html.twig" />
-        <option value="$PROJECT_DIR$/assets/global.scss" />
         <option value="$PROJECT_DIR$/templates/private/home.html.twig" />
         <option value="$PROJECT_DIR$/translations/front_index.fr.yml" />
         <option value="$PROJECT_DIR$/translations/front_salon.fr.yml" />
         <option value="$PROJECT_DIR$/src/Controller/Security/PrivateController.php" />
+        <option value="$PROJECT_DIR$/translations/front_ally.fr.yml" />
+        <option value="$PROJECT_DIR$/assets/scss/front/ally.scss" />
+        <option value="$PROJECT_DIR$/templates/preconnected/ally.html.twig" />
+        <option value="$PROJECT_DIR$/templates/connected/ally/pact.html.twig" />
+        <option value="$PROJECT_DIR$/templates/preconnected/ally/pact.html.twig" />
+        <option value="$PROJECT_DIR$/src/Controller/PreConnected/Ally/PreAllyController.php" />
+        <option value="$PROJECT_DIR$/src/Controller/Connected/Ally/AllyController.php" />
+        <option value="$PROJECT_DIR$/assets/global.scss" />
+        <option value="$PROJECT_DIR$/templates/connected/ally/rank.html.twig" />
+        <option value="$PROJECT_DIR$/templates/connected/rank.html.twig" />
+        <option value="$PROJECT_DIR$/translations/front_ally_rank.fr.yml" />
+        <option value="$PROJECT_DIR$/src/Controller/CronController/DailyController.php" />
+        <option value="$PROJECT_DIR$/src/Entity/Ally.php" />
+        <option value="$PROJECT_DIR$/templates/connected/salon.html.twig" />
+        <option value="$PROJECT_DIR$/templates/connected/map/sector.html.twig" />
+        <option value="$PROJECT_DIR$/src/Controller/Connected/Map/SectorController.php" />
+        <option value="$PROJECT_DIR$/templates/connected/ally/add.html.twig" />
+        <option value="$PROJECT_DIR$/templates/preconnected/ally/add.html.twig" />
+        <option value="$PROJECT_DIR$/templates/preconnected/ally/noAlly.html.twig" />
+        <option value="$PROJECT_DIR$/templates/connected/ally/noAlly.html.twig" />
       </list>
     </option>
   </component>
@@ -339,6 +397,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -349,27 +408,32 @@
             <path>
               <item name="Area" type="b2602c69:ProjectViewProjectNode" />
               <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="Area" type="b2602c69:ProjectViewProjectNode" />
               <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="connected" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="Area" type="b2602c69:ProjectViewProjectNode" />
               <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Security" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="preconnected" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="preconnected" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="ally" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -457,12 +521,13 @@
       <workItem from="1542128199387" duration="53775000" />
       <workItem from="1542400957910" duration="15580000" />
       <workItem from="1542493987869" duration="2004000" />
-      <workItem from="1542496525506" duration="35683000" />
+      <workItem from="1542496525506" duration="35820000" />
+      <workItem from="1543947460861" duration="10699000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1629472000" />
+    <option name="totallyTimeSpent" value="1640308000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -483,7 +548,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286991" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287483" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11288605" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11448349" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32969216" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -538,102 +603,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/templates/connected/ally.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="16" lean-forward="true" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/connected/help_new.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="31" lean-forward="false" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/War.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-125">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/OverviewController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="29" column="9" lean-forward="true" selection-start-line="29" selection-start-column="9" selection-end-line="29" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/connected/fleet/edit.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2317">
-          <caret line="16" column="55" lean-forward="false" selection-start-line="16" selection-start-column="55" selection-end-line="16" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="278" column="63" lean-forward="false" selection-start-line="278" selection-start-column="60" selection-end-line="278" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/connected/spatial.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="59" lean-forward="true" selection-start-line="10" selection-start-column="59" selection-end-line="10" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/anonymous/medias.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="32" lean-forward="true" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Ally.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1020">
-          <caret line="72" column="21" lean-forward="true" selection-start-line="72" selection-start-column="21" selection-end-line="72" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/preconnected/profil/modal_ally.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="50" lean-forward="true" selection-start-line="13" selection-start-column="50" selection-end-line="15" selection-end-column="86" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/scss/front/unconnected.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="58" column="50" lean-forward="true" selection-start-line="58" selection-start-column="50" selection-end-line="58" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/TopMenuController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="95" column="49" lean-forward="true" selection-start-line="95" selection-start-column="49" selection-end-line="98" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/translations/front_page_ally.fr.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -642,19 +611,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/translations/front_ally.fr.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="952">
-          <caret line="125" column="20" lean-forward="false" selection-start-line="125" selection-start-column="20" selection-end-line="125" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/preconnected/profil/ally.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
           <caret line="13" column="50" lean-forward="true" selection-start-line="13" selection-start-column="50" selection-end-line="15" selection-end-column="86" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -662,7 +622,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="15" column="86" lean-forward="false" selection-start-line="15" selection-start-column="86" selection-end-line="15" selection-end-column="86" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -670,23 +629,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="9" column="55" lean-forward="false" selection-start-line="9" selection-start-column="55" selection-end-line="9" selection-end-column="80" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/connected/ally/add.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="952">
-          <caret line="96" column="18" lean-forward="false" selection-start-line="96" selection-start-column="18" selection-end-line="96" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/PreConnected/Ally/PreAllyController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="707">
-          <caret line="530" column="58" lean-forward="true" selection-start-line="530" selection-start-column="58" selection-end-line="531" selection-end-column="51" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -694,23 +636,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/scss/front/ally.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/preconnected/ally/add.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="32" lean-forward="false" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -726,23 +651,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/preconnected/ally/makePeace.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="32" lean-forward="false" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/preconnected/ally/noAlly.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="33" lean-forward="false" selection-start-line="7" selection-start-column="33" selection-end-line="7" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -762,27 +670,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/preconnected/ally.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="16" lean-forward="true" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/preconnected/ally/pact.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="32" lean-forward="false" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/menu/_top_menu.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -790,10 +681,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1543236030769" expanded="true" signature="569:603" ph="ALTER TABLE salon_user... " />
-            <marker date="1543236030769" expanded="true" signature="919:986" ph="ALTER TABLE salon_user... " />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -805,21 +692,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Privacy.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="31" lean-forward="false" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Privacy.php" />
     <entry file="file://$PROJECT_DIR$/src/Controller/Connected/ProfilController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="6" selection-end-column="62" />
-          <folding>
-            <element signature="e#44#91#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -827,7 +704,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="11" column="23" lean-forward="false" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -835,7 +711,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -843,17 +718,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="25" column="34" lean-forward="false" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/Ally/AllyController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="161" column="32" lean-forward="true" selection-start-line="161" selection-start-column="32" selection-end-line="162" selection-end-column="25" />
-          <folding>
-            <element signature="e#49#96#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -861,7 +725,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" column="31" lean-forward="false" selection-start-line="2" selection-start-column="31" selection-end-line="2" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -869,7 +732,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
           <caret line="177" column="0" lean-forward="true" selection-start-line="177" selection-start-column="0" selection-end-line="177" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -893,15 +755,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" column="36" lean-forward="false" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/global.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="832">
-          <caret line="232" column="20" lean-forward="false" selection-start-line="232" selection-start-column="20" selection-end-line="232" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -917,9 +770,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="318">
           <caret line="118" column="38" lean-forward="false" selection-start-line="118" selection-start-column="33" selection-end-line="118" selection-end-column="38" />
-          <folding>
-            <element signature="e#44#94#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -927,7 +777,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="551">
           <caret line="70" column="62" lean-forward="false" selection-start-line="70" selection-start-column="62" selection-end-line="70" selection-end-column="62" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -939,23 +788,207 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/User.php">
+    <entry file="file://$PROJECT_DIR$/src/Controller/Security/PrivateController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="847">
-          <caret line="859" column="40" lean-forward="true" selection-start-line="859" selection-start-column="40" selection-end-line="859" selection-end-column="40" />
+        <state relative-caret-position="600">
+          <caret line="82" column="38" lean-forward="false" selection-start-line="82" selection-start-column="38" selection-end-line="82" selection-end-column="38" />
           <folding>
-            <element signature="e#30#62#0#PHP" expanded="true" />
+            <element signature="e#43#90#0#PHP" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Security/PrivateController.php">
+    <entry file="file://$PROJECT_DIR$/templates/preconnected/ally/makePeace.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="81" column="91" lean-forward="false" selection-start-line="81" selection-start-column="91" selection-end-line="81" selection-end-column="91" />
+        <state relative-caret-position="105">
+          <caret line="7" column="32" lean-forward="false" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/translations/front_ally.fr.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="81" column="15" lean-forward="false" selection-start-line="81" selection-start-column="15" selection-end-line="81" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/scss/front/ally.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="795">
+          <caret line="53" column="15" lean-forward="false" selection-start-line="53" selection-start-column="15" selection-end-line="53" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/connected/ally.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/preconnected/ally.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="94" column="20" lean-forward="true" selection-start-line="94" selection-start-column="20" selection-end-line="97" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/connected/rank.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="32" column="25" lean-forward="true" selection-start-line="32" selection-start-column="25" selection-end-line="32" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/connected/ally/rank.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="21" lean-forward="false" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/translations/front_ally_rank.fr.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11942">
+          <caret line="859" column="40" lean-forward="true" selection-start-line="859" selection-start-column="40" selection-end-line="859" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Ally.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="318">
+          <caret line="220" column="31" lean-forward="false" selection-start-line="220" selection-start-column="20" selection-end-line="220" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/CronController/DailyController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="745">
+          <caret line="118" column="47" lean-forward="false" selection-start-line="118" selection-start-column="34" selection-end-line="118" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/global.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1185">
+          <caret line="79" column="21" lean-forward="false" selection-start-line="79" selection-start-column="21" selection-end-line="79" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/Ally/AllyController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="760">
+          <caret line="718" column="61" lean-forward="false" selection-start-line="718" selection-start-column="61" selection-end-line="718" selection-end-column="61" />
           <folding>
-            <element signature="e#43#90#0#PHP" expanded="true" />
+            <element signature="e#49#96#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/connected/overview.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="31" column="45" lean-forward="true" selection-start-line="31" selection-start-column="45" selection-end-line="31" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/PreConnected/Ally/PreAllyController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="802">
+          <caret line="660" column="50" lean-forward="false" selection-start-line="660" selection-start-column="50" selection-end-line="660" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/connected/map/sector.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="384">
+          <caret line="300" column="39" lean-forward="false" selection-start-line="300" selection-start-column="39" selection-end-line="300" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/connected/ally/pact.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="554">
+          <caret line="220" column="66" lean-forward="true" selection-start-line="220" selection-start-column="66" selection-end-line="225" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/Map/SectorController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="505">
+          <caret line="57" column="37" lean-forward="false" selection-start-line="57" selection-start-column="37" selection-end-line="57" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/preconnected/ally/pact.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="637">
+          <caret line="227" column="24" lean-forward="true" selection-start-line="227" selection-start-column="24" selection-end-line="234" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/connected/salon.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="29" column="41" lean-forward="true" selection-start-line="29" selection-start-column="41" selection-end-line="34" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/connected/ally/add.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="545">
+          <caret line="55" column="57" lean-forward="true" selection-start-line="55" selection-start-column="57" selection-end-line="60" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/preconnected/ally/add.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="531">
+          <caret line="68" column="47" lean-forward="false" selection-start-line="68" selection-start-column="47" selection-end-line="68" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/preconnected/ally/noAlly.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="274">
+          <caret line="52" column="48" lean-forward="false" selection-start-line="52" selection-start-column="48" selection-end-line="52" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/connected/ally/noAlly.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="681">
+          <caret line="52" column="106" lean-forward="false" selection-start-line="52" selection-start-column="106" selection-end-line="52" selection-end-column="106" />
+          <folding />
         </state>
       </provider>
     </entry>

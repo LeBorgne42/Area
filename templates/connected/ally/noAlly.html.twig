@@ -49,6 +49,11 @@
                 {% for proposal in app.user.getProposals() %}
                     <tr>
                         <td class="center-cells">
+                            {% if proposal.getAlly().getImageName() %}
+                                <img height="10" width="15" src="{{ vich_uploader_asset(proposal.getAlly(), 'imageFile') }}">
+                            {% else %}
+                                <img height="10" width="15" src="{{ asset('img/ally.jpg') }}">
+                            {% endif %}
                             <span><a href="{{ path('ally_profil', {'idp': usePlanet.getId(), 'id': proposal.getAlly().getId()}) }}">{{ proposal.getAlly().getName() }}</a></span>
                         </td>
                         <td class="center-cells">

@@ -12,6 +12,9 @@
                 <th width="15px" class="tab-cells-name p-2">
                     {{ 'rank.position'|trans }}
                 </th>
+                <th width="45" class="tab-cells-name p-2">
+                    {{ 'rank.logo'|trans }}
+                </th>
                 <th class="tab-cells-name p-2 text-left">
                     {{ 'rank.ally'|trans }}
                 </th>
@@ -36,6 +39,13 @@
                 <tr>
                     <th width="15px" class="tab-cells-name p-2">
                         {% if x == 1 %}<div class="text-or glyphicon glyphicon-star"></div> {{ x }}.{% elseif x == 2 %}<div class="text-argent glyphicon glyphicon-star"></div> {{ x }}.{% elseif x == 3 %}<div class="text-bronze glyphicon glyphicon-star"></div> {{ x }}.{% else %}<div class="glyphicon glyphicon-star" hidden></div> {{ x }}.{% endif %}
+                    </th>
+                    <th class="tab-cells-name borderAlly p-0">
+                        {% if ally.getImageName() %}
+                            <img height="30" width="45" src="{{ vich_uploader_asset(ally, 'imageFile') }}">
+                        {% else %}
+                            <img height="30" width="45" src="{{ asset('img/ally.jpg') }}">
+                        {% endif %}
                     </th>
                     <th class="tab-cells-name p-2 text-left">
                         <span><a data-toggle="modal" data-target="#userModal" href="{{ path('ally_profil_modal', {'idp': usePlanet.getId(), 'id': ally.getId()}) }}">[{{ ally.getSigle() }}] {{ ally.getName() }}</a></span>
