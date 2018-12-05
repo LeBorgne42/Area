@@ -52,11 +52,16 @@ class SecurityController extends Controller
                     return $this->redirectToRoute('home');
                 }
             }
+            if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+                $userIp = $_SERVER['HTTP_X_FORWARDED_FOR'];
+            } else {
+                $userIp = $_SERVER['REMOTE_ADDR'];
+            }
 
             $userSameIp = $em->getRepository('App:User')
                 ->createQueryBuilder('u')
                 ->where('u.ipAddress = :ip')
-                ->setParameters(['ip' => $_SERVER['REMOTE_ADDR']])
+                ->setParameters(['ip' => $userIp])
                 ->getQuery()
                 ->getOneOrNullResult();
 
@@ -73,7 +78,7 @@ class SecurityController extends Controller
             $user->setEmail($_POST['_email']);
             $user->setCreatedAt($now);
             $user->setPassword(password_hash($_POST['_password'], PASSWORD_BCRYPT));
-            $user->setIpAddress($_SERVER['REMOTE_ADDR']);
+            $user->setIpAddress($userIp);
             $em->persist($user);
             $em->flush();
 
@@ -232,11 +237,17 @@ class SecurityController extends Controller
         $server = $em->getRepository('App:Server')->find(['id' => 1]);
         $user = $this->getUser();
 
+        if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $userIp = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        } else {
+            $userIp = $_SERVER['REMOTE_ADDR'];
+        }
+
         $userSameIp = $em->getRepository('App:User')
             ->createQueryBuilder('u')
             ->where('u.ipAddress = :ip')
             ->andWhere('u.username != :user')
-            ->setParameters(['user' => $user->getUsername(), 'ip' => $_SERVER['REMOTE_ADDR']])
+            ->setParameters(['user' => $user->getUsername(), 'ip' => $userIp])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -258,7 +269,7 @@ class SecurityController extends Controller
             }
             $usePlanet = $em->getRepository('App:Planet')->findByFirstPlanet($this->getUser()->getUsername());
 
-            $user->setIpAddress($_SERVER['REMOTE_ADDR']);
+            $user->setIpAddress($userIp);
             $user->setLastActivity($now);
             $em->flush();
 

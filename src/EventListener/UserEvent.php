@@ -81,11 +81,16 @@ class UserEvent implements EventSubscriberInterface
                 $now->setTimezone(new DateTimeZone('Europe/Paris'));
                 if($user instanceof User)
                 {
+                    if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+                        $userIp = $_SERVER['HTTP_X_FORWARDED_FOR'];
+                    } else {
+                        $userIp = $_SERVER['REMOTE_ADDR'];
+                    }
                     $userSameIp = $this->em->getRepository('App:User')
                         ->createQueryBuilder('u')
                         ->where('u.ipAddress = :ip')
                         ->andWhere('u.username != :user')
-                        ->setParameters(['user' => $user->getUsername(), 'ip' => $_SERVER['REMOTE_ADDR']])
+                        ->setParameters(['user' => $user->getUsername(), 'ip' => $userIp])
                         ->getQuery()
                         ->getOneOrNullResult();
 
@@ -95,7 +100,7 @@ class UserEvent implements EventSubscriberInterface
                         $userSameIp->setCheat($user->getCheat() + 1);
                         $this->em->flush($userSameIp);
                     } else {
-                        $user->setIpAddress($_SERVER['REMOTE_ADDR']);
+                        $user->setIpAddress($userIp);
                     }
                     $user->setLastActivity($now);
                     $this->em->flush($user);
