@@ -76,13 +76,27 @@ class UserEvent implements EventSubscriberInterface
         {
             if($this->token->getToken()) {
                 $user = $this->token->getToken()->getUser();
-                /*$delay = new DateTime();
-                $delay->setTimezone(new DateTimeZone('Europe/Paris'));
-                $delay->add(new DateInterval('PT' . 60 . 'S'));*/
+
                 $now = new DateTime();
                 $now->setTimezone(new DateTimeZone('Europe/Paris'));
-                if($user instanceof User) // && $user->getLastActivity() < $delay
+                if($user instanceof User)
                 {
+                    $userSameIp = $this->em->getRepository('App:User')
+                        ->createQueryBuilder('u')
+                        ->where('u.ipAddress = :ip')
+                        ->andWhere('u.username != :user')
+                        ->setParameters(['user' => $user->getUsername(), 'ip' => $_SERVER['REMOTE_ADDR']])
+                        ->getQuery()
+                        ->getOneOrNullResult();
+
+                    if($userSameIp) {
+                        $user->setIpAddress($userSameIp->getUsername());
+                        $user->setCheat($user->getCheat() + 1);
+                        $userSameIp->setCheat($user->getCheat() + 1);
+                        $this->em->flush($userSameIp);
+                    } else {
+                        $user->setIpAddress($_SERVER['REMOTE_ADDR']);
+                    }
                     $user->setLastActivity($now);
                     $this->em->flush($user);
                 }

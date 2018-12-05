@@ -52,6 +52,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/cache" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/config" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/console" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/contracts" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/css-selector" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/debug" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/debug-bundle" />
@@ -86,8 +87,11 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/property-access" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/property-info" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/routing" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/security" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/security-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/security-core" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/security-csrf" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/security-guard" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/security-http" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/serializer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/serializer-pack" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/stopwatch" />
@@ -98,6 +102,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/twig-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/validator" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/var-dumper" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/var-exporter" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/web-link" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/web-profiler-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/web-server-bundle" />
@@ -160,6 +165,7 @@
           <root url="file://$MODULE_DIR$/vendor/symfony/cache" />
           <root url="file://$MODULE_DIR$/vendor/symfony/config" />
           <root url="file://$MODULE_DIR$/vendor/symfony/console" />
+          <root url="file://$MODULE_DIR$/vendor/symfony/contracts" />
           <root url="file://$MODULE_DIR$/vendor/symfony/css-selector" />
           <root url="file://$MODULE_DIR$/vendor/symfony/debug" />
           <root url="file://$MODULE_DIR$/vendor/symfony/debug-bundle" />
@@ -194,8 +200,11 @@
           <root url="file://$MODULE_DIR$/vendor/symfony/property-access" />
           <root url="file://$MODULE_DIR$/vendor/symfony/property-info" />
           <root url="file://$MODULE_DIR$/vendor/symfony/routing" />
-          <root url="file://$MODULE_DIR$/vendor/symfony/security" />
           <root url="file://$MODULE_DIR$/vendor/symfony/security-bundle" />
+          <root url="file://$MODULE_DIR$/vendor/symfony/security-core" />
+          <root url="file://$MODULE_DIR$/vendor/symfony/security-csrf" />
+          <root url="file://$MODULE_DIR$/vendor/symfony/security-guard" />
+          <root url="file://$MODULE_DIR$/vendor/symfony/security-http" />
           <root url="file://$MODULE_DIR$/vendor/symfony/serializer" />
           <root url="file://$MODULE_DIR$/vendor/symfony/serializer-pack" />
           <root url="file://$MODULE_DIR$/vendor/symfony/stopwatch" />
@@ -206,6 +215,7 @@
           <root url="file://$MODULE_DIR$/vendor/symfony/twig-bundle" />
           <root url="file://$MODULE_DIR$/vendor/symfony/validator" />
           <root url="file://$MODULE_DIR$/vendor/symfony/var-dumper" />
+          <root url="file://$MODULE_DIR$/vendor/symfony/var-exporter" />
           <root url="file://$MODULE_DIR$/vendor/symfony/web-link" />
           <root url="file://$MODULE_DIR$/vendor/symfony/web-profiler-bundle" />
           <root url="file://$MODULE_DIR$/vendor/symfony/web-server-bundle" />
@@ -264,6 +274,7 @@
           <root url="file://$MODULE_DIR$/vendor/symfony/cache" />
           <root url="file://$MODULE_DIR$/vendor/symfony/config" />
           <root url="file://$MODULE_DIR$/vendor/symfony/console" />
+          <root url="file://$MODULE_DIR$/vendor/symfony/contracts" />
           <root url="file://$MODULE_DIR$/vendor/symfony/css-selector" />
           <root url="file://$MODULE_DIR$/vendor/symfony/debug" />
           <root url="file://$MODULE_DIR$/vendor/symfony/debug-bundle" />
@@ -298,8 +309,11 @@
           <root url="file://$MODULE_DIR$/vendor/symfony/property-access" />
           <root url="file://$MODULE_DIR$/vendor/symfony/property-info" />
           <root url="file://$MODULE_DIR$/vendor/symfony/routing" />
-          <root url="file://$MODULE_DIR$/vendor/symfony/security" />
           <root url="file://$MODULE_DIR$/vendor/symfony/security-bundle" />
+          <root url="file://$MODULE_DIR$/vendor/symfony/security-core" />
+          <root url="file://$MODULE_DIR$/vendor/symfony/security-csrf" />
+          <root url="file://$MODULE_DIR$/vendor/symfony/security-guard" />
+          <root url="file://$MODULE_DIR$/vendor/symfony/security-http" />
           <root url="file://$MODULE_DIR$/vendor/symfony/serializer" />
           <root url="file://$MODULE_DIR$/vendor/symfony/serializer-pack" />
           <root url="file://$MODULE_DIR$/vendor/symfony/stopwatch" />
@@ -310,6 +324,7 @@
           <root url="file://$MODULE_DIR$/vendor/symfony/twig-bundle" />
           <root url="file://$MODULE_DIR$/vendor/symfony/validator" />
           <root url="file://$MODULE_DIR$/vendor/symfony/var-dumper" />
+          <root url="file://$MODULE_DIR$/vendor/symfony/var-exporter" />
           <root url="file://$MODULE_DIR$/vendor/symfony/web-link" />
           <root url="file://$MODULE_DIR$/vendor/symfony/web-profiler-bundle" />
           <root url="file://$MODULE_DIR$/vendor/symfony/web-server-bundle" />

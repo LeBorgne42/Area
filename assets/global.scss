@@ -156,6 +156,18 @@ a:hover {
   border: 1px solid white;
 }
 
+.alerte-flash-error {
+  color: darkorange;
+  width: fit-content;
+  margin: auto;
+  padding: 1rem 2.5rem;
+  font-size: 3rem;
+  background-color: rgba(0,0,0, 0.7);
+  border: 1px solid silver;
+  border-radius: .3rem;
+  text-shadow: 1.5px 1.5px 2px rgba(0,0,0, 0.8);
+}
+
 .back-rouge {
   background-color: #ff1a1a;
 }

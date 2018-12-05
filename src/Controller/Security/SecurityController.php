@@ -25,22 +25,46 @@ class SecurityController extends Controller
         $user = new User();
 
         if ($_POST) {
-            $alreadyInBase = $em->getRepository('App:User')
+            $userSameName = $em->getRepository('App:User')
                 ->createQueryBuilder('u')
                 ->where('u.username = :username')
-                ->orWhere('u.email = :email')
-                ->setParameters(['username' => $_POST['_username'], 'email' => $_POST['_email']])
+                ->setParameters(['username' => $_POST['_username']])
                 ->getQuery()
-                ->getResult();
+                ->getOneOrNullResult();
 
-            foreach ($alreadyInBase as $check) {
-                if (strtoupper($check->getUsername()) == strtoupper($_POST['_username'])) {
+
+            $userSameEmail = $em->getRepository('App:User')
+                ->createQueryBuilder('u')
+                ->orWhere('u.email = :email')
+                ->setParameters(['email' => $_POST['_email']])
+                ->getQuery()
+                ->getOneOrNullResult();
+
+            if($userSameName) {
+                if (strtoupper($userSameName->getUsername()) == strtoupper($_POST['_username'])) {
                     $this->addFlash("fail", "Ce pseudo existe déjà sur le jeu.");
                     return $this->redirectToRoute('home');
-                } elseif (strtoupper($check->getEmail()) == strtoupper($_POST['_email'])) {
-                    $this->addFlash("fail", "Un compte existe déjà avec cet email.");
+                }
+            }
+            if($userSameEmail) {
+                if (strtoupper($userSameEmail->getEmail()) == strtoupper($_POST['_email'])) {
+                    $this->addFlash("fail", "Cet email est déjà utilisé sur le compte - " . $userSameEmail->getUsername());
                     return $this->redirectToRoute('home');
                 }
+            }
+
+            $userSameIp = $em->getRepository('App:User')
+                ->createQueryBuilder('u')
+                ->where('u.ipAddress = :ip')
+                ->setParameters(['ip' => $_SERVER['REMOTE_ADDR']])
+                ->getQuery()
+                ->getOneOrNullResult();
+
+            if($userSameIp) {
+                $this->addFlash("fail", "Cette IP est déjà rattachée au compte de - " . $userSameIp->getUsername());
+                $userSameIp->setCheat($user->getCheat() + 1);
+                $em->flush();
+                return $this->redirectToRoute('home');
             }
 
             $now = new DateTime();
@@ -49,6 +73,7 @@ class SecurityController extends Controller
             $user->setEmail($_POST['_email']);
             $user->setCreatedAt($now);
             $user->setPassword(password_hash($_POST['_password'], PASSWORD_BCRYPT));
+            $user->setIpAddress($_SERVER['REMOTE_ADDR']);
             $em->persist($user);
             $em->flush();
 
@@ -136,12 +161,11 @@ class SecurityController extends Controller
      * @Route("/login", name="login")
      * @Route("/login/", name="login_noSlash")
      */
-    public function loginAction(AuthenticationUtils $authenticationUtils)
+    public function loginAction()
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
         $server = $em->getRepository('App:Server')->find(['id' => 1]);
-
 
         if($user) {
             if($user->getRoles()[0] == 'ROLE_PRIVATE') {
@@ -206,12 +230,25 @@ class SecurityController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $server = $em->getRepository('App:Server')->find(['id' => 1]);
+        $user = $this->getUser();
+
+        $userSameIp = $em->getRepository('App:User')
+            ->createQueryBuilder('u')
+            ->where('u.ipAddress = :ip')
+            ->andWhere('u.username != :user')
+            ->setParameters(['user' => $user->getUsername(), 'ip' => $_SERVER['REMOTE_ADDR']])
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        if($userSameIp) {
+            $this->addFlash("fail", "Cette IP est déjà rattachée au compte de - " . $userSameIp->getUsername());
+            return $this->redirectToRoute('home');
+        }
 
         if($server->getOpen() == false && $this->getUser()->getRoles()[0] == 'ROLE_USER') {
             return $this->redirectToRoute('pre_ally');
         }
         if ($this->getUser()->getRoles()[0] == 'ROLE_USER') {
-            $user = $this->getUser();
             $em = $this->getDoctrine()->getManager();
             $now = new DateTime();
             $now->setTimezone(new DateTimeZone('Europe/Paris'));

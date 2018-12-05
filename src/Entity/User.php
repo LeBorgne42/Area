@@ -43,9 +43,16 @@ class User implements UserInterface, \Serializable
     protected $email;
 
     /**
+     * @ORM\Column(type="string", length=40, unique=true, nullable=true)
      * @Assert\Ip
+     * @Assert\NotBlank(message = "required")
      */
     protected $ipAddress;
+
+    /**
+     * @ORM\Column(name="cheat",type="integer")
+     */
+    protected $cheat;
 
     /**
      * @ORM\ManyToOne(targetEntity="Ally", inversedBy="users", fetch="EXTRA_LAZY")
@@ -311,6 +318,7 @@ class User implements UserInterface, \Serializable
         $this->fleets = new \Doctrine\Common\Collections\ArrayCollection();
         $this->scientistProduction = 1;
         $this->bitcoin = 25000;
+        $this->cheat = 0;
     }
 
     /**
@@ -943,6 +951,22 @@ class User implements UserInterface, \Serializable
         $this->password = $password;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCheat()
+    {
+        return $this->cheat;
+    }
+
+    /**
+     * @param mixed $cheat
+     */
+    public function setCheat($cheat): void
+    {
+        $this->cheat = $cheat;
     }
 
     /**
