@@ -54,7 +54,7 @@
                         </tr>
                         <tr>
                             <th colspan="2" class="tab-cells-name">
-                                <div class="p-1">{% if message.getShareKey() %}<a class="p-1" href="{{ path('message_share_display', {'id': message.getShareKey()}) }}" target="_blank">https://www.areauniverse.eu/fr/message/share/{{ message.getShareKey() }}</a>{% endif %}<a class="confirm-button btn-sm" href="{{ path('message_share', {'idp': usePlanet.getId(), 'id': message.getId()}) }}">{{ 'share'|trans }}</a></div>
+                                <div class="p-1">{% if message.getShareKey() %}<a class="p-1" href="{{ path('message_share_display', {'id': message.getShareKey()}) }}" target="_blank">https://www.areauniverse.eu/connect/message/share/{{ message.getShareKey() }}</a>{% endif %}<a class="confirm-button btn-sm" href="{{ path('message_share', {'idp': usePlanet.getId(), 'id': message.getId()}) }}">{{ 'share'|trans }}</a></div>
                             </th>
                         </tr>
                         </tbody>

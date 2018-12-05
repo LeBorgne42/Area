@@ -1,0 +1,49 @@
+version: 'Beta v0.3'
+footer: 'Folge uns auf facebook!'
+media: Medien
+easyadmin: 'Panel Admin'
+serveur.activate: 'Aktivieren'
+serveur.deactivate: 'Deaktivieren'
+serveur.createBig: 'Universum schaffen'
+serveur.createLittle: 'Universum klein schaffen'
+serveur.kill.sector: 'Sektor vernichten'
+serveur.kill.serveur: 'Universum vernichten'
+logout: Trennen
+game: Spiel
+globalView: 'Globale sicht'
+fleet: Flotten
+planet: Planeten
+search: Forschung
+ally: Allianz
+galaxy: Galaxis
+map: 'Räumliche karte'
+building: Gebäude
+spatial: Weltraumwerft
+soldier: Ausbildung
+message: Messaging
+report: Bericht
+salon: Show
+disconnect: Trennen
+rules: Siedlung
+statistic: Statistiken
+objective: 'Zweck des Spiels'
+niobium: Niobium
+water: Wasser
+coin: Bitcoin
+universe: Universum
+forum: Forum
+workers: Arbeiter
+scientists: Wissenschaftlich
+soldiers: Soldaten
+groundImg: Boden
+SkyImg: Raum
+rank: Rang
+market: Einzelhändler
+helpNew: 'Hilfe für Anfänger'
+fleetNoAlly: 'Nicht alliierte Flotten wurden im Orbit unseres Planeten gesichtet.'
+embargo: 'Dieser Planet steht derzeit unter Embargo.'
+previousPlanet: 'Vorheriger Planet'
+nextPlanet: 'Nächster Planet'
+tooltip.search: 'Sie können suchen !'
+tooltip.building: 'Sie können ein Gebäude bauen !'
+modifyOptions: 'Meine Optionen'

@@ -11,7 +11,7 @@ use DateTime;
 use DateTimeZone;
 
 /**
- * @Route("/fr")
+ * @Route("/connect")
  * @Security("has_role('ROLE_USER')")
  */
 class OptionsController extends Controller

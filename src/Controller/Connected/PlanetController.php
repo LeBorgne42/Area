@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Form\Front\PlanetRenameType;
 
 /**
- * @Route("/fr")
+ * @Route("/connect")
  * @Security("has_role('ROLE_USER')")
  */
 class PlanetController extends Controller

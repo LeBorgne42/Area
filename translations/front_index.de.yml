@@ -1,0 +1,11 @@
+title: 'Area Universe'
+server.off: 'Früh verbinden'
+server.on: 'Server öffnen'
+username: Spitzname
+password: Passwort
+email: Email
+recoveryPw: 'Passwort verloren'
+login: Verbinden
+register: Registrieren
+contact: 'Kontakt administrator'
+logout: Trennen

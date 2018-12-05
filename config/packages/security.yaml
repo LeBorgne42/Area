@@ -51,7 +51,7 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: '%env(HTTPS_SCHEMA)%' }
-        - { path: ^/fr, roles: ROLE_USER, requires_channel: '%env(HTTPS_SCHEMA)%' }
+        - { path: ^/connect, roles: ROLE_USER, requires_channel: '%env(HTTPS_SCHEMA)%' }
         - { path: ^/admin-edr, roles: ROLE_MODO, requires_channel: '%env(HTTPS_SCHEMA)%' }
         - { path: ^/serveur, roles: ROLE_ADMIN, requires_channel: '%env(HTTPS_SCHEMA)%' }
         - { path: ^/private, roles: ROLE_PRIVATE, requires_channel: '%env(HTTPS_SCHEMA)%' }

@@ -16,7 +16,7 @@ use DateTimeZone;
 use Dateinterval;
 
 /**
- * @Route("/fr")
+ * @Route("/connect")
  * @Security("has_role('ROLE_USER')")
  */
 class PactController extends Controller

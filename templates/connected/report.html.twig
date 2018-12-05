@@ -28,7 +28,7 @@
             </tr>
             <tr>
                 <th colspan="2" class="tab-cells-name">
-                    <div class="p-1">{% if report.getShareKey() %}<a class="p-1" href="{{ path('report_share_display', {'id': report.getShareKey()}) }}" target="_blank">https://www.areauniverse.eu/fr/rapport/share/{{ report.getShareKey() }}</a>{% endif %}<a class="confirm-button btn-sm" href="{{ path('report_share', {'idp': usePlanet.getId(), 'id': report.getId()}) }}">{{ 'share'|trans }}</a></div>
+                    <div class="p-1">{% if report.getShareKey() %}<a class="p-1" href="{{ path('report_share_display', {'id': report.getShareKey()}) }}" target="_blank">https://www.areauniverse.eu/connect/rapport/share/{{ report.getShareKey() }}</a>{% endif %}<a class="confirm-button btn-sm" href="{{ path('report_share', {'idp': usePlanet.getId(), 'id': report.getId()}) }}">{{ 'share'|trans }}</a></div>
                 </th>
             </tr>
             </tbody>

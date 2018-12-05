@@ -7,6 +7,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Translation\Translator;
+use Symfony\Component\Translation\Loader\ArrayLoader;
 
 class UserAllyType extends AbstractType
 {
@@ -137,14 +139,15 @@ class UserAllyType extends AbstractType
 
     protected function getPolitic()
     {
+        $translator = new Translator('front_ally');
         return [
-            'Neutre' => 'neutral',
-            'Monarchie' => 'monarchy',
-            'Démocratie' => 'democrat',
-            'Fascisme' => 'fascism',
-            'Anarchisme' => 'anarchism',
-            'Communisme' => 'communism',
-            'Théocratie' => 'theocrat'
+            $translator->trans('neutral') => 'neutral',
+            $translator->trans('monarchy') => 'monarchy',
+            $translator->trans('democrat') => 'democrat',
+            $translator->trans('fascism') => 'fascism',
+            $translator->trans('anarchism') => 'anarchism',
+            $translator->trans('communism') => 'communism',
+            $translator->trans('theocrat') => 'theocrat'
         ];
     }
 

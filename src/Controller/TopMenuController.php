@@ -13,8 +13,8 @@ use DateInterval;
 class TopMenuController extends Controller
 {
     /**
-     * @Route("/reglement/", name="rules")
-     * @Route("/reglement/", name="rules_noSlash")
+     * @Route("/reglement/{_locale}", name="rules", defaults={"_locale" = "fr"}, requirements={"_locale" = "fr|en|de"})
+     * @Route("/reglement", name="rules_noSlash")
      */
     public function rulesAction()
     {
@@ -38,8 +38,8 @@ class TopMenuController extends Controller
         ]);
     }
     /**
-     * @Route("/medias/", name="medias")
-     * @Route("/medias/", name="medias_noSlash")
+     * @Route("/medias/{_locale}", name="medias", defaults={"_locale" = "fr"}, requirements={"_locale" = "fr|en|de"})
+     * @Route("/medias", name="medias_noSlash")
      */
     public function mediasAction()
     {
@@ -63,8 +63,8 @@ class TopMenuController extends Controller
         ]);
     }
     /**
-     * @Route("/but-du-jeu/", name="point_game")
-     * @Route("/but-du-jeu/", name="point_game_noSlash")
+     * @Route("/but-du-jeu/{_locale}", name="point_game", defaults={"_locale" = "fr"}, requirements={"_locale" = "fr|en|de"})
+     * @Route("/but-du-jeu", name="point_game_noSlash")
      */
     public function pointGameAction()
     {
@@ -88,8 +88,8 @@ class TopMenuController extends Controller
         ]);
     }
     /**
-     * @Route("/statistiques/", name="statistics")
-     * @Route("/statistiques/", name="statistics_noSlash")
+     * @Route("/statistiques/{_locale}", name="statistics", defaults={"_locale" = "fr"}, requirements={"_locale" = "fr|en|de"})
+     * @Route("/statistiques", name="statistics_noSlash")
      */
     public function statisticsAction()
     {
@@ -147,8 +147,8 @@ class TopMenuController extends Controller
     }
 
     /**
-     * @Route("/nous-contacter/", name="contact")
-     * @Route("/nous-contacter/", name="contact_noSlash")
+     * @Route("/nous-contacter/{_locale}", name="contact", defaults={"_locale" = "fr"}, requirements={"_locale" = "fr|en|de"})
+     * @Route("/nous-contacter", name="contact_noSlash")
      */
     public function contactAction(Request $request, \Swift_Mailer $mailer)
     {

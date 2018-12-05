@@ -11,7 +11,7 @@ use DateTimeZone;
 use DateInterval;
 
 /**
- * @Route("/fr")
+ * @Route("/connect")
  * @Security("has_role('ROLE_USER')")
  */
 class ReportController extends Controller

@@ -1,0 +1,11 @@
+title: 'Area Universe'
+server.off: 'Early connect'
+server.on: 'Server open'
+username: Nickname
+password: Password
+email: Email
+recoveryPw: 'Password lost'
+login: Connect
+register: Register
+contact: 'Admin contact'
+logout: Disconnect

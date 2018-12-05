@@ -27,13 +27,13 @@ use Dateinterval;
 use App\Entity\Salon;
 
 /**
- * @Route("/fr")
+ * @Route("/connect")
  * @Security("has_role('ROLE_USER')")
  */
 class PreAllyController extends Controller
 {
     /**
-     * @Route("/pre-alliance", name="pre_ally")
+     * @Route("/pre-alliance/{_locale}", name="pre_ally", defaults={"_locale" = "fr"}, requirements={"_locale" = "fr|en|de"})
      */
     public function preAllyAction(Request $request)
     {
@@ -98,7 +98,7 @@ class PreAllyController extends Controller
     }
 
     /**
-     * @Route("/pre-cherche-alliance", name="pre_ally_blank")
+     * @Route("/pre-cherche-alliance/{_locale}", name="pre_ally_blank", defaults={"_locale" = "fr"}, requirements={"_locale" = "fr|en|de"})
      */
     public function preNoAllyAction(Request $request)
     {
@@ -179,7 +179,7 @@ class PreAllyController extends Controller
     }
 
     /**
-     * @Route("/pre-supprimer-alliance", name="pre_remove_ally")
+     * @Route("/pre-supprimer-alliance/{_locale}", name="pre_remove_ally", defaults={"_locale" = "fr"}, requirements={"_locale" = "fr|en|de"})
      */
     public function preRemoveAllyAction()
     {
@@ -269,7 +269,7 @@ class PreAllyController extends Controller
     }
 
     /**
-     * @Route("/pre-quitter-alliance", name="pre_leave_ally")
+     * @Route("/pre-quitter-alliance/{_locale}", name="pre_leave_ally", defaults={"_locale" = "fr"}, requirements={"_locale" = "fr|en|de"})
      */
     public function preLeaveAllyAction()
     {
@@ -404,7 +404,7 @@ class PreAllyController extends Controller
     }
 
     /**
-     * @Route("/pre-bye-bye-les-losers", name="pre_ally_page_exit")
+     * @Route("/pre-bye-bye-les-losers/{_locale}", name="pre_ally_page_exit", defaults={"_locale" = "fr"}, requirements={"_locale" = "fr|en|de"})
      */
     public function preExitPageAllyAction(Request $request)
     {
@@ -435,7 +435,7 @@ class PreAllyController extends Controller
     }
 
     /**
-     * @Route("/prereserve-commune", name="pre_ally_page_bank")
+     * @Route("/prereserve-commune/{_locale}", name="pre_ally_page_bank", defaults={"_locale" = "fr"}, requirements={"_locale" = "fr|en|de"})
      */
     public function preBankPageAllyAction(Request $request)
     {
@@ -467,7 +467,7 @@ class PreAllyController extends Controller
     }
 
     /**
-     * @Route("/pre-ajouter-des-membres", name="pre_ally_page_add")
+     * @Route("/pre-ajouter-des-membres/{_locale}", name="pre_ally_page_add", defaults={"_locale" = "fr"}, requirements={"_locale" = "fr|en|de"})
      */
     public function preAddPageAllyAction(Request $request)
     {
@@ -534,7 +534,7 @@ class PreAllyController extends Controller
     }
 
     /**
-     * @Route("/pre-administration-alliance", name="pre_ally_page_admin")
+     * @Route("/pre-administration-alliance/{_locale}", name="pre_ally_page_admin", defaults={"_locale" = "fr"}, requirements={"_locale" = "fr|en|de"})
      */
     public function preAdminPageAllyAction(Request $request)
     {
@@ -570,7 +570,7 @@ class PreAllyController extends Controller
     }
 
     /**
-     * @Route("/pre-ambassade-interne", name="pre_ally_page_pacts")
+     * @Route("/pre-ambassade-interne/{_locale}", name="pre_ally_page_pacts", defaults={"_locale" = "fr"}, requirements={"_locale" = "fr|en|de"})
      */
     public function prePactPageAllyAction(Request $request)
     {

@@ -1,0 +1,49 @@
+version: 'Beta v0.3'
+footer: 'Follow us on facebook!'
+media: Medias
+easyadmin: 'Panel Admin'
+serveur.activate: 'Activate'
+serveur.deactivate: 'Deactivate'
+serveur.createBig: 'Create Universe'
+serveur.createLittle: 'Create small Universe'
+serveur.kill.sector: 'Destroy sector'
+serveur.kill.serveur: 'Destroy Universe'
+logout: Disconnect
+game: Game
+globalView: 'Global view'
+fleet: Flleets
+planet: Planets
+search: Research
+ally: Ally
+galaxy: Galaxy
+map: 'Spatial map'
+building: Building
+spatial: 'Space shipyard'
+soldier: Trainning
+message: Messaging
+report: Report
+salon: Salon
+disconnect: Disconnect
+rules: Rules
+statistic: Statistics
+objective: 'Goal of the game'
+niobium: Niobium
+water: Water
+coin: Bitcoin
+universe: Universe
+forum: Forum
+workers: Workers
+scientists: Scientists
+soldiers: Soldiers
+groundImg: Ground
+SkyImg: Sky
+rank: Rank
+market: Merchants
+helpNew: 'Beginner assistance'
+fleetNoAlly: 'Non-allied fleets have been spotted in orbit of our planet.'
+embargo: 'This planet is currently under embargo.'
+previousPlanet: 'Previous planet'
+nextPlanet: 'Next planet'
+tooltip.search: 'You can start a research !'
+tooltip.building: 'You can build a building !'
+modifyOptions: 'My options'

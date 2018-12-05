@@ -12,7 +12,7 @@ use Dateinterval;
 use DateTimeZone;
 
 /**
- * @Route("/fr")
+ * @Route("/connect")
  * @Security("has_role('ROLE_USER')")
  */
 class MarketController extends Controller

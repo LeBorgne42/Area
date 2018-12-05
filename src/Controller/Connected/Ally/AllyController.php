@@ -28,7 +28,7 @@ use Dateinterval;
 use App\Entity\Salon;
 
 /**
- * @Route("/fr")
+ * @Route("/connect")
  * @Security("has_role('ROLE_USER')")
  */
 class AllyController extends Controller

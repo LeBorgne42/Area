@@ -1,7 +1,7 @@
 title: Réglement
 menu: Réglement
 rules.one: '1. Comptes multiples'
-rules.oneSub1: '1.1. Multi-compte'
+rules.oneSub1: '1.1. Multi-comptes'
 rules.oneSub2: '1.2 Partage de compte'
 rules.two: '2. Contrainte'
 rules.three: '3. Triche'
@@ -21,4 +21,4 @@ rules.threeSub2.text: 'L`utilisation de programmes ou de scripts n`est pas autor
 rules.four.text: ''
 rules.fourSub1.text: 'Il n`est pas permis d`adresser des menaces en relation avec la vie réelle à l`encontre d`autres joueurs.'
 rules.fourSub2.text: 'Les insultes et comportements inconvenants vis-à-vis d`autres joueurs ne sont pas autorisés. De même, il est interdit de tenir des propos à caractère pornographique, raciste ou extrémiste de quelque sorte que ce soit. La publicité et les opinions politiques ou religieuses sont indésirables et n`ont pas droit de cité.'
-rules.five.text: 'La langue du jeu est le français. L`anglais est toutefois toléré de manière générale.'
+rules.five.text: 'La langue principale du jeu est le français sur le salon public. L’anglais et l’allemand n’y sont pas tolérés.'

@@ -1,0 +1,128 @@
+title: Alliance
+delete: 'Delete Alliance'
+ally.members: members
+form.name: 'Alliance name (max 15)'
+form.sigle: 'Tag (max 4)'
+form.slogan: 'Rallying cry (max 30)'
+form.taxe: '(1 to 10%)'
+form.taxeAlly: 'Alliance tax :'
+form.send: 'Create an Alliance'
+form.add: 'Send proposal'
+form.transfert: Transfer
+form.num: number
+form.exchangeType: 'Type of transfer'
+form.pactType: 'Type of pact'
+form.image: Picture
+form.allyName: 'Alliance tag'
+form.description: 'Alliance description'
+form.nameUser: 'Player nickname'
+Donner: Give
+Retirer: Take
+ally.admin: Administration
+ally.add: 'Add a member'
+ally.delete: 'Delete Alliance'
+ally.memberGrade: Rank
+ally.memberName: Nickname
+ally.memberDateJoin: Membership
+ally.memberPoint: Points
+ally.memberConnected: 'Online'
+ally.deleteText: 'Are you sure you want to delete your Alliance ?'
+ally.proposalAt: 'Proposal date'
+ally.cancelAsk: 'Cancel proposal'
+ally.cancel: 'Click here to cancel'
+ally.allyName: 'Ally name'
+ally.refuseProp: 'Refuse the received proposal'
+ally.refuse: 'Click here to decline'
+ally.acceptProp: 'Accept the proposal'
+ally.accept: 'Join the Alliance'
+ally.leave: 'Quit Alliance'
+ally.leaveText: 'Are you sure you want to leave your Alliance ?'
+leave: 'Quit Alliance'
+ally.memberKick: 'Kick a player'
+ally.kick: Kick
+ally.allyUsers: 'Choose member'
+ally.canRecruit: Recruit
+ally.gradeName: 'Grade name'
+ally.canPeace: Pact/Pna
+ally.canKick: Exclude
+ally.canWar: War
+ally.pacts: Pacts
+ally.alliedName: 'Defensive pact'
+ally.cancelPact: 'Break pact'
+ally.pnaName: 'Alliance in pna'
+ally.cancelPna: 'Break pna'
+ally.warName: 'Alliance enemy'
+ally.cancelwar: 'Propose peace'
+ally.found: 'Alliance Fund'
+ally.foundTotal: 'Total Fund of the alliance :'
+ally.exchangerName: Member
+ally.amount: Amount
+ally.donateAt: 'Donné/Retiré le'
+ally.statut: Statut
+ally.signedAt: 'Signé le'
+ally.accepted: Accepted
+ally.pactWaiting: 'In waiting'
+ally.acceptCancel: Accept/Refuse
+ally.acceptPact: Accept
+ally.refusePact: Refuse
+ally.refuseCancelPact: Cancel
+ally.priority: Priority
+ally.connected: Yes
+ally.notConnected: No
+tooltip.changeGrade: 'Cliquez sur le rang du joueur pour changer son grade.'
+ally.banktitle: 'Banque de l''alliance'
+ally.taxe: 'tax :'
+ally.pactsTitle: 'Gestion des Pactes/Pnas/Guerre de l''alliance'
+ally.gradeTitle: 'Création de grades'
+ally.addTitle: 'Recrutement de joueurs'
+ally.machiavel: 'Vous avez trahis vos alliés'
+ally.traitor: 'Vous avez été trahis'
+ally.banAlly: 'You will be able to join/create an alliance in : '
+ally.makePeace: 'Faire la paix'
+ally.makePeaceTitle: 'Proposition/demande de paix'
+ally.askFor: Type
+ally.attrRetr: Offre/Demande
+ally.listNbr: Valeurs
+ally.send: Signer
+ally.takePlanet: 'Nombre de planètes'
+ally.takeTaxe: 'Bitcoin reversé par jour'
+ally.takePdg: 'Pourcentage des pdg'
+ally.peacePropal: 'Les propositions ennemies de paix'
+ally.peaceOffer: 'Vos propositions de paix'
+ally.give: Proposer
+ally.claim: Claim
+ally.acceptPeace: 'Accepter les termes'
+ally.removePeace: 'Cancel the proposal'
+ally.peaceName: 'Alliance in peace'
+ally.remainPeace: 'Remaining time'
+ally.statusPeace: Statut
+ally.warWin: Win
+ally.warLose: Defeat
+ally.pdgTotal: 'Fond de points de Guerre : '
+ally.type: Type
+ally.pdgDonate: 'War Points'
+ally.bitcoinDonate: Bitcoins
+ally.formGiveBitcoin: 'Bitcoin exchanges'
+ally.formGivePdg: 'Transaction de pdg'
+ally.ranked: 'List of Created Alliances'
+ally.proposals: 'Recruit proposal'
+ally.usersRecrut: 'Joueurs actifs sans alliance :'
+tooltip.takePlanet: 'Nombre de planète que vous demandez/offrez pour la paix(selectionné parmit les meilleurs).'
+tooltip.takeTaxe: 'Taxe que vous percevrez chaque jour pendant 2 semaines sur leurs revenus.'
+tooltip.takePdg: 'Taxe que vous recevrez pour chaque gain de pdg gagner en combat.'
+tooltip.sendPeace: 'Si la paix est signé, celle-ci durera 2 semaines, aucun combat et aucune invasion ne sera possible durant cette période.'
+rank.ally: 'Alliance name'
+rank.members: Members
+rank.createdAt: 'Created the'
+rank.user: 'Player nickname'
+rank.lastActivity: 'Last activity the'
+rank.politic: 'Political regime'
+rank.logo: Logo
+ally.list: 'Alliances list'
+neutral: Neutral
+monarchy: Monarchy
+democrat: Democrat
+fascism: Fascism
+anarchism: Anarchism
+communism: Communism
+theocrat: Theocrat

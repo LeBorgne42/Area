@@ -15,7 +15,7 @@ use DateTime;
 use DateTimeZone;
 
 /**
- * @Route("/fr")
+ * @Route("/connect")
  * @Security("has_role('ROLE_USER')")
  */
 class SpatialController extends Controller

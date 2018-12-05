@@ -10,7 +10,7 @@ use DateTime;
 use DateTimeZone;
 
 /**
- * @Route("/fr")
+ * @Route("/connect")
  * @Security("has_role('ROLE_USER')")
  */
 class ConnectController extends Controller

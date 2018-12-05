@@ -13,7 +13,7 @@ use DatetimeZone;
 use DateInterval;
 
 /**
- * @Route("/fr")
+ * @Route("/connect")
  * @Security("has_role('ROLE_USER')")
  */
 class SectorController extends Controller

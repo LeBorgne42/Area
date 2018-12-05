@@ -9,12 +9,8 @@ serveur.createLittle: 'Créer petit Univers'
 serveur.kill.sector: 'Détruire secteur'
 serveur.kill.serveur: 'Détruire Univers'
 logout: Déconnexion
-faq: F.A.Q
-overview: Empire
 game: Jeu
-contact: 'Nous contacter'
 globalView: 'Vue d''ensemble'
-dailyCost: Entretien
 fleet: Flottes
 planet: Planètes
 search: Recherches
@@ -42,7 +38,6 @@ soldiers: Soldats
 groundImg: Terrain
 SkyImg: Espace
 rank: Classement
-tmpRank: 'Rank temporaire'
 market: Marchands
 helpNew: 'Aide débutant'
 fleetNoAlly: 'Des flottes non alliées ont été repérées en orbite de notre planète.'
