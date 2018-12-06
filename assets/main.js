@@ -739,16 +739,22 @@ $(document).ready(function() {
     $('[data-toggle="popover"]').popover();
     $('[data-toggle="tooltip"]').tooltip();
     $('[data-toggle="confirmation"]').confirmation();
+
     $("body").scrollspy({
         target: "#navbar-rules",
         offset: 70
     });
+
     $('.tipFleet').on("mouseover", function() {
         $(this).tooltip('show');
     })
+
     $(document).click(function() {
         $('.tipFleet').tooltip('hide');
+        $("body").find(".modal-backdrop").css("display", "none");
+        $("body").find(".popover.confirmation").attr('hidden', 'hidden');
     });
+
     manageImageForm();
     manageAllyImageForm();
     manageModalContact();
