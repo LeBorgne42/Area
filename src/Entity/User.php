@@ -26,6 +26,8 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\Column(name="username",type="string", length=20, unique=true)
      * @Assert\NotBlank(message = "required")
+     * @Assert\Regex(
+     *     pattern="/[a-zA-Z0-9]/")
      */
     protected $username;
 

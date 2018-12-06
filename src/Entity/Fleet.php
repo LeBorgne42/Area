@@ -21,6 +21,8 @@ class Fleet
     /**
      * @ORM\Column(name="name",type="string", length=20)
      * @Assert\NotBlank(message = "required")
+     * @Assert\Regex(
+     *     pattern="/[a-zA-Z0-9]/")
      */
     protected $name;
 

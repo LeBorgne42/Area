@@ -16,7 +16,7 @@
             <div class="block-title ml-2"><h2>{{ 'fleet.createFleet'|trans }}</h2></div>
             <button type="button" class="close plus"><a href="{{ path('fleet', {'idp': usePlanet.getId()}) }}">X</a></button>
         </div>
-        <div class="p-5 createFleet">
+        <div class="pb-3 createFleet">
             <div class="row">
                 <div class="col-9 pr-1">
                     {{ form_start(form_manageRenameFleet,{attr: { action: path('manage_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}) }}

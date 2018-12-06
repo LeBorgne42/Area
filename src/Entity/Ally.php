@@ -42,12 +42,16 @@ class Ally
     /**
      * @ORM\Column(name="name",type="string", length=15, unique=true)
      * @Assert\NotBlank(message = "required")
+     * @Assert\Regex(
+     *     pattern="/[a-zA-Z0-9]/")
      */
     protected $name;
 
     /**
      * @ORM\Column(name="sigle",type="string", length=5, unique=true)
      * @Assert\NotBlank(message = "required")
+     * @Assert\Regex(
+     *     pattern="/[a-zA-Z0-9]/")
      */
     protected $sigle;
 

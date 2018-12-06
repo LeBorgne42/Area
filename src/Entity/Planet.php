@@ -23,6 +23,8 @@ class Planet
 
     /**
      * @ORM\Column(name="name",type="string", length=20, nullable=true)
+     * @Assert\Regex(
+     *     pattern="/[a-zA-Z0-9]/")
      */
     protected $name = 'Inhabitée';
 
