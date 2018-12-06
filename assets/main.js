@@ -1,5 +1,7 @@
 var $ = require('jquery');
-require('bootstrap-sass');
+        require('bootstrap-sass');
+        require('bootstrap-confirmation2');
+
 
 function manageImageForm() {
     $('.modify').off('click').on('click',function(e){
@@ -736,6 +738,7 @@ function manageFlightTime(){
 $(document).ready(function() {
     $('[data-toggle="popover"]').popover();
     $('[data-toggle="tooltip"]').tooltip();
+    $('[data-toggle="confirmation"]').confirmation();
     $("body").scrollspy({
         target: "#navbar-rules",
         offset: 70

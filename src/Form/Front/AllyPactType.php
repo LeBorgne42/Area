@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Translation\Translator;
 
 class AllyPactType extends AbstractType
 {
@@ -48,10 +49,11 @@ class AllyPactType extends AbstractType
 
     protected function getPactType()
     {
+        $translator = new Translator('front_ally');
         return [
-            'Pacte défensif' => '1',
-            'Pacte de non-agression' => '2',
-            'Déclarer guerre' => '3',
+            $translator->trans('form.defensive') => '1',
+            $translator->trans('form.pna')=> '2',
+            $translator->trans('form.war') => '3',
         ];
     }
 

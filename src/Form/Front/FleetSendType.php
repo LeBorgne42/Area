@@ -7,10 +7,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use function Couchbase\defaultEncoder;
 use Doctrine\ORM\EntityRepository;
-use PMA\libraries\config\Form;
 use App\Entity\Planet;
+use Symfony\Component\Translation\Translator;
 
 class FleetSendType extends AbstractType
 {
@@ -109,11 +108,12 @@ class FleetSendType extends AbstractType
 
     protected function getFlightType()
     {
+        $translator = new Translator('front_fleet');
         return [
-            'Normal' => '1',
-            'Décharger et revenir' => '2',
-            'Coloniser' => '3',
-            'Envahir' => '4',
+            $translator->trans('form.normal') => '1',
+            $translator->trans('form.discharge') => '2',
+            $translator->trans('form.col') => '3',
+            $translator->trans('form.invade') => '4'
         ];
     }
 

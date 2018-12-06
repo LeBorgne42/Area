@@ -63,7 +63,7 @@
                     {{ form_end(form_allyGrade) }}
                     <div class="pull-right mt-3">
                         <span class="mr-3">{{ 'ally.deleteText'|trans }}</span>
-                        <a href="{{ path('remove_ally', {'idp': usePlanet.getId()}) }}" class="btn btn-lg btn-danger">{{ 'delete'|trans }}</a>
+                        <a data-toggle="confirmation" data-placement="right" data-title="{{ 'ally.delete.question'|trans }}" href="{{ path('remove_ally', {'idp': usePlanet.getId()}) }}" class="btn btn-lg btn-danger">{{ 'delete'|trans }}</a>
                     </div>
                 </div>
             </div>

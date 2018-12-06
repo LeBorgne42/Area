@@ -46,7 +46,7 @@
                 <div class="tab-pane fade show active" id="leave" role="tabpanel" aria-labelledby="leave-tab">
                     <div class="pull-right mt-5">
                         <span class="mr-3">{{ 'ally.leaveText'|trans }}</span>
-                        <a href="{{ path('pre_leave_ally') }}" class="btn btn-lg btn-danger">{{ 'leave'|trans }}</a>
+                        <a data-toggle="confirmation" data-placement="right" data-title="{{ 'ally.leave.question'|trans }}" href="{{ path('pre_leave_ally') }}" class="btn btn-lg btn-danger">{{ 'leave'|trans }}</a>
                     </div>
                 </div>
             </div>

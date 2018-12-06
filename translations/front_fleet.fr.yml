@@ -90,3 +90,7 @@ click.brouilleur: 'Cliquez pour déployer le brouilleur'
 fleet.allShip: Tout
 fleet.allDischarge: 'Tout decharger'
 fleet.cancelFleet: Annuler
+form.normal: Normal
+form.discharge: 'Décharger et revenir'
+form.col: Coloniser
+form.invade: Envahir

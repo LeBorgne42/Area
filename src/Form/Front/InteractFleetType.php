@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Doctrine\ORM\EntityRepository;
 use App\Entity\Fleet;
+use Symfony\Component\Translation\Translator;
 
 class InteractFleetType extends AbstractType
 {
@@ -61,11 +62,12 @@ class InteractFleetType extends AbstractType
 
     protected function getFlightType()
     {
+        $translator = new Translator('front_fleet');
         return [
-            'Normal' => '1',
-            'Décharger et revenir' => '2',
-            'Coloniser' => '3',
-            'Envahir' => '4',
+            $translator->trans('form.normal') => '1',
+            $translator->trans('form.discharge') => '2',
+            $translator->trans('form.col') => '3',
+            $translator->trans('form.invade') => '4'
         ];
     }
 

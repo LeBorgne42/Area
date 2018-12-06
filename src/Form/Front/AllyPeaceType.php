@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Translation\Translator;
 
 class AllyPeaceType extends AbstractType
 {
@@ -73,16 +74,18 @@ class AllyPeaceType extends AbstractType
 
     protected function getType()
     {
+        $translator = new Translator('front_ally');
         return [
-            'Proposer' => '0',
-            'Réclamer' => '1',
+            $translator->trans('form.proposal') => '0',
+            $translator->trans('form.claim') => '1',
         ];
     }
 
     protected function getPlanetNbr()
     {
+        $translator = new Translator('front_ally');
         return [
-            'aucune' => '0',
+            $translator->trans('form.non') => '0',
             '2' => '2',
             '3' => '3',
             '4' => '4',
@@ -92,8 +95,9 @@ class AllyPeaceType extends AbstractType
 
     protected function getTaxeNbr()
     {
+        $translator = new Translator('front_ally');
         return [
-            'aucun' => '0',
+            $translator->trans('form.none') => '0',
             '10%' => '10',
             '11%' => '11',
             '12%' => '12',
@@ -115,8 +119,9 @@ class AllyPeaceType extends AbstractType
 
     protected function getPdgNbr()
     {
+        $translator = new Translator('front_ally');
         return [
-            'aucun' => '0',
+            $translator->trans('form.none') => '0',
             '25%' => '25',
             '26%' => '26',
             '27%' => '27',

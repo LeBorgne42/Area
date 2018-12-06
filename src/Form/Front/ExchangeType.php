@@ -4,12 +4,9 @@ namespace App\Form\Front;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Doctrine\ORM\EntityRepository;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use App\Entity\User;
+use Symfony\Component\Translation\Translator;
 
 class ExchangeType extends AbstractType
 {
@@ -49,14 +46,15 @@ class ExchangeType extends AbstractType
                     'mapped' => true,
                 ]
             )
-            ->add('sendForm', SubmitType::class, ['label' => 'form.transfert', 'attr' => ['class' => 'confirm-button float-right']]);
+            ->add('sendForm', SubmitType::class, ['label' => 'form.transfert', 'attr' => ['class' => 'confirm-button']]);
     }
 
     protected function getTrade()
     {
+        $translator = new Translator('front_ally');
         return [
-            'Donner' => '1',
-            'Retirer' => '2',
+            $translator->trans('form.give') => '1',
+            $translator->trans('form.take') => '2'
         ];
     }
 

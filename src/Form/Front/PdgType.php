@@ -4,12 +4,9 @@ namespace App\Form\Front;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Doctrine\ORM\EntityRepository;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use App\Entity\User;
+use Symfony\Component\Translation\Translator;
 
 class PdgType extends AbstractType
 {
@@ -54,9 +51,10 @@ class PdgType extends AbstractType
 
     protected function getTrade()
     {
+        $translator = new Translator('front_ally');
         return [
-            'Donner' => '1',
-            'Retirer' => '2',
+            $translator->trans('form.give') => '1',
+            $translator->trans('form.take') => '2',
         ];
     }
 

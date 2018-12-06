@@ -75,7 +75,7 @@
                                 </td>
                                 {% if app.user.getGrade().getCanKick() == 1 %}
                                     <td class="center-cells">
-                                        <a class="text-rouge" href="{{ path('pre_ally_kick',{'id': user.getId()}) }}"><div class="glyphicon glyphicon-remove"></div> <span>{{ 'ally.kick'|trans }}</span></a>
+                                        <a class="text-rouge" data-toggle="confirmation" data-placement="right" data-title="{{ 'ally.member.kick.question'|trans }}" href="{{ path('pre_ally_kick',{'id': user.getId()}) }}"><div class="glyphicon glyphicon-remove"></div> <span>{{ 'ally.kick'|trans }}</span></a>
                                     </td>
                                 {% endif %}
                             </tr>

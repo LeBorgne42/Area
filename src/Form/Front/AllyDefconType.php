@@ -5,9 +5,8 @@ namespace App\Form\Front;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\CallbackTransformer;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Translation\Translator;
 
 class AllyDefconType extends AbstractType
 {
@@ -38,11 +37,12 @@ class AllyDefconType extends AbstractType
 
     protected function getDefcon()
     {
+        $translator = new Translator('front_defcon');
         return [
-            '0 - Paix' => '0',
-            '1 - Préparation militaire' => '1',
-            '2 - Guerre imminente' => '2',
-            '3 - En guerre' => '3'
+            $translator->trans('peace') => '0',
+            $translator->trans('preparation') => '1',
+            $translator->trans('warcoming') => '2',
+            $translator->trans('war') => '3'
         ];
     }
 

@@ -122,6 +122,25 @@ a:hover {
   top: 70px;
 }
 
+.confirmation {
+  border: 10px solid silver;
+  width: auto;
+  background-color: black!important;
+  color: white;
+  .popover-header {
+    background-color: black!important;
+  }
+  .btn-primary {
+    background-color: darkred;
+    border: none;
+  }
+  .btn-secondary {
+    margin-left: 0.8rem!important;
+    background-color: darkgreen;
+    border: none;
+  }
+}
+
 .navbar-left {
   position: sticky;
   top: 0;

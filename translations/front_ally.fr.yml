@@ -126,3 +126,15 @@ fascism: Fascisme
 anarchism: Anarchisme
 communism: Communisme
 theocrat: Théocratie
+ally.member.kick.question: 'Souhaitez vous exclure ce membre ?'
+ally.leave.question: 'Souhaitez vous quitter l''alliance ?'
+ally.delete.question: 'Souhaitez vous détruire l''alliance ?'
+form.give: Donner
+form.take: Retirer
+form.proposal: Proposer
+form.claim: Réclamer
+form.non: Aucune
+form.none: Aucun
+form.defensive: 'Pacte défensif'
+form.pna: 'Pacte de non-agression'
+form.war: 'Déclarer guerre'

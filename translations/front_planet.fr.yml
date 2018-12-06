@@ -17,3 +17,4 @@ planet.population: Population
 planet.ship: Vaisseaux
 position: 'Position :'
 planet.abandon: Abandonner
+planet.abandon.question: 'Souhaitez vous abandonner la planète ?'

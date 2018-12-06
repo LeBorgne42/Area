@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Translation\Translator;
 
 class ModifPasswordType extends AbstractType
 {
@@ -73,11 +74,12 @@ class ModifPasswordType extends AbstractType
 
     protected function getChoices()
     {
+        $translator = new Translator('front_options');
         return [
             '' => null,
-            'Alphabétique' => 'alpha',
-            'Position' => 'pos',
-            'Colonisation' => 'colo'
+            $translator->trans('form.alpha') => 'alpha',
+            $translator->trans('form.pos') => 'pos',
+            $translator->trans('form.col') => 'colo'
         ];
     }
 

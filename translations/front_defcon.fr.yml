@@ -1,0 +1,6 @@
+form.defcon: 'Niveau du DEFCON :'
+form.send: 'Actualiser'
+peace: '0 - Paix'
+preparation: '1 - Préparation militaire'
+warcoming: '2 - Guerre imminente'
+war: '3 - En guerre'

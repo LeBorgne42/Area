@@ -49,7 +49,7 @@
                             </div>
                             <div class="mt-4 text-left">
                                 {{ 'position'|trans }} <span><a href="{{ path('map', {id: planet.getSector().getPosition(), 'idp': planet.getId(), 'gal': planet.getSector().getGalaxy().getPosition()}) }}">{{ planet.getSector().getGalaxy.getPosition() }}:{{ planet.getSector().getPosition() }}:{{ planet.getPosition() }}</a></span>
-                                {%  if planet.getMoon() == false %}<a class="btn btn-sm btn-danger float-right" href="{{ path('planet_abandon', {'id': planet.getId(), 'idp': planet.getId()}) }}">{{ 'planet.abandon'|trans }}</a>{% endif %}
+                                {%  if planet.getMoon() == false %}<a class="btn btn-sm btn-danger float-right" data-toggle="confirmation" data-placement="right" data-title="{{ 'planet.abandon.question'|trans }}" href="{{ path('planet_abandon', {'id': planet.getId(), 'idp': planet.getId()}) }}">{{ 'planet.abandon'|trans }}</a>{% endif %}
                             </div>
                         </td>
                         <td class="center-cells text-center cell-middle">

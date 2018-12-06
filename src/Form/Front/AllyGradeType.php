@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Translation\Translator;
 
 class AllyGradeType extends AbstractType
 {
@@ -112,11 +113,12 @@ class AllyGradeType extends AbstractType
 
     protected function getPlacement()
     {
+        $translator = new Translator('front_grade');
         return [
-            'Dirigeant' => '1',
-            'Bras droit' => '2',
-            'Officier' => '3',
-            'Normal' => '4'
+            $translator->trans('leader') => '1',
+            $translator->trans('coleader') => '2',
+            $translator->trans('officer') => '3',
+            $translator->trans('member') => '4'
         ];
     }
 

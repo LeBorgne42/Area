@@ -5,3 +5,6 @@ form.oldPassword: 'Ancien mdp'
 form.password: 'Nouveau mdp'
 form.confirmPassword: 'Confirmer mdp'
 form.newOptions: Sauvegarder
+form.alpha: Alphabétique
+form.pos: Position
+form.col: Colonisation
