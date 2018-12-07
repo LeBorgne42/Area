@@ -2,6 +2,7 @@ version: 'Beta v0.3'
 footer: 'Suivez nous sur facebook!'
 media: Medias
 easyadmin: 'Pannel Admin'
+adminMail: 'Mail global'
 serveur.activate: 'Activer'
 serveur.deactivate: 'Désactiver'
 serveur.createBig: 'Créer Univers'

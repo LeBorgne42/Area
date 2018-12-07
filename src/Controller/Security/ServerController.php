@@ -497,4 +497,33 @@ class ServerController extends AbstractController
 
         exit;
     }
+
+    /**
+     * @Route("/mail-admin", name="mail_while")
+     * @Route("/mail-admin/", name="mail_while_noSlash")
+     */
+    public function mailAdminAction(\Swift_Mailer $mailer)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $users = $em->getRepository('App:User')->findAll();
+
+        foreach($users as $user) {
+                $message = (new \Swift_Message('Nouveau serveur 12/12/2018'))
+                    ->setFrom('support@areauniverse.eu')
+                    ->setTo($user->getEmail())
+                    ->setBody(
+                        $this->renderView(
+                            'emails/new_server.html.twig',
+                            [
+                                'username' => $user->getUsername(),
+                                'id' => $user->getId()
+                            ]
+                        ),
+                        'text/html'
+                    );
+                $mailer->send($message);
+        }
+
+        return $this->redirectToRoute('home');
+    }
 }

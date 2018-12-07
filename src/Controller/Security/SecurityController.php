@@ -118,48 +118,41 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/nouveau-password", name="recoveryPw")
-     * @Route("/nouveau-password/", name="recoveryPw_noSlash")
+     * @Route("/nouveau-password/{user}", name="recoveryPw", requirements={"user"="\d+"})
      */
-    public function recoveryPwAction(Request $request, \Swift_Mailer $mailer)
+    public function recoveryPwAction(\Swift_Mailer $mailer, User $user)
     {
         $em = $this->getDoctrine()->getManager();
-        $form_recoverPw = $this->createForm(UserRecoveryType::class);
-        $form_recoverPw->handleRequest($request);
-
-        if ($form_recoverPw->isSubmitted()) {
-            $userPw = $em->getRepository('App:User')
-                ->createQueryBuilder('u')
-                ->where('u.username = :pseudoEmail OR u.email = :pseudoEmail')
-                ->setParameter('pseudoEmail', $form_recoverPw->get('pseudoEmail')->getData())
-                ->getQuery()
-                ->getOneOrNullResult();
-            if($userPw) {
-                $alpha = ['a', '8', 'c', '&', 'e', 'f', 'g', '5', 'i', '-', 'k', 'l', '(', 'n', 'o', 'M', 'A', 'F', ':', 'w', 'Z'];
-                $newPassword = $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)];
-                $userPw->setPassword(password_hash($newPassword, PASSWORD_BCRYPT));
-                $em->flush();
-
-                $message = (new \Swift_Message('Hello Email'))
-                    ->setFrom('support@areauniverse.eu')
-                    ->setTo($userPw->getEmail())
-                    ->setBody(
-                        $this->renderView(
-                            'emails/recoveryPw.html.twig',
-                            ['password' => $newPassword]
-                        ),
-                        'text/html'
-                    );
-
-                $mailer->send($message);
-
-                return $this->redirectToRoute('home');
-            }
+        if($this->getUser()) {
+            return $this->redirectToRoute('home');
         }
+        $userPw = $em->getRepository('App:User')
+            ->createQueryBuilder('u')
+            ->where('u.id = :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getOneOrNullResult();
 
-        return $this->render('security/recoveryPw.html.twig', [
-            'form_recoverPw' => $form_recoverPw->createView(),
-        ]);
+        if($userPw) {
+            $alpha = ['a', '8', 'c', '&', 'e', 'f', 'g', '5', 'i', '-', 'k', 'l', '(', 'n', 'o', 'M', 'A', 'F', ':', 'w', 'Z'];
+            $newPassword = $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)];
+            $userPw->setPassword(password_hash($newPassword, PASSWORD_BCRYPT));
+            $em->flush();
+
+            $message = (new \Swift_Message('Nouveau mot de passe'))
+                ->setFrom('support@areauniverse.eu')
+                ->setTo($userPw->getEmail())
+                ->setBody(
+                    $this->renderView(
+                        'emails/recoveryPw.html.twig',
+                        ['password' => $newPassword]
+                    ),
+                    'text/html'
+                );
+
+            $mailer->send($message);
+        }
+        return $this->redirectToRoute('home');
     }
 
     /**
