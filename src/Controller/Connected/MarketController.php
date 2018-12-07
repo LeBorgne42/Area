@@ -3,7 +3,7 @@
 namespace App\Controller\Connected;
 
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\Front\MarketType;
@@ -13,9 +13,9 @@ use DateTimeZone;
 
 /**
  * @Route("/connect")
- * @Security("has_role('ROLE_USER')")
+ * @Security("is_granted('ROLE_USER')")
  */
-class MarketController extends Controller
+class MarketController extends AbstractController
 {
     /**
      * @Route("/marchands/{idp}", name="market", requirements={"idp"="\d+"})

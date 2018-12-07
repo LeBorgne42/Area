@@ -3,7 +3,7 @@
 namespace App\Controller\Connected;
 
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\Front\SpatialEditFleetType;
@@ -13,17 +13,19 @@ use App\Form\Front\FleetRessourcesType;
 use App\Form\Front\SpatialFleetType;
 use App\Form\Front\FleetSendType;
 use App\Form\Front\FleetAttackType;
+use App\Form\Front\FleetListType;
 use App\Entity\Fleet;
 use App\Entity\Report;
+use App\Entity\Fleet_List;
 use Datetime;
 use DatetimeZone;
 use DateInterval;
 
 /**
  * @Route("/connect")
- * @Security("has_role('ROLE_USER')")
+ * @Security("is_granted('ROLE_USER')")
  */
-class FleetController extends Controller
+class FleetController  extends AbstractController
 {
     /**
      * @Route("/flotte/{idp}", name="fleet", requirements={"idp"="\d+"})
@@ -95,6 +97,131 @@ class FleetController extends Controller
             'fleetPlanets' => $fleetPlanets,
             'fleetUsePlanet' => $fleetUsePlanet,
         ]);
+    }
+
+    /**
+     * @Route("/flotte-liste/{idp}", name="fleet_list", requirements={"idp"="\d+"})
+     */
+    public function fleetListAction(Request $request, $idp)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
+
+        if($user->getGameOver()) {
+            return $this->redirectToRoute('game_over');
+        }
+
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+
+        $form_listCreate = $this->createForm(FleetListType::class);
+        $form_listCreate->handleRequest($request);
+
+
+        if ($form_listCreate->isSubmitted()) {
+            if(count($user->getFleetLists()) >= 10) {
+                $this->addFlash("fail", "Vous avez atteint la limite de Cohortes autorisées par l'Instance.");
+                return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
+            }
+
+            $fleetList = new Fleet_List();
+            $fleetList->setName($form_listCreate->get('name')->getData());
+            $fleetList->setPriority($form_listCreate->get('priority')->getData());
+            $fleetList->setUser($user);
+            $em->persist($fleetList);
+            $em->flush();
+        }
+
+        $fleetLists = $em->getRepository('App:Fleet_List')
+            ->createQueryBuilder('f')
+            ->where('f.user = :user')
+            ->setParameters(['user' => $user])
+            ->orderBy('f.priority')
+            ->getQuery()
+            ->getResult();
+
+        return $this->render('connected/fleet_list.html.twig', [
+            'date' => $now,
+            'usePlanet' => $usePlanet,
+            'fleetLists' => $fleetLists,
+            'form_listCreate' => $form_listCreate->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/flotte-liste-ajouter/{idp}/{fleetList}/{fleet}", name="fleet_list_add", requirements={"idp"="\d+","fleetList"="\d+","fleet"="\d+"})
+     */
+    public function fleetListAddAction($idp, Fleet_List $fleetList, Fleet $fleet)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+
+        if($user->getGameOver()) {
+            return $this->redirectToRoute('game_over');
+        }
+
+        if($user == $fleetList->getUser()) {
+            $fleetList->addFleet($fleet);
+            $fleet->setFleetList($fleetList);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
+    }
+
+    /**
+     * @Route("/flotte-liste-sub/{idp}/{fleetList}/{fleet}", name="fleet_list_sub", requirements={"idp"="\d+","fleetList"="\d+","fleet"="\d+"})
+     */
+    public function fleetListSubAction($idp, Fleet_List $fleetList, Fleet $fleet)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+
+        if($user->getGameOver()) {
+            return $this->redirectToRoute('game_over');
+        }
+
+        if($user == $fleetList->getUser()) {
+            $fleetList->removeFleet($fleet);
+            $fleet->setFleetList(null);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
+    }
+
+    /**
+     * @Route("/flotte-liste-destroy/{idp}/{fleetList}", name="fleet_list_destroy", requirements={"idp"="\d+","fleetList"="\d+"})
+     */
+    public function fleetListDestroyAction($idp, Fleet_List $fleetList)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+
+        if($user->getGameOver()) {
+            return $this->redirectToRoute('game_over');
+        }
+
+        if($user == $fleetList->getUser()) {
+            foreach($fleetList->getFleets() as $fleet) {
+                $fleetList->removeFleet($fleet);
+                $fleet->setFleetList(null);
+            }
+            $em->remove($fleetList);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -1253,6 +1380,11 @@ class FleetController extends Controller
         $user = $this->getUser();
 
         $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+
+        if(count($user->getFleets()) >= 75) {
+            $this->addFlash("fail", "Vous avez atteint la limite de flottes autorisées par l'Instance.");
+            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+        }
 
         $oldFleet = $em->getRepository('App:Fleet')
             ->createQueryBuilder('f')

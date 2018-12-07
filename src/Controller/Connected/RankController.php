@@ -3,14 +3,14 @@
 namespace App\Controller\Connected;
 
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * @Route("/connect")
- * @Security("has_role('ROLE_USER')")
+ * @Security("is_granted('ROLE_USER')")
  */
-class RankController extends Controller
+class RankController extends AbstractController
 {
     /**
      * @Route("/classement-alliance/{idp}", name="rank_ally", requirements={"idp"="\d+"})

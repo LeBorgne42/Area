@@ -2,9 +2,9 @@ title: 'Page joueur'
 user.name: 'Pseudo :'
 user.ally: 'Alliance :'
 user.allyNone: Aucune
-user.galaxy: 'Installé en galaxie :'
-user.planet: 'Nombre de planète :'
-user.fleet: 'Nombre de flotte :'
+user.galaxy: 'Galaxie(s) :'
+user.planet: 'Planètes :'
+user.fleet: 'Flottes :'
 responde: 'Écrire au joueur'
 user.politic: 'Politique :'
 neutral: Neutre

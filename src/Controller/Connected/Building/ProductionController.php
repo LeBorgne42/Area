@@ -4,7 +4,7 @@ namespace App\Controller\Connected\Building;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use DateTime;
 use Dateinterval;
@@ -12,9 +12,9 @@ use DateTimeZone;
 
 /**
  * @Route("/connect")
- * @Security("has_role('ROLE_USER')")
+ * @Security("is_granted('ROLE_USER')")
  */
-class ProductionController extends Controller
+class ProductionController extends AbstractController
 {
     /**
      * @Route("/contruire-mine/{idp}", name="building_add_mine", requirements={"idp"="\d+"})

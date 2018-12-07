@@ -3,13 +3,13 @@
 namespace App\Controller\Connected;
 
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use DateTime;
 use DateTimeZone;
 use Dateinterval;
 
-class DeployController extends Controller
+class DeployController extends AbstractController
 {
     /**
      * @Route("/deployer-radar/{idp}/{fleet}/", name="deploy_radar", requirements={"idp"="\d+", "fleet"="\d+"})

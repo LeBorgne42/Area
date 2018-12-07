@@ -3,11 +3,11 @@
 namespace App\Controller\Share;
 
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use App\Entity\Report;
 
-class ShareController extends Controller
+class ShareController extends AbstractController
 {
     /**
      * @Route("/rapport/share/{id}", name="report_share_display")

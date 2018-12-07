@@ -3,7 +3,7 @@
 namespace App\Controller\Connected;
 
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\Front\SpatialShipType;
@@ -16,9 +16,9 @@ use DateTimeZone;
 
 /**
  * @Route("/connect")
- * @Security("has_role('ROLE_USER')")
+ * @Security("is_granted('ROLE_USER')")
  */
-class SpatialController extends Controller
+class SpatialController extends AbstractController
 {
     /**
      * @Route("/chantier-spatial/{idp}", name="spatial", requirements={"idp"="\d+"})
@@ -181,6 +181,12 @@ class SpatialController extends Controller
         $user = $this->getUser();
 
         $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+
+
+        if(count($user->getFleets()) >= 75) {
+            $this->addFlash("fail", "Vous avez atteint la limite de flottes autorisées par l'Instance.");
+            return $this->redirectToRoute('spatial', ['idp' => $usePlanet->getId()]);
+        }
 
         $form_createFleet = $this->createForm(SpatialFleetType::class);
         $form_createFleet->handleRequest($request);

@@ -4,7 +4,7 @@ namespace App\Controller\Connected;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\Front\SalonType;
@@ -15,9 +15,9 @@ use DateInterval;
 
 /**
  * @Route("/connect")
- * @Security("has_role('ROLE_USER')")
+ * @Security("is_granted('ROLE_USER')")
  */
-class SalonController extends Controller
+class SalonController extends AbstractController
 {
     /**
      * @Route("/salon/{idp}", name="salon", requirements={"idp"="\d+"})

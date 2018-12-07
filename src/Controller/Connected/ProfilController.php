@@ -3,14 +3,14 @@
 namespace App\Controller\Connected;
 
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * @Route("/connect")
- * @Security("has_role('ROLE_USER')")
+ * @Security("is_granted('ROLE_USER')")
  */
-class ProfilController extends Controller
+class ProfilController extends AbstractController
 {
     /**
      * @Route("/profil-joueur/{idp}/{id}", name="user_profil", requirements={"idp"="\d+", "id"="\d+"})

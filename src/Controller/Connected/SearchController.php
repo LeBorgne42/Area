@@ -3,16 +3,16 @@
 namespace App\Controller\Connected;
 
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use DateTime;
 use DateTimeZone;
 
 /**
  * @Route("/connect")
- * @Security("has_role('ROLE_USER')")
+ * @Security("is_granted('ROLE_USER')")
  */
-class SearchController extends Controller
+class SearchController extends AbstractController
 {
     /**
      * @Route("/recherche/{idp}", name="search", requirements={"idp"="\d+"})

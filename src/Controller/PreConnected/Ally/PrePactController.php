@@ -3,7 +3,7 @@
 namespace App\Controller\PreConnected\Ally;
 
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\Front\AllyPeaceType;
@@ -17,9 +17,9 @@ use Dateinterval;
 
 /**
  * @Route("/connect")
- * @Security("has_role('ROLE_USER')")
+ * @Security("is_granted('ROLE_USER')")
  */
-class PrePactController extends Controller
+class PrePactController extends AbstractController
 {
     /**
      * @Route("/pre-accepter-pacte/{id}", name="pre_ally_acceptAllied", requirements={"id"="\d+"})

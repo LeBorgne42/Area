@@ -4,7 +4,7 @@ namespace App\Controller\Security;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use App\Entity\Planet;
 use App\Entity\Sector;
@@ -17,9 +17,9 @@ use DateTime;
 
 /**
  * @Route("/serveur")
- * @Security("has_role('ROLE_ADMIN')")
+ * @Security("is_granted('ROLE_ADMIN')")
  */
-class ServerController extends Controller
+class ServerController extends AbstractController
 {
     /**
      * @Route("/creation-univers", name="create")

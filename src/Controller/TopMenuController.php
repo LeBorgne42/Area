@@ -3,14 +3,14 @@
 namespace App\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\Front\UserContactType;
 use DateTime;
 use DateTimeZone;
 use DateInterval;
 
-class TopMenuController extends Controller
+class TopMenuController extends AbstractController
 {
     /**
      * @Route("/reglement/{_locale}", name="rules", defaults={"_locale" = "fr"}, requirements={"_locale" = "fr|en|de"})
@@ -169,7 +169,6 @@ class TopMenuController extends Controller
 
             $mailer->send($message);
 
-            $this->addFlash("success", "This is a success message");
             return $this->redirectToRoute('home');
         }
 

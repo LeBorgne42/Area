@@ -3,13 +3,13 @@
 namespace App\Controller\Connected;
 
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use App\Entity\Report;
 use DateTime;
 use DateTimeZone;
 
-class FightController extends Controller
+class FightController extends AbstractController
 {
     /**
      * @Route("/clash/", name="fight_war_area")

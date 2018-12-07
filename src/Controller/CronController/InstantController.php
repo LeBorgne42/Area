@@ -3,13 +3,13 @@
 namespace App\Controller\CronController;
 
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Report;
 use DateTime;
 use DateTimeZone;
 use Dateinterval;
 
-class InstantController extends Controller
+class InstantController extends AbstractController
 {
     /**
      * @Route("/resources/", name="ressources_load")

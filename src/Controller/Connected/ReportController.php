@@ -3,7 +3,7 @@
 namespace App\Controller\Connected;
 
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use App\Entity\Report;
 use DateTime;
@@ -12,9 +12,9 @@ use DateInterval;
 
 /**
  * @Route("/connect")
- * @Security("has_role('ROLE_USER')")
+ * @Security("is_granted('ROLE_USER')")
  */
-class ReportController extends Controller
+class ReportController extends AbstractController
 {
     /**
      * @Route("/rapport/{idp}", name="report", requirements={"idp"="\d+"})

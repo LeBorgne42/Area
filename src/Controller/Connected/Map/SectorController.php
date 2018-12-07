@@ -3,7 +3,7 @@
 namespace App\Controller\Connected\Map;
 
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use App\Form\Front\InteractFleetType;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,9 +14,9 @@ use DateInterval;
 
 /**
  * @Route("/connect")
- * @Security("has_role('ROLE_USER')")
+ * @Security("is_granted('ROLE_USER')")
  */
-class SectorController extends Controller
+class SectorController extends AbstractController
 {
     /**
      * @Route("/carte-spatiale/{id}/{gal}/{idp}", name="map", requirements={"id"="\d+", "idp"="\d+", "gal"="\d+"})

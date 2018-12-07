@@ -15,17 +15,14 @@
     <div class="btn-left{% if app.user.getSearch() is null %} freeSearchBuild{% endif %}{% if app.request.attributes.get('_route') == 'search' %} currentRoute{% endif %}">
         <a href="{{ path('search', {'idp': usePlanet.getId()}) }}"><span>{{ 'search'|trans }}</span>{% if app.user.getSearch() is null %} <span class="glyphicon glyphicon-question-sign text-orange" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.search'|trans }}"></span>{% endif %}</a>
     </div>
-    <div class="btn-left{% if app.request.attributes.get('_route') == 'fleet' %} currentRoute{% endif %}">
-        <a href="{{ path('fleet', {'idp': usePlanet.getId()}) }}"><span>{{ 'fleet'|trans }}</span></a>
+    <div class="btn-left{% if app.request.attributes.get('_route') == 'fleet' or app.request.attributes.get('_route') == 'fleet_list' %} currentRoute{% endif %}">
+        <a href="{{ path('fleet', {'idp': usePlanet.getId()}) }}"><span>{{ 'fleet'|trans }}</span></a> - <a href="{{ path('fleet_list', {'idp': usePlanet.getId()}) }}"><span>{{ 'fleetList'|trans }}</span></a>
     </div>
     <div class="btn-left{% if app.request.attributes.get('_route') == 'market' %} currentRoute{% endif %}">
         <a href="{{ path('market', {'idp': usePlanet.getId()}) }}"><span>{{ 'market'|trans }}</span></a>
     </div>
-    <div class="btn-left{% if app.request.attributes.get('_route') == 'universe' %} currentRoute{% endif %}">
-        <a href="{{ path('universe', {'idp': usePlanet.getId()}) }}"><span>{{ 'universe'|trans }}</span></a>
-    </div>
-    <div class="btn-left{% if app.request.attributes.get('_route') == 'galaxy' %} currentRoute{% endif %}">
-        <a href="{{ path('galaxy', {'id': usePlanet.getSector().getGalaxy().getPosition(), 'idp': usePlanet.getId()}) }}"><span>{{ 'galaxy'|trans }}</span></a>
+    <div class="btn-left{% if app.request.attributes.get('_route') == 'galaxy' or app.request.attributes.get('_route') == 'universe' %} currentRoute{% endif %}">
+        <a href="{{ path('universe', {'idp': usePlanet.getId()}) }}"><span>{{ 'universe'|trans }}</span></a> - <a href="{{ path('galaxy', {'id': usePlanet.getSector().getGalaxy().getPosition(), 'idp': usePlanet.getId()}) }}"><span>{{ 'galaxy'|trans }}</span></a>
     </div>
     <div class="btn-left{% if app.request.attributes.get('_route') == 'map' %} currentRoute{% endif %}">
         <a href="{{ path('map', {'id':usePlanet.getSector().getPosition(), 'idp': usePlanet.getId(), 'gal': usePlanet.getSector().getGalaxy().getPosition()}) }}"><span>{{ 'map'|trans }}</span></a>

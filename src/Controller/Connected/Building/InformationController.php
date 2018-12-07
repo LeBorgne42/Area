@@ -3,7 +3,7 @@
 namespace App\Controller\Connected\Building;
 
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use DateTime;
 use Dateinterval;
@@ -11,9 +11,9 @@ use DateTimeZone;
 
 /**
  * @Route("/connect")
- * @Security("has_role('ROLE_USER')")
+ * @Security("is_granted('ROLE_USER')")
  */
-class InformationController extends Controller
+class InformationController extends AbstractController
 {
     /**
      * @Route("/contruire-radar/{idp}", name="building_add_radar", requirements={"idp"="\d+"})

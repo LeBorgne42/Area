@@ -3,7 +3,7 @@
 namespace App\Controller\Connected\Ally;
 
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\Front\UserAllyType;
@@ -29,9 +29,9 @@ use App\Entity\Salon;
 
 /**
  * @Route("/connect")
- * @Security("has_role('ROLE_USER')")
+ * @Security("is_granted('ROLE_USER')")
  */
-class AllyController extends Controller
+class AllyController extends AbstractController
 {
     /**
      * @Route("/alliance/{idp}", name="ally", requirements={"idp"="\d+"})

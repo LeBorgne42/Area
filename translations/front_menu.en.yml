@@ -12,6 +12,7 @@ logout: Disconnect
 game: Game
 globalView: 'Global view'
 fleet: Flleets
+fleetList: Lists
 planet: Planets
 search: Research
 ally: Ally

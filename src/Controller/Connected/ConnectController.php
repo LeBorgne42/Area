@@ -3,7 +3,7 @@
 namespace App\Controller\Connected;
 
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use App\Entity\Rank;
 use DateTime;
@@ -11,9 +11,9 @@ use DateTimeZone;
 
 /**
  * @Route("/connect")
- * @Security("has_role('ROLE_USER')")
+ * @Security("is_granted('ROLE_USER')")
  */
-class ConnectController extends Controller
+class ConnectController extends AbstractController
 {
     /**
      * @Route("/connection/{id}", name="connect_server", requirements={"id"="\d+"})

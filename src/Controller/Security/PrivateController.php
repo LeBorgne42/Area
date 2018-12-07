@@ -3,7 +3,7 @@
 namespace App\Controller\Security;
 
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\Front\SalonType;
@@ -14,9 +14,9 @@ use DateTimeZone;
 
 /**
  * @Route("/private")
- * @Security("has_role('ROLE_PRIVATE')")
+ * @Security("is_granted('ROLE_PRIVATE')")
  */
-class PrivateController extends Controller
+class PrivateController extends AbstractController
 {
     /**
      * @Route("/home", name="private_home")

@@ -3,16 +3,16 @@
 namespace App\Controller\Connected\Building;
 
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use DateTime;
 use DateTimeZone;
 
 /**
  * @Route("/connect")
- * @Security("has_role('ROLE_USER')")
+ * @Security("is_granted('ROLE_USER')")
  */
-class BuildingController extends Controller
+class BuildingController extends AbstractController
 {
     /**
      * @Route("/batiment/{idp}", name="building", requirements={"idp"="\d+"})

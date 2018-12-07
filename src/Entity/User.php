@@ -161,6 +161,12 @@ class User implements UserInterface, \Serializable
     protected $fleets;
 
     /**
+     * @ORM\OneToMany(targetEntity="Fleet_List", mappedBy="user", fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="fleet_list_id", referencedColumnName="id")
+     */
+    protected $fleetLists;
+
+    /**
      * @ORM\Column(name="bitcoin",type="decimal", precision=28, scale=5)
      */
     protected $bitcoin;
@@ -318,6 +324,7 @@ class User implements UserInterface, \Serializable
         $this->messages = new \Doctrine\Common\Collections\ArrayCollection();
         $this->reports = new \Doctrine\Common\Collections\ArrayCollection();
         $this->fleets = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->fleetLists = new \Doctrine\Common\Collections\ArrayCollection();
         $this->scientistProduction = 1;
         $this->bitcoin = 25000;
         $this->cheat = 0;
@@ -822,6 +829,24 @@ class User implements UserInterface, \Serializable
     /**
      * @return mixed
      */
+    public function getFleetsInList($fleetList)
+    {
+        $fleets = null;
+        foreach($this->fleets as $fleet) {
+            if($fleet->getFleetList()) {
+                if($fleet->getFleetList()->getId() != $fleetList) {
+                    $fleets[] = $fleet;
+                }
+            } else {
+                $fleets[] = $fleet;
+            }
+        }
+        return $fleets;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getBitcoin()
     {
         return $this->bitcoin;
@@ -1168,6 +1193,22 @@ class User implements UserInterface, \Serializable
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFleetLists()
+    {
+        return $this->fleetLists;
+    }
+
+    /**
+     * @param mixed $fleetLists
+     */
+    public function setFleetLists($fleetLists): void
+    {
+        $this->fleetLists = $fleetLists;
     }
 
     /**

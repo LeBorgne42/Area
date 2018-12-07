@@ -44,6 +44,12 @@ class Fleet
     protected $user;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Fleet_List", inversedBy="fleets", fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="fleet_list_id", referencedColumnName="id")
+     */
+    protected $fleetList;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Planet", inversedBy="fleets", fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(name="planet_id", referencedColumnName="id")
      */
@@ -1048,6 +1054,22 @@ class Fleet
     public function setPlanet($planet): void
     {
         $this->planet = $planet;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFleetList()
+    {
+        return $this->fleetList;
+    }
+
+    /**
+     * @param mixed $fleetList
+     */
+    public function setFleetList($fleetList): void
+    {
+        $this->fleetList = $fleetList;
     }
 
     /**

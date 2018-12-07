@@ -3,14 +3,14 @@
 namespace App\Controller\Connected\Map;
 
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * @Route("/connect")
- * @Security("has_role('ROLE_USER')")
+ * @Security("is_granted('ROLE_USER')")
  */
-class UniverseController extends Controller
+class UniverseController extends AbstractController
 {
     /**
      * @Route("/univers/{idp}", name="universe", requirements={"idp"="\d+"})

@@ -3,7 +3,7 @@
 namespace App\Controller\Connected;
 
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\Front\ModifPasswordType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -12,9 +12,9 @@ use DateTimeZone;
 
 /**
  * @Route("/connect")
- * @Security("has_role('ROLE_USER')")
+ * @Security("is_granted('ROLE_USER')")
  */
-class OptionsController extends Controller
+class OptionsController extends AbstractController
 {
     /**
      * @Route("/mes-options/{idp}", name="my_options", requirements={"idp"="\d+"})

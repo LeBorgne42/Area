@@ -3,7 +3,7 @@
 namespace App\Controller\PreConnected\Ally;
 
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\Front\UserAllyType;
@@ -28,9 +28,9 @@ use App\Entity\Salon;
 
 /**
  * @Route("/connect")
- * @Security("has_role('ROLE_USER')")
+ * @Security("is_granted('ROLE_USER')")
  */
-class PreAllyController extends Controller
+class PreAllyController extends AbstractController
 {
     /**
      * @Route("/pre-alliance/{_locale}", name="pre_ally", defaults={"_locale" = "fr"}, requirements={"_locale" = "fr|en|de"})

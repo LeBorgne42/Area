@@ -3,14 +3,14 @@
 namespace App\Controller\PreConnected;
 
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * @Route("/connect")
- * @Security("has_role('ROLE_USER')")
+ * @Security("is_granted('ROLE_USER')")
  */
-class PreProfilController extends Controller
+class PreProfilController extends AbstractController
 {
     /**
      * @Route("/pre-profil-joueur/{id}", name="pre_user_profil")

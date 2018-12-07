@@ -1,0 +1,131 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'front_fleet' %}
+
+{% block title %}{{ 'title'|trans }}{% endblock %}
+
+{% block body %}
+    {% for message in app.flashes('fail') %}
+        <div class="flash-notice mt-5 alerte-flash-error text-center">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <div class="front-block display-allFleet">
+        <div class="mb-3">
+        {{ form_start(form_listCreate,{attr: { action: path('fleet_list', {'idp': usePlanet.getId()}) }}) }}
+        {{ form_widget(form_listCreate.sendForm) }}
+        {{ form_widget(form_listCreate.priority) }}
+        {{ form_widget(form_listCreate.name) }}
+        {{ form_end(form_listCreate) }}
+        </div>
+        {% for fleetList in fleetLists %}
+            <div class="block-title">
+                <h2>{{ fleetList.getName() }}</h2>
+            </div>
+            <form class="fleetList_add mb-2" name="fleetList_add" method="post" action="{{ path('fleet_list_add', {'idp': usePlanet.getId(), 'fleetList': fleetList.getId(), 'fleet': '0'}) }}">
+                <select class="planetChoice select2">
+                    <option value="">{{ 'fleetList.add'|trans }}</option>
+                    {% for fleet in app.user.getFleetsInList(fleetList.getId()) %}
+                        <option value="{{ fleet.getId() }}">{{ fleet.getName() }}</option>
+                    {% endfor %}
+                </select>
+                <a class="btn btn-sm btn-danger float-right" href="{{ path('fleet_list_destroy', {'idp': usePlanet.getId(), 'fleetList': fleetList.getId()}) }}"  data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.destroy'|trans }}">{{ 'fleet.deleteList'|trans }}</a>
+                <button type="submit" id="planet_choice_send" hidden></button>
+            </form>
+            <table class="table table-striped table-bordered table-dark">
+                <tbody>
+                <tr>
+                    <th class="tab-cells-name text-center">
+                        {{ fleetList.getPriority() }}
+                    </th>
+                    <th class="tab-cells-name text-center">
+                        {{ 'fleet.fleetName'|trans }}
+                    </th>
+                    {% if fleetList.getFlightTime() %}
+                        <th class="tab-cells-name text-center">
+                            {{ 'fleet.from'|trans }}
+                        </th>
+                        <th class="tab-cells-name text-center">
+                            {{ 'fleet.goTo'|trans }}
+                        </th>
+                        <th class="tab-cells-name text-center">
+                            {{ 'fleet.time'|trans }}
+                        </th>
+                    {% endif %}
+                    <th class="tab-cells-name text-center">
+                        {{ 'fleet.fleetShips'|trans }}
+                    </th>
+                    <th class="tab-cells-name text-center">
+                        {{ 'fleet.cargo'|trans }}
+                    </th>
+                    <th class="tab-cells-name text-center">
+                        {{ 'fleet.st'|trans }}
+                    </th>
+                    {% if fleetList.getFlightTime() %}
+                        <th class="tab-cells-name text-center">
+                            {{ 'fleet.cancelFleet'|trans }}
+                        </th>
+                    {% endif %}
+                </tr>
+                {% for fleet in fleetList.getFleets() %}
+                    <tr>
+                        <td class="center-cells text-center">
+                            <a class="text-rouge" href="{{ path('fleet_list_sub', {'idp': usePlanet.getId(), 'fleetList': fleetList.getId(), 'fleet': fleet.getId()}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.remove'|trans }}">X</a>
+                        </td>
+                        <th class="tab-cells-name">
+                            <span class="ml-3">"{{  fleet.getName() }}"</span>{% if fleet.getFightAt() == null %} <span><a class="ml-3 float-right" href="{{ path('destroy_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.drop'|trans }}"><span>{{ 'fleet.destroyFleet'|trans }}</span></a></span> <span><a class="ml-3 float-right" href="{{ path('manage_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}" data-toggle="modal" data-target="#editModal"><span>{{ 'fleet.seeFlotte'|trans }}</span></a></span>{% else %}<span class="float-right text-rouge">{{ 'fleet.combat'|trans }}</span>{% endif %}
+                        </th>
+                        {% if fleetList.getFlightTime() %}
+                            <td class="center-cells text-center">
+                                {% if fleet.getPlanet() and fleet.getFlightTime() %}
+                                    <span><a href="{{ path('map', {'id': fleet.getPlanet().getSector.getPosition(), 'idp': usePlanet.getId(), 'gal': fleet.getPlanet().getSector().getGalaxy().getPosition()}) }}">{{ fleet.getplanet().getName() }} - {{ fleet.getPlanet().getSector().getGalaxy.getPosition() }}:{{ fleet.getPlanet().getSector.getPosition() }}:{{ fleet.getPlanet().getPosition() }}</a></span>
+                                {% endif %}
+                            </td>
+                            <td class="center-cells text-center">
+                                {% if fleet.getFlightTime() %}
+                                    <span><a href="{{ path('map', {'id': fleet.getSector().getPosition(), 'idp': usePlanet.getId(), 'gal': fleet.getSector().getGalaxy().getPosition()}) }}">{{ fleet.getSector().getGalaxy.getPosition() }}:{{ fleet.getSector.getPosition() }}:{{ fleet.getPlanete() }}</a></span>
+                                {% endif %}
+                            </td>
+                            <td class="center-cells text-center">
+                                {% if fleet.getFlightTime() %}
+                                    <span class="timerArea" hidden>{{ fleet.getFlightTime()|date('Y/m/d H:i:s') }}</span>
+                                {% endif %}
+                            </td>
+                        {% endif %}
+                        <td class="center-cells text-center">
+                            {{ fleet.getNbrShips()|number_format }}
+                        </td>
+                        <td class="center-cells text-center">
+                            {{ fleet.getCargoFull()|number_format }} / {{ fleet.getCargoPlace()|number_format }}
+                        </td>
+                        <td class="center-cells text-center">
+                            {{ fleet.getNbrSignatures()|number_format }}
+                        </td>
+                        {% if fleetList.getFlightTime() %}
+                            {% if fleet.cancelFlight() > date and fleet.getFlightTime() %}
+                                <td class="center-cells text-center">
+                                    <a class="text-rouge" href="{{ path('cancel_fleet', {'idp': usePlanet.getId(),'id': fleet.getId()}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.cancel'|trans }}"><span class="timerArea" hidden>{{ fleet.cancelFlight()|date('Y/m/d H:i:s') }}</span></a>
+                                </td>
+                            {% else %}
+                                <td class="center-cells text-center">
+                                </td>
+                            {% endif %}
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endfor %}
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content special">
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content special">
+            </div>
+        </div>
+    </div>
+{% endblock %}

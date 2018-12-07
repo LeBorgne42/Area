@@ -3,12 +3,12 @@
 namespace App\Controller\CronController;
 
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use DateTime;
 use DateTimeZone;
 use App\Entity\Report;
 
-class DailyController extends Controller
+class DailyController extends AbstractController
 {
     /**
      * @Route("/dailyReport/", name="daily_load")

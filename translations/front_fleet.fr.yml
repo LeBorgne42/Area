@@ -89,8 +89,17 @@ click.radar: 'Cliquez pour déployer le radar'
 click.brouilleur: 'Cliquez pour déployer le brouilleur'
 fleet.allShip: Tout
 fleet.allDischarge: 'Tout decharger'
+fleet.remove: Retirer
+form.fleetList: 'Créer nouvelle Cohorte'
+fleetList.add: 'Ajouter flotte'
 fleet.cancelFleet: Annuler
 form.normal: Normal
 form.discharge: 'Décharger et revenir'
 form.col: Coloniser
 form.invade: Envahir
+fleet.st: ST
+tooltip.remove: 'Supprimer flotte de la Cohorte ?'
+tooltip.cancel: 'Annuler l''envoi de la flotte ?'
+tooltip.drop: 'Poser la flotte sur la planète ?'
+tooltip.destroy: 'Supprimer la Cohorte de flottes ?'
+fleet.deleteList: Supprimer

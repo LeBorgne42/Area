@@ -52,8 +52,22 @@ function managePlanetChoiceForm() {
 
         var actionForm = $(this).attr('action');
             planetChoice = $(this)[0][0].value;
-            
+
         actionForm = actionForm.replace(/\/\d+$/, '/' + planetChoice);
+        $(this).attr('action', actionForm)
+        $(this).closest('form').submit();
+    });
+}
+
+function manageFleetListChoiceForm() {
+    $('.fleetList_add').off('change').on('change',function(e){
+        e.preventDefault();
+
+        var actionForm = $(this).attr('action');
+        fleetChoice = $(this)[0][0].value;
+
+        actionForm = actionForm.replace(/\/\d$/, '/' + fleetChoice);
+        console.log(actionForm);
         $(this).attr('action', actionForm)
         $(this).closest('form').submit();
     });
@@ -783,5 +797,6 @@ $(document).ready(function() {
     manageRegistrationCheck();
     manageRenameFleetForm();
     managePlanetChoiceForm();
+    manageFleetListChoiceForm();
     console.log("Toute utilisation de scripts sur le jeu seront puni d'un ban permanent, merci.");
 });

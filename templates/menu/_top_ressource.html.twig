@@ -2,7 +2,6 @@
 
 <div class="navbar navbar-ressource navbar-dark bg-top">
     {% if usePlanet.getPreviousPlanet() != usePlanet.getId() %}<h1><span data-toggle="tooltip" data-placement="bottom" title="{{ 'previousPlanet'|trans }}"><a href="{{ usePlanet.getPreviousPlanet() }}"><</a></span></h1>{% endif %}
-    {#<span>{{ usePlanet.getName() }} - <a href="{{ path('map', {'idp': usePlanet.getId(), id: usePlanet.getSector().getPosition(), 'gal': usePlanet.getSector().getGalaxy.getId()}) }}">{{ usePlanet.getSector().getGalaxy.getPosition() }}:{{ usePlanet.getSector().getPosition() }}:{{ usePlanet.getPosition() }}</a></span>#}
     <form id="planet_choice" name="planet_choice" method="post" action="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'idp': usePlanet.getId()})) }}">
         <select class="planetChoice select2">
             <option value="{{ usePlanet.getId() }}">{{ usePlanet.getName() }} - {{ usePlanet.getSector().getGalaxy.getPosition() }}:{{ usePlanet.getSector().getPosition() }}:{{ usePlanet.getPosition() }}</option>
