@@ -95,7 +95,7 @@ class UserEvent implements EventSubscriberInterface
                         ->getOneOrNullResult();
 
                     if($userSameIp) {
-                        $user->setIpAddress($userSameIp->getUsername());
+                        $user->setIpAddress($userSameIp->getUsername() . '-' . rand(1,99));
                         $user->setCheat($user->getCheat() + 1);
                         $userSameIp->setCheat($user->getCheat() + 1);
                         $this->em->flush($userSameIp);

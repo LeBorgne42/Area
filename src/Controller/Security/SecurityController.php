@@ -195,6 +195,7 @@ class SecurityController extends AbstractController
             }
         }
 
+        $this->addFlash("fail", "Le mot de passe est incorrect.");
         return $this->redirectToRoute('home');
     }
 
