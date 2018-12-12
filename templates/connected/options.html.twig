@@ -14,6 +14,9 @@
                 {{ 'modifPassword'|trans }}
             </td>
             <td class="center-cells">
+                {{ 'newletterActiver'|trans }}
+            </td>
+            <td class="center-cells">
                 {{ 'planetOrder'|trans }}
             </td>
         </tr>
@@ -23,6 +26,9 @@
                 {{ form_widget(form_pass.oldPassword) }}
                 {{ form_widget(form_pass.password) }}
                 {{ form_widget(form_pass.confirmPassword) }}
+            </td>
+            <td class="center-cells">
+                {{ form_widget(form_pass.newletter) }}
             </td>
             <td>
                 {{ form_widget(form_pass.planetOrder) }}

@@ -5,15 +5,14 @@ namespace App\Controller\Security;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\HttpFoundation\Request;
-use App\Form\Front\UserRecoveryType;
 use App\Entity\User;
 use DateTime;
 use DateTimeZone;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
-class SecurityController extends AbstractController
+class SecurityController extends Controller
 {
     /**
      * @Route("/enregistrement", name="register")
@@ -67,7 +66,7 @@ class SecurityController extends AbstractController
 
             if($userSameIp) {
                 $this->addFlash("fail", "Cette IP est déjà rattachée au compte de - " . $userSameIp->getUsername());
-                $userSameIp->setCheat($user->getCheat() + 1);
+                $userSameIp->setCheat($userSameIp->getCheat() + 1);
                 $em->flush();
                 return $this->redirectToRoute('home');
             }
@@ -82,7 +81,7 @@ class SecurityController extends AbstractController
             $em->persist($user);
             $em->flush();
 
-            $message = (new \Swift_Message('Confirmation email'))
+            $message = (new \Swift_Message('Confirmation inscription'))
                 ->setFrom('support@areauniverse.eu')
                 ->setTo($_POST['_email'])
                 ->setBody(
@@ -91,6 +90,7 @@ class SecurityController extends AbstractController
                         [
                             'password' => $_POST['_password'],
                             'username' => $user->getUsername(),
+                            'key' => $user->getId() //fixmr encrypt
                         ]
                     ),
                     'text/html'
@@ -105,7 +105,6 @@ class SecurityController extends AbstractController
                 $user->getRoles()
             );
 
-
            $this->get('security.token_storage')->setToken($token);
            $request->getSession()->set('_security_main', serialize($token));
 
@@ -118,41 +117,64 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/nouveau-password/{user}", name="recoveryPw", requirements={"user"="\d+"})
+     * @Route("/enregistrement-anonyme", name="register_ghost")
+     * @Route("/enregistrement-anonyme/", name="register_ghost_noSlash")
      */
-    public function recoveryPwAction(\Swift_Mailer $mailer, User $user)
+    public function registerGhostAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        if($this->getUser()) {
-            return $this->redirectToRoute('home');
+
+        if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $userIp = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        } else {
+            $userIp = $_SERVER['REMOTE_ADDR'];
         }
-        $userPw = $em->getRepository('App:User')
+
+        $userSameIp = $em->getRepository('App:User')
             ->createQueryBuilder('u')
-            ->where('u.id = :user')
-            ->setParameter('user', $user)
+            ->where('u.ipAddress = :ip')
+            ->setParameters(['ip' => $userIp])
             ->getQuery()
             ->getOneOrNullResult();
 
-        if($userPw) {
-            $alpha = ['a', '8', 'c', '&', 'e', 'f', 'g', '5', 'i', '-', 'k', 'l', '(', 'n', 'o', 'M', 'A', 'F', ':', 'w', 'Z'];
-            $newPassword = $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)] . $alpha[rand(0, 14)];
-            $userPw->setPassword(password_hash($newPassword, PASSWORD_BCRYPT));
+        if($userSameIp) {
+            $this->addFlash("fail", "Cette IP est déjà rattachée au compte de - " . $userSameIp->getUsername());
+            $userSameIp->setCheat($userSameIp->getCheat() + 1);
             $em->flush();
-
-            $message = (new \Swift_Message('Nouveau mot de passe'))
-                ->setFrom('support@areauniverse.eu')
-                ->setTo($userPw->getEmail())
-                ->setBody(
-                    $this->renderView(
-                        'emails/recoveryPw.html.twig',
-                        ['password' => $newPassword]
-                    ),
-                    'text/html'
-                );
-
-            $mailer->send($message);
+            return $this->redirectToRoute('home');
         }
-        return $this->redirectToRoute('home');
+
+        $number = $em->getRepository('App:User')
+            ->createQueryBuilder('u')
+            ->select('count(u)')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        $user = new User();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
+        $user->setUsername('Test' . $number);
+        $user->setEmail('Test' . $number . '@areauniverse.eu');
+        $user->setCreatedAt($now);
+        $user->setPassword(password_hash('connected', PASSWORD_BCRYPT));
+        $user->setIpAddress($userIp);
+        $em->persist($user);
+        $em->flush();
+
+        $token = new UsernamePasswordToken(
+            $user,
+            null,
+            'main',
+            $user->getRoles()
+        );
+
+        $this->get('security.token_storage')->setToken($token);
+        $request->getSession()->set('_security_main', serialize($token));
+
+        $event = new InteractiveLoginEvent($request, $token);
+        $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
+
+        return $this->redirectToRoute('login');
     }
 
     /**
@@ -285,28 +307,5 @@ class SecurityController extends AbstractController
             return $this->redirectToRoute('home');
         }
         return $this->redirectToRoute('logout');
-    }
-
-    /**
-     * @Route("/confirmation-email/{key}", name="confirmEmail", requirements={"key"=".+"})
-     * @Route("/confirmation-email/{key}/", name="confirmEmail_noSlash", requirements={"key"=".+"})
-     */
-    public function confirmEmailAction(Request $request, $key)
-    {
-        $userId = decrypt($key);
-        $em = $this->getDoctrine()->getManager();
-        $user = $em->getRepository('App:User')->find(['id' => $userId]);
-
-        $token = new UsernamePasswordToken(
-            $user,
-            null,
-            'main',
-            $user->getRoles()
-        );
-
-        $this->get('security.token_storage')->setToken($token);
-        $request->getSession()->set('main', serialize($token));
-
-        return $this->redirectToRoute('overview');
     }
 }

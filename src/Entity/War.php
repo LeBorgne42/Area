@@ -40,7 +40,12 @@ class War
      * @ORM\Column(name="accepted",type="boolean")
      * @Assert\NotBlank(message = "required")
      */
-    protected $accepted = false;
+    protected $accepted;
+
+    public function __construct()
+    {
+        $this->accepted = false;
+    }
 
     /**
      * @return mixed

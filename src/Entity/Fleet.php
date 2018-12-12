@@ -30,7 +30,7 @@ class Fleet
      * @ORM\Column(name="attack",type="boolean")
      * @Assert\NotBlank(message = "required")
      */
-    protected $attack = false;
+    protected $attack;
 
     /**
      * @ORM\Column(name="fightAt",type="datetime", nullable=true)
@@ -230,6 +230,14 @@ class Fleet
      * @ORM\Column(name="water",type="integer", nullable=true)
      */
     protected $water = null;
+
+    /**
+     * User constructor.
+     */
+    public function __construct()
+    {
+        $this->attack = false;
+    }
 
     public function getId()
     {

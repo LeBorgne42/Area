@@ -44,26 +44,30 @@ class Grade
     /**
      * @ORM\Column(name="canRecruit",type="boolean")
      */
-    protected $canRecruit = false;
+    protected $canRecruit;
 
     /**
      * @ORM\Column(name="canKick",type="boolean")
      */
-    protected $canKick = false;
+    protected $canKick;
 
     /**
      * @ORM\Column(name="canWar",type="boolean")
      */
-    protected $canWar = false;
+    protected $canWar;
 
     /**
      * @ORM\Column(name="canPeace",type="boolean")
      */
-    protected $canPeace = false;
+    protected $canPeace;
 
     public function __construct()
     {
         $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->canRecruit = false;
+        $this->canKick = false;
+        $this->canWar = false;
+        $this->canPeace = false;
     }
 
     /**

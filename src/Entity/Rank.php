@@ -26,27 +26,36 @@ class Rank
     /**
      * @ORM\Column(name="warPoint",type="bigint")
      */
-    protected $warPoint = 0;
+    protected $warPoint;
 
     /**
      * @ORM\Column(name="point",type="bigint")
      */
-    protected $point = 100;
+    protected $point;
 
     /**
      * @ORM\Column(name="oldPoint",type="bigint")
      */
-    protected $oldPoint = 0;
+    protected $oldPoint;
 
     /**
      * @ORM\Column(name="position",type="integer")
      */
-    protected $position = 0;
+    protected $position;
 
     /**
      * @ORM\Column(name="oldPosition",type="integer")
      */
-    protected $oldPosition = 0;
+    protected $oldPosition;
+
+    public function __construct()
+    {
+        $this->warPoint = 0;
+        $this->point = 100;
+        $this->oldPoint = 0;
+        $this->position = 0;
+        $this->oldPosition = 0;
+    }
 
     /**
      * @return mixed

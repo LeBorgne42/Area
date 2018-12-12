@@ -38,13 +38,18 @@ class Commander
      * @ORM\Column(name="capture",type="boolean")
      * @Assert\NotBlank(message = "required")
      */
-    protected $capture = false;
+    protected $capture;
 
     /**
      * @ORM\Column(name="name",type="string", length=25)
      * @Assert\NotBlank(message = "required")
      */
     protected $name;
+
+    /**
+     * @ORM\Column(name="cost",type="integer")
+     */
+    protected $cost;
 
     /**
      * @ORM\Column(name="level",type="integer")
@@ -105,6 +110,36 @@ class Commander
      * @ORM\Column(name="soldier",type="integer")
      */
     protected $soldier;
+
+    /**
+     * User constructor.
+     */
+    public function __construct()
+    {
+        $this->capture = false;
+        $this->soldier = rand(0,5);
+        $this->bitcoin = rand(0,5);
+        $this->water = rand(0,5);
+        $this->niobium = rand(0,5);
+        $this->plasma = rand(0,5);
+        $this->missile = rand(0,5);
+        $this->laser = rand(0,5);
+        $this->armor = rand(0,5);
+        $this->shield = rand(0,5);
+        $this->speed = rand(0,5);
+        $this->name = 'Temporary';
+        $this->cost = $this->getTotalSkills() * 10000;
+        $this->level = $this->getTotalSkills();
+    }
+
+    /**
+     * @return int
+     */
+    public function getTotalSkills()
+    {
+        $return = $this->soldier + $this->bitcoin + $this->water + $this->niobium + $this->plasma + $this->missile + $this->laser + $this->armor + $this->shield + $this->speed;
+        return $return;
+    }
 
     /**
      * @return mixed

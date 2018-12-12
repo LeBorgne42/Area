@@ -35,7 +35,7 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(name="orderPlanet",type="string", length=10)
      * @Assert\NotBlank(message = "required")
      */
-    protected $orderPlanet = 'pos';
+    protected $orderPlanet;
 
     /**
      * @ORM\Column(type="string", length=40, unique=true)
@@ -65,7 +65,7 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\Column(name="allyBan",type="datetime", nullable=true)
      */
-    protected $allyBan = null;
+    protected $allyBan;
 
     /**
      * @ORM\OneToMany(targetEntity="Proposal", mappedBy="user", fetch="EXTRA_LAZY")
@@ -75,7 +75,7 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\Column(name="joinAllyAt",type="datetime", nullable=true)
      */
-    protected $joinAllyAt = null;
+    protected $joinAllyAt;
 
     /**
      * @ORM\ManyToOne(targetEntity="Grade", inversedBy="users", fetch="EXTRA_LAZY")
@@ -119,12 +119,12 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\Column(name="salonAt",type="datetime", nullable=true)
      */
-    protected $salonAt = null;
+    protected $salonAt;
 
     /**
      * @ORM\Column(name="salonBan",type="datetime", nullable=true)
      */
-    protected $salonBan = null;
+    protected $salonBan;
 
     /**
      * @ORM\OneToMany(targetEntity="S_Content", mappedBy="user", fetch="EXTRA_LAZY")
@@ -140,19 +140,31 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(name="viewMessage",type="boolean")
      * @Assert\NotBlank(message = "required")
      */
-    protected $viewMessage = true;
+    protected $viewMessage;
 
     /**
      * @ORM\Column(name="viewReport",type="boolean")
      * @Assert\NotBlank(message = "required")
      */
-    protected $viewReport = true;
+    protected $viewReport;
 
     /**
      * @ORM\Column(name="tutorial",type="boolean")
      * @Assert\NotBlank(message = "required")
      */
-    protected $tutorial = true;
+    protected $tutorial;
+
+    /**
+     * @ORM\Column(name="newletter",type="boolean")
+     * @Assert\NotBlank(message = "required")
+     */
+    protected $newletter;
+
+    /**
+     * @ORM\Column(name="email_confirm",type="boolean")
+     * @Assert\NotBlank(message = "required")
+     */
+    protected $emailConfirm;
 
     /**
      * @ORM\OneToMany(targetEntity="Fleet", mappedBy="user", fetch="EXTRA_LAZY")
@@ -259,27 +271,27 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\Column(name="searchAt",type="datetime", nullable=true)
      */
-    protected $searchAt = null;
+    protected $searchAt;
 
     /**
      * @ORM\Column(name="search",type="string", nullable=true)
      */
-    protected $search = null;
+    protected $search;
 
     /**
      * @ORM\Column(name="created_at",type="datetime")
      */
-    protected $createdAt = null;
+    protected $createdAt;
 
     /**
      * @ORM\Column(name="lastActivity",type="datetime", nullable=true)
      */
-    protected $lastActivity = null;
+    protected $lastActivity;
 
     /**
      * @ORM\Column(name="gameOver",type="string", nullable=true)
      */
-    protected $gameOver = null;
+    protected $gameOver;
 
     /**
      * @Assert\File(
@@ -328,6 +340,21 @@ class User implements UserInterface, \Serializable
         $this->scientistProduction = 1;
         $this->bitcoin = 25000;
         $this->cheat = 0;
+        $this->newletter = 1;
+        $this->viewMessage = 1;
+        $this->viewReport = 1;
+        $this->tutorial = 1;
+        $this->emailConfirm = 0;
+        $this->salonAt = null;
+        $this->salonBan = null;
+        $this->joinAllyAt = null;
+        $this->allyBan = null;
+        $this->orderPlanet = 'pos';
+        $this->searchAt = null;
+        $this->search = null;
+        $this->createdAt = null;
+        $this->lastActivity = null;
+        $this->gameOver = null;
     }
 
     /**
@@ -829,6 +856,24 @@ class User implements UserInterface, \Serializable
     /**
      * @return mixed
      */
+    public function getGalaxyPlanets()
+    {
+        $return = [];
+
+        if(count($this->getPlanets()) > 0){
+            foreach ($this->getPlanets() as $planet) {
+                if (!in_array($planet->getSector()->getGalaxy()->getPosition(), $return)) { // fixmr vérifier fonction
+                    $return[] = $planet->getSector()->getGalaxy()->getPosition();
+                }
+            }
+
+            return $return;
+        }
+    }
+
+    /**
+     * @return mixed
+     */
     public function getFleetsInList($fleetList)
     {
         $fleets = null;
@@ -1018,6 +1063,38 @@ class User implements UserInterface, \Serializable
         $this->createdAt = $createdAt;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmailConfirm()
+    {
+        return $this->emailConfirm;
+    }
+
+    /**
+     * @param mixed $emailConfirm
+     */
+    public function setEmailConfirm($emailConfirm): void
+    {
+        $this->emailConfirm = $emailConfirm;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNewletter()
+    {
+        return $this->newletter;
+    }
+
+    /**
+     * @param mixed $newletter
+     */
+    public function setNewletter($newletter): void
+    {
+        $this->newletter = $newletter;
     }
 
     /**

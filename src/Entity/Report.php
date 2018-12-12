@@ -34,7 +34,7 @@ class Report
     /**
      * @ORM\Column(name="newReport",type="boolean")
      */
-    protected $newReport = true;
+    protected $newReport;
 
     /**
      * @ORM\Column(name="content",type="string", length=12000)
@@ -51,6 +51,11 @@ class Report
      * @ORM\Column(name="sendAt",type="datetime")
      */
     protected $sendAt;
+
+    public function __construct()
+    {
+        $this->newReport = true;
+    }
 
     public function getId()
     {

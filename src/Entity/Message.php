@@ -28,13 +28,13 @@ class Message
     /**
      * @ORM\Column(name="sender",type="string", nullable=true)
      */
-    protected $sender = null;
+    protected $sender;
 
     /**
      * @ORM\Column(name="idSender",type="integer")
      * @Assert\NotBlank(message = "required")
      */
-    protected $idSender = 0;
+    protected $idSender;
 
     /**
      * @ORM\Column(name="title",type="string", length=20)
@@ -50,7 +50,7 @@ class Message
     /**
      * @ORM\Column(name="newMessage",type="boolean")
      */
-    protected $newMessage = true;
+    protected $newMessage;
 
     /**
      * @ORM\Column(name="content",type="string", length=1000)
@@ -67,6 +67,14 @@ class Message
      * @ORM\Column(name="sendAt",type="datetime")
      */
     protected $sendAt;
+
+    public function __construct()
+    {
+        $this->sender = null;
+        $this->idSender = 0;
+        $this->newMessage = true;
+        $this->bitcoin = 0;
+    }
 
     public function getId()
     {

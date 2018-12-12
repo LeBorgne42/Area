@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Translation\Translator;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class ModifPasswordType extends AbstractType
 {
@@ -54,6 +55,20 @@ class ModifPasswordType extends AbstractType
                         'autocomplete' => 'off',
                     ],
                     'required' => false,
+                ]
+            )
+            ->add(
+                'newletter',
+                CheckboxType::class,
+                [
+                    'label' => 'form.newletter',
+                    'attr'  => [
+                        'placeholder' => 'form.newletter',
+                        'class' => '',
+                        'checked'   => 'checked'
+                    ],
+                    'required' => false,
+                    'mapped' => true,
                 ]
             )
             ->add(

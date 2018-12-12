@@ -32,7 +32,7 @@ class Ally
      * @ORM\Column(name="politic",type="string", length=25)
      * @Assert\NotBlank(message = "required")
      */
-    protected $politic = 'neutral';
+    protected $politic;
 
     /**
      * @ORM\OneToMany(targetEntity="Proposal", mappedBy="ally", fetch="EXTRA_LAZY")
@@ -64,7 +64,7 @@ class Ally
     /**
      * @ORM\Column(name="description",type="string", length=1000, nullable=true)
      */
-    protected $description = null;
+    protected $description;
 
     /**
      * @ORM\OneToMany(targetEntity="Grade", mappedBy="ally", fetch="EXTRA_LAZY", cascade={"persist"})
@@ -84,7 +84,7 @@ class Ally
     /**
      * @ORM\Column(name="rank",type="integer", nullable=true)
      */
-    protected $rank = null;
+    protected $rank;
 
     /**
      * @ORM\Column(name="bitcoin",type="bigint")
@@ -135,7 +135,7 @@ class Ally
      *
      * @var File
      */
-    private $imageFile= null;
+    private $imageFile;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -154,7 +154,7 @@ class Ally
     /**
      * @ORM\Column(name="created_at",type="datetime", nullable=true)
      */
-    protected $createdAt = null;
+    protected $createdAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -176,6 +176,11 @@ class Ally
         $this->wars = new \Doctrine\Common\Collections\ArrayCollection();
         $this->grades = new \Doctrine\Common\Collections\ArrayCollection();
         $this->defcon = 0;
+        $this->createdAt = null;
+        $this->imageFile = null;
+        $this->rank = null;
+        $this->descritpion = null;
+        $this->politic = 'neutral';
     }
 
     /**
@@ -501,6 +506,25 @@ class Ally
             }
         }
         return 'toto';
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGalaxyPlanets()
+    {
+        $return = [];
+        foreach ($this->getUsers() as $user) {
+            if(count($user->getGalaxyPlanets()) > 0) {
+                foreach ($user->getGalaxyPlanets() as $galaxy) {
+                    if (!in_array($galaxy, $return)) { // fixmr vérifier fonction
+                        $return[] = $galaxy;
+                    }
+                }
+            }
+        }
+
+        return $return;
     }
 
     /**

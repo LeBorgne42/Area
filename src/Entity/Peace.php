@@ -40,7 +40,7 @@ class Peace
      * @ORM\Column(name="accepted",type="boolean")
      * @Assert\NotBlank(message = "required")
      */
-    protected $accepted = false;
+    protected $accepted;
 
     /**
      * @ORM\Column(name="type",type="boolean")
@@ -51,17 +51,25 @@ class Peace
     /**
      * @ORM\Column(name="planet",type="integer", nullable=true)
      */
-    protected $planet = null;
+    protected $planet;
 
     /**
      * @ORM\Column(name="taxe",type="integer", nullable=true)
      */
-    protected $taxe = null;
+    protected $taxe;
 
     /**
      * @ORM\Column(name="pdg",type="integer", nullable=true)
      */
-    protected $pdg = null;
+    protected $pdg;
+
+    public function __construct()
+    {
+        $this->accepted = false;
+        $this->planet = null;
+        $this->taxe = null;
+        $this->pdg = null;
+    }
 
     /**
      * @return mixed

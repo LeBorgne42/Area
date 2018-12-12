@@ -50,7 +50,15 @@ class Allied
      * @ORM\Column(name="accepted",type="boolean")
      * @Assert\NotBlank(message = "required")
      */
-    protected $accepted = false;
+    protected $accepted;
+
+    /**
+     * User constructor.
+     */
+    public function __construct()
+    {
+        $this->accepted = false;
+    }
 
     /**
      * @return mixed

@@ -6,6 +6,8 @@
 
 <div>Pour jouer cliquez <a href="{{ url('home') }}">ici</a>.</div>
 
-<div>Si vous avez oublié votre mot de passe <a href="{{ url('recoveryPw', {'user': id}) }}">cliquez ici</a> pour en obtenir un nouveau.</div>
+<div>Si vous avez oublié votre mot de passe <a href="{{ url('recoveryPw', {'key': id}) }}">cliquez ici</a> pour en obtenir un nouveau.</div>
 
 <div>Area Universe.</div>
+
+<small><a href="{{ url('deactivate_newletter', {'key': key}) }}">Cliquer ici pour ne plus recevoir de mail.</a></small>

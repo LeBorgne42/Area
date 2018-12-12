@@ -47,12 +47,13 @@ class Sector
      * @ORM\Column(name="destroy",type="boolean")
      * @Assert\NotBlank(message = "required")
      */
-    protected $destroy = false;
+    protected $destroy;
 
     public function __construct()
     {
         $this->planets = new \Doctrine\Common\Collections\ArrayCollection();
         $this->fleets = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->destroy = false;
     }
 
     /**

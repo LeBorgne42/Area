@@ -4,6 +4,8 @@
 
 <div>Votre mot de passe lors de l'inscription : <strong>{{ password }}</strong></div>
 
-<div>Pour jouer cliquez <a href="{{ url('home') }}">ici</a>.</div>
+<div>Pour jouer cliquez <a href="{{ url('confirmEmail', {'key': key}) }}">ici</a>.</div>
 
 <div>Area Universe.</div>
+
+<small><a href="{{ url('deactivate_newletter', {'key': key}) }}">Cliquer ici pour ne plus recevoir de mail.</a></small>

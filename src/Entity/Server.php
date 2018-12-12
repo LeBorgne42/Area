@@ -23,53 +23,54 @@ class Server
      * @ORM\Column(name="open",type="boolean")
      * @Assert\NotBlank(message = "required")
      */
-    protected $open = false;
+    protected $open;
 
     /**
      * @ORM\Column(name="nbr_message",type="integer")
      */
-    protected $nbrMessage = 0;
+    protected $nbrMessage;
 
     /**
      * @ORM\Column(name="nbr_colonize",type="integer")
      */
-    protected $nbrColonize = 0;
+    protected $nbrColonize;
 
     /**
      * @ORM\Column(name="nbr_salon_message",type="integer")
      */
-    protected $nbrSalonMessage = 0;
+    protected $nbrSalonMessage;
 
     /**
      * @ORM\Column(name="nbr_invasion",type="integer")
      */
-    protected $nbrInvasion = 0;
+    protected $nbrInvasion;
 
     /**
      * @ORM\Column(name="nbr_sell",type="integer")
      */
-    protected $nbrSell = 0;
+    protected $nbrSell;
 
     /**
      * @ORM\Column(name="nbr_battle",type="integer")
      */
-    protected $nbrBattle = 0;
+    protected $nbrBattle;
 
     /**
      * @ORM\Column(name="nbr_building",type="integer")
      */
-    protected $nbrBuilding = 0;
+    protected $nbrBuilding;
 
     /**
      * @ORM\Column(name="nbr_research",type="integer")
      */
-    protected $nbrResearch = 0;
+    protected $nbrResearch;
 
     /**
      * User constructor.
      */
     public function __construct()
     {
+        $this->open = false;
         $this->nbrMessage = 0;
         $this->nbrColonize = 0;
         $this->nbrSalonMessage = 0;
