@@ -66,8 +66,7 @@ class OverviewController extends AbstractController
         $form_image = $this->createForm(UserImageType::class,$user);
         $form_image->handleRequest($request);
 
-        if ($form_image->isSubmitted() && $form_image->isValid()) {
-            $em->persist($user);
+        if ($form_image->isSubmitted()) {
             $em->flush();
         }
 

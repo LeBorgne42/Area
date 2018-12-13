@@ -162,7 +162,6 @@ class User implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(name="email_confirm",type="boolean")
-     * @Assert\NotBlank(message = "required")
      */
     protected $emailConfirm;
 
@@ -846,7 +845,7 @@ class User implements UserInterface, \Serializable
             }
         }
         if ($this->getAlly()) {
-            if ($this->getAlly()->getRadarAlliance($sector) > $return || $return == null) {
+            if ($this->getAlly()->getRadarAlliance($sector, $gal) > $return || $return == null) {
                 $return = $this->getAlly()->getRadarAlliance($sector);
             }
         }

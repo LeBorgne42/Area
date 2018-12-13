@@ -29,8 +29,8 @@ class SpaceShipyardController extends AbstractController
         $level = $usePlanet->getSpaceShip() + 1;
         $usePlanetNb = $usePlanet->getNiobium();
         $usePlanetWt = $usePlanet->getWater();
-        $newGround = $usePlanet->getGroundPlace() + 10;
-        $newSky = $usePlanet->getSkyPlace() + 4;
+        $newGround = $usePlanet->getGroundPlace() + 2;
+        $newSky = $usePlanet->getSkyPlace() + 1;
 
         if(($usePlanetNb < ($level * 3000) || $usePlanetWt < ($level * 2000)) ||
             ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround()) ||
@@ -63,8 +63,8 @@ class SpaceShipyardController extends AbstractController
         $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $level = $usePlanet->getSpaceShip();
-        $newGround = $usePlanet->getGroundPlace() - 10;
-        $newSky = $usePlanet->getSkyPlace() - 4;
+        $newGround = $usePlanet->getGroundPlace() - 2;
+        $newSky = $usePlanet->getSkyPlace() - 1;
 
         if($level == 0 || $usePlanet->getConstructAt() > $now) {
             return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);

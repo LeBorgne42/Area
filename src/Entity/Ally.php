@@ -408,13 +408,13 @@ class Ally
     /**
      * @return mixed
      */
-    public function getRadarAlliance($sector)
+    public function getRadarAlliance($sector, $gal)
     {
         $return = null;
 
         foreach($this->getUsers() as $user) {
             foreach ($user->getPlanets() as $planet) {
-                if ($planet->getSector()->getPosition() == $sector) {
+                if ($planet->getSector()->getPosition() == $sector && $planet->getSector()->getGalaxy()->getPosition() == $gal) {
                     $radar = $planet->getRadar() + $planet->getSkyRadar();
                     if ($radar > $return || $return == null) {
                         $return = $radar;

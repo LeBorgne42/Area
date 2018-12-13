@@ -83,7 +83,7 @@ class SoldierController extends AbstractController
                 if ($usePlanet->getScientistAtNbr() + $nbrScientist > $usePlanet->getScientistMax()) {
                     return $this->redirectToRoute('soldier', ['idp' => $usePlanet->getId()]);
                 }
-                $tmpScientist = $usePlanet->getScientistAtNbr() - $usePlanet->getScientist();
+                $tmpScientist = $usePlanet->getScientistAtNbr();
                 $now->add(new DateInterval('PT' . round((($nbrScientist + $tmpScientist) * 60)/ $user->getScientistProduction()) . 'S'));
                 $usePlanet->setScientistAtNbr($usePlanet->getScientistAtNbr() + $nbrScientist);
             } else {
