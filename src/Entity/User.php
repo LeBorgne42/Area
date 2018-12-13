@@ -846,7 +846,7 @@ class User implements UserInterface, \Serializable
         }
         if ($this->getAlly()) {
             if ($this->getAlly()->getRadarAlliance($sector, $gal) > $return || $return == null) {
-                $return = $this->getAlly()->getRadarAlliance($sector);
+                $return = $this->getAlly()->getRadarAlliance($sector, $gal);
             }
         }
         return $return;

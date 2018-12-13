@@ -384,32 +384,32 @@ class Planet
     /**
      * @ORM\Column(name="empty",type="boolean")
      */
-    protected $empty = false;
+    protected $empty;
 
     /**
      * @ORM\Column(name="cdr",type="boolean")
      */
-    protected $cdr = false;
+    protected $cdr;
 
     /**
      * @ORM\Column(name="merchant",type="boolean")
      */
-    protected $merchant = false;
+    protected $merchant;
 
     /**
      * @ORM\Column(name="moon",type="boolean")
      */
-    protected $moon = false;
+    protected $moon;
 
     /**
      * @ORM\Column(name="radarAt",type="datetime", nullable=true)
      */
-    protected $radarAt = null;
+    protected $radarAt;
 
     /**
      * @ORM\Column(name="brouilleurAt",type="datetime", nullable=true)
      */
-    protected $brouilleurAt = null;
+    protected $brouilleurAt;
 
     /**
      * @Assert\File(
@@ -420,7 +420,7 @@ class Planet
      *
      * @var File
      */
-    private $imageFile= null;
+    private $imageFile;
 
     /**
      * @ORM\Column(name="imageName",type="string", length=20, nullable=true)
@@ -437,6 +437,15 @@ class Planet
     public function __construct()
     {
         $this->fleets = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->centerSearch = 0;
+        $this->imageFile = null;
+        $this->brouilleurAt = null;
+        $this->radarAt = null;
+        $this->moon = 0;
+        $this->merchant = 0;
+        $this->cdr = 0;
+        $this->empty = 0;
+        $this->cdr = 0;
     }
 
     /**
