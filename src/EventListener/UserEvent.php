@@ -76,11 +76,11 @@ class UserEvent implements EventSubscriberInterface
         {
             if($this->token->getToken()) {
                 $user = $this->token->getToken()->getUser();
-                if (!$user->getSpecUsername()) {
 
-                    $now = new DateTime();
-                    $now->setTimezone(new DateTimeZone('Europe/Paris'));
-                    if ($user instanceof User) {
+                $now = new DateTime();
+                $now->setTimezone(new DateTimeZone('Europe/Paris'));
+                if ($user instanceof User) {
+                    if (!$user->getSpecUsername()) {
                         if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
                             $userIp = $_SERVER['HTTP_X_FORWARDED_FOR'];
                         } else {
