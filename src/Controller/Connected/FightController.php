@@ -6,6 +6,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use App\Entity\Report;
+use App\Entity\Fleet;
 use DateTime;
 use DateTimeZone;
 
@@ -634,7 +635,7 @@ class FightController extends AbstractController
     /**
      * @Route("/colonisation-planete/{idp}/{fleet}/", name="colonizer_planet", requirements={"idp"="\d+", "fleet"="\d+"})
      */
-    public function colonizeAction($idp, $fleet)
+    public function colonizeAction($idp, Fleet $fleet)
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();

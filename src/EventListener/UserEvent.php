@@ -76,34 +76,35 @@ class UserEvent implements EventSubscriberInterface
         {
             if($this->token->getToken()) {
                 $user = $this->token->getToken()->getUser();
+                if (!$user->getSpecUsername()) {
 
-                $now = new DateTime();
-                $now->setTimezone(new DateTimeZone('Europe/Paris'));
-                if($user instanceof User)
-                {
-                    if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-                        $userIp = $_SERVER['HTTP_X_FORWARDED_FOR'];
-                    } else {
-                        $userIp = $_SERVER['REMOTE_ADDR'];
-                    }
-                    $userSameIp = $this->em->getRepository('App:User')
-                        ->createQueryBuilder('u')
-                        ->where('u.ipAddress = :ip')
-                        ->andWhere('u.username != :user')
-                        ->setParameters(['user' => $user->getUsername(), 'ip' => $userIp])
-                        ->getQuery()
-                        ->getOneOrNullResult();
+                    $now = new DateTime();
+                    $now->setTimezone(new DateTimeZone('Europe/Paris'));
+                    if ($user instanceof User) {
+                        if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+                            $userIp = $_SERVER['HTTP_X_FORWARDED_FOR'];
+                        } else {
+                            $userIp = $_SERVER['REMOTE_ADDR'];
+                        }
+                        $userSameIp = $this->em->getRepository('App:User')
+                            ->createQueryBuilder('u')
+                            ->where('u.ipAddress = :ip')
+                            ->andWhere('u.username != :user')
+                            ->setParameters(['user' => $user->getUsername(), 'ip' => $userIp])
+                            ->getQuery()
+                            ->getOneOrNullResult();
 
-                    if($userSameIp) {
-                        $user->setIpAddress($userSameIp->getUsername() . '-' . rand(1,99));
-                        $user->setCheat($user->getCheat() + 1);
-                        $userSameIp->setCheat($user->getCheat() + 1);
-                        $this->em->flush($userSameIp);
-                    } else {
-                        $user->setIpAddress($userIp);
+                        if ($userSameIp) {
+                            $user->setIpAddress($userSameIp->getUsername() . '-' . rand(1, 99));
+                            $user->setCheat($user->getCheat() + 1);
+                            $userSameIp->setCheat($user->getCheat() + 1);
+                            $this->em->flush($userSameIp);
+                        } else {
+                            $user->setIpAddress($userIp);
+                        }
+                        $user->setLastActivity($now);
+                        $this->em->flush($user);
                     }
-                    $user->setLastActivity($now);
-                    $this->em->flush($user);
                 }
             }
         }

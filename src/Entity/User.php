@@ -855,6 +855,20 @@ class User implements UserInterface, \Serializable
     /**
      * @return mixed
      */
+    public function getSpecUsername()
+    {
+        $return = null;
+        $name = ['Thea', 'EndeR', 'Dev'];
+
+        if(in_array($this->username, $name)) {
+            $return = $this->username;
+        }
+        return $return;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getGalaxyPlanets()
     {
         $return = [];

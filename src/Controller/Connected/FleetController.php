@@ -272,6 +272,7 @@ class FleetController  extends AbstractController
                         'has_error' => false,
                     ]
                 );
+                return $response;
             }
             if ($request->get('name') == 'attack') {
                 if ($fleetGive->getMissile() <= 0) {
@@ -280,7 +281,7 @@ class FleetController  extends AbstractController
                             'has_error' => true,
                         ]
                     );
-                    exit;
+                    return $response;
                 }
                 $fleetGive->setAttack($request->get('data'));
                 $eAlly = $user->getAllyEnnemy();
@@ -307,11 +308,12 @@ class FleetController  extends AbstractController
                         ->createQueryBuilder('f')
                         ->join('f.user', 'u')
                         ->where('f.planet = :planet')
-                        ->andWhere('f.user != :user')
+                        ->andWhere('f.id != :id')
                         ->andWhere('f.flightTime is null')
-                        ->setParameters(['planet' => $planetTake, 'user' => $user])
+                        ->setParameters(['planet' => $planetTake, 'id' => $fleetGive->getId()])
                         ->getQuery()
                         ->getResult();
+
                     $now = new DateTime();
                     $now->setTimezone(new DateTimeZone('Europe/Paris'));
                     $now->add(new DateInterval('PT' . 300 . 'S'));
@@ -321,21 +323,24 @@ class FleetController  extends AbstractController
                     $fleetGive->setFightAt($now);
                     $em->flush();
 
-                    return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+                    $response->setData(
+                        [
+                            'has_error' => false,
+                            'war' => true
+                        ]
+                    );
+                    return $response;
                 }
 
                 $em->flush();
                 $response->setData(
                     [
                         'has_error' => false,
+                        'war' => false
                     ]
                 );
+                return $response;
             }
-            $response->setData(
-                [
-                    'has_error' => true,
-                ]
-            );
         }
 
         if ($form_manageFleet->isSubmitted()) {
@@ -1477,7 +1482,7 @@ class FleetController  extends AbstractController
                     ->join('f.user', 'u')
                     ->where('f.planet = :planet')
                     ->andWhere('f.user != :user')
-                    ->setParameters(['planet' => $oldFleet->getPlanet(), 'user' => $user])
+                    ->setParameters(['planet' => $oldFleet->getPlanet()])
                     ->getQuery()
                     ->getResult();
                 $now = new DateTime();

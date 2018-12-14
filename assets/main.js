@@ -40,7 +40,12 @@ function manageAttackFleetForm() {
         $.ajax({
             url: $form.attr('action'),
             type: "POST",
-            data: {name: 'attack', data: content}
+            data: {name: 'attack', data: content},
+            success: function(response){
+                if(response.war == true) {
+                    location = location;
+                }
+            }
         });
         //$(this).closest('form').submit();
     });
