@@ -781,6 +781,7 @@ class FleetController  extends AbstractController
                 $planetTake = $form_sendFleet->get('planet')->getData();
                 $sector = $planetTake->getSector()->getPosition();
                 $planetTakee = $planetTake->getPosition();
+                $galaxy = $planetTake->getSector()->getGalaxy()->getPosition();
                 if($planetTake == $fleetGive->getPlanet()) {
                     return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
                 }
@@ -812,7 +813,7 @@ class FleetController  extends AbstractController
                     return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
                 }
             }
-            $sFleet= $fleetGive->getPlanet()->getSector()->getPosition();
+            $sFleet = $fleetGive->getPlanet()->getSector()->getPosition();
             if($fleetGive->getPlanet()->getSector()->getGalaxy()->getPosition() != $galaxy) {
                 $base = 100000;
                 $price = 50;
@@ -847,6 +848,7 @@ class FleetController  extends AbstractController
                     $base = 3000;
                     $price = 3;
                 }
+                var_dump($base); exit;
             }
             $carburant = round($price * ($fleetGive->getNbrSignatures() / 200));
             if($carburant > $user->getBitcoin()) {

@@ -6,6 +6,11 @@
         <br>
         <a target="_blank" href="http://area-control.forumactif.com/f8-mise-a-jour"><button class="text-orange my-4"><strong>{{ 'version'|trans }}</strong></button></a>
     </div>
+    {% if app.user.getConfirmed() == 0 %}
+        <div class="btn-left{% if app.request.attributes.get('_route') == 'confirm_account' %} currentRoute{% endif %}">
+            <a href="{{ path('confirm_account', {'idp': usePlanet.getId()}) }}"><span class="text-orange">{{ 'confirm.account'|trans }}</span></a>
+        </div>
+    {% endif %}
     <div class="btn-left{% if app.request.attributes.get('_route') == 'overview' %} currentRoute{% endif %}">
         <a href="{{ path('overview', {'idp': usePlanet.getId()}) }}"><span>{{ 'globalView'|trans }}</span></a>
     </div>

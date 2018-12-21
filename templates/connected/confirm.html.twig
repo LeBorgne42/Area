@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'front_confirm' %}
+
+{% block title %}{{ 'title'|trans }}{% endblock %}
+
+{% block body %}
+{% if app.user.getConfirmed() == 0 %}
+    <div class="front-block">
+        <table class="table table-striped table-dark borderOverview">
+            <tbody>
+            <tr>
+                <td>
+                    {{ 'info.changes'|trans }}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <table class="table table-striped table-dark text-center borderOverview">
+            <tbody>
+            {{ form_start(form_confirm) }}
+            <tr>
+                <td class="center-cells">
+                    {{ form_widget(form_confirm.username) }}
+                </td>
+                <td class="center-cells">
+                    {{ form_widget(form_confirm.password) }}
+                </td>
+                <td class="center-cells">
+                    {{ form_widget(form_confirm.email) }}
+                </td>
+                <td class="center-cells">
+                    {{ form_widget(form_confirm.sendForm) }}
+                </td>
+            </tr>
+            {{ form_end(form_confirm) }}
+            </tbody>
+        </table>
+    </div>
+{% endif %}
+
+{% endblock %}

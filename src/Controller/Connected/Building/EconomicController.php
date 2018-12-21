@@ -63,7 +63,7 @@ class EconomicController extends AbstractController
         $newGround = $usePlanet->getGroundPlace() - 5;
 
         if(($level == 0 || $usePlanet->getConstructAt() > $now) ||
-            ($usePlanet->getScientist() < $usePlanet->getScientistMax() - 500)) {
+            ($usePlanet->getScientist() > $usePlanet->getScientistMax() - 500)) {
             return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
         $now->add(new DateInterval('PT' . 1800 . 'S'));

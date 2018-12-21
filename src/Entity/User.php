@@ -161,9 +161,9 @@ class User implements UserInterface, \Serializable
     protected $newletter;
 
     /**
-     * @ORM\Column(name="email_confirm",type="boolean")
+     * @ORM\Column(name="confirmed",type="boolean")
      */
-    protected $emailConfirm;
+    protected $confirmed;
 
     /**
      * @ORM\OneToMany(targetEntity="Fleet", mappedBy="user", fetch="EXTRA_LAZY")
@@ -343,7 +343,7 @@ class User implements UserInterface, \Serializable
         $this->viewMessage = 1;
         $this->viewReport = 1;
         $this->tutorial = 1;
-        $this->emailConfirm = 0;
+        $this->confirmed = 1;
         $this->salonAt = null;
         $this->salonBan = null;
         $this->joinAllyAt = null;
@@ -1081,17 +1081,17 @@ class User implements UserInterface, \Serializable
     /**
      * @return mixed
      */
-    public function getEmailConfirm()
+    public function getConfirmed()
     {
-        return $this->emailConfirm;
+        return $this->confirmed;
     }
 
     /**
-     * @param mixed $emailConfirm
+     * @param mixed $confirmed
      */
-    public function setEmailConfirm($emailConfirm): void
+    public function setConfirmed($confirmed): void
     {
-        $this->emailConfirm = $emailConfirm;
+        $this->confirmed = $confirmed;
     }
 
     /**

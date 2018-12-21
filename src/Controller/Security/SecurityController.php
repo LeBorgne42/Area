@@ -158,6 +158,7 @@ class SecurityController extends Controller
         $user->setCreatedAt($now);
         $user->setPassword(password_hash('connected', PASSWORD_BCRYPT));
         $user->setIpAddress($userIp);
+        $user->setConfirmed(0);
         $em->persist($user);
         $em->flush();
 

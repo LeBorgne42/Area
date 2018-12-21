@@ -1,0 +1,6 @@
+title: 'Valider le compte'
+form.username: Pseudo
+form.password: 'Mot de passe'
+form.email: Email
+form.confirm: 'Enregistrer'
+info.changes: 'Changez les infos de votre compte test, vous ne pouvez le faire qu''une fois.'
