@@ -37,7 +37,7 @@ class ConfirmController extends AbstractController
         $form_confirm = $this->createForm(ConfirmType::class, $user);
         $form_confirm->handleRequest($request);
 
-        if ($form_confirm->isSubmitted()) {
+        if ($form_confirm->isSubmitted() && $form_confirm->isValid()) {
             $user->setConfirmed(1);
             $em->flush();
 

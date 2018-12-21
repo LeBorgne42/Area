@@ -848,7 +848,6 @@ class FleetController  extends AbstractController
                     $base = 3000;
                     $price = 3;
                 }
-                var_dump($base); exit;
             }
             $carburant = round($price * ($fleetGive->getNbrSignatures() / 200));
             if($carburant > $user->getBitcoin()) {

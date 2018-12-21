@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97f042ea-d0ee-4bd9-bb02-3d850e24f659" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/Building/EconomicController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/Building/EconomicController.php" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/ConfirmController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/ConfirmController.php" />
       <change beforePath="$PROJECT_DIR$/src/Controller/Connected/FleetController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/FleetController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Security/SecurityController.php" afterPath="$PROJECT_DIR$/src/Controller/Security/SecurityController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" afterPath="$PROJECT_DIR$/src/Entity/User.php" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/ally/noAlly.html.twig" afterPath="$PROJECT_DIR$/templates/connected/ally/noAlly.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/menu/_left_menu.html.twig" afterPath="$PROJECT_DIR$/templates/menu/_left_menu.html.twig" />
-      <change beforePath="$PROJECT_DIR$/translations/front_menu.fr.yml" afterPath="$PROJECT_DIR$/translations/front_menu.fr.yml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,12 +17,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="FleetController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FleetController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Controller/Connected/FleetController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="350">
-              <caret line="785" column="91" lean-forward="true" selection-start-line="785" selection-start-column="91" selection-end-line="785" selection-end-column="91" />
+            <state relative-caret-position="237">
+              <caret line="849" column="17" lean-forward="false" selection-start-line="849" selection-start-column="17" selection-end-line="849" selection-end-column="17" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ConfirmController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Controller/Connected/ConfirmController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="353">
+              <caret line="39" column="57" lean-forward="false" selection-start-line="39" selection-start-column="57" selection-end-line="39" selection-end-column="57" />
+              <folding>
+                <element signature="e#44#91#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -37,8 +43,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Box</find>
-      <find>box</find>
       <find>message_responde</find>
       <find>form_message</find>
       <find>getPlanets</find>
@@ -67,6 +71,8 @@
       <find>confirm</find>
       <find>Email</find>
       <find>return $this-&gt;redirectToRoute('</find>
+      <find>var</find>
+      <find>-&gt;isSubmitted()</find>
     </findStrings>
     <replaceStrings>
       <replace>['id' =&gt; $id, 'gal' =&gt; $gal]</replace>
@@ -174,8 +180,8 @@
         <option value="$PROJECT_DIR$/translations/front_confirm.fr.yml" />
         <option value="$PROJECT_DIR$/templates/menu/_left_menu.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/Security/SecurityController.php" />
-        <option value="$PROJECT_DIR$/src/Controller/Connected/ConfirmController.php" />
         <option value="$PROJECT_DIR$/src/Controller/Connected/FleetController.php" />
+        <option value="$PROJECT_DIR$/src/Controller/Connected/ConfirmController.php" />
       </list>
     </option>
   </component>
@@ -465,12 +471,12 @@
       <workItem from="1544432046526" duration="2590000" />
       <workItem from="1544438240790" duration="4662000" />
       <workItem from="1544602028562" duration="893000" />
-      <workItem from="1544638418545" duration="15685000" />
+      <workItem from="1544638418545" duration="15962000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1729679000" />
+    <option name="totallyTimeSpent" value="1729956000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -924,16 +930,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/ConfirmController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="33" column="77" lean-forward="false" selection-start-line="33" selection-start-column="77" selection-end-line="33" selection-end-column="77" />
-          <folding>
-            <element signature="e#44#91#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/translations/front_confirm.fr.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -944,7 +940,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Connected/OverviewController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
+        <state relative-caret-position="-190">
           <caret line="28" column="12" lean-forward="false" selection-start-line="28" selection-start-column="12" selection-end-line="28" selection-end-column="43" />
           <folding />
         </state>
@@ -952,9 +948,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Connected/FleetController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="785" column="91" lean-forward="true" selection-start-line="785" selection-start-column="91" selection-end-line="785" selection-end-column="91" />
+        <state relative-caret-position="237">
+          <caret line="849" column="17" lean-forward="false" selection-start-line="849" selection-start-column="17" selection-end-line="849" selection-end-column="17" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/ConfirmController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="353">
+          <caret line="39" column="57" lean-forward="false" selection-start-line="39" selection-start-column="57" selection-end-line="39" selection-end-column="57" />
+          <folding>
+            <element signature="e#44#91#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
