@@ -38,7 +38,7 @@ class SpaceShipyardController extends AbstractController
             return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
 
-        $now->add(new DateInterval('PT' . ($level * 7000) . 'S'));
+        $now->add(new DateInterval('PT' . ($level * 1800) . 'S'));
         $usePlanet->setNiobium($usePlanetNb - ($level * 3000));
         $usePlanet->setWater($usePlanetWt - ($level * 2000));
         $usePlanet->setGroundPlace($newGround);

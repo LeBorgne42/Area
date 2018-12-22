@@ -318,10 +318,10 @@ class InstantController extends AbstractController
                 $planet->setWtProduction($planet->getWtProduction() + ($planet->getExtractor() * 1.09));
             } elseif ($build == 'niobiumStock') {
                 $planet->setNiobiumStock($planet->getNiobiumStock() + 1);
-                $planet->setNiobiumMax($planet->getNiobiumMax() + 750000);
+                $planet->setNiobiumMax($planet->getNiobiumMax() + 1000000);
             } elseif ($build == 'waterStock') {
                 $planet->setWaterStock($planet->getWaterStock() + 1);
-                $planet->setWaterMax($planet->getWaterMax() + 750000);
+                $planet->setWaterMax($planet->getWaterMax() + 1000000);
             } elseif ($build == 'city') {
                 $planet->setCity($planet->getCity() + 1);
                 $planet->setWorkerProduction($planet->getWorkerProduction() + 2000);
@@ -651,11 +651,11 @@ class InstantController extends AbstractController
                     if ($sFleet == $sector) {
                         $pFleet = $fleet->getPlanet()->getPosition();
                         if (strpos('0 -1 1 -4 4 -5 5 6 -6', (strval($pFleet - $planetTakee)) ) != false) {
-                            $base = 1500;
+                            $base = 750;
                         } elseif (strpos('2 -2 3 -3 7 -7 8 -8 9 -9 10 -10 11 -11 12 -12', (strval($pFleet - $planetTakee)) ) != false) {
-                            $base = 1750;
+                            $base = 875;
                         } else {
-                            $base = 2000;
+                            $base = 1000;
                         }
                     }
                     /*elseif (strpos('0 -1 1 -10 10 -9 9', (strval($sFleet - $sector)) ) != false) {
@@ -668,7 +668,7 @@ class InstantController extends AbstractController
                         $base= 15000;
                     }*/
                     else {
-                        $base = 3000;
+                        $base = 1500;
                     }
                     if($fleet->getMotherShip()) {
                         $speed = $fleet->getSpeed()  - ($fleet->getSpeed() * 0.10);

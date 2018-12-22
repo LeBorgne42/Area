@@ -653,6 +653,8 @@ class FightController extends AbstractController
             $colonize->setColonizer($colonize->getColonizer() - 1);
             $newPlanet->setUser($colonize->getUser());
             $newPlanet->setName('Colonie');
+            $newPlanet->setSoldier(0);
+            $newPlanet->setScientist(0);
             $newPlanet->setNbColo(count($fleet->getUser()->getPlanets()) + 1);
             if($colonize->getNbrShips() == 0) {
                 $em->remove($colonize);

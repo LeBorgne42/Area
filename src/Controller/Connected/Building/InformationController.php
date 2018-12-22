@@ -43,7 +43,7 @@ class InformationController extends AbstractController
             return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
 
-        $now->add(new DateInterval('PT' . ($level * 3600) . 'S'));
+        $now->add(new DateInterval('PT' . ($level * 2200) . 'S'));
         $usePlanet->setNiobium($usePlanetNb - ($level * 1200));
         $usePlanet->setWater($usePlanetWt - ($level * 650));
         $usePlanet->setGroundPlace($newGround);

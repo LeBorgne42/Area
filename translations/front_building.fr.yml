@@ -59,11 +59,11 @@ building.deleteTxt: 'Êtes vous sûr de vouloir supprimer ce bâtiment ? Vous ne
 building.deleteSave: Détruire
 building.deleteCancel: Annuler
 building.destroyBuild: 'Une démolition est en cours : '
-popover.niobiumStock: '<h5>Stockage de niobium : +250.000<hr>Gestion des cargaisons 2</h5>'
+popover.niobiumStock: '<h5>Stockage de niobium : +1.000.000<hr>Gestion des cargaisons 2</h5>'
 building.niobiumStock: 'Entrepôt de Niobium'
 building.niobiumStock.desc: 'Vous regardez votre production de niobium et vous dites "Mais ou vais-je mettre tout ça!" Et bien ici !'
 building.waterStock.desc: 'Si vous ne jurez que par le niobium, stockez tout de même votre eau... Cela pourrait servir.'
-popover.waterStock: '<h5>Stockage d''eau : +250.000<hr>Gestion des cargaisons 2</h5>'
+popover.waterStock: '<h5>Stockage d''eau : +1.000.000<hr>Gestion des cargaisons 2</h5>'
 building.waterStock: 'Réservoir d''eau'
 popover.bunker: '<h5>Capacitée soldats : +20.000<hr>Accroissement militaire 3</h5>'
 building.bunker: 'Fort défensif'

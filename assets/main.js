@@ -647,7 +647,7 @@ function manageCoordonate(){
 function manageFlightTime(){
     var position = $('#positionFleet').text();
     var speed = $('#speedFleet').text();
-    var base = 2000;
+    var base = 1000;
     var price = 1;
     var carburant = 1;
     $('#fleet_send_planete').off('change').on('change',function(e){
@@ -660,13 +660,13 @@ function manageFlightTime(){
             var pOne = '0 -1 1 -4 4 -5 5 6 -6';
             var pTwo = '2 -2 3 -3 7 -7 8 -8 9 -9 10 -10 11 -11 12 -12';
             if (pOne.indexOf(planete - newPlanete) != -1) {
-                base = 1500;
+                base = 750;
                 price = 0.7;
             } else if (pTwo.indexOf(planete - newPlanete) != -1) {
-                base = 1750;
+                base = 875;
                 price = 0.9;
             } else {
-                base = 2000;
+                base = 1000;
                 price = 1;
             }
         }
@@ -716,10 +716,10 @@ function manageFlightTime(){
             price = 6;
         }*/
         if (position == newPosition) {
-            base = 2000;
+            base = 1000;
             price = 1;
         } else {
-            base = 3000;
+            base = 1500;
             price = 3;
         }
         carburant = Math.round(price * ($('#signatureFleet').text() / 200));

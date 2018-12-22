@@ -167,17 +167,17 @@ class SectorController extends AbstractController
                 if ($sFleet == $sector) {
                     $pFleet = $fleet->getPlanet()->getPosition();
                     if (strpos('0 -1 1 -4 4 -5 5 6 -6', (strval($pFleet - $planete))) != false) {
-                        $base = 1500;
+                        $base = 750;
                         $price = 0.7;
                     } elseif (strpos('2 -2 3 -3 7 -7 8 -8 9 -9 10 -10 11 -11 12 -12', (strval($pFleet - $planete))) != false) {
-                        $base = 1750;
+                        $base = 850;
                         $price = 0.9;
                     } else {
-                        $base = 2000;
+                        $base = 1000;
                         $price = 1;
                     }
                 } else {
-                    $base = 3000;
+                    $base = 1500;
                     $price = 3;
                 }
             }
@@ -257,17 +257,17 @@ class SectorController extends AbstractController
             if ($sFleet == $sector) {
                 $pFleet = $fPlanet->getPosition();
                 if (strpos('0 -1 1 -4 4 -5 5 6 -6', (strval($pFleet - $planete))) != false) {
-                    $base = 1500;
+                    $base = 750;
                     $price = 0.7;
                 } elseif (strpos('2 -2 3 -3 7 -7 8 -8 9 -9 10 -10 11 -11 12 -12', (strval($pFleet - $planete))) != false) {
-                    $base = 1750;
+                    $base = 875;
                     $price = 0.9;
                 } else {
-                    $base = 2000;
+                    $base = 1000;
                     $price = 1;
                 }
             } else {
-                $base = 3000;
+                $base = 1500;
                 $price = 3;
             }
         }

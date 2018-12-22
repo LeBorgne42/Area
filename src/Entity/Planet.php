@@ -26,7 +26,7 @@ class Planet
      * @Assert\Regex(
      *     pattern="/[a-zA-Z0-9]/")
      */
-    protected $name = 'Inhabitée';
+    protected $name;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="planets", fetch="EXTRA_LAZY")
@@ -48,27 +48,27 @@ class Planet
     /**
      * @ORM\Column(name="niobium",type="decimal", precision=28, scale=5)
      */
-    protected $niobium = 10000;
+    protected $niobium;
 
     /**
      * @ORM\Column(name="water",type="decimal", precision=28, scale=5)
      */
-    protected $water = 6500;
+    protected $water;
 
     /**
      * @ORM\Column(name="nbCdr",type="bigint", nullable=true)
      */
-    protected $nbCdr = 0;
+    protected $nbCdr;
 
     /**
      * @ORM\Column(name="wtCdr",type="bigint", nullable=true)
      */
-    protected $wtCdr = 0;
+    protected $wtCdr;
 
     /**
      * @ORM\Column(name="shipProduction",type="decimal", precision=28, scale=5)
      */
-    protected $shipProduction = 1;
+    protected $shipProduction;
 
     /**
      * @ORM\OneToOne(targetEntity="Product", mappedBy="planet", fetch="EXTRA_LAZY")
@@ -78,42 +78,42 @@ class Planet
     /**
      * @ORM\Column(name="workerProduction",type="integer")
      */
-    protected $workerProduction = 6000;
+    protected $workerProduction;
 
     /**
      * @ORM\Column(name="niobiumMax",type="integer")
      */
-    protected $niobiumMax = 500000;
+    protected $niobiumMax;
 
     /**
      * @ORM\Column(name="waterMax",type="integer")
      */
-    protected $waterMax = 400000;
+    protected $waterMax;
 
     /**
      * @ORM\Column(name="soldierMax",type="integer")
      */
-    protected $soldierMax = 2500;
+    protected $soldierMax;
 
     /**
      * @ORM\Column(name="scientistMax",type="integer")
      */
-    protected $scientistMax = 500;
+    protected $scientistMax;
 
     /**
      * @ORM\Column(name="workerMax",type="integer")
      */
-    protected $workerMax = 125000;
+    protected $workerMax;
 
     /**
      * @ORM\Column(name="nbProduction",type="decimal", precision=28, scale=5)
      */
-    protected $nbProduction = 6;
+    protected $nbProduction;
 
     /**
      * @ORM\Column(name="wtProduction",type="decimal", precision=28, scale=5)
      */
-    protected $wtProduction = 5;
+    protected $wtProduction;
 
     /**
      * @ORM\OneToMany(targetEntity="Fleet", mappedBy="planet", fetch="EXTRA_LAZY")
@@ -153,27 +153,27 @@ class Planet
     /**
      * @ORM\Column(name="miner",type="integer", nullable=true)
      */
-    protected $miner = 0;
+    protected $miner;
 
     /**
      * @ORM\Column(name="niobiumStock",type="integer", nullable=true)
      */
-    protected $niobiumStock = 0;
+    protected $niobiumStock;
 
     /**
      * @ORM\Column(name="extractor",type="integer", nullable=true)
      */
-    protected $extractor = 0;
+    protected $extractor;
 
     /**
      * @ORM\Column(name="waterStock",type="integer", nullable=true)
      */
-    protected $waterStock = 0;
+    protected $waterStock;
 
     /**
      * @ORM\Column(name="spaceShip",type="integer", nullable=true)
      */
-    protected $spaceShip = 0;
+    protected $spaceShip;
 
     /**
      * @ORM\Column(name="centerSearch",type="integer", nullable=true)
@@ -183,172 +183,172 @@ class Planet
     /**
      * @ORM\Column(name="metropole",type="integer", nullable=true)
      */
-    protected $metropole = 0;
+    protected $metropole;
 
     /**
      * @ORM\Column(name="city",type="integer", nullable=true)
      */
-    protected $city = 0;
+    protected $city;
 
     /**
      * @ORM\Column(name="caserne",type="integer", nullable=true)
      */
-    protected $caserne = 0;
+    protected $caserne;
 
     /**
      * @ORM\Column(name="bunker",type="integer", nullable=true)
      */
-    protected $bunker = 0;
+    protected $bunker;
 
     /**
      * @ORM\Column(name="radar",type="integer", nullable=true)
      */
-    protected $radar = 0;
+    protected $radar;
 
     /**
      * @ORM\Column(name="skyRadar",type="integer", nullable=true)
      */
-    protected $skyRadar = 0;
+    protected $skyRadar;
 
     /**
      * @ORM\Column(name="skyBrouilleur",type="integer", nullable=true)
      */
-    protected $skyBrouilleur = 0;
+    protected $skyBrouilleur;
 
     /**
      * @ORM\Column(name="lightUsine",type="integer", nullable=true)
      */
-    protected $lightUsine = 0;
+    protected $lightUsine;
 
     /**
      * @ORM\Column(name="heavyUsine",type="integer", nullable=true)
      */
-    protected $heavyUsine = 0;
+    protected $heavyUsine;
 
     /**
      * @ORM\Column(name="sonde",type="bigint", nullable=true)
      */
-    protected $sonde = 0;
+    protected $sonde;
 
     /**
      * @ORM\Column(name="cargoI",type="bigint", nullable=true)
      */
-    protected $cargoI = 0;
+    protected $cargoI;
 
     /**
      * @ORM\Column(name="cargoV",type="bigint", nullable=true)
      */
-    protected $cargoV = 0;
+    protected $cargoV;
 
     /**
      * @ORM\Column(name="cargoX",type="bigint", nullable=true)
      */
-    protected $cargoX = 0;
+    protected $cargoX;
 
     /**
      * @ORM\Column(name="colonizer",type="integer", nullable=true)
      */
-    protected $colonizer = 0;
+    protected $colonizer;
 
     /**
      * @ORM\Column(name="recycleur",type="integer", nullable=true)
      */
-    protected $recycleur = 0;
+    protected $recycleur;
 
     /**
      * @ORM\Column(name="barge",type="integer", nullable=true)
      */
-    protected $barge = 0;
+    protected $barge;
 
     /**
      * @ORM\Column(name="moonMaker",type="integer", nullable=true)
      */
-    protected $moonMaker = 0;
+    protected $moonMaker;
 
     /**
      * @ORM\Column(name="radarShip",type="integer", nullable=true)
      */
-    protected $radarShip = 0;
+    protected $radarShip;
 
     /**
      * @ORM\Column(name="brouilleurShip",type="integer", nullable=true)
      */
-    protected $brouilleurShip = 0;
+    protected $brouilleurShip;
 
     /**
      * @ORM\Column(name="motherShip",type="integer", nullable=true)
      */
-    protected $motherShip = 0;
+    protected $motherShip;
 
     /**
      * @ORM\Column(name="hunter",type="bigint", nullable=true)
      */
-    protected $hunter = 0;
+    protected $hunter;
 
     /**
      * @ORM\Column(name="hunterHeavy",type="bigint", nullable=true)
      */
-    protected $hunterHeavy = 0;
+    protected $hunterHeavy;
 
     /**
      * @ORM\Column(name="hunterWar",type="bigint", nullable=true)
      */
-    protected $hunterWar = 0;
+    protected $hunterWar;
 
     /**
      * @ORM\Column(name="corvet",type="bigint", nullable=true)
      */
-    protected $corvet = 0;
+    protected $corvet;
 
     /**
      * @ORM\Column(name="corvetLaser",type="bigint", nullable=true)
      */
-    protected $corvetLaser = 0;
+    protected $corvetLaser;
 
     /**
      * @ORM\Column(name="corvetWar",type="bigint", nullable=true)
      */
-    protected $corvetWar = 0;
+    protected $corvetWar;
 
     /**
      * @ORM\Column(name="fregate",type="bigint", nullable=true)
      */
-    protected $fregate = 0;
+    protected $fregate;
 
     /**
      * @ORM\Column(name="fregatePlasma",type="bigint", nullable=true)
      */
-    protected $fregatePlasma = 0;
+    protected $fregatePlasma;
 
     /**
      * @ORM\Column(name="croiser",type="bigint", nullable=true)
      */
-    protected $croiser = 0;
+    protected $croiser;
 
     /**
      * @ORM\Column(name="ironClad",type="bigint", nullable=true)
      */
-    protected $ironClad = 0;
+    protected $ironClad;
 
     /**
      * @ORM\Column(name="destroyer",type="bigint", nullable=true)
      */
-    protected $destroyer = 0;
+    protected $destroyer;
 
     /**
      * @ORM\Column(name="soldier",type="integer", nullable=true)
      */
-    protected $soldier = 50;
+    protected $soldier;
 
     /**
      * @ORM\Column(name="worker",type="integer")
      */
-    protected $worker = 10000;
+    protected $worker;
 
     /**
      * @ORM\Column(name="scientist",type="integer", nullable=true)
      */
-    protected $scientist = 100;
+    protected $scientist;
 
     /**
      * @ORM\ManyToOne(targetEntity="Sector", inversedBy="planets", fetch="EXTRA_LAZY")
@@ -369,7 +369,7 @@ class Planet
     /**
      * @ORM\Column(name="groundPlace",type="integer", nullable=true)
      */
-    protected $groundPlace = 0;
+    protected $groundPlace;
 
     /**
      * @ORM\Column(name="sky",type="integer", nullable=true)
@@ -379,7 +379,7 @@ class Planet
     /**
      * @ORM\Column(name="skyPlace",type="integer", nullable=true)
      */
-    protected $skyPlace = 0;
+    protected $skyPlace;
 
     /**
      * @ORM\Column(name="empty",type="boolean")
@@ -446,6 +446,61 @@ class Planet
         $this->cdr = 0;
         $this->empty = 0;
         $this->cdr = 0;
+        $this->name = 'Inhabitée';
+        $this->niobium = 20000;
+        $this->water = 14000;
+        $this->nbCdr = 0;
+        $this->wtCdr = 0;
+        $this->shipProduction = 1;
+        $this->workerProduction = 6000;
+        $this->niobiumMax = 500000;
+        $this->waterMax = 400000;
+        $this->soldierMax = 1000;
+        $this->scientistMax = 0;
+        $this->workerMax = 125000;
+        $this->nbProduction = 6;
+        $this->wtProduction = 5;
+        $this->miner = 0;
+        $this->niobiumStock = 0;
+        $this->extractor = 0;
+        $this->waterStock = 0;
+        $this->spaceShip = 0;
+        $this->metropole = 0;
+        $this->city = 0;
+        $this->caserne = 0;
+        $this->bunker = 0;
+        $this->radar = 0;
+        $this->skyRadar = 0;
+        $this->skyBrouilleur = 0;
+        $this->lightUsine = 0;
+        $this->heavyUsine = 0;
+        $this->sonde = 0;
+        $this->cargoI = 0;
+        $this->cargoV = 0;
+        $this->cargoX = 0;
+        $this->colonizer = 0;
+        $this->recycleur = 0;
+        $this->barge = 0;
+        $this->moonMaker = 0;
+        $this->radarShip = 0;
+        $this->brouilleurShip = 0;
+        $this->motherShip = 0;
+        $this->hunter = 0;
+        $this->hunterHeavy = 0;
+        $this->hunterWar = 0;
+        $this->corvet = 0;
+        $this->corvetLaser = 0;
+        $this->corvetWar = 0;
+        $this->fregate = 0;
+        $this->fregatePlasma = 0;
+        $this->croiser = 0;
+        $this->ironClad = 0;
+        $this->destroyer = 0;
+        $this->soldier = 1000;
+        $this->worker = 10000;
+        $this->scientist = 0;
+        $this->groundPlace = 0;
+        $this->skyPlace = 0;
     }
 
     /**
