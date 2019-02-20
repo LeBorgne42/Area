@@ -4,6 +4,8 @@
 
 {% block title %}{{ 'title'|trans }}{% endblock %}
 
+{# VUE GALAXY AVEC 25 SECTEUR
+
 {% block body %}
     <div class="map-block">
         <table class="table table-bordered table-dark galaxy-table text-center">
@@ -31,12 +33,12 @@
             <span class="pp-mine text-more">.</span> {{ 'galaxy.mine'|trans }} <span class="pp-ally ml-4 text-more">.</span> {{ 'galaxy.ally'|trans }} <span class="pp-enemy ml-4 text-more">.</span> {{ 'galaxy.enemy'|trans }} <span class="pp-ia ml-4 text-more">.</span> {{ 'galaxy.ia'|trans }} <span class="pp-cdr ml-4 text-more">.</span> {{ 'galaxy.cdr'|trans }} <span class="ml-4 text-more">.</span> {{ 'galaxy.empty'|trans }}
         </div>
     </div>
-{% endblock %}
+{% endblock %}#}
 
 
 
 
-{# VUE GALAXY AVEC 100 SECTEUR
+{# VUE GALAXY AVEC 100 SECTEUR#}
 
 {% block body %}
     <div class="map-block">
@@ -48,10 +50,10 @@
                         <tr>
                         {% set x = 1 %}
                     {% endif %}
-                    <td class="center-cells"><a data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.sector'|trans({'%position%': sector.getPosition()}) }}" href="{{ path('map', {'id':sector.getPostion(), 'idp': usePlanet.getId(), 'gal': sector.getGalaxy().getPosition()}) }}">
-                        {% for planet in sector.getPlanets() %}
-                            <span class="{% if planet.getUser() == app.user %}pp-mine{% elseif planet.getPlanetAlliance() == app.user.getAlly() and planet.getPlanetAlliance() != null or planet.getOurAllyPact(app.user) %}pp-ally{% elseif planet.getUser() %}pp-enemy{% elseif planet.getCdr() == true %}pp-cdr{% elseif planet.getMerchant() == true %}pp-ia{% endif %}">{% if planet.getEmpty() == true %}&nbsp;{% else %}.{% endif %}</span>
-                        {% endfor %}
+                    <td class="center-cells{% if sector.getDestroy() == true %} red-border{% endif %}"><a data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.sector'|trans({'%position%': sector.getPosition()}) }}" href="{{ path('map', {'id':sector.getPosition(), 'idp': usePlanet.getId(), 'gal': sector.getGalaxy().getPosition()}) }}">
+                            {% for planet in sector.getPlanets() %}
+                                <span class="{% if planet.getEmpty() == true %}pp-no2{% endif %}{% if planet.getUser() == app.user %}pp-mine2{% elseif planet.getPlanetAlliance() == app.user.getAlly() and planet.getPlanetAlliance() != null or planet.getOurAllyPact(app.user) %}pp-ally2{% elseif planet.getUser() %}pp-enemy2{% elseif planet.getCdr() == true %}pp-cdr2{% elseif planet.getMerchant() == true %}pp-ia2{% endif %}">{% if planet.getEmpty() == true %}&#x25A0{% else %}&#x25A0{% endif %}</span>
+                            {% endfor %}
                         </a></td>
                     {% set x = x + 1 %}
                             {% if x == 11 %}
@@ -62,7 +64,7 @@
             </tbody>
         </table>
         <div class="mt-3 galaxy-info text-center">
-            <span class="pp-mine text-more">.</span> {{ 'galaxy.mine'|trans }} <span class="pp-ally ml-4 text-more">.</span> {{ 'galaxy.ally'|trans }} <span class="pp-enemy ml-4 text-more">.</span> {{ 'galaxy.enemy'|trans }} <span class="pp-ia ml-4 text-more">.</span> {{ 'galaxy.ia'|trans }} <span class="pp-cdr ml-4 text-more">.</span> {{ 'galaxy.cdr'|trans }} <span class="ml-4 text-more">.</span> {{ 'galaxy.empty'|trans }}
+            <span class="pp-mine text-more">&#x25A0</span> {{ 'galaxy.mine'|trans }} <span class="pp-ally ml-4 text-more">&#x25A0</span> {{ 'galaxy.ally'|trans }} <span class="pp-enemy ml-4 text-more">&#x25A0</span> {{ 'galaxy.enemy'|trans }} <span class="pp-ia ml-4 text-more">&#x25A0</span> {{ 'galaxy.ia'|trans }} <span class="pp-cdr ml-4 text-more">&#x25A0</span> {{ 'galaxy.cdr'|trans }} <span class="ml-4 text-more">&#x25A0</span> {{ 'galaxy.empty'|trans }}
         </div>
     </div>
-{% endblock %}#}
+{% endblock %}

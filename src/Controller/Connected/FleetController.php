@@ -816,38 +816,15 @@ class FleetController  extends AbstractController
             $sFleet = $fleetGive->getPlanet()->getSector()->getPosition();
             if($fleetGive->getPlanet()->getSector()->getGalaxy()->getPosition() != $galaxy) {
                 $base = 100000;
-                $price = 50;
+                $price = 25;
             } else {
-                if ($sFleet == $sector) {
-                    $pFleet = $fleetGive->getPlanet()->getPosition();
-                    if (strpos('0 -1 1 -4 4 -5 5 6 -6', (strval($pFleet - $planetTakee)) ) != false) {
-                        $base = 750;
-                        $price = 0.7;
-                    } elseif (strpos('2 -2 3 -3 7 -7 8 -8 9 -9 10 -10 11 -11 12 -12', (strval($pFleet - $planetTakee)) ) != false) {
-                        $base = 875;
-                        $price = 0.9;
-                    } else {
-                        $base = 1000;
-                        $price = 1;
-                    }
-                }
-                /*elseif (strpos('0 -1 1 -10 10 -9 9', (strval($sFleet - $sector)) ) != false) {
-                    $base = 3000;
-                    $price = 1.5;
-                } elseif (strpos('-20 20 12 11 8 2 -12 -11 -8 -2', (strval($sFleet - $sector)) ) != false) {
-                    $base = 6800;
-                    $price = 3.4;
-                } elseif (strpos('-28 28 29 30 31 32 33 22 12 3 7 -29 -30 -31 -32 -33 -22 -13 -3 -7', (strval($sFleet - $sector)) ) != false) {
-                    $base = 8000;
-                    $price = 4;
-                } else {
-                    $base = 12000;
-                    $price = 6;
-                }*/
-                else {
-                    $base = 1500;
-                    $price = 3;
-                }
+                $pFleet = $fleetGive->getPlanet()->getPosition();
+                $x1 = ($sFleet % 10) * 5 + ($pFleet % 5);
+                $x2 = ($sector % 10) * 5 + ($planetTakee % 5);
+                $y1 = ($sFleet / 10) * 5 + ($pFleet % 5);
+                $y2 = ($sector / 10) * 5 + ($planetTakee % 5);
+                $base = sqrt(pow(($x2 - $x1), 2) + pow(($y2 - $y1), 2));
+                $price = $base / 3;
             }
             $carburant = round($price * ($fleetGive->getNbrSignatures() / 200));
             if($carburant > $user->getBitcoin()) {
@@ -858,7 +835,8 @@ class FleetController  extends AbstractController
             } else {
                 $speed = $fleetGive->getSpeed();
             }
-            $now->add(new DateInterval('PT' . round($speed * $base) . 'S'));
+            $distance = $speed * $base * 500;
+            $now->add(new DateInterval('PT' . round($distance) . 'S'));
             $fleetGive->setRecycleAt(null);
             $fleetGive->setNewPlanet($planetTake->getId());
             $fleetGive->setFlightTime($now);

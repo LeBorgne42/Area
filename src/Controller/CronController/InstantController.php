@@ -648,39 +648,40 @@ class InstantController extends AbstractController
                     $planetTakee = $fleet->getPlanete();
                     $sFleet= $fleet->getPlanet()->getSector()->getPosition();
                     $sector = $oldPlanet->getSector()->getPosition();
-                    if ($sFleet == $sector) {
+                    $galaxy = $oldPlanet->getSector()->getGalaxy()->getPosition();
+                    if($fleet->getPlanet()->getSector()->getGalaxy()->getPosition() != $galaxy) {
+                        $base = 100000;
+                        $price = 25;
+                    } else {
                         $pFleet = $fleet->getPlanet()->getPosition();
-                        if (strpos('0 -1 1 -4 4 -5 5 6 -6', (strval($pFleet - $planetTakee)) ) != false) {
-                            $base = 750;
-                        } elseif (strpos('2 -2 3 -3 7 -7 8 -8 9 -9 10 -10 11 -11 12 -12', (strval($pFleet - $planetTakee)) ) != false) {
-                            $base = 875;
+                        $x1 = ($sFleet % 10) * 5 + ($pFleet % 5);
+                        $x2 = ($sector % 10) * 5 + ($planetTakee % 5);
+                        $y1 = ($sFleet / 10) * 5 + ($pFleet % 5);
+                        $y2 = ($sector / 10) * 5 + ($planetTakee % 5);
+                        $base = sqrt(pow(($x2 - $x1), 2) + pow(($y2 - $y1), 2));
+                        $price = $base / 3;
+                    }
+                    $carburant = round($price * ($fleet->getNbrSignatures() / 200));
+                    $fuser = $fleet->getUser();
+                    if($carburant <= $fuser->getBitcoin()) {
+                        if ($fleet->getMotherShip()) {
+                            $speed = $fleet->getSpeed() - ($fleet->getSpeed() * 0.10);
                         } else {
-                            $base = 1000;
+                            $speed = $fleet->getSpeed();
                         }
+                        $distance = $speed * $base * 500;
+                        $moreNow = new DateTime();
+                        $moreNow->setTimezone(new DateTimeZone('Europe/Paris'));
+                        $moreNow->add(new DateInterval('PT' . 120 . 'S'));
+                        $now->add(new DateInterval('PT' . round($distance) . 'S'));
+                        $fleet->setNewPlanet($oldPlanet->getId());
+                        $fleet->setFlightTime($now);
+                        $fleet->setFlightType(1);
+                        $fleet->setSector($oldPlanet->getSector());
+                        $fleet->setPlanete($oldPlanet->getPosition());
+                        $fleet->setCancelFlight($moreNow);
+                        $fuser->setBitcoin($user->getBitcoin() - $carburant);
                     }
-                    /*elseif (strpos('0 -1 1 -10 10 -9 9', (strval($sFleet - $sector)) ) != false) {
-                        $base= 3000;
-                    } elseif (strpos('-20 20 12 11 8 2 -12 -11 -8 -2', (strval($sFleet - $sector)) ) != false) {
-                        $base= 6800;
-                    } elseif (strpos('-28 28 29 30 31 32 33 22 12 3 7 -29 -30 -31 -32 -33 -22 -13 -3 -7', (strval($sFleet - $sector)) ) != false) {
-                        $base= 8000;
-                    } else {
-                        $base= 15000;
-                    }*/
-                    else {
-                        $base = 1500;
-                    }
-                    if($fleet->getMotherShip()) {
-                        $speed = $fleet->getSpeed()  - ($fleet->getSpeed() * 0.10);
-                    } else {
-                        $speed = $fleet->getSpeed();
-                    }
-                    $now->add(new DateInterval('PT' . round($speed * $base) . 'S'));
-                    $fleet->setNewPlanet($oldPlanet->getId());
-                    $fleet->setFlightTime($now);
-                    $fleet->setFlightType(1);
-                    $fleet->setSector($oldPlanet->getSector());
-                    $fleet->setPlanete($oldPlanet->getPosition());
                 } elseif ($fleet->getFlightType() == '3') {
                     if ($fleet->getColonizer() && $newPlanet->getUser() == null &&
                         $newPlanet->getEmpty() == false && $newPlanet->getMerchant() == false &&

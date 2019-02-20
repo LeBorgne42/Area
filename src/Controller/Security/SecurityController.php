@@ -259,9 +259,9 @@ class SecurityController extends Controller
         } else {
             $userIp = $_SERVER['REMOTE_ADDR'];
         }
-        if($user->getSpecUsername()) {
+        /*if($user->getSpecUsername()) {
             $userIp = $user->getUsername();
-        }
+        }*/
 
         $userSameIp = $em->getRepository('App:User')
             ->createQueryBuilder('u')

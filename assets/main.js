@@ -653,27 +653,19 @@ function manageFlightTime(){
     $('#fleet_send_planete').off('change').on('change',function(e){
         var newPosition = $('#fleet_send_sector').val();
         newPosition = newPosition.toString();
-        if (position == newPosition) {
-            var planete = $('#planeteFleet').text();
-            var newPlanete = $('#fleet_send_planete').val();
-            newPlanete = newPlanete.toString();
-            var pOne = '0 -1 1 -4 4 -5 5 6 -6';
-            var pTwo = '2 -2 3 -3 7 -7 8 -8 9 -9 10 -10 11 -11 12 -12';
-            if (pOne.indexOf(planete - newPlanete) != -1) {
-                base = 750;
-                price = 0.7;
-            } else if (pTwo.indexOf(planete - newPlanete) != -1) {
-                base = 875;
-                price = 0.9;
-            } else {
-                base = 1000;
-                price = 1;
-            }
-        }
+        var planete = $('#planeteFleet').text();
+        var newPlanete = $('#fleet_send_planete').val();
+        newPlanete = newPlanete.toString();
+        var x1 = (position % 10) * 5 + (planete % 5);
+        var x2 = (newPosition % 10) * 5 + (newPlanete % 5);
+        var y1 = (position / 10) * 5 + (planete % 5);
+        var y2 = (newPosition / 10) * 5 + (newPlanete % 5);
+        var base = Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2));
+        var price = base / 3;
         carburant = Math.round(price * ($('#signatureFleet').text() / 200));
         var now = new Date();
         var travel = new Date();
-        travel.setSeconds(travel.getSeconds() + (base * speed));
+        travel.setSeconds(travel.getSeconds() + (base * speed * 500));
         var date_now = Math.abs((travel - now) / 1000);
         var jours = Math.floor(date_now / (60 * 60 * 24));
         var heures = Math.floor((date_now - (jours * 60 * 60 * 24)) / (60 * 60));
@@ -696,36 +688,19 @@ function manageFlightTime(){
     $('#fleet_send_sector').off('change').on('change',function(e){
         var newPosition = $('#fleet_send_sector').val();
         newPosition = newPosition.toString();
-        /*var first = '0 -1 1 -10 10 -9 9';
-        var second = '-20 20 12 11 8 2 -12 -11 -8 -2';
-        var third = '-28 28 29 30 31 32 33 22 12 3 7 -29 -30 -31 -32 -33 -22 -13 -3 -7';
-        if (position == newPosition) {
-            base = 2000;
-            price = 1;
-        } else if (first.indexOf(position - newPosition) != -1) {
-            base = 3000;
-            price = 1.5;
-        } else if (second.indexOf(position - newPosition) != -1) {
-            base = 6800;
-            price = 3.4;
-        } else if (third.indexOf(position - newPosition) != -1) {
-            base = 8000;
-            price = 4;
-        } else {
-            base = 12000;
-            price = 6;
-        }*/
-        if (position == newPosition) {
-            base = 1000;
-            price = 1;
-        } else {
-            base = 1500;
-            price = 3;
-        }
+        var planete = $('#planeteFleet').text();
+        var newPlanete = $('#fleet_send_planete').val();
+        newPlanete = newPlanete.toString();
+        var x1 = (position % 10) * 5 + (planete % 5);
+        var x2 = (newPosition % 10) * 5 + (newPlanete % 5);
+        var y1 = (position / 10) * 5 + (planete % 5);
+        var y2 = (newPosition / 10) * 5 + (newPlanete % 5);
+        var base = Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2));
+        var price = base / 3;
         carburant = Math.round(price * ($('#signatureFleet').text() / 200));
         var now = new Date();
         var travel = new Date();
-        travel.setSeconds(travel.getSeconds() + (base * speed));
+        travel.setSeconds(travel.getSeconds() + (base * speed * 500));
         var date_now = Math.abs((travel - now) / 1000);
         var jours = Math.floor(date_now / (60 * 60 * 24));
         var heures = Math.floor((date_now - (jours * 60 * 60 * 24)) / (60 * 60));

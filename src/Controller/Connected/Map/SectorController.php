@@ -157,54 +157,43 @@ class SectorController extends AbstractController
             $sFleet= $fleet->getPlanet()->getSector()->getPosition();
             $sector = $planet->getSector()->getPosition();
             $planete = $planet->getPosition();
-            if($user->getHyperespace() == 1) {
-                $galaxy = $planet->getSector()->getGalaxy()->getPosition();
+            $galaxy = $planet->getSector()->getGalaxy()->getPosition();
+            if($user->getHyperespace() != 1 && $fleet->getPlanet()->getSector()->getGalaxy()->getPosition() != $galaxy) {
+                return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getPosition()]);
             }
             if($fleet->getPlanet()->getSector()->getGalaxy()->getPosition() != $galaxy) {
                 $base = 100000;
-                $price = 50;
+                $price = 25;
             } else {
-                if ($sFleet == $sector) {
-                    $pFleet = $fleet->getPlanet()->getPosition();
-                    if (strpos('0 -1 1 -4 4 -5 5 6 -6', (strval($pFleet - $planete))) != false) {
-                        $base = 750;
-                        $price = 0.7;
-                    } elseif (strpos('2 -2 3 -3 7 -7 8 -8 9 -9 10 -10 11 -11 12 -12', (strval($pFleet - $planete))) != false) {
-                        $base = 850;
-                        $price = 0.9;
-                    } else {
-                        $base = 1000;
-                        $price = 1;
-                    }
-                } else {
-                    $base = 1500;
-                    $price = 3;
-                }
+                $pFleet = $fleet->getPlanet()->getPosition();
+                $x1 = ($sFleet % 10) * 5 + ($pFleet % 5);
+                $x2 = ($sector % 10) * 5 + ($planete % 5);
+                $y1 = ($sFleet / 10) * 5 + ($pFleet % 5);
+                $y2 = ($sector / 10) * 5 + ($planete % 5);
+                $base = sqrt(pow(($x2 - $x1), 2) + pow(($y2 - $y1), 2));
+                $price = $base / 3;
             }
-            /*elseif (strpos('0 -1 1 -10 10 -9 9', (strval($sFleet - $sector)) ) != false) {
-                $base = 3000;
-                $price = 1.5;
-            } elseif (strpos('-20 20 12 11 8 2 -12 -11 -8 -2', (strval($sFleet - $sector)) ) != false) {
-                $base = 6800;
-                $price = 3.4;
-            } elseif (strpos('-28 28 29 30 31 32 33 22 12 3 7 -29 -30 -31 -32 -33 -22 -13 -3 -7', (strval($sFleet - $sector)) ) != false) {
-                $base = 8000;
-                $price = 4;
-            } else {
-                $base = 12000;
-                $price = 6;
-            }*/
             $carburant = round($price * ($fleet->getNbrSignatures() / 200));
             if($carburant > $user->getBitcoin()) {
                 return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getPosition()]);
             }
-            $now->add(new DateInterval('PT' . round($fleet->getSpeed() * $base) . 'S'));
+            if($fleet->getMotherShip()) {
+                $speed = $fleet->getSpeed() - ($fleet->getSpeed() * 0.10);
+            } else {
+                $speed = $fleet->getSpeed();
+            }
+            $distance = $speed * $base * 500;
+            $now->add(new DateInterval('PT' . round($distance) . 'S'));
+            $moreNow = new DateTime();
+            $moreNow->setTimezone(new DateTimeZone('Europe/Paris'));
+            $moreNow->add(new DateInterval('PT' . 120 . 'S'));
             $fleet->setRecycleAt(null);
             $fleet->setNewPlanet($planet->getId());
             $fleet->setFlightTime($now);
             $fleet->setSector($planet->getSector());
             $fleet->setPlanete($planete);
             $fleet->setFlightType($form_sendFleet->get('flightType')->getData());
+            $fleet->setCancelFlight($moreNow);
             $user->setBitcoin($user->getBitcoin() - $carburant);
 
             $em->flush();
@@ -252,34 +241,16 @@ class SectorController extends AbstractController
         }
         if($fPlanet->getSector()->getGalaxy()->getPosition() != $galaxy) {
             $base = 100000;
-            $price = 50;
+            $price = 25;
         } else {
-            if ($sFleet == $sector) {
-                $pFleet = $fPlanet->getPosition();
-                if (strpos('0 -1 1 -4 4 -5 5 6 -6', (strval($pFleet - $planete))) != false) {
-                    $base = 750;
-                    $price = 0.7;
-                } elseif (strpos('2 -2 3 -3 7 -7 8 -8 9 -9 10 -10 11 -11 12 -12', (strval($pFleet - $planete))) != false) {
-                    $base = 875;
-                    $price = 0.9;
-                } else {
-                    $base = 1000;
-                    $price = 1;
-                }
-            } else {
-                $base = 1500;
-                $price = 3;
-            }
+            $pFleet = $fPlanet->getPosition();
+            $x1 = ($sFleet % 10) * 5 + ($pFleet % 5);
+            $x2 = ($sector % 10) * 5 + ($planete % 5);
+            $y1 = ($sFleet / 10) * 5 + ($pFleet % 5);
+            $y2 = ($sector / 10) * 5 + ($planete % 5);
+            $base = sqrt(pow(($x2 - $x1), 2) + pow(($y2 - $y1), 2));
+            $price = $base / 3;
         }
-        /*elseif (strpos('0 -1 1 -10 10 -9 9', (strval($sFleet - $sector)) ) != false) {
-            $base = 3000;
-        } elseif (strpos('-20 20 12 11 8 2 -12 -11 -8 -2', (strval($sFleet - $sector)) ) != false) {
-            $base = 6800;
-        } elseif (strpos('-28 28 29 30 31 32 33 22 12 3 7 -29 -30 -31 -32 -33 -22 -13 -3 -7', (strval($sFleet - $sector)) ) != false) {
-            $base = 8000;
-        } else {
-            $base = 12000;
-        }*/
         $carburant = round($price * ($fPlanet->getNbrSignatures() / 200));
         if(1 > $user->getBitcoin()) {
             return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getPosition()]);
@@ -290,12 +261,18 @@ class SectorController extends AbstractController
         $fleet->setPlanet($fPlanet);
         $fleet->setName('Auto Sonde');
         $fPlanet->setSonde($fPlanet->getSonde() - 1);
-        $now->add(new DateInterval('PT' . round($fleet->getSpeed() * $base) . 'S'));
+        $speed = $fleet->getSpeed();
+        $distance = $speed * $base * 500;
+        $now->add(new DateInterval('PT' . round($distance) . 'S'));
+        $moreNow = new DateTime();
+        $moreNow->setTimezone(new DateTimeZone('Europe/Paris'));
+        $moreNow->add(new DateInterval('PT' . 120 . 'S'));
         $fleet->setNewPlanet($planet->getId());
         $fleet->setFlightTime($now);
         $fleet->setSector($planet->getSector());
         $fleet->setPlanete($planete);
         $fleet->setFlightType(1);
+        $fleet->setCancelFlight($moreNow);
         $user->setBitcoin($user->getBitcoin() - $carburant);
         $em->persist($fleet);
 

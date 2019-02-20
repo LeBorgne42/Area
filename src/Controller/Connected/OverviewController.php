@@ -135,7 +135,14 @@ class OverviewController extends AbstractController
 
                 $em->flush();
             }
+            $galaxys = $em->getRepository('App:Galaxy')
+                ->createQueryBuilder('g')
+                ->orderBy('g.position', 'ASC')
+                ->getQuery()
+                ->getResult();
+
             return $this->render('connected/game_over.html.twig', [
+                'galaxys' => $galaxys,
             ]);
         } else {
             return $this->redirectToRoute('home');

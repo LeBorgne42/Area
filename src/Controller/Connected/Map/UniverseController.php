@@ -23,6 +23,7 @@ class UniverseController extends AbstractController
 
         $galaxys = $em->getRepository('App:Galaxy')
             ->createQueryBuilder('g')
+            ->select('g.position')
             ->orderBy('g.position', 'ASC')
             ->getQuery()
             ->getResult();

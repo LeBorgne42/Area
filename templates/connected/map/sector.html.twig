@@ -5,6 +5,8 @@
 {% block title %}{{ 'title'|trans }}{% endblock %}
 
 {% block body %}
+
+    {#  Pour 25 secteurs
 {% set topSector = id - 4 %}
     {% if topSector <= 0 %}
         {% set topSector = id + 12 %}
@@ -21,24 +23,23 @@
     {% if leftSector == 0 %}
         {% set leftSector = 16 %}
     {% endif %}
-    {#  Pour 100 secteurs
-
-    {% set topSector = id - 10 %}
-    {% if topSector < 0 %}
-        {% set topSector = id + 90 %}
-    {% endif %}
-    {% set rightSector = id + 1 %}
-    {% if rightSector == 101 %}
-        {% set rightSector = 1 %}
-    {% endif %}
-    {% set bottomSector = id + 10 %}
-    {% if bottomSector > 100 %}
-        {% set bottomSector = id - 90 %}
-    {% endif %}
-    {% set leftSector = id - 1 %}
-    {% if leftSector == 0 %}
-        {% set leftSector = 100 %}
-    {% endif %}#}
+#}
+{% set topSector = id - 10 %}
+{% if topSector < 0 %}
+    {% set topSector = id + 90 %}
+{% endif %}
+{% set rightSector = id + 1 %}
+{% if rightSector == 101 %}
+    {% set rightSector = 1 %}
+{% endif %}
+{% set bottomSector = id + 10 %}
+{% if bottomSector > 100 %}
+    {% set bottomSector = id - 90 %}
+{% endif %}
+{% set leftSector = id - 1 %}
+{% if leftSector == 0 %}
+    {% set leftSector = 100 %}
+{% endif %}
     <div class="map-block">
         <div class="block-title ml-4"><h2>{{ 'galaxy.number'|trans }} {{ gal }} - {{ 'sector.number'|trans }} {{ id }}</h2></div>
         <table class="table sector-table text-center sector">

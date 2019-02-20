@@ -36,150 +36,165 @@ class ServerController extends AbstractController
             'planet25.png', 'planet26.png', 'planet27.png', 'planet28.png', 'planet29.png', 'planet30.png',
             'planet31.png', 'planet32.png', 'planet33.png'
         ];
-        $x = 0;
-        while($x < 5) {
-            $nbrSector = 1;
-            $nbrPlanets = 0;
-            $galaxy = new Galaxy();
-            $galaxy->setPosition(1);
-            $em->persist($galaxy);
-            /*$salon = new Salon();
-            $salon->setName('Public');
-            $em->persist($salon);
-            $em->flush();*/
 
-            $iaPlayer = $em->getRepository('App:User')->find(['id' => 1]);
+        $nbrGalaxy = $em->getRepository('App:Galaxy')->findAll();
+        $nbrSector = 1;
+        $nbrPlanets = 0;
+        $galaxy = new Galaxy();
+        $galaxy->setPosition(count($nbrGalaxy) + 1);
+        $em->persist($galaxy);
+        /*$salon = new Salon();
+        $salon->setName('Public');
+        $em->persist($salon);
+        $em->flush();*/
+        $iaPlayer = $em->getRepository('App:User')->find(['id' => 1]);
 
-            if ($iaPlayer == null) {
-                $iaPlayer = new User();
-                $now = new DateTime();
-                $iaPlayer->setUsername('Les Hydres');
-                $iaPlayer->setEmail('support@areauniverse.eu');
-                $iaPlayer->setCreatedAt($now);
-                $iaPlayer->setPassword(password_hash('ViolGratuit2019', PASSWORD_BCRYPT));
-                $iaPlayer->setBitcoin(100);
-                $iaPlayer->setImageName('hydre.png');
-                $iaPlayer->setTerraformation(999999);
-                $rank = new Rank();
-                $em->persist($rank);
-                $iaPlayer->setRank($rank);
-                $em->persist($iaPlayer);
+        /*if ($iaPlayer == null) {
+            $iaPlayer = new User();
+            $now = new DateTime();
+            $iaPlayer->setUsername('Les Hydres');
+            $iaPlayer->setEmail('support@areauniverse.eu');
+            $iaPlayer->setCreatedAt($now);
+            $iaPlayer->setPassword(password_hash('ViolGratuit2019', PASSWORD_BCRYPT));
+            $iaPlayer->setBitcoin(100);
+            $iaPlayer->setImageName('hydre.png');
+            $iaPlayer->setTerraformation(999999);
+            $rank = new Rank();
+            $em->persist($rank);
+            $iaPlayer->setRank($rank);
+            $em->persist($iaPlayer);
 
-                $iaSalon = $em->getRepository('App:Salon')->find(['id' => 1]);
-                $iaSalon->addUser($iaPlayer);
-                $em->flush();
-            }
+            $iaSalon = $em->getRepository('App:Salon')->find(['id' => 1]);
+            $iaSalon->addUser($iaPlayer);
+            $em->flush();
+        }*/
 
-            while ($nbrSector <= 100) {
-                $nbrPlanet = 1;
-                $sector = new Sector();
-                $sector->setGalaxy($galaxy);
-                $sector->setPosition($nbrSector);
-                $em->persist($sector);
-                while ($nbrPlanet <= 25) {
-                    if (($nbrSector == 23 || $nbrSector == 28 || $nbrSector == 73 || $nbrSector == 78) && $nbrPlanet == 13) {
+        while ($nbrSector <= 100) {
+            $nbrPlanet = 1;
+            $sector = new Sector();
+            $sector->setGalaxy($galaxy);
+            $sector->setPosition($nbrSector);
+            $em->persist($sector);
+            while ($nbrPlanet <= 25) {
+                if (($nbrSector == 23 || $nbrSector == 28 || $nbrSector == 73 || $nbrSector == 78) && $nbrPlanet == 13) {
+                    $planet = new Planet();
+                    $planet->setMerchant(true);
+                    $planet->setGround(400);
+                    $planet->setSky(80);
+                    $planet->setImageName('merchant.png');
+                    $planet->setName('Marchands');
+                    $planet->setSector($sector);
+                    $planet->setPosition($nbrPlanet);
+                    $fleet = new Fleet();
+                    $fleet->setHunterWar(200);
+                    $fleet->setCorvetWar(25);
+                    $fleet->setFregatePlasma(2);
+                    $fleet->setDestroyer(1);
+                    $fleet->setUser($iaPlayer);
+                    $fleet->setPlanet($planet);
+                    $fleet->setAttack(1);
+                    $fleet->setName('Hydra Force');
+                    $em->persist($fleet);
+                } else {
+                    if (rand(1, 20) < 6) {
                         $planet = new Planet();
-                        $planet->setMerchant(true);
-                        $planet->setGround(400);
-                        $planet->setSky(80);
-                        $planet->setImageName('merchant.png');
-                        $planet->setName('Marchands');
+                        $planet->setEmpty(true);
+                        $planet->setName('Vide');
                         $planet->setSector($sector);
                         $planet->setPosition($nbrPlanet);
+                    } elseif (rand(0, 101) < 2) {
+                        $planet = new Planet();
+                        $planet->setCdr(true);
+                        $planet->setImageName('cdr.png');
+                        $planet->setName('Astéroïdes');
+                        $planet->setSector($sector);
+                        $planet->setPosition($nbrPlanet);
+                        $fleet = new Fleet();
+                        $fleet->setHunterWar(350);
+                        $fleet->setCorvetWar(75);
+                        $fleet->setFregatePlasma(30);
+                        $fleet->setDestroyer(8);
+                        $fleet->setUser($iaPlayer);
+                        $fleet->setPlanet($planet);
+                        $fleet->setAttack(1);
+                        $fleet->setName('Hydra Force');
+                        $em->persist($fleet);
                     } else {
-                        if (rand(1, 20) < 6) {
-                            $planet = new Planet();
-                            $planet->setEmpty(true);
-                            $planet->setName('Vide');
-                            $planet->setSector($sector);
-                            $planet->setPosition($nbrPlanet);
-                        } elseif (rand(0, 101) < 2) {
-                            $planet = new Planet();
-                            $planet->setCdr(true);
-                            $planet->setImageName('cdr.png');
-                            $planet->setName('Astéroïdes');
-                            $planet->setSector($sector);
-                            $planet->setPosition($nbrPlanet);
-                        } else {
-                            $nbrPlanets++;
-                            $planet = new Planet();
+                        $nbrPlanets++;
+                        $planet = new Planet();
 
-                            $planet->setImageName($image[rand(0, 32)]);
-                            $planet->setSector($sector);
-                            $planet->setPosition($nbrPlanet);
-                            if (($nbrSector >= 1 && $nbrSector <= 9) || ($nbrSector >= 92 && $nbrSector <= 99) || ($nbrSector % 10 == 0 || $nbrSector % 10 == 1)) {
-                                if ($nbrPlanet == 4 || $nbrPlanet == 6 || $nbrPlanet == 15 || $nbrPlanet == 17 || $nbrPlanet == 25) {
-                                    $planet->setGround(25);
-                                    $planet->setSky(5);
-                                } else {
-                                    $planet->setGround(rand(30, 40));
-                                    $planet->setSky(rand(5, 8));
-                                }
-                            } elseif ($nbrSector == 45 || $nbrSector == 46 || $nbrSector == 55 || $nbrSector == 56) {
-                                $planet->setGround(rand(65, 85));
-                                $planet->setSky(rand(10, 20));
+                        $planet->setImageName($image[rand(0, 32)]);
+                        $planet->setSector($sector);
+                        $planet->setPosition($nbrPlanet);
+                        if (($nbrSector >= 1 && $nbrSector <= 9) || ($nbrSector >= 92 && $nbrSector <= 99) || ($nbrSector % 10 == 0 || $nbrSector % 10 == 1)) {
+                            if ($nbrPlanet == 4 || $nbrPlanet == 6 || $nbrPlanet == 15 || $nbrPlanet == 17 || $nbrPlanet == 25) {
+                                $planet->setGround(25);
+                                $planet->setSky(5);
                             } else {
-                                $planet->setGround(rand(48, 60));
-                                $planet->setSky(rand(8, 11));
+                                $planet->setGround(rand(30, 40));
+                                $planet->setSky(rand(5, 8));
                             }
+                        } elseif ($nbrSector == 45 || $nbrSector == 46 || $nbrSector == 55 || $nbrSector == 56) {
+                            $planet->setGround(rand(65, 85));
+                            $planet->setSky(rand(10, 20));
+                        } else {
+                            $planet->setGround(rand(48, 60));
+                            $planet->setSky(rand(8, 11));
                         }
                     }
-                    $em->persist($planet);
-                    $nbrPlanet++;
                 }
-                $nbrSector++;
+                $em->persist($planet);
+                $nbrPlanet++;
             }
-            $em->flush();
-
-            $iaPlanet = $em->getRepository('App:Planet')
-                ->createQueryBuilder('p')
-                ->where('p.user is null')
-                ->andWhere('p.ground > :ground')
-                ->andWhere('p.sky > :sky')
-                ->andWhere('p.ground < :limitG')
-                ->andWhere('p.sky < :limitS')
-                ->setParameters(['ground' => 70, 'sky' => 15, 'limitG' => 86, 'limitS' => 21])
-                ->setMaxResults(1)
-                ->getQuery()
-                ->getOneOrNullResult();
-
-            $iaPlayer = $em->getRepository('App:User')->find(['id' => 1]);
-
-            $iaPlanet->setUser($iaPlayer);
-            $iaPlanet->setWorker(500000);
-            $iaPlanet->setWorkerMax(500000);
-            $iaPlanet->setSoldier(150000);
-            $iaPlanet->setSoldierMax(150000);
-            $iaPlanet->setCaserne(500);
-            $iaPlanet->setGround(1300);
-            $iaPlanet->setSky(180);
-            $iaPlanet->setImageName('hydra_planet.png');
-            $iaPlanet->setName('Fort Hydra');
-            $iaPlayer->addPlanet($iaPlanet);
-
-            $putFleets = $em->getRepository('App:Planet')
-                ->createQueryBuilder('p')
-                ->join('p.sector', 's')
-                ->andWhere('s.position in (:pos)')
-                ->setParameters(['pos' => [45, 46, 55, 56]])
-                ->getQuery()
-                ->getResult();
-
-            foreach ($putFleets as $putFleet) {
-                $fleet = new Fleet();
-                $fleet->setHunterWar(750);
-                $fleet->setCorvetWar(125);
-                $fleet->setFregatePlasma(50);
-                $fleet->setDestroyer(10);
-                $fleet->setUser($iaPlayer);
-                $fleet->setPlanet($putFleet);
-                $fleet->setAttack(1);
-                $fleet->setName('Hydra Force');
-                $em->persist($fleet);
-            }
-            $em->flush();
-            $x = $x + 1;
+            $nbrSector++;
         }
+        $em->flush();
+
+        $iaPlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.user is null')
+            ->andWhere('p.ground > :ground')
+            ->andWhere('p.sky > :sky')
+            ->andWhere('p.ground < :limitG')
+            ->andWhere('p.sky < :limitS')
+            ->setParameters(['ground' => 70, 'sky' => 15, 'limitG' => 86, 'limitS' => 21])
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $iaPlanet->setUser($iaPlayer);
+        $iaPlanet->setWorker(500000);
+        $iaPlanet->setWorkerMax(500000);
+        $iaPlanet->setSoldier(150000);
+        $iaPlanet->setSoldierMax(150000);
+        $iaPlanet->setCaserne(500);
+        $iaPlanet->setGround(1300);
+        $iaPlanet->setSky(180);
+        $iaPlanet->setImageName('hydra_planet.png');
+        $iaPlanet->setName('Fort Hydra');
+        $iaPlayer->addPlanet($iaPlanet);
+
+        $putFleets = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->join('p.sector', 's')
+            ->andWhere('s.position in (:pos)')
+            ->setParameters(['pos' => [45, 46, 55, 56]])
+            ->getQuery()
+            ->getResult();
+
+        foreach ($putFleets as $putFleet) {
+            $fleet = new Fleet();
+            $fleet->setHunterWar(750);
+            $fleet->setCorvetWar(125);
+            $fleet->setFregatePlasma(50);
+            $fleet->setDestroyer(10);
+            $fleet->setUser($iaPlayer);
+            $fleet->setPlanet($putFleet);
+            $fleet->setAttack(1);
+            $fleet->setName('Hydra Force');
+            $em->persist($fleet);
+        }
+        $em->flush();
 
         return $this->render('server/create.html.twig', [
             'nbrPlanet' => $nbrPlanets,
@@ -340,10 +355,18 @@ class ServerController extends AbstractController
             $em->remove($sContent);
         }
 
-        $salons = $em->getRepository('App:Salon')->find(['id' => 1]);
+        $salons = $em->getRepository('App:Salon')->findAll();
 
-        foreach ($salons as $salon) {
-            $em->remove($salon);
+        foreach ($salons as $salo) {
+            if ($salo != $salon) {
+                $em->remove($salo);
+            }
+        }
+
+        $lists = $em->getRepository('App:Fleet_List')->findAll();
+
+        foreach ($lists as $list) {
+            $em->remove($list);
         }
 
         $reports = $em->getRepository('App:Report')->findAll();

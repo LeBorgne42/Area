@@ -32,9 +32,8 @@
   margin-top: 2rem;
   color: #fff;
   width: 650px;
-  background-color: rgba(52,58,64,0.5);
-  border: 1px solid rgba(0,0,0,.125);
-  border-radius: 5px;
+  background-color: black;
+  border: 1px solid white;
   padding: 1.5rem;
 }
 
@@ -59,49 +58,78 @@ div.tooltip-inner span a.ally {
 }
 
 div.tooltip-inner span a.manage {
-  font-size: 1rem;
+  font-size: 1.3rem;
   font-family: Arial, Helvetica, sans-serif;
   color: #00ffff!important;
 }
 
 .pp-mine {
-  //font-weight: 600;
+  font-weight: 600;
   color: #00ffff!important;
-  font-size: 1.2rem;
+  font-size: 1.2rem!important;
 }
 
 .pp-no {
-  //font-weight: 600;
+  font-weight: 600;
   color: black!important;
-  font-size: 1.2rem;
+  font-size: 1.2rem!important;
 }
 
 .pp-ally {
-  //font-weight: 600;
+  font-weight: 600;
   color: #00ff00!important;
-  font-size: 1.2rem;
+  font-size: 1.2rem!important;
 }
 
 .pp-peace {
-  //font-weight: 600;
+  font-weight: 600;
   color: #ff66ff!important;
-  font-size: 1.2rem;
+  font-size: 1.2rem!important;
 }
 
 .pp-ia {
-  //font-weight: 600;
+  font-weight: 600;
   color: violet;
-  font-size: 1.2rem;
+  font-size: 1.2rem!important;
 }
 
 .pp-cdr {
-  //font-weight: 600;
+  font-weight: 600;
   color: yellow;
-  font-size: 1.2rem;
+  font-size: 1.2rem!important;
 }
 
 .pp-enemy {
-  //font-weight: 600;
+  font-weight: 600;
+  color: red!important;
+  font-size: 1.2rem!important;
+}
+
+.pp-mine2 {
+  color: #00ffff!important;
+}
+
+.pp-no2 {
+  color: black!important;
+}
+
+.pp-ally2 {
+  color: #00ff00!important;
+}
+
+.pp-peace2 {
+  color: #ff66ff!important;
+}
+
+.pp-ia2 {
+  color: violet;
+}
+
+.pp-cdr2 {
+  color: yellow;
+}
+
+.pp-enemy2 {
   color: red!important;
 }
 
@@ -109,9 +137,9 @@ div.tooltip-inner span a.manage {
   margin: 7rem 6% 2% 21rem;
   color: #fff;
   .center-cells a {
-    //line-height: 1rem; galaxy100
-    //font-size: 1rem; galaxy100
-    letter-spacing: 5px; // 2 en galaxy100
+    line-height: 10px; //galaxy100
+    font-size: 0.7rem; //galaxy100
+    letter-spacing: 1px; // 5 en galaxy100
     color: gainsboro;
     text-decoration: none;
   }
@@ -128,7 +156,7 @@ div.tooltip-inner span a.manage {
 }
 
 .galaxy-table td.center-cells {
-  line-height: 0.01; // 0.1 galaxy100
+  line-height: 0.1; // 0.01 galaxy100
   padding-top: 0.01rem;
 }
 
@@ -152,8 +180,8 @@ td.special-cell {
 }
 
 .galaxy-table {
-  height: 580px!important; // 650 en galaxy100
-  width: 670px!important; // 650 en galaxy100
+  height: 650px!important; // 580 en galaxy100
+  width: 650px!important; // 670 en galaxy100
   background-color: black!important;
 }
 

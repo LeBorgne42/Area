@@ -858,7 +858,7 @@ class User implements UserInterface, \Serializable
     public function getSpecUsername()
     {
         $return = null;
-        $name = ['Thea', 'EndeR', 'Dev'];
+        $name = ['Admin', 'Dev'];
 
         if(in_array($this->username, $name)) {
             $return = $this->username;
@@ -933,11 +933,7 @@ class User implements UserInterface, \Serializable
 
     public function getRoles()
     {
-        if($this->username === 'Thea' || $this->username === 'EndeR') {
-            return ['ROLE_PRIVATE'];
-        } else {
-            return ['ROLE_USER'];
-        }
+        return ['ROLE_USER'];
     }
 
     public function eraseCredentials()
