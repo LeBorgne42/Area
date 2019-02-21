@@ -31,11 +31,11 @@ class InstantController extends AbstractController
             $niobium = $planet->getNiobium();
             $water = $planet->getWater();
             if ($planet->getUser()->getAlly()) {
-                $niobium = $niobium + ($planet->getNbProduction() * 1.2);
-                $water = $water + ($planet->getWtProduction() * 1.2);
+                $niobium = $niobium + ($planet->getNbProduction() * 2.2);
+                $water = $water + ($planet->getWtProduction() * 2.2);
             } else {
-                $niobium = $niobium + ($planet->getNbProduction());
-                $water = $water + ($planet->getWtProduction());
+                $niobium = $niobium + ($planet->getNbProduction() * 2);
+                $water = $water + ($planet->getWtProduction() * 2);
             }
             if($planet->getNiobiumMax() > ($planet->getNiobium() + $planet->getNbProduction())) {
                 $planet->setNiobium($niobium);
