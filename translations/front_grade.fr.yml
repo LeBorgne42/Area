@@ -1,6 +1,6 @@
 form.name: 'Nom du grade'
 form.send: 'Ajouter grade'
 leader: Dirigeant
-coleader: 'Bras droit'
-officer: Officier
+coleader: Diplomate
+officer: Recruteur
 member: Membre

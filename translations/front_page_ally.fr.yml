@@ -4,7 +4,9 @@ ally.nbr: 'Membres :'
 ally.galaxy: 'Galaxie(s) :'
 ally.planet: 'Planètes :'
 ally.fleet: 'Flottes :'
-ally.leader: 'Dirigeants : '
+ally.leader: Dirigeants
+ally.diplomate: Diplomates
+ally.recruiter: Recruteurs
 ally.allied: 'Pacte défensif :'
 ally.pna: 'Pacte de non-agression :'
 ally.war: 'Guerre :'
