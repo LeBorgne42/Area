@@ -48,12 +48,16 @@ class ConnectController extends AbstractController
             $planet->setName('Nova Terra');
             $planet->setSonde(10);
             $planet->setRadar(1);
-            $planet->setGroundPlace(2);
+            $planet->setGroundPlace(10);
+            $planet->setSkyPlace(1);
+            $planet->setMiner(3);
+            $planet->setExtractor(3);
+            $planet->setSpaceShip(1);
             $planet->setHunter(5);
             $planet->setNiobium(15000);
             $planet->setWater(10000);
             $planet->setFregate(2);
-            $planet->setWorker(25000);
+            $planet->setWorker(50000);
             $planet->setColonizer(1);
             $user->addPlanet($planet);
         } else {

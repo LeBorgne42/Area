@@ -68,6 +68,7 @@ class SpatialController extends AbstractController
             $niobiumLess = (175000 * $motherShip) + (11000 * $brouilleurShip) + (5000 * $radarShip) + (500000 * $moonMaker) + (8000 * $cargoI) + (22000 * $cargoV) + (45000 * $cargoX) + (20000 * $colonizer) + (10000 * $recycleur) + (15000 * $barge) + (15000 * $sonde) + (250 * $hunter) + (2200 * $fregate) + (400 * $hunterHeavy) + (1000 * $corvet) + (400 * $corvetLaser) + (2000 * $fregatePlasma) + (10000 * $croiser) + (30000 * $ironClad) + (20000 * $destroyer);
             $waterLess =  (95000 * $motherShip) + (13000 * $brouilleurShip) + (6000 * $radarShip) + (230000 * $moonMaker) + (6500 * $cargoI) + (15000 * $cargoV) + (38000 * $cargoX) + (12000 * $colonizer) + (7000 * $recycleur) + (12000 * $barge) + (50 * $hunter) + (1400 * $fregate) + (80 * $hunterHeavy) + (500 * $corvet) + (2000 * $corvetLaser) + (7000 * $fregatePlasma) + (8000 * $croiser) + (12000 * $ironClad) + (70000 * $destroyer);
             $workerLess = (2000 * $motherShip) + (20000 * $moonMaker) + (10000 * $colonizer) + (500 * $destroyer) + (50 * $cargoX);
+            $soldierLess = (50 * $colonizer) + (1 * $hunter);
             $warPoint = (500 * $motherShip) + (900 * $hunterWar) + (1800 * $corvetWar);
             $bitcoinLess = (200000 * $moonMaker) + (55000 * $brouilleurShip) +  (25000 * $radarShip);
             $time = (3600 * $motherShip) + (400 * $brouilleurShip) + (200 * $radarShip) + (18000 * $moonMaker) + ((300 * $cargoI) + (600 * $cargoV) + (900 * $cargoX) + (10800 * $colonizer) + (400 * $recycleur) + (1800 * $barge) + (2 * $sonde) + (60 * $hunterWar) + (300 * $corvetWar) + (20 * $hunter) + (240 * $fregate) + (32 * $hunterHeavy) + (100 * $corvet) + (160 * $corvetLaser) + (600 * $fregatePlasma) + (1200 * $croiser) + (2800 * $ironClad) + (6000 * $destroyer)) / $usePlanet->getShipProduction();
@@ -75,6 +76,7 @@ class SpatialController extends AbstractController
 
             if (($usePlanet->getNiobium() < $niobiumLess || $usePlanet->getWater() < $waterLess) ||
                 ($usePlanet->getWorker() < $workerLess) || ($cargoI && $user->getCargo() < 1) ||
+                ($usePlanet->getSoldier() < $soldierLess) ||
                 ($cargoV && $user->getCargo() < 3) || ($cargoX && $user->getCargo() < 5) ||
                 ($colonizer && $user->getTerraformation() == 0) || ($recycleur && $user->getRecycleur() == 0) ||
                 ($barge && $user->getBarge() == 0) || ($hunter && ($user->getIndustry() == 0 || $user->getMissile() == 0)) ||
@@ -156,6 +158,7 @@ class SpatialController extends AbstractController
             $usePlanet->setNiobium($usePlanet->getNiobium() - $niobiumLess);
             $usePlanet->setWater($usePlanet->getWater() - $waterLess);
             $usePlanet->setWorker($usePlanet->getWorker() - $workerLess);
+            $usePlanet->setSoldier($usePlanet->getSoldier() - $soldierLess);
             $user->getRank()->setWarPoint($user->getRank()->getWarPoint() - $warPoint);
             $user->setBitcoin($user->getBitcoin() - $bitcoinLess);
             $em->persist($product);

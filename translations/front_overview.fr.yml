@@ -16,6 +16,8 @@ info.planet: 'Nombre de planètes :'
 info.fleet: 'Nombre de flotte :'
 info.ally: 'Votre alliance :'
 info.allyMissing: 'Rejoignez une alliance !'
+info.allyMissingBoost: 'Et obtenez +20%'
+info.allyMissingBoost2: 'de ressources !'
 info.defcon: 'Niveau d''alerte Alliance :'
 overview.fleetName: 'Flotte en approche'
 overview.from: De

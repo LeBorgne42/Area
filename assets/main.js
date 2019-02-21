@@ -151,6 +151,7 @@ function manageTotalShip() {
         var niobium = 0;
         var water = 0;
         var worker = 0;
+        var soldier = 0;
         var bitcoin = 0;
         var pdg = 0;
         var product = 0;
@@ -195,6 +196,16 @@ function manageTotalShip() {
         });
         $('tr').each( function(){
             if($(this).find('.nbrProduct').val() > 0) {
+                var delPoint = $(this).find('.soldierProduct').text().replace('.', '');
+                if (soldier == 0) {
+                    soldier = parseFloat($(this).find('.nbrProduct').val() * delPoint);
+                } else {
+                    soldier = soldier + parseFloat($(this).find('.nbrProduct').val() * delPoint);
+                }
+            }
+        });
+        $('tr').each( function(){
+            if($(this).find('.nbrProduct').val() > 0) {
                 var delPoint = $(this).find('.bitcoinProduct').text().replace('.', '');
                 if (bitcoin == 0) {
                     bitcoin = parseFloat($(this).find('.nbrProduct').val() * delPoint);
@@ -228,6 +239,11 @@ function manageTotalShip() {
             $('#workerProduct').text(worker);
         } else {
             $('#workerProduct').html("<span class='text-rouge'>" + worker + "</span>");
+        }
+        if(soldier <= parseFloat($('#soldier').text().replace(re, ''))) {
+            $('#soldierProduct').text(soldier);
+        } else {
+            $('#soldierProduct').html("<span class='text-rouge'>" + soldier + "</span>");
         }
         if(bitcoin <= parseFloat($('#bitcoin').text().replace(re, ''))) {
             $('#bitcoinProduct').text(bitcoin);

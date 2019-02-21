@@ -152,12 +152,15 @@ class ServerController extends AbstractController
 
         $iaPlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
+            ->join('p.sector', 's')
+            ->join('s.galaxy', 'g')
             ->where('p.user is null')
             ->andWhere('p.ground > :ground')
             ->andWhere('p.sky > :sky')
             ->andWhere('p.ground < :limitG')
             ->andWhere('p.sky < :limitS')
-            ->setParameters(['ground' => 70, 'sky' => 15, 'limitG' => 86, 'limitS' => 21])
+            ->andWhere('g.position = :galaxy')
+            ->setParameters(['ground' => 70, 'sky' => 15, 'limitG' => 86, 'limitS' => 21, 'galaxy' => count($nbrGalaxy) + 1])
             ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult();

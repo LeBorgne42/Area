@@ -30,8 +30,13 @@ class InstantController extends AbstractController
         foreach ($planets as $planet) {
             $niobium = $planet->getNiobium();
             $water = $planet->getWater();
-            $niobium = $niobium + ($planet->getNbProduction());
-            $water = $water + ($planet->getWtProduction());
+            if ($planet->getUser()->getAlly()) {
+                $niobium = $niobium + ($planet->getNbProduction() * 1.2);
+                $water = $water + ($planet->getWtProduction() * 1.2);
+            } else {
+                $niobium = $niobium + ($planet->getNbProduction());
+                $water = $water + ($planet->getWtProduction());
+            }
             if($planet->getNiobiumMax() > ($planet->getNiobium() + $planet->getNbProduction())) {
                 $planet->setNiobium($niobium);
             } else {
@@ -588,7 +593,7 @@ class InstantController extends AbstractController
                         $reportSell->setSendAt($now);
                         $reportSell->setUser($user);
                         $reportSell->setTitle("Vente aux marchands");
-                        $newWarPointS = ((($fleet->getScientist() * 100) + ($fleet->getWorker() * 50) + ($fleet->getSoldier() * 10) + ($fleet->getWater() / 3) + ($fleet->getNiobium() / 6)) / 400);
+                        $newWarPointS = ((($fleet->getScientist() * 100) + ($fleet->getWorker() * 50) + ($fleet->getSoldier() * 10) + ($fleet->getWater() / 3) + ($fleet->getNiobium() / 6)) / 1000);
                         $reportSell->setContent("Votre vente aux marchands vous a rapporté " . round(($fleet->getWater() * 0.5) + ($fleet->getSoldier() * 5) + ($fleet->getWorker() * 2) + ($fleet->getScientist() * 50) + ($fleet->getNiobium() * 0.25)) . " bitcoin. Et " . $newWarPointS . " points de Guerre.");
                         $em->persist($reportSell);
                         $user->setBitcoin($user->getBitcoin() + ($fleet->getWater() * 0.5) + ($fleet->getSoldier() * 5) + ($fleet->getWorker() * 2) + ($fleet->getScientist() * 50) + ($fleet->getNiobium() * 0.25));
