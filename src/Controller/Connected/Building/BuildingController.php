@@ -61,7 +61,7 @@ class BuildingController extends AbstractController
             $cancelPlanet->setWater($cancelPlanet->getWater() + ($level * 100));
             $cancelPlanet->setGroundPlace($cancelPlanet->getGroundPlace() - 2);
         } elseif ($build == 'extractor') {
-            $level = $cancelPlanet->getExtract() + 1;
+            $level = $cancelPlanet->getExtractor() + 1;
             $cancelPlanet->setNiobium($cancelPlanet->getNiobium() + ($level * 100));
             $cancelPlanet->setWater($cancelPlanet->getWater() + ($level * 250));
             $cancelPlanet->setGroundPlace($cancelPlanet->getGroundPlace() - 3);

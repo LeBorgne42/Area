@@ -77,33 +77,58 @@ class UserEvent implements EventSubscriberInterface
             if($this->token->getToken()) {
                 $user = $this->token->getToken()->getUser();
 
-                $now = new DateTime();
-                $now->setTimezone(new DateTimeZone('Europe/Paris'));
                 if ($user instanceof User) {
-                    if (!$user->getSpecUsername()) {
-                        if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-                            $userIp = $_SERVER['HTTP_X_FORWARDED_FOR'];
-                        } else {
-                            $userIp = $_SERVER['REMOTE_ADDR'];
-                        }
-                        $userSameIp = $this->em->getRepository('App:User')
-                            ->createQueryBuilder('u')
-                            ->where('u.ipAddress = :ip')
-                            ->andWhere('u.username != :user')
-                            ->setParameters(['user' => $user->getUsername(), 'ip' => $userIp])
-                            ->getQuery()
-                            ->getOneOrNullResult();
+                    $now = new DateTime();
+                    $now->setTimezone(new DateTimeZone('Europe/Paris'));
+                    $seconds = ($now->format('U') - ($user->getLastActivity()->format('U') - 3600));
+                    if ($seconds >= 60) {
+                        if (!$user->getSpecUsername()) {
+                            if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+                                $userIp = $_SERVER['HTTP_X_FORWARDED_FOR'];
+                            } else {
+                                $userIp = $_SERVER['REMOTE_ADDR'];
+                            }
+                            $userSameIp = $this->em->getRepository('App:User')
+                                ->createQueryBuilder('u')
+                                ->where('u.ipAddress = :ip')
+                                ->andWhere('u.username != :user')
+                                ->setParameters(['user' => $user->getUsername(), 'ip' => $userIp])
+                                ->getQuery()
+                                ->getOneOrNullResult();
 
-                        if ($userSameIp) {
-                            $user->setIpAddress($userSameIp->getUsername() . '-' . rand(1, 99));
-                            $user->setCheat($user->getCheat() + 1);
-                            $userSameIp->setCheat($user->getCheat() + 1);
-                            $this->em->flush($userSameIp);
-                        } else {
-                            $user->setIpAddress($userIp);
+                            if ($userSameIp) {
+                                $user->setIpAddress($userSameIp->getUsername() . '-' . rand(1, 99));
+                                $user->setCheat($user->getCheat() + 1);
+                                $userSameIp->setCheat($user->getCheat() + 1);
+                                $this->em->flush($userSameIp);
+                            } else {
+                                $user->setIpAddress($userIp);
+                            }
+                            foreach ($user->getPlanets() as $planet) {
+                                $nbProd = ($planet->getNbProduction() * $seconds) / 60;
+                                $wtProd = ($planet->getWtProduction() * $seconds) / 60;
+                                if ($planet->getUser()->getAlly()) {
+                                    $niobium = $planet->getNiobium() + ($nbProd * 1.2);
+                                    $water = $planet->getWater() + ($wtProd * 1.2);
+                                } else {
+                                    $niobium = $planet->getNiobium() + $nbProd;
+                                    $water = $planet->getWater() + $wtProd;
+                                }
+                                if ($planet->getNiobiumMax() > ($planet->getNiobium() + $nbProd)) {
+                                    $planet->setNiobium($niobium);
+                                } else {
+                                    $planet->setNiobium($planet->getNiobiumMax());
+                                }
+                                if ($planet->getWaterMax() > ($planet->getWater() + $wtProd)) {
+                                    $planet->setWater($water);
+                                } else {
+                                    $planet->setWater($planet->getWaterMax());
+                                }
+                                $this->em->flush($planet);
+                            }
+                            $user->setLastActivity($now);
+                            $this->em->flush($user);
                         }
-                        $user->setLastActivity($now);
-                        $this->em->flush($user);
                     }
                 }
             }

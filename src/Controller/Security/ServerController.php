@@ -180,8 +180,10 @@ class ServerController extends AbstractController
         $putFleets = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->join('p.sector', 's')
+            ->join('s.galaxy', 'g')
             ->andWhere('s.position in (:pos)')
-            ->setParameters(['pos' => [45, 46, 55, 56]])
+            ->andWhere('g.position = :galaxy')
+            ->setParameters(['pos' => [45, 46, 55, 56], 'galaxy' => count($nbrGalaxy) + 1])
             ->getQuery()
             ->getResult();
 
