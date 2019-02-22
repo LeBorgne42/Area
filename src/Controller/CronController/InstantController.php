@@ -27,29 +27,6 @@ class InstantController extends AbstractController
             ->getQuery()
             ->getResult();
 
-        foreach ($planets as $planet) {
-            $niobium = $planet->getNiobium();
-            $water = $planet->getWater();
-            if ($planet->getUser()->getAlly()) {
-                $niobium = $niobium + ($planet->getNbProduction() * 2.2);
-                $water = $water + ($planet->getWtProduction() * 2.2);
-            } else {
-                $niobium = $niobium + ($planet->getNbProduction() * 2);
-                $water = $water + ($planet->getWtProduction() * 2);
-            }
-            if($planet->getNiobiumMax() > ($planet->getNiobium() + $planet->getNbProduction())) {
-                $planet->setNiobium($niobium);
-            } else {
-                $planet->setNiobium($planet->getNiobiumMax());
-            }
-            if($planet->getWaterMax() > ($planet->getWater() + $planet->getWtProduction())) {
-                $planet->setWater($water);
-            } else {
-                $planet->setWater($planet->getWaterMax());
-            }
-        }
-        $em->flush();
-
         exit;
     }
 
@@ -111,13 +88,6 @@ class InstantController extends AbstractController
         }
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
-
-        $users = $em->getRepository('App:User')
-            ->createQueryBuilder('u')
-            ->where('u.searchAt < :now')
-            ->setParameters(['now' => $now])
-            ->getQuery()
-            ->getResult();
 
         $planetSoldiers = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
@@ -363,46 +333,6 @@ class InstantController extends AbstractController
             $planet->setConstruct(null);
             $planet->setConstructAt(null);
             $server->setNbrBuilding($server->getNbrBuilding() + 1);
-        }
-
-        foreach ($users as $user) {
-            $research = $user->getSearch();
-            if ($research == 'onde') {
-                $user->setOnde($user->getOnde() + 1);
-            } elseif ($research == 'industry') {
-                $user->setIndustry($user->getIndustry() + 1);
-            } elseif ($research == 'discipline') {
-                $user->setDiscipline($user->getDiscipline() + 1);
-            } elseif ($research == 'hyperespace') {
-                $user->setHyperespace(1);
-            } elseif ($research == 'barge') {
-                $user->setBarge(1);
-            } elseif ($research == 'utility') {
-                $user->setUtility($user->getUtility() + 1);
-            } elseif ($research == 'demography') {
-                $user->setDemography($user->getDemography() + 1);
-            } elseif ($research == 'terraformation') {
-                $user->setTerraformation($user->getTerraformation() + 1);
-            } elseif ($research == 'cargo') {
-                $user->setCargo($user->getCargo() + 1);
-            } elseif ($research == 'recycleur') {
-                $user->setRecycleur(1);
-            } elseif ($research == 'armement') {
-                $user->setArmement($user->getArmement() + 1);
-            } elseif ($research == 'missile') {
-                $user->setMissile($user->getMissile() + 1);
-            } elseif ($research == 'laser') {
-                $user->setLaser($user->getLaser() + 1);
-            } elseif ($research == 'plasma') {
-                $user->setPlasma($user->getPlasma() + 1);
-            } elseif ($research == 'lightShip') {
-                $user->setLightShip($user->getLightShip() + 1);
-            } elseif ($research == 'heavyShip') {
-                $user->setHeavyShip($user->getHeavyShip() + 1);
-            }
-            $user->setSearch(null);
-            $user->setSearchAt(null);
-            $server->setNbrResearch($server->getNbrResearch() + 1);
         }
 
         foreach ($products as $product) {

@@ -858,7 +858,7 @@ class User implements UserInterface, \Serializable
     public function getSpecUsername()
     {
         $return = null;
-        $name = ['Admin', 'Dev'];
+        $name = ['Admin', 'Dev', 'Les hydres'];
 
         if(in_array($this->username, $name)) {
             $return = $this->username;
