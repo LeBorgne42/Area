@@ -496,7 +496,7 @@ class Planet
         $this->croiser = 0;
         $this->ironClad = 0;
         $this->destroyer = 0;
-        $this->soldier = 1000;
+        $this->soldier = 50;
         $this->worker = 10000;
         $this->scientist = 0;
         $this->groundPlace = 0;

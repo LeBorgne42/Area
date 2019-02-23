@@ -58,6 +58,7 @@ class ConnectController extends AbstractController
             $planet->setWater(10000);
             $planet->setFregate(2);
             $planet->setWorker(50000);
+            $planet->setSoldier(1000);
             $planet->setColonizer(1);
             $user->addPlanet($planet);
         } else {

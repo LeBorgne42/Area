@@ -236,11 +236,6 @@ class SecurityController extends Controller
      */
     public function disconnectMeAction()
     {
-        $user = $this->getUser();
-        $em = $this->getDoctrine()->getManager();
-
-        $user->setLastActivity(null);
-        $em->flush();
         return $this->redirectToRoute('logout');
     }
 

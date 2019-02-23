@@ -124,7 +124,12 @@ class UserEvent implements EventSubscriberInterface
                             $this->em->flush($user);
                         }
                     }
-                    $seconds = ($now->format('U') - ($user->getLastActivity()->format('U')));
+                    if ($user->getLastActivity()) {
+                        $seconds = ($now->format('U') - ($user->getLastActivity()->format('U')));
+                    } else {
+                        $user->setLastActivity($now);
+                        $this->em->flush($user);
+                    }
                     if ($seconds >= 60) {
                         if (!$user->getSpecUsername()) {
                             if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {

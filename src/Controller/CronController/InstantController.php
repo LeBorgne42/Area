@@ -625,6 +625,7 @@ class InstantController extends AbstractController
                         $fleet->setColonizer($fleet->getColonizer() - 1);
                         $newPlanet->setUser($fleet->getUser());
                         $newPlanet->setName('Colonie');
+                        $newPlanet->setSoldier(50);
                         $newPlanet->setNbColo(count($fleet->getUser()->getPlanets()) + 1);
                         if ($fleet->getNbrShips() == 0) {
                             $em->remove($fleet);
