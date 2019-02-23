@@ -572,41 +572,45 @@ function manageTime() {
         var heures = Math.floor((date_now - (jours * 60 * 60 * 24)) / (60 * 60));
         var minutes = Math.floor((date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60))) / 60);
         var secondes = Math.floor(date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60 + minutes * 60)));
-            setInterval(function() {
+        setInterval(function() {
+            if (build < now) {
+                area.html("<a style='cursor: pointer;' onclick='window.location.reload(false)'>Terminée</a>");
+                area.removeAttr('hidden');
+                setTimeout(function () {
+                }, 2000);
+            } else {
                 if (date_now > 0) {
                     if (jours > 0) {
                         area.text(jours + 'j ' + heures + 'heures ' + minutes + 'mins ' + secondes + 's');
                         area.removeAttr('hidden');
-                    } else if (heures > 0)
-                    {
+                    } else if (heures > 0) {
                         area.text(heures + 'heures ' + minutes + 'mins ' + secondes + 's');
                         area.removeAttr('hidden');
-                    } else if (minutes > 0)
-                    {
+                    } else if (minutes > 0) {
                         area.text(minutes + 'mins ' + secondes + 's');
                         area.removeAttr('hidden');
-                    } else if (secondes > 0)
-                    {
+                    } else if (secondes > 0) {
                         area.text(secondes + ' secondes');
                         area.removeAttr('hidden');
                     }
                     secondes = secondes - 1;
-                    if(secondes == 0 || secondes < 0) {
-                        if(minutes == 0 && heures == 0 && jours == 0) {
-                            area.text('Terminée');
-                            setTimeout(function() {
+                    if (secondes == 0 || secondes < 0) {
+                        if (minutes == 0 && heures == 0 && jours == 0) {
+                            area.html("<a style='cursor: pointer;' onclick='window.location.reload(false)'>Terminée</a>");
+                            setTimeout(function () {
                                 //window.location.href = window.location.href;
                             }, 2000);
                         } else {
                             secondes = 60;
                             minutes = minutes - 1;
-                            if(minutes == 0 && heures != 0) {
+                            if (minutes == 0 && heures != 0) {
                                 minutes = 60;
                                 heures = heures - 1;
                             }
                         }
                     }
                 }
+            }
         }, 1000);
     });
 }
