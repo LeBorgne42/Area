@@ -111,7 +111,7 @@ class ExternalController extends AbstractController
         $users = $em->getRepository('App:User')->findAll();
 
         foreach($users as $user) {
-            $message = (new \Swift_Message('Nouveau serveur 12/12/2018'))
+            $message = (new \Swift_Message('Nouveau serveur 2019'))
                 ->setFrom('support@areauniverse.eu')
                 ->setTo($user->getEmail())
                 ->setBody(

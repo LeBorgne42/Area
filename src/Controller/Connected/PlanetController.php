@@ -87,14 +87,13 @@ class PlanetController extends AbstractController
             return $this->redirectToRoute('planet', ['idp' => $usePlanet->getId()]);
         }
 
-        if($abandonPlanet->getSky() == 10 && $abandonPlanet->getGround() == 60) {
+        if($abandonPlanet->getSky() == 5 && $abandonPlanet->getGround() == 25) {
             if($abandonPlanet->getWorker() < 10000) {
                 $abandonPlanet->setWorker(10000);
             }
             $abandonPlanet->setUser(null);
             $abandonPlanet->setName('Abandonnée');
         } else {
-            $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
             $hydra = $em->getRepository('App:User')->find(['id' => 1]);
 
             $abandonPlanet->setUser($hydra);
@@ -115,6 +114,9 @@ class PlanetController extends AbstractController
             $em->flush();
 
             return $this->redirectToRoute('game_over');
+        }
+        if ($usePlanet == $abandonPlanet) {
+            $usePlanet = $em->getRepository('App:Planet')->findByFirstPlanet($user->getUsername());
         }
 
         return $this->redirectToRoute('planet', ['idp' => $usePlanet->getId()]);
