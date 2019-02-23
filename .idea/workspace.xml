@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97f042ea-d0ee-4bd9-bb02-3d850e24f659" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/src/Controller/Connected/ConnectController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/ConnectController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/FightController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/FightController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/CronController/InstantController.php" afterPath="$PROJECT_DIR$/src/Controller/CronController/InstantController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Security/SecurityController.php" afterPath="$PROJECT_DIR$/src/Controller/Security/SecurityController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Planet.php" afterPath="$PROJECT_DIR$/src/Entity/Planet.php" />
-      <change beforePath="$PROJECT_DIR$/src/EventListener/UserEvent.php" afterPath="$PROJECT_DIR$/src/EventListener/UserEvent.php" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/help_new.html.twig" afterPath="$PROJECT_DIR$/templates/connected/help_new.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/salon.html.twig" afterPath="$PROJECT_DIR$/templates/connected/salon.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/connected/ally/add.html.twig" afterPath="$PROJECT_DIR$/templates/connected/ally/add.html.twig" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,11 +17,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="FleetController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FleetController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Controller/Connected/FleetController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="318">
-              <caret line="1262" column="83" lean-forward="false" selection-start-line="1262" selection-start-column="77" selection-end-line="1262" selection-end-column="83" />
+            <state relative-caret-position="474">
+              <caret line="824" column="62" lean-forward="true" selection-start-line="824" selection-start-column="62" selection-end-line="824" selection-end-column="62" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ConnectController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Controller/Connected/ConnectController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="519">
+              <caret line="54" column="44" lean-forward="true" selection-start-line="54" selection-start-column="44" selection-end-line="54" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -38,9 +41,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>400</find>
-      <find>setMine</find>
-      <find>skyPl</find>
       <find>spaceShip</find>
       <find>allyMissing</find>
       <find>workerProduct</find>
@@ -54,7 +54,6 @@
       <find>Bras droit</find>
       <find>Dirigean</find>
       <find>text-bl</find>
-      <find>userModal</find>
       <find>reload</find>
       <find>url</find>
       <find>location</find>
@@ -68,6 +67,10 @@
       <find>1000</find>
       <find>Coloni</find>
       <find>Colonie</find>
+      <find>getSpeed</find>
+      <find>userModal</find>
+      <find>setNbProduction</find>
+      <find>setWtProduction</find>
     </findStrings>
     <replaceStrings>
       <replace>Galaxy().getPosition()</replace>
@@ -128,7 +131,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Form/Front/ConfirmType.php" />
         <option value="$PROJECT_DIR$/templates/connected/confirm.html.twig" />
         <option value="$PROJECT_DIR$/translations/front_confirm.fr.yml" />
         <option value="$PROJECT_DIR$/templates/menu/_left_menu.html.twig" />
@@ -177,8 +179,9 @@
         <option value="$PROJECT_DIR$/templates/connected/help_new.html.twig" />
         <option value="$PROJECT_DIR$/templates/connected/overview.html.twig" />
         <option value="$PROJECT_DIR$/templates/connected/salon.html.twig" />
-        <option value="$PROJECT_DIR$/src/Controller/Connected/ConnectController.php" />
         <option value="$PROJECT_DIR$/src/Controller/CronController/InstantController.php" />
+        <option value="$PROJECT_DIR$/templates/connected/ally/add.html.twig" />
+        <option value="$PROJECT_DIR$/src/Controller/Connected/ConnectController.php" />
       </list>
     </option>
   </component>
@@ -371,7 +374,32 @@
               <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Connected" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="CronController" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="connected" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="connected" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="ally" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
@@ -472,12 +500,12 @@
       <workItem from="1544602028562" duration="893000" />
       <workItem from="1544638418545" duration="19758000" />
       <workItem from="1550577059574" duration="3545000" />
-      <workItem from="1550595254059" duration="44179000" />
+      <workItem from="1550595254059" duration="45566000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1781476000" />
+    <option name="totallyTimeSpent" value="1782863000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -575,21 +603,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Entity/Commander.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2818">
-          <caret line="57" column="0" lean-forward="false" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/FightController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7346">
-          <caret line="658" column="47" lean-forward="false" selection-start-line="658" selection-start-column="47" selection-end-line="658" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Connected/CommanderController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
@@ -967,14 +980,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/ConnectController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="609">
-          <caret line="60" column="38" lean-forward="true" selection-start-line="60" selection-start-column="38" selection-end-line="60" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/CronController/InstantController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="527">
@@ -983,10 +988,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Fleet.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="784" column="20" lean-forward="false" selection-start-line="784" selection-start-column="20" selection-end-line="784" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/connected/ally/add.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="952">
+          <caret line="120" column="10" lean-forward="false" selection-start-line="120" selection-start-column="10" selection-end-line="120" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Connected/FleetController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="1262" column="83" lean-forward="false" selection-start-line="1262" selection-start-column="77" selection-end-line="1262" selection-end-column="83" />
+        <state relative-caret-position="474">
+          <caret line="824" column="62" lean-forward="true" selection-start-line="824" selection-start-column="62" selection-end-line="824" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/ConnectController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="519">
+          <caret line="54" column="44" lean-forward="true" selection-start-line="54" selection-start-column="44" selection-end-line="54" selection-end-column="44" />
           <folding />
         </state>
       </provider>
