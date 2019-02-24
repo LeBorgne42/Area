@@ -160,8 +160,8 @@ class Product
         $cargoX = $this->getCargoX() * 250;
         $barge = $this->getBarge() * 50;
         $moonMaker = $this->getMoonMaker() * 50000;
-        $radarShip = $this->getRadarShip() * 200;
-        $brouilleurShip = $this->getBrouilleurShip() * 500;
+        $radarShip = $this->getRadarShip() * 500;
+        $brouilleurShip = $this->getBrouilleurShip() * 1000;
         $motherShip = $this->getMotherShip() * 20000;
         $hunter = $this->getHunter() * 5;
         $hunterHeavy = $this->getHunterHeavy() * 8;
