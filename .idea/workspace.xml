@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97f042ea-d0ee-4bd9-bb02-3d850e24f659" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/SpatialController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/SpatialController.php" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/spatial.html.twig" afterPath="$PROJECT_DIR$/templates/connected/spatial.html.twig" />
+      <change beforePath="$PROJECT_DIR$/assets/scss/front/building.scss" afterPath="$PROJECT_DIR$/assets/scss/front/building.scss" />
+      <change beforePath="$PROJECT_DIR$/assets/scss/front/galaxy.scss" afterPath="$PROJECT_DIR$/assets/scss/front/galaxy.scss" />
+      <change beforePath="$PROJECT_DIR$/assets/scss/front/message.scss" afterPath="$PROJECT_DIR$/assets/scss/front/message.scss" />
+      <change beforePath="$PROJECT_DIR$/assets/scss/front/research.scss" afterPath="$PROJECT_DIR$/assets/scss/front/research.scss" />
+      <change beforePath="$PROJECT_DIR$/assets/scss/front/spatial.scss" afterPath="$PROJECT_DIR$/assets/scss/front/spatial.scss" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,21 +20,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="SpatialController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Controller/Connected/SpatialController.php">
+      <file leaf-file-name="galaxy.scss" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/scss/front/galaxy.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="318">
-              <caret line="78" column="60" lean-forward="true" selection-start-line="78" selection-start-column="60" selection-end-line="78" selection-end-column="60" />
+            <state relative-caret-position="312">
+              <caret line="172" column="0" lean-forward="true" selection-start-line="172" selection-start-column="0" selection-end-line="172" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="spatial.html.twig" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/connected/spatial.html.twig">
+      <file leaf-file-name="global.scss" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/assets/global.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="205">
-              <caret line="110" column="747" lean-forward="false" selection-start-line="110" selection-start-column="747" selection-end-line="110" selection-end-column="747" />
+            <state relative-caret-position="552">
+              <caret line="106" column="0" lean-forward="true" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -41,9 +44,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>allyMissing</find>
-      <find>workerProduct</find>
-      <find>workerImg</find>
       <find>.navbar</find>
       <find>allyPage</find>
       <find>userPage</find>
@@ -69,8 +69,11 @@
       <find>userModal</find>
       <find>setNbProduction</find>
       <find>setWtProduction</find>
-      <find>$soldier</find>
       <find>hunter</find>
+      <find>$soldier</find>
+      <find>sector-table</find>
+      <find>borderO</find>
+      <find>front-block</find>
     </findStrings>
     <replaceStrings>
       <replace>Galaxy().getPosition()</replace>
@@ -149,7 +152,6 @@
         <option value="$PROJECT_DIR$/templates/connected/map/universe.html.twig" />
         <option value="$PROJECT_DIR$/src/Entity/User.php" />
         <option value="$PROJECT_DIR$/src/Controller/Connected/Map/SectorController.php" />
-        <option value="$PROJECT_DIR$/assets/scss/front/galaxy.scss" />
         <option value="$PROJECT_DIR$/templates/connected/map/sector.html.twig" />
         <option value="$PROJECT_DIR$/templates/connected/fleet/edit.html.twig" />
         <option value="$PROJECT_DIR$/templates/connected/map/galaxy.html.twig" />
@@ -158,7 +160,6 @@
         <option value="$PROJECT_DIR$/translations/front_overview.fr.yml" />
         <option value="$PROJECT_DIR$/assets/scss/front/spatial.scss" />
         <option value="$PROJECT_DIR$/assets/scss/front/ally.scss" />
-        <option value="$PROJECT_DIR$/assets/global.scss" />
         <option value="$PROJECT_DIR$/templates/connected/profil/player.html.twig" />
         <option value="$PROJECT_DIR$/translations/front_grade.fr.yml" />
         <option value="$PROJECT_DIR$/translations/front_page_ally.fr.yml" />
@@ -182,6 +183,8 @@
         <option value="$PROJECT_DIR$/src/Controller/Connected/ConnectController.php" />
         <option value="$PROJECT_DIR$/src/Controller/Connected/SpatialController.php" />
         <option value="$PROJECT_DIR$/templates/connected/spatial.html.twig" />
+        <option value="$PROJECT_DIR$/assets/scss/front/galaxy.scss" />
+        <option value="$PROJECT_DIR$/assets/global.scss" />
       </list>
     </option>
   </component>
@@ -358,24 +361,6 @@
               <item name="Area" type="b2602c69:ProjectViewProjectNode" />
               <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
-            <path>
-              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="connected" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="connected" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="ally" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -475,12 +460,12 @@
       <workItem from="1544602028562" duration="893000" />
       <workItem from="1544638418545" duration="19758000" />
       <workItem from="1550577059574" duration="3545000" />
-      <workItem from="1550595254059" duration="45858000" />
+      <workItem from="1550595254059" duration="46313000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1783155000" />
+    <option name="totallyTimeSpent" value="1783610000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -660,14 +645,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/scss/front/galaxy.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="184" column="36" lean-forward="true" selection-start-line="184" selection-start-column="36" selection-end-line="184" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Connected/Map/SectorController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1710">
@@ -800,14 +777,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
           <caret line="28" column="46" lean-forward="true" selection-start-line="28" selection-start-column="46" selection-end-line="28" selection-end-column="105" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/global.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="447">
-          <caret line="231" column="1" lean-forward="false" selection-start-line="231" selection-start-column="1" selection-end-line="231" selection-end-column="1" />
           <folding />
         </state>
       </provider>
@@ -979,6 +948,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/connected/spatial.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1648">
+          <caret line="110" column="747" lean-forward="false" selection-start-line="110" selection-start-column="747" selection-end-line="110" selection-end-column="747" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Connected/SpatialController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="318">
@@ -987,10 +964,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/connected/spatial.html.twig">
+    <entry file="file://$PROJECT_DIR$/assets/scss/front/galaxy.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="110" column="747" lean-forward="false" selection-start-line="110" selection-start-column="747" selection-end-line="110" selection-end-column="747" />
+        <state relative-caret-position="312">
+          <caret line="172" column="0" lean-forward="true" selection-start-line="172" selection-start-column="0" selection-end-line="172" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/global.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="552">
+          <caret line="106" column="0" lean-forward="true" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
           <folding />
         </state>
       </provider>
