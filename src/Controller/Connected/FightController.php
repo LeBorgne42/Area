@@ -191,46 +191,46 @@ class FightController extends AbstractController
 
         if($attAll > 0 && $defAll <= 0) {
             foreach($blockDef as $removeOne) {
-                $reportB = new Report();
-                $reportB->setSendAt($now);
-                $reportB->setContent("Votre flotte utilitaire " . $removeOne->getName() . " ne dispose pas des technologies nécessaires à l'identification des vaisseaux ennemis en " . $removeOne->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $removeOne->getPlanet()->getSector()->getPosition() . ":" . $removeOne->getPlanet()->getPosition() . " .");
-                $reportB->setTitle("Rapport de combat : Défaite");
-                $reportB->setUser($removeOne->getUser());
+                $reportLoseUtilA = new Report();
+                $reportLoseUtilA->setSendAt($now);
+                $reportLoseUtilA->setContent("Votre flotte utilitaire " . $removeOne->getName() . " ne dispose pas des technologies nécessaires à l'identification des vaisseaux ennemis en " . $removeOne->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $removeOne->getPlanet()->getSector()->getPosition() . ":" . $removeOne->getPlanet()->getPosition() . " .");
+                $reportLoseUtilA->setTitle("Rapport de combat : Défaite");
+                $reportLoseUtilA->setUser($removeOne->getUser());
                 $removeOne->getUser()->setViewReport(false);
-                $em->persist($reportB);
+                $em->persist($reportLoseUtilA);
                 $em->remove($removeOne);
             }
             foreach($blockAtt as $reportWin) {
-                $reportA = new Report();
-                $reportA->setSendAt($now);
-                $reportA->setContent("Vous venez de détruire une flotte utilitaire en " . $reportWin->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $reportWin->getPlanet()->getSector()->getPosition() . ":" . $reportWin->getPlanet()->getPosition() . " .");
-                $reportA->setTitle("Rapport de combat : Victoire");
+                $reportWinUtilA = new Report();
+                $reportWinUtilA->setSendAt($now);
+                $reportWinUtilA->setContent("Vous venez de détruire une flotte utilitaire en " . $reportWin->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $reportWin->getPlanet()->getSector()->getPosition() . ":" . $reportWin->getPlanet()->getPosition() . " .");
+                $reportWinUtilA->setTitle("Rapport de combat : Victoire");
                 $reportWin->getUser()->setViewReport(false);
-                $reportA->setUser($reportWin->getUser());
-                $em->persist($reportA);
+                $reportWinUtilA->setUser($reportWin->getUser());
+                $em->persist($reportWinUtilA);
             }
             $em->flush();
             return($blockAtt);
         }
         if($defAll > 0 && $attAll <= 0) {
             foreach($blockAtt as $removeTwo) {
-                $reportB = new Report();
-                $reportB->setSendAt($now);
-                $reportB->setContent("Votre flotte utilitaire " . $removeTwo->getName() . " ne dispose pas des technologies nécessaires à l'identification des vaisseaux ennemis " . $removeTwo->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $removeTwo->getPlanet()->getSector()->getPosition() . ":" . $removeTwo->getPlanet()->getPosition() . " .");
-                $reportB->setTitle("Rapport de combat : Défaite");
-                $reportB->setUser($removeTwo->getUser());
+                $reportLoseUtilB = new Report();
+                $reportLoseUtilB->setSendAt($now);
+                $reportLoseUtilB->setContent("Votre flotte utilitaire " . $removeTwo->getName() . " ne dispose pas des technologies nécessaires à l'identification des vaisseaux ennemis " . $removeTwo->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $removeTwo->getPlanet()->getSector()->getPosition() . ":" . $removeTwo->getPlanet()->getPosition() . " .");
+                $reportLoseUtilB->setTitle("Rapport de combat : Défaite");
+                $reportLoseUtilB->setUser($removeTwo->getUser());
                 $removeTwo->getUser()->setViewReport(false);
-                $em->persist($reportB);
+                $em->persist($reportLoseUtilB);
                 $em->remove($removeTwo);
             }
             foreach($blockDef as $reportWin) {
-                $reportA = new Report();
-                $reportA->setSendAt($now);
-                $reportA->setContent("Vous venez de détruire une flotte utilitaire en " . $reportWin->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $reportWin->getPlanet()->getSector()->getPosition() . ":" . $reportWin->getPlanet()->getPosition() . " .");
-                $reportA->setTitle("Rapport de combat : Victoire");
-                $reportA->setUser($reportWin->getUser());
+                $reportWinUtilB = new Report();
+                $reportWinUtilB->setSendAt($now);
+                $reportWinUtilB->setContent("Vous venez de détruire une flotte utilitaire en " . $reportWin->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $reportWin->getPlanet()->getSector()->getPosition() . ":" . $reportWin->getPlanet()->getPosition() . " .");
+                $reportWinUtilB->setTitle("Rapport de combat : Victoire");
+                $reportWinUtilB->setUser($reportWin->getUser());
                 $reportWin->getUser()->setViewReport(false);
-                $em->persist($reportA);
+                $em->persist($reportWinUtilB);
             }
             $em->flush();
             return($blockDef);
@@ -293,11 +293,11 @@ class FightController extends AbstractController
                 $armorD = $armorSaveD / 20;
             }
             foreach($blockDef as $defenderWin) {
-                $reportB = new Report();
-                $reportB->setSendAt($now);
-                $reportB->setContent("<table class=\"table table-striped table-bordered table-dark\"><tbody><tr><th class=\"tab-cells-name p-1 ml-2\">Groupe de combat 1</th><th class=\"tab-cells-name p-1 ml-2\">" . $countSDef . " tir(s) pour percer les boucliers</th></tr>");
-                $reportB->setTitle("Rapport de combat : Victoire");
-                $reportB->setUser($defenderWin->getUser());
+                $reportWinA = new Report();
+                $reportWinA->setSendAt($now);
+                $reportWinA->setContent("<table class=\"table table-striped table-bordered table-dark\"><tbody><tr><th class=\"tab-cells-name p-1 ml-2\">Groupe de combat 1</th><th class=\"tab-cells-name p-1 ml-2\">" . $countSDef . " tir(s) pour percer les boucliers</th></tr>");
+                $reportWinA->setTitle("Rapport de combat : Victoire");
+                $reportWinA->setUser($defenderWin->getUser());
                 foreach ($blockDef as $fleetA) {
                     $player = $fleetA->getFleetTags();
                     if($armorSaveD != $armorD) {
@@ -307,31 +307,31 @@ class FightController extends AbstractController
                     } else {
                         $ships = $fleetA->getShipsReportNoLost();
                     }
-                    $reportB->setContent($reportB->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $player . "</th><th class=\"tab-cells-name p-1 ml-2\">" . $ships . "</th></tr>");
+                    $reportWinA->setContent($reportWinA->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $player . "</th><th class=\"tab-cells-name p-1 ml-2\">" . $ships . "</th></tr>");
                 }
-                $reportB->setContent($reportB->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">Groupe de combat 2</th><th class=\"tab-cells-name p-1 ml-2\">" . $countSAtt . " tir(s) pour percer les boucliers</th></tr>");
+                $reportWinA->setContent($reportWinA->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">Groupe de combat 2</th><th class=\"tab-cells-name p-1 ml-2\">" . $countSAtt . " tir(s) pour percer les boucliers</th></tr>");
                 foreach ($blockAtt as $fleetB) {
                     $player = $fleetB->getFleetTags();
                     $lose = $fleetB->getShipsLoseReport();
-                    $reportB->setContent($reportB->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $player . "</th><th class=\"tab-cells-name p-1 ml-2\">" . $lose . "</th></tr>");
+                    $reportWinA->setContent($reportWinA->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $player . "</th><th class=\"tab-cells-name p-1 ml-2\">" . $lose . "</th></tr>");
                 }
-                $reportB->setContent($reportB->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $countShot . " rounds de combat.</th></tr></tbody></table>");
-                $reportB->setContent($reportB->getContent() . "Vous avez gagné le combat en "  . $defenderWin->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $defenderWin->getPlanet()->getSector()->getPosition() . ":" . $defenderWin->getPlanet()->getPosition() . " , vous remportez " . $warPointA . " points de Guerre");
+                $reportWinA->setContent($reportWinA->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $countShot . " rounds de combat.</th></tr></tbody></table>");
+                $reportWinA->setContent($reportWinA->getContent() . "Vous avez gagné le combat en "  . $defenderWin->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $defenderWin->getPlanet()->getSector()->getPosition() . ":" . $defenderWin->getPlanet()->getPosition() . " , vous remportez " . $warPointA . " points de Guerre");
                 $defenderWin->getUser()->setViewReport(false);
-                $em->persist($reportB);
+                $em->persist($reportWinA);
             }
             foreach($blockAtt as $attackerLose) {
-                $reportA = new Report();
-                $reportA->setSendAt($now);
-                $reportA->setContent("<table class=\"table table-striped table-bordered table-dark\"><tbody><tr><th class=\"tab-cells-name p-1 ml-2\">Groupe de combat 1</th><th class=\"tab-cells-name p-1 ml-2\">" . $countSAtt . " tir(s) pour percer les boucliers</th></tr>");
-                $reportA->setTitle("Rapport de combat : Défaite");
-                $reportA->setUser($attackerLose->getUser());
+                $reportLoseA = new Report();
+                $reportLoseA->setSendAt($now);
+                $reportLoseA->setContent("<table class=\"table table-striped table-bordered table-dark\"><tbody><tr><th class=\"tab-cells-name p-1 ml-2\">Groupe de combat 1</th><th class=\"tab-cells-name p-1 ml-2\">" . $countSAtt . " tir(s) pour percer les boucliers</th></tr>");
+                $reportLoseA->setTitle("Rapport de combat : Défaite");
+                $reportLoseA->setUser($attackerLose->getUser());
                 foreach ($blockAtt as $fleetB) {
                     $player = $fleetB->getFleetTags();
                     $lose = $fleetB->getShipsLoseReport();
-                    $reportA->setContent($reportA->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $player . "</th><th class=\"tab-cells-name p-1 ml-2\">" . $lose . "</th></tr>");
+                    $reportLoseA->setContent($reportLoseA->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $player . "</th><th class=\"tab-cells-name p-1 ml-2\">" . $lose . "</th></tr>");
                 }
-                $reportA->setContent($reportA->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">Groupe de combat 2</th><th class=\"tab-cells-name p-1 ml-2\">" . $countSDef . " tir(s) pour percer les boucliers</th></tr>");
+                $reportLoseA->setContent($reportLoseA->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">Groupe de combat 2</th><th class=\"tab-cells-name p-1 ml-2\">" . $countSDef . " tir(s) pour percer les boucliers</th></tr>");
                 foreach ($blockDef as $fleetA) {
                     $player = $fleetA->getFleetTags();
                     if($armorSaveD != $armorD) {
@@ -341,10 +341,10 @@ class FightController extends AbstractController
                     } else {
                         $ships = $fleetA->getShipsReportNoLost();
                     }
-                    $reportA->setContent($reportA->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $player . "</th><th class=\"tab-cells-name p-1 ml-2\">" . $ships . "</th></tr>");
+                    $reportLoseA->setContent($reportLoseA->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $player . "</th><th class=\"tab-cells-name p-1 ml-2\">" . $ships . "</th></tr>");
                 }
-                $reportA->setContent($reportA->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $countShot . " rounds de combat.</th></tr></tbody></table>");
-                $reportA->setContent($reportA->getContent() . "Vous avez perdu le combat en " . $attackerLose->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $attackerLose->getPlanet()->getSector()->getPosition() . ":" . $attackerLose->getPlanet()->getPosition() . " , vos adversaires remportent " . $warPointA . " points de Guerre.");
+                $reportLoseA->setContent($reportLoseA->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $countShot . " rounds de combat.</th></tr></tbody></table>");
+                $reportLoseA->setContent($reportLoseA->getContent() . "Vous avez perdu le combat en " . $attackerLose->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $attackerLose->getPlanet()->getSector()->getPosition() . ":" . $attackerLose->getPlanet()->getPosition() . " , vos adversaires remportent " . $warPointA . " points de Guerre.");
                 $attackerLose->getUser()->setViewReport(false);
                 $planet = $attackerLose->getPlanet();
 
@@ -367,11 +367,11 @@ class FightController extends AbstractController
                         ->getOneOrNullResult();
                     $otherAlly->setPdg($otherAlly->getPdg() + $pdgPeace);
                 }
-                $reportA->setContent($reportA->getContent() . " Mais vous remportez vous même " . $newWarPoint . " points de Guerre !");
+                $reportLoseA->setContent($reportLoseA->getContent() . " Mais vous remportez vous même " . $newWarPoint . " points de Guerre !");
                 if($attackerLose->getUser()->getRank()) {
                     $attackerLose->getUser()->getRank()->setWarPoint($attackerLose->getUser()->getRank()->getWarPoint() + $newWarPoint);
                 }
-                $em->persist($reportA);
+                $em->persist($reportLoseA);
                 $em->remove($attackerLose);
             }
             foreach($blockDef as $defenderWin) {
@@ -411,17 +411,17 @@ class FightController extends AbstractController
                 $armor = $armorSaveA / 20;
             }
             foreach($blockAtt as $attackerWin) {
-                $reportA = new Report();
-                $reportA->setSendAt($now);
-                $reportA->setContent("<table class=\"table table-striped table-bordered table-dark\"><tbody><tr><th class=\"tab-cells-name p-1 ml-2\">Groupe de combat 1</th><th class=\"tab-cells-name p-1 ml-2\">" . $countSDef . " tir(s) pour percer les boucliers</th></tr>");
-                $reportA->setTitle("Rapport de combat : Victoire");
-                $reportA->setUser($attackerWin->getUser());
+                $reportWinB = new Report();
+                $reportWinB->setSendAt($now);
+                $reportWinB->setContent("<table class=\"table table-striped table-bordered table-dark\"><tbody><tr><th class=\"tab-cells-name p-1 ml-2\">Groupe de combat 1</th><th class=\"tab-cells-name p-1 ml-2\">" . $countSDef . " tir(s) pour percer les boucliers</th></tr>");
+                $reportWinB->setTitle("Rapport de combat : Victoire");
+                $reportWinB->setUser($attackerWin->getUser());
                 foreach ($blockDef as $fleetA) {
                     $player = $fleetA->getFleetTags();
                     $lose = $fleetA->getShipsLoseReport();
-                    $reportA->setContent($reportA->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $player . "</th><th class=\"tab-cells-name p-1 ml-2\">" . $lose . "</th></tr>");
+                    $reportWinB->setContent($reportWinB->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $player . "</th><th class=\"tab-cells-name p-1 ml-2\">" . $lose . "</th></tr>");
                 }
-                $reportA->setContent($reportA->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">Groupe de combat 2</th><th class=\"tab-cells-name p-1 ml-2\">" . $countSAtt . " tir(s) pour percer les boucliers</th></tr>");
+                $reportWinB->setContent($reportWinB->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">Groupe de combat 2</th><th class=\"tab-cells-name p-1 ml-2\">" . $countSAtt . " tir(s) pour percer les boucliers</th></tr>");
                 foreach ($blockAtt as $fleetB) {
                     $player = $fleetB->getFleetTags();
                     if($armorSaveA != $armor) {
@@ -431,19 +431,19 @@ class FightController extends AbstractController
                     } else {
                         $ships = $fleetB->getShipsReportNoLost();
                     }
-                    $reportA->setContent($reportA->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $player . "</th><th class=\"tab-cells-name p-1 ml-2\">" . $ships . "</th></tr>");
+                    $reportWinB->setContent($reportWinB->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $player . "</th><th class=\"tab-cells-name p-1 ml-2\">" . $ships . "</th></tr>");
                 }
-                $reportA->setContent($reportA->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $countShot . " rounds de combat.</th></tr></tbody></table>");
-                $reportA->setContent($reportA->getContent() . "Vous avez gagné le combat en "  . $attackerWin->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $attackerWin->getPlanet()->getSector()->getPosition() . ":" . $attackerWin->getPlanet()->getPosition() . " , vous remportez " . $warPointB . " points de Guerre");
+                $reportWinB->setContent($reportWinB->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $countShot . " rounds de combat.</th></tr></tbody></table>");
+                $reportWinB->setContent($reportWinB->getContent() . "Vous avez gagné le combat en "  . $attackerWin->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $attackerWin->getPlanet()->getSector()->getPosition() . ":" . $attackerWin->getPlanet()->getPosition() . " , vous remportez " . $warPointB . " points de Guerre");
                 $attackerWin->getUser()->setViewReport(false);
-                $em->persist($reportA);
+                $em->persist($reportWinB);
             }
             foreach($blockDef as $defenderLose) {
-                $reportB = new Report();
-                $reportB->setSendAt($now);
-                $reportB->setContent("<table class=\"table table-striped table-bordered table-dark\"><tbody><tr><th class=\"tab-cells-name p-1 ml-2\">Groupe de combat 1</th><th class=\"tab-cells-name p-1 ml-2\">" . $countSAtt . " tir(s) pour percer les boucliers</th></tr>");
-                $reportB->setTitle("Rapport de combat : Défaite");
-                $reportB->setUser($defenderLose->getUser());
+                $reportLoseB = new Report();
+                $reportLoseB->setSendAt($now);
+                $reportLoseB->setContent("<table class=\"table table-striped table-bordered table-dark\"><tbody><tr><th class=\"tab-cells-name p-1 ml-2\">Groupe de combat 1</th><th class=\"tab-cells-name p-1 ml-2\">" . $countSAtt . " tir(s) pour percer les boucliers</th></tr>");
+                $reportLoseB->setTitle("Rapport de combat : Défaite");
+                $reportLoseB->setUser($defenderLose->getUser());
                 foreach ($blockAtt as $fleetB) {
                     $player = $fleetB->getFleetTags();
                     if($armorSaveA != $armor) {
@@ -453,16 +453,16 @@ class FightController extends AbstractController
                     } else {
                         $ships = $fleetB->getShipsReportNoLost();
                     }
-                    $reportB->setContent($reportB->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $player . "</th><th class=\"tab-cells-name p-1 ml-2\">" . $ships . "</th></tr>");
+                    $reportLoseB->setContent($reportLoseB->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $player . "</th><th class=\"tab-cells-name p-1 ml-2\">" . $ships . "</th></tr>");
                 }
-                $reportB->setContent($reportB->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">Groupe de combat 2</th><th class=\"tab-cells-name p-1 ml-2\">" . $countSDef . " tir(s) pour percer les boucliers</th></tr>");
+                $reportLoseB->setContent($reportLoseB->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">Groupe de combat 2</th><th class=\"tab-cells-name p-1 ml-2\">" . $countSDef . " tir(s) pour percer les boucliers</th></tr>");
                 foreach ($blockDef as $fleetA) {
                     $player = $fleetA->getFleetTags();
                     $lose = $fleetA->getShipsLoseReport();
-                    $reportB->setContent($reportB->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $player . "</th><th class=\"tab-cells-name p-1 ml-2\">" . $lose . "</th></tr>");
+                    $reportLoseB->setContent($reportLoseB->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $player . "</th><th class=\"tab-cells-name p-1 ml-2\">" . $lose . "</th></tr>");
                 }
-                $reportB->setContent($reportB->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $countShot . " rounds de combat.</th></tr></tbody></table>");
-                $reportB->setContent($reportB->getContent() . "Vous avez perdu le combat en " . $defenderLose->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $defenderLose->getPlanet()->getSector()->getPosition() . ":" . $defenderLose->getPlanet()->getPosition() . " , vos adversaires remportent " . $warPointB . " points de Guerre.");
+                $reportLoseB->setContent($reportLoseB->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $countShot . " rounds de combat.</th></tr></tbody></table>");
+                $reportLoseB->setContent($reportLoseB->getContent() . "Vous avez perdu le combat en " . $defenderLose->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $defenderLose->getPlanet()->getSector()->getPosition() . ":" . $defenderLose->getPlanet()->getPosition() . " , vos adversaires remportent " . $warPointB . " points de Guerre.");
                 $defenderLose->getUser()->setViewReport(false);
                 $planet = $defenderLose->getPlanet();
                 $loseArm = $defenderLose->getLaser() + $defenderLose->getMissile() + $defenderLose->getPlasma();
@@ -484,11 +484,11 @@ class FightController extends AbstractController
                         ->getOneOrNullResult();
                     $otherAlly->setPdg($otherAlly->getPdg() + $pdgPeace);
                 }
-                $reportB->setContent($reportA->getContent() . " Mais vous remportez vous même " . $newWarPoint . " points de Guerre !");
+                $reportLoseB->setContent($reportWinB->getContent() . " Mais vous remportez vous même " . $newWarPoint . " points de Guerre !");
                 if($defenderLose->getUser()->getRank()) {
                     $defenderLose->getUser()->getRank()->setWarPoint($defenderLose->getUser()->getRank()->getWarPoint() + $newWarPoint);
                 }
-                $em->persist($reportB);
+                $em->persist($reportLoseB);
                 $em->remove($defenderLose);
             }
             foreach($blockAtt as $attackerWin) {
@@ -653,7 +653,7 @@ class FightController extends AbstractController
             $colonize->setColonizer($colonize->getColonizer() - 1);
             $newPlanet->setUser($colonize->getUser());
             $newPlanet->setName('Colonie');
-            $newPlanet->setSoldier(50);
+            $newPlanet->setSoldier(0);
             $newPlanet->setScientist(0);
             $newPlanet->setNbColo(count($fleet->getUser()->getPlanets()) + 1);
             if($colonize->getNbrShips() == 0) {
