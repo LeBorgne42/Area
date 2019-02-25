@@ -73,9 +73,10 @@ class OverviewController extends AbstractController
             ->andWhere('f.flightTime < :time')
             ->setParameters(['user' => $user, 'time' => $oneHour])
             ->orderBy('f.flightTime')
+            ->setMaxResults(4)
             ->getQuery()
             ->getResult();
-        
+
         if (count($fleetMove) == 0) {
             $fleetMove = null;
         }
