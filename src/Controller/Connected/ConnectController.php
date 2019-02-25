@@ -89,6 +89,9 @@ class ConnectController extends AbstractController
         $user->setTutorial(1);
         $user->setGameOver(null);
         $salon->addUser($user);
+        foreach ($user->getQuests() as $quest) {
+            $user->removeQuest($quest);
+        }
         $questOne = $em->getRepository('App:Quest')->findOneById(2);
         $questTwo = $em->getRepository('App:Quest')->findOneById(4);
         $questTree = $em->getRepository('App:Quest')->findOneById(50);

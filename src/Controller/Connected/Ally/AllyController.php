@@ -463,7 +463,7 @@ class AllyController extends AbstractController
         if ($form_pdg->isSubmitted() && $form_pdg->isValid()) {
             $amountPdg = abs($form_pdg->get('amount')->getData());
             if($form_pdg->get('exchangeType')->getData() == 1) {
-                if($amountPdg < $user->getRank()->getWarPoint()) {
+                if($amountPdg <= $user->getRank()->getWarPoint()) {
                     $user->getRank()->setWarPoint(($user->getRank()->getWarPoint() - $amountPdg));
                     $ally->setPdg($ally->getPdg() + $amountPdg);
                     $exchange = new Exchange();
@@ -475,7 +475,7 @@ class AllyController extends AbstractController
                     $em->persist($exchange);
                 }
             } else {
-                if($amountPdg < $ally->getPdg() && $user->getGrade()->getPlacement() == 1) {
+                if($amountPdg <= $ally->getPdg() && $user->getGrade()->getPlacement() == 1) {
                     $user->getRank()->setWarPoint(($user->getRank()->getWarPoint() + $amountPdg));
                     $ally->setPdg($ally->getPdg() - $amountPdg);
                     $exchange = new Exchange();
@@ -495,7 +495,7 @@ class AllyController extends AbstractController
         if ($form_exchange->isSubmitted() && $form_exchange->isValid()) {
             $amountExchange = abs($form_exchange->get('amount')->getData());
             if($form_exchange->get('exchangeType')->getData() == 1) {
-                if($amountExchange < $user->getBitcoin()) {
+                if($amountExchange <= $user->getBitcoin()) {
                     $user->setBitcoin($user->getBitcoin() - $amountExchange);
                     $ally->setBitcoin($ally->getBitcoin() + $amountExchange);
                     $exchange = new Exchange();
@@ -507,7 +507,7 @@ class AllyController extends AbstractController
                     $em->persist($exchange);
                 }
             } else {
-                if($amountExchange < $ally->getBitcoin() && $user->getGrade()->getPlacement() == 1) {
+                if($amountExchange <= $ally->getBitcoin() && $user->getGrade()->getPlacement() == 1) {
                     $user->setBitcoin($user->getBitcoin() + $amountExchange);
                     $ally->setBitcoin($ally->getBitcoin() - $amountExchange);
                     $exchange = new Exchange();

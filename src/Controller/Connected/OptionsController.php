@@ -40,7 +40,11 @@ class OptionsController extends AbstractController
             if($form_password->get('planetOrder')->getData()) {
                 $user->setOrderPlanet($form_password->get('planetOrder')->getData());
             }
-            $user->setNewletter($form_password->get('planetOrder')->getData());
+            if ($form_password->get('planetOrder')->getData() == null) {
+                $user->setNewletter(false);
+            } else {
+                $user->setNewletter($form_password->get('planetOrder')->getData());
+            }
 
             $em->flush();
         }

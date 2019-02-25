@@ -50,7 +50,7 @@ class InstantController extends AbstractController
                 foreach ($asteroides as $asteroide) {
                     $nbrFleet = $asteroide->getFleetWithRec();
                     foreach ($asteroide->getFleets() as $fleetAsteroide) {
-                        $asteroideRes = round(15000 / $nbrFleet);
+                        $asteroideRes = round(20000 / $nbrFleet);
                         if ($fleetAsteroide->getRecycleur()) {
                             if ($fleetAsteroide->getCargoPlace() < ($fleetAsteroide->getCargoFull() + ($asteroideRes * 2))) {
                                 $cargoFullAst = round((($fleetAsteroide->getCargoPlace() - $fleetAsteroide->getCargoFull()) / 2));

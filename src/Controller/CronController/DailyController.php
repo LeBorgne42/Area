@@ -28,12 +28,11 @@ class DailyController extends AbstractController
             ->getQuery()
             ->getResult();
 
-        $questOne = $em->getRepository('App:Quest')->findOneById(rand(1,4));
-        $questTwo = $em->getRepository('App:Quest')->findOneById(rand(5,10));
-        $questTree = $em->getRepository('App:Quest')->findOneById(rand(11,14));
-
         $x = 1;
         foreach ($users as $user) {
+            $questOne = $em->getRepository('App:Quest')->findOneById(rand(1,4));
+            $questTwo = $em->getRepository('App:Quest')->findOneById(rand(5,10));
+            $questTree = $em->getRepository('App:Quest')->findOneById(rand(11,14));
             $report = new Report();
             $report->setTitle("Rapport de l'empire");
             $report->setSendAt($now);
