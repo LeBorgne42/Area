@@ -105,7 +105,12 @@ class PlanetController extends AbstractController
         $em->flush();
 
         if($user->getColPlanets() == 0) {
+            $hydra = $em->getRepository('App:User')->find(['id' => 1]);
             foreach ($user->getFleets() as $fleet) {
+                if($fleet->getFleetList()) {
+                    $fleet->getFleetList()->removeFleet($fleet);
+                    $fleet->setFleetList(null);
+                }
                 $fleet->setUser($hydra);
                 $fleet->setName('Incursion H');
                 $fleet->setAttack(true);
