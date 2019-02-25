@@ -89,6 +89,12 @@ class ConnectController extends AbstractController
         $user->setTutorial(1);
         $user->setGameOver(null);
         $salon->addUser($user);
+        $questOne = $em->getRepository('App:Quest')->findOneById(2);
+        $questTwo = $em->getRepository('App:Quest')->findOneById(4);
+        $questTree = $em->getRepository('App:Quest')->findOneById(50);
+        $user->addQuest($questOne);
+        $user->addQuest($questTwo);
+        $user->addQuest($questTree);
         $em->flush();
 
         return $this->redirectToRoute('login');

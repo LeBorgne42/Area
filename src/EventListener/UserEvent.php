@@ -134,6 +134,7 @@ class UserEvent implements EventSubscriberInterface
                     } else {
                         $user->setLastActivity($now);
                         $this->em->flush($user);
+                        $seconds = ($now->format('U') - ($user->getLastActivity()->format('U')));
                     }
                     if ($seconds >= 60) {
                         if (!$user->getSpecUsername()) {
