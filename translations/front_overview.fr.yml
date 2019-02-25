@@ -20,6 +20,7 @@ info.allyMissingBoost: 'Et obtenez +20%'
 info.allyMissingBoost2: 'de ressources !'
 info.defcon: 'Niveau d''alerte Alliance :'
 overview.fleetName: 'Flotte en approche'
+overview.myFleet: 'Flottes proches de la destination'
 overview.from: De
 overview.goTo: Vers
 overview.time: Temps

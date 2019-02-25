@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Form\Front\UserImageType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use DateTime;
+use Dateinterval;
 use DateTimeZone;
 
 /**
@@ -62,6 +63,23 @@ class OverviewController extends AbstractController
             $attackFleets = null;
         }
 
+
+        $oneHour = new DateTime();
+        $oneHour->setTimezone(new DateTimeZone('Europe/Paris'));
+        $oneHour->add(new DateInterval('PT' . 3600 . 'S'));
+        $fleetMove = $em->getRepository('App:Fleet')
+            ->createQueryBuilder('f')
+            ->where('f.user = :user')
+            ->andWhere('f.flightTime < :time')
+            ->setParameters(['user' => $user, 'time' => $oneHour])
+            ->orderBy('f.flightTime')
+            ->getQuery()
+            ->getResult();
+        
+        if (count($fleetMove) == 0) {
+            $fleetMove = null;
+        }
+
         $user = $this->getUser();
         $form_image = $this->createForm(UserImageType::class,$user);
         $form_image->handleRequest($request);
@@ -74,7 +92,8 @@ class OverviewController extends AbstractController
             'form_image' => $form_image->createView(),
             'usePlanet' => $usePlanet,
             'date' => $now,
-            'fleetMove' => $attackFleets,
+            'attackFleets' => $attackFleets,
+            'fleetMove' => $fleetMove,
         ]);
     }
 
