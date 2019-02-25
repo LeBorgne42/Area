@@ -1,4 +1,4 @@
-title: Marchand
+title: 'Points de Guerre'
 market.text: 'Bienvenu à vous, que désirez vous acheter avec vos points de guerre ?'
 market.planet: 'Sélectionner planète'
 market.bitcoin: 'Bictoins : 0.20 <img src="/img/pdg.png"> = 1 <img height="10" src="/img/coin.png">'
@@ -9,3 +9,22 @@ form.nbr: nombre
 form.buyMarket: Acheter
 market.pdg: 'Vous disposez de'
 market.pdgs: 'points de Guerre.'
+quest.name: Quête à accomplir
+quest.gain: Récompense
+quest.star: Rareté
+quest.info: 'Chaque jour lors du rapport de l''Empire vous recevez aléatoirement trois quêtes a finir avant le prochain rapport :'
+private_message: 'Envoyer un message privé'
+salon_message: 'Écrire un message dans le salon'
+spy_planet: 'Sonder la planète d''un joueur'
+sell: 'Vendre des ressources aux marchands'
+colonize: 'Coloniser une planète'
+recycle: 'Recycler sur un astèroïde'
+ally_join: 'Rejoindre/Créer une alliance'
+build_city: 'Construire le bâtiment Grande ville'
+build_metro: 'Construire le bâtiment Metropole'
+build_heavy: 'Construire le bâtiment Industrie lourde'
+invade: 'Envahir la planète d''un joueur'
+destroy_fleet: 'Détruire une flotte adverse (non utilitaire)'
+research: 'Finir une recherche'
+pdg: 'Dépenser des Points de Guerre'
+cohort: 'Créer une nouvelle Cohorte'

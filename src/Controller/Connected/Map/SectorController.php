@@ -275,6 +275,13 @@ class SectorController extends AbstractController
         $fleet->setCancelFlight($moreNow);
         $user->setBitcoin($user->getBitcoin() - $carburant);
         $em->persist($fleet);
+        if ($planet->getUser()) {
+            $quest = $user->checkQuests('spy_planet');
+            if($quest) {
+                $user->removeQuest($quest);
+                $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + 250);
+            }
+        }
 
         $em->flush();
         return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getPosition()]);

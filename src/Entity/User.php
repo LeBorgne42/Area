@@ -83,6 +83,11 @@ class User implements UserInterface, \Serializable
     protected $grade;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Quest", inversedBy="users")
+     */
+    protected $quests;
+
+    /**
      * @ORM\OneToOne(targetEntity="Rank", inversedBy="user", fetch="EXTRA_LAZY", cascade={"persist"})
      * @ORM\JoinColumn(name="rank_id", referencedColumnName="id")
      */
@@ -335,6 +340,7 @@ class User implements UserInterface, \Serializable
         $this->messages = new \Doctrine\Common\Collections\ArrayCollection();
         $this->reports = new \Doctrine\Common\Collections\ArrayCollection();
         $this->fleets = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->quests = new \Doctrine\Common\Collections\ArrayCollection();
         $this->fleetLists = new \Doctrine\Common\Collections\ArrayCollection();
         $this->scientistProduction = 1;
         $this->bitcoin = 25000;
@@ -632,6 +638,19 @@ class User implements UserInterface, \Serializable
             $return = $return + $fleet->getNbrShips();
         }
         return $return;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function checkQuests($name)
+    {
+        foreach($this->quests as $quest) {
+            if($quest->getName() == $name) {
+                return $quest;
+            }
+        }
+        return NULL;
     }
 
     /**
@@ -1202,6 +1221,46 @@ class User implements UserInterface, \Serializable
     public function setRank($rank): void
     {
         $this->rank = $rank;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getQuests()
+    {
+        return $this->quests;
+    }
+
+    /**
+     * @param mixed $quests
+     */
+    public function setQuests($quests): void
+    {
+        $this->quests = $quests;
+    }
+
+    /**
+     * Add quest
+     *
+     * @param \App\Entity\Quest $quest
+     *
+     * @return Quest
+     */
+    public function addQuest(\App\Entity\Quest $quest)
+    {
+        $this->quests[] = $quest;
+
+        return $this;
+    }
+
+    /**
+     * Remove quest
+     *
+     * @param \App\Entity\Quest $quest
+     */
+    public function removeQuest(\App\Entity\Quest $quest)
+    {
+        $this->quests->removeElement($quest);
     }
 
     /**

@@ -40,7 +40,8 @@ soldiers: Soldats
 groundImg: Terrain
 SkyImg: Espace
 rank: Classement
-market: Marchands
+quest: 'Objectifs'
+market: 'Points de Guerre'
 helpNew: 'Aide débutant'
 fleetNoAlly: 'Des flottes non alliées ont été repérées en orbite de notre planète.'
 embargo: 'Cette planète subit actuellement un embargo.'

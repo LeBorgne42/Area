@@ -89,6 +89,11 @@ class MessageController extends AbstractController
             $recever->setViewMessage(false);
             $user->setBitcoin($user->getBitcoin() - abs($form_message->get('bitcoin')->getData()));
             $em->persist($message);
+            $quest = $user->checkQuests('private_message');
+            if($quest) {
+                $user->removeQuest($quest);
+                $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + 250);
+            }
 
             $em->flush();
 
@@ -142,6 +147,11 @@ class MessageController extends AbstractController
             $userRecever->setViewMessage(false);
             $user->setBitcoin($user->getBitcoin() - abs($form_message->get('bitcoin')->getData()));
             $em->persist($message);
+            $quest = $user->checkQuests('private_message');
+            if($quest) {
+                $user->removeQuest($quest);
+                $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + 250);
+            }
 
             $em->flush();
             return $this->redirectToRoute('message', ['idp' => $usePlanet->getId()]);

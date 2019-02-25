@@ -153,8 +153,12 @@ class SalonController extends AbstractController
                     $tmpuser->setSalonAt(null);
                 }
             }
-
             $em->persist($message);
+            $quest = $user->checkQuests('salon_message');
+            if($quest) {
+                $user->removeQuest($quest);
+                $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + 250);
+            }
 
             $form_message = null;
             $form_message = $this->createForm(SalonType::class);

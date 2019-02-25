@@ -160,6 +160,11 @@ class AllyController extends AbstractController
             $user->setJoinAllyAt($now);
             $user->setGrade($grade);
             $em->persist($ally);
+            $quest = $user->checkQuests('ally_join');
+            if($quest) {
+                $user->removeQuest($quest);
+                $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + 2000);
+            }
             $em->flush();
 
             return $this->redirectToRoute('ally', ['idp' => $usePlanet->getId()]);
@@ -351,6 +356,11 @@ class AllyController extends AbstractController
         $user->setJoinAllyAt($now);
         $user->setGrade($ally->getNewMember());
         $em->remove($proposal);
+        $quest = $user->checkQuests('ally_join');
+        if($quest) {
+            $user->removeQuest($quest);
+            $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + 2000);
+        }
 
         $em->flush();
 

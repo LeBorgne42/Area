@@ -130,6 +130,11 @@ class FleetController  extends AbstractController
             $fleetList->setPriority($form_listCreate->get('priority')->getData());
             $fleetList->setUser($user);
             $em->persist($fleetList);
+            $quest = $user->checkQuests('cohort');
+            if($quest) {
+                $user->removeQuest($quest);
+                $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + 500);
+            }
             $em->flush();
         }
 
@@ -903,6 +908,11 @@ class FleetController  extends AbstractController
             $user->setBitcoin($user->getBitcoin() + ($fleetGive->getNiobium() * 0.25));
             $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $newWarPointS);
             $fleetGive->setNiobium(0);
+            $quest = $user->checkQuests('sell');
+            if($quest) {
+                $user->removeQuest($quest);
+                $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + 500);
+            }
         }
         if(($planetTake->getNiobium() + $fleetGive->getNiobium()) <= $planetTake->getNiobiumMax()) {
             $planetTake->setNiobium($planetTake->getNiobium() + $fleetGive->getNiobium());
@@ -959,6 +969,11 @@ class FleetController  extends AbstractController
             $user->setBitcoin($user->getBitcoin() + ($fleetGive->getWater() * 0.5));
             $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $newWarPointS);
             $fleetGive->setWater(0);
+            $quest = $user->checkQuests('sell');
+            if($quest) {
+                $user->removeQuest($quest);
+                $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + 500);
+            }
         }
         if(($planetTake->getWater() + $fleetGive->getWater()) <= $planetTake->getWaterMax()) {
             $planetTake->setWater($planetTake->getWater() + $fleetGive->getWater());
@@ -1015,6 +1030,11 @@ class FleetController  extends AbstractController
             $user->setBitcoin($user->getBitcoin() + ($fleetGive->getSoldier() * 5));
             $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $newWarPointS);
             $fleetGive->setSoldier(0);
+            $quest = $user->checkQuests('sell');
+            if($quest) {
+                $user->removeQuest($quest);
+                $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + 500);
+            }
         }
         if(($planetTake->getSoldier() + $fleetGive->getSoldier()) <= $planetTake->getSoldierMax()) {
             $planetTake->setSoldier($planetTake->getSoldier() + $fleetGive->getSoldier());
@@ -1071,6 +1091,11 @@ class FleetController  extends AbstractController
             $user->setBitcoin($user->getBitcoin() + ($fleetGive->getWorker() * 2));
             $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $newWarPointS);
             $fleetGive->setWorker(0);
+            $quest = $user->checkQuests('sell');
+            if($quest) {
+                $user->removeQuest($quest);
+                $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + 500);
+            }
         }
         if(($planetTake->getWorker() + $fleetGive->getWorker()) <= $planetTake->getWorkerMax()) {
             $planetTake->setWorker($planetTake->getWorker() + $fleetGive->getWorker());
@@ -1127,6 +1152,11 @@ class FleetController  extends AbstractController
             $user->setBitcoin($user->getBitcoin() + ($fleetGive->getScientist() * 50));
             $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $newWarPointS);
             $fleetGive->setScientist(0);
+            $quest = $user->checkQuests('sell');
+            if($quest) {
+                $user->removeQuest($quest);
+                $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + 500);
+            }
         }
         if(($planetTake->getScientist() + $fleetGive->getScientist()) <= $planetTake->getScientistMax()) {
             $planetTake->setScientist($planetTake->getScientist() + $fleetGive->getScientist());
@@ -1191,6 +1221,11 @@ class FleetController  extends AbstractController
             $fleetGive->setSoldier(0);
             $fleetGive->setWorker(0);
             $fleetGive->setWater(0);
+            $quest = $user->checkQuests('sell');
+            if($quest) {
+                $user->removeQuest($quest);
+                $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + 500);
+            }
         }
         if(($planetTake->getScientist() + $fleetGive->getScientist()) <= $planetTake->getScientistMax() &&
             ($planetTake->getWorker() + $fleetGive->getWorker()) <= $planetTake->getWorkerMax() &&

@@ -29,6 +29,14 @@ class MarketController extends AbstractController
 
         $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
+        $quests = $em->getRepository('App:Quest')
+            ->createQueryBuilder('q')
+            ->join('q.users', 'u')
+            ->where('u.id = :user')
+            ->setParameters(['user' => $user->getId()])
+            ->getQuery()
+            ->getResult();
+
         $form_market = $this->createForm(MarketType::class, null, ["user" => $user->getId()]);
         $form_market->handleRequest($request);
 
@@ -55,6 +63,11 @@ class MarketController extends AbstractController
             $planetBuy->setSoldier($planetBuy->getSoldier() + abs($form_market->get('soldier')->getData()));
             $planetBuy->setWorker($planetBuy->getWorker() + abs($form_market->get('worker')->getData()));
             $user->getRank()->setWarPoint($user->getRank()->getWarPoint() - $cost);
+            $quest = $user->checkQuests('pdg');
+            if($quest) {
+                $user->removeQuest($quest);
+                $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + 250);
+            }
 
             $em->flush();
             return $this->redirectToRoute('market', ['idp' => $usePlanet->getId()]);
@@ -63,6 +76,7 @@ class MarketController extends AbstractController
         return $this->render('connected/market.html.twig', [
             'usePlanet' => $usePlanet,
             'form_market' => $form_market->createView(),
+            'quests' => $quests
         ]);
     }
 }

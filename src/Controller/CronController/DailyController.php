@@ -28,6 +28,10 @@ class DailyController extends AbstractController
             ->getQuery()
             ->getResult();
 
+        $questOne = $em->getRepository('App:Quest')->findOneById(rand(1,4));
+        $questTwo = $em->getRepository('App:Quest')->findOneById(rand(5,10));
+        $questTree = $em->getRepository('App:Quest')->findOneById(rand(11,14));
+
         $x = 1;
         foreach ($users as $user) {
             $report = new Report();
@@ -35,6 +39,11 @@ class DailyController extends AbstractController
             $report->setSendAt($now);
             $report->setUser($user);
             $ally = $user->getAlly();
+            $nbrQuests = count($user->getQuests());
+            foreach ($user->getQuests() as $quest) {
+                $user->removeQuest($quest);
+            }
+            $user->addQuest($questOne);
             $worker = 0;
             $planetPoint= 0;
             $buildingCost = 0;
@@ -52,6 +61,7 @@ class DailyController extends AbstractController
             }
             $gain = round($worker / 2);
             if($ally) {
+                $user->addQuest($questTwo);
                 if($ally->getPeaces()) {
                     foreach($ally->getPeaces() as $peace) {
                         if($peace->getType() == false && $peace->getAccepted() == 1) {
@@ -78,7 +88,11 @@ class DailyController extends AbstractController
                 $allyBitcoin = $ally->getBitcoin();
                 $allyBitcoin = $allyBitcoin + $taxe;
                 $ally->setBitcoin($allyBitcoin);
+            } else {
+                $questAlly = $em->getRepository('App:Quest')->findOneById(50);
+                $user->addQuest($questAlly);
             }
+            $user->addQuest($questTree);
             $soldier = $user->getAllSoldier();
             $ship = $user->getAllShipsCost();
             $cost = $user->getBitcoin();
@@ -88,7 +102,12 @@ class DailyController extends AbstractController
             $report->setContent($report->getContent() . " L'entretien de votre empire vous coûte cependant " . round($empireCost) . " Bitcoin.");
             $point = round(round($worker / 100) + round($user->getAllShipsPoint() / 75) + round($soldier / 75) + $planetPoint);
             $user->setBitcoin($cost);
-            $report->setContent($report->getContent() . " Ce qui vous donne un revenu de " . round($gain - $empireCost) . " Bitcoin. Bonne journée Commandant.");
+            if ($nbrQuests == 0) {
+                $report->setContent($report->getContent() . " Ce qui vous donne un revenu de " . round($gain - $empireCost) . " Bitcoin. Comme vous avez terminé toutes les quêtes vous recevez un bonus de 2.000 PDG ! Bonne journée suprême Commandant.");
+                $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + 2000);
+            } else {
+                $report->setContent($report->getContent() . " Ce qui vous donne un revenu de " . round($gain - $empireCost) . " Bitcoin. Bonne journée Commandant.");
+            }
             $user->getRank()->setOldPoint($user->getRank()->getPoint());
             $user->getRank()->setPoint($point);
             $user->setViewReport(false);

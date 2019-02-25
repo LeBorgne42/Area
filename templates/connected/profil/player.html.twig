@@ -13,10 +13,12 @@
                 {% else %}
                     <div class="text-center mt-2"><img height="64" width="64" src="{{ asset('img/avatar.png') }}"></div>
                 {% endif %}
-                {% if user.getAlly.imageName %}
-                    <div class="text-center mt-4"><img height="42" width="64" src="{{ vich_uploader_asset(user.getAlly, 'imageFile') }}"></div>
-                {% else %}
-                    <div class="text-center mt-4"><img height="42" width="64" src="{{ asset('img/ally.jpg') }}"></div>
+                {% if user.getAlly %}
+                    {% if user.getAlly.imageName %}
+                        <div class="text-center mt-4"><img height="42" width="64" src="{{ vich_uploader_asset(user.getAlly, 'imageFile') }}"></div>
+                    {% else %}
+                        <div class="text-center mt-4"><img height="42" width="64" src="{{ asset('img/ally.jpg') }}"></div>
+                    {% endif %}
                 {% endif %}
             </div>
             <div class="col-8">

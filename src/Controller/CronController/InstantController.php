@@ -61,6 +61,11 @@ class InstantController extends AbstractController
                                 $fleetAsteroide->setWater($fleetAsteroide->getWater() + $asteroideRes);
                             }
                         }
+                        $quest = $fleetAsteroide->getUser()->checkQuests('recycle');
+                        if($quest) {
+                            $fleetAsteroide->getUser()->removeQuest($quest);
+                            $fleetAsteroide->getUser()->getRank()->setWarPoint($fleetAsteroide->getUser()->getRank()->getWarPoint() + 1000);
+                        }
                     }
                     if(rand(1, 300) == 300) {
                         $asteroide->setCdr(false);
@@ -301,10 +306,20 @@ class InstantController extends AbstractController
                 $planet->setCity($planet->getCity() + 1);
                 $planet->setWorkerProduction($planet->getWorkerProduction() + 2000);
                 $planet->setWorkerMax($planet->getWorkerMax() + 25000);
+                $quest = $planet->getUser()->checkQuests('build_city');
+                if($quest) {
+                    $planet->getUser()->removeQuest($quest);
+                    $planet->getUser()->getRank()->setWarPoint($planet->getUser()->getRank()->getWarPoint() + 1000);
+                }
             } elseif ($build == 'metropole') {
                 $planet->setMetropole($planet->getMetropole() + 1);
                 $planet->setWorkerProduction($planet->getWorkerProduction() + 5000);
                 $planet->setWorkerMax($planet->getWorkerMax() + 75000);
+                $quest = $planet->getUser()->checkQuests('build_metro');
+                if($quest) {
+                    $planet->getUser()->removeQuest($quest);
+                    $planet->getUser()->getRank()->setWarPoint($planet->getUser()->getRank()->getWarPoint() + 2000);
+                }
             } elseif ($build == 'caserne') {
                 $planet->setCaserne($planet->getCaserne() + 1);
                 $planet->setSoldierMax($planet->getSoldierMax() + 2500);
@@ -320,6 +335,11 @@ class InstantController extends AbstractController
             } elseif ($build == 'heavyUsine') {
                 $planet->setHeavyUsine($planet->getHeavyUsine() + 1);
                 $planet->setShipProduction($planet->getShipProduction() + 0.3);
+                $quest = $planet->getUser()->checkQuests('build_heavy');
+                if($quest) {
+                    $planet->getUser()->removeQuest($quest);
+                    $planet->getUser()->getRank()->setWarPoint($planet->getUser()->getRank()->getWarPoint() + 4000);
+                }
             } elseif ($build == 'spaceShip') {
                 $planet->setSpaceShip($planet->getSpaceShip() + 1);
                 $planet->setShipProduction($planet->getShipProduction() + 0.1);
@@ -534,6 +554,11 @@ class InstantController extends AbstractController
                         $fleet->setWorker(0);
                         $fleet->setScientist(0);
                         $server->setNbrSell($server->getNbrSell() + 1);
+                        $quest = $user->checkQuests('sell');
+                        if($quest) {
+                            $user->removeQuest($quest);
+                            $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + 500);
+                        }
                     } else {
                         if($user != $newPlanet->getUser() && $newPlanet->getUser()) {
                             $reportSell = new Report();
@@ -627,6 +652,11 @@ class InstantController extends AbstractController
                         $newPlanet->setName('Colonie');
                         $newPlanet->setSoldier(50);
                         $newPlanet->setNbColo(count($fleet->getUser()->getPlanets()) + 1);
+                        $quest = $fleet->getUser()->checkQuests('colonize');
+                        if($quest) {
+                            $fleet->getUser()->removeQuest($quest);
+                            $fleet->getUser()->getRank()->setWarPoint($fleet->getUser()->getRank()->getWarPoint() + 500);
+                        }
                         if ($fleet->getNbrShips() == 0) {
                             $em->remove($fleet);
                         }
@@ -722,6 +752,11 @@ class InstantController extends AbstractController
                             $reportDef->setContent("Mais QUI ? QUI !!! Vous as donné un commandant si médiocre " . $user->getUserName() . " n'a pas eu a faire grand chose pour prendre votre planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . ".  " . round($soldierAtmp) . " soldats ennemis sont tout de même éliminé. C'est toujours ça de gagner. Vos " . $soldierDtmp . " soldats et " . $workerDtmp . " travailleurs sont tous mort. Votre empire en a prit un coup, mais il vous reste des planètes, il est l'heure de la revanche !");
                             $reportInv->setTitle("Rapport d'invasion : Victoire (attaque)");
                             $reportInv->setContent("Vous débarquez après que la planète ait été prise et vous installez sur le trône de " . $userDefender->getUserName() . ". Qu'il est bon d'entendre ses pleures lointain... La planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . " est désormais votre! Il est temps de remettre de l'ordre dans la galaxie. " . round($soldierAtmp) . " de vos soldats ont péri dans l'invasion. Mais les défenseurs ont aussi leurs pertes : " . $soldierDtmp . " soldats et " . $workerDtmp . " travailleurs ont péri. Cependant vous épargnez 2000 travailleurs dans votre bonté (surtout pour faire tourner la planète).");
+                            $quest = $fleet->getUser()->checkQuests('invade');
+                            if($quest) {
+                                $fleet->getUser()->removeQuest($quest);
+                                $fleet->getUser()->getRank()->setWarPoint($fleet->getUser()->getRank()->getWarPoint() + 4000);
+                            }
                         }
                         if($fleet->getNbrShips() == 0) {
                             $em->remove($fleet);

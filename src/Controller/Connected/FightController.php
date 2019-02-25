@@ -318,6 +318,11 @@ class FightController extends AbstractController
                 $reportWinA->setContent($reportWinA->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $countShot . " rounds de combat.</th></tr></tbody></table>");
                 $reportWinA->setContent($reportWinA->getContent() . "Vous avez gagné le combat en "  . $defenderWin->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $defenderWin->getPlanet()->getSector()->getPosition() . ":" . $defenderWin->getPlanet()->getPosition() . " , vous remportez " . $warPointA . " points de Guerre");
                 $defenderWin->getUser()->setViewReport(false);
+                $quest = $defenderWin->getUser()->checkQuests('destroy_fleet');
+                if($quest) {
+                    $defenderWin->getUser()->removeQuest($quest);
+                    $defenderWin->getUser()->getRank()->setWarPoint($defenderWin->getUser()->getRank()->getWarPoint() + 1000);
+                }
                 $em->persist($reportWinA);
             }
             foreach($blockAtt as $attackerLose) {
@@ -437,6 +442,11 @@ class FightController extends AbstractController
                 $reportWinB->setContent($reportWinB->getContent() . "Vous avez gagné le combat en "  . $attackerWin->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $attackerWin->getPlanet()->getSector()->getPosition() . ":" . $attackerWin->getPlanet()->getPosition() . " , vous remportez " . $warPointB . " points de Guerre");
                 $attackerWin->getUser()->setViewReport(false);
                 $em->persist($reportWinB);
+                $quest = $attackerWin->getUser()->checkQuests('destroy_fleet');
+                if($quest) {
+                    $attackerWin->getUser()->removeQuest($quest);
+                    $attackerWin->getUser()->getRank()->setWarPoint($attackerWin->getUser()->getRank()->getWarPoint() + 1000);
+                }
             }
             foreach($blockDef as $defenderLose) {
                 $reportLoseB = new Report();
@@ -619,6 +629,11 @@ class FightController extends AbstractController
                 $reportDef->setContent("Mais QUI ? QUI !!! Vous as donné un commandant si médiocre " . $user->getUserName() . " n'a pas eu a faire grand chose pour prendre votre planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . ".  " . round($soldierAtmp) . " soldats ennemis sont tout de même éliminé. C'est toujours ça de gagner. Vos " . $soldierDtmp . " soldats et " . $workerDtmp . " travailleurs sont tous mort. Votre empire en a prit un coup, mais il vous reste des planètes, il est l'heure de la revanche !");
                 $reportInv->setTitle("Rapport d'invasion : Victoire (attaque)");
                 $reportInv->setContent("Vous débarquez après que la planète ait été prise et vous installez sur le trône de " . $userDefender->getUserName() . ". Qu'il est bon d'entendre ses pleures lointain... La planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . " est désormais votre! Il est temps de remettre de l'ordre dans la galaxie. " . round($soldierAtmp) . " de vos soldats ont péri dans l'invasion. Mais les défenseurs ont aussi leurs pertes : " . $soldierDtmp . " soldats et " . $workerDtmp . " travailleurs ont péri. Cependant vous épargnez 2000 travailleurs dans votre bonté (surtout pour faire tourner la planète).");
+                $quest = $user->checkQuests('invade');
+                if($quest) {
+                    $user->removeQuest($quest);
+                    $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + 4000);
+                }
             }
             if($invader->getNbrShips() == 0) {
                 $em->remove($invader);
@@ -667,6 +682,11 @@ class FightController extends AbstractController
             $user->setViewReport(false);
             $em->persist($reportColo);
             $server->setNbrColonize($server->getNbrColonize() + 1);
+            $quest = $user->checkQuests('colonize');
+            if($quest) {
+                $user->removeQuest($quest);
+                $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + 1000);
+            }
             $em->flush();
         }
 
