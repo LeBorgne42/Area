@@ -41,7 +41,21 @@
     {% set leftSector = 100 %}
 {% endif %}
     <div class="map-block">
-        <div class="block-title ml-4"><h2>{{ 'galaxy.number'|trans }} {{ gal }} - {{ 'sector.number'|trans }} {{ id }}</h2></div>
+        {{ form_start(form_navigate) }}
+            <div class="row mb-2 navigate">
+                <div class="col-1 pt-1 text-more">{{ form_label(form_navigate.galaxy) }}</div>
+                <div class="col-1">
+                     {{ form_widget(form_navigate.galaxy) }}
+                </div>
+                <div class="col-1 pt-1 text-more">{{ form_label(form_navigate.sector) }}</div>
+                <div class="col-1">
+                    {{ form_widget(form_navigate.sector) }}
+                </div>
+                <div class="col-1">
+                    {{ form_widget(form_navigate.sendForm) }}
+                </div>
+            </div>
+        {{ form_end(form_navigate) }}
         <table class="table sector-table text-center sector">
             {% if planets|length > 1 %}
                 <tbody>

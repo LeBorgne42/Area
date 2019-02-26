@@ -101,13 +101,13 @@ class InstantController extends AbstractController
             }
         }
 
-        $asteroides = $em->getRepository('App:Planet')
+      /*  $asteroides = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->join('p.sector', 's')
             ->join('s.galaxy', 'g')
             ->where('p.cdr = true')
             ->andWhere('g.position = :galaxy')
-            ->setParameters(['galaxy' => 2])
+            ->setParameters(['galaxy' => 1])
             ->getQuery()
             ->getResult();
 
@@ -120,7 +120,7 @@ class InstantController extends AbstractController
                 ->where('p.empty = true')
                 ->andWhere('s.position = :rand')
                 ->andWhere('g.position = :galaxy')
-                ->setParameters(['rand' => rand(1, 100), 'galaxy' => 2])
+                ->setParameters(['rand' => rand(1, 100), 'galaxy' => 1])
                 ->setMaxResults(1)
                 ->getQuery()
                 ->getOneOrNullResult();
@@ -153,7 +153,7 @@ class InstantController extends AbstractController
                 $firstGal->setRecycleAt(null);
                 $firstGal->setName('Vide');
             }
-        }
+        }*/
 
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));

@@ -42,6 +42,21 @@
 
 {% block body %}
     <div class="map-block">
+        {{ form_start(form_navigate) }}
+            <div class="row mb-2 navigate">
+                <div class="col-1 pt-1 text-more">{{ form_label(form_navigate.galaxy) }}</div>
+                <div class="col-1">
+                     {{ form_widget(form_navigate.galaxy) }}
+                </div>
+                <div class="col-1 pt-1 text-more">{{ form_label(form_navigate.sector) }}</div>
+                <div class="col-1">
+                    {{ form_widget(form_navigate.sector) }}
+                </div>
+                <div class="col-1">
+                    {{ form_widget(form_navigate.sendForm) }}
+                </div>
+            </div>
+        {{ form_end(form_navigate) }}
         <table class="table table-bordered table-dark galaxy-table text-center">
             <tbody>
                 {% set x = 1 %}

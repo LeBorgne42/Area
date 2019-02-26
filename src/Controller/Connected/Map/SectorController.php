@@ -5,8 +5,9 @@ namespace App\Controller\Connected\Map;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use App\Form\Front\InteractFleetType;
 use Symfony\Component\HttpFoundation\Request;
+use App\Form\Front\NavigateType;
+use App\Form\Front\InteractFleetType;
 use App\Entity\Fleet;
 use Datetime;
 use DatetimeZone;
@@ -21,11 +22,21 @@ class SectorController extends AbstractController
     /**
      * @Route("/carte-spatiale/{id}/{gal}/{idp}", name="map", requirements={"id"="\d+", "idp"="\d+", "gal"="\d+"})
      */
-    public function mapAction($id, $idp, $gal)
+    public function mapAction(Request $request, $id, $idp, $gal)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
         $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+
+        $form_navigate = $this->createForm(NavigateType::class, null, ["galaxy" => $gal, "sector" => $id]);
+        $form_navigate->handleRequest($request);
+
+        if ($form_navigate->isSubmitted() && $form_navigate->isValid()) {
+            if ($form_navigate->get('sector')->getData() && $form_navigate->get('galaxy')->getData()) {
+                return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $form_navigate->get('sector')->getData(), 'gal' => $form_navigate->get('galaxy')->getData()]);
+            }
+            return $this->redirectToRoute('galaxy', ['idp' => $usePlanet->getId(), 'id' => $form_navigate->get('galaxy')->getData()]);
+        }
 
         $sectorId = $em->getRepository('App:Sector')
             ->createQueryBuilder('s')
@@ -98,6 +109,7 @@ class SectorController extends AbstractController
         }
 
         return $this->render('connected/map/sector.html.twig', [
+            'form_navigate' => $form_navigate->createView(),
             'planets' => $planets,
             'usePlanet' => $usePlanet,
             'id' => $id,

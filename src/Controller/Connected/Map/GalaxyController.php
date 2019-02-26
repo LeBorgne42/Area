@@ -5,6 +5,8 @@ namespace App\Controller\Connected\Map;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Request;
+use App\Form\Front\NavigateType;
 
 /**
  * @Route("/connect")
@@ -15,11 +17,21 @@ class GalaxyController extends AbstractController
     /**
      * @Route("/galaxie/{id}/{idp}", name="galaxy", requirements={"id"="\d+", "idp"="\d+"})
      */
-    public function galaxyAction($id, $idp)
+    public function galaxyAction(Request $request, $id, $idp)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
         $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+
+        $form_navigate = $this->createForm(NavigateType::class, null, ["galaxy" => $id, "sector" => 0]);
+        $form_navigate->handleRequest($request);
+
+        if ($form_navigate->isSubmitted() && $form_navigate->isValid()) {
+            if ($form_navigate->get('sector')->getData() && $form_navigate->get('galaxy')->getData()) {
+                return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $form_navigate->get('sector')->getData(), 'gal' => $form_navigate->get('galaxy')->getData()]);
+            }
+            return $this->redirectToRoute('galaxy', ['idp' => $usePlanet->getId(), 'id' => $form_navigate->get('galaxy')->getData()]);
+        }
 
         $sectors = $em->getRepository('App:Sector')
             ->createQueryBuilder('s')
@@ -31,6 +43,7 @@ class GalaxyController extends AbstractController
             ->getResult();
 
         return $this->render('connected/map/galaxy.html.twig', [
+            'form_navigate' => $form_navigate->createView(),
             'sectors' => $sectors,
             'usePlanet' => $usePlanet,
         ]);
