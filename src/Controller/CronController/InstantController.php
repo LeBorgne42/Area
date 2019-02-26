@@ -73,7 +73,7 @@ class InstantController extends AbstractController
                     $nowAste->add(new DateInterval('PT' . 600 . 'S'));
                     $asteroide->setRecycleAt($nowAste);
                 }
-                if(rand(1, 300) == 300) {
+                if(rand(1, 8000) == 8000) {
                     $asteroide->setCdr(false);
                     $asteroide->setEmpty(true);
                     $asteroide->setImageName(null);
@@ -82,19 +82,76 @@ class InstantController extends AbstractController
                     $newAsteroides = $em->getRepository('App:Planet')
                         ->createQueryBuilder('p')
                         ->join('p.sector', 's')
+                        ->join('s.galaxy', 'g')
                         ->where('p.empty = true')
-                        ->andWhere('s.id = :rand')
-                        ->setParameters(['rand' => rand(1, 100)])
+                        ->andWhere('s.position = :rand')
+                        ->andWhere('g.position = :galaxy')
+                        ->setParameters(['rand' => rand(1, 100), 'galaxy' => $asteroide->getSector()->getGalaxy()->getPosition()])
                         ->setMaxResults(1)
                         ->getQuery()
-                        ->getResult();
-                    foreach($newAsteroides as $newAsteroide) {
-                        $newAsteroide->setEmpty(false);
-                        $newAsteroide->setCdr(true);
-                        $newAsteroide->setImageName('cdr.png');
-                        $newAsteroide->setName('Astéroïdes');
+                        ->getOneOrNullResult();
+
+                    if ($newAsteroides) {
+                        $newAsteroides->setEmpty(false);
+                        $newAsteroides->setCdr(true);
+                        $newAsteroides->setImageName('cdr.png');
+                        $newAsteroides->setName('Astéroïdes');
                     }
                 }
+            }
+        }
+
+        $asteroides = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->join('p.sector', 's')
+            ->join('s.galaxy', 'g')
+            ->where('p.cdr = true')
+            ->andWhere('g.position = :galaxy')
+            ->setParameters(['galaxy' => 2])
+            ->getQuery()
+            ->getResult();
+
+        $nbrCount = 25 - count($asteroides);
+        while($nbrCount > 0) {
+            $newAsteroides = $em->getRepository('App:Planet')
+                ->createQueryBuilder('p')
+                ->join('p.sector', 's')
+                ->join('s.galaxy', 'g')
+                ->where('p.empty = true')
+                ->andWhere('s.position = :rand')
+                ->andWhere('g.position = :galaxy')
+                ->setParameters(['rand' => rand(1, 100), 'galaxy' => 2])
+                ->setMaxResults(1)
+                ->getQuery()
+                ->getOneOrNullResult();
+
+            if ($newAsteroides) {
+                $newAsteroides->setEmpty(false);
+                $newAsteroides->setCdr(true);
+                $newAsteroides->setImageName('cdr.png');
+                $newAsteroides->setName('Astéroïdes');
+            }
+            $nbrCount--;
+        }
+
+        $firstGals = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->join('p.sector', 's')
+            ->join('s.galaxy', 'g')
+            ->where('p.cdr = true')
+            ->andWhere('g.position = :galaxy')
+            ->setParameters(['galaxy' => 1])
+            ->getQuery()
+            ->getResult();
+
+        $nbrCount = count($firstGals);
+        if($nbrCount > 25) {
+            foreach($firstGals as $firstGal) {
+                $firstGal->setCdr(false);
+                $firstGal->setEmpty(true);
+                $firstGal->setImageName(null);
+                $firstGal->setRecycleAt(null);
+                $firstGal->setName('Vide');
             }
         }
 

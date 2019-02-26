@@ -2,80 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97f042ea-d0ee-4bd9-bb02-3d850e24f659" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/FleetController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/FleetController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/MessageController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/MessageController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/ReportController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/ReportController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/SpatialController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/SpatialController.php" />
       <change beforePath="$PROJECT_DIR$/src/Controller/CronController/InstantController.php" afterPath="$PROJECT_DIR$/src/Controller/CronController/InstantController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Planet.php" afterPath="$PROJECT_DIR$/src/Entity/Planet.php" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180508151728.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180508174814.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180508180250.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180508180958.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180509205124.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180509220655.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180510152258.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180510163437.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180511040839.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180511201230.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180515011423.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180515014642.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180516013816.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180516025037.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180517162047.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180517233407.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180518145827.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180518174910.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180518184527.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180518203807.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180519125426.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180521102347.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180523041509.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180524133846.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180527034205.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180527151806.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180531143810.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180531153000.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180531203001.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180601170605.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180602011605.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180605235419.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180606001125.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180606110504.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180606133630.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180606142113.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180608135946.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180614083529.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180614235355.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180812122525.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180812122708.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180826140201.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180826140213.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180826141235.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180826141451.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180826163135.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180826163146.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20181112121303.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20181112164532.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20181112174338.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20181112174551.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20181112235620.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20181119212157.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20181119222159.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20181119222257.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20181126141232.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20181126141253.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20181205131646.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20181205133647.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20181206170942.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20181210092714.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20181212202115.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20181221184528.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20190224155338.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20190224161459.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20190224162446.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20190224224559.php" afterPath="" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -92,8 +19,8 @@
       <file leaf-file-name="InstantController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Controller/CronController/InstantController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="426">
-              <caret line="78" column="51" lean-forward="true" selection-start-line="78" selection-start-column="51" selection-end-line="78" selection-end-column="51" />
+            <state relative-caret-position="705">
+              <caret line="97" column="38" lean-forward="false" selection-start-line="97" selection-start-column="38" selection-end-line="97" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -129,10 +56,10 @@
       <find>userModal</find>
       <find>ally.getUse</find>
       <find>/ 6</find>
-      <find>$now</find>
       <find>= :true</find>
       <find>=&gt; NULL</find>
       <find>'true'</find>
+      <find>$now</find>
     </findStrings>
     <replaceStrings>
       <replace>&lt;span class='nbr-stats'&gt;</replace>
@@ -434,13 +361,8 @@
               <item name="Area" type="b2602c69:ProjectViewProjectNode" />
               <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Entity" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Migrations" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="CronController" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
@@ -544,12 +466,12 @@
       <workItem from="1544638418545" duration="19758000" />
       <workItem from="1550577059574" duration="3545000" />
       <workItem from="1550595254059" duration="54065000" />
-      <workItem from="1551029272895" duration="22751000" />
+      <workItem from="1551029272895" duration="26969000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1814113000" />
+    <option name="totallyTimeSpent" value="1818331000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -787,14 +709,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="727">
           <caret line="277" column="33" lean-forward="true" selection-start-line="277" selection-start-column="33" selection-end-line="282" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/FightController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="634">
-          <caret line="631" column="16" lean-forward="false" selection-start-line="631" selection-start-column="16" selection-end-line="635" selection-end-column="17" />
           <folding />
         </state>
       </provider>
@@ -1049,10 +963,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/FightController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="610" column="24" lean-forward="true" selection-start-line="610" selection-start-column="24" selection-end-line="610" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/CronController/InstantController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="426">
-          <caret line="78" column="51" lean-forward="true" selection-start-line="78" selection-start-column="51" selection-end-line="78" selection-end-column="51" />
+        <state relative-caret-position="705">
+          <caret line="97" column="38" lean-forward="false" selection-start-line="97" selection-start-column="38" selection-end-line="97" selection-end-column="38" />
           <folding />
         </state>
       </provider>
