@@ -555,7 +555,7 @@ class AllyController extends AbstractController
         $form_allyAdd->handleRequest($request);
 
         if (($form_allyAdd->isSubmitted() && $form_allyAdd->isValid()) && $user->getGrade()->getCanRecruit() == 1) {
-            if($maxMembers >= 6) {
+            if($maxMembers >= 20) {
                 return $this->redirectToRoute('ally_blank', ['idp' => $usePlanet->getId()]);
             }
             $userProposal = $em->getRepository('App:User')
