@@ -119,9 +119,9 @@ class ReportController extends AbstractController
 
         $reports = $em->getRepository('App:Report')
             ->createQueryBuilder('r')
-            ->where('r.newReport = :true')
+            ->where('r.newReport = true')
             ->andWhere('r.user = :user')
-            ->setParameters(['true' => true, 'user' => $user])
+            ->setParameters(['user' => $user])
             ->getQuery()
             ->getResult();
 

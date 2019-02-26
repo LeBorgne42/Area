@@ -301,10 +301,10 @@ class FleetController  extends AbstractController
                     ->join('f.user', 'u')
                     ->join('u.ally', 'a')
                     ->where('f.planet = :planet')
-                    ->andWhere('f.attack = :true OR a.sigle in (:ally)')
+                    ->andWhere('f.attack = true OR a.sigle in (:ally)')
                     ->andWhere('f.user != :user')
                     ->andWhere('f.flightTime is null')
-                    ->setParameters(['planet' => $usePlanet, 'true' => true, 'ally' => $warAlly, 'user' => $user])
+                    ->setParameters(['planet' => $usePlanet, 'ally' => $warAlly, 'user' => $user])
                     ->getQuery()
                     ->getResult();
 
@@ -885,8 +885,8 @@ class FleetController  extends AbstractController
             ->andWhere('f.user = :user')
             ->andWhere('f.fightAt is null')
             ->andWhere('f.flightTime is null')
-            ->andWhere('p.user is not null or p.merchant = :true')
-            ->setParameters(['id' => $id, 'user' => $user, 'true' => true])
+            ->andWhere('p.user is not null or p.merchant = true')
+            ->setParameters(['id' => $id, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -947,8 +947,8 @@ class FleetController  extends AbstractController
             ->andWhere('f.user = :user')
             ->andWhere('f.fightAt is null')
             ->andWhere('f.flightTime is null')
-            ->andWhere('p.user is not null or p.merchant = :true')
-            ->setParameters(['id' => $id, 'user' => $user, 'true' => true])
+            ->andWhere('p.user is not null or p.merchant = true')
+            ->setParameters(['id' => $id, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -1008,8 +1008,8 @@ class FleetController  extends AbstractController
             ->andWhere('f.user = :user')
             ->andWhere('f.fightAt is null')
             ->andWhere('f.flightTime is null')
-            ->andWhere('p.user is not null or p.merchant = :true')
-            ->setParameters(['id' => $id, 'user' => $user, 'true' => true])
+            ->andWhere('p.user is not null or p.merchant = true')
+            ->setParameters(['id' => $id, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -1069,8 +1069,8 @@ class FleetController  extends AbstractController
             ->andWhere('f.user = :user')
             ->andWhere('f.fightAt is null')
             ->andWhere('f.flightTime is null')
-            ->andWhere('p.user is not null or p.merchant = :true')
-            ->setParameters(['id' => $id, 'user' => $user, 'true' => true])
+            ->andWhere('p.user is not null or p.merchant = true')
+            ->setParameters(['id' => $id, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -1130,8 +1130,8 @@ class FleetController  extends AbstractController
             ->andWhere('f.user = :user')
             ->andWhere('f.fightAt is null')
             ->andWhere('f.flightTime is null')
-            ->andWhere('p.user is not null or p.merchant = :true')
-            ->setParameters(['id' => $id, 'user' => $user, 'true' => true])
+            ->andWhere('p.user is not null or p.merchant = true')
+            ->setParameters(['id' => $id, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -1191,8 +1191,8 @@ class FleetController  extends AbstractController
             ->andWhere('f.user = :user')
             ->andWhere('f.fightAt is null')
             ->andWhere('f.flightTime is null')
-            ->andWhere('p.user is not null or p.merchant = :true')
-            ->setParameters(['id' => $id, 'user' => $user, 'true' => true])
+            ->andWhere('p.user is not null or p.merchant = true')
+            ->setParameters(['id' => $id, 'user' => $user])
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -1460,10 +1460,10 @@ class FleetController  extends AbstractController
                 ->join('f.user', 'u')
                 ->leftJoin('u.ally', 'a')
                 ->where('f.planet = :planet')
-                ->andWhere('f.attack = :true OR a.sigle in (:ally)')
+                ->andWhere('f.attack = true OR a.sigle in (:ally)')
                 ->andWhere('f.user != :user')
                 ->andWhere('f.flightTime is null')
-                ->setParameters(['planet' => $oldFleet->getPlanet(), 'true' => true, 'ally' => $warAlly, 'user' => $user])
+                ->setParameters(['planet' => $oldFleet->getPlanet(), 'ally' => $warAlly, 'user' => $user])
                 ->getQuery()
                 ->getResult();
 

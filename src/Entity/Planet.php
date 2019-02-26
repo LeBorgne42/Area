@@ -131,6 +131,11 @@ class Planet
     protected $constructAt;
 
     /**
+     * @ORM\Column(name="recycleAt",type="datetime", nullable=true)
+     */
+    protected $recycleAt;
+
+    /**
      * @ORM\Column(name="scientistAt",type="datetime", nullable=true)
      */
     protected $scientistAt;
@@ -501,6 +506,7 @@ class Planet
         $this->scientist = 0;
         $this->groundPlace = 0;
         $this->skyPlace = 0;
+        $this->recycleAt = NULL;
     }
 
     /**
@@ -2121,6 +2127,22 @@ class Planet
     public function getBunker()
     {
         return $this->bunker;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRecycleAt()
+    {
+        return $this->recycleAt;
+    }
+
+    /**
+     * @param mixed $recycleAt
+     */
+    public function setRecycleAt($recycleAt): void
+    {
+        $this->recycleAt = $recycleAt;
     }
 
     /**

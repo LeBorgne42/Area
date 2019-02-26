@@ -215,9 +215,9 @@ class MessageController extends AbstractController
 
         $messages = $em->getRepository('App:Message')
             ->createQueryBuilder('m')
-            ->where('m.newMessage = :true')
+            ->where('m.newMessage = true')
             ->andWhere('m.user = :user')
-            ->setParameters(['true' => true, 'user' => $user])
+            ->setParameters(['user' => $user])
             ->getQuery()
             ->getResult();
 

@@ -282,12 +282,12 @@ class SpatialController extends AbstractController
                 ->join('f.user', 'u')
                 ->leftJoin('u.ally', 'a')
                 ->where('f.planet = :planet')
-                ->andWhere('f.attack = :true OR a.sigle in (:ally)')
+                ->andWhere('f.attack = true OR a.sigle in (:ally)')
                 ->andWhere('f.user != :user')
                 ->andWhere('f.flightTime is null')
                 ->andWhere('u.ally is null OR a.sigle not in (:friend)')
                 ->andWhere('u.ally is null OR u.ally != :myAlly')
-                ->setParameters(['planet' => $usePlanet, 'true' => true, 'ally' => $warAlly, 'user' => $user, 'friend' => $friendAlly, 'myAlly' => $allyF])
+                ->setParameters(['planet' => $usePlanet, 'ally' => $warAlly, 'user' => $user, 'friend' => $friendAlly, 'myAlly' => $allyF])
                 ->getQuery()
                 ->getResult();
 

@@ -2,13 +2,80 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97f042ea-d0ee-4bd9-bb02-3d850e24f659" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/Ally/AllyController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/Ally/AllyController.php" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/ally/pact.html.twig" afterPath="$PROJECT_DIR$/templates/connected/ally/pact.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/ally/rank.html.twig" afterPath="$PROJECT_DIR$/templates/connected/ally/rank.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/overview.html.twig" afterPath="$PROJECT_DIR$/templates/connected/overview.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/preconnected/ally.html.twig" afterPath="$PROJECT_DIR$/templates/preconnected/ally.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/preconnected/ally/noAlly.html.twig" afterPath="$PROJECT_DIR$/templates/preconnected/ally/noAlly.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/preconnected/ally/pact.html.twig" afterPath="$PROJECT_DIR$/templates/preconnected/ally/pact.html.twig" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/FleetController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/FleetController.php" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/MessageController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/MessageController.php" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/ReportController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/ReportController.php" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/SpatialController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/SpatialController.php" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/CronController/InstantController.php" afterPath="$PROJECT_DIR$/src/Controller/CronController/InstantController.php" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Planet.php" afterPath="$PROJECT_DIR$/src/Entity/Planet.php" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180508151728.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180508174814.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180508180250.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180508180958.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180509205124.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180509220655.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180510152258.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180510163437.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180511040839.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180511201230.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180515011423.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180515014642.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180516013816.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180516025037.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180517162047.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180517233407.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180518145827.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180518174910.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180518184527.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180518203807.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180519125426.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180521102347.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180523041509.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180524133846.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180527034205.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180527151806.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180531143810.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180531153000.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180531203001.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180601170605.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180602011605.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180605235419.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180606001125.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180606110504.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180606133630.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180606142113.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180608135946.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180614083529.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180614235355.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180812122525.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180812122708.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180826140201.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180826140213.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180826141235.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180826141451.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180826163135.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180826163146.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20181112121303.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20181112164532.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20181112174338.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20181112174551.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20181112235620.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20181119212157.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20181119222159.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20181119222257.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20181126141232.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20181126141253.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20181205131646.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20181205133647.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20181206170942.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20181210092714.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20181212202115.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20181221184528.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20190224155338.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20190224161459.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20190224162446.php" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20190224224559.php" afterPath="" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,71 +89,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="pact.html.twig" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/connected/ally/pact.html.twig">
+      <file leaf-file-name="InstantController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Controller/CronController/InstantController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="337">
-              <caret line="215" column="52" lean-forward="true" selection-start-line="215" selection-start-column="52" selection-end-line="215" selection-end-column="52" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="rank.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/connected/ally/rank.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="487">
-              <caret line="53" column="57" lean-forward="false" selection-start-line="53" selection-start-column="57" selection-end-line="53" selection-end-column="57" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ally.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/preconnected/ally.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="532">
-              <caret line="127" column="61" lean-forward="false" selection-start-line="127" selection-start-column="61" selection-end-line="127" selection-end-column="61" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pact.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/preconnected/ally/pact.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="622">
-              <caret line="242" column="61" lean-forward="false" selection-start-line="242" selection-start-column="61" selection-end-line="242" selection-end-column="61" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="noAlly.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/preconnected/ally/noAlly.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="622">
-              <caret line="111" column="61" lean-forward="false" selection-start-line="111" selection-start-column="61" selection-end-line="111" selection-end-column="61" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="overview.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/connected/overview.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="327">
-              <caret line="78" column="128" lean-forward="false" selection-start-line="78" selection-start-column="126" selection-end-line="78" selection-end-column="128" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AllyController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Controller/Connected/Ally/AllyController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="557" column="32" lean-forward="false" selection-start-line="557" selection-start-column="30" selection-end-line="557" selection-end-column="32" />
+            <state relative-caret-position="426">
+              <caret line="78" column="51" lean-forward="true" selection-start-line="78" selection-start-column="51" selection-end-line="78" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -96,10 +103,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>findBy</find>
-      <find>findOneBy</find>
-      <find>quest</find>
-      <find>132</find>
       <find>pdg</find>
       <find>warPoi</find>
       <find>persist</find>
@@ -126,6 +129,10 @@
       <find>userModal</find>
       <find>ally.getUse</find>
       <find>/ 6</find>
+      <find>$now</find>
+      <find>= :true</find>
+      <find>=&gt; NULL</find>
+      <find>'true'</find>
     </findStrings>
     <replaceStrings>
       <replace>&lt;span class='nbr-stats'&gt;</replace>
@@ -225,10 +232,8 @@
         <option value="$PROJECT_DIR$/templates/preconnected/profil/modal_user.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/CronController/DailyController.php" />
         <option value="$PROJECT_DIR$/src/Controller/Connected/OptionsController.php" />
-        <option value="$PROJECT_DIR$/src/Controller/CronController/InstantController.php" />
         <option value="$PROJECT_DIR$/src/Controller/Connected/ConnectController.php" />
         <option value="$PROJECT_DIR$/templates/connected/game_over.html.twig" />
-        <option value="$PROJECT_DIR$/src/Entity/Planet.php" />
         <option value="$PROJECT_DIR$/src/Controller/Connected/PlanetController.php" />
         <option value="$PROJECT_DIR$/templates/connected/ally/add.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/Connected/Ally/AllyController.php" />
@@ -238,6 +243,8 @@
         <option value="$PROJECT_DIR$/templates/preconnected/ally.html.twig" />
         <option value="$PROJECT_DIR$/templates/connected/ally/rank.html.twig" />
         <option value="$PROJECT_DIR$/templates/connected/ally/pact.html.twig" />
+        <option value="$PROJECT_DIR$/src/Entity/Planet.php" />
+        <option value="$PROJECT_DIR$/src/Controller/CronController/InstantController.php" />
       </list>
     </option>
   </component>
@@ -423,6 +430,18 @@
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
+            <path>
+              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Entity" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Migrations" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -525,12 +544,12 @@
       <workItem from="1544638418545" duration="19758000" />
       <workItem from="1550577059574" duration="3545000" />
       <workItem from="1550595254059" duration="54065000" />
-      <workItem from="1551029272895" duration="21019000" />
+      <workItem from="1551029272895" duration="22751000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1812381000" />
+    <option name="totallyTimeSpent" value="1814113000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -910,14 +929,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Planet.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="732" column="13" lean-forward="true" selection-start-line="732" selection-start-column="13" selection-end-line="732" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Connected/PlanetController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="702">
@@ -958,14 +969,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/CronController/InstantController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="485">
-          <caret line="408" column="39" lean-forward="true" selection-start-line="408" selection-start-column="39" selection-end-line="408" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/connected/ally/add.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="679">
@@ -982,42 +985,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/Ally/AllyController.php">
+    <entry file="file://$PROJECT_DIR$/templates/connected/ally/pact.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="557" column="32" lean-forward="false" selection-start-line="557" selection-start-column="30" selection-end-line="557" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/connected/overview.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="327">
-          <caret line="78" column="128" lean-forward="false" selection-start-line="78" selection-start-column="126" selection-end-line="78" selection-end-column="128" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/preconnected/ally/noAlly.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="622">
-          <caret line="111" column="61" lean-forward="false" selection-start-line="111" selection-start-column="61" selection-end-line="111" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/preconnected/ally/pact.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="622">
-          <caret line="242" column="61" lean-forward="false" selection-start-line="242" selection-start-column="61" selection-end-line="242" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/preconnected/ally.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="127" column="61" lean-forward="false" selection-start-line="127" selection-start-column="61" selection-end-line="127" selection-end-column="61" />
+        <state relative-caret-position="382">
+          <caret line="218" column="42" lean-forward="true" selection-start-line="218" selection-start-column="42" selection-end-line="218" selection-end-column="42" />
           <folding />
         </state>
       </provider>
@@ -1030,10 +1001,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/connected/ally/pact.html.twig">
+    <entry file="file://$PROJECT_DIR$/templates/preconnected/ally.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="337">
-          <caret line="215" column="52" lean-forward="true" selection-start-line="215" selection-start-column="52" selection-end-line="215" selection-end-column="52" />
+        <state relative-caret-position="532">
+          <caret line="127" column="61" lean-forward="false" selection-start-line="127" selection-start-column="61" selection-end-line="127" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/preconnected/ally/pact.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="622">
+          <caret line="242" column="61" lean-forward="false" selection-start-line="242" selection-start-column="61" selection-end-line="242" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/preconnected/ally/noAlly.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="622">
+          <caret line="111" column="61" lean-forward="false" selection-start-line="111" selection-start-column="61" selection-end-line="111" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/connected/overview.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="327">
+          <caret line="78" column="128" lean-forward="false" selection-start-line="78" selection-start-column="126" selection-end-line="78" selection-end-column="128" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/Ally/AllyController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="557" column="32" lean-forward="false" selection-start-line="557" selection-start-column="30" selection-end-line="557" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Planet.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="574">
+          <caret line="2147" column="7" lean-forward="false" selection-start-line="2147" selection-start-column="7" selection-end-line="2147" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/CronController/InstantController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="426">
+          <caret line="78" column="51" lean-forward="true" selection-start-line="78" selection-start-column="51" selection-end-line="78" selection-end-column="51" />
           <folding />
         </state>
       </provider>
