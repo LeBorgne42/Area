@@ -121,6 +121,11 @@ class Planet
     protected $fleets;
 
     /**
+     * @ORM\OneToMany(targetEntity="Construction", mappedBy="planet", fetch="EXTRA_LAZY")
+     */
+    protected $constructions;
+
+    /**
      * @ORM\Column(name="construct",type="string", nullable=true)
      */
     protected $construct;
@@ -442,6 +447,7 @@ class Planet
     public function __construct()
     {
         $this->fleets = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->constructions = new \Doctrine\Common\Collections\ArrayCollection();
         $this->centerSearch = 0;
         $this->imageFile = null;
         $this->brouilleurAt = null;
@@ -667,6 +673,21 @@ class Planet
             }
         }
         return $fullFleet;
+    }
+
+    /**
+     * @return int
+     */
+    public function getConstructionsLike($name): int
+    {
+        $nbr = 0;
+        foreach($this->constructions as $construct) {
+            if($construct->getConstruct() == $name) {
+                $nbr++;
+            }
+        }
+
+        return $nbr;
     }
 
     /**
@@ -2159,6 +2180,22 @@ class Planet
     public function setNbColo($nbColo): void
     {
         $this->nbColo = $nbColo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConstructions()
+    {
+        return $this->constructions;
+    }
+
+    /**
+     * @param mixed $constructions
+     */
+    public function setConstructions($constructions): void
+    {
+        $this->constructions = $constructions;
     }
 
     /**

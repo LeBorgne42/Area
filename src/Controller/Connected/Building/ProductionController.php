@@ -2,6 +2,7 @@
 
 namespace App\Controller\Connected\Building;
 
+use App\Entity\Construction;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,15 +33,27 @@ class ProductionController extends AbstractController
         $usePlanetWt = $usePlanet->getWater();
         $newGround = $usePlanet->getGroundPlace() + 1;
         if(($usePlanetNb < ($level * 450) || $usePlanetWt < ($level * 200)) ||
-            ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround())) {
+            ($newGround > $usePlanet->getGround())) {
             return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
-        $now->add(new DateInterval('PT' . ($level * 180) . 'S'));
-        $usePlanet->setNiobium($usePlanetNb - ($level * 450));
-        $usePlanet->setWater($usePlanetWt - ($level * 200));
-        $usePlanet->setGroundPlace($newGround);
-        $usePlanet->setConstruct('miner');
-        $usePlanet->setConstructAt($now);
+        if ($usePlanet->getConstructAt() > $now) {
+            $level = $level + $usePlanet->getConstructionsLike('miner');
+            $construction = new Construction();
+            $construction->setConstruct('miner');
+            $construction->setConstructTime($level * 180);
+            $construction->setPlanet($usePlanet);
+            $usePlanet->setNiobium($usePlanetNb - ($level * 450));
+            $usePlanet->setWater($usePlanetWt - ($level * 200));
+            $usePlanet->setGroundPlace($newGround);
+            $em->persist($construction);
+        } else {
+            $now->add(new DateInterval('PT' . ($level * 180) . 'S'));
+            $usePlanet->setNiobium($usePlanetNb - ($level * 450));
+            $usePlanet->setWater($usePlanetWt - ($level * 200));
+            $usePlanet->setGroundPlace($newGround);
+            $usePlanet->setConstruct('miner');
+            $usePlanet->setConstructAt($now);
+        }
         $em->flush();
 
         return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
@@ -91,15 +104,27 @@ class ProductionController extends AbstractController
         $usePlanetWt = $usePlanet->getWater();
         $newGround = $usePlanet->getGroundPlace() + 1;
         if(($usePlanetNb < ($level * 200) || $usePlanetWt < ($level * 500)) ||
-            ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround())) {
+            ($newGround > $usePlanet->getGround())) {
             return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
-        $now->add(new DateInterval('PT' . ($level * 180) . 'S'));
-        $usePlanet->setNiobium($usePlanetNb - ($level * 200));
-        $usePlanet->setWater($usePlanetWt - ($level * 500));
-        $usePlanet->setGroundPlace($newGround);
-        $usePlanet->setConstruct('extractor');
-        $usePlanet->setConstructAt($now);
+        if ($usePlanet->getConstructAt() > $now) {
+            $level = $level + $usePlanet->getConstructionsLike('extractor');
+            $construction = new Construction();
+            $construction->setConstruct('extractor');
+            $construction->setConstructTime($level * 180);
+            $construction->setPlanet($usePlanet);
+            $usePlanet->setNiobium($usePlanetNb - ($level * 200));
+            $usePlanet->setWater($usePlanetWt - ($level * 500));
+            $usePlanet->setGroundPlace($newGround);
+            $em->persist($construction);
+        } else {
+            $now->add(new DateInterval('PT' . ($level * 180) . 'S'));
+            $usePlanet->setNiobium($usePlanetNb - ($level * 200));
+            $usePlanet->setWater($usePlanetWt - ($level * 500));
+            $usePlanet->setGroundPlace($newGround);
+            $usePlanet->setConstruct('extractor');
+            $usePlanet->setConstructAt($now);
+        }
         $em->flush();
 
         return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);

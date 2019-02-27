@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use DateTime;
 use DateTimeZone;
+use Dateinterval;
 
 /**
  * @Route("/connect")
@@ -59,12 +60,12 @@ class BuildingController extends AbstractController
             $level = $cancelPlanet->getMiner() + 1;
             $cancelPlanet->setNiobium($cancelPlanet->getNiobium() + ($level * 225));
             $cancelPlanet->setWater($cancelPlanet->getWater() + ($level * 100));
-            $cancelPlanet->setGroundPlace($cancelPlanet->getGroundPlace() - 2);
+            $cancelPlanet->setGroundPlace($cancelPlanet->getGroundPlace() - 1);
         } elseif ($build == 'extractor') {
             $level = $cancelPlanet->getExtractor() + 1;
             $cancelPlanet->setNiobium($cancelPlanet->getNiobium() + ($level * 100));
             $cancelPlanet->setWater($cancelPlanet->getWater() + ($level * 250));
-            $cancelPlanet->setGroundPlace($cancelPlanet->getGroundPlace() - 3);
+            $cancelPlanet->setGroundPlace($cancelPlanet->getGroundPlace() - 1);
         } elseif ($build == 'niobiumStock') {
             $level = $cancelPlanet->getNiobiumStock() + 1;
             $cancelPlanet->setNiobium($cancelPlanet->getNiobium() + ($level * 75000));
@@ -74,7 +75,7 @@ class BuildingController extends AbstractController
             $level = $cancelPlanet->getWaterStock() + 1;
             $cancelPlanet->setNiobium($cancelPlanet->getNiobium() + ($level * 55000));
             $cancelPlanet->setWater($cancelPlanet->getWater() + ($level * 90000));
-            $cancelPlanet->setGroundPlace($cancelPlanet->getGroundPlace() - 4);
+            $cancelPlanet->setGroundPlace($cancelPlanet->getGroundPlace() - 3);
         } elseif ($build == 'city') {
             $level = $cancelPlanet->getCity() + 1;
             $cancelPlanet->setNiobium($cancelPlanet->getNiobium() + ($level * 7500));
@@ -115,8 +116,8 @@ class BuildingController extends AbstractController
             $level = $cancelPlanet->getSpaceShip() + 1;
             $cancelPlanet->setNiobium($cancelPlanet->getNiobium() + ($level * 1500));
             $cancelPlanet->setWater($cancelPlanet->getWater() + ($level * 1000));
-            $cancelPlanet->setGroundPlace($cancelPlanet->getGroundPlace() - 10);
-            $cancelPlanet->setSkyPlace($cancelPlanet->getSkyPlace() - 4);
+            $cancelPlanet->setGroundPlace($cancelPlanet->getGroundPlace() - 2);
+            $cancelPlanet->setSkyPlace($cancelPlanet->getSkyPlace() - 1);
         } elseif ($build == 'radar') {
             $level = $cancelPlanet->getRadar() + 1;
             $cancelPlanet->setNiobium($cancelPlanet->getNiobium() + ($level * 600));
@@ -133,8 +134,19 @@ class BuildingController extends AbstractController
             $cancelPlanet->setWater($cancelPlanet->getWater() + ($level * 16000));
             $cancelPlanet->setSkyPlace($cancelPlanet->getSkyPlace() - 4);
         }
-        $cancelPlanet->setConstruct(null);
-        $cancelPlanet->setConstructAt(null);
+        if($cancelPlanet->getConstructions()) {
+            $constructTime = new DateTime();
+            $constructTime->setTimezone(new DateTimeZone('Europe/Paris'));
+            foreach ($cancelPlanet->getConstructions() as $construction) {
+                $cancelPlanet->setConstruct($construction->getConstruct());
+                $cancelPlanet->setConstructAt($constructTime->add(new DateInterval('PT' . $construction->getConstructTime() . 'S')));
+                $em->remove($construction);
+                break;
+            }
+        } else {
+            $cancelPlanet->setConstruct(null);
+            $cancelPlanet->setConstructAt(null);
+        }
         $em->flush();
 
         return $this->redirectToRoute('overview', ['idp' => $usePlanet->getId()]);

@@ -19,9 +19,23 @@ building.heavy: 'Industrie lourde'
 building.radar: 'Radar au sol'
 building.skyRadar: 'Radar d''espace'
 building.brouilleur: 'Brouilleur de radar'
+building.constructions: 'Bâtiments en liste d''attente : '
 niobiumImg: Niobium
 waterImg: Eau
 groundImg: Terrain
+miner: 'Mine de niobium'
+extractor: 'Extracteur d''eau'
+city: 'Grande ville'
+metropole: Metropole
+caserne: Caserne
+destruct: Destruction
+centerSearch: 'Centre de recherche'
+lightUsine: 'Usine d''armement'
+heavyUsine: 'Usine lourde'
+spaceShip: 'Chantier spatial'
+radar: 'Radar au sol'
+skyRadar: 'Radar d''espace'
+skyBrouilleur: 'Brouilleur de radar'
 skyImg: Espace
 building.canBe: 'x 0'
 building.Activated: Construit

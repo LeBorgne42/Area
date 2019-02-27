@@ -414,8 +414,19 @@ class InstantController extends AbstractController
             } elseif ($build == 'skyBrouilleur') {
                 $planet->setSkyBrouilleur($planet->getSkyBrouilleur() + 1);
             }
-            $planet->setConstruct(null);
-            $planet->setConstructAt(null);
+            if($planet->getConstructions()) {
+                $constructTime = new DateTime();
+                $constructTime->setTimezone(new DateTimeZone('Europe/Paris'));
+                foreach ($planet->getConstructions() as $construction) {
+                    $planet->setConstruct($construction->getConstruct());
+                    $planet->setConstructAt($constructTime->add(new DateInterval('PT' . $construction->getConstructTime() . 'S')));
+                    $em->remove($construction);
+                    break;
+                }
+            } else {
+                $planet->setConstruct(null);
+                $planet->setConstructAt(null);
+            }
             $server->setNbrBuilding($server->getNbrBuilding() + 1);
         }
 
