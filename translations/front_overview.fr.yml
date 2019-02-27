@@ -28,6 +28,7 @@ overview.fleetShips: Vaisseaux
 overview.fleetSignature: Signature
 title.lastFleet: 'Flottes en mouvement'
 title.planet: Planète
+constructionsWaiting: 'Constructions en attentes sur la planète'
 form.name: 'nouveau nom'
 form.renamePlanet: Renommer
 tooltip.rank: 'Votre classement est affiché ici avec l''évolution positive ou négative depuis les dernière 24h.'
