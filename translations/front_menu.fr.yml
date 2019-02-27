@@ -38,6 +38,7 @@ workers: Travailleurs
 scientists: Scientifiques
 soldiers: Soldats
 groundImg: Terrain
+ships: 'Vaisseaux au sol'
 SkyImg: Espace
 rank: Classement
 quest: 'Objectifs'

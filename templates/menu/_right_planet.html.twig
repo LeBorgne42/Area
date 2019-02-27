@@ -25,6 +25,9 @@
                             <div class="ml-2">
                                 {{ planet.getGroundPlace() }}/{{ planet.getGround() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"> {{ planet.getSkyPlace() }}/{{ planet.getSky() }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'SkyImg'|trans }}" src="{{ asset('img/sky.png') }}">
                             </div>
+                            <div class="ml-2">
+                                {{ planet.getShipOn() }} <span class="glyphicon glyphicon-plane" data-toggle="tooltip" data-placement="bottom" title="{{ 'ships'|trans }}"></span>
+                            </div>
                         </div>
                     </div>
                 {% endif %}
