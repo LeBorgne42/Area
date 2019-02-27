@@ -57,7 +57,7 @@
                 </div>
             </div>
         {{ form_end(form_navigate) }}
-        <table class="table table-bordered table-dark galaxy-table text-center">
+      {#  <table class="table table-bordered table-dark galaxy-table text-center">
             <tbody>
                 {% set x = 1 %}
                 {% for sector in sectors %}
@@ -76,6 +76,29 @@
                     {% set x = 1 %}
                     {% endif %}
                 {% endfor %}
+            </tbody>
+        </table>#}
+        <table class="table table-bordered table-dark galaxy-table text-center">
+            <tbody>
+            {% set x = 0 %}
+            {% set y = 0 %}
+            {% for planet in planets %}
+                {% if x == 0 %}
+                    <tr>
+                    {% set x = 0 %}
+                {% endif %}
+                {% if y % 25 == 0 %}
+                    <td class="center-cells{% if planet.destroy == true %} red-border{% endif %}"><a data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.sector'|trans({'%position%': planet.sector}) }}" href="{{ path('map', {'id':planet.sector, 'idp': usePlanet.getId(), 'gal': planet.galaxy}) }}">
+                {% endif %}
+                <span class="{% if planet.empty == true %}pp-no2{% endif %}{% if planet.username == app.user.getUsername() %}pp-mine2{% elseif planet.alliance == app.user.getAlly().getSigle() and planet.alliance != null or app.user.getOurAllyPact(planet.alliance) %}pp-ally2{% elseif planet.username %}pp-enemy2{% elseif planet.cdr == true %}pp-cdr2{% elseif planet.merchant == true %}pp-ia2{% endif %}">{% if planet.empty == true %}&#x25A0{% else %}&#x25A0{% endif %}</span>
+                {% set y = y + 1 %}
+                {% if y % 25 == 0 %}</a></td>{% endif %}
+                {% set x = x + 1 %}
+                {% if x == 250 %}
+                    </tr>
+                    {% set x = 0 %}
+                {% endif %}
+            {% endfor %}
             </tbody>
         </table>
         <div class="mt-3 galaxy-info text-center">

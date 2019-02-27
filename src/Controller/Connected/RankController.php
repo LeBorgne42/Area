@@ -45,7 +45,9 @@ class RankController extends AbstractController
 
         $users = $em->getRepository('App:User')
             ->createQueryBuilder('u')
+            ->select('a.id as alliance, a.sigle as sigle, u.id, u.username, r.warPoint as warPoint, u.createdAt')
             ->leftJoin('u.rank', 'r')
+            ->leftJoin('u.ally', 'a')
             ->where('u.rank is not null')
             ->andWhere('u.id != :one')
             ->andWhere('r.warPoint > :one')

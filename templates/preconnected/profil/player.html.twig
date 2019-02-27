@@ -32,8 +32,10 @@
                 <div class="my-2 text-middle"><span class="glyphicon glyphicon-link text-orange"></span> {{ 'user.planet'|trans }} {{ user.getAllPlanets() }}</div>
                 <div class="my-2 text-middle">
                     <span class="glyphicon glyphicon-link text-orange"></span> {{ 'user.galaxy'|trans }}
+                    {% set x = 1 %}
                     {% for galaxy in user.getGalaxyPlanets() %}
-                        {{ galaxy }} -
+                        {% if x > 1 %} - {% endif %}{{ galaxy }}
+                        {% set x = x + 1 %}
                     {% endfor %}
                 </div>
                 <div class="my-2 text-middle"><span class="glyphicon glyphicon-link text-orange"></span> {{ 'user.ally'|trans }} {% if user.getAlly() %}<span><a data-toggle="modal" data-target="#allyModal" href="{{ path('pre_ally_profil_modal', {'id': user.getAlly().getId()}) }}">{{ user.getAlly().getName() }}</a></span>{% else %}{{ 'user.allyNone'|trans }}{% endif %}</div>

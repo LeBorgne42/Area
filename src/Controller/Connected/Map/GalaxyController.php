@@ -33,18 +33,32 @@ class GalaxyController extends AbstractController
             return $this->redirectToRoute('galaxy', ['idp' => $usePlanet->getId(), 'id' => $form_navigate->get('galaxy')->getData()]);
         }
 
-        $sectors = $em->getRepository('App:Sector')
+  /*      $sectors = $em->getRepository('App:Sector')
             ->createQueryBuilder('s')
             ->join('s.galaxy', 'g')
             ->where('g.position = :id')
             ->setParameter('id', $id)
             ->orderBy('s.position', 'ASC')
             ->getQuery()
+            ->getResult();*/
+
+        $planets = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->select('p.merchant, p.cdr, p.empty, s.position as sector, g.position as galaxy, u.username as username, a.sigle as alliance, s.destroy as destroy')
+            ->leftJoin('p.user', 'u')
+            ->leftJoin('u.ally', 'a')
+            ->join('p.sector', 's')
+            ->join('s.galaxy', 'g')
+            ->where('g.position = :id')
+            ->setParameter('id', $id)
+            ->orderBy('p.id', 'ASC')
+            ->getQuery()
             ->getResult();
 
         return $this->render('connected/map/galaxy.html.twig', [
             'form_navigate' => $form_navigate->createView(),
-            'sectors' => $sectors,
+//            'sectors' => $sectors,
+            'planets' => $planets,
             'usePlanet' => $usePlanet,
         ]);
     }
