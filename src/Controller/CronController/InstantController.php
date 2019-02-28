@@ -5,6 +5,7 @@ namespace App\Controller\CronController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Report;
+use App\Entity\Fleet;
 use DateTime;
 use DateTimeZone;
 use Dateinterval;
@@ -50,7 +51,7 @@ class InstantController extends AbstractController
 
         if($asteroides) {
             foreach ($asteroides as $asteroide) {
-                $nbrFleet = $asteroide->getFleetWithRec();
+                /*$nbrFleet = $asteroide->getFleetWithRec();
                 if ($nbrFleet) {
                     foreach ($asteroide->getFleets() as $fleetAsteroide) {
                         $asteroideRes = round(15000 / $nbrFleet);
@@ -72,7 +73,14 @@ class InstantController extends AbstractController
                     }
                     $nowAste->add(new DateInterval('PT' . 600 . 'S'));
                     $asteroide->setRecycleAt($nowAste);
-                }
+                }*/
+
+                $nowAste->add(new DateInterval('PT' . 1200 . 'S'));
+                $asteroide->setRecycleAt($nowAste);
+                $asteroide->setNbCdr($asteroide->getNbCdr() + 15000);
+                $asteroide->setWtCdr($asteroide->getWtCdr() + 10000);
+
+
                 if(rand(1, 8000) == 8000) {
                     $asteroide->setCdr(false);
                     $asteroide->setEmpty(true);
@@ -96,6 +104,17 @@ class InstantController extends AbstractController
                         $newAsteroides->setCdr(true);
                         $newAsteroides->setImageName('cdr.png');
                         $newAsteroides->setName('Astéroïdes');
+                        $iaPlayer = $em->getRepository('App:User')->find(['id' => 1]);
+                        $fleet = new Fleet();
+                        $fleet->setHunterWar(350);
+                        $fleet->setCorvetWar(75);
+                        $fleet->setFregatePlasma(30);
+                        $fleet->setDestroyer(8);
+                        $fleet->setUser($iaPlayer);
+                        $fleet->setPlanet($newAsteroides);
+                        $fleet->setAttack(1);
+                        $fleet->setName('Hydra Force');
+                        $em->persist($fleet);
                     }
                 }
             }
@@ -302,7 +321,7 @@ class InstantController extends AbstractController
         }
 
         foreach ($fleetCdrs as $fleetCdr) {
-            $recycle = $fleetCdr->getRecycleur() * 5000;
+            $recycle = $fleetCdr->getRecycleur() * 1500;
             $planetCdr = $fleetCdr->getPlanet();
             if ($fleetCdr->getCargoPlace() < ($fleetCdr->getCargoFull() + ($recycle * 2))) {
                 $cargoFullCdr = round((($fleetCdr->getCargoPlace() - $fleetCdr->getCargoFull()) / 2));
@@ -414,7 +433,7 @@ class InstantController extends AbstractController
             } elseif ($build == 'skyBrouilleur') {
                 $planet->setSkyBrouilleur($planet->getSkyBrouilleur() + 1);
             }
-            if($planet->getConstructions()) {
+            if(count($planet->getConstructions()) > 0) {
                 $constructTime = new DateTime();
                 $constructTime->setTimezone(new DateTimeZone('Europe/Paris'));
                 foreach ($planet->getConstructions() as $construction) {

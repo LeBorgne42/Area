@@ -3,7 +3,9 @@ building.infos: Infrastructure
 building.construct: Construire
 building.mining: 'Mine de niobium'
 building.build: Construire
+building.buildList: Ajouter
 building.demolish: Detruire
+building.cancel: Annuler
 building.extract: 'Extracteur d''eau'
 building.titleRessource: 'Production de ressources'
 building.titleShip: 'Infrastructure militaire'
@@ -17,6 +19,7 @@ building.chantier: 'Chantier spatial'
 building.light: 'Usine d''armement'
 building.heavy: 'Industrie lourde'
 building.radar: 'Radar au sol'
+tooltip.cancelList: 'Annuler construction'
 building.skyRadar: 'Radar d''espace'
 building.brouilleur: 'Brouilleur de radar'
 building.constructions: 'Bâtiments en liste d''attente : '

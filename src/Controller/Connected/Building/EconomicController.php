@@ -66,7 +66,7 @@ class EconomicController extends AbstractController
             ($usePlanet->getScientist() > $usePlanet->getScientistMax() - 500)) {
             return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
-        $now->add(new DateInterval('PT' . 1800 . 'S'));
+        $now->add(new DateInterval('PT' . 600 . 'S'));
         $usePlanet->setCenterSearch($level - 1);
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setScientistMax($usePlanet->getScientistMax() - 500);
@@ -128,7 +128,7 @@ class EconomicController extends AbstractController
         if($level == 0 || $usePlanet->getConstructAt() > $now) {
             return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
-        $now->add(new DateInterval('PT' . 1800 . 'S'));
+        $now->add(new DateInterval('PT' . 600 . 'S'));
         $usePlanet->setCity($level - 1);
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setWorkerMax($usePlanet->getWorkerMax() - 25000);
@@ -194,7 +194,7 @@ class EconomicController extends AbstractController
         if($level == 0 || $usePlanet->getConstructAt() > $now) {
             return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
-        $now->add(new DateInterval('PT' . 1800 . 'S'));
+        $now->add(new DateInterval('PT' . 600 . 'S'));
         $usePlanet->setMetropole($level - 1);
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setWorkerMax($usePlanet->getWorkerMax() - 75000);

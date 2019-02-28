@@ -134,7 +134,7 @@ class BuildingController extends AbstractController
             $cancelPlanet->setWater($cancelPlanet->getWater() + ($level * 16000));
             $cancelPlanet->setSkyPlace($cancelPlanet->getSkyPlace() - 4);
         }
-        if($cancelPlanet->getConstructions()) {
+        if(count($cancelPlanet->getConstructions()) > 0) {
             $constructTime = new DateTime();
             $constructTime->setTimezone(new DateTimeZone('Europe/Paris'));
             foreach ($cancelPlanet->getConstructions() as $construction) {
@@ -149,6 +149,47 @@ class BuildingController extends AbstractController
         }
         $em->flush();
 
+        if ($id == $idp) {
+            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+        }
         return $this->redirectToRoute('overview', ['idp' => $usePlanet->getId()]);
+    }
+
+    /**
+     * @Route("/annuler-construction-liste/{idp}/{id}", name="building_listCancel", requirements={"idp"="\d+", "id"="\d+"})
+     */
+    public function buildingListCancelAction($idp, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+
+        $construction = $em->getRepository('App:Construction')
+            ->createQueryBuilder('c')
+            ->join('c.planet', 'p')
+            ->where('c.id = :id')
+            ->andWhere('p.user = :user')
+            ->setParameters(['id' => $id, 'user' => $user])
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $build = $construction->getConstruct();
+        $cancelPlanet = $construction->getPlanet();
+        if ($build == 'miner') {
+            $level = $cancelPlanet->getMiner() + 1;
+            $cancelPlanet->setNiobium($cancelPlanet->getNiobium() + ($level * 225));
+            $cancelPlanet->setWater($cancelPlanet->getWater() + ($level * 100));
+            $cancelPlanet->setGroundPlace($cancelPlanet->getGroundPlace() - 1);
+        } elseif ($build == 'extractor') {
+            $level = $cancelPlanet->getExtractor() + 1;
+            $cancelPlanet->setNiobium($cancelPlanet->getNiobium() + ($level * 100));
+            $cancelPlanet->setWater($cancelPlanet->getWater() + ($level * 250));
+            $cancelPlanet->setGroundPlace($cancelPlanet->getGroundPlace() - 1);
+        }
+
+        $em->remove($construction);
+        $em->flush();
+
+        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
     }
 }
