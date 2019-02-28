@@ -1,5 +1,6 @@
 title: 'Page joueur'
 user.name: 'Pseudo :'
+user.level: 'Niveau du joueur :'
 user.ally: 'Alliance :'
 user.allyNone: Aucune
 user.galaxy: 'Galaxie(s) :'

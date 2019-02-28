@@ -321,7 +321,7 @@ class InstantController extends AbstractController
         }
 
         foreach ($fleetCdrs as $fleetCdr) {
-            $recycle = $fleetCdr->getRecycleur() * 1500;
+            $recycle = $fleetCdr->getRecycleur() * 5000;
             $planetCdr = $fleetCdr->getPlanet();
             if ($fleetCdr->getCargoPlace() < ($fleetCdr->getCargoFull() + ($recycle * 2))) {
                 $cargoFullCdr = round((($fleetCdr->getCargoPlace() - $fleetCdr->getCargoFull()) / 2));

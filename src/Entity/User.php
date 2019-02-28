@@ -45,6 +45,11 @@ class User implements UserInterface, \Serializable
     protected $email;
 
     /**
+     * @ORM\Column(name="experience",type="integer")
+     */
+    protected $experience;
+
+    /**
      * @ORM\Column(type="string", length=40, unique=true, nullable=true)
      * @Assert\Ip
      * @Assert\NotBlank(message = "required")
@@ -831,6 +836,14 @@ class User implements UserInterface, \Serializable
             $return = $return + ($planet->getWorker());
         }
         return $return;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLevel(): int
+    {
+        return floor($this->experience / 500);
     }
 
     /**
@@ -1895,6 +1908,22 @@ class User implements UserInterface, \Serializable
     public function setTutorial($tutorial): void
     {
         $this->tutorial = $tutorial;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getExperience()
+    {
+        return $this->experience;
+    }
+
+    /**
+     * @param mixed $experience
+     */
+    public function setExperience($experience): void
+    {
+        $this->experience = $experience;
     }
 
     /**

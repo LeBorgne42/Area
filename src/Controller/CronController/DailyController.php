@@ -109,6 +109,10 @@ class DailyController extends AbstractController
             }
             $user->getRank()->setOldPoint($user->getRank()->getPoint());
             $user->getRank()->setPoint($point);
+            $user->setExperience($user->getExperience() + $point); // A SUPPRIMER
+            if ($point - $user->getRank()->getPoint() > 0) {
+                $user->setExperience($user->getExperience() + ($point - $user->getRank()->getPoint()));
+            }
             $user->setViewReport(false);
 
             $em->persist($report);

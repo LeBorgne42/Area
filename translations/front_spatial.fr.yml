@@ -38,7 +38,7 @@ soldierImg: Soldats
 popover.title: 'Caractéristiques techniques'
 popover.sonde: '<h5>Signature thermique : 1<br>Vitesse : 1.000/lm</h5>'
 popover.colo: '<h5>Signature thermique : 200<br>Vitesse : 50/lm<hr>Coloniser une planète</h5>'
-popover.rec: '<h5>Signature thermique : 80<br>Vitesse : 75/lm<br>Cargo : 10.000<br>Recyclage : 1500/h<hr>Recycler des ressources</h5>'
+popover.rec: '<h5>Signature thermique : 80<br>Vitesse : 75/lm<br>Cargo : 10.000<br>Recyclage : 5.000/h<hr>Recycler des ressources</h5>'
 popover.barge: '<h5>Signature thermique : 50<br>Vitesse : 25/lm<br>Cargo : 2.000<hr>Envahir une planète</h5>'
 popover.cargoI: '<h5>Signature thermique : 50<br>Vitesse : 160/lm<br>Cargo : 25.000</h5>'
 popover.cargoV: '<h5>Signature thermique : 120<br>Vitesse : 150/lm<br>Cargo : 100.000</h5>'
