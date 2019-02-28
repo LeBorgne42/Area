@@ -57,6 +57,7 @@
                         {{ form_widget(form_image.imageFile) }}
                         {{ form_widget(form_image.sendForm) }}
                         {{ form_end(form_image) }}
+                        <div class="text-center"><span class="glyphicon glyphicon-star text-orange"></span> {{ 'info.level'|trans }} {{ app.user.getLevel() }}</div>
                     </th>
                     <td class="center-cells text-left">
                         <div class="my-2">{{ 'info.userName'|trans|raw }} <span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'idp': usePlanet.getId(), 'id': app.user.getId()}) }}">{{ app.user.getUsername() }}</a></span></div>

@@ -107,12 +107,12 @@ class DailyController extends AbstractController
             } else {
                 $report->setContent($report->getContent() . " Ce qui vous donne un revenu de " . round($gain - $empireCost) . " Bitcoin. Bonne journée Commandant.");
             }
+            $user->setExperience($point); // A SUPPRIMER
+            /*if ($point - $user->getRank()->getOldPoint() > 0) {
+                $user->setExperience($user->getExperience() + ($point - $user->getRank()->getOldPoint()));
+            }*/
             $user->getRank()->setOldPoint($user->getRank()->getPoint());
             $user->getRank()->setPoint($point);
-            $user->setExperience($user->getExperience() + $point); // A SUPPRIMER
-            if ($point - $user->getRank()->getPoint() > 0) {
-                $user->setExperience($user->getExperience() + ($point - $user->getRank()->getPoint()));
-            }
             $user->setViewReport(false);
 
             $em->persist($report);

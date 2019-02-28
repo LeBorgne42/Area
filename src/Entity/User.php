@@ -843,7 +843,40 @@ class User implements UserInterface, \Serializable
      */
     public function getLevel(): int
     {
-        return floor($this->experience / 500);
+        $return = 0;
+        if ($this->experience < 500) {
+            $return = 0;
+        } elseif ($this->experience < 2000) {
+            $return = 1;
+        } elseif ($this->experience < 5000) {
+            $return = 2;
+        } elseif ($this->experience < 10000) {
+            $return = 3;
+        } elseif ($this->experience < 25000) {
+            $return = 4;
+        } elseif ($this->experience < 40000) {
+            $return = 5;
+        } elseif ($this->experience < 75000) {
+            $return = 6;
+        } elseif ($this->experience < 100000) {
+            $return = 7;
+        } elseif ($this->experience < 150000) {
+            $return = 8;
+        } elseif ($this->experience < 200000) {
+            $return = 9;
+        } elseif ($this->experience < 280000) {
+            $return = 10;
+        } elseif ($this->experience < 350000) {
+            $return = 11;
+        } elseif ($this->experience < 450000) {
+            $return = 12;
+        } elseif ($this->experience < 600000) {
+            $return = 13;
+        } elseif ($this->experience < 800000) {
+            $return = 14;
+        }
+
+        return $return;
     }
 
     /**

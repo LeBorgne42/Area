@@ -40,6 +40,7 @@ info.ship: 'Total vaisseaux :'
 info.allyPlanets: 'Total planète :'
 info.allyBitcoin: 'Fonds de l''alliance :'
 info.userName: 'Empire :'
+info.level: 'Niveau :'
 info.grade: 'Grade :'
 info.independant: Indépendant
 info.niobium: 'Production de niobium :'
