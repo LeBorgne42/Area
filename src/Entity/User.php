@@ -158,9 +158,9 @@ class User implements UserInterface, \Serializable
      */
     protected $viewReport;
 
+
     /**
-     * @ORM\Column(name="tutorial",type="boolean")
-     * @Assert\NotBlank(message = "required")
+     * @ORM\Column(name="tutorial",type="integer")
      */
     protected $tutorial;
 
