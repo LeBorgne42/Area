@@ -820,7 +820,7 @@ class FleetController  extends AbstractController
             }
             $sFleet = $fleetGive->getPlanet()->getSector()->getPosition();
             if($fleetGive->getPlanet()->getSector()->getGalaxy()->getPosition() != $galaxy) {
-                $base = 3600;  // 86400 MODE NORMAL
+                $base = 18;  // 86400 MODE NORMAL
                 $price = 25;
             } else {
                 $pFleet = $fleetGive->getPlanet()->getPosition();
@@ -847,7 +847,7 @@ class FleetController  extends AbstractController
             } else {
                 $speed = $fleetGive->getSpeed();
             }
-            $distance = $speed * $base * 200; // 1000 MODE NORMAL
+            $distance = $speed * $base * 100; // 1000 MODE NORMAL
             $now->add(new DateInterval('PT' . round($distance) . 'S'));
             $fleetGive->setRecycleAt(null);
             $fleetGive->setNewPlanet($planetTake->getId());

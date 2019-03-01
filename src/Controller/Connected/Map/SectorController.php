@@ -174,7 +174,7 @@ class SectorController extends AbstractController
                 return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getPosition()]);
             }
             if($fleet->getPlanet()->getSector()->getGalaxy()->getPosition() != $galaxy) {
-                $base = 3600;
+                $base = 18;
                 $price = 25;
             } else {
                 $pFleet = $fleet->getPlanet()->getPosition();
@@ -201,7 +201,7 @@ class SectorController extends AbstractController
             } else {
                 $speed = $fleet->getSpeed();
             }
-            $distance = $speed * $base * 200;
+            $distance = $speed * $base * 100;
             $now->add(new DateInterval('PT' . round($distance) . 'S'));
             $moreNow = new DateTime();
             $moreNow->setTimezone(new DateTimeZone('Europe/Paris'));
@@ -259,7 +259,7 @@ class SectorController extends AbstractController
             return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $fPlanet->getSector()->getPosition(), 'gal' => $fPlanet->getSector()->getGalaxy()->getPosition()]);
         }
         if($fPlanet->getSector()->getGalaxy()->getPosition() != $galaxy) {
-            $base = 3600;
+            $base = 18;
             $price = 25;
         } else {
             $pFleet = $fPlanet->getPosition();
@@ -288,7 +288,7 @@ class SectorController extends AbstractController
         $fleet->setName('Auto Sonde');
         $fPlanet->setSonde($fPlanet->getSonde() - 1);
         $speed = $fleet->getSpeed();
-        $distance = $speed * $base * 200;
+        $distance = $speed * $base * 100;
         $now->add(new DateInterval('PT' . round($distance) . 'S'));
         $moreNow = new DateTime();
         $moreNow->setTimezone(new DateTimeZone('Europe/Paris'));

@@ -57,6 +57,7 @@
                     </table>
                     {{ form_end(form_manageAttackFleet) }}
                     {{ form_start(form_sendFleet,{attr: { action: path('send_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}) }}
+                    <div id="galaxyFleet" hidden>{{ fleet.getPlanet().getSector().getGalaxy().getPosition() }}</div>
                     <div id="positionFleet" hidden>{{ fleet.getPlanet().getSector().getPosition() }}</div>
                     <div id="planeteFleet" hidden>{{ fleet.getPlanet().getPosition() }}</div>
                     <div id="signatureFleet" hidden>{{ fleet.getNbrSignatures() }}</div>

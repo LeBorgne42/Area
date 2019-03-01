@@ -704,7 +704,7 @@ class InstantController extends AbstractController
                     $sector = $oldPlanet->getSector()->getPosition();
                     $galaxy = $oldPlanet->getSector()->getGalaxy()->getPosition();
                     if($fleet->getPlanet()->getSector()->getGalaxy()->getPosition() != $galaxy) {
-                        $base = 3600;
+                        $base = 18;
                         $price = 25;
                     } else {
                         $pFleet = $fleet->getPlanet()->getPosition();
@@ -730,7 +730,7 @@ class InstantController extends AbstractController
                         } else {
                             $speed = $fleet->getSpeed();
                         }
-                        $distance = $speed * $base * 200;
+                        $distance = $speed * $base * 100;
                         $moreNow = new DateTime();
                         $moreNow->setTimezone(new DateTimeZone('Europe/Paris'));
                         $moreNow->add(new DateInterval('PT' . 120 . 'S'));
