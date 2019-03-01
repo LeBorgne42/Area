@@ -1357,7 +1357,7 @@ class FleetController  extends AbstractController
         } else {
             return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
         }
-        $now->add(new DateInterval('PT' . 3600 . 'S'));
+        $now->add(new DateInterval('PT' . 600 . 'S'));
         $fleet->setRecycleAt($now);
 
         $em->flush();

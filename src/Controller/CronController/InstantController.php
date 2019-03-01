@@ -65,11 +65,6 @@ class InstantController extends AbstractController
                                 $fleetAsteroide->setWater($fleetAsteroide->getWater() + $asteroideRes);
                             }
                         }
-                        $quest = $fleetAsteroide->getUser()->checkQuests('recycle');
-                        if($quest) {
-                            $fleetAsteroide->getUser()->removeQuest($quest);
-                            $fleetAsteroide->getUser()->getRank()->setWarPoint($fleetAsteroide->getUser()->getRank()->getWarPoint() + 1000);
-                        }
                     }
                     $nowAste->add(new DateInterval('PT' . 600 . 'S'));
                     $asteroide->setRecycleAt($nowAste);
@@ -321,7 +316,7 @@ class InstantController extends AbstractController
         }
 
         foreach ($fleetCdrs as $fleetCdr) {
-            $recycle = $fleetCdr->getRecycleur() * 5000;
+            $recycle = $fleetCdr->getRecycleur() * 1000;
             $planetCdr = $fleetCdr->getPlanet();
             if ($fleetCdr->getCargoPlace() < ($fleetCdr->getCargoFull() + ($recycle * 2))) {
                 $cargoFullCdr = round((($fleetCdr->getCargoPlace() - $fleetCdr->getCargoFull()) / 2));
@@ -362,11 +357,16 @@ class InstantController extends AbstractController
                 }
                 if (($planetCdr->getNbCdr() > 0 || $planetCdr->getWtCdr() > 0) && $fleetCdr->getCargoPlace() > $fleetCdr->getCargoFull()) {
                     $tmpNoCdr = $now;
-                    $tmpNoCdr->add(new DateInterval('PT' . 3600 . 'S'));
+                    $tmpNoCdr->add(new DateInterval('PT' . 600 . 'S'));
                     $fleetCdr->setRecycleAt($now);
                 } else {
                     $fleetCdr->setRecycleAt(null);
                 }
+            }
+            $quest = $fleetCdr->getUser()->checkQuests('recycle');
+            if($quest) {
+                $fleetCdr->getUser()->removeQuest($quest);
+                $fleetCdr->getUser()->getRank()->setWarPoint($fleetCdr->getUser()->getRank()->getWarPoint() + 1000);
             }
         }
 

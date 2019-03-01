@@ -1,6 +1,6 @@
 {% trans_default_domain 'front_menu' %}
 
-<nav class="navbar-right text-center pr-4">
+<nav class="navbar-right text-center pr-4 hideForLittle">
     {% for planet in app.user.getPlanets() %}
         {% if planet == usePlanet and app.user.getAllPlanets() > 9 %}
         {% else %}
