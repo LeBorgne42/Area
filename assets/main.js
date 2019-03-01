@@ -676,16 +676,23 @@ function manageFlightTime(){
         var planete = $('#planeteFleet').text();
         var newPlanete = $('#fleet_send_planete').val();
         newPlanete = newPlanete.toString();
-        var x1 = (position % 10) * 5 + (planete % 5);
-        var x2 = (newPosition % 10) * 5 + (newPlanete % 5);
-        var y1 = (position / 10) * 5 + (planete % 5);
-        var y2 = (newPosition / 10) * 5 + (newPlanete % 5);
+        if (position == newPosition) {
+            var x1 = (planete - 1) % 5;
+            var x2 = (newPlanete - 1) % 5;
+            var y1 = (planete - 1) / 5;
+            var y2 = (newPlanete - 1) / 5;
+        } else {
+            var x1 = ((position - 1) % 10) * 3;
+            var x2 = ((newPosition - 1) % 10) * 3;
+            var y1 = ((position - 1) / 10) * 3;
+            var y2 = ((newPosition - 1) / 10) * 3;
+        }
         var base = Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2));
         var price = base / 3;
         carburant = Math.round(price * ($('#signatureFleet').text() / 200));
         var now = new Date();
         var travel = new Date();
-        travel.setSeconds(travel.getSeconds() + (base * speed * 500));
+        travel.setSeconds(travel.getSeconds() + (base * speed * 1000));
         var date_now = Math.abs((travel - now) / 1000);
         var jours = Math.floor(date_now / (60 * 60 * 24));
         var heures = Math.floor((date_now - (jours * 60 * 60 * 24)) / (60 * 60));

@@ -174,14 +174,21 @@ class SectorController extends AbstractController
                 return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getPosition()]);
             }
             if($fleet->getPlanet()->getSector()->getGalaxy()->getPosition() != $galaxy) {
-                $base = 100000;
+                $base = 86400;
                 $price = 25;
             } else {
                 $pFleet = $fleet->getPlanet()->getPosition();
-                $x1 = ($sFleet % 10) * 5 + ($pFleet % 5);
-                $x2 = ($sector % 10) * 5 + ($planete % 5);
-                $y1 = ($sFleet / 10) * 5 + ($pFleet % 5);
-                $y2 = ($sector / 10) * 5 + ($planete % 5);
+                if ($sFleet == $sector) {
+                    $x1 = ($pFleet - 1) % 5;
+                    $x2 = ($planete - 1) % 5;
+                    $y1 = ($pFleet - 1) / 5;
+                    $y2 = ($planete - 1) / 5;
+                } else {
+                    $x1 = (($sFleet - 1) % 10) * 3;
+                    $x2 = (($sector - 1) % 10) * 3;
+                    $y1 = (($sFleet - 1) / 10) * 3;
+                    $y2 = (($sector - 1) / 10) * 3;
+                }
                 $base = sqrt(pow(($x2 - $x1), 2) + pow(($y2 - $y1), 2));
                 $price = $base / 3;
             }
@@ -194,7 +201,7 @@ class SectorController extends AbstractController
             } else {
                 $speed = $fleet->getSpeed();
             }
-            $distance = $speed * $base * 500;
+            $distance = $speed * $base * 1000;
             $now->add(new DateInterval('PT' . round($distance) . 'S'));
             $moreNow = new DateTime();
             $moreNow->setTimezone(new DateTimeZone('Europe/Paris'));
@@ -252,14 +259,21 @@ class SectorController extends AbstractController
             return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $fPlanet->getSector()->getPosition(), 'gal' => $fPlanet->getSector()->getGalaxy()->getPosition()]);
         }
         if($fPlanet->getSector()->getGalaxy()->getPosition() != $galaxy) {
-            $base = 100000;
+            $base = 86400;
             $price = 25;
         } else {
             $pFleet = $fPlanet->getPosition();
-            $x1 = ($sFleet % 10) * 5 + ($pFleet % 5);
-            $x2 = ($sector % 10) * 5 + ($planete % 5);
-            $y1 = ($sFleet / 10) * 5 + ($pFleet % 5);
-            $y2 = ($sector / 10) * 5 + ($planete % 5);
+            if ($sFleet == $sector) {
+                $x1 = ($pFleet - 1) % 5;
+                $x2 = ($planete - 1) % 5;
+                $y1 = ($pFleet - 1) / 5;
+                $y2 = ($planete - 1) / 5;
+            } else {
+                $x1 = (($sFleet - 1) % 10) * 3;
+                $x2 = (($sector - 1) % 10) * 3;
+                $y1 = (($sFleet - 1) / 10) * 3;
+                $y2 = (($sector - 1) / 10) * 3;
+            }
             $base = sqrt(pow(($x2 - $x1), 2) + pow(($y2 - $y1), 2));
             $price = $base / 3;
         }
@@ -274,7 +288,7 @@ class SectorController extends AbstractController
         $fleet->setName('Auto Sonde');
         $fPlanet->setSonde($fPlanet->getSonde() - 1);
         $speed = $fleet->getSpeed();
-        $distance = $speed * $base * 500;
+        $distance = $speed * $base * 1000;
         $now->add(new DateInterval('PT' . round($distance) . 'S'));
         $moreNow = new DateTime();
         $moreNow->setTimezone(new DateTimeZone('Europe/Paris'));

@@ -778,7 +778,7 @@ class FleetController  extends AbstractController
                 ->getQuery()
                 ->getOneOrNullResult();
 
-            if($sectorDestroy && $form_sendFleet->get('sector')->getData() != $fleetGive->getPlanet()->getSector()->getPosition()) {
+            if($sectorDestroy && $form_sendFleet->get('sector')->getData() != $fleetGive->getPlanet()->getSector()->getPosition()) { // AJOUTER LA GALAXIE
                 return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
             }
 
@@ -820,14 +820,21 @@ class FleetController  extends AbstractController
             }
             $sFleet = $fleetGive->getPlanet()->getSector()->getPosition();
             if($fleetGive->getPlanet()->getSector()->getGalaxy()->getPosition() != $galaxy) {
-                $base = 100000;
+                $base = 86400;
                 $price = 25;
             } else {
                 $pFleet = $fleetGive->getPlanet()->getPosition();
-                $x1 = ($sFleet % 10) * 5 + ($pFleet % 5);
-                $x2 = ($sector % 10) * 5 + ($planetTakee % 5);
-                $y1 = ($sFleet / 10) * 5 + ($pFleet % 5);
-                $y2 = ($sector / 10) * 5 + ($planetTakee % 5);
+                if ($sFleet == $sector) {
+                    $x1 = ($pFleet - 1) % 5;
+                    $x2 = ($planetTakee - 1) % 5;
+                    $y1 = ($pFleet - 1) / 5;
+                    $y2 = ($planetTakee - 1) / 5;
+                } else {
+                    $x1 = (($sFleet - 1) % 10) * 3;
+                    $x2 = (($sector - 1) % 10) * 3;
+                    $y1 = (($sFleet - 1) / 10) * 3;
+                    $y2 = (($sector - 1) / 10) * 3;
+                }
                 $base = sqrt(pow(($x2 - $x1), 2) + pow(($y2 - $y1), 2));
                 $price = $base / 3;
             }
@@ -840,7 +847,8 @@ class FleetController  extends AbstractController
             } else {
                 $speed = $fleetGive->getSpeed();
             }
-            $distance = $speed * $base * 500;
+            $distance = $speed * $base * 1000;
+            var_dump($distance); exit;
             $now->add(new DateInterval('PT' . round($distance) . 'S'));
             $fleetGive->setRecycleAt(null);
             $fleetGive->setNewPlanet($planetTake->getId());

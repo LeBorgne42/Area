@@ -704,14 +704,21 @@ class InstantController extends AbstractController
                     $sector = $oldPlanet->getSector()->getPosition();
                     $galaxy = $oldPlanet->getSector()->getGalaxy()->getPosition();
                     if($fleet->getPlanet()->getSector()->getGalaxy()->getPosition() != $galaxy) {
-                        $base = 100000;
+                        $base = 86400;
                         $price = 25;
                     } else {
                         $pFleet = $fleet->getPlanet()->getPosition();
-                        $x1 = ($sFleet % 10) * 5 + ($pFleet % 5);
-                        $x2 = ($sector % 10) * 5 + ($planetTakee % 5);
-                        $y1 = ($sFleet / 10) * 5 + ($pFleet % 5);
-                        $y2 = ($sector / 10) * 5 + ($planetTakee % 5);
+                        if ($sFleet == $sector) {
+                            $x1 = ($pFleet - 1) % 5;
+                            $x2 = ($planetTakee - 1) % 5;
+                            $y1 = ($pFleet - 1) / 5;
+                            $y2 = ($planetTakee - 1) / 5;
+                        } else {
+                            $x1 = (($sFleet - 1) % 10) * 3;
+                            $x2 = (($sector - 1) % 10) * 3;
+                            $y1 = (($sFleet - 1) / 10) * 3;
+                            $y2 = (($sector - 1) / 10) * 3;
+                        }
                         $base = sqrt(pow(($x2 - $x1), 2) + pow(($y2 - $y1), 2));
                         $price = $base / 3;
                     }
@@ -723,7 +730,7 @@ class InstantController extends AbstractController
                         } else {
                             $speed = $fleet->getSpeed();
                         }
-                        $distance = $speed * $base * 500;
+                        $distance = $speed * $base * 1000;
                         $moreNow = new DateTime();
                         $moreNow->setTimezone(new DateTimeZone('Europe/Paris'));
                         $moreNow->add(new DateInterval('PT' . 120 . 'S'));

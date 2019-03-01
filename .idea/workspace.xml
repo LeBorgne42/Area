@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97f042ea-d0ee-4bd9-bb02-3d850e24f659" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/assets/global.scss" afterPath="$PROJECT_DIR$/assets/global.scss" />
+      <change beforePath="$PROJECT_DIR$/assets/main.js" afterPath="$PROJECT_DIR$/assets/main.js" />
       <change beforePath="$PROJECT_DIR$/src/Controller/Connected/FleetController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/FleetController.php" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/Map/SectorController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/Map/SectorController.php" />
       <change beforePath="$PROJECT_DIR$/src/Controller/CronController/InstantController.php" afterPath="$PROJECT_DIR$/src/Controller/CronController/InstantController.php" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/fleet_list.html.twig" afterPath="$PROJECT_DIR$/templates/connected/fleet_list.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/menu/_right_planet.html.twig" afterPath="$PROJECT_DIR$/templates/menu/_right_planet.html.twig" />
-      <change beforePath="$PROJECT_DIR$/translations/front_spatial.fr.yml" afterPath="$PROJECT_DIR$/translations/front_spatial.fr.yml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,43 +19,18 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="fleet_list.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/connected/fleet_list.html.twig">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="371">
-              <caret line="58" column="49" lean-forward="true" selection-start-line="58" selection-start-column="49" selection-end-line="58" selection-end-column="49" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="global.scss" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/global.scss">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="31" column="34" lean-forward="false" selection-start-line="31" selection-start-column="34" selection-end-line="31" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InstantController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Controller/CronController/InstantController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="902">
-              <caret line="369" column="13" lean-forward="true" selection-start-line="369" selection-start-column="13" selection-end-line="369" selection-end-column="13" />
-              <folding>
-                <element signature="e#49#96#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="FleetController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Controller/Connected/FleetController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="556">
-              <caret line="1359" column="45" lean-forward="false" selection-start-line="1359" selection-start-column="45" selection-end-line="1359" selection-end-column="45" />
+            <state relative-caret-position="546">
+              <caret line="827" column="43" lean-forward="true" selection-start-line="827" selection-start-column="43" selection-end-line="827" selection-end-column="43" />
+              <caret line="828" column="48" lean-forward="true" selection-start-line="828" selection-start-column="48" selection-end-line="828" selection-end-column="48" />
+              <caret line="829" column="43" lean-forward="false" selection-start-line="829" selection-start-column="43" selection-end-line="829" selection-end-column="43" />
+              <caret line="830" column="48" lean-forward="true" selection-start-line="830" selection-start-column="48" selection-end-line="830" selection-end-column="48" />
+              <caret line="827" column="26" lean-forward="false" selection-start-line="827" selection-start-column="26" selection-end-line="827" selection-end-column="26" />
+              <caret line="828" column="26" lean-forward="false" selection-start-line="828" selection-start-column="26" selection-end-line="828" selection-end-column="26" />
+              <caret line="829" column="26" lean-forward="false" selection-start-line="829" selection-start-column="26" selection-end-line="829" selection-end-column="26" />
+              <caret line="830" column="26" lean-forward="false" selection-start-line="830" selection-start-column="26" selection-end-line="830" selection-end-column="26" />
               <folding>
                 <element signature="e#44#91#0#PHP" expanded="true" />
               </folding>
@@ -65,12 +38,49 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_right_planet.html.twig" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/menu/_right_planet.html.twig">
+      <file leaf-file-name="InstantController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Controller/CronController/InstantController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="55" lean-forward="false" selection-start-line="2" selection-start-column="55" selection-end-line="2" selection-end-column="55" />
+            <state relative-caret-position="443">
+              <caret line="711" column="51" lean-forward="false" selection-start-line="711" selection-start-column="51" selection-end-line="711" selection-end-column="51" />
+              <caret line="712" column="56" lean-forward="true" selection-start-line="712" selection-start-column="56" selection-end-line="712" selection-end-column="56" />
+              <caret line="713" column="51" lean-forward="false" selection-start-line="713" selection-start-column="51" selection-end-line="713" selection-end-column="51" />
+              <caret line="714" column="56" lean-forward="false" selection-start-line="714" selection-start-column="56" selection-end-line="714" selection-end-column="56" />
+              <caret line="711" column="34" lean-forward="true" selection-start-line="711" selection-start-column="34" selection-end-line="711" selection-end-column="34" />
+              <caret line="712" column="34" lean-forward="true" selection-start-line="712" selection-start-column="34" selection-end-line="712" selection-end-column="34" />
+              <caret line="713" column="34" lean-forward="true" selection-start-line="713" selection-start-column="34" selection-end-line="713" selection-end-column="34" />
+              <caret line="714" column="34" lean-forward="true" selection-start-line="714" selection-start-column="34" selection-end-line="714" selection-end-column="34" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SectorController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Controller/Connected/Map/SectorController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="705">
+              <caret line="181" column="43" lean-forward="false" selection-start-line="181" selection-start-column="43" selection-end-line="181" selection-end-column="43" />
+              <caret line="182" column="44" lean-forward="false" selection-start-line="182" selection-start-column="44" selection-end-line="182" selection-end-column="44" />
+              <caret line="183" column="43" lean-forward="false" selection-start-line="183" selection-start-column="43" selection-end-line="183" selection-end-column="43" />
+              <caret line="184" column="44" lean-forward="false" selection-start-line="184" selection-start-column="44" selection-end-line="184" selection-end-column="44" />
+              <caret line="181" column="26" lean-forward="true" selection-start-line="181" selection-start-column="26" selection-end-line="181" selection-end-column="26" />
+              <caret line="182" column="26" lean-forward="true" selection-start-line="182" selection-start-column="26" selection-end-line="182" selection-end-column="26" />
+              <caret line="183" column="26" lean-forward="true" selection-start-line="183" selection-start-column="26" selection-end-line="183" selection-end-column="26" />
+              <caret line="184" column="26" lean-forward="false" selection-start-line="184" selection-start-column="26" selection-end-line="184" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="618">
+              <caret line="687" column="49" lean-forward="false" selection-start-line="687" selection-start-column="49" selection-end-line="687" selection-end-column="49" />
+              <folding>
+                <marker date="1551454503837" expanded="true" signature="29043:29059" ph="..." />
+                <marker date="1551454503837" expanded="true" signature="30238:30254" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -79,13 +89,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>new Report</find>
-      <find>new Report(</find>
-      <find>$report = new Report();</find>
-      <find>ManyToOne</find>
-      <find>,type=&quot;string&quot;</find>
-      <find>fleets</find>
-      <find>constr</find>
       <find>{% for</find>
       <find>()|trans</find>
       <find>miner:</find>
@@ -109,6 +112,13 @@
       <find>$fleetCdrs</find>
       <find>5000</find>
       <find>recycle</find>
+      <find>envoyer</find>
+      <find>$base =</find>
+      <find>$base = 86400;</find>
+      <find>\n                \$x1 \= \(\(\$sFleet \- 1\) \% 10\) \* 3 \+ \(\(\$pFleet \- 1\) \% 5\)\;\n                \$x2 \= \(\(\$sector \- 1\) \% 10\) \* 3 \+ \(\(\$planete \- 1\) \% 5\)\;\n                \$y1 \= \(\(\$sFleet \- 1\) \/ 10\) \* 3 \+ \(\(\$pFleet \- 1\) \/ 5\)\;\n                \$y2 \= \(\(\$sector \- 1\) \/ 10\) \* 3 \+ \(\(\$planete \- 1\) \/ 5\)\;</find>
+      <find>$base = 86400</find>
+      <find>$speed * $base * 500</find>
+      <find>86400</find>
     </findStrings>
     <replaceStrings>
       <replace>&lt;span class='nbr-stats'&gt;</replace>
@@ -172,7 +182,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/translations/front_market.fr.yml" />
         <option value="$PROJECT_DIR$/src/Controller/Connected/OverviewController.php" />
         <option value="$PROJECT_DIR$/src/EventListener/UserEvent.php" />
         <option value="$PROJECT_DIR$/src/Controller/Connected/OptionsController.php" />
@@ -188,7 +197,6 @@
         <option value="$PROJECT_DIR$/translations/front_galaxy.fr.yml" />
         <option value="$PROJECT_DIR$/assets/scss/front/galaxy.scss" />
         <option value="$PROJECT_DIR$/templates/connected/map/sector.html.twig" />
-        <option value="$PROJECT_DIR$/src/Controller/Connected/Map/SectorController.php" />
         <option value="$PROJECT_DIR$/src/Form/Front/NavigateType.php" />
         <option value="$PROJECT_DIR$/src/Controller/Connected/Map/GalaxyController.php" />
         <option value="$PROJECT_DIR$/templates/connected/map/galaxy.html.twig" />
@@ -220,8 +228,10 @@
         <option value="$PROJECT_DIR$/templates/connected/fleet_list.html.twig" />
         <option value="$PROJECT_DIR$/templates/menu/_right_planet.html.twig" />
         <option value="$PROJECT_DIR$/assets/global.scss" />
-        <option value="$PROJECT_DIR$/src/Controller/CronController/InstantController.php" />
         <option value="$PROJECT_DIR$/translations/front_spatial.fr.yml" />
+        <option value="$PROJECT_DIR$/assets/main.js" />
+        <option value="$PROJECT_DIR$/src/Controller/Connected/Map/SectorController.php" />
+        <option value="$PROJECT_DIR$/src/Controller/CronController/InstantController.php" />
         <option value="$PROJECT_DIR$/src/Controller/Connected/FleetController.php" />
       </list>
     </option>
@@ -423,13 +433,6 @@
             <path>
               <item name="Area" type="b2602c69:ProjectViewProjectNode" />
               <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="CronController" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
@@ -442,7 +445,8 @@
               <item name="Area" type="b2602c69:ProjectViewProjectNode" />
               <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="menu" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="connected" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="fleet" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
@@ -546,12 +550,12 @@
       <workItem from="1544638418545" duration="19758000" />
       <workItem from="1550577059574" duration="3545000" />
       <workItem from="1550595254059" duration="54065000" />
-      <workItem from="1551029272895" duration="62169000" />
+      <workItem from="1551029272895" duration="67886000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1853531000" />
+    <option name="totallyTimeSpent" value="1859248000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -649,14 +653,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Form/Front/ModifPasswordType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="11" column="23" lean-forward="false" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Connected/OptionsController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
@@ -839,16 +835,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/Map/SectorController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="49" column="51" lean-forward="true" selection-start-line="49" selection-start-column="51" selection-end-line="49" selection-end-column="51" />
-          <folding>
-            <element signature="e#48#95#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/translations/front_menu.fr.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="600">
@@ -913,14 +899,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/connected/fleet/edit.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="707">
-          <caret line="816" column="66" lean-forward="false" selection-start-line="816" selection-start-column="66" selection-end-line="816" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Security/ServerController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -951,14 +929,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="21" column="41" lean-forward="false" selection-start-line="21" selection-start-column="41" selection-end-line="21" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/connected/building.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="601">
-          <caret line="163" column="109" lean-forward="true" selection-start-line="163" selection-start-column="109" selection-end-line="163" selection-end-column="127" />
           <folding />
         </state>
       </provider>
@@ -1019,10 +989,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/connected/fleet_list.html.twig">
+    <entry file="file://$PROJECT_DIR$/translations/front_spatial.fr.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="58" column="49" lean-forward="true" selection-start-line="58" selection-start-column="49" selection-end-line="58" selection-end-column="49" />
+        <state relative-caret-position="412">
+          <caret line="40" column="107" lean-forward="false" selection-start-line="40" selection-start-column="107" selection-end-line="40" selection-end-column="107" />
           <folding />
         </state>
       </provider>
@@ -1043,28 +1013,82 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/translations/front_spatial.fr.yml">
+    <entry file="file://$PROJECT_DIR$/templates/connected/fleet_list.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="412">
-          <caret line="40" column="107" lean-forward="false" selection-start-line="40" selection-start-column="107" selection-end-line="40" selection-end-column="107" />
+        <state relative-caret-position="371">
+          <caret line="58" column="49" lean-forward="true" selection-start-line="58" selection-start-column="49" selection-end-line="58" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/connected/building.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="481">
+          <caret line="155" column="21" lean-forward="true" selection-start-line="155" selection-start-column="21" selection-end-line="155" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/connected/fleet/edit.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11249">
+          <caret line="816" column="66" lean-forward="false" selection-start-line="816" selection-start-column="66" selection-end-line="816" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="618">
+          <caret line="687" column="49" lean-forward="false" selection-start-line="687" selection-start-column="49" selection-end-line="687" selection-end-column="49" />
+          <folding>
+            <marker date="1551454503837" expanded="true" signature="29043:29059" ph="..." />
+            <marker date="1551454503837" expanded="true" signature="30238:30254" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/Map/SectorController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="705">
+          <caret line="181" column="43" lean-forward="false" selection-start-line="181" selection-start-column="43" selection-end-line="181" selection-end-column="43" />
+          <caret line="182" column="44" lean-forward="false" selection-start-line="182" selection-start-column="44" selection-end-line="182" selection-end-column="44" />
+          <caret line="183" column="43" lean-forward="false" selection-start-line="183" selection-start-column="43" selection-end-line="183" selection-end-column="43" />
+          <caret line="184" column="44" lean-forward="false" selection-start-line="184" selection-start-column="44" selection-end-line="184" selection-end-column="44" />
+          <caret line="181" column="26" lean-forward="true" selection-start-line="181" selection-start-column="26" selection-end-line="181" selection-end-column="26" />
+          <caret line="182" column="26" lean-forward="true" selection-start-line="182" selection-start-column="26" selection-end-line="182" selection-end-column="26" />
+          <caret line="183" column="26" lean-forward="true" selection-start-line="183" selection-start-column="26" selection-end-line="183" selection-end-column="26" />
+          <caret line="184" column="26" lean-forward="false" selection-start-line="184" selection-start-column="26" selection-end-line="184" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/CronController/InstantController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="902">
-          <caret line="369" column="13" lean-forward="true" selection-start-line="369" selection-start-column="13" selection-end-line="369" selection-end-column="13" />
-          <folding>
-            <element signature="e#49#96#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="443">
+          <caret line="711" column="51" lean-forward="false" selection-start-line="711" selection-start-column="51" selection-end-line="711" selection-end-column="51" />
+          <caret line="712" column="56" lean-forward="true" selection-start-line="712" selection-start-column="56" selection-end-line="712" selection-end-column="56" />
+          <caret line="713" column="51" lean-forward="false" selection-start-line="713" selection-start-column="51" selection-end-line="713" selection-end-column="51" />
+          <caret line="714" column="56" lean-forward="false" selection-start-line="714" selection-start-column="56" selection-end-line="714" selection-end-column="56" />
+          <caret line="711" column="34" lean-forward="true" selection-start-line="711" selection-start-column="34" selection-end-line="711" selection-end-column="34" />
+          <caret line="712" column="34" lean-forward="true" selection-start-line="712" selection-start-column="34" selection-end-line="712" selection-end-column="34" />
+          <caret line="713" column="34" lean-forward="true" selection-start-line="713" selection-start-column="34" selection-end-line="713" selection-end-column="34" />
+          <caret line="714" column="34" lean-forward="true" selection-start-line="714" selection-start-column="34" selection-end-line="714" selection-end-column="34" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Connected/FleetController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="556">
-          <caret line="1359" column="45" lean-forward="false" selection-start-line="1359" selection-start-column="45" selection-end-line="1359" selection-end-column="45" />
+        <state relative-caret-position="546">
+          <caret line="827" column="43" lean-forward="true" selection-start-line="827" selection-start-column="43" selection-end-line="827" selection-end-column="43" />
+          <caret line="828" column="48" lean-forward="true" selection-start-line="828" selection-start-column="48" selection-end-line="828" selection-end-column="48" />
+          <caret line="829" column="43" lean-forward="false" selection-start-line="829" selection-start-column="43" selection-end-line="829" selection-end-column="43" />
+          <caret line="830" column="48" lean-forward="true" selection-start-line="830" selection-start-column="48" selection-end-line="830" selection-end-column="48" />
+          <caret line="827" column="26" lean-forward="false" selection-start-line="827" selection-start-column="26" selection-end-line="827" selection-end-column="26" />
+          <caret line="828" column="26" lean-forward="false" selection-start-line="828" selection-start-column="26" selection-end-line="828" selection-end-column="26" />
+          <caret line="829" column="26" lean-forward="false" selection-start-line="829" selection-start-column="26" selection-end-line="829" selection-end-column="26" />
+          <caret line="830" column="26" lean-forward="false" selection-start-line="830" selection-start-column="26" selection-end-line="830" selection-end-column="26" />
           <folding>
             <element signature="e#44#91#0#PHP" expanded="true" />
           </folding>
