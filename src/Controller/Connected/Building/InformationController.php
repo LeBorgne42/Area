@@ -43,7 +43,7 @@ class InformationController extends AbstractController
             return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
 
-        $now->add(new DateInterval('PT' . ($level * 2200) . 'S'));
+        $now->add(new DateInterval('PT' . ($level * 220) . 'S'));
         $usePlanet->setNiobium($usePlanetNb - ($level * 1200));
         $usePlanet->setWater($usePlanetWt - ($level * 650));
         $usePlanet->setGroundPlace($newGround);
@@ -116,7 +116,7 @@ class InformationController extends AbstractController
             return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
 
-        $now->add(new DateInterval('PT' . ($level * 14400) . 'S'));
+        $now->add(new DateInterval('PT' . ($level * 1440) . 'S'));
         $usePlanet->setNiobium($usePlanetNb - ($level * 20000));
         $usePlanet->setWater($usePlanetWt - ($level * 17200));
         $usePlanet->setSkyPlace($newSky);
@@ -189,7 +189,7 @@ class InformationController extends AbstractController
             return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
 
-        $now->add(new DateInterval('PT' . ($level * 32400) . 'S'));
+        $now->add(new DateInterval('PT' . ($level * 3240) . 'S'));
         $usePlanet->setNiobium($usePlanetNb - ($level * 51000));
         $usePlanet->setWater($usePlanetWt - ($level * 32100));
         $usePlanet->setSkyPlace($newSky);

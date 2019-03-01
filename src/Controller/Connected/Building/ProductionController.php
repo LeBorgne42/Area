@@ -179,7 +179,7 @@ class ProductionController extends AbstractController
         $user->getCargo() < 2) {
             return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
-        $now->add(new DateInterval('PT' . ($level * 21600) . 'S'));
+        $now->add(new DateInterval('PT' . ($level * 2160) . 'S'));
         $usePlanet->setNiobium($usePlanetNb - ($level * 150000));
         $usePlanet->setWater($usePlanetWt - ($level * 100000));
         $usePlanet->setGroundPlace($newGround);
@@ -239,7 +239,7 @@ class ProductionController extends AbstractController
             $user->getCargo() < 2) {
             return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
-        $now->add(new DateInterval('PT' . ($level * 21600) . 'S'));
+        $now->add(new DateInterval('PT' . ($level * 2160) . 'S'));
         $usePlanet->setNiobium($usePlanetNb - ($level * 110000));
         $usePlanet->setWater($usePlanetWt - ($level * 180000));
         $usePlanet->setGroundPlace($newGround);

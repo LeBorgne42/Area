@@ -99,7 +99,7 @@ class EconomicController extends AbstractController
             return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
 
-        $now->add(new DateInterval('PT' . ($level * 7200) . 'S'));
+        $now->add(new DateInterval('PT' . ($level * 720) . 'S'));
         $usePlanet->setNiobium($usePlanetNb - ($level * 15000));
         $usePlanet->setWater($usePlanetWt - ($level * 11000));
         $usePlanet->setGroundPlace($newGround);
@@ -163,7 +163,7 @@ class EconomicController extends AbstractController
             return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
 
-        $now->add(new DateInterval('PT' . ($level * 28000) . 'S'));
+        $now->add(new DateInterval('PT' . ($level * 2800) . 'S'));
         $usePlanet->setNiobium($usePlanetNb - ($level * 75000));
         $usePlanet->setWater($usePlanetWt - ($level * 55000));
         $usePlanet->setGroundPlace($newGround);

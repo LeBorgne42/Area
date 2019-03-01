@@ -38,7 +38,7 @@ class SpaceShipyardController extends AbstractController
             return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
 
-        $now->add(new DateInterval('PT' . ($level * 1800) . 'S'));
+        $now->add(new DateInterval('PT' . ($level * 180) . 'S'));
         $usePlanet->setNiobium($usePlanetNb - ($level * 3000));
         $usePlanet->setWater($usePlanetWt - ($level * 2000));
         $usePlanet->setGroundPlace($newGround);
@@ -109,7 +109,7 @@ class SpaceShipyardController extends AbstractController
             return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
 
-        $now->add(new DateInterval('PT' . ($level * 21600) . 'S'));
+        $now->add(new DateInterval('PT' . ($level * 2160) . 'S'));
         $usePlanet->setNiobium($usePlanetNb - ($level * 6000));
         $usePlanet->setWater($usePlanetWt - ($level * 3900));
         $usePlanet->setGroundPlace($newGround);
@@ -183,7 +183,7 @@ class SpaceShipyardController extends AbstractController
             return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
 
-        $now->add(new DateInterval('PT' . ($level * 72000) . 'S'));
+        $now->add(new DateInterval('PT' . ($level * 7200) . 'S'));
         $usePlanet->setNiobium($usePlanetNb - ($level * 83000));
         $usePlanet->setWater($usePlanetWt - ($level * 68000));
         $usePlanet->setGroundPlace($newGround);
@@ -259,7 +259,7 @@ class SpaceShipyardController extends AbstractController
             return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
 
-        $now->add(new DateInterval('PT' . ($level * 21000) . 'S'));
+        $now->add(new DateInterval('PT' . ($level * 2100) . 'S'));
         $usePlanet->setNiobium($usePlanetNb - ($level * 13000));
         $usePlanet->setWater($usePlanetWt - ($level * 19000));
         $usePlanet->setGroundPlace($newGround);
@@ -334,7 +334,7 @@ class SpaceShipyardController extends AbstractController
             return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
 
-        $now->add(new DateInterval('PT' . ($level * 43200) . 'S'));
+        $now->add(new DateInterval('PT' . ($level * 4320) . 'S'));
         $usePlanet->setNiobium($usePlanetNb - ($level * 200000));
         $usePlanet->setWater($usePlanetWt - ($level * 190000));
         $usePlanet->setGroundPlace($newGround);

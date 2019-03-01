@@ -71,7 +71,7 @@ class SpatialController extends AbstractController
             $soldierLess = (50 * $colonizer);
             $warPoint = (500 * $motherShip) + (900 * $hunterWar) + (1800 * $corvetWar);
             $bitcoinLess = (200000 * $moonMaker) + (55000 * $brouilleurShip) +  (25000 * $radarShip);
-            $time = (3600 * $motherShip) + (400 * $brouilleurShip) + (200 * $radarShip) + (18000 * $moonMaker) + ((300 * $cargoI) + (600 * $cargoV) + (900 * $cargoX) + (10800 * $colonizer) + (400 * $recycleur) + (1800 * $barge) + (2 * $sonde) + (60 * $hunterWar) + (300 * $corvetWar) + (20 * $hunter) + (240 * $fregate) + (32 * $hunterHeavy) + (100 * $corvet) + (160 * $corvetLaser) + (600 * $fregatePlasma) + (1200 * $croiser) + (2800 * $ironClad) + (6000 * $destroyer)) / $usePlanet->getShipProduction();
+            $time = ((3600 * $motherShip) + (400 * $brouilleurShip) + (200 * $radarShip) + (18000 * $moonMaker) + ((300 * $cargoI) + (600 * $cargoV) + (900 * $cargoX) + (10800 * $colonizer) + (400 * $recycleur) + (1800 * $barge) + (2 * $sonde) + (60 * $hunterWar) + (300 * $corvetWar) + (20 * $hunter) + (240 * $fregate) + (32 * $hunterHeavy) + (100 * $corvet) + (160 * $corvetLaser) + (600 * $fregatePlasma) + (1200 * $croiser) + (2800 * $ironClad) + (6000 * $destroyer)) / $usePlanet->getShipProduction() / 10); // X10 NORMAL GAME
             $now->add(new DateInterval('PT' . round($time) . 'S'));
 
             if (($usePlanet->getNiobium() < $niobiumLess || $usePlanet->getWater() < $waterLess) ||

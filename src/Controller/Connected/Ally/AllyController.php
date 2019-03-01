@@ -162,8 +162,8 @@ class AllyController extends AbstractController
             $em->persist($ally);
             $quest = $user->checkQuests('ally_join');
             if($quest) {
+                $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $quest->getGain());
                 $user->removeQuest($quest);
-                $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + 2000);
             }
             $em->flush();
 
@@ -358,8 +358,8 @@ class AllyController extends AbstractController
         $em->remove($proposal);
         $quest = $user->checkQuests('ally_join');
         if($quest) {
+            $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $quest->getGain());
             $user->removeQuest($quest);
-            $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + 2000);
         }
 
         $em->flush();

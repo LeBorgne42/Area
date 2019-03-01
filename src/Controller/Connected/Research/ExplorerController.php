@@ -40,7 +40,7 @@ class ExplorerController extends AbstractController
             return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
         }
 
-        $now->add(new DateInterval('PT' . round(($level * 3000 / $user->getScientistProduction())) . 'S'));
+        $now->add(new DateInterval('PT' . round(($level * 300 / $user->getScientistProduction())) . 'S'));
         $user->setSearch('onde');
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - ($level * 2300));
@@ -74,7 +74,7 @@ class ExplorerController extends AbstractController
             return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
         }
 
-        $now->add(new DateInterval('PT' . round(($level * 36000) / $user->getScientistProduction()) . 'S'));
+        $now->add(new DateInterval('PT' . round(($level * 360) / $user->getScientistProduction()) . 'S')); // X100 NORMAL GAME
         $user->setSearch('terraformation');
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - ($level * 12000));
@@ -108,7 +108,7 @@ class ExplorerController extends AbstractController
             return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
         }
 
-        $now->add(new DateInterval('PT' . round(($level * 4000 / $user->getScientistProduction())) . 'S'));
+        $now->add(new DateInterval('PT' . round(($level * 400 / $user->getScientistProduction())) . 'S'));
         $user->setSearch('cargo');
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - ($level * 3500));
@@ -142,7 +142,7 @@ class ExplorerController extends AbstractController
             return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
         }
 
-        $now->add(new DateInterval('PT' . round(4000 / $user->getScientistProduction()) . 'S'));
+        $now->add(new DateInterval('PT' . round(400 / $user->getScientistProduction()) . 'S'));
         $user->setSearch('recycleur');
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - 16900);
@@ -176,7 +176,7 @@ class ExplorerController extends AbstractController
             return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
         }
 
-        $now->add(new DateInterval('PT' . round(28800 / $user->getScientistProduction()) . 'S'));
+        $now->add(new DateInterval('PT' . round(280 / $user->getScientistProduction()) . 'S')); // X100 NORMAL GAME
         $user->setSearch('barge');
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - 35000);
@@ -210,7 +210,7 @@ class ExplorerController extends AbstractController
             return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
         }
 
-        $now->add(new DateInterval('PT' . round(($level * 2000 / $user->getScientistProduction())) . 'S'));
+        $now->add(new DateInterval('PT' . round(($level * 200 / $user->getScientistProduction())) . 'S'));
         $user->setSearch('utility');
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - ($level * 2500));
@@ -244,7 +244,7 @@ class ExplorerController extends AbstractController
             return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
         }
 
-        $now->add(new DateInterval('PT' . round(604800 / $user->getScientistProduction()) . 'S'));
+        $now->add(new DateInterval('PT' . round(6048 / $user->getScientistProduction()) . 'S')); // X100 NORMAL GAME
         $user->setSearch('hyperespace');
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - 25000000);

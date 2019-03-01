@@ -156,8 +156,8 @@ class SalonController extends AbstractController
             $em->persist($message);
             $quest = $user->checkQuests('salon_message');
             if($quest) {
+                $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $quest->getGain());
                 $user->removeQuest($quest);
-                $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + 250);
             }
 
             $form_message = null;

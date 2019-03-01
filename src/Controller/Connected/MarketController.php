@@ -65,8 +65,8 @@ class MarketController extends AbstractController
             $user->getRank()->setWarPoint($user->getRank()->getWarPoint() - $cost);
             $quest = $user->checkQuests('pdg');
             if($quest) {
+                $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $quest->getGain());
                 $user->removeQuest($quest);
-                $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + 250);
             }
 
             $em->flush();
