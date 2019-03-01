@@ -28,21 +28,21 @@
                             <td>{{ quest.name|trans|raw }}</td>
                             <td>{{ quest.gain }} <img src="{{ asset('img/pdg.png') }}"</td>
                             <td>
-                                {% if quest.gain == 250 %}
+                                {% if quest.gain == 2500 %}
                                     <div class="text-or glyphicon glyphicon-star"></div>
-                                {% elseif quest.gain == 500 %}
-                                    <div class="text-or glyphicon glyphicon-star"></div>
-                                    <div class="text-or glyphicon glyphicon-star"></div>
-                                {% elseif quest.gain == 1000 %}
+                                {% elseif quest.gain == 5000 %}
                                     <div class="text-or glyphicon glyphicon-star"></div>
                                     <div class="text-or glyphicon glyphicon-star"></div>
-                                    <div class="text-or glyphicon glyphicon-star"></div>
-                                {% elseif quest.gain == 2000 %}
+                                {% elseif quest.gain == 10000 %}
                                     <div class="text-or glyphicon glyphicon-star"></div>
                                     <div class="text-or glyphicon glyphicon-star"></div>
                                     <div class="text-or glyphicon glyphicon-star"></div>
+                                {% elseif quest.gain == 20000 %}
                                     <div class="text-or glyphicon glyphicon-star"></div>
-                                {% elseif quest.gain == 4000 %}
+                                    <div class="text-or glyphicon glyphicon-star"></div>
+                                    <div class="text-or glyphicon glyphicon-star"></div>
+                                    <div class="text-or glyphicon glyphicon-star"></div>
+                                {% elseif quest.gain == 40000 %}
                                     <div class="text-or glyphicon glyphicon-star"></div>
                                     <div class="text-or glyphicon glyphicon-star"></div>
                                     <div class="text-or glyphicon glyphicon-star"></div>

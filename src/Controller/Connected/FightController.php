@@ -356,7 +356,7 @@ class FightController extends AbstractController
                 $loseArm = $attackerLose->getLaser() + $attackerLose->getMissile() + $attackerLose->getPlasma();
                 $percentWarPoint = ($loseArm * 100) / $armeSaveA;
                 $warPointB = ($warPointB - ($armorD / 80)) / 10;
-                $newWarPoint = round(($percentWarPoint * $warPointB) / 100);
+                $newWarPoint = round(($percentWarPoint * $warPointB) / 10);
                 if($newWarPoint < 0) {
                     $newWarPoint = $newWarPoint * -1;
                 }
@@ -382,7 +382,7 @@ class FightController extends AbstractController
             foreach($blockDef as $defenderWin) {
                 $defArm = $defenderWin->getLaser() + $defenderWin->getMissile() + $defenderWin->getPlasma();
                 $percentWarPoint = ($defArm * 100) / $armeSaveB;
-                $newWarPoint = round(($percentWarPoint * $warPointA) / 100);
+                $newWarPoint = round(($percentWarPoint * $warPointA) / 10);
                 if($defenderWin->getUser()->getPeaces()) {
                     $peace = $defenderWin->getUser()->getPeaces();
                     $pdgPeace = $newWarPoint * ($peace->getPdg() / 100);
