@@ -597,7 +597,7 @@ class FightController extends AbstractController
             $dSigle = $userDefender->getAlly()->getSigle();
         }
 
-        if($barge && $invader->getPlanet()->getUser() && $invader->getAllianceUser() && $invader->getFightAt() == null && $invader->getFlightTime() == null && $user->getSigleAlliedArray($dSigle) == NULL) {
+        if($barge && $invader->getPlanet()->getUser() && $invader->getAllianceUser() && $invader->getFightAt() == null && $invader->getFlightTime() == null && $user->getSigleAllied($dSigle) == NULL) {
             if($barge >= $invader->getSoldier()) {
                 $aMilitary = $invader->getSoldier() * $alea;
                 $soldierAtmp = $invader->getSoldier();

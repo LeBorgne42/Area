@@ -382,6 +382,7 @@ class User implements UserInterface, \Serializable
         $this->missile = 0;
         $this->laser = 0;
         $this->plasma = 0;
+        $this->experience = 0;
     }
 
     /**
@@ -597,6 +598,32 @@ class User implements UserInterface, \Serializable
                     if ($peace->getAllyTag() == $sigle && $peace->getAccepted() == true) {
                         return $peace->getAllyTag();
                     }
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSigleAllied($sigle)
+    {
+        $ally = $this->getAlly();
+        if($sigle && $ally) {
+            foreach ($ally->getPnas() as $pna) {
+                if ($pna->getAllyTag() == $sigle && $pna->getAccepted() == true) {
+                    return $pna->getAllyTag();
+                }
+            }
+            foreach ($ally->getAllieds() as $pact) {
+                if ($pact->getAllyTag() == $sigle && $pact->getAccepted() == true) {
+                    return $pact->getAllyTag();
+                }
+            }
+            foreach ($ally->getPeaces() as $peace) {
+                if ($peace->getAllyTag() == $sigle && $peace->getAccepted() == true) {
+                    return $peace->getAllyTag();
                 }
             }
         }

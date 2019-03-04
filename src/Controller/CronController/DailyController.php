@@ -59,6 +59,7 @@ class DailyController extends AbstractController
                 }
             }
             $gain = round($worker / 2);
+            $lose = null;
             if($ally) {
                 $user->addQuest($questTwo);
                 if($ally->getPeaces()) {
@@ -92,7 +93,7 @@ class DailyController extends AbstractController
                 $user->setBitcoin($userBitcoin - $taxe);
                 $report->setContent("Le montant envoyé dans les fonds de votre alliance s'élève à " . round($taxe) . " Bitcoin.");
                 if ($lose) {
-                    $report->setContent($report->getContent() . "La paix que vous avez signé envoi directement " . round($lose) . " Bitcoin à l'aliance [" . $otherAlly->getSigle() . "].");
+                    $report->setContent($report->getContent() . " La paix que vous avez signé envoi directement " . round($lose) . " Bitcoin à l'aliance [" . $otherAlly->getSigle() . "].");
                 }
                 $allyBitcoin = $ally->getBitcoin();
                 $allyBitcoin = $allyBitcoin + $taxe;
@@ -105,14 +106,14 @@ class DailyController extends AbstractController
             $soldier = $user->getAllSoldier();
             $ship = $user->getAllShipsCost();
             $cost = $user->getBitcoin();
-            $report->setContent($report->getContent() . "Le travaille fournit par vos travailleurs vous rapporte " . round($gain) . " Bitcoin.");
+            $report->setContent($report->getContent() . " Le travaille fournit par vos travailleurs vous rapporte " . round($gain) . " Bitcoin.");
             $empireCost = ($soldier * 2) + $ship + $buildingCost;
             $cost = $cost - $empireCost + ($gain);
             $report->setContent($report->getContent() . " L'entretien de votre empire vous coûte cependant " . round($empireCost) . " Bitcoin.");
             $point = round(round($worker / 100) + round($user->getAllShipsPoint() / 75) + round($soldier / 75) + $planetPoint);
             $user->setBitcoin($cost);
             if ($nbrQuests == 0) {
-                $report->setContent($report->getContent() . " Ce qui vous donne un revenu de " . round($gain - $empireCost) . " Bitcoin. Comme vous avez terminé toutes les quêtes vous recevez un bonus de 2.000 PDG ! Bonne journée suprême Commandant.");
+                $report->setContent($report->getContent() . " Ce qui vous donne un revenu de " . round($gain - $empireCost) . " Bitcoin. Comme vous avez terminé toutes les quêtes vous recevez un bonus de 20.000 PDG ! Bonne journée suprême Commandant.");
                 $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + 20000);
             } else {
                 $report->setContent($report->getContent() . " Ce qui vous donne un revenu de " . round($gain - $empireCost) . " Bitcoin. Bonne journée Commandant.");

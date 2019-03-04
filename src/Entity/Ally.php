@@ -490,6 +490,11 @@ class Ally
                 return $sigle;
             }
         }
+        foreach ($this->getPeaces() as $peace) {
+            if ($peace->getAllyTag() == $sigle && $peace->getAccepted() == true) {
+                return $sigle;
+            }
+        }
         return null;
     }
 
