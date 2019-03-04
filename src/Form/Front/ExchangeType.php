@@ -46,6 +46,34 @@ class ExchangeType extends AbstractType
                     'mapped' => true,
                 ]
             )
+            ->add(
+                'valueType',
+                'Symfony\Component\Form\Extension\Core\Type\ChoiceType',
+                [
+                    'choices' => $this->getValue(),
+                    'label' => 'form.valueType',
+                    'attr'  => [
+                        'placeholder' => 'form.valueType',
+                        'class' => 'game-input select2',
+                    ],
+                    'required' => true
+                ]
+            )
+            ->add(
+                'content',
+                null,
+                [
+                    'label' => 'form.content',
+                    'attr'  => [
+                        'placeholder' => 'form.content',
+                        'class' => 'game-input',
+                        'maxlength' => '200',
+                        'minlength' => '1',
+                        'autocomplete' => 'off',
+                    ],
+                    'required' => true,
+                ]
+            )
             ->add('sendForm', SubmitType::class, ['label' => 'form.transfert', 'attr' => ['class' => 'confirm-button']]);
     }
 
@@ -55,6 +83,15 @@ class ExchangeType extends AbstractType
         return [
             $translator->trans('form.give') => '1',
             $translator->trans('form.take') => '2'
+        ];
+    }
+
+    protected function getValue()
+    {
+        $translator = new Translator('front_ally');
+        return [
+            $translator->trans('form.bitcoin') => '1',
+            $translator->trans('form.pdg') => '2'
         ];
     }
 

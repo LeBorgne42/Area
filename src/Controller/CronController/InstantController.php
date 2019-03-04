@@ -171,6 +171,7 @@ class InstantController extends AbstractController
 
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
+        $now->add(new DateInterval('PT' . 1 . 'S'));
 
         $planetSoldiers = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
@@ -234,6 +235,8 @@ class InstantController extends AbstractController
             ->setParameters(['now' => $now])
             ->getQuery()
             ->getResult();
+
+        $now->sub(new DateInterval('PT' . 1 . 'S'));
 
         foreach ($peaces as $peace) {
             $em->remove($peace);

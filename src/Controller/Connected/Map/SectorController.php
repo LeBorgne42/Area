@@ -40,6 +40,7 @@ class SectorController extends AbstractController
 
         $sectorId = $em->getRepository('App:Sector')
             ->createQueryBuilder('s')
+            ->select('s.position, g.position as galaxy')
             ->join('s.galaxy', 'g')
             ->where('s.position = :id')
             ->andWhere('g.position = :gal')
@@ -67,7 +68,7 @@ class SectorController extends AbstractController
             ->where('fs.position = :sec')
             ->andWhere('g.position = :gal')
             ->andWhere('ps.position != :id')
-            ->setParameters(['id' => $id, 'gal' => $gal, 'sec' => $sectorId->getPosition()])
+            ->setParameters(['id' => $id, 'gal' => $gal, 'sec' => $sectorId['position']])
             ->orderBy('f.flightTime')
             ->getQuery()
             ->getResult();
@@ -81,7 +82,7 @@ class SectorController extends AbstractController
             ->where('fs.position != :sec')
             ->andWhere('ps.position = :id')
             ->andWhere('g.position = :gal')
-            ->setParameters(['id' => $id, 'gal' => $gal, 'sec' => $sectorId->getPosition()])
+            ->setParameters(['id' => $id, 'gal' => $gal, 'sec' => $sectorId['position']])
             ->orderBy('f.flightTime')
             ->getQuery()
             ->getResult();
@@ -102,18 +103,13 @@ class SectorController extends AbstractController
             ->getQuery()
             ->getResult();
 
-        foreach ($planets as $planet) {
-            $id = $planet->getSector()->getPosition();
-            $gal = $planet->getSector()->getGalaxy()->getPosition();
-            break;
-        }
 
         return $this->render('connected/map/sector.html.twig', [
             'form_navigate' => $form_navigate->createView(),
             'planets' => $planets,
             'usePlanet' => $usePlanet,
-            'id' => $id,
-            'gal' => $gal,
+            'id' => $sectorId['position'],
+            'gal' => $sectorId['galaxy'],
             'fleetIn' => $fleetIn,
             'fleetOut' => $fleetOut,
             'fleetCurrent' => $fleetCurrent,

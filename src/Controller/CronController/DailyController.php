@@ -82,6 +82,8 @@ class DailyController extends AbstractController
                             $exchange->setAlly($otherAlly);
                             $exchange->setCreatedAt($now);
                             $exchange->setType(0);
+                            $exchange->setAccepted(1);
+                            $exchange->setContent("Taxe liée à la paix.");
                             $exchange->setAmount($lose);
                             $exchange->setName($user->getUserName());
                             $em->persist($exchange);

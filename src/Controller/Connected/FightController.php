@@ -376,6 +376,8 @@ class FightController extends AbstractController
                     $exchangeLoseA->setCreatedAt($now);
                     $exchangeLoseA->setType(1);
                     $exchangeLoseA->setAmount($pdgPeace);
+                    $exchangeLoseA->setAccepted(1);
+                    $exchangeLoseA->setContent("Taxe liée à la paix.");
                     $exchangeLoseA->setName($attackerLose->getUser()->getUserName());
                     $em->persist($exchangeLoseA);
                 }
@@ -407,6 +409,8 @@ class FightController extends AbstractController
                     $exchangeWinA->setCreatedAt($now);
                     $exchangeWinA->setType(1);
                     $exchangeWinA->setAmount($pdgPeace);
+                    $exchangeWinA->setAccepted(1);
+                    $exchangeWinA->setContent("Taxe liée à la paix.");
                     $exchangeWinA->setName($defenderWin->getUser()->getUserName());
                     $em->persist($exchangeWinA);
                 }
@@ -513,6 +517,8 @@ class FightController extends AbstractController
                     $exchangeLoseB->setCreatedAt($now);
                     $exchangeLoseB->setType(1);
                     $exchangeLoseB->setAmount($pdgPeace);
+                    $exchangeLoseB->setAccepted(1);
+                    $exchangeLoseB->setContent("Taxe liée à la paix.");
                     $exchangeLoseB->setName($defenderLose->getUser()->getUserName());
                     $em->persist($exchangeLoseB);
                 }
@@ -545,6 +551,8 @@ class FightController extends AbstractController
                     $exchangeWinB->setCreatedAt($now);
                     $exchangeWinB->setType(1);
                     $exchangeWinB->setAmount($pdgPeace);
+                    $exchangeWinB->setAccepted(1);
+                    $exchangeWinB->setContent("Taxe liée à la paix.");
                     $exchangeWinB->setName($attackerWin->getUser()->getUserName());
                     $em->persist($exchangeWinB);
                 }

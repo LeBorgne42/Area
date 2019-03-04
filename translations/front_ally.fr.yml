@@ -57,7 +57,7 @@ ally.found: 'Fonds alliance'
 ally.foundTotal: 'Fond total de l''alliance :'
 ally.exchangerName: Membre
 ally.amount: Montant
-ally.donateAt: 'Donné/Retiré le'
+ally.donateAt: 'Statut'
 ally.statut: Statut
 ally.signedAt: 'Signé le'
 ally.accepted: Accepté
@@ -100,9 +100,14 @@ ally.warWin: Victoire
 ally.warLose: Défaite
 ally.pdgTotal: 'Fond de points de Guerre : '
 ally.type: Type
-ally.pdgDonate: 'Points de Guerre'
+ally.pdgDonate: PDG
+ally.contentDonate: Raison
 ally.bitcoinDonate: Bitcoins
-ally.formGiveBitcoin: 'Transaction de Bitcoin'
+ally.exchangeAccepted: Acceptée
+ally.exchangeWaiting: 'En attente'
+ally.exchangeAccept: Oui
+ally.exchangeRefuse: Non
+ally.formBank: 'Transaction alliance :'
 ally.formGivePdg: 'Transaction de pdg'
 ally.ranked: 'Liste d''Alliances crées'
 ally.proposals: 'Proposition(s) de recrutement'
@@ -138,3 +143,6 @@ form.none: Aucun
 form.defensive: 'Pacte défensif'
 form.pna: 'Pacte de non-agression'
 form.war: 'Déclarer guerre'
+form.bitcoin: Bitcoin
+form.pdg: PDG
+form.content: 'Raison de la transaction.'
