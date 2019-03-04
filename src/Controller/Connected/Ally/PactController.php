@@ -49,11 +49,11 @@ class PactController extends AbstractController
         $pact->setAccepted(true);
         $em->persist($allied);
         $ally->addAllyAllied($allied);
-        $salon = new Salon();
+        /*$salon = new Salon();
         $salon->setName($pact->getAlly()->getSigle() . " - " . $ally->getSigle());
         $salon->addAlly($pact->getAlly());
         $salon->addAlly($ally);
-        $em->persist($salon);
+        $em->persist($salon);*/
 
         $em->flush();
 

@@ -53,7 +53,7 @@ class FightController extends AbstractController
             $fleetsId = [];
             foreach ($fleetsWars as $fleetsWar) {
                 if ($fleetsWar->getUser()->getAlly()) {
-                    if (in_array($fleetsWar->getUser()->getAlly()->getSigle(), $teamBlock) == false && $fleetsWar->getUser()->getAlly()->getSigleAlliedArray($teamBlock) &&
+                    if (in_array($fleetsWar->getUser()->getAlly()->getSigle(), $teamBlock) == false && $fleetsWar->getUser()->getAlly()->getSigleAlliedArray($teamBlock) == NULL &&
                         in_array($fleetsWar->getId(), $fleetsId) == false) {
                         $teamBlock[] = $fleetsWar->getUser()->getAlly()->getSigle();
                         $fleetsId[] = $fleetsWar->getId();
@@ -597,7 +597,7 @@ class FightController extends AbstractController
             $dSigle = $userDefender->getAlly()->getSigle();
         }
 
-        if($barge && $invader->getPlanet()->getUser() && $invader->getAllianceUser() && $invader->getFightAt() == null && $invader->getFlightTime() == null && $user->getSigleAlliedArray($dSigle)) {
+        if($barge && $invader->getPlanet()->getUser() && $invader->getAllianceUser() && $invader->getFightAt() == null && $invader->getFlightTime() == null && $user->getSigleAlliedArray($dSigle) == NULL) {
             if($barge >= $invader->getSoldier()) {
                 $aMilitary = $invader->getSoldier() * $alea;
                 $soldierAtmp = $invader->getSoldier();

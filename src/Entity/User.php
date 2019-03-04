@@ -585,22 +585,22 @@ class User implements UserInterface, \Serializable
             foreach ($sigles as $sigle) {
                 foreach ($ally->getPnas() as $pna) {
                     if ($pna->getAllyTag() == $sigle && $pna->getAccepted() == true) {
-                        return null;
+                        return $pna->getAllyTag();
                     }
                 }
                 foreach ($ally->getAllieds() as $pact) {
                     if ($pact->getAllyTag() == $sigle && $pact->getAccepted() == true) {
-                        return null;
+                        return $pact->getAllyTag();
                     }
                 }
                 foreach ($ally->getPeaces() as $peace) {
                     if ($peace->getAllyTag() == $sigle && $peace->getAccepted() == true) {
-                        return null;
+                        return $peace->getAllyTag();
                     }
                 }
             }
         }
-        return 'toto';
+        return null;
     }
 
     /**

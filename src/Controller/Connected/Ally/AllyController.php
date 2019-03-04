@@ -555,7 +555,7 @@ class AllyController extends AbstractController
         $form_allyAdd->handleRequest($request);
 
         if (($form_allyAdd->isSubmitted() && $form_allyAdd->isValid()) && $user->getGrade()->getCanRecruit() == 1) {
-            if($maxMembers >= 20) {
+            if($maxMembers >= $ally->getMaxMembers()) {
                 return $this->redirectToRoute('ally_blank', ['idp' => $usePlanet->getId()]);
             }
             $userProposal = $em->getRepository('App:User')
@@ -702,11 +702,11 @@ class AllyController extends AbstractController
                 $em->persist($allied);
                 $ally->addAllyAllied($allied);
             } elseif($form_allyPact->get('pactType')->getData() == 3 && $user->getGrade()->getCanWar() == 1) {
-                $salon = new Salon();
+                /*$salon = new Salon();
                 $salon->setName("Guerre : " . $allyPact->getSigle() . " - " . $ally->getSigle());
                 $salon->addAlly($allyPact);
                 $salon->addAlly($ally);
-                $em->persist($salon);
+                $em->persist($salon);*/
                 $war = new War();
                 $war2 = new War();
                 $war2->setAlly($allyPact);

@@ -791,7 +791,7 @@ class InstantController extends AbstractController
                         $dSigle = $userDefender->getAlly()->getSigle();
                     }
 
-                    if($barge && $fleet->getPlanet()->getUser() && $fleet->getAllianceUser() && $user->getSigleAlliedArray($dSigle)) {
+                    if($barge && $fleet->getPlanet()->getUser() && $fleet->getAllianceUser() && $user->getSigleAlliedArray($dSigle) == NULL) {
 
                         if($barge >= $fleet->getSoldier()) {
                             $aMilitary = $fleet->getSoldier() * $alea;
