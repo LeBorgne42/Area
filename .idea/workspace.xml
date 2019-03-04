@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97f042ea-d0ee-4bd9-bb02-3d850e24f659" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/Ally/AllyController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/Ally/AllyController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/Ally/PactController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/Ally/PactController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/FightController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/FightController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/CronController/InstantController.php" afterPath="$PROJECT_DIR$/src/Controller/CronController/InstantController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Ally.php" afterPath="$PROJECT_DIR$/src/Entity/Ally.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" afterPath="$PROJECT_DIR$/src/Entity/User.php" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/overview.html.twig" afterPath="$PROJECT_DIR$/templates/connected/overview.html.twig" />
+      <change beforePath="$PROJECT_DIR$/assets/main.js" afterPath="$PROJECT_DIR$/assets/main.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -32,12 +26,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FightController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FightController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Controller/Connected/FightController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="599" column="185" lean-forward="false" selection-start-line="599" selection-start-column="166" selection-end-line="599" selection-end-column="185" />
+            <state relative-caret-position="795">
+              <caret line="630" column="20" lean-forward="true" selection-start-line="630" selection-start-column="20" selection-end-line="630" selection-end-column="20" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/assets/main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="559">
+              <caret line="749" column="12" lean-forward="false" selection-start-line="749" selection-start-column="12" selection-end-line="749" selection-end-column="32" />
+              <folding>
+                <marker date="1551718194826" expanded="true" signature="29043:29059" ph="..." />
+                <marker date="1551718194826" expanded="true" signature="30238:30254" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -71,11 +78,11 @@
       <find>new War</find>
       <find>getAllieds</find>
       <find>getAllyFriends</find>
-      <find>getSigleAlliedArray</find>
       <find>20</find>
       <find>&gt;= 20</find>
       <find>$fleets</find>
       <find>tooltip</find>
+      <find>getSigleAlliedArray</find>
     </findStrings>
     <replaceStrings>
       <replace>2200</replace>
@@ -174,7 +181,6 @@
         <option value="$PROJECT_DIR$/templates/connected/fleet/edit.html.twig" />
         <option value="$PROJECT_DIR$/templates/connected/market.html.twig" />
         <option value="$PROJECT_DIR$/templates/connected/spatial.html.twig" />
-        <option value="$PROJECT_DIR$/assets/main.js" />
         <option value="$PROJECT_DIR$/src/Controller/Connected/FleetController.php" />
         <option value="$PROJECT_DIR$/templates/connected/ally/bank.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/Connected/Building/SpaceShipyardController.php" />
@@ -190,6 +196,7 @@
         <option value="$PROJECT_DIR$/src/Controller/Connected/Ally/AllyController.php" />
         <option value="$PROJECT_DIR$/templates/connected/overview.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/Connected/FightController.php" />
+        <option value="$PROJECT_DIR$/assets/main.js" />
       </list>
     </option>
   </component>
@@ -367,20 +374,7 @@
             <path>
               <item name="Area" type="b2602c69:ProjectViewProjectNode" />
               <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Connected" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="assets" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
@@ -484,12 +478,12 @@
       <workItem from="1544638418545" duration="19758000" />
       <workItem from="1550577059574" duration="3545000" />
       <workItem from="1550595254059" duration="54065000" />
-      <workItem from="1551029272895" duration="85063000" />
+      <workItem from="1551029272895" duration="85301000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1876425000" />
+    <option name="totallyTimeSpent" value="1876663000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -671,17 +665,6 @@
         <state relative-caret-position="743">
           <caret line="83" column="33" lean-forward="true" selection-start-line="83" selection-start-column="33" selection-end-line="83" selection-end-column="33" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="787">
-          <caret line="748" column="43" lean-forward="false" selection-start-line="748" selection-start-column="33" selection-end-line="748" selection-end-column="43" />
-          <folding>
-            <marker date="1551534659449" expanded="true" signature="29043:29059" ph="..." />
-            <marker date="1551534659449" expanded="true" signature="30238:30254" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -991,9 +974,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Connected/FightController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="599" column="185" lean-forward="false" selection-start-line="599" selection-start-column="166" selection-end-line="599" selection-end-column="185" />
+        <state relative-caret-position="795">
+          <caret line="630" column="20" lean-forward="true" selection-start-line="630" selection-start-column="20" selection-end-line="630" selection-end-column="20" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="559">
+          <caret line="749" column="12" lean-forward="false" selection-start-line="749" selection-start-column="12" selection-end-line="749" selection-end-column="32" />
+          <folding>
+            <marker date="1551718194826" expanded="true" signature="29043:29059" ph="..." />
+            <marker date="1551718194826" expanded="true" signature="30238:30254" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>

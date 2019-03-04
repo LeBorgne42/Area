@@ -699,7 +699,7 @@ function manageFlightTime(){
         var now = new Date();
         var travel = new Date();
         travel.setSeconds(travel.getSeconds() + (base * speed * 100)); // 1000 MODE NORMAL
-        var date_now = Math.abs((travel - now) / 200);
+        var date_now = Math.abs((travel - now) / 1000);
         var jours = Math.floor(date_now / (60 * 60 * 24));
         var heures = Math.floor((date_now - (jours * 60 * 60 * 24)) / (60 * 60));
         var minutes = Math.floor((date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60))) / 60);
@@ -747,7 +747,7 @@ function manageFlightTime(){
         var now = new Date();
         var travel = new Date();
         travel.setSeconds(travel.getSeconds() + (base * speed * 100)); // 1000 MODE NORMAL
-        var date_now = Math.abs((travel - now) / 200);
+        var date_now = Math.abs((travel - now) / 1000);
         var jours = Math.floor(date_now / (60 * 60 * 24));
         var heures = Math.floor((date_now - (jours * 60 * 60 * 24)) / (60 * 60));
         var minutes = Math.floor((date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60))) / 60);
@@ -795,7 +795,7 @@ function manageFlightTime(){
         var now = new Date();
         var travel = new Date();
         travel.setSeconds(travel.getSeconds() + (base * speed * 100)); // 1000 MODE NORMAL
-        var date_now = Math.abs((travel - now) / 200);
+        var date_now = Math.abs((travel - now) / 1000);
         var jours = Math.floor(date_now / (60 * 60 * 24));
         var heures = Math.floor((date_now - (jours * 60 * 60 * 24)) / (60 * 60));
         var minutes = Math.floor((date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60))) / 60);
