@@ -35,7 +35,7 @@ class Fleet
     /**
      * @ORM\Column(name="fightAt",type="datetime", nullable=true)
      */
-    protected $fightAt = null;
+    protected $fightAt;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="fleets", fetch="EXTRA_LAZY")
@@ -64,22 +64,22 @@ class Fleet
     /**
      * @ORM\Column(name="newPlanet",type="integer", nullable=true)
      */
-    protected $newPlanet = null;
+    protected $newPlanet;
 
     /**
      * @ORM\Column(name="flightTime",type="datetime", nullable=true)
      */
-    protected $flightTime = null;
+    protected $flightTime;
 
     /**
      * @ORM\Column(name="cancelFlight",type="datetime", nullable=true)
      */
-    protected $cancelFlight = null;
+    protected $cancelFlight;
 
     /**
      * @ORM\Column(name="flightType",type="string", nullable=true)
      */
-    protected $flightType = null;
+    protected $flightType;
 
     /**
      * @ORM\Column(name="recycleAt",type="datetime", nullable=true)
@@ -94,142 +94,142 @@ class Fleet
     /**
      * @ORM\Column(name="planete",type="integer", nullable=true)
      */
-    protected $planete = null;
+    protected $planete;
 
     /**
      * @ORM\Column(name="sonde",type="bigint", nullable=true)
      */
-    protected $sonde = 0;
+    protected $sonde;
 
     /**
      * @ORM\Column(name="cargoI",type="bigint", nullable=true)
      */
-    protected $cargoI = 0;
+    protected $cargoI;
 
     /**
      * @ORM\Column(name="cargoV",type="bigint", nullable=true)
      */
-    protected $cargoV = 0;
+    protected $cargoV;
 
     /**
      * @ORM\Column(name="cargoX",type="bigint", nullable=true)
      */
-    protected $cargoX = 0;
+    protected $cargoX;
 
     /**
      * @ORM\Column(name="colonizer",type="integer", nullable=true)
      */
-    protected $colonizer = 0;
+    protected $colonizer;
 
     /**
      * @ORM\Column(name="recycleur",type="integer", nullable=true)
      */
-    protected $recycleur = 0;
+    protected $recycleur;
 
     /**
      * @ORM\Column(name="barge",type="integer", nullable=true)
      */
-    protected $barge = 0;
+    protected $barge;
 
     /**
      * @ORM\Column(name="moonMaker",type="integer", nullable=true)
      */
-    protected $moonMaker = 0;
+    protected $moonMaker;
 
     /**
      * @ORM\Column(name="radarShip",type="integer", nullable=true)
      */
-    protected $radarShip = 0;
+    protected $radarShip;
 
     /**
      * @ORM\Column(name="brouilleurShip",type="integer", nullable=true)
      */
-    protected $brouilleurShip = 0;
+    protected $brouilleurShip;
 
     /**
      * @ORM\Column(name="motherShip",type="integer", nullable=true)
      */
-    protected $motherShip = 0;
+    protected $motherShip;
 
     /**
      * @ORM\Column(name="hunter",type="bigint", nullable=true)
      */
-    protected $hunter = 0;
+    protected $hunter;
 
     /**
      * @ORM\Column(name="hunterHeavy",type="bigint", nullable=true)
      */
-    protected $hunterHeavy = 0;
+    protected $hunterHeavy;
 
     /**
      * @ORM\Column(name="hunterWar",type="bigint", nullable=true)
      */
-    protected $hunterWar = 0;
+    protected $hunterWar;
 
     /**
      * @ORM\Column(name="corvet",type="bigint", nullable=true)
      */
-    protected $corvet = 0;
+    protected $corvet;
 
     /**
      * @ORM\Column(name="corvetLaser",type="bigint", nullable=true)
      */
-    protected $corvetLaser = 0;
+    protected $corvetLaser;
 
     /**
      * @ORM\Column(name="corvetWar",type="bigint", nullable=true)
      */
-    protected $corvetWar = 0;
+    protected $corvetWar;
 
     /**
      * @ORM\Column(name="fregate",type="bigint", nullable=true)
      */
-    protected $fregate = 0;
+    protected $fregate;
 
     /**
      * @ORM\Column(name="fregatePlasma",type="bigint", nullable=true)
      */
-    protected $fregatePlasma = 0;
+    protected $fregatePlasma;
 
     /**
      * @ORM\Column(name="croiser",type="bigint", nullable=true)
      */
-    protected $croiser = 0;
+    protected $croiser;
 
     /**
      * @ORM\Column(name="ironClad",type="bigint", nullable=true)
      */
-    protected $ironClad = 0;
+    protected $ironClad;
 
     /**
      * @ORM\Column(name="destroyer",type="bigint", nullable=true)
      */
-    protected $destroyer = 0;
+    protected $destroyer;
 
     /**
      * @ORM\Column(name="soldier",type="integer", nullable=true)
      */
-    protected $soldier = null;
+    protected $soldier;
 
     /**
      * @ORM\Column(name="worker",type="integer", nullable=true)
      */
-    protected $worker = null;
+    protected $worker;
 
     /**
      * @ORM\Column(name="scientist",type="integer", nullable=true)
      */
-    protected $scientist = null;
+    protected $scientist;
 
     /**
      * @ORM\Column(name="niobium",type="integer", nullable=true)
      */
-    protected $niobium = null;
+    protected $niobium;
 
     /**
      * @ORM\Column(name="water",type="integer", nullable=true)
      */
-    protected $water = null;
+    protected $water;
 
     /**
      * User constructor.
@@ -237,6 +237,49 @@ class Fleet
     public function __construct()
     {
         $this->attack = false;
+        $this->water = 0;
+        $this->niobium = 0;
+        $this->scientist = 0;
+        $this->worker = 0;
+        $this->soldier = 0;
+        $this->attack = 0;
+        $this->attack = 0;
+        $this->attack = 0;
+        $this->attack = 0;
+        $this->attack = 0;
+        $this->attack = 0;
+        $this->attack = 0;
+        $this->attack = 0;
+        $this->attack = 0;
+        $this->attack = 0;
+        $this->destroyer = 0;
+        $this->ironClad = 0;
+        $this->croiser = 0;
+        $this->fregate = 0;
+        $this->fregatePlasma = 0;
+        $this->corvet = 0;
+        $this->corvetLaser = 0;
+        $this->corvetWar = 0;
+        $this->hunter = 0;
+        $this->hunterHeavy = 0;
+        $this->hunterWar = 0;
+        $this->moonMaker = 0;
+        $this->motherShip = 0;
+        $this->radarShip = 0;
+        $this->brouilleurShip = 0;
+        $this->barge = 0;
+        $this->recycleur = 0;
+        $this->cargoI = 0;
+        $this->cargoV = 0;
+        $this->cargoX = 0;
+        $this->colonizer = 0;
+        $this->sonde = 0;
+        $this->planete = null;
+        $this->fightAt = null;
+        $this->newPlanet = null;
+        $this->flightTime = null;
+        $this->cancelFlight = null;
+        $this->flightType = null;
     }
 
     public function getId()

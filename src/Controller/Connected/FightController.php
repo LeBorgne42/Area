@@ -371,8 +371,16 @@ class FightController extends AbstractController
                         ->getQuery()
                         ->getOneOrNullResult();
                     $otherAlly->setPdg($otherAlly->getPdg() + $pdgPeace);
+                    $exchangeLoseA = new Exchange();
+                    $exchangeLoseA->setAlly($otherAlly);
+                    $exchangeLoseA->setCreatedAt($now);
+                    $exchangeLoseA->setType(1);
+                    $exchangeLoseA->setAmount($pdgPeace);
+                    $exchangeLoseA->setName($attackerLose->getUser()->getUserName());
+                    $em->persist($exchangeLoseA);
                 }
                 $reportLoseA->setContent($reportLoseA->getContent() . " Mais vous remportez vous même " . $newWarPoint . " points de Guerre !");
+                $reportLoseA->setContent($reportLoseA->getContent() . "Votre accord de paix ayant envoyé " . $pdgPeace . " points de Guerre à l'alliance [" . $otherAlly->getSigle() . "].");
                 if($attackerLose->getUser()->getRank()) {
                     $attackerLose->getUser()->getRank()->setWarPoint($attackerLose->getUser()->getRank()->getWarPoint() + $newWarPoint);
                 }
@@ -394,6 +402,13 @@ class FightController extends AbstractController
                         ->getQuery()
                         ->getOneOrNullResult();
                     $otherAlly->setPdg($otherAlly->getPdg() + $pdgPeace);
+                    $exchangeWinA = new Exchange();
+                    $exchangeWinA->setAlly($otherAlly);
+                    $exchangeWinA->setCreatedAt($now);
+                    $exchangeWinA->setType(1);
+                    $exchangeWinA->setAmount($pdgPeace);
+                    $exchangeWinA->setName($defenderWin->getUser()->getUserName());
+                    $em->persist($exchangeWinA);
                 }
                 $percentArmor = ($defenderWin->getArmor() * 100) / $armorSaveD;
                 $newArmor = $defenderWin->getArmor() - (round($percentArmor * $armorD) / 100);
@@ -444,8 +459,8 @@ class FightController extends AbstractController
                 $em->persist($reportWinB);
                 $quest = $attackerWin->getUser()->checkQuests('destroy_fleet');
                 if($quest) {
-                    $attackerWin->getRank()->setWarPoint($attackerWin->getRank()->getWarPoint() + $quest->getGain());
-                    $attackerWin->removeQuest($quest);
+                    $attackerWin->getUser()->getRank()->setWarPoint($attackerWin->getUser()->getRank()->getWarPoint() + $quest->getGain());
+                    $attackerWin->getUser()->removeQuest($quest);
                 }
             }
             foreach($blockDef as $defenderLose) {
@@ -478,7 +493,7 @@ class FightController extends AbstractController
                 $loseArm = $defenderLose->getLaser() + $defenderLose->getMissile() + $defenderLose->getPlasma();
                 $percentWarPoint = ($loseArm * 100) / $armeSaveB;
                 $warPointA = ($warPointA - ($armor / 80)) / 10;
-                $newWarPoint = round(($percentWarPoint * $warPointA) / 100);
+                $newWarPoint = round(($percentWarPoint * $warPointA) / 10);
                 if($newWarPoint < 0) {
                     $newWarPoint = $newWarPoint * -1;
                 }
@@ -493,8 +508,16 @@ class FightController extends AbstractController
                         ->getQuery()
                         ->getOneOrNullResult();
                     $otherAlly->setPdg($otherAlly->getPdg() + $pdgPeace);
+                    $exchangeLoseB = new Exchange();
+                    $exchangeLoseB->setAlly($otherAlly);
+                    $exchangeLoseB->setCreatedAt($now);
+                    $exchangeLoseB->setType(1);
+                    $exchangeLoseB->setAmount($pdgPeace);
+                    $exchangeLoseB->setName($defenderLose->getUser()->getUserName());
+                    $em->persist($exchangeLoseB);
                 }
                 $reportLoseB->setContent($reportWinB->getContent() . " Mais vous remportez vous même " . $newWarPoint . " points de Guerre !");
+                $reportLoseB->setContent($reportWinB->getContent() . "Votre accord de paix ayant envoyé " . $pdgPeace . " points de Guerre à l'alliance [" . $otherAlly->getSigle() . "].");
                 if($defenderLose->getUser()->getRank()) {
                     $defenderLose->getUser()->getRank()->setWarPoint($defenderLose->getUser()->getRank()->getWarPoint() + $newWarPoint);
                 }
@@ -504,7 +527,7 @@ class FightController extends AbstractController
             foreach($blockAtt as $attackerWin) {
                 $attArm = $attackerWin->getLaser() + $attackerWin->getMissile() + $attackerWin->getPlasma();
                 $percentWarPoint = ($attArm * 100) / $armeSaveA;
-                $newWarPoint = round(($percentWarPoint * $warPointB) / 100);
+                $newWarPoint = round(($percentWarPoint * $warPointB) / 10);
                 if($attackerWin->getUser()->getPeaces()) {
                     $peace = $attackerWin->getUser()->getPeaces();
                     $pdgPeace = $newWarPoint * ($peace->getPdg() / 100);
@@ -516,6 +539,14 @@ class FightController extends AbstractController
                         ->getQuery()
                         ->getOneOrNullResult();
                     $otherAlly->setPdg($otherAlly->getPdg() + $pdgPeace);
+                    $otherAlly->setPdg($otherAlly->getPdg() + $pdgPeace);
+                    $exchangeWinB = new Exchange();
+                    $exchangeWinB->setAlly($otherAlly);
+                    $exchangeWinB->setCreatedAt($now);
+                    $exchangeWinB->setType(1);
+                    $exchangeWinB->setAmount($pdgPeace);
+                    $exchangeWinB->setName($attackerWin->getUser()->getUserName());
+                    $em->persist($exchangeWinB);
                 }
                 $percentArmor = ($attackerWin->getArmor() * 100) / $armorSaveA;
                 $newArmor = $attackerWin->getArmor() - (round($percentArmor * $armor) / 100);
@@ -668,7 +699,7 @@ class FightController extends AbstractController
             $colonize->setColonizer($colonize->getColonizer() - 1);
             $newPlanet->setUser($colonize->getUser());
             $newPlanet->setName('Colonie');
-            $newPlanet->setSoldier(0);
+            $newPlanet->setSoldier(50);
             $newPlanet->setScientist(0);
             $newPlanet->setNbColo(count($fleet->getUser()->getPlanets()) + 1);
             if($colonize->getNbrShips() == 0) {

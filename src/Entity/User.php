@@ -200,82 +200,82 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\Column(name="onde",type="integer", nullable=true)
      */
-    protected $onde = 0;
+    protected $onde;
 
     /**
      * @ORM\Column(name="industry",type="integer", nullable=true)
      */
-    protected $industry = 0;
+    protected $industry;
 
     /**
      * @ORM\Column(name="lightShip",type="integer", nullable=true)
      */
-    protected $lightShip = 0;
+    protected $lightShip;
 
     /**
      * @ORM\Column(name="heavyShip",type="integer", nullable=true)
      */
-    protected $heavyShip = 0;
+    protected $heavyShip;
 
     /**
      * @ORM\Column(name="discipline",type="integer", nullable=true)
      */
-    protected $discipline = 0;
+    protected $discipline;
 
     /**
      * @ORM\Column(name="hyperespace",type="integer", nullable=true)
      */
-    protected $hyperespace = 0;
+    protected $hyperespace;
 
     /**
      * @ORM\Column(name="barge",type="integer", nullable=true)
      */
-    protected $barge = 0;
+    protected $barge;
 
     /**
      * @ORM\Column(name="utility",type="integer", nullable=true)
      */
-    protected $utility = 0;
+    protected $utility;
 
     /**
      * @ORM\Column(name="demography",type="integer", nullable=true)
      */
-    protected $demography = 0;
+    protected $demography;
 
     /**
      * @ORM\Column(name="terraformation",type="integer", nullable=true)
      */
-    protected $terraformation = 0;
+    protected $terraformation;
 
     /**
      * @ORM\Column(name="cargo",type="integer", nullable=true)
      */
-    protected $cargo = 0;
+    protected $cargo;
 
     /**
      * @ORM\Column(name="recycleur",type="integer", nullable=true)
      */
-    protected $recycleur = 0;
+    protected $recycleur;
 
     /**
      * @ORM\Column(name="armement",type="integer", nullable=true)
      */
-    protected $armement = 0;
+    protected $armement;
 
     /**
      * @ORM\Column(name="missile",type="integer", nullable=true)
      */
-    protected $missile = 0;
+    protected $missile;
 
     /**
      * @ORM\Column(name="laser",type="integer", nullable=true)
      */
-    protected $laser = 0;
+    protected $laser;
 
     /**
      * @ORM\Column(name="plasma",type="integer", nullable=true)
      */
-    protected $plasma = 0;
+    protected $plasma;
 
     /**
      * @ORM\Column(name="searchAt",type="datetime", nullable=true)
@@ -311,7 +311,7 @@ class User implements UserInterface, \Serializable
      *
      * @var File
      */
-    private $imageFile= null;
+    private $imageFile;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -365,6 +365,23 @@ class User implements UserInterface, \Serializable
         $this->createdAt = null;
         $this->lastActivity = null;
         $this->gameOver = null;
+        $this->imageFile = null;
+        $this->onde = 0;
+        $this->industry = 0;
+        $this->lightShip = 0;
+        $this->heavyShip = 0;
+        $this->discipline = 0;
+        $this->hyperespace = 0;
+        $this->barge = 0;
+        $this->demography = 0;
+        $this->terraformation = 0;
+        $this->utility = 0;
+        $this->cargo = 0;
+        $this->recycleur = 0;
+        $this->armement = 0;
+        $this->missile = 0;
+        $this->laser = 0;
+        $this->plasma = 0;
     }
 
     /**

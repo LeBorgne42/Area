@@ -929,6 +929,7 @@ class FleetController  extends AbstractController
             $fleetGive->setNiobium(($planetTake->getNiobium() + $fleetGive->getNiobium()) - $planetTake->getNiobiumMax());
         }
         $server->setNbrSell($server->getNbrSell() + 1);
+        $user->setViewReport(false);
 
         $em->flush();
 
@@ -990,6 +991,7 @@ class FleetController  extends AbstractController
             $fleetGive->setWater(($planetTake->getWater() + $fleetGive->getWater()) - $planetTake->getWaterMax());
         }
         $server->setNbrSell($server->getNbrSell() + 1);
+        $user->setViewReport(false);
 
         $em->flush();
 
@@ -1051,6 +1053,7 @@ class FleetController  extends AbstractController
             $fleetGive->setSoldier(($planetTake->getSoldier() + $fleetGive->getSoldier()) - $planetTake->getSoldierMax());
         }
         $server->setNbrSell($server->getNbrSell() + 1);
+        $user->setViewReport(false);
 
         $em->flush();
 
@@ -1112,6 +1115,7 @@ class FleetController  extends AbstractController
             $fleetGive->setWorker(($planetTake->getWorker() + $fleetGive->getWorker()) - $planetTake->getWorkerMax());
         }
         $server->setNbrSell($server->getNbrSell() + 1);
+        $user->setViewReport(false);
 
         $em->flush();
 
@@ -1173,6 +1177,7 @@ class FleetController  extends AbstractController
             $fleetGive->setScientist(($planetTake->getScientist() + $fleetGive->getScientist()) - $planetTake->getScientistMax());
         }
         $server->setNbrSell($server->getNbrSell() + 1);
+        $user->setViewReport(false);
 
         $em->flush();
 
@@ -1262,6 +1267,7 @@ class FleetController  extends AbstractController
             $fleetGive->setWorker(($planetTake->getWorker() + $fleetGive->getWorker()) - $planetTake->getWorkerMax());
         }
         $server->setNbrSell($server->getNbrSell() + 1);
+        $user->setViewReport(false);
 
         $em->flush();
 

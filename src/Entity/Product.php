@@ -27,117 +27,145 @@ class Product
     /**
      * @ORM\Column(name="sonde",type="bigint", nullable=true)
      */
-    protected $sonde = 0;
+    protected $sonde;
 
     /**
      * @ORM\Column(name="cargoI",type="bigint", nullable=true)
      */
-    protected $cargoI = 0;
+    protected $cargoI;
 
     /**
      * @ORM\Column(name="cargoV",type="bigint", nullable=true)
      */
-    protected $cargoV = 0;
+    protected $cargoV;
 
     /**
      * @ORM\Column(name="cargoX",type="bigint", nullable=true)
      */
-    protected $cargoX = 0;
+    protected $cargoX;
 
     /**
      * @ORM\Column(name="colonizer",type="integer", nullable=true)
      */
-    protected $colonizer = 0;
+    protected $colonizer;
 
     /**
      * @ORM\Column(name="recycleur",type="integer", nullable=true)
      */
-    protected $recycleur = 0;
+    protected $recycleur;
 
     /**
      * @ORM\Column(name="barge",type="integer", nullable=true)
      */
-    protected $barge = 0;
+    protected $barge;
 
     /**
      * @ORM\Column(name="moonMaker",type="integer", nullable=true)
      */
-    protected $moonMaker = 0;
+    protected $moonMaker;
 
     /**
      * @ORM\Column(name="radarShip",type="integer", nullable=true)
      */
-    protected $radarShip = 0;
+    protected $radarShip;
 
     /**
      * @ORM\Column(name="brouilleurShip",type="integer", nullable=true)
      */
-    protected $brouilleurShip = 0;
+    protected $brouilleurShip;
 
     /**
      * @ORM\Column(name="motherShip",type="integer", nullable=true)
      */
-    protected $motherShip = 0;
+    protected $motherShip;
 
     /**
      * @ORM\Column(name="hunter",type="bigint", nullable=true)
      */
-    protected $hunter = 0;
+    protected $hunter;
 
     /**
      * @ORM\Column(name="hunterHeavy",type="bigint", nullable=true)
      */
-    protected $hunterHeavy = 0;
+    protected $hunterHeavy;
 
     /**
      * @ORM\Column(name="hunterWar",type="bigint", nullable=true)
      */
-    protected $hunterWar = 0;
+    protected $hunterWar;
 
     /**
      * @ORM\Column(name="corvet",type="bigint", nullable=true)
      */
-    protected $corvet = 0;
+    protected $corvet;
 
     /**
      * @ORM\Column(name="corvetLaser",type="bigint", nullable=true)
      */
-    protected $corvetLaser = 0;
+    protected $corvetLaser;
 
     /**
      * @ORM\Column(name="corvetWar",type="bigint", nullable=true)
      */
-    protected $corvetWar = 0;
+    protected $corvetWar;
 
     /**
      * @ORM\Column(name="fregate",type="bigint", nullable=true)
      */
-    protected $fregate = 0;
+    protected $fregate;
 
     /**
      * @ORM\Column(name="fregatePlasma",type="bigint", nullable=true)
      */
-    protected $fregatePlasma = 0;
+    protected $fregatePlasma;
 
     /**
      * @ORM\Column(name="croiser",type="bigint", nullable=true)
      */
-    protected $croiser = 0;
+    protected $croiser;
 
     /**
      * @ORM\Column(name="ironClad",type="bigint", nullable=true)
      */
-    protected $ironClad = 0;
+    protected $ironClad;
 
     /**
      * @ORM\Column(name="destroyer",type="bigint", nullable=true)
      */
-    protected $destroyer = 0;
+    protected $destroyer;
 
     /**
      * @ORM\Column(name="productAt",type="datetime")
      */
     protected $productAt;
+    /**
+     * User constructor.
+     */
+    public function __construct()
+    {
+        $this->destroyer = 0;
+        $this->ironClad = 0;
+        $this->croiser = 0;
+        $this->fregate = 0;
+        $this->fregatePlasma = 0;
+        $this->corvet = 0;
+        $this->corvetLaser = 0;
+        $this->corvetWar = 0;
+        $this->hunter = 0;
+        $this->hunterHeavy = 0;
+        $this->hunterWar = 0;
+        $this->moonMaker = 0;
+        $this->motherShip = 0;
+        $this->radarShip = 0;
+        $this->brouilleurShip = 0;
+        $this->barge = 0;
+        $this->recycleur = 0;
+        $this->cargoI = 0;
+        $this->cargoV = 0;
+        $this->cargoX = 0;
+        $this->colonizer = 0;
+        $this->sonde = 0;
+    }
 
     /**
      * @return mixed

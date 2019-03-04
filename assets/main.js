@@ -678,7 +678,7 @@ function manageFlightTime(){
         var newPlanete = $('#fleet_send_planete').val();
         newPlanete = newPlanete.toString();
         if (galaxy != newGalaxy) {
-            var base = 12;
+            var base = 18;
             var price = 25;
         } else {
             if (position == newPosition) {
@@ -726,7 +726,7 @@ function manageFlightTime(){
         var newPlanete = $('#fleet_send_planete').val();
         newPlanete = newPlanete.toString();
         if (galaxy != newGalaxy) {
-            var base = 12;
+            var base = 18;
             var price = 25;
         } else {
             if (position == newPosition) {
@@ -774,7 +774,7 @@ function manageFlightTime(){
         var newPlanete = $('#fleet_send_planete').val();
         newPlanete = newPlanete.toString();
         if (galaxy != newGalaxy) {
-            var base = 12;
+            var base = 18;
             var price = 25;
         } else {
             if (position == newPosition) {

@@ -67,6 +67,16 @@ class Ally
     protected $description;
 
     /**
+     * @ORM\Column(name="level",type="integer", nullable=true)
+     */
+    protected $level;
+
+    /**
+     * @ORM\Column(name="max_members",type="integer", nullable=true)
+     */
+    protected $maxMembers;
+
+    /**
      * @ORM\OneToMany(targetEntity="Grade", mappedBy="ally", fetch="EXTRA_LAZY", cascade={"persist"})
      */
     protected $grades;
@@ -179,8 +189,10 @@ class Ally
         $this->createdAt = null;
         $this->imageFile = null;
         $this->rank = null;
-        $this->descritpion = null;
+        $this->descritpion = '-';
         $this->politic = 'neutral';
+        $this->level = 0;
+        $this->maxMembers = 3;
     }
 
     /**
@@ -939,6 +951,54 @@ class Ally
     public function setPeaces($peaces): void
     {
         $this->peaces = $peaces;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLevel()
+    {
+        return $this->level;
+    }
+
+    /**
+     * @param mixed $level
+     */
+    public function setLevel($level): void
+    {
+        $this->level = $level;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMaxMembers()
+    {
+        return $this->maxMembers;
+    }
+
+    /**
+     * @param mixed $maxMembers
+     */
+    public function setMaxMembers($maxMembers): void
+    {
+        $this->maxMembers = $maxMembers;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescritpion(): string
+    {
+        return $this->descritpion;
+    }
+
+    /**
+     * @param string $descritpion
+     */
+    public function setDescritpion(string $descritpion): void
+    {
+        $this->descritpion = $descritpion;
     }
 
     /**

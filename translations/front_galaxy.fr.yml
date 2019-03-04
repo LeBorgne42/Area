@@ -4,7 +4,7 @@ galaxy.mine: 'Planète contrôlée'
 galaxy.ally: 'Planète alliée'
 galaxy.enemy: 'Planète hostile'
 galaxy.empty: 'Planète inhabitée'
-galaxy.ia: 'Planète IA'
+galaxy.ia: Marchands
 galaxy.cdr: Ressources
 form.galaxy: 0
 form.sector: 0

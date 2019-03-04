@@ -77,6 +77,13 @@ class DailyController extends AbstractController
                             }
                             $user->setBitcoin($user->getBitcoin() - $lose);
                             $otherAlly->setBitcoin($otherAlly->getBitcoin() + $lose);
+                            $exchange = new Exchange();
+                            $exchange->setAlly($otherAlly);
+                            $exchange->setCreatedAt($now);
+                            $exchange->setType(0);
+                            $exchange->setAmount($lose);
+                            $exchange->setName($user->getUserName());
+                            $em->persist($exchange);
                         }
                     }
                 }
@@ -84,6 +91,9 @@ class DailyController extends AbstractController
                 $taxe = (($ally->getTaxe() / 100) * $gain);
                 $user->setBitcoin($userBitcoin - $taxe);
                 $report->setContent("Le montant envoyé dans les fonds de votre alliance s'élève à " . round($taxe) . " Bitcoin.");
+                if ($lose) {
+                    $report->setContent($report->getContent() . "La paix que vous avez signé envoi directement " . round($lose) . " Bitcoin à l'aliance [" . $otherAlly->getSigle() . "].");
+                }
                 $allyBitcoin = $ally->getBitcoin();
                 $allyBitcoin = $allyBitcoin + $taxe;
                 $ally->setBitcoin($allyBitcoin);
@@ -103,7 +113,7 @@ class DailyController extends AbstractController
             $user->setBitcoin($cost);
             if ($nbrQuests == 0) {
                 $report->setContent($report->getContent() . " Ce qui vous donne un revenu de " . round($gain - $empireCost) . " Bitcoin. Comme vous avez terminé toutes les quêtes vous recevez un bonus de 2.000 PDG ! Bonne journée suprême Commandant.");
-                $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + 2000);
+                $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + 20000);
             } else {
                 $report->setContent($report->getContent() . " Ce qui vous donne un revenu de " . round($gain - $empireCost) . " Bitcoin. Bonne journée Commandant.");
             }

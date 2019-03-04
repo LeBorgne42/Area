@@ -311,11 +311,17 @@ class PactController extends AbstractController
             ->getQuery()
             ->getOneOrNullResult();
 
+        $otherPeaces = $em->getRepository('App:Peace')
+            ->createQueryBuilder('p')
+            ->where('p.id != :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult();
 
         $otherAlly = $em->getRepository('App:Ally')
             ->createQueryBuilder('a')
-            ->where('a.sigle = :sigle')
-            ->setParameter('sigle', $peace->getAllyTag())
+            ->where('a.id = :id')
+            ->setParameter('id', $peace->getAlly()->getId())
             ->getQuery()
             ->getOneOrNullResult();
 
@@ -333,16 +339,19 @@ class PactController extends AbstractController
             ->getQuery()
             ->getOneOrNullResult();
 
-        if($peace->getType() == 0) {
+        if ($peace->getType() == 0) {
             $type = 1;
 
         } else {
             $type = 0;
 
         }
-        if($war && $war2) {
+        if ($war && $war2) {
             $em->remove($war);
             $em->remove($war2);
+        }
+        foreach ($otherPeaces as $otherPeace) {
+            $em->remove($otherPeace);
         }
         $peace2 = new Peace();
         $peace2->setAlly($otherAlly);

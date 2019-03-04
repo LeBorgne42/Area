@@ -61,7 +61,7 @@ class Message
     /**
      * @ORM\Column(name="bitcoin",type="bigint")
      */
-    protected $bitcoin = 0;
+    protected $bitcoin;
 
     /**
      * @ORM\Column(name="sendAt",type="datetime")

@@ -36,10 +36,29 @@ class Exchange
     protected $amount;
 
     /**
+     * @ORM\Column(name="content",type="string", length=200)
+     */
+    protected $content;
+
+    /**
      * @ORM\Column(name="type",type="boolean")
      * @Assert\NotBlank(message = "required")
      */
     protected $type;
+
+    /**
+     * @ORM\Column(name="accepted",type="boolean")
+     */
+    protected $accepted;
+
+    /**
+     * User constructor.
+     */
+    public function __construct()
+    {
+        $this->accepted = 0;
+        $this->content = '-';
+    }
 
     /**
      * @ORM\Column(name="createdAt",type="datetime")
@@ -49,6 +68,22 @@ class Exchange
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAccepted()
+    {
+        return $this->accepted;
+    }
+
+    /**
+     * @param mixed $accepted
+     */
+    public function setAccepted($accepted): void
+    {
+        $this->accepted = $accepted;
     }
 
     /**
