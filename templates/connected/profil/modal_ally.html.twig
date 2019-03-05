@@ -13,6 +13,7 @@
     {%- endblock -%}
     <div class="front-block allyPage text-center text-middle pt-3">
         <div class="my-4 text-more">[{{ ally.getSigle() }}] - {{ ally.getName() }} <span class="ml-4"><a href="{{ path('ally_join_salon', {'idp': usePlanet.getId(), 'sigle': ally.getSigle()}) }}">{{ 'ally.ambassy'|trans|raw }}</a></span></div>
+        <h3 class="text-center text-or mb-4">{{ 'ally.level'|trans }}{{ ally.getLevel() }}</h3>
         <div class="my-3"><span class="glyphicon glyphicon-bullhorn text-jaune mr-3"></span> {{ ally.getPolitic()|trans }} : '{{ ally.getSlogan() }}'</div>
         {% if ally.imageName %}
             <div class="text-center"><img height="300" width="450" src="{{ vich_uploader_asset(ally, 'imageFile') }}"></div>

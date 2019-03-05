@@ -77,7 +77,7 @@
                     <td class="center-cells text-left">
                         {% if app.user.getAlly() %}
                             <div class="my-2">{{ 'info.ally'|trans|raw }} [{{ app.user.getAlly().getSigle() }}] {{ app.user.getAlly().getName() }}</div>
-                            <div class="my-2">{{ 'info.allyMembers'|trans|raw }} {{ app.user.getAlly().getUsers()|length }} / {{ app.user.getAlly().getMaxMembers()|length }}</div>
+                            <div class="my-2">{{ 'info.allyMembers'|trans|raw }} {{ app.user.getAlly().getUsers()|length }} / {{ app.user.getAlly().getMaxMembers()}}</div>
                             <div class="my-2">{{ 'info.allyPlanets'|trans|raw }} {{ app.user.getAlly().getPlanets()|number_format }}</div>
                             <div class="my-2">{{ 'info.allyBitcoin'|trans|raw }} {{ app.user.getAlly().getBitcoin()|number_format }}</div>
                             <div class="my-2">{{ 'info.allyShips'|trans|raw }} {{ app.user.getAlly().getAllShips()|number_format }}</div>

@@ -55,6 +55,10 @@ ally.warName: 'Alliance ennemie'
 ally.cancelwar: 'Proposer paix'
 ally.found: 'Fonds alliance'
 ally.foundTotal: 'Fond total de l''alliance :'
+ally.levelUp: 'Monter niveau de l''alliance'
+ally.levelUpMembers: 'Limite de membres augmentée à '
+ally.levelUpCost: 'Coût : '
+ally.level: 'Niveau : '
 ally.exchangerName: Membre
 ally.amount: Montant
 ally.donateAt: 'Statut'
@@ -146,3 +150,5 @@ form.war: 'Déclarer guerre'
 form.bitcoin: Bitcoin
 form.pdg: PDG
 form.content: 'Raison de la transaction.'
+pdgImg: 'Points de Guerre'
+bitcoinImg: Bitcoin

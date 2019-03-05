@@ -565,7 +565,7 @@ class AllyController extends AbstractController
                 $em->flush();
             }
         } else {
-            return $this->redirectToRoute('ally_blank', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('ally_page_bank', ['idp' => $usePlanet->getId()]);
         }
 
         return $this->redirectToRoute('ally_page_bank', ['idp' => $usePlanet->getId()]);
@@ -585,7 +585,7 @@ class AllyController extends AbstractController
             $em->remove($id);
             $em->flush();
         } else {
-            return $this->redirectToRoute('ally_blank', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('ally_page_bank', ['idp' => $usePlanet->getId()]);
         }
 
         return $this->redirectToRoute('ally_page_bank', ['idp' => $usePlanet->getId()]);
@@ -655,6 +655,34 @@ class AllyController extends AbstractController
             'form_allyAdd' => $form_allyAdd->createView(),
             'usersRecrutable' => $usersRecruitable,
         ]);
+    }
+
+    /**
+     * @Route("/alliance-level/{idp}", name="ally_level", requirements={"idp"="\d+"})
+     */
+    public function allylevelAction($idp)
+    {
+        $user = $this->getUser();
+        $ally = $user->getAlly();
+        $em = $this->getDoctrine()->getManager();
+
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+
+        if($ally->getLevel() == 10) {
+            return $this->redirectToRoute('ally_page_bank', ['idp' => $usePlanet->getId()]);
+        }
+        $array = $ally->getLevelCost();
+        if($user->getGrade()->getPlacement() == 1 && $ally->getBitcoin() >= $array[1] && $ally->getBitcoin() >= $array[2]) {
+            $ally->setLevel($ally->getLevel() + 1);
+            $ally->setMaxMembers($array[0]);
+            $ally->setBitcoin($ally->getBitcoin() - $array[1]);
+            $ally->setPdg($ally->getPdg() - $array[2]);
+            $em->flush();
+        } else {
+            return $this->redirectToRoute('ally_page_bank', ['idp' => $usePlanet->getId()]);
+        }
+
+        return $this->redirectToRoute('ally_page_bank', ['idp' => $usePlanet->getId()]);
     }
 
     /**

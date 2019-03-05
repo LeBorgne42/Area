@@ -233,6 +233,59 @@ class Ally
     }
 
     /**
+     * @return mixed
+     */
+    public function getLevelCost()
+    {
+        $maxMembers = 0;
+        $bitcoin = 0;
+        $pdg = 0;
+        if($this->getLevel() == 0) {
+            $maxMembers = 6;
+            $bitcoin = 125000;
+            $pdg = 0;
+        } elseif ($this->getLevel() == 1){
+            $maxMembers = 8;
+            $bitcoin = 225000;
+            $pdg = 2500;
+        } elseif ($this->getLevel() == 2){
+            $maxMembers = 10;
+            $bitcoin = 600000;
+            $pdg = 10000;
+        } elseif ($this->getLevel() == 3){
+            $maxMembers = 12;
+            $bitcoin = 1000000;
+            $pdg = 25000;
+        } elseif ($this->getLevel() == 4){
+            $maxMembers = 15;
+            $bitcoin = 0;
+            $pdg = 50000;
+        } elseif ($this->getLevel() == 5){
+            $maxMembers = 17;
+            $bitcoin = 10000000;
+            $pdg = 0;
+        } elseif ($this->getLevel() == 6){
+            $maxMembers = 20;
+            $bitcoin = 15000000;
+            $pdg = 125000;
+        } elseif ($this->getLevel() == 7){
+            $maxMembers = 22;
+            $bitcoin = 35000000;
+            $pdg = 300000;
+        } elseif ($this->getLevel() == 8){
+            $maxMembers = 25;
+            $bitcoin = 50000000;
+            $pdg = 500000;
+        } elseif ($this->getLevel() == 9){
+            $maxMembers = 30;
+            $bitcoin = 100000000;
+            $pdg = 1000000;
+        }
+        $return = [$maxMembers, $bitcoin, $pdg];
+        return $return;
+    }
+
+    /**
      * @return int
      */
     public function getAllPdg() : int

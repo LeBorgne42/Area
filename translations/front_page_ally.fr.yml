@@ -11,6 +11,7 @@ ally.allied: 'Pacte défensif :'
 ally.pna: 'Pacte de non-agression :'
 ally.war: 'Guerre :'
 ally.ambassy: 'Rejoindre ambassade'
+ally.level: 'Niveau : '
 neutral: Neutre
 monarchy: Monarchie
 democrat: Démocratie

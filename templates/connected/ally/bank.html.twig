@@ -30,6 +30,9 @@
                     <a href="{{ path('ally_page_exit', {'idp': usePlanet.getId()}) }}" >{{ 'ally.leave'|trans }}</a>
                 </li>
             </ul>
+            <div class="my-5 text-center">
+                {% set x = 1 %}{% for info in app.user.getAlly().getLevelCost()  %} {% if x == 1 %}{{ 'ally.levelUpMembers'|trans }} {{ info|number_format }} <a href="{{ path('ally_level', {'idp': usePlanet.getId()}) }}" class="confirm-button">{{ 'ally.levelUp'|trans }}</a>{% elseif x == 2 %}{{ 'ally.levelUpCost'|trans }} {{ info|number_format }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}">{% elseif x == 3 %}{{ info|number_format }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'pdgImg'|trans }}" src="{{ asset('img/pdg.png') }}">{% endif %}{% set x = x + 1 %}{% endfor %}
+            </div>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="bank" role="tabpanel" aria-labelledby="bank-tab">
                     {{ form_start(form_exchange) }}
