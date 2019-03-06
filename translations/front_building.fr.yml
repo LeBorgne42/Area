@@ -1,5 +1,5 @@
 title: Batiment
-building.infos: Infrastructure
+building.infos: Infrastructures
 building.construct: Construire
 building.mining: 'Mine de niobium'
 building.build: Construire
@@ -8,8 +8,8 @@ building.demolish: Detruire
 building.cancel: Annuler
 building.extract: 'Extracteur d''eau'
 building.titleRessource: 'Production de ressources'
-building.titleShip: 'Infrastructure militaire'
-building.titleEco: 'Infrastructure économique'
+building.titleShip: 'Infrastructures militaire'
+building.titleEco: 'Infrastructures économique'
 building.titleSpy: 'Service de renseignement'
 building.search: 'Centre de recherche'
 building.city: 'Grande ville'
@@ -23,6 +23,9 @@ tooltip.cancelList: 'Annuler construction'
 building.skyRadar: 'Radar d''espace'
 building.brouilleur: 'Brouilleur de radar'
 building.constructions: 'Bâtiments en liste d''attente : '
+building.tutorial: 'Comme vous pouvez le constater votre planète de départ a déjà quelques constructions, nous allons rajouter quelques mines et extracteurs pour augmenter la production de ressource, cliquez sur «Construire».'
+building.tutorialBis: 'Le bâtiment est actuellement en construction, pour éviter d''avoir a attendre mettez d''autres mines et extracteurs en en attente de construction en cliquant sur «Ajouter».'
+building.tutorialTer: 'Parfait ! Rendez vous sur l''onglet «Recherches».'
 niobiumImg: Niobium
 waterImg: Eau
 groundImg: Terrain

@@ -369,6 +369,9 @@ class SpatialController extends AbstractController
             $usePlanet->setDestroyer($destroyer);
             $usePlanet->addFleet($fleet);
 
+            if(($user->getTutorial() == 10)) {
+                $user->setTutorial(11);
+            }
             $em->flush();
 
 

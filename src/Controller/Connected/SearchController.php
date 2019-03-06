@@ -36,6 +36,16 @@ class SearchController extends AbstractController
             ->getQuery()
             ->getOneOrNullResult();
 
+        if($user->getTutorial() == 7) {
+            $user->setTutorial(8);
+            $em->flush();
+        }
+
+        if($user->getTutorial() == 8 && $user->getSearchAt()) {
+            $user->setTutorial(9);
+            $em->flush();
+        }
+
         return $this->render('connected/search.html.twig', [
             'usePlanet' => $usePlanet,
             'date' => $now,

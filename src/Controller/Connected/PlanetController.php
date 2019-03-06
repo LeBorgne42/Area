@@ -41,9 +41,16 @@ class PlanetController extends AbstractController
                 ->getOneOrNullResult();
 
             $renamePlanet->setName($form_manageRenamePlanet->get('name')->getData());
+            if(($user->getTutorial() == 3)) {
+                $user->setTutorial(4);
+            }
 
             $em->flush();
             return $this->redirectToRoute('planet', ['idp' => $usePlanet->getId()]);
+        }
+        if(($user->getTutorial() == 2)) {
+            $user->setTutorial(3);
+            $em->flush();
         }
 
         return $this->render('connected/planet.html.twig', [

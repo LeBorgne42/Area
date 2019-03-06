@@ -380,9 +380,9 @@ class FightController extends AbstractController
                     $exchangeLoseA->setContent("Taxe liée à la paix.");
                     $exchangeLoseA->setName($attackerLose->getUser()->getUserName());
                     $em->persist($exchangeLoseA);
+                    $reportLoseA->setContent($reportLoseA->getContent() . " Votre accord de paix ayant envoyé " . $pdgPeace . " points de Guerre à l'alliance [" . $otherAlly->getSigle() . "].");
                 }
                 $reportLoseA->setContent($reportLoseA->getContent() . " Mais vous remportez vous même " . $newWarPoint . " points de Guerre !");
-                $reportLoseA->setContent($reportLoseA->getContent() . "Votre accord de paix ayant envoyé " . $pdgPeace . " points de Guerre à l'alliance [" . $otherAlly->getSigle() . "].");
                 if($attackerLose->getUser()->getRank()) {
                     $attackerLose->getUser()->getRank()->setWarPoint($attackerLose->getUser()->getRank()->getWarPoint() + $newWarPoint);
                 }
@@ -521,9 +521,9 @@ class FightController extends AbstractController
                     $exchangeLoseB->setContent("Taxe liée à la paix.");
                     $exchangeLoseB->setName($defenderLose->getUser()->getUserName());
                     $em->persist($exchangeLoseB);
+                    $reportLoseB->setContent($reportWinB->getContent() . " Votre accord de paix ayant envoyé " . $pdgPeace . " points de Guerre à l'alliance [" . $otherAlly->getSigle() . "].");
                 }
                 $reportLoseB->setContent($reportWinB->getContent() . " Mais vous remportez vous même " . $newWarPoint . " points de Guerre !");
-                $reportLoseB->setContent($reportWinB->getContent() . "Votre accord de paix ayant envoyé " . $pdgPeace . " points de Guerre à l'alliance [" . $otherAlly->getSigle() . "].");
                 if($defenderLose->getUser()->getRank()) {
                     $defenderLose->getUser()->getRank()->setWarPoint($defenderLose->getUser()->getRank()->getWarPoint() + $newWarPoint);
                 }

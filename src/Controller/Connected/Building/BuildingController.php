@@ -26,6 +26,11 @@ class BuildingController extends AbstractController
         $user = $this->getUser();
         $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
+        if(($user->getTutorial() == 4)) {
+            $user->setTutorial(5);
+            $em->flush();
+        }
+
         return $this->render('connected/building.html.twig', [
             'usePlanet' => $usePlanet,
             'date' => $now,

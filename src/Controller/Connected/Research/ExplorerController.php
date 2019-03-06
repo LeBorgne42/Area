@@ -44,6 +44,9 @@ class ExplorerController extends AbstractController
         $user->setSearch('onde');
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - ($level * 2300));
+        if(($user->getTutorial() == 8)) {
+            $user->setTutorial(9);
+        }
         $em->flush();
 
         return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
@@ -214,6 +217,9 @@ class ExplorerController extends AbstractController
         $user->setSearch('utility');
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - ($level * 2500));
+        if(($user->getTutorial() == 8)) {
+            $user->setTutorial(9);
+        }
         $em->flush();
 
         return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);

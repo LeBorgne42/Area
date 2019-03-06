@@ -44,6 +44,9 @@ class MilitaryController extends AbstractController
         $user->setSearch('industry');
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - ($level * 1500));
+        if(($user->getTutorial() == 8)) {
+            $user->setTutorial(9);
+        }
         $em->flush();
 
         return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);

@@ -1,6 +1,13 @@
 title: 'Votre Empire'
 modify: modifier
-tooltip.modify: 'Modifier image !'
+tooltip.modify: 'Modifiez votre avatar !'
+tooltip.level: 'Le niveau de votre Commandant.'
+tooltip.pseudo: 'Le nom de votre Commandant.'
+tooltip.maxPlanets: 'Votre nombre de planètes ainsi que la limite maximum.'
+tooltip.ships: 'Le nombre total de vaisseaux dans votre Empire.'
+tooltip.maxPlanetsAlly: 'Le nombre de planète que tout les membres de l''alliance ont ensemble.'
+tooltip.bitcoinAlly: 'Les Bitcoins dans la banque de votre Alliance.'
+tooltip.pdg: 'Pour gagner des Points de Guerre : Accomplissez les Objectifs, vendez des ressources aux marchands ou encore combattez d''autres joueurs!'
 title.batiment: Bâtiment
 cell.batiment: 'Aucun bâtiment en construction'
 title.search: Recherche
@@ -54,6 +61,8 @@ cell.searchNone: 'Aucune recherche'
 overview.batiment: 'Bâtiments en construction'
 cell.buildingNone: 'Aucune construction'
 overview.spatial: 'Vaisseaux en production'
+overview.tutorial: 'Bonjour Commandant,<br>Cette page est la plus importante, elle synthétise votre Empire vous permettant de le gérer simplement.<br>Prenez votre temps pour y découvrir toutes les informations affichées et rendez vous ensuite sur la page des «Rapports».'
+overview.tutorialTitle: 'Tutoriel'
 cell.spatialNone: 'Aucun vaisseaux'
 miner: 'Mine de niobium'
 extractor: 'Extracteur d''eau'

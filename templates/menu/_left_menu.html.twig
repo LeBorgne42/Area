@@ -15,57 +15,57 @@
         <a href="{{ path('overview', {'idp': usePlanet.getId()}) }}"><span>{{ 'globalView'|trans }}</span></a>
     </div>
     {% if app.user.getQuests()|length > 0 %}
-        <div class="btn-left{% if app.request.attributes.get('_route') == 'market' %} currentRoute{% endif %}">
+        <div class="btn-left{% if app.request.attributes.get('_route') == 'market' %} currentRoute{% endif %}{% if app.user.getTutorial() < 16 %} tutorial-hide{% elseif app.user.getTutorial() == 16 %} tutorial-show{% endif %}">
             <a href="{{ path('market', {'idp': usePlanet.getId()}) }}"><span>{{ 'quest'|trans }} {{ app.user.getQuests()|length }}/3</span></a>
         </div>
     {% endif %}
-    <div class="btn-left{% if app.request.attributes.get('_route') == 'fleet' or app.request.attributes.get('_route') == 'fleet_list' %} currentRoute{% endif %}">
+    <div class="btn-left{% if app.request.attributes.get('_route') == 'fleet' or app.request.attributes.get('_route') == 'fleet_list' %} currentRoute{% endif %}{% if app.user.getTutorial() < 9 %} tutorial-hide{% elseif app.user.getTutorial() == 9 or app.user.getTutorial() == 11 %} tutorial-show{% endif %}">
         <a href="{{ path('fleet', {'idp': usePlanet.getId()}) }}"><span>{{ 'fleet'|trans }}</span></a> - <a href="{{ path('fleet_list', {'idp': usePlanet.getId()}) }}"><span>{{ 'fleetList'|trans }}</span></a>
     </div>
-    <div class="btn-left{{ app.user.getRessourceFull() }}{% if app.request.attributes.get('_route') == 'planet' %} currentRoute{% endif %}">
+    <div class="btn-left{{ app.user.getRessourceFull() }}{% if app.request.attributes.get('_route') == 'planet' %} currentRoute{% endif %}{% if app.user.getTutorial() < 2 %} tutorial-hide{% elseif app.user.getTutorial() == 2 %} tutorial-show{% endif %}">
         <a href="{{ path('planet', {'idp': usePlanet.getId()}) }}"><span>{{ 'planet'|trans }}</span></a>
     </div>
-    <div class="btn-left{% if app.user.getSearch() is null %} freeSearchBuild{% endif %}{% if app.request.attributes.get('_route') == 'search' %} currentRoute{% endif %}">
+    <div class="btn-left{% if app.user.getSearch() is null %} freeSearchBuild{% endif %}{% if app.request.attributes.get('_route') == 'search' %} currentRoute{% endif %}{% if app.user.getTutorial() < 7 %} tutorial-hide{% elseif app.user.getTutorial() == 7 %} tutorial-show{% endif %}">
         <a href="{{ path('search', {'idp': usePlanet.getId()}) }}"><span>{{ 'search'|trans }}</span>{% if app.user.getSearch() is null %} <span class="glyphicon glyphicon-question-sign text-orange" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.search'|trans }}"></span>{% endif %}</a>
     </div>
-    <div class="btn-left{% if app.request.attributes.get('_route') == 'ally_blank' or app.request.attributes.get('_route') == 'ally' %} currentRoute{% endif %}">
+    <div class="btn-left{% if app.request.attributes.get('_route') == 'ally_blank' or app.request.attributes.get('_route') == 'ally' %} currentRoute{% endif %}{% if app.user.getTutorial() < 18 %} tutorial-hide{% endif %}">
         <a href="{{ path('ally', {'idp': usePlanet.getId()}) }}"><span>{{ 'ally'|trans }}{% if app.user.getProposals() and app.user.getAlly() is null %} (<small>{{ app.user.getProposals()|length }}</small>){% endif %}</span></a>
     </div>
     {% if app.user.getQuests()|length == 0 %}
-        <div class="btn-left{% if app.request.attributes.get('_route') == 'market' %} currentRoute{% endif %}">
+        <div class="btn-left{% if app.request.attributes.get('_route') == 'market' %} currentRoute{% endif %}{% if app.user.getTutorial() < 18 %} tutorial-hide{% endif %}">
             <a href="{{ path('market', {'idp': usePlanet.getId()}) }}"><span>{{ 'market'|trans }}</span></a>
         </div>
     {% endif %}
     <div class="btn-left separate"></div>
-    <div class="btn-left{% if app.request.attributes.get('_route') == 'galaxy' or app.request.attributes.get('_route') == 'universe' %} currentRoute{% endif %}">
+    <div class="btn-left{% if app.request.attributes.get('_route') == 'galaxy' or app.request.attributes.get('_route') == 'universe' %} currentRoute{% endif %}{% if app.user.getTutorial() < 18 %} tutorial-hide{% endif %}">
         <a href="{{ path('universe', {'idp': usePlanet.getId()}) }}"><span>{{ 'universe'|trans }}</span></a> - <a href="{{ path('galaxy', {'id': usePlanet.getSector().getGalaxy().getPosition(), 'idp': usePlanet.getId()}) }}"><span>{{ 'galaxy'|trans }}</span></a>
     </div>
-    <div class="btn-left{% if app.request.attributes.get('_route') == 'map' %} currentRoute{% endif %}">
+    <div class="btn-left{% if app.request.attributes.get('_route') == 'map' %} currentRoute{% endif %}{% if app.user.getTutorial() < 14 %} tutorial-hide{% elseif app.user.getTutorial() == 14 %} tutorial-show{% endif %}">
         <a href="{{ path('map', {'id':usePlanet.getSector().getPosition(), 'idp': usePlanet.getId(), 'gal': usePlanet.getSector().getGalaxy().getPosition()}) }}"><span>{{ 'map'|trans }}</span></a>
     </div>
     <div class="btn-left separate"></div>
-    <div class="btn-left{% if usePlanet.getConstruct() is null and (usePlanet.getGround() != usePlanet.getGroundPlace()) %} freeSearchBuild{% endif %}{% if app.request.attributes.get('_route') == 'building' %} currentRoute{% endif %}">
+    <div class="btn-left{% if usePlanet.getConstruct() is null and (usePlanet.getGround() != usePlanet.getGroundPlace()) %} freeSearchBuild{% endif %}{% if app.request.attributes.get('_route') == 'building' %} currentRoute{% endif %}{% if app.user.getTutorial() < 4 %} tutorial-hide{% elseif app.user.getTutorial() == 4 %} tutorial-show{% endif %}">
         <a href="{{ path('building', {'idp': usePlanet.getId()}) }}"><span>{{ 'building'|trans }}</span>{% if usePlanet.getConstruct() is null and (usePlanet.getGround() != usePlanet.getGroundPlace()) %} <span class="glyphicon glyphicon-question-sign text-orange" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.building'|trans }}"></span>{% endif %}</a>
     </div>
     {% if usePlanet.getCaserne() > 0 or usePlanet.getCenterSearch() > 0 %}
-        <div class="btn-left{% if app.request.attributes.get('_route') == 'soldier' %} currentRoute{% endif %}">
+        <div class="btn-left{% if app.request.attributes.get('_route') == 'soldier' %} currentRoute{% endif %}{% if app.user.getTutorial() < 18 %} tutorial-hide{% endif %}">
             <a href="{{ path('soldier', {'idp': usePlanet.getId()}) }}">{{ 'soldier'|trans }}</span></a>
         </div>
     {% endif %}
-    <div class="btn-left{% if app.request.attributes.get('_route') == 'spatial' %} currentRoute{% endif %}">
+    <div class="btn-left{% if app.request.attributes.get('_route') == 'spatial' %} currentRoute{% endif %}{% if app.user.getTutorial() < 18 %} tutorial-hide{% endif %}">
         <a href="{{ path('spatial', {'idp': usePlanet.getId()}) }}"><span>{{ 'spatial'|trans }}</span></a>
     </div>
     <div class="btn-left separate"></div>
-    <div class="btn-left{% if app.request.attributes.get('_route') == 'message' %} currentRoute{% endif %}">
+    <div class="btn-left{% if app.request.attributes.get('_route') == 'message' %} currentRoute{% endif %}{% if app.user.getTutorial() < 18 %} tutorial-hide{% endif %}">
         <a href="{{ path('message', {'idp': usePlanet.getId()}) }}">{% if app.user.getViewMessage() == false %}<div class="text-orange glyphicon glyphicon-envelope"></div> {% endif %}{{ 'message'|trans }}</span></a>
     </div>
-    <div class="btn-left{% if app.request.attributes.get('_route') == 'salon' %} currentRoute{% endif %}">
+    <div class="btn-left{% if app.request.attributes.get('_route') == 'salon' %} currentRoute{% endif %}{% if app.user.getTutorial() < 17 %} tutorial-hide{% elseif app.user.getTutorial() == 17 %} tutorial-show{% endif %}">
         <a href="{{ path('salon', {'idp': usePlanet.getId()}) }}"><span>{% if app.user.getSalonAt() == null %}<div class="text-orange glyphicon glyphicon-comment"></div> {% endif %}{{ 'salon'|trans }}</span></a>
     </div>
-    <div class="btn-left{% if app.request.attributes.get('_route') == 'report' %} currentRoute{% endif %}">
+    <div class="btn-left{% if app.request.attributes.get('_route') == 'report' %} currentRoute{% endif %}{% if app.user.getTutorial() == 1 %} tutorial-show{% endif %}">
         <a href="{{ path('report', {'idp': usePlanet.getId()}) }}">{% if app.user.getViewReport() == false %}<div class="text-orange glyphicon glyphicon-exclamation-sign"></div> {% endif %}{{ 'report'|trans }}</span></a>
     </div>
-    <div class="btn-left{% if app.request.attributes.get('_route') == 'rank_ally' %} currentRoute{% endif %}">
+    <div class="btn-left{% if app.request.attributes.get('_route') == 'rank_ally' %} currentRoute{% endif %}{% if app.user.getTutorial() < 18 %} tutorial-hide{% endif %}">
         <a href="{{ path('rank_ally', {'idp': usePlanet.getId()}) }}"><span>{{ 'rank'|trans }}</span></a>
     </div>
     <div class="btn-left separate"></div>

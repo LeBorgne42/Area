@@ -46,6 +46,9 @@ class ProductionController extends AbstractController
             $usePlanet->setWater($usePlanetWt - ($level * 200));
             $usePlanet->setGroundPlace($newGround);
             $em->persist($construction);
+            if(($user->getTutorial() == 6)) {
+                $user->setTutorial(7);
+            }
         } else {
             $now->add(new DateInterval('PT' . ($level * 180) . 'S'));
             $usePlanet->setNiobium($usePlanetNb - ($level * 450));
@@ -53,6 +56,9 @@ class ProductionController extends AbstractController
             $usePlanet->setGroundPlace($newGround);
             $usePlanet->setConstruct('miner');
             $usePlanet->setConstructAt($now);
+            if(($user->getTutorial() == 5)) {
+                $user->setTutorial(6);
+            }
         }
         $em->flush();
 
@@ -117,6 +123,9 @@ class ProductionController extends AbstractController
             $usePlanet->setWater($usePlanetWt - ($level * 500));
             $usePlanet->setGroundPlace($newGround);
             $em->persist($construction);
+            if(($user->getTutorial() == 6)) {
+                $user->setTutorial(7);
+            }
         } else {
             $now->add(new DateInterval('PT' . ($level * 180) . 'S'));
             $usePlanet->setNiobium($usePlanetNb - ($level * 200));
@@ -124,6 +133,9 @@ class ProductionController extends AbstractController
             $usePlanet->setGroundPlace($newGround);
             $usePlanet->setConstruct('extractor');
             $usePlanet->setConstructAt($now);
+            if(($user->getTutorial() == 5)) {
+                $user->setTutorial(6);
+            }
         }
         $em->flush();
 

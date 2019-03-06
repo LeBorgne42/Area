@@ -7,10 +7,15 @@ planet.worker: Travailleurs
 planet.soldier: Soldats
 planet.scientist: Scientifiques
 planet.fleet: Flottes
+planet.tutorial: 'Voici le résumé de chacune de vos planètes, pour le moment vous n''en avez qu''une. Renomez la !'
+planet.tutorialBis: 'Bien ! Maintenant il faut développer votre planète, prochaine étape la page «Infrastructures».'
 niobium: Niobium
 water: Eau
 groundImg: Terrain
 SkyImg: Espace
+worker: Travailleurs
+soldier: Soldats
+scientist: Scientifiques
 planet.image: Planète
 planet.production: Production
 planet.population: Population
@@ -18,3 +23,5 @@ planet.ship: Vaisseaux
 position: 'Position :'
 planet.abandon: Abandonner
 planet.abandon.question: 'Souhaitez vous abandonner la planète ?'
+tooltip.ships: 'Les vaisseaux qui sont posés sur votre planète.'
+tooltip.planet: 'Infrastructures de la planète'

@@ -61,3 +61,5 @@ popover.industry: '<h5>Niveau 1 : Vaisseaux légers<br>Niveau 3 : Vaisseaux lour
 popover.light: '<h5>Industrie 1<hr>Niveau 1 : Usine d''armement</h5>'
 popover.heavy: '<h5>Industrie 3<hr>Niveau 1 : Industrie lourde</h5>'
 research.finish: Terminée
+research.tutorial: 'Les recherches de votre Empire vous permettent de toujours aller plus loin dans les infrastructures et dans la construction de vaisseaux.<br>Pour le début nous vous conseillons le combo : Vaisseaux utilitaires - Terraformation - Gestion des cargaisons. Lancez une recherche ! '
+research.tutorialBis: 'Votre Empire est en bonne voie, passons à son expansion ! Dans le menu rendez vous sur la page «Flottes».'

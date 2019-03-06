@@ -45,6 +45,11 @@ fleet.soldier: Soldats
 fleet.worker: Travailleurs
 fleet.scientist: Scientifiques
 fleet.discharge: Decharger
+fleet.tutorial: 'Commandant il est l''heure de faire vos preuves dans la conquête spatiale, vous débutez avec quelques vaisseaux et nous allons les utiliser ! Cliquez sur «Créer une flotte» puis mettez y le nom que vous souhaitez et surtout : Un colonisateur.'
+fleet.tutorialBis: 'Votre flotte a été crée et est en orbite de votre planète. Pour le moment vous n''avez qu''une flotte mais pour une meilleure organisation allez sur la page «Cohorte».'
+fleetList.tutorial: 'Les Cohorte vous permettent d''organiser vos flottes comme vous le voulez dans des listes, dans la plupart des cas de trier les flottes de sondes, de cargos, de recycleurs, de guerre et d''invasions pour gagner du temps. Entrez un nom et une prioritée puis cliquez sur «Créer nouvelle Cohorte».'
+fleetList.tutorialBis: 'Votre Cohorte est crée vous pouvez y ajouter votre flotte précedement crée, cliquez sur «ajouter flotte», selectionné votre flotte et c''est partit!'
+fleetList.tutorialTer: 'On y est presque, votre flotte a rejoint la Cohorte. Maintenant rendons nous sur la page «Carte Spatiale» pour l''utiliser.'
 tooltip.fleetOnPlanet: 'Dans ce cadre vous pouvez voir les flottes que vous avez sur votre planète actuelle.'
 tooltip.cargo: 'Il s''agit de la place que votre flotte a en soute pour vos transports de ressources(niobium, eau) ou humains(soldat, travailleur, scientique).'
 tooltip.signature: 'Ici nous parlons de signature thermique, il serait trop facile que tout le monde sache ce qu''il y a dans la composition de votre flotte, ainsi la signature donne un ordre de grandeur sans rentrer dans le détails de la flotte.'

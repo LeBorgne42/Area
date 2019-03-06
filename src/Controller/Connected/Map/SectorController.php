@@ -103,6 +103,11 @@ class SectorController extends AbstractController
             ->getQuery()
             ->getResult();
 
+        if(($user->getTutorial() == 14)) {
+            $user->setTutorial(15);
+            $em->flush();
+        }
+
 
         return $this->render('connected/map/sector.html.twig', [
             'form_navigate' => $form_navigate->createView(),
@@ -211,6 +216,9 @@ class SectorController extends AbstractController
             $fleet->setCancelFlight($moreNow);
             $user->setBitcoin($user->getBitcoin() - $carburant);
 
+            if(($user->getTutorial() == 15)) {
+                $user->setTutorial(16);
+            }
             $em->flush();
             return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getPosition()]);
         }

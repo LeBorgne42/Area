@@ -31,6 +31,7 @@ class MarketController extends AbstractController
 
         $quests = $em->getRepository('App:Quest')
             ->createQueryBuilder('q')
+            ->select('q.name, q.gain')
             ->join('q.users', 'u')
             ->where('u.id = :user')
             ->setParameters(['user' => $user->getId()])
@@ -71,6 +72,10 @@ class MarketController extends AbstractController
 
             $em->flush();
             return $this->redirectToRoute('market', ['idp' => $usePlanet->getId()]);
+        }
+        if(($user->getTutorial() == 16)) {
+            $user->setTutorial(17);
+            $em->flush();
         }
 
         return $this->render('connected/market.html.twig', [

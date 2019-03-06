@@ -1,5 +1,6 @@
 title: 'Rapport Automatique'
 report.title: Titre
+report.tutorial: 'Ici apparaîtrons tout les rapports de votre Empire : L''arrivée de votre flotte sur une planète, le succès d''une invasion, un combat spatial, une colonisation, une vente aux marchands...etc<br>Ainsi que votre Rapport d''Empire tout les jours a 18h00 et le revenu en Bitcoin de vos travailleurs.<br>Une fois votre rapport de bienvenu lu, marquez le comme lu et rendez vous sur la page «Planètes».'
 AllNewView: 'Marquer tout les rapports comme lus'
 NewReport: Nouveau
 share: 'Générer lien de partage'

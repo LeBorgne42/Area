@@ -54,14 +54,14 @@ class SoldierController extends AbstractController
                 return $this->redirectToRoute('soldier', ['idp' => $usePlanet->getId()]);
             }
             if($usePlanet->getSoldierAt()) {
-                if ($usePlanet->getSoldierAtNbr() + $nbrSoldier > $usePlanet->getSoldierMax()) {
+                if ($usePlanet->getSoldier() + $usePlanet->getSoldierAtNbr() + $nbrSoldier > $usePlanet->getSoldierMax()) {
                     return $this->redirectToRoute('soldier', ['idp' => $usePlanet->getId()]);
                 }
                 $tmpSoldier = $usePlanet->getSoldierAtNbr();
-                $now->add(new DateInterval('PT' . (($nbrSoldier / 10) + $tmpSoldier) . 'S'));  // X10 NORMAL GAME
+                $now->add(new DateInterval('PT' . round(($nbrSoldier / 10) + $tmpSoldier) . 'S'));  // X10 NORMAL GAME
                 $usePlanet->setSoldierAtNbr($usePlanet->getSoldierAtNbr() + $nbrSoldier);
             } else {
-                $now->add(new DateInterval('PT' . ($nbrSoldier / 10) . 'S')); // X10 NORMAL GAME
+                $now->add(new DateInterval('PT' . round($nbrSoldier / 10) . 'S')); // X10 NORMAL GAME
                 $usePlanet->setSoldierAtNbr($nbrSoldier);
             }
             $usePlanet->setWorker($usePlanet->getWorker() - ($nbrSoldier * 3));
@@ -80,7 +80,7 @@ class SoldierController extends AbstractController
                 return $this->redirectToRoute('soldier', ['idp' => $usePlanet->getId()]);
             }
             if($usePlanet->getScientistAt()) {
-                if ($usePlanet->getScientistAtNbr() + $nbrScientist > $usePlanet->getScientistMax()) {
+                if ($usePlanet->getScientist() + $usePlanet->getScientistAtNbr() + $nbrScientist > $usePlanet->getScientistMax()) {
                     return $this->redirectToRoute('soldier', ['idp' => $usePlanet->getId()]);
                 }
                 $tmpScientist = $usePlanet->getScientistAtNbr();

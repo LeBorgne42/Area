@@ -5,71 +5,73 @@
 {% block title %}{{ 'title'|trans }}{% endblock %}
 
 {% block body %}
-    <div class="front-block-ally">
-        {% if app.user.getAlly() %}
-        {% else %}
-            {% if app.user.getAllyBan() %}<h3 class="text-center text-orange mb-5">{{ 'ally.banAlly'|trans }} <span class="timerArea" hidden>{{ app.user.getAllyBan()|date('Y/m/d H:i:s') }}</span></h3>{% endif %}
-            {{ form_start(form_ally) }}
-            <div class="row">
-                <div class="offset-1 col-4 form-group">
-                    {{ form_widget(form_ally.name) }}
+    <div class="front-block">
+        <div class="front-block-ally">
+            {% if app.user.getAlly() %}
+            {% else %}
+                {% if app.user.getAllyBan() %}<h3 class="text-center text-orange mb-5">{{ 'ally.banAlly'|trans }} <span class="timerArea" hidden>{{ app.user.getAllyBan()|date('Y/m/d H:i:s') }}</span></h3>{% endif %}
+                {{ form_start(form_ally) }}
+                <div class="row">
+                    <div class="offset-1 col-4 form-group">
+                        {{ form_widget(form_ally.name) }}
+                    </div>
+                    <div class="col-2 form-group">
+                        {{ form_widget(form_ally.sigle) }}
+                    </div>
+                    <div class="col-2 form-control-plaintext">
+                        {{ form_label(form_ally.taxe) }}
+                    </div>
+                    <div class="col-2 form-group">
+                        {{ form_widget(form_ally.taxe) }}
+                    </div>
                 </div>
-                <div class="col-2 form-group">
-                    {{ form_widget(form_ally.sigle) }}
+                <div class="row">
+                    <div class="offset-1 col-7 form-group">
+                        {{ form_widget(form_ally.slogan) }}
+                    </div>
+                    <div class="col-3 form-group">
+                        {{ form_widget(form_ally.politic) }}
+                    </div>
+                    <div class="offset-1 col-10 form-group">
+                        {{ form_widget(form_ally.description) }}
+                        <div><span class="pull-left mt-3">{{ form_widget(form_ally.politic) }}</span>{{ form_widget(form_ally.sendForm) }}</div>
+                    </div>
                 </div>
-                <div class="col-2 form-control-plaintext">
-                    {{ form_label(form_ally.taxe) }}
-                </div>
-                <div class="col-2 form-group">
-                    {{ form_widget(form_ally.taxe) }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="offset-1 col-7 form-group">
-                    {{ form_widget(form_ally.slogan) }}
-                </div>
-                <div class="col-3 form-group">
-                    {{ form_widget(form_ally.politic) }}
-                </div>
-                <div class="offset-1 col-10 form-group">
-                    {{ form_widget(form_ally.description) }}
-                    <div><span class="pull-left mt-3">{{ form_widget(form_ally.politic) }}</span>{{ form_widget(form_ally.sendForm) }}</div>
-                </div>
-            </div>
-            {{ form_end(form_ally) }}
+                {{ form_end(form_ally) }}
 
-            <table class="table table-striped table-bordered table-dark text-center mt-5">
-                <tbody>
-                <tr>
-                    <th class="tab-cells-name">{{ 'ally.allyName'|trans }}</th>
-                    <th class="tab-cells-name">{{ 'ally.proposalAt'|trans }}</th>
-                    <th class="tab-cells-name">{{ 'ally.acceptProp'|trans }}</th>
-                    <th class="tab-cells-name">{{ 'ally.refuseProp'|trans }}</th>
-                </tr>
-                {% for proposal in app.user.getProposals() %}
+                <table class="table table-striped table-bordered table-dark text-center mt-5">
+                    <tbody>
                     <tr>
-                        <td class="center-cells">
-                            {% if proposal.getAlly().getImageName() %}
-                                <img height="10" width="15" src="{{ vich_uploader_asset(proposal.getAlly(), 'imageFile') }}">
-                            {% else %}
-                                <img height="10" width="15" src="{{ asset('img/ally.jpg') }}">
-                            {% endif %}
-                            <span><a href="{{ path('ally_profil', {'idp': usePlanet.getId(), 'id': proposal.getAlly().getId()}) }}">{{ proposal.getAlly().getName() }}</a></span>
-                        </td>
-                        <td class="center-cells">
-                            {{ proposal.getProposalAt()|date('d/m/Y H:i') }}
-                        </td>
-                        <td class="center-cells">
-                            <a href="{{ path('ally_accept', {id: proposal.getId(), 'idp': usePlanet.getId()}) }}"><span>{{ 'ally.accept'|trans }}</span></a>
-                        </td>
-                        <td class="center-cells">
-                            <a class="text-rouge" href="{{ path('ally_refuse', {id: proposal.getId(), 'idp': usePlanet.getId()}) }}"><div class="glyphicon glyphicon-remove"></div> <span>{{ 'ally.refuse'|trans }}</span></a>
-                        </td>
+                        <th class="tab-cells-name">{{ 'ally.allyName'|trans }}</th>
+                        <th class="tab-cells-name">{{ 'ally.proposalAt'|trans }}</th>
+                        <th class="tab-cells-name">{{ 'ally.acceptProp'|trans }}</th>
+                        <th class="tab-cells-name">{{ 'ally.refuseProp'|trans }}</th>
                     </tr>
-                {% endfor %}
-                </tr>
-                </tbody>
-            </table>
-        {% endif %}
+                    {% for proposal in app.user.getProposals() %}
+                        <tr>
+                            <td class="center-cells">
+                                {% if proposal.getAlly().getImageName() %}
+                                    <img height="10" width="15" src="{{ vich_uploader_asset(proposal.getAlly(), 'imageFile') }}">
+                                {% else %}
+                                    <img height="10" width="15" src="{{ asset('img/ally.jpg') }}">
+                                {% endif %}
+                                <span><a href="{{ path('ally_profil', {'idp': usePlanet.getId(), 'id': proposal.getAlly().getId()}) }}">{{ proposal.getAlly().getName() }}</a></span>
+                            </td>
+                            <td class="center-cells">
+                                {{ proposal.getProposalAt()|date('d/m/Y H:i') }}
+                            </td>
+                            <td class="center-cells">
+                                <a href="{{ path('ally_accept', {id: proposal.getId(), 'idp': usePlanet.getId()}) }}"><span>{{ 'ally.accept'|trans }}</span></a>
+                            </td>
+                            <td class="center-cells">
+                                <a class="text-rouge" href="{{ path('ally_refuse', {id: proposal.getId(), 'idp': usePlanet.getId()}) }}"><div class="glyphicon glyphicon-remove"></div> <span>{{ 'ally.refuse'|trans }}</span></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tr>
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
     </div>
 {% endblock %}

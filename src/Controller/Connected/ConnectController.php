@@ -104,7 +104,7 @@ class ConnectController extends AbstractController
         $report->setSendAt($now);
         $report->setUser($user);
         $report->setTitle("Bienvenu parmis nous "  . $user->getUsername() . " !");
-        $report->setContent("Votre planète dispose déjà des premières infrastructures, des mines et extracteurs pour vos ressources. Un chantier spatial pour la construction de vaisseaux et enfin un radar pour visualiser les informations de la carte spatiale. Vous disposez aussi de quelques vaisseaux, des sondes pour aller voir ce qu'il se passe dans les autres secteurs, des chasseurs et frégates pour vous défendre. Et enfin un colonisateur! Rendez vous sur la page flottes puis 'Créer une nouvelle flotte'. Ensuite allez coloniser les meilleures planètes de la galaxie! Bon courage commandant. (Pour recevoir de l'aide : La page Salon ou rendez vous sur le discord)");
+        $report->setContent("Votre planète dispose déjà des premières infrastructures, des mines et extracteurs pour vos ressources. Un chantier spatial pour la construction de vaisseaux et enfin un radar pour visualiser les informations de la carte spatiale. Vous disposez aussi de quelques vaisseaux, des sondes pour aller voir ce qu'il se passe dans les autres secteurs, des chasseurs et frégates pour vous défendre. Bon courage commandant. (Pour recevoir de l'aide : La page Salon ou rendez-vous sur le discord)");
         $em->persist($report);
         $user->setViewReport(false);
 

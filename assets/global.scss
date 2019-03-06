@@ -246,6 +246,33 @@ a:hover {
   word-wrap: break-word;
 }
 
+.tutorial {
+  font-size: 1.4rem;
+  text-shadow: 1px 1px 1px rgba(0,0,0, 0.1);
+  color: lightblue;
+  border: 1px solid white;
+  background-image: url("../public/img/tuto.gif");
+  background-repeat: repeat;
+  background-size: cover;
+  background-color: black;
+}
+
+.tutorial-title {
+  text-shadow: 2px 2px 1px rgba(0,0,0, 1);
+}
+
+.tutorial-hide {
+    pointer-events: none;
+    text-decoration: line-through;
+}
+
+.tutorial-show {
+  background-image: url("../public/img/tuto2.gif");
+  background-repeat: repeat;
+  background-size: cover;
+  background-color: black;
+}
+
 span a {
   color: orange;
 }

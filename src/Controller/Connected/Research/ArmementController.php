@@ -42,6 +42,9 @@ class ArmementController extends AbstractController
         $user->setSearch('armement');
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - ($level * 2000));
+        if(($user->getTutorial() == 8)) {
+            $user->setTutorial(9);
+        }
         $em->flush();
 
         return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);

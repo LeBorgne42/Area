@@ -165,6 +165,9 @@ class SalonController extends AbstractController
         }
         $user->setSalonAt($now);
 
+        if(($user->getTutorial() == 17)) {
+            $user->setTutorial(18);
+        }
         $em->flush();
 
         return $this->render('connected/salon.html.twig', [

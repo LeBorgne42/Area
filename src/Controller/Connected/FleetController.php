@@ -89,6 +89,11 @@ class FleetController  extends AbstractController
             ->getQuery()
             ->getResult();
 
+        if(($user->getTutorial() == 9)) {
+            $user->setTutorial(10);
+            $em->flush();
+        }
+
         return $this->render('connected/fleet.html.twig', [
             'date' => $now,
             'usePlanet' => $usePlanet,
@@ -135,6 +140,9 @@ class FleetController  extends AbstractController
                 $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $quest->getGain());
                 $user->removeQuest($quest);
             }
+            if(($user->getTutorial() == 12)) {
+                $user->setTutorial(13);
+            }
             $em->flush();
         }
 
@@ -145,6 +153,11 @@ class FleetController  extends AbstractController
             ->orderBy('f.priority')
             ->getQuery()
             ->getResult();
+
+        if(($user->getTutorial() == 11)) {
+            $user->setTutorial(12);
+            $em->flush();
+        }
 
         return $this->render('connected/fleet_list.html.twig', [
             'date' => $now,
@@ -172,6 +185,9 @@ class FleetController  extends AbstractController
         if($user == $fleetList->getUser()) {
             $fleetList->addFleet($fleet);
             $fleet->setFleetList($fleetList);
+            if(($user->getTutorial() == 13)) {
+                $user->setTutorial(14);
+            }
             $em->flush();
         }
 

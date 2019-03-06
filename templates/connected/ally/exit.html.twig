@@ -5,52 +5,54 @@
 {% block title %}{{ 'title'|trans }}{% endblock %}
 
 {% block body %}
-    <div class="front-block-ally">
-        {% if app.user.getAlly() %}
-            <h1 class="text-center text-orange mb-4">{{ app.user.getAlly().getName() }}<small> - [{{ app.user.getAlly().getSigle() }}]</small></h1>
-            <div class="text-center modify-allyImage">
-                {% if app.user.getAlly().getImageName() %}
-                    <img height="300" width="450" src="{{ vich_uploader_asset(app.user.getAlly(), 'imageFile') }}">
-                {% else %}
-                    <img height="300" width="450" src="{{ asset('img/ally.jpg') }}">
-                {% endif %}
-            </div>
-            {{ form_start(form_allyImage,{attr: { hidden: 'hidden'}}) }}
-            {{ form_widget(form_allyImage.imageFile) }}
-            {{ form_widget(form_allyImage.sendForm) }}
-            {{ form_end(form_allyImage) }}
-            <div class="text-center my-2">"{{ app.user.getAlly().getSlogan() }}"</div>
-            <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
-                <li class="nav-item">
-                    <a href="{{ path('ally', {'idp': usePlanet.getId()}) }}" >{{ app.user.getAlly().getUsers()|length }} {{ 'ally.members'|trans }}</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ path('ally_page_bank', {'idp': usePlanet.getId()}) }}" >{{ 'ally.found'|trans }}</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ path('ally_page_pacts', {'idp': usePlanet.getId()}) }}" >{{ app.user.getAlly().getPacts() }}  {{ 'ally.pacts'|trans }}</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ path('ally_page_add', {'idp': usePlanet.getId()}) }}" >{{ 'ally.add'|trans }}</a>
-                </li>
-                {% if app.user.getGrade().getPlacement() == 1 %}
+    <div class="front-block">
+        <div class="front-block-ally">
+            {% if app.user.getAlly() %}
+                <h1 class="text-center text-orange mb-4">{{ app.user.getAlly().getName() }}<small> - [{{ app.user.getAlly().getSigle() }}]</small></h1>
+                <div class="text-center modify-allyImage">
+                    {% if app.user.getAlly().getImageName() %}
+                        <img height="300" width="450" src="{{ vich_uploader_asset(app.user.getAlly(), 'imageFile') }}">
+                    {% else %}
+                        <img height="300" width="450" src="{{ asset('img/ally.jpg') }}">
+                    {% endif %}
+                </div>
+                {{ form_start(form_allyImage,{attr: { hidden: 'hidden'}}) }}
+                {{ form_widget(form_allyImage.imageFile) }}
+                {{ form_widget(form_allyImage.sendForm) }}
+                {{ form_end(form_allyImage) }}
+                <div class="text-center my-2">"{{ app.user.getAlly().getSlogan() }}"</div>
+                <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
                     <li class="nav-item">
-                        <a href="{{ path('ally_page_admin', {'idp': usePlanet.getId()}) }}" >{{ 'ally.admin'|trans }}</a>
+                        <a href="{{ path('ally', {'idp': usePlanet.getId()}) }}" >{{ app.user.getAlly().getUsers()|length }} {{ 'ally.members'|trans }}</a>
                     </li>
-                {% endif %}
-                <li class="nav-item">
-                    <a class="nav-link active" id="leave-tab" data-toggle="tab" href="#leave" role="tab" aria-controls="leave" aria-selected="false">{{ 'ally.leave'|trans }}</a>
-                </li>
-            </ul>
-            <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="leave" role="tabpanel" aria-labelledby="leave-tab">
-                    <div class="pull-right mt-5">
-                        <span class="mr-3">{{ 'ally.leaveText'|trans }}</span>
-                        <a data-toggle="confirmation" data-placement="right" data-title="{{ 'ally.leave.question'|trans }}" href="{{ path('leave_ally', {'idp': usePlanet.getId()}) }}" class="btn btn-lg btn-danger">{{ 'leave'|trans }}</a>
+                    <li class="nav-item">
+                        <a href="{{ path('ally_page_bank', {'idp': usePlanet.getId()}) }}" >{{ 'ally.found'|trans }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ path('ally_page_pacts', {'idp': usePlanet.getId()}) }}" >{{ app.user.getAlly().getPacts() }}  {{ 'ally.pacts'|trans }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ path('ally_page_add', {'idp': usePlanet.getId()}) }}" >{{ 'ally.add'|trans }}</a>
+                    </li>
+                    {% if app.user.getGrade().getPlacement() == 1 %}
+                        <li class="nav-item">
+                            <a href="{{ path('ally_page_admin', {'idp': usePlanet.getId()}) }}" >{{ 'ally.admin'|trans }}</a>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link active" id="leave-tab" data-toggle="tab" href="#leave" role="tab" aria-controls="leave" aria-selected="false">{{ 'ally.leave'|trans }}</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="leave" role="tabpanel" aria-labelledby="leave-tab">
+                        <div class="pull-right mt-5">
+                            <span class="mr-3">{{ 'ally.leaveText'|trans }}</span>
+                            <a data-toggle="confirmation" data-placement="right" data-title="{{ 'ally.leave.question'|trans }}" href="{{ path('leave_ally', {'idp': usePlanet.getId()}) }}" class="btn btn-lg btn-danger">{{ 'leave'|trans }}</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        {% else %}
-        {% endif %}
+            {% else %}
+            {% endif %}
+        </div>
     </div>
 {% endblock %}

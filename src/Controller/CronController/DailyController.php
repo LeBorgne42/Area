@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use DateTime;
 use DateTimeZone;
 use App\Entity\Report;
+use App\Entity\Exchange;
 
 class DailyController extends AbstractController
 {

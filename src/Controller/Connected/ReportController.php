@@ -25,7 +25,7 @@ class ReportController extends AbstractController
         $user = $this->getUser();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
-        $now->sub(new DateInterval('PT' . 1209600 . 'S'));
+        $now->sub(new DateInterval('PT' . 604800 . 'S'));
 
         $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
@@ -45,12 +45,16 @@ class ReportController extends AbstractController
 
         $reports = $em->getRepository('App:Report')
             ->createQueryBuilder('r')
+            ->select('r.title, r.id, r.sendAt, r.newReport, r.shareKey, r.content')
             ->where('r.user = :user')
             ->setParameters(['user' => $user])
             ->orderBy('r.sendAt', 'DESC')
             ->getQuery()
             ->getResult();
 
+        if(($user->getTutorial() == 1)) {
+            $user->setTutorial(2);
+        }
         $user->setViewReport(true);
 
         $em->flush();
