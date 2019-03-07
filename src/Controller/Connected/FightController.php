@@ -320,7 +320,7 @@ class FightController extends AbstractController
                 $defenderWin->getUser()->setViewReport(false);
                 $quest = $defenderWin->getUser()->checkQuests('destroy_fleet');
                 if($quest) {
-                    $defenderWin->getRank()->setWarPoint($defenderWin->getRank()->getWarPoint() + $quest->getGain());
+                    $defenderWin->getUser()->getRank()->setWarPoint($defenderWin->getUser()->getRank()->getWarPoint() + $quest->getGain());
                     $defenderWin->removeQuest($quest);
                 }
                 $em->persist($reportWinA);
@@ -370,6 +370,7 @@ class FightController extends AbstractController
                         ->setParameter('sigle', $peace->getAllyTag())
                         ->getQuery()
                         ->getOneOrNullResult();
+
                     $otherAlly->setPdg($otherAlly->getPdg() + $pdgPeace);
                     $exchangeLoseA = new Exchange();
                     $exchangeLoseA->setAlly($otherAlly);

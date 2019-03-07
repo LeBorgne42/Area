@@ -368,8 +368,8 @@ class InstantController extends AbstractController
             }
             $quest = $fleetCdr->getUser()->checkQuests('recycle');
             if($quest) {
-                $fleetCdr->getRank()->setWarPoint($fleetCdr->getRank()->getWarPoint() + $quest->getGain());
-                $fleetCdr->removeQuest($quest);
+                $fleetCdr->getUser()->getRank()->setWarPoint($fleetCdr->getUser()->getRank()->getWarPoint() + $quest->getGain());
+                $fleetCdr->getUser()->removeQuest($quest);
             }
         }
 
