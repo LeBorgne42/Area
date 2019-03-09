@@ -25,9 +25,11 @@
     <div class="btn-left{{ app.user.getRessourceFull() }}{% if app.request.attributes.get('_route') == 'planet' %} currentRoute{% endif %}{% if app.user.getTutorial() < 2 %} tutorial-hide{% elseif app.user.getTutorial() == 2 %} tutorial-show{% endif %}">
         <a href="{{ path('planet', {'idp': usePlanet.getId()}) }}"><span>{{ 'planet'|trans }}</span></a>
     </div>
-    <div class="btn-left{% if app.user.getSearch() is null %} freeSearchBuild{% endif %}{% if app.request.attributes.get('_route') == 'search' %} currentRoute{% endif %}{% if app.user.getTutorial() < 7 %} tutorial-hide{% elseif app.user.getTutorial() == 7 %} tutorial-show{% endif %}">
-        <a href="{{ path('search', {'idp': usePlanet.getId()}) }}"><span>{{ 'search'|trans }}</span>{% if app.user.getSearch() is null %} <span class="glyphicon glyphicon-question-sign text-orange" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.search'|trans }}"></span>{% endif %}</a>
-    </div>
+    {% if app.user.checkResearch() %}
+        <div class="btn-left{% if app.user.getSearch() is null %} freeSearchBuild{% endif %}{% if app.request.attributes.get('_route') == 'search' %} currentRoute{% endif %}{% if app.user.getTutorial() < 7 %} tutorial-hide{% elseif app.user.getTutorial() == 7 %} tutorial-show{% endif %}">
+            <a href="{{ path('search', {'idp': usePlanet.getId()}) }}"><span>{{ 'search'|trans }}</span>{% if app.user.getSearch() is null %} <span class="glyphicon glyphicon-question-sign text-orange" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.search'|trans }}"></span>{% endif %}</a>
+        </div>
+    {% endif %}
     <div class="btn-left{% if app.request.attributes.get('_route') == 'ally_blank' or app.request.attributes.get('_route') == 'ally' %} currentRoute{% endif %}{% if app.user.getTutorial() < 18 %} tutorial-hide{% endif %}">
         <a href="{{ path('ally', {'idp': usePlanet.getId()}) }}"><span>{{ 'ally'|trans }}{% if app.user.getProposals() and app.user.getAlly() is null %} (<small>{{ app.user.getProposals()|length }}</small>){% endif %}</span></a>
     </div>

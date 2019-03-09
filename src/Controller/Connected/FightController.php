@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use App\Entity\Report;
 use App\Entity\Fleet;
+use App\Entity\Exchange;
 use DateTime;
 use DateTimeZone;
 
@@ -362,26 +363,28 @@ class FightController extends AbstractController
                 }
                 if($attackerLose->getUser()->getPeaces()) {
                     $peace = $attackerLose->getUser()->getPeaces();
-                    $pdgPeace = $newWarPoint * ($peace->getPdg() / 100);
-                    $newWarPoint = $newWarPoint - $pdgPeace;
-                    $otherAlly = $em->getRepository('App:Ally')
-                        ->createQueryBuilder('a')
-                        ->where('a.sigle = :sigle')
-                        ->setParameter('sigle', $peace->getAllyTag())
-                        ->getQuery()
-                        ->getOneOrNullResult();
+                    if ($peace->getPdg() > 0) {
+                        $pdgPeace = $newWarPoint * ($peace->getPdg() / 100);
+                        $newWarPoint = $newWarPoint - $pdgPeace;
+                        $otherAlly = $em->getRepository('App:Ally')
+                            ->createQueryBuilder('a')
+                            ->where('a.sigle = :sigle')
+                            ->setParameter('sigle', $peace->getAllyTag())
+                            ->getQuery()
+                            ->getOneOrNullResult();
 
-                    $otherAlly->setPdg($otherAlly->getPdg() + $pdgPeace);
-                    $exchangeLoseA = new Exchange();
-                    $exchangeLoseA->setAlly($otherAlly);
-                    $exchangeLoseA->setCreatedAt($now);
-                    $exchangeLoseA->setType(1);
-                    $exchangeLoseA->setAmount($pdgPeace);
-                    $exchangeLoseA->setAccepted(1);
-                    $exchangeLoseA->setContent("Taxe liée à la paix.");
-                    $exchangeLoseA->setName($attackerLose->getUser()->getUserName());
-                    $em->persist($exchangeLoseA);
-                    $reportLoseA->setContent($reportLoseA->getContent() . " Votre accord de paix ayant envoyé " . $pdgPeace . " points de Guerre à l'alliance [" . $otherAlly->getSigle() . "].");
+                        $otherAlly->setPdg($otherAlly->getPdg() + $pdgPeace);
+                        $exchangeLoseA = new Exchange();
+                        $exchangeLoseA->setAlly($otherAlly);
+                        $exchangeLoseA->setCreatedAt($now);
+                        $exchangeLoseA->setType(1);
+                        $exchangeLoseA->setAmount($pdgPeace);
+                        $exchangeLoseA->setAccepted(1);
+                        $exchangeLoseA->setContent("Taxe liée à la paix.");
+                        $exchangeLoseA->setName($attackerLose->getUser()->getUserName());
+                        $em->persist($exchangeLoseA);
+                        $reportLoseA->setContent($reportLoseA->getContent() . " Votre accord de paix ayant envoyé " . $pdgPeace . " points de Guerre à l'alliance [" . $otherAlly->getSigle() . "].");
+                    }
                 }
                 $reportLoseA->setContent($reportLoseA->getContent() . " Mais vous remportez vous même " . $newWarPoint . " points de Guerre !");
                 if($attackerLose->getUser()->getRank()) {
@@ -396,24 +399,26 @@ class FightController extends AbstractController
                 $newWarPoint = round(($percentWarPoint * $warPointA) / 10);
                 if($defenderWin->getUser()->getPeaces()) {
                     $peace = $defenderWin->getUser()->getPeaces();
-                    $pdgPeace = $newWarPoint * ($peace->getPdg() / 100);
-                    $newWarPoint = $newWarPoint - $pdgPeace;
-                    $otherAlly = $em->getRepository('App:Ally')
-                        ->createQueryBuilder('a')
-                        ->where('a.sigle = :sigle')
-                        ->setParameter('sigle', $peace->getAllyTag())
-                        ->getQuery()
-                        ->getOneOrNullResult();
-                    $otherAlly->setPdg($otherAlly->getPdg() + $pdgPeace);
-                    $exchangeWinA = new Exchange();
-                    $exchangeWinA->setAlly($otherAlly);
-                    $exchangeWinA->setCreatedAt($now);
-                    $exchangeWinA->setType(1);
-                    $exchangeWinA->setAmount($pdgPeace);
-                    $exchangeWinA->setAccepted(1);
-                    $exchangeWinA->setContent("Taxe liée à la paix.");
-                    $exchangeWinA->setName($defenderWin->getUser()->getUserName());
-                    $em->persist($exchangeWinA);
+                    if ($peace->getPdg() > 0) {
+                        $pdgPeace = $newWarPoint * ($peace->getPdg() / 100);
+                        $newWarPoint = $newWarPoint - $pdgPeace;
+                        $otherAlly = $em->getRepository('App:Ally')
+                            ->createQueryBuilder('a')
+                            ->where('a.sigle = :sigle')
+                            ->setParameter('sigle', $peace->getAllyTag())
+                            ->getQuery()
+                            ->getOneOrNullResult();
+                        $otherAlly->setPdg($otherAlly->getPdg() + $pdgPeace);
+                        $exchangeWinA = new Exchange();
+                        $exchangeWinA->setAlly($otherAlly);
+                        $exchangeWinA->setCreatedAt($now);
+                        $exchangeWinA->setType(1);
+                        $exchangeWinA->setAmount($pdgPeace);
+                        $exchangeWinA->setAccepted(1);
+                        $exchangeWinA->setContent("Taxe liée à la paix.");
+                        $exchangeWinA->setName($defenderWin->getUser()->getUserName());
+                        $em->persist($exchangeWinA);
+                    }
                 }
                 $percentArmor = ($defenderWin->getArmor() * 100) / $armorSaveD;
                 $newArmor = $defenderWin->getArmor() - (round($percentArmor * $armorD) / 100);
@@ -504,25 +509,27 @@ class FightController extends AbstractController
                 }
                 if($defenderLose->getUser()->getPeaces()) {
                     $peace = $defenderLose->getUser()->getPeaces();
-                    $pdgPeace = $newWarPoint * ($peace->getPdg() / 100);
-                    $newWarPoint = $newWarPoint - $pdgPeace;
-                    $otherAlly = $em->getRepository('App:Ally')
-                        ->createQueryBuilder('a')
-                        ->where('a.sigle = :sigle')
-                        ->setParameter('sigle', $peace->getAllyTag())
-                        ->getQuery()
-                        ->getOneOrNullResult();
-                    $otherAlly->setPdg($otherAlly->getPdg() + $pdgPeace);
-                    $exchangeLoseB = new Exchange();
-                    $exchangeLoseB->setAlly($otherAlly);
-                    $exchangeLoseB->setCreatedAt($now);
-                    $exchangeLoseB->setType(1);
-                    $exchangeLoseB->setAmount($pdgPeace);
-                    $exchangeLoseB->setAccepted(1);
-                    $exchangeLoseB->setContent("Taxe liée à la paix.");
-                    $exchangeLoseB->setName($defenderLose->getUser()->getUserName());
-                    $em->persist($exchangeLoseB);
-                    $reportLoseB->setContent($reportWinB->getContent() . " Votre accord de paix ayant envoyé " . $pdgPeace . " points de Guerre à l'alliance [" . $otherAlly->getSigle() . "].");
+                    if ($peace->getPdg() > 0) {
+                        $pdgPeace = $newWarPoint * ($peace->getPdg() / 100);
+                        $newWarPoint = $newWarPoint - $pdgPeace;
+                        $otherAlly = $em->getRepository('App:Ally')
+                            ->createQueryBuilder('a')
+                            ->where('a.sigle = :sigle')
+                            ->setParameter('sigle', $peace->getAllyTag())
+                            ->getQuery()
+                            ->getOneOrNullResult();
+                        $otherAlly->setPdg($otherAlly->getPdg() + $pdgPeace);
+                        $exchangeLoseB = new Exchange();
+                        $exchangeLoseB->setAlly($otherAlly);
+                        $exchangeLoseB->setCreatedAt($now);
+                        $exchangeLoseB->setType(1);
+                        $exchangeLoseB->setAmount($pdgPeace);
+                        $exchangeLoseB->setAccepted(1);
+                        $exchangeLoseB->setContent("Taxe liée à la paix.");
+                        $exchangeLoseB->setName($defenderLose->getUser()->getUserName());
+                        $em->persist($exchangeLoseB);
+                        $reportLoseB->setContent($reportWinB->getContent() . " Votre accord de paix ayant envoyé " . $pdgPeace . " points de Guerre à l'alliance [" . $otherAlly->getSigle() . "].");
+                    }
                 }
                 $reportLoseB->setContent($reportWinB->getContent() . " Mais vous remportez vous même " . $newWarPoint . " points de Guerre !");
                 if($defenderLose->getUser()->getRank()) {
@@ -537,25 +544,27 @@ class FightController extends AbstractController
                 $newWarPoint = round(($percentWarPoint * $warPointB) / 10);
                 if($attackerWin->getUser()->getPeaces()) {
                     $peace = $attackerWin->getUser()->getPeaces();
-                    $pdgPeace = $newWarPoint * ($peace->getPdg() / 100);
-                    $newWarPoint = $newWarPoint - $pdgPeace;
-                    $otherAlly = $em->getRepository('App:Ally')
-                        ->createQueryBuilder('a')
-                        ->where('a.sigle = :sigle')
-                        ->setParameter('sigle', $peace->getAllyTag())
-                        ->getQuery()
-                        ->getOneOrNullResult();
-                    $otherAlly->setPdg($otherAlly->getPdg() + $pdgPeace);
-                    $otherAlly->setPdg($otherAlly->getPdg() + $pdgPeace);
-                    $exchangeWinB = new Exchange();
-                    $exchangeWinB->setAlly($otherAlly);
-                    $exchangeWinB->setCreatedAt($now);
-                    $exchangeWinB->setType(1);
-                    $exchangeWinB->setAmount($pdgPeace);
-                    $exchangeWinB->setAccepted(1);
-                    $exchangeWinB->setContent("Taxe liée à la paix.");
-                    $exchangeWinB->setName($attackerWin->getUser()->getUserName());
-                    $em->persist($exchangeWinB);
+                    if ($peace->getPdg() > 0) {
+                        $pdgPeace = $newWarPoint * ($peace->getPdg() / 100);
+                        $newWarPoint = $newWarPoint - $pdgPeace;
+                        $otherAlly = $em->getRepository('App:Ally')
+                            ->createQueryBuilder('a')
+                            ->where('a.sigle = :sigle')
+                            ->setParameter('sigle', $peace->getAllyTag())
+                            ->getQuery()
+                            ->getOneOrNullResult();
+                        $otherAlly->setPdg($otherAlly->getPdg() + $pdgPeace);
+                        $otherAlly->setPdg($otherAlly->getPdg() + $pdgPeace);
+                        $exchangeWinB = new Exchange();
+                        $exchangeWinB->setAlly($otherAlly);
+                        $exchangeWinB->setCreatedAt($now);
+                        $exchangeWinB->setType(1);
+                        $exchangeWinB->setAmount($pdgPeace);
+                        $exchangeWinB->setAccepted(1);
+                        $exchangeWinB->setContent("Taxe liée à la paix.");
+                        $exchangeWinB->setName($attackerWin->getUser()->getUserName());
+                        $em->persist($exchangeWinB);
+                    }
                 }
                 $percentArmor = ($attackerWin->getArmor() * 100) / $armorSaveA;
                 $newArmor = $attackerWin->getArmor() - (round($percentArmor * $armor) / 100);

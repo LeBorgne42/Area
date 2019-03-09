@@ -196,8 +196,12 @@ class InstantController extends AbstractController
 
         $fleetCdrs = $em->getRepository('App:Fleet')
             ->createQueryBuilder('f')
-            ->where('f.recycleAt < :now')
-            ->setParameters(['now' => $now])
+            ->join('f.planet', 'p')
+            ->where('f.recycleAt < :now or f.recycleAt is null')
+            ->andWhere('f.recycleur > :zero')
+            ->andWhere('f.flightTime is null')
+            ->andWhere('p.nbCdr > :zero or p.wtCdr > :zero')
+            ->setParameters(['now' => $now, 'zero' => 0])
             ->getQuery()
             ->getResult();
 

@@ -724,6 +724,48 @@ class User implements UserInterface, \Serializable
     }
 
     /**
+     * @return mixed
+     */
+    public function checkResearch()
+    {
+        $return = 'continue';
+        if($this->utility < 3) {
+            return $return;
+        } elseif ($this->terraformation < 18) {
+            return $return;
+        } elseif ($this->cargo < 5) {
+            return $return;
+        } elseif ($this->barge < 1) {
+            return $return;
+        } elseif ($this->recycleur < 1) {
+            return $return;
+        } elseif ($this->onde < 5) {
+            return $return;
+        } elseif ($this->hyperespace < 1) {
+            return $return;
+        } elseif ($this->demography < 5) {
+            return $return;
+        } elseif ($this->discipline < 3) {
+            return $return;
+        } elseif ($this->armement < 5) {
+            return $return;
+        } elseif ($this->missile < 3) {
+            return $return;
+        } elseif ($this->laser < 3) {
+            return $return;
+        } elseif ($this->plasma < 3) {
+            return $return;
+        } elseif ($this->industry < 5) {
+            return $return;
+        } elseif ($this->lightShip < 3) {
+            return $return;
+        } elseif ($this->heavyShip < 3) {
+            return $return;
+        }
+        return NULL;
+    }
+
+    /**
      * @return int
      */
     public function getAllShipsCost(): int

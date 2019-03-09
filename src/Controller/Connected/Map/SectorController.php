@@ -207,7 +207,6 @@ class SectorController extends AbstractController
             $moreNow = new DateTime();
             $moreNow->setTimezone(new DateTimeZone('Europe/Paris'));
             $moreNow->add(new DateInterval('PT' . 120 . 'S'));
-            $fleet->setRecycleAt(null);
             $fleet->setNewPlanet($planet->getId());
             $fleet->setFlightTime($now);
             $fleet->setSector($planet->getSector());

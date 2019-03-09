@@ -31,8 +31,9 @@ overview.myFleet: 'Flottes proches de la destination'
 overview.from: De
 overview.goTo: Vers
 overview.time: Temps
-overview.fleetShips: Vaisseaux
+overview.fleetShips: 'Vaisseaux : ST'
 overview.fleetSignature: Signature
+tooltip.signature: 'ST signifie signature thermique, il serait trop facile que tout le monde sache ce qu''il y a dans la composition de votre flotte, ainsi la signature donne un ordre de grandeur sans rentrer dans le détails de la flotte.'
 title.lastFleet: 'Flottes en mouvement'
 title.planet: Planète
 constructionsWaiting: 'Constructions en attentes sur la planète'

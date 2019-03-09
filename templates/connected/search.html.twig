@@ -68,7 +68,11 @@
                                 <div>{% if ((app.user.getTerraformation() + 1) * app.user.getTimeConstruct(360)) < 3600 %}{{ ((app.user.getTerraformation() + 1) * app.user.getTimeConstruct(360))|date('i:s') }}{% elseif ((app.user.getTerraformation() + 1) * app.user.getTimeConstruct(360)) < 86400 %}{{  ((app.user.getTerraformation() + 1) * app.user.getTimeConstruct(360)- 3600)|date('H:i:s') }}{% else %}{{ ((app.user.getTerraformation() + 1) * app.user.getTimeConstruct(360)- 3600)|date('d H:i:s') }}{% endif %}</div>
                                 <a class="btn btn-lg btn-info" href="{{ path('research_terraformation', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
                             {% else %}
-                                <a class="btn btn-lg btn-secondary" disabled>{{ 'research.seek'|trans }}</a>
+                                {% if app.user.getTerraformation() == 18 %}
+                                    <div class="text-vert">{{ 'research.finish'|trans }}</div>
+                                {% else %}
+                                    <a class="btn btn-lg btn-secondary" disabled>{{ 'research.seek'|trans }}</a>
+                                {% endif %}
                             {% endif %}
                         {% endif %}
                     </td>

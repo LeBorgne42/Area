@@ -66,7 +66,7 @@
                             {{ 'fleet.flightTime'|trans }} <span id="flightTime"></span>
                     </div>
                     <div class="mb-3 text-center">
-                        {% if fleet.getBarge() and fleet.getPlanet().getUser() and fleet.getAllianceUser() %}
+                        {% if fleet.getBarge() and fleet.getPlanet().getUser() and fleet.getAllianceUser() and fleet.getSoldier() %}
                             <span>
                                 <h4><a class="badge badge-danger" href="{{ path('invader_planet', {'idp': usePlanet.getId(), 'fleet': fleet.getId()}) }}">
                                    {{ 'fleet.invade'|trans }}
@@ -812,10 +812,10 @@
                             <tbody>
                                 <tr>
                                     <th class="tab-cells-name p-2 text-center">
-                                        {% if fleet.getPlanet().getEmpty() != 1 %}<a href="{{ path('map', {id: fleet.getPlanet().getSector().getPosition(), 'idp': usePlanet.getId(), 'gal': fleet.getPlanet().getSector().getGalaxy.getId()}) }}"><img height="25" width="25" src="{{ vich_uploader_asset(fleet.getPlanet(), 'imageFile') }}"></a>{% endif %}
+                                        {% if fleet.getPlanet().getEmpty() != 1 %}<a href="{{ path('map', {id: fleet.getPlanet().getSector().getPosition(), 'idp': usePlanet.getId(), 'gal': fleet.getPlanet().getSector().getGalaxy.getId()}) }}"><img height="15" src="{{ vich_uploader_asset(fleet.getPlanet(), 'imageFile') }}"></a>{% endif %}
                                         <div class="mt-2">{{ fleet.getPlanet().getNbCdr()|number_format }} <img src="{{ asset('img/niobium.png') }}"></div>
                                         <div>{{ fleet.getPlanet().getWtCdr()|number_format }} <img src="{{ asset('img/water.png') }}"></div>
-                                        {% if fleet.getRecycleur() %}{% if fleet.getRecycleAt() %}<div><span class="timerArea" hidden>{{ fleet.getRecycleAt()|date('Y/m/d H:i:s') }}</span> <span><a href="{{ path('cancel_recycle_fleet', {id: fleet.getId(), 'idp': usePlanet.getId()}) }}">{{ 'recyclerCancel'|trans }}</a></span></div>{% else %}<div><span><a href="{{ path('recycle_fleet', {id: fleet.getId(), 'idp': usePlanet.getId()}) }}">{{ 'recycler'|trans }}</a></span></div>{% endif %}{% endif %}
+                                        {% if fleet.getRecycleur() and fleet.getRecycleAt() %}<div><span class="timerArea" hidden>{{ fleet.getRecycleAt()|date('Y/m/d H:i:s') }}</span></div>{% endif %}
                                     </th>
                                 </tr>
                             </tbody>
