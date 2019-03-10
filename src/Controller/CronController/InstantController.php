@@ -12,25 +12,6 @@ use Dateinterval;
 
 class InstantController extends AbstractController
 {
-    /*    /**
-         * @Route("/resources/", name="ressources_load")
-         */
-    /*  public function minuteLoadAction()
-      {
-          $em = $this->getDoctrine()->getManager();
-          $now = new DateTime();
-          $now->setTimezone(new DateTimeZone('Europe/Paris'));
-
-          $planets = $em->getRepository('App:Planet')
-              ->createQueryBuilder('p')
-              ->where('p.user is not null')
-              ->andWhere('p.niobiumMax > (p.niobium + p.nbProduction) or p.waterMax > (p.water + p.wtProduction)')
-              ->getQuery()
-              ->getResult();
-
-          exit;
-      }*/
-
     /**
      * @Route("/construction/", name="build_fleet_load")
      */
@@ -51,32 +32,14 @@ class InstantController extends AbstractController
 
         if($asteroides) {
             foreach ($asteroides as $asteroide) {
-                /*$nbrFleet = $asteroide->getFleetWithRec();
-                if ($nbrFleet) {
-                    foreach ($asteroide->getFleets() as $fleetAsteroide) {
-                        $asteroideRes = round(15000 / $nbrFleet);
-                        if ($fleetAsteroide->getRecycleur()) {
-                            if ($fleetAsteroide->getCargoPlace() < ($fleetAsteroide->getCargoFull() + ($asteroideRes * 2))) {
-                                $cargoFullAst = round((($fleetAsteroide->getCargoPlace() - $fleetAsteroide->getCargoFull()) / 2));
-                                $fleetAsteroide->setNiobium($fleetAsteroide->getNiobium() + $cargoFullAst);
-                                $fleetAsteroide->setWater($fleetAsteroide->getWater() + $cargoFullAst);
-                            } else {
-                                $fleetAsteroide->setNiobium($fleetAsteroide->getNiobium() + $asteroideRes);
-                                $fleetAsteroide->setWater($fleetAsteroide->getWater() + $asteroideRes);
-                            }
-                        }
-                    }
-                    $nowAste->add(new DateInterval('PT' . 600 . 'S'));
-                    $asteroide->setRecycleAt($nowAste);
-                }*/
 
-                $nowAste->add(new DateInterval('PT' . 1200 . 'S'));
+                $nowAste->add(new DateInterval('PT' . 86400 . 'S'));
                 $asteroide->setRecycleAt($nowAste);
-                $asteroide->setNbCdr($asteroide->getNbCdr() + 15000);
-                $asteroide->setWtCdr($asteroide->getWtCdr() + 10000);
+                $asteroide->setNbCdr($asteroide->getNbCdr() + rand(1500000, 3000000));
+                $asteroide->setWtCdr($asteroide->getWtCdr() + rand(1200000, 2800000));
 
 
-                if(rand(1, 8000) == 8000) {
+                if(rand(1, 100) == 100) {
                     $asteroide->setCdr(false);
                     $asteroide->setEmpty(true);
                     $asteroide->setImageName(null);
@@ -101,10 +64,10 @@ class InstantController extends AbstractController
                         $newAsteroides->setName('Astéroïdes');
                         $iaPlayer = $em->getRepository('App:User')->find(['id' => 1]);
                         $fleet = new Fleet();
-                        $fleet->setHunterWar(350);
-                        $fleet->setCorvetWar(75);
-                        $fleet->setFregatePlasma(30);
-                        $fleet->setDestroyer(8);
+                        $fleet->setHunterWar(rand(50, 3000));
+                        $fleet->setCorvetWar(rand(50, 200));
+                        $fleet->setFregatePlasma(rand(20, 100));
+                        $fleet->setDestroyer(rand(1, 50));
                         $fleet->setUser($iaPlayer);
                         $fleet->setPlanet($newAsteroides);
                         $fleet->setAttack(1);
@@ -114,60 +77,6 @@ class InstantController extends AbstractController
                 }
             }
         }
-
-      /*  $asteroides = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->join('p.sector', 's')
-            ->join('s.galaxy', 'g')
-            ->where('p.cdr = true')
-            ->andWhere('g.position = :galaxy')
-            ->setParameters(['galaxy' => 1])
-            ->getQuery()
-            ->getResult();
-
-        $nbrCount = 25 - count($asteroides);
-        while($nbrCount > 0) {
-            $newAsteroides = $em->getRepository('App:Planet')
-                ->createQueryBuilder('p')
-                ->join('p.sector', 's')
-                ->join('s.galaxy', 'g')
-                ->where('p.empty = true')
-                ->andWhere('s.position = :rand')
-                ->andWhere('g.position = :galaxy')
-                ->setParameters(['rand' => rand(1, 100), 'galaxy' => 1])
-                ->setMaxResults(1)
-                ->getQuery()
-                ->getOneOrNullResult();
-
-            if ($newAsteroides) {
-                $newAsteroides->setEmpty(false);
-                $newAsteroides->setCdr(true);
-                $newAsteroides->setImageName('cdr.png');
-                $newAsteroides->setName('Astéroïdes');
-            }
-            $nbrCount--;
-        }
-
-        $firstGals = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->join('p.sector', 's')
-            ->join('s.galaxy', 'g')
-            ->where('p.cdr = true')
-            ->andWhere('g.position = :galaxy')
-            ->setParameters(['galaxy' => 1])
-            ->getQuery()
-            ->getResult();
-
-        $nbrCount = count($firstGals);
-        if($nbrCount > 25) {
-            foreach($firstGals as $firstGal) {
-                $firstGal->setCdr(false);
-                $firstGal->setEmpty(true);
-                $firstGal->setImageName(null);
-                $firstGal->setRecycleAt(null);
-                $firstGal->setName('Vide');
-            }
-        }*/
 
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));

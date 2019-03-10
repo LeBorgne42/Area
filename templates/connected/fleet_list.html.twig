@@ -69,13 +69,10 @@
                             </th>
                         {% endif %}
                         <th class="tab-cells-name text-center">
-                            {{ 'fleet.fleetShips'|trans }}
+                            {{ 'fleet.fleetShips'|trans }} <span class="glyphicon glyphicon-question-sign text-orange" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.signature'|trans }}"></span>
                         </th>
                         <th class="tab-cells-name text-center">
                             {{ 'fleet.cargo'|trans }}
-                        </th>
-                        <th class="tab-cells-name text-center">
-                            {{ 'fleet.st'|trans }}
                         </th>
                         {% if fleetList.getFlightTime() %}
                             <th class="tab-cells-name text-center">
@@ -109,13 +106,10 @@
                                 </td>
                             {% endif %}
                             <td class="center-cells text-center">
-                                {{ fleet.getNbrShips()|number_format }}
+                                {{ fleet.getNbrShips()|number_format }} => {{ fleet.getNbrSignatures()|number_format }}
                             </td>
                             <td class="center-cells text-center">
                                 {{ fleet.getCargoFull()|number_format }} / {{ fleet.getCargoPlace()|number_format }}
-                            </td>
-                            <td class="center-cells text-center">
-                                {{ fleet.getNbrSignatures()|number_format }}
                             </td>
                             {% if fleetList.getFlightTime() %}
                                 {% if fleet.cancelFlight() > date and fleet.getFlightTime() %}

@@ -110,10 +110,10 @@ class ServerController extends AbstractController
                         $planet->setSector($sector);
                         $planet->setPosition($nbrPlanet);
                         $fleet = new Fleet();
-                        $fleet->setHunterWar(350);
-                        $fleet->setCorvetWar(75);
-                        $fleet->setFregatePlasma(30);
-                        $fleet->setDestroyer(8);
+                        $fleet->setHunterWar(rand(50, 3000));
+                        $fleet->setCorvetWar(rand(50, 200));
+                        $fleet->setFregatePlasma(rand(20, 100));
+                        $fleet->setDestroyer(rand(1, 50));
                         $fleet->setUser($iaPlayer);
                         $fleet->setPlanet($planet);
                         $fleet->setAttack(1);
@@ -189,10 +189,10 @@ class ServerController extends AbstractController
 
         foreach ($putFleets as $putFleet) {
             $fleet = new Fleet();
-            $fleet->setHunterWar(750);
-            $fleet->setCorvetWar(125);
-            $fleet->setFregatePlasma(50);
-            $fleet->setDestroyer(10);
+            $fleet->setHunterWar(rand(1500, 5000));
+            $fleet->setCorvetWar(rand(100, 500));
+            $fleet->setFregatePlasma(rand(50, 200));
+            $fleet->setDestroyer(rand(10, 100));
             $fleet->setUser($iaPlayer);
             $fleet->setPlanet($putFleet);
             $fleet->setAttack(1);

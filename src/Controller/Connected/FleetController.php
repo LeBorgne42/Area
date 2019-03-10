@@ -1350,6 +1350,10 @@ class FleetController  extends AbstractController
         $fleetTake->setSoldier($fleetTake->getSoldier() + $fleetGive->getSoldier());
         $fleetTake->setWorker($fleetTake->getWorker() + $fleetGive->getWorker());
         $fleetTake->setScientist($fleetTake->getScientist() + $fleetGive->getScientist());
+        if ($fleetGive->getRecycleAt() && $fleetTake->getRecycleAt()) {
+            $bestRecycle = ($fleetGive->getRecycleAt() > $fleetTake->getRecycleAt()) ? $fleetGive->getRecycleAt() : $fleetTake->getRecycleAt();
+            $fleetTake->setRecycleAt($bestRecycle);
+        }
         $em->remove($fleetGive);
         $em->flush();
 
