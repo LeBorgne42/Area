@@ -60,12 +60,12 @@
                         <div class="modify">
                             {% if app.user %}
                                 {% if app.user.imageName %}
-                                    <img data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.modify'|trans }}" height="64" width="64" src="{{ vich_uploader_asset(app.user, 'imageFile') }}">
+                                    <img class="border-solid-img" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.modify'|trans }}" height="64" width="64" src="{{ vich_uploader_asset(app.user, 'imageFile') }}">
                                 {% else %}
-                                    <img data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.modify'|trans }}" height="64" width="64" src="{{ asset('img/avatar.png') }}">
+                                    <img class="border-solid-img" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.modify'|trans }}" height="64" width="64" src="{{ asset('img/avatar.png') }}">
                                 {% endif %}
                             {% else %}
-                                <img data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.modify'|trans }}" height="64" width="64" src="{{ asset('img/avatar.png') }}">
+                                <img class="border-solid-img" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.modify'|trans }}" height="64" width="64" src="{{ asset('img/avatar.png') }}">
                             {% endif %}
                             <div><strong>{{ 'modify'|trans }}</strong></div>
                         </div>
@@ -84,8 +84,8 @@
                         <div data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.ships'|trans }}" class="my-2">{{ 'info.ship'|trans|raw }} {{ app.user.getAllShips()|number_format }}</div>
                     </td>
                     <td class="center-cells text-left">
-                        <div class="my-2">{{ 'info.niobium'|trans|raw }} {{ app.user.getAllNiobium()|number_format }} <img height="10" src="{{ asset('img/niobium.png') }}"></div>
-                        <div class="my-2">{{ 'info.water'|trans|raw }} {{ app.user.getAllWater()|number_format }} <img height="10" src="{{ asset('img/water.png') }}"></div>
+                        <div class="my-2">{{ 'info.niobium'|trans|raw }} <span class="text-vert">+{{ app.user.getAllNiobium()|number_format }}</span> <img height="10" src="{{ asset('img/niobium.png') }}"></div>
+                        <div class="my-2">{{ 'info.water'|trans|raw }} <span class="text-vert">+{{ app.user.getAllWater()|number_format }}</span> <img height="10" src="{{ asset('img/water.png') }}"></div>
                         <div class="my-2">{{ 'info.worker'|trans|raw }} {{ app.user.getAllWorker()|number_format }} <img height="10" src="{{ asset('img/worker.png') }}"></div>
                         <div class="my-2">{{ 'info.scientist'|trans|raw }} {{ app.user.getAllScientist()|number_format }} <img height="10" src="{{ asset('img/scientist.png') }}"></div>
                         <div class="my-2">{{ 'info.soldier'|trans|raw }} {{ app.user.getAllSoldier()|number_format }} <img height="10" src="{{ asset('img/soldier.png') }}"></div>
@@ -201,8 +201,9 @@
                                 {% if app.user.getSearch() %}<span><a href="{{ path('search', {'idp': usePlanet.getId()}) }}">{{ app.user.getSearch()|trans }}</a></span> (<span class="timerArea" hidden>{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</span>) - <a class="text-rouge" href="{{ path('research_cancel', {'idp': usePlanet.getId()}) }}">X</a>{% else %}<span><a href="{{ path('search', {'idp': usePlanet.getId()}) }}">{{ 'cell.searchNone'|trans|raw }}</a></span>{% endif %}
                             </div>
                         {% endif %}
-                        <div class="col-5 pt-1 ml-2"  data-html="true" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.dailyCost'|trans({'%soldier%': (app.user.getAllSoldier() * 2)|number_format, '%ship%': app.user.getAllShipsCost()|number_format, '%build%': app.user.getBuildingCost()|number_format, '%bitcoin%': (app.user.getAllWorker() / 1.60)|number_format}) }}">
-                            {{ 'info.cost'|trans|raw }} {{ cost|number_format }} <img src="{{ asset('img/coin.png') }}">
+                        <div class="col-5 pt-1 ml-2"  data-html="true" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.dailyCost'|trans({'%soldier%': (app.user.getAllSoldier() * 2)|number_format, '%ship%': app.user.getAllShipsCost()|number_format, '%build%': app.user.getBuildingCost()|number_format, '%bitcoin%': cost|number_format}) }}">
+                            {% set gainDay = ((app.user.getAllWorker() / 1.60) - cost) %}
+                            {{ 'info.cost'|trans|raw }} {% if gainDay > 0 %}<span class="text-vert">+{{ gainDay|number_format }}</span>{% else %}<span class="text-rouge">-{{ gainDay|number_format }}</span>{% endif %} <img src="{{ asset('img/coin.png') }}">
                         </div>
                     </div>
                 </th>

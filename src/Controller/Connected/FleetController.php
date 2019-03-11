@@ -919,11 +919,12 @@ class FleetController  extends AbstractController
         }
         
         if($planetTake->getMerchant() == true) {
-            $newWarPointS = ($fleetGive->getNiobium() / 6) / 1000;
+            $newWarPointS = round(($fleetGive->getNiobium() / 6) / 1000);
             $reportSell = new Report();
             $reportSell->setSendAt($now);
             $reportSell->setUser($user);
             $reportSell->setTitle("Vente aux marchands");
+            $reportSell->setImageName("sell_report.jpg");
             $reportSell->setContent("Votre vente aux marchands vous a rapporté " . round(($fleetGive->getNiobium() * 0.25)) . " bitcoin. Et " . $newWarPointS . " points de Guerre.");
             $em->persist($reportSell);
             $planetTake->setNiobium($planetTake->getNiobium() + $fleetGive->getNiobium());
@@ -981,11 +982,12 @@ class FleetController  extends AbstractController
             return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
         }
         if($planetTake->getMerchant() == true) {
-            $newWarPointS = ($fleetGive->getWater() / 3) / 1000;
+            $newWarPointS = round(($fleetGive->getWater() / 3) / 1000);
             $reportSell = new Report();
             $reportSell->setSendAt($now);
             $reportSell->setUser($user);
             $reportSell->setTitle("Vente aux marchands");
+            $reportSell->setImageName("sell_report.jpg");
             $reportSell->setContent("Votre vente aux marchands vous a rapporté " . round(($fleetGive->getWater() * 0.5)) . " bitcoin. Et " . $newWarPointS . " points de Guerre.");
             $em->persist($reportSell);
             $planetTake->setWater($planetTake->getWater() + $fleetGive->getWater());
@@ -1043,11 +1045,12 @@ class FleetController  extends AbstractController
             return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
         }
         if($planetTake->getMerchant() == true) {
-            $newWarPointS = ($fleetGive->getSoldier() * 10) / 1000;
+            $newWarPointS = round(($fleetGive->getSoldier() * 10) / 1000);
             $reportSell = new Report();
             $reportSell->setSendAt($now);
             $reportSell->setUser($user);
             $reportSell->setTitle("Vente aux marchands");
+            $reportSell->setImageName("sell_report.jpg");
             $reportSell->setContent("Votre vente aux marchands vous a rapporté " . round(($fleetGive->getSoldier() * 5)) . " bitcoin. Et " . $newWarPointS . " points de Guerre.");
             $em->persist($reportSell);
             $planetTake->setSoldier($planetTake->getSoldier() + $fleetGive->getSoldier());
@@ -1105,11 +1108,12 @@ class FleetController  extends AbstractController
             return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
         }
         if($planetTake->getMerchant() == true) {
-            $newWarPointS = ($fleetGive->getWorker() * 50) / 1000;
+            $newWarPointS = round(($fleetGive->getWorker() * 50) / 1000);
             $reportSell = new Report();
             $reportSell->setSendAt($now);
             $reportSell->setUser($user);
             $reportSell->setTitle("Vente aux marchands");
+            $reportSell->setImageName("sell_report.jpg");
             $reportSell->setContent("Votre vente aux marchands vous a rapporté " . round(($fleetGive->getWorker() * 2)) . " bitcoin. Et " . $newWarPointS . " points de Guerre.");
             $em->persist($reportSell);
             $planetTake->setWorker($planetTake->getWorker() + $fleetGive->getWorker());
@@ -1167,11 +1171,12 @@ class FleetController  extends AbstractController
             return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
         }
         if($planetTake->getMerchant() == true) {$reportSell = new Report();
-            $newWarPointS = ($fleetGive->getScientist() * 100) / 1000;
+            $newWarPointS = round(($fleetGive->getScientist() * 100) / 1000);
             $reportSell = new Report();
             $reportSell->setSendAt($now);
             $reportSell->setUser($user);
             $reportSell->setTitle("Vente aux marchands");
+            $reportSell->setImageName("sell_report.jpg");
             $reportSell->setContent("Votre vente aux marchands vous a rapporté " . round(($fleetGive->getScientist() * 50)) . " bitcoin. Et " . $newWarPointS . " points de Guerre.");
             $em->persist($reportSell);
             $planetTake->setScientist($planetTake->getScientist() + $fleetGive->getScientist());
@@ -1233,7 +1238,8 @@ class FleetController  extends AbstractController
             $reportSell->setSendAt($now);
             $reportSell->setUser($user);
             $reportSell->setTitle("Vente aux marchands");
-            $newWarPointS = ((($fleetGive->getScientist() * 100) + ($fleetGive->getWorker() * 50) + ($fleetGive->getSoldier() * 10) + ($fleetGive->getWater() / 3) + ($fleetGive->getNiobium() / 6)) / 1000);
+            $reportSell->setImageName("sell_report.jpg");
+            $newWarPointS = round((($fleetGive->getScientist() * 100) + ($fleetGive->getWorker() * 50) + ($fleetGive->getSoldier() * 10) + ($fleetGive->getWater() / 3) + ($fleetGive->getNiobium() / 6)) / 1000);
             $reportSell->setContent("Votre vente aux marchands vous a rapporté " . round(($fleetGive->getWater() * 0.5) + ($fleetGive->getSoldier() * 5) + ($fleetGive->getWorker() * 2) + ($fleetGive->getScientist() * 50) + ($fleetGive->getNiobium() * 0.25)) . " bitcoin. Et " . $newWarPointS . " points de Guerre.");
             $em->persist($reportSell);
             $planetTake->setScientist($planetTake->getScientist() + $fleetGive->getScientist());

@@ -194,6 +194,7 @@ class FightController extends AbstractController
             foreach($blockDef as $removeOne) {
                 $reportLoseUtilA = new Report();
                 $reportLoseUtilA->setSendAt($now);
+                $reportLoseUtilA->setImageName("f_lose_report.jpg");
                 $reportLoseUtilA->setContent("Votre flotte utilitaire " . $removeOne->getName() . " ne dispose pas des technologies nécessaires à l'identification des vaisseaux ennemis en " . $removeOne->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $removeOne->getPlanet()->getSector()->getPosition() . ":" . $removeOne->getPlanet()->getPosition() . " .");
                 $reportLoseUtilA->setTitle("Rapport de combat : Défaite");
                 $reportLoseUtilA->setUser($removeOne->getUser());
@@ -204,6 +205,7 @@ class FightController extends AbstractController
             foreach($blockAtt as $reportWin) {
                 $reportWinUtilA = new Report();
                 $reportWinUtilA->setSendAt($now);
+                $reportWinUtilA->setImageName("f_win_report.jpg");
                 $reportWinUtilA->setContent("Vous venez de détruire une flotte utilitaire en " . $reportWin->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $reportWin->getPlanet()->getSector()->getPosition() . ":" . $reportWin->getPlanet()->getPosition() . " .");
                 $reportWinUtilA->setTitle("Rapport de combat : Victoire");
                 $reportWin->getUser()->setViewReport(false);
@@ -217,6 +219,7 @@ class FightController extends AbstractController
             foreach($blockAtt as $removeTwo) {
                 $reportLoseUtilB = new Report();
                 $reportLoseUtilB->setSendAt($now);
+                $reportLoseUtilB->setImageName("f_lose_report.jpg");
                 $reportLoseUtilB->setContent("Votre flotte utilitaire " . $removeTwo->getName() . " ne dispose pas des technologies nécessaires à l'identification des vaisseaux ennemis " . $removeTwo->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $removeTwo->getPlanet()->getSector()->getPosition() . ":" . $removeTwo->getPlanet()->getPosition() . " .");
                 $reportLoseUtilB->setTitle("Rapport de combat : Défaite");
                 $reportLoseUtilB->setUser($removeTwo->getUser());
@@ -227,6 +230,7 @@ class FightController extends AbstractController
             foreach($blockDef as $reportWin) {
                 $reportWinUtilB = new Report();
                 $reportWinUtilB->setSendAt($now);
+                $reportWinUtilB->setImageName("f_win_report.jpg");
                 $reportWinUtilB->setContent("Vous venez de détruire une flotte utilitaire en " . $reportWin->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $reportWin->getPlanet()->getSector()->getPosition() . ":" . $reportWin->getPlanet()->getPosition() . " .");
                 $reportWinUtilB->setTitle("Rapport de combat : Victoire");
                 $reportWinUtilB->setUser($reportWin->getUser());
@@ -318,6 +322,7 @@ class FightController extends AbstractController
                 }
                 $reportWinA->setContent($reportWinA->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $countShot . " rounds de combat.</th></tr></tbody></table>");
                 $reportWinA->setContent($reportWinA->getContent() . "Vous avez gagné le combat en "  . $defenderWin->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $defenderWin->getPlanet()->getSector()->getPosition() . ":" . $defenderWin->getPlanet()->getPosition() . " , vous remportez " . $warPointA . " points de Guerre");
+                $reportWinA->setImageName("fight_win_report.jpg");
                 $defenderWin->getUser()->setViewReport(false);
                 $quest = $defenderWin->getUser()->checkQuests('destroy_fleet');
                 if($quest) {
@@ -331,6 +336,7 @@ class FightController extends AbstractController
                 $reportLoseA->setSendAt($now);
                 $reportLoseA->setContent("<table class=\"table table-striped table-bordered table-dark\"><tbody><tr><th class=\"tab-cells-name p-1 ml-2\">Groupe de combat 1</th><th class=\"tab-cells-name p-1 ml-2\">" . $countSAtt . " tir(s) pour percer les boucliers</th></tr>");
                 $reportLoseA->setTitle("Rapport de combat : Défaite");
+                $reportLoseA->setImageName("fight_lose_report.jpg");
                 $reportLoseA->setUser($attackerLose->getUser());
                 foreach ($blockAtt as $fleetB) {
                     $player = $fleetB->getFleetTags();
@@ -364,7 +370,7 @@ class FightController extends AbstractController
                 if($attackerLose->getUser()->getPeaces()) {
                     $peace = $attackerLose->getUser()->getPeaces();
                     if ($peace->getPdg() > 0) {
-                        $pdgPeace = $newWarPoint * ($peace->getPdg() / 100);
+                        $pdgPeace = round($newWarPoint * ($peace->getPdg() / 100));
                         $newWarPoint = $newWarPoint - $pdgPeace;
                         $otherAlly = $em->getRepository('App:Ally')
                             ->createQueryBuilder('a')
@@ -400,7 +406,7 @@ class FightController extends AbstractController
                 if($defenderWin->getUser()->getPeaces()) {
                     $peace = $defenderWin->getUser()->getPeaces();
                     if ($peace->getPdg() > 0) {
-                        $pdgPeace = $newWarPoint * ($peace->getPdg() / 100);
+                        $pdgPeace = round($newWarPoint * ($peace->getPdg() / 100));
                         $newWarPoint = $newWarPoint - $pdgPeace;
                         $otherAlly = $em->getRepository('App:Ally')
                             ->createQueryBuilder('a')
@@ -445,6 +451,7 @@ class FightController extends AbstractController
                 $reportWinB->setSendAt($now);
                 $reportWinB->setContent("<table class=\"table table-striped table-bordered table-dark\"><tbody><tr><th class=\"tab-cells-name p-1 ml-2\">Groupe de combat 1</th><th class=\"tab-cells-name p-1 ml-2\">" . $countSDef . " tir(s) pour percer les boucliers</th></tr>");
                 $reportWinB->setTitle("Rapport de combat : Victoire");
+                $reportWinB->setImageName("fight_win_report.jpg");
                 $reportWinB->setUser($attackerWin->getUser());
                 foreach ($blockDef as $fleetA) {
                     $player = $fleetA->getFleetTags();
@@ -478,6 +485,7 @@ class FightController extends AbstractController
                 $reportLoseB->setSendAt($now);
                 $reportLoseB->setContent("<table class=\"table table-striped table-bordered table-dark\"><tbody><tr><th class=\"tab-cells-name p-1 ml-2\">Groupe de combat 1</th><th class=\"tab-cells-name p-1 ml-2\">" . $countSAtt . " tir(s) pour percer les boucliers</th></tr>");
                 $reportLoseB->setTitle("Rapport de combat : Défaite");
+                $reportLoseB->setImageName("fight_lose_report.jpg");
                 $reportLoseB->setUser($defenderLose->getUser());
                 foreach ($blockAtt as $fleetB) {
                     $player = $fleetB->getFleetTags();
@@ -510,7 +518,7 @@ class FightController extends AbstractController
                 if($defenderLose->getUser()->getPeaces()) {
                     $peace = $defenderLose->getUser()->getPeaces();
                     if ($peace->getPdg() > 0) {
-                        $pdgPeace = $newWarPoint * ($peace->getPdg() / 100);
+                        $pdgPeace = round($newWarPoint * ($peace->getPdg() / 100));
                         $newWarPoint = $newWarPoint - $pdgPeace;
                         $otherAlly = $em->getRepository('App:Ally')
                             ->createQueryBuilder('a')
@@ -545,7 +553,7 @@ class FightController extends AbstractController
                 if($attackerWin->getUser()->getPeaces()) {
                     $peace = $attackerWin->getUser()->getPeaces();
                     if ($peace->getPdg() > 0) {
-                        $pdgPeace = $newWarPoint * ($peace->getPdg() / 100);
+                        $pdgPeace = round($newWarPoint * ($peace->getPdg() / 100));
                         $newWarPoint = $newWarPoint - $pdgPeace;
                         $otherAlly = $em->getRepository('App:Ally')
                             ->createQueryBuilder('a')
@@ -643,8 +651,10 @@ class FightController extends AbstractController
                     $workerDtmp = $defenser->getWorker();
                 }
                 $reportDef->setTitle("Rapport d'invasion : Victoire (défense)");
+                $reportDef->setImageName("defend_win_report.jpg");
                 $reportDef->setContent("Bien joué ! Vos travailleurs et soldats ont repoussé l'invasion du joueur " . $user->getUserName() . " sur votre planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . ".  " . $soldierAtmp . " soldats vous ont attaqué, tous ont été tué. Vous avez ainsi prit le contrôle des barges de l'attaquant.");
                 $reportInv->setTitle("Rapport d'invasion : Défaite (attaque)");
+                $reportInv->setImageName("invade_lose_report.jpg");
                 $reportInv->setContent("'AH AH AH AH' le rire de " . $userDefender->getUserName() . " résonne à vos oreilles d'un curieuse façon. Votre sang bouillonne vous l'a vouliez cette planète. Qu'il rigole donc, vous reviendrez prendre " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . " et ferez effacer des livres d'histoires son ridicule nom. Vous avez tout de même tué " . $soldierDtmp . " soldats et " . $workerDtmp . " travailleurs à l'ennemi. Tous vos soldats sont morts et vos barges sont resté sur la planète. Courage commandant.");
             } else {
                 $soldierDtmp = $defenser->getSoldier();
@@ -675,8 +685,10 @@ class FightController extends AbstractController
                     }
                 }
                 $reportDef->setTitle("Rapport d'invasion : Défaite (défense)");
+                $reportDef->setImageName("defend_lose_report.jpg");
                 $reportDef->setContent("Mais QUI ? QUI !!! Vous as donné un commandant si médiocre " . $user->getUserName() . " n'a pas eu a faire grand chose pour prendre votre planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . ".  " . round($soldierAtmp) . " soldats ennemis sont tout de même éliminé. C'est toujours ça de gagner. Vos " . $soldierDtmp . " soldats et " . $workerDtmp . " travailleurs sont tous mort. Votre empire en a prit un coup, mais il vous reste des planètes, il est l'heure de la revanche !");
                 $reportInv->setTitle("Rapport d'invasion : Victoire (attaque)");
+                $reportInv->setImageName("invade_win_report.jpg");
                 $reportInv->setContent("Vous débarquez après que la planète ait été prise et vous installez sur le trône de " . $userDefender->getUserName() . ". Qu'il est bon d'entendre ses pleures lointain... La planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . " est désormais votre! Il est temps de remettre de l'ordre dans la galaxie. " . round($soldierAtmp) . " de vos soldats ont péri dans l'invasion. Mais les défenseurs ont aussi leurs pertes : " . $soldierDtmp . " soldats et " . $workerDtmp . " travailleurs ont péri. Cependant vous épargnez 2000 travailleurs dans votre bonté (surtout pour faire tourner la planète).");
                 $quest = $user->checkQuests('invade');
                 if($quest) {
@@ -727,6 +739,7 @@ class FightController extends AbstractController
             $reportColo->setSendAt($now);
             $reportColo->setUser($user);
             $reportColo->setTitle("Colonisation de planète");
+            $reportColo->setImageName("colonize_report.jpg");
             $reportColo->setContent("Vous venez de coloniser une planète inhabitée en : " .  $newPlanet->getSector()->getgalaxy()->getPosition() . ":" . $newPlanet->getSector()->getPosition() . ":" . $newPlanet->getPosition() . ". Cette planète fait désormais partit de votre Empire, pensez a la renommer sur la page Planètes.");
             $user->setViewReport(false);
             $em->persist($reportColo);

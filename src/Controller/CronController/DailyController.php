@@ -36,6 +36,7 @@ class DailyController extends AbstractController
             $questTree = $em->getRepository('App:Quest')->findOneById(rand(11,14));
             $report = new Report();
             $report->setTitle("Rapport de l'empire");
+            $report->setImageName("daily_report.jpg");
             $report->setSendAt($now);
             $report->setUser($user);
             $ally = $user->getAlly();
@@ -77,6 +78,7 @@ class DailyController extends AbstractController
                             if($lose < 0) {
                                 $lose = (($peace->getTaxe() / 100) * $user->getBitcoin());
                             }
+                            $gain = $gain - $lose;
                             $user->setBitcoin($user->getBitcoin() - $lose);
                             $otherAlly->setBitcoin($otherAlly->getBitcoin() + $lose);
                             $exchange = new Exchange();
@@ -88,16 +90,15 @@ class DailyController extends AbstractController
                             $exchange->setAmount($lose);
                             $exchange->setName($user->getUserName());
                             $em->persist($exchange);
+                            $report->setContent($report->getContent() . " La paix que vous avez signé envoi directement " . round($lose) . " Bitcoin à l'aliance [" . $otherAlly->getSigle() . "].");
                         }
                     }
                 }
                 $userBitcoin = $user->getBitcoin();
                 $taxe = (($ally->getTaxe() / 100) * $gain);
+                $gain = $gain - $taxe;
                 $user->setBitcoin($userBitcoin - $taxe);
-                $report->setContent("Le montant envoyé dans les fonds de votre alliance s'élève à " . round($taxe) . " Bitcoin.");
-                if ($lose) {
-                    $report->setContent($report->getContent() . " La paix que vous avez signé envoi directement " . round($lose) . " Bitcoin à l'aliance [" . $otherAlly->getSigle() . "].");
-                }
+                $report->setContent(" Le montant envoyé dans les fonds de votre alliance s'élève à " . round($taxe) . " Bitcoin.");
                 $allyBitcoin = $ally->getBitcoin();
                 $allyBitcoin = $allyBitcoin + $taxe;
                 $ally->setBitcoin($allyBitcoin);

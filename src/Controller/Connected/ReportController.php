@@ -45,7 +45,6 @@ class ReportController extends AbstractController
 
         $reports = $em->getRepository('App:Report')
             ->createQueryBuilder('r')
-            ->select('r.title, r.id, r.sendAt, r.newReport, r.shareKey, r.content')
             ->where('r.user = :user')
             ->setParameters(['user' => $user])
             ->orderBy('r.sendAt', 'DESC')

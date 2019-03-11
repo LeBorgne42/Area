@@ -104,6 +104,7 @@ class ConnectController extends AbstractController
         $report->setSendAt($now);
         $report->setUser($user);
         $report->setTitle("Bienvenu parmis nous "  . $user->getUsername() . " !");
+        $report->setImageName("welcome_report.jpg");
         $report->setContent("Votre planète dispose déjà des premières infrastructures, des mines et extracteurs pour vos ressources. Un chantier spatial pour la construction de vaisseaux et enfin un radar pour visualiser les informations de la carte spatiale. Vous disposez aussi de quelques vaisseaux, des sondes pour aller voir ce qu'il se passe dans les autres secteurs, des chasseurs et frégates pour vous défendre. Bon courage commandant. (Pour recevoir de l'aide : La page Salon ou rendez-vous sur le discord)");
         $em->persist($report);
         $user->setViewReport(false);
