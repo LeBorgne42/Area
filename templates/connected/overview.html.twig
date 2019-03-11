@@ -201,7 +201,7 @@
                                 {% if app.user.getSearch() %}<span><a href="{{ path('search', {'idp': usePlanet.getId()}) }}">{{ app.user.getSearch()|trans }}</a></span> (<span class="timerArea" hidden>{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</span>) - <a class="text-rouge" href="{{ path('research_cancel', {'idp': usePlanet.getId()}) }}">X</a>{% else %}<span><a href="{{ path('search', {'idp': usePlanet.getId()}) }}">{{ 'cell.searchNone'|trans|raw }}</a></span>{% endif %}
                             </div>
                         {% endif %}
-                        <div class="col-5 pt-1 ml-2"  data-html="true" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.dailyCost'|trans({'%soldier%': (app.user.getAllSoldier() * 2)|number_format, '%ship%': app.user.getAllShipsCost()|number_format, '%build%': app.user.getBuildingCost()|number_format, '%bitcoin%': cost|number_format}) }}">
+                        <div class="col-5 pt-1 ml-2"  data-html="true" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.dailyCost'|trans({'%soldier%': (app.user.getAllSoldier() * 2)|number_format, '%ship%': app.user.getAllShipsCost()|number_format, '%build%': app.user.getBuildingCost()|number_format, '%bitcoin%': cost|number_format, '%gain%': (app.user.getAllWorker() / 1.60)|number_format}) }}">
                             {% set gainDay = ((app.user.getAllWorker() / 1.60) - cost) %}
                             {{ 'info.cost'|trans|raw }} {% if gainDay > 0 %}<span class="text-vert">+{{ gainDay|number_format }}</span>{% else %}<span class="text-rouge">-{{ gainDay|number_format }}</span>{% endif %} <img src="{{ asset('img/coin.png') }}">
                         </div>

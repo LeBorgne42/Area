@@ -282,7 +282,7 @@ class InstantController extends AbstractController
                     $reportRec->setImageName("recycle_report.jpg");
                     $reportRec->setSendAt($now);
                     $reportRec->setUser($fleetCdr->getUser());
-                    $reportRec->setContent("Bonjour dirigeant " . $fleetCdr->getUser()->getUserName() . " votre flotte " . $fleetCdr->getName() . " vient de terminer de recycler en " . $fleetCdr->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $fleetCdr->getPlanet()->getSector()->getPosition() . ":" . $fleetCdr->getPlanet()->getPosition() . ". Ses soutes sont actuellement pleines, allez les vider chez un marchand ou sur une de vos planètes !");
+                    $reportRec->setContent("Bonjour dirigeant " . $fleetCdr->getUser()->getUserName() . " votre flotte " . $fleetCdr->getName() . " vient de terminer de recycler en " . $fleetCdr->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $fleetCdr->getPlanet()->getSector()->getPosition() . ":" . $fleetCdr->getPlanet()->getPosition() . ".");
                     $em->persist($reportRec);
                 }
             }

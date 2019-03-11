@@ -90,6 +90,30 @@ class ReportController extends AbstractController
     }
 
     /**
+     * @Route("/supprimer-rapport/{idp}/{id}", name="report_delete", requirements={"idp"="\d+", "id"="\d+"})
+     */
+    public function reportDeleteAction($idp, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+
+        $report = $em->getRepository('App:Report')
+            ->createQueryBuilder('r')
+            ->where('r.id = :id')
+            ->andWhere('r.user = :user')
+            ->setParameters(['id' => $id, 'user' => $user])
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $em->remove($report);
+        $em->flush();
+
+        return $this->redirectToRoute('report', ['idp' => $usePlanet->getId()]);
+    }
+
+    /**
      * @Route("/rapport-share/{idp}/{id}", name="report_share", requirements={"idp"="\d+", "id"="\d+"})
      */
     public function reportShareAction($idp, Report $id)

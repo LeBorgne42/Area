@@ -31,9 +31,27 @@
   width: 100%;
 }
 
-.btn-new {
+.btn-read-all {
   color: #fff;
   border: 1px solid orange;
+  padding: .5rem 1rem;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  border-radius: .3rem;
+}
+
+.btn-new {
+  color: #fff;
+  border: 1px solid lawngreen;
+  padding: .5rem 1rem;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  border-radius: .3rem;
+}
+
+.btn-delete {
+  color: #fff;
+  border: 1px solid red;
   padding: .5rem 1rem;
   font-size: 1.25rem;
   line-height: 1.5;
