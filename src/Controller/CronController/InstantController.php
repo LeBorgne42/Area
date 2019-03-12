@@ -278,7 +278,7 @@ class InstantController extends AbstractController
                 } else {
                     $fleetCdr->setRecycleAt(null);
                     $reportRec = new Report();
-                    $reportRec->setTitle("Votre flotte " . $fleetCdr->getName() . " a ses cargos pleins!");
+                    $reportRec->setTitle("Votre flotte " . $fleetCdr->getName() . " a arrêté de recycler!");
                     $reportRec->setImageName("recycle_report.jpg");
                     $reportRec->setSendAt($now);
                     $reportRec->setUser($fleetCdr->getUser());
@@ -544,6 +544,8 @@ class InstantController extends AbstractController
                 $now = new DateTime();
                 $now->setTimezone(new DateTimeZone('Europe/Paris'));
                 $now->add(new DateInterval('PT' . 300 . 'S'));
+                $nowReport = new DateTime();
+                $nowReport->setTimezone(new DateTimeZone('Europe/Paris'));
 
                 foreach ($allFleets as $updateF) {
                     $updateF->setFightAt($now);
@@ -559,12 +561,12 @@ class InstantController extends AbstractController
                 if ($fleet->getFlightType() == '2') {
                     if($newPlanet->getMerchant() == true) {
                         $reportSell = new Report();
-                        $reportSell->setSendAt($now);
+                        $reportSell->setSendAt($nowReport);
                         $reportSell->setUser($user);
                         $reportSell->setTitle("Vente aux marchands");
                         $reportSell->setImageName("sell_report.jpg");
                         $newWarPointS = round((($fleet->getScientist() * 100) + ($fleet->getWorker() * 50) + ($fleet->getSoldier() * 10) + ($fleet->getWater() / 3) + ($fleet->getNiobium() / 6)) / 1000);
-                        $reportSell->setContent("Votre vente aux marchands vous a rapporté " . round(($fleet->getWater() * 0.5) + ($fleet->getSoldier() * 5) + ($fleet->getWorker() * 2) + ($fleet->getScientist() * 50) + ($fleet->getNiobium() * 0.25)) . " bitcoin. Et " . $newWarPointS . " points de Guerre.");
+                        $reportSell->setContent("Votre vente aux marchands vous a rapporté " . round(($fleet->getWater() * 0.5) + ($fleet->getSoldier() * 5) + ($fleet->getWorker() * 2) + ($fleet->getScientist() * 50) + ($fleet->getNiobium() * 0.25)) . " bitcoin. Et " . $newWarPointS . " points de Guerre. Votre flotte " . $fleet->getName() . " est sur le chemin du retour.");
                         $em->persist($reportSell);
                         $user->setBitcoin($user->getBitcoin() + ($fleet->getWater() * 0.5) + ($fleet->getSoldier() * 5) + ($fleet->getWorker() * 2) + ($fleet->getScientist() * 50) + ($fleet->getNiobium() * 0.25));
                         $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $newWarPointS);
@@ -582,7 +584,7 @@ class InstantController extends AbstractController
                     } else {
                         if($user != $newPlanet->getUser() && $newPlanet->getUser()) {
                             $reportSell = new Report();
-                            $reportSell->setSendAt($now);
+                            $reportSell->setSendAt($nowReport);
                             $reportSell->setUser($newPlanet->getUser());
                             $reportSell->setTitle("Dépôt de ressources");
                             $reportSell->setImageName("depot_report.jpg");
@@ -689,7 +691,7 @@ class InstantController extends AbstractController
                             $em->remove($fleet);
                         }
                         $reportColo = new Report();
-                        $reportColo->setSendAt($now);
+                        $reportColo->setSendAt($nowReport);
                         $reportColo->setUser($user);
                         $reportColo->setTitle("Colonisation de planète");
                         $reportColo->setImageName("colonize_report.jpg");
@@ -706,12 +708,12 @@ class InstantController extends AbstractController
                     $alea = rand(4, 8);
 
                     $reportInv = new Report();
-                    $reportInv->setSendAt($now);
+                    $reportInv->setSendAt($nowReport);
                     $reportInv->setUser($user);
                     $user->setViewReport(false);
 
                     $reportDef = new Report();
-                    $reportDef->setSendAt($now);
+                    $reportDef->setSendAt($nowReport);
                     $reportDef->setUser($userDefender);
                     $userDefender->setViewReport(false);
                     $dSigle = null;
@@ -799,10 +801,11 @@ class InstantController extends AbstractController
                         $server->setNbrInvasion($server->getNbrInvasion() + 1);
                     }
                 }
-            } else {
                 if ($fleet->getFlightType() == '1') {
                     $em->persist($report);
                 }
+            } else {
+                $em->persist($report);
             }
         }
         $em->flush();

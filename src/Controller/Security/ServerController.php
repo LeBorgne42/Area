@@ -360,23 +360,23 @@ class ServerController extends AbstractController
             $em->remove($sContent);
         }
 
-        $salons = $em->getRepository('App:Salon')->findAll();
+        $salons = $em->getRepository('App:Salon')
+            ->createQueryBuilder('s')
+            ->leftJoin('s.allys', 'a')
+            ->where('s.name != :name')
+            ->andWhere('a.id is null')
+            ->setParameters(['name' => 'Public'])
+            ->getQuery()
+            ->getResult();
 
         foreach ($salons as $salo) {
-            if ($salo != $salon) {
-                $em->remove($salo);
-            }
-        }
-
-        $lists = $em->getRepository('App:Fleet_List')->findAll();
-
-        foreach ($lists as $list) {
-            $em->remove($list);
+            $em->remove($salo);
         }
 
         $reports = $em->getRepository('App:Report')->findAll();
 
         foreach ($reports as $report) {
+            $report->setImageName(null);
             $em->remove($report);
         }
 
@@ -392,18 +392,6 @@ class ServerController extends AbstractController
             $em->remove($rank);
         }
 
-        $exchanges = $em->getRepository('App:Exchange')->findAll();
-
-        foreach ($exchanges as $exchange) {
-            $em->remove($exchange);
-        }
-
-        $grades = $em->getRepository('App:Grade')->findAll();
-
-        foreach ($grades as $grade) {
-            $em->remove($grade);
-        }
-
         $products = $em->getRepository('App:Product')->findAll();
 
         foreach ($products as $product) {
@@ -416,15 +404,29 @@ class ServerController extends AbstractController
             $em->remove($fleet);
         }
 
+        $wars = $em->getRepository('App:War')->findAll();
+
+        foreach ($wars as $war) {
+            $em->remove($war);
+        }
+
+        $peaces = $em->getRepository('App:Peace')->findAll();
+
+        foreach ($peaces as $peace) {
+            $em->remove($peace);
+        }
+
         $allys = $em->getRepository('App:Ally')->findAll();
 
         foreach ($allys as $ally) {
-            $em->remove($ally);
+            $ally->setBitcoin(0);
+            $ally->setPdg(0);
         }
 
         $planets = $em->getRepository('App:Planet')->findAll();
 
         foreach ($planets as $planet) {
+            $planet->setImageName(null);
             $em->remove($planet);
         }
 

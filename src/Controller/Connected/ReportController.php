@@ -107,6 +107,7 @@ class ReportController extends AbstractController
             ->getQuery()
             ->getOneOrNullResult();
 
+        $report->setImageName(null);
         $em->remove($report);
         $em->flush();
 

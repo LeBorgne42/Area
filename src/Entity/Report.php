@@ -60,14 +60,14 @@ class Report
      *     maxSize="400k",
      *     mimeTypes={"image/png", "image/jpeg", "image/bmp"}
      * )
-     * @Vich\UploadableField(mapping="planet_img", fileNameProperty="imageName" )
+     * @Vich\UploadableField(mapping="report_img", fileNameProperty="imageName" )
      *
      * @var File
      */
     private $imageFile;
 
     /**
-     * @ORM\Column(name="imageName",type="string", length=25, nullable=true)
+     * @ORM\Column(name="imageName",type="string", length=20, nullable=true)
      */
     protected $imageName;
 
