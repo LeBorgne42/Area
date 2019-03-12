@@ -105,7 +105,7 @@
                             {{ fleet.getCargoFull()|number_format }} / {{ fleet.getCargoPlace()|number_format }}
                         </td>
                         {% if fleet.cancelFlight() > date %}
-                            <td class="center-cells text-center">{{ date|date('Y/m/d H:i:s') }} {{ fleet.cancelFlight()|date('Y/m/d H:i:s') }}
+                            <td class="center-cells text-center">
                                 <a class="text-rouge" href="{{ path('cancel_fleet', {'idp': usePlanet.getId(),'id': fleet.getId()}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.cancel'|trans }}"><span class="timerArea" hidden>{{ fleet.cancelFlight()|date('Y/m/d H:i:s') }}</span></a>
                             </td>
                         {% else %}

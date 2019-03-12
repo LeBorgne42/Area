@@ -552,7 +552,6 @@ class InstantController extends AbstractController
                 $report->setContent($report->getContent() . " Votre flotte vient d''engager le combat !");
                 $report->setImageName("war_report.jpg");
             }
-            $em->persist($report);
             if ($fleet->getFightAt() == null) {
                 $user = $fleet->getUser();
                 $newPlanet = $fleet->getPlanet();
@@ -799,6 +798,10 @@ class InstantController extends AbstractController
                         $em->persist($reportDef);
                         $server->setNbrInvasion($server->getNbrInvasion() + 1);
                     }
+                }
+            } else {
+                if ($fleet->getFlightType() == '1') {
+                    $em->persist($report);
                 }
             }
         }
