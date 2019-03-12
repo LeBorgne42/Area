@@ -557,7 +557,10 @@ class InstantController extends AbstractController
             if ($fleet->getFightAt() == null) {
                 $user = $fleet->getUser();
                 $newPlanet = $fleet->getPlanet();
-                
+
+                if ($fleet->getFlightType() == '1') {
+                    $em->persist($report);
+                }
                 if ($fleet->getFlightType() == '2') {
                     if($newPlanet->getMerchant() == true) {
                         $reportSell = new Report();
@@ -800,9 +803,6 @@ class InstantController extends AbstractController
                         $em->persist($reportDef);
                         $server->setNbrInvasion($server->getNbrInvasion() + 1);
                     }
-                }
-                if ($fleet->getFlightType() == '1') {
-                    $em->persist($report);
                 }
             } else {
                 $em->persist($report);

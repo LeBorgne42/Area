@@ -60,7 +60,7 @@ class Report
      *     maxSize="400k",
      *     mimeTypes={"image/png", "image/jpeg", "image/bmp"}
      * )
-     * @Vich\UploadableField(mapping="report_img", fileNameProperty="imageName" )
+     * @Vich\UploadableField(mapping="planet_img", fileNameProperty="imageName" )
      *
      * @var File
      */
