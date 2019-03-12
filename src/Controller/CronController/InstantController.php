@@ -399,6 +399,10 @@ class InstantController extends AbstractController
             $em->remove($product);
         }
 
+        $nowReport = new DateTime();
+        $nowReport->setTimezone(new DateTimeZone('Europe/Paris'));
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
         foreach ($fleets as $fleet) {
 
             $newHome = $em->getRepository('App:Planet')
@@ -521,14 +525,14 @@ class InstantController extends AbstractController
                     ->getQuery()
                     ->getResult();
 
-                $now = new DateTime();
-                $now->setTimezone(new DateTimeZone('Europe/Paris'));
-                $now->add(new DateInterval('PT' . 300 . 'S'));
+                $nowWar = new DateTime();
+                $nowWar->setTimezone(new DateTimeZone('Europe/Paris'));
+                $nowWar->add(new DateInterval('PT' . 300 . 'S'));
 
                 foreach ($allFleets as $updateF) {
-                    $updateF->setFightAt($now);
+                    $updateF->setFightAt($nowWar);
                 }
-                $fleet->setFightAt($now);
+                $fleet->setFightAt($nowWar);
                 $report->setContent($report->getContent() . " Attention votre flotte est rentrée en combat !");
                 $report->setImageName("war_report.jpg");
             } elseif ($neutralFleets && $fleet->getAttack() == 1) {
@@ -541,16 +545,14 @@ class InstantController extends AbstractController
                     ->getQuery()
                     ->getResult();
 
-                $now = new DateTime();
-                $now->setTimezone(new DateTimeZone('Europe/Paris'));
-                $now->add(new DateInterval('PT' . 300 . 'S'));
-                $nowReport = new DateTime();
-                $nowReport->setTimezone(new DateTimeZone('Europe/Paris'));
+                $nowWar = new DateTime();
+                $nowWar->setTimezone(new DateTimeZone('Europe/Paris'));
+                $nowWar->add(new DateInterval('PT' . 300 . 'S'));
 
                 foreach ($allFleets as $updateF) {
-                    $updateF->setFightAt($now);
+                    $updateF->setFightAt($nowWar);
                 }
-                $fleet->setFightAt($now);
+                $fleet->setFightAt($nowWar);
                 $report->setContent($report->getContent() . " Votre flotte vient d''engager le combat !");
                 $report->setImageName("war_report.jpg");
             }
@@ -666,9 +668,11 @@ class InstantController extends AbstractController
                         $moreNow = new DateTime();
                         $moreNow->setTimezone(new DateTimeZone('Europe/Paris'));
                         $moreNow->add(new DateInterval('PT' . 120 . 'S'));
-                        $now->add(new DateInterval('PT' . round($distance) . 'S'));
+                        $nowFlight = new DateTime();
+                        $nowFlight->setTimezone(new DateTimeZone('Europe/Paris'));
+                        $nowFlight->add(new DateInterval('PT' . round($distance) . 'S'));
                         $fleet->setNewPlanet($oldPlanet->getId());
-                        $fleet->setFlightTime($now);
+                        $fleet->setFlightTime($nowFlight);
                         $fleet->setFlightType(1);
                         $fleet->setSector($oldPlanet->getSector());
                         $fleet->setPlanete($oldPlanet->getPosition());

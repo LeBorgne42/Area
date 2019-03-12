@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="97f042ea-d0ee-4bd9-bb02-3d850e24f659" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/src/Controller/CronController/InstantController.php" afterPath="$PROJECT_DIR$/src/Controller/CronController/InstantController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Report.php" afterPath="$PROJECT_DIR$/src/Entity/Report.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,8 +19,8 @@
       <file leaf-file-name="InstantController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Controller/CronController/InstantController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="295">
-              <caret line="561" column="42" lean-forward="false" selection-start-line="561" selection-start-column="41" selection-end-line="561" selection-end-column="42" />
+            <state relative-caret-position="416">
+              <caret line="674" column="58" lean-forward="true" selection-start-line="674" selection-start-column="58" selection-end-line="674" selection-end-column="58" />
               <folding />
             </state>
           </provider>
@@ -55,7 +54,6 @@
       <find>border-img</find>
       <find>cancel_fleet</find>
       <find>'date' =&gt;</find>
-      <find>$now</find>
       <find>tooltip.dailyCost</find>
       <find>NewReport</find>
       <find>report_view</find>
@@ -71,6 +69,7 @@
       <find>$em-&gt;persist($report)</find>
       <find>envoyer</find>
       <find>$fleet-&gt;setFlightType()</find>
+      <find>$now</find>
     </findStrings>
     <replaceStrings>
       <replace>$reportLoseA</replace>
@@ -487,12 +486,12 @@
       <workItem from="1550577059574" duration="3545000" />
       <workItem from="1550595254059" duration="54065000" />
       <workItem from="1551029272895" duration="125354000" />
-      <workItem from="1551874547618" duration="34758000" />
+      <workItem from="1551874547618" duration="35186000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1951474000" />
+    <option name="totallyTimeSpent" value="1951902000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -992,8 +991,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/CronController/InstantController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="561" column="42" lean-forward="false" selection-start-line="561" selection-start-column="41" selection-end-line="561" selection-end-column="42" />
+        <state relative-caret-position="416">
+          <caret line="674" column="58" lean-forward="true" selection-start-line="674" selection-start-column="58" selection-end-line="674" selection-end-column="58" />
           <folding />
         </state>
       </provider>
