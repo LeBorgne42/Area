@@ -40,7 +40,6 @@
 .sector-info {
   margin-top: 2rem;
   color: #fff;
-  width: 650px;
   background-color: rgba(52,58,64,0.5);
   border: 1px solid rgba(0,0,0,.125);
   border-radius: 5px;
@@ -52,13 +51,13 @@ div.tooltip-inner {
 }
 
 div.tooltip-inner span a.ally {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-family: Arial, Helvetica, sans-serif;
   color: orange!important;
 }
 
 div.tooltip-inner span a.manage {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   font-family: Arial, Helvetica, sans-serif;
   color: #00ffff!important;
 }
@@ -161,7 +160,6 @@ div.tooltip-inner span a.manage {
 
 .sector td.center-cells {
   height: 120px;
-  width: 121px;
   border: none;
 }
 
@@ -171,8 +169,6 @@ td.special-cell {
 }
 
 .sector-table {
-  height: 400px!important;
-  width: 650px!important;
   background-color: black!important;
   border: 1px solid white;
   border-collapse: initial;
@@ -186,33 +182,29 @@ td.special-cell {
 }
 
 .glyphicon-plane.planet {
-  float: right;
+  font-size: 1.5rem!important;
+  top: 5px;
 }
 
 .glyphicon-plane.empty {
-  float: right;
-  top: 1rem;
-  right: 1rem;
+  font-size: 1.5rem!important;
 }
 
 .glyphicon-info-sign {
-  float: right;
-  right: 1rem;
+  font-size: 2rem;
 }
 
 .glyphicon-oil.planet {
-  float: right;
-  right: 0.5rem;
+  font-size: 2rem;
 }
 
 .glyphicon-oil.empty {
-  float: right;
-  top: 1rem;
+  font-size: 2rem;
 
 }
 
 .glyphicon-cd {
-  float: right;
+  font-size: 2rem;
 }
 
 .planet-position {
