@@ -67,7 +67,7 @@ class Report
     private $imageFile;
 
     /**
-     * @ORM\Column(name="imageName",type="string", length=20, nullable=true)
+     * @ORM\Column(name="imageName",type="string", length=40, nullable=true)
      */
     protected $imageName;
 

@@ -234,7 +234,7 @@ class InstantController extends AbstractController
         foreach ($fleetCdrs as $fleetCdr) {
             $recycle = $fleetCdr->getRecycleur() * 1000;
             $planetCdr = $fleetCdr->getPlanet();
-            if ($fleetCdr->getCargoPlace() < ($fleetCdr->getCargoFull() + ($recycle * 2))) {
+            if ($fleetCdr->getCargoPlace() > ($fleetCdr->getCargoFull() + ($recycle * 2))) {
                 $cargoFullCdr = round((($fleetCdr->getCargoPlace() - $fleetCdr->getCargoFull()) / 2));
                 if ($planetCdr->getNbCdr() > $cargoFullCdr) {
                     $fleetCdr->setNiobium($fleetCdr->getNiobium() + $cargoFullCdr);
@@ -271,19 +271,23 @@ class InstantController extends AbstractController
                     $fleetCdr->setWater($fleetCdr->getWater() + $planetCdr->getWtCdr());
                     $planetCdr->setWtCdr(0);
                 }
-                if (($planetCdr->getNbCdr() > 0 || $planetCdr->getWtCdr() > 0) && $fleetCdr->getCargoPlace() > $fleetCdr->getCargoFull()) {
+                if (($planetCdr->getNbCdr() > 0 || $planetCdr->getWtCdr() > 0) && $fleetCdr->getCargoPlace() > ($fleetCdr->getCargoFull() + ($recycle * 2))) {
                     $tmpNoCdr = $now;
                     $tmpNoCdr->add(new DateInterval('PT' . 600 . 'S'));
-                    $fleetCdr->setRecycleAt($now);
+                    $fleetCdr->setRecycleAt($tmpNoCdr);
                 } else {
                     $fleetCdr->setRecycleAt(null);
-                    $reportRec = new Report();
-                    $reportRec->setTitle("Votre flotte " . $fleetCdr->getName() . " a arrêté de recycler!");
-                    $reportRec->setImageName("recycle_report.jpg");
-                    $reportRec->setSendAt($now);
-                    $reportRec->setUser($fleetCdr->getUser());
-                    $reportRec->setContent("Bonjour dirigeant " . $fleetCdr->getUser()->getUserName() . " votre flotte " . $fleetCdr->getName() . " vient de terminer de recycler en " . $fleetCdr->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $fleetCdr->getPlanet()->getSector()->getPosition() . ":" . $fleetCdr->getPlanet()->getPosition() . ".");
-                    $em->persist($reportRec);
+                    if ($fleetCdr->getCargoPlace() > ($fleetCdr->getCargoFull() + ($recycle * 2))) {
+                        $reportRec = new Report();
+                        $reportRec->setTitle("Votre flotte " . $fleetCdr->getName() . " a arrêté de recycler!");
+                        $reportRec->setImageName("recycle_report.jpg");
+                        $reportRec->setSendAt($now);
+                        $reportRec->setUser($fleetCdr->getUser());
+                        $usePlanet = $em->getRepository('App:Planet')->findByFirstPlanet($fleetCdr->getUser()->getUsername());
+                        $reportRec->setContent("Bonjour dirigeant " . $fleetCdr->getUser()->getUserName() . " votre flotte " . "<span><a href='/connect/gerer-flotte/" . $usePlanet->getId() ."/" . $fleetCdr->getId() . "' data-toggle='modal' data-target='#editModal'>" . $fleetCdr->getName() . "</a></span>" . " vient de terminer de recycler en " . "<span><a href='/connect/carte-spatiale/" . $fleetCdr->getPlanet()->getSector()->getPosition() ."/" . $fleetCdr->getPlanet()->getSector()->getGalaxy()->getPosition() ."/" . $usePlanet->getId() . "'>" . $fleetCdr->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $fleetCdr->getPlanet()->getSector()->getPosition() . ":" . $fleetCdr->getPlanet()->getPosition() . "</a></span>.");
+                        $em->persist($reportRec);
+                        $fleetCdr->getUser()->setViewReport(false);
+                    }
                 }
             }
             $quest = $fleetCdr->getUser()->checkQuests('recycle');
@@ -405,6 +409,7 @@ class InstantController extends AbstractController
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         foreach ($fleets as $fleet) {
 
+            $usePlanet = $em->getRepository('App:Planet')->findByFirstPlanet($fleet->getUser()->getUsername());
             $newHome = $em->getRepository('App:Planet')
                 ->createQueryBuilder('p')
                 ->join('p.sector', 's')
@@ -422,7 +427,7 @@ class InstantController extends AbstractController
             $report->setImageName("travel_report.jpg");
             $report->setSendAt($now);
             $report->setUser($userFleet);
-            $report->setContent("Bonjour dirigeant " . $userFleet->getUserName() . " votre flotte " . $fleet->getName() . " vient d'arriver en " . $newHome->getSector()->getGalaxy()->getPosition() . ":" . $newHome->getSector()->getPosition() . ":" . $newHome->getPosition() . ".");
+            $report->setContent("Bonjour dirigeant " . $userFleet->getUserName() . " votre flotte " . "<span><a href='/connect/gerer-flotte/" . $usePlanet->getId() ."/" . $fleet->getId() . "' data-toggle='modal' data-target='#editModal'>" . $fleet->getName() . "</a></span>" . " vient d'arriver en " . "<span><a href='/connect/carte-spatiale/" . $newHome->getSector()->getPosition() ."/" . $newHome->getSector()->getGalaxy()->getPosition() ."/" . $usePlanet->getId() . "'>" . $newHome->getSector()->getGalaxy()->getPosition() . ":" . $newHome->getSector()->getPosition() . ":" . $newHome->getPosition() . "</a></span>.");
             $userFleet->setViewReport(false);
             $oldPlanet = $fleet->getPlanet();
             $fleet->setPlanet($newHome);
@@ -593,7 +598,7 @@ class InstantController extends AbstractController
                             $reportSell->setUser($newPlanet->getUser());
                             $reportSell->setTitle("Dépôt de ressources");
                             $reportSell->setImageName("depot_report.jpg");
-                            $reportSell->setContent("Le joueur " . $newPlanet->getUser()->getUserName() . " vient de déposer des ressources sur votre planète "  . $newPlanet->getSector()->getgalaxy()->getPosition() . ":" . $newPlanet->getSector()->getPosition() . ":" . $newPlanet->getPosition() . " " . $fleet->getNiobium() . " Niobium, " . $fleet->getWater() . " Eau, " . $fleet->getWorker() . " Travailleurs, " . $fleet->getSoldier() . " Soldats, " . $fleet->getScientist() . " Scientifiques.");
+                            $reportSell->setContent("Le joueur " . $newPlanet->getUser()->getUserName() . " vient de déposer des ressources sur votre planète " . $newPlanet->getSector()->getgalaxy()->getPosition() . ":" . $newPlanet->getSector()->getPosition() . ":" . $newPlanet->getPosition() . " " . $fleet->getNiobium() . " Niobium, " . $fleet->getWater() . " Eau, " . $fleet->getWorker() . " Travailleurs, " . $fleet->getSoldier() . " Soldats, " . $fleet->getScientist() . " Scientifiques.");
                             $em->persist($reportSell);
                         }
                         if($newPlanet->getNiobium() + $fleet->getNiobium() <= $newPlanet->getNiobiumMax()) {
@@ -702,7 +707,7 @@ class InstantController extends AbstractController
                         $reportColo->setUser($user);
                         $reportColo->setTitle("Colonisation de planète");
                         $reportColo->setImageName("colonize_report.jpg");
-                        $reportColo->setContent("Vous venez de coloniser une planète inhabitée en : " .  $newPlanet->getSector()->getgalaxy()->getPosition() . ":" . $newPlanet->getSector()->getPosition() . ":" . $newPlanet->getPosition() . ". Cette planète fait désormais partit de votre Empire, pensez a la renommer sur la page Planètes.");
+                        $reportColo->setContent("Vous venez de coloniser une planète inhabitée en : " . "<span><a href='/connect/carte-spatiale/" . $newPlanet->getSector()->getPosition() ."/" . $newPlanet->getSector()->getGalaxy()->getPosition() ."/" . $usePlanet->getId() . "'>" . $newPlanet->getSector()->getGalaxy()->getPosition() . ":" . $newPlanet->getSector()->getPosition() . ":" . $newPlanet->getPosition() . "</a></span>" . ". Cette planète fait désormais partit de votre Empire, pensez a la renommer sur la page Planètes.");
                         $user->setViewReport(false);
                         $em->persist($reportColo);
                         $server->setNbrColonize($server->getNbrColonize() + 1);
@@ -738,6 +743,8 @@ class InstantController extends AbstractController
                             $soldierAtmp = $barge;
                         }
                         if($dMilitary > $aMilitary) {
+                            $warPointDef = round($aMilitary / 10);
+                            $userDefender->getRank()->setWarPoint($userDefender->getRank()->getWarPoint() + $warPointDef);
                             $aMilitary = ($defenser->getSoldier() * 6) - $aMilitary;
                             if($barge < $fleet->getSoldier()) {
                                 $fleet->setSoldier($fleet->getSoldier() - $barge);
@@ -758,20 +765,23 @@ class InstantController extends AbstractController
                             }
                             $reportDef->setTitle("Rapport d'invasion : Victoire (défense)");
                             $reportDef->setImageName("defend_win_report.jpg");
-                            $reportDef->setContent("Bien joué ! Vos travailleurs et soldats ont repoussé l'invasion du joueur " . $user->getUserName() . " sur votre planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . ".  " . $soldierAtmp . " soldats vous ont attaqué, tous ont été tué. Vous avez ainsi prit le contrôle des barges de l'attaquant.");
+                            $reportDef->setContent("Bien joué ! Vos travailleurs et soldats ont repoussé l'invasion du joueur " . $user->getUserName() . " sur votre planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . ".  " . $soldierAtmp . " soldats vous ont attaqué, tous ont été tué. Vous avez ainsi prit le contrôle des barges de l'attaquant. Et vous remportez" . $warPointDef . " points de Guerre.");
                             $reportInv->setTitle("Rapport d'invasion : Défaite (attaque)");
                             $reportInv->setImageName("invade_lose_report.jpg");
                             $reportInv->setContent("'AH AH AH AH' le rire de " . $userDefender->getUserName() . " résonne à vos oreilles d'un curieuse façon. Votre sang bouillonne vous l'a vouliez cette planète. Qu'il rigole donc, vous reviendrez prendre " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . " et ferez effacer des livres d'histoires son ridicule nom. Vous avez tout de même tué " . $soldierDtmp . " soldats et " . $workerDtmp . " travailleurs à l'ennemi. Tous vos soldats sont morts et vos barges sont resté sur la planète. Courage commandant.");
                         } else {
                             $soldierDtmp = $defenser->getSoldier();
                             $workerDtmp = $defenser->getWorker();
+                            $warPointAtt = round(($soldierDtmp / 10) + ($workerDtmp / 100));
+                            $fleet->getUser()->getRank()->setWarPoint($fleet->getUser()->getRank()->getWarPoint() + $warPointAtt);
                             $soldierAtmp = $fleet->getSoldier();
                             $fleet->setSoldier(($aMilitary - $dMilitary) / $alea);
                             $soldierAtmp = $soldierAtmp - $fleet->getSoldier();
                             $defenser->setSoldier(0);
                             $defenser->setWorker(2000);
                             if($fleet->getUser()->getColPlanets() <= ($fleet->getUser()->getTerraformation() + 1)) {
-                                $defenser->setUser($user);
+                                $defenser->setUser($fleet->getUser());
+                                $em->flush();
                             } else {
                                 $hydra = $em->getRepository('App:User')->find(['id' => 1]);
 
@@ -781,19 +791,19 @@ class InstantController extends AbstractController
                                 $defenser->setName('Avant Poste');
                             }
                             if($userDefender->getAllPlanets() == 0) {
-                                $userDefender->setGameOver($user->getUserName());
+                                $userDefender->setGameOver($fleet->getUser()->getUserName());
                                 $userDefender->setAlly(null);
                                 $userDefender->setGrade(null);
                                 foreach($userDefender->getFleets() as $tmpFleet) {
-                                    $tmpFleet->setUser($user);
+                                    $tmpFleet->setUser($fleet->getUser());
                                 }
                             }
                             $reportDef->setTitle("Rapport d'invasion : Défaite (défense)");
                             $reportDef->setImageName("defend_lose_report.jpg");
-                            $reportDef->setContent("Mais QUI ? QUI !!! Vous as donné un commandant si médiocre " . $user->getUserName() . " n'a pas eu a faire grand chose pour prendre votre planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . ".  " . round($soldierAtmp) . " soldats ennemis sont tout de même éliminé. C'est toujours ça de gagner. Vos " . $soldierDtmp . " soldats et " . $workerDtmp . " travailleurs sont tous mort. Votre empire en a prit un coup, mais il vous reste des planètes, il est l'heure de la revanche !");
+                            $reportDef->setContent("Mais QUI ? QUI !!! Vous as donné un commandant si médiocre " . $fleet->getUser()->getUserName() . " n'a pas eu a faire grand chose pour prendre votre planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . ".  " . round($soldierAtmp) . " soldats ennemis sont tout de même éliminé. C'est toujours ça de gagner. Vos " . $soldierDtmp . " soldats et " . $workerDtmp . " travailleurs sont tous mort. Votre empire en a prit un coup, mais il vous reste des planètes, il est l'heure de la revanche !");
                             $reportInv->setTitle("Rapport d'invasion : Victoire (attaque)");
                             $reportInv->setImageName("invade_win_report.jpg");
-                            $reportInv->setContent("Vous débarquez après que la planète ait été prise et vous installez sur le trône de " . $userDefender->getUserName() . ". Qu'il est bon d'entendre ses pleures lointain... La planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . " est désormais votre! Il est temps de remettre de l'ordre dans la galaxie. " . round($soldierAtmp) . " de vos soldats ont péri dans l'invasion. Mais les défenseurs ont aussi leurs pertes : " . $soldierDtmp . " soldats et " . $workerDtmp . " travailleurs ont péri. Cependant vous épargnez 2000 travailleurs dans votre bonté (surtout pour faire tourner la planète).");
+                            $reportInv->setContent("Vous débarquez après que la planète ait été prise et vous installez sur le trône de " . $userDefender->getUserName() . ". Qu'il est bon d'entendre ses pleures lointain... La planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . " est désormais votre! Il est temps de remettre de l'ordre dans la galaxie. " . round($soldierAtmp) . " de vos soldats ont péri dans l'invasion. Mais les défenseurs ont aussi leurs pertes : " . $soldierDtmp . " soldats et " . $workerDtmp . " travailleurs ont péri. Cependant vous épargnez 2000 travailleurs dans votre bonté (surtout pour faire tourner la planète). Et vous remportez" . $warPointAtt . " points de Guerre.");
                             $quest = $fleet->getUser()->checkQuests('invade');
                             if($quest) {
                                 $fleet->getUser()->getRank()->setWarPoint($fleet->getUser()->getRank()->getWarPoint() + $quest->getGain());
