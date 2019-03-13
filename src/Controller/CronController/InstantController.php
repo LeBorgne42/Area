@@ -231,29 +231,13 @@ class InstantController extends AbstractController
             }
         }
 
+        $tmpNoCdr = new DateTime();
+        $tmpNoCdr->setTimezone(new DateTimeZone('Europe/Paris'));
+        $tmpNoCdr->add(new DateInterval('PT' . 600 . 'S'));
         foreach ($fleetCdrs as $fleetCdr) {
             $recycle = $fleetCdr->getRecycleur() * 1000;
             $planetCdr = $fleetCdr->getPlanet();
             if ($fleetCdr->getCargoPlace() > ($fleetCdr->getCargoFull() + ($recycle * 2))) {
-                $cargoFullCdr = round((($fleetCdr->getCargoPlace() - $fleetCdr->getCargoFull()) / 2));
-                if ($planetCdr->getNbCdr() > $cargoFullCdr) {
-                    $fleetCdr->setNiobium($fleetCdr->getNiobium() + $cargoFullCdr);
-                    $planetCdr->setNbCdr($planetCdr->getNbCdr() - $cargoFullCdr);
-                } else {
-                    $fleetCdr->setNiobium($fleetCdr->getNiobium() + $planetCdr->getNbCdr());
-                    $planetCdr->setNbCdr(0);
-                }
-                if ($planetCdr->getWtCdr() > $cargoFullCdr) {
-                    $fleetCdr->setWater($fleetCdr->getWater() + $cargoFullCdr);
-                    $planetCdr->setWtCdr($planetCdr->getWtCdr() - $cargoFullCdr);
-                } else {
-                    $fleetCdr->setWater($fleetCdr->getWater() + $planetCdr->getWtCdr());
-                    $planetCdr->setWtCdr(0);
-                }
-                if($planetCdr->getNbCdr() == 0 && $planetCdr->getWtCdr() == 0) {
-                    $fleetCdr->setRecycleAt(null);
-                }
-            } else {
                 if($planetCdr->getNbCdr() == 0 || $planetCdr->getWtCdr() == 0) {
                     $recycle = $recycle * 2;
                 }
@@ -271,11 +255,7 @@ class InstantController extends AbstractController
                     $fleetCdr->setWater($fleetCdr->getWater() + $planetCdr->getWtCdr());
                     $planetCdr->setWtCdr(0);
                 }
-                if (($planetCdr->getNbCdr() > 0 || $planetCdr->getWtCdr() > 0) && $fleetCdr->getCargoPlace() > ($fleetCdr->getCargoFull() + ($recycle * 2))) {
-                    $tmpNoCdr = $now;
-                    $tmpNoCdr->add(new DateInterval('PT' . 600 . 'S'));
-                    $fleetCdr->setRecycleAt($tmpNoCdr);
-                } else {
+                if($planetCdr->getNbCdr() == 0 && $planetCdr->getWtCdr() == 0) {
                     $fleetCdr->setRecycleAt(null);
                     if ($fleetCdr->getCargoPlace() > ($fleetCdr->getCargoFull() + ($recycle * 2))) {
                         $reportRec = new Report();
@@ -288,6 +268,33 @@ class InstantController extends AbstractController
                         $em->persist($reportRec);
                         $fleetCdr->getUser()->setViewReport(false);
                     }
+                } else {
+                    $fleetCdr->setRecycleAt($tmpNoCdr);
+                }
+            } else {
+                if($planetCdr->getNbCdr() == 0 || $planetCdr->getWtCdr() == 0) {
+                    $recycle = ($fleetCdr->getCargoPlace() >= ($fleetCdr->getCargoFull() + ($recycle * 2))) ? $recycle * 2 : (($fleetCdr->getCargoPlace() - $fleetCdr->getCargoFull()));
+                } else {
+                    $recycle = ($fleetCdr->getCargoPlace() >= ($fleetCdr->getCargoFull() + ($recycle * 2))) ? $recycle : (($fleetCdr->getCargoPlace() - $fleetCdr->getCargoFull()) / 2);
+                }
+                if ($planetCdr->getNbCdr() > $recycle) {
+                    $fleetCdr->setNiobium($fleetCdr->getNiobium() + $recycle);
+                    $planetCdr->setNbCdr($planetCdr->getNbCdr() - $recycle);
+                } else {
+                    $fleetCdr->setNiobium($fleetCdr->getNiobium() + $planetCdr->getNbCdr());
+                    $planetCdr->setNbCdr(0);
+                }
+                if ($planetCdr->getWtCdr() > $recycle) {
+                    $fleetCdr->setWater($fleetCdr->getWater() + $recycle);
+                    $planetCdr->setWtCdr($planetCdr->getWtCdr() - $recycle);
+                } else {
+                    $fleetCdr->setWater($fleetCdr->getWater() + $planetCdr->getWtCdr());
+                    $planetCdr->setWtCdr(0);
+                }
+                if ($planetCdr->getNbCdr() == 0 && $planetCdr->getWtCdr() == 0 || $fleetCdr->getCargoPlace() == $fleetCdr->getCargoFull()) {
+                    $fleetCdr->setRecycleAt(null);
+                } else {
+                    $fleetCdr->setRecycleAt($tmpNoCdr);
                 }
             }
             $quest = $fleetCdr->getUser()->checkQuests('recycle');
