@@ -365,7 +365,6 @@ class FleetController  extends AbstractController
         }
 
         if ($form_manageFleet->isSubmitted()) {
-            $cargoRessources = $fleetGive->getCargoFull() + abs($form_manageFleet->get('moreNiobium')->getData()) + abs($form_manageFleet->get('moreWater')->getData()) + abs($form_manageFleet->get('moreSoldier')->getData()) + abs($form_manageFleet->get('moreWorker')->getData()) + abs($form_manageFleet->get('moreScientist')->getData());
             if (abs($form_manageFleet->get('moreColonizer')->getData())) {
                 $colonizer = $planetTake->getColonizer() - abs($form_manageFleet->get('moreColonizer')->getData());
                 $fleetGive->setColonizer($fleetGive->getColonizer() + abs($form_manageFleet->get('moreColonizer')->getData()));
@@ -375,50 +374,47 @@ class FleetController  extends AbstractController
             } else {
                 $colonizer = $planetTake->getColonizer();
             }
-            if (abs($form_manageFleet->get('moreRecycleur')->getData())) {
-                $recycleur = $planetTake->getRecycleur() - abs($form_manageFleet->get('moreRecycleur')->getData());
+            if (abs($form_manageFleet->get('moreRecycleur')->getData()) <= $planetTake->getRecycleur() and abs($form_manageFleet->get('moreRecycleur')->getData()) != 0) {
                 $fleetGive->setRecycleur($fleetGive->getRecycleur() + abs($form_manageFleet->get('moreRecycleur')->getData()));
-            } elseif (abs($form_manageFleet->get('lessRecycleur')->getData()) <= $fleetGive->getRecycleur()) {
-                $recycleur = $planetTake->getRecycleur() + abs($form_manageFleet->get('lessRecycleur')->getData());
+                $planetTake->setRecycleur($planetTake->getRecycleur() - abs($form_manageFleet->get('moreRecycleur')->getData()));
+            } elseif (abs($form_manageFleet->get('lessRecycleur')->getData()) <= $fleetGive->getRecycleur() and ($fleetGive->getCargoPlace() - $fleetGive->getCargoFull() - abs($form_manageFleet->get('lessRecycleur')->getData() * 10000)) >= 0) {
                 $fleetGive->setRecycleur($fleetGive->getRecycleur() - abs($form_manageFleet->get('lessRecycleur')->getData()));
-            } else {
-                $recycleur = $planetTake->getRecycleur();
+                $planetTake->setRecycleur($planetTake->getRecycleur() + abs($form_manageFleet->get('lessRecycleur')->getData()));
             }
-            if (abs($form_manageFleet->get('moreCargoI')->getData())) {
-                $cargoI = $planetTake->getCargoI() - abs($form_manageFleet->get('moreCargoI')->getData());
+            if (abs($form_manageFleet->get('moreCargoI')->getData()) <= $planetTake->getCargoI() and abs($form_manageFleet->get('moreCargoI')->getData()) != 0) {
                 $fleetGive->setCargoI($fleetGive->getCargoI() + abs($form_manageFleet->get('moreCargoI')->getData()));
-            } elseif (abs($form_manageFleet->get('lessCargoI')->getData()) <= $fleetGive->getCargoI()) {
-                $cargoI = $planetTake->getCargoI() + abs($form_manageFleet->get('lessCargoI')->getData());
+                $planetTake->setCargoI($planetTake->getCargoI() - abs($form_manageFleet->get('moreCargoI')->getData()));
+            } elseif (abs($form_manageFleet->get('lessCargoI')->getData()) <= $fleetGive->getCargoI() and ($fleetGive->getCargoPlace() - $fleetGive->getCargoFull() - abs($form_manageFleet->get('lessCargoI')->getData() * 25000)) >= 0) {
                 $fleetGive->setCargoI($fleetGive->getCargoI() - abs($form_manageFleet->get('lessCargoI')->getData()));
-            } else {
-                $cargoI = $planetTake->getCargoI();
+                $planetTake->setCargoI($planetTake->getCargoI() + abs($form_manageFleet->get('lessCargoI')->getData()));
             }
-            if (abs($form_manageFleet->get('moreCargoV')->getData())) {
-                $cargoV = $planetTake->getCargoV() - abs($form_manageFleet->get('moreCargoV')->getData());
+            if (abs($form_manageFleet->get('moreCargoV')->getData()) <= $planetTake->getCargoV() and abs($form_manageFleet->get('moreCargoV')->getData()) != 0) {
                 $fleetGive->setCargoV($fleetGive->getCargoV() + abs($form_manageFleet->get('moreCargoV')->getData()));
-            } elseif (abs($form_manageFleet->get('lessCargoV')->getData()) <= $fleetGive->getCargoV()) {
-                $cargoV = $planetTake->getCargoV() + abs($form_manageFleet->get('lessCargoV')->getData());
+                $planetTake->setCargoV($planetTake->getCargoV() - abs($form_manageFleet->get('moreCargoV')->getData()));
+            } elseif (abs($form_manageFleet->get('lessCargoV')->getData()) <= $fleetGive->getCargoV() and ($fleetGive->getCargoPlace() - $fleetGive->getCargoFull() - abs($form_manageFleet->get('lessRecycleur')->getData() * 100000)) >= 0) {
                 $fleetGive->setCargoV($fleetGive->getCargoV() - abs($form_manageFleet->get('lessCargoV')->getData()));
-            } else {
-                $cargoV = $planetTake->getCargoV();
+                $planetTake->setCargoV($planetTake->getCargoV() + abs($form_manageFleet->get('lessCargoV')->getData()));
             }
-            if (abs($form_manageFleet->get('moreCargoX')->getData())) {
-                $cargoX = $planetTake->getCargoX() - abs($form_manageFleet->get('moreCargoX')->getData());
+            if (abs($form_manageFleet->get('moreCargoX')->getData()) <= $planetTake->getCargoX() and abs($form_manageFleet->get('moreCargoX')->getData()) != 0) {
                 $fleetGive->setCargoX($fleetGive->getCargoX() + abs($form_manageFleet->get('moreCargoX')->getData()));
-            } elseif (abs($form_manageFleet->get('lessCargoX')->getData()) <= $fleetGive->getCargoX()) {
-                $cargoX = $planetTake->getCargoX() + abs($form_manageFleet->get('lessCargoX')->getData());
+                $planetTake->setCargoX($planetTake->getCargoX() - abs($form_manageFleet->get('moreCargoX')->getData()));
+            } elseif (abs($form_manageFleet->get('lessCargoX')->getData()) <= $fleetGive->getCargoX() and ($fleetGive->getCargoPlace() - $fleetGive->getCargoFull() - abs($form_manageFleet->get('lessCargoX')->getData() * 250000)) >= 0) {
                 $fleetGive->setCargoX($fleetGive->getCargoX() - abs($form_manageFleet->get('lessCargoX')->getData()));
-            } else {
-                $cargoX = $planetTake->getCargoX();
+                $planetTake->setCargoX($planetTake->getCargoX() + abs($form_manageFleet->get('lessCargoX')->getData()));
             }
-            if (abs($form_manageFleet->get('moreBarge')->getData())) {
-                $barge = $planetTake->getBarge() - abs($form_manageFleet->get('moreBarge')->getData());
+            if (abs($form_manageFleet->get('moreBarge')->getData()) <= $planetTake->getBarge() and abs($form_manageFleet->get('moreBarge')->getData()) != 0) {
                 $fleetGive->setBarge($fleetGive->getBarge() + abs($form_manageFleet->get('moreBarge')->getData()));
-            } elseif (abs($form_manageFleet->get('lessBarge')->getData()) <= $fleetGive->getBarge()) {
-                $barge = $planetTake->getBarge() + abs($form_manageFleet->get('lessBarge')->getData());
+                $planetTake->setBarge($planetTake->getBarge() - abs($form_manageFleet->get('moreBarge')->getData()));
+            } elseif (abs($form_manageFleet->get('lessBarge')->getData()) <= $fleetGive->getBarge() and ($fleetGive->getCargoPlace() - $fleetGive->getCargoFull() - abs($form_manageFleet->get('lessBarge')->getData() * 2500)) >= 0) {
                 $fleetGive->setBarge($fleetGive->getBarge() - abs($form_manageFleet->get('lessBarge')->getData()));
-            } else {
-                $barge = $planetTake->getBarge();
+                $planetTake->setBarge($planetTake->getBarge() + abs($form_manageFleet->get('lessBarge')->getData()));
+            }
+            if (abs($form_manageFleet->get('moreMotherShip')->getData()) <= $planetTake->getMotherShip() and abs($form_manageFleet->get('moreMotherShip')->getData()) != 0) {
+                $fleetGive->setMotherShip($fleetGive->getMotherShip() + abs($form_manageFleet->get('moreMotherShip')->getData()));
+                $planetTake->setMotherShip($planetTake->getMotherShip() - abs($form_manageFleet->get('moreMotherShip')->getData()));
+            } elseif (abs($form_manageFleet->get('lessMotherShip')->getData()) <= $fleetGive->getMotherShip() and (($fleetGive->getCargoPlace() / 1.10) - $fleetGive->getCargoFull()) >= 0) {
+                $fleetGive->setMotherShip($fleetGive->getMotherShip() - abs($form_manageFleet->get('lessMotherShip')->getData()));
+                $planetTake->setMotherShip($planetTake->getMotherShip() + abs($form_manageFleet->get('lessMotherShip')->getData()));
             }
             if (abs($form_manageFleet->get('moreMoonMaker')->getData())) {
                 $moonMaker = $planetTake->getMoonMaker() - abs($form_manageFleet->get('moreMoonMaker')->getData());
@@ -446,15 +442,6 @@ class FleetController  extends AbstractController
                 $fleetGive->setBrouilleurShip($fleetGive->getBrouilleurShip() - abs($form_manageFleet->get('lessBrouilleurShip')->getData()));
             } else {
                 $brouilleurShip = $planetTake->getBrouilleurShip();
-            }
-            if (abs($form_manageFleet->get('moreMotherShip')->getData())) {
-                $motherShip = $planetTake->getMotherShip() - abs($form_manageFleet->get('moreMotherShip')->getData());
-                $fleetGive->setMotherShip($fleetGive->getMotherShip() + abs($form_manageFleet->get('moreMotherShip')->getData()));
-            } elseif (abs($form_manageFleet->get('lessMotherShip')->getData()) <= $fleetGive->getMotherShip()) {
-                $motherShip = $planetTake->getMotherShip() + abs($form_manageFleet->get('lessMotherShip')->getData());
-                $fleetGive->setMotherShip($fleetGive->getMotherShip() - abs($form_manageFleet->get('lessMotherShip')->getData()));
-            } else {
-                $motherShip = $planetTake->getMotherShip();
             }
             if (abs($form_manageFleet->get('moreSonde')->getData())) {
                 $sonde = $planetTake->getSonde() - abs($form_manageFleet->get('moreSonde')->getData());
@@ -564,72 +551,106 @@ class FleetController  extends AbstractController
             } else {
                 $destroyer = $planetTake->getDestroyer();
             }
-            $nbKeep = 0;
-            if (abs($form_manageFleet->get('moreNiobium')->getData())) {
-                $niobium = $planetTake->getNiobium() - abs($form_manageFleet->get('moreNiobium')->getData());
-                $fleetGive->setNiobium($fleetGive->getNiobium() + abs($form_manageFleet->get('moreNiobium')->getData()));
+            if (abs($form_manageFleet->get('moreNiobium')->getData()) <= $planetTake->getNiobium() and abs($form_manageFleet->get('moreNiobium')->getData()) != 0) {
+                if (($fleetGive->getCargoPlace() - $fleetGive->getCargoFull()) >= $fleetGive->getNiobium() + abs($form_manageFleet->get('moreNiobium')->getData())) {
+                    $fleetGive->setNiobium($fleetGive->getNiobium() + abs($form_manageFleet->get('moreNiobium')->getData()));
+                    $planetTake->setNiobium($planetTake->getNiobium() - abs($form_manageFleet->get('moreNiobium')->getData()));
+                } else {
+                    $maxRes = $fleetGive->getCargoPlace() - $fleetGive->getCargoFull();
+                    $fleetGive->setNiobium($fleetGive->getNiobium() + $maxRes);
+                    $planetTake->setNiobium($planetTake->getNiobium() - $maxRes);
+                }
             } elseif (abs($form_manageFleet->get('lessNiobium')->getData()) <= $fleetGive->getNiobium()) {
-                $niobium = $planetTake->getNiobium() + abs($form_manageFleet->get('lessNiobium')->getData());
-                $fleetGive->setNiobium($fleetGive->getNiobium() - abs($form_manageFleet->get('lessNiobium')->getData()));
-            } else {
-                $niobium = 0;
-                $nbKeep = 1;
+                if ($planetTake->getNiobiumMax() >= $planetTake->getNiobium() + abs($form_manageFleet->get('lessNiobium')->getData())) {
+                    $fleetGive->setNiobium($fleetGive->getNiobium() - abs($form_manageFleet->get('lessNiobium')->getData()));
+                    $planetTake->setNiobium($planetTake->getNiobium() + abs($form_manageFleet->get('lessNiobium')->getData()));
+                } else {
+                    $maxRes = $planetTake->getNiobiumMax() - $planetTake->getNiobium();
+                    $fleetGive->setNiobium($fleetGive->getNiobium() - $maxRes);
+                    $planetTake->setNiobium($planetTake->getNiobium() + $maxRes);
+                }
             }
-            $wtKeep = 0;
-            if (abs($form_manageFleet->get('moreWater')->getData())) {
-                $water = $planetTake->getWater() - abs($form_manageFleet->get('moreWater')->getData());
-                $fleetGive->setWater($fleetGive->getWater() + abs($form_manageFleet->get('moreWater')->getData()));
+            if (abs($form_manageFleet->get('moreWater')->getData()) <= $planetTake->getWater() and abs($form_manageFleet->get('moreWater')->getData()) != 0) {
+                if (($fleetGive->getCargoPlace() - $fleetGive->getCargoFull()) >= $fleetGive->getWater() + abs($form_manageFleet->get('moreWater')->getData())) {
+                    $fleetGive->setWater($fleetGive->getWater() + abs($form_manageFleet->get('moreWater')->getData()));
+                    $planetTake->setWater($planetTake->getWater() - abs($form_manageFleet->get('moreWater')->getData()));
+                } else {
+                    $maxRes = $fleetGive->getCargoPlace() - $fleetGive->getCargoFull();
+                    $fleetGive->setWater($fleetGive->getWater() + $maxRes);
+                    $planetTake->setWater($planetTake->getWater() - $maxRes);
+                }
             } elseif (abs($form_manageFleet->get('lessWater')->getData()) <= $fleetGive->getWater()) {
-                $water = $planetTake->getWater() + abs($form_manageFleet->get('lessWater')->getData());
-                $fleetGive->setWater($fleetGive->getWater() - abs($form_manageFleet->get('lessWater')->getData()));
-            } else {
-                $water = 0;
-                $wtKeep = 1;
+                if ($planetTake->getWaterMax() >= $planetTake->getWater() + abs($form_manageFleet->get('lessWater')->getData())) {
+                    $fleetGive->setWater($fleetGive->getWater() - abs($form_manageFleet->get('lessWater')->getData()));
+                    $planetTake->setWater($planetTake->getWater() + abs($form_manageFleet->get('lessWater')->getData()));
+                } else {
+                    $maxRes = $planetTake->getWaterMax() - $planetTake->getWater();
+                    $fleetGive->setWater($fleetGive->getWater() - $maxRes);
+                    $planetTake->setWater($planetTake->getWater() + $maxRes);
+                }
             }
-            $solKeep = 0;
-            if (abs($form_manageFleet->get('moreSoldier')->getData())) {
-                $soldier = $planetTake->getSoldier() - abs($form_manageFleet->get('moreSoldier')->getData());
-                $fleetGive->setSoldier($fleetGive->getSoldier() + abs($form_manageFleet->get('moreSoldier')->getData()));
+            if (abs($form_manageFleet->get('moreSoldier')->getData()) <= $planetTake->getSoldier() and abs($form_manageFleet->get('moreSoldier')->getData()) != 0) {
+                if (($fleetGive->getCargoPlace() - $fleetGive->getCargoFull()) >= $fleetGive->getSoldier() + abs($form_manageFleet->get('moreSoldier')->getData())) {
+                    $fleetGive->setSoldier($fleetGive->getSoldier() + abs($form_manageFleet->get('moreSoldier')->getData()));
+                    $planetTake->setSoldier($planetTake->getSoldier() - abs($form_manageFleet->get('moreSoldier')->getData()));
+                } else {
+                    $maxRes = $fleetGive->getCargoPlace() - $fleetGive->getCargoFull();
+                    $fleetGive->setSoldier($fleetGive->getSoldier() + $maxRes);
+                    $planetTake->setSoldier($planetTake->getSoldier() - $maxRes);
+                }
             } elseif (abs($form_manageFleet->get('lessSoldier')->getData()) <= $fleetGive->getSoldier()) {
-                $soldier = $planetTake->getSoldier() + abs($form_manageFleet->get('lessSoldier')->getData());
-                $fleetGive->setSoldier($fleetGive->getSoldier() - abs($form_manageFleet->get('lessSoldier')->getData()));
-            } else {
-                $soldier = 0;
-                $solKeep = 1;
+                if ($planetTake->getSoldierMax() >= $planetTake->getSoldier() + abs($form_manageFleet->get('lessSoldier')->getData())) {
+                    $fleetGive->setSoldier($fleetGive->getSoldier() - abs($form_manageFleet->get('lessSoldier')->getData()));
+                    $planetTake->setSoldier($planetTake->getSoldier() + abs($form_manageFleet->get('lessSoldier')->getData()));
+                } else {
+                    $maxRes = $planetTake->getSoldierMax() - $planetTake->getSoldier();
+                    $fleetGive->setSoldier($fleetGive->getSoldier() - $maxRes);
+                    $planetTake->setSoldier($planetTake->getSoldier() + $maxRes);
+                }
             }
-            $wkKeep = 0;
-            if (abs($form_manageFleet->get('moreWorker')->getData())) {
-                $worker = $planetTake->getWorker() - abs($form_manageFleet->get('moreWorker')->getData());
-                $fleetGive->setWorker($fleetGive->getWorker() + abs($form_manageFleet->get('moreWorker')->getData()));
+            if (abs($form_manageFleet->get('moreWorker')->getData()) <= $planetTake->getWorker() and abs($form_manageFleet->get('moreWorker')->getData()) != 0) {
+                if (($fleetGive->getCargoPlace() - $fleetGive->getCargoFull()) >= $fleetGive->getWorker() + abs($form_manageFleet->get('moreWorker')->getData())) {
+                    $fleetGive->setWorker($fleetGive->getWorker() + abs($form_manageFleet->get('moreWorker')->getData()));
+                    $planetTake->setWorker($planetTake->getWorker() - abs($form_manageFleet->get('moreWorker')->getData()));
+                } else {
+                    $maxRes = $fleetGive->getCargoPlace() - $fleetGive->getCargoFull();
+                    $fleetGive->setWorker($fleetGive->getWorker() + $maxRes);
+                    $planetTake->setWorker($planetTake->getWorker() - $maxRes);
+                }
             } elseif (abs($form_manageFleet->get('lessWorker')->getData()) <= $fleetGive->getWorker()) {
-                $worker = $planetTake->getWorker() + abs($form_manageFleet->get('lessWorker')->getData());
-                $fleetGive->setWorker($fleetGive->getWorker() - abs($form_manageFleet->get('lessWorker')->getData()));
-            } else {
-                $worker = 0;
-                $wkKeep = 1;
+                if ($planetTake->getWorkerMax() >= $planetTake->getWorker() + abs($form_manageFleet->get('lessWorker')->getData())) {
+                    $fleetGive->setWorker($fleetGive->getWorker() - abs($form_manageFleet->get('lessWorker')->getData()));
+                    $planetTake->setWorker($planetTake->getWorker() + abs($form_manageFleet->get('lessWorker')->getData()));
+                } else {
+                    $maxRes = $planetTake->getWorkerMax() - $planetTake->getWorker();
+                    $fleetGive->setWorker($fleetGive->getWorker() - $maxRes);
+                    $planetTake->setWorker($planetTake->getWorker() + $maxRes);
+                }
             }
-            $scKeep = 0;
-            if (abs($form_manageFleet->get('moreScientist')->getData())) {
-                $scientist = $planetTake->getScientist() - abs($form_manageFleet->get('moreScientist')->getData());
-                $fleetGive->setScientist($fleetGive->getScientist() + abs($form_manageFleet->get('moreScientist')->getData()));
+            if (abs($form_manageFleet->get('moreScientist')->getData()) <= $planetTake->getScientist() and abs($form_manageFleet->get('moreScientist')->getData()) != 0) {
+                if (($fleetGive->getCargoPlace() - $fleetGive->getCargoFull()) >= $fleetGive->getScientist() + abs($form_manageFleet->get('moreScientist')->getData())) {
+                    $fleetGive->setScientist($fleetGive->getScientist() + abs($form_manageFleet->get('moreScientist')->getData()));
+                    $planetTake->setScientist($planetTake->getScientist() - abs($form_manageFleet->get('moreScientist')->getData()));
+                } else {
+                    $maxRes = $fleetGive->getCargoPlace() - $fleetGive->getCargoFull();
+                    $fleetGive->setScientist($fleetGive->getScientist() + $maxRes);
+                    $planetTake->setScientist($planetTake->getScientist() - $maxRes);
+                }
             } elseif (abs($form_manageFleet->get('lessScientist')->getData()) <= $fleetGive->getScientist()) {
-                $scientist = $planetTake->getScientist() + abs($form_manageFleet->get('lessScientist')->getData());
-                $fleetGive->setScientist($fleetGive->getScientist() - abs($form_manageFleet->get('lessScientist')->getData()));
-            } else {
-                $scientist = 0;
-                $scKeep = 1;
+                if ($planetTake->getScientistMax() >= $planetTake->getScientist() + abs($form_manageFleet->get('lessScientist')->getData())) {
+                    $fleetGive->setScientist($fleetGive->getScientist() - abs($form_manageFleet->get('lessScientist')->getData()));
+                    $planetTake->setScientist($planetTake->getScientist() + abs($form_manageFleet->get('lessScientist')->getData()));
+                } else {
+                    $maxRes = $planetTake->getScientistMax() - $planetTake->getScientist();
+                    $fleetGive->setScientist($fleetGive->getScientist() - $maxRes);
+                    $planetTake->setScientist($planetTake->getScientist() + $maxRes);
+                }
             }
-            $cargo = $fleetGive->getCargoPlace() - $cargoRessources;
-            if (($colonizer < 0 || $recycleur < 0) || ($barge < 0 || $sonde < 0) || ($hunter < 0 || $fregate < 0) ||
-                ($niobium < 0 || $water < 0) || ($soldier < 0 || $worker < 0) || ($scientist < 0 || $cargo < 0) ||
-                ($cargoI < 0 || $cargoV < 0) || ($hunterHeavy < 0 || $corvet < 0) ||
+            if (($destroyer < 0 || $sonde < 0) || ($hunter < 0 || $fregate < 0)||
+                ($hunterHeavy < 0 || $corvet < 0) ||
                 ($corvetLaser < 0 || $fregatePlasma < 0) || ($croiser < 0 || $ironClad < 0) ||
-                ($destroyer < 0 || $cargoX < 0) || ($hunterWar < 0 || $corvetWar < 0) ||
-                ($moonMaker < 0 || $radarShip < 0) || ($brouilleurShip < 0 || $motherShip < 0) ||
-                ($soldier > $planetTake->getSoldierMax()) ||
-                ($worker > $planetTake->getWorkerMax() || $scientist > $planetTake->getScientistMax()) ||
-                ($niobium > $planetTake->getNiobiumMax() || $water > $planetTake->getWaterMax()) ||
-                ($worker < 10000 && abs($form_manageFleet->get('moreWorker')->getData()))) {
+                ($hunterWar < 0 || $corvetWar < 0) ||
+                ($moonMaker < 0 || $radarShip < 0) || ($brouilleurShip < 0 || $colonizer < 0)) {
                 return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
             }
 
@@ -637,15 +658,9 @@ class FleetController  extends AbstractController
                 $em->remove($fleetGive);
             }
             $planetTake->setColonizer($colonizer);
-            $planetTake->setCargoI($cargoI);
-            $planetTake->setCargoV($cargoV);
-            $planetTake->setCargoX($cargoX);
-            $planetTake->setRecycleur($recycleur);
-            $planetTake->setBarge($barge);
             $planetTake->setMoonMaker($moonMaker);
             $planetTake->setRadarShip($radarShip);
             $planetTake->setBrouilleurShip($brouilleurShip);
-            $planetTake->setMotherShip($motherShip);
             $planetTake->setSonde($sonde);
             $planetTake->setHunter($hunter);
             $planetTake->setHunterHeavy($hunterHeavy);
@@ -658,21 +673,6 @@ class FleetController  extends AbstractController
             $planetTake->setCroiser($croiser);
             $planetTake->setIronClad($ironClad);
             $planetTake->setDestroyer($destroyer);
-            if($nbKeep == 0) {
-                $planetTake->setNiobium($niobium);
-            }
-            if($wtKeep == 0) {
-                $planetTake->setWater($water);
-            }
-            if($solKeep == 0) {
-                $planetTake->setSoldier($soldier);
-            }
-            if($wkKeep == 0) {
-                $planetTake->setWorker($worker);
-            }
-            if($scKeep == 0) {
-                $planetTake->setScientist($scientist);
-            }
 
             $em->flush();
             return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);

@@ -58,7 +58,7 @@ class SoldierController extends AbstractController
                     return $this->redirectToRoute('soldier', ['idp' => $usePlanet->getId()]);
                 }
                 $tmpSoldier = $usePlanet->getSoldierAtNbr();
-                $now->add(new DateInterval('PT' . round(($nbrSoldier / 10) + $tmpSoldier) . 'S'));  // X10 NORMAL GAME
+                $now->add(new DateInterval('PT' . round(($nbrSoldier + $tmpSoldier) / 10) . 'S'));  // X10 NORMAL GAME
                 $usePlanet->setSoldierAtNbr($usePlanet->getSoldierAtNbr() + $nbrSoldier);
             } else {
                 $now->add(new DateInterval('PT' . round($nbrSoldier / 10) . 'S')); // X10 NORMAL GAME

@@ -758,28 +758,28 @@
                                 <tbody>
                                 <tr>
                                     <th class="tab-cells-name p-2 pl-4">
-                                        {{ 'fleet.cargo'|trans }} {{ fleet.getCargoFull()|number_format }} / {{ fleet.getCargoPlace()|number_format }} <span class="float-right"><a href="{{ path('discharge_fleet_all', {'idp': usePlanet.getId(), 'id': fleet.getId() }) }}">{{ 'fleet.allDischarge'|trans }}</a></span>
+                                        {{ 'fleet.cargo'|trans }} {{ fleet.getCargoFull()|number_format }} / {{ fleet.getCargoPlace()|number_format }}{% if fleet.getPlanet().getUser() or fleet.getPlanet().getMerchant() == true %} <span class="float-right"><a href="{{ path('discharge_fleet_all', {'idp': usePlanet.getId(), 'id': fleet.getId() }) }}">{{ 'fleet.allDischarge'|trans }}</a></span>{% endif %}
                                     </th>
                                 </tr>
                                 <tr{% if fleet.getNiobium() == 0 %} hidden{% endif %}>
                                     <th class="tab-cells-name p-2 pl-4">
-                                        {{ 'fleet.niobium'|trans }} x {{ fleet.getNiobium()|number_format }} <span class="float-right"><a href="{{ path('discharge_fleet_niobium', {'idp': usePlanet.getId(), 'id': fleet.getId() }) }}">{{ 'fleet.discharge'|trans }}</a></span>
+                                        {{ 'fleet.niobium'|trans }} x {{ fleet.getNiobium()|number_format }}{% if fleet.getPlanet().getUser() or fleet.getPlanet().getMerchant() == true %} <span class="float-right"><a href="{{ path('discharge_fleet_niobium', {'idp': usePlanet.getId(), 'id': fleet.getId() }) }}">{{ 'fleet.discharge'|trans }}</a></span>{% endif %}
                                     </th>
                                 <tr{% if fleet.getWater() == 0 %} hidden{% endif %}>
                                     <th class="tab-cells-name p-2 pl-4">
-                                        {{ 'fleet.water'|trans }} x {{ fleet.getWater()|number_format }} <span class="float-right"><a href="{{ path('discharge_fleet_water', {'idp': usePlanet.getId(), 'id': fleet.getId() }) }}">{{ 'fleet.discharge'|trans }}</a></span>
+                                        {{ 'fleet.water'|trans }} x {{ fleet.getWater()|number_format }}{% if fleet.getPlanet().getUser() or fleet.getPlanet().getMerchant() == true %} <span class="float-right"><a href="{{ path('discharge_fleet_water', {'idp': usePlanet.getId(), 'id': fleet.getId() }) }}">{{ 'fleet.discharge'|trans }}</a></span>{% endif %}
                                     </th>
                                 <tr{% if fleet.getSoldier() == 0 %} hidden{% endif %}>
                                     <th class="tab-cells-name p-2 pl-4">
-                                        {{ 'fleet.soldier'|trans }} x {{ fleet.getSoldier()|number_format }} <span class="float-right"><a href="{{ path('discharge_fleet_soldier', {'idp': usePlanet.getId(), 'id': fleet.getId() }) }}">{{ 'fleet.discharge'|trans }}</a></span>
+                                        {{ 'fleet.soldier'|trans }} x {{ fleet.getSoldier()|number_format }}{% if fleet.getPlanet().getUser() or fleet.getPlanet().getMerchant() == true %} <span class="float-right"><a href="{{ path('discharge_fleet_soldier', {'idp': usePlanet.getId(), 'id': fleet.getId() }) }}">{{ 'fleet.discharge'|trans }}</a></span>{% endif %}
                                     </th>
                                 <tr{% if fleet.getWorker() == 0 %} hidden{% endif %}>
                                     <th class="tab-cells-name p-2 pl-4">
-                                        {{ 'fleet.worker'|trans }} x {{ fleet.getWorker()|number_format }} <span class="float-right"><a href="{{ path('discharge_fleet_worker', {'idp': usePlanet.getId(), 'id': fleet.getId() }) }}">{{ 'fleet.discharge'|trans }}</a></span>
+                                        {{ 'fleet.worker'|trans }} x {{ fleet.getWorker()|number_format }}{% if fleet.getPlanet().getUser() or fleet.getPlanet().getMerchant() == true %} <span class="float-right"><a href="{{ path('discharge_fleet_worker', {'idp': usePlanet.getId(), 'id': fleet.getId() }) }}">{{ 'fleet.discharge'|trans }}</a></span>{% endif %}
                                     </th>
                                 <tr{% if fleet.getScientist() == 0 %} hidden{% endif %}>
                                     <th class="tab-cells-name p-2 pl-4">
-                                        {{ 'fleet.scientist'|trans }} x {{ fleet.getScientist()|number_format }} <span class="float-right"><a href="{{ path('discharge_fleet_scientist', {'idp': usePlanet.getId(), 'id': fleet.getId() }) }}">{{ 'fleet.discharge'|trans }}</a></span>
+                                        {{ 'fleet.scientist'|trans }} x {{ fleet.getScientist()|number_format }}{% if fleet.getPlanet().getUser() or fleet.getPlanet().getMerchant() == true %} <span class="float-right"><a href="{{ path('discharge_fleet_scientist', {'idp': usePlanet.getId(), 'id': fleet.getId() }) }}">{{ 'fleet.discharge'|trans }}</a></span>{% endif %}
                                     </th>
                                 </tr>
                                 </tbody>
