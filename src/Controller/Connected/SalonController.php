@@ -116,7 +116,11 @@ class SalonController extends AbstractController
         if ($form_message->isSubmitted() && $form_message->isValid() && ($user->getSalonBan() > $now || $user->getSalonBan() == null)) {
             $message = new S_Content();
             $message->setSalon($salon);
-            $message->setMessage(nl2br($form_message->get('content')->getData()));
+            if (substr($form_message->get('content')->getData(), 0, 8) == 'https://' || substr($form_message->get('content')->getData(), 0, 7) == 'http://') {
+                $message->setMessage('<span><a target="_blank" href="' . $form_message->get('content')->getData() . '">' . $form_message->get('content')->getData() . '</a></span>');
+            } else {
+                $message->setMessage(nl2br($form_message->get('content')->getData()));
+            }
             $message->setSendAt($now);
             $message->setUser($user);
 
