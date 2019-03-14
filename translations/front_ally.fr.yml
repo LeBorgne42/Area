@@ -38,7 +38,7 @@ ally.accept: 'Rejoindre l''alliance'
 ally.leave: 'Quitter alliance'
 ally.leaveText: 'Êtes vous bien sûr de vouloir quitter votre alliance ?'
 leave: 'Quitter l''alliance'
-ally.memberKick: 'Exclure un joueur'
+ally.memberKick: Exclure
 ally.kick: Exclure
 ally.allyUsers: 'Choisir membre'
 ally.canRecruit: Recruter

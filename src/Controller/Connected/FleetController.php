@@ -174,8 +174,6 @@ class FleetController  extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        $now = new DateTime();
-        $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         if($user->getGameOver()) {
@@ -201,8 +199,6 @@ class FleetController  extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        $now = new DateTime();
-        $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         if($user->getGameOver()) {
@@ -1240,14 +1236,15 @@ class FleetController  extends AbstractController
             $reportSell->setTitle("Vente aux marchands");
             $reportSell->setImageName("sell_report.jpg");
             $newWarPointS = round((($fleetGive->getScientist() * 100) + ($fleetGive->getWorker() * 50) + ($fleetGive->getSoldier() * 10) + ($fleetGive->getWater() / 3) + ($fleetGive->getNiobium() / 6)) / 1000);
-            $reportSell->setContent("Votre vente aux marchands vous a rapporté " . round(($fleetGive->getWater() * 0.5) + ($fleetGive->getSoldier() * 5) + ($fleetGive->getWorker() * 2) + ($fleetGive->getScientist() * 50) + ($fleetGive->getNiobium() * 0.25)) . " bitcoin. Et " . $newWarPointS . " points de Guerre.");
+            $gain = round(($fleetGive->getWater() * 0.5) + ($fleetGive->getSoldier() * 5) + ($fleetGive->getWorker() * 2) + ($fleetGive->getScientist() * 50) + ($fleetGive->getNiobium() * 0.25));
+            $reportSell->setContent("Votre vente aux marchands vous a rapporté " . $gain . " bitcoin. Et " . $newWarPointS . " points de Guerre.");
             $em->persist($reportSell);
             $planetTake->setScientist($planetTake->getScientist() + $fleetGive->getScientist());
             $planetTake->setWorker($planetTake->getWorker() + $fleetGive->getWorker());
             $planetTake->setSoldier($planetTake->getSoldier() + $fleetGive->getSoldier());
             $planetTake->setWater($planetTake->getWater() + $fleetGive->getWater());
             $planetTake->setNiobium($planetTake->getNiobium() + $fleetGive->getNiobium());
-            $user->setBitcoin($user->getBitcoin() + ($fleetGive->getScientist() * 50) + ($fleetGive->getWorker() * 2) + ($fleetGive->getSoldier() * 5) + ($fleetGive->getWater() * 0.5) + ($fleetGive->getNiobium() * 0.25));
+            $user->setBitcoin($user->getBitcoin() + $gain);
             $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $newWarPointS);
             $fleetGive->setScientist(0);
             $fleetGive->setNiobium(0);

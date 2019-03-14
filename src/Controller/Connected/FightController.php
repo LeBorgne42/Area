@@ -632,7 +632,7 @@ class FightController extends AbstractController
                 $soldierAtmp = $barge;
             }
             if($dMilitary > $aMilitary) {
-                $warPointDef = round($aMilitary / 10);
+                $warPointDef = round($aMilitary);
                 $userDefender->getRank()->setWarPoint($userDefender->getRank()->getWarPoint() + $warPointDef);
                 $aMilitary = ($defenser->getSoldier() * 6) - $aMilitary;
                 if($barge < $invader->getSoldier()) {
@@ -661,7 +661,7 @@ class FightController extends AbstractController
             } else {
                 $soldierDtmp = $defenser->getSoldier() != 0 ? $defenser->getSoldier() : 1;
                 $workerDtmp = $defenser->getWorker();
-                $warPointAtt = round(($soldierDtmp / 10) + ($workerDtmp / 100));
+                $warPointAtt = round($soldierDtmp + ($workerDtmp / 10));
                 $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $warPointAtt);
                 $soldierAtmp = $invader->getSoldier();
                 $invader->setSoldier(($aMilitary - $dMilitary) / $alea);

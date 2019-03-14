@@ -412,6 +412,11 @@ class Planet
     protected $moon;
 
     /**
+     * @ORM\Column(name="auto_seller",type="boolean")
+     */
+    protected $autoSeller;
+
+    /**
      * @ORM\Column(name="radarAt",type="datetime", nullable=true)
      */
     protected $radarAt;
@@ -513,6 +518,7 @@ class Planet
         $this->groundPlace = 0;
         $this->skyPlace = 0;
         $this->recycleAt = NULL;
+        $this->autoSeller = 0;
     }
 
     /**
@@ -750,22 +756,24 @@ class Planet
     {
         $return = null;
         foreach($this->getFleets() as $fleet) {
-            if($fleet->getAttack() == 1) {
-                $return = 'ennemy';
-            } else {
-                $return = 'neutre';
-            }
-            if ($fleet->getUser() == $user) {
-                $return = null;
-            }
-            if($fleet->getUser()->getAlly() == $user->getAlly() && $return != 'pp-mine') {
-                $return = null;
-            }
-            if ($fleet->getUser()->getAlly() && $user->getAlly()) {
-                if (count($fleet->getUser()->getAlly()->getAllieds()) > 0) {
-                    foreach($fleet->getUser()->getAlly()->getAllieds() as $allied) {
-                        if($allied->getAllyTag() == $user->getAlly()->getSigle() && $allied->getAccepted() == 1) {
-                            $return = null;
+            if ($fleet->getFlightTime() == null) {
+                if ($fleet->getAttack() == 1) {
+                    $return = 'ennemy';
+                } else {
+                    $return = 'neutre';
+                }
+                if ($fleet->getUser() == $user) {
+                    $return = null;
+                }
+                if ($fleet->getUser()->getAlly() == $user->getAlly() && $return != 'pp-mine') {
+                    $return = null;
+                }
+                if ($fleet->getUser()->getAlly() && $user->getAlly()) {
+                    if (count($fleet->getUser()->getAlly()->getAllieds()) > 0) {
+                        foreach ($fleet->getUser()->getAlly()->getAllieds() as $allied) {
+                            if ($allied->getAllyTag() == $user->getAlly()->getSigle() && $allied->getAccepted() == 1) {
+                                $return = null;
+                            }
                         }
                     }
                 }
@@ -2196,6 +2204,22 @@ class Planet
     public function setConstructions($constructions): void
     {
         $this->constructions = $constructions;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAutoSeller()
+    {
+        return $this->autoSeller;
+    }
+
+    /**
+     * @param mixed $autoSeller
+     */
+    public function setAutoSeller($autoSeller): void
+    {
+        $this->autoSeller = $autoSeller;
     }
 
     /**

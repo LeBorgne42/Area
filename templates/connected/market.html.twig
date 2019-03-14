@@ -42,7 +42,7 @@
                     {% for quest in quests %}
                             <tr class="text-center">
                                 <td>{{ quest.name|trans|raw }}</td>
-                                <td>{{ quest.gain }} <img src="{{ asset('img/pdg.png') }}"</td>
+                                <td>{{ quest.gain|number_format }} <img src="{{ asset('img/pdg.png') }}"</td>
                                 <td>
                                     {% if quest.gain == 2500 %}
                                         <div class="text-or glyphicon glyphicon-star"></div>
@@ -109,6 +109,43 @@
                 </div>
             </div>
             {{ form_end(form_market) }}
+        </div>
+        <div class="front-block-ally mt-4 mb-5">
+            <form class="planetList_add mb-2" name="planetList_add" method="post" action="{{ path('planet_seller_add', {'idp': usePlanet.getId(), 'planet': '0'}) }}">
+                <span data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.autoSell'|trans }}" class="mr-5 text-more">{{ 'market.autoSell'|trans|raw }}<span class="glyphicon glyphicon-question-sign text-orange"></span></span>
+                <select class="planetChoice select2">
+                    <option value="">{{ 'planetList.add'|trans }}</option>
+                    {% for planet in planetsNoSell %}
+                        {% if planet.getOffensiveFleet(app.user) != 'ennemy' %}
+                            <option value="{{ planet.getId() }}">{{ planet.getName() }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+                <button type="submit" id="planet_choice_send" hidden></button>
+            </form>
+            <table class="table table-striped table-bordered table-dark seller-table">
+                <tbody>
+                    <tr>
+                    {% set x = 0 %}
+                    {% for planet in planetsSeller %}
+                        {% if x % 5 == 0 %}
+                            <tr>
+                        {% endif %}
+                            <td width="160" class="center-cells text-center">
+                                <a class="text-rouge" href="{{ path('planet_seller_sub', {'idp': usePlanet.getId(), 'planet': planet.getId()}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.remove'|trans }}">X</a> {{ planet.getName() }}
+                            </td>
+                        {% set x = x + 1 %}
+                        {% if x % 5 == 0 %}
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row mt-5">
+                <div class="offset-6 col-6">
+                    <a class="confirm-button" href="{{ path('planets_seller', {'idp': usePlanet.getId()}) }}">{{ 'market.sellAll'|trans }}</a>
+                </div>
         </div>
     </div>
 {% endblock %}

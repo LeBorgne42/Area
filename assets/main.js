@@ -78,6 +78,20 @@ function manageFleetListChoiceForm() {
     });
 }
 
+function managePlanetSellerChoiceForm() {
+    $('.planetList_add').off('change').on('change',function(e){
+        e.preventDefault();
+
+        var actionForm = $(this).attr('action');
+        fleetChoice = $(this)[0][0].value;
+
+        actionForm = actionForm.replace(/\/\d$/, '/' + fleetChoice);
+        console.log(actionForm);
+        $(this).attr('action', actionForm)
+        $(this).closest('form').submit();
+    });
+}
+
 function manageRenameFleetForm() {
     $('#fleet_rename_sendForm').off('click').on('click',function(e){
         e.preventDefault();
@@ -852,5 +866,6 @@ $(document).ready(function() {
     manageRenameFleetForm();
     managePlanetChoiceForm();
     manageFleetListChoiceForm();
+    managePlanetSellerChoiceForm();
     console.log("Toute utilisation de scripts sur le jeu seront puni d'un ban permanent, merci.");
 });

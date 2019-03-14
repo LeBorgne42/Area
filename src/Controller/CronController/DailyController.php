@@ -133,6 +133,8 @@ class DailyController extends AbstractController
             $x++;
         }
 
+        $em->flush();
+
         $users = $em->getRepository('App:User')
             ->createQueryBuilder('u')
             ->join('u.rank', 'r')
