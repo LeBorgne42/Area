@@ -177,54 +177,6 @@ class UserEvent implements EventSubscriberInterface
                         }
                     }
 
-                    if ($user->getCargo() == 3) {
-                        foreach ($user->getPlanets() as $planet) {
-                            if ($planet->getCargoI() != 0) {
-                                $planet->setCargoV(round($planet->getCargoI() / 2));
-                                $planet->setCargoI(0);
-                                $this->em->flush($planet);
-                            }
-                            if ($planet->getProduct()) {
-                                $product = $planet->getProduct();
-                                if ($product->getCargoI() != 0) {
-                                    $product->setCargoV(round($product->getCargoI() / 2));
-                                    $product->setCargoI(0);
-                                    $this->em->flush($product);
-                                }
-                            }
-                        }
-                        foreach ($user->getFleets() as $fleet) {
-                            if ($fleet->getCargoI() != 0) {
-                                $fleet->setCargoV(round($fleet->getCargoI() / 2));
-                                $fleet->setCargoI(0);
-                                $this->em->flush($fleet);
-                            }
-                        }
-                    } elseif ($user->getCargo() == 5){
-                        foreach ($user->getPlanets() as $planet) {
-                            if ($planet->getCargoV() != 0) {
-                                $planet->setCargoX(round($planet->getCargoV() / 2));
-                                $planet->setCargoV(0);
-                                $this->em->flush($planet);
-                            }
-                            if ($planet->getProduct()) {
-                                $product = $planet->getProduct();
-                                if ($product->getCargoV() != 0) {
-                                    $product->setCargoX(round($product->getCargoV() / 2));
-                                    $product->setCargoV(0);
-                                    $this->em->flush($product);
-                                }
-                            }
-                        }
-                        foreach ($user->getFleets() as $fleet) {
-                            if ($fleet->getCargoV() != 0) {
-                                $fleet->setCargoX(round($fleet->getCargoV() / 2));
-                                $fleet->setCargoV(0);
-                                $this->em->flush($fleet);
-                            }
-                        }
-                    }
-
                     if ($user->getLastActivity()) {
                         $seconds = ($now->format('U') - ($user->getLastActivity()->format('U')));
                     } else {

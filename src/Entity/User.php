@@ -579,6 +579,24 @@ class User implements UserInterface, \Serializable
     /**
      * @return mixed
      */
+    public function getWhichQuest()
+    {
+        $return = ['private_message', 'salon_message', 'pdg', 'spy_planet', 'sell', 'cohort', 'destroy_fleet', 'recycle', 'invade'];
+        if ($this->getColPlanets() < 20) {
+            $return[] = 'colonize';
+        }
+        if ($this->checkResearch()) {
+            $return[] = 'research';
+        }
+        if ($this->getAlly()) {
+            $return[] = 'ally_join';
+        }
+        return $return;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getSigleAlliedArray($sigles)
     {
         $ally = $this->getAlly();

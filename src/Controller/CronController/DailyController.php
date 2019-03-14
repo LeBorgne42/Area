@@ -31,9 +31,20 @@ class DailyController extends AbstractController
 
         $x = 1;
         foreach ($users as $user) {
-            $questOne = $em->getRepository('App:Quest')->findOneById(rand(1,4));
-            $questTwo = $em->getRepository('App:Quest')->findOneById(rand(5,10));
-            $questTree = $em->getRepository('App:Quest')->findOneById(rand(11,14));
+
+            $maxQuest = count($user->getWhichQuest()) - 1;
+            $first = rand(0, $maxQuest);
+            $second = $first;
+            $third = $second;
+            while ($second == $first) {
+                $second = rand(0, $maxQuest);
+            }
+            while ($third == $first or $third == $second) {
+                $third = rand(0, $maxQuest);
+            }
+            $questOne = $em->getRepository('App:Quest')->findOneByName($user->getWhichQuest()[$first]);
+            $questTwo = $em->getRepository('App:Quest')->findOneByName($user->getWhichQuest()[$second]);
+            $questTree = $em->getRepository('App:Quest')->findOneByName($user->getWhichQuest()[$third]);
             $report = new Report();
             $report->setTitle("Rapport de l'empire");
             $report->setImageName("daily_report.jpg");
