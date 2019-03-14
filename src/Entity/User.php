@@ -581,7 +581,7 @@ class User implements UserInterface, \Serializable
      */
     public function getWhichQuest()
     {
-        $return = ['private_message', 'salon_message', 'pdg', 'spy_planet', 'sell', 'cohort', 'destroy_fleet', 'recycle', 'invade'];
+        $return = ['private_message', 'salon_message', 'pdg', 'spy_planet', 'sell', 'cohort', 'destroy_fleet', 'recycle', 'invade', 'soldier', 'scientist', 'ships'];
         if ($this->getColPlanets() < 20) {
             $return[] = 'colonize';
         }
@@ -590,6 +590,9 @@ class User implements UserInterface, \Serializable
         }
         if ($this->getAlly()) {
             $return[] = 'ally_join';
+        }
+        if (!$this->getImageName()) {
+            $return[] = 'logo';
         }
         return $return;
     }

@@ -67,7 +67,11 @@ class SoldierController extends AbstractController
             $usePlanet->setWorker($usePlanet->getWorker() - ($nbrSoldier * 3));
             $usePlanet->setSoldierAt($now);
             $user->setBitcoin($user->getBitcoin() - ($nbrSoldier * 75));
-
+            $quest = $user->checkQuests('soldier');
+            if($quest) {
+                $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $quest->getGain());
+                $user->removeQuest($quest);
+            }
             $em->flush();
             return $this->redirectToRoute('soldier', ['idp' => $usePlanet->getId()]);
         }
@@ -93,6 +97,11 @@ class SoldierController extends AbstractController
             $usePlanet->setWorker($usePlanet->getWorker() - ($nbrScientist * 10));
             $user->setBitcoin($user->getBitcoin() - ($nbrScientist * 250));
             $usePlanet->setScientistAt($now);
+            $quest = $user->checkQuests('scientist');
+            if($quest) {
+                $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $quest->getGain());
+                $user->removeQuest($quest);
+            }
 
             $em->flush();
             return $this->redirectToRoute('soldier', ['idp' => $usePlanet->getId()]);

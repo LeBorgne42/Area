@@ -86,6 +86,11 @@ class OverviewController extends AbstractController
         $form_image->handleRequest($request);
 
         if ($form_image->isSubmitted()) {
+            $quest = $user->checkQuests('logo');
+            if($quest) {
+                $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $quest->getGain());
+                $user->removeQuest($quest);
+            }
             $em->flush();
         }
 

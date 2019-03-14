@@ -162,6 +162,11 @@ class SpatialController extends AbstractController
             $user->getRank()->setWarPoint($user->getRank()->getWarPoint() - $warPoint);
             $user->setBitcoin($user->getBitcoin() - $bitcoinLess);
             $em->persist($product);
+            $quest = $user->checkQuests('ships');
+            if($quest) {
+                $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $quest->getGain());
+                $user->removeQuest($quest);
+            }
 
             $em->flush();
 
