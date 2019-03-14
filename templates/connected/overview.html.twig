@@ -98,7 +98,7 @@
                             <div data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.bitcoinAlly'|trans }}" class="my-2">{{ 'info.allyBitcoin'|trans|raw }} {{ app.user.getAlly().getBitcoin()|number_format }}</div>
                             <div class="my-2">{{ 'info.allyShips'|trans|raw }} {{ app.user.getAlly().getAllShips()|number_format }}</div>
                         {% else %}
-                            <div class="my-2"><span><a href="{{ path('ally', {'idp': usePlanet.getId()}) }}">{{ 'info.allyMissing'|trans|raw }}</a></span></div>
+                            <div class="my-2{% if app.user.getTutorial() < 18 %} tutorial-hide{% endif %}"><span><a href="{{ path('ally', {'idp': usePlanet.getId()}) }}">{{ 'info.allyMissing'|trans|raw }}</a></span></div>
                             <div class="my-2">{{ 'info.allyMissingBoost'|trans|raw }}</div>
                             <div class="my-2">{{ 'info.allyMissingBoost2'|trans|raw }}</div>
                         {% endif %}
