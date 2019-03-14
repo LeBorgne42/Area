@@ -243,7 +243,7 @@
                         {% if planet.getSpaceShip() %}
                             <tr>
                                 <th class="tab-cells-name p-2{% if app.user.getTutorial() < 18 %} tutorial-hide{% endif %}">
-                                    {{ planet.getName() }} : {% if planet.getProduct() %}<span><a href="{{ path('spatial', {'idp': planet.getId()}) }}">{{ 'overview.inProduct'|trans }}</a></span>(<span class="timerArea" hidden>{{ planet.getProduct().getProductAt()|date('Y/m/d H:i:s') }}</span>){% else %}<span><a href="{{ path('spatial', {'idp': planet.getId()}) }}">{{ 'cell.spatialNone'|trans|raw }}</a></span>{% endif %}
+                                    {{ planet.getName() }} : {% if planet.getProduct() %}<span><a class="tipProduct" href="{{ path('spatial', {'idp': planet.getId()}) }}" data-placement="right" data-trigger="" title="{% for ships in planet.getProduct().getShips() %}<div class='my-3 text-left'>{% set x = 0 %}{% for info in ships %} {% if x == 0 %}{{ info }}{% else %}{{ info|trans }}{% endif %}{% set x = x + 1 %} {% endfor %}</div>{% endfor %}" data-html="true">{{ 'overview.inProduct'|trans }}</a></span>(<span class="timerArea" hidden>{{ planet.getProduct().getProductAt()|date('Y/m/d H:i:s') }}</span>){% else %}<span><a href="{{ path('spatial', {'idp': planet.getId()}) }}">{{ 'cell.spatialNone'|trans|raw }}</a></span>{% endif %}
                                 </th>
                             </tr>
                         {% endif %}

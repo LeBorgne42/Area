@@ -170,6 +170,81 @@ class Product
     /**
      * @return mixed
      */
+    public function getShips()
+    {
+        $return = [];
+        if ($this->sonde > 0) {
+            $return[] = [$this->sonde, 'sonde'];
+        }
+        if ($this->colonizer > 0) {
+            $return[] = [$this->colonizer, 'colonizer'];
+        }
+        if ($this->cargoI > 0) {
+            $return[] = [$this->cargoI, 'cargoI'];
+        }
+        if ($this->cargoV > 0) {
+            $return[] = [$this->cargoV, 'cargoV'];
+        }
+        if ($this->cargoX > 0) {
+            $return[] = [$this->cargoX, 'cargoX'];
+        }
+        if ($this->barge > 0) {
+            $return[] = [$this->barge, 'barges'];
+        }
+        if ($this->recycleur > 0) {
+            $return[] = [$this->recycleur, 'recycleurs'];
+        }
+        if ($this->radarShip > 0) {
+            $return[] = [$this->radarShip, 'radarShip'];
+        }
+        if ($this->brouilleurShip > 0) {
+            $return[] = [$this->brouilleurShip, 'brouilleurShip'];
+        }
+        if ($this->moonMaker > 0) {
+            $return[] = [$this->moonMaker, 'moonMaker'];
+        }
+        if ($this->motherShip > 0) {
+            $return[] = [$this->motherShip, 'motherShip'];
+        }
+        if ($this->hunter > 0) {
+            $return[] = [$this->hunter, 'hunter'];
+        }
+        if ($this->hunterHeavy > 0) {
+            $return[] = [$this->hunterHeavy, 'hunterHeavy'];
+        }
+        if ($this->hunterWar > 0) {
+            $return[] = [$this->hunterWar, 'hunterWar'];
+        }
+        if ($this->corvet > 0) {
+            $return[] = [$this->corvet, 'corvet'];
+        }
+        if ($this->corvetLaser > 0) {
+            $return[] = [$this->corvetLaser, 'corvetLaser'];
+        }
+        if ($this->corvetWar > 0) {
+            $return[] = [$this->corvetWar, 'corvetWar'];
+        }
+        if ($this->fregate > 0) {
+            $return[] = [$this->fregate, 'fregate'];
+        }
+        if ($this->fregatePlasma > 0) {
+            $return[] = [$this->fregatePlasma, 'fregatePlasma'];
+        }
+        if ($this->croiser > 0) {
+            $return[] = [$this->croiser, 'croiser'];
+        }
+        if ($this->ironClad > 0) {
+            $return[] = [$this->ironClad, 'ironClad'];
+        }
+        if ($this->destroyer > 0) {
+            $return[] = [$this->destroyer, 'destroyer'];
+        }
+        return $return;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getId()
     {
         return $this->id;

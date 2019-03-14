@@ -383,7 +383,7 @@ class Fleet
             } else {
                 $new = 0;
             }
-            $ships = $ships . "Chasseur à plasma : " . $this->getHunterWar() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round($new) . "</span></span><br>";
+            $ships = $ships . "Chasseur a plasma : " . $this->getHunterWar() . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . round($new) . "</span></span><br>";
         }
         if($this->getCorvetLaser()) {
             if($armor != 0) {

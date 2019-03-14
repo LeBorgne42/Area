@@ -844,6 +844,14 @@ $(document).ready(function() {
         $(this).tooltip('show');
     })
 
+    $('.tipProduct').on("mouseover", function() {
+        $(this).tooltip('show');
+    })
+
+    $('.tipProduct').on("mouseout", function() {
+        $(this).tooltip('hide');
+    })
+
     $(document).click(function() {
         $('.tipFleet').tooltip('hide');
         $("body").find(".modal-backdrop").css("display", "none");

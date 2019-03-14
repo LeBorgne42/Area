@@ -101,3 +101,25 @@ tooltip.dailyCost: 'Coût des soldats : <span class="text-rouge">-%soldier%</spa
 1: 'Préparation militaire'
 2: 'Guerre imminente'
 3: 'En guerre'
+sonde: Sonde
+destroyer: Destroyer
+ironClad: Cuirassé
+croiser: Croiseur
+fregate: Frégate
+fregatePlasma: 'Frégate a plasma'
+corvet: Corvette
+corvetLaser: 'Corvette a laser'
+corvetWar: 'Corvette de combat'
+hunter: Chasseur
+hunterHeavy: 'Chasseur lourd'
+hunterWar: 'Chasseur a plasma'
+moonMaker: Lunar
+motherShip: 'Vaisseau mère'
+radarShip: 'Vaisseau radar'
+brouilleurShip: 'Vaisseau brouilleur'
+barges: Barge
+recycleurs: Recycleur
+cargoI: 'Cargo I'
+cargoV: 'Cargo V'
+cargoX: 'Cargo X'
+colonizer: Colonisateur
