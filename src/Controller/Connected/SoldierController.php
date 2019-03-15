@@ -71,7 +71,7 @@ class SoldierController extends AbstractController
                     $user->removeQuest($quest);
                 }
             }
-            if ($form_caserneRecruit->get('tank')->getData() && $usePlanet->getBunker() > 0 && $usePlanet->getLightUsine() > 0) {
+            if ($form_caserneRecruit->get('tank')->getData() && $usePlanet->getBunker() > 0 && $usePlanet->getLightUsine() > 0 && $user->getTank() == 1) {
                 $now = new DateTime();
                 $now->setTimezone(new DateTimeZone('Europe/Paris'));
                 $nbrTank = abs($form_caserneRecruit->get('tank')->getData());
