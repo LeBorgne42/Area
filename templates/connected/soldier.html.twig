@@ -31,6 +31,10 @@
                     </tr>
                     </tbody>
                 </table>
+            {% else %}
+                <span hidden>
+                    {{ form_widget(form_caserneRecruit.soldier) }}
+                </span>
             {% endif %}
             {% if usePlanet.getBunker() > 0 and usePlanet.getLightUsine() > 0 and app.user.getTank() == 1 %}
                 <div class="block-title"><h2>{{ 'tank.recruit'|trans }}</h2></div>
@@ -56,6 +60,10 @@
                     </tr>
                     </tbody>
                 </table>
+            {% else %}
+                <span hidden>
+                    {{ form_widget(form_caserneRecruit.tank) }}
+                </span>
             {% endif %}
             {% if usePlanet.getCenterSearch() > 0 %}
                 <div class="block-title"><h2>{{ 'scientist.recruit'|trans }}</h2></div>
@@ -81,6 +89,10 @@
                     </tr>
                     </tbody>
                 </table>
+            {% else %}
+                <span hidden>
+                    {{ form_widget(form_caserneRecruit.scientist) }}
+                </span>
             {% endif %}
             {{ form_widget(form_caserneRecruit.sendForm) }}
             {{ form_end(form_caserneRecruit) }}
