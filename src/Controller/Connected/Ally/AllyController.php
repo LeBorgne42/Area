@@ -193,6 +193,9 @@ class AllyController extends AbstractController
             $user->setGrade(null);
             $user->setAllyBan($now);
         }
+        foreach ($ally->getFleets() as $fleet) {
+            $fleet->setAlly(null);
+        }
         foreach ($ally->getGrades() as $grade) {
             $em->remove($grade);
         }

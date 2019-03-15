@@ -201,11 +201,11 @@ class FleetController  extends AbstractController
         $user = $this->getUser();
         $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
-        if($user->getGameOver()) {
+        if ($user->getGameOver()) {
             return $this->redirectToRoute('game_over');
         }
 
-        if($user == $fleetList->getUser()) {
+        if ($user == $fleetList->getUser()) {
             $fleetList->removeFleet($fleet);
             $fleet->setFleetList(null);
             $em->flush();
@@ -225,16 +225,60 @@ class FleetController  extends AbstractController
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
-        if($user->getGameOver()) {
+        if ($user->getGameOver()) {
             return $this->redirectToRoute('game_over');
         }
 
-        if($user == $fleetList->getUser()) {
+        if ($user == $fleetList->getUser()) {
             foreach($fleetList->getFleets() as $fleet) {
                 $fleetList->removeFleet($fleet);
                 $fleet->setFleetList(null);
             }
             $em->remove($fleetList);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
+    }
+
+    /**
+     * @Route("/flotte-alliance-ajouter/{idp}/{fleet}", name="fleet_ally_add", requirements={"idp"="\d+","fleet"="\d+"})
+     */
+    public function fleetAllyAddAction($idp, Fleet $fleet)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+
+        if ($user->getGameOver()) {
+            return $this->redirectToRoute('game_over');
+        }
+
+        if ($user == $fleet->getUser() && $user->getAlly()) {
+            if (count($user->getAlly()->getFleets()) < round(count($user->getAlly()->getUsers()) / 2)) {
+                $fleet->setAlly($user->getAlly());
+                $em->flush();
+            }
+        }
+
+        return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
+    }
+
+    /**
+     * @Route("/flotte-alliance-sub/{idp}/{fleet}", name="fleet_ally_sub", requirements={"idp"="\d+","fleet"="\d+"})
+     */
+    public function fleetAllySubAction($idp, Fleet $fleet)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+
+        if ($user->getGameOver()) {
+            return $this->redirectToRoute('game_over');
+        }
+
+        if ($user == $fleet->getUser() && $user->getAlly()) {
+            $fleet->setAlly(null);
             $em->flush();
         }
 
@@ -251,15 +295,30 @@ class FleetController  extends AbstractController
 
         $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
-        $fleetGive = $em->getRepository('App:Fleet')
-            ->createQueryBuilder('f')
-            ->where('f.id = :id')
-            ->andWhere('f.user = :user')
-            ->andWhere('f.fightAt is null')
-            ->andWhere('f.flightTime is null')
-            ->setParameters(['id' => $id, 'user' => $user])
-            ->getQuery()
-            ->getOneOrNullResult();
+        if ($user->getAlly()) {
+            if ($user->getGrade()->getPlacement() == 1) {
+                $fleetGive = $em->getRepository('App:Fleet')
+                    ->createQueryBuilder('f')
+                    ->where('f.id = :id')
+                    ->andWhere('f.user = :user or f.ally = :ally')
+                    ->andWhere('f.fightAt is null')
+                    ->andWhere('f.flightTime is null')
+                    ->setParameters(['id' => $id, 'user' => $user, 'ally' => $user->getAlly()])
+                    ->getQuery()
+                    ->getOneOrNullResult();
+            }
+        } else {
+            $fleetGive = $em->getRepository('App:Fleet')
+                ->createQueryBuilder('f')
+                ->where('f.id = :id')
+                ->andWhere('f.user = :user')
+                ->andWhere('f.fightAt is null')
+                ->andWhere('f.flightTime is null')
+                ->setParameters(['id' => $id, 'user' => $user])
+                ->getQuery()
+                ->getOneOrNullResult();
+        }
+
 
         $planetTake = $fleetGive->getPlanet();
         $form_manageFleet = $this->createForm(SpatialEditFleetType::class);
@@ -764,13 +823,19 @@ class FleetController  extends AbstractController
 
         $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
+        $ally = 'w';
+        if ($user->getAlly()) {
+            if ($user->getGrade()->getPlacement() == 1) {
+                $ally = $user->getAlly();
+            }
+        }
         $fleetGive = $em->getRepository('App:Fleet')
             ->createQueryBuilder('f')
             ->where('f.id = :id')
-            ->andWhere('f.user = :user')
+            ->andWhere('f.user = :user or f.ally = :ally')
             ->andWhere('f.fightAt is null')
             ->andWhere('f.flightTime is null')
-            ->setParameters(['id' => $id, 'user' => $user])
+            ->setParameters(['id' => $id, 'user' => $user, 'ally' => $ally])
             ->getQuery()
             ->getOneOrNullResult();
 

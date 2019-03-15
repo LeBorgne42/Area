@@ -730,9 +730,9 @@ class FightController extends AbstractController
     }
 
     /**
-     * @Route("/colonisation-planete/{idp}/{fleet}/", name="colonizer_planet", requirements={"idp"="\d+", "fleet"="\d+"})
+     * @Route("/colonisation-planete/{fleet}/", name="colonizer_planet", requirements={"fleet"="\d+"})
      */
-    public function colonizeAction($idp, Fleet $fleet)
+    public function colonizeAction(Fleet $fleet)
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();

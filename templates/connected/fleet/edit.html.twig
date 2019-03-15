@@ -11,7 +11,7 @@
     {%- endblock -%}
     {%- block right_planet -%}
     {%- endblock -%}
-    {% if fleet.getUser() == app.user %}
+    {% if fleet.getUser() == app.user or (fleet.getAlly() == app.user.getAlly() and app.user.getGrade().getPlacement() == 1) %}
         <div class="modal-header">
             <div class="block-title ml-2"><h2>{{ 'fleet.createFleet'|trans }}</h2></div>
             <a href="{{ path('fleet', {'idp': usePlanet.getId()}) }}"><button type="button" class="close plus">X</button></a>
@@ -75,7 +75,7 @@
                         {% endif %}
                         {% if fleet.getColonizer() and fleet.getPlanet().getUser() == null and fleet.getPlanet().getEmpty() == false and fleet.getPlanet().getMerchant() == false and fleet.getPlanet().getCdr() == false and app.user.getColPlanets()|length < 20 and app.user.getColPlanets() <= (app.user.getTerraformation() + 1) %}
                             <span>
-                                <h4><a class="badge badge-success" href="{{ path('colonizer_planet', {'idp': usePlanet.getId(), 'fleet': fleet.getId()}) }}">
+                                <h4><a class="badge badge-success" href="{{ path('colonizer_planet', {'fleet': fleet.getId()}) }}">
                                     {{ 'fleet.colonize'|trans }}
                                 </a></h4>
                             </span>

@@ -56,6 +56,7 @@ tooltip.signature: 'ST signifie signature thermique, il serait trop facile que t
 tooltip.fleetMove: 'Toutes vos flottes qui sont en mouvement d''une planète vers une autre s''affiche ici.'
 tooltip.fleetOtherPlanet: 'Ici sont les flottes que vous avez sur vos autres planètes.'
 tooltip.fleetNoMyPlanet: 'Et enfin les flottes qui sont sur aucune de vos planètes.'
+tooltip.allyFleet: 'Vous pouvez partager vos flottes avec les membres de votre alliance, seuls les dirigeants de votre alliance pourront les utiliser.'
 fleet.combat: 'en combat'
 fleet.cargoI: 'Cargo I'
 fleet.cargoV: 'Cargo V'
@@ -101,6 +102,7 @@ fleet.cancelFleet: Annuler
 form.normal: Normal
 form.discharge: 'Décharger et revenir'
 form.col: Coloniser
+form.num: 0
 form.invade: Envahir
 fleet.st: ST
 tooltip.remove: 'Supprimer flotte de la Cohorte ?'

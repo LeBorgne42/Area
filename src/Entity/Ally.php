@@ -29,6 +29,12 @@ class Ally
     protected $users;
 
     /**
+     * @ORM\OneToMany(targetEntity="Fleet", mappedBy="ally", fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="fleet_id", referencedColumnName="id")
+     */
+    protected $fleets;
+
+    /**
      * @ORM\Column(name="politic",type="string", length=25)
      * @Assert\NotBlank(message = "required")
      */
@@ -179,6 +185,7 @@ class Ally
     public function __construct()
     {
         $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->fleets = new \Doctrine\Common\Collections\ArrayCollection();
         $this->salons = new \Doctrine\Common\Collections\ArrayCollection();
         $this->proposals = new \Doctrine\Common\Collections\ArrayCollection();
         $this->pnas = new \Doctrine\Common\Collections\ArrayCollection();
@@ -308,6 +315,38 @@ class Ally
             ->orderBy(array('grade' => 'ASC'));
 
         return $this->users->matching($criteria);
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFleets()
+    {
+        return $this->fleets;
+    }
+
+    /**
+     * Add fleet
+     *
+     * @param \App\Entity\Fleet $fleet
+     *
+     * @return Ally
+     */
+    public function addFleet(\App\Entity\Fleet $fleet)
+    {
+        $this->fleets[] = $fleet;
+
+        return $this;
+    }
+
+    /**
+     * Remove fleet
+     *
+     * @param \App\Entity\Fleet $fleet
+     */
+    public function removeFleet(\App\Entity\Fleet $fleet)
+    {
+        $this->fleet->removeElement($fleet);
     }
 
     /**
@@ -617,7 +656,7 @@ class Ally
     /**
      * @return int
      */
-    public function getFleets(): int
+    public function getAllyFleets(): int
     {
         $return = 0;
 
@@ -627,6 +666,19 @@ class Ally
             }
         }
         return $return;
+    }
+
+    /**
+     * @return int
+     */
+    public function getFlightTime() : int
+    {
+        foreach ($this->fleets as $fleet) {
+            if($fleet->getFlightTime()) {
+                return 1;
+            }
+        }
+        return 0;
     }
 
     /**

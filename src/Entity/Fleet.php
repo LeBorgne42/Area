@@ -44,6 +44,12 @@ class Fleet
     protected $user;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Ally", inversedBy="fleets", fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="ally_id", referencedColumnName="id", nullable=true)
+     */
+    protected $ally;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Fleet_List", inversedBy="fleets", fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(name="fleet_list_id", referencedColumnName="id")
      */
@@ -277,6 +283,7 @@ class Fleet
         $this->flightTime = null;
         $this->cancelFlight = null;
         $this->flightType = null;
+        $this->ally = null;
     }
 
     public function getId()
@@ -1086,6 +1093,22 @@ class Fleet
     public function setUser($user): void
     {
         $this->user = $user;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAlly()
+    {
+        return $this->ally;
+    }
+
+    /**
+     * @param mixed $ally
+     */
+    public function setAlly($ally): void
+    {
+        $this->ally = $ally;
     }
 
     /**
