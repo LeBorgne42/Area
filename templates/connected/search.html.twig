@@ -29,7 +29,7 @@
                 <tr>
                     <th class="tab-cells-name">
                         <img class="float-left building-img ml-3" src="{{ asset('img/utility.png') }}"><button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.utility'|trans|raw }}">{{ 'title.utility'|trans|raw }} - {{ 'research.level'|trans|raw }} {{ app.user.getUtility()|trans }} / 3</button>
-                        <div class="mt-4">{% if (app.user.getUtility() + 1) * 2500 > app.user.getBitcoin() %}<span class="text-rouge">{{ (app.user.getUtility() + 1) * 2500 }}</span>{% else %}{{ (app.user.getUtility() + 1) * 2500 }}{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
+                        <div class="mt-4">{% if (app.user.getUtility() + 1) * 2500 > app.user.getBitcoin() %}<span class="text-rouge">{{ ((app.user.getUtility() + 1) * 2500)|number_format }}</span>{% else %}{{ ((app.user.getUtility() + 1) * 2500)|number_format }}{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
                     </th>
                     <td class="center-cells cell-middle">
                         {{ 'research.utility.desc'|trans }}
@@ -55,7 +55,7 @@
                 <tr>
                     <th class="tab-cells-name">
                         <img class="float-left building-img ml-3" src="{{ asset('img/terra.png') }}"><button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.terra'|trans|raw }}">{{ 'title.terraformation'|trans|raw }} - {{ 'research.level'|trans|raw }} {{ app.user.getTerraformation()|trans }} / 18</button>
-                        <div class="mt-4">{% if (app.user.getTerraformation() + 1) * 12000 > app.user.getBitcoin() %}<span class="text-rouge">{{ (app.user.getTerraformation() + 1) * 12000 }}</span>{% else %}{{ (app.user.getTerraformation() + 1) * 12000 }}{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
+                        <div class="mt-4">{% if (app.user.getTerraformation() + 1) * 12000 > app.user.getBitcoin() %}<span class="text-rouge">{{ ((app.user.getTerraformation() + 1) * 12000)|number_format }}</span>{% else %}{{ ((app.user.getTerraformation() + 1) * 12000)|number_format }}{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
                     </th>
                     <td class="center-cells cell-middle">
                         {{ 'research.terraformation.desc'|trans }}
@@ -80,7 +80,7 @@
                 <tr>
                     <th class="tab-cells-name">
                         <img class="float-left building-img ml-3" src="{{ asset('img/cargo.png') }}"><button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.cargo'|trans|raw }}">{{ 'title.cargo'|trans|raw }} - {{ 'research.level'|trans|raw }} {{ app.user.getCargo()|trans }} / 5</button>
-                        <div class="mt-4">{% if (app.user.getCargo() + 1) * 3500 > app.user.getBitcoin() %}<span class="text-rouge">{{ (app.user.getCargo() + 1) * 3500 }}</span>{% else %}{{ (app.user.getCargo() + 1) * 3500 }}{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
+                        <div class="mt-4">{% if (app.user.getCargo() + 1) * 3500 > app.user.getBitcoin() %}<span class="text-rouge">{{ ((app.user.getCargo() + 1) * 3500)|number_format }}</span>{% else %}{{ ((app.user.getCargo() + 1) * 3500)|number_format }}{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
                     </th>
                     <td class="center-cells cell-middle">
                         {{ 'research.cargo.desc'|trans }}
@@ -105,7 +105,7 @@
                 </tr>
                 <th class="tab-cells-name">
                     <img class="float-left building-img ml-3" src="{{ asset('img/invader.png') }}">{% if app.user.getBarge() == false %}<button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.barge'|trans|raw }}">{{ 'title.barge'|trans|raw }} - {{ 'research.canBe'|trans }}</button>{% else %}{{ 'title.barge'|trans|raw }} - <span class="text-vert">{{ 'research.Activated'|trans }}</span>{% endif %}
-                    <div class="mt-4">{% if 35000 > app.user.getBitcoin() %}<span class="text-rouge">35000</span>{% else %}35000{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
+                    <div class="mt-4">{% if 35000 > app.user.getBitcoin() %}<span class="text-rouge">35.000</span>{% else %}35.000{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
                 </th>
                 <td class="center-cells cell-middle">
                     {{ 'research.barge.desc'|trans }}
@@ -131,7 +131,7 @@
                 <tr>
                     <th class="tab-cells-name">
                         <img class="float-left building-img ml-3" src="{{ asset('img/recyclage.png') }}">{% if app.user.getRecycleur() == false %}<button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.recylceur'|trans|raw }}">{{ 'title.recycleur'|trans|raw }} - {{ 'research.canBe'|trans }}</button>{% else %}{{ 'title.recycleur'|trans|raw }} - <span class="text-vert">{{ 'research.Activated'|trans }}</span>{% endif %}
-                        <div class="mt-4">{% if 16900 > app.user.getBitcoin() %}<span class="text-rouge">16900</span>{% else %}16900{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
+                        <div class="mt-4">{% if 16900 > app.user.getBitcoin() %}<span class="text-rouge">16.900</span>{% else %}16.900{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
                     </th>
                     <td class="center-cells cell-middle">
                         {{ 'research.recycleur.desc'|trans }}
@@ -157,7 +157,7 @@
                 <tr>
                     <th class="tab-cells-name">
                         <img class="float-left building-img ml-3" src="{{ asset('img/scanner.png') }}"><button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.onde'|trans|raw }}">{{ 'title.onde'|trans|raw }} - {{ 'research.level'|trans|raw }} {{ app.user.getOnde()|trans }} / 5</button>
-                        <div class="mt-4">{% if (app.user.getOnde() + 1) * 2300 > app.user.getBitcoin() %}<span class="text-rouge">{{ (app.user.getOnde() + 1) * 2300 }}</span>{% else %}{{ (app.user.getOnde() + 1) * 2300 }}{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
+                        <div class="mt-4">{% if (app.user.getOnde() + 1) * 2300 > app.user.getBitcoin() %}<span class="text-rouge">{{ ((app.user.getOnde() + 1) * 2300)|number_format }}</span>{% else %}{{ ((app.user.getOnde() + 1) * 2300)|number_format }}{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
                     </th>
                     <td class="center-cells cell-middle">
                         {{ 'research.onde.desc'|trans }}
@@ -183,7 +183,7 @@
                 <tr>
                     <th class="tab-cells-name">
                         <img class="float-left building-img ml-3" src="{{ asset('img/hyper.png') }}">{% if app.user.getHyperespace() == false %}<button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.hyper'|trans|raw }}">{{ 'title.hyperespace'|trans|raw }} - {{ 'research.canBe'|trans }}</button>{% else %}{{ 'title.hyperespace'|trans|raw }} - <span class="text-vert">{{ 'research.Activated'|trans }}</span>{% endif %}
-                        <div class="mt-4">{% if 25000000 > app.user.getBitcoin() %}<span class="text-rouge">25000000</span>{% else %}25000000{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
+                        <div class="mt-4">{% if 25000000 > app.user.getBitcoin() %}<span class="text-rouge">25.000.000</span>{% else %}25.000.000{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
                     </th>
                     <td class="center-cells cell-middle">
                         {{ 'research.hyperespace.desc'|trans }}
@@ -214,7 +214,7 @@
                 <tr>
                     <th class="tab-cells-name">
                         <img class="float-left building-img ml-3" src="{{ asset('img/urbain.png') }}"><button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.demography'|trans|raw }}">{{ 'title.demography'|trans|raw }} - {{ 'research.level'|trans|raw }} {{ app.user.getDemography()|trans }} / 5</button>
-                        <div class="mt-4">{% if (app.user.getDemography() + 1) * 8000 > app.user.getBitcoin() %}<span class="text-rouge">{{ (app.user.getDemography() + 1) * 8000 }}</span>{% else %}{{ (app.user.getDemography() + 1) * 8000 }}{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
+                        <div class="mt-4">{% if (app.user.getDemography() + 1) * 8000 > app.user.getBitcoin() %}<span class="text-rouge">{{ ((app.user.getDemography() + 1) * 8000)|number_format }}</span>{% else %}{{ ((app.user.getDemography() + 1) * 8000)|number_format }}{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
                     </th>
                     <td class="center-cells cell-middle">
                         {{ 'research.demography.desc'|trans }}
@@ -240,7 +240,7 @@
                 <tr>
                     <th class="tab-cells-name">
                         <img class="float-left building-img ml-3" src="{{ asset('img/military.png') }}"><button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.discipline'|trans|raw }}">{{ 'title.discipline'|trans|raw }} - {{ 'research.level'|trans|raw }} {{ app.user.getDiscipline()|trans }} / 3</button>
-                        <div class="mt-4">{% if (app.user.getDiscipline() + 1) * 11700 > app.user.getBitcoin() %}<span class="text-rouge">{{ (app.user.getDiscipline() + 1) * 11700 }}</span>{% else %}{{ (app.user.getDiscipline() + 1) * 11700 }}{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
+                        <div class="mt-4">{% if (app.user.getDiscipline() + 1) * 11700 > app.user.getBitcoin() %}<span class="text-rouge">{{ ((app.user.getDiscipline() + 1) * 11700)|number_format }}</span>{% else %}{{ ((app.user.getDiscipline() + 1) * 11700)|number_format }}{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
                     </th>
                     <td class="center-cells cell-middle">
                         {{ 'research.discipline.desc'|trans }}
@@ -263,6 +263,84 @@
                         {% endif %}
                     </td>
                 </tr>
+                <tr>
+                    <th class="tab-cells-name">
+                        <img class="float-left building-img ml-3" src="{{ asset('img/barbed.jpg') }}"><button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.barbed'|trans|raw }}">{{ 'title.barbed'|trans|raw }} - {{ 'research.level'|trans|raw }} {{ app.user.getBarbed()|trans }} / 5</button>
+                        <div class="mt-4">{% if (app.user.getBarbed() + 1) * 200000 > app.user.getBitcoin() %}<span class="text-rouge">{{ ((app.user.getBarbed() + 1) * 200000)|number_format }}</span>{% else %}{{ ((app.user.getBarbed() + 1) * 200000)|number_format }}{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
+                    </th>
+                    <td class="center-cells cell-middle">
+                        {{ 'research.barbed.desc'|trans }}
+                    </td>
+                    <td width="101px" class="center-cells cell-middle">
+                        {% if app.user.getSearch() == 'barbed' %}
+                            <div class="timerArea">{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
+
+                        {% else %}
+                            {% if app.user.getBitcoin() >= ((app.user.getBarbed() + 1) * 200000) and app.user.getDiscipline() == 3 and app.user.getBarbed() < 5 and app.user.getSearchAt() < date %}
+                                <div>{% if ((app.user.getBarbed() + 1) * app.user.getTimeConstruct(1200)) < 3600 %}{{ ((app.user.getBarbed() + 1) * app.user.getTimeConstruct(1200))|date('i:s') }}{% elseif ((app.user.getBarbed() + 1) * app.user.getTimeConstruct(1200)) < 86400 %}{{  ((app.user.getBarbed() + 1) * app.user.getTimeConstruct(1200)- 3600)|date('H:i:s') }}{% else %}{{  ((app.user.getBarbed() + 1) * app.user.getTimeConstruct(1200)- 3600)|date('d H:i:s') }}{% endif %}</div>
+                                <a class="btn btn-lg btn-info" href="{{ path('research_barbed', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                            {% else %}
+                                {% if app.user.getBarbed() == 5 %}
+                                    <div class="text-vert">{{ 'research.finish'|trans }}</div>
+                                {% else %}
+                                    <a class="btn btn-lg btn-secondary" disabled>{{ 'research.seek'|trans }}</a>
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th class="tab-cells-name">
+                        <img class="float-left building-img ml-3" src="{{ asset('img/tank.jpg') }}"><button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.tank'|trans|raw }}">{{ 'title.tank'|trans|raw }} - {{ 'research.level'|trans|raw }} {{ app.user.getTank()|trans }} / 1</button>
+                        <div class="mt-4">{% if (app.user.getTank() + 1) * 40000 > app.user.getBitcoin() %}<span class="text-rouge">{{ ((app.user.getTank() + 1) * 40000)|number_format }}</span>{% else %}{{ ((app.user.getTank() + 1) * 40000)|number_format }}{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
+                    </th>
+                    <td class="center-cells cell-middle">
+                        {{ 'research.tank.desc'|trans }}
+                    </td>
+                    <td width="101px" class="center-cells cell-middle">
+                        {% if app.user.getSearch() == 'tank' %}
+                            <div class="timerArea">{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
+
+                        {% else %}
+                            {% if app.user.getBitcoin() >= ((app.user.getTank() + 1) * 40000) and app.user.getDiscipline() == 3 and app.user.getTank() < 1 and app.user.getSearchAt() < date %}
+                                <div>{% if ((app.user.getTank() + 1) * app.user.getTimeConstruct(2000)) < 3600 %}{{ ((app.user.getTank() + 1) * app.user.getTimeConstruct(2000))|date('i:s') }}{% elseif ((app.user.getTank() + 1) * app.user.getTimeConstruct(2000)) < 86400 %}{{  ((app.user.getTank() + 1) * app.user.getTimeConstruct(2000)- 3600)|date('H:i:s') }}{% else %}{{  ((app.user.getTank() + 1) * app.user.getTimeConstruct(2000)- 3600)|date('d H:i:s') }}{% endif %}</div>
+                                <a class="btn btn-lg btn-info" href="{{ path('research_tank', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                            {% else %}
+                                {% if app.user.getTank() == 1 %}
+                                    <div class="text-vert">{{ 'research.finish'|trans }}</div>
+                                {% else %}
+                                    <a class="btn btn-lg btn-secondary" disabled>{{ 'research.seek'|trans }}</a>
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th class="tab-cells-name">
+                        <img class="float-left building-img ml-3" src="{{ asset('img/expansion.jpg') }}"><button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.expansion'|trans|raw }}">{{ 'title.expansion'|trans|raw }} - {{ 'research.level'|trans|raw }} {{ app.user.getExpansion()|trans }} / 2</button>
+                        <div class="mt-4">{% if (app.user.getExpansion() + 1) * 75000 > app.user.getRank().getWarPoint() %}<span class="text-rouge">{{ ((app.user.getExpansion() + 1) * 75000)|number_format }}</span>{% else %}{{ ((app.user.getExpansion() + 1) * 75000)|number_format }}{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'pdgImg'|trans }}" src="{{ asset('img/pdg.png') }}"></div>
+                    </th>
+                    <td class="center-cells cell-middle">
+                        {{ 'research.expansion.desc'|trans }}
+                    </td>
+                    <td width="101px" class="center-cells cell-middle">
+                        {% if app.user.getSearch() == 'expansion' %}
+                            <div class="timerArea">{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</div>
+
+                        {% else %}
+                            {% if app.user.getRank().getWarPoint() >= ((app.user.getExpansion() + 1) * 75000) and app.user.getHyperespace() == 1 and app.user.getExpansion() < 2 and app.user.getSearchAt() < date %}
+                                <div>{% if ((app.user.getExpansion() + 1) * app.user.getTimeConstruct(6000)) < 3600 %}{{ ((app.user.getExpansion() + 1) * app.user.getTimeConstruct(6000))|date('i:s') }}{% elseif ((app.user.getExpansion() + 1) * app.user.getTimeConstruct(6000)) < 86400 %}{{  ((app.user.getExpansion() + 1) * app.user.getTimeConstruct(6000)- 3600)|date('H:i:s') }}{% else %}{{  ((app.user.getExpansion() + 1) * app.user.getTimeConstruct(6000)- 3600)|date('d H:i:s') }}{% endif %}</div>
+                                <a class="btn btn-lg btn-info" href="{{ path('research_expansion', {'idp': usePlanet.getId()}) }}">{{ 'research.seek'|trans }}</a>
+                            {% else %}
+                                {% if app.user.getExpansion() == 2 %}
+                                    <div class="text-vert">{{ 'research.finish'|trans }}</div>
+                                {% else %}
+                                    <a class="btn btn-lg btn-secondary" disabled>{{ 'research.seek'|trans }}</a>
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                </tr>
                 </tbody>
             </table>
             <div class="block-title mt-5 ml-4"><h2>{{ 'research.titleArm'|trans }}</h2></div>
@@ -271,7 +349,7 @@
                 <tr>
                     <th class="tab-cells-name">
                         <img class="float-left building-img ml-3" src="{{ asset('img/armement.png') }}"><button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.armement'|trans|raw }}">{{ 'title.armement'|trans|raw }} - {{ 'research.level'|trans|raw }} {{ app.user.getArmement()|trans }} / 5</button>
-                        <div class="mt-4">{% if (app.user.getArmement() + 1) * 2000 > app.user.getBitcoin() %}<span class="text-rouge">{{ (app.user.getArmement() + 1) * 2000 }}</span>{% else %}{{ (app.user.getArmement() + 1) * 2000 }}{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
+                        <div class="mt-4">{% if (app.user.getArmement() + 1) * 2000 > app.user.getBitcoin() %}<span class="text-rouge">{{ ((app.user.getArmement() + 1) * 2000)|number_format }}</span>{% else %}{{ ((app.user.getArmement() + 1) * 2000)|number_format }}{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
                     </th>
                     <td class="center-cells cell-middle">
                         {{ 'research.armement.desc'|trans }}
@@ -297,7 +375,7 @@
                 <tr>
                     <th class="tab-cells-name">
                         <img class="float-left building-img ml-3" src="{{ asset('img/missile.png') }}"><button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.missile'|trans|raw }}">{{ 'title.missile'|trans|raw }} - {{ 'research.level'|trans|raw }} {{ app.user.getMissile()|trans }} / 3</button>
-                        <div class="mt-4">{% if (app.user.getMissile() + 1) * 2600 > app.user.getBitcoin() %}<span class="text-rouge">{{ (app.user.getMissile() + 1) * 2600 }}</span>{% else %}{{ (app.user.getMissile() + 1) * 2600 }}{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
+                        <div class="mt-4">{% if (app.user.getMissile() + 1) * 2600 > app.user.getBitcoin() %}<span class="text-rouge">{{ ((app.user.getMissile() + 1) * 2600)|number_format }}</span>{% else %}{{ ((app.user.getMissile() + 1) * 2600)|number_format }}{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
                     </th>
                     <td class="center-cells cell-middle">
                         {{ 'research.missile.desc'|trans }}
@@ -323,7 +401,7 @@
                 <tr>
                     <th class="tab-cells-name">
                         <img class="float-left building-img ml-3" src="{{ asset('img/laser.png') }}"><button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.laser'|trans|raw }}">{{ 'title.laser'|trans|raw }} - {{ 'research.level'|trans|raw }} {{ app.user.getLaser()|trans }} / 3</button>
-                        <div class="mt-4">{% if (app.user.getLaser() + 1) * 13000 > app.user.getBitcoin() %}<span class="text-rouge">{{ (app.user.getLaser() + 1) * 13000 }}</span>{% else %}{{ (app.user.getLaser() + 1) * 13000 }}{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
+                        <div class="mt-4">{% if (app.user.getLaser() + 1) * 13000 > app.user.getBitcoin() %}<span class="text-rouge">{{ ((app.user.getLaser() + 1) * 13000)|number_format }}</span>{% else %}{{ ((app.user.getLaser() + 1) * 13000)|number_format }}{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
                     </th>
                     <td class="center-cells cell-middle">
                         {{ 'research.laser.desc'|trans }}
@@ -349,7 +427,7 @@
                 <tr>
                     <th class="tab-cells-name">
                         <img class="float-left building-img ml-3" src="{{ asset('img/plasma.png') }}"><button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.plasma'|trans|raw }}">{{ 'title.plasma'|trans|raw }} - {{ 'research.level'|trans|raw }} {{ app.user.getPlasma()|trans }} / 3</button>
-                        <div class="mt-4">{% if (app.user.getPlasma() + 1) * 29000 > app.user.getBitcoin() %}<span class="text-rouge">{{ (app.user.getPlasma() + 1) * 29000 }}</span>{% else %}{{ (app.user.getPlasma() + 1) * 29000 }}{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
+                        <div class="mt-4">{% if (app.user.getPlasma() + 1) * 29000 > app.user.getBitcoin() %}<span class="text-rouge">{{ ((app.user.getPlasma() + 1) * 29000)|number_format }}</span>{% else %}{{ ((app.user.getPlasma() + 1) * 29000)|number_format }}{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
                     </th>
                     <td class="center-cells cell-middle">
                         {{ 'research.plasma.desc'|trans }}
@@ -380,7 +458,7 @@
                 <tr>
                     <th class="tab-cells-name">
                         <img class="float-left building-img ml-3" src="{{ asset('img/industry.png') }}"><button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.industry'|trans|raw }}">{{ 'title.industry'|trans|raw }} - {{ 'research.level'|trans|raw }} {{ app.user.getIndustry()|trans }} / 5</button>
-                        <div class="mt-4">{% if (app.user.getIndustry() + 1) * 1500 > app.user.getBitcoin() %}<span class="text-rouge">{{ (app.user.getIndustry() + 1) * 1500 }}</span>{% else %}{{ (app.user.getIndustry() + 1) * 1500 }}{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
+                        <div class="mt-4">{% if (app.user.getIndustry() + 1) * 1500 > app.user.getBitcoin() %}<span class="text-rouge">{{ ((app.user.getIndustry() + 1) * 1500)|number_format }}</span>{% else %}{{ ((app.user.getIndustry() + 1) * 1500)|number_format }}{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
                     </th>
                     <td class="center-cells cell-middle">
                         {{ 'research.industry.desc'|trans }}
@@ -406,7 +484,7 @@
                 <tr>
                     <th class="tab-cells-name">
                         <img class="float-left building-img ml-3" src="{{ asset('img/lightShip.png') }}"><button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.light'|trans|raw }}">{{ 'title.lightShip'|trans|raw }} - {{ 'research.level'|trans|raw }} {{ app.user.getLightShip()|trans }} / 3</button>
-                        <div class="mt-4">{% if (app.user.getLightShip() + 1) * 9000 > app.user.getBitcoin() %}<span class="text-rouge">{{ (app.user.getLightShip() + 1) * 9000 }}</span>{% else %}{{ (app.user.getLightShip() + 1) * 9000 }}{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
+                        <div class="mt-4">{% if (app.user.getLightShip() + 1) * 9000 > app.user.getBitcoin() %}<span class="text-rouge">{{ ((app.user.getLightShip() + 1) * 9000)|number_format }}</span>{% else %}{{ ((app.user.getLightShip() + 1) * 9000)|number_format }}{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
                     </th>
                     <td class="center-cells cell-middle">
                         {{ 'research.lightShip.desc'|trans }}
@@ -432,7 +510,7 @@
                 <tr>
                     <th class="tab-cells-name">
                         <img class="float-left building-img ml-3" src="{{ asset('img/heavyShip.png') }}"><button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.heavy'|trans|raw }}">{{ 'title.heavyShip'|trans|raw }} - {{ 'research.level'|trans|raw }} {{ app.user.getHeavyShip()|trans }} / 3</button>
-                        <div class="mt-4">{% if (app.user.getHeavyShip() + 1) * 42000 > app.user.getBitcoin() %}<span class="text-rouge">{{ (app.user.getHeavyShip() + 1) * 42000 }}</span>{% else %}{{ (app.user.getHeavyShip() + 1) * 42000 }}{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
+                        <div class="mt-4">{% if (app.user.getHeavyShip() + 1) * 42000 > app.user.getBitcoin() %}<span class="text-rouge">{{ ((app.user.getHeavyShip() + 1) * 42000)|number_format }}</span>{% else %}{{ ((app.user.getHeavyShip() + 1) * 42000)|number_format }}{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>
                     </th>
                     <td class="center-cells cell-middle">
                         {{ 'research.heavyShip.desc'|trans }}

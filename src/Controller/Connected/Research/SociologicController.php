@@ -85,4 +85,106 @@ class SociologicController extends AbstractController
 
         return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
     }
+
+    /**
+     * @Route("/rechercher-barbele/{idp}", name="research_barbed", requirements={"idp"="\d+"})
+     */
+    public function researchBarbedAction($idp)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
+        $user = $this->getUser();
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->andWhere('p.user = :user')
+            ->setParameters(['id' => $idp, 'user' => $user])
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $level = $user->getBarbed() + 1;
+        $userBt = $user->getBitcoin();
+
+        if(($userBt < ($level * 200000) || $user->getDiscipline() != 3) ||
+            ($level == 6 || $user->getSearchAt() > $now)) {
+            return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
+        }
+
+        $now->add(new DateInterval('PT' . round(($level * 1200 / $user->getScientistProduction())) . 'S'));
+        $user->setSearch('barbed');
+        $user->setSearchAt($now);
+        $user->setBitcoin($userBt - ($level * 200000));
+        $em->flush();
+
+        return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
+    }
+
+    /**
+     * @Route("/rechercher-tank/{idp}", name="research_tank", requirements={"idp"="\d+"})
+     */
+    public function researchTankAction($idp)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
+        $user = $this->getUser();
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->andWhere('p.user = :user')
+            ->setParameters(['id' => $idp, 'user' => $user])
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $level = $user->getTank() + 1;
+        $userBt = $user->getBitcoin();
+
+        if(($userBt < ($level * 40000) || $user->getDiscipline() != 3) ||
+            ($level == 2 || $user->getSearchAt() > $now)) {
+            return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
+        }
+
+        $now->add(new DateInterval('PT' . round(($level * 2000 / $user->getScientistProduction())) . 'S'));
+        $user->setSearch('tank');
+        $user->setSearchAt($now);
+        $user->setBitcoin($userBt - ($level * 40000));
+        $em->flush();
+
+        return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
+    }
+
+    /**
+     * @Route("/rechercher-expansion/{idp}", name="research_expansion", requirements={"idp"="\d+"})
+     */
+    public function researchExpansionAction($idp)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
+        $user = $this->getUser();
+        $usePlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.id = :id')
+            ->andWhere('p.user = :user')
+            ->setParameters(['id' => $idp, 'user' => $user])
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $level = $user->getExpansion() + 1;
+        $userPdg = $user->getRank()->getWarPoint();
+
+        if(($userPdg < ($level * 75000) || $user->getHyperespace() == 0) ||
+            ($level == 2 || $user->getSearchAt() > $now)) {
+            return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
+        }
+
+        $now->add(new DateInterval('PT' . round(($level * 6000 / $user->getScientistProduction())) . 'S'));
+        $user->setSearch('expansion');
+        $user->setSearchAt($now);
+        $user->getRank()->setWarPoint($userPdg - ($level * 75000));
+        $em->flush();
+
+        return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
+    }
 }

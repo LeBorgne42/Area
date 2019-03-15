@@ -243,6 +243,20 @@ class User implements UserInterface, \Serializable
     protected $demography;
 
     /**
+     * @ORM\Column(name="barbed",type="integer", nullable=true)
+     */
+    protected $barbed;
+
+    /**
+     * @ORM\Column(name="tank",type="integer", nullable=true)
+     */
+    protected $tank;
+
+    /**
+     * @ORM\Column(name="expansion",type="integer", nullable=true)
+     */
+    protected $expansion;
+    /**
      * @ORM\Column(name="terraformation",type="integer", nullable=true)
      */
     protected $terraformation;
@@ -383,6 +397,9 @@ class User implements UserInterface, \Serializable
         $this->laser = 0;
         $this->plasma = 0;
         $this->experience = 0;
+        $this->barbed = 0;
+        $this->tank = 0;
+        $this->expansion = 0;
     }
 
     /**
@@ -747,6 +764,26 @@ class User implements UserInterface, \Serializable
     /**
      * @return mixed
      */
+    public function getBarbedAdv() : mixed
+    {
+        if($this->barbed == 1) {
+            return 1.05;
+        } elseif ($this->barbed == 2) {
+            return 1.10;
+        } elseif ($this->barbed == 3) {
+            return 1.15;
+        } elseif ($this->barbed == 4) {
+            return 1.20;
+        } elseif ($this->barbed == 5) {
+            return 1.25;
+        }
+
+        return 1;
+    }
+
+    /**
+     * @return mixed
+     */
     public function checkResearch()
     {
         $return = 'continue';
@@ -759,6 +796,12 @@ class User implements UserInterface, \Serializable
         } elseif ($this->barge < 1) {
             return $return;
         } elseif ($this->recycleur < 1) {
+            return $return;
+        } elseif ($this->barbed < 5) {
+            return $return;
+        } elseif ($this->tank < 1) {
+            return $return;
+        } elseif ($this->expansion < 2) {
             return $return;
         } elseif ($this->onde < 5) {
             return $return;
@@ -1201,6 +1244,54 @@ class User implements UserInterface, \Serializable
         $this->email = $email;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBarbed()
+    {
+        return $this->barbed;
+    }
+
+    /**
+     * @param mixed $barbed
+     */
+    public function setBarbed($barbed): void
+    {
+        $this->barbed = $barbed;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTank()
+    {
+        return $this->tank;
+    }
+
+    /**
+     * @param mixed $tank
+     */
+    public function setTank($tank): void
+    {
+        $this->tank = $tank;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getExpansion()
+    {
+        return $this->expansion;
+    }
+
+    /**
+     * @param mixed $expansion
+     */
+    public function setExpansion($expansion): void
+    {
+        $this->expansion = $expansion;
     }
 
     /**

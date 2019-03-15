@@ -725,7 +725,8 @@ class InstantController extends AbstractController
                         $barge = $fleet->getBarge() * 2500;
                         $defenser = $fleet->getPlanet();
                         $userDefender = $fleet->getPlanet()->getUser();
-                        $dMilitary = $defenser->getWorker() + ($defenser->getSoldier() * 6);
+                        $barbed = $userDefender->getBarbedAdv();
+                        $dMilitary = $defenser->getWorker() + (($defenser->getSoldier() * 6) * $barbed);
                         $alea = rand(4, 8);
 
                         $reportInv = new Report();

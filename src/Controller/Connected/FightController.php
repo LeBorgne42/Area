@@ -606,7 +606,8 @@ class FightController extends AbstractController
         $barge = $invader->getBarge() * 2500;
         $defenser = $invader->getPlanet();
         $userDefender= $invader->getPlanet()->getUser();
-        $dMilitary = $defenser->getWorker() + ($defenser->getSoldier() * 6);
+        $barbed = $userDefender->getBarbedAdv();
+        $dMilitary = $defenser->getWorker() + (($defenser->getSoldier() * 6) * $barbed);
         $alea = rand(4, 8);
 
         $reportInv = new Report();

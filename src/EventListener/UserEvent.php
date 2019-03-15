@@ -89,6 +89,12 @@ class UserEvent implements EventSubscriberInterface
                                 $user->setIndustry($user->getIndustry() + 1);
                             } elseif ($research == 'discipline') {
                                 $user->setDiscipline($user->getDiscipline() + 1);
+                            } elseif ($research == 'barbed') {
+                                $user->setBarbed($user->getBarbed() + 1);
+                            } elseif ($research == 'tank') {
+                                $user->setTank($user->getTank() + 1);
+                            } elseif ($research == 'expansion') {
+                                $user->setExpansion($user->getExpansion() + 1);
                             } elseif ($research == 'hyperespace') {
                                 $user->setHyperespace(1);
                             } elseif ($research == 'barge') {
