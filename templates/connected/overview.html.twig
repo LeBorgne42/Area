@@ -5,7 +5,7 @@
 {% block title %}{{ 'title'|trans }}{% endblock %}
 
 {% block body %}
-    {% set cost = (app.user.getAllSoldier() * 2) + app.user.getAllShipsCost() + app.user.getBuildingCost() %}
+    {% set cost = app.user.getAllTroops() + app.user.getAllShipsCost() + app.user.getBuildingCost() %}
     <div class="front-block">
         {% if app.user.getTutorial() == 1 %}
             <table class="table table-striped borderOverview tutorial">

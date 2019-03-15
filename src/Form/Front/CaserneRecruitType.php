@@ -32,7 +32,39 @@ class CaserneRecruitType extends AbstractType
                     'required' => true,
                 ]
             )
-            ->add('sendForm', SubmitType::class, ['label' => 'form.recruitSoldier', 'attr' => ['class' => 'confirm-button float-right']]);
+            ->add(
+                'tank',
+                null,
+                [
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => [
+                        'placeholder' => 'form.nbr',
+                        'class' => 'game-input text-right',
+                        'min' => '0',
+                        'max' => '500',
+                        'autocomplete' => 'off',
+                    ],
+                    'required' => true,
+                ]
+            )
+            ->add(
+                'scientist',
+                null,
+                [
+                    'label' => 'form.nbr',
+                    'data' => 0,
+                    'attr'  => [
+                        'placeholder' => 'form.nbr',
+                        'class' => 'game-input text-right',
+                        'min' => '0',
+                        'max' => '5000',
+                        'autocomplete' => 'off',
+                    ],
+                    'required' => true,
+                ]
+            )
+            ->add('sendForm', SubmitType::class, ['label' => 'form.recruitCaserne', 'attr' => ['class' => 'confirm-button float-right']]);
     }
 
     /**

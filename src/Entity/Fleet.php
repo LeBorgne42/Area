@@ -212,6 +212,11 @@ class Fleet
     protected $soldier;
 
     /**
+     * @ORM\Column(name="tank",type="integer", nullable=true)
+     */
+    protected $tank;
+
+    /**
      * @ORM\Column(name="worker",type="integer", nullable=true)
      */
     protected $worker;
@@ -242,15 +247,7 @@ class Fleet
         $this->scientist = 0;
         $this->worker = 0;
         $this->soldier = 0;
-        $this->attack = 0;
-        $this->attack = 0;
-        $this->attack = 0;
-        $this->attack = 0;
-        $this->attack = 0;
-        $this->attack = 0;
-        $this->attack = 0;
-        $this->attack = 0;
-        $this->attack = 0;
+        $this->tank = 0;
         $this->attack = 0;
         $this->destroyer = 0;
         $this->ironClad = 0;
@@ -1681,6 +1678,22 @@ class Fleet
     public function setMotherShip($motherShip): void
     {
         $this->motherShip = $motherShip;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTank()
+    {
+        return $this->tank;
+    }
+
+    /**
+     * @param mixed $tank
+     */
+    public function setTank($tank): void
+    {
+        $this->tank = $tank;
     }
 
     /**

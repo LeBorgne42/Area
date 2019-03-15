@@ -25,6 +25,21 @@ class Product
     protected $planet;
 
     /**
+     * @ORM\Column(name="soldier",type="bigint", nullable=true)
+     */
+    protected $soldier;
+
+    /**
+     * @ORM\Column(name="tank",type="bigint", nullable=true)
+     */
+    protected $tank;
+
+    /**
+     * @ORM\Column(name="scientist",type="bigint", nullable=true)
+     */
+    protected $scientist;
+
+    /**
      * @ORM\Column(name="sonde",type="bigint", nullable=true)
      */
     protected $sonde;
@@ -648,6 +663,54 @@ class Product
     public function setBrouilleurShip($brouilleurShip): void
     {
         $this->brouilleurShip = $brouilleurShip;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSoldier()
+    {
+        return $this->soldier;
+    }
+
+    /**
+     * @param mixed $soldier
+     */
+    public function setSoldier($soldier): void
+    {
+        $this->soldier = $soldier;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTank()
+    {
+        return $this->tank;
+    }
+
+    /**
+     * @param mixed $tank
+     */
+    public function setTank($tank): void
+    {
+        $this->tank = $tank;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getScientist()
+    {
+        return $this->scientist;
+    }
+
+    /**
+     * @param mixed $scientist
+     */
+    public function setScientist($scientist): void
+    {
+        $this->scientist = $scientist;
     }
 
     /**

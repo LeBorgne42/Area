@@ -2,12 +2,16 @@ title: Soldat
 soldier.recruit: 'Recruter des soldats'
 caserner.soldier: 'Soldats en caserne'
 bitcoinImg: Bitcoin
+niobiumImg: Niobium
 scientist.recruit: 'Engager des scientifiques'
 caserner.scientist: 'Scientifiques dans les centres'
+tank.recruit: 'Construire des tanks'
+caserner.tank: 'Tanks dans nos hangars'
 form.nbr: nombre
-form.recruitSoldier: Recruter
-form.recruitScientist: Engager
+form.recruitCaserne: Lancer
 workerImg: Travailleurs
 scientistImg: Scientifiques
+tankImg: Tanks
 caserner.soldierProd: ' soldats en production'
 caserner.scientistProd: ' scientifiques en production'
+caserner.tankProd: ' tanks en production'

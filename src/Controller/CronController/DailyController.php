@@ -118,14 +118,14 @@ class DailyController extends AbstractController
                 $user->addQuest($questAlly);
             }
             $user->addQuest($questTree);
-            $soldier = $user->getAllSoldier();
+            $troops = $user->getAllTroops();
             $ship = $user->getAllShipsCost();
             $cost = $user->getBitcoin();
             $report->setContent($report->getContent() . " Le travaille fournit par vos travailleurs vous rapporte " . round($gain) . " Bitcoin.");
-            $empireCost = ($soldier * 2) + $ship + $buildingCost;
+            $empireCost = $troops + $ship + $buildingCost;
             $cost = $cost - $empireCost + ($gain);
             $report->setContent($report->getContent() . " L'entretien de votre empire vous coûte cependant " . round($empireCost) . " Bitcoin.");
-            $point = round(round($worker / 100) + round($user->getAllShipsPoint() / 75) + round($soldier / 75) + $planetPoint);
+            $point = round(round($worker / 100) + round($user->getAllShipsPoint() / 75) + round($troops / 75) + $planetPoint);
             $user->setBitcoin($cost);
             if ($nbrQuests == 0) {
                 $report->setContent($report->getContent() . " Ce qui vous donne un revenu de " . round($gain - $empireCost) . " Bitcoin. Comme vous avez terminé toutes les quêtes vous recevez un bonus de 20.000 PDG ! Bonne journée suprême Commandant.");

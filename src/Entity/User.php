@@ -764,21 +764,22 @@ class User implements UserInterface, \Serializable
     /**
      * @return mixed
      */
-    public function getBarbedAdv() : mixed
+    public function getBarbedAdv()
     {
+        $return = 1;
         if($this->barbed == 1) {
-            return 1.05;
+            $return = 1.05;
         } elseif ($this->barbed == 2) {
-            return 1.10;
+            $return = 1.10;
         } elseif ($this->barbed == 3) {
-            return 1.15;
+            $return = 1.15;
         } elseif ($this->barbed == 4) {
-            return 1.20;
+            $return = 1.20;
         } elseif ($this->barbed == 5) {
-            return 1.25;
+            $return = 1.25;
         }
 
-        return 1;
+        return $return;
     }
 
     /**
@@ -894,6 +895,27 @@ class User implements UserInterface, \Serializable
         }
         foreach($this->fleets as $fleet) {
             $return = $return + $fleet->getSoldier();
+        }
+        return $return;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAllTroops(): int
+    {
+        $return = 0;
+        foreach($this->planets as $planet) {
+            $return = $return + ($planet->getSoldier() * 2);
+            $return = $return + $planet->getSoldierAtNbr();
+            $return = $return + ($planet->getTank() * 250);
+            $return = $return + ($planet->getTankAtNbr() * 125);
+            $return = $return + ($planet->getScientist() * 100);
+            $return = $return + ($planet->getScientistAtNbr() * 50);
+        }
+        foreach($this->fleets as $fleet) {
+            $return = $return + ($fleet->getSoldier() * 5);
+            $return = $return + ($fleet->getScientist() * 100);
         }
         return $return;
     }

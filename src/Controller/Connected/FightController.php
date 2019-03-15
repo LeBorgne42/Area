@@ -607,7 +607,9 @@ class FightController extends AbstractController
         $defenser = $invader->getPlanet();
         $userDefender= $invader->getPlanet()->getUser();
         $barbed = $userDefender->getBarbedAdv();
-        $dMilitary = $defenser->getWorker() + (($defenser->getSoldier() * 6) * $barbed);
+        $dSoldier = $defenser->getSoldier() > 0 ? ($defenser->getSoldier() * 6) * $barbed : 0;
+        $dTanks = $defenser->getTank() > 0 ? $defenser->getTank() * 300 : 0;
+        $dMilitary = $defenser->getWorker() + $dSoldier + $dTanks;
         $alea = rand(4, 8);
 
         $reportInv = new Report();
@@ -635,22 +637,34 @@ class FightController extends AbstractController
             if($dMilitary > $aMilitary) {
                 $warPointDef = round($aMilitary);
                 $userDefender->getRank()->setWarPoint($userDefender->getRank()->getWarPoint() + $warPointDef);
-                $aMilitary = ($defenser->getSoldier() * 6) - $aMilitary;
+                $aMilitary = $dSoldier - $aMilitary;
                 if($barge < $invader->getSoldier()) {
                     $invader->setSoldier($invader->getSoldier() - $barge);
                 }
                 $defenser->setBarge($defenser->getBarge() + $invader->getBarge());
                 $invader->setBarge(0);
-                if($aMilitary < 0) {
+                if($aMilitary <= 0) {
                     $soldierDtmp = $defenser->getSoldier();
                     $workerDtmp = $defenser->getWorker();
+                    $tankDtmp = $defenser->getTank();
                     $defenser->setSoldier(0);
-                    $defenser->setWorker($defenser->getWorker() + $aMilitary);
-                    $soldierDtmp = $soldierDtmp - $defenser->getSoldier();
-                    $workerDtmp = $workerDtmp - $defenser->getWorker();
+                    $aMilitary = $dTanks - abs($aMilitary);
+                    if($aMilitary <= 0) {
+                        $defenser->setTank(0);
+                        $defenser->setWorker($defenser->getWorker() + $aMilitary);
+                        $tankDtmp = $tankDtmp - $defenser->getTank();
+                        $soldierDtmp = $soldierDtmp - $defenser->getSoldier();
+                        $workerDtmp = $workerDtmp - $defenser->getWorker();
+                    } else {
+                        $defenser->setTank(round($aMilitary / 300));
+                        $tankDtmp = $tankDtmp - $defenser->getTank();
+                        $soldierDtmp = $soldierDtmp - $defenser->getSoldier();
+                        $workerDtmp = $workerDtmp - $defenser->getWorker();
+                    }
                 } else {
-                    $defenser->setSoldier(round($aMilitary / 6));
-                    $soldierDtmp = round($aMilitary / 6);
+                    $defenser->setSoldier(round($aMilitary / $alea));
+                    $tankDtmp = $defenser->getTank();
+                    $soldierDtmp = round($aMilitary / $alea);
                     $workerDtmp = $defenser->getWorker();
                 }
                 $reportDef->setTitle("Rapport d'invasion : Victoire (défense)");
@@ -658,16 +672,18 @@ class FightController extends AbstractController
                 $reportDef->setContent("Bien joué ! Vos travailleurs et soldats ont repoussé l'invasion du joueur " . $user->getUserName() . " sur votre planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . ".  " . $soldierAtmp . " soldats vous ont attaqué, tous ont été tué. Vous avez ainsi prit le contrôle des barges de l'attaquant. Et vous remportez " . $warPointDef . " points de Guerre.");
                 $reportInv->setTitle("Rapport d'invasion : Défaite (attaque)");
                 $reportInv->setImageName("invade_lose_report.jpg");
-                $reportInv->setContent("'AH AH AH AH' le rire de " . $userDefender->getUserName() . " résonne à vos oreilles d'un curieuse façon. Votre sang bouillonne vous l'a vouliez cette planète. Qu'il rigole donc, vous reviendrez prendre " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . " et ferez effacer des livres d'histoires son ridicule nom. Vous avez tout de même tué " . $soldierDtmp . " soldats et " . $workerDtmp . " travailleurs à l'ennemi. Tous vos soldats sont morts et vos barges sont resté sur la planète. Courage commandant.");
+                $reportInv->setContent("'AH AH AH AH' le rire de " . $userDefender->getUserName() . " résonne à vos oreilles d'un curieuse façon. Votre sang bouillonne vous l'a vouliez cette planète. Qu'il rigole donc, vous reviendrez prendre " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . " et ferez effacer des livres d'histoires son ridicule nom. Vous avez tout de même tué " . $soldierDtmp . " soldats, " . $tankDtmp ." tanks et " . $workerDtmp . " travailleurs à l'ennemi. Tous vos soldats sont morts et vos barges sont resté sur la planète. Courage commandant.");
             } else {
                 $soldierDtmp = $defenser->getSoldier() != 0 ? $defenser->getSoldier() : 1;
                 $workerDtmp = $defenser->getWorker();
+                $tankDtmp = $defenser->getTank();
                 $warPointAtt = round($soldierDtmp + ($workerDtmp / 10));
                 $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $warPointAtt);
                 $soldierAtmp = $invader->getSoldier();
                 $invader->setSoldier(($aMilitary - $dMilitary) / $alea);
                 $soldierAtmp = $soldierAtmp - $invader->getSoldier();
                 $defenser->setSoldier(0);
+                $defenser->setTank(0);
                 $defenser->setWorker(2000);
                 if($invader->getUser()->getColPlanets() <= ($invader->getUser()->getTerraformation() + 1)) {
                     $defenser->setUser($user);
@@ -691,10 +707,10 @@ class FightController extends AbstractController
                 }
                 $reportDef->setTitle("Rapport d'invasion : Défaite (défense)");
                 $reportDef->setImageName("defend_lose_report.jpg");
-                $reportDef->setContent("Mais QUI ? QUI !!! Vous as donné un commandant si médiocre " . $user->getUserName() . " n'a pas eu a faire grand chose pour prendre votre planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . ".  " . round($soldierAtmp) . " soldats ennemis sont tout de même éliminé. C'est toujours ça de gagner. Vos " . $soldierDtmp . " soldats et " . $workerDtmp . " travailleurs sont tous mort. Votre empire en a prit un coup, mais il vous reste des planètes, il est l'heure de la revanche !");
+                $reportDef->setContent("Mais QUI ? QUI !!! Vous as donné un commandant si médiocre " . $user->getUserName() . " n'a pas eu a faire grand chose pour prendre votre planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . ".  " . round($soldierAtmp) . " soldats ennemis sont tout de même éliminé. C'est toujours ça de gagner. Vos " . $soldierDtmp . " soldats, " . $tankDtmp ." tanks et " . $workerDtmp . " travailleurs sont tous mort. Votre empire en a prit un coup, mais il vous reste des planètes, il est l'heure de la revanche !");
                 $reportInv->setTitle("Rapport d'invasion : Victoire (attaque)");
                 $reportInv->setImageName("invade_win_report.jpg");
-                $reportInv->setContent("Vous débarquez après que la planète ait été prise et vous installez sur le trône de " . $userDefender->getUserName() . ". Qu'il est bon d'entendre ses pleures lointain... La planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . " est désormais votre! Il est temps de remettre de l'ordre dans la galaxie. " . round($soldierAtmp) . " de vos soldats ont péri dans l'invasion. Mais les défenseurs ont aussi leurs pertes : " . $soldierDtmp . " soldats et " . $workerDtmp . " travailleurs ont péri. Cependant vous épargnez 2000 travailleurs dans votre bonté (surtout pour faire tourner la planète). Et vous remportez " . $warPointAtt . " points de Guerre.");
+                $reportInv->setContent("Vous débarquez après que la planète ait été prise et vous installez sur le trône de " . $userDefender->getUserName() . ". Qu'il est bon d'entendre ses pleures lointains... La planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . " est désormais votre! Il est temps de remettre de l'ordre dans la galaxie. " . round($soldierAtmp) . " de vos soldats ont péri dans l'invasion. Mais les défenseurs ont aussi leurs pertes : " . $soldierDtmp . " soldats, " . $tankDtmp ." tanks et " . $workerDtmp . " travailleurs ont péri. Cependant vous épargnez 2000 travailleurs dans votre bonté (surtout pour faire tourner la planète). Et vous remportez " . $warPointAtt . " points de Guerre.");
                 $quest = $user->checkQuests('invade');
                 if($quest) {
                     $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $quest->getGain());
@@ -710,7 +726,7 @@ class FightController extends AbstractController
             $em->flush();
         }
 
-        return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $defenser->getSector()->getPosition(), 'gal' => $defenser->getSector()->getGalaxy()->getPosition()]);
+        return $this->redirectToRoute('report', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -723,7 +739,6 @@ class FightController extends AbstractController
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
         $server = $em->getRepository('App:Server')->find(['id' => 1]);
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
         $colonize = $em->getRepository('App:Fleet')->find(['id' => $fleet]);
         $newPlanet = $colonize->getPlanet();
 
@@ -757,6 +772,6 @@ class FightController extends AbstractController
             $em->flush();
         }
 
-        return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $newPlanet->getSector()->getPosition(), 'gal' => $newPlanet->getSector()->getGalaxy()->getPosition()]);
+        return $this->redirectToRoute('building', ['idp' => $newPlanet->getId()]);
     }
 }

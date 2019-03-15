@@ -161,6 +161,16 @@ class Planet
     protected $soldierAtNbr;
 
     /**
+     * @ORM\Column(name="tankAt",type="datetime", nullable=true)
+     */
+    protected $tankAt;
+
+    /**
+     * @ORM\Column(name="tankAtNbr",type="integer", nullable=true)
+     */
+    protected $tankAtNbr;
+
+    /**
      * @ORM\Column(name="miner",type="integer", nullable=true)
      */
     protected $miner;
@@ -204,6 +214,16 @@ class Planet
      * @ORM\Column(name="caserne",type="integer", nullable=true)
      */
     protected $caserne;
+
+    /**
+     * @ORM\Column(name="island",type="integer", nullable=true)
+     */
+    protected $island;
+
+    /**
+     * @ORM\Column(name="orbital",type="integer", nullable=true)
+     */
+    protected $orbital;
 
     /**
      * @ORM\Column(name="bunker",type="integer", nullable=true)
@@ -351,6 +371,11 @@ class Planet
     protected $soldier;
 
     /**
+     * @ORM\Column(name="tank",type="integer", nullable=true)
+     */
+    protected $tank;
+
+    /**
      * @ORM\Column(name="worker",type="integer")
      */
     protected $worker;
@@ -472,6 +497,7 @@ class Planet
         $this->niobiumMax = 500000;
         $this->waterMax = 400000;
         $this->soldierMax = 1000;
+        $this->tank = 0;
         $this->scientistMax = 0;
         $this->workerMax = 125000;
         $this->nbProduction = 6;
@@ -485,6 +511,8 @@ class Planet
         $this->city = 0;
         $this->caserne = 0;
         $this->bunker = 0;
+        $this->island = 0;
+        $this->orbital = 0;
         $this->radar = 0;
         $this->skyRadar = 0;
         $this->skyBrouilleur = 0;
@@ -2209,6 +2237,54 @@ class Planet
     /**
      * @return mixed
      */
+    public function getIsland()
+    {
+        return $this->island;
+    }
+
+    /**
+     * @param mixed $island
+     */
+    public function setIsland($island): void
+    {
+        $this->island = $island;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOrbital()
+    {
+        return $this->orbital;
+    }
+
+    /**
+     * @param mixed $orbital
+     */
+    public function setOrbital($orbital): void
+    {
+        $this->orbital = $orbital;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTank()
+    {
+        return $this->tank;
+    }
+
+    /**
+     * @param mixed $tank
+     */
+    public function setTank($tank): void
+    {
+        $this->tank = $tank;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getAutoSeller()
     {
         return $this->autoSeller;
@@ -2220,6 +2296,38 @@ class Planet
     public function setAutoSeller($autoSeller): void
     {
         $this->autoSeller = $autoSeller;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTankAt()
+    {
+        return $this->tankAt;
+    }
+
+    /**
+     * @param mixed $tankAt
+     */
+    public function setTankAt($tankAt): void
+    {
+        $this->tankAt = $tankAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTankAtNbr()
+    {
+        return $this->tankAtNbr;
+    }
+
+    /**
+     * @param mixed $tankAtNbr
+     */
+    public function setTankAtNbr($tankAtNbr): void
+    {
+        $this->tankAtNbr = $tankAtNbr;
     }
 
     /**
