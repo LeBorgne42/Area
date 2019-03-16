@@ -321,7 +321,7 @@ class FightController extends AbstractController
                     $reportWinA->setContent($reportWinA->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $player . "</th><th class=\"tab-cells-name p-1 ml-2\">" . $lose . "</th></tr>");
                 }
                 $reportWinA->setContent($reportWinA->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $countShot . " rounds de combat.</th></tr></tbody></table>");
-                $reportWinA->setContent($reportWinA->getContent() . "Vous avez gagné le combat en "  . $defenderWin->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $defenderWin->getPlanet()->getSector()->getPosition() . ":" . $defenderWin->getPlanet()->getPosition() . " , vous remportez " . $warPointA . " points de Guerre");
+                $reportWinA->setContent($reportWinA->getContent() . "Vous avez gagné le combat en "  . $defenderWin->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $defenderWin->getPlanet()->getSector()->getPosition() . ":" . $defenderWin->getPlanet()->getPosition() . " , vous remportez " . number_format($warPointA) . " points de Guerre");
                 $reportWinA->setImageName("fight_win_report.jpg");
                 $defenderWin->getUser()->setViewReport(false);
                 $quest = $defenderWin->getUser()->checkQuests('destroy_fleet');
@@ -356,7 +356,7 @@ class FightController extends AbstractController
                     $reportLoseA->setContent($reportLoseA->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $player . "</th><th class=\"tab-cells-name p-1 ml-2\">" . $ships . "</th></tr>");
                 }
                 $reportLoseA->setContent($reportLoseA->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $countShot . " rounds de combat.</th></tr></tbody></table>");
-                $reportLoseA->setContent($reportLoseA->getContent() . "Vous avez perdu le combat en " . $attackerLose->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $attackerLose->getPlanet()->getSector()->getPosition() . ":" . $attackerLose->getPlanet()->getPosition() . " , vos adversaires remportent " . $warPointA . " points de Guerre.");
+                $reportLoseA->setContent($reportLoseA->getContent() . "Vous avez perdu le combat en " . $attackerLose->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $attackerLose->getPlanet()->getSector()->getPosition() . ":" . $attackerLose->getPlanet()->getPosition() . " , vos adversaires remportent " . number_format($warPointA) . " points de Guerre.");
                 $attackerLose->getUser()->setViewReport(false);
                 $planet = $attackerLose->getPlanet();
 
@@ -389,10 +389,10 @@ class FightController extends AbstractController
                         $exchangeLoseA->setContent("Taxe liée à la paix.");
                         $exchangeLoseA->setName($attackerLose->getUser()->getUserName());
                         $em->persist($exchangeLoseA);
-                        $reportLoseA->setContent($reportLoseA->getContent() . " Votre accord de paix ayant envoyé " . $pdgPeace . " points de Guerre à l'alliance [" . $otherAlly->getSigle() . "].");
+                        $reportLoseA->setContent($reportLoseA->getContent() . " Votre accord de paix ayant envoyé " . number_format($pdgPeace) . " points de Guerre à l'alliance [" . $otherAlly->getSigle() . "].");
                     }
                 }
-                $reportLoseA->setContent($reportLoseA->getContent() . " Mais vous remportez vous même " . $newWarPoint . " points de Guerre !");
+                $reportLoseA->setContent($reportLoseA->getContent() . " Mais vous remportez vous même " . number_format($newWarPoint) . " points de Guerre !");
                 if($attackerLose->getUser()->getRank()) {
                     $attackerLose->getUser()->getRank()->setWarPoint($attackerLose->getUser()->getRank()->getWarPoint() + $newWarPoint);
                 }
@@ -471,7 +471,7 @@ class FightController extends AbstractController
                     $reportWinB->setContent($reportWinB->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $player . "</th><th class=\"tab-cells-name p-1 ml-2\">" . $ships . "</th></tr>");
                 }
                 $reportWinB->setContent($reportWinB->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $countShot . " rounds de combat.</th></tr></tbody></table>");
-                $reportWinB->setContent($reportWinB->getContent() . "Vous avez gagné le combat en "  . $attackerWin->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $attackerWin->getPlanet()->getSector()->getPosition() . ":" . $attackerWin->getPlanet()->getPosition() . " , vous remportez " . $warPointB . " points de Guerre");
+                $reportWinB->setContent($reportWinB->getContent() . "Vous avez gagné le combat en "  . $attackerWin->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $attackerWin->getPlanet()->getSector()->getPosition() . ":" . $attackerWin->getPlanet()->getPosition() . " , vous remportez " . number_format($warPointB) . " points de Guerre");
                 $attackerWin->getUser()->setViewReport(false);
                 $em->persist($reportWinB);
                 $quest = $attackerWin->getUser()->checkQuests('destroy_fleet');
@@ -505,7 +505,7 @@ class FightController extends AbstractController
                     $reportLoseB->setContent($reportLoseB->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $player . "</th><th class=\"tab-cells-name p-1 ml-2\">" . $lose . "</th></tr>");
                 }
                 $reportLoseB->setContent($reportLoseB->getContent() . "<tr><th class=\"tab-cells-name p-1 ml-2\">" . $countShot . " rounds de combat.</th></tr></tbody></table>");
-                $reportLoseB->setContent($reportLoseB->getContent() . "Vous avez perdu le combat en " . $defenderLose->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $defenderLose->getPlanet()->getSector()->getPosition() . ":" . $defenderLose->getPlanet()->getPosition() . " , vos adversaires remportent " . $warPointB . " points de Guerre.");
+                $reportLoseB->setContent($reportLoseB->getContent() . "Vous avez perdu le combat en " . $defenderLose->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $defenderLose->getPlanet()->getSector()->getPosition() . ":" . $defenderLose->getPlanet()->getPosition() . " , vos adversaires remportent " . number_format($warPointB) . " points de Guerre.");
                 $defenderLose->getUser()->setViewReport(false);
                 $planet = $defenderLose->getPlanet();
                 $loseArm = $defenderLose->getLaser() + $defenderLose->getMissile() + $defenderLose->getPlasma();
@@ -536,10 +536,10 @@ class FightController extends AbstractController
                         $exchangeLoseB->setContent("Taxe liée à la paix.");
                         $exchangeLoseB->setName($defenderLose->getUser()->getUserName());
                         $em->persist($exchangeLoseB);
-                        $reportLoseB->setContent($reportWinB->getContent() . " Votre accord de paix ayant envoyé " . $pdgPeace . " points de Guerre à l'alliance [" . $otherAlly->getSigle() . "].");
+                        $reportLoseB->setContent($reportWinB->getContent() . " Votre accord de paix ayant envoyé " . number_format($pdgPeace) . " points de Guerre à l'alliance [" . $otherAlly->getSigle() . "].");
                     }
                 }
-                $reportLoseB->setContent($reportWinB->getContent() . " Mais vous remportez vous même " . $newWarPoint . " points de Guerre !");
+                $reportLoseB->setContent($reportWinB->getContent() . " Mais vous remportez vous même " . number_format($newWarPoint) . " points de Guerre !");
                 if($defenderLose->getUser()->getRank()) {
                     $defenderLose->getUser()->getRank()->setWarPoint($defenderLose->getUser()->getRank()->getWarPoint() + $newWarPoint);
                 }
@@ -669,10 +669,10 @@ class FightController extends AbstractController
                 }
                 $reportDef->setTitle("Rapport d'invasion : Victoire (défense)");
                 $reportDef->setImageName("defend_win_report.jpg");
-                $reportDef->setContent("Bien joué ! Vos travailleurs et soldats ont repoussé l'invasion du joueur " . $user->getUserName() . " sur votre planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . ".  " . $soldierAtmp . " soldats vous ont attaqué, tous ont été tué. Vous avez ainsi prit le contrôle des barges de l'attaquant. Et vous remportez " . $warPointDef . " points de Guerre.");
+                $reportDef->setContent("Bien joué ! Vos travailleurs et soldats ont repoussé l'invasion du joueur " . $user->getUserName() . " sur votre planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . ".  " . number_format($soldierAtmp) . " soldats vous ont attaqué, tous ont été tué. Vous avez ainsi prit le contrôle des barges de l'attaquant. Et vous remportez " . number_format($warPointDef) . " points de Guerre.");
                 $reportInv->setTitle("Rapport d'invasion : Défaite (attaque)");
                 $reportInv->setImageName("invade_lose_report.jpg");
-                $reportInv->setContent("'AH AH AH AH' le rire de " . $userDefender->getUserName() . " résonne à vos oreilles d'un curieuse façon. Votre sang bouillonne vous l'a vouliez cette planète. Qu'il rigole donc, vous reviendrez prendre " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . " et ferez effacer des livres d'histoires son ridicule nom. Vous avez tout de même tué " . $soldierDtmp . " soldats, " . $tankDtmp ." tanks et " . $workerDtmp . " travailleurs à l'ennemi. Tous vos soldats sont morts et vos barges sont resté sur la planète. Courage commandant.");
+                $reportInv->setContent("'AH AH AH AH' le rire de " . $userDefender->getUserName() . " résonne à vos oreilles d'un curieuse façon. Votre sang bouillonne vous l'a vouliez cette planète. Qu'il rigole donc, vous reviendrez prendre " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . " et ferez effacer des livres d'histoires son ridicule nom. Vous avez tout de même tué " . number_format($soldierDtmp) . " soldats, " . number_format($tankDtmp) ." tanks et " . number_format($workerDtmp) . " travailleurs à l'ennemi. Tous vos soldats sont morts et vos barges sont resté sur la planète. Courage commandant.");
             } else {
                 $soldierDtmp = $defenser->getSoldier() != 0 ? $defenser->getSoldier() : 1;
                 $workerDtmp = $defenser->getWorker();
@@ -707,10 +707,10 @@ class FightController extends AbstractController
                 }
                 $reportDef->setTitle("Rapport d'invasion : Défaite (défense)");
                 $reportDef->setImageName("defend_lose_report.jpg");
-                $reportDef->setContent("Mais QUI ? QUI !!! Vous as donné un commandant si médiocre " . $user->getUserName() . " n'a pas eu a faire grand chose pour prendre votre planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . ".  " . round($soldierAtmp) . " soldats ennemis sont tout de même éliminé. C'est toujours ça de gagner. Vos " . $soldierDtmp . " soldats, " . $tankDtmp ." tanks et " . $workerDtmp . " travailleurs sont tous mort. Votre empire en a prit un coup, mais il vous reste des planètes, il est l'heure de la revanche !");
+                $reportDef->setContent("Mais QUI ? QUI !!! Vous as donné un commandant si médiocre " . $user->getUserName() . " n'a pas eu a faire grand chose pour prendre votre planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . ".  " . round($soldierAtmp) . " soldats ennemis sont tout de même éliminé. C'est toujours ça de gagner. Vos " . number_format($soldierDtmp) . " soldats, " . number_format($tankDtmp) ." tanks et " . number_format($workerDtmp) . " travailleurs sont tous mort. Votre empire en a prit un coup, mais il vous reste des planètes, il est l'heure de la revanche !");
                 $reportInv->setTitle("Rapport d'invasion : Victoire (attaque)");
                 $reportInv->setImageName("invade_win_report.jpg");
-                $reportInv->setContent("Vous débarquez après que la planète ait été prise et vous installez sur le trône de " . $userDefender->getUserName() . ". Qu'il est bon d'entendre ses pleures lointains... La planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . " est désormais votre! Il est temps de remettre de l'ordre dans la galaxie. " . round($soldierAtmp) . " de vos soldats ont péri dans l'invasion. Mais les défenseurs ont aussi leurs pertes : " . $soldierDtmp . " soldats, " . $tankDtmp ." tanks et " . $workerDtmp . " travailleurs ont péri. Cependant vous épargnez 2000 travailleurs dans votre bonté (surtout pour faire tourner la planète). Et vous remportez " . $warPointAtt . " points de Guerre.");
+                $reportInv->setContent("Vous débarquez après que la planète ait été prise et vous installez sur le trône de " . $userDefender->getUserName() . ". Qu'il est bon d'entendre ses pleures lointains... La planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . " est désormais votre! Il est temps de remettre de l'ordre dans la galaxie. " . round($soldierAtmp) . " de vos soldats ont péri dans l'invasion. Mais les défenseurs ont aussi leurs pertes : " . number_format($soldierDtmp) . " soldats, " . number_format($tankDtmp) ." tanks et " . number_format($workerDtmp) . " travailleurs ont péri. Cependant vous épargnez 2000 travailleurs dans votre bonté (surtout pour faire tourner la planète). Et vous remportez " . number_format($warPointAtt) . " points de Guerre.");
                 $quest = $user->checkQuests('invade');
                 if($quest) {
                     $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $quest->getGain());

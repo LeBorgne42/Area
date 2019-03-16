@@ -341,7 +341,7 @@
                         {% endif %}
                     </td>
                     <td class="center-cells p-4">
-                        {% if usePlanet.getCaserne() > 0 and usePlanet.getConstructAt() == null %}
+                        {% if usePlanet.getBunker() > 0 and usePlanet.getConstructAt() == null %}
                             <a class="btn btn-lg btn-danger  mt-5" data-toggle="confirmation" data-placement="right" data-title="{{ 'building.demolition.question'|trans }}" href="{{ path('building_remove_bunker', {'idp': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                         {% elseif usePlanet.getConstruct() == 'bunker' %}
                             <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'idp': usePlanet.getId(), 'id': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
@@ -562,7 +562,7 @@
                 <tbody>
                     <tr>
                         <td class="center-cells">
-                            <img class="float-left building-img ml-3" src="{{ asset('img/island.jpg') }}"><button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.island'|trans|raw }}"><strong>{{ 'building.island'|trans }} x {{ usePlanet.getIsland()|trans }}</strong></button>
+                            <img class="float-left building-img ml-3" src="{{ asset('img/island.jpg') }}"><button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.island'|trans|raw }}"><strong>{{ 'building.island'|trans }} x {{ usePlanet.getIsland()|trans }}/5</strong></button>
                             <div class="mt-4"><span class="ml-4">{% if (usePlanet.getIsland + 1) * 200000 > usePlanet.getUser().getRank().getWarPoint() %}<span class="text-rouge">{{ ((usePlanet.getIsland() + 1) * 200000)|number_format }}</span>{% else %}{{ ((usePlanet.getIsland() + 1) * 200000)|number_format }}{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'pdgImg'|trans }}" src="{{ asset('img/pdg.png') }}"></span></div>
                         </td>
                         <td class="center-cells cell-middle">
@@ -589,7 +589,7 @@
                     </tr>
                     <tr>
                         <td class="center-cells">
-                            <img class="float-left building-img ml-3" src="{{ asset('img/orbital.jpg') }}"><button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.orbital'|trans|raw }}"><strong>{{ 'building.orbital'|trans }} x {{ usePlanet.getOrbital()|trans }}</strong></button>
+                            <img class="float-left building-img ml-3" src="{{ asset('img/orbital.jpg') }}"><button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.orbital'|trans|raw }}"><strong>{{ 'building.orbital'|trans }} x {{ usePlanet.getOrbital()|trans }}/5</strong></button>
                             <div class="mt-4"><span class="ml-4">{% if (usePlanet.getOrbital + 1) * 200000 > usePlanet.getUser().getRank().getWarPoint() %}<span class="text-rouge">{{ ((usePlanet.getOrbital() + 1) * 200000)|number_format }}</span>{% else %}{{ ((usePlanet.getOrbital() + 1) * 200000)|number_format }}{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'pdgImg'|trans }}" src="{{ asset('img/pdg.png') }}"></span></div>
                         </td>
                         <td class="center-cells cell-middle">

@@ -189,70 +189,70 @@ class Product
     {
         $return = [];
         if ($this->sonde > 0) {
-            $return[] = [$this->sonde, 'sonde'];
+            $return[] = [number_format($this->sonde), 'sonde'];
         }
         if ($this->colonizer > 0) {
-            $return[] = [$this->colonizer, 'colonizer'];
+            $return[] = [number_format($this->colonizer), 'colonizer'];
         }
         if ($this->cargoI > 0) {
-            $return[] = [$this->cargoI, 'cargoI'];
+            $return[] = [number_format($this->cargoI), 'cargoI'];
         }
         if ($this->cargoV > 0) {
-            $return[] = [$this->cargoV, 'cargoV'];
+            $return[] = [number_format($this->cargoV), 'cargoV'];
         }
         if ($this->cargoX > 0) {
-            $return[] = [$this->cargoX, 'cargoX'];
+            $return[] = [number_format($this->cargoX), 'cargoX'];
         }
         if ($this->barge > 0) {
-            $return[] = [$this->barge, 'barges'];
+            $return[] = [number_format($this->barge), 'barges'];
         }
         if ($this->recycleur > 0) {
-            $return[] = [$this->recycleur, 'recycleurs'];
+            $return[] = [number_format($this->recycleur), 'recycleurs'];
         }
         if ($this->radarShip > 0) {
-            $return[] = [$this->radarShip, 'radarShip'];
+            $return[] = [number_format($this->radarShip), 'radarShip'];
         }
         if ($this->brouilleurShip > 0) {
-            $return[] = [$this->brouilleurShip, 'brouilleurShip'];
+            $return[] = [number_format($this->brouilleurShip), 'brouilleurShip'];
         }
         if ($this->moonMaker > 0) {
-            $return[] = [$this->moonMaker, 'moonMaker'];
+            $return[] = [number_format($this->moonMaker), 'moonMaker'];
         }
         if ($this->motherShip > 0) {
-            $return[] = [$this->motherShip, 'motherShip'];
+            $return[] = [number_format($this->motherShip), 'motherShip'];
         }
         if ($this->hunter > 0) {
-            $return[] = [$this->hunter, 'hunter'];
+            $return[] = [number_format($this->hunter), 'hunter'];
         }
         if ($this->hunterHeavy > 0) {
-            $return[] = [$this->hunterHeavy, 'hunterHeavy'];
+            $return[] = [number_format($this->hunterHeavy), 'hunterHeavy'];
         }
         if ($this->hunterWar > 0) {
-            $return[] = [$this->hunterWar, 'hunterWar'];
+            $return[] = [number_format($this->hunterWar), 'hunterWar'];
         }
         if ($this->corvet > 0) {
-            $return[] = [$this->corvet, 'corvet'];
+            $return[] = [number_format($this->corvet), 'corvet'];
         }
         if ($this->corvetLaser > 0) {
-            $return[] = [$this->corvetLaser, 'corvetLaser'];
+            $return[] = [number_format($this->corvetLaser), 'corvetLaser'];
         }
         if ($this->corvetWar > 0) {
-            $return[] = [$this->corvetWar, 'corvetWar'];
+            $return[] = [number_format($this->corvetWar), 'corvetWar'];
         }
         if ($this->fregate > 0) {
-            $return[] = [$this->fregate, 'fregate'];
+            $return[] = [number_format($this->fregate), 'fregate'];
         }
         if ($this->fregatePlasma > 0) {
-            $return[] = [$this->fregatePlasma, 'fregatePlasma'];
+            $return[] = [number_format($this->fregatePlasma), 'fregatePlasma'];
         }
         if ($this->croiser > 0) {
-            $return[] = [$this->croiser, 'croiser'];
+            $return[] = [number_format($this->croiser), 'croiser'];
         }
         if ($this->ironClad > 0) {
-            $return[] = [$this->ironClad, 'ironClad'];
+            $return[] = [number_format($this->ironClad), 'ironClad'];
         }
         if ($this->destroyer > 0) {
-            $return[] = [$this->destroyer, 'destroyer'];
+            $return[] = [number_format($this->destroyer), 'destroyer'];
         }
         return $return;
     }

@@ -14,7 +14,7 @@
     {% if fleet.getUser() == app.user or (fleet.getAlly() == app.user.getAlly() and app.user.getGrade().getPlacement() == 1) %}
         <div class="modal-header">
             <div class="block-title ml-2"><h2>{{ 'fleet.createFleet'|trans }}</h2></div>
-            <a href="{{ path('fleet', {'idp': usePlanet.getId()}) }}"><button type="button" class="close plus">X</button></a>
+            <a href="{{ path('fleet', {'idp': usePlanet.getId()}) }}"><button type="button" class="close plus glyphicon glyphicon-remove"></button></a>
         </div>
         <div class="pb-3 createFleet">
             <div class="row">
