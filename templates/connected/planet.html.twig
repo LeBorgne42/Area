@@ -80,7 +80,7 @@
                             <div class="my-2" data-toggle="tooltip" data-placement="bottom" title="{{ 'soldier'|trans }}">{{ planet.getSoldier()|number_format }} / {{ planet.getSoldierMax()|number_format }} <img height="15" src="{{ asset('img/soldier.png') }}"></div>
                             <div data-toggle="tooltip" data-placement="bottom" title="{{ 'scientist'|trans }}">{{ planet.getScientist()|number_format }} / {{ planet.getScientistMax()|number_format }} <img height="15" src="{{ asset('img/scientist.png') }}"></div>
                         </td>
-                        <td class="center-cells text-center cell-middle{% if app.user.getTutorial() < 18 %} tutorial-hide{% endif %}">
+                        <td class="center-cells text-center cell-middle{% if app.user.getTutorial() < 50 %} tutorial-hide{% endif %}">
                             <div data-toggle="tooltip" data-placement="bottom" title="{{ 'tooltip.ships'|trans }}"><span><a href="{{ path('spatial', {'idp': planet.getId()}) }}">{{ planet.getShipOn() }}</a></span></div>
                             {#<div class="my-2"><span><a href="{{ path('spatial', {'idp': planet.getId()}) }}">{{ planet.getFleets()|length }}</a></span></div>#}
                         </td>

@@ -793,7 +793,7 @@ class Planet
                 if ($fleet->getUser() == $user) {
                     $return = null;
                 }
-                if ($fleet->getUser()->getAlly() == $user->getAlly() && $return != 'pp-mine') {
+                if ($fleet->getUser()->getAlly() == $user->getAlly() && $user->getAlly()) {
                     $return = null;
                 }
                 if ($fleet->getUser()->getAlly() && $user->getAlly()) {

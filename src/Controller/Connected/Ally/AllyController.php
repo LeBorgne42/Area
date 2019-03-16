@@ -169,6 +169,12 @@ class AllyController extends AbstractController
 
             return $this->redirectToRoute('ally', ['idp' => $usePlanet->getId()]);
         }
+
+        if(($user->getTutorial() == 17)) {
+            $user->setTutorial(18);
+            $em->flush();
+        }
+
         return $this->render('connected/ally/noAlly.html.twig', [
             'form_ally' => $form_ally->createView(),
             'usePlanet' => $usePlanet,

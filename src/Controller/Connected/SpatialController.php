@@ -10,6 +10,7 @@ use App\Form\Front\SpatialShipType;
 use App\Form\Front\SpatialFleetType;
 use App\Entity\Fleet;
 use App\Entity\Product;
+use App\Entity\Report;
 use Dateinterval;
 use DateTime;
 use DateTimeZone;
@@ -43,6 +44,45 @@ class SpatialController extends AbstractController
             if($usePlanet->getSpaceShip() == 0) {
                 return $this->redirectToRoute('spatial', ['idp' => $usePlanet->getId()]);
             }
+
+            if(($user->getTutorial() == 19)) {
+                $user->setTutorial(20);
+                $now->add(new DateInterval('PT' . 10 . 'S'));
+                $product = new Product();
+                $product->setPlanet($usePlanet);
+                $product->setHunterWar(10);
+                $product->setCorvetWar(5);
+                $product->setProductAt($now);
+                $em->persist($product);
+                $iaPlayer = $em->getRepository('App:User')->find(['id' => 1]);
+                $fleet = new Fleet();
+                $fleet->setHunter(10);
+                $fleet->setCorvet(5);
+                $fleet->setBarge(1);
+                $fleet->setUser($iaPlayer);
+                $fleet->setPlanet($usePlanet);
+                $fleet->setAttack(1);
+                $fleet->setName('Hydra Force');
+                $em->persist($fleet);
+                $reportDef = new Report();
+                $reportDef->setSendAt($now);
+                $reportDef->setUser($user);
+                $reportDef->setTitle("Rapport d'invasion : Victoire (défense)");
+                $reportDef->setImageName("defend_win_report.jpg");
+                $reportDef->setContent("Bien joué ! Vos travailleurs et soldats ont repoussé l'invasion du joueur " . $user->getUserName() . " sur votre planète " . $usePlanet->getName() . " - " . $usePlanet->getSector()->getgalaxy()->getPosition() . ":" . $usePlanet->getSector()->getPosition() . ":" . $usePlanet->getPosition() . ".  " . number_format(500) . " soldats vous ont attaqué, tous ont été tué. Vous remportez " . 100 . " points de Guerre.");
+                $usePlanet->setSoldier($usePlanet->getSoldier() - 200);
+                $em->persist($reportDef);
+                $em->flush();
+
+                $form_spatialShip = null;
+                $form_spatialShip = $this->createForm(SpatialShipType::class);
+
+                return $this->render('connected/spatial.html.twig', [
+                    'usePlanet' => $usePlanet,
+                    'form_spatialShip' => $form_spatialShip->createView(),
+                ]);
+            }
+
             $cargoI = abs($form_spatialShip->get('cargoI')->getData());
             $cargoV = abs($form_spatialShip->get('cargoV')->getData());
             $cargoX = abs($form_spatialShip->get('cargoX')->getData());
@@ -172,6 +212,11 @@ class SpatialController extends AbstractController
 
             $form_spatialShip = null;
             $form_spatialShip = $this->createForm(SpatialShipType::class);
+        }
+
+        if(($user->getTutorial() == 18)) {
+            $user->setTutorial(19);
+            $em->flush();
         }
 
         return $this->render('connected/spatial.html.twig', [
@@ -374,7 +419,21 @@ class SpatialController extends AbstractController
             $usePlanet->setDestroyer($destroyer);
             $usePlanet->addFleet($fleet);
 
+            if(($user->getTutorial() == 20)) {
+                $user->setTutorial(21);
+                $fleet->setHunter($usePlanet->getHunter());
+                $fleet->setFregate($usePlanet->getFregate());
+                $fleet->setCorvetWar($usePlanet->getCorvetWar());
+                $fleet->setHunterWar($usePlanet->getHunterWar());
+                $usePlanet->setHunter(0);
+                $usePlanet->setFregate(0);
+                $usePlanet->setCorvetWar(0);
+                $usePlanet->setHunterWar(0);
+            }
+
             if(($user->getTutorial() == 10)) {
+                $fleet->setColonizer($usePlanet->getColonizer());
+                $usePlanet->setColonizer($usePlanet->getColonizer() - 1);
                 $user->setTutorial(11);
             }
             $em->flush();

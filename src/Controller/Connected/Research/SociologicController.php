@@ -175,7 +175,7 @@ class SociologicController extends AbstractController
         $userPdg = $user->getRank()->getWarPoint();
 
         if(($userPdg < ($level * 75000) || $user->getHyperespace() == 0) ||
-            ($level == 2 || $user->getSearchAt() > $now)) {
+            ($level == 3 || $user->getSearchAt() > $now)) {
             return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
         }
 

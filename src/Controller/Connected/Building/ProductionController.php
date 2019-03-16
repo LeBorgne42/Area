@@ -82,7 +82,7 @@ class ProductionController extends AbstractController
         if($level == 0 || $usePlanet->getConstructAt() > $now) {
             return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
-        $now->add(new DateInterval('PT' . 600 . 'S'));
+        $now->add(new DateInterval('PT' . 60 . 'S'));
         $usePlanet->setMiner($level - 1);
         $usePlanet->setNbProduction($usePlanet->getNbProduction() - ($level * 1.1));
         $usePlanet->setGroundPlace($newGround);
@@ -159,7 +159,7 @@ class ProductionController extends AbstractController
         if($level == 0 || $usePlanet->getConstructAt() > $now) {
             return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
         }
-        $now->add(new DateInterval('PT' . 600 . 'S'));
+        $now->add(new DateInterval('PT' . 60 . 'S'));
         $usePlanet->setExtractor($level - 1);
         $usePlanet->setWtProduction($usePlanet->getWtProduction() - ($level * 1.09));
         $usePlanet->setGroundPlace($newGround);

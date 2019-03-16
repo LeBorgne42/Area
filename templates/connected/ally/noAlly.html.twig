@@ -6,6 +6,21 @@
 
 {% block body %}
     <div class="front-block">
+        {% if app.user.getTutorial() == 18 %}
+            <table class="table table-striped borderOverview tutorial">
+                <tbody>
+                <tr>
+                    <th class="tab-cells-name p-3 tutorial">
+                        <div class="row">
+                            <div class="col-12 py-1">
+                                {% if app.user.getTutorial() == 18  %}{{ 'quest.tutorial'|trans|raw }}{% endif %}
+                            </div>
+                        </div>
+                    </th>
+                </tr>
+                </tbody>
+            </table>
+        {% endif %}
         <div class="front-block-ally">
             {% if app.user.getAlly() %}
             {% else %}
@@ -34,7 +49,7 @@
                     </div>
                     <div class="offset-1 col-10 form-group">
                         {{ form_widget(form_ally.description) }}
-                        <div><span class="pull-left mt-3">{{ form_widget(form_ally.politic) }}</span>{{ form_widget(form_ally.sendForm) }}</div>
+                        <div><span class="pull-left mt-3">{{ form_widget(form_ally.politic) }}</span><span class="{% if app.user.getTutorial() < 21 %}tutorial-hide{% endif %}">{{ form_widget(form_ally.sendForm) }}</span></div>
                     </div>
                 </div>
                 {{ form_end(form_ally) }}

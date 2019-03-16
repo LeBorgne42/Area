@@ -3,13 +3,13 @@ tooltip.planet: '%name%'
 tooltip.planetAlly: '[%ally%] %name%'
 tooltip.planetInfos: 'Terrain: %land% <img class="mb-1" src="https://www.areauniverse.eu/img/ground.png"> <br> Espace: %sky% <img class="mb-1" src="https://www.areauniverse.eu/img/sky.png"> <br> Radar: %radar% <br> Brouilleur: %brouilleur% <br> Au sol: %ground%'
 tooltip.planetOrbite: '%orbite%'
-map.coming: 'Flotte entrant dans le secteur'
+map.coming: 'Flottes entrant dans le secteur'
 map.fleetName: 'Nom de flotte'
 map.from: De
 map.goTo: Vers
 map.time: Temps
 map.fleetSignature: Signature
-map.out: 'Flotte sortant du secteur'
+map.out: 'Flottes sortant du secteur'
 map.planetHostile: Occupée
 tooltip.cdr: '%niobium% Niobium  <img class="mb-1" src="https://www.areauniverse.eu/img/niobium.png"><br> %water% Water <img class="mb-1" src="https://www.areauniverse.eu/img/water.png">'
 tooltip.brouillage: Brouillage
