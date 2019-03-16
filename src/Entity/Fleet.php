@@ -329,21 +329,6 @@ class Fleet
             }
             $ships = "Chasseurs : " . number_format($this->getHunter()) . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . number_format(round($new)) . "</span></span><br>";
         }
-        if($this->getCorvet()) {
-            if($armor != 0) {
-                $new = (($this->getCorvet() * 74) - $armor) / 74;
-                if($new < 0) {
-                    $armor = $new * -74;
-                    $new = $this->getCorvet();
-                } else {
-                    $armor = 0;
-                    $new = $this->getCorvet() - $new;
-                }
-            } else {
-                $new = 0;
-            }
-            $ships = $ships . "Corvettes : " . number_format($this->getCorvet()) . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . number_format(round($new)) . "</span></span><br>";
-        }
         if($this->getHunterHeavy()) {
             if($armor != 0) {
                 $new = (($this->getHunterHeavy() * 25) - $armor) / 25;
@@ -359,21 +344,6 @@ class Fleet
             }
             $ships = $ships . "Chasseurs lourds : " . number_format($this->getHunterHeavy()) . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . number_format(round($new)) . "</span></span><br>";
         }
-        if($this->getFregate()) {
-            if($armor != 0) {
-                $new = (($this->getFregate() * 168) - $armor) / 168;
-                if ($new < 0) {
-                    $armor = $new * -168;
-                    $new = $this->getFregate();
-                } else {
-                    $armor = 0;
-                    $new = $this->getFregate() - $new;
-                }
-            } else {
-                $new = 0;
-            }
-            $ships = $ships . "Frégates : " . number_format($this->getFregate()) . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . number_format(round($new)) . "</span></span><br>";
-        }
         if($this->getHunterWar()) {
             if($armor != 0) {
                 $new = (($this->getHunterWar() * 53) - $armor) / 53;
@@ -388,6 +358,21 @@ class Fleet
                 $new = 0;
             }
             $ships = $ships . "Chasseur a plasma : " . number_format($this->getHunterWar()) . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . number_format(round($new)) . "</span></span><br>";
+        }
+        if($this->getCorvet()) {
+            if($armor != 0) {
+                $new = (($this->getCorvet() * 74) - $armor) / 74;
+                if($new < 0) {
+                    $armor = $new * -74;
+                    $new = $this->getCorvet();
+                } else {
+                    $armor = 0;
+                    $new = $this->getCorvet() - $new;
+                }
+            } else {
+                $new = 0;
+            }
+            $ships = $ships . "Corvettes : " . number_format($this->getCorvet()) . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . number_format(round($new)) . "</span></span><br>";
         }
         if($this->getCorvetLaser()) {
             if($armor != 0) {
@@ -418,6 +403,21 @@ class Fleet
                 $new = 0;
             }
             $ships = $ships . "Corvettes Armageddon : " . number_format($this->getCorvetWar()) . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . number_format(round($new)) . "</span></span><br>";
+        }
+        if($this->getFregate()) {
+            if($armor != 0) {
+                $new = (($this->getFregate() * 168) - $armor) / 168;
+                if ($new < 0) {
+                    $armor = $new * -168;
+                    $new = $this->getFregate();
+                } else {
+                    $armor = 0;
+                    $new = $this->getFregate() - $new;
+                }
+            } else {
+                $new = 0;
+            }
+            $ships = $ships . "Frégates : " . number_format($this->getFregate()) . " <span class='float-right'>Perte : <span class=\"text-rouge\">" . number_format(round($new)) . "</span></span><br>";
         }
         if($this->getFregatePlasma()) {
             if($armor != 0) {
