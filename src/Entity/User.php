@@ -1020,32 +1020,34 @@ class User implements UserInterface, \Serializable
             $return = 0;
         } elseif ($this->experience < 2000) {
             $return = 1;
-        } elseif ($this->experience < 5000) {
-            $return = 2;
         } elseif ($this->experience < 10000) {
-            $return = 3;
+            $return = 2;
         } elseif ($this->experience < 25000) {
-            $return = 4;
+            $return = 3;
         } elseif ($this->experience < 40000) {
-            $return = 5;
+            $return = 4;
         } elseif ($this->experience < 75000) {
-            $return = 6;
+            $return = 5;
         } elseif ($this->experience < 100000) {
-            $return = 7;
+            $return = 6;
         } elseif ($this->experience < 150000) {
-            $return = 8;
+            $return = 7;
         } elseif ($this->experience < 200000) {
-            $return = 9;
+            $return = 8;
         } elseif ($this->experience < 280000) {
-            $return = 10;
+            $return = 9;
         } elseif ($this->experience < 350000) {
-            $return = 11;
+            $return = 10;
         } elseif ($this->experience < 450000) {
-            $return = 12;
+            $return = 11;
         } elseif ($this->experience < 600000) {
-            $return = 13;
+            $return = 12;
         } elseif ($this->experience < 800000) {
+            $return = 13;
+        } elseif ($this->experience < 1000000) {
             $return = 14;
+        } elseif ($this->experience < 1300000) {
+            $return = 15;
         }
 
         return $return;
