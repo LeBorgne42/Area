@@ -18,3 +18,17 @@
   border: 1px solid white;
   border-radius: 5px;
 }
+
+.blocked-building {
+  background-image: url("../public/img/blocked.png");
+  background-color: black;
+  height: 79px;
+}
+
+tr.blocked-building th {
+  border: none!important;
+}
+
+tr.blocked-building td {
+  border: none!important;
+}
