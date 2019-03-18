@@ -595,10 +595,10 @@ function manageTime() {
             } else {
                 if (date_now > 0) {
                     if (jours > 0) {
-                        area.text(jours + 'j ' + heures + 'heures ' + minutes + 'mins ' + secondes + 's');
+                        area.text(jours + 'j ' + heures + 'h ' + minutes + 'mins ' + secondes + 's');
                         area.removeAttr('hidden');
                     } else if (heures > 0) {
-                        area.text(heures + 'heures ' + minutes + 'mins ' + secondes + 's');
+                        area.text(heures + 'h ' + minutes + 'mins ' + secondes + 's');
                         area.removeAttr('hidden');
                     } else if (minutes > 0) {
                         area.text(minutes + 'mins ' + secondes + 's');
@@ -719,13 +719,13 @@ function manageFlightTime(){
         var minutes = Math.floor((date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60))) / 60);
         var secondes = Math.floor(date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60 + minutes * 60)));
         if (jours > 0) {
-            $('#flightTime').text(jours + 'j ' + heures + 'heures ' + minutes + 'mins ' + secondes + 's' + '   Prix : ' + carburant + ' bitcoin');
+            $('#flightTime').text(jours + ' jours ' + heures + ' heures ' + minutes + ' mins ' + secondes + 's' + '   Prix : ' + carburant + ' bitcoin');
         } else if (heures > 0)
         {
-            $('#flightTime').text(heures + 'heures ' + minutes + 'mins ' + secondes + 's' + '   Prix : ' + carburant + ' bitcoin');
+            $('#flightTime').text(heures + ' heures ' + minutes + ' mins ' + secondes + 's' + '   Prix : ' + carburant + ' bitcoin');
         } else if (minutes > 0)
         {
-            $('#flightTime').text(minutes + 'mins ' + secondes + 's' + '   Prix : ' + carburant + ' bitcoin');
+            $('#flightTime').text(minutes + ' mins ' + secondes + 's' + '   Prix : ' + carburant + ' bitcoin');
         } else if (secondes > 0)
         {
             $('#flightTime').text(secondes + ' secondes' + '   Prix : ' + carburant + ' bitcoin');
@@ -767,13 +767,13 @@ function manageFlightTime(){
         var minutes = Math.floor((date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60))) / 60);
         var secondes = Math.floor(date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60 + minutes * 60)));
         if (jours > 0) {
-            $('#flightTime').text(jours + 'j ' + heures + 'heures ' + minutes + 'mins ' + secondes + 's' + '   Prix : ' + carburant + ' bitcoin');
+            $('#flightTime').text(jours + ' jours ' + heures + ' heures ' + minutes + ' mins ' + secondes + 's' + '   Prix : ' + carburant + ' bitcoin');
         } else if (heures > 0)
         {
-            $('#flightTime').text(heures + 'heures ' + minutes + 'mins ' + secondes + 's' + '   Prix : ' + carburant + ' bitcoin');
+            $('#flightTime').text(heures + ' heures ' + minutes + ' mins ' + secondes + 's' + '   Prix : ' + carburant + ' bitcoin');
         } else if (minutes > 0)
         {
-            $('#flightTime').text(minutes + 'mins ' + secondes + 's' + '   Prix : ' + carburant + ' bitcoin');
+            $('#flightTime').text(minutes + ' mins ' + secondes + 's' + '   Prix : ' + carburant + ' bitcoin');
         } else if (secondes > 0)
         {
             $('#flightTime').text(secondes + ' secondes' + '   Prix : ' + carburant + ' bitcoin');
@@ -815,13 +815,13 @@ function manageFlightTime(){
         var minutes = Math.floor((date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60))) / 60);
         var secondes = Math.floor(date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60 + minutes * 60)));
         if (jours > 0) {
-            $('#flightTime').text(jours + 'j ' + heures + 'heures ' + minutes + 'mins ' + secondes + 's' + '   Prix : ' + carburant + ' bitcoin');
+            $('#flightTime').text(jours + ' jours ' + heures + ' heures ' + minutes + ' mins ' + secondes + 's' + '   Prix : ' + carburant + ' bitcoin');
         } else if (heures > 0)
         {
-            $('#flightTime').text(heures + 'heures ' + minutes + 'mins ' + secondes + 's' + '   Prix : ' + carburant + ' bitcoin');
+            $('#flightTime').text(heures + ' heures ' + minutes + ' mins ' + secondes + 's' + '   Prix : ' + carburant + ' bitcoin');
         } else if (minutes > 0)
         {
-            $('#flightTime').text(minutes + 'mins ' + secondes + 's' + '   Prix : ' + carburant + ' bitcoin');
+            $('#flightTime').text(minutes + ' mins ' + secondes + 's' + '   Prix : ' + carburant + ' bitcoin');
         } else if (secondes > 0)
         {
             $('#flightTime').text(secondes + ' secondes' + '   Prix : ' + carburant + ' bitcoin');

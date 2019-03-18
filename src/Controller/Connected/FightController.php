@@ -148,11 +148,13 @@ class FightController extends AbstractController
         $missile = 0;
         $laser = 0;
         $plasma = 0;
+        $debrisAtt = 0;
         $armorD = 0;
         $shieldD = 0;
         $missileD = 0;
         $laserD = 0;
         $plasmaD = 0;
+        $debrisDef = 0;
 
         foreach($blockAtt as $attacker) {
             $armor = $armor + $attacker->getArmor();
@@ -160,7 +162,7 @@ class FightController extends AbstractController
             $missile = $missile + $attacker->getMissile();
             $laser = $laser + $attacker->getLaser();
             $plasma = $plasma + $attacker->getPlasma();
-            $debrisAtt = $attacker->getNbrSignatures();
+            $debrisAtt = $debrisAtt + $attacker->getNbrSignatures() + $attacker->getCargoFull();
             $armeSaveA = $missile + $laser + $plasma;
         }
         foreach($blockDef as $defender) {
@@ -169,7 +171,7 @@ class FightController extends AbstractController
             $missileD = $missileD + $defender->getMissile();
             $laserD = $laserD + $defender->getLaser();
             $plasmaD = $plasmaD + $defender->getPlasma();
-            $debrisDef = $defender->getNbrSignatures();
+            $debrisDef = $debrisDef + $defender->getNbrSignatures() + $defender->getCargoFull();
             $armeSaveB = $laserD + $plasmaD + $missileD;
         }
         $armorSaveA = $armor;

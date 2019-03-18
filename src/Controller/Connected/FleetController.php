@@ -306,6 +306,16 @@ class FleetController  extends AbstractController
                     ->setParameters(['id' => $id, 'user' => $user, 'ally' => $user->getAlly()])
                     ->getQuery()
                     ->getOneOrNullResult();
+            } else {
+                $fleetGive = $em->getRepository('App:Fleet')
+                    ->createQueryBuilder('f')
+                    ->where('f.id = :id')
+                    ->andWhere('f.user = :user')
+                    ->andWhere('f.fightAt is null')
+                    ->andWhere('f.flightTime is null')
+                    ->setParameters(['id' => $id, 'user' => $user])
+                    ->getQuery()
+                    ->getOneOrNullResult();
             }
         } else {
             $fleetGive = $em->getRepository('App:Fleet')

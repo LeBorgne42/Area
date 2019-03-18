@@ -11,4 +11,31 @@
 
 .research .tab-cells-name {
   width: 350px;
+  height: 79px;
+}
+
+.blocked-search {
+  background-image: url("../public/img/blocked.png");
+  background-color: black;
+}
+
+tr.blocked-search th {
+  border: none!important;
+}
+
+tr.blocked-search td {
+  border: none!important;
+}
+
+.access-search {
+  background-image: url("../public/img/access.png");
+  background-color: black;
+}
+
+tr.access-search th {
+  border: none!important;
+}
+
+tr.access-search td {
+  border: none!important;
 }
