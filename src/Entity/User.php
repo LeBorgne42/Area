@@ -164,6 +164,17 @@ class User implements UserInterface, \Serializable
      */
     protected $tutorial;
 
+
+    /**
+     * @ORM\Column(name="vote_ally",type="smallint")
+     */
+    protected $voteAlly;
+
+    /**
+     * @ORM\Column(name="vote_name",type="string", nullable=true)
+     */
+    protected $voteName;
+
     /**
      * @ORM\Column(name="newletter",type="boolean")
      * @Assert\NotBlank(message = "required")
@@ -514,6 +525,8 @@ class User implements UserInterface, \Serializable
         $this->politicTankDef = 0;
         $this->politicWorker = 0;
         $this->politicWorkerDef = 0;
+        $this->voteAlly = 0;
+        $this->voteName = null;
     }
 
     /**
@@ -2833,6 +2846,38 @@ class User implements UserInterface, \Serializable
     public function setPoliticPdg($politicPdg): void
     {
         $this->politicPdg = $politicPdg;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVoteAlly()
+    {
+        return $this->voteAlly;
+    }
+
+    /**
+     * @param mixed $voteAlly
+     */
+    public function setVoteAlly($voteAlly): void
+    {
+        $this->voteAlly = $voteAlly;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVoteName()
+    {
+        return $this->voteName;
+    }
+
+    /**
+     * @param mixed $voteName
+     */
+    public function setVoteName($voteName): void
+    {
+        $this->voteName = $voteName;
     }
 
     /**

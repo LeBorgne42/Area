@@ -12,6 +12,7 @@ use App\Form\Front\AllyAddType;
 use App\Form\Front\AllyPactType;
 use App\Form\Front\AllyGradeType;
 use App\Form\Front\AllyDefconType;
+use App\Form\Front\VoteType;
 use App\Form\Front\ExchangeType;
 use App\Form\Front\UserAttrGradeType;
 use App\Entity\Grade;
@@ -50,13 +51,62 @@ class AllyController extends AbstractController
         $form_allyImage = $this->createForm(AllyImageType::class, $ally);
         $form_allyImage->handleRequest($request);
 
+        $form_vote = $this->createForm(VoteType::class, null, ["allyId" => $user->getAlly()->getId()]);
+        $form_vote->handleRequest($request);
+
         if ($form_allyImage->isSubmitted() && $form_allyImage->isValid()) {
             $em->flush();
         }
 
+        if ($form_vote->isSubmitted() && $form_vote->isValid()) {
+            if ($user->getVoteName()) {
+                $unVoteUser = $em->getRepository('App:User')->findOneBy(['username' => $user->getVoteName()]);
+                $unVoteUser->setVoteAlly($unVoteUser->getVoteAlly() - 1);
+            }
+            $user->setVoteName($form_vote->get('user')->getData()->getUsername());
+            $form_vote->get('user')->getData()->setVoteAlly($form_vote->get('user')->getData()->getVoteAlly() + 1);
+            $em->flush();
+
+            $leader = $em->getRepository('App:User')
+                ->createQueryBuilder('u')
+                ->join('u.grade', 'g')
+                ->where('g.placement = :one')
+                ->andWhere('u.ally = :ally')
+                ->setParameters(['one' => 1, 'ally' => $user->getAlly()])
+                ->getQuery()
+                ->getOneOrNullResult();
+
+            $newLeader = $em->getRepository('App:User')
+                ->createQueryBuilder('u')
+                ->where('u.voteAlly > :vote and u.id != :user')
+                ->andWhere('u.ally = :ally')
+                ->setParameters(['vote' => $leader->getVoteAlly(), 'ally' => $user->getAlly(), 'user' => $leader->getId()])
+                ->orderBy('u.voteAlly', 'DESC')
+                ->getQuery()
+                ->getOneOrNullResult();
+
+            if ($newLeader) {
+                $tmpGrade = $newLeader->getGrade();
+                $newLeader->setGrade($leader->getGrade());
+                $leader->setGrade($tmpGrade);
+                $em->flush();
+            }
+        }
+
+        $userVotes = $em->getRepository('App:User')
+            ->createQueryBuilder('u')
+            ->where('u.voteAlly > :vote')
+            ->andWhere('u.ally = :ally')
+            ->setParameters(['vote' => 0, 'ally' => $user->getAlly()])
+            ->orderBy('u.voteAlly', 'DESC')
+            ->getQuery()
+            ->getResult();
+
         return $this->render('connected/ally.html.twig', [
             'form_allyImage' => $form_allyImage->createView(),
-            'usePlanet' => $usePlanet
+            'form_allyVote' => $form_vote->createView(),
+            'usePlanet' => $usePlanet,
+            'userVotes' => $userVotes
         ]);
     }
 
@@ -73,18 +123,22 @@ class AllyController extends AbstractController
         $form_userAttrGrade = $this->createForm(UserAttrGradeType::class, null, ["allyId" => $user->getAlly()->getId()]);
         $form_userAttrGrade->handleRequest($request);
 
-        if ($ally->getPolitic() != 'fascism') {
-            if (($form_userAttrGrade->isSubmitted() && $form_userAttrGrade->isValid())) {
+        if (($form_userAttrGrade->isSubmitted() && $form_userAttrGrade->isValid())) {
+            if ($ally->getPolitic() == 'fascism' && $form_userAttrGrade->get('grade')->getData()->getPlacement() == 1) {
+            } else {
                 $newGradeUser = $em->getRepository('App:User')->find(['id' => $id]);
 
                 if (($user->getGrade()->getPlacement() == 1 && $newGradeUser->getId() == $user->getId()) && $form_userAttrGrade->get('grade')->getData()->getPlacement() != 1) {
                     return $this->redirectToRoute('ally', ['idp' => $usePlanet->getId()]);
                 }
+                if ($newGradeUser != $user && $form_userAttrGrade->get('grade')->getData()->getPlacement() == 1 && $ally->getPolitic() != 'communism') {
+                    $grade = $em->getRepository('App:Grade')->findOneBy(['ally' => $ally->getId(), 'placement' => 5]);
+                    $user->setGrade($grade);
+                }
                 $newGradeUser->setGrade($form_userAttrGrade->get('grade')->getData());
                 $em->flush();
-
-                return $this->redirectToRoute('ally', ['idp' => $usePlanet->getId()]);
             }
+            return $this->redirectToRoute('ally', ['idp' => $usePlanet->getId()]);
         }
 
         return $this->render('connected/ally/grade.html.twig', [
@@ -128,11 +182,11 @@ class AllyController extends AbstractController
             $mGrade = new Grade();
             $mGrade->setAlly($ally);
             $mGrade->addUser($user);
-            $mGrade->setPlacement(5);
 
             $grade->setAlly($ally);
             if ($form_ally->get('politic')->getData() == 'democrat') {
                 $grade->setName("Président");
+                $mGrade->setPlacement(5);
                 $mGrade->setName("Citoyen");
                 $ally->setMaxMembers(3);
                 $ally->setImageName('democrat.jpg');
@@ -149,6 +203,7 @@ class AllyController extends AbstractController
                 $sGrade->setCanKick(false);
                 $sGrade->setCanWar(false);
                 $sGrade->setCanPeace(false);
+                $mGrade->setPlacement(5);
                 $mGrade->setName("Soldat");
                 $ally->setMaxMembers(2);
                 $ally->setImageName('fascism.png');
@@ -156,6 +211,7 @@ class AllyController extends AbstractController
                 $ally->setPdg(2000);
             } elseif ($form_ally->get('politic')->getData() == 'communism'){
                 $grade->setName("Père des peuples");
+                $mGrade->setPlacement(1);
                 $mGrade->setName("Camarade");
                 $ally->setMaxMembers(4);
                 $ally->setImageName('communism.jpg');
@@ -186,6 +242,7 @@ class AllyController extends AbstractController
 
             $ally->addGrade($grade);
             $user->setAlly($ally);
+            $user->setVoteAlly(1);
             $user->setJoinAllyAt($now);
             $user->setGrade($grade);
             $em->persist($ally);
@@ -840,6 +897,9 @@ class AllyController extends AbstractController
         }
 
         if (($form_allyGrade->isSubmitted() && $form_allyGrade->isValid()) && $ally->getPolitic() != 'fascism') {
+            if ($user->getAlly()->getPolitic() == 'communism') {
+                $grade->setPlacement(1);
+            }
             $grade->setAlly($ally);
             $em->persist($grade);
             $ally->addGrade($grade);

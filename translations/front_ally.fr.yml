@@ -47,6 +47,7 @@ ally.canPeace: Pacte/Pna
 ally.canKick: Exclure
 ally.canWar: Guerre
 ally.pacts: Pactes
+form.send.vote: 'Voter pour votre président'
 ally.alliedName: 'Pacte défensif'
 ally.cancelPact: 'Rompre pacte'
 ally.pnaName: 'Alliance en pna'
@@ -77,7 +78,7 @@ tooltip.changeGrade: 'Cliquez sur le rang du joueur pour changer son grade.'
 ally.banktitle: 'Banque de l''alliance'
 ally.taxe: 'taxe :'
 ally.pactsTitle: 'Gestion des Pactes/Pnas/Guerre de l''alliance'
-ally.gradeTitle: 'Création de grades'
+ally.gradeTitle: 'Administration alliance'
 ally.addTitle: 'Recrutement de joueurs'
 ally.machiavel: 'Vous avez trahis vos alliés'
 ally.traitor: 'Vous avez été trahis'

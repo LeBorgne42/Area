@@ -816,6 +816,7 @@
                                         <div class="mt-2">{{ fleet.getPlanet().getNbCdr()|number_format }} <img src="{{ asset('img/niobium.png') }}"></div>
                                         <div>{{ fleet.getPlanet().getWtCdr()|number_format }} <img src="{{ asset('img/water.png') }}"></div>
                                         {% if fleet.getRecycleur() and fleet.getRecycleAt() %}<div><span class="timerArea" hidden>{{ fleet.getRecycleAt()|date('Y/m/d H:i:s') }}</span></div>{% endif %}
+                                        {% if fleet.getRecycleur() %}<div>{{ 'fleet.recyclage'|trans }} {{ (fleet.getRecycleur() * (1000 + (app.user.getPoliticRecycleur() * 200)))|number_format }}</div>{% endif %}
                                     </th>
                                 </tr>
                             </tbody>

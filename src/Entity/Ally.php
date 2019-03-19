@@ -312,7 +312,7 @@ class Ally
     public function getUsers()
     {
         $criteria = Criteria::create()
-            ->orderBy(array('grade' => 'ASC'));
+            ->orderBy(array('username' => 'ASC'));
 
         return $this->users->matching($criteria);
     }
@@ -633,6 +633,21 @@ class Ally
             }
         }
 
+        return $return;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPlanetsMax(): int
+    {
+        $return = 0;
+
+        foreach($this->getUsers() as $user) {
+            $return = $return + $user->getTerraformation() + 2;
+            $return = $return + $user->getPoliticColonisation();
+            $return = $return + $user->getPoliticInvade();
+        }
         return $return;
     }
 
