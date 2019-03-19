@@ -951,8 +951,217 @@ class User implements UserInterface, \Serializable
             return $return;
         } elseif ($this->heavyShip < 3) {
             return $return;
+        } elseif ($this->ally) {
+            if ($this->politicCostScientist < 5){
+                return $return;
+            } elseif ($this->politicArmor < 5){
+                return $return;
+            } elseif ($this->politicBarge < 5){
+                return $return;
+            } elseif ($this->politicCargo < 5){
+                return $return;
+            } elseif ($this->politicColonisation < 5){
+                return $return;
+            } elseif ($this->politicCostSoldier < 5){
+                return $return;
+            } elseif ($this->politicCostTank < 5){
+                return $return;
+            } elseif ($this->politicInvade < 5){
+                return $return;
+            } elseif ($this->politicMerchant < 5){
+                return $return;
+            } elseif ($this->politicPdg < 5){
+                return $return;
+            } elseif ($this->politicProd < 5){
+                return $return;
+            } elseif ($this->politicRecycleur < 5){
+                return $return;
+            } elseif ($this->politicSearch < 5){
+                return $return;
+            } elseif ($this->politicSoldierAtt < 5){
+                return $return;
+            } elseif ($this->politicTankDef < 5){
+                return $return;
+            } elseif ($this->politicWorker < 5){
+                return $return;
+            } elseif ($this->politicWorkerDef < 5){
+                return $return;
+            }
         }
-        return NULL;
+        return null;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWhichResearch($search)
+    {
+        if ($this->ally) {
+            if ('prod_ally' == $search) {
+                return $this->politicProd;
+            } elseif ('recycleur_ally' == $search) {
+                return $this->politicRecycleur;
+            } elseif ('worker_ally' == $search) {
+                return $this->politicWorker;
+            }
+            if ($this->ally->getLevel() >= 1) {
+                if ('armement_ally' == $search && $this->ally->getPolitic() == 'fascism') {
+                    return $this->politicArmement;
+                } elseif ('worker_def_ally' == $search) {
+                    return $this->politicWorkerDef;
+                } elseif ('search_ally' == $search) {
+                    return $this->politicSearch;
+                }
+            }
+            if ($this->ally->getLevel() >= 2) {
+                if ('cost_scientist_ally' == $search) {
+                    return $this->politicCostScientist;
+                } elseif ('armement_ally' == $search && $this->ally->getPolitic() == 'communism') {
+                    return $this->politicArmement;
+                } elseif ('barge_ally' == $search) {
+                    return $this->politicBarge;
+                }
+            }
+            if ($this->ally->getLevel() >= 3) {
+                if ('soldier_att_ally' == $search) {
+                    return $this->politicSoldierAtt;
+                } elseif ('cargo_ally' == $search) {
+                    return $this->politicCargo;
+                } elseif ('cost_soldier_ally' == $search) {
+                    return $this->politicCostSoldier;
+                }
+            }
+            if ($this->ally->getLevel() >= 4) {
+                if ('armor_ally' == $search) {
+                    return $this->politicArmor;
+                } elseif ('soldier_sale_ally' == $search) {
+                    return $this->politicSoldierSale;
+                } elseif ('cost_tank_ally' == $search) {
+                    return $this->politicCostTank;
+                }
+            }
+            if ($this->ally->getLevel() >= 5) {
+                if ('merchant_ally' == $search) {
+                    return $this->politicMerchant;
+                } elseif ('tank_def_ally' == $search) {
+                    return $this->politicTankDef;
+                } elseif ('invade_ally' == $search && $this->ally->getPolitic() == 'communism') {
+                    return $this->politicInvade;
+                }
+            }
+            if ($this->ally->getLevel() >= 6) {
+                if ('colonisation_ally' == $search) {
+                    return $this->politicColonisation;
+                } elseif ('invade_ally' == $search && $this->ally->getPolitic() == 'fascism') {
+                    return $this->politicInvade;
+                } elseif ('pdg_ally' == $search) {
+                    return $this->politicPdg;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getResearchCost($search)
+    {
+        if('armement_ally' == $search && $this->ally->getPolitic() == 'fascism') {
+            return 50000;
+        } elseif('armement_ally' == $search && $this->ally->getPolitic() == 'communism') {
+            return 100000;
+        } elseif ('cost_scientist_ally' == $search) {
+            return 100000;
+        } elseif ('armor_ally' == $search) {
+            return 200000;
+        } elseif ('barge_ally' == $search) {
+            return 100000;
+        } elseif ('cargo_ally' == $search) {
+            return 150000;
+        } elseif ('colonisation_ally' == $search) {
+            return 300000;
+        } elseif ('cost_soldier_ally' == $search) {
+            return 150000;
+        } elseif ('cost_tank_ally' == $search) {
+            return 200000;
+        } elseif ('invade_ally' == $search && $this->ally->getPolitic() == 'fascism') {
+            return 300000;
+        } elseif ('invade_ally' == $search && $this->ally->getPolitic() == 'communism') {
+            return 250000;
+        } elseif ('merchant_ally' == $search) {
+            return 250000;
+        } elseif ('pdg_ally' == $search) {
+            return 300000;
+        } elseif ('prod_ally' == $search) {
+            return 25000;
+        } elseif ('recycleur_ally' == $search) {
+            return 25000;
+        } elseif ('search_ally' == $search) {
+            return 50000;
+        } elseif ('soldier_att_ally' == $search) {
+            return 150000;
+        } elseif ('soldier_sale_ally' == $search) {
+            return 200000;
+        } elseif ('tank_def_ally' == $search) {
+            return 250000;
+        } elseif ('worker_ally' == $search) {
+            return 25000;
+        } elseif ('worker_def_ally' == $search) {
+            return 50000;
+        }
+        return 0;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getResearchTime($search)
+    {
+        if('armement_ally' == $search && $this->ally->getPolitic() == 'fascism') {
+            return 1200;
+        } elseif('armement_ally' == $search && $this->ally->getPolitic() == 'communism') {
+            return 1500;
+        } elseif ('cost_scientist_ally' == $search) {
+            return 1500;
+        } elseif ('armor_ally' == $search) {
+            return 2100;
+        } elseif ('barge_ally' == $search) {
+            return 1500;
+        } elseif ('cargo_ally' == $search) {
+            return 1800;
+        } elseif ('colonisation_ally' == $search) {
+            return 2700;
+        } elseif ('cost_soldier_ally' == $search) {
+            return 1800;
+        } elseif ('cost_tank_ally' == $search) {
+            return 2100;
+        } elseif ('invade_ally' == $search && $this->ally->getPolitic() == 'fascism') {
+            return 2700;
+        } elseif ('invade_ally' == $search && $this->ally->getPolitic() == 'communism') {
+            return 2400;
+        } elseif ('merchant_ally' == $search) {
+            return 2400;
+        } elseif ('pdg_ally' == $search) {
+            return 2700;
+        } elseif ('prod_ally' == $search) {
+            return 900;
+        } elseif ('recycleur_ally' == $search) {
+            return 900;
+        } elseif ('search_ally' == $search) {
+            return 1200;
+        } elseif ('soldier_att_ally' == $search) {
+            return 1800;
+        } elseif ('soldier_sale_ally' == $search) {
+            return 2100;
+        } elseif ('tank_def_ally' == $search) {
+            return 2400;
+        } elseif ('worker_ally' == $search) {
+            return 900;
+        } elseif ('worker_def_ally' == $search) {
+            return 1200;
+        }
+        return 0;
     }
 
     /**

@@ -72,6 +72,8 @@ class SpatialController extends AbstractController
                 $reportDef->setContent("Bien joué ! Vos travailleurs et soldats ont repoussé l'invasion du joueur " . $user->getUserName() . " sur votre planète " . $usePlanet->getName() . " - " . $usePlanet->getSector()->getgalaxy()->getPosition() . ":" . $usePlanet->getSector()->getPosition() . ":" . $usePlanet->getPosition() . ".  " . number_format(500) . " soldats vous ont attaqué, tous ont été tué. Vous remportez " . 100 . " points de Guerre.");
                 $usePlanet->setSoldier($usePlanet->getSoldier() - 200);
                 $em->persist($reportDef);
+                $user->setViewReport(false);
+                $user->getRank()->setWarPoint(100);
                 $em->flush();
 
                 $form_spatialShip = null;
@@ -432,8 +434,10 @@ class SpatialController extends AbstractController
             }
 
             if(($user->getTutorial() == 10)) {
-                $fleet->setColonizer($usePlanet->getColonizer());
-                $usePlanet->setColonizer($usePlanet->getColonizer() - 1);
+                $fleet->setColonizer(1);
+                if ($usePlanet->getColonizer() == 1) {
+                    $usePlanet->setColonizer($usePlanet->getColonizer() - 1);
+                }
                 $user->setTutorial(11);
             }
             $em->flush();

@@ -1,4 +1,4 @@
-.front-block-ally {
+.front-block-game {
   color: #fff;
   padding: 2rem;
   position: absolute;
@@ -19,7 +19,7 @@
   border-radius: 5px;
 }
 
-.front-block-pre-ally {
+.front-block-pre-game {
   margin: 2rem 6% 2% 21rem;
   color: #fff;
   padding: 2rem;
@@ -31,11 +31,11 @@
   border-radius: 5px;
 }
 
-.front-block-ally #myTab li.nav-item a {
+.front-block-game #myTab li.nav-item a {
   color: orange;
 }
 
-.front-block-ally .nav-tabs .nav-link.active {
+.front-block-game .nav-tabs .nav-link.active {
   background-color: black;
   border: 1px solid orange;
 }

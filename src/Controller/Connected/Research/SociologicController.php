@@ -43,7 +43,6 @@ class SociologicController extends AbstractController
         $user->setSearch('demography');
         $user->setSearchAt($now);
         $user->setBitcoin($userBt - ($level * 8000));
-        $usePlanet->setWorkerProduction($usePlanet->getWorkerProduction() + 500);
         if(($user->getTutorial() == 8)) {
             $user->setTutorial(9);
         }

@@ -21,7 +21,7 @@
                 </tbody>
             </table>
         {% endif %}
-        <div class="front-block-ally">
+        <div class="front-block-game">
             {% if app.user.getAlly() %}
             {% else %}
                 {% if app.user.getAllyBan() %}<h3 class="text-center text-orange mb-5">{{ 'ally.banAlly'|trans }} <span class="timerArea" hidden>{{ app.user.getAllyBan()|date('Y/m/d H:i:s') }}</span></h3>{% endif %}
