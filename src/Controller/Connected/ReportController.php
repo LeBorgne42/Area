@@ -38,6 +38,7 @@ class ReportController extends AbstractController
 
         if($removeReports) {
             foreach($removeReports as $removeReport) {
+                $removeReport->setImageName(null);
                 $em->remove($removeReport);
             }
         }
