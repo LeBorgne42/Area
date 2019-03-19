@@ -6,6 +6,11 @@
 
 {% block body %}
     {% set cost = app.user.getAllTroops() + app.user.getAllShipsCost() + app.user.getBuildingCost() %}
+    {% if app.user.getAlly() %}
+        {% set totalgain = (app.user.getAllWorker() / 2) / ( 1 + app.user.getAlly().getTaxe() / 100) %}
+    {% else %}
+        {% set totalgain = app.user.getAllWorker() / 2 %}
+    {% endif %}
     <div class="front-block">
         {% if app.user.getTutorial() == 1 %}
             <table class="table table-striped borderOverview tutorial">
@@ -201,8 +206,8 @@
                                 {% if app.user.getSearch() %}<span><a href="{{ path('search', {'idp': usePlanet.getId()}) }}">{{ app.user.getSearch()|trans }}</a></span> (<span class="timerArea" hidden>{{ app.user.getSearchAt()|date('Y/m/d H:i:s') }}</span>) - <a class="text-rouge glyphicon glyphicon-remove" href="{{ path('research_cancel', {'idp': usePlanet.getId()}) }}"></a>{% else %}<span><a href="{{ path('search', {'idp': usePlanet.getId()}) }}">{{ 'cell.searchNone'|trans|raw }}</a></span>{% endif %}
                             </div>
                         {% endif %}
-                        <div class="col-5 pt-1 ml-2"  data-html="true" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.dailyCost'|trans({'%soldier%': app.user.getAllTroops()|number_format, '%ship%': app.user.getAllShipsCost()|number_format, '%build%': app.user.getBuildingCost()|number_format, '%bitcoin%': cost|number_format, '%gain%': (app.user.getAllWorker() / 2)|number_format}) }}">
-                            {% set gainDay = ((app.user.getAllWorker() / 2) - cost) %}
+                        <div class="col-5 pt-1 ml-2"  data-html="true" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.dailyCost'|trans({'%soldier%': app.user.getAllTroops()|number_format, '%ship%': app.user.getAllShipsCost()|number_format, '%build%': app.user.getBuildingCost()|number_format, '%bitcoin%': cost|number_format, '%gain%': (totalgain)|number_format}) }}">
+                            {% set gainDay = (totalgain - cost) %}
                             {{ 'info.cost'|trans|raw }} {% if gainDay > 0 %}<span class="text-vert">+{{ gainDay|number_format }}</span>{% else %}<span class="text-rouge">{{ gainDay|number_format }}</span>{% endif %} <img src="{{ asset('img/coin.png') }}">
                         </div>
                     </div>
