@@ -155,25 +155,87 @@ class FightController extends AbstractController
         $laserD = 0;
         $plasmaD = 0;
         $debrisDef = 0;
+        $politicA = null;
+        $politicB = null;
 
         foreach($blockAtt as $attacker) {
-            $armor = $armor + $attacker->getArmor();
-            $shield = $shield + $attacker->getShield();
-            $missile = $missile + $attacker->getMissile();
-            $laser = $laser + $attacker->getLaser();
+            if ($attacker->getAlly()) {
+                $politicA = $attacker->getAlly()->getPolitic();
+                if ($attacker->getPoliticArmor() > 0) {
+                    $armor = $armor + ($attacker->getArmor() * (1 + ($attacker->getPoliticArmor() / 10)));
+                } else {
+                    $armor = $armor + $attacker->getArmor();
+                }
+                if ($attacker->getPoliticArmement() > 0) {
+                    $missile = $missile + ($attacker->getMissile() * (1 + ($attacker->getPoliticArmement() / 10)));
+                    $laser = $laser + ($attacker->getLaser() * (1 + ($attacker->getPoliticArmement() / 10)));
+                } else {
+                    $missile = $missile + $attacker->getMissile();
+                    $laser = $laser + $attacker->getLaser();
+                }
+            } else {
+                $armor = $armor + $attacker->getArmor();
+                $missile = $missile + $attacker->getMissile();
+                $laser = $laser + $attacker->getLaser();
+            }
             $plasma = $plasma + $attacker->getPlasma();
+            $shield = $shield + $attacker->getShield();
             $debrisAtt = $debrisAtt + $attacker->getNbrSignatures() + $attacker->getCargoFull();
             $armeSaveA = $missile + $laser + $plasma;
         }
         foreach($blockDef as $defender) {
-            $armorD = $armorD + $defender->getArmor();
+            if ($defender->getAlly()) {
+                $politicB = $defender->getAlly()->getPolitic();
+                if ($defender->getPoliticArmor() > 0) {
+                    $armorD = $armorD + ($defender->getArmor() * (1 + ($defender->getPoliticArmor() / 10)));
+                } else {
+                    $armorD = $armorD + $defender->getArmor();
+                }
+                if ($defender->getPoliticArmement() > 0) {
+                    $missileD = $missileD + ($defender->getMissile() * (1 + ($defender->getPoliticArmement() / 10)));
+                    $laserD = $laserD + ($defender->getLaser() * (1 + ($defender->getPoliticArmement() / 10)));
+                } else {
+                    $missileD = $missileD + $defender->getMissile();
+                    $laserD = $laserD + $defender->getLaser();
+                }
+            } else {
+                $armorD = $armorD + $defender->getArmor();
+                $missileD = $missileD + $defender->getMissile();
+                $laserD = $laserD + $defender->getLaser();
+            }
             $shieldD = $shieldD + $defender->getShield();
-            $missileD = $missileD + $defender->getMissile();
-            $laserD = $laserD + $defender->getLaser();
             $plasmaD = $plasmaD + $defender->getPlasma();
             $debrisDef = $debrisDef + $defender->getNbrSignatures() + $defender->getCargoFull();
             $armeSaveB = $laserD + $plasmaD + $missileD;
         }
+        if ($politicA && $politicB && $politicA != $politicB) {
+            if ($politicA == 'fascim' && $politicB == 'communism') {
+                $missileD = $missileD * 1.2;
+                $laserD = $laserD * 1.2;
+                $plasmaD = $plasmaD * 1.2;
+            } elseif ($politicA == 'fascim' && $politicB == 'democrat') {
+                $missile = $missile * 1.2;
+                $laser = $laser * 1.2;
+                $plasma = $plasma * 1.2;
+            } elseif ($politicA == 'democrat' && $politicB == 'communism') {
+                $missile = $missile * 1.2;
+                $laser = $laser * 1.2;
+                $plasma = $plasma * 1.2;
+            } elseif ($politicA == 'democrat' && $politicB == 'fascim') {
+                $missile = $missile * 1.2;
+                $laser = $laser * 1.2;
+                $plasma = $plasma * 1.2;
+            } elseif ($politicA == 'communism' && $politicB == 'democrat') {
+                $missile = $missile * 1.2;
+                $laser = $laser * 1.2;
+                $plasma = $plasma * 1.2;
+            } elseif ($politicA == 'communism' && $politicB == 'fascim') {
+                $missile = $missile * 1.2;
+                $laser = $laser * 1.2;
+                $plasma = $plasma * 1.2;
+            }
+        }
+
         $armorSaveA = $armor;
         $armorSaveD = $armorD;
         $warPointA = round($armor / 80);
@@ -329,7 +391,7 @@ class FightController extends AbstractController
                 $quest = $defenderWin->getUser()->checkQuests('destroy_fleet');
                 if($quest) {
                     $defenderWin->getUser()->getRank()->setWarPoint($defenderWin->getUser()->getRank()->getWarPoint() + $quest->getGain());
-                    $defenderWin->removeQuest($quest);
+                    $defenderWin->getUser()->removeQuest($quest);
                 }
                 $em->persist($reportWinA);
             }
@@ -605,13 +667,27 @@ class FightController extends AbstractController
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
         $invader = $em->getRepository('App:Fleet')->find(['id' => $fleet]);
-        $barge = $invader->getBarge() * 2500;
+        if ($user->getPoliticBarge() > 0) {
+            $barge = $invader->getBarge() * 2500 * (1 + ($user->getPoliticBarge() / 4));
+        } else {
+            $barge = $invader->getBarge() * 2500;
+        }
         $defenser = $invader->getPlanet();
         $userDefender= $invader->getPlanet()->getUser();
         $barbed = $userDefender->getBarbedAdv();
         $dSoldier = $defenser->getSoldier() > 0 ? ($defenser->getSoldier() * 6) * $barbed : 0;
         $dTanks = $defenser->getTank() > 0 ? $defenser->getTank() * 300 : 0;
-        $dMilitary = $defenser->getWorker() + $dSoldier + $dTanks;
+        $dWorker = $defenser->getWorker();
+        if ($userDefender->getPoliticSoldierAtt() > 0) {
+            $dSoldier = $dSoldier * (1 + ($userDefender->getPoliticSoldierAtt() / 10));
+        }
+        if ($userDefender->getPoliticTankDef() > 0) {
+            $dTanks = $dTanks * (1 + ($userDefender->getPoliticTankDef() / 10));
+        }
+        if ($userDefender->getPoliticWorkerDef() > 0) {
+            $dWorker = $dWorker * (1 + ($userDefender->getPoliticWorkerDef() / 5));
+        }
+        $dMilitary = $dWorker + $dSoldier + $dTanks;
         $alea = rand(4, 8);
 
         $reportInv = new Report();
@@ -635,6 +711,9 @@ class FightController extends AbstractController
             } else {
                 $aMilitary = $barge * $alea;
                 $soldierAtmp = $barge;
+            }
+            if ($user->getPoliticSoldierAtt() > 0) {
+                $aMilitary = $aMilitary * (1 + ($user->getPoliticSoldierAtt() / 10));
             }
             if($dMilitary > $aMilitary) {
                 $warPointDef = round($aMilitary);
@@ -687,7 +766,7 @@ class FightController extends AbstractController
                 $defenser->setSoldier(0);
                 $defenser->setTank(0);
                 $defenser->setWorker(2000);
-                if($invader->getUser()->getColPlanets() <= ($invader->getUser()->getTerraformation() + 1)) {
+                if($invader->getUser()->getColPlanets() <= ($invader->getUser()->getTerraformation() + 1 + $user->getPoliticInvade())) {
                     $defenser->setUser($user);
                     $em->flush();
                 } else {
@@ -746,8 +825,9 @@ class FightController extends AbstractController
 
         if($colonize->getColonizer() && $newPlanet->getUser() == null &&
             $newPlanet->getEmpty() == false && $newPlanet->getMerchant() == false &&
-            $newPlanet->getCdr() == false && $colonize->getUser()->getColPlanets() < 21 &&
-            $colonize->getUser()->getColPlanets() <= ($user->getTerraformation() + 1)) {
+            $newPlanet->getCdr() == false && $colonize->getUser()->getColPlanets() < 26 &&
+            $colonize->getUser()->getColPlanets() <= ($user->getTerraformation() + 1 + $user->getPoliticColonisation())) {
+
             $colonize->setColonizer($colonize->getColonizer() - 1);
             $newPlanet->setUser($colonize->getUser());
             $newPlanet->setName('Colonie');

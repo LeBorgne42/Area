@@ -249,7 +249,11 @@ class InstantController extends AbstractController
         $tmpNoCdr->setTimezone(new DateTimeZone('Europe/Paris'));
         $tmpNoCdr->add(new DateInterval('PT' . 600 . 'S'));
         foreach ($fleetCdrs as $fleetCdr) {
-            $recycle = $fleetCdr->getRecycleur() * 1000;
+            if ($fleetCdr->getUser()->getPoliticRecycleur() > 0) {
+                $recycle = $fleetCdr->getRecycleur() * (1000 + ($fleetCdr->getUser()->getPoliticRecycleur() * 200));
+            } else {
+                $recycle = $fleetCdr->getRecycleur() * 1000;
+            }
             $planetCdr = $fleetCdr->getPlanet();
             if ($fleetCdr->getCargoPlace() > ($fleetCdr->getCargoFull() + ($recycle * 2))) {
                 if($planetCdr->getNbCdr() == 0 || $planetCdr->getWtCdr() == 0) {
@@ -605,9 +609,18 @@ class InstantController extends AbstractController
                             $reportSell->setTitle("Vente aux marchands");
                             $reportSell->setImageName("sell_report.jpg");
                             $newWarPointS = round((($fleet->getScientist() * 100) + ($fleet->getWorker() * 50) + ($fleet->getSoldier() * 10) + ($fleet->getWater() / 3) + ($fleet->getNiobium() / 6)) / 1000);
-                            $reportSell->setContent("Votre vente aux marchands vous a rapporté " . number_format(round(($fleet->getWater() * 0.5) + ($fleet->getSoldier() * 5) + ($fleet->getWorker() * 2) + ($fleet->getScientist() * 50) + ($fleet->getNiobium() * 0.25))) . " bitcoin. Et " . number_format($newWarPointS) . " points de Guerre. Votre flotte " . $fleet->getName() . " est sur le chemin du retour.");
+                            if ($fleet->getUser()->getAlly() && $fleet->getUser()->getAlly()->getPolitic() == 'democrat') {
+                                if ($user->getPoliticMerchant() > 0) {
+                                    $gainSell = (($fleet->getWater() * 0.5) + ($fleet->getSoldier() * 5) + ($fleet->getWorker() * 2) + ($fleet->getScientist() * 50) + ($fleet->getNiobium() * 0.25)) * (1 + ($fleet->getUser()->getPoliticMerchant() / 20));
+                                } else {
+                                    $gainSell = ($fleet->getWater() * 0.5) + ($fleet->getSoldier() * 5) + ($fleet->getWorker() * 2) + ($fleet->getScientist() * 50) + ($fleet->getNiobium() * 0.25);
+                                }
+                            } else {
+                                $gainSell = ($fleet->getWater() * 0.5) + ($fleet->getSoldier() * 5) + ($fleet->getWorker() * 2) + ($fleet->getScientist() * 50) + ($fleet->getNiobium() * 0.25);
+                            }
+                            $reportSell->setContent("Votre vente aux marchands vous a rapporté " . number_format(round($gainSell)) . " bitcoin. Et " . number_format($newWarPointS) . " points de Guerre. Votre flotte " . $fleet->getName() . " est sur le chemin du retour.");
                             $em->persist($reportSell);
-                            $user->setBitcoin($user->getBitcoin() + ($fleet->getWater() * 0.5) + ($fleet->getSoldier() * 5) + ($fleet->getWorker() * 2) + ($fleet->getScientist() * 50) + ($fleet->getNiobium() * 0.25));
+                            $user->setBitcoin($user->getBitcoin() + $gainSell);
                             $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $newWarPointS);
                             $fleet->setNiobium(0);
                             $fleet->setWater(0);
@@ -716,8 +729,9 @@ class InstantController extends AbstractController
                     } elseif ($fleet->getFlightType() == '3') {
                         if ($fleet->getColonizer() && $newPlanet->getUser() == null &&
                             $newPlanet->getEmpty() == false && $newPlanet->getMerchant() == false &&
-                            $newPlanet->getCdr() == false && $fleet->getUser()->getColPlanets() < 21 &&
-                            $fleet->getUser()->getColPlanets() <= ($user->getTerraformation() + 1)) {
+                            $newPlanet->getCdr() == false && $fleet->getUser()->getColPlanets() < 26 &&
+                            $fleet->getUser()->getColPlanets() <= ($user->getTerraformation() + 1 + $user->getPoliticColonisation())) {
+
                             $fleet->setColonizer($fleet->getColonizer() - 1);
                             $newPlanet->setUser($fleet->getUser());
                             $newPlanet->setName('Colonie');
@@ -742,13 +756,27 @@ class InstantController extends AbstractController
                             $server->setNbrColonize($server->getNbrColonize() + 1);
                         }
                     } elseif ($fleet->getFlightType() == '4' && $fleet->getPlanet()->getUser()) {
-                        $barge = $fleet->getBarge() * 2500;
+                        if ($fleet->getUser()->getPoliticBarge() > 0) {
+                            $barge = $fleet->getBarge() * 2500 * (1 + ($fleet->getUser()->getPoliticBarge() / 4));
+                        } else {
+                            $barge = $fleet->getBarge() * 2500;
+                        }
                         $defenser = $fleet->getPlanet();
                         $userDefender= $fleet->getPlanet()->getUser();
                         $barbed = $userDefender->getBarbedAdv();
                         $dSoldier = $defenser->getSoldier() > 0 ? ($defenser->getSoldier() * 6) * $barbed : 0;
                         $dTanks = $defenser->getTank() > 0 ? $defenser->getTank() * 300 : 0;
-                        $dMilitary = $defenser->getWorker() + $dSoldier + $dTanks;
+                        $dWorker = $defenser->getWorker();
+                        if ($userDefender->getPoliticSoldierAtt() > 0) {
+                            $dSoldier = $dSoldier * (1 + ($userDefender->getPoliticSoldierAtt() / 10));
+                        }
+                        if ($userDefender->getPoliticTankDef() > 0) {
+                            $dTanks = $dTanks * (1 + ($userDefender->getPoliticTankDef() / 10));
+                        }
+                        if ($userDefender->getPoliticWorkerDef() > 0) {
+                            $dWorker = $dWorker * (1 + ($userDefender->getPoliticWorkerDef() / 5));
+                        }
+                        $dMilitary = $dWorker + $dSoldier + $dTanks;
                         $alea = rand(4, 8);
 
                         $reportInv = new Report();
@@ -773,6 +801,9 @@ class InstantController extends AbstractController
                             } else {
                                 $aMilitary = $barge * $alea;
                                 $soldierAtmp = $barge;
+                            }
+                            if ($fleet->getUser()->getPoliticSoldierAtt() > 0) {
+                                $aMilitary = $aMilitary * (1 + ($fleet->getUser()->getPoliticSoldierAtt() / 10));
                             }
                             if ($dMilitary > $aMilitary) {
                                 $warPointDef = round($aMilitary);
@@ -825,7 +856,7 @@ class InstantController extends AbstractController
                                 $defenser->setSoldier(0);
                                 $defenser->setTank(0);
                                 $defenser->setWorker(2000);
-                                if ($fleet->getUser()->getColPlanets() <= ($fleet->getUser()->getTerraformation() + 1)) {
+                                if ($fleet->getUser()->getColPlanets() <= ($fleet->getUser()->getTerraformation() + 1 + $fleet->getUser()->getPoliticInvade())) {
                                     $defenser->setUser($fleet->getUser());
                                     $em->flush();
                                 } else {
@@ -879,27 +910,6 @@ class InstantController extends AbstractController
     public function repareAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $planets = $em->getRepository('App:Planet')->findAll();
-        foreach ($planets as $planet) {
-            if ($planet->getEmpty() == false && $planet->getMerchant() == false && $planet->getCdr() == false) {
-                if (($planet->getSector()->getPosition() >= 1 && $planet->getSector()->getPosition() <= 9) || ($planet->getSector()->getPosition() >= 92 && $planet->getSector()->getPosition() <= 99) || ($planet->getSector()->getPosition() % 10 == 0 || $planet->getSector()->getPosition() % 10 == 1)) {
-                    if ($planet->getPosition() == 4 || $planet->getPosition() == 6 || $planet->getPosition() == 15 || $planet->getPosition() == 17 || $planet->getPosition() == 25) {
-                        $planet->setGround(25);
-                        $planet->setSky(5);
-                    } else {
-                        $planet->setGround(rand(40, 50));
-                        $planet->setSky(rand(8, 12));
-                    }
-                } elseif ($planet->getSector()->getPosition() == 45 || $planet->getSector()->getPosition() == 46 || $planet->getSector()->getPosition() == 55 || $planet->getSector()->getPosition() == 56) {
-                    $planet->setGround(rand(85, 95));
-                    $planet->setSky(rand(20, 22));
-                } else {
-                    $planet->setGround(rand(60, 70));
-                    $planet->setSky(rand(11, 13));
-                }
-            }
-        }
-        $em->flush();
         exit;
     }
 }

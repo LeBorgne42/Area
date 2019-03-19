@@ -59,12 +59,17 @@ class DailyController extends AbstractController
             $worker = 0;
             $planetPoint= 0;
             $buildingCost = 0;
+            if ($user->getPoliticWorker() > 0) {
+                $workerBonus = (1 + ($user->getPoliticWorker() / 5));
+            } else {
+                $workerBonus = 1;
+            }
             foreach ($user->getPlanets() as $planet) {
                 if($planet->getRadarAt() == null && $planet->getBrouilleurAt() == null) {
                     if (($planet->getWorker() + $planet->getWorkerProduction() > $planet->getWorkerMax())) {
                         $planet->setWorker($planet->getWorkerMax());
                     } else {
-                        $planet->setWorker($planet->getWorker() + $planet->getWorkerProduction());
+                        $planet->setWorker($planet->getWorker() + ($planet->getWorkerProduction() * $workerBonus));
                     }
                     $worker = $worker + $planet->getWorker();
                     $planetPoint = $planetPoint + $planet->getBuildingPoint();

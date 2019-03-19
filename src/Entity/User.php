@@ -719,9 +719,6 @@ class User implements UserInterface, \Serializable
         if ($this->checkResearch()) {
             $return[] = 'research';
         }
-        if ($this->getAlly()) {
-            $return[] = 'ally_join';
-        }
         if (!$this->getImageName()) {
             $return[] = 'logo';
         }
@@ -1239,17 +1236,36 @@ class User implements UserInterface, \Serializable
     public function getAllTroops(): int
     {
         $return = 0;
+        if ($this->politicCostSoldier > 0) {
+            $sPrice = 3 / (1 + ($this->politicCostSoldier / 10));
+            $sPrices = 6 / ( 1 + ($this->politicCostSoldier / 10));
+        } else {
+            $sPrice = 3;
+            $sPrices = 6;
+        }
+        if ($this->politicCostTank > 0) {
+            $tPrice = 250 / (1 + ($this->politicCostTank / 5));
+        } else {
+            $tPrice = 250;
+        }
+        if ($this->politicCostScientist > 0) {
+            $scPrice = 50 / (1 + ($this->politicCostScientist / 5));
+            $scPrices = 100 / (1 + ($this->politicCostScientist / 5));
+        } else {
+            $scPrice = 50;
+            $scPrices = 100;
+        }
         foreach($this->planets as $planet) {
-            $return = $return + ($planet->getSoldier() * 2);
+            $return = $return + ($planet->getSoldier() * $sPrice);
             $return = $return + $planet->getSoldierAtNbr();
-            $return = $return + ($planet->getTank() * 250);
-            $return = $return + ($planet->getTankAtNbr() * 125);
-            $return = $return + ($planet->getScientist() * 100);
-            $return = $return + ($planet->getScientistAtNbr() * 50);
+            $return = $return + ($planet->getTank() * $tPrice);
+            $return = $return + ($planet->getTankAtNbr() * $tPrice);
+            $return = $return + ($planet->getScientist() * $scPrice);
+            $return = $return + ($planet->getScientistAtNbr() * $scPrices);
         }
         foreach($this->fleets as $fleet) {
-            $return = $return + ($fleet->getSoldier() * 5);
-            $return = $return + ($fleet->getScientist() * 100);
+            $return = $return + ($fleet->getSoldier() * $sPrices);
+            $return = $return + ($fleet->getScientist() * $scPrice);
         }
         return $return;
     }

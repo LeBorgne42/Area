@@ -46,7 +46,14 @@ class SoldierController extends AbstractController
                 $now = new DateTime();
                 $now->setTimezone(new DateTimeZone('Europe/Paris'));
                 $nbrSoldier = abs($form_caserneRecruit->get('soldier')->getData());
-                if($nbrSoldier * 75 > $user->getBitcoin() ||
+                if ($user->getAlly()) {
+                    if ($user->getPoliticSoldierSale() > 0) {
+                        $price = 75 - ($user->getPoliticSoldierSale() * 5);
+                    } else {
+                        $price = 75;
+                    }
+                }
+                if($nbrSoldier * $price > $user->getBitcoin() ||
                     ($nbrSoldier * 2 > $usePlanet->getWorker() || ($usePlanet->getSoldier() + $nbrSoldier) > $usePlanet->getSoldierMax()) ||
                     ($usePlanet->getWorker() < 5000)) {
                     return $this->redirectToRoute('soldier', ['idp' => $usePlanet->getId()]);
@@ -64,7 +71,7 @@ class SoldierController extends AbstractController
                 }
                 $usePlanet->setWorker($usePlanet->getWorker() - ($nbrSoldier * 2));
                 $usePlanet->setSoldierAt($now);
-                $user->setBitcoin($user->getBitcoin() - ($nbrSoldier * 75));
+                $user->setBitcoin($user->getBitcoin() - ($nbrSoldier * $price));
                 $quest = $user->checkQuests('soldier');
                 if($quest) {
                     $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $quest->getGain());

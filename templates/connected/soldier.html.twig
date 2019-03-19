@@ -8,15 +8,16 @@
     {{ form_start(form_caserneRecruit) }}
         <div class="front-block soldier">
             {% if usePlanet.getCaserne() > 0 %}
+                {% set price = app.user.getPoliticSoldierSale() * 5 %}
                 <div class="block-title"><h2>{{ 'soldier.recruit'|trans }}</h2></div>
                 <table class="table table-striped table-bordered table-dark">
                     <tbody>
                     <tr>
                         <th class="tab-cells-name">
-                            <img class="mr-3" src="{{ asset('img/soldier.png') }}"> {{ 'caserner.soldier'|trans }} x {{ usePlanet.getSoldier()|number_format }} / {{ usePlanet.getSoldierMax()|number_format }} <span class="float-right"><span class="ml-5">75 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></span> <span class="ml-3">2 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'workerImg'|trans }}" src="{{ asset('img/worker.png') }}"></span></span>
+                            <img class="mr-3" src="{{ asset('img/soldier.png') }}"> {{ 'caserner.soldier'|trans }} x {{ usePlanet.getSoldier()|number_format }} / {{ usePlanet.getSoldierMax()|number_format }} <span class="float-right"><span class="ml-5">{{ 75 - price }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></span> <span class="ml-3">2 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'workerImg'|trans }}" src="{{ asset('img/worker.png') }}"></span></span>
                         </th>
                         <td class="center-cells"{% if usePlanet.getWorker() < 5000 %} hidden{% endif %}>
-                            {{ form_widget(form_caserneRecruit.soldier,{attr: { max: app.user.getBitcoin() / 75 }}) }}
+                            {{ form_widget(form_caserneRecruit.soldier,{attr: { max: app.user.getBitcoin() / 75 - price }}) }}
                         </td>
                     </tr>
                     <tr class="text-center" {% if usePlanet.getSoldierAtNbr() == null %} hidden{% endif %}>

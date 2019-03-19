@@ -355,6 +355,7 @@ class AllyController extends AbstractController
             $user->setPoliticSearch(0);
             $user->setPoliticSoldierAtt(0);
             $user->setPoliticSoldierSale(0);
+            $user->setScientistProduction($user->getScientistProduction() - ($user->getPoliticSearch() / 10));
             $user->setPoliticTankDef(0);
             $user->setPoliticWorker(0);
             $user->setPoliticWorkerDef(0);
@@ -537,6 +538,7 @@ class AllyController extends AbstractController
                 $user->setPoliticRecycleur(0);
                 $user->setPoliticSearch(0);
                 $user->setPoliticSoldierAtt(0);
+                $user->setScientistProduction($user->getScientistProduction() - ($user->getPoliticSearch() / 10));
                 $user->setPoliticSoldierSale(0);
                 $user->setPoliticTankDef(0);
                 $user->setPoliticWorker(0);

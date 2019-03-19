@@ -13,8 +13,13 @@
         </select>
         <button type="submit" id="planet_choice_send" hidden></button>
     </form>
-    <span data-toggle="tooltip" data-placement="bottom" title="{{ 'niobium'|trans }}"><span{% if usePlanet.getNiobium() >= usePlanet.getNiobiumMax() %} class="text-rouge"{% endif %} id="niobium">{{ usePlanet.getNiobium()|number_format }}</span> / {{ usePlanet.getNiobiumMax()|number_format }} <span class="text-vert">+<span class="takeProd">{{ (usePlanet.getNbProduction() * 60)|number_format }}</span>/h</span> <img src="{{ asset('img/niobium.png') }}"></span>
-    <span data-toggle="tooltip" data-placement="bottom" title="{{ 'water'|trans }}"><span{% if usePlanet.getWater() >= usePlanet.getWaterMax() %} class="text-rouge"{% endif %} id="water">{{ usePlanet.getWater()|number_format }}</span> / {{ usePlanet.getWaterMax()|number_format }} <span class="text-vert">+<span class="takeProd">{{ (usePlanet.getWtProduction() * 60)|number_format }}</span>/h</span> <img src="{{ asset('img/water.png') }}"></span>
+    {% if app.user.getAlly() %}
+        {% set bonus = 1.2 + (app.user.getPoliticProd() / 14) %}
+    {% else %}
+        {% set bonus = 1 %}
+    {% endif %}
+    <span data-toggle="tooltip" data-placement="bottom" title="{{ 'niobium'|trans }}"><span{% if usePlanet.getNiobium() >= usePlanet.getNiobiumMax() %} class="text-rouge"{% endif %} id="niobium">{{ usePlanet.getNiobium()|number_format }}</span> / {{ usePlanet.getNiobiumMax()|number_format }} <span class="text-vert">+<span class="takeProd">{{ (usePlanet.getNbProduction() * 60 * bonus)|number_format }}</span>/h</span> <img src="{{ asset('img/niobium.png') }}"></span>
+    <span data-toggle="tooltip" data-placement="bottom" title="{{ 'water'|trans }}"><span{% if usePlanet.getWater() >= usePlanet.getWaterMax() %} class="text-rouge"{% endif %} id="water">{{ usePlanet.getWater()|number_format }}</span> / {{ usePlanet.getWaterMax()|number_format }} <span class="text-vert">+<span class="takeProd">{{ (usePlanet.getWtProduction() * 60 * bonus)|number_format }}</span>/h</span> <img src="{{ asset('img/water.png') }}"></span>
     <span data-toggle="tooltip" data-placement="bottom" title="{{ 'coin'|trans }}"><span id="bitcoin">{{ app.user.getBitcoin()|number_format }}</span> <img src="{{ asset('img/coin.png') }}"></span>
     <span><span data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}">{{ usePlanet.getGroundPlace() }}/{{ usePlanet.getGround() }} <img src="{{ asset('img/ground.png') }}"></span> <span data-toggle="tooltip" data-placement="bottom" title="{{ 'SkyImg'|trans }}">{{ usePlanet.getSkyPlace() }}/{{ usePlanet.getSky() }} <img src="{{ asset('img/sky.png') }}"></span></span>
     <span data-toggle="tooltip" data-placement="bottom" title="{{ 'workers'|trans }}"><span id="worker">{{ usePlanet.getWorker()|number_format }}</span> / {{ usePlanet.getWorkerMax()|number_format }} <img src="{{ asset('img/worker.png') }}"></span>

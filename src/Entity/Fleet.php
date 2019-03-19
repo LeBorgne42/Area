@@ -640,9 +640,15 @@ class Fleet
     {
         $barge = $this->getBarge() * 2500;
         $recycleur = $this->getRecycleur() * 10000;
-        $cargoI = $this->getCargoI() * 25000;
-        $cargoV = $this->getCargoV() * 100000;
-        $cargoX = $this->getCargoX() * 250000;
+        if ($this->getUser()->getPoliticCargo() > 0) {
+            $cargoI = ($this->getCargoI() * 25000) * (1 + ($this->getUser()->getPoliticCargo() / 5));
+            $cargoV = ($this->getCargoV() * 100000) * (1 + ($this->getUser()->getPoliticCargo() / 5));
+            $cargoX = ($this->getCargoX() * 250000) * (1 + ($this->getUser()->getPoliticCargo() / 5));
+        } else {
+            $cargoI = $this->getCargoI() * 25000;
+            $cargoV = $this->getCargoV() * 100000;
+            $cargoX = $this->getCargoX() * 250000;
+        }
 
         $nbr = $barge + $recycleur + $cargoI + $cargoV + $cargoX;
         if($this->getMotherShip() == 1) {

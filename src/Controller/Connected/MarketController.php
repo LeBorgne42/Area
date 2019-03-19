@@ -185,7 +185,15 @@ class MarketController extends AbstractController
         $newWarPointS = 0;
         foreach ($planetsSeller as $planet) {
             if ($planet->getOffensiveFleet($user) != 'ennemy') {
-                $gain = $gain + round((($planet->getWater() * 0.5) + ($planet->getNiobium() * 0.25)) * 0.75);
+                if ($user->getAlly() && $user->getAlly()->getPolitic() == 'democrat') {
+                    if ($user->getPoliticMerchant() > 0) {
+                        $gain = $gain + round((($planet->getWater() * 0.5) + ($planet->getNiobium() * 0.25)) * (1 + ($user->getPoliticMerchant() / 20)));
+                    } else {
+                        $gain = $gain + round((($planet->getWater() * 0.5) + ($planet->getNiobium() * 0.25)));
+                    }
+                } else {
+                    $gain = $gain + round((($planet->getWater() * 0.5) + ($planet->getNiobium() * 0.25)) * 0.75);
+                }
                 $newWarPointS = $newWarPointS + round((($planet->getWater() / 3) + ($planet->getNiobium() / 6)) / 1000);
                 $planet->setNiobium(0);
                 $planet->setWater(0);

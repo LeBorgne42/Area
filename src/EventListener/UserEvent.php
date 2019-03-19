@@ -169,6 +169,48 @@ class UserEvent implements EventSubscriberInterface
                             } elseif ($research == 'heavyShip') {
                                 $user->setHeavyShip($user->getHeavyShip() + 1);
                             }
+                            if ($user->getAlly()) {
+                                if ($research == 'prod_ally') {
+                                    $user->setPoliticProd($user->getPoliticProd() + 1);
+                                } elseif ($research == 'recycleur_ally') {
+                                    $user->setPoliticRecycleur($user->getPoliticRecycleur() + 1);
+                                } elseif ($research == 'worker_ally') {
+                                    $user->setPoliticWorker($user->getPoliticWorker() + 1);
+                                } elseif ($research == 'armement_ally') {
+                                    $user->setPoliticArmement($user->getPoliticArmement() + 1);
+                                } elseif ($research == 'worker_def_ally') {
+                                    $user->setPoliticWorkerDef($user->getPoliticWorkerDef() + 1);
+                                } elseif ($research == 'search_ally') {
+                                    $user->setScientistProduction($user->getScientistProduction() + 0.1);
+                                    $user->setPoliticSearch($user->getPoliticSearch() + 1);
+                                } elseif ($research == 'cost_scientist_ally') {
+                                    $user->setPoliticCostScientist($user->getPoliticCostScientist() + 1);
+                                } elseif ($research == 'barge_ally') {
+                                    $user->setPoliticBarge($user->getPoliticBarge() + 1);
+                                } elseif ($research == 'soldier_att_ally') {
+                                    $user->setPoliticSoldierAtt($user->getPoliticSoldierAtt() + 1);
+                                } elseif ($research == 'cargo_ally') {
+                                    $user->setPoliticCargo($user->getPoliticCargo() + 1);
+                                } elseif ($research == 'cost_soldier_ally') {
+                                    $user->setPoliticCostSoldier($user->getPoliticCostSoldier() + 1);
+                                } elseif ($research == 'armor_ally') {
+                                    $user->setPoliticArmor($user->getPoliticArmor() + 1);
+                                } elseif ($research == 'soldier_sale_ally') {
+                                    $user->setPoliticSoldierSale($user->getPoliticSoldierSale() + 1);
+                                } elseif ($research == 'cost_tank_ally') {
+                                    $user->setPoliticCostTank($user->getPoliticCostTank() + 1);
+                                } elseif ($research == 'merchant_ally') {
+                                    $user->setPoliticMerchant($user->getPoliticMerchant() + 1);
+                                } elseif ($research == 'tank_def_ally') {
+                                    $user->setPoliticTankDef($user->getPoliticTankDef() + 1);
+                                } elseif ($research == 'invade_ally') {
+                                    $user->setPoliticInvade($user->getPoliticInvade() + 1);
+                                } elseif ($research == 'colonisation_ally') {
+                                    $user->setPoliticColonisation($user->getPoliticColonisation() + 1);
+                                } elseif ($research == 'pdg_ally') {
+                                    $user->setPoliticPdg($user->getPoliticPdg() + 1);
+                                }
+                            }
                             $user->setSearch(null);
                             $user->setSearchAt(null);
                             $server = $this->em->getRepository('App:Server')->find(['id' => 1]);
@@ -217,9 +259,14 @@ class UserEvent implements EventSubscriberInterface
                         foreach ($user->getPlanets() as $planet) {
                             $nbProd = ($planet->getNbProduction() * $seconds) / 60;
                             $wtProd = ($planet->getWtProduction() * $seconds) / 60;
-                            if ($planet->getUser()->getAlly()) {
-                                $niobium = $planet->getNiobium() + ($nbProd * 1.2);
-                                $water = $planet->getWater() + ($wtProd * 1.2);
+                            if ($user->getAlly()) {
+                                if ($user->getPoliticProd() > 0) {
+                                    $niobium = $planet->getNiobium() + ($nbProd * (1.2 + ($user->getPoliticProd() / 14)));
+                                    $water = $planet->getWater() + ($wtProd * (1.2 + ($user->getPoliticProd() / 14)));
+                                } else {
+                                    $niobium = $planet->getNiobium() + ($nbProd * 1.2);
+                                    $water = $planet->getWater() + ($wtProd * 1.2);
+                                }
                             } else {
                                 $niobium = $planet->getNiobium() + $nbProd;
                                 $water = $planet->getWater() + $wtProd;
