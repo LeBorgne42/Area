@@ -13,7 +13,6 @@ use App\Form\Front\AllyPactType;
 use App\Form\Front\AllyGradeType;
 use App\Form\Front\AllyDefconType;
 use App\Form\Front\ExchangeType;
-use App\Form\Front\PdgType;
 use App\Form\Front\UserAttrGradeType;
 use App\Entity\Grade;
 use App\Entity\Ally;
@@ -67,23 +66,25 @@ class AllyController extends AbstractController
     public function allyAddUserGradeAction(Request $request, $id, $idp)
     {
         $user = $this->getUser();
+        $ally = $user->getAlly();
         $em = $this->getDoctrine()->getManager();
         $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
         $form_userAttrGrade = $this->createForm(UserAttrGradeType::class, null, ["allyId" => $user->getAlly()->getId()]);
         $form_userAttrGrade->handleRequest($request);
 
+        if ($ally->getPolitic() != 'fascism') {
+            if (($form_userAttrGrade->isSubmitted() && $form_userAttrGrade->isValid())) {
+                $newGradeUser = $em->getRepository('App:User')->find(['id' => $id]);
 
-        if (($form_userAttrGrade->isSubmitted() && $form_userAttrGrade->isValid())) {
-            $newGradeUser = $em->getRepository('App:User')->find(['id' => $id]);
+                if (($user->getGrade()->getPlacement() == 1 && $newGradeUser->getId() == $user->getId()) && $form_userAttrGrade->get('grade')->getData()->getPlacement() != 1) {
+                    return $this->redirectToRoute('ally', ['idp' => $usePlanet->getId()]);
+                }
+                $newGradeUser->setGrade($form_userAttrGrade->get('grade')->getData());
+                $em->flush();
 
-            if(($user->getGrade()->getPlacement() == 1 && $newGradeUser->getId() == $user->getId()) && $form_userAttrGrade->get('grade')->getData()->getPlacement() != 1) {
                 return $this->redirectToRoute('ally', ['idp' => $usePlanet->getId()]);
             }
-            $newGradeUser->setGrade($form_userAttrGrade->get('grade')->getData());
-            $em->flush();
-
-            return $this->redirectToRoute('ally', ['idp' => $usePlanet->getId()]);
         }
 
         return $this->render('connected/ally/grade.html.twig', [
@@ -121,13 +122,47 @@ class AllyController extends AbstractController
             $grade = new Grade();
 
             $ally->addUser($user);
-            $ally->setBitcoin(5000);
-            $ally->setPdg(50);
             $ally->setCreatedAt($now);
             $em->persist($ally);
+            $em->flush();
+            $mGrade = new Grade();
+            $mGrade->setAlly($ally);
+            $mGrade->addUser($user);
+            $mGrade->setPlacement(5);
 
             $grade->setAlly($ally);
-            $grade->setName("Dirigeant");
+            if ($form_ally->get('politic')->getData() == 'democrat') {
+                $grade->setName("Président");
+                $mGrade->setName("Citoyen");
+                $ally->setMaxMembers(3);
+                $ally->setImageName('democrat.jpg');
+                $ally->setBitcoin(25000);
+                $ally->setPdg(0);
+            } elseif ($form_ally->get('politic')->getData() == 'fascism') {
+                $grade->setName("Führer");
+                $sGrade = new Grade();
+                $sGrade->setAlly($ally);
+                $sGrade->addUser($user);
+                $sGrade->setPlacement(2);
+                $sGrade->setName("Reichsführer");
+                $sGrade->setCanRecruit(true);
+                $sGrade->setCanKick(false);
+                $sGrade->setCanWar(false);
+                $sGrade->setCanPeace(false);
+                $mGrade->setName("Soldat");
+                $ally->setMaxMembers(2);
+                $ally->setImageName('fascism.png');
+                $ally->setBitcoin(15000);
+                $ally->setPdg(2000);
+            } elseif ($form_ally->get('politic')->getData() == 'communism'){
+                $grade->setName("Père des peuples");
+                $mGrade->setName("Camarade");
+                $ally->setMaxMembers(4);
+                $ally->setImageName('communism.jpg');
+                $ally->setBitcoin(0);
+                $ally->setPdg(250);
+                $ally->setTaxe(50);
+            }
             $grade->addUser($user);
             $grade->setPlacement(1);
             $grade->setCanRecruit(true);
@@ -135,15 +170,9 @@ class AllyController extends AbstractController
             $grade->setCanWar(true);
             $grade->setCanPeace(true);
             $em->persist($grade);
-            $mGrade = new Grade();
-            $mGrade->setAlly($ally);
-            $mGrade->setName("Membre");
-            $mGrade->addUser($user);
-            $mGrade->setPlacement(5);
             $em->persist($mGrade);
 
             $ally->addGrade($mGrade);
-
 
             $salon = new Salon();
             $salon->setName($ally->getName());
@@ -194,79 +223,100 @@ class AllyController extends AbstractController
         $ally = $user->getAlly();
         $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
-        foreach ($ally->getUsers() as $user) {
-            $user->setAlly(null);
-            $user->setGrade(null);
-            $user->setAllyBan($now);
-        }
-        foreach ($ally->getFleets() as $fleet) {
-            $fleet->setAlly(null);
-        }
-        foreach ($ally->getGrades() as $grade) {
-            $em->remove($grade);
-        }
-        foreach ($ally->getSalons() as $salon) {
-            foreach ($salon->getContents() as $content) {
-                $em->remove($content);
+        if ($ally->getPolitic() != 'fascism') {
+            foreach ($ally->getUsers() as $user) {
+                $user->setAlly(null);
+                $user->setGrade(null);
+                $user->setPoliticArmement(0);
+                $user->setPoliticCostScientist(0);
+                $user->setPoliticArmor(0);
+                $user->setPoliticBarge(0);
+                $user->setPoliticCargo(0);
+                $user->setPoliticColonisation(0);
+                $user->setPoliticCostSoldier(0);
+                $user->setPoliticCostTank(0);
+                $user->setPoliticInvade(0);
+                $user->setPoliticMerchant(0);
+                $user->setPoliticPdg(0);
+                $user->setPoliticProd(0);
+                $user->setPoliticRecycleur(0);
+                $user->setPoliticSearch(0);
+                $user->setPoliticSoldierAtt(0);
+                $user->setPoliticSoldierSale(0);
+                $user->setPoliticTankDef(0);
+                $user->setPoliticWorker(0);
+                $user->setPoliticWorkerDef(0);
+                $user->setAllyBan($now);
             }
-            $em->remove($salon);
+            foreach ($ally->getFleets() as $fleet) {
+                $fleet->setAlly(null);
+            }
+            foreach ($ally->getGrades() as $grade) {
+                $em->remove($grade);
+            }
+            foreach ($ally->getSalons() as $salon) {
+                foreach ($salon->getContents() as $content) {
+                    $em->remove($content);
+                }
+                $em->remove($salon);
+            }
+            foreach ($ally->getExchanges() as $exchange) {
+                $em->remove($exchange);
+            }
+
+            foreach ($ally->getPnas() as $pna) {
+                $em->remove($pna);
+            }
+
+            foreach ($ally->getWars() as $war) {
+                $em->remove($war);
+            }
+
+            foreach ($ally->getAllieds() as $allied) {
+                $em->remove($allied);
+            }
+
+            foreach ($ally->getProposals() as $proposal) {
+                $em->remove($proposal);
+            }
+            $em->flush();
+
+            $pnas = $em->getRepository('App:Pna')
+                ->createQueryBuilder('p')
+                ->where('p.allyTag = :allytag')
+                ->setParameters(['allytag' => $ally->getSigle()])
+                ->getQuery()
+                ->getResult();
+
+            $pacts = $em->getRepository('App:Allied')
+                ->createQueryBuilder('a')
+                ->where('a.allyTag = :allytag')
+                ->setParameters(['allytag' => $ally->getSigle()])
+                ->getQuery()
+                ->getResult();
+
+            $wars = $em->getRepository('App:War')
+                ->createQueryBuilder('w')
+                ->where('w.allyTag = :allytag')
+                ->setParameters(['allytag' => $ally->getSigle()])
+                ->getQuery()
+                ->getResult();
+
+            foreach ($pnas as $pna) {
+                $em->remove($pna);
+            }
+
+            foreach ($pacts as $pact) {
+                $em->remove($pact);
+            }
+
+            foreach ($wars as $war) {
+                $em->remove($war);
+            }
+
+            $em->remove($ally);
+            $em->flush();
         }
-        foreach ($ally->getExchanges() as $exchange) {
-            $em->remove($exchange);
-        }
-
-        foreach ($ally->getPnas() as $pna) {
-            $em->remove($pna);
-        }
-
-        foreach ($ally->getWars() as $war) {
-            $em->remove($war);
-        }
-
-        foreach ($ally->getAllieds() as $allied) {
-            $em->remove($allied);
-        }
-
-        foreach ($ally->getProposals() as $proposal) {
-            $em->remove($proposal);
-        }
-        $em->flush();
-
-        $pnas = $em->getRepository('App:Pna')
-            ->createQueryBuilder('p')
-            ->where('p.allyTag = :allytag')
-            ->setParameters(['allytag' => $ally->getSigle()])
-            ->getQuery()
-            ->getResult();
-
-        $pacts = $em->getRepository('App:Allied')
-            ->createQueryBuilder('a')
-            ->where('a.allyTag = :allytag')
-            ->setParameters(['allytag' => $ally->getSigle()])
-            ->getQuery()
-            ->getResult();
-
-        $wars = $em->getRepository('App:War')
-            ->createQueryBuilder('w')
-            ->where('w.allyTag = :allytag')
-            ->setParameters(['allytag' => $ally->getSigle()])
-            ->getQuery()
-            ->getResult();
-
-        foreach ($pnas as $pna) {
-            $em->remove($pna);
-        }
-
-        foreach ($pacts as $pact) {
-            $em->remove($pact);
-        }
-
-        foreach ($wars as $war) {
-            $em->remove($war);
-        }
-
-        $em->remove($ally);
-        $em->flush();
 
         return $this->redirectToRoute('ally', ['idp' => $usePlanet->getId()]);
     }
@@ -281,18 +331,40 @@ class AllyController extends AbstractController
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $now->add(new DateInterval('PT' . 172800 . 'S'));
         $user = $this->getUser();
+        $ally = $user->getAlly();
 
         $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
-        if($user->getGrade()->getPlacement() == 1 || count($user->getAlly()->getUsers()) == 1) {
-            return $this->redirectToRoute('ally', ['idp' => $usePlanet->getId()]);
-        }
-        $user->setAlly(null);
-        $user->setJoinAllyAt(null);
-        $user->setGrade(null);
-        $user->setAllyBan($now);
+        if ($ally->getPolitic() == 'democrat') {
+            if ($user->getGrade()->getPlacement() == 1 || count($user->getAlly()->getUsers()) == 1) {
+                return $this->redirectToRoute('ally', ['idp' => $usePlanet->getId()]);
+            }
+            $user->setPoliticArmement(0);
+            $user->setPoliticCostScientist(0);
+            $user->setPoliticArmor(0);
+            $user->setPoliticBarge(0);
+            $user->setPoliticCargo(0);
+            $user->setPoliticColonisation(0);
+            $user->setPoliticCostSoldier(0);
+            $user->setPoliticCostTank(0);
+            $user->setPoliticInvade(0);
+            $user->setPoliticMerchant(0);
+            $user->setPoliticPdg(0);
+            $user->setPoliticProd(0);
+            $user->setPoliticRecycleur(0);
+            $user->setPoliticSearch(0);
+            $user->setPoliticSoldierAtt(0);
+            $user->setPoliticSoldierSale(0);
+            $user->setPoliticTankDef(0);
+            $user->setPoliticWorker(0);
+            $user->setPoliticWorkerDef(0);
+            $user->setAlly(null);
+            $user->setJoinAllyAt(null);
+            $user->setGrade(null);
+            $user->setAllyBan($now);
 
-        $em->flush();
+            $em->flush();
+        }
 
         return $this->redirectToRoute('ally', ['idp' => $usePlanet->getId()]);
     }
@@ -307,33 +379,55 @@ class AllyController extends AbstractController
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $now->add(new DateInterval('PT' . 172800 . 'S'));
         $user = $this->getUser();
+        $ally = $user->getAlly();
         $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
-        if($user->getGrade()->getCanKick() == 0) {
-            return $this->redirectToRoute('ally', ['idp' => $usePlanet->getId()]);
-        }
-        $kicked = $em->getRepository('App:User')
-            ->createQueryBuilder('u')
-            ->join('u.grade', 'g')
-            ->where('u.id = :id')
-            ->andWhere('g.placement > :nbr')
-            ->setParameters([
-                'id' => $id,
-                'nbr' => 1])
-            ->getQuery()
-            ->getOneOrNullResult();
+        if ($ally->getPolitic() != 'fascism') {
+            if ($user->getGrade()->getCanKick() == 0) {
+                return $this->redirectToRoute('ally', ['idp' => $usePlanet->getId()]);
+            }
+            $kicked = $em->getRepository('App:User')
+                ->createQueryBuilder('u')
+                ->join('u.grade', 'g')
+                ->where('u.id = :id')
+                ->andWhere('g.placement > :nbr')
+                ->setParameters([
+                    'id' => $id,
+                    'nbr' => 1])
+                ->getQuery()
+                ->getOneOrNullResult();
 
-        if(!$kicked) {
-            return $this->redirectToRoute('ally', ['idp' => $usePlanet->getId()]);
-        }
-        $ally = $user->getAlly();
-        $ally->removeUser($kicked);
-        $kicked->setAlly(null);
-        $kicked->setJoinAllyAt(null);
-        $kicked->setGrade(null);
-        $kicked->setAllyBan($now);
+            if (!$kicked) {
+                return $this->redirectToRoute('ally', ['idp' => $usePlanet->getId()]);
+            }
+            $kicked->setPoliticArmement(0);
+            $kicked->setPoliticCostScientist(0);
+            $kicked->setPoliticArmor(0);
+            $kicked->setPoliticBarge(0);
+            $kicked->setPoliticCargo(0);
+            $kicked->setPoliticColonisation(0);
+            $kicked->setPoliticCostSoldier(0);
+            $kicked->setPoliticCostTank(0);
+            $kicked->setPoliticInvade(0);
+            $kicked->setPoliticMerchant(0);
+            $kicked->setPoliticPdg(0);
+            $kicked->setPoliticProd(0);
+            $kicked->setPoliticRecycleur(0);
+            $kicked->setPoliticSearch(0);
+            $kicked->setPoliticSoldierAtt(0);
+            $kicked->setPoliticSoldierSale(0);
+            $kicked->setPoliticTankDef(0);
+            $kicked->setPoliticWorker(0);
+            $kicked->setPoliticWorkerDef(0);
+            $ally = $user->getAlly();
+            $ally->removeUser($kicked);
+            $kicked->setAlly(null);
+            $kicked->setJoinAllyAt(null);
+            $kicked->setGrade(null);
+            $kicked->setAllyBan($now);
 
-        $em->flush();
+            $em->flush();
+        }
 
         return $this->redirectToRoute('ally', ['idp' => $usePlanet->getId()]);
     }
@@ -414,22 +508,44 @@ class AllyController extends AbstractController
     public function exitPageAllyAction(Request $request, $idp)
     {
         $user = $this->getUser();
+        $ally = $user->getAlly();
         $em = $this->getDoctrine()->getManager();
 
         $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($ally->getPolitic() != 'fascism') {
+            if ($user->getAlly()) {
+                $ally = $user->getAlly();
+            } else {
+                return $this->redirectToRoute('ally_blank', ['idp' => $usePlanet->getId()]);
+            }
+            $form_allyImage = $this->createForm(AllyImageType::class, $ally);
+            $form_allyImage->handleRequest($request);
 
-        if($user->getAlly()) {
-            $ally = $user->getAlly();
-        } else {
-            return $this->redirectToRoute('ally_blank', ['idp' => $usePlanet->getId()]);
-        }
-        $form_allyImage = $this->createForm(AllyImageType::class,$ally);
-        $form_allyImage->handleRequest($request);
+            if ($form_allyImage->isSubmitted() && $form_allyImage->isValid()) {
+                $user->setPoliticArmement(0);
+                $user->setPoliticCostScientist(0);
+                $user->setPoliticArmor(0);
+                $user->setPoliticBarge(0);
+                $user->setPoliticCargo(0);
+                $user->setPoliticColonisation(0);
+                $user->setPoliticCostSoldier(0);
+                $user->setPoliticCostTank(0);
+                $user->setPoliticInvade(0);
+                $user->setPoliticMerchant(0);
+                $user->setPoliticPdg(0);
+                $user->setPoliticProd(0);
+                $user->setPoliticRecycleur(0);
+                $user->setPoliticSearch(0);
+                $user->setPoliticSoldierAtt(0);
+                $user->setPoliticSoldierSale(0);
+                $user->setPoliticTankDef(0);
+                $user->setPoliticWorker(0);
+                $user->setPoliticWorkerDef(0);
+                $em->persist($user);
+                $em->flush();
 
-        if ($form_allyImage->isSubmitted() && $form_allyImage->isValid()) {
-            $em->persist($user);
-            $em->flush();
-            return $this->redirectToRoute('ally', ['idp' => $usePlanet->getId()]);
+                return $this->redirectToRoute('ally', ['idp' => $usePlanet->getId()]);
+            }
         }
 
         return $this->render('connected/ally/exit.html.twig', [
@@ -484,12 +600,12 @@ class AllyController extends AbstractController
                         $em->persist($exchange);
                     }
                 } else {
-                    if ($amountExchange <= $ally->getBitcoin() && $user->getGrade()->getPlacement() == 1) {
+                    if ($amountExchange <= $ally->getBitcoin()) {
                         $exchange = new Exchange();
                         $exchange->setAlly($ally);
                         $exchange->setCreatedAt($now);
                         $exchange->setType(0);
-                        if ($user->getGrade()->getPlacement() == 1) {
+                        if ($user->getGrade()->getPlacement() == 1 || $ally->getPolitic() == 'communism') {
                             $exchange->setAccepted(1);
                             $user->setBitcoin($user->getBitcoin() + $amountExchange);
                             $ally->setBitcoin($ally->getBitcoin() - $amountExchange);
@@ -518,11 +634,11 @@ class AllyController extends AbstractController
                         $em->persist($exchange);
                     }
                 } else {
-                    if($amountExchange <= $ally->getPdg() && $user->getGrade()->getPlacement() == 1) {
+                    if($amountExchange <= $ally->getPdg()) {
                         $exchange = new Exchange();
                         $exchange->setAlly($ally);
                         $exchange->setType(1);
-                        if ($user->getGrade()->getPlacement() == 1) {
+                        if ($user->getGrade()->getPlacement() == 1 || $ally->getPolitic() == 'communism') {
                             $exchange->setAccepted(1);
                             $user->getRank()->setWarPoint(($user->getRank()->getWarPoint() + $amountExchange));
                             $ally->setPdg($ally->getPdg() - $amountExchange);
@@ -721,7 +837,7 @@ class AllyController extends AbstractController
             $em->flush();
         }
 
-        if (($form_allyGrade->isSubmitted() && $form_allyGrade->isValid())) {
+        if (($form_allyGrade->isSubmitted() && $form_allyGrade->isValid()) && $ally->getPolitic() != 'fascism') {
             $grade->setAlly($ally);
             $em->persist($grade);
             $ally->addGrade($grade);
@@ -791,12 +907,14 @@ class AllyController extends AbstractController
                 $em->persist($pna);
                 $ally->addAllyPna($pna);
             } elseif($form_allyPact->get('pactType')->getData() == 1  && $user->getGrade()->getCanPeace() == 1) {
-                $allied = new Allied();
-                $allied->setAlly($ally);
-                $allied->setAllyTag($allyPact->getSigle());
-                $allied->setSignedAt($now);
-                $em->persist($allied);
-                $ally->addAllyAllied($allied);
+                if ($ally->getPolitic() == $allyPact->getPolitic() || $ally->getPolitic() == 'democrat') {
+                    $allied = new Allied();
+                    $allied->setAlly($ally);
+                    $allied->setAllyTag($allyPact->getSigle());
+                    $allied->setSignedAt($now);
+                    $em->persist($allied);
+                    $ally->addAllyAllied($allied);
+                }
             } elseif($form_allyPact->get('pactType')->getData() == 3 && $user->getGrade()->getCanWar() == 1) {
                 /*$salon = new Salon();
                 $salon->setName("Guerre : " . $allyPact->getSigle() . " - " . $ally->getSigle());

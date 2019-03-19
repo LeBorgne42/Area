@@ -342,6 +342,28 @@ class ServerController extends AbstractController
             $user->setOnde(0);
             $user->setHyperespace(0);
             $user->setDiscipline(0);
+            $user->setBarbed(0);
+            $user->setTank(0);
+            $user->setExpansion(0);
+            $user->setPoliticArmement(0);
+            $user->setPoliticCostScientist(0);
+            $user->setPoliticArmor(0);
+            $user->setPoliticBarge(0);
+            $user->setPoliticCargo(0);
+            $user->setPoliticColonisation(0);
+            $user->setPoliticCostSoldier(0);
+            $user->setPoliticCostTank(0);
+            $user->setPoliticInvade(0);
+            $user->setPoliticMerchant(0);
+            $user->setPoliticPdg(0);
+            $user->setPoliticProd(0);
+            $user->setPoliticRecycleur(0);
+            $user->setPoliticSearch(0);
+            $user->setPoliticSoldierAtt(0);
+            $user->setPoliticSoldierSale(0);
+            $user->setPoliticTankDef(0);
+            $user->setPoliticWorker(0);
+            $user->setPoliticWorkerDef(0);
             foreach ($user->getProposals() as $proposal) {
                 $user->removeProposal($proposal);
             }

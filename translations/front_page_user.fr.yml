@@ -5,10 +5,10 @@ user.ally: 'Alliance :'
 user.allyNone: Aucune
 user.galaxy: 'Galaxie(s) :'
 user.planet: 'Planètes :'
+user.first.planet: 'Position :'
 user.fleet: 'Flottes :'
 responde: 'Écrire au joueur'
 user.politic: 'Politique :'
-neutral: Neutre
 monarchy: Monarchie
 democrat: Démocratie
 fascism: Fascisme

@@ -39,12 +39,12 @@ class Rank
     protected $oldPoint;
 
     /**
-     * @ORM\Column(name="position",type="integer")
+     * @ORM\Column(name="position",type="smallint")
      */
     protected $position;
 
     /**
-     * @ORM\Column(name="oldPosition",type="integer")
+     * @ORM\Column(name="oldPosition",type="smallint")
      */
     protected $oldPosition;
 

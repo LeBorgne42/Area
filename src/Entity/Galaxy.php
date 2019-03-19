@@ -25,7 +25,7 @@ class Galaxy
     protected $sectors;
 
     /**
-     * @ORM\Column(name="position",type="integer")
+     * @ORM\Column(name="position",type="smallint")
      * @Assert\NotBlank(message = "required")
      */
     protected $position;

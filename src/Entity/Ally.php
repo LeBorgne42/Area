@@ -35,7 +35,7 @@ class Ally
     protected $fleets;
 
     /**
-     * @ORM\Column(name="politic",type="string", length=25)
+     * @ORM\Column(name="politic",type="string", length=30)
      * @Assert\NotBlank(message = "required")
      */
     protected $politic;
@@ -68,17 +68,17 @@ class Ally
     protected $slogan;
 
     /**
-     * @ORM\Column(name="description",type="string", length=1000, nullable=true)
+     * @ORM\Column(name="description",type="string", length=1500, nullable=true)
      */
     protected $description;
 
     /**
-     * @ORM\Column(name="level",type="integer", nullable=true)
+     * @ORM\Column(name="level",type="smallint")
      */
     protected $level;
 
     /**
-     * @ORM\Column(name="max_members",type="integer", nullable=true)
+     * @ORM\Column(name="max_members",type="smallint")
      */
     protected $maxMembers;
 
@@ -88,7 +88,7 @@ class Ally
     protected $grades;
 
     /**
-     * @ORM\Column(name="defcon",type="bigint")
+     * @ORM\Column(name="defcon",type="smallint")
      */
     protected $defcon;
 
@@ -98,7 +98,7 @@ class Ally
     protected $salons;
 
     /**
-     * @ORM\Column(name="rank",type="integer", nullable=true)
+     * @ORM\Column(name="rank",type="bigint", nullable=true)
      */
     protected $rank;
 
@@ -118,7 +118,7 @@ class Ally
     protected $exchanges;
 
     /**
-     * @ORM\Column(name="taxe",type="integer")
+     * @ORM\Column(name="taxe",type="smallint")
      */
     protected $taxe;
 
@@ -197,7 +197,7 @@ class Ally
         $this->imageFile = null;
         $this->rank = null;
         $this->descritpion = '-';
-        $this->politic = 'neutral';
+        $this->politic = 'democrat';
         $this->level = 0;
         $this->maxMembers = 3;
     }
@@ -248,43 +248,43 @@ class Ally
         $bitcoin = 0;
         $pdg = 0;
         if($this->getLevel() == 0) {
-            $maxMembers = 6;
+            $maxMembers = $this->maxMembers + 3;
             $bitcoin = 125000;
             $pdg = 0;
         } elseif ($this->getLevel() == 1){
-            $maxMembers = 8;
+            $maxMembers = $this->maxMembers + 2;
             $bitcoin = 225000;
             $pdg = 2500;
         } elseif ($this->getLevel() == 2){
-            $maxMembers = 10;
+            $maxMembers = $this->maxMembers + 2;
             $bitcoin = 600000;
             $pdg = 10000;
         } elseif ($this->getLevel() == 3){
-            $maxMembers = 12;
+            $maxMembers = $this->maxMembers + 2;
             $bitcoin = 1000000;
             $pdg = 25000;
         } elseif ($this->getLevel() == 4){
-            $maxMembers = 15;
+            $maxMembers = $this->maxMembers + 3;
             $bitcoin = 0;
             $pdg = 50000;
         } elseif ($this->getLevel() == 5){
-            $maxMembers = 17;
+            $maxMembers = $this->maxMembers + 2;
             $bitcoin = 10000000;
             $pdg = 0;
         } elseif ($this->getLevel() == 6){
-            $maxMembers = 20;
+            $maxMembers = $this->maxMembers + 3;
             $bitcoin = 15000000;
             $pdg = 125000;
         } elseif ($this->getLevel() == 7){
-            $maxMembers = 22;
+            $maxMembers = $this->maxMembers + 2;
             $bitcoin = 35000000;
             $pdg = 300000;
         } elseif ($this->getLevel() == 8){
-            $maxMembers = 25;
+            $maxMembers = $this->maxMembers + 3;
             $bitcoin = 50000000;
             $pdg = 500000;
         } elseif ($this->getLevel() == 9){
-            $maxMembers = 30;
+            $maxMembers = $this->maxMembers + 5;
             $bitcoin = 100000000;
             $pdg = 1000000;
         }

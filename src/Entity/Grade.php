@@ -31,7 +31,7 @@ class Grade
     protected $users;
 
     /**
-     * @ORM\Column(name="placement",type="integer")
+     * @ORM\Column(name="placement",type="smallint")
      */
     protected $placement;
 

@@ -7,12 +7,12 @@ ally.fleet: 'Flottes :'
 ally.leader: Dirigeants
 ally.diplomate: Diplomates
 ally.recruiter: Recruteurs
+ally.members: Citoyens
 ally.allied: 'Pacte défensif :'
 ally.pna: 'Pacte de non-agression :'
 ally.war: 'Guerre :'
 ally.ambassy: 'Rejoindre ambassade'
 ally.level: 'Niveau : '
-neutral: Neutre
 monarchy: Monarchie
 democrat: Démocratie
 fascism: Fascisme

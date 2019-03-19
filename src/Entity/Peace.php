@@ -49,17 +49,17 @@ class Peace
     protected $type;
 
     /**
-     * @ORM\Column(name="planet",type="integer", nullable=true)
+     * @ORM\Column(name="planet",type="smallint", nullable=true)
      */
     protected $planet;
 
     /**
-     * @ORM\Column(name="taxe",type="integer", nullable=true)
+     * @ORM\Column(name="taxe",type="smallint", nullable=true)
      */
     protected $taxe;
 
     /**
-     * @ORM\Column(name="pdg",type="integer", nullable=true)
+     * @ORM\Column(name="pdg",type="smallint", nullable=true)
      */
     protected $pdg;
 

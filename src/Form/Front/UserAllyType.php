@@ -140,29 +140,28 @@ class UserAllyType extends AbstractType
     {
         $translator = new Translator('front_ally');
         return [
-            $translator->trans('neutral') => 'neutral',
-            $translator->trans('monarchy') => 'monarchy',
             $translator->trans('democrat') => 'democrat',
             $translator->trans('fascism') => 'fascism',
-            $translator->trans('anarchism') => 'anarchism',
             $translator->trans('communism') => 'communism',
-            $translator->trans('theocrat') => 'theocrat'
+         /*   $translator->trans('anarchism') => 'anarchism',
+            $translator->trans('monarchy') => 'monarchy',
+            $translator->trans('theocrat') => 'theocrat'*/
         ];
     }
 
     protected function getPercentTaxe()
     {
         return [
-            '01%' => '1',
-            '02%' => '2',
-            '03%' => '3',
-            '04%' => '4',
             '05%' => '5',
-            '06%' => '6',
-            '07%' => '7',
-            '08%' => '8',
-            '09%' => '9',
-            '10%' => '10'
+            '10%' => '10',
+            '15%' => '15',
+            '20%' => '20',
+            '25%' => '25',
+            '30%' => '30',
+            '35%' => '35',
+            '40%' => '40',
+            '45%' => '45',
+            '50%' => '50',
         ];
     }
 

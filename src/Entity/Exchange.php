@@ -31,7 +31,7 @@ class Exchange
     protected $name;
 
     /**
-     * @ORM\Column(name="amount",type="integer")
+     * @ORM\Column(name="amount",type="bigint")
      */
     protected $amount;
 

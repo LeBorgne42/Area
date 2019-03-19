@@ -52,62 +52,62 @@ class Commander
     protected $cost;
 
     /**
-     * @ORM\Column(name="level",type="integer")
+     * @ORM\Column(name="level",type="smallint")
      */
     protected $level;
 
     /**
-     * @ORM\Column(name="speed",type="integer")
+     * @ORM\Column(name="speed",type="smallint")
      */
     protected $speed;
 
     /**
-     * @ORM\Column(name="shield",type="integer")
+     * @ORM\Column(name="shield",type="smallint")
      */
     protected $shield;
 
     /**
-     * @ORM\Column(name="armor",type="integer")
+     * @ORM\Column(name="armor",type="smallint")
      */
     protected $armor;
 
     /**
-     * @ORM\Column(name="laser",type="integer")
+     * @ORM\Column(name="laser",type="smallint")
      */
     protected $laser;
 
     /**
-     * @ORM\Column(name="missile",type="integer")
+     * @ORM\Column(name="missile",type="smallint")
      */
     protected $missile;
 
     /**
-     * @ORM\Column(name="plasma",type="integer")
+     * @ORM\Column(name="plasma",type="smallint")
      */
     protected $plasma;
 
     /**
-     * @ORM\Column(name="niobium",type="integer")
+     * @ORM\Column(name="niobium",type="smallint")
      */
     protected $niobium;
 
     /**
-     * @ORM\Column(name="water",type="integer")
+     * @ORM\Column(name="water",type="smallint")
      */
     protected $water;
 
     /**
-     * @ORM\Column(name="bitcoin",type="integer")
+     * @ORM\Column(name="bitcoin",type="smallint")
      */
     protected $bitcoin;
 
     /**
-     * @ORM\Column(name="worker",type="integer")
+     * @ORM\Column(name="worker",type="smallint")
      */
     protected $worker;
 
     /**
-     * @ORM\Column(name="soldier",type="integer")
+     * @ORM\Column(name="soldier",type="smallint")
      */
     protected $soldier;
 

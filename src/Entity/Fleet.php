@@ -68,7 +68,7 @@ class Fleet
     protected $commander;
 
     /**
-     * @ORM\Column(name="newPlanet",type="integer", nullable=true)
+     * @ORM\Column(name="newPlanet",type="smallint", nullable=true)
      */
     protected $newPlanet;
 
@@ -98,147 +98,147 @@ class Fleet
     protected $sector;
 
     /**
-     * @ORM\Column(name="planete",type="integer", nullable=true)
+     * @ORM\Column(name="planete",type="smallint", nullable=true)
      */
     protected $planete;
 
     /**
-     * @ORM\Column(name="sonde",type="bigint", nullable=true)
+     * @ORM\Column(name="sonde",type="bigint")
      */
     protected $sonde;
 
     /**
-     * @ORM\Column(name="cargoI",type="bigint", nullable=true)
+     * @ORM\Column(name="cargoI",type="integer")
      */
     protected $cargoI;
 
     /**
-     * @ORM\Column(name="cargoV",type="bigint", nullable=true)
+     * @ORM\Column(name="cargoV",type="integer")
      */
     protected $cargoV;
 
     /**
-     * @ORM\Column(name="cargoX",type="bigint", nullable=true)
+     * @ORM\Column(name="cargoX",type="bigint")
      */
     protected $cargoX;
 
     /**
-     * @ORM\Column(name="colonizer",type="integer", nullable=true)
+     * @ORM\Column(name="colonizer",type="smallint")
      */
     protected $colonizer;
 
     /**
-     * @ORM\Column(name="recycleur",type="integer", nullable=true)
+     * @ORM\Column(name="recycleur",type="integer")
      */
     protected $recycleur;
 
     /**
-     * @ORM\Column(name="barge",type="integer", nullable=true)
+     * @ORM\Column(name="barge",type="integer")
      */
     protected $barge;
 
     /**
-     * @ORM\Column(name="moonMaker",type="integer", nullable=true)
+     * @ORM\Column(name="moonMaker",type="smallint")
      */
     protected $moonMaker;
 
     /**
-     * @ORM\Column(name="radarShip",type="integer", nullable=true)
+     * @ORM\Column(name="radarShip",type="integer")
      */
     protected $radarShip;
 
     /**
-     * @ORM\Column(name="brouilleurShip",type="integer", nullable=true)
+     * @ORM\Column(name="brouilleurShip",type="integer")
      */
     protected $brouilleurShip;
 
     /**
-     * @ORM\Column(name="motherShip",type="integer", nullable=true)
+     * @ORM\Column(name="motherShip",type="smallint")
      */
     protected $motherShip;
 
     /**
-     * @ORM\Column(name="hunter",type="bigint", nullable=true)
+     * @ORM\Column(name="hunter",type="bigint")
      */
     protected $hunter;
 
     /**
-     * @ORM\Column(name="hunterHeavy",type="bigint", nullable=true)
+     * @ORM\Column(name="hunterHeavy",type="bigint")
      */
     protected $hunterHeavy;
 
     /**
-     * @ORM\Column(name="hunterWar",type="bigint", nullable=true)
+     * @ORM\Column(name="hunterWar",type="bigint")
      */
     protected $hunterWar;
 
     /**
-     * @ORM\Column(name="corvet",type="bigint", nullable=true)
+     * @ORM\Column(name="corvet",type="bigint")
      */
     protected $corvet;
 
     /**
-     * @ORM\Column(name="corvetLaser",type="bigint", nullable=true)
+     * @ORM\Column(name="corvetLaser",type="bigint")
      */
     protected $corvetLaser;
 
     /**
-     * @ORM\Column(name="corvetWar",type="bigint", nullable=true)
+     * @ORM\Column(name="corvetWar",type="bigint")
      */
     protected $corvetWar;
 
     /**
-     * @ORM\Column(name="fregate",type="bigint", nullable=true)
+     * @ORM\Column(name="fregate",type="bigint")
      */
     protected $fregate;
 
     /**
-     * @ORM\Column(name="fregatePlasma",type="bigint", nullable=true)
+     * @ORM\Column(name="fregatePlasma",type="bigint")
      */
     protected $fregatePlasma;
 
     /**
-     * @ORM\Column(name="croiser",type="bigint", nullable=true)
+     * @ORM\Column(name="croiser",type="bigint")
      */
     protected $croiser;
 
     /**
-     * @ORM\Column(name="ironClad",type="bigint", nullable=true)
+     * @ORM\Column(name="ironClad",type="bigint")
      */
     protected $ironClad;
 
     /**
-     * @ORM\Column(name="destroyer",type="bigint", nullable=true)
+     * @ORM\Column(name="destroyer",type="bigint")
      */
     protected $destroyer;
 
     /**
-     * @ORM\Column(name="soldier",type="integer", nullable=true)
+     * @ORM\Column(name="soldier",type="integer")
      */
     protected $soldier;
 
     /**
-     * @ORM\Column(name="tank",type="integer", nullable=true)
+     * @ORM\Column(name="tank",type="smallint")
      */
     protected $tank;
 
     /**
-     * @ORM\Column(name="worker",type="integer", nullable=true)
+     * @ORM\Column(name="worker",type="integer")
      */
     protected $worker;
 
     /**
-     * @ORM\Column(name="scientist",type="integer", nullable=true)
+     * @ORM\Column(name="scientist",type="smallint")
      */
     protected $scientist;
 
     /**
-     * @ORM\Column(name="niobium",type="integer", nullable=true)
+     * @ORM\Column(name="niobium",type="bigint")
      */
     protected $niobium;
 
     /**
-     * @ORM\Column(name="water",type="integer", nullable=true)
+     * @ORM\Column(name="water",type="bigint")
      */
     protected $water;
 

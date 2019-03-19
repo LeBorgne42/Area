@@ -253,7 +253,7 @@
                     </td>
                 </tr>
 
-                {% if app.user.getCargo() <= 1 and usePlanet.getCity() == 0 %}
+                {% if app.user.getDemography() <= 0 and usePlanet.getCity() == 0 %}
                     <tr class="blocked-building">
                         <th class="tab-cells-name">
                             <img class="float-left building-img ml-3" width="40" src="{{ asset('img/city.png') }}"><button class="text-orange mt-3" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.city'|trans|raw }}">{{ 'building.city'|trans|raw }}</button>
@@ -300,7 +300,7 @@
                         </td>
                     </tr>
                 {% endif %}
-                {% if app.user.getDemography() <= 5 and usePlanet.getMetropole() == 0 %}
+                {% if app.user.getDemography() <= 4 and usePlanet.getMetropole() == 0 %}
                     <tr class="blocked-building">
                         <th class="tab-cells-name">
                             <img class="float-left building-img ml-3" width="40" src="{{ asset('img/metropole.png') }}"><button class="text-orange mt-3" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.metropole'|trans|raw }}">{{ 'building.metropole'|trans|raw }}</button>

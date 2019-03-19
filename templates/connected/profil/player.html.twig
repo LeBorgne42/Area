@@ -24,15 +24,30 @@
             </div>
             <div class="col-8">
                 <div class="my-2 text-middle"><span class="glyphicon glyphicon-link text-orange"></span> {{ 'user.name'|trans }} {{ user.getUserName() }}</div>
-                <div class="my-2 text-middle"><span class="glyphicon glyphicon-link text-orange"></span> {{ 'user.planet'|trans }} {{ user.getAllPlanets() }}</div>
-                <div class="my-2 text-middle">
-                    <span class="glyphicon glyphicon-link text-orange"></span> {{ 'user.galaxy'|trans }}
-                    {% set x = 1 %}
-                    {% for galaxy in user.getGalaxyPlanets() %}
-                        {% if x > 1 %} - {% endif %}{{ galaxy }}
-                        {% set x = x + 1 %}
-                    {% endfor %}
-                </div>
+                {% if user.getAlly %}
+                    {% if app.user.getAlly().getPolitic() != 'fascism' %}
+                        <div class="my-2 text-middle"><span class="glyphicon glyphicon-link text-orange"></span> {{ 'user.planet'|trans }} {{ user.getAllPlanets() }}</div>
+                        {% if app.user.getAlly().getPolitic() == 'democrat' %}<div class="my-2 text-middle"><span class="glyphicon glyphicon-link text-orange"></span> {{ 'user.first.planet'|trans }} {{ user.getFirstPlanet() }}</div>{% endif %}
+                        <div class="my-2 text-middle">
+                            <span class="glyphicon glyphicon-link text-orange"></span> {{ 'user.galaxy'|trans }}
+                            {% set x = 1 %}
+                            {% for galaxy in user.getGalaxyPlanets() %}
+                                {% if x > 1 %} - {% endif %}{{ galaxy }}
+                                {% set x = x + 1 %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% else %}
+                    <div class="my-2 text-middle"><span class="glyphicon glyphicon-link text-orange"></span> {{ 'user.planet'|trans }} {{ user.getAllPlanets() }}</div>
+                    <div class="my-2 text-middle">
+                        <span class="glyphicon glyphicon-link text-orange"></span> {{ 'user.galaxy'|trans }}
+                        {% set x = 1 %}
+                        {% for galaxy in user.getGalaxyPlanets() %}
+                            {% if x > 1 %} - {% endif %}{{ galaxy }}
+                            {% set x = x + 1 %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
                 <div class="my-2 text-middle"><span class="glyphicon glyphicon-link text-orange"></span> {{ 'user.ally'|trans }} {% if user.getAlly() %}<span><a data-toggle="modal" data-target="#allyModal" href="{{ path('ally_profil_modal', {'idp': usePlanet.getId(), 'id': user.getAlly().getId()}) }}">{{ user.getAlly().getName() }}</a></span>{% else %}{{ 'user.allyNone'|trans }}{% endif %}</div>
                 {% if user.getAlly() %}<div class="my-2 text-middle"><span class="glyphicon glyphicon-link text-orange"></span> {{ 'user.politic'|trans }} {{ user.getAlly().getPolitic()|trans }}</div>{% endif %}
             </div>

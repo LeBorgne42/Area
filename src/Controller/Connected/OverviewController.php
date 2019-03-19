@@ -110,6 +110,9 @@ class OverviewController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
+        $now->add(new DateInterval('PT' . 172800 . 'S'));
         if($user->getGameOver() || $user->getAllPlanets() == 0) {
             if($user->getColPlanets() == 0 && $user->getGameOver() == null) {
                 $user->setGameOver($user->getUserName());
@@ -118,7 +121,6 @@ class OverviewController extends AbstractController
             }
             if($user->getRank()) {
                 $user->setBitcoin(25000);
-                $user->setAlly(null);
                 $user->setSearch(null);
                 $user->setRank(null);
                 $user->setGrade(null);
@@ -143,7 +145,108 @@ class OverviewController extends AbstractController
                 $user->setIndustry(0);
                 $user->setOnde(0);
                 $user->setHyperespace(0);
-                $user->setDiscipline(0);*/
+                $user->setDiscipline(0);
+                $user->setBarbed(0);
+                $user->setTank(0);
+                $user->setExpansion(0);*/
+                $user->setPoliticArmement(0);
+                $user->setPoliticCostScientist(0);
+                $user->setPoliticArmor(0);
+                $user->setPoliticBarge(0);
+                $user->setPoliticCargo(0);
+                $user->setPoliticColonisation(0);
+                $user->setPoliticCostSoldier(0);
+                $user->setPoliticCostTank(0);
+                $user->setPoliticInvade(0);
+                $user->setPoliticMerchant(0);
+                $user->setPoliticPdg(0);
+                $user->setPoliticProd(0);
+                $user->setPoliticRecycleur(0);
+                $user->setPoliticSearch(0);
+                $user->setPoliticSoldierAtt(0);
+                $user->setPoliticSoldierSale(0);
+                $user->setPoliticTankDef(0);
+                $user->setPoliticWorker(0);
+                $user->setPoliticWorkerDef(0);
+                if ($user->getAlly()) {
+                    $ally = $user->getAlly();
+                    if (count($ally->getUsers()) == 1 || ($ally->getPolitic() == 'fascism' && $user->getGrade()->getPlacement() == 1)) {
+                        foreach ($ally->getUsers() as $user) {
+                        $user->setAlly(null);
+                        $user->setGrade(null);
+                        $user->setAllyBan($now);
+                    }
+                        foreach ($ally->getFleets() as $fleet) {
+                            $fleet->setAlly(null);
+                        }
+                        foreach ($ally->getGrades() as $grade) {
+                            $em->remove($grade);
+                        }
+                        foreach ($ally->getSalons() as $salon) {
+                            foreach ($salon->getContents() as $content) {
+                                $em->remove($content);
+                            }
+                            $em->remove($salon);
+                        }
+                        foreach ($ally->getExchanges() as $exchange) {
+                            $em->remove($exchange);
+                        }
+
+                        foreach ($ally->getPnas() as $pna) {
+                            $em->remove($pna);
+                        }
+
+                        foreach ($ally->getWars() as $war) {
+                            $em->remove($war);
+                        }
+
+                        foreach ($ally->getAllieds() as $allied) {
+                            $em->remove($allied);
+                        }
+
+                        foreach ($ally->getProposals() as $proposal) {
+                            $em->remove($proposal);
+                        }
+                        $em->flush();
+
+                        $pnas = $em->getRepository('App:Pna')
+                            ->createQueryBuilder('p')
+                            ->where('p.allyTag = :allytag')
+                            ->setParameters(['allytag' => $ally->getSigle()])
+                            ->getQuery()
+                            ->getResult();
+
+                        $pacts = $em->getRepository('App:Allied')
+                            ->createQueryBuilder('a')
+                            ->where('a.allyTag = :allytag')
+                            ->setParameters(['allytag' => $ally->getSigle()])
+                            ->getQuery()
+                            ->getResult();
+
+                        $wars = $em->getRepository('App:War')
+                            ->createQueryBuilder('w')
+                            ->where('w.allyTag = :allytag')
+                            ->setParameters(['allytag' => $ally->getSigle()])
+                            ->getQuery()
+                            ->getResult();
+
+                        foreach ($pnas as $pna) {
+                            $em->remove($pna);
+                        }
+
+                        foreach ($pacts as $pact) {
+                            $em->remove($pact);
+                        }
+
+                        foreach ($wars as $war) {
+                            $em->remove($war);
+                        }
+
+                        $em->remove($ally);
+                    }
+                }
+                $user->setAlly(null);
+
                 foreach ($user->getSalons() as $salon) {
                     $salon->removeUser($user);
                 }

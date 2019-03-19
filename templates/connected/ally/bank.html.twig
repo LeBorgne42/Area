@@ -27,9 +27,11 @@
                             <a href="{{ path('ally_page_admin', {'idp': usePlanet.getId()}) }}" >{{ 'ally.admin'|trans }}</a>
                         </li>
                     {% endif %}
-                    <li class="nav-item">
-                        <a href="{{ path('ally_page_exit', {'idp': usePlanet.getId()}) }}" >{{ 'ally.leave'|trans }}</a>
-                    </li>
+                    {% if app.user.getAlly().getPolitic() == 'democrate' %}
+                        <li class="nav-item">
+                            <a href="{{ path('ally_page_exit', {'idp': usePlanet.getId()}) }}" >{{ 'ally.leave'|trans }}</a>
+                        </li>
+                    {% endif %}
                 </ul>
                 {% if app.user.getGrade().getPlacement() == 1 %}
                     <div class="my-5 text-center">

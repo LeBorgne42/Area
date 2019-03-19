@@ -872,4 +872,34 @@ class InstantController extends AbstractController
         $em->flush();
         exit;
     }
+
+    /**
+     * @Route("/repare/", name="repare_it")
+     */
+    public function repareAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $planets = $em->getRepository('App:Planet')->findAll();
+        foreach ($planets as $planet) {
+            if ($planet->getEmpty() == false && $planet->getMerchant() == false && $planet->getCdr() == false) {
+                if (($planet->getSector()->getPosition() >= 1 && $planet->getSector()->getPosition() <= 9) || ($planet->getSector()->getPosition() >= 92 && $planet->getSector()->getPosition() <= 99) || ($planet->getSector()->getPosition() % 10 == 0 || $planet->getSector()->getPosition() % 10 == 1)) {
+                    if ($planet->getPosition() == 4 || $planet->getPosition() == 6 || $planet->getPosition() == 15 || $planet->getPosition() == 17 || $planet->getPosition() == 25) {
+                        $planet->setGround(25);
+                        $planet->setSky(5);
+                    } else {
+                        $planet->setGround(rand(40, 50));
+                        $planet->setSky(rand(8, 12));
+                    }
+                } elseif ($planet->getSector()->getPosition() == 45 || $planet->getSector()->getPosition() == 46 || $planet->getSector()->getPosition() == 55 || $planet->getSector()->getPosition() == 56) {
+                    $planet->setGround(rand(85, 95));
+                    $planet->setSky(rand(20, 22));
+                } else {
+                    $planet->setGround(rand(60, 70));
+                    $planet->setSky(rand(11, 13));
+                }
+            }
+        }
+        $em->flush();
+        exit;
+    }
 }

@@ -57,7 +57,7 @@ class User implements UserInterface, \Serializable
     protected $ipAddress;
 
     /**
-     * @ORM\Column(name="cheat",type="integer")
+     * @ORM\Column(name="cheat",type="smallint")
      */
     protected $cheat;
 
@@ -160,7 +160,7 @@ class User implements UserInterface, \Serializable
 
 
     /**
-     * @ORM\Column(name="tutorial",type="integer")
+     * @ORM\Column(name="tutorial",type="smallint")
      */
     protected $tutorial;
 
@@ -188,7 +188,7 @@ class User implements UserInterface, \Serializable
     protected $fleetLists;
 
     /**
-     * @ORM\Column(name="bitcoin",type="decimal", precision=28, scale=5)
+     * @ORM\Column(name="bitcoin",type="bigint")
      */
     protected $bitcoin;
 
@@ -198,98 +198,193 @@ class User implements UserInterface, \Serializable
     protected $scientistProduction;
 
     /**
-     * @ORM\Column(name="onde",type="integer", nullable=true)
+     * @ORM\Column(name="onde",type="smallint")
      */
     protected $onde;
 
     /**
-     * @ORM\Column(name="industry",type="integer", nullable=true)
+     * @ORM\Column(name="industry",type="integer")
      */
     protected $industry;
 
     /**
-     * @ORM\Column(name="lightShip",type="integer", nullable=true)
+     * @ORM\Column(name="lightShip",type="smallint")
      */
     protected $lightShip;
 
     /**
-     * @ORM\Column(name="heavyShip",type="integer", nullable=true)
+     * @ORM\Column(name="heavyShip",type="smallint")
      */
     protected $heavyShip;
 
     /**
-     * @ORM\Column(name="discipline",type="integer", nullable=true)
+     * @ORM\Column(name="discipline",type="smallint")
      */
     protected $discipline;
 
     /**
-     * @ORM\Column(name="hyperespace",type="integer", nullable=true)
+     * @ORM\Column(name="hyperespace",type="smallint")
      */
     protected $hyperespace;
 
     /**
-     * @ORM\Column(name="barge",type="integer", nullable=true)
+     * @ORM\Column(name="barge",type="smallint")
      */
     protected $barge;
 
     /**
-     * @ORM\Column(name="utility",type="integer", nullable=true)
+     * @ORM\Column(name="utility",type="smallint")
      */
     protected $utility;
 
     /**
-     * @ORM\Column(name="demography",type="integer", nullable=true)
+     * @ORM\Column(name="demography",type="smallint")
      */
     protected $demography;
 
     /**
-     * @ORM\Column(name="barbed",type="integer", nullable=true)
+     * @ORM\Column(name="barbed",type="smallint")
      */
     protected $barbed;
 
     /**
-     * @ORM\Column(name="tank",type="integer", nullable=true)
+     * @ORM\Column(name="tank",type="smallint")
      */
     protected $tank;
 
     /**
-     * @ORM\Column(name="expansion",type="integer", nullable=true)
+     * @ORM\Column(name="expansion",type="smallint")
      */
     protected $expansion;
     /**
-     * @ORM\Column(name="terraformation",type="integer", nullable=true)
+     * @ORM\Column(name="terraformation",type="smallint")
      */
     protected $terraformation;
 
     /**
-     * @ORM\Column(name="cargo",type="integer", nullable=true)
+     * @ORM\Column(name="cargo",type="smallint")
      */
     protected $cargo;
 
     /**
-     * @ORM\Column(name="recycleur",type="integer", nullable=true)
+     * @ORM\Column(name="recycleur",type="smallint")
      */
     protected $recycleur;
 
     /**
-     * @ORM\Column(name="armement",type="integer", nullable=true)
+     * @ORM\Column(name="armement",type="smallint")
      */
     protected $armement;
 
     /**
-     * @ORM\Column(name="missile",type="integer", nullable=true)
+     * @ORM\Column(name="missile",type="smallint")
      */
     protected $missile;
 
     /**
-     * @ORM\Column(name="laser",type="integer", nullable=true)
+     * @ORM\Column(name="laser",type="smallint")
      */
     protected $laser;
 
     /**
-     * @ORM\Column(name="plasma",type="integer", nullable=true)
+     * @ORM\Column(name="plasma",type="smallint")
      */
     protected $plasma;
+
+    /**
+     * @ORM\Column(name="politic_cargo",type="smallint")
+     */
+    protected $politicCargo;
+
+    /**
+     * @ORM\Column(name="politic_recycleur",type="smallint")
+     */
+    protected $politicRecycleur;
+
+    /**
+     * @ORM\Column(name="politic_worker",type="smallint")
+     */
+    protected $politicWorker;
+
+    /**
+     * @ORM\Column(name="politic_prod",type="smallint")
+     */
+    protected $politicProd;
+
+    /**
+     * @ORM\Column(name="politic_cost_soldier",type="smallint")
+     */
+    protected $politicCostSoldier;
+
+    /**
+     * @ORM\Column(name="politic_cost_scientist",type="smallint")
+     */
+    protected $politicCostScientist;
+
+    /**
+     * @ORM\Column(name="politic_cost_tank",type="smallint")
+     */
+    protected $politicCostTank;
+
+    /**
+     * @ORM\Column(name="politic_worker_def",type="smallint")
+     */
+    protected $politicWorkerDef;
+
+    /**
+     * @ORM\Column(name="politic_tank_def",type="smallint")
+     */
+    protected $politicTankDef;
+
+    /**
+     * @ORM\Column(name="politic_soldier_att",type="smallint")
+     */
+    protected $politicSoldierAtt;
+
+    /**
+     * @ORM\Column(name="politic_armement",type="smallint")
+     */
+    protected $politicArmement;
+
+    /**
+     * @ORM\Column(name="politic_armor",type="smallint")
+     */
+    protected $politicArmor;
+
+    /**
+     * @ORM\Column(name="politic_colonisation",type="smallint")
+     */
+    protected $politicColonisation;
+
+    /**
+     * @ORM\Column(name="politic_invade",type="smallint")
+     */
+    protected $politicInvade;
+
+    /**
+     * @ORM\Column(name="politic_merchant",type="smallint")
+     */
+    protected $politicMerchant;
+
+    /**
+     * @ORM\Column(name="politic_search",type="smallint")
+     */
+    protected $politicSearch;
+
+    /**
+     * @ORM\Column(name="politic_soldier_sale",type="smallint")
+     */
+    protected $politicSoldierSale;
+
+    /**
+     * @ORM\Column(name="politic_barge",type="smallint")
+     */
+    protected $politicBarge;
+
+    /**
+     * @ORM\Column(name="politic_pdg",type="smallint")
+     */
+    protected $politicPdg;
 
     /**
      * @ORM\Column(name="searchAt",type="datetime", nullable=true)
@@ -400,6 +495,25 @@ class User implements UserInterface, \Serializable
         $this->barbed = 0;
         $this->tank = 0;
         $this->expansion = 0;
+        $this->politicArmement = 0;
+        $this->politicCostScientist = 0;
+        $this->politicArmor = 0;
+        $this->politicBarge = 0;
+        $this->politicCargo = 0;
+        $this->politicColonisation = 0;
+        $this->politicCostSoldier = 0;
+        $this->politicCostTank = 0;
+        $this->politicInvade = 0;
+        $this->politicMerchant = 0;
+        $this->politicPdg = 0;
+        $this->politicProd = 0;
+        $this->politicRecycleur = 0;
+        $this->politicSearch = 0;
+        $this->politicSoldierAtt = 0;
+        $this->politicSoldierSale = 0;
+        $this->politicTankDef = 0;
+        $this->politicWorker = 0;
+        $this->politicWorkerDef = 0;
     }
 
     /**
@@ -687,6 +801,17 @@ class User implements UserInterface, \Serializable
             }
         }
         return null;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFirstPlanet()
+    {
+        foreach ($this->planets as $planet) {
+            return $planet->getSector()->getGalaxy()->getPosition() . ":" . $planet->getSector()->getPosition() . ":" . $planet->getPosition();
+        }
+        return 'Game over';
     }
 
     /**
@@ -2179,6 +2304,310 @@ class User implements UserInterface, \Serializable
     public function setExperience($experience): void
     {
         $this->experience = $experience;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPoliticCargo()
+    {
+        return $this->politicCargo;
+    }
+
+    /**
+     * @param mixed $politicCargo
+     */
+    public function setPoliticCargo($politicCargo): void
+    {
+        $this->politicCargo = $politicCargo;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPoliticRecycleur()
+    {
+        return $this->politicRecycleur;
+    }
+
+    /**
+     * @param mixed $politicRecycleur
+     */
+    public function setPoliticRecycleur($politicRecycleur): void
+    {
+        $this->politicRecycleur = $politicRecycleur;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPoliticWorker()
+    {
+        return $this->politicWorker;
+    }
+
+    /**
+     * @param mixed $politicWorker
+     */
+    public function setPoliticWorker($politicWorker): void
+    {
+        $this->politicWorker = $politicWorker;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPoliticProd()
+    {
+        return $this->politicProd;
+    }
+
+    /**
+     * @param mixed $politicProd
+     */
+    public function setPoliticProd($politicProd): void
+    {
+        $this->politicProd = $politicProd;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPoliticCostSoldier()
+    {
+        return $this->politicCostSoldier;
+    }
+
+    /**
+     * @param mixed $politicCostSoldier
+     */
+    public function setPoliticCostSoldier($politicCostSoldier): void
+    {
+        $this->politicCostSoldier = $politicCostSoldier;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPoliticCostScientist()
+    {
+        return $this->politicCostScientist;
+    }
+
+    /**
+     * @param mixed $politicCostScientist
+     */
+    public function setPoliticCostScientist($politicCostScientist): void
+    {
+        $this->politicCostScientist = $politicCostScientist;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPoliticCostTank()
+    {
+        return $this->politicCostTank;
+    }
+
+    /**
+     * @param mixed $politicCostTank
+     */
+    public function setPoliticCostTank($politicCostTank): void
+    {
+        $this->politicCostTank = $politicCostTank;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPoliticWorkerDef()
+    {
+        return $this->politicWorkerDef;
+    }
+
+    /**
+     * @param mixed $politicWorkerDef
+     */
+    public function setPoliticWorkerDef($politicWorkerDef): void
+    {
+        $this->politicWorkerDef = $politicWorkerDef;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPoliticTankDef()
+    {
+        return $this->politicTankDef;
+    }
+
+    /**
+     * @param mixed $politicTankDef
+     */
+    public function setPoliticTankDef($politicTankDef): void
+    {
+        $this->politicTankDef = $politicTankDef;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPoliticSoldierAtt()
+    {
+        return $this->politicSoldierAtt;
+    }
+
+    /**
+     * @param mixed $politicSoldierAtt
+     */
+    public function setPoliticSoldierAtt($politicSoldierAtt): void
+    {
+        $this->politicSoldierAtt = $politicSoldierAtt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPoliticArmement()
+    {
+        return $this->politicArmement;
+    }
+
+    /**
+     * @param mixed $politicArmement
+     */
+    public function setPoliticArmement($politicArmement): void
+    {
+        $this->politicArmement = $politicArmement;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPoliticArmor()
+    {
+        return $this->politicArmor;
+    }
+
+    /**
+     * @param mixed $politicArmor
+     */
+    public function setPoliticArmor($politicArmor): void
+    {
+        $this->politicArmor = $politicArmor;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPoliticColonisation()
+    {
+        return $this->politicColonisation;
+    }
+
+    /**
+     * @param mixed $politicColonisation
+     */
+    public function setPoliticColonisation($politicColonisation): void
+    {
+        $this->politicColonisation = $politicColonisation;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPoliticInvade()
+    {
+        return $this->politicInvade;
+    }
+
+    /**
+     * @param mixed $politicInvade
+     */
+    public function setPoliticInvade($politicInvade): void
+    {
+        $this->politicInvade = $politicInvade;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPoliticMerchant()
+    {
+        return $this->politicMerchant;
+    }
+
+    /**
+     * @param mixed $politicMerchant
+     */
+    public function setPoliticMerchant($politicMerchant): void
+    {
+        $this->politicMerchant = $politicMerchant;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPoliticSearch()
+    {
+        return $this->politicSearch;
+    }
+
+    /**
+     * @param mixed $politicSearch
+     */
+    public function setPoliticSearch($politicSearch): void
+    {
+        $this->politicSearch = $politicSearch;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPoliticSoldierSale()
+    {
+        return $this->politicSoldierSale;
+    }
+
+    /**
+     * @param mixed $politicSoldierSale
+     */
+    public function setPoliticSoldierSale($politicSoldierSale): void
+    {
+        $this->politicSoldierSale = $politicSoldierSale;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPoliticBarge()
+    {
+        return $this->politicBarge;
+    }
+
+    /**
+     * @param mixed $politicBarge
+     */
+    public function setPoliticBarge($politicBarge): void
+    {
+        $this->politicBarge = $politicBarge;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPoliticPdg()
+    {
+        return $this->politicPdg;
+    }
+
+    /**
+     * @param mixed $politicPdg
+     */
+    public function setPoliticPdg($politicPdg): void
+    {
+        $this->politicPdg = $politicPdg;
     }
 
     /**

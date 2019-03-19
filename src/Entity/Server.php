@@ -26,42 +26,42 @@ class Server
     protected $open;
 
     /**
-     * @ORM\Column(name="nbr_message",type="integer")
+     * @ORM\Column(name="nbr_message",type="bigint")
      */
     protected $nbrMessage;
 
     /**
-     * @ORM\Column(name="nbr_colonize",type="integer")
+     * @ORM\Column(name="nbr_colonize",type="bigint")
      */
     protected $nbrColonize;
 
     /**
-     * @ORM\Column(name="nbr_salon_message",type="integer")
+     * @ORM\Column(name="nbr_salon_message",type="bigint")
      */
     protected $nbrSalonMessage;
 
     /**
-     * @ORM\Column(name="nbr_invasion",type="integer")
+     * @ORM\Column(name="nbr_invasion",type="bigint")
      */
     protected $nbrInvasion;
 
     /**
-     * @ORM\Column(name="nbr_sell",type="integer")
+     * @ORM\Column(name="nbr_sell",type="bigint")
      */
     protected $nbrSell;
 
     /**
-     * @ORM\Column(name="nbr_battle",type="integer")
+     * @ORM\Column(name="nbr_battle",type="bigint")
      */
     protected $nbrBattle;
 
     /**
-     * @ORM\Column(name="nbr_building",type="integer")
+     * @ORM\Column(name="nbr_building",type="bigint")
      */
     protected $nbrBuilding;
 
     /**
-     * @ORM\Column(name="nbr_research",type="integer")
+     * @ORM\Column(name="nbr_research",type="bigint")
      */
     protected $nbrResearch;
 
