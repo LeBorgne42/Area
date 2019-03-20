@@ -49,11 +49,9 @@
     <div class="btn-left{% if usePlanet.getConstruct() is null and (usePlanet.getGround() != usePlanet.getGroundPlace()) %} freeSearchBuild{% endif %}{% if app.request.attributes.get('_route') == 'building' %} currentRoute{% endif %}{% if app.user.getTutorial() < 4 %} tutorial-hide{% elseif app.user.getTutorial() == 4 %} tutorial-show{% endif %}">
         <a href="{{ path('building', {'idp': usePlanet.getId()}) }}"><span>{{ 'building'|trans }}</span>{% if usePlanet.getConstruct() is null and (usePlanet.getGround() != usePlanet.getGroundPlace()) %} <span class="glyphicon glyphicon-question-sign text-orange" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.building'|trans }}"></span>{% endif %}</a>
     </div>
-    {% if usePlanet.getCaserne() > 0 or usePlanet.getCenterSearch() > 0 or (usePlanet.getBunker() and usePlanet.getLightUsine()) %}
-        <div class="btn-left{% if app.request.attributes.get('_route') == 'soldier' %} currentRoute{% endif %}{% if app.user.getTutorial() < 50 %} tutorial-hide{% endif %}">
-            <a href="{{ path('soldier', {'idp': usePlanet.getId()}) }}">{{ 'soldier'|trans }}</span></a>
-        </div>
-    {% endif %}
+    <div class="btn-left{% if app.request.attributes.get('_route') == 'soldier' %} currentRoute{% endif %}{% if app.user.getTutorial() < 50 %} tutorial-hide{% endif %}">
+        <a href="{{ path('soldier', {'idp': usePlanet.getId()}) }}">{{ 'soldier'|trans }}</span></a>
+    </div>
     <div class="btn-left{% if app.request.attributes.get('_route') == 'spatial' %} currentRoute{% endif %}{% if app.user.getTutorial() < 18 %} tutorial-hide{% elseif app.user.getTutorial() == 18 %} tutorial-show{% endif %}">
         <a href="{{ path('spatial', {'idp': usePlanet.getId()}) }}"><span>{{ 'spatial'|trans }}</span></a>
     </div>

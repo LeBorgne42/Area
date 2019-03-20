@@ -1446,8 +1446,13 @@ class User implements UserInterface, \Serializable
     public function getAllNiobium(): int
     {
         $return = 0;
+        if ($this->ally) {
+            $bonus = 1.2 + ($this->politicProd / 14);
+        } else {
+            $bonus = 1;
+        }
         foreach($this->planets as $planet) {
-            $return = $return + ($planet->getNbProduction() * 60);
+            $return = $return + ($planet->getNbProduction() * 60) * $bonus;
         }
         return $return;
     }
@@ -1458,8 +1463,13 @@ class User implements UserInterface, \Serializable
     public function getAllWater(): int
     {
         $return = 0;
+        if ($this->ally) {
+            $bonus = 1.2 + ($this->politicProd / 14);
+        } else {
+            $bonus = 1;
+        }
         foreach($this->planets as $planet) {
-            $return = $return + ($planet->getWtProduction() * 60);
+            $return = $return + ($planet->getWtProduction() * 60) * $bonus;
         }
         return $return;
     }

@@ -15,3 +15,5 @@ tankImg: Tanks
 caserner.soldierProd: ' soldats en production'
 caserner.scientistProd: ' scientifiques en production'
 caserner.tankProd: ' tanks en production'
+caserner.noScientist: 'Requis : Centre de recherche'
+caserner.noTank: 'Requis : Unitées blindées - Usine d''armement + Caserne ou Bunker'

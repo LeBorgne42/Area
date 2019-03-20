@@ -69,8 +69,9 @@ class SpatialController extends AbstractController
                 $reportDef->setUser($user);
                 $reportDef->setTitle("Rapport d'invasion : Victoire (défense)");
                 $reportDef->setImageName("defend_win_report.jpg");
-                $reportDef->setContent("Bien joué ! Vos travailleurs et soldats ont repoussé l'invasion des " . $iaPlayer->getUserName() . " sur votre planète " . $usePlanet->getName() . " - " . $usePlanet->getSector()->getgalaxy()->getPosition() . ":" . $usePlanet->getSector()->getPosition() . ":" . $usePlanet->getPosition() . ".  " . number_format(500) . " zombies vous ont attaqué, tous ont été tué. Vous remportez " . 100 . " points de Guerre.");
-                $usePlanet->setSoldier($usePlanet->getSoldier() - 200);
+                $reportDef->setContent("Bien joué ! Vos travailleurs et soldats ont repoussé l'invasion des " . $iaPlayer->getUserName() . " sur votre planète " . $usePlanet->getName() . " - " . $usePlanet->getSector()->getgalaxy()->getPosition() . ":" . $usePlanet->getSector()->getPosition() . ":" . $usePlanet->getPosition() . ". 50 zombies vous ont attaqué, tous ont été tué. Vous remportez 100 points de Guerre et 10.000 Bitcoins. Recrutez de nouveau soldats !");
+                $usePlanet->setSoldier($usePlanet->getSoldier() - 100);
+                $user->setBitcoin($user->getBitcoin() + 10000);
                 $em->persist($reportDef);
                 $user->setViewReport(false);
                 $user->getRank()->setWarPoint(100);
