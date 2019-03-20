@@ -165,7 +165,7 @@ class MarketController extends AbstractController
         $user = $this->getUser();
         $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
         $server = $em->getRepository('App:Server')->find(['id' => 1]);
-        $merchant = $em->getRepository('App:User')->find(['id' => 1]);
+        $merchant = $em->getRepository('App:User')->findOneBy(['merchant' => 1]);
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
 

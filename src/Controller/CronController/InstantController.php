@@ -6,6 +6,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Report;
 use App\Entity\Fleet;
+use App\Entity\Rank;
+use App\Entity\User;
 use DateTime;
 use DateTimeZone;
 use Dateinterval;
@@ -62,7 +64,7 @@ class InstantController extends AbstractController
                         $newAsteroides->setCdr(true);
                         $newAsteroides->setImageName('cdr.png');
                         $newAsteroides->setName('Astéroïdes');
-                        $iaPlayer = $em->getRepository('App:User')->find(['id' => 1]);
+                        $iaPlayer = $em->getRepository('App:User')->findOneBy(['zombie' => 1]);
                         $fleet = new Fleet();
                         $fleet->setHunterWar(rand(50, 3000));
                         $fleet->setCorvetWar(rand(50, 200));
@@ -71,7 +73,7 @@ class InstantController extends AbstractController
                         $fleet->setUser($iaPlayer);
                         $fleet->setPlanet($newAsteroides);
                         $fleet->setAttack(1);
-                        $fleet->setName('Hydra Force');
+                        $fleet->setName('Horde Zombie');
                         $em->persist($fleet);
                     }
                 }
@@ -860,12 +862,34 @@ class InstantController extends AbstractController
                                     $defenser->setUser($fleet->getUser());
                                     $em->flush();
                                 } else {
-                                    $hydra = $em->getRepository('App:User')->find(['id' => 1]);
+                                    $hydra = $em->getRepository('App:User')->findOneBy(['zombie' => 1]);
 
-                                    $defenser->setUser($hydra);
-                                    $defenser->setWorker(25000);
-                                    $defenser->setSoldier(500);
-                                    $defenser->setName('Avant Poste');
+                                    if ($defenser->getZombie() == 1) {
+                                        $image = [
+                                            'planet1.png', 'planet2.png', 'planet3.png', 'planet4.png', 'planet5.png', 'planet6.png',
+                                            'planet7.png', 'planet8.png', 'planet9.png', 'planet10.png', 'planet11.png', 'planet12.png',
+                                            'planet13.png', 'planet14.png', 'planet15.png', 'planet16.png', 'planet17.png', 'planet18.png',
+                                            'planet19.png', 'planet20.png', 'planet21.png', 'planet22.png', 'planet23.png', 'planet24.png',
+                                            'planet25.png', 'planet26.png', 'planet27.png', 'planet28.png', 'planet29.png', 'planet30.png',
+                                            'planet31.png', 'planet32.png', 'planet33.png'
+                                        ];
+                                        $defenser->setUser(null);
+                                        $defenser->setName('Inhabitée');
+                                        $defenser->setImageName($image[rand(0, 32)]);
+                                    } else {
+                                        $defenser->setUser($hydra);
+                                        $defenser->setWorker(125000);
+                                        if ($defenser->getSoldierMax() >= 2500) {
+                                            $defenser->setSoldier($defenser->getSoldierMax());
+                                        } else {
+                                            $defenser->setCaserne(1);
+                                            $defenser->setSoldier(2500);
+                                            $defenser->setSoldierMax(2500);
+                                        }
+                                        $defenser->setName('Base Zombie');
+                                        $defenser->setImageName('hydra_planet.png');
+                                        $em->flush();
+                                    }
                                 }
                                 if ($userDefender->getAllPlanets() == 0) {
                                     $userDefender->setGameOver($fleet->getUser()->getUserName());
@@ -910,6 +934,24 @@ class InstantController extends AbstractController
     public function repareAction()
     {
         $em = $this->getDoctrine()->getManager();
+
+        $iaPlayer = new User();
+        $now = new DateTime();
+        $iaPlayer->setUsername('Marchands');
+        $iaPlayer->setEmail('support+5@areauniverse.eu');
+        $iaPlayer->setCreatedAt($now);
+        $iaPlayer->setPassword(password_hash('ViolGratuit2019', PASSWORD_BCRYPT));
+        $iaPlayer->setBitcoin(100);
+        $iaPlayer->setImageName('merchant.png');
+        $iaPlayer->setMerchant(1);
+        $rank = new Rank();
+        $em->persist($rank);
+        $iaPlayer->setRank($rank);
+        $em->persist($iaPlayer);
+
+        $iaSalon = $em->getRepository('App:Salon')->find(['id' => 1]);
+        $iaSalon->addUser($iaPlayer);
+        $em->flush();
         exit;
     }
 }

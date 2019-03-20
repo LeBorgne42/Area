@@ -770,13 +770,34 @@ class FightController extends AbstractController
                     $defenser->setUser($user);
                     $em->flush();
                 } else {
-                    $hydra = $em->getRepository('App:User')->find(['id' => 1]);
+                    $hydra = $em->getRepository('App:User')->findOneBy(['zombie' => 1]);
 
-                    $defenser->setUser($hydra);
-                    $defenser->setWorker(25000);
-                    $defenser->setSoldier(500);
-                    $defenser->setName('Avant Poste');
-                    $em->flush();
+                    if ($defenser->getZombie() == 1) {
+                        $image = [
+                            'planet1.png', 'planet2.png', 'planet3.png', 'planet4.png', 'planet5.png', 'planet6.png',
+                            'planet7.png', 'planet8.png', 'planet9.png', 'planet10.png', 'planet11.png', 'planet12.png',
+                            'planet13.png', 'planet14.png', 'planet15.png', 'planet16.png', 'planet17.png', 'planet18.png',
+                            'planet19.png', 'planet20.png', 'planet21.png', 'planet22.png', 'planet23.png', 'planet24.png',
+                            'planet25.png', 'planet26.png', 'planet27.png', 'planet28.png', 'planet29.png', 'planet30.png',
+                            'planet31.png', 'planet32.png', 'planet33.png'
+                        ];
+                        $defenser->setUser(null);
+                        $defenser->setName('Inhabitée');
+                        $defenser->setImageName($image[rand(0, 32)]);
+                    } else {
+                        $defenser->setUser($hydra);
+                        $defenser->setWorker(125000);
+                        if ($defenser->getSoldierMax() >= 2500) {
+                            $defenser->setSoldier($defenser->getSoldierMax());
+                        } else {
+                            $defenser->setCaserne(1);
+                            $defenser->setSoldier(2500);
+                            $defenser->setSoldierMax(2500);
+                        }
+                        $defenser->setName('Base Zombie');
+                        $defenser->setImageName('hydra_planet.png');
+                        $em->flush();
+                    }
                 }
                 if($userDefender->getColPlanets() == 0) {
                     $userDefender->setGameOver($user->getUserName());

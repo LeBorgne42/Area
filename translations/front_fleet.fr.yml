@@ -47,7 +47,7 @@ fleet.scientist: Scientifiques
 fleet.discharge: Decharger
 fleet.tutorial: 'Commandant il est l''heure de faire vos preuves dans la conquête spatiale, vous débutez avec quelques vaisseaux et nous allons les utiliser ! Cliquez sur «Créer une flotte» puis mettez y le nom que vous souhaitez et surtout : Un colonisateur.'
 fleet.tutorialBis: 'Votre flotte a été crée et est en orbite de votre planète. Pour le moment vous n''avez qu''une flotte mais pour une meilleure organisation allez sur la page «Cohorte».'
-fleet.tutorialTer: 'Votre flotte est en combat contre les hydres, le combat durera 5 minutes puis vous aurez le rapport de combat, d''aileurs rendons nous sur la page «Rapport» pour y voir l''invasion manquée.'
+fleet.tutorialTer: 'Votre flotte est en combat contre une Horde Zombie, le combat durera 5 minutes puis vous aurez le rapport de combat, d''aileurs rendons nous sur la page «Rapport» pour y voir l''invasion manquée.'
 fleetList.tutorial: 'Les Cohorte vous permettent d''organiser vos flottes comme vous le voulez dans des listes, dans la plupart des cas de trier les flottes de sondes, de cargos, de recycleurs, de guerre et d''invasions pour gagner du temps. Entrez un nom et une prioritée puis cliquez sur «Créer nouvelle Cohorte».'
 fleetList.tutorialBis: 'Votre Cohorte est crée vous pouvez y ajouter votre flotte précedement crée, cliquez sur «ajouter flotte», selectionné votre flotte et c''est partit!'
 fleetList.tutorialTer: 'On y est presque, votre flotte a rejoint la Cohorte. Maintenant rendons nous sur la page «Carte Spatiale» pour l''utiliser.'

@@ -153,6 +153,16 @@ class User implements UserInterface, \Serializable
     protected $viewMessage;
 
     /**
+     * @ORM\Column(name="zombie",type="boolean")
+     */
+    protected $zombie;
+
+    /**
+     * @ORM\Column(name="merchant",type="boolean")
+     */
+    protected $merchant;
+
+    /**
      * @ORM\Column(name="viewReport",type="boolean")
      * @Assert\NotBlank(message = "required")
      */
@@ -527,6 +537,8 @@ class User implements UserInterface, \Serializable
         $this->politicWorkerDef = 0;
         $this->voteAlly = 0;
         $this->voteName = null;
+        $this->zombie = 0;
+        $this->merchant = 0;
     }
 
     /**
@@ -1481,7 +1493,7 @@ class User implements UserInterface, \Serializable
     public function getSpecUsername()
     {
         $return = null;
-        $name = ['Admin', 'Dev', 'Les hydres'];
+        $name = ['Admin', 'Dev', 'Zombies'];
 
         if(in_array($this->username, $name)) {
             $return = $this->username;
@@ -2878,6 +2890,38 @@ class User implements UserInterface, \Serializable
     public function setVoteName($voteName): void
     {
         $this->voteName = $voteName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getZombie()
+    {
+        return $this->zombie;
+    }
+
+    /**
+     * @param mixed $zombie
+     */
+    public function setZombie($zombie): void
+    {
+        $this->zombie = $zombie;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMerchant()
+    {
+        return $this->merchant;
+    }
+
+    /**
+     * @param mixed $merchant
+     */
+    public function setMerchant($merchant): void
+    {
+        $this->merchant = $merchant;
     }
 
     /**

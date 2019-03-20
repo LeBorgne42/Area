@@ -54,7 +54,7 @@ class SpatialController extends AbstractController
                 $product->setCorvetWar(5);
                 $product->setProductAt($now);
                 $em->persist($product);
-                $iaPlayer = $em->getRepository('App:User')->find(['id' => 1]);
+                $iaPlayer = $em->getRepository('App:User')->findOneBy(['zombie' => 1]);
                 $fleet = new Fleet();
                 $fleet->setHunter(10);
                 $fleet->setCorvet(5);
@@ -62,14 +62,14 @@ class SpatialController extends AbstractController
                 $fleet->setUser($iaPlayer);
                 $fleet->setPlanet($usePlanet);
                 $fleet->setAttack(1);
-                $fleet->setName('Hydra Force');
+                $fleet->setName('Horde Zombie');
                 $em->persist($fleet);
                 $reportDef = new Report();
                 $reportDef->setSendAt($now);
                 $reportDef->setUser($user);
                 $reportDef->setTitle("Rapport d'invasion : Victoire (défense)");
                 $reportDef->setImageName("defend_win_report.jpg");
-                $reportDef->setContent("Bien joué ! Vos travailleurs et soldats ont repoussé l'invasion du joueur " . $user->getUserName() . " sur votre planète " . $usePlanet->getName() . " - " . $usePlanet->getSector()->getgalaxy()->getPosition() . ":" . $usePlanet->getSector()->getPosition() . ":" . $usePlanet->getPosition() . ".  " . number_format(500) . " soldats vous ont attaqué, tous ont été tué. Vous remportez " . 100 . " points de Guerre.");
+                $reportDef->setContent("Bien joué ! Vos travailleurs et soldats ont repoussé l'invasion des " . $iaPlayer->getUserName() . " sur votre planète " . $usePlanet->getName() . " - " . $usePlanet->getSector()->getgalaxy()->getPosition() . ":" . $usePlanet->getSector()->getPosition() . ":" . $usePlanet->getPosition() . ".  " . number_format(500) . " zombies vous ont attaqué, tous ont été tué. Vous remportez " . 100 . " points de Guerre.");
                 $usePlanet->setSoldier($usePlanet->getSoldier() - 200);
                 $em->persist($reportDef);
                 $user->setViewReport(false);

@@ -101,18 +101,25 @@ class PlanetController extends AbstractController
             $abandonPlanet->setUser(null);
             $abandonPlanet->setName('Abandonnée');
         } else {
-            $hydra = $em->getRepository('App:User')->find(['id' => 1]);
+            $hydra = $em->getRepository('App:User')->findOneBy(['zombie' => 1]);
 
             $abandonPlanet->setUser($hydra);
-            $abandonPlanet->setWorker(100000);
-            $abandonPlanet->setSoldier(2500);
-            $abandonPlanet->setName('Base avancée');
+            $abandonPlanet->setWorker(125000);
+            if ($abandonPlanet->getSoldierMax() >= 2500) {
+                $abandonPlanet->setSoldier($abandonPlanet->getSoldierMax());
+            } else {
+                $abandonPlanet->setCaserne(1);
+                $abandonPlanet->setSoldier(2500);
+                $abandonPlanet->setSoldierMax(2500);
+            }
+            $abandonPlanet->setName('Base Zombie');
+            $abandonPlanet->setImageName('hydra_planet.png');
         }
 
         $em->flush();
 
         if($user->getColPlanets() == 0) {
-            $hydra = $em->getRepository('App:User')->find(['id' => 1]);
+            $hydra = $em->getRepository('App:User')->findOneBy(['zombie' => 1]);
             foreach ($user->getFleets() as $fleet) {
                 if($fleet->getFleetList()) {
                     $fleet->getFleetList()->removeFleet($fleet);

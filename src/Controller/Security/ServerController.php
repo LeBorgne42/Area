@@ -47,18 +47,17 @@ class ServerController extends AbstractController
         $salon->setName('Public');
         $em->persist($salon);
         $em->flush();*/
-        $iaPlayer = $em->getRepository('App:User')->find(['id' => 1]);
+        $iaPlayer = $em->getRepository('App:User')->findOneBy(['zombie' => 1]);
 
         /*if ($iaPlayer == null) {
             $iaPlayer = new User();
             $now = new DateTime();
-            $iaPlayer->setUsername('Les Hydres');
+            $iaPlayer->setUsername('Zombies');
             $iaPlayer->setEmail('support@areauniverse.eu');
             $iaPlayer->setCreatedAt($now);
             $iaPlayer->setPassword(password_hash('ViolGratuit2019', PASSWORD_BCRYPT));
             $iaPlayer->setBitcoin(100);
             $iaPlayer->setImageName('hydre.png');
-            $iaPlayer->setTerraformation(999999);
             $rank = new Rank();
             $em->persist($rank);
             $iaPlayer->setRank($rank);
@@ -93,7 +92,7 @@ class ServerController extends AbstractController
                     $fleet->setUser($iaPlayer);
                     $fleet->setPlanet($planet);
                     $fleet->setAttack(1);
-                    $fleet->setName('Hydra Force');
+                    $fleet->setName('Horde Zombie');
                     $em->persist($fleet);
                 } else {
                     if (rand(1, 20) < 6) {
@@ -117,7 +116,7 @@ class ServerController extends AbstractController
                         $fleet->setUser($iaPlayer);
                         $fleet->setPlanet($planet);
                         $fleet->setAttack(1);
-                        $fleet->setName('Hydra Force');
+                        $fleet->setName('Horde Zombie');
                         $em->persist($fleet);
                     } else {
                         $nbrPlanets++;
@@ -196,7 +195,7 @@ class ServerController extends AbstractController
             $fleet->setUser($iaPlayer);
             $fleet->setPlanet($putFleet);
             $fleet->setAttack(1);
-            $fleet->setName('Hydra Force');
+            $fleet->setName('Horde Zombie');
             $em->persist($fleet);
         }
         $em->flush();

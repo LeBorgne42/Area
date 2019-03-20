@@ -105,7 +105,7 @@ class ConnectController extends AbstractController
         $report->setUser($user);
         $report->setTitle("Bienvenu parmis nous "  . $user->getUsername() . " !");
         $report->setImageName("welcome_report.jpg");
-        $report->setContent("Votre planète dispose déjà des premières infrastructures, des mines et extracteurs pour vos ressources. Un chantier spatial pour la construction de vaisseaux et enfin un radar pour visualiser les informations de la carte spatiale. Vous disposez aussi de quelques vaisseaux, des sondes pour aller voir ce qu'il se passe dans les autres secteurs, des chasseurs et frégates pour vous défendre. Bon courage commandant. (Pour recevoir de l'aide : La page Salon ou rendez-vous sur le discord)");
+        $report->setContent("Une épidémie s'est déclaré sur la Terre et en ce moment même il est fort a parier qu'elle est aux mains des hordes zombies. Vous et quelques autres commandant de vaisseaux spatiaux avez eu la chance de fuir avec un certains nombre de travailleurs/soldats. Remontez notre civilisation et préparez vous, les Zombies ne sont pas arrivés par hasard sur Terre... Bon courage commandant. (Pour recevoir de l'aide : La page Salon ou rendez-vous sur le discord)");
         $em->persist($report);
         $user->setViewReport(false);
 
