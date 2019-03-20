@@ -80,7 +80,7 @@
                         {% endif %}
                     </td>
                 </tr>
-                {% if usePlanet.getCenterSearch() >= 0 %}
+                {% if usePlanet.getCenterSearch() <= 0 %}
                     <tr>
                         <td colspan="2" class="center-cells text-center text-more text-rouge">
                             {{ 'caserner.noScientist'|trans }}

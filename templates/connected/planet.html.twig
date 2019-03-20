@@ -5,6 +5,11 @@
 {% block title %}{{ 'title'|trans }}{% endblock %}
 
 {% block body %}
+    {% if app.user.getAlly() %}
+        {% set bonus = 1.2 + (app.user.getPoliticProd() / 14) %}
+    {% else %}
+        {% set bonus = 1 %}
+    {% endif %}
     <div class="front-block">
         {% if app.user.getTutorial() == 3 or app.user.getTutorial() == 4 %}
             <table class="table table-striped borderOverview tutorial">
@@ -39,9 +44,6 @@
                 <th class="tab-cells-name text-center">
                     {{ 'planet.population'|trans }}
                 </th>
-                <th class="tab-cells-name text-center">
-                    {{ 'planet.ship'|trans }}
-                </th>
             </tr>
             {% for planet in app.user.getPlanets() %}
                 {% if planet.getEmpty() == true %}
@@ -68,21 +70,19 @@
                             </div>
                         </td>
                         <td class="center-cells text-center cell-middle">
-                            <div data-toggle="tooltip" data-placement="bottom" title="{{ 'niobium'|trans }}"><span>{% if planet.getNiobium() >= planet.getNiobiumMax() %}<span class="text-rouge">{{ planet.getNiobium()|number_format }}</span>{% else %}{{ planet.getNiobium()|number_format }}{% endif %} / {{ planet.getNiobiumMax()|number_format }}</span> <span class="text-vert">+<span>{{ (planet.getNbProduction() * 60)|number_format }}</span>/h</span> <img height="15" src="{{ asset('img/niobium.png') }}"></div>
-                            <div class="my-2" data-toggle="tooltip" data-placement="bottom" title="{{ 'water'|trans }}"><span>{% if planet.getWater() >= planet.getWaterMax() %}<span class="text-rouge">{{ planet.getWater()|number_format }}</span>{% else %}{{ planet.getWater()|number_format }}{% endif %} / {{ planet.getWaterMax()|number_format }}</span> <span class="text-vert">+<span>{{ (planet.getWtProduction() * 60)|number_format }}</span>/h</span> <img height="15" src="{{ asset('img/water.png') }}"></div>
+                            <div data-toggle="tooltip" data-placement="bottom" title="{{ 'niobium'|trans }}"><span>{% if planet.getNiobium() >= planet.getNiobiumMax() %}<span class="text-rouge">{{ planet.getNiobium()|number_format }}</span>{% else %}{{ planet.getNiobium()|number_format }}{% endif %}<span class="text-middle">/</span>{{ planet.getNiobiumMax()|number_format }}</span> <span class="text-vert">+<span>{{ (planet.getNbProduction() * 60 * bonus)|number_format }}</span>/h</span> <img height="15" src="{{ asset('img/niobium.png') }}"></div>
+                            <div class="my-2" data-toggle="tooltip" data-placement="bottom" title="{{ 'water'|trans }}"><span>{% if planet.getWater() >= planet.getWaterMax() %}<span class="text-rouge">{{ planet.getWater()|number_format }}</span>{% else %}{{ planet.getWater()|number_format }}{% endif %}<span class="text-middle">/</span>{{ planet.getWaterMax()|number_format }}</span> <span class="text-vert">+<span>{{ (planet.getWtProduction() * 60* bonus)|number_format }}</span>/h</span> <img height="15" src="{{ asset('img/water.png') }}"></div>
+                            <div><span data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}">{{ planet.getGroundPlace() }}<span class="text-middle">/</span>{{ planet.getGround() }} <img src="{{ asset('img/ground.png') }}"></span><span class="ml-4" data-toggle="tooltip" data-placement="bottom" title="{{ 'SkyImg'|trans }}">{{ planet.getSkyPlace() }}<span class="text-middle">/</span>{{ planet.getSky() }} <img src="{{ asset('img/sky.png') }}"></span></div>
+
                         </td>
                         <td width="100px" class="center-cells text-center cell-middle">
-                            <div data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}">{{ planet.getGroundPlace() }}/{{ planet.getGround() }} <img src="{{ asset('img/ground.png') }}"></div>
-                            <div class="my-2" data-toggle="tooltip" data-placement="bottom" title="{{ 'SkyImg'|trans }}">{{ planet.getSkyPlace() }}/{{ planet.getSky() }} <img src="{{ asset('img/sky.png') }}"></div>
+                            <div class="my-2" data-toggle="tooltip" data-placement="bottom" title="{{ 'tank'|trans }}">{{ planet.getTank()|number_format }}<span class="text-middle">/</span>500 <img height="15" src="{{ asset('img/tanks.png') }}"></div>
+                            <div class="my-2" data-toggle="tooltip" data-placement="bottom" title="{{ 'soldier'|trans }}">{{ planet.getSoldier()|number_format }}<span class="text-middle">/</span>{{ planet.getSoldierMax()|number_format }} <img height="15" src="{{ asset('img/soldier.png') }}"></div>
+                            <div {% if app.user.getTutorial() < 50 %}class="tutorial-hide" {% endif %}data-toggle="tooltip" data-placement="bottom" title="{{ 'tooltip.ships'|trans }}"><span><a href="{{ path('spatial', {'idp': planet.getId()}) }}">{{ planet.getShipOn() }} <img height="15" src="{{ asset('img/utility.png') }}"></a></span></div>
                         </td>
                         <td class="center-cells text-center cell-middle">
-                            <div data-toggle="tooltip" data-placement="bottom" title="{{ 'worker'|trans }}">{{ planet.getWorker()|number_format }} / {{ planet.getWorkerMax()|number_format }} <img height="15" src="{{ asset('img/worker.png') }}"></div>
-                            <div class="my-2" data-toggle="tooltip" data-placement="bottom" title="{{ 'soldier'|trans }}">{{ planet.getSoldier()|number_format }} / {{ planet.getSoldierMax()|number_format }} <img height="15" src="{{ asset('img/soldier.png') }}"></div>
-                            <div data-toggle="tooltip" data-placement="bottom" title="{{ 'scientist'|trans }}">{{ planet.getScientist()|number_format }} / {{ planet.getScientistMax()|number_format }} <img height="15" src="{{ asset('img/scientist.png') }}"></div>
-                        </td>
-                        <td class="center-cells text-center cell-middle{% if app.user.getTutorial() < 50 %} tutorial-hide{% endif %}">
-                            <div data-toggle="tooltip" data-placement="bottom" title="{{ 'tooltip.ships'|trans }}"><span><a href="{{ path('spatial', {'idp': planet.getId()}) }}">{{ planet.getShipOn() }}</a></span></div>
-                            {#<div class="my-2"><span><a href="{{ path('spatial', {'idp': planet.getId()}) }}">{{ planet.getFleets()|length }}</a></span></div>#}
+                            <div class="my-3" data-toggle="tooltip" data-placement="bottom" title="{{ 'worker'|trans }}">{{ planet.getWorker()|number_format }}<span class="text-middle">/</span>{{ planet.getWorkerMax()|number_format }} <img height="15" src="{{ asset('img/worker.png') }}"></div>
+                            <div class="my-3" data-toggle="tooltip" data-placement="bottom" title="{{ 'scientist'|trans }}">{{ planet.getScientist()|number_format }}<span class="text-middle">/</span>{{ planet.getScientistMax()|number_format }} <img height="15" src="{{ asset('img/scientist.png') }}"></div>
                         </td>
                     </tr>
                     {{ form_end(form_rename) }}

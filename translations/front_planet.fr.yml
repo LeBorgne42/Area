@@ -1,8 +1,8 @@
 title: Planète
-planet.name: Nom
+planet.name: Administration
 planet.niobium: Niobium
 planet.water: Eau
-planet.place: Place
+planet.place: Défense
 planet.worker: Travailleurs
 planet.soldier: Soldats
 planet.scientist: Scientifiques
@@ -17,7 +17,7 @@ worker: Travailleurs
 soldier: Soldats
 scientist: Scientifiques
 planet.image: Planète
-planet.production: Production
+planet.production: Information
 planet.population: Population
 planet.ship: Vaisseaux
 position: 'Position :'
@@ -25,3 +25,4 @@ planet.abandon: Abandonner
 planet.abandon.question: 'Souhaitez vous abandonner la planète ?'
 tooltip.ships: 'Les vaisseaux qui sont posés sur votre planète.'
 tooltip.planet: 'Infrastructures de la planète'
+tank: Tanks

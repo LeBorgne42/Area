@@ -134,7 +134,7 @@
                             <tr>
                         {% endif %}
                             <td width="160" class="center-cells text-center">
-                                <a class="text-or glyphicon glyphicon-remove" href="{{ path('planet_seller_sub', {'idp': usePlanet.getId(), 'planet': planet.getId()}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.remove'|trans }}"></a> <span class="{% if planet.getNiobium() >= planet.getNiobiumMax() or planet.getWater() >= planet.getWaterMax() %}text-rouge{% endif %}">{{ planet.getName() }}</span>
+                                <a class="text-or glyphicon glyphicon-remove" href="{{ path('planet_seller_sub', {'idp': usePlanet.getId(), 'planet': planet.getId()}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.remove'|trans }}"></a> <span{% if planet.getNiobium() >= planet.getNiobiumMax() or planet.getWater() >= planet.getWaterMax() %} class="text-rouge"{% endif %}>{{ planet.getName() }}</span>
                             </td>
                         {% set x = x + 1 %}
                         {% if x % 5 == 0 %}

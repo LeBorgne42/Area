@@ -445,482 +445,486 @@ class InstantController extends AbstractController
                 $em->remove($fleet);
             } else {
                 $usePlanet = $em->getRepository('App:Planet')->findByFirstPlanet($fleet->getUser()->getUsername());
-                $newHome = $em->getRepository('App:Planet')
-                    ->createQueryBuilder('p')
-                    ->join('p.sector', 's')
-                    ->join('s.galaxy', 'g')
-                    ->where('p.position = :planete')
-                    ->andWhere('s.position = :sector')
-                    ->andWhere('g.position = :galaxy')
-                    ->setParameters(['planete' => $fleet->getPlanete(), 'sector' => $fleet->getSector()->getPosition(), 'galaxy' => $fleet->getSector()->getGalaxy()->getPosition()])
-                    ->getQuery()
-                    ->getOneOrNullResult();
+                if (!$usePlanet) {
+                    $em->remove($fleet);
+                } else {
+                    $newHome = $em->getRepository('App:Planet')
+                        ->createQueryBuilder('p')
+                        ->join('p.sector', 's')
+                        ->join('s.galaxy', 'g')
+                        ->where('p.position = :planete')
+                        ->andWhere('s.position = :sector')
+                        ->andWhere('g.position = :galaxy')
+                        ->setParameters(['planete' => $fleet->getPlanete(), 'sector' => $fleet->getSector()->getPosition(), 'galaxy' => $fleet->getSector()->getGalaxy()->getPosition()])
+                        ->getQuery()
+                        ->getOneOrNullResult();
 
-                $userFleet = $fleet->getUser();
-                $report = new Report();
-                $report->setTitle("Votre flotte " . $fleet->getName() . " est arrivée");
-                $report->setImageName("travel_report.jpg");
-                $report->setSendAt($now);
-                $report->setUser($userFleet);
-                $report->setContent("Bonjour dirigeant " . $userFleet->getUserName() . " votre flotte " . "<span><a href='/connect/gerer-flotte/" . $usePlanet->getId() . "/" . $fleet->getId() . "' data-toggle='modal' data-target='#editModal'>" . $fleet->getName() . "</a></span>" . " vient d'arriver en " . "<span><a href='/connect/carte-spatiale/" . $newHome->getSector()->getPosition() . "/" . $newHome->getSector()->getGalaxy()->getPosition() . "/" . $usePlanet->getId() . "'>" . $newHome->getSector()->getGalaxy()->getPosition() . ":" . $newHome->getSector()->getPosition() . ":" . $newHome->getPosition() . "</a></span>.");
-                $userFleet->setViewReport(false);
-                $oldPlanet = $fleet->getPlanet();
-                $fleet->setPlanet($newHome);
-                $fleet->setPlanete(null);
-                $fleet->setFlightTime(null);
-                $fleet->setNewPlanet(null);
-                $fleet->setSector(null);
+                    $userFleet = $fleet->getUser();
+                    $report = new Report();
+                    $report->setTitle("Votre flotte " . $fleet->getName() . " est arrivée");
+                    $report->setImageName("travel_report.jpg");
+                    $report->setSendAt($now);
+                    $report->setUser($userFleet);
+                    $report->setContent("Bonjour dirigeant " . $userFleet->getUserName() . " votre flotte " . "<span><a href='/connect/gerer-flotte/" . $usePlanet->getId() . "/" . $fleet->getId() . "' data-toggle='modal' data-target='#editModal'>" . $fleet->getName() . "</a></span>" . " vient d'arriver en " . "<span><a href='/connect/carte-spatiale/" . $newHome->getSector()->getPosition() . "/" . $newHome->getSector()->getGalaxy()->getPosition() . "/" . $usePlanet->getId() . "'>" . $newHome->getSector()->getGalaxy()->getPosition() . ":" . $newHome->getSector()->getPosition() . ":" . $newHome->getPosition() . "</a></span>.");
+                    $userFleet->setViewReport(false);
+                    $oldPlanet = $fleet->getPlanet();
+                    $fleet->setPlanet($newHome);
+                    $fleet->setPlanete(null);
+                    $fleet->setFlightTime(null);
+                    $fleet->setNewPlanet(null);
+                    $fleet->setSector(null);
 
-                $user = $fleet->getUser();
-                $eAlly = $user->getAllyEnnemy();
-                $warAlly = [];
-                $x = 0;
-                foreach ($eAlly as $tmp) {
-                    $warAlly[$x] = $tmp->getAllyTag();
-                    $x++;
-                }
-
-                $fAlly = $user->getAllyFriends();
-                $friendAlly = [];
-                $x = 0;
-                foreach ($fAlly as $tmp) {
-                    if ($tmp->getAccepted() == 1) {
-                        $friendAlly[$x] = $tmp->getAllyTag();
+                    $user = $fleet->getUser();
+                    $eAlly = $user->getAllyEnnemy();
+                    $warAlly = [];
+                    $x = 0;
+                    foreach ($eAlly as $tmp) {
+                        $warAlly[$x] = $tmp->getAllyTag();
                         $x++;
                     }
-                }
-                if (!$friendAlly) {
-                    $friendAlly = ['impossible', 'personne'];
-                }
 
-                if ($user->getAlly()) {
-                    $allyF = $user->getAlly();
-                } else {
-                    $allyF = 'war';
-                }
+                    $fAlly = $user->getAllyFriends();
+                    $friendAlly = [];
+                    $x = 0;
+                    foreach ($fAlly as $tmp) {
+                        if ($tmp->getAccepted() == 1) {
+                            $friendAlly[$x] = $tmp->getAllyTag();
+                            $x++;
+                        }
+                    }
+                    if (!$friendAlly) {
+                        $friendAlly = ['impossible', 'personne'];
+                    }
 
-                $warFleets = $em->getRepository('App:Fleet')
-                    ->createQueryBuilder('f')
-                    ->join('f.user', 'u')
-                    ->leftJoin('u.ally', 'a')
-                    ->where('f.planet = :planet')
-                    ->andWhere('f.attack = true OR a.sigle in (:ally)')
-                    ->andWhere('f.user != :user')
-                    ->andWhere('f.flightTime is null')
-                    ->andWhere('u.ally is null OR a.sigle not in (:friend)')
-                    ->andWhere('u.ally is null OR u.ally != :myAlly')
-                    ->setParameters(['planet' => $newHome, 'ally' => $warAlly, 'user' => $user, 'friend' => $friendAlly, 'myAlly' => $allyF])
-                    ->getQuery()
-                    ->getResult();
+                    if ($user->getAlly()) {
+                        $allyF = $user->getAlly();
+                    } else {
+                        $allyF = 'war';
+                    }
 
-                $neutralFleets = $em->getRepository('App:Fleet')
-                    ->createQueryBuilder('f')
-                    ->join('f.user', 'u')
-                    ->leftJoin('u.ally', 'a')
-                    ->where('f.planet = :planet')
-                    ->andWhere('f.user != :user')
-                    ->andWhere('f.flightTime is null')
-                    ->andWhere('u.ally is null OR a.sigle not in (:friend)')
-                    ->setParameters(['planet' => $newHome, 'user' => $user, 'friend' => $friendAlly])
-                    ->getQuery()
-                    ->getResult();
+                    $warFleets = $em->getRepository('App:Fleet')
+                        ->createQueryBuilder('f')
+                        ->join('f.user', 'u')
+                        ->leftJoin('u.ally', 'a')
+                        ->where('f.planet = :planet')
+                        ->andWhere('f.attack = true OR a.sigle in (:ally)')
+                        ->andWhere('f.user != :user')
+                        ->andWhere('f.flightTime is null')
+                        ->andWhere('u.ally is null OR a.sigle not in (:friend)')
+                        ->andWhere('u.ally is null OR u.ally != :myAlly')
+                        ->setParameters(['planet' => $newHome, 'ally' => $warAlly, 'user' => $user, 'friend' => $friendAlly, 'myAlly' => $allyF])
+                        ->getQuery()
+                        ->getResult();
 
-                $fleetFight = $em->getRepository('App:Fleet')
-                    ->createQueryBuilder('f')
-                    ->join('f.user', 'u')
-                    ->leftJoin('u.ally', 'a')
-                    ->where('f.planet = :planet')
-                    ->andWhere('f.fightAt is not null')
-                    ->andWhere('f.flightTime is null')
-                    ->setParameters(['planet' => $newHome])
-                    ->getQuery()
-                    ->setMaxResults(1)
-                    ->getOneOrNullResult();
+                    $neutralFleets = $em->getRepository('App:Fleet')
+                        ->createQueryBuilder('f')
+                        ->join('f.user', 'u')
+                        ->leftJoin('u.ally', 'a')
+                        ->where('f.planet = :planet')
+                        ->andWhere('f.user != :user')
+                        ->andWhere('f.flightTime is null')
+                        ->andWhere('u.ally is null OR a.sigle not in (:friend)')
+                        ->setParameters(['planet' => $newHome, 'user' => $user, 'friend' => $friendAlly])
+                        ->getQuery()
+                        ->getResult();
 
-                if ($fleetFight) {
-                    $fleet->setFightAt($fleetFight->getFightAt());
-                } elseif ($warFleets) {
-                    foreach ($warFleets as $setWar) {
-                        if ($setWar->getUser()->getAlly()) {
-                            $fleetArm = $fleet->getMissile() + $fleet->getLaser() + $fleet->getPlasma();
-                            if ($fleetArm > 0) {
-                                $fleet->setAttack(1);
-                            }
-                            foreach ($eAlly as $tmp) {
-                                if ($setWar->getUser()->getAlly()->getSigle() == $tmp->getAllyTag()) {
-                                    $fleetArm = $setWar->getMissile() + $setWar->getLaser() + $setWar->getPlasma();
-                                    if ($fleetArm > 0) {
-                                        $setWar->setAttack(1);
+                    $fleetFight = $em->getRepository('App:Fleet')
+                        ->createQueryBuilder('f')
+                        ->join('f.user', 'u')
+                        ->leftJoin('u.ally', 'a')
+                        ->where('f.planet = :planet')
+                        ->andWhere('f.fightAt is not null')
+                        ->andWhere('f.flightTime is null')
+                        ->setParameters(['planet' => $newHome])
+                        ->getQuery()
+                        ->setMaxResults(1)
+                        ->getOneOrNullResult();
+
+                    if ($fleetFight) {
+                        $fleet->setFightAt($fleetFight->getFightAt());
+                    } elseif ($warFleets) {
+                        foreach ($warFleets as $setWar) {
+                            if ($setWar->getUser()->getAlly()) {
+                                $fleetArm = $fleet->getMissile() + $fleet->getLaser() + $fleet->getPlasma();
+                                if ($fleetArm > 0) {
+                                    $fleet->setAttack(1);
+                                }
+                                foreach ($eAlly as $tmp) {
+                                    if ($setWar->getUser()->getAlly()->getSigle() == $tmp->getAllyTag()) {
+                                        $fleetArm = $setWar->getMissile() + $setWar->getLaser() + $setWar->getPlasma();
+                                        if ($fleetArm > 0) {
+                                            $setWar->setAttack(1);
+                                        }
                                     }
                                 }
                             }
                         }
+                        $allFleets = $em->getRepository('App:Fleet')
+                            ->createQueryBuilder('f')
+                            ->join('f.user', 'u')
+                            ->where('f.planet = :planet')
+                            ->andWhere('f.flightTime is null')
+                            ->setParameters(['planet' => $newHome])
+                            ->getQuery()
+                            ->getResult();
+
+                        $nowWar = new DateTime();
+                        $nowWar->setTimezone(new DateTimeZone('Europe/Paris'));
+                        $nowWar->add(new DateInterval('PT' . 300 . 'S'));
+
+                        foreach ($allFleets as $updateF) {
+                            $updateF->setFightAt($nowWar);
+                        }
+                        $fleet->setFightAt($nowWar);
+                        $report->setContent($report->getContent() . " Attention votre flotte est rentrée en combat !");
+                        $report->setImageName("war_report.jpg");
+                    } elseif ($neutralFleets && $fleet->getAttack() == 1) {
+                        $allFleets = $em->getRepository('App:Fleet')
+                            ->createQueryBuilder('f')
+                            ->join('f.user', 'u')
+                            ->where('f.planet = :planet')
+                            ->andWhere('f.flightTime is null')
+                            ->setParameters(['planet' => $newHome])
+                            ->getQuery()
+                            ->getResult();
+
+                        $nowWar = new DateTime();
+                        $nowWar->setTimezone(new DateTimeZone('Europe/Paris'));
+                        $nowWar->add(new DateInterval('PT' . 300 . 'S'));
+
+                        foreach ($allFleets as $updateF) {
+                            $updateF->setFightAt($nowWar);
+                        }
+                        $fleet->setFightAt($nowWar);
+                        $report->setContent($report->getContent() . " Votre flotte vient d''engager le combat !");
+                        $report->setImageName("war_report.jpg");
                     }
-                    $allFleets = $em->getRepository('App:Fleet')
-                        ->createQueryBuilder('f')
-                        ->join('f.user', 'u')
-                        ->where('f.planet = :planet')
-                        ->andWhere('f.flightTime is null')
-                        ->setParameters(['planet' => $newHome])
-                        ->getQuery()
-                        ->getResult();
+                    if ($fleet->getFightAt() == null) {
+                        $user = $fleet->getUser();
+                        $newPlanet = $fleet->getPlanet();
 
-                    $nowWar = new DateTime();
-                    $nowWar->setTimezone(new DateTimeZone('Europe/Paris'));
-                    $nowWar->add(new DateInterval('PT' . 300 . 'S'));
-
-                    foreach ($allFleets as $updateF) {
-                        $updateF->setFightAt($nowWar);
-                    }
-                    $fleet->setFightAt($nowWar);
-                    $report->setContent($report->getContent() . " Attention votre flotte est rentrée en combat !");
-                    $report->setImageName("war_report.jpg");
-                } elseif ($neutralFleets && $fleet->getAttack() == 1) {
-                    $allFleets = $em->getRepository('App:Fleet')
-                        ->createQueryBuilder('f')
-                        ->join('f.user', 'u')
-                        ->where('f.planet = :planet')
-                        ->andWhere('f.flightTime is null')
-                        ->setParameters(['planet' => $newHome])
-                        ->getQuery()
-                        ->getResult();
-
-                    $nowWar = new DateTime();
-                    $nowWar->setTimezone(new DateTimeZone('Europe/Paris'));
-                    $nowWar->add(new DateInterval('PT' . 300 . 'S'));
-
-                    foreach ($allFleets as $updateF) {
-                        $updateF->setFightAt($nowWar);
-                    }
-                    $fleet->setFightAt($nowWar);
-                    $report->setContent($report->getContent() . " Votre flotte vient d''engager le combat !");
-                    $report->setImageName("war_report.jpg");
-                }
-                if ($fleet->getFightAt() == null) {
-                    $user = $fleet->getUser();
-                    $newPlanet = $fleet->getPlanet();
-
-                    if ($fleet->getFlightType() == '1') {
-                        $em->persist($report);
-                    }
-                    if ($fleet->getFlightType() == '2') {
-                        if ($newPlanet->getMerchant() == true) {
-                            $reportSell = new Report();
-                            $reportSell->setSendAt($nowReport);
-                            $reportSell->setUser($user);
-                            $reportSell->setTitle("Vente aux marchands");
-                            $reportSell->setImageName("sell_report.jpg");
-                            $newWarPointS = round((($fleet->getScientist() * 100) + ($fleet->getWorker() * 50) + ($fleet->getSoldier() * 10) + ($fleet->getWater() / 3) + ($fleet->getNiobium() / 6)) / 1000);
-                            if ($fleet->getUser()->getAlly() && $fleet->getUser()->getAlly()->getPolitic() == 'democrat') {
-                                if ($user->getPoliticMerchant() > 0) {
-                                    $gainSell = (($fleet->getWater() * 0.5) + ($fleet->getSoldier() * 5) + ($fleet->getWorker() * 2) + ($fleet->getScientist() * 50) + ($fleet->getNiobium() * 0.25)) * (1 + ($fleet->getUser()->getPoliticMerchant() / 20));
+                        if ($fleet->getFlightType() == '1') {
+                            $em->persist($report);
+                        }
+                        if ($fleet->getFlightType() == '2') {
+                            if ($newPlanet->getMerchant() == true) {
+                                $reportSell = new Report();
+                                $reportSell->setSendAt($nowReport);
+                                $reportSell->setUser($user);
+                                $reportSell->setTitle("Vente aux marchands");
+                                $reportSell->setImageName("sell_report.jpg");
+                                $newWarPointS = round((($fleet->getScientist() * 100) + ($fleet->getWorker() * 50) + ($fleet->getSoldier() * 10) + ($fleet->getWater() / 3) + ($fleet->getNiobium() / 6)) / 1000);
+                                if ($fleet->getUser()->getAlly() && $fleet->getUser()->getAlly()->getPolitic() == 'democrat') {
+                                    if ($user->getPoliticMerchant() > 0) {
+                                        $gainSell = (($fleet->getWater() * 0.5) + ($fleet->getSoldier() * 5) + ($fleet->getWorker() * 2) + ($fleet->getScientist() * 50) + ($fleet->getNiobium() * 0.25)) * (1 + ($fleet->getUser()->getPoliticMerchant() / 20));
+                                    } else {
+                                        $gainSell = ($fleet->getWater() * 0.5) + ($fleet->getSoldier() * 5) + ($fleet->getWorker() * 2) + ($fleet->getScientist() * 50) + ($fleet->getNiobium() * 0.25);
+                                    }
                                 } else {
                                     $gainSell = ($fleet->getWater() * 0.5) + ($fleet->getSoldier() * 5) + ($fleet->getWorker() * 2) + ($fleet->getScientist() * 50) + ($fleet->getNiobium() * 0.25);
                                 }
-                            } else {
-                                $gainSell = ($fleet->getWater() * 0.5) + ($fleet->getSoldier() * 5) + ($fleet->getWorker() * 2) + ($fleet->getScientist() * 50) + ($fleet->getNiobium() * 0.25);
-                            }
-                            $reportSell->setContent("Votre vente aux marchands vous a rapporté " . number_format(round($gainSell)) . " bitcoin. Et " . number_format($newWarPointS) . " points de Guerre. Votre flotte " . $fleet->getName() . " est sur le chemin du retour.");
-                            $em->persist($reportSell);
-                            $user->setBitcoin($user->getBitcoin() + $gainSell);
-                            $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $newWarPointS);
-                            $fleet->setNiobium(0);
-                            $fleet->setWater(0);
-                            $fleet->setSoldier(0);
-                            $fleet->setWorker(0);
-                            $fleet->setScientist(0);
-                            $server->setNbrSell($server->getNbrSell() + 1);
-                            $quest = $user->checkQuests('sell');
-                            if ($quest) {
-                                $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $quest->getGain());
-                                $user->removeQuest($quest);
-                            }
-                        } else {
-                            if ($user != $newPlanet->getUser() && $newPlanet->getUser()) {
-                                $reportSell = new Report();
-                                $reportSell->setSendAt($nowReport);
-                                $reportSell->setUser($newPlanet->getUser());
-                                $reportSell->setTitle("Dépôt de ressources");
-                                $reportSell->setImageName("depot_report.jpg");
-                                $reportSell->setContent("Le joueur " . $newPlanet->getUser()->getUserName() . " vient de déposer des ressources sur votre planète " . $newPlanet->getSector()->getgalaxy()->getPosition() . ":" . $newPlanet->getSector()->getPosition() . ":" . $newPlanet->getPosition() . " " . number_format($fleet->getNiobium()) . " Niobium, " . number_format($fleet->getWater()) . " Eau, " . number_format($fleet->getWorker()) . " Travailleurs, " . number_format($fleet->getSoldier()) . " Soldats, " . number_format($fleet->getScientist()) . " Scientifiques.");
+                                $reportSell->setContent("Votre vente aux marchands vous a rapporté " . number_format(round($gainSell)) . " bitcoin. Et " . number_format($newWarPointS) . " points de Guerre. Votre flotte " . $fleet->getName() . " est sur le chemin du retour.");
                                 $em->persist($reportSell);
-                            }
-                            if ($newPlanet->getNiobium() + $fleet->getNiobium() <= $newPlanet->getNiobiumMax()) {
-                                $newPlanet->setNiobium($newPlanet->getNiobium() + $fleet->getNiobium());
+                                $user->setBitcoin($user->getBitcoin() + $gainSell);
+                                $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $newWarPointS);
                                 $fleet->setNiobium(0);
-                            } else {
-                                $fleet->setNiobium($fleet->getNiobium() - ($newPlanet->getNiobiumMax() - $newPlanet->getNiobium()));
-                                $newPlanet->setNiobium($newPlanet->getNiobiumMax());
-                            }
-                            if ($newPlanet->getWater() + $fleet->getWater() <= $newPlanet->getWaterMax()) {
-                                $newPlanet->setWater($newPlanet->getWater() + $fleet->getWater());
                                 $fleet->setWater(0);
-                            } else {
-                                $fleet->setWater($fleet->getWater() - ($newPlanet->getWaterMax() - $newPlanet->getWater()));
-                                $newPlanet->setWater($newPlanet->getWaterMax());
-                            }
-                            if ($newPlanet->getSoldier() + $fleet->getSoldier() <= $newPlanet->getSoldierMax()) {
-                                $newPlanet->setSoldier($newPlanet->getSoldier() + $fleet->getSoldier());
                                 $fleet->setSoldier(0);
-                            } else {
-                                $fleet->setSoldier($fleet->getSoldier() - ($newPlanet->getSoldierMax() - $newPlanet->getSoldier()));
-                                $newPlanet->setSoldier($newPlanet->getSoldierMax());
-                            }
-                            if ($newPlanet->getWorker() + $fleet->getWorker() <= $newPlanet->getWorkerMax()) {
-                                $newPlanet->setWorker($newPlanet->getWorker() + $fleet->getWorker());
                                 $fleet->setWorker(0);
-                            } else {
-                                $fleet->setWorker($fleet->getWorker() - ($newPlanet->getWorkerMax() - $newPlanet->getWorker()));
-                                $newPlanet->setWorker($newPlanet->getWorkerMax());
-                            }
-                            if ($newPlanet->getScientist() + $fleet->getScientist() <= $newPlanet->getScientistMax()) {
-                                $newPlanet->setScientist($newPlanet->getScientist() + $fleet->getScientist());
                                 $fleet->setScientist(0);
-                            } else {
-                                $fleet->setScientist($fleet->getScientist() - ($newPlanet->getScientistMax() - $newPlanet->getScientist()));
-                                $newPlanet->setScientist($newPlanet->getScientistMax());
-                            }
-                        }
-
-                        $planetTakee = $fleet->getPlanete();
-                        $sFleet = $fleet->getPlanet()->getSector()->getPosition();
-                        $sector = $oldPlanet->getSector()->getPosition();
-                        $galaxy = $oldPlanet->getSector()->getGalaxy()->getPosition();
-                        if ($fleet->getPlanet()->getSector()->getGalaxy()->getPosition() != $galaxy) {
-                            $base = 18;
-                            $price = 25;
-                        } else {
-                            $pFleet = $fleet->getPlanet()->getPosition();
-                            if ($sFleet == $sector) {
-                                $x1 = ($pFleet - 1) % 5;
-                                $x2 = ($planetTakee - 1) % 5;
-                                $y1 = ($pFleet - 1) / 5;
-                                $y2 = ($planetTakee - 1) / 5;
-                            } else {
-                                $x1 = (($sFleet - 1) % 10) * 3;
-                                $x2 = (($sector - 1) % 10) * 3;
-                                $y1 = (($sFleet - 1) / 10) * 3;
-                                $y2 = (($sector - 1) / 10) * 3;
-                            }
-                            $base = sqrt(pow(($x2 - $x1), 2) + pow(($y2 - $y1), 2));
-                            $price = $base / 3;
-                        }
-                        $carburant = round($price * ($fleet->getNbrSignatures() / 200));
-                        $fuser = $fleet->getUser();
-                        if ($carburant <= $fuser->getBitcoin()) {
-                            if ($fleet->getMotherShip()) {
-                                $speed = $fleet->getSpeed() - ($fleet->getSpeed() * 0.10);
-                            } else {
-                                $speed = $fleet->getSpeed();
-                            }
-                            $distance = $speed * $base * 100;
-                            $moreNow = new DateTime();
-                            $moreNow->setTimezone(new DateTimeZone('Europe/Paris'));
-                            $moreNow->add(new DateInterval('PT' . 120 . 'S'));
-                            $nowFlight = new DateTime();
-                            $nowFlight->setTimezone(new DateTimeZone('Europe/Paris'));
-                            $nowFlight->add(new DateInterval('PT' . round($distance) . 'S'));
-                            $fleet->setNewPlanet($oldPlanet->getId());
-                            $fleet->setFlightTime($nowFlight);
-                            $fleet->setFlightType(1);
-                            $fleet->setSector($oldPlanet->getSector());
-                            $fleet->setPlanete($oldPlanet->getPosition());
-                            $fleet->setCancelFlight($moreNow);
-                            $fuser->setBitcoin($user->getBitcoin() - $carburant);
-                        }
-                    } elseif ($fleet->getFlightType() == '3') {
-                        if ($fleet->getColonizer() && $newPlanet->getUser() == null &&
-                            $newPlanet->getEmpty() == false && $newPlanet->getMerchant() == false &&
-                            $newPlanet->getCdr() == false && $fleet->getUser()->getColPlanets() < 26 &&
-                            $fleet->getUser()->getColPlanets() <= ($user->getTerraformation() + 1 + $user->getPoliticColonisation())) {
-
-                            $fleet->setColonizer($fleet->getColonizer() - 1);
-                            $newPlanet->setUser($fleet->getUser());
-                            $newPlanet->setName('Colonie');
-                            $newPlanet->setSoldier(50);
-                            $newPlanet->setNbColo(count($fleet->getUser()->getPlanets()) + 1);
-                            $quest = $fleet->getUser()->checkQuests('colonize');
-                            if ($quest) {
-                                $fleet->getUser()->getRank()->setWarPoint($fleet->getUser()->getRank()->getWarPoint() + $quest->getGain());
-                                $fleet->getUser()->removeQuest($quest);
-                            }
-                            if ($fleet->getNbrShips() == 0) {
-                                $em->remove($fleet);
-                            }
-                            $reportColo = new Report();
-                            $reportColo->setSendAt($nowReport);
-                            $reportColo->setUser($user);
-                            $reportColo->setTitle("Colonisation de planète");
-                            $reportColo->setImageName("colonize_report.jpg");
-                            $reportColo->setContent("Vous venez de coloniser une planète inhabitée en : " . "<span><a href='/connect/carte-spatiale/" . $newPlanet->getSector()->getPosition() . "/" . $newPlanet->getSector()->getGalaxy()->getPosition() . "/" . $usePlanet->getId() . "'>" . $newPlanet->getSector()->getGalaxy()->getPosition() . ":" . $newPlanet->getSector()->getPosition() . ":" . $newPlanet->getPosition() . "</a></span>" . ". Cette planète fait désormais partit de votre Empire, pensez a la renommer sur la page Planètes.");
-                            $user->setViewReport(false);
-                            $em->persist($reportColo);
-                            $server->setNbrColonize($server->getNbrColonize() + 1);
-                        }
-                    } elseif ($fleet->getFlightType() == '4' && $fleet->getPlanet()->getUser()) {
-                        if ($fleet->getUser()->getPoliticBarge() > 0) {
-                            $barge = $fleet->getBarge() * 2500 * (1 + ($fleet->getUser()->getPoliticBarge() / 4));
-                        } else {
-                            $barge = $fleet->getBarge() * 2500;
-                        }
-                        $defenser = $fleet->getPlanet();
-                        $userDefender= $fleet->getPlanet()->getUser();
-                        $barbed = $userDefender->getBarbedAdv();
-                        $dSoldier = $defenser->getSoldier() > 0 ? ($defenser->getSoldier() * 6) * $barbed : 0;
-                        $dTanks = $defenser->getTank() > 0 ? $defenser->getTank() * 300 : 0;
-                        $dWorker = $defenser->getWorker();
-                        if ($userDefender->getPoliticSoldierAtt() > 0) {
-                            $dSoldier = $dSoldier * (1 + ($userDefender->getPoliticSoldierAtt() / 10));
-                        }
-                        if ($userDefender->getPoliticTankDef() > 0) {
-                            $dTanks = $dTanks * (1 + ($userDefender->getPoliticTankDef() / 10));
-                        }
-                        if ($userDefender->getPoliticWorkerDef() > 0) {
-                            $dWorker = $dWorker * (1 + ($userDefender->getPoliticWorkerDef() / 5));
-                        }
-                        $dMilitary = $dWorker + $dSoldier + $dTanks;
-                        $alea = rand(4, 8);
-
-                        $reportInv = new Report();
-                        $reportInv->setSendAt($nowReport);
-                        $reportInv->setUser($user);
-                        $user->setViewReport(false);
-
-                        $reportDef = new Report();
-                        $reportDef->setSendAt($nowReport);
-                        $reportDef->setUser($userDefender);
-                        $userDefender->setViewReport(false);
-                        $dSigle = null;
-                        if ($userDefender->getAlly()) {
-                            $dSigle = $userDefender->getAlly()->getSigle();
-                        }
-
-                        if ($barge && $fleet->getPlanet()->getUser() && $fleet->getAllianceUser() && $user->getSigleAllied($dSigle) == NULL) {
-
-                            if ($barge >= $fleet->getSoldier()) {
-                                $aMilitary = $fleet->getSoldier() * $alea;
-                                $soldierAtmp = $fleet->getSoldier();
-                            } else {
-                                $aMilitary = $barge * $alea;
-                                $soldierAtmp = $barge;
-                            }
-                            if ($fleet->getUser()->getPoliticSoldierAtt() > 0) {
-                                $aMilitary = $aMilitary * (1 + ($fleet->getUser()->getPoliticSoldierAtt() / 10));
-                            }
-                            if ($dMilitary > $aMilitary) {
-                                $warPointDef = round($aMilitary);
-                                $userDefender->getRank()->setWarPoint($userDefender->getRank()->getWarPoint() + $warPointDef);
-                                $aMilitary = ($defenser->getSoldier() * 6) - $aMilitary;
-                                if ($barge < $fleet->getSoldier()) {
-                                    $fleet->setSoldier($fleet->getSoldier() - $barge);
+                                $server->setNbrSell($server->getNbrSell() + 1);
+                                $quest = $user->checkQuests('sell');
+                                if ($quest) {
+                                    $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $quest->getGain());
+                                    $user->removeQuest($quest);
                                 }
-                                $defenser->setBarge($defenser->getBarge() + $fleet->getBarge());
-                                $fleet->setBarge(0);
-                                if ($aMilitary < 0) {
-                                    $soldierDtmp = $defenser->getSoldier();
-                                    $workerDtmp = $defenser->getWorker();
-                                    $tankDtmp = $defenser->getTank();
-                                    $defenser->setSoldier(0);
-                                    $aMilitary = $dTanks - abs($aMilitary);
-                                    if($aMilitary <= 0) {
-                                        $defenser->setTank(0);
-                                        $defenser->setWorker($defenser->getWorker() + $aMilitary);
-                                        $tankDtmp = $tankDtmp - $defenser->getTank();
-                                        $soldierDtmp = $soldierDtmp - $defenser->getSoldier();
-                                        $workerDtmp = $workerDtmp - $defenser->getWorker();
-                                    } else {
-                                        $defenser->setTank(round($aMilitary / 300));
-                                        $tankDtmp = $tankDtmp - $defenser->getTank();
-                                        $soldierDtmp = $soldierDtmp - $defenser->getSoldier();
-                                        $workerDtmp = $workerDtmp - $defenser->getWorker();
-                                    }
+                            } else {
+                                if ($user != $newPlanet->getUser() && $newPlanet->getUser()) {
+                                    $reportSell = new Report();
+                                    $reportSell->setSendAt($nowReport);
+                                    $reportSell->setUser($newPlanet->getUser());
+                                    $reportSell->setTitle("Dépôt de ressources");
+                                    $reportSell->setImageName("depot_report.jpg");
+                                    $reportSell->setContent("Le joueur " . $newPlanet->getUser()->getUserName() . " vient de déposer des ressources sur votre planète " . $newPlanet->getSector()->getgalaxy()->getPosition() . ":" . $newPlanet->getSector()->getPosition() . ":" . $newPlanet->getPosition() . " " . number_format($fleet->getNiobium()) . " Niobium, " . number_format($fleet->getWater()) . " Eau, " . number_format($fleet->getWorker()) . " Travailleurs, " . number_format($fleet->getSoldier()) . " Soldats, " . number_format($fleet->getScientist()) . " Scientifiques.");
+                                    $em->persist($reportSell);
+                                }
+                                if ($newPlanet->getNiobium() + $fleet->getNiobium() <= $newPlanet->getNiobiumMax()) {
+                                    $newPlanet->setNiobium($newPlanet->getNiobium() + $fleet->getNiobium());
+                                    $fleet->setNiobium(0);
                                 } else {
-                                    $defenser->setSoldier(round($aMilitary / $alea));
-                                    $tankDtmp = $defenser->getTank();
-                                    $soldierDtmp = round($aMilitary / $alea);
-                                    $workerDtmp = $defenser->getWorker();
+                                    $fleet->setNiobium($fleet->getNiobium() - ($newPlanet->getNiobiumMax() - $newPlanet->getNiobium()));
+                                    $newPlanet->setNiobium($newPlanet->getNiobiumMax());
                                 }
-                                $reportDef->setTitle("Rapport d'invasion : Victoire (défense)");
-                                $reportDef->setImageName("defend_win_report.jpg");
-                                $reportDef->setContent("Bien joué ! Vos travailleurs et soldats ont repoussé l'invasion du joueur " . $user->getUserName() . " sur votre planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . ".  " . number_format($soldierAtmp) . " soldats vous ont attaqué, tous ont été tué. Vous avez ainsi prit le contrôle des barges de l'attaquant. Et vous remportez" . number_format($warPointDef) . " points de Guerre.");
-                                $reportInv->setTitle("Rapport d'invasion : Défaite (attaque)");
-                                $reportInv->setImageName("invade_lose_report.jpg");
-                                $reportInv->setContent("'AH AH AH AH' le rire de " . $userDefender->getUserName() . " résonne à vos oreilles d'un curieuse façon. Votre sang bouillonne vous l'a vouliez cette planète. Qu'il rigole donc, vous reviendrez prendre " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . " et ferez effacer des livres d'histoires son ridicule nom. Vous avez tout de même tué " . number_format($soldierDtmp) . " soldats, " . number_format($tankDtmp) ." tanks et " . number_format($workerDtmp) . " travailleurs à l'ennemi. Tous vos soldats sont morts et vos barges sont resté sur la planète. Courage commandant.");
-                            } else {
-                                $soldierDtmp = $defenser->getSoldier();
-                                $workerDtmp = $defenser->getWorker();
-                                $tankDtmp = $defenser->getTank();
-                                $warPointAtt = round($soldierDtmp + ($workerDtmp / 10));
-                                $fleet->getUser()->getRank()->setWarPoint($fleet->getUser()->getRank()->getWarPoint() + $warPointAtt);
-                                $soldierAtmp = $fleet->getSoldier();
-                                $fleet->setSoldier(($aMilitary - $dMilitary) / $alea);
-                                $soldierAtmp = $soldierAtmp - $fleet->getSoldier();
-                                $defenser->setSoldier(0);
-                                $defenser->setTank(0);
-                                $defenser->setWorker(2000);
-                                if ($fleet->getUser()->getColPlanets() <= ($fleet->getUser()->getTerraformation() + 1 + $fleet->getUser()->getPoliticInvade())) {
-                                    $defenser->setUser($fleet->getUser());
-                                    $em->flush();
+                                if ($newPlanet->getWater() + $fleet->getWater() <= $newPlanet->getWaterMax()) {
+                                    $newPlanet->setWater($newPlanet->getWater() + $fleet->getWater());
+                                    $fleet->setWater(0);
                                 } else {
-                                    $hydra = $em->getRepository('App:User')->findOneBy(['zombie' => 1]);
+                                    $fleet->setWater($fleet->getWater() - ($newPlanet->getWaterMax() - $newPlanet->getWater()));
+                                    $newPlanet->setWater($newPlanet->getWaterMax());
+                                }
+                                if ($newPlanet->getSoldier() + $fleet->getSoldier() <= $newPlanet->getSoldierMax()) {
+                                    $newPlanet->setSoldier($newPlanet->getSoldier() + $fleet->getSoldier());
+                                    $fleet->setSoldier(0);
+                                } else {
+                                    $fleet->setSoldier($fleet->getSoldier() - ($newPlanet->getSoldierMax() - $newPlanet->getSoldier()));
+                                    $newPlanet->setSoldier($newPlanet->getSoldierMax());
+                                }
+                                if ($newPlanet->getWorker() + $fleet->getWorker() <= $newPlanet->getWorkerMax()) {
+                                    $newPlanet->setWorker($newPlanet->getWorker() + $fleet->getWorker());
+                                    $fleet->setWorker(0);
+                                } else {
+                                    $fleet->setWorker($fleet->getWorker() - ($newPlanet->getWorkerMax() - $newPlanet->getWorker()));
+                                    $newPlanet->setWorker($newPlanet->getWorkerMax());
+                                }
+                                if ($newPlanet->getScientist() + $fleet->getScientist() <= $newPlanet->getScientistMax()) {
+                                    $newPlanet->setScientist($newPlanet->getScientist() + $fleet->getScientist());
+                                    $fleet->setScientist(0);
+                                } else {
+                                    $fleet->setScientist($fleet->getScientist() - ($newPlanet->getScientistMax() - $newPlanet->getScientist()));
+                                    $newPlanet->setScientist($newPlanet->getScientistMax());
+                                }
+                            }
 
-                                    if ($defenser->getZombie() == 1) {
-                                        $image = [
-                                            'planet1.png', 'planet2.png', 'planet3.png', 'planet4.png', 'planet5.png', 'planet6.png',
-                                            'planet7.png', 'planet8.png', 'planet9.png', 'planet10.png', 'planet11.png', 'planet12.png',
-                                            'planet13.png', 'planet14.png', 'planet15.png', 'planet16.png', 'planet17.png', 'planet18.png',
-                                            'planet19.png', 'planet20.png', 'planet21.png', 'planet22.png', 'planet23.png', 'planet24.png',
-                                            'planet25.png', 'planet26.png', 'planet27.png', 'planet28.png', 'planet29.png', 'planet30.png',
-                                            'planet31.png', 'planet32.png', 'planet33.png'
-                                        ];
-                                        $defenser->setUser(null);
-                                        $defenser->setName('Inhabitée');
-                                        $defenser->setImageName($image[rand(0, 32)]);
-                                    } else {
-                                        $defenser->setUser($hydra);
-                                        $defenser->setWorker(125000);
-                                        if ($defenser->getSoldierMax() >= 2500) {
-                                            $defenser->setSoldier($defenser->getSoldierMax());
-                                        } else {
-                                            $defenser->setCaserne(1);
-                                            $defenser->setSoldier(2500);
-                                            $defenser->setSoldierMax(2500);
-                                        }
-                                        $defenser->setName('Base Zombie');
-                                        $defenser->setImageName('hydra_planet.png');
-                                        $em->flush();
-                                    }
+                            $planetTakee = $fleet->getPlanete();
+                            $sFleet = $fleet->getPlanet()->getSector()->getPosition();
+                            $sector = $oldPlanet->getSector()->getPosition();
+                            $galaxy = $oldPlanet->getSector()->getGalaxy()->getPosition();
+                            if ($fleet->getPlanet()->getSector()->getGalaxy()->getPosition() != $galaxy) {
+                                $base = 18;
+                                $price = 25;
+                            } else {
+                                $pFleet = $fleet->getPlanet()->getPosition();
+                                if ($sFleet == $sector) {
+                                    $x1 = ($pFleet - 1) % 5;
+                                    $x2 = ($planetTakee - 1) % 5;
+                                    $y1 = ($pFleet - 1) / 5;
+                                    $y2 = ($planetTakee - 1) / 5;
+                                } else {
+                                    $x1 = (($sFleet - 1) % 10) * 3;
+                                    $x2 = (($sector - 1) % 10) * 3;
+                                    $y1 = (($sFleet - 1) / 10) * 3;
+                                    $y2 = (($sector - 1) / 10) * 3;
                                 }
-                                if ($userDefender->getAllPlanets() == 0) {
-                                    $userDefender->setGameOver($fleet->getUser()->getUserName());
-                                    $userDefender->setAlly(null);
-                                    $userDefender->setGrade(null);
-                                    foreach ($userDefender->getFleets() as $tmpFleet) {
-                                        $tmpFleet->setUser($fleet->getUser());
-                                    }
+                                $base = sqrt(pow(($x2 - $x1), 2) + pow(($y2 - $y1), 2));
+                                $price = $base / 3;
+                            }
+                            $carburant = round($price * ($fleet->getNbrSignatures() / 200));
+                            $fuser = $fleet->getUser();
+                            if ($carburant <= $fuser->getBitcoin()) {
+                                if ($fleet->getMotherShip()) {
+                                    $speed = $fleet->getSpeed() - ($fleet->getSpeed() * 0.10);
+                                } else {
+                                    $speed = $fleet->getSpeed();
                                 }
-                                $reportDef->setTitle("Rapport d'invasion : Défaite (défense)");
-                                $reportDef->setImageName("defend_lose_report.jpg");
-                                $reportDef->setContent("Mais QUI ? QUI !!! Vous as donné un commandant si médiocre " . $fleet->getUser()->getUserName() . " n'a pas eu a faire grand chose pour prendre votre planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . ".  " . round($soldierAtmp) . " soldats ennemis sont tout de même éliminé. C'est toujours ça de gagner. Vos " . number_format($soldierDtmp) . " soldats, " . number_format($tankDtmp) ." tanks et " . number_format($workerDtmp) . " travailleurs sont tous mort. Votre empire en a prit un coup, mais il vous reste des planètes, il est l'heure de la revanche !");
-                                $reportInv->setTitle("Rapport d'invasion : Victoire (attaque)");
-                                $reportInv->setImageName("invade_win_report.jpg");
-                                $reportInv->setContent("Vous débarquez après que la planète ait été prise et vous installez sur le trône de " . $userDefender->getUserName() . ". Qu'il est bon d'entendre ses pleures lointain... La planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . " est désormais votre! Il est temps de remettre de l'ordre dans la galaxie. " . number_format(round($soldierAtmp)) . " de vos soldats ont péri dans l'invasion. Mais les défenseurs ont aussi leurs pertes : " . number_format($soldierDtmp) . " soldats et " . number_format($workerDtmp) . " travailleurs ont péri. Cependant vous épargnez 2000 travailleurs dans votre bonté (surtout pour faire tourner la planète). Et vous remportez" . number_format($warPointAtt) . " points de Guerre.");
-                                $quest = $fleet->getUser()->checkQuests('invade');
+                                $distance = $speed * $base * 100;
+                                $moreNow = new DateTime();
+                                $moreNow->setTimezone(new DateTimeZone('Europe/Paris'));
+                                $moreNow->add(new DateInterval('PT' . 120 . 'S'));
+                                $nowFlight = new DateTime();
+                                $nowFlight->setTimezone(new DateTimeZone('Europe/Paris'));
+                                $nowFlight->add(new DateInterval('PT' . round($distance) . 'S'));
+                                $fleet->setNewPlanet($oldPlanet->getId());
+                                $fleet->setFlightTime($nowFlight);
+                                $fleet->setFlightType(1);
+                                $fleet->setSector($oldPlanet->getSector());
+                                $fleet->setPlanete($oldPlanet->getPosition());
+                                $fleet->setCancelFlight($moreNow);
+                                $fuser->setBitcoin($user->getBitcoin() - $carburant);
+                            }
+                        } elseif ($fleet->getFlightType() == '3') {
+                            if ($fleet->getColonizer() && $newPlanet->getUser() == null &&
+                                $newPlanet->getEmpty() == false && $newPlanet->getMerchant() == false &&
+                                $newPlanet->getCdr() == false && $fleet->getUser()->getColPlanets() < 26 &&
+                                $fleet->getUser()->getColPlanets() <= ($user->getTerraformation() + 1 + $user->getPoliticColonisation())) {
+
+                                $fleet->setColonizer($fleet->getColonizer() - 1);
+                                $newPlanet->setUser($fleet->getUser());
+                                $newPlanet->setName('Colonie');
+                                $newPlanet->setSoldier(50);
+                                $newPlanet->setNbColo(count($fleet->getUser()->getPlanets()) + 1);
+                                $quest = $fleet->getUser()->checkQuests('colonize');
                                 if ($quest) {
                                     $fleet->getUser()->getRank()->setWarPoint($fleet->getUser()->getRank()->getWarPoint() + $quest->getGain());
                                     $fleet->getUser()->removeQuest($quest);
                                 }
+                                if ($fleet->getNbrShips() == 0) {
+                                    $em->remove($fleet);
+                                }
+                                $reportColo = new Report();
+                                $reportColo->setSendAt($nowReport);
+                                $reportColo->setUser($user);
+                                $reportColo->setTitle("Colonisation de planète");
+                                $reportColo->setImageName("colonize_report.jpg");
+                                $reportColo->setContent("Vous venez de coloniser une planète inhabitée en : " . "<span><a href='/connect/carte-spatiale/" . $newPlanet->getSector()->getPosition() . "/" . $newPlanet->getSector()->getGalaxy()->getPosition() . "/" . $usePlanet->getId() . "'>" . $newPlanet->getSector()->getGalaxy()->getPosition() . ":" . $newPlanet->getSector()->getPosition() . ":" . $newPlanet->getPosition() . "</a></span>" . ". Cette planète fait désormais partit de votre Empire, pensez a la renommer sur la page Planètes.");
+                                $user->setViewReport(false);
+                                $em->persist($reportColo);
+                                $server->setNbrColonize($server->getNbrColonize() + 1);
                             }
-                            if ($fleet->getNbrShips() == 0) {
-                                $em->remove($fleet);
+                        } elseif ($fleet->getFlightType() == '4' && $fleet->getPlanet()->getUser()) {
+                            if ($fleet->getUser()->getPoliticBarge() > 0) {
+                                $barge = $fleet->getBarge() * 2500 * (1 + ($fleet->getUser()->getPoliticBarge() / 4));
+                            } else {
+                                $barge = $fleet->getBarge() * 2500;
                             }
-                            $em->persist($reportInv);
-                            $em->persist($reportDef);
-                            $server->setNbrInvasion($server->getNbrInvasion() + 1);
+                            $defenser = $fleet->getPlanet();
+                            $userDefender = $fleet->getPlanet()->getUser();
+                            $barbed = $userDefender->getBarbedAdv();
+                            $dSoldier = $defenser->getSoldier() > 0 ? ($defenser->getSoldier() * 6) * $barbed : 0;
+                            $dTanks = $defenser->getTank() > 0 ? $defenser->getTank() * 300 : 0;
+                            $dWorker = $defenser->getWorker();
+                            if ($userDefender->getPoliticSoldierAtt() > 0) {
+                                $dSoldier = $dSoldier * (1 + ($userDefender->getPoliticSoldierAtt() / 10));
+                            }
+                            if ($userDefender->getPoliticTankDef() > 0) {
+                                $dTanks = $dTanks * (1 + ($userDefender->getPoliticTankDef() / 10));
+                            }
+                            if ($userDefender->getPoliticWorkerDef() > 0) {
+                                $dWorker = $dWorker * (1 + ($userDefender->getPoliticWorkerDef() / 5));
+                            }
+                            $dMilitary = $dWorker + $dSoldier + $dTanks;
+                            $alea = rand(4, 8);
+
+                            $reportInv = new Report();
+                            $reportInv->setSendAt($nowReport);
+                            $reportInv->setUser($user);
+                            $user->setViewReport(false);
+
+                            $reportDef = new Report();
+                            $reportDef->setSendAt($nowReport);
+                            $reportDef->setUser($userDefender);
+                            $userDefender->setViewReport(false);
+                            $dSigle = null;
+                            if ($userDefender->getAlly()) {
+                                $dSigle = $userDefender->getAlly()->getSigle();
+                            }
+
+                            if ($barge && $fleet->getPlanet()->getUser() && $fleet->getAllianceUser() && $user->getSigleAllied($dSigle) == NULL) {
+
+                                if ($barge >= $fleet->getSoldier()) {
+                                    $aMilitary = $fleet->getSoldier() * $alea;
+                                    $soldierAtmp = $fleet->getSoldier();
+                                } else {
+                                    $aMilitary = $barge * $alea;
+                                    $soldierAtmp = $barge;
+                                }
+                                if ($fleet->getUser()->getPoliticSoldierAtt() > 0) {
+                                    $aMilitary = $aMilitary * (1 + ($fleet->getUser()->getPoliticSoldierAtt() / 10));
+                                }
+                                if ($dMilitary > $aMilitary) {
+                                    $warPointDef = round($aMilitary);
+                                    $userDefender->getRank()->setWarPoint($userDefender->getRank()->getWarPoint() + $warPointDef);
+                                    $aMilitary = ($defenser->getSoldier() * 6) - $aMilitary;
+                                    if ($barge < $fleet->getSoldier()) {
+                                        $fleet->setSoldier($fleet->getSoldier() - $barge);
+                                    }
+                                    $defenser->setBarge($defenser->getBarge() + $fleet->getBarge());
+                                    $fleet->setBarge(0);
+                                    if ($aMilitary < 0) {
+                                        $soldierDtmp = $defenser->getSoldier();
+                                        $workerDtmp = $defenser->getWorker();
+                                        $tankDtmp = $defenser->getTank();
+                                        $defenser->setSoldier(0);
+                                        $aMilitary = $dTanks - abs($aMilitary);
+                                        if ($aMilitary <= 0) {
+                                            $defenser->setTank(0);
+                                            $defenser->setWorker($defenser->getWorker() + $aMilitary);
+                                            $tankDtmp = $tankDtmp - $defenser->getTank();
+                                            $soldierDtmp = $soldierDtmp - $defenser->getSoldier();
+                                            $workerDtmp = $workerDtmp - $defenser->getWorker();
+                                        } else {
+                                            $defenser->setTank(round($aMilitary / 300));
+                                            $tankDtmp = $tankDtmp - $defenser->getTank();
+                                            $soldierDtmp = $soldierDtmp - $defenser->getSoldier();
+                                            $workerDtmp = $workerDtmp - $defenser->getWorker();
+                                        }
+                                    } else {
+                                        $defenser->setSoldier(round($aMilitary / $alea));
+                                        $tankDtmp = $defenser->getTank();
+                                        $soldierDtmp = round($aMilitary / $alea);
+                                        $workerDtmp = $defenser->getWorker();
+                                    }
+                                    $reportDef->setTitle("Rapport d'invasion : Victoire (défense)");
+                                    $reportDef->setImageName("defend_win_report.jpg");
+                                    $reportDef->setContent("Bien joué ! Vos travailleurs et soldats ont repoussé l'invasion du joueur " . $user->getUserName() . " sur votre planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . ".  " . number_format($soldierAtmp) . " soldats vous ont attaqué, tous ont été tué. Vous avez ainsi prit le contrôle des barges de l'attaquant. Et vous remportez" . number_format($warPointDef) . " points de Guerre.");
+                                    $reportInv->setTitle("Rapport d'invasion : Défaite (attaque)");
+                                    $reportInv->setImageName("invade_lose_report.jpg");
+                                    $reportInv->setContent("'AH AH AH AH' le rire de " . $userDefender->getUserName() . " résonne à vos oreilles d'un curieuse façon. Votre sang bouillonne vous l'a vouliez cette planète. Qu'il rigole donc, vous reviendrez prendre " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . " et ferez effacer des livres d'histoires son ridicule nom. Vous avez tout de même tué " . number_format($soldierDtmp) . " soldats, " . number_format($tankDtmp) . " tanks et " . number_format($workerDtmp) . " travailleurs à l'ennemi. Tous vos soldats sont morts et vos barges sont resté sur la planète. Courage commandant.");
+                                } else {
+                                    $soldierDtmp = $defenser->getSoldier();
+                                    $workerDtmp = $defenser->getWorker();
+                                    $tankDtmp = $defenser->getTank();
+                                    $warPointAtt = round($soldierDtmp + ($workerDtmp / 10));
+                                    $fleet->getUser()->getRank()->setWarPoint($fleet->getUser()->getRank()->getWarPoint() + $warPointAtt);
+                                    $soldierAtmp = $fleet->getSoldier();
+                                    $fleet->setSoldier(($aMilitary - $dMilitary) / $alea);
+                                    $soldierAtmp = $soldierAtmp - $fleet->getSoldier();
+                                    $defenser->setSoldier(0);
+                                    $defenser->setTank(0);
+                                    $defenser->setWorker(2000);
+                                    if ($fleet->getUser()->getColPlanets() <= ($fleet->getUser()->getTerraformation() + 1 + $fleet->getUser()->getPoliticInvade())) {
+                                        $defenser->setUser($fleet->getUser());
+                                        $em->flush();
+                                    } else {
+                                        $hydra = $em->getRepository('App:User')->findOneBy(['zombie' => 1]);
+
+                                        if ($defenser->getZombie() == 1) {
+                                            $image = [
+                                                'planet1.png', 'planet2.png', 'planet3.png', 'planet4.png', 'planet5.png', 'planet6.png',
+                                                'planet7.png', 'planet8.png', 'planet9.png', 'planet10.png', 'planet11.png', 'planet12.png',
+                                                'planet13.png', 'planet14.png', 'planet15.png', 'planet16.png', 'planet17.png', 'planet18.png',
+                                                'planet19.png', 'planet20.png', 'planet21.png', 'planet22.png', 'planet23.png', 'planet24.png',
+                                                'planet25.png', 'planet26.png', 'planet27.png', 'planet28.png', 'planet29.png', 'planet30.png',
+                                                'planet31.png', 'planet32.png', 'planet33.png'
+                                            ];
+                                            $defenser->setUser(null);
+                                            $defenser->setName('Inhabitée');
+                                            $defenser->setImageName($image[rand(0, 32)]);
+                                        } else {
+                                            $defenser->setUser($hydra);
+                                            $defenser->setWorker(125000);
+                                            if ($defenser->getSoldierMax() >= 2500) {
+                                                $defenser->setSoldier($defenser->getSoldierMax());
+                                            } else {
+                                                $defenser->setCaserne(1);
+                                                $defenser->setSoldier(2500);
+                                                $defenser->setSoldierMax(2500);
+                                            }
+                                            $defenser->setName('Base Zombie');
+                                            $defenser->setImageName('hydra_planet.png');
+                                            $em->flush();
+                                        }
+                                    }
+                                    if ($userDefender->getAllPlanets() == 0) {
+                                        $userDefender->setGameOver($fleet->getUser()->getUserName());
+                                        $userDefender->setAlly(null);
+                                        $userDefender->setGrade(null);
+                                        foreach ($userDefender->getFleets() as $tmpFleet) {
+                                            $tmpFleet->setUser($fleet->getUser());
+                                        }
+                                    }
+                                    $reportDef->setTitle("Rapport d'invasion : Défaite (défense)");
+                                    $reportDef->setImageName("defend_lose_report.jpg");
+                                    $reportDef->setContent("Mais QUI ? QUI !!! Vous as donné un commandant si médiocre " . $fleet->getUser()->getUserName() . " n'a pas eu a faire grand chose pour prendre votre planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . ".  " . round($soldierAtmp) . " soldats ennemis sont tout de même éliminé. C'est toujours ça de gagner. Vos " . number_format($soldierDtmp) . " soldats, " . number_format($tankDtmp) . " tanks et " . number_format($workerDtmp) . " travailleurs sont tous mort. Votre empire en a prit un coup, mais il vous reste des planètes, il est l'heure de la revanche !");
+                                    $reportInv->setTitle("Rapport d'invasion : Victoire (attaque)");
+                                    $reportInv->setImageName("invade_win_report.jpg");
+                                    $reportInv->setContent("Vous débarquez après que la planète ait été prise et vous installez sur le trône de " . $userDefender->getUserName() . ". Qu'il est bon d'entendre ses pleures lointain... La planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . " est désormais votre! Il est temps de remettre de l'ordre dans la galaxie. " . number_format(round($soldierAtmp)) . " de vos soldats ont péri dans l'invasion. Mais les défenseurs ont aussi leurs pertes : " . number_format($soldierDtmp) . " soldats et " . number_format($workerDtmp) . " travailleurs ont péri. Cependant vous épargnez 2000 travailleurs dans votre bonté (surtout pour faire tourner la planète). Et vous remportez" . number_format($warPointAtt) . " points de Guerre.");
+                                    $quest = $fleet->getUser()->checkQuests('invade');
+                                    if ($quest) {
+                                        $fleet->getUser()->getRank()->setWarPoint($fleet->getUser()->getRank()->getWarPoint() + $quest->getGain());
+                                        $fleet->getUser()->removeQuest($quest);
+                                    }
+                                }
+                                if ($fleet->getNbrShips() == 0) {
+                                    $em->remove($fleet);
+                                }
+                                $em->persist($reportInv);
+                                $em->persist($reportDef);
+                                $server->setNbrInvasion($server->getNbrInvasion() + 1);
+                            }
                         }
+                    } else {
+                        $em->persist($report);
                     }
-                } else {
-                    $em->persist($report);
                 }
             }
         }

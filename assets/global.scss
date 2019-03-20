@@ -46,7 +46,7 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
   }
 }
 
-@media screen and (max-width: 1025px) {
+@media screen and (max-width: 1200px) {
  .hideForLittle {
    display: none;
  }
@@ -381,6 +381,31 @@ span a {
     background-color: rgba(0,0,0, 0.4);
     text-decoration: none;
   }
+}
+
+progress.product-full::-webkit-progress-value {
+  width: 65px;
+  height: 7px;
+  background-color: red;
+  border: 1px solid black;
+}
+
+progress.product-ressource::-webkit-progress-value {
+  width: 65px;
+  height: 6px;
+  background-color: limegreen;
+}
+
+progress.product-ressource {
+  width: 65px;
+  height: 6px;
+  background-color: limegreen;
+}
+
+progress.product-full {
+  width: 65px;
+  height: 7px;
+  background-color: red;
 }
 
 .back-banner {

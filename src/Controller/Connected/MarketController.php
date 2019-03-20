@@ -197,7 +197,7 @@ class MarketController extends AbstractController
                 $newWarPointS = $newWarPointS + round((($planet->getWater() / 3) + ($planet->getNiobium() / 6)) / 1000);
                 $planet->setNiobium(0);
                 $planet->setWater(0);
-                if ($gain != 0) {
+                if ($gain > 0) {
                     $repor = new DateTime();
                     $repor->setTimezone(new DateTimeZone('Europe/Paris'));
                     $repor->add(new DateInterval('PT' . 1200 . 'S'));
@@ -214,7 +214,7 @@ class MarketController extends AbstractController
                 }
             }
         }
-        if ($gain != 0) {
+        if ($gain > 0) {
             $reportSell = new Report();
             $reportSell->setSendAt($now);
             $reportSell->setUser($user);
