@@ -209,7 +209,7 @@ class MarketController extends AbstractController
                     $fleet->setSector($planet->getSector());
                     $fleet->setFlightTime($repor);
                     $fleet->setAttack(0);
-                    $fleet->setName('Cargos Marchands');
+                    $fleet->setName('Cargos');
                     $em->persist($fleet);
                 }
             }
@@ -223,7 +223,9 @@ class MarketController extends AbstractController
             $reportSell->setContent("Votre vente aux marchands vous a rapporté " . number_format($gain) . " bitcoin. Et " . number_format($newWarPointS) . " points de Guerre.");
             $em->persist($reportSell);
             $user->setBitcoin($user->getBitcoin() + $gain);
-            $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $newWarPointS);
+            if ($user->getZombie() == 0) {
+                $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $newWarPointS);
+            }
             $server->setNbrSell($server->getNbrSell() + 1);
             $user->setViewReport(false);
             $quest = $user->checkQuests('sell');

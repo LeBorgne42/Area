@@ -21,6 +21,7 @@
                 </tbody>
             </table>
         {% endif %}
+        {% if app.user.getZombie() == 0 %}
         <div class="front-block-second">
             {% if quests %}
                 <div class="mb-4">
@@ -110,6 +111,7 @@
             </div>
             {{ form_end(form_market) }}
         </div>
+        {% endif %}
         <div class="front-block-game mt-4 mb-5">
             <form class="planetList_add mb-2" name="planetList_add" method="post" action="{{ path('planet_seller_add', {'idp': usePlanet.getId(), 'planet': '0'}) }}">
                 <span data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.autoSell'|trans }}" class="mr-5 text-more">{{ 'market.autoSell'|trans|raw }}<span class="glyphicon glyphicon-question-sign text-orange"></span></span>

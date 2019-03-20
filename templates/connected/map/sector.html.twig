@@ -203,7 +203,7 @@
                         </th>
                     </tr>
                     {% for fleet in fleetCurrent %}
-                        <tr class="{% if fleet.getUser() == app.user %}text-bleu{% elseif fleet.getUser().getAlly() == app.user.getAlly() and app.user.getAlly() %}text-vert{% else %}text-rouge{% endif %}">
+                        <tr class="{% if fleet.getUser() == app.user %}text-bleu{% elseif fleet.getUser().getAlly() == app.user.getAlly() and app.user.getAlly() or fleet.getUser().getMerchant() == 1 %}text-vert{% else %}text-rouge{% endif %}">
                             <th class="tab-cells-name">
                                 {% if fleet.getUser().getAlly() %}
                                     {% if fleet.getUser().getAlly().getImageName() %}
