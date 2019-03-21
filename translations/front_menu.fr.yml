@@ -38,7 +38,10 @@ workers: Travailleurs
 scientists: Scientifiques
 soldiers: Soldats
 groundImg: Terrain
-ships: 'Vaisseaux au sol'
+tooltip.ships: 'Vaisseaux au sol'
+tooltip.caserne: 'Caserne/bunker sur la planète'
+tooltip.tanks: 'Construction de tanks'
+tooltip.scientists: 'Centre de recherche'
 SkyImg: Espace
 rank: Classement
 quest: 'Objectifs'

@@ -1249,6 +1249,18 @@ class User implements UserInterface, \Serializable
     /**
      * @return int
      */
+    public function getAllTank(): int
+    {
+        $return = 0;
+        foreach($this->planets as $planet) {
+            $return = $return + $planet->getTank();
+        }
+        return $return;
+    }
+
+    /**
+     * @return int
+     */
     public function getAllSoldier(): int
     {
         $return = 0;
