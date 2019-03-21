@@ -70,7 +70,7 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
   width: auto;
   height: 30px;
   line-height: 1rem;
-  background-image: url("../public/img/confirm.png");
+  background-image: url("../public/img/confirm.jpg");
   margin-left: 0.6rem;
   text-shadow: 1.5px 1.5px 2px rgba(255,255,255, 0.3);
   border: 1px solid black;
@@ -82,7 +82,7 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
   width: 100%;
   height: 30px;
   font-size: 1.2rem;
-  background-image: url("../public/img/form-game.png");
+  background-image: url("../public/img/form-game.jpg");
   line-height: 1.5rem;
   padding-left: 1rem;
   padding-right: 1rem;
@@ -90,7 +90,7 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
   border: 1px solid silver;
   border-radius: 5px;
   option {
-    background-image: url("../public/img/form-game.png");
+    background-image: url("../public/img/form-game.jpg");
     background: black;
   }
 }
@@ -100,7 +100,7 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
   width: 100%;
   height: 30px;
   font-size: 1.2rem;
-  background-image: url("../public/img/blocked.png");
+  background-image: url("../public/img/blocked.jpg");
   background-size: cover;
   line-height: 1.5rem;
   padding-left: 1rem;
@@ -109,7 +109,7 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
   border: 1px solid silver;
   border-radius: 5px;
   option {
-    background-image: url("../public/img/blocked.png");
+    background-image: url("../public/img/blocked.jpg");
     background: black;
   }
 }
