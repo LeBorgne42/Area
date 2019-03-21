@@ -44,7 +44,7 @@ class GalaxyController extends AbstractController
 
         $planets = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
-            ->select('p.merchant, p.cdr, p.empty, s.position as sector, g.position as galaxy, u.username as username, a.sigle as alliance, s.destroy as destroy')
+            ->select('p.merchant, p.cdr, p.empty, s.position as sector, g.position as galaxy, u.username as username, a.sigle as alliance, s.destroy as destroy, u.zombie as zombie')
             ->leftJoin('p.user', 'u')
             ->leftJoin('u.ally', 'a')
             ->join('p.sector', 's')

@@ -35,13 +35,13 @@ class InstantController extends AbstractController
         if($asteroides) {
             foreach ($asteroides as $asteroide) {
 
-                $nowAste->add(new DateInterval('PT' . 86400 . 'S'));
+                $nowAste->add(new DateInterval('PT' . 57600 . 'S'));
                 $asteroide->setRecycleAt($nowAste);
-                $asteroide->setNbCdr($asteroide->getNbCdr() + rand(1500000, 3000000));
-                $asteroide->setWtCdr($asteroide->getWtCdr() + rand(1200000, 2800000));
+                $asteroide->setNbCdr($asteroide->getNbCdr() + rand(1500000, 8000000));
+                $asteroide->setWtCdr($asteroide->getWtCdr() + rand(1200000, 7800000));
 
 
-                if(rand(1, 100) == 100) {
+                if(rand(1, 50) == 50) {
                     $asteroide->setCdr(false);
                     $asteroide->setEmpty(true);
                     $asteroide->setImageName(null);
@@ -66,10 +66,10 @@ class InstantController extends AbstractController
                         $newAsteroides->setName('Astéroïdes');
                         $iaPlayer = $em->getRepository('App:User')->findOneBy(['zombie' => 1]);
                         $fleet = new Fleet();
-                        $fleet->setHunterWar(rand(50, 3000));
-                        $fleet->setCorvetWar(rand(50, 200));
-                        $fleet->setFregatePlasma(rand(20, 100));
-                        $fleet->setDestroyer(rand(1, 50));
+                        $fleet->setHunterWar(rand(50, 100000));
+                        $fleet->setCorvetWar(rand(50, 20000));
+                        $fleet->setFregatePlasma(rand(20, 1000));
+                        $fleet->setDestroyer(rand(1, 5000));
                         $fleet->setUser($iaPlayer);
                         $fleet->setPlanet($newAsteroides);
                         $fleet->setAttack(1);

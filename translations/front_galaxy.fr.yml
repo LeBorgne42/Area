@@ -1,10 +1,11 @@
 title: Galaxie
 tooltip.sector: 'Secteur %position%'
 galaxy.mine: 'Planète contrôlée'
-galaxy.ally: 'Planète alliée'
-galaxy.enemy: 'Planète hostile'
-galaxy.empty: 'Planète inhabitée'
+galaxy.ally: 'Alliée'
+galaxy.enemy: 'Hostile'
+galaxy.empty: 'Inhabitée'
 galaxy.ia: Marchands
+galaxy.zombie: Zombies
 galaxy.cdr: Ressources
 form.galaxy: 0
 form.sector: 0
