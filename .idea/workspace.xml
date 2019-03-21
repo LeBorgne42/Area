@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97f042ea-d0ee-4bd9-bb02-3d850e24f659" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/assets/scss/front/_topRessource.scss" afterPath="$PROJECT_DIR$/assets/scss/front/_topRessource.scss" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" afterPath="$PROJECT_DIR$/src/Entity/User.php" />
-      <change beforePath="$PROJECT_DIR$/src/EventListener/UserEvent.php" afterPath="$PROJECT_DIR$/src/EventListener/UserEvent.php" />
       <change beforePath="$PROJECT_DIR$/templates/connected/overview.html.twig" afterPath="$PROJECT_DIR$/templates/connected/overview.html.twig" />
       <change beforePath="$PROJECT_DIR$/templates/menu/_right_planet.html.twig" afterPath="$PROJECT_DIR$/templates/menu/_right_planet.html.twig" />
-      <change beforePath="$PROJECT_DIR$/translations/front_menu.fr.yml" afterPath="$PROJECT_DIR$/translations/front_menu.fr.yml" />
       <change beforePath="$PROJECT_DIR$/translations/front_overview.fr.yml" afterPath="$PROJECT_DIR$/translations/front_overview.fr.yml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -25,28 +21,28 @@
       <file leaf-file-name="overview.html.twig" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/connected/overview.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="473">
-              <caret line="94" column="206" lean-forward="true" selection-start-line="94" selection-start-column="206" selection-end-line="94" selection-end-column="260" />
+            <state relative-caret-position="551">
+              <caret line="103" column="104" lean-forward="false" selection-start-line="103" selection-start-column="104" selection-end-line="103" selection-end-column="104" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_right_planet.html.twig" pinned="false" current-in-tab="false">
+      <file leaf-file-name="_right_planet.html.twig" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/menu/_right_planet.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="31" column="140" lean-forward="false" selection-start-line="31" selection-start-column="140" selection-end-line="31" selection-end-column="140" />
+            <state relative-caret-position="435">
+              <caret line="29" column="147" lean-forward="false" selection-start-line="29" selection-start-column="147" selection-end-line="29" selection-end-column="147" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="front_menu.fr.yml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="front_menu.fr.yml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/translations/front_menu.fr.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="615">
-              <caret line="41" column="15" lean-forward="false" selection-start-line="41" selection-start-column="15" selection-end-line="41" selection-end-column="15" />
+            <state relative-caret-position="0">
+              <caret line="0" column="20" lean-forward="false" selection-start-line="0" selection-start-column="20" selection-end-line="0" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -56,7 +52,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>hyper</find>
       <find>access-search</find>
       <find>back_b</find>
       <find>open5</find>
@@ -86,6 +81,7 @@
       <find>info.scientist</find>
       <find>toolt</find>
       <find>getLight</find>
+      <find>Le nombre</find>
     </findStrings>
     <replaceStrings>
       <replace>app.user.getResearchCost('invade_ally')</replace>
@@ -197,10 +193,10 @@
         <option value="$PROJECT_DIR$/src/EventListener/UserEvent.php" />
         <option value="$PROJECT_DIR$/assets/scss/front/_topRessource.scss" />
         <option value="$PROJECT_DIR$/src/Entity/User.php" />
-        <option value="$PROJECT_DIR$/templates/connected/overview.html.twig" />
         <option value="$PROJECT_DIR$/translations/front_overview.fr.yml" />
-        <option value="$PROJECT_DIR$/templates/menu/_right_planet.html.twig" />
         <option value="$PROJECT_DIR$/translations/front_menu.fr.yml" />
+        <option value="$PROJECT_DIR$/templates/connected/overview.html.twig" />
+        <option value="$PROJECT_DIR$/templates/menu/_right_planet.html.twig" />
       </list>
     </option>
   </component>
@@ -501,12 +497,12 @@
       <workItem from="1550595254059" duration="54065000" />
       <workItem from="1551029272895" duration="125354000" />
       <workItem from="1551874547618" duration="191322000" />
-      <workItem from="1553069594287" duration="30697000" />
+      <workItem from="1553069594287" duration="31116000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2138735000" />
+    <option name="totallyTimeSpent" value="2139154000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -982,6 +978,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/translations/front_menu.fr.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="20" lean-forward="false" selection-start-line="0" selection-start-column="20" selection-end-line="0" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/translations/front_overview.fr.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -992,24 +996,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/connected/overview.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="473">
-          <caret line="94" column="206" lean-forward="true" selection-start-line="94" selection-start-column="206" selection-end-line="94" selection-end-column="260" />
+        <state relative-caret-position="551">
+          <caret line="103" column="104" lean-forward="false" selection-start-line="103" selection-start-column="104" selection-end-line="103" selection-end-column="104" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/menu/_right_planet.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="31" column="140" lean-forward="false" selection-start-line="31" selection-start-column="140" selection-end-line="31" selection-end-column="140" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/translations/front_menu.fr.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="41" column="15" lean-forward="false" selection-start-line="41" selection-start-column="15" selection-end-line="41" selection-end-column="15" />
+        <state relative-caret-position="435">
+          <caret line="29" column="147" lean-forward="false" selection-start-line="29" selection-start-column="147" selection-end-line="29" selection-end-column="147" />
           <folding />
         </state>
       </provider>

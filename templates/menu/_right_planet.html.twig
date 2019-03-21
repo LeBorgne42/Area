@@ -27,7 +27,7 @@
                             </div>
                             <div class="ml-2">
                                 {% if planet.getShipOn() > 0 %}<span data-toggle="tooltip" data-placement="bottom" title="{{ 'tooltip.ships'|trans }}">{{ planet.getShipOn() }} <span class="glyphicon glyphicon-plane"></span></span>{% endif %}
-                                {% if (planet.getCaserne() > 0 or planet.getBunker() > 0) and planet.getLightUsine() > 0 %}<span data-toggle="tooltip" data-placement="bottom" title="{{ 'tooltip.tanks'|trans }}"><img height="10" src="{{ asset('img/tanks.png') }}"></span>{% endif %}
+                                {% if (planet.getCaserne() > 0 or planet.getBunker() > 0) and planet.getLightUsine() > 0 and app.user.getTank() > 0 %}<span data-toggle="tooltip" data-placement="bottom" title="{{ 'tooltip.tanks'|trans }}"><img height="10" src="{{ asset('img/tanks.png') }}"></span>{% endif %}
                                 {% if planet.getCaserne() > 0 %}<span data-toggle="tooltip" data-placement="bottom" title="{{ 'tooltip.caserne'|trans }}"><img height="12" src="{{ asset('img/soldier.png') }}"></span>{% endif %}
                                 {% if planet.getCenterSearch() > 0 %}<span data-toggle="tooltip" data-placement="bottom" title="{{ 'tooltip.scientists'|trans }}"><img height="10" src="{{ asset('img/scientist.png') }}"></span>{% endif %}
                             </div>
