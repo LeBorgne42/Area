@@ -746,32 +746,32 @@ class Planet
      */
     public function getFleetsColor($user): string
     {
-        $color = 'pp-enemy';
+        $color = 'enemy';
         foreach($this->fleets as $fleet) {
-            $color = 'pp-enemy';
+            $color = 'enemy';
             if ($fleet->getUser() == $user) {
-                $color = 'pp-mine';
+                $color = 'mine';
             }
             if($fleet->getUser()->getAlly() == $user->getAlly() && $color != 'pp-mine' && $user->getAlly()) {
-                $color = 'pp-ally';
+                $color = 'ally';
             }
             if ($fleet->getUser()->getAlly() && $user->getAlly()) {
                 if (count($fleet->getUser()->getAlly()->getAllieds()) > 0) {
                     foreach($fleet->getUser()->getAlly()->getAllieds() as $allied) {
                         if($allied->getAllyTag() == $user->getAlly()->getSigle() && $allied->getAccepted() == 1) {
-                            $color = 'pp-ally';
+                            $color = 'ally';
                         }
                     }
                 }
                 if (count($fleet->getUser()->getAlly()->getPeaces()) > 0) {
                     foreach($fleet->getUser()->getAlly()->getPeaces() as $peace) {
                         if($peace->getAllyTag() == $user->getAlly()->getSigle() && $peace->getAccepted() == 1) {
-                            $color = 'pp-peace';
+                            $color = 'peace';
                         }
                     }
                 }
             }
-            if($color == 'pp-enemy') {
+            if($color == 'enemy') {
                 return $color;
             }
         }

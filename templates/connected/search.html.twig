@@ -68,7 +68,7 @@
                         </td>
                     </tr>
                 {% else %}
-                    <tr class={% if app.user.getUtility() == 3 %}finish-search{% else %}access-search-2{% endif %}>
+                    <tr class={% if app.user.getTerraformation() == 18 %}finish-search{% else %}access-search-2{% endif %}>
                         <th class="tab-cells-name">
                             <img class="float-left building-img ml-3" src="{{ asset('img/terra.png') }}"><button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.terra'|trans|raw }}">{{ 'title.terraformation'|trans|raw }} - {{ 'research.level'|trans|raw }} {{ app.user.getTerraformation()|trans }} / 18</button>
                             {% if app.user.getTerraformation() != 18 %}<div class="mt-4">{% if (app.user.getTerraformation() + 1) * 12000 > app.user.getBitcoin() %}<span class="text-rouge">{{ ((app.user.getTerraformation() + 1) * 12000)|number_format }}</span>{% else %}{{ ((app.user.getTerraformation() + 1) * 12000)|number_format }}{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>{% endif %}
@@ -255,12 +255,12 @@
                         </td>
                     {% endif %}
                 </tr>
-                <tr class={% if app.user.getHyperespace() == true %}finish-search{% else %}access-search{% endif %}>
+                <tr class={% if app.user.getHyperespace() == 1 %}finish-search{% else %}access-search{% endif %}>
                     <th class="tab-cells-name">
                         <img class="float-left building-img ml-3" src="{{ asset('img/hyper.png') }}">{% if app.user.getHyperespace() == false %}<button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.hyper'|trans|raw }}">{{ 'title.hyperespace'|trans|raw }} - {{ 'research.canBe'|trans }}</button>{% else %}{{ 'title.hyperespace'|trans|raw }} - <span class="text-vert">{{ 'research.Activated'|trans }}</span>{% endif %}
-                        {% if app.user.getHyperespace() != false %}<div class="mt-4">{% if 25000000 > app.user.getBitcoin() %}<span class="text-rouge">25.000.000</span>{% else %}25.000.000{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>{% endif %}
+                        {% if app.user.getHyperespace() == 0 %}<div class="mt-4">{% if 25000000 > app.user.getBitcoin() %}<span class="text-rouge">25.000.000</span>{% else %}25.000.000{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>{% endif %}
                     </th>
-                    {% if app.user.getHyperespace() == true %}
+                    {% if app.user.getHyperespace() == 1 %}
                         <td colspan="2" width="101px" class="center-cells cell-middle">
                             <div class="text-vert text-more">{{ 'research.finish'|trans }}</div>
                         </td>

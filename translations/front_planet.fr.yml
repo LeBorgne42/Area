@@ -7,7 +7,7 @@ planet.worker: Travailleurs
 planet.soldier: Soldats
 planet.scientist: Scientifiques
 planet.fleet: Flottes
-planet.tutorial: 'Voici le résumé de chacune de vos planètes, pour le moment vous n''en avez qu''une. Renomez la !'
+planet.tutorial: 'Voici le résumé de chacune de vos planètes, pour le moment vous n''en avez qu''une. Renomez la !<br>Vous pouvez aussi plus facilement vendre les ressources de vos planètes aux marchands ici.'
 planet.tutorialBis: 'Bien ! Maintenant il faut développer votre planète, prochaine étape la page «Infrastructures».'
 niobium: Niobium
 water: Eau
@@ -26,3 +26,8 @@ planet.abandon.question: 'Souhaitez vous abandonner la planète ?'
 tooltip.ships: 'Les vaisseaux qui sont posés sur votre planète.'
 tooltip.planet: 'Infrastructures de la planète'
 tank: Tanks
+planetList.add: Ajouter
+market.autoSell: 'Vente aux marchands '
+tooltip.autoSell: 'Selectionnez des planètes et vendez en un clic toutes les ressources de celle-ci aux marchands ! (25% de gains en moins qu''en se déplaçant soit même aux marchands)'
+tooltip.remove: 'Retirer de la liste de planète'
+market.sellAll: 'Vendre les ressources'

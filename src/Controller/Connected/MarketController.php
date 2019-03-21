@@ -41,27 +41,8 @@ class MarketController extends AbstractController
             ->getQuery()
             ->getResult();
 
-        $planetsSeller = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.user = :user')
-            ->andWhere('p.autoSeller = true')
-            ->setParameters(['user' => $user])
-            ->getQuery()
-            ->getResult();
-
-        $planetsNoSell = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.user = :user')
-            ->andWhere('p.autoSeller = false')
-            ->setParameters(['user' => $user])
-            ->getQuery()
-            ->getResult();
-
         $form_market = $this->createForm(MarketType::class, null, ["user" => $user->getId()]);
         $form_market->handleRequest($request);
-
-        $form_seller = $this->createForm(MarketType::class, null, ["user" => $user->getId()]);
-        $form_seller->handleRequest($request);
 
         if ($form_market->isSubmitted() && $form_market->isValid()) {
             $planetBuy = $em->getRepository('App:Planet')
@@ -96,10 +77,6 @@ class MarketController extends AbstractController
             return $this->redirectToRoute('market', ['idp' => $usePlanet->getId()]);
         }
 
-        if ($form_seller->isSubmitted() && $form_seller->isValid()) {
-
-        }
-
         if(($user->getTutorial() == 16)) {
             $user->setTutorial(17);
             $em->flush();
@@ -108,9 +85,7 @@ class MarketController extends AbstractController
         return $this->render('connected/market.html.twig', [
             'usePlanet' => $usePlanet,
             'form_market' => $form_market->createView(),
-            'quests' => $quests,
-            'planetsSeller' => $planetsSeller,
-            'planetsNoSell' => $planetsNoSell
+            'quests' => $quests
         ]);
     }
 
@@ -132,7 +107,7 @@ class MarketController extends AbstractController
             $em->flush();
         }
 
-        return $this->redirectToRoute('market', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('planet', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -153,7 +128,7 @@ class MarketController extends AbstractController
             $em->flush();
         }
 
-        return $this->redirectToRoute('market', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('planet', ['idp' => $usePlanet->getId()]);
     }
 
     /**
@@ -237,6 +212,6 @@ class MarketController extends AbstractController
 
         $em->flush();
 
-        return $this->redirectToRoute('market', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('report', ['idp' => $usePlanet->getId()]);
     }
 }

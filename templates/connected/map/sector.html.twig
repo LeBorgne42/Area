@@ -102,18 +102,24 @@
                                         <div class="planet-position text-center">{{ planet.getPosition() }}</div>
                                         <div class="float-right">
                                             {% if planet.getCdr() == false %}
-                                                <div><span class="glyphicon glyphicon-info-sign{% if planet.getSkyBrouilleur() %} text-orange{% elseif planet.getRadar() or planet.getSkyRadar() %} text-jaune{% endif %}" data-html="true" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planetInfos'|trans({'%land%': planet.getGround(), '%radar%': planet.getRadar() + planet.getSkyRadar(), '%brouilleur%': planet.getSkyBrouilleur(), '%sky%': planet.getSky(), '%ground%': planet.getNbrSignatures()|number_format}) }}"></span></div>
+                                                <div><span data-html="true" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planetInfos'|trans({'%land%': planet.getGround(), '%radar%': planet.getRadar() + planet.getSkyRadar(), '%brouilleur%': planet.getSkyBrouilleur(), '%sky%': planet.getSky(), '%ground%': planet.getNbrSignatures()|number_format}) }}">{% if planet.getSkyBrouilleur() %}<img src="{{ asset('img/radarjammed-known.gif') }}">{% elseif planet.getRadar() or planet.getSkyRadar() %}<img src="{{ asset('img/radar.gif') }}">{% else %}<img src="{{ asset('img/info.gif') }}">{% endif %}</span></div>
                                             {% endif %}
                                             {% if planet.getNbCdr() or planet.getWtCdr() %}
-                                                <div><span class="glyphicon glyphicon-oil planet" data-html="true" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.cdr'|trans({'%niobium%': planet.getNbCdr()|number_format, '%water%': planet.getWtCdr()|number_format}) }}"></span></div>
+                                                <div><span class="planet" data-html="true" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.cdr'|trans({'%niobium%': planet.getNbCdr()|number_format, '%water%': planet.getWtCdr()|number_format}) }}"><img src="{{ asset('img/niobium.png') }}"></span></div>
                                             {% endif %}
                                             {% if planet.getNbrFleets() %}
-                                                {#<a class="glyphicon glyphicon-plane planet {{ planet.getFleetsColor(app.user) }}" href="{{ path('fleet_sector', {'id':planet.getId(), 'idp': usePlanet.getId()}) }}" data-toggle="modal" data-target="#fleetModal"></a>#}
-                                                <div><a class="glyphicon glyphicon-plane planet {{ planet.getFleetsColor(app.user) }} tipFleet" data-placement="right" data-trigger="" title="
+                                                <div>
+                                                    <a class="planet tipFleet" data-placement="right" data-trigger="" title="
                                                     {% for fleet in planet.getFleets() %}
                                                     {% if fleet.getFlightTime() is null %}
                                                         <div class='my-3 text-left'>{% if fleet.getUser() != app.user %}<span><a class='ally' data-toggle='modal' data-target='#userModal' href='{{ path('user_profil_modal', {'idp': usePlanet.getId(), 'id': fleet.getUser().getId()}) }}'>{% if fleet.getUser().getAlly() %}[{{ fleet.getUser().getAlly().getSigle() }}]{% endif %}{{ fleet.getUser().getUserName() }}</a></span> - {% endif %}{% if fleet.getUser() == app.user and fleet.getFightAt() == null %}<span><a class='manage' href='{{ path('manage_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}' data-toggle='modal' data-target='#editModal'><span>{{ fleet.name }} : {{ fleet.getNbrSignatures()|number_format }}</span></a></span>{% else %}<span class='{{ fleet.getFleetsColor(app.user) }}'>{{ fleet.name }} : {{ fleet.getNbrSignatures()|number_format }}<span>{% endif %}{% if fleet.getFightAt() %}<span class='ml-3 text-rouge'>{{ 'fleet.combat'|trans }}</span>{% endif %}</div>
-                                                    {% endif %}{% endfor %}"data-html="true"></a></div>
+                                                    {% endif %}{% endfor %}"data-html="true">{% if planet.getFleetsColor(app.user) == 'enemy' %}<img src="{{ asset('img/fleets-enemy.gif') }}">{% elseif planet.getFleetsColor(app.user) == 'mine' %}<img src="{{ asset('img/fleets.gif') }}">{% elseif planet.getFleetsColor(app.user) == 'ally' %}<img src="{{ asset('img/fleets.gif') }}">{% elseif planet.getFleetsColor(app.user) == 'peace' %}<img src="{{ asset('img/fleets.gif') }}">{% endif %}
+                                                    </a>
+                                                </div>
+                                            {% elseif planet.getNbrSignatures() > 0 %}
+                                                <div>
+                                                    <a class="planet tipFleet" data-placement="right" data-trigger="" title="<div class='my-3 text-left'>{{ planet.getNbrSignatures()|number_format }} <img height='15' src='{{ asset('img/utility.png') }}'> {{ 'sector.groundfleet'|trans }}</div>" data-html="true"><img src="{{ asset('img/fleets-ground.gif') }}"></a>
+                                                </div>
                                             {% endif %}
                                         </div>
                                         <a {% if planet.getUser() == app.user %}href="{{ path('building', {'idp': planet.getId()}) }}"{% else %} data-toggle="modal" data-target="#planetModal" href="{{ path('planet_interact', {'idp': usePlanet.getId(), 'id': planet.getId()}) }}"{% endif %}><img class="mr-4 mb-4" {% if planet.getUser() and planet.getUser().getAlly() %}data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planetAlly'|trans({'%name%': planet.getUser().getUserName(), '%ally%': planet.getUser().getAlly().getSigle() }) }}"{% elseif planet.getUser() %}data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planet'|trans({'%name%': planet.getUser().getUserName() }) }}"{% endif %} height="64" width="64" src="{{ vich_uploader_asset(planet, 'imageFile') }}"></a>
@@ -124,7 +130,7 @@
                                     <div class="planet-position">{{ planet.getPosition() }}</div>
                                         <div class="float-right">
                                             {% if planet.getSkyBrouilleur() and app.user.getWhereRadar(id, gal) > 0 %}
-                                                <div><span class="glyphicon glyphicon-cd text-rouge" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.brouillage'|trans() }}"></span></div>
+                                                <div><span data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.brouillage'|trans() }}"><img src="{{ asset('img/radarjammed.gif') }}"></span></div>
                                             {% endif %}
                                         </div>
                                     <a{% if planet.getUser() == app.user %} href="{{ path('building', {'idp': planet.getId()}) }}"{% else %} data-toggle="modal" data-target="#planetModal" href="{{ path('planet_interact', {'idp': usePlanet.getId(), 'id': planet.getId()}) }}"{% endif %}><img class="mr-4 mb-4" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.planet'|trans({'%name%': planet.getName() }) }}" height="64" width="64" src="{{ vich_uploader_asset(planet, 'imageFile') }}"></a>
@@ -137,17 +143,24 @@
                                         <div class="planet-position-empty text-center">{{ planet.getPosition() }}</div>
                                         <div class="float-right">
                                             {% if planet.getUser() %}
-                                                <div><span class="glyphicon glyphicon-info-sign mt-3 mr-2{% if planet.getSkyBrouilleur() %} text-orange{% elseif planet.getRadar() or planet.getSkyRadar() %} text-jaune{% endif %}" data-html="true" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.radarInfos'|trans({'%radar%': planet.getRadar() + planet.getSkyRadar(), '%brouilleur%': planet.getSkyBrouilleur(), '%user%': planet.getUser().getUserName()}) }}"></span></div>
+                                                <div><span class="mt-3 mr-2" data-html="true" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.radarInfos'|trans({'%radar%': planet.getRadar() + planet.getSkyRadar(), '%brouilleur%': planet.getSkyBrouilleur(), '%user%': planet.getUser().getUserName()}) }}">{% if planet.getSkyBrouilleur() %}<img src="{{ asset('img/radarjammed-known.gif') }}">{% elseif planet.getRadar() or planet.getSkyRadar() %}<img src="{{ asset('img/radar.gif') }}">{% else %}<img src="{{ asset('img/info.gif') }}">{% endif %}</span></div>
                                             {% endif %}
                                             {% if planet.getNbCdr() or planet.getWtCdr() %}
-                                                <div><span class="glyphicon glyphicon-oil empty" data-html="true" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.cdr'|trans({'%niobium%': planet.getNbCdr()|number_format, '%water%': planet.getWtCdr()|number_format}) }}"></span></div>
+                                                <div><span class="empty" data-html="true" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.cdr'|trans({'%niobium%': planet.getNbCdr()|number_format, '%water%': planet.getWtCdr()|number_format}) }}"><img src="{{ asset('img/niobium.png') }}"></span></div>
                                             {% endif %}
                                             {% if planet.getNbrFleets() %}
-                                                <div><a class="glyphicon glyphicon-plane empty {{ planet.getFleetsColor(app.user) }} tipFleet" data-placement="right" data-trigger="" title="
+                                                <div>
+                                                    <a class="empty tipFleet" data-placement="right" data-trigger="" title="
                                                     {% for fleet in planet.getFleets() %}
                                                     {% if fleet.getFlightTime() is null %}
                                                         <div class='my-3 text-left'>{% if fleet.getUser() != app.user %}<span><a class='ally' data-toggle='modal' data-target='#userModal' href='{{ path('user_profil_modal', {'idp': usePlanet.getId(), 'id': fleet.getUser().getId()}) }}'>{% if fleet.getUser().getAlly() %}[{{ fleet.getUser().getAlly().getSigle() }}]{% endif %}{{ fleet.getUser().getUserName() }}</a></span> - {% endif %}{% if fleet.getUser() == app.user and fleet.getFightAt() == null %}<span><a class='manage' href='{{ path('manage_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}' data-toggle='modal' data-target='#editModal'><span>{{ fleet.name }} : {{ fleet.getNbrSignatures()|number_format }}</span></a></span>{% else %}<span class='{% if fleet.getUser().getAlly() == app.user.getAlly() %}text-vert{% else %}text-rouge{% endif %}'>{{ fleet.name }} : {{ fleet.getNbrSignatures()|number_format }}<span>{% endif %}{% if fleet.getFightAt() %}<span class='ml-3 text-rouge'>{{ 'fleet.combat'|trans }}</span>{% endif %}</div>
-                                                    {% endif %}{% endfor %}"data-html="true"></a></div>
+                                                    {% endif %}{% endfor %}"data-html="true">{% if planet.getFleetsColor(app.user) == 'enemy' %}<img src="{{ asset('img/fleets-enemy.gif') }}">{% elseif planet.getFleetsColor(app.user) == 'mine' %}<img src="{{ asset('img/fleets.gif') }}">{% elseif planet.getFleetsColor(app.user) == 'ally' %}<img src="{{ asset('img/fleets.gif') }}">{% elseif planet.getFleetsColor(app.user) == 'peace' %}<img src="{{ asset('img/fleets.gif') }}">{% endif %}
+                                                    </a>
+                                                </div>
+                                            {% elseif planet.getNbrSignatures() > 0 %}
+                                                <div>
+                                                    <a class="planet tipFleet" data-placement="right" data-trigger="" title="<div class='my-3 text-left'>{{ planet.getNbrSignatures()|number_format }} <img height='15' src='{{ asset('img/utility.png') }}'> {{ 'sector.groundfleet'|trans }}</div>" data-html="true"><img src="{{ asset('img/fleets-ground.gif') }}"></a>
+                                                </div>
                                             {% endif %}
                                         </div>
                                     </td>
@@ -374,7 +387,7 @@
     </div>
     <div class="modal fade" id="planetModal" tabindex="-1" role="dialog" aria-labelledby="planetModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content special-opaque">
+            <div class="modal-content special">
             </div>
         </div>
     </div>

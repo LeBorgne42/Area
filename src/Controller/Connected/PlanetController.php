@@ -28,6 +28,22 @@ class PlanetController extends AbstractController
 
         $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
+        $planetsSeller = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.user = :user')
+            ->andWhere('p.autoSeller = true')
+            ->setParameters(['user' => $user])
+            ->getQuery()
+            ->getResult();
+
+        $planetsNoSell = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.user = :user')
+            ->andWhere('p.autoSeller = false')
+            ->setParameters(['user' => $user])
+            ->getQuery()
+            ->getResult();
+
         $form_manageRenamePlanet = $this->createForm(PlanetRenameType::class);
         $form_manageRenamePlanet->handleRequest($request);
 
@@ -56,6 +72,8 @@ class PlanetController extends AbstractController
         return $this->render('connected/planet.html.twig', [
             'usePlanet' => $usePlanet,
             'formObject' => $form_manageRenamePlanet,
+            'planetsSeller' => $planetsSeller,
+            'planetsNoSell' => $planetsNoSell
         ]);
     }
 

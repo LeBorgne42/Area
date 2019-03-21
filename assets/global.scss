@@ -146,6 +146,10 @@ a:hover {
   height: 20px;
 }
 
+.table-dark {
+  background-image: url("../public/img/back.jpg");
+}
+
 .borderOverview {
   border: 1px solid white;
 }
@@ -171,7 +175,7 @@ a:hover {
   margin-top: 2rem!important;
   font-family: AppleGothic;
   font-size: 2rem;
-  background-color: rgba(0, 0, 0, 0.96);
+  background-image: url("../public/img/back.jpg");
   border-radius: 5px;
 }
 
@@ -238,13 +242,7 @@ a:hover {
 }
 
 .modal-content.special {
-  background-color: black;
-  border-radius: 20px;
-  border: 1px solid white;
-}
-
-.modal-content.special-opaque {
-  background-color: black;
+  background-image: url("../public/img/back.jpg");
   border-radius: 20px;
   border: 1px solid white;
 }
