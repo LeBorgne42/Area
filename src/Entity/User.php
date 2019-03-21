@@ -73,6 +73,11 @@ class User implements UserInterface, \Serializable
     protected $allyBan;
 
     /**
+     * @ORM\Column(name="dailyConnect",type="datetime", nullable=true)
+     */
+    protected $dailyConnect;
+
+    /**
      * @ORM\OneToMany(targetEntity="Proposal", mappedBy="user", fetch="EXTRA_LAZY")
      */
     protected $proposals;
@@ -537,6 +542,7 @@ class User implements UserInterface, \Serializable
         $this->politicWorkerDef = 0;
         $this->voteAlly = 0;
         $this->voteName = null;
+        $this->dailyConnect = null;
         $this->zombie = 0;
         $this->merchant = 0;
     }
@@ -2932,6 +2938,22 @@ class User implements UserInterface, \Serializable
     public function setMerchant($merchant): void
     {
         $this->merchant = $merchant;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDailyConnect()
+    {
+        return $this->dailyConnect;
+    }
+
+    /**
+     * @param mixed $dailyConnect
+     */
+    public function setDailyConnect($dailyConnect): void
+    {
+        $this->dailyConnect = $dailyConnect;
     }
 
     /**

@@ -220,7 +220,7 @@ class MarketController extends AbstractController
             $reportSell->setUser($user);
             $reportSell->setTitle("Vente aux marchands");
             $reportSell->setImageName("sell_report.jpg");
-            $reportSell->setContent("Votre vente aux marchands vous a rapporté " . number_format($gain) . " bitcoin. Et " . number_format($newWarPointS) . " points de Guerre.");
+            $reportSell->setContent("Votre vente aux marchands vous a rapporté <span class='text-vert'>+" . number_format($gain) . "</span> bitcoins. Et <span class='text-vert'>+" . number_format($newWarPointS) . "</span> points de Guerre.");
             $em->persist($reportSell);
             $user->setBitcoin($user->getBitcoin() + $gain);
             if ($user->getZombie() == 0) {

@@ -3,6 +3,7 @@
 namespace App\EventListener;
 
 use App\Entity\User;
+use App\Entity\Report;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
@@ -78,9 +79,26 @@ class UserEvent implements EventSubscriberInterface
                 $user = $this->token->getToken()->getUser();
                 $now = new DateTime();
                 $now->setTimezone(new DateTimeZone('Europe/Paris'));
+                $twentyfour = new DateTime();
+                $twentyfour->setTimezone(new DateTimeZone('Europe/Paris'));
+                $twentyfour->sub(new DateInterval('PT' . 86400 . 'S'));
 
                 if ($user instanceof User) {
-                    if($user->getSearchAt()) {
+                    if ($twentyfour > $user->getDailyConnect()) {
+                        $user->setDailyConnect($now);
+                        $bonus = (($user->getLevel() + 1) * 10000);
+                        $user->setBitcoin($user->getBitcoin() + $bonus);
+                        $user->setViewReport(false);
+                        $reportDaily = new Report();
+                        $reportDaily->setSendAt($now);
+                        $reportDaily->setUser($user);
+                        $reportDaily->setTitle("Bonus de connexion");
+                        $reportDaily->setImageName("sell_report.jpg");
+                        $reportDaily->setContent("«Ah vous voilà de retour, voici l'argent.»<br>-dépose " . number_format($bonus) . " bitcoins sur la table.<br>«Toute les 24h comme convenu ?<br>Bien à demain.»");
+                        $this->em->persist($reportDaily);
+
+                    }
+                    if ($user->getSearchAt()) {
                         if ($user->getSearchAt()->format('U') < $now->format('U')) {
                             $research = $user->getSearch();
                             if ($research == 'onde') {

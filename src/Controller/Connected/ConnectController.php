@@ -88,6 +88,7 @@ class ConnectController extends AbstractController
         $em->persist($rank);
         $user->setRank($rank);
         $user->setTutorial(1);
+        $user->setDailyConnect($now);
         $user->setGameOver(null);
         $salon->addUser($user);
         foreach ($user->getQuests() as $quest) {
