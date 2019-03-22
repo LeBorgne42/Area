@@ -208,7 +208,7 @@ class InstantController extends AbstractController
                 $dWorker = $dWorker * (1 + ($zUser->getPoliticWorkerDef() / 5));
             }
             $dMilitary = $dWorker + $dSoldier + $dTanks;
-            $aMilitary = (500 * (($zUser->getZombieAtt() / 6) + 1) * 2);
+            $aMilitary = (500 * (($zUser->getZombieAtt() / 6) + 1) * 2 * round($zUser->getTerraformation() / 5));
             $soldierAtmp = (500 * (($zUser->getZombieAtt() / 6) + 1));
 
             if($dMilitary > $aMilitary) {
