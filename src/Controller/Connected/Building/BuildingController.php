@@ -138,6 +138,12 @@ class BuildingController extends AbstractController
             $cancelPlanet->setNiobium($cancelPlanet->getNiobium() + ($level * 25500));
             $cancelPlanet->setWater($cancelPlanet->getWater() + ($level * 16000));
             $cancelPlanet->setSkyPlace($cancelPlanet->getSkyPlace() - 4);
+        } elseif ($build == 'island') {
+            $level = $cancelPlanet->getIsland() + 1;
+            $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + ($level * 200000));
+        } elseif ($build == 'orbital') {
+            $level = $cancelPlanet->getOrbital() + 1;
+            $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + ($level * 200000));
         }
         if(count($cancelPlanet->getConstructions()) > 0) {
             $constructTime = new DateTime();

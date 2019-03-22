@@ -171,6 +171,7 @@ class InstantController extends AbstractController
         $now->sub(new DateInterval('PT' . 1 . 'S'));
 
         foreach ($zUsers as $zUser) {
+            $usePlanet = $em->getRepository('App:Planet')->findByFirstPlanet($zUser->getUsername());
             $zombie = $em->getRepository('App:User')->findOneBy(['zombie' => 1]);
             $planetAtt = $em->getRepository('App:Planet')
                 ->createQueryBuilder('p')
@@ -208,7 +209,7 @@ class InstantController extends AbstractController
                 $dWorker = $dWorker * (1 + ($zUser->getPoliticWorkerDef() / 5));
             }
             $dMilitary = $dWorker + $dSoldier + $dTanks;
-            $aMilitary = (500 * (($zUser->getZombieAtt() / 6) + 1) * 2 * round($zUser->getTerraformation() / 5));
+            $aMilitary = (500 * (($zUser->getZombieAtt() / 6) + 1) * 2 * round((1 + $zUser->getTerraformation()) / 5));
             $soldierAtmp = (500 * (($zUser->getZombieAtt() / 6) + 1));
 
             if($dMilitary > $aMilitary) {
@@ -228,18 +229,18 @@ class InstantController extends AbstractController
                         $planetAtt->setTank(0);
                         $planetAtt->setWorker($planetAtt->getWorker() + ($aMilitary / (1 + ($zUser->getPoliticWorkerDef() / 5))));
                         $workerDtmp = $workerDtmp - $planetAtt->getWorker();
-                        $reportDef->setContent("«Au secours !» des civils crient et cours dans tout les sens sur " . $planetAtt->getName() . " en " . $planetAtt->getSector()->getgalaxy()->getPosition() . ":" . $planetAtt->getSector()->getPosition() . ":" . $planetAtt->getPosition() . ".<br>Vous n'aviez pas prévu suffisament de soldats et tanks pour faire face a la menace et des zombies envahissent les villes. Heureusement pour vous les travailleurs se réunissent et parviennent exterminer les zombies mais ce n'est pas grâce a vous.<br>" . number_format($soldierAtmp) . " zombies sont tués. <span class='text-rouge'>" . number_format($soldierDtmp) . "</span> de vos soldats succombent aux mâchoires de ces infamies et <span class='text-rouge'>" . number_format($tankDtmp) . "</span> tanks sont mit hors de service. <span class='text-rouge'>" . number_format($workerDtmp) ."</span> de vos travailleurs sont retrouvés morts.<br>Vous remportez ne remportez aucun points de Guerre pour avoir sacrifié vos civils.");
+                        $reportDef->setContent("«Au secours !» des civils crient et cours dans tout les sens sur " . $planetAtt->getName() . " en <span><a href='/connect/carte-spatiale/" . $planetAtt->getSector()->getPosition() . "/" . $planetAtt->getSector()->getGalaxy()->getPosition() . "/" . $usePlanet->getId() . "'>" . $planetAtt->getSector()->getGalaxy()->getPosition() . ":" . $planetAtt->getSector()->getPosition() . ":" . $planetAtt->getPosition() . "</a></span>.<br>Vous n'aviez pas prévu suffisament de soldats et tanks pour faire face a la menace et des zombies envahissent les villes. Heureusement pour vous les travailleurs se réunissent et parviennent exterminer les zombies mais ce n'est pas grâce a vous.<br>" . number_format($soldierAtmp) . " zombies sont tués. <span class='text-rouge'>" . number_format($soldierDtmp) . "</span> de vos soldats succombent aux mâchoires de ces infamies et <span class='text-rouge'>" . number_format($tankDtmp) . "</span> tanks sont mit hors de service. <span class='text-rouge'>" . number_format($workerDtmp) ."</span> de vos travailleurs sont retrouvés morts.<br>Vous remportez ne remportez aucun points de Guerre pour avoir sacrifié vos civils.");
                     } else {
                         $diviser = (1 + ($zUser->getPoliticTankDef() / 10)) * 300;
                         $planetAtt->setTank(round($aMilitary / $diviser));
                         $tankDtmp = $tankDtmp - $planetAtt->getTank();
-                        $reportDef->setContent("Vos tanks ont suffit a arrêter les zombies pour cette fois-ci sur la planète " . $planetAtt->getName() . " en " . $planetAtt->getSector()->getgalaxy()->getPosition() . ":" . $planetAtt->getSector()->getPosition() . ":" . $planetAtt->getPosition() . ".<br>Mais pensez a rester sur vos gardes. Votre armée extermine " . number_format($soldierAtmp) . " zombies. <span class='text-rouge'>" . number_format($soldierDtmp) . "</span> de vos soldats succombent aux mâchoires de ces infamies et <span class='text-rouge'>" . number_format($tankDtmp) . "</span> tanks sont mit hors de service.<br>Vous remportez <span class='text-vert'>+" . number_format($warPointDef) . "</span> points de Guerre.");
+                        $reportDef->setContent("Vos tanks ont suffit a arrêter les zombies pour cette fois-ci sur la planète " . $planetAtt->getName() . " en <span><a href='/connect/carte-spatiale/" . $planetAtt->getSector()->getPosition() . "/" . $planetAtt->getSector()->getGalaxy()->getPosition() . "/" . $usePlanet->getId() . "'>" . $planetAtt->getSector()->getGalaxy()->getPosition() . ":" . $planetAtt->getSector()->getPosition() . ":" . $planetAtt->getPosition() . "</a></span>.br>Mais pensez a rester sur vos gardes. Votre armée extermine " . number_format($soldierAtmp) . " zombies. <span class='text-rouge'>" . number_format($soldierDtmp) . "</span> de vos soldats succombent aux mâchoires de ces infamies et <span class='text-rouge'>" . number_format($tankDtmp) . "</span> tanks sont mit hors de service.<br>Vous remportez <span class='text-vert'>+" . number_format($warPointDef) . "</span> points de Guerre.");
                     }
                 } else {
                     $diviser = (1 + ($zUser->getPoliticSoldierAtt() / 10)) * (6 * $zUser->getBarbedAdv());
                     $planetAtt->setSoldier(round($aMilitary / $diviser));
                     $soldierDtmp = $soldierDtmp - $planetAtt->getSoldier();
-                    $reportDef->setContent("Une attaque de zombie est déclarée sur " . $planetAtt->getName() . " en " . $planetAtt->getSector()->getgalaxy()->getPosition() . ":" . $planetAtt->getSector()->getPosition() . ":" . $planetAtt->getPosition() . ".<br>Vous étiez préparé a cette éventualité et vos soldats exterminent " . number_format($soldierAtmp) . " zombies. <span class='text-rouge'>" . number_format($soldierDtmp) . "</span> de vos soldats succombent aux mâchoires de ces infamies.<br>Vous remportez <span class='text-vert'>+" . number_format($warPointDef) . "</span> points de Guerre.");
+                    $reportDef->setContent("Une attaque de zombie est déclarée sur " . $planetAtt->getName() . " en <span><a href='/connect/carte-spatiale/" . $planetAtt->getSector()->getPosition() . "/" . $planetAtt->getSector()->getGalaxy()->getPosition() . "/" . $usePlanet->getId() . "'>" . $planetAtt->getSector()->getGalaxy()->getPosition() . ":" . $planetAtt->getSector()->getPosition() . ":" . $planetAtt->getPosition() . "</a></span>.<br>Vous étiez préparé a cette éventualité et vos soldats exterminent " . number_format($soldierAtmp) . " zombies. <span class='text-rouge'>" . number_format($soldierDtmp) . "</span> de vos soldats succombent aux mâchoires de ces infamies.<br>Vous remportez <span class='text-vert'>+" . number_format($warPointDef) . "</span> points de Guerre.");
                 }
             } else {
                 $zUser->setZombieAtt((round($zUser->getZombieAtt() / 2)));
@@ -248,7 +249,7 @@ class InstantController extends AbstractController
                 $tankDtmp = $planetAtt->getTank();
                 $reportDef->setTitle("Rapport invasion zombies : Défaite");
                 $reportDef->setImageName("zombie_lose_report.jpg");
-                $reportDef->setContent("Vous recevez des rapports de toutes parts vous signalant des zombies sur la planète " . $planetAtt->getName() . " en " . $planetAtt->getSector()->getgalaxy()->getPosition() . ":" . $planetAtt->getSector()->getPosition() . ":" . $planetAtt->getPosition() . ".<br>Mais vous tardez a réagir et le manque de préparation lui est fatale.<br>Vous recevez ces derniers mots de votre Gouverneur local «Salopard! Vous étiez censé nous protéger, ou est l'armée !»<br> Les dernières images de la planète vous montre des zombies envahissant le moindre recoin de la planète.<br>Vos <span class='text-rouge'>" . number_format($soldierDtmp) . "</span> soldats, <span class='text-rouge'>" . number_format($tankDtmp) ."</span> tanks et <span class='text-rouge'>" . number_format($workerDtmp) . "</span> travailleurs sont tous mort. Votre empire en a prit un coup, mais il vous reste des planètes, remettez vous en question! Consolidez vos positions et allez détuire les nids de zombies!");
+                $reportDef->setContent("Vous recevez des rapports de toutes parts vous signalant des zombies sur la planète " . $planetAtt->getName() . " en <span><a href='/connect/carte-spatiale/" . $planetAtt->getSector()->getPosition() . "/" . $planetAtt->getSector()->getGalaxy()->getPosition() . "/" . $usePlanet->getId() . "'>" . $planetAtt->getSector()->getGalaxy()->getPosition() . ":" . $planetAtt->getSector()->getPosition() . ":" . $planetAtt->getPosition() . "</a></span>.<br>Mais vous tardez a réagir et le manque de préparation lui est fatale.<br>Vous recevez ces derniers mots de votre Gouverneur local «Salopard! Vous étiez censé nous protéger, ou est l'armée !»<br> Les dernières images de la planète vous montre des zombies envahissant le moindre recoin de la planète.<br>Vos <span class='text-rouge'>" . number_format($soldierDtmp) . "</span> soldats, <span class='text-rouge'>" . number_format($tankDtmp) ."</span> tanks et <span class='text-rouge'>" . number_format($workerDtmp) . "</span> travailleurs sont tous mort. Votre empire en a prit un coup, mais il vous reste des planètes, remettez vous en question! Consolidez vos positions et allez détuire les nids de zombies!");
                 $planetAtt->setWorker(125000);
                 if ($planetAtt->getSoldierMax() >= 2500) {
                     $planetAtt->setSoldier($planetAtt->getSoldierMax());
@@ -280,7 +281,7 @@ class InstantController extends AbstractController
             $zUser->setZombieAt($nextZombie);
             $fleetZb = new Fleet();
             $fleetZb->setName('Horde');
-            $fleetZb->setCorvet(round($zUser->getAllShipsPoint() / (10 * rand(1, 3))));
+            $fleetZb->setCorvet(1 + round(($zUser->getAllShipsPoint() / (10 * rand(1, 3)))));
             $fleetZb->setUser($zombie);
             $fleetZb->setPlanet($planetZb);
             $fleetZb->setPlanete($planetAtt->getPosition());
@@ -926,8 +927,8 @@ class InstantController extends AbstractController
 
                             $reportInv = new Report();
                             $reportInv->setSendAt($nowReport);
-                            $reportInv->setUser($user);
-                            $user->setViewReport(false);
+                            $reportInv->setUser($fleet->getUser());
+                            $fleet->getUser()->setViewReport(false);
 
                             $reportDef = new Report();
                             $reportDef->setSendAt($nowReport);
@@ -938,34 +939,37 @@ class InstantController extends AbstractController
                                 $dSigle = $userDefender->getAlly()->getSigle();
                             }
 
-                            if ($barge && $fleet->getPlanet()->getUser() && $fleet->getAllianceUser() && $user->getSigleAllied($dSigle) == NULL) {
-
-                                if ($barge >= $fleet->getSoldier()) {
+                            if ($barge && $fleet->getPlanet()->getUser() && $fleet->getAllianceUser() && $fleet->getUser()->getSigleAllied($dSigle) == NULL) {
+                                if($barge >= $fleet->getSoldier()) {
                                     $aMilitary = $fleet->getSoldier() * $alea;
                                     $soldierAtmp = $fleet->getSoldier();
+                                    $soldierAtmpTotal = 0;
                                 } else {
                                     $aMilitary = $barge * $alea;
                                     $soldierAtmp = $barge;
+                                    $soldierAtmpTotal = $fleet->getSoldier() - $barge;
                                 }
                                 if ($fleet->getUser()->getPoliticSoldierAtt() > 0) {
-                                    $aMilitary = $aMilitary * (1 + ($fleet->getUser()->getPoliticSoldierAtt() / 10));
+                                    $aMilitary = $aMilitary * (1 + ($user->getPoliticSoldierAtt() / 10));
                                 }
-                                if ($dMilitary > $aMilitary) {
-                                    $warPointDef = round($aMilitary);
-                                    $userDefender->getRank()->setWarPoint($userDefender->getRank()->getWarPoint() + $warPointDef);
-                                    $aMilitary = ($defenser->getSoldier() * 6) - $aMilitary;
-                                    if ($barge < $fleet->getSoldier()) {
+                                if($dMilitary > $aMilitary) {
+                                    if ($userDefender->getZombie() == 0) {
+                                        $warPointDef = round($aMilitary);
+                                        $userDefender->getRank()->setWarPoint($userDefender->getRank()->getWarPoint() + $warPointDef);
+                                    }
+                                    $aMilitary = $dSoldier - $aMilitary;
+                                    if($barge < $fleet->getSoldier()) {
                                         $fleet->setSoldier($fleet->getSoldier() - $barge);
                                     }
                                     $defenser->setBarge($defenser->getBarge() + $fleet->getBarge());
                                     $fleet->setBarge(0);
-                                    if ($aMilitary < 0) {
+                                    if($aMilitary <= 0) {
                                         $soldierDtmp = $defenser->getSoldier();
                                         $workerDtmp = $defenser->getWorker();
                                         $tankDtmp = $defenser->getTank();
                                         $defenser->setSoldier(0);
                                         $aMilitary = $dTanks - abs($aMilitary);
-                                        if ($aMilitary <= 0) {
+                                        if($aMilitary <= 0) {
                                             $defenser->setTank(0);
                                             $defenser->setWorker($defenser->getWorker() + ($aMilitary / (1 + ($userDefender->getPoliticWorkerDef() / 5))));
                                             $tankDtmp = $tankDtmp - $defenser->getTank();
@@ -980,36 +984,56 @@ class InstantController extends AbstractController
                                         }
                                     } else {
                                         $diviser = (1 + ($userDefender->getPoliticSoldierAtt() / 10)) * ($alea * $userDefender->getBarbedAdv());
-                                        $defenser->setSoldier(round($aMilitary / $diviser));
+                                        $defenser->setSoldier($soldierAtmpTotal + round($aMilitary / $diviser));
                                         $tankDtmp = $defenser->getTank();
-                                        $soldierDtmp = round($aMilitary / $diviser);
-                                        $workerDtmp = $defenser->getWorker();
+                                        $soldierDtmp = $soldierAtmpTotal + round($aMilitary / $diviser);
+                                        $workerDtmp = 0;
                                     }
-                                    $reportDef->setTitle("Rapport d'invasion : Victoire (défense)");
-                                    $reportDef->setImageName("defend_win_report.jpg");
-                                    $reportDef->setContent("Bien joué ! Vos travailleurs et soldats ont repoussé l'invasion du joueur " . $user->getUserName() . " sur votre planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . ".  " . number_format($soldierAtmp) . " soldats vous ont attaqué, tous ont été tué. Vous avez ainsi prit le contrôle des barges de l'attaquant.<br>Et vous remportez <span class='text-vert'>+" . number_format($warPointDef) . "</span> points de Guerre.");
-                                    $reportInv->setTitle("Rapport d'invasion : Défaite (attaque)");
-                                    $reportInv->setImageName("invade_lose_report.jpg");
-                                    $reportInv->setContent("'AH AH AH AH' le rire de " . $userDefender->getUserName() . " résonne à vos oreilles d'un curieuse façon. Votre sang bouillonne vous l'a vouliez cette planète. Qu'il rigole donc, vous reviendrez prendre " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . " et ferez effacer des livres d'histoires son ridicule nom. Vous avez tout de même tué " . number_format($soldierDtmp) . " soldats, " . number_format($tankDtmp) . " tanks et " . number_format($workerDtmp) . " travailleurs à l'ennemi. Tous vos soldats sont morts et vos barges sont resté sur la planète. Courage commandant.");
+                                    if ($userDefender->getZombie() == 1) {
+                                        $reportInv->setTitle("Rapport contre attaque : Défaite");
+                                        $reportInv->setImageName("zombie_lose_report.jpg");
+                                        $reportInv->setContent("Vous pensiez partir pour une promenade de santé mais la réalité vous rattrape vite... Vous avez envoyé tout vos soldats au casse-pipe.<br>Pire, vous avez attirer l'attention des zombies et fait monter la menace de 10 points ! Vous avez interêt a prendre vite " . $defenser->getName() . " en " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . " sinon votre Empire ne tiendra pas longtemps. Vous avez tué <span class='text-vert'>" . number_format(round($soldierDtmp + ($workerDtmp / 6) + ($tankDtmp * 300))) . "</span> zombies. Tous vos soldats sont morts et vos barges se sont égarés sur la planète.<br>N'abandonnez pas et sortez vos tripes !");
+                                        $fleet->getUser()->setZombieAtt($fleet->getUser()->getZombieAtt() + 10);
+                                    } else {
+                                        $reportDef->setTitle("Rapport d'invasion : Victoire (défense)");
+                                        $reportDef->setImageName("defend_win_report.jpg");
+                                        $reportDef->setContent("Bien joué ! Vos travailleurs et soldats ont repoussé l'invasion du joueur " . $defenser->getUser()->getUserName() . " sur votre planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . ".  <span class='text-vert'>" . number_format($soldierAtmp) . "</span> soldats vous ont attaqué, tous ont été tué. Vous avez ainsi prit le contrôle des barges de l'attaquant.<br>Et vous remportez <span class='text-vert'>+" . number_format($warPointDef) . "</span> points de Guerre.");
+                                        $reportInv->setTitle("Rapport d'invasion : Défaite (attaque)");
+                                        $reportInv->setImageName("invade_lose_report.jpg");
+                                        $reportInv->setContent("'AH AH AH AH' le rire de " . $userDefender->getUserName() . " résonne à vos oreilles d'un curieuse façon. Votre sang bouillonne vous l'a vouliez cette planète. Qu'il rigole donc, vous reviendrez prendre " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . " et ferez effacer des livres d'histoires son ridicule nom. Vous avez tout de même tué <span class='text-vert'>" . number_format($soldierDtmp) . "</span> soldats, <span class='text-vert'>" . number_format($tankDtmp) ."</span> tanks et <span class='text-vert'>" . number_format($workerDtmp) . "</span> travailleurs à l'ennemi. Tous vos soldats sont morts et vos barges sont resté sur la planète.<br>Courage commandant.");
+                                    }
                                 } else {
-                                    $soldierDtmp = $defenser->getSoldier();
+                                    $soldierDtmp = $defenser->getSoldier() != 0 ? $defenser->getSoldier() : 1;
                                     $workerDtmp = $defenser->getWorker();
                                     $tankDtmp = $defenser->getTank();
-                                    $warPointAtt = round($soldierDtmp + ($workerDtmp / 10));
-                                    $fleet->getUser()->getRank()->setWarPoint($fleet->getUser()->getRank()->getWarPoint() + $warPointAtt);
-                                    $soldierAtmp = $fleet->getSoldier();
-                                    $fleet->setSoldier(($aMilitary - $dMilitary) / $alea);
-                                    $soldierAtmp = $soldierAtmp - $fleet->getSoldier();
+                                    $warPointAtt = round(($soldierDtmp + ($workerDtmp / 10)) * 1);
+                                    if ($fleet->getUser()->getPoliticSoldierAtt() > 0) {
+                                        $aMilitary = $aMilitary / (1 + ($fleet->getUser()->getPoliticSoldierAtt() / 10));
+                                    }
+                                    $fleet->setSoldier($soldierAtmpTotal + round(($aMilitary - $dMilitary) / $alea));
+                                    $soldierAtmp = $soldierAtmpTotal + $soldierAtmp - $fleet->getSoldier();
                                     $defenser->setSoldier(0);
                                     $defenser->setTank(0);
                                     $defenser->setWorker(2000);
-                                    if ($fleet->getUser()->getColPlanets() <= ($fleet->getUser()->getTerraformation() + 1 + $fleet->getUser()->getPoliticInvade())) {
+                                    if($fleet->getUser()->getColPlanets() <= ($fleet->getUser()->getTerraformation() + 1 + $fleet->getUser()->getPoliticInvade()) && $userDefender->getZombie() == 0) {
+                                        $fleet->getUser()->getRank()->setWarPoint($fleet->getUser()->getRank()->getWarPoint() + $warPointAtt);
                                         $defenser->setUser($fleet->getUser());
                                         $em->flush();
+                                        $reportDef->setTitle("Rapport d'invasion : Défaite (défense)");
+                                        $reportDef->setImageName("defend_lose_report.jpg");
+                                        $reportDef->setContent("Mais QUI ? QUI !!! Vous as donné un commandant si médiocre " . $defenser->getUser()->getUserName() . " n'a pas eu a faire grand chose pour prendre votre planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . ".  " . number_format(round($soldierAtmp)) . " soldats ennemis sont tout de même éliminé. C'est toujours ça de gagner. Vos <span class='text-rouge'>-" . number_format($soldierDtmp) . "</span> soldats, <span class='text-rouge'>-" . number_format($tankDtmp) ."</span> tanks et <span class='text-rouge'>-" . number_format($workerDtmp) . "</span> travailleurs sont tous mort. Votre empire en a prit un coup, mais il vous reste des planètes, il est l'heure de la revanche !");
+                                        $reportInv->setTitle("Rapport d'invasion : Victoire (attaque)");
+                                        $reportInv->setImageName("invade_win_report.jpg");
+                                        $reportInv->setContent("Vous débarquez après que la planète ait été prise et vous installez sur le trône de " . $userDefender->getUserName() . ". Qu'il est bon d'entendre ses pleures lointains... La planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . " est désormais votre! Il est temps de remettre de l'ordre dans la galaxie. <span class='text-rouge'>-" . number_format(round($soldierAtmp)) . "</span> de vos soldats ont péri dans l'invasion. Mais les défenseurs ont aussi leurs pertes : <span class='text-vert'>" . number_format($soldierDtmp) . "</span> soldats, <span class='text-vert'>" . number_format($tankDtmp) ."</span> tanks et <span class='text-vert'>" . number_format($workerDtmp) . "</span> travailleurs ont péri. Cependant vous épargnez 2000 travailleurs dans votre bonté (surtout pour faire tourner la planète).<br>Et vous remportez <span class='text-vert'>+" . number_format($warPointAtt) . "</span> points de Guerre.");
                                     } else {
+                                        $warPointAtt = $warPointAtt * 10;
+                                        $fleet->getUser()->getRank()->setWarPoint($fleet->getUser()->getRank()->getWarPoint() + $warPointAtt);
                                         $hydra = $em->getRepository('App:User')->findOneBy(['zombie' => 1]);
+                                        $reportInv->setTitle("Rapport contre attaque : Victoire");
+                                        $reportInv->setImageName("invade_win_report.jpg");
+                                        $reportInv->setContent("Vos soldats débarquent sur la planète zombie et sorte l'artillerie lourde ! Les rues s'enlisent de mort mais l'entraînement prévaut sur la peur et vous purgez cette planète de cette peste macabre.<br> La planète " . $defenser->getName() . " en " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . " est désormais libre. Et votre indice d'attaque zombie est divisé par 10. Lors de l'assaut vous dénombrez <span class='text-rouge'>-" . number_format(round($soldierAtmp)) . "</span> pertes parmis vos soldats. Mais vous avez exterminé <span class='text-vert'>" . number_format(round($soldierDtmp + ($workerDtmp / 6) + ($tankDtmp * 300))) . "</span> zombies ! <br>Et vous remportez <span class='text-vert'>+" . number_format($warPointAtt) . "</span> points de Guerre.");
 
-                                        if ($defenser->getZombie() == 1) {
+                                        if ($userDefender->getZombie() == 1) {
                                             $image = [
                                                 'planet1.png', 'planet2.png', 'planet3.png', 'planet4.png', 'planet5.png', 'planet6.png',
                                                 'planet7.png', 'planet8.png', 'planet9.png', 'planet10.png', 'planet11.png', 'planet12.png',
@@ -1019,6 +1043,8 @@ class InstantController extends AbstractController
                                                 'planet31.png', 'planet32.png', 'planet33.png'
                                             ];
                                             $defenser->setUser(null);
+                                            $em->flush();
+                                            $fleet->getUser()->setZombieAtt(round($fleet->getUser()->getZombieAtt() / 10));
                                             $defenser->setName('Inhabitée');
                                             $defenser->setImageName($image[rand(0, 32)]);
                                         } else {
@@ -1036,32 +1062,28 @@ class InstantController extends AbstractController
                                             $em->flush();
                                         }
                                     }
-                                    if ($userDefender->getAllPlanets() == 0) {
+                                    if($userDefender->getColPlanets() == 0) {
                                         $userDefender->setGameOver($fleet->getUser()->getUserName());
                                         $userDefender->setGrade(null);
-                                        foreach ($userDefender->getFleets() as $tmpFleet) {
+                                        foreach($userDefender->getFleets() as $tmpFleet) {
                                             $tmpFleet->setUser($fleet->getUser());
                                             $tmpFleet->setFleetList(null);
                                         }
                                     }
-                                    $reportDef->setTitle("Rapport d'invasion : Défaite (défense)");
-                                    $reportDef->setImageName("defend_lose_report.jpg");
-                                    $reportDef->setContent("Mais QUI ? QUI !!! Vous as donné un commandant si médiocre " . $fleet->getUser()->getUserName() . " n'a pas eu a faire grand chose pour prendre votre planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . ".  " . round($soldierAtmp) . " soldats ennemis sont tout de même éliminé. C'est toujours ça de gagner. Vos " . number_format($soldierDtmp) . " soldats, " . number_format($tankDtmp) . " tanks et " . number_format($workerDtmp) . " travailleurs sont tous mort. Votre empire en a prit un coup, mais il vous reste des planètes, il est l'heure de la revanche !");
-                                    $reportInv->setTitle("Rapport d'invasion : Victoire (attaque)");
-                                    $reportInv->setImageName("invade_win_report.jpg");
-                                    $reportInv->setContent("Vous débarquez après que la planète ait été prise et vous installez sur le trône de " . $userDefender->getUserName() . ". Qu'il est bon d'entendre ses pleures lointain... La planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . " est désormais votre! Il est temps de remettre de l'ordre dans la galaxie. " . number_format(round($soldierAtmp)) . " de vos soldats ont péri dans l'invasion. Mais les défenseurs ont aussi leurs pertes : " . number_format($soldierDtmp) . " soldats et " . number_format($workerDtmp) . " travailleurs ont péri. Cependant vous épargnez 2000 travailleurs dans votre bonté (surtout pour faire tourner la planète).<br>Et vous remportez <span class='text-vert'>+" . number_format($warPointAtt) . "</span> points de Guerre.");
                                     $quest = $fleet->getUser()->checkQuests('invade');
-                                    if ($quest) {
+                                    if($quest) {
                                         $fleet->getUser()->getRank()->setWarPoint($fleet->getUser()->getRank()->getWarPoint() + $quest->getGain());
                                         $fleet->getUser()->removeQuest($quest);
                                     }
                                 }
-                                if ($fleet->getNbrShips() == 0) {
+                                if($fleet->getNbrShips() == 0) {
                                     $em->remove($fleet);
                                 }
-                                $em->persist($reportInv);
-                                $em->persist($reportDef);
                                 $server->setNbrInvasion($server->getNbrInvasion() + 1);
+                                $em->persist($reportInv);
+                                if ($userDefender->getZombie() == 0) {
+                                    $em->persist($reportDef);
+                                }
                             }
                         }
                     } else {
@@ -1081,22 +1103,31 @@ class InstantController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $iaPlayer = new User();
-        $now = new DateTime();
-        $iaPlayer->setUsername('Marchands');
-        $iaPlayer->setEmail('support+5@areauniverse.eu');
-        $iaPlayer->setCreatedAt($now);
-        $iaPlayer->setPassword(password_hash('ViolGratuit2019', PASSWORD_BCRYPT));
-        $iaPlayer->setBitcoin(100);
-        $iaPlayer->setImageName('merchant.png');
-        $iaPlayer->setMerchant(1);
-        $rank = new Rank();
-        $em->persist($rank);
-        $iaPlayer->setRank($rank);
-        $em->persist($iaPlayer);
+        $zombie = $em->getRepository('App:User')->findOneBy(['zombie' => 1]);
+        $newZombies = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->leftJoin('p.user', 'u')
+            ->where('p.user is null and p.empty = false and p.cdr = false')
+            ->getQuery()
+            ->getResult();
 
-        $iaSalon = $em->getRepository('App:Salon')->find(['id' => 1]);
-        $iaSalon->addUser($iaPlayer);
+        foreach ($newZombies as $newZombie) {
+            if ((($newZombie->getSector()->getPosition() >= 1 && $newZombie->getSector()->getPosition() <= 9) || ($newZombie->getSector()->getPosition() >= 92 && $newZombie->getSector()->getPosition() <= 99) || ($newZombie->getSector()->getPosition() % 10 == 0 || $newZombie->getSector()->getPosition() % 10 == 1)) && $newZombie->getPosition() == 13) {
+
+                $newZombie->setUser($zombie);
+                $newZombie->setWorker(round(25000 * rand(1,4)));
+                if ($newZombie->getSoldierMax() >= 2500) {
+                    $newZombie->setSoldier($newZombie->getSoldierMax());
+                } else {
+                    $newZombie->setCaserne(1);
+                    $newZombie->setSoldier(2500);
+                    $newZombie->setSoldierMax(2500);
+                }
+                $newZombie->setName('Base Zombie');
+                $newZombie->setImageName('hydra_planet.png');
+            }
+        }
+
         $em->flush();
         exit;
     }

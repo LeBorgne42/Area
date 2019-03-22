@@ -289,12 +289,12 @@ class UserEvent implements EventSubscriberInterface
                                 $niobium = $planet->getNiobium() + $nbProd;
                                 $water = $planet->getWater() + $wtProd;
                             }
-                            if ($planet->getNiobiumMax() > ($planet->getNiobium() + $nbProd)) {
+                            if ($planet->getNiobiumMax() > ($planet->getNiobium() + $niobium)) {
                                 $planet->setNiobium($niobium);
                             } else {
                                 $planet->setNiobium($planet->getNiobiumMax());
                             }
-                            if ($planet->getWaterMax() > ($planet->getWater() + $wtProd)) {
+                            if ($planet->getWaterMax() > ($planet->getWater() + $water)) {
                                 $planet->setWater($water);
                             } else {
                                 $planet->setWater($planet->getWaterMax());
