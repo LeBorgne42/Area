@@ -226,16 +226,18 @@ class InstantController extends AbstractController
                     $aMilitary = $dTanks - abs($aMilitary);
                     if($aMilitary <= 0) {
                         $planetAtt->setTank(0);
-                        $planetAtt->setWorker($planetAtt->getWorker() + $aMilitary);
+                        $planetAtt->setWorker($planetAtt->getWorker() + ($aMilitary / (1 + ($zUser->getPoliticWorkerDef() / 5))));
                         $workerDtmp = $workerDtmp - $planetAtt->getWorker();
                         $reportDef->setContent("«Au secours !» des civils crient et cours dans tout les sens sur " . $planetAtt->getName() . " en " . $planetAtt->getSector()->getgalaxy()->getPosition() . ":" . $planetAtt->getSector()->getPosition() . ":" . $planetAtt->getPosition() . ".<br>Vous n'aviez pas prévu suffisament de soldats et tanks pour faire face a la menace et des zombies envahissent les villes. Heureusement pour vous les travailleurs se réunissent et parviennent exterminer les zombies mais ce n'est pas grâce a vous.<br>" . number_format($soldierAtmp) . " zombies sont tués. <span class='text-rouge'>" . number_format($soldierDtmp) . "</span> de vos soldats succombent aux mâchoires de ces infamies et <span class='text-rouge'>" . number_format($tankDtmp) . "</span> tanks sont mit hors de service. <span class='text-rouge'>" . number_format($workerDtmp) ."</span> de vos travailleurs sont retrouvés morts.<br>Vous remportez ne remportez aucun points de Guerre pour avoir sacrifié vos civils.");
                     } else {
-                        $planetAtt->setTank(round($aMilitary / 300));
+                        $diviser = (1 + ($zUser->getPoliticTankDef() / 10)) * 300;
+                        $planetAtt->setTank(round($aMilitary / $diviser));
                         $tankDtmp = $tankDtmp - $planetAtt->getTank();
                         $reportDef->setContent("Vos tanks ont suffit a arrêter les zombies pour cette fois-ci sur la planète " . $planetAtt->getName() . " en " . $planetAtt->getSector()->getgalaxy()->getPosition() . ":" . $planetAtt->getSector()->getPosition() . ":" . $planetAtt->getPosition() . ".<br>Mais pensez a rester sur vos gardes. Votre armée extermine " . number_format($soldierAtmp) . " zombies. <span class='text-rouge'>" . number_format($soldierDtmp) . "</span> de vos soldats succombent aux mâchoires de ces infamies et <span class='text-rouge'>" . number_format($tankDtmp) . "</span> tanks sont mit hors de service.<br>Vous remportez <span class='text-vert'>+" . number_format($warPointDef) . "</span> points de Guerre.");
                     }
                 } else {
-                    $planetAtt->setSoldier(round($aMilitary / 6));
+                    $diviser = (1 + ($zUser->getPoliticSoldierAtt() / 10)) * (6 * $zUser->getBarbedAdv());
+                    $planetAtt->setSoldier(round($aMilitary / $diviser));
                     $soldierDtmp = $soldierDtmp - $planetAtt->getSoldier();
                     $reportDef->setContent("Une attaque de zombie est déclarée sur " . $planetAtt->getName() . " en " . $planetAtt->getSector()->getgalaxy()->getPosition() . ":" . $planetAtt->getSector()->getPosition() . ":" . $planetAtt->getPosition() . ".<br>Vous étiez préparé a cette éventualité et vos soldats exterminent " . number_format($soldierAtmp) . " zombies. <span class='text-rouge'>" . number_format($soldierDtmp) . "</span> de vos soldats succombent aux mâchoires de ces infamies.<br>Vous remportez <span class='text-vert'>+" . number_format($warPointDef) . "</span> points de Guerre.");
                 }
@@ -965,20 +967,22 @@ class InstantController extends AbstractController
                                         $aMilitary = $dTanks - abs($aMilitary);
                                         if ($aMilitary <= 0) {
                                             $defenser->setTank(0);
-                                            $defenser->setWorker($defenser->getWorker() + $aMilitary);
+                                            $defenser->setWorker($defenser->getWorker() + ($aMilitary / (1 + ($userDefender->getPoliticWorkerDef() / 5))));
                                             $tankDtmp = $tankDtmp - $defenser->getTank();
                                             $soldierDtmp = $soldierDtmp - $defenser->getSoldier();
                                             $workerDtmp = $workerDtmp - $defenser->getWorker();
                                         } else {
-                                            $defenser->setTank(round($aMilitary / 300));
+                                            $diviser = (1 + ($userDefender->getPoliticTankDef() / 10)) * 300;
+                                            $defenser->setTank(round($aMilitary / $diviser));
                                             $tankDtmp = $tankDtmp - $defenser->getTank();
                                             $soldierDtmp = $soldierDtmp - $defenser->getSoldier();
                                             $workerDtmp = $workerDtmp - $defenser->getWorker();
                                         }
                                     } else {
-                                        $defenser->setSoldier(round($aMilitary / $alea));
+                                        $diviser = (1 + ($userDefender->getPoliticSoldierAtt() / 10)) * ($alea * $userDefender->getBarbedAdv());
+                                        $defenser->setSoldier(round($aMilitary / $diviser));
                                         $tankDtmp = $defenser->getTank();
-                                        $soldierDtmp = round($aMilitary / $alea);
+                                        $soldierDtmp = round($aMilitary / $diviser);
                                         $workerDtmp = $defenser->getWorker();
                                     }
                                     $reportDef->setTitle("Rapport d'invasion : Victoire (défense)");

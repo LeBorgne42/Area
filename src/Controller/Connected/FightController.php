@@ -732,20 +732,22 @@ class FightController extends AbstractController
                     $aMilitary = $dTanks - abs($aMilitary);
                     if($aMilitary <= 0) {
                         $defenser->setTank(0);
-                        $defenser->setWorker($defenser->getWorker() + $aMilitary);
+                        $defenser->setWorker($defenser->getWorker() + ($aMilitary / (1 + ($userDefender->getPoliticWorkerDef() / 5))));
                         $tankDtmp = $tankDtmp - $defenser->getTank();
                         $soldierDtmp = $soldierDtmp - $defenser->getSoldier();
                         $workerDtmp = $workerDtmp - $defenser->getWorker();
                     } else {
-                        $defenser->setTank(round($aMilitary / 300));
+                        $diviser = (1 + ($userDefender->getPoliticTankDef() / 10)) * 300;
+                        $defenser->setTank(round($aMilitary / $diviser));
                         $tankDtmp = $tankDtmp - $defenser->getTank();
                         $soldierDtmp = $soldierDtmp - $defenser->getSoldier();
                         $workerDtmp = $workerDtmp - $defenser->getWorker();
                     }
                 } else {
-                    $defenser->setSoldier(round($aMilitary / $alea));
+                    $diviser = (1 + ($userDefender->getPoliticSoldierAtt() / 10)) * ($alea * $userDefender->getBarbedAdv());
+                    $defenser->setSoldier(round($aMilitary / $diviser));
                     $tankDtmp = $defenser->getTank();
-                    $soldierDtmp = round($aMilitary / $alea);
+                    $soldierDtmp = round($aMilitary / $diviser);
                     $workerDtmp = $defenser->getWorker();
                 }
                 $reportDef->setTitle("Rapport d'invasion : Victoire (défense)");
