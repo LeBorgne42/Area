@@ -56,6 +56,18 @@ class Report
     protected $sendAt;
 
     /**
+     * @ORM\Column(name="type",type="string", length=25)
+     */
+    protected $type;
+
+    public function __construct()
+    {
+        $this->newReport = 1;
+        $this->shareKey = null;
+        $this->type = 'defaut';
+    }
+
+    /**
      * @Assert\File(
      *     maxSize="400k",
      *     mimeTypes={"image/png", "image/jpeg", "image/bmp"}
@@ -127,11 +139,6 @@ class Report
     public function getImageName(): ?string
     {
         return $this->imageName;
-    }
-
-    public function __construct()
-    {
-        $this->newReport = true;
     }
 
     public function getId()
@@ -217,6 +224,22 @@ class Report
     public function setSendAt($sendAt): void
     {
         $this->sendAt = $sendAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param mixed $type
+     */
+    public function setType($type): void
+    {
+        $this->type = $type;
     }
 
     /**

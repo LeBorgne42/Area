@@ -992,6 +992,7 @@ class FleetController  extends AbstractController
         if($planetTake->getMerchant() == true) {
             $newWarPointS = round(($fleetGive->getNiobium() / 6) / 1000);
             $reportSell = new Report();
+            $reportSell->setType('economic');
             $reportSell->setSendAt($now);
             $reportSell->setUser($user);
             $reportSell->setTitle("Vente aux marchands");
@@ -1064,6 +1065,7 @@ class FleetController  extends AbstractController
         if($planetTake->getMerchant() == true) {
             $newWarPointS = round(($fleetGive->getWater() / 3) / 1000);
             $reportSell = new Report();
+            $reportSell->setType('economic');
             $reportSell->setSendAt($now);
             $reportSell->setUser($user);
             $reportSell->setTitle("Vente aux marchands");
@@ -1136,6 +1138,7 @@ class FleetController  extends AbstractController
         if($planetTake->getMerchant() == true) {
             $newWarPointS = round(($fleetGive->getSoldier() * 10) / 1000);
             $reportSell = new Report();
+            $reportSell->setType('economic');
             $reportSell->setSendAt($now);
             $reportSell->setUser($user);
             $reportSell->setTitle("Vente aux marchands");
@@ -1208,6 +1211,7 @@ class FleetController  extends AbstractController
         if($planetTake->getMerchant() == true) {
             $newWarPointS = round(($fleetGive->getWorker() * 50) / 1000);
             $reportSell = new Report();
+            $reportSell->setType('economic');
             $reportSell->setSendAt($now);
             $reportSell->setUser($user);
             $reportSell->setTitle("Vente aux marchands");
@@ -1277,9 +1281,10 @@ class FleetController  extends AbstractController
         } else {
             return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
         }
-        if($planetTake->getMerchant() == true) {$reportSell = new Report();
+        if($planetTake->getMerchant() == true) {
             $newWarPointS = round(($fleetGive->getScientist() * 100) / 1000);
             $reportSell = new Report();
+            $reportSell->setType('economic');
             $reportSell->setSendAt($now);
             $reportSell->setUser($user);
             $reportSell->setTitle("Vente aux marchands");
@@ -1351,6 +1356,7 @@ class FleetController  extends AbstractController
         }
         if($planetTake->getMerchant() == true) {
             $reportSell = new Report();
+            $reportSell->setType('economic');
             $reportSell->setSendAt($now);
             $reportSell->setUser($user);
             $reportSell->setTitle("Vente aux marchands");

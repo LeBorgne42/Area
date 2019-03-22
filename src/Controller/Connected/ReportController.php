@@ -18,14 +18,15 @@ class ReportController extends AbstractController
 {
     /**
      * @Route("/rapport/{idp}", name="report", requirements={"idp"="\d+"})
+     * @Route("/rapport/{idp}/{id}", name="report_id", requirements={"idp"="\d+", "id"="\w+"})
      */
-    public function reportAction($idp)
+    public function reportAction($idp, $id = 'defaut')
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
-        $now->sub(new DateInterval('PT' . 604800 . 'S'));
+        $now->sub(new DateInterval('PT' . 2592000 . 'S'));
 
         $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
 
@@ -44,13 +45,24 @@ class ReportController extends AbstractController
         }
         $em->flush();
 
-        $reports = $em->getRepository('App:Report')
-            ->createQueryBuilder('r')
-            ->where('r.user = :user')
-            ->setParameters(['user' => $user])
-            ->orderBy('r.sendAt', 'DESC')
-            ->getQuery()
-            ->getResult();
+        if ($id == 'defaut') {
+            $reports = $em->getRepository('App:Report')
+                ->createQueryBuilder('r')
+                ->where('r.user = :user')
+                ->setParameters(['user' => $user])
+                ->orderBy('r.sendAt', 'DESC')
+                ->getQuery()
+                ->getResult();
+        } else {
+            $reports = $em->getRepository('App:Report')
+                ->createQueryBuilder('r')
+                ->where('r.user = :user')
+                ->andWhere('r.type = :type')
+                ->setParameters(['user' => $user, 'type' => $id])
+                ->orderBy('r.sendAt', 'DESC')
+                ->getQuery()
+                ->getResult();
+        }
 
         if(($user->getTutorial() == 1)) {
             $user->setTutorial(2);
@@ -65,6 +77,7 @@ class ReportController extends AbstractController
         return $this->render('connected/report.html.twig', [
             'usePlanet' => $usePlanet,
             'reports' => $reports,
+            'reportPage' => $id
         ]);
     }
 

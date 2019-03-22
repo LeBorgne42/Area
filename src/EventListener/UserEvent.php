@@ -91,6 +91,7 @@ class UserEvent implements EventSubscriberInterface
                         $user->setBitcoin($user->getBitcoin() + $bonus);
                         $user->setViewReport(false);
                         $reportDaily = new Report();
+                        $reportDaily->setType('economic');
                         $reportDaily->setSendAt($now);
                         $reportDaily->setUser($user);
                         $reportDaily->setTitle("Bonus de connexion");

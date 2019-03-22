@@ -23,6 +23,26 @@
         {% endif %}
         <div class="front-block-game report">
             <div class="float-right mb-3"><a class="btn-read-all" href="{{ path('report_all_view', {'idp': usePlanet.getId()}) }}">{{ 'AllNewView'|trans }}</a></div>
+            <ul class="nav nav-tabs mt-1" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a{% if reportPage == 'defaut' %} class="py-2 nav-link active"{% endif %} href="{{ path('report_id', {'idp': usePlanet.getId(), 'id': 'defaut'}) }}" >{{ 'report.defaut'|trans }}</a>
+                </li>
+                <li class="nav-item">
+                    <a{% if reportPage == 'zombie' %} class="py-2 nav-link active"{% endif %} href="{{ path('report_id', {'idp': usePlanet.getId(), 'id': 'zombie'}) }}" >{{ 'report.zombie'|trans }}</a>
+                </li>
+                <li class="nav-item">
+                    <a{% if reportPage == 'fight' %} class="py-2 nav-link active"{% endif %} href="{{ path('report_id', {'idp': usePlanet.getId(), 'id': 'fight'}) }}" >{{ 'report.fight'|trans }}</a>
+                </li>
+                <li class="nav-item">
+                    <a{% if reportPage == 'invade' %} class="py-2 nav-link active"{% endif %} href="{{ path('report_id', {'idp': usePlanet.getId(), 'id': 'invade'}) }}" >{{ 'report.invade'|trans }}</a>
+                </li>
+                <li class="nav-item">
+                    <a{% if reportPage == 'economic' %} class="py-2 nav-link active"{% endif %} href="{{ path('report_id', {'idp': usePlanet.getId(), 'id': 'economic'}) }}" >{{ 'report.economic'|trans }}</a>
+                </li>
+                <li class="nav-item">
+                    <a{% if reportPage == 'move' %} class="py-2 nav-link active"{% endif %} href="{{ path('report_id', {'idp': usePlanet.getId(), 'id': 'move'}) }}" >{{ 'report.move'|trans }}</a>
+                </li>
+            </ul>
             {% for report in reports %}
                 <table class="table table-striped table-bordered table-dark">
                     <tbody>

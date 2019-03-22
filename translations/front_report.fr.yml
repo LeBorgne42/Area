@@ -8,3 +8,9 @@ newReport: 'Marquer lu'
 share: 'Générer lien de partage'
 of: 'de'
 share.title: 'Rapport'
+report.defaut: Tous
+report.zombie: Zombie
+report.fight: Combats
+report.invade: Invasions
+report.economic: Economique
+report.move: Flottes

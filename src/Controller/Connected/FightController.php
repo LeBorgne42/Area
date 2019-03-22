@@ -257,6 +257,7 @@ class FightController extends AbstractController
         if($attAll > 0 && $defAll <= 0) {
             foreach($blockDef as $removeOne) {
                 $reportLoseUtilA = new Report();
+                $reportLoseUtilA->setType('fight');
                 $reportLoseUtilA->setSendAt($now);
                 $reportLoseUtilA->setImageName("f_lose_report.jpg");
                 $reportLoseUtilA->setContent("Votre flotte utilitaire " . $removeOne->getName() . " ne dispose pas des technologies nécessaires à l'identification des vaisseaux ennemis en " . $removeOne->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $removeOne->getPlanet()->getSector()->getPosition() . ":" . $removeOne->getPlanet()->getPosition() . " .");
@@ -268,6 +269,7 @@ class FightController extends AbstractController
             }
             foreach($blockAtt as $reportWin) {
                 $reportWinUtilA = new Report();
+                $reportWinUtilA->setType('fight');
                 $reportWinUtilA->setSendAt($now);
                 $reportWinUtilA->setImageName("f_win_report.jpg");
                 $reportWinUtilA->setContent("Vous venez de détruire une flotte utilitaire en " . $reportWin->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $reportWin->getPlanet()->getSector()->getPosition() . ":" . $reportWin->getPlanet()->getPosition() . " .");
@@ -282,6 +284,7 @@ class FightController extends AbstractController
         if($defAll > 0 && $attAll <= 0) {
             foreach($blockAtt as $removeTwo) {
                 $reportLoseUtilB = new Report();
+                $reportLoseUtilB->setType('fight');
                 $reportLoseUtilB->setSendAt($now);
                 $reportLoseUtilB->setImageName("f_lose_report.jpg");
                 $reportLoseUtilB->setContent("Votre flotte utilitaire " . $removeTwo->getName() . " ne dispose pas des technologies nécessaires à l'identification des vaisseaux ennemis " . $removeTwo->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $removeTwo->getPlanet()->getSector()->getPosition() . ":" . $removeTwo->getPlanet()->getPosition() . " .");
@@ -293,6 +296,7 @@ class FightController extends AbstractController
             }
             foreach($blockDef as $reportWin) {
                 $reportWinUtilB = new Report();
+                $reportWinUtilB->setType('fight');
                 $reportWinUtilB->setSendAt($now);
                 $reportWinUtilB->setImageName("f_win_report.jpg");
                 $reportWinUtilB->setContent("Vous venez de détruire une flotte utilitaire en " . $reportWin->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $reportWin->getPlanet()->getSector()->getPosition() . ":" . $reportWin->getPlanet()->getPosition() . " .");
@@ -363,6 +367,7 @@ class FightController extends AbstractController
             }
             foreach($blockDef as $defenderWin) {
                 $reportWinA = new Report();
+                $reportWinA->setType('fight');
                 $reportWinA->setSendAt($now);
                 $reportWinA->setContent("<table class=\"table table-striped table-bordered table-dark\"><tbody><tr><th class=\"tab-cells-name p-1 ml-2\">Groupe de combat 1</th><th class=\"tab-cells-name p-1 ml-2\">" . $countSDef . " tir(s) pour percer les boucliers</th></tr>");
                 $reportWinA->setTitle("Rapport de combat : Victoire");
@@ -397,6 +402,7 @@ class FightController extends AbstractController
             }
             foreach($blockAtt as $attackerLose) {
                 $reportLoseA = new Report();
+                $reportLoseA->setType('fight');
                 $reportLoseA->setSendAt($now);
                 $reportLoseA->setContent("<table class=\"table table-striped table-bordered table-dark\"><tbody><tr><th class=\"tab-cells-name p-1 ml-2\">Groupe de combat 1</th><th class=\"tab-cells-name p-1 ml-2\">" . $countSAtt . " tir(s) pour percer les boucliers</th></tr>");
                 $reportLoseA->setTitle("Rapport de combat : Défaite");
@@ -512,6 +518,7 @@ class FightController extends AbstractController
             }
             foreach($blockAtt as $attackerWin) {
                 $reportWinB = new Report();
+                $reportWinB->setType('fight');
                 $reportWinB->setSendAt($now);
                 $reportWinB->setContent("<table class=\"table table-striped table-bordered table-dark\"><tbody><tr><th class=\"tab-cells-name p-1 ml-2\">Groupe de combat 1</th><th class=\"tab-cells-name p-1 ml-2\">" . $countSDef . " tir(s) pour percer les boucliers</th></tr>");
                 $reportWinB->setTitle("Rapport de combat : Victoire");
@@ -546,6 +553,7 @@ class FightController extends AbstractController
             }
             foreach($blockDef as $defenderLose) {
                 $reportLoseB = new Report();
+                $reportLoseB->setType('fight');
                 $reportLoseB->setSendAt($now);
                 $reportLoseB->setContent("<table class=\"table table-striped table-bordered table-dark\"><tbody><tr><th class=\"tab-cells-name p-1 ml-2\">Groupe de combat 1</th><th class=\"tab-cells-name p-1 ml-2\">" . $countSAtt . " tir(s) pour percer les boucliers</th></tr>");
                 $reportLoseB->setTitle("Rapport de combat : Défaite");
@@ -691,12 +699,18 @@ class FightController extends AbstractController
         $alea = rand(4, 8);
 
         $reportInv = new Report();
+        if ($userDefender->getZombie() == 0) {
+            $reportInv->setType('invade');
+        } else {
+            $reportInv->setType('zombie');
+        }
         $reportInv->setSendAt($now);
         $reportInv->setUser($user);
         $user->setViewReport(false);
 
         if ($userDefender->getZombie() == 0) {
             $reportDef = new Report();
+            $reportDef->setType('invade');
             $reportDef->setSendAt($now);
             $reportDef->setUser($userDefender);
         }
@@ -885,6 +899,7 @@ class FightController extends AbstractController
                 $em->remove($colonize);
             }
             $reportColo = new Report();
+            $reportColo->setType('move');
             $reportColo->setSendAt($now);
             $reportColo->setUser($user);
             $reportColo->setTitle("Colonisation de planète");

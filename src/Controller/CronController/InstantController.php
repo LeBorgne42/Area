@@ -192,6 +192,7 @@ class InstantController extends AbstractController
                 ->getOneOrNullResult();
 
             $reportDef = new Report();
+            $reportDef->setType('invade');
             $reportDef->setSendAt($now);
             $reportDef->setUser($zUser);
 
@@ -412,6 +413,7 @@ class InstantController extends AbstractController
                     $fleetCdr->setRecycleAt(null);
                     if ($fleetCdr->getCargoPlace() > ($fleetCdr->getCargoFull() + ($recycle * 2))) {
                         $reportRec = new Report();
+                        $reportRec->setType('move');
                         $reportRec->setTitle("Votre flotte " . $fleetCdr->getName() . " a arrêté de recycler!");
                         $reportRec->setImageName("recycle_report.jpg");
                         $reportRec->setSendAt($now);
@@ -594,6 +596,7 @@ class InstantController extends AbstractController
 
                     $userFleet = $fleet->getUser();
                     $report = new Report();
+                    $report->setType('move');
                     $report->setTitle("Votre flotte " . $fleet->getName() . " est arrivée");
                     $report->setImageName("travel_report.jpg");
                     $report->setSendAt($now);
@@ -742,6 +745,7 @@ class InstantController extends AbstractController
                         if ($fleet->getFlightType() == '2') {
                             if ($newPlanet->getMerchant() == true) {
                                 $reportSell = new Report();
+                                $reportSell->setType('economic');
                                 $reportSell->setSendAt($nowReport);
                                 $reportSell->setUser($user);
                                 $reportSell->setTitle("Vente aux marchands");
@@ -774,6 +778,7 @@ class InstantController extends AbstractController
                             } else {
                                 if ($user != $newPlanet->getUser() && $newPlanet->getUser()) {
                                     $reportSell = new Report();
+                                    $reportSell->setType('economic');
                                     $reportSell->setSendAt($nowReport);
                                     $reportSell->setUser($newPlanet->getUser());
                                     $reportSell->setTitle("Dépôt de ressources");
@@ -892,6 +897,7 @@ class InstantController extends AbstractController
                                     $em->remove($fleet);
                                 }
                                 $reportColo = new Report();
+                                $reportColo->setType('move');
                                 $reportColo->setSendAt($nowReport);
                                 $reportColo->setUser($user);
                                 $reportColo->setTitle("Colonisation de planète");
@@ -926,13 +932,22 @@ class InstantController extends AbstractController
                             $alea = rand(4, 8);
 
                             $reportInv = new Report();
+                            if ($userDefender->getZombie() == 0) {
+                                $reportInv->setType('invade');
+                            } else {
+                                $reportInv->setType('zombie');
+                            }
                             $reportInv->setSendAt($nowReport);
                             $reportInv->setUser($fleet->getUser());
                             $fleet->getUser()->setViewReport(false);
 
-                            $reportDef = new Report();
-                            $reportDef->setSendAt($nowReport);
-                            $reportDef->setUser($userDefender);
+
+                            if ($userDefender->getZombie() == 0) {
+                                $reportDef = new Report();
+                                $reportDef->setType('invade');
+                                $reportDef->setSendAt($nowReport);
+                                $reportDef->setUser($userDefender);
+                            }
                             $userDefender->setViewReport(false);
                             $dSigle = null;
                             if ($userDefender->getAlly()) {

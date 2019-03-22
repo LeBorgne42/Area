@@ -38,7 +38,6 @@ class Message
 
     /**
      * @ORM\Column(name="title",type="string", length=20)
-     * @Assert\NotBlank(message = "required")
      */
     protected $title;
 
@@ -72,8 +71,9 @@ class Message
     {
         $this->sender = null;
         $this->idSender = 0;
-        $this->newMessage = true;
+        $this->newMessage = 1;
         $this->bitcoin = 0;
+        $this->title = 'Bonjour';
     }
 
     public function getId()

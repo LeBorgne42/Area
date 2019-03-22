@@ -46,6 +46,7 @@ class DailyController extends AbstractController
             $questTwo = $em->getRepository('App:Quest')->findOneByName($user->getWhichQuest()[$second]);
             $questTree = $em->getRepository('App:Quest')->findOneByName($user->getWhichQuest()[$third]);
             $report = new Report();
+            $report->setType('economic');
             $report->setTitle("Rapport de l'empire");
             $report->setImageName("daily_report.jpg");
             $report->setSendAt($now);

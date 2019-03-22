@@ -65,12 +65,13 @@ class SpatialController extends AbstractController
                 $fleet->setName('Horde');
                 $em->persist($fleet);
                 $reportDef = new Report();
+                $reportDef->setType('invade');
                 $reportDef->setSendAt($now);
                 $reportDef->setUser($user);
                 $reportDef->setTitle("Rapport d'invasion : Victoire (défense)");
                 $reportDef->setImageName("defend_win_report.jpg");
-                $reportDef->setContent("Bien joué ! Vos travailleurs et soldats ont repoussé l'invasion des " . $iaPlayer->getUserName() . " sur votre planète " . $usePlanet->getName() . " - " . $usePlanet->getSector()->getgalaxy()->getPosition() . ":" . $usePlanet->getSector()->getPosition() . ":" . $usePlanet->getPosition() . ". 50 zombies vous ont attaqué, tous ont été tué. Vous remportez 100 points de Guerre et 10.000 Bitcoins. Recrutez de nouveau soldats !");
-                $usePlanet->setSoldier($usePlanet->getSoldier() - 100);
+                $reportDef->setContent("Bien joué ! Vos travailleurs et soldats ont repoussé l'invasion des " . $iaPlayer->getUserName() . " sur votre planète " . $usePlanet->getName() . " - " . $usePlanet->getSector()->getgalaxy()->getPosition() . ":" . $usePlanet->getSector()->getPosition() . ":" . $usePlanet->getPosition() . ". <span class='text-rouge'>100</span> zombies vous ont attaqué, tous ont été tué. Vous remportez <span class='text-vert'>+100</span> points de Guerre et <span class='text-vert'>+10.000 bitcoins</span>. Recrutez de nouveau soldats !");
+                $usePlanet->setSoldier($usePlanet->getSoldier() - 50);
                 $user->setBitcoin($user->getBitcoin() + 10000);
                 $em->persist($reportDef);
                 $user->setViewReport(false);

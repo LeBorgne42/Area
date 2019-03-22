@@ -191,6 +191,7 @@ class MarketController extends AbstractController
         }
         if ($gain > 0) {
             $reportSell = new Report();
+            $reportSell->setType('economic');
             $reportSell->setSendAt($now);
             $reportSell->setUser($user);
             $reportSell->setTitle("Vente aux marchands");
