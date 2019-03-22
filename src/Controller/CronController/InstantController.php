@@ -33,12 +33,12 @@ class InstantController extends AbstractController
             ->getResult();
 
         if($asteroides) {
+            $nowAste->add(new DateInterval('PT' . 57600 . 'S'));
             foreach ($asteroides as $asteroide) {
 
-                $nowAste->add(new DateInterval('PT' . 57600 . 'S'));
                 $asteroide->setRecycleAt($nowAste);
-                $asteroide->setNbCdr($asteroide->getNbCdr() + rand(1500000, 8000000));
-                $asteroide->setWtCdr($asteroide->getWtCdr() + rand(1200000, 7800000));
+                $asteroide->setNbCdr($asteroide->getNbCdr() + rand(1500000, 3000000));
+                $asteroide->setWtCdr($asteroide->getWtCdr() + rand(1200000, 2800000));
 
 
                 if(rand(1, 50) == 50) {
@@ -67,9 +67,9 @@ class InstantController extends AbstractController
                         $iaPlayer = $em->getRepository('App:User')->findOneBy(['zombie' => 1]);
                         $fleet = new Fleet();
                         $fleet->setHunterWar(rand(50, 100000));
-                        $fleet->setCorvetWar(rand(50, 20000));
+                        $fleet->setCorvetWar(rand(50, 2500));
                         $fleet->setFregatePlasma(rand(20, 1000));
-                        $fleet->setDestroyer(rand(1, 5000));
+                        $fleet->setDestroyer(rand(1, 200));
                         $fleet->setUser($iaPlayer);
                         $fleet->setPlanet($newAsteroides);
                         $fleet->setAttack(1);
@@ -78,6 +78,7 @@ class InstantController extends AbstractController
                     }
                 }
             }
+            $em->flush();
         }
 
         $now = new DateTime();
