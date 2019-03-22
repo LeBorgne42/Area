@@ -85,7 +85,7 @@ ally.attrRetr: Offre/Demande
 ally.listNbr: Valeurs
 ally.send: Signer
 ally.takePlanet: 'Nombre de planètes'
-ally.takeTaxe: 'Bitcoin reversé par jour'
+ally.takeTaxe: 'Bitcoins reversé par jour'
 ally.takePdg: 'Pourcentage des pdg'
 ally.peacePropal: 'Les propositions ennemies de paix'
 ally.peaceOffer: 'Vos propositions de paix'
@@ -102,7 +102,7 @@ ally.pdgTotal: 'Fond de points de Guerre : '
 ally.type: Type
 ally.pdgDonate: 'War Points'
 ally.bitcoinDonate: Bitcoins
-ally.formGiveBitcoin: 'Bitcoin exchanges'
+ally.formGiveBitcoin: 'Bitcoins exchanges'
 ally.formGivePdg: 'Transaction de pdg'
 ally.ranked: 'List of Created Alliances'
 ally.proposals: 'Recruit proposal'

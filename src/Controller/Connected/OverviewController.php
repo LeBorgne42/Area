@@ -120,6 +120,13 @@ class OverviewController extends AbstractController
                 $em->flush();
             }
             if($user->getRank()) {
+
+                foreach ($user->getFleetLists() as $list) {
+                    foreach ($list->getFleets() as $fleetL) {
+                        $fleetL->setFleetList(null);
+                    }
+                    $em->remove($list);
+                }
                 $user->setBitcoin(25000);
                 $user->setSearch(null);
                 $user->setRank(null);
@@ -128,21 +135,21 @@ class OverviewController extends AbstractController
                 $user->setAllyBan(null);
                 $user->setScientistProduction(1);
                 $user->setSearchAt(null);
+                $user->setDemography(0);
+                $user->setUtility(0);
+                $user->setArmement(0);
+                $user->setIndustry(0);
+                $user->setTerraformation(round($user->getTerraformation(0) / 2));
                 /*$user->setPlasma(0);
                 $user->setLaser(0);
                 $user->setMissile(0);
-                $user->setArmement(0);
                 $user->setRecycleur(0);
                 $user->setCargo(0);
-                $user->setTerraformation(0);
-                $user->setDemography(0);
-                $user->setUtility(0);
                 $user->setBarge(0);
                 $user->setHyperespace(0);
                 $user->setDiscipline(0);
                 $user->setHeavyShip(0);
                 $user->setLightShip(0);
-                $user->setIndustry(0);
                 $user->setOnde(0);
                 $user->setHyperespace(0);
                 $user->setDiscipline(0);
@@ -168,6 +175,7 @@ class OverviewController extends AbstractController
                 $user->setPoliticTankDef(0);
                 $user->setPoliticWorker(0);
                 $user->setPoliticWorkerDef(0);
+                $user->setZombieAtt(1);
                 if ($user->getAlly()) {
                     $ally = $user->getAlly();
                     if (count($ally->getUsers()) == 1 || ($ally->getPolitic() == 'fascism' && $user->getGrade()->getPlacement() == 1)) {
@@ -242,6 +250,7 @@ class OverviewController extends AbstractController
                             $em->remove($war);
                         }
 
+                        $ally->setImageName(null);
                         $em->remove($ally);
                     }
                 }

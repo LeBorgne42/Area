@@ -92,7 +92,7 @@ class ServerController extends AbstractController
                     $fleet->setUser($iaPlayer);
                     $fleet->setPlanet($planet);
                     $fleet->setAttack(1);
-                    $fleet->setName('Horde Zombie');
+                    $fleet->setName('Horde');
                     $em->persist($fleet);
                 } else {
                     if (rand(1, 20) < 6) {
@@ -116,7 +116,7 @@ class ServerController extends AbstractController
                         $fleet->setUser($iaPlayer);
                         $fleet->setPlanet($planet);
                         $fleet->setAttack(1);
-                        $fleet->setName('Horde Zombie');
+                        $fleet->setName('Horde');
                         $em->persist($fleet);
                     } else {
                         $nbrPlanets++;
@@ -195,7 +195,7 @@ class ServerController extends AbstractController
             $fleet->setUser($iaPlayer);
             $fleet->setPlanet($putFleet);
             $fleet->setAttack(1);
-            $fleet->setName('Horde Zombie');
+            $fleet->setName('Horde');
             $em->persist($fleet);
         }
         $em->flush();

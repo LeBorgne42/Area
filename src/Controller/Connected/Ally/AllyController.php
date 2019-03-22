@@ -177,6 +177,10 @@ class AllyController extends AbstractController
 
             $ally->addUser($user);
             $ally->setCreatedAt($now);
+            $ally->setMaxMembers(1);
+            $ally->setImageName('democrat.jpg');
+            $ally->setBitcoin(1);
+            $ally->setPdg(1);
             $em->persist($ally);
             $em->flush();
             $mGrade = new Grade();
@@ -209,6 +213,7 @@ class AllyController extends AbstractController
                 $ally->setImageName('fascism.png');
                 $ally->setBitcoin(15000);
                 $ally->setPdg(2000);
+                $em->persist($sGrade);
             } elseif ($form_ally->get('politic')->getData() == 'communism'){
                 $grade->setName("Père des peuples");
                 $mGrade->setPlacement(1);
@@ -370,7 +375,7 @@ class AllyController extends AbstractController
             foreach ($wars as $war) {
                 $em->remove($war);
             }
-
+            $ally->setImageName(null);
             $em->remove($ally);
             $em->flush();
         }

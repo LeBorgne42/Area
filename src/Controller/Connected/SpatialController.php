@@ -62,7 +62,7 @@ class SpatialController extends AbstractController
                 $fleet->setUser($iaPlayer);
                 $fleet->setPlanet($usePlanet);
                 $fleet->setAttack(1);
-                $fleet->setName('Horde Zombie');
+                $fleet->setName('Horde');
                 $em->persist($fleet);
                 $reportDef = new Report();
                 $reportDef->setSendAt($now);

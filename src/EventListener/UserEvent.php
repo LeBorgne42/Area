@@ -3,6 +3,7 @@
 namespace App\EventListener;
 
 use App\Entity\User;
+use App\Entity\Fleet;
 use App\Entity\Report;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -96,7 +97,6 @@ class UserEvent implements EventSubscriberInterface
                         $reportDaily->setImageName("sell_report.jpg");
                         $reportDaily->setContent("«Ah vous voilà de retour, voici l'argent.»<br>-Dépose <span class='text-vert'>+" . number_format($bonus) . "</span> bitcoins sur la table.<br>«Toute les 24h comme convenu ?<br>Bien à demain.»");
                         $this->em->persist($reportDaily);
-
                     }
                     if ($user->getSearchAt()) {
                         if ($user->getSearchAt()->format('U') < $now->format('U')) {

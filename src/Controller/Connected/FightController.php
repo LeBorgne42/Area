@@ -801,10 +801,10 @@ class FightController extends AbstractController
                 }
                 if($userDefender->getColPlanets() == 0) {
                     $userDefender->setGameOver($user->getUserName());
-                    $userDefender->setAlly(null);
                     $userDefender->setGrade(null);
                     foreach($userDefender->getFleets() as $tmpFleet) {
                         $tmpFleet->setUser($user);
+                        $tmpFleet->setFleetList(null);
                     }
                 }
                 $reportDef->setTitle("Rapport d'invasion : Défaite (défense)");

@@ -11,7 +11,7 @@ form.name: ''
 message.received: 'Messages reçus'
 message.sent: 'Messages envoyés'
 message.sender: 'Envoyé par :'
-message.bitcoinRe: 'Bitcoin :'
+message.bitcoinRe: 'Bitcoins :'
 message.title: 'Titre : '
 message.anonymousSender: Anonyme
 message.sendTo: 'Envoyé à : '

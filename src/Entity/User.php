@@ -78,6 +78,16 @@ class User implements UserInterface, \Serializable
     protected $dailyConnect;
 
     /**
+     * @ORM\Column(name="zombie_att",type="smallint")
+     */
+    protected $zombieAtt;
+
+    /**
+     * @ORM\Column(name="zombie_at",type="datetime", nullable=true)
+     */
+    protected $zombieAt;
+
+    /**
      * @ORM\OneToMany(targetEntity="Proposal", mappedBy="user", fetch="EXTRA_LAZY")
      */
     protected $proposals;
@@ -543,7 +553,9 @@ class User implements UserInterface, \Serializable
         $this->voteAlly = 0;
         $this->voteName = null;
         $this->dailyConnect = null;
+        $this->zombieAt = null;
         $this->zombie = 0;
+        $this->zombieAtt = 1;
         $this->merchant = 0;
     }
 
@@ -2966,6 +2978,38 @@ class User implements UserInterface, \Serializable
     public function setDailyConnect($dailyConnect): void
     {
         $this->dailyConnect = $dailyConnect;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getZombieAtt()
+    {
+        return $this->zombieAtt;
+    }
+
+    /**
+     * @param mixed $zombieAtt
+     */
+    public function setZombieAtt($zombieAtt): void
+    {
+        $this->zombieAtt = $zombieAtt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getZombieAt()
+    {
+        return $this->zombieAt;
+    }
+
+    /**
+     * @param mixed $zombieAt
+     */
+    public function setZombieAt($zombieAt): void
+    {
+        $this->zombieAt = $zombieAt;
     }
 
     /**

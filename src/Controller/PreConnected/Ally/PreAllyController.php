@@ -262,6 +262,7 @@ class PreAllyController extends AbstractController
             $em->remove($war);
         }
 
+        $ally->setImageName(null);
         $em->remove($ally);
         $em->flush();
 

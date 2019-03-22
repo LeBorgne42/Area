@@ -126,7 +126,7 @@ class DailyController extends AbstractController
             $troops = $user->getAllTroops();
             $ship = $user->getAllShipsCost();
             $cost = $user->getBitcoin();
-            $report->setContent($report->getContent() . " Le travaille fournit par vos travailleurs vous rapporte <span class='text-vert'>+" . number_format(round($gain)) . "</span> Bitcoin.");
+            $report->setContent($report->getContent() . " Le travaille fournit par vos travailleurs vous rapporte <span class='text-vert'>+" . number_format(round($gain)) . "</span> bitcoins.");
             $empireCost = $troops + $ship + $buildingCost;
             $cost = $cost - $empireCost + ($gain);
             $report->setContent($report->getContent() . " L'entretien de votre empire vous coûte cependant <span class='text-rouge'>-" . number_format(round($empireCost)) . "</span> bitcoins.<br>");

@@ -9,6 +9,7 @@ use App\Entity\Rank;
 use App\Entity\Report;
 use DateTime;
 use DateTimeZone;
+use Dateinterval;
 
 /**
  * @Route("/connect")
@@ -88,7 +89,12 @@ class ConnectController extends AbstractController
         $em->persist($rank);
         $user->setRank($rank);
         $user->setTutorial(1);
+        $user->setZombieAtt(1);
         $user->setDailyConnect($now);
+        $nextZombie = new DateTime();
+        $nextZombie->setTimezone(new DateTimeZone('Europe/Paris'));
+        $nextZombie->add(new DateInterval('PT' . 172800 . 'S'));
+        $user->setZombieAt($nextZombie);
         $user->setGameOver(null);
         $salon->addUser($user);
         foreach ($user->getQuests() as $quest) {

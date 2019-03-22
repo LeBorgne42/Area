@@ -193,6 +193,7 @@ class Ally
         $this->wars = new \Doctrine\Common\Collections\ArrayCollection();
         $this->grades = new \Doctrine\Common\Collections\ArrayCollection();
         $this->defcon = 0;
+        $this->bitcoin = 0;
         $this->createdAt = null;
         $this->imageFile = null;
         $this->rank = null;

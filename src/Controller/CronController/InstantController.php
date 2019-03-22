@@ -73,7 +73,7 @@ class InstantController extends AbstractController
                         $fleet->setUser($iaPlayer);
                         $fleet->setPlanet($newAsteroides);
                         $fleet->setAttack(1);
-                        $fleet->setName('Horde Zombie');
+                        $fleet->setName('Horde');
                         $em->persist($fleet);
                     }
                 }
@@ -108,6 +108,16 @@ class InstantController extends AbstractController
         $fleets = $em->getRepository('App:Fleet')
             ->createQueryBuilder('f')
             ->where('f.flightTime < :now')
+            ->setParameters(['now' => $now])
+            ->getQuery()
+            ->getResult();
+
+        $zUsers = $em->getRepository('App:User')
+            ->createQueryBuilder('u')
+            ->join('u.planets', 'p')
+            ->where('u.zombieAt < :now')
+            ->andWhere('u.rank is not null')
+            ->andWhere('p.id is not null')
             ->setParameters(['now' => $now])
             ->getQuery()
             ->getResult();
@@ -159,6 +169,126 @@ class InstantController extends AbstractController
             ->getResult();
 
         $now->sub(new DateInterval('PT' . 1 . 'S'));
+
+        foreach ($zUsers as $zUser) {
+            $zombie = $em->getRepository('App:User')->findOneBy(['zombie' => 1]);
+            $planetAtt = $em->getRepository('App:Planet')
+                ->createQueryBuilder('p')
+                ->where('p.user = :user')
+                ->setParameters(['user' => $zUser])
+                ->orderBy('p.ground', 'ASC')
+                ->getQuery()
+                ->setMaxresults(1)
+                ->getOneOrNullResult();
+
+            $planetZb = $em->getRepository('App:Planet')
+                ->createQueryBuilder('p')
+                ->where('p.user = :user')
+                ->setParameters(['user' => $zombie])
+                ->orderBy('p.ground', 'ASC')
+                ->getQuery()
+                ->setMaxresults(1)
+                ->getOneOrNullResult();
+
+            $reportDef = new Report();
+            $reportDef->setSendAt($now);
+            $reportDef->setUser($zUser);
+
+            $barbed = $zUser->getBarbedAdv();
+            $dSoldier = $planetAtt->getSoldier() > 0 ? ($planetAtt->getSoldier() * 6) * $barbed : 0;
+            $dTanks = $planetAtt->getTank() > 0 ? $planetAtt->getTank() * 300 : 0;
+            $dWorker = $planetAtt->getWorker();
+            if ($zUser->getPoliticSoldierAtt() > 0) {
+                $dSoldier = $dSoldier * (1 + ($zUser->getPoliticSoldierAtt() / 10));
+            }
+            if ($zUser->getPoliticTankDef() > 0) {
+                $dTanks = $dTanks * (1 + ($zUser->getPoliticTankDef() / 10));
+            }
+            if ($zUser->getPoliticWorkerDef() > 0) {
+                $dWorker = $dWorker * (1 + ($zUser->getPoliticWorkerDef() / 5));
+            }
+            $dMilitary = $dWorker + $dSoldier + $dTanks;
+            $aMilitary = (500 * (($zUser->getZombieAtt() / 6) + 1) * 2);
+            $soldierAtmp = (500 * (($zUser->getZombieAtt() / 6) + 1));
+
+            if($dMilitary > $aMilitary) {
+                $zUser->setZombieAtt($zUser->getZombieAtt() + 2);
+                $warPointDef = round($aMilitary);
+                $zUser->getRank()->setWarPoint($zUser->getRank()->getWarPoint() + $warPointDef);
+                $aMilitary = $dSoldier - $aMilitary;
+                $reportDef->setTitle("Rapport invasion zombies : Victoire");
+                $reportDef->setImageName("zombie_win_report.jpg");
+                $soldierDtmp = $planetAtt->getSoldier();
+                $workerDtmp = $planetAtt->getWorker();
+                $tankDtmp = $planetAtt->getTank();
+                if($aMilitary <= 0) {
+                    $planetAtt->setSoldier(0);
+                    $aMilitary = $dTanks - abs($aMilitary);
+                    if($aMilitary <= 0) {
+                        $planetAtt->setTank(0);
+                        $planetAtt->setWorker($planetAtt->getWorker() + $aMilitary);
+                        $workerDtmp = $workerDtmp - $planetAtt->getWorker();
+                        $reportDef->setContent("«Au secours !» des civils crient et cours dans tout les sens sur " . $planetAtt->getName() . " en " . $planetAtt->getSector()->getgalaxy()->getPosition() . ":" . $planetAtt->getSector()->getPosition() . ":" . $planetAtt->getPosition() . ".<br>Vous n'aviez pas prévu suffisament de soldats et tanks pour faire face a la menace et des zombies envahissent les villes. Heureusement pour vous les travailleurs se réunissent et parviennent exterminer les zombies mais ce n'est pas grâce a vous.<br>" . number_format($soldierAtmp) . " zombies sont tués. <span class='text-rouge'>" . number_format($soldierDtmp) . "</span> de vos soldats succombent aux mâchoires de ces infamies et <span class='text-rouge'>" . number_format($tankDtmp) . "</span> tanks sont mit hors de service. <span class='text-rouge'>" . number_format($workerDtmp) ."</span> de vos travailleurs sont retrouvés morts.<br>Vous remportez ne remportez aucun points de Guerre pour avoir sacrifié vos civils.");
+                    } else {
+                        $planetAtt->setTank(round($aMilitary / 300));
+                        $tankDtmp = $tankDtmp - $planetAtt->getTank();
+                        $reportDef->setContent("Vos tanks ont suffit a arrêter les zombies pour cette fois-ci sur la planète " . $planetAtt->getName() . " en " . $planetAtt->getSector()->getgalaxy()->getPosition() . ":" . $planetAtt->getSector()->getPosition() . ":" . $planetAtt->getPosition() . ".<br>Mais pensez a rester sur vos gardes. Votre armée extermine " . number_format($soldierAtmp) . " zombies. <span class='text-rouge'>" . number_format($soldierDtmp) . "</span> de vos soldats succombent aux mâchoires de ces infamies et <span class='text-rouge'>" . number_format($tankDtmp) . "</span> tanks sont mit hors de service.<br>Vous remportez <span class='text-vert'>+" . number_format($warPointDef) . "</span> points de Guerre.");
+                    }
+                } else {
+                    $planetAtt->setSoldier(round($aMilitary / 6));
+                    $soldierDtmp = $soldierDtmp - $planetAtt->getSoldier();
+                    $reportDef->setContent("Une attaque de zombie est déclarée sur " . $planetAtt->getName() . " en " . $planetAtt->getSector()->getgalaxy()->getPosition() . ":" . $planetAtt->getSector()->getPosition() . ":" . $planetAtt->getPosition() . ".<br>Vous étiez préparé a cette éventualité et vos soldats exterminent " . number_format($soldierAtmp) . " zombies. <span class='text-rouge'>" . number_format($soldierDtmp) . "</span> de vos soldats succombent aux mâchoires de ces infamies.<br>Vous remportez <span class='text-vert'>+" . number_format($warPointDef) . "</span> points de Guerre.");
+                }
+            } else {
+                $zUser->setZombieAtt((round($zUser->getZombieAtt() / 2)));
+                $soldierDtmp = $planetAtt->getSoldier() != 0 ? $planetAtt->getSoldier() : 1;
+                $workerDtmp = $planetAtt->getWorker();
+                $tankDtmp = $planetAtt->getTank();
+                $reportDef->setTitle("Rapport invasion zombies : Défaite");
+                $reportDef->setImageName("zombie_lose_report.jpg");
+                $reportDef->setContent("Vous recevez des rapports de toutes parts vous signalant des zombies sur la planète " . $planetAtt->getName() . " en " . $planetAtt->getSector()->getgalaxy()->getPosition() . ":" . $planetAtt->getSector()->getPosition() . ":" . $planetAtt->getPosition() . ".<br>Mais vous tardez a réagir et le manque de préparation lui est fatale.<br>Vous recevez ces derniers mots de votre Gouverneur local «Salopard! Vous étiez censé nous protéger, ou est l'armée !»<br> Les dernières images de la planète vous montre des zombies envahissant le moindre recoin de la planète.<br>Vos <span class='text-rouge'>" . number_format($soldierDtmp) . "</span> soldats, <span class='text-rouge'>" . number_format($tankDtmp) ."</span> tanks et <span class='text-rouge'>" . number_format($workerDtmp) . "</span> travailleurs sont tous mort. Votre empire en a prit un coup, mais il vous reste des planètes, remettez vous en question! Consolidez vos positions et allez détuire les nids de zombies!");
+                $planetAtt->setWorker(125000);
+                if ($planetAtt->getSoldierMax() >= 2500) {
+                    $planetAtt->setSoldier($planetAtt->getSoldierMax());
+                } else {
+                    $planetAtt->setCaserne(1);
+                    $planetAtt->setSoldier(2500);
+                    $planetAtt->setSoldierMax(2500);
+                }
+                $planetAtt->setName('Base Zombie');
+                $planetAtt->setImageName('hydra_planet.png');
+                $planetAtt->setUser($zombie);
+                $em->flush();
+                if($zUser->getColPlanets() == 0) {
+                    $zUser->setGameOver($zombie->getUserName());
+                    $zUser->setGrade(null);
+                    foreach($zUser->getFleets() as $tmpFleet) {
+                        $tmpFleet->setUser($zombie);
+                        $tmpFleet->setFleetList(null);
+                    }
+                }
+            }
+            $zUser->setViewReport(false);
+            $timeAtt = new DateTime();
+            $timeAtt->setTimezone(new DateTimeZone('Europe/Paris'));
+            $timeAtt->add(new DateInterval('PT' . 46000 . 'S'));
+            $nextZombie = new DateTime();
+            $nextZombie->setTimezone(new DateTimeZone('Europe/Paris'));
+            $nextZombie->add(new DateInterval('PT' . round(30000 * rand(1,5)) . 'S'));
+            $zUser->setZombieAt($nextZombie);
+            $fleetZb = new Fleet();
+            $fleetZb->setName('Horde');
+            $fleetZb->setCorvet(round($zUser->getAllShipsPoint() / (10 * rand(1, 3))));
+            $fleetZb->setUser($zombie);
+            $fleetZb->setPlanet($planetZb);
+            $fleetZb->setPlanete($planetAtt->getPosition());
+            $fleetZb->setSector($planetAtt->getSector());
+            $fleetZb->setFlightTime($timeAtt);
+            $fleetZb->setAttack(1);
+            $fleetZb->setFlightType(1);
+            $em->persist($fleetZb);
+            $em->persist($reportDef);
+        }
 
         foreach ($peaces as $peace) {
             $em->remove($peace);
@@ -441,7 +571,7 @@ class InstantController extends AbstractController
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         foreach ($fleets as $fleet) {
-            if ($fleet->getName() == 'Cargos Marchands' && $fleet->getUser()->getId() == 1) {
+            if ($fleet->getUser()->getMerchant() == 1) {
                 $em->remove($fleet);
             } else {
                 $usePlanet = $em->getRepository('App:Planet')->findByFirstPlanet($fleet->getUser()->getUsername());
@@ -739,8 +869,16 @@ class InstantController extends AbstractController
 
                                 $fleet->setColonizer($fleet->getColonizer() - 1);
                                 $newPlanet->setUser($fleet->getUser());
-                                $newPlanet->setName('Colonie');
-                                $newPlanet->setSoldier(50);
+                                if ($fleet->getUser()->getZombie() == 1) {
+                                    $newPlanet->setName('Base Zombie');
+                                    $newPlanet->setWorker(125000);
+                                    $newPlanet->setSoldier(2500);
+                                    $newPlanet->setSoldierMax(2500);
+                                    $newPlanet->setCaserne(1);
+                                } else {
+                                    $newPlanet->setName('Colonie');
+                                    $newPlanet->setSoldier(50);
+                                }
                                 $newPlanet->setNbColo(count($fleet->getUser()->getPlanets()) + 1);
                                 $quest = $fleet->getUser()->checkQuests('colonize');
                                 if ($quest) {
@@ -756,7 +894,7 @@ class InstantController extends AbstractController
                                 $reportColo->setTitle("Colonisation de planète");
                                 $reportColo->setImageName("colonize_report.jpg");
                                 $reportColo->setContent("Vous venez de coloniser une planète inhabitée en : " . "<span><a href='/connect/carte-spatiale/" . $newPlanet->getSector()->getPosition() . "/" . $newPlanet->getSector()->getGalaxy()->getPosition() . "/" . $usePlanet->getId() . "'>" . $newPlanet->getSector()->getGalaxy()->getPosition() . ":" . $newPlanet->getSector()->getPosition() . ":" . $newPlanet->getPosition() . "</a></span>" . ". Cette planète fait désormais partit de votre Empire, pensez a la renommer sur la page Planètes.");
-                                $user->setViewReport(false);
+                                $fleet->getUser()->setViewReport(false);
                                 $em->persist($reportColo);
                                 $server->setNbrColonize($server->getNbrColonize() + 1);
                             }
@@ -896,10 +1034,10 @@ class InstantController extends AbstractController
                                     }
                                     if ($userDefender->getAllPlanets() == 0) {
                                         $userDefender->setGameOver($fleet->getUser()->getUserName());
-                                        $userDefender->setAlly(null);
                                         $userDefender->setGrade(null);
                                         foreach ($userDefender->getFleets() as $tmpFleet) {
                                             $tmpFleet->setUser($fleet->getUser());
+                                            $tmpFleet->setFleetList(null);
                                         }
                                     }
                                     $reportDef->setTitle("Rapport d'invasion : Défaite (défense)");
