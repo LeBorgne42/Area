@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97f042ea-d0ee-4bd9-bb02-3d850e24f659" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/FightController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/FightController.php" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/CronController/InstantController.php" afterPath="$PROJECT_DIR$/src/Controller/CronController/InstantController.php" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Planet.php" afterPath="$PROJECT_DIR$/src/Entity/Planet.php" />
       <change beforePath="$PROJECT_DIR$/templates/connected/map/sector.html.twig" afterPath="$PROJECT_DIR$/templates/connected/map/sector.html.twig" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/search.html.twig" afterPath="$PROJECT_DIR$/templates/connected/search.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/connected/overview.html.twig" afterPath="$PROJECT_DIR$/templates/connected/overview.html.twig" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,14 +18,64 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="InstantController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="overview.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/connected/overview.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="555">
+              <caret line="142" column="122" lean-forward="false" selection-start-line="142" selection-start-column="122" selection-end-line="142" selection-end-column="128" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sector.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/connected/map/sector.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="842">
+              <caret line="156" column="120" lean-forward="false" selection-start-line="156" selection-start-column="106" selection-end-line="156" selection-end-column="120" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Planet.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Entity/Planet.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="387">
+              <caret line="750" column="17" lean-forward="false" selection-start-line="750" selection-start-column="17" selection-end-line="750" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FleetController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Controller/Connected/FleetController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="668">
+              <caret line="951" column="58" lean-forward="false" selection-start-line="951" selection-start-column="58" selection-end-line="951" selection-end-column="58" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InstantController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Controller/CronController/InstantController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="498">
-              <caret line="228" column="98" lean-forward="false" selection-start-line="228" selection-start-column="98" selection-end-line="228" selection-end-column="98" />
+            <state relative-caret-position="-159">
+              <caret line="228" column="130" lean-forward="true" selection-start-line="228" selection-start-column="130" selection-end-line="228" selection-end-column="130" />
               <folding>
                 <element signature="e#49#96#0#PHP" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SectorController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Controller/Connected/Map/SectorController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -46,8 +94,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Bitcoin.</find>
-      <find>$soldierAtmp</find>
       <find>&lt;span class='</find>
       <find>$planetAtt</find>
       <find>$user</find>
@@ -71,11 +117,13 @@
       <find>$em-&gt;remove($ally);</find>
       <find>armor_ally</find>
       <find>getPoliticSoldierSale</find>
-      <find>getFleetsColor</find>
       <find>.enemy</find>
       <find>pp-e</find>
       <find>enemy</find>
       <find>'enemy'</find>
+      <find>setSector</find>
+      <find>getFleetsColor</find>
+      <find>'gal':</find>
     </findStrings>
     <replaceStrings>
       <replace>app.user.getResearchTime('merchant_ally')</replace>
@@ -162,7 +210,6 @@
         <option value="$PROJECT_DIR$/assets/scss/front/_topRessource.scss" />
         <option value="$PROJECT_DIR$/translations/front_overview.fr.yml" />
         <option value="$PROJECT_DIR$/translations/front_menu.fr.yml" />
-        <option value="$PROJECT_DIR$/templates/connected/overview.html.twig" />
         <option value="$PROJECT_DIR$/templates/menu/_right_planet.html.twig" />
         <option value="$PROJECT_DIR$/assets/global.scss" />
         <option value="$PROJECT_DIR$/assets/scss/front/research.scss" />
@@ -188,9 +235,10 @@
         <option value="$PROJECT_DIR$/src/Controller/Connected/OverviewController.php" />
         <option value="$PROJECT_DIR$/templates/connected/search.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/Connected/FightController.php" />
-        <option value="$PROJECT_DIR$/src/Entity/Planet.php" />
-        <option value="$PROJECT_DIR$/templates/connected/map/sector.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/CronController/InstantController.php" />
+        <option value="$PROJECT_DIR$/templates/connected/overview.html.twig" />
+        <option value="$PROJECT_DIR$/templates/connected/map/sector.html.twig" />
+        <option value="$PROJECT_DIR$/src/Entity/Planet.php" />
       </list>
     </option>
   </component>
@@ -388,6 +436,14 @@
               <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Connected" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Map" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="CronController" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
@@ -511,12 +567,12 @@
       <workItem from="1550595254059" duration="54065000" />
       <workItem from="1551029272895" duration="125354000" />
       <workItem from="1551874547618" duration="191322000" />
-      <workItem from="1553069594287" duration="63338000" />
+      <workItem from="1553069594287" duration="64362000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2171376000" />
+    <option name="totallyTimeSpent" value="2172400000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -614,14 +670,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/translations/front_soldier.fr.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="24" lean-forward="false" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/connected/soldier.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="710">
@@ -902,14 +950,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/FleetController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="803">
-          <caret line="945" column="16" lean-forward="false" selection-start-line="945" selection-start-column="16" selection-end-line="945" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/Ally.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="699">
@@ -986,30 +1026,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/connected/map/sector.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="115" column="445" lean-forward="false" selection-start-line="115" selection-start-column="445" selection-end-line="115" selection-end-column="445" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/connected/overview.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="548">
-          <caret line="136" column="41" lean-forward="true" selection-start-line="136" selection-start-column="41" selection-end-line="136" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Planet.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="648">
-          <caret line="773" column="29" lean-forward="false" selection-start-line="773" selection-start-column="29" selection-end-line="773" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Connected/FightController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="455">
@@ -1018,13 +1034,53 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/Map/SectorController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/FleetController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="668">
+          <caret line="951" column="58" lean-forward="false" selection-start-line="951" selection-start-column="58" selection-end-line="951" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/CronController/InstantController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="498">
-          <caret line="228" column="98" lean-forward="false" selection-start-line="228" selection-start-column="98" selection-end-line="228" selection-end-column="98" />
+        <state relative-caret-position="-159">
+          <caret line="228" column="130" lean-forward="true" selection-start-line="228" selection-start-column="130" selection-end-line="228" selection-end-column="130" />
           <folding>
             <element signature="e#49#96#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/connected/overview.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="142" column="122" lean-forward="false" selection-start-line="142" selection-start-column="122" selection-end-line="142" selection-end-column="128" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/connected/map/sector.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="842">
+          <caret line="156" column="120" lean-forward="false" selection-start-line="156" selection-start-column="106" selection-end-line="156" selection-end-column="120" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Planet.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="387">
+          <caret line="750" column="17" lean-forward="false" selection-start-line="750" selection-start-column="17" selection-end-line="750" selection-end-column="17" />
+          <folding />
         </state>
       </provider>
     </entry>

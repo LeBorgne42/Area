@@ -748,31 +748,33 @@ class Planet
     {
         $color = 'pp-enemy';
         foreach($this->fleets as $fleet) {
-            $color = 'pp-enemy';
-            if ($fleet->getUser() == $user) {
-                $color = 'pp-mine';
-            }
-            if($fleet->getUser()->getAlly() == $user->getAlly() && $color != 'pp-mine' && $user->getAlly()) {
-                $color = 'pp-ally';
-            }
-            if ($fleet->getUser()->getAlly() && $user->getAlly()) {
-                if (count($fleet->getUser()->getAlly()->getAllieds()) > 0) {
-                    foreach($fleet->getUser()->getAlly()->getAllieds() as $allied) {
-                        if($allied->getAllyTag() == $user->getAlly()->getSigle() && $allied->getAccepted() == 1) {
-                            $color = 'pp-ally';
+            if (!$fleet->getFlightTime()) {
+                $color = 'pp-enemy';
+                if ($fleet->getUser() == $user) {
+                    $color = 'pp-mine';
+                }
+                if($fleet->getUser()->getAlly() == $user->getAlly() && $color != 'pp-mine' && $user->getAlly()) {
+                    $color = 'pp-ally';
+                }
+                if ($fleet->getUser()->getAlly() && $user->getAlly()) {
+                    if (count($fleet->getUser()->getAlly()->getAllieds()) > 0) {
+                        foreach($fleet->getUser()->getAlly()->getAllieds() as $allied) {
+                            if($allied->getAllyTag() == $user->getAlly()->getSigle() && $allied->getAccepted() == 1) {
+                                $color = 'pp-ally';
+                            }
+                        }
+                    }
+                    if (count($fleet->getUser()->getAlly()->getPeaces()) > 0) {
+                        foreach($fleet->getUser()->getAlly()->getPeaces() as $peace) {
+                            if($peace->getAllyTag() == $user->getAlly()->getSigle() && $peace->getAccepted() == 1) {
+                                $color = 'pp-peace';
+                            }
                         }
                     }
                 }
-                if (count($fleet->getUser()->getAlly()->getPeaces()) > 0) {
-                    foreach($fleet->getUser()->getAlly()->getPeaces() as $peace) {
-                        if($peace->getAllyTag() == $user->getAlly()->getSigle() && $peace->getAccepted() == 1) {
-                            $color = 'pp-peace';
-                        }
-                    }
+                if($color == 'pp-enemy') {
+                    return $color;
                 }
-            }
-            if($color == 'pp-enemy') {
-                return $color;
             }
         }
         return $color;
