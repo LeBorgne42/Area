@@ -77,6 +77,8 @@ caserne: Caserne
 destruct: Destruction
 centerSearch: 'Centre de recherche'
 lightUsine: 'Usine d''armement'
+island: 'Ville flottante'
+orbital: 'Station orbitale'
 heavyUsine: 'Usine lourde'
 spaceShip: 'Chantier spatial'
 radar: 'Radar au sol'

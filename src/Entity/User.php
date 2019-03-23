@@ -162,6 +162,11 @@ class User implements UserInterface, \Serializable
     protected $reports;
 
     /**
+     * @ORM\OneToMany(targetEntity="View", mappedBy="user", fetch="EXTRA_LAZY")
+     */
+    protected $views;
+
+    /**
      * @ORM\Column(name="viewMessage",type="boolean")
      * @Assert\NotBlank(message = "required")
      */
@@ -492,6 +497,7 @@ class User implements UserInterface, \Serializable
         $this->fleets = new \Doctrine\Common\Collections\ArrayCollection();
         $this->quests = new \Doctrine\Common\Collections\ArrayCollection();
         $this->fleetLists = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->views = new \Doctrine\Common\Collections\ArrayCollection();
         $this->scientistProduction = 1;
         $this->bitcoin = 25000;
         $this->cheat = 0;
@@ -691,6 +697,30 @@ class User implements UserInterface, \Serializable
     }
 
     /**
+     * Add view
+     *
+     * @param \App\Entity\View $view
+     *
+     * @return User
+     */
+    public function addView(\App\Entity\View $view)
+    {
+        $this->views[] = $view;
+
+        return $this;
+    }
+
+    /**
+     * Remove view
+     *
+     * @param \App\Entity\View $view
+     */
+    public function removeView(\App\Entity\View $view)
+    {
+        $this->views->removeElement($view);
+    }
+
+    /**
      * Add planet
      *
      * @param \App\Entity\Planet $planet
@@ -792,6 +822,74 @@ class User implements UserInterface, \Serializable
                     }
                 }
             }
+        }
+        return null;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWhichViewsSalon($tmpSalon)
+    {
+        if($this->getViews()) {
+            $nbr = 0;
+            foreach ($this->getViews() as $view) {
+                if ($view->getSalon() == $tmpSalon) {
+                    $nbr= $nbr + 1;
+                }
+            }
+            return $nbr != 0 ? $nbr : null;
+        }
+        return null;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWhichViewsReport($tmpReport)
+    {
+        if($this->getViews()) {
+            $nbr = 0;
+            foreach ($this->getViews() as $view) {
+                if ($view->getType() == $tmpReport) {
+                    $nbr= $nbr + 1;
+                }
+            }
+            return $nbr != 0 ? $nbr : null;
+        }
+        return null;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getViewsReport()
+    {
+        if($this->getViews()) {
+            $nbr = 0;
+            foreach ($this->getViews() as $view) {
+                if ($view->getType()) {
+                    $nbr = $nbr + 1;
+                }
+            }
+            return $nbr != 0 ? $nbr : null;
+        }
+        return null;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getViewSalon()
+    {
+        if($this->getViews()) {
+            $nbr = 0;
+            foreach ($this->getViews() as $view) {
+                if ($view->getSalon()) {
+                    $nbr = $nbr + 1;
+                }
+            }
+            return $nbr != 0 ? $nbr : null;
         }
         return null;
     }
@@ -3010,6 +3108,22 @@ class User implements UserInterface, \Serializable
     public function setZombieAt($zombieAt): void
     {
         $this->zombieAt = $zombieAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getViews()
+    {
+        return $this->views;
+    }
+
+    /**
+     * @param mixed $views
+     */
+    public function setViews($views): void
+    {
+        $this->views = $views;
     }
 
     /**

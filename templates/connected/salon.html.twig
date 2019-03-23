@@ -14,7 +14,7 @@
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a href="{{ path('salon_id', {'idp': usePlanet.getId(), 'id': tmpSalon.getId()}) }}" >{{ tmpSalon.getName() }}</a>
+                        <a href="{{ path('salon_id', {'idp': usePlanet.getId(), 'id': tmpSalon.getId()}) }}" >{{ tmpSalon.getName() }} {% if app.user.getWhichViewsSalon(tmpSalon) %}<span class="text-vert">{{ app.user.getWhichViewsSalon(tmpSalon) }}</span>{% endif %}</a>
                     </li>
                 {% endif %}
             {% endfor %}

@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\Front\SalonType;
 use App\Entity\S_Content;
+use App\Entity\View;
 use DateTime;
 use DateTimeZone;
 use DateInterval;
@@ -46,6 +47,13 @@ class SalonController extends AbstractController
         }
 
         $salon = $em->getRepository('App:Salon')->find(['id' => $id]);
+        if ($id != 1) {
+            foreach($user->getViews() as $view) {
+                if($view->getSalon() == $salon) {
+                    $em->remove($view);
+                }
+            }
+        }
 
         $salons = $em->getRepository('App:Salon')
             ->createQueryBuilder('s')
@@ -150,11 +158,21 @@ class SalonController extends AbstractController
             } else {
                 foreach($salon->getAllys() as $ally) {
                     foreach($ally->getUsers() as $tmpuser) {
-                        $tmpuser->setSalonAt(null);
+                        if ($tmpuser != $user) {
+                            $view = new View();
+                            $view->setUser($tmpuser);
+                            $view->setSalon($salon);
+                            $em->persist($view);
+                        }
                     }
                 }
                 foreach($salon->getUsers() as $tmpuser) {
-                    $tmpuser->setSalonAt(null);
+                    if ($tmpuser != $user) {
+                        $view = new View();
+                        $view->setUser($tmpuser);
+                        $view->setSalon($salon);
+                        $em->persist($view);
+                    }
                 }
             }
             $em->persist($message);

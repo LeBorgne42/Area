@@ -2,7 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97f042ea-d0ee-4bd9-bb02-3d850e24f659" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Controller/CronController/InstantController.php" afterPath="$PROJECT_DIR$/src/Controller/CronController/InstantController.php" />
+      <change beforePath="$PROJECT_DIR$/assets/scss/front/_rightPlanet.scss" afterPath="$PROJECT_DIR$/assets/scss/front/_rightPlanet.scss" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/SalonController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/SalonController.php" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Salon.php" afterPath="$PROJECT_DIR$/src/Entity/Salon.php" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" afterPath="$PROJECT_DIR$/src/Entity/User.php" />
+      <change beforePath="$PROJECT_DIR$/templates/connected/salon.html.twig" afterPath="$PROJECT_DIR$/templates/connected/salon.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/menu/_left_menu.html.twig" afterPath="$PROJECT_DIR$/templates/menu/_left_menu.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/menu/_right_planet.html.twig" afterPath="$PROJECT_DIR$/templates/menu/_right_planet.html.twig" />
+      <change beforePath="$PROJECT_DIR$/translations/front_overview.fr.yml" afterPath="$PROJECT_DIR$/translations/front_overview.fr.yml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,12 +23,56 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="InstantController.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Controller/CronController/InstantController.php">
+      <file leaf-file-name="SalonController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Controller/Connected/SalonController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="824">
-              <caret line="68" column="60" lean-forward="false" selection-start-line="68" selection-start-column="54" selection-end-line="68" selection-end-column="60" />
+            <state relative-caret-position="485">
+              <caret line="53" column="17" lean-forward="true" selection-start-line="53" selection-start-column="17" selection-end-line="53" selection-end-column="17" />
+              <folding>
+                <element signature="e#44#94#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_left_menu.html.twig" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/menu/_left_menu.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="577">
+              <caret line="62" column="152" lean-forward="false" selection-start-line="62" selection-start-column="152" selection-end-line="62" selection-end-column="152" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="salon.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/connected/salon.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="16" column="203" lean-forward="false" selection-start-line="16" selection-start-column="203" selection-end-line="16" selection-end-column="203" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="User.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Entity/User.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="748">
+              <caret line="885" column="21" lean-forward="false" selection-start-line="885" selection-start-column="21" selection-end-line="885" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="View.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Entity/View.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-53">
+              <caret line="34" column="37" lean-forward="false" selection-start-line="34" selection-start-column="37" selection-end-line="34" selection-end-column="37" />
+              <folding>
+                <element signature="e#30#62#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -30,36 +81,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>remove($ally)</find>
-      <find>$em-&gt;remove($ally);</find>
-      <find>armor_ally</find>
-      <find>getPoliticSoldierSale</find>
-      <find>.enemy</find>
-      <find>pp-e</find>
-      <find>enemy</find>
-      <find>'enemy'</find>
-      <find>setSector</find>
-      <find>getFleetsColor</find>
-      <find>'gal':</find>
-      <find>getResult</find>
-      <find>$hydra</find>
-      <find>$soldierDtmp</find>
-      <find>&lt;span cl</find>
-      <find>$invader</find>
-      <find>$user</find>
-      <find>$dMilitary</find>
       <find>$usePlanet</find>
       <find>'building'</find>
       <find>center-cell</find>
       <find>building</find>
       <find>$user-&gt;getRank()</find>
       <find>setTitle(</find>
-      <find>new Report</find>
       <find>new Report()</find>
       <find>salon_id</find>
       <find>$id</find>
-      <find>$reportInv</find>
       <find>DateInterval</find>
+      <find>$reportInv</find>
+      <find>currentPlanet</find>
+      <find>currentRoute</find>
+      <find>getOffensiveFleet</find>
+      <find>planetFull</find>
+      <find>constructFree</find>
+      <find>current</find>
+      <find>persist</find>
+      <find>OneToOne</find>
+      <find>$view</find>
+      <find>ManyToOne</find>
+      <find>* @ORM\ManyToOne(targetEntity=&quot;User&quot;,</find>
+      <find>get</find>
+      <find>* @ORM\ManyToOne(targetEntity=&quot;User&quot;</find>
+      <find>addReport</find>
+      <find>$reports</find>
+      <find>new Report</find>
+      <find>reports</find>
+      <find>views</find>
+      <find>getWhichV</find>
     </findStrings>
     <replaceStrings>
       <replace>app.user.getResearchTime('tank_def_ally')</replace>
@@ -124,17 +175,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/templates/connected/fleet/edit.html.twig" />
-        <option value="$PROJECT_DIR$/assets/scss/front/spatial.scss" />
-        <option value="$PROJECT_DIR$/assets/scss/front/_topMenu.scss" />
         <option value="$PROJECT_DIR$/assets/scss/front/_leftMenu.scss" />
         <option value="$PROJECT_DIR$/templates/connected/building.html.twig" />
         <option value="$PROJECT_DIR$/assets/scss/front/building.scss" />
         <option value="$PROJECT_DIR$/templates/menu/_top_ressource.html.twig" />
-        <option value="$PROJECT_DIR$/src/Controller/Connected/SalonController.php" />
         <option value="$PROJECT_DIR$/src/Controller/CronController/DailyController.php" />
         <option value="$PROJECT_DIR$/assets/scss/front/_topRessource.scss" />
-        <option value="$PROJECT_DIR$/translations/front_overview.fr.yml" />
         <option value="$PROJECT_DIR$/assets/global.scss" />
         <option value="$PROJECT_DIR$/assets/scss/front/research.scss" />
         <option value="$PROJECT_DIR$/assets/scss/front/ally.scss" />
@@ -149,7 +195,6 @@
         <option value="$PROJECT_DIR$/src/Controller/Connected/Map/GalaxyController.php" />
         <option value="$PROJECT_DIR$/translations/front_galaxy.fr.yml" />
         <option value="$PROJECT_DIR$/templates/connected/fleet_list.html.twig" />
-        <option value="$PROJECT_DIR$/src/Entity/User.php" />
         <option value="$PROJECT_DIR$/src/Entity/Ally.php" />
         <option value="$PROJECT_DIR$/src/Controller/Connected/ConnectController.php" />
         <option value="$PROJECT_DIR$/templates/connected/map/galaxy.html.twig" />
@@ -161,8 +206,6 @@
         <option value="$PROJECT_DIR$/templates/connected/map/sector.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/Connected/Building/BuildingController.php" />
         <option value="$PROJECT_DIR$/src/EventListener/UserEvent.php" />
-        <option value="$PROJECT_DIR$/assets/scss/front/_rightPlanet.scss" />
-        <option value="$PROJECT_DIR$/templates/menu/_right_planet.html.twig" />
         <option value="$PROJECT_DIR$/translations/front_menu.fr.yml" />
         <option value="$PROJECT_DIR$/src/Entity/Report.php" />
         <option value="$PROJECT_DIR$/src/Entity/Message.php" />
@@ -170,11 +213,19 @@
         <option value="$PROJECT_DIR$/src/Controller/Connected/FightController.php" />
         <option value="$PROJECT_DIR$/src/Controller/Connected/FleetController.php" />
         <option value="$PROJECT_DIR$/translations/front_report.fr.yml" />
-        <option value="$PROJECT_DIR$/templates/connected/salon.html.twig" />
         <option value="$PROJECT_DIR$/templates/connected/report.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/Connected/ReportController.php" />
         <option value="$PROJECT_DIR$/templates/connected/overview.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/CronController/InstantController.php" />
+        <option value="$PROJECT_DIR$/translations/front_overview.fr.yml" />
+        <option value="$PROJECT_DIR$/assets/scss/front/_rightPlanet.scss" />
+        <option value="$PROJECT_DIR$/templates/menu/_right_planet.html.twig" />
+        <option value="$PROJECT_DIR$/src/Entity/Salon.php" />
+        <option value="$PROJECT_DIR$/src/Entity/View.php" />
+        <option value="$PROJECT_DIR$/src/Controller/Connected/SalonController.php" />
+        <option value="$PROJECT_DIR$/templates/connected/salon.html.twig" />
+        <option value="$PROJECT_DIR$/src/Entity/User.php" />
+        <option value="$PROJECT_DIR$/templates/menu/_left_menu.html.twig" />
       </list>
     </option>
   </component>
@@ -378,12 +429,6 @@
             <path>
               <item name="Area" type="b2602c69:ProjectViewProjectNode" />
               <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Migrations" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
@@ -391,11 +436,6 @@
               <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="templates" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="connected" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="Area" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Area" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="translations" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
@@ -410,18 +450,18 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/Entity" />
+      <recent name="$PROJECT_DIR$/src/Form/Front" />
+      <recent name="$PROJECT_DIR$/src/Controller/Connected/Research" />
+      <recent name="$PROJECT_DIR$/src/Controller/Connected/Building" />
+      <recent name="$PROJECT_DIR$/src/Repository" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/Controller/Connected" />
       <recent name="$PROJECT_DIR$/templates/connected" />
       <recent name="$PROJECT_DIR$/src/Controller/PreConnected/Ally" />
       <recent name="$PROJECT_DIR$/src/Controller/PreConnected" />
-      <recent name="$PROJECT_DIR$/src/Repository" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/Form/Front" />
-      <recent name="$PROJECT_DIR$/src/Controller/Connected/Research" />
-      <recent name="$PROJECT_DIR$/src/Controller/Connected/Building" />
-      <recent name="$PROJECT_DIR$/src/Entity" />
       <recent name="$PROJECT_DIR$/src/Repository" />
     </key>
   </component>
@@ -500,12 +540,12 @@
       <workItem from="1551029272895" duration="125354000" />
       <workItem from="1551874547618" duration="191322000" />
       <workItem from="1553069594287" duration="64784000" />
-      <workItem from="1553262221690" duration="15932000" />
+      <workItem from="1553262221690" duration="21358000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2188754000" />
+    <option name="totallyTimeSpent" value="2194180000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -603,38 +643,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/assets/scss/front/options.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="10" lean-forward="true" selection-start-line="14" selection-start-column="10" selection-end-line="15" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/scss/front/_topRessource.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="22" lean-forward="true" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/translations/front_overview.fr.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="34" lean-forward="false" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/scss/front/research.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="547">
-          <caret line="68" column="43" lean-forward="true" selection-start-line="68" selection-start-column="43" selection-end-line="68" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/scss/front/ally.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="127">
@@ -754,14 +762,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-36113">
-          <caret line="555" column="23" lean-forward="true" selection-start-line="555" selection-start-column="23" selection-end-line="555" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Connected/ConnectController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="427">
@@ -870,14 +870,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/scss/front/_rightPlanet.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="29" lean-forward="false" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/Rank.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-5">
@@ -910,14 +902,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/menu/_right_planet.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="20" lean-forward="false" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/connected/building.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="412">
@@ -926,42 +910,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/FightController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="709" column="0" lean-forward="true" selection-start-line="709" selection-start-column="0" selection-end-line="715" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Connected/FleetController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="797">
           <caret line="1286" column="45" lean-forward="false" selection-start-line="1286" selection-start-column="45" selection-end-line="1286" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/SalonController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="430">
-          <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="47" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/connected/salon.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="27" lean-forward="false" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Report.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="643">
-          <caret line="63" column="5" lean-forward="false" selection-start-line="63" selection-start-column="5" selection-end-line="63" selection-end-column="5" />
           <folding />
         </state>
       </provider>
@@ -1008,8 +960,100 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/CronController/InstantController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="824">
-          <caret line="68" column="60" lean-forward="false" selection-start-line="68" selection-start-column="54" selection-end-line="68" selection-end-column="60" />
+        <state relative-caret-position="-752">
+          <caret line="173" column="37" lean-forward="true" selection-start-line="173" selection-start-column="37" selection-end-line="173" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/translations/front_overview.fr.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="433">
+          <caret line="80" column="26" lean-forward="false" selection-start-line="80" selection-start-column="26" selection-end-line="80" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/scss/front/_rightPlanet.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="1" lean-forward="true" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/menu/_right_planet.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="16" column="391" lean-forward="false" selection-start-line="16" selection-start-column="391" selection-end-line="16" selection-end-column="391" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/FightController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5101">
+          <caret line="529" column="199" lean-forward="true" selection-start-line="529" selection-start-column="199" selection-end-line="529" selection-end-column="199" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Report.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="25" column="5" lean-forward="false" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Salon.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="952">
+          <caret line="233" column="0" lean-forward="true" selection-start-line="233" selection-start-column="0" selection-end-line="233" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Connected/SalonController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="485">
+          <caret line="53" column="17" lean-forward="true" selection-start-line="53" selection-start-column="17" selection-end-line="53" selection-end-column="17" />
+          <folding>
+            <element signature="e#44#94#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/View.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-53">
+          <caret line="34" column="37" lean-forward="false" selection-start-line="34" selection-start-column="37" selection-end-line="34" selection-end-column="37" />
+          <folding>
+            <element signature="e#30#62#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/connected/salon.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="16" column="203" lean-forward="false" selection-start-line="16" selection-start-column="203" selection-end-line="16" selection-end-column="203" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="885" column="21" lean-forward="false" selection-start-line="885" selection-start-column="21" selection-end-line="885" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/menu/_left_menu.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="577">
+          <caret line="62" column="152" lean-forward="false" selection-start-line="62" selection-start-column="152" selection-end-line="62" selection-end-column="152" />
           <folding />
         </state>
       </provider>

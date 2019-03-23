@@ -41,6 +41,11 @@ class Salon
     protected $name;
 
     /**
+     * @ORM\OneToMany(targetEntity="View", mappedBy="salon", fetch="EXTRA_LAZY")
+     */
+    protected $views;
+
+    /**
      * User constructor.
      */
     public function __construct()
@@ -48,6 +53,7 @@ class Salon
         $this->users = new \Doctrine\Common\Collections\ArrayCollection();
         $this->allys = new \Doctrine\Common\Collections\ArrayCollection();
         $this->contents = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->views = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -72,6 +78,30 @@ class Salon
     public function removeUser(\App\Entity\User $user)
     {
         $this->users->removeElement($user);
+    }
+
+    /**
+     * Add view
+     *
+     * @param \App\Entity\View $view
+     *
+     * @return Salon
+     */
+    public function addView(\App\Entity\View $view)
+    {
+        $this->views[] = $view;
+
+        return $this;
+    }
+
+    /**
+     * Remove view
+     *
+     * @param \App\Entity\View $view
+     */
+    public function removeView(\App\Entity\View $view)
+    {
+        $this->views->removeElement($view);
     }
 
     /**
@@ -184,6 +214,22 @@ class Salon
     public function setName($name): void
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getViews()
+    {
+        return $this->views;
+    }
+
+    /**
+     * @param mixed $views
+     */
+    public function setViews($views): void
+    {
+        $this->views = $views;
     }
 
     public function getId()

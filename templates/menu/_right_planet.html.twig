@@ -13,8 +13,8 @@
         </div>
     </div>
     {% for planet in app.user.getPlanets() %}
-        {% if planet == usePlanet and app.user.getAllPlanets() > 9 %}
-            <div {% if planet.getOffensiveFleet(app.user) == 'ennemy' %} data-toggle="tooltip" data-placement="bottom" title="{{ 'embargo'|trans }}"{% endif %} class="currentPlanet mb-4 bg-right px-4 py-2{% if planet.getOffensiveFleet(app.user) == 'ennemy' %} planetFull{% elseif planet.getConstruct() is null and (planet.getGround() != planet.getGroundPlace()) %} constructFree{% endif %}">  {#or planet.getSkyPlace() != planet.getSky()#}
+        {% if planet == usePlanet %}
+            <div {% if planet.getOffensiveFleet(app.user) == 'ennemy' %} data-toggle="tooltip" data-placement="bottom" title="{{ 'embargo'|trans }}"{% endif %} class="currentPlanet mb-4 bg-right px-4 py-2{% if planet.getOffensiveFleet(app.user) == 'ennemy' %} planetFull{% elseif planet.getConstruct() is null and (planet.getGround() != planet.getGroundPlace()) %} constructFree{% endif %}">
                 <div class="pt-2 float-left"><a href="{{ planet.getId() }}"><img height="32" width="32" src="{{ vich_uploader_asset(planet, 'imageFile') }}"></a></div>
                 <div class="float-right">
                     <div class="mt-2{% if app.user.getTutorial() < 14 %} tutorial-hide{% endif %}">
