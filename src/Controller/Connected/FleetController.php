@@ -1010,21 +1010,21 @@ class FleetController  extends AbstractController
         }
         
         if($planetTake->getMerchant() == true) {
-            $newWarPointS = round(($fleetGive->getNiobium() / 6) / 1000);
+            if ($user->getPoliticPdg() > 0) {
+                $newWarPointS = round((($fleetGive->getNiobium() / 6) / 1000) * (1 + ($user->getPoliticPdg() / 10)));
+            } else {
+                $newWarPointS = round(($fleetGive->getNiobium() / 6) / 1000);
+            }
             $reportSell = new Report();
             $reportSell->setType('economic');
             $reportSell->setSendAt($now);
             $reportSell->setUser($user);
             $reportSell->setTitle("Vente aux marchands");
             $reportSell->setImageName("sell_report.jpg");
-            if ($user->getAlly() && $user->getAlly()->getPolitic() == 'democrat') {
-                if ($user->getPoliticMerchant() > 0) {
-                    $gainSell = ($fleetGive->getNiobium() * 0.25) * (1 + ($user->getPoliticMerchant() / 20));
-                } else {
-                    $gainSell = ($fleetGive->getNiobium() * 0.25);
-                }
+            if ($user->getPoliticMerchant() > 0) {
+                $gainSell = ($fleetGive->getNiobium() * 0.10) * (1 + ($user->getPoliticMerchant() / 20));
             } else {
-                $gainSell = ($fleetGive->getNiobium() * 0.25);
+                $gainSell = ($fleetGive->getNiobium() * 0.10);
             }
             $reportSell->setContent("Votre vente aux marchands vous a rapporté <span class='text-vert'>+" . number_format(round($gainSell)) . "</span> bitcoins. Et <span class='text-vert'>+" . number_format($newWarPointS) . "</span> points de Guerre.");
             $em->persist($reportSell);
@@ -1087,21 +1087,21 @@ class FleetController  extends AbstractController
             return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
         }
         if($planetTake->getMerchant() == true) {
-            $newWarPointS = round(($fleetGive->getWater() / 3) / 1000);
+            if ($user->getPoliticPdg() > 0) {
+                $newWarPointS = round((($fleetGive->getWater() / 3) / 1000) * (1 + ($user->getPoliticPdg() / 10)));
+            } else {
+                $newWarPointS = round(($fleetGive->getWater() / 3) / 1000);
+            }
             $reportSell = new Report();
             $reportSell->setType('economic');
             $reportSell->setSendAt($now);
             $reportSell->setUser($user);
             $reportSell->setTitle("Vente aux marchands");
             $reportSell->setImageName("sell_report.jpg");
-            if ($user->getAlly() && $user->getAlly()->getPolitic() == 'democrat') {
-                if ($user->getPoliticMerchant() > 0) {
-                    $gainSell = ($fleetGive->getWater() * 0.5) * (1 + ($user->getPoliticMerchant() / 20));
-                } else {
-                    $gainSell = ($fleetGive->getWater() * 0.5);
-                }
+            if ($user->getPoliticMerchant() > 0) {
+                $gainSell = ($fleetGive->getWater() * 0.25) * (1 + ($user->getPoliticMerchant() / 20));
             } else {
-                $gainSell = ($fleetGive->getWater() * 0.5);
+                $gainSell = ($fleetGive->getWater() * 0.25);
             }
             $reportSell->setContent("Votre vente aux marchands vous a rapporté <span class='text-vert'>+" . number_format(round($gainSell)) . "</span> bitcoins. Et <span class='text-vert'>+" . number_format($newWarPointS) . "</span> points de Guerre.");
             $em->persist($reportSell);
@@ -1164,21 +1164,21 @@ class FleetController  extends AbstractController
             return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
         }
         if($planetTake->getMerchant() == true) {
-            $newWarPointS = round(($fleetGive->getSoldier() * 10) / 1000);
+            if ($user->getPoliticPdg() > 0) {
+                $newWarPointS = round((($fleetGive->getSoldier() * 10) / 1000) * (1 + ($user->getPoliticPdg() / 10)));
+            } else {
+                $newWarPointS = round(($fleetGive->getSoldier() * 10) / 1000);
+            }
             $reportSell = new Report();
             $reportSell->setType('economic');
             $reportSell->setSendAt($now);
             $reportSell->setUser($user);
             $reportSell->setTitle("Vente aux marchands");
             $reportSell->setImageName("sell_report.jpg");
-            if ($user->getAlly() && $user->getAlly()->getPolitic() == 'democrat') {
-                if ($user->getPoliticMerchant() > 0) {
-                    $gainSell = ($fleetGive->getSoldier() * 5) * (1 + ($user->getPoliticMerchant() / 20));
-                } else {
-                    $gainSell = ($fleetGive->getSoldier() * 5);
-                }
+            if ($user->getPoliticMerchant() > 0) {
+                $gainSell = ($fleetGive->getSoldier() * 80) * (1 + ($user->getPoliticMerchant() / 20));
             } else {
-                $gainSell = ($fleetGive->getSoldier() * 5);
+                $gainSell = ($fleetGive->getSoldier() * 80);
             }
             $reportSell->setContent("Votre vente aux marchands vous a rapporté <span class='text-vert'>+" . number_format(round($gainSell)) . "</span> bitcoins. Et <span class='text-vert'>+" . number_format($newWarPointS) . "</span> points de Guerre.");
             $em->persist($reportSell);
@@ -1241,21 +1241,21 @@ class FleetController  extends AbstractController
             return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
         }
         if($planetTake->getMerchant() == true) {
-            $newWarPointS = round(($fleetGive->getWorker() * 50) / 1000);
+            if ($user->getPoliticPdg() > 0) {
+                $newWarPointS = round((($fleetGive->getWorker() * 50) / 1000) * (1 + ($user->getPoliticPdg() / 10)));
+            } else {
+                $newWarPointS = round(($fleetGive->getWorker() * 50) / 1000);
+            }
             $reportSell = new Report();
             $reportSell->setType('economic');
             $reportSell->setSendAt($now);
             $reportSell->setUser($user);
             $reportSell->setTitle("Vente aux marchands");
             $reportSell->setImageName("sell_report.jpg");
-            if ($user->getAlly() && $user->getAlly()->getPolitic() == 'democrat') {
-                if ($user->getPoliticMerchant() > 0) {
-                    $gainSell = ($fleetGive->getWorker() * 2) * (1 + ($user->getPoliticMerchant() / 20));
-                } else {
-                    $gainSell = ($fleetGive->getWorker() * 2);
-                }
+            if ($user->getPoliticMerchant() > 0) {
+                $gainSell = ($fleetGive->getWorker() * 5) * (1 + ($user->getPoliticMerchant() / 20));
             } else {
-                $gainSell = ($fleetGive->getWorker() * 2);
+                $gainSell = ($fleetGive->getWorker() * 5);
             }
             $reportSell->setContent("Votre vente aux marchands vous a rapporté <span class='text-vert'>+" . number_format(round($gainSell)) . "</span> bitcoins. Et <span class='text-vert'>+" . number_format($newWarPointS) . "</span> points de Guerre.");
             $em->persist($reportSell);
@@ -1318,21 +1318,21 @@ class FleetController  extends AbstractController
             return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
         }
         if($planetTake->getMerchant() == true) {
-            $newWarPointS = round(($fleetGive->getScientist() * 100) / 1000);
+            if ($user->getPoliticPdg() > 0) {
+                $newWarPointS = round((($fleetGive->getScientist() * 100) / 1000) * (1 + ($user->getPoliticPdg() / 10)));
+            } else {
+                $newWarPointS = round(($fleetGive->getScientist() * 100) / 1000);
+            }
             $reportSell = new Report();
             $reportSell->setType('economic');
             $reportSell->setSendAt($now);
             $reportSell->setUser($user);
             $reportSell->setTitle("Vente aux marchands");
             $reportSell->setImageName("sell_report.jpg");
-            if ($user->getAlly() && $user->getAlly()->getPolitic() == 'democrat') {
-                if ($user->getPoliticMerchant() > 0) {
-                    $gainSell = ($fleetGive->getScientist() * 50) * (1 + ($user->getPoliticMerchant() / 20));
-                } else {
-                    $gainSell = ($fleetGive->getScientist() * 50);
-                }
+            if ($user->getPoliticMerchant() > 0) {
+                $gainSell = ($fleetGive->getScientist() * 300) * (1 + ($user->getPoliticMerchant() / 20));
             } else {
-                $gainSell = ($fleetGive->getScientist() * 50);
+                $gainSell = ($fleetGive->getScientist() * 300);
             }
             $reportSell->setContent("Votre vente aux marchands vous a rapporté <span class='text-vert'>+" . number_format(round($gainSell)) . "</span> bitcoins. Et <span class='text-vert'>+" . number_format($newWarPointS) . "</span> points de Guerre.");
             $em->persist($reportSell);
@@ -1401,15 +1401,15 @@ class FleetController  extends AbstractController
             $reportSell->setUser($user);
             $reportSell->setTitle("Vente aux marchands");
             $reportSell->setImageName("sell_report.jpg");
-            $newWarPointS = round((($fleetGive->getScientist() * 100) + ($fleetGive->getWorker() * 50) + ($fleetGive->getSoldier() * 10) + ($fleetGive->getWater() / 3) + ($fleetGive->getNiobium() / 6)) / 1000);
-            if ($user->getAlly() && $user->getAlly()->getPolitic() == 'democrat') {
-                if ($user->getPoliticMerchant() > 0) {
-                    $gainSell = round((($fleetGive->getWater() * 0.5) + ($fleetGive->getSoldier() * 5) + ($fleetGive->getWorker() * 2) + ($fleetGive->getScientist() * 50) + ($fleetGive->getNiobium() * 0.25)) * (1 + ($user->getPoliticMerchant() / 20)));
-                } else {
-                    $gainSell = round(($fleetGive->getWater() * 0.5) + ($fleetGive->getSoldier() * 5) + ($fleetGive->getWorker() * 2) + ($fleetGive->getScientist() * 50) + ($fleetGive->getNiobium() * 0.25));
-                }
+            if ($user->getPoliticPdg() > 0) {
+                $newWarPointS = round((((($fleetGive->getScientist() * 100) + ($fleetGive->getWorker() * 50) + ($fleetGive->getSoldier() * 10) + ($fleetGive->getWater() / 3) + ($fleetGive->getNiobium() / 6)) / 1000)) * (1 + ($user->getPoliticPdg() / 10)));
             } else {
-                $gainSell = round(($fleetGive->getWater() * 0.5) + ($fleetGive->getSoldier() * 5) + ($fleetGive->getWorker() * 2) + ($fleetGive->getScientist() * 50) + ($fleetGive->getNiobium() * 0.25));
+                $newWarPointS = round((($fleetGive->getScientist() * 100) + ($fleetGive->getWorker() * 50) + ($fleetGive->getSoldier() * 10) + ($fleetGive->getWater() / 3) + ($fleetGive->getNiobium() / 6)) / 1000);
+            }
+            if ($user->getPoliticMerchant() > 0) {
+                $gainSell = round((($fleetGive->getWater() * 0.25) + ($fleetGive->getSoldier() * 80) + ($fleetGive->getWorker() * 5) + ($fleetGive->getScientist() * 300) + ($fleetGive->getNiobium() * 0.10)) * (1 + ($user->getPoliticMerchant() / 20)));
+            } else {
+                $gainSell = round(($fleetGive->getWater() * 0.25) + ($fleetGive->getSoldier() * 80) + ($fleetGive->getWorker() * 5) + ($fleetGive->getScientist() * 300) + ($fleetGive->getNiobium() * 0.10));
             }
             $reportSell->setContent("Votre vente aux marchands vous a rapporté <span class='text-vert'>+" . number_format($gainSell) . "</span> bitcoins. Et <span class='text-vert'>+" . number_format($newWarPointS) . "</span> points de Guerre.");
             $em->persist($reportSell);

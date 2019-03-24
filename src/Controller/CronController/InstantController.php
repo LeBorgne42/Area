@@ -761,15 +761,15 @@ class InstantController extends AbstractController
                                 $reportSell->setUser($user);
                                 $reportSell->setTitle("Vente aux marchands");
                                 $reportSell->setImageName("sell_report.jpg");
-                                $newWarPointS = round((($fleet->getScientist() * 100) + ($fleet->getWorker() * 50) + ($fleet->getSoldier() * 10) + ($fleet->getWater() / 3) + ($fleet->getNiobium() / 6)) / 1000);
-                                if ($fleet->getUser()->getAlly() && $fleet->getUser()->getAlly()->getPolitic() == 'democrat') {
-                                    if ($user->getPoliticMerchant() > 0) {
-                                        $gainSell = (($fleet->getWater() * 0.5) + ($fleet->getSoldier() * 5) + ($fleet->getWorker() * 2) + ($fleet->getScientist() * 50) + ($fleet->getNiobium() * 0.25)) * (1 + ($fleet->getUser()->getPoliticMerchant() / 20));
-                                    } else {
-                                        $gainSell = ($fleet->getWater() * 0.5) + ($fleet->getSoldier() * 5) + ($fleet->getWorker() * 2) + ($fleet->getScientist() * 50) + ($fleet->getNiobium() * 0.25);
-                                    }
+                                if ($user->getPoliticPdg() > 0) {
+                                    $newWarPointS = round((((($fleet->getScientist() * 100) + ($fleet->getWorker() * 50) + ($fleet->getSoldier() * 10) + ($fleet->getWater() / 3) + ($fleet->getNiobium() / 6)) / 1000)) * (1 + ($user->getPoliticPdg() / 10)));
                                 } else {
-                                    $gainSell = ($fleet->getWater() * 0.5) + ($fleet->getSoldier() * 5) + ($fleet->getWorker() * 2) + ($fleet->getScientist() * 50) + ($fleet->getNiobium() * 0.25);
+                                    $newWarPointS = round((($fleet->getScientist() * 100) + ($fleet->getWorker() * 50) + ($fleet->getSoldier() * 10) + ($fleet->getWater() / 3) + ($fleet->getNiobium() / 6)) / 1000);
+                                }
+                                if ($user->getPoliticMerchant() > 0) {
+                                    $gainSell = (($fleet->getWater() * 0.25) + ($fleet->getSoldier() * 80) + ($fleet->getWorker() * 5) + ($fleet->getScientist() * 300) + ($fleet->getNiobium() * 0.10)) * (1 + ($fleet->getUser()->getPoliticMerchant() / 20));
+                                } else {
+                                    $gainSell = ($fleet->getWater() * 0.25) + ($fleet->getSoldier() * 80) + ($fleet->getWorker() * 5) + ($fleet->getScientist() * 300) + ($fleet->getNiobium() * 0.10);
                                 }
                                 $reportSell->setContent("Votre vente aux marchands vous a rapporté <span class='text-vert'>+" . number_format(round($gainSell)) . "</span> bitcoins. Et <span class='text-vert'>+" . number_format($newWarPointS) . "</span> points de Guerre. Votre flotte " . $fleet->getName() . " est sur le chemin du retour.");
                                 $em->persist($reportSell);
@@ -980,6 +980,9 @@ class InstantController extends AbstractController
                                 if($dMilitary > $aMilitary) {
                                     if ($userDefender->getZombie() == 0) {
                                         $warPointDef = round($aMilitary);
+                                        if ($userDefender->getPoliticPdg() > 0) {
+                                            $warPointDef = round($warPointDef * (1 + ($userDefender->getPoliticPdg() / 10)));
+                                        }
                                         $userDefender->getRank()->setWarPoint($userDefender->getRank()->getWarPoint() + $warPointDef);
                                     }
                                     $aMilitary = $dSoldier - $aMilitary;
@@ -1032,6 +1035,9 @@ class InstantController extends AbstractController
                                     $workerDtmp = $defenser->getWorker();
                                     $tankDtmp = $defenser->getTank();
                                     $warPointAtt = round(($soldierDtmp + ($workerDtmp / 10)) * 1);
+                                    if ($fleet->getUser()->getPoliticPdg() > 0) {
+                                        $warPointAtt = round($warPointAtt * (1 + ($fleet->getUser()->getPoliticPdg() / 10)));
+                                    }
                                     if ($fleet->getUser()->getPoliticSoldierAtt() > 0) {
                                         $aMilitary = $aMilitary / (1 + ($fleet->getUser()->getPoliticSoldierAtt() / 10));
                                     }
