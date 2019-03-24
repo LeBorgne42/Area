@@ -848,28 +848,11 @@ class User implements UserInterface, \Serializable
      */
     public function getWhichViewsReport($tmpReport)
     {
-        if($this->getViews()) {
+        if($this->getReports()) {
             $nbr = 0;
-            foreach ($this->getViews() as $view) {
-                if ($view->getType() == $tmpReport) {
+            foreach ($this->getReports() as $report) {
+                if (($report->getType() == $tmpReport or $tmpReport == 'all') and $report->getNewReport() == 2) {
                     $nbr= $nbr + 1;
-                }
-            }
-            return $nbr != 0 ? $nbr : null;
-        }
-        return null;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getViewsReport()
-    {
-        if($this->getViews()) {
-            $nbr = 0;
-            foreach ($this->getViews() as $view) {
-                if ($view->getType()) {
-                    $nbr = $nbr + 1;
                 }
             }
             return $nbr != 0 ? $nbr : null;
@@ -1090,40 +1073,56 @@ class User implements UserInterface, \Serializable
         } elseif ($this->heavyShip < 3) {
             return $return;
         } elseif ($this->ally) {
-            if ($this->politicCostScientist < 5){
-                return $return;
-            } elseif ($this->politicArmor < 5){
-                return $return;
-            } elseif ($this->politicBarge < 5){
-                return $return;
-            } elseif ($this->politicCargo < 5){
-                return $return;
-            } elseif ($this->politicColonisation < 5){
-                return $return;
-            } elseif ($this->politicCostSoldier < 5){
-                return $return;
-            } elseif ($this->politicCostTank < 5){
-                return $return;
-            } elseif ($this->politicInvade < 5){
-                return $return;
-            } elseif ($this->politicMerchant < 5){
-                return $return;
-            } elseif ($this->politicPdg < 5){
-                return $return;
-            } elseif ($this->politicProd < 5){
-                return $return;
-            } elseif ($this->politicRecycleur < 5){
-                return $return;
-            } elseif ($this->politicSearch < 5){
-                return $return;
-            } elseif ($this->politicSoldierAtt < 5){
-                return $return;
-            } elseif ($this->politicTankDef < 5){
-                return $return;
-            } elseif ($this->politicWorker < 5){
-                return $return;
-            } elseif ($this->politicWorkerDef < 5){
-                return $return;
+            if ($this->ally == 'fascism') {
+                if ($this->politicBarge < 5){
+                    return $return;
+                } elseif ($this->politicCostTank < 5){
+                    return $return;
+                } elseif ($this->politicInvade < 5){
+                    return $return;
+                } elseif ($this->politicSoldierAtt < 5){
+                    return $return;
+                } elseif ($this->politicTankDef < 5){
+                    return $return;
+                } elseif ($this->politicArmement < 5){
+                    return $return;
+                } elseif ($this->politicWorker < 5){
+                    return $return;
+                }
+            }
+            if ($this->ally == 'democrat') {
+                if ($this->politicCostScientist < 5){
+                    return $return;
+                } elseif ($this->politicArmor < 5){
+                    return $return;
+                } elseif ($this->politicCargo < 5){
+                    return $return;
+                } elseif ($this->politicColonisation < 5){
+                    return $return;
+                } elseif ($this->politicProd < 5){
+                    return $return;
+                } elseif ($this->politicSearch < 5){
+                    return $return;
+                } elseif ($this->politicMerchant < 5){
+                    return $return;
+                }
+            }
+            if ($this->ally == 'communism') {
+                if ($this->politicCostSoldier < 5){
+                    return $return;
+                } elseif ($this->politicInvade < 5){
+                    return $return;
+                } elseif ($this->politicPdg < 5){
+                    return $return;
+                } elseif ($this->politicRecycleur < 5){
+                    return $return;
+                } elseif ($this->politicWorkerDef < 5){
+                    return $return;
+                } elseif ($this->politicArmement < 5){
+                    return $return;
+                } elseif ($this->politicSoldierSale < 5){
+                    return $return;
+                }
             }
         }
         return null;

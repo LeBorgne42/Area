@@ -25,22 +25,22 @@
             <div class="float-right mb-3"><a class="btn-read-all" href="{{ path('report_all_view', {'idp': usePlanet.getId()}) }}">{{ 'AllNewView'|trans }}</a></div>
             <ul class="nav nav-tabs mt-1" id="myTab" role="tablist">
                 <li class="nav-item">
-                    <a{% if reportPage == 'defaut' %} class="py-2 nav-link active"{% endif %} href="{{ path('report_id', {'idp': usePlanet.getId(), 'id': 'defaut'}) }}" >{{ 'report.defaut'|trans }}</a>
+                    <a{% if reportPage == 'defaut' %} class="py-2 nav-link active"{% endif %} href="{{ path('report_id', {'idp': usePlanet.getId(), 'id': 'defaut'}) }}" >{{ 'report.defaut'|trans }} {% if app.user.getWhichViewsReport('defaut') %}<span class="text-vert">{{ app.user.getWhichViewsReport('defaut') }}</span>{% endif %}</a>
                 </li>
                 <li class="nav-item">
-                    <a{% if reportPage == 'zombie' %} class="py-2 nav-link active"{% endif %} href="{{ path('report_id', {'idp': usePlanet.getId(), 'id': 'zombie'}) }}" >{{ 'report.zombie'|trans }}</a>
+                    <a{% if reportPage == 'zombie' %} class="py-2 nav-link active"{% endif %} href="{{ path('report_id', {'idp': usePlanet.getId(), 'id': 'zombie'}) }}" >{{ 'report.zombie'|trans }} {% if app.user.getWhichViewsReport('zombie') %}<span class="text-vert">{{ app.user.getWhichViewsReport('zombie') }}</span>{% endif %}</a>
                 </li>
                 <li class="nav-item">
-                    <a{% if reportPage == 'fight' %} class="py-2 nav-link active"{% endif %} href="{{ path('report_id', {'idp': usePlanet.getId(), 'id': 'fight'}) }}" >{{ 'report.fight'|trans }}</a>
+                    <a{% if reportPage == 'fight' %} class="py-2 nav-link active"{% endif %} href="{{ path('report_id', {'idp': usePlanet.getId(), 'id': 'fight'}) }}" >{{ 'report.fight'|trans }} {% if app.user.getWhichViewsReport('fight') %}<span class="text-vert">{{ app.user.getWhichViewsReport('fight') }}</span>{% endif %}</a>
                 </li>
                 <li class="nav-item">
-                    <a{% if reportPage == 'invade' %} class="py-2 nav-link active"{% endif %} href="{{ path('report_id', {'idp': usePlanet.getId(), 'id': 'invade'}) }}" >{{ 'report.invade'|trans }}</a>
+                    <a{% if reportPage == 'invade' %} class="py-2 nav-link active"{% endif %} href="{{ path('report_id', {'idp': usePlanet.getId(), 'id': 'invade'}) }}" >{{ 'report.invade'|trans }} {% if app.user.getWhichViewsReport('invade') %}<span class="text-vert">{{ app.user.getWhichViewsReport('invade') }}</span>{% endif %}</a>
                 </li>
                 <li class="nav-item">
-                    <a{% if reportPage == 'economic' %} class="py-2 nav-link active"{% endif %} href="{{ path('report_id', {'idp': usePlanet.getId(), 'id': 'economic'}) }}" >{{ 'report.economic'|trans }}</a>
+                    <a{% if reportPage == 'economic' %} class="py-2 nav-link active"{% endif %} href="{{ path('report_id', {'idp': usePlanet.getId(), 'id': 'economic'}) }}" >{{ 'report.economic'|trans }} {% if app.user.getWhichViewsReport('economic') %}<span class="text-vert">{{ app.user.getWhichViewsReport('economic') }}</span>{% endif %}</a>
                 </li>
                 <li class="nav-item">
-                    <a{% if reportPage == 'move' %} class="py-2 nav-link active"{% endif %} href="{{ path('report_id', {'idp': usePlanet.getId(), 'id': 'move'}) }}" >{{ 'report.move'|trans }}</a>
+                    <a{% if reportPage == 'move' %} class="py-2 nav-link active"{% endif %} href="{{ path('report_id', {'idp': usePlanet.getId(), 'id': 'move'}) }}" >{{ 'report.move'|trans }} {% if app.user.getWhichViewsReport('move') %}<span class="text-vert">{{ app.user.getWhichViewsReport('move') }}</span>{% endif %}</a>
                 </li>
             </ul>
             {% for report in reports %}
@@ -54,7 +54,7 @@
                                     {{ report.sendAt|date('Y/m/d H:i:s') }}
                                 </div>
                                 <div class="mt-3">
-                                    {% if report.getNewReport() == true %}<a class="btn-new" href="{{ path('report_view', {'idp': usePlanet.getId(), 'id': report.getId()}) }}">{{ 'newReport'|trans }}</a>{% endif %}
+                                    {% if report.getNewReport() == 1 %}<a class="btn-new" href="{{ path('report_view', {'idp': usePlanet.getId(), 'id': report.getId()}) }}">{{ 'newReport'|trans }}</a>{% endif %}
                                     <a class="btn-delete" href="{{ path('report_delete', {'idp': usePlanet.getId(), 'id': report.getId()}) }}">{{ 'deleteReport'|trans }}</a>
                                 </div>
                             </span>

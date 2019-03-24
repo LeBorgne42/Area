@@ -286,7 +286,7 @@ class FleetController  extends AbstractController
     }
 
     /**
-     * @Route("/gerer-flotte/{idp}/{id}", name="manage_fleet", requirements={"idp"="\d+", "id"="\d+"})
+     * @Route("/gerer-flotte/{idp}/{id}/", name="manage_fleet", requirements={"idp"="\d+", "id"="\d+"})
      */
     public function manageFleetAction(Request $request, $idp, $id)
     {
@@ -740,7 +740,11 @@ class FleetController  extends AbstractController
             $planetTake->setDestroyer($destroyer);
 
             $em->flush();
-            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+            if ($fleetGive->getFleetList()) {
+                return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
+            } else {
+                return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+            }
         }
 
         return $this->render('connected/fleet/edit.html.twig', [
@@ -866,7 +870,11 @@ class FleetController  extends AbstractController
                 ->getOneOrNullResult();
 
             if($sectorDestroy && $form_sendFleet->get('sector')->getData() != $fleetGive->getPlanet()->getSector()->getPosition()) { // AJOUTER LA GALAXIE
-                return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+                if ($fleetGive->getFleetList()) {
+                    return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
+                } else {
+                    return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+                }
             }
 
             if($form_sendFleet->get('planet')->getData()) {
@@ -875,7 +883,11 @@ class FleetController  extends AbstractController
                 $planetTakee = $planetTake->getPosition();
                 $galaxy = $planetTake->getSector()->getGalaxy()->getPosition();
                 if($planetTake == $fleetGive->getPlanet()) {
-                    return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+                    if ($fleetGive->getFleetList()) {
+                        return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
+                    } else {
+                        return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+                    }
                 }
             } else {
                 if($user->getHyperespace() == 1) {
@@ -902,7 +914,11 @@ class FleetController  extends AbstractController
                     ->getOneOrNullResult();
 
                 if($planetTake == $fleetGive->getPlanet()) {
-                    return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+                    if ($fleetGive->getFleetList()) {
+                        return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
+                    } else {
+                        return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+                    }
                 }
             }
             $sFleet = $fleetGive->getPlanet()->getSector()->getPosition();
@@ -954,7 +970,11 @@ class FleetController  extends AbstractController
             $user->setBitcoin($user->getBitcoin() - $carburant);
 
             $em->flush();
-            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+            if ($fleetGive->getFleetList()) {
+                return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
+            } else {
+                return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+            }
         }
         return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
     }
@@ -1030,7 +1050,11 @@ class FleetController  extends AbstractController
 
         $em->flush();
 
-        return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+        if ($fleetGive->getFleetList()) {
+            return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
+        } else {
+            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+        }
     }
 
     /**
@@ -1103,7 +1127,11 @@ class FleetController  extends AbstractController
 
         $em->flush();
 
-        return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+        if ($fleetGive->getFleetList()) {
+            return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
+        } else {
+            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+        }
     }
 
     /**
@@ -1176,7 +1204,11 @@ class FleetController  extends AbstractController
 
         $em->flush();
 
-        return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+        if ($fleetGive->getFleetList()) {
+            return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
+        } else {
+            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+        }
     }
 
     /**
@@ -1249,7 +1281,11 @@ class FleetController  extends AbstractController
 
         $em->flush();
 
-        return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+        if ($fleetGive->getFleetList()) {
+            return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
+        } else {
+            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+        }
     }
 
     /**
@@ -1322,7 +1358,11 @@ class FleetController  extends AbstractController
 
         $em->flush();
 
-        return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+        if ($fleetGive->getFleetList()) {
+            return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
+        } else {
+            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+        }
     }
 
     /**
@@ -1423,7 +1463,11 @@ class FleetController  extends AbstractController
 
         $em->flush();
 
-        return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+        if ($fleetGive->getFleetList()) {
+            return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
+        } else {
+            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+        }
     }
 
     /**
@@ -1494,7 +1538,11 @@ class FleetController  extends AbstractController
         $em->remove($fleetGive);
         $em->flush();
 
-        return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+        if ($fleetTake->getFleetList()) {
+            return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
+        } else {
+            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+        }
     }
 
     /**
@@ -1644,7 +1692,11 @@ class FleetController  extends AbstractController
             $em->flush();
 
 
-            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+            if ($oldFleet->getFleetList() || $fleet->getFleetList()) {
+                return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
+            } else {
+                return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+            }
         }
 
         return $this->render('connected/fleet/split.html.twig', [
@@ -1683,6 +1735,10 @@ class FleetController  extends AbstractController
             $em->flush();
         }
 
-        return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+        if ($fleet->getFleetList()) {
+            return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
+        } else {
+            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+        }
     }
 }

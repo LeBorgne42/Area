@@ -35,7 +35,7 @@ class Report
     protected $title;
 
     /**
-     * @ORM\Column(name="newReport",type="boolean")
+     * @ORM\Column(name="newReport",type="smallint")
      */
     protected $newReport;
 
@@ -62,7 +62,7 @@ class Report
 
     public function __construct()
     {
-        $this->newReport = 1;
+        $this->newReport = 2;
         $this->shareKey = null;
         $this->type = 'defaut';
     }

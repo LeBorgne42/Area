@@ -60,10 +60,10 @@
         <a href="{{ path('message', {'idp': usePlanet.getId()}) }}">{% if app.user.getViewMessage() == false %}<div class="text-orange glyphicon glyphicon-envelope"></div> {% endif %}{{ 'message'|trans }}</span></a>
     </div>
     <div class="btn-left{% if app.request.attributes.get('_route') == 'salon' %} currentRoute{% endif %}{% if app.user.getTutorial() < 22 %} tutorial-hide{% elseif app.user.getTutorial() == 22 %} tutorial-show{% endif %}">
-        <a href="{{ path('salon', {'idp': usePlanet.getId()}) }}"><span>{% if app.user.getViewSalon() %}<span class="text-vert">{{ app.user.getViewSalon() }}</span> {% elseif app.user.getSalonAt() == null %}<div class="text-orange glyphicon glyphicon-comment"></div> {% endif %}{{ 'salon'|trans }}</span></a>
+        <a href="{{ path('salon', {'idp': usePlanet.getId()}) }}"><span>{% if app.user.getViewSalon() %}<span class="text-vert">{{ app.user.getViewSalon() }}</span> {% elseif app.user.getSalonAt() == null %}<div class="text-vert glyphicon glyphicon-comment"></div> {% endif %}{{ 'salon'|trans }}</span></a>
     </div>
     <div class="btn-left{% if app.request.attributes.get('_route') == 'report' %} currentRoute{% endif %}{% if app.user.getTutorial() == 1 or app.user.getTutorial() == 21 %} tutorial-show{% endif %}">
-        <a href="{{ path('report', {'idp': usePlanet.getId()}) }}">{% if app.user.getViewsReport() %}<span class="text-vert">{{ app.user.getViewsReport() }}</span> {% elseif app.user.getViewReport() == false %}<div class="text-orange glyphicon exclamation-sign"></div> {% endif %}{{ 'report'|trans }}</span></a>
+        <a href="{{ path('report', {'idp': usePlanet.getId()}) }}">{% if app.user.getWhichViewsReport('all') %}<span class="text-vert">{{ app.user.getWhichViewsReport('all') }}</span> {% endif %}{{ 'report'|trans }}</span></a>
     </div>
     <div class="btn-left{% if app.request.attributes.get('_route') == 'rank_ally' %} currentRoute{% endif %}{% if app.user.getTutorial() < 50 %} tutorial-hide{% endif %}">
         <a href="{{ path('rank_ally', {'idp': usePlanet.getId()}) }}"><span>{{ 'rank'|trans }}</span></a>

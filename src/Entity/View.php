@@ -26,11 +26,6 @@ class View
     protected $user;
 
     /**
-     * @ORM\Column(name="type",type="string", length=25, nullable=true)
-     */
-    protected $type;
-
-    /**
      * @ORM\ManyToOne(targetEntity="Salon", inversedBy="views", fetch="EXTRA_LAZY")
      * @ORM\JoinColumn(name="salon_id", referencedColumnName="id")
      */
@@ -38,7 +33,6 @@ class View
 
     public function __construct()
     {
-        $this->type = null;
         $this->salon = null;
     }
 
@@ -61,22 +55,6 @@ class View
     public function setUser($user): void
     {
         $this->user = $user;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * @param mixed $type
-     */
-    public function setType($type): void
-    {
-        $this->type = $type;
     }
 
     /**

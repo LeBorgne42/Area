@@ -53,6 +53,8 @@ class SalonController extends AbstractController
                     $em->remove($view);
                 }
             }
+        } else {
+            $user->setViewMessage(true);
         }
 
         $salons = $em->getRepository('App:Salon')

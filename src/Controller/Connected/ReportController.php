@@ -49,7 +49,8 @@ class ReportController extends AbstractController
             $reports = $em->getRepository('App:Report')
                 ->createQueryBuilder('r')
                 ->where('r.user = :user')
-                ->setParameters(['user' => $user])
+                ->andWhere('r.type = :type')
+                ->setParameters(['user' => $user, 'type' => 'defaut'])
                 ->orderBy('r.sendAt', 'DESC')
                 ->getQuery()
                 ->getResult();
@@ -64,13 +65,26 @@ class ReportController extends AbstractController
                 ->getResult();
         }
 
+        if ($id != 'defaut') {
+            foreach($reports as $report) {
+                if($report->getType() == $id && $report->getNewReport() == 2) {
+                    $report->setNewReport(1);
+                }
+            }
+        } else {
+            foreach($reports as $report) {
+                if($report->getType() == $id && $report->getNewReport() == 2) {
+                    $report->setNewReport(1);
+                }
+            }
+        }
+
         if(($user->getTutorial() == 1)) {
             $user->setTutorial(2);
         }
         if(($user->getTutorial() == 21)) {
             $user->setTutorial(22);
         }
-        $user->setViewReport(true);
 
         $em->flush();
 
@@ -99,7 +113,7 @@ class ReportController extends AbstractController
             ->getQuery()
             ->getOneOrNullResult();
 
-        $report->setNewReport(false);
+        $report->setNewReport(0);
 
         $em->flush();
 
@@ -164,14 +178,14 @@ class ReportController extends AbstractController
 
         $reports = $em->getRepository('App:Report')
             ->createQueryBuilder('r')
-            ->where('r.newReport = true')
+            ->where('r.newReport = :one')
             ->andWhere('r.user = :user')
-            ->setParameters(['user' => $user])
+            ->setParameters(['user' => $user, 'one' => 1])
             ->getQuery()
             ->getResult();
 
         foreach($reports as $report) {
-            $report->setNewReport(false);
+            $report->setNewReport(0);
         }
         $em->flush();
 

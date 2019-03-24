@@ -5,6 +5,7 @@
 {% block title %}{{ 'title'|trans }}{% endblock %}
 
 {% block body %}
+<script type="text/javascript" src="{{ asset('build/spatial.js') }}"></script>
     {% set bargeBonus = 2000 * (1 + (app.user.getPoliticBarge() / 4)) %}
     {% set recycleurBonus = 1000 + (app.user.getPoliticRecycleur() * 200) %}
     {% set cargoBonus = 1.2 + (app.user.getPoliticCargo() / 5) %}
@@ -381,7 +382,7 @@
                     {% if fleet.getUser() == app.user and fleet.getPlanete() is null %}
                         <tr>
                             <th class="tab-cells-name">
-                                "{{  fleet.getName() }}" {% if fleet.getFightAt() == null %}<span><a class="ml-3 float-right" href="{{ path('destroy_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}"><span>{{ 'spatial.destroyFleet'|trans }}</span></a></span><span><a class="ml-3 float-right" href="{{ path('manage_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId() }) }}" data-toggle="modal" data-target="#editModal"><span>{{ 'spatial.seeFlotte'|trans }}</span></a></span>{% else %}<span class="float-right text-rouge">{{ 'fleet.combat'|trans }}</span>{% endif %}
+                                "{{  fleet.getName() }}" {% if fleet.getFightAt() == null %}<span><a class="ml-3 float-right" href="{{ path('destroy_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}"><span>{{ 'spatial.destroyFleet'|trans }}</span></a></span><span><a class="ml-3 float-right" href="{{ path('manage_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}" data-toggle="modal" data-target="#editModal"><span>{{ 'spatial.seeFlotte'|trans }}</span></a></span>{% else %}<span class="float-right text-rouge">{{ 'fleet.combat'|trans }}</span>{% endif %}
                             </th>
                             <td class="center-cells text-center">
                                 {{ fleet.getNbrShips()|number_format }}

@@ -899,7 +899,6 @@ class FightController extends AbstractController
                 $em->remove($colonize);
             }
             $reportColo = new Report();
-            $reportColo->setType('move');
             $reportColo->setSendAt($now);
             $reportColo->setUser($user);
             $reportColo->setTitle("Colonisation de planète");
