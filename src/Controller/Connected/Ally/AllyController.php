@@ -269,6 +269,7 @@ class AllyController extends AbstractController
         return $this->render('connected/ally/noAlly.html.twig', [
             'form_ally' => $form_ally->createView(),
             'usePlanet' => $usePlanet,
+            'now' => $now
         ]);
     }
 
@@ -317,6 +318,9 @@ class AllyController extends AbstractController
                 $em->remove($grade);
             }
             foreach ($ally->getSalons() as $salon) {
+                foreach ($salon->getViews() as $view) {
+                    $em->remove($view);
+                }
                 foreach ($salon->getContents() as $content) {
                     $em->remove($content);
                 }

@@ -21,10 +21,10 @@
                 </tbody>
             </table>
         {% endif %}
-        <div class="front-block-game">
+        <div class="front-block-second">
             {% if app.user.getAlly() %}
             {% else %}
-                {% if app.user.getAllyBan() %}<h3 class="text-center text-orange mb-5">{{ 'ally.banAlly'|trans }} <span class="timerArea" hidden>{{ app.user.getAllyBan()|date('Y/m/d H:i:s') }}</span></h3>{% endif %}
+                {% if app.user.getAllyBan() > now %}<h3 class="text-center text-orange mb-5">{{ 'ally.banAlly'|trans }} <span class="timerArea" hidden>{{ app.user.getAllyBan()|date('Y/m/d H:i:s') }}</span></h3>{% endif %}
                 {{ form_start(form_ally) }}
                 <div class="row">
                     <div class="offset-1 col-4 form-group">
@@ -87,6 +87,28 @@
                     </tbody>
                 </table>
             {% endif %}
+        </div>
+        <div class="front-block-game mt-4 mb-5 text-center">
+            <h1 class="mb-5 text-or">{{ 'ally.advantagesPolitic'|trans }}</h1>
+            <div class="row">
+                <div class="col-4">
+                    <img class="politic-border" data-toggle="tooltip" data-html="true" data-placement="top" title="{{ 'tooltip.communism'|trans }}" src="{{ asset('img/communism.png') }}">
+                </div>
+                <div class="col-4">
+                    <img class="politic-border" data-toggle="tooltip" data-html="true" data-placement="top" title="{{ 'tooltip.democrat'|trans }}" src="{{ asset('img/democrat.png') }}">
+                </div>
+                <div class="col-4">
+                    <img class="politic-border" data-toggle="tooltip" data-html="true" data-placement="top" title="{{ 'tooltip.fascism'|trans }}" src="{{ asset('img/fascism.png') }}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">{{ 'advice.communism'|trans }}
+                </div>
+                <div class="col-4">{{ 'advice.democrat'|trans }}
+                </div>
+                <div class="col-4">{{ 'advice.fascism'|trans }}
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

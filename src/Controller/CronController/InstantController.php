@@ -215,7 +215,15 @@ class InstantController extends AbstractController
             $soldierAtmp = (500 * (($zUser->getZombieAtt() / 6) + 1));
 
             if($dMilitary > $aMilitary) {
-                $zUser->setZombieAtt($zUser->getZombieAtt() + 2);
+                if ($zUser->getAlly()) {
+                    if ($zUser->getAlly()->getPolitic() == 'fascism') {
+                        $zUser->setZombieAtt($zUser->getZombieAtt() + 1);
+                    } else {
+                        $zUser->setZombieAtt($zUser->getZombieAtt() + 3);
+                    }
+                } else {
+                    $zUser->setZombieAtt($zUser->getZombieAtt() + 2);
+                }
                 $warPointDef = round($aMilitary);
                 $zUser->getRank()->setWarPoint($zUser->getRank()->getWarPoint() + $warPointDef);
                 $aMilitary = $dSoldier - $aMilitary;

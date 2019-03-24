@@ -117,7 +117,7 @@ class ReportController extends AbstractController
 
         $em->flush();
 
-        return $this->redirectToRoute('report', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('report_id', ['idp' => $usePlanet->getId(), 'id' => $report->getType()]);
     }
 
     /**
@@ -139,10 +139,11 @@ class ReportController extends AbstractController
             ->getOneOrNullResult();
 
         $report->setImageName(null);
+        $path = $report->getType();
         $em->remove($report);
         $em->flush();
 
-        return $this->redirectToRoute('report', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('report_id', ['idp' => $usePlanet->getId(), 'id' => $path]);
     }
 
     /**
@@ -163,7 +164,7 @@ class ReportController extends AbstractController
             $em->flush();
         }
 
-        return $this->redirectToRoute('report', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('report_id', ['idp' => $usePlanet->getId(), 'id' => $id->getType()]);
     }
 
     /**
