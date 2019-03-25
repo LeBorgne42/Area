@@ -71,7 +71,7 @@
                 <tbody>
                 <tr>
                     <th width="445" class="tab-cells-name">
-                        <img class="mr-3" src="{{ asset('img/scientist.png') }}"> {{ 'caserner.scientist'|trans }} x {{ usePlanet.getScientist()|number_format }} / {{ usePlanet.getScientistMax()|number_format }} <span class="float-right"><span class="ml-5"><span class="bitcoinProduct">250 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></span> <span class="ml-3"><span class="workerProduct">10</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'workerImg'|trans }}" src="{{ asset('img/worker.png') }}"></span></span>
+                        <img class="mr-3" src="{{ asset('img/scientist.png') }}"> {{ 'caserner.scientist'|trans }} x {{ usePlanet.getScientist()|number_format }} / {{ usePlanet.getScientistMax()|number_format }} <span class="float-right"><span class="ml-5"><span class="bitcoinProduct">250 <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></span> <span class="ml-3"><span class="workerProduct">10</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'workerImg'|trans }}" src="{{ asset('img/worker.png') }}"></span></span></span>
                     </th>
                     <td class="center-cells"{% if usePlanet.getWorker() < 5000 %} hidden{% endif %}>
                         {% if usePlanet.getCenterSearch() > 0 %}

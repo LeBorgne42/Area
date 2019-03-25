@@ -1,0 +1,20 @@
+title: Zombie
+zombie.mission: 'Missions sur la planète infectée :'
+zombie.zombie: 'Mission d''élimination zombies'
+zombie.planet: 'Votre planète'
+zombie.infected: 'est infectée'
+zombie.menace: 'Le niveau de menace zombies est a'
+zombie.attack: 'La prochaine attaque est prévue dans'
+tooltip.zombie: 'Lancer cette mission pour faire baisser le niveau de menace zombie en éliminant les zombies présent sur votre planète.'
+zombie.soldier: Soldats
+zombie.tank: Tanks
+zombie.time: Temps
+zombie.succed: Réussite
+zombie.uranium: 'Mission de récupèration d''uranium'
+tooltip.uranium: 'Lancer cette mission pour récupérer de l''uranium dans les zones infectées par les zombies.'
+form.nbr: 0
+form.one: 1h
+form.three: 3h
+form.six: 6h
+form.ten: 10h
+form.startMission: Lancer

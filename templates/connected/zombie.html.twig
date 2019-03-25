@@ -6,17 +6,102 @@
 
 {% block body %}
     <div class="front-block">
-        <div class="front-block-second">
-            <img src="{{ asset('img/zombie_indic.gif') }}">
+        <div class="front-block-second text-center">
+            <img class="float-left" src="{{ asset('img/zombie_indic.gif') }}">
+            <img class="float-right mt-4" src="{{ vich_uploader_asset(planet, 'imageFile') }}">
+            <div class="text-more mt-5">{{ 'zombie.planet'|trans }} «{{ planet.getName() }}» <span><a href="{{ path('map', {id: planet.getSector().getPosition(), 'usePlanet': planet.getId(), 'gal': planet.getSector().getGalaxy().getPosition()}) }}">{{ planet.getSector().getGalaxy.getPosition() }}:{{ planet.getSector().getPosition() }}:{{ planet.getPosition() }}</a></span> {{ 'zombie.infected'|trans }}</div>
+            <div class="text-more">{{ 'zombie.menace'|trans }} <span class="text-rouge">{{ app.user.getZombieAtt() }}</span></div>
+            <div class="text-more mb-4">{{ 'zombie.attack'|trans }} <span class="mt-5 timerArea text-rouge" hidden>{% if app.user.getZombieAt() %}{{ app.user.getZombieAt()|date('Y/m/d H:i:s') }}{% endif %}</span></div>
         </div>
         <div class="front-block-game mt-4">
-            Missions et lancer une mission.
-            Missions pour tuer zombies sur planète contaminé.
-            Missions 1h, 3h 6h, 10h.
+            <h2 class="text-center mb-5">{{ 'zombie.mission'|trans }}</h2>
 
-            Lancement seulement si soldats disponiblent.
-            Succès suivant probabilitées.
-            Permet de trouver de l'uranium, mais risque de faire monter la Menace Zombie.
+            <div class="row">
+                <div class="col-6">
+                    {{ form_start(form_missionZombie) }}
+                    <table class="table table-striped table-bordered table-dark">
+                        <tbody>
+                        <tr>
+                            <th colspan="4" class="tab-cells-name text-center">
+                                <span data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.zombie'|trans }}">{{ 'zombie.zombie'|trans }} <span class="glyphicon glyphicon-question-sign text-orange"></span></span>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="tab-cells-name">
+                                {{ 'zombie.soldier'|trans }}
+                            </th>
+                            <th class="tab-cells-name">
+                                {{ 'zombie.tank'|trans }}
+                            </th>
+                            <th class="tab-cells-name">
+                                {{ 'zombie.time'|trans }}
+                            </th>
+                            <th class="tab-cells-name">
+                                {{ 'zombie.succed'|trans }}
+                            </th>
+                        </tr>
+                        <tr>
+                            <td class="center-cells">
+                                {{ form_widget(form_missionZombie.soldier) }}
+                            </td>
+                            <td class="center-cells">
+                                {{ form_widget(form_missionZombie.tank) }}
+                            </td>
+                            <td class="center-cells">
+                                {{ form_widget(form_missionZombie.time) }}
+                            </td>
+                            <td class="center-cells text-center">
+                                0%
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    {{ form_widget(form_missionZombie.sendForm) }}
+                    {{ form_end(form_missionZombie) }}
+                </div>
+                <div class="col-6">
+                    {{ form_start(form_missionUranium) }}
+                    <table class="table table-striped table-bordered table-dark">
+                        <tbody>
+                        <tr>
+                            <th colspan="4" class="tab-cells-name text-center">
+                                <span data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.uranium'|trans }}">{{ 'zombie.uranium'|trans }} <span class="glyphicon glyphicon-question-sign text-orange"></span></span>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="tab-cells-name">
+                                {{ 'zombie.soldier'|trans }}
+                            </th>
+                            <th class="tab-cells-name">
+                                {{ 'zombie.tank'|trans }}
+                            </th>
+                            <th class="tab-cells-name">
+                                {{ 'zombie.time'|trans }}
+                            </th>
+                            <th class="tab-cells-name">
+                                {{ 'zombie.succed'|trans }}
+                            </th>
+                        </tr>
+                        <tr>
+                            <td class="center-cells">
+                                {{ form_widget(form_missionUranium.soldier) }}
+                            </td>
+                            <td class="center-cells">
+                                {{ form_widget(form_missionUranium.tank) }}
+                            </td>
+                            <td class="center-cells">
+                                {{ form_widget(form_missionUranium.time) }}
+                            </td>
+                            <td class="center-cells text-center">
+                                0%
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    {{ form_widget(form_missionUranium.sendForm) }}
+                    {{ form_end(form_missionUranium) }}
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

@@ -848,6 +848,7 @@ class AllyController extends AbstractController
             ->createQueryBuilder('u')
             ->where('u.lastActivity > :date')
             ->andWhere('u.ally is null')
+            ->andWhere('u.rank is not null')
             ->setParameters(['date' => $lastActivity])
             ->orderBy('u.lastActivity', 'DESC')
             ->getQuery()
