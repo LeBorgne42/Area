@@ -204,7 +204,7 @@ class SecurityController extends Controller
             $usePlanet = $em->getRepository('App:Planet')->findByFirstPlanet($user->getUsername());
 
             if($usePlanet) {
-                return $this->redirectToRoute('overview', ['usePlanet' => $usePlanet->getId(), 'usePlanet' => $usePlanet]);
+                return $this->redirectToRoute('overview', ['usePlanet' => $usePlanet->getId()]);
             } else {
                 $galaxys = $em->getRepository('App:Galaxy')
                     ->createQueryBuilder('g')
@@ -289,7 +289,7 @@ class SecurityController extends Controller
             $em->flush();
 
             if($usePlanet) {
-                return $this->redirectToRoute('overview', ['usePlanet' => $usePlanet->getId(), 'usePlanet' => $usePlanet]);
+                return $this->redirectToRoute('overview', ['usePlanet' => $usePlanet->getId()]);
             } else {
                 $galaxys = $em->getRepository('App:Galaxy')
                     ->createQueryBuilder('g')

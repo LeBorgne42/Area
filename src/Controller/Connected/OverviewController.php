@@ -131,6 +131,7 @@ class OverviewController extends AbstractController
                 }
                 $user->setBitcoin(25000);
                 $user->setSearch(null);
+                $em->remove($user->getRank(null));
                 $user->setRank(null);
                 $user->setGrade(null);
                 $user->setJoinAllyAt(null);

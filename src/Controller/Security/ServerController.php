@@ -317,6 +317,7 @@ class ServerController extends AbstractController
             $user->setBitcoin(25000);
             $user->setAlly(null);
             $user->setSearch(null);
+            $em->remove($user->getRank(null));
             $user->setRank(null);
             $user->setGrade(null);
             $user->setJoinAllyAt(null);
