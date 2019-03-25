@@ -56,6 +56,11 @@ class Planet
     protected $water;
 
     /**
+     * @ORM\Column(name="uranium",type="integer", nullable=true)
+     */
+    protected $uranium;
+
+    /**
      * @ORM\Column(name="nbCdr",type="bigint")
      */
     protected $nbCdr;
@@ -547,8 +552,9 @@ class Planet
         $this->skyPlace = 0;
         $this->ground = 0;
         $this->sky = 0;
-        $this->recycleAt = NULL;
+        $this->recycleAt = null;
         $this->autoSeller = 0;
+        $this->uranium = null;
     }
 
     /**

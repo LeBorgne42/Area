@@ -46,6 +46,11 @@ class Server
     protected $nbrInvasion;
 
     /**
+     * @ORM\Column(name="nbr_zombie",type="bigint")
+     */
+    protected $nbrZombie;
+
+    /**
      * @ORM\Column(name="nbr_sell",type="bigint")
      */
     protected $nbrSell;
@@ -79,6 +84,7 @@ class Server
         $this->nbrBattle = 0;
         $this->nbrBuilding = 0;
         $this->nbrResearch = 0;
+        $this->nbrZombie = 0;
     }
 
     /**
@@ -223,6 +229,22 @@ class Server
     public function setOpen($open): void
     {
         $this->open = $open;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNbrZombie()
+    {
+        return $this->nbrZombie;
+    }
+
+    /**
+     * @param mixed $nbrZombie
+     */
+    public function setNbrZombie($nbrZombie): void
+    {
+        $this->nbrZombie = $nbrZombie;
     }
 
     public function getId()

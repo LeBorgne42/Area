@@ -301,51 +301,20 @@ class FleetController  extends AbstractController
     }
 
     /**
-     * @Route("/gerer-flotte/{usePlanet}/{id}/", name="manage_fleet", requirements={"usePlanet"="\d+", "id"="\d+"})
+     * @Route("/gerer-flotte/{usePlanet}/{fleetGive}/", name="manage_fleet", requirements={"usePlanet"="\d+", "fleetGive"="\d+"})
      */
-    public function manageFleetAction(Request $request, Planet $usePlanet, $id)
+    public function manageFleetAction(Request $request, Planet $usePlanet, Fleet $fleetGive)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
 
-        if ($usePlanet->getUser() != $user) {
-            return $this->redirectToRoute('home');
-        }
-
-        if ($user->getAlly()) {
-            if ($user->getGrade()->getPlacement() == 1) {
-                $fleetGive = $em->getRepository('App:Fleet')
-                    ->createQueryBuilder('f')
-                    ->where('f.id = :id')
-                    ->andWhere('f.user = :user or f.ally = :ally')
-                    ->andWhere('f.fightAt is null')
-                    ->andWhere('f.flightTime is null')
-                    ->setParameters(['id' => $id, 'user' => $user, 'ally' => $user->getAlly()])
-                    ->getQuery()
-                    ->getOneOrNullResult();
-            } else {
-                $fleetGive = $em->getRepository('App:Fleet')
-                    ->createQueryBuilder('f')
-                    ->where('f.id = :id')
-                    ->andWhere('f.user = :user')
-                    ->andWhere('f.fightAt is null')
-                    ->andWhere('f.flightTime is null')
-                    ->setParameters(['id' => $id, 'user' => $user])
-                    ->getQuery()
-                    ->getOneOrNullResult();
+        if ($usePlanet->getUser() != $user || $fleetGive->getUser() != $user) {
+            if (!$user->getAlly()) {
+                return $this->redirectToRoute('home');
+            } elseif ($user->getGrade()->getPlacement() != 1 || $fleetGive->getUser()->getAlly() != $user->getAlly()) {
+                return $this->redirectToRoute('home');
             }
-        } else {
-            $fleetGive = $em->getRepository('App:Fleet')
-                ->createQueryBuilder('f')
-                ->where('f.id = :id')
-                ->andWhere('f.user = :user')
-                ->andWhere('f.fightAt is null')
-                ->andWhere('f.flightTime is null')
-                ->setParameters(['id' => $id, 'user' => $user])
-                ->getQuery()
-                ->getOneOrNullResult();
         }
-
 
         $planetTake = $fleetGive->getPlanet();
         $form_manageFleet = $this->createForm(SpatialEditFleetType::class);
@@ -832,9 +801,9 @@ class FleetController  extends AbstractController
     }
 
     /**
-     * @Route("/envoyer-flotte/{usePlanet}/{id}", name="send_fleet", requirements={"usePlanet"="\d+", "id"="\d+"})
+     * @Route("/envoyer-flotte/{usePlanet}/{fleetGive}", name="send_fleet", requirements={"usePlanet"="\d+", "fleetGive"="\d+"})
      */
-    public function sendFleetAction(Request $request, Planet $usePlanet, $id)
+    public function sendFleetAction(Request $request, Planet $usePlanet, Fleet $fleetGive)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
@@ -844,25 +813,13 @@ class FleetController  extends AbstractController
         $moreNow->setTimezone(new DateTimeZone('Europe/Paris'));
         $moreNow->add(new DateInterval('PT' . 120 . 'S'));
 
-        if ($usePlanet->getUser() != $user) {
-            return $this->redirectToRoute('home');
-        }
-
-        $ally = 'w';
-        if ($user->getAlly()) {
-            if ($user->getGrade()->getPlacement() == 1) {
-                $ally = $user->getAlly();
+        if ($usePlanet->getUser() != $user || $fleetGive->getUser() != $user) {
+            if (!$user->getAlly()) {
+                return $this->redirectToRoute('home');
+            } elseif ($user->getGrade()->getPlacement() != 1 || $fleetGive->getUser()->getAlly() != $user->getAlly()) {
+                return $this->redirectToRoute('home');
             }
         }
-        $fleetGive = $em->getRepository('App:Fleet')
-            ->createQueryBuilder('f')
-            ->where('f.id = :id')
-            ->andWhere('f.user = :user or f.ally = :ally')
-            ->andWhere('f.fightAt is null')
-            ->andWhere('f.flightTime is null')
-            ->setParameters(['id' => $id, 'user' => $user, 'ally' => $ally])
-            ->getQuery()
-            ->getOneOrNullResult();
 
         $form_sendFleet = $this->createForm(FleetSendType::class, null, ["user" => $user->getId()]);
         $form_sendFleet->handleRequest($request);

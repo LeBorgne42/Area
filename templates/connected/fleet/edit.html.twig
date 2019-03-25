@@ -20,7 +20,7 @@
         <div class="pb-3 createFleet">
             <div class="row">
                 <div class="col-9 pr-1">
-                    {{ form_start(form_manageRenameFleet,{attr: { action: path('manage_fleet', {'usePlanet': usePlanet.getId(), 'id': fleet.getId()}) }}) }}
+                    {{ form_start(form_manageRenameFleet,{attr: { action: path('manage_fleet', {'usePlanet': usePlanet.getId(), 'fleetGive': fleet.getId()}) }}) }}
                     <table class="table table-striped table-bordered table-dark">
                         <tbody>
                         <tr>
@@ -38,7 +38,7 @@
                         </tbody>
                     </table>
                     {{ form_end(form_manageRenameFleet) }}
-                    {{ form_start(form_manageAttackFleet,{attr: { action: path('manage_fleet', {'usePlanet': usePlanet.getId(), 'id': fleet.getId()}) }}) }}
+                    {{ form_start(form_manageAttackFleet,{attr: { action: path('manage_fleet', {'usePlanet': usePlanet.getId(), 'fleetGive': fleet.getId()}) }}) }}
                     <table class="table table-striped table-bordered table-dark">
                         <tbody>
                         <tr>
@@ -57,7 +57,7 @@
                         </tbody>
                     </table>
                     {{ form_end(form_manageAttackFleet) }}
-                    {{ form_start(form_sendFleet,{attr: { action: path('send_fleet', {'usePlanet': usePlanet.getId(), 'id': fleet.getId()}) }}) }}
+                    {{ form_start(form_sendFleet,{attr: { action: path('send_fleet', {'usePlanet': usePlanet.getId(), 'fleetGive': fleet.getId()}) }}) }}
                     <div id="galaxyFleet" hidden>{{ fleet.getPlanet().getSector().getGalaxy().getPosition() }}</div>
                     <div id="positionFleet" hidden>{{ fleet.getPlanet().getSector().getPosition() }}</div>
                     <div id="planeteFleet" hidden>{{ fleet.getPlanet().getPosition() }}</div>
@@ -136,7 +136,7 @@
                     </table>
                     {% if app.user == fleet.getPlanet().getUser() and fleet.getPlanet().getRadarAt() == null and fleet.getPlanet().getBrouilleurAt() == null %}
                         {{ form_end(form_sendFleet) }}
-                        {{ form_start(form_manageFleet,{attr: { action: path('manage_fleet', {'usePlanet': usePlanet.getId(), 'id': fleet.getId()}) }}) }}
+                        {{ form_start(form_manageFleet,{attr: { action: path('manage_fleet', {'usePlanet': usePlanet.getId(), 'fleetGive': fleet.getId()}) }}) }}
                         <table class="table table-striped table-bordered table-dark">
                             <tbody>
                             <tr>

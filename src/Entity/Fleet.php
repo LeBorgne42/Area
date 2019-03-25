@@ -243,6 +243,11 @@ class Fleet
     protected $water;
 
     /**
+     * @ORM\Column(name="uranium",type="integer", nullable=true)
+     */
+    protected $uranium;
+
+    /**
      * User constructor.
      */
     public function __construct()
@@ -250,6 +255,7 @@ class Fleet
         $this->attack = false;
         $this->water = null;
         $this->niobium = null;
+        $this->uranium = null;
         $this->scientist = null;
         $this->worker = null;
         $this->soldier = null;
