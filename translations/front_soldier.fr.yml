@@ -7,7 +7,7 @@ scientist.recruit: 'Engager des scientifiques'
 caserner.scientist: 'Scientifiques dans les centres'
 tank.recruit: 'Construire des tanks'
 caserner.tank: 'Tanks dans nos hangars'
-form.nbr: nombre
+form.nbr: 0
 form.recruitCaserne: Lancer
 workerImg: Travailleurs
 scientistImg: Scientifiques
@@ -17,3 +17,4 @@ caserner.scientistProd: ' scientifiques en production'
 caserner.tankProd: ' tanks en production'
 caserner.noScientist: 'Requis : Centre de recherche'
 caserner.noTank: 'Requis : Unitées blindées - Usine d''armement + Caserne ou Bunker'
+caserner.totalProduct: 'Total :'

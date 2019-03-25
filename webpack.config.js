@@ -25,6 +25,7 @@ Encore
     .addEntry('spatial', './assets/js/spatial.js')
     .addEntry('planet', './assets/js/planet.js')
     .addEntry('fleet_list', './assets/js/fleet_list.js')
+    .addEntry('caserne', './assets/js/caserne.js')
     .enableForkedTypeScriptTypesChecking()
 ;
 

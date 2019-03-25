@@ -21,15 +21,14 @@ class CaserneRecruitType extends AbstractType
                 null,
                 [
                     'label' => 'form.nbr',
-                    'data' => 0,
+                    'data' => null,
                     'attr'  => [
                         'placeholder' => 'form.nbr',
-                        'class' => 'game-input text-right',
-                        'min' => '0',
+                        'class' => 'nbrProduct game-input text-right',
                         'max' => '50000',
                         'autocomplete' => 'off',
                     ],
-                    'required' => true,
+                    'required' => false,
                 ]
             )
             ->add(
@@ -37,15 +36,14 @@ class CaserneRecruitType extends AbstractType
                 null,
                 [
                     'label' => 'form.nbr',
-                    'data' => 0,
+                    'data' => null,
                     'attr'  => [
                         'placeholder' => 'form.nbr',
-                        'class' => 'game-input text-right',
-                        'min' => '0',
+                        'class' => 'nbrProduct game-input text-right',
                         'max' => '500',
                         'autocomplete' => 'off',
                     ],
-                    'required' => true,
+                    'required' => false,
                 ]
             )
             ->add(
@@ -53,15 +51,14 @@ class CaserneRecruitType extends AbstractType
                 null,
                 [
                     'label' => 'form.nbr',
-                    'data' => 0,
+                    'data' => null,
                     'attr'  => [
                         'placeholder' => 'form.nbr',
-                        'class' => 'game-input text-right',
-                        'min' => '0',
+                        'class' => 'nbrProduct game-input text-right',
                         'max' => '5000',
                         'autocomplete' => 'off',
                     ],
-                    'required' => true,
+                    'required' => false,
                 ]
             )
             ->add('sendForm', SubmitType::class, ['label' => 'form.recruitCaserne', 'attr' => ['class' => 'confirm-button float-right']]);
