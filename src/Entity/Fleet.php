@@ -103,142 +103,142 @@ class Fleet
     protected $planete;
 
     /**
-     * @ORM\Column(name="sonde",type="bigint")
+     * @ORM\Column(name="sonde",type="bigint", nullable=true)
      */
     protected $sonde;
 
     /**
-     * @ORM\Column(name="cargoI",type="integer")
+     * @ORM\Column(name="cargoI",type="integer", nullable=true)
      */
     protected $cargoI;
 
     /**
-     * @ORM\Column(name="cargoV",type="integer")
+     * @ORM\Column(name="cargoV",type="integer", nullable=true)
      */
     protected $cargoV;
 
     /**
-     * @ORM\Column(name="cargoX",type="bigint")
+     * @ORM\Column(name="cargoX",type="bigint", nullable=true)
      */
     protected $cargoX;
 
     /**
-     * @ORM\Column(name="colonizer",type="smallint")
+     * @ORM\Column(name="colonizer",type="smallint", nullable=true)
      */
     protected $colonizer;
 
     /**
-     * @ORM\Column(name="recycleur",type="integer")
+     * @ORM\Column(name="recycleur",type="integer", nullable=true)
      */
     protected $recycleur;
 
     /**
-     * @ORM\Column(name="barge",type="integer")
+     * @ORM\Column(name="barge",type="integer", nullable=true)
      */
     protected $barge;
 
     /**
-     * @ORM\Column(name="moonMaker",type="smallint")
+     * @ORM\Column(name="moonMaker",type="smallint", nullable=true)
      */
     protected $moonMaker;
 
     /**
-     * @ORM\Column(name="radarShip",type="integer")
+     * @ORM\Column(name="radarShip",type="integer", nullable=true)
      */
     protected $radarShip;
 
     /**
-     * @ORM\Column(name="brouilleurShip",type="integer")
+     * @ORM\Column(name="brouilleurShip",type="integer", nullable=true)
      */
     protected $brouilleurShip;
 
     /**
-     * @ORM\Column(name="motherShip",type="smallint")
+     * @ORM\Column(name="motherShip",type="smallint", nullable=true)
      */
     protected $motherShip;
 
     /**
-     * @ORM\Column(name="hunter",type="bigint")
+     * @ORM\Column(name="hunter",type="bigint", nullable=true)
      */
     protected $hunter;
 
     /**
-     * @ORM\Column(name="hunterHeavy",type="bigint")
+     * @ORM\Column(name="hunterHeavy",type="bigint", nullable=true)
      */
     protected $hunterHeavy;
 
     /**
-     * @ORM\Column(name="hunterWar",type="bigint")
+     * @ORM\Column(name="hunterWar",type="bigint", nullable=true)
      */
     protected $hunterWar;
 
     /**
-     * @ORM\Column(name="corvet",type="bigint")
+     * @ORM\Column(name="corvet",type="bigint", nullable=true)
      */
     protected $corvet;
 
     /**
-     * @ORM\Column(name="corvetLaser",type="bigint")
+     * @ORM\Column(name="corvetLaser",type="bigint", nullable=true)
      */
     protected $corvetLaser;
 
     /**
-     * @ORM\Column(name="corvetWar",type="bigint")
+     * @ORM\Column(name="corvetWar",type="bigint", nullable=true)
      */
     protected $corvetWar;
 
     /**
-     * @ORM\Column(name="fregate",type="bigint")
+     * @ORM\Column(name="fregate",type="bigint", nullable=true)
      */
     protected $fregate;
 
     /**
-     * @ORM\Column(name="fregatePlasma",type="bigint")
+     * @ORM\Column(name="fregatePlasma",type="bigint", nullable=true)
      */
     protected $fregatePlasma;
 
     /**
-     * @ORM\Column(name="croiser",type="bigint")
+     * @ORM\Column(name="croiser",type="bigint", nullable=true)
      */
     protected $croiser;
 
     /**
-     * @ORM\Column(name="ironClad",type="bigint")
+     * @ORM\Column(name="ironClad",type="bigint", nullable=true)
      */
     protected $ironClad;
 
     /**
-     * @ORM\Column(name="destroyer",type="bigint")
+     * @ORM\Column(name="destroyer",type="bigint", nullable=true)
      */
     protected $destroyer;
 
     /**
-     * @ORM\Column(name="soldier",type="integer")
+     * @ORM\Column(name="soldier",type="integer", nullable=true)
      */
     protected $soldier;
 
     /**
-     * @ORM\Column(name="tank",type="smallint")
+     * @ORM\Column(name="tank",type="smallint", nullable=true)
      */
     protected $tank;
 
     /**
-     * @ORM\Column(name="worker",type="integer")
+     * @ORM\Column(name="worker",type="integer", nullable=true)
      */
     protected $worker;
 
     /**
-     * @ORM\Column(name="scientist",type="smallint")
+     * @ORM\Column(name="scientist",type="smallint", nullable=true)
      */
     protected $scientist;
 
     /**
-     * @ORM\Column(name="niobium",type="bigint")
+     * @ORM\Column(name="niobium",type="bigint", nullable=true)
      */
     protected $niobium;
 
     /**
-     * @ORM\Column(name="water",type="bigint")
+     * @ORM\Column(name="water",type="bigint", nullable=true)
      */
     protected $water;
 
@@ -248,35 +248,35 @@ class Fleet
     public function __construct()
     {
         $this->attack = false;
-        $this->water = 0;
-        $this->niobium = 0;
-        $this->scientist = 0;
-        $this->worker = 0;
-        $this->soldier = 0;
-        $this->tank = 0;
+        $this->water = null;
+        $this->niobium = null;
+        $this->scientist = null;
+        $this->worker = null;
+        $this->soldier = null;
+        $this->tank = null;
         $this->attack = 0;
-        $this->destroyer = 0;
-        $this->ironClad = 0;
-        $this->croiser = 0;
-        $this->fregate = 0;
-        $this->fregatePlasma = 0;
-        $this->corvet = 0;
-        $this->corvetLaser = 0;
-        $this->corvetWar = 0;
-        $this->hunter = 0;
-        $this->hunterHeavy = 0;
-        $this->hunterWar = 0;
-        $this->moonMaker = 0;
-        $this->motherShip = 0;
-        $this->radarShip = 0;
-        $this->brouilleurShip = 0;
-        $this->barge = 0;
-        $this->recycleur = 0;
-        $this->cargoI = 0;
-        $this->cargoV = 0;
-        $this->cargoX = 0;
-        $this->colonizer = 0;
-        $this->sonde = 0;
+        $this->destroyer = null;
+        $this->ironClad = null;
+        $this->croiser = null;
+        $this->fregate = null;
+        $this->fregatePlasma = null;
+        $this->corvet = null;
+        $this->corvetLaser = null;
+        $this->corvetWar = null;
+        $this->hunter = null;
+        $this->hunterHeavy = null;
+        $this->hunterWar = null;
+        $this->moonMaker = null;
+        $this->motherShip = null;
+        $this->radarShip = null;
+        $this->brouilleurShip = null;
+        $this->barge = null;
+        $this->recycleur = null;
+        $this->cargoI = null;
+        $this->cargoV = null;
+        $this->cargoX = null;
+        $this->colonizer = null;
+        $this->sonde = null;
         $this->planete = null;
         $this->fightAt = null;
         $this->newPlanet = null;

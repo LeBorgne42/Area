@@ -1424,7 +1424,7 @@ class FleetController  extends AbstractController
     /**
      * @Route("/fusionner-flotte/{usePlanet}/{fleetGive}/{fleetTake}", name="fusion_fleet", requirements={"usePlanet"="\d+", "fleetGive"="\d+", "fleetTake"="\d+"})
      */
-    public function fusionFleetAction(Planet $usePlanet, $fleetGive, $fleetTake)
+    public function fusionFleetAction(Planet $usePlanet, Fleet $fleetGive, Fleet $fleetTake)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();

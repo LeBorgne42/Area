@@ -37,11 +37,10 @@ class SpatialFleetType extends AbstractType
                 null,
                 array(
                     'label' => 'form.nbr',
-                    'data' => 0,
+                    'data' => null,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
                         'class' => 'game-input text-right',
-                        'min' => '0',
                         'autocomplete' => 'off',
                     ),
                     'required' => false,
@@ -52,11 +51,10 @@ class SpatialFleetType extends AbstractType
                 null,
                 array(
                     'label' => 'form.nbr',
-                    'data' => 0,
+                    'data' => null,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
                         'class' => 'game-input text-right',
-                        'min' => '0',
                         'autocomplete' => 'off',
                     ),
                     'required' => false,
@@ -67,11 +65,10 @@ class SpatialFleetType extends AbstractType
                 null,
                 array(
                     'label' => 'form.nbr',
-                    'data' => 0,
+                    'data' => null,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
                         'class' => 'game-input text-right',
-                        'min' => '0',
                         'autocomplete' => 'off',
                     ),
                     'required' => false,
@@ -82,11 +79,10 @@ class SpatialFleetType extends AbstractType
                 null,
                 array(
                     'label' => 'form.nbr',
-                    'data' => 0,
+                    'data' => null,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
                         'class' => 'game-input text-right',
-                        'min' => '0',
                         'autocomplete' => 'off',
                     ),
                     'required' => false,
@@ -97,11 +93,10 @@ class SpatialFleetType extends AbstractType
                 null,
                 array(
                     'label' => 'form.nbr',
-                    'data' => 0,
+                    'data' => null,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
                         'class' => 'game-input text-right',
-                        'min' => '0',
                         'autocomplete' => 'off',
                     ),
                     'required' => false,
@@ -112,11 +107,10 @@ class SpatialFleetType extends AbstractType
                 null,
                 array(
                     'label' => 'form.nbr',
-                    'data' => 0,
+                    'data' => null,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
                         'class' => 'game-input text-right',
-                        'min' => '0',
                         'autocomplete' => 'off',
                     ),
                     'required' => false,
@@ -127,11 +121,10 @@ class SpatialFleetType extends AbstractType
                 null,
                 array(
                     'label' => 'form.nbr',
-                    'data' => 0,
+                    'data' => null,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
                         'class' => 'game-input text-right',
-                        'min' => '0',
                         'autocomplete' => 'off',
                     ),
                     'required' => false,
@@ -142,11 +135,10 @@ class SpatialFleetType extends AbstractType
                 null,
                 array(
                     'label' => 'form.nbr',
-                    'data' => 0,
+                    'data' => null,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
                         'class' => 'game-input text-right',
-                        'min' => '0',
                         'autocomplete' => 'off',
                     ),
                     'required' => false,
@@ -157,11 +149,10 @@ class SpatialFleetType extends AbstractType
                 null,
                 array(
                     'label' => 'form.nbr',
-                    'data' => 0,
+                    'data' => null,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
                         'class' => 'game-input text-right',
-                        'min' => '0',
                         'autocomplete' => 'off',
                     ),
                     'required' => false,
@@ -172,11 +163,10 @@ class SpatialFleetType extends AbstractType
                 null,
                 array(
                     'label' => 'form.nbr',
-                    'data' => 0,
+                    'data' => null,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
                         'class' => 'game-input text-right',
-                        'min' => '0',
                         'autocomplete' => 'off',
                     ),
                     'required' => false,
@@ -187,11 +177,10 @@ class SpatialFleetType extends AbstractType
                 null,
                 array(
                     'label' => 'form.nbr',
-                    'data' => 0,
+                    'data' => null,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
                         'class' => 'game-input text-right',
-                        'min' => '0',
                         'autocomplete' => 'off',
                     ),
                     'required' => false,
@@ -202,11 +191,10 @@ class SpatialFleetType extends AbstractType
                 null,
                 array(
                     'label' => 'form.nbr',
-                    'data' => 0,
+                    'data' => null,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
                         'class' => 'game-input text-right',
-                        'min' => '0',
                         'autocomplete' => 'off',
                     ),
                     'required' => false,
@@ -217,11 +205,10 @@ class SpatialFleetType extends AbstractType
                 null,
                 array(
                     'label' => 'form.nbr',
-                    'data' => 0,
+                    'data' => null,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
                         'class' => 'game-input text-right',
-                        'min' => '0',
                         'autocomplete' => 'off',
                     ),
                     'required' => false,
@@ -232,11 +219,10 @@ class SpatialFleetType extends AbstractType
                 null,
                 array(
                     'label' => 'form.nbr',
-                    'data' => 0,
+                    'data' => null,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
                         'class' => 'game-input text-right',
-                        'min' => '0',
                         'autocomplete' => 'off',
                     ),
                     'required' => false,
@@ -247,11 +233,10 @@ class SpatialFleetType extends AbstractType
                 null,
                 array(
                     'label' => 'form.nbr',
-                    'data' => 0,
+                    'data' => null,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
                         'class' => 'game-input text-right',
-                        'min' => '0',
                         'autocomplete' => 'off',
                     ),
                     'required' => false,
@@ -262,11 +247,10 @@ class SpatialFleetType extends AbstractType
                 null,
                 array(
                     'label' => 'form.nbr',
-                    'data' => 0,
+                    'data' => null,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
                         'class' => 'game-input text-right',
-                        'min' => '0',
                         'autocomplete' => 'off',
                     ),
                     'required' => false,
@@ -277,11 +261,10 @@ class SpatialFleetType extends AbstractType
                 null,
                 array(
                     'label' => 'form.nbr',
-                    'data' => 0,
+                    'data' => null,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
                         'class' => 'game-input text-right',
-                        'min' => '0',
                         'autocomplete' => 'off',
                     ),
                     'required' => false,
@@ -292,11 +275,10 @@ class SpatialFleetType extends AbstractType
                 null,
                 array(
                     'label' => 'form.nbr',
-                    'data' => 0,
+                    'data' => null,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
                         'class' => 'game-input text-right',
-                        'min' => '0',
                         'autocomplete' => 'off',
                     ),
                     'required' => false,
@@ -307,11 +289,10 @@ class SpatialFleetType extends AbstractType
                 null,
                 array(
                     'label' => 'form.nbr',
-                    'data' => 0,
+                    'data' => null,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
                         'class' => 'game-input text-right',
-                        'min' => '0',
                         'autocomplete' => 'off',
                     ),
                     'required' => false,
@@ -322,11 +303,10 @@ class SpatialFleetType extends AbstractType
                 null,
                 array(
                     'label' => 'form.nbr',
-                    'data' => 0,
+                    'data' => null,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
                         'class' => 'game-input text-right',
-                        'min' => '0',
                         'autocomplete' => 'off',
                     ),
                     'required' => false,
@@ -337,11 +317,10 @@ class SpatialFleetType extends AbstractType
                 null,
                 array(
                     'label' => 'form.nbr',
-                    'data' => 0,
+                    'data' => null,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
                         'class' => 'game-input text-right',
-                        'min' => '0',
                         'autocomplete' => 'off',
                     ),
                     'required' => false,
@@ -352,11 +331,10 @@ class SpatialFleetType extends AbstractType
                 null,
                 array(
                     'label' => 'form.nbr',
-                    'data' => 0,
+                    'data' => null,
                     'attr'  => array(
                         'placeholder' => 'form.nbr',
                         'class' => 'game-input text-right',
-                        'min' => '0',
                         'autocomplete' => 'off',
                     ),
                     'required' => false,

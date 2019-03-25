@@ -244,186 +244,186 @@ class User implements UserInterface, \Serializable
     protected $onde;
 
     /**
-     * @ORM\Column(name="industry",type="integer")
+     * @ORM\Column(name="industry",type="integer", nullable=true)
      */
     protected $industry;
 
     /**
-     * @ORM\Column(name="lightShip",type="smallint")
+     * @ORM\Column(name="lightShip",type="smallint", nullable=true)
      */
     protected $lightShip;
 
     /**
-     * @ORM\Column(name="heavyShip",type="smallint")
+     * @ORM\Column(name="heavyShip",type="smallint", nullable=true)
      */
     protected $heavyShip;
 
     /**
-     * @ORM\Column(name="discipline",type="smallint")
+     * @ORM\Column(name="discipline",type="smallint", nullable=true)
      */
     protected $discipline;
 
     /**
-     * @ORM\Column(name="hyperespace",type="smallint")
+     * @ORM\Column(name="hyperespace",type="smallint", nullable=true)
      */
     protected $hyperespace;
 
     /**
-     * @ORM\Column(name="barge",type="smallint")
+     * @ORM\Column(name="barge",type="smallint", nullable=true)
      */
     protected $barge;
 
     /**
-     * @ORM\Column(name="utility",type="smallint")
+     * @ORM\Column(name="utility",type="smallint", nullable=true)
      */
     protected $utility;
 
     /**
-     * @ORM\Column(name="demography",type="smallint")
+     * @ORM\Column(name="demography",type="smallint", nullable=true)
      */
     protected $demography;
 
     /**
-     * @ORM\Column(name="barbed",type="smallint")
+     * @ORM\Column(name="barbed",type="smallint", nullable=true)
      */
     protected $barbed;
 
     /**
-     * @ORM\Column(name="tank",type="smallint")
+     * @ORM\Column(name="tank",type="smallint", nullable=true)
      */
     protected $tank;
 
     /**
-     * @ORM\Column(name="expansion",type="smallint")
+     * @ORM\Column(name="expansion",type="smallint", nullable=true)
      */
     protected $expansion;
     /**
-     * @ORM\Column(name="terraformation",type="smallint")
+     * @ORM\Column(name="terraformation",type="smallint", nullable=true)
      */
     protected $terraformation;
 
     /**
-     * @ORM\Column(name="cargo",type="smallint")
+     * @ORM\Column(name="cargo",type="smallint", nullable=true)
      */
     protected $cargo;
 
     /**
-     * @ORM\Column(name="recycleur",type="smallint")
+     * @ORM\Column(name="recycleur",type="smallint", nullable=true)
      */
     protected $recycleur;
 
     /**
-     * @ORM\Column(name="armement",type="smallint")
+     * @ORM\Column(name="armement",type="smallint", nullable=true)
      */
     protected $armement;
 
     /**
-     * @ORM\Column(name="missile",type="smallint")
+     * @ORM\Column(name="missile",type="smallint", nullable=true)
      */
     protected $missile;
 
     /**
-     * @ORM\Column(name="laser",type="smallint")
+     * @ORM\Column(name="laser",type="smallint", nullable=true)
      */
     protected $laser;
 
     /**
-     * @ORM\Column(name="plasma",type="smallint")
+     * @ORM\Column(name="plasma",type="smallint", nullable=true)
      */
     protected $plasma;
 
     /**
-     * @ORM\Column(name="politic_cargo",type="smallint")
+     * @ORM\Column(name="politic_cargo",type="smallint", nullable=true)
      */
     protected $politicCargo;
 
     /**
-     * @ORM\Column(name="politic_recycleur",type="smallint")
+     * @ORM\Column(name="politic_recycleur",type="smallint", nullable=true)
      */
     protected $politicRecycleur;
 
     /**
-     * @ORM\Column(name="politic_worker",type="smallint")
+     * @ORM\Column(name="politic_worker",type="smallint", nullable=true)
      */
     protected $politicWorker;
 
     /**
-     * @ORM\Column(name="politic_prod",type="smallint")
+     * @ORM\Column(name="politic_prod",type="smallint", nullable=true)
      */
     protected $politicProd;
 
     /**
-     * @ORM\Column(name="politic_cost_soldier",type="smallint")
+     * @ORM\Column(name="politic_cost_soldier",type="smallint", nullable=true)
      */
     protected $politicCostSoldier;
 
     /**
-     * @ORM\Column(name="politic_cost_scientist",type="smallint")
+     * @ORM\Column(name="politic_cost_scientist",type="smallint", nullable=true)
      */
     protected $politicCostScientist;
 
     /**
-     * @ORM\Column(name="politic_cost_tank",type="smallint")
+     * @ORM\Column(name="politic_cost_tank",type="smallint", nullable=true)
      */
     protected $politicCostTank;
 
     /**
-     * @ORM\Column(name="politic_worker_def",type="smallint")
+     * @ORM\Column(name="politic_worker_def",type="smallint", nullable=true)
      */
     protected $politicWorkerDef;
 
     /**
-     * @ORM\Column(name="politic_tank_def",type="smallint")
+     * @ORM\Column(name="politic_tank_def",type="smallint", nullable=true)
      */
     protected $politicTankDef;
 
     /**
-     * @ORM\Column(name="politic_soldier_att",type="smallint")
+     * @ORM\Column(name="politic_soldier_att",type="smallint", nullable=true)
      */
     protected $politicSoldierAtt;
 
     /**
-     * @ORM\Column(name="politic_armement",type="smallint")
+     * @ORM\Column(name="politic_armement",type="smallint", nullable=true)
      */
     protected $politicArmement;
 
     /**
-     * @ORM\Column(name="politic_armor",type="smallint")
+     * @ORM\Column(name="politic_armor",type="smallint", nullable=true)
      */
     protected $politicArmor;
 
     /**
-     * @ORM\Column(name="politic_colonisation",type="smallint")
+     * @ORM\Column(name="politic_colonisation",type="smallint", nullable=true)
      */
     protected $politicColonisation;
 
     /**
-     * @ORM\Column(name="politic_invade",type="smallint")
+     * @ORM\Column(name="politic_invade",type="smallint", nullable=true)
      */
     protected $politicInvade;
 
     /**
-     * @ORM\Column(name="politic_merchant",type="smallint")
+     * @ORM\Column(name="politic_merchant",type="smallint", nullable=true)
      */
     protected $politicMerchant;
 
     /**
-     * @ORM\Column(name="politic_search",type="smallint")
+     * @ORM\Column(name="politic_search",type="smallint", nullable=true)
      */
     protected $politicSearch;
 
     /**
-     * @ORM\Column(name="politic_soldier_sale",type="smallint")
+     * @ORM\Column(name="politic_soldier_sale",type="smallint", nullable=true)
      */
     protected $politicSoldierSale;
 
     /**
-     * @ORM\Column(name="politic_barge",type="smallint")
+     * @ORM\Column(name="politic_barge",type="smallint", nullable=true)
      */
     protected $politicBarge;
 
     /**
-     * @ORM\Column(name="politic_pdg",type="smallint")
+     * @ORM\Column(name="politic_pdg",type="smallint", nullable=true)
      */
     protected $politicPdg;
 
@@ -517,45 +517,45 @@ class User implements UserInterface, \Serializable
         $this->lastActivity = null;
         $this->gameOver = null;
         $this->imageFile = null;
-        $this->onde = 0;
-        $this->industry = 0;
-        $this->lightShip = 0;
-        $this->heavyShip = 0;
-        $this->discipline = 0;
-        $this->hyperespace = 0;
-        $this->barge = 0;
-        $this->demography = 0;
-        $this->terraformation = 0;
-        $this->utility = 0;
-        $this->cargo = 0;
-        $this->recycleur = 0;
-        $this->armement = 0;
-        $this->missile = 0;
-        $this->laser = 0;
-        $this->plasma = 0;
-        $this->experience = 0;
-        $this->barbed = 0;
-        $this->tank = 0;
-        $this->expansion = 0;
-        $this->politicArmement = 0;
-        $this->politicCostScientist = 0;
-        $this->politicArmor = 0;
-        $this->politicBarge = 0;
-        $this->politicCargo = 0;
-        $this->politicColonisation = 0;
-        $this->politicCostSoldier = 0;
-        $this->politicCostTank = 0;
-        $this->politicInvade = 0;
-        $this->politicMerchant = 0;
-        $this->politicPdg = 0;
-        $this->politicProd = 0;
-        $this->politicRecycleur = 0;
-        $this->politicSearch = 0;
-        $this->politicSoldierAtt = 0;
-        $this->politicSoldierSale = 0;
-        $this->politicTankDef = 0;
-        $this->politicWorker = 0;
-        $this->politicWorkerDef = 0;
+        $this->onde = null;
+        $this->industry = null;
+        $this->lightShip = null;
+        $this->heavyShip = null;
+        $this->discipline = null;
+        $this->hyperespace = null;
+        $this->barge = null;
+        $this->demography = null;
+        $this->terraformation = null;
+        $this->utility = null;
+        $this->cargo = null;
+        $this->recycleur = null;
+        $this->armement = null;
+        $this->missile = null;
+        $this->laser = null;
+        $this->plasma = null;
+        $this->experience = null;
+        $this->barbed = null;
+        $this->tank = null;
+        $this->expansion = null;
+        $this->politicArmement = null;
+        $this->politicCostScientist = null;
+        $this->politicArmor = null;
+        $this->politicBarge = null;
+        $this->politicCargo = null;
+        $this->politicColonisation = null;
+        $this->politicCostSoldier = null;
+        $this->politicCostTank = null;
+        $this->politicInvade = null;
+        $this->politicMerchant = null;
+        $this->politicPdg = null;
+        $this->politicProd = null;
+        $this->politicRecycleur = null;
+        $this->politicSearch = null;
+        $this->politicSoldierAtt = null;
+        $this->politicSoldierSale = null;
+        $this->politicTankDef = null;
+        $this->politicWorker = null;
+        $this->politicWorkerDef = null;
         $this->voteAlly = 0;
         $this->voteName = null;
         $this->dailyConnect = null;

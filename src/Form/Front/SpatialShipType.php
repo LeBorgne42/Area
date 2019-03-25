@@ -19,58 +19,58 @@ class SpatialShipType extends AbstractType
             ->add(
                 'sonde',
                 null,
-                array(
+                [
                     'label' => 'form.nbr',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.nbr',
                         'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
-                    ),
+                    ],
                     'required' => false,
-                )
+                ]
             )
             ->add(
                 'colonizer',
                 null,
-                array(
+                [
                     'label' => 'form.nbr',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.nbr',
                         'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
-                    ),
+                    ],
                     'required' => false,
-                )
+                ]
             )
             ->add(
                 'recycleur',
                 null,
-                array(
+                [
                     'label' => 'form.nbr',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.nbr',
                         'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
-                    ),
+                    ],
                     'required' => false,
-                )
+                ]
             )
             ->add(
                 'moonMaker',
                 null,
-                array(
+                [
                     'label' => 'form.nbr',
-                    'attr'  => array(
+                    'attr'  => [
                         'placeholder' => 'form.nbr',
                         'class' => 'game-input text-right',
                         'min' => '0',
                         'autocomplete' => 'off',
-                    ),
+                    ],
                     'required' => false,
-                )
+                ]
             )
             ->add(
                 'radarShip',

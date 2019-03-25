@@ -171,197 +171,197 @@ class Planet
     protected $tankAtNbr;
 
     /**
-     * @ORM\Column(name="miner",type="smallint")
+     * @ORM\Column(name="miner",type="smallint", nullable=true)
      */
     protected $miner;
 
     /**
-     * @ORM\Column(name="niobiumStock",type="smallint")
+     * @ORM\Column(name="niobiumStock",type="smallint", nullable=true)
      */
     protected $niobiumStock;
 
     /**
-     * @ORM\Column(name="extractor",type="smallint")
+     * @ORM\Column(name="extractor",type="smallint", nullable=true)
      */
     protected $extractor;
 
     /**
-     * @ORM\Column(name="waterStock",type="smallint")
+     * @ORM\Column(name="waterStock",type="smallint", nullable=true)
      */
     protected $waterStock;
 
     /**
-     * @ORM\Column(name="spaceShip",type="smallint")
+     * @ORM\Column(name="spaceShip",type="smallint", nullable=true)
      */
     protected $spaceShip;
 
     /**
-     * @ORM\Column(name="centerSearch",type="smallint")
+     * @ORM\Column(name="centerSearch",type="smallint", nullable=true)
      */
     protected $centerSearch;
 
     /**
-     * @ORM\Column(name="metropole",type="smallint")
+     * @ORM\Column(name="metropole",type="smallint", nullable=true)
      */
     protected $metropole;
 
     /**
-     * @ORM\Column(name="city",type="smallint")
+     * @ORM\Column(name="city",type="smallint", nullable=true)
      */
     protected $city;
 
     /**
-     * @ORM\Column(name="caserne",type="smallint")
+     * @ORM\Column(name="caserne",type="smallint", nullable=true)
      */
     protected $caserne;
 
     /**
-     * @ORM\Column(name="island",type="smallint")
+     * @ORM\Column(name="island",type="smallint", nullable=true)
      */
     protected $island;
 
     /**
-     * @ORM\Column(name="orbital",type="smallint")
+     * @ORM\Column(name="orbital",type="smallint", nullable=true)
      */
     protected $orbital;
 
     /**
-     * @ORM\Column(name="bunker",type="smallint")
+     * @ORM\Column(name="bunker",type="smallint", nullable=true)
      */
     protected $bunker;
 
     /**
-     * @ORM\Column(name="radar",type="smallint")
+     * @ORM\Column(name="radar",type="smallint", nullable=true)
      */
     protected $radar;
 
     /**
-     * @ORM\Column(name="skyRadar",type="smallint")
+     * @ORM\Column(name="skyRadar",type="smallint", nullable=true)
      */
     protected $skyRadar;
 
     /**
-     * @ORM\Column(name="skyBrouilleur",type="smallint")
+     * @ORM\Column(name="skyBrouilleur",type="smallint", nullable=true)
      */
     protected $skyBrouilleur;
 
     /**
-     * @ORM\Column(name="lightUsine",type="smallint")
+     * @ORM\Column(name="lightUsine",type="smallint", nullable=true)
      */
     protected $lightUsine;
 
     /**
-     * @ORM\Column(name="heavyUsine",type="smallint")
+     * @ORM\Column(name="heavyUsine",type="smallint", nullable=true)
      */
     protected $heavyUsine;
 
     /**
-     * @ORM\Column(name="sonde",type="integer")
+     * @ORM\Column(name="sonde",type="integer", nullable=true)
      */
     protected $sonde;
 
     /**
-     * @ORM\Column(name="cargoI",type="integer")
+     * @ORM\Column(name="cargoI",type="integer", nullable=true)
      */
     protected $cargoI;
 
     /**
-     * @ORM\Column(name="cargoV",type="integer")
+     * @ORM\Column(name="cargoV",type="integer", nullable=true)
      */
     protected $cargoV;
 
     /**
-     * @ORM\Column(name="cargoX",type="bigint")
+     * @ORM\Column(name="cargoX",type="bigint", nullable=true)
      */
     protected $cargoX;
 
     /**
-     * @ORM\Column(name="colonizer",type="smallint")
+     * @ORM\Column(name="colonizer",type="smallint", nullable=true)
      */
     protected $colonizer;
 
     /**
-     * @ORM\Column(name="recycleur",type="integer")
+     * @ORM\Column(name="recycleur",type="integer", nullable=true)
      */
     protected $recycleur;
 
     /**
-     * @ORM\Column(name="barge",type="integer")
+     * @ORM\Column(name="barge",type="integer", nullable=true)
      */
     protected $barge;
 
     /**
-     * @ORM\Column(name="moonMaker",type="smallint")
+     * @ORM\Column(name="moonMaker",type="smallint", nullable=true)
      */
     protected $moonMaker;
 
     /**
-     * @ORM\Column(name="radarShip",type="integer")
+     * @ORM\Column(name="radarShip",type="integer", nullable=true)
      */
     protected $radarShip;
 
     /**
-     * @ORM\Column(name="brouilleurShip",type="integer")
+     * @ORM\Column(name="brouilleurShip",type="integer", nullable=true)
      */
     protected $brouilleurShip;
 
     /**
-     * @ORM\Column(name="motherShip",type="smallint")
+     * @ORM\Column(name="motherShip",type="smallint", nullable=true)
      */
     protected $motherShip;
 
     /**
-     * @ORM\Column(name="hunter",type="bigint")
+     * @ORM\Column(name="hunter",type="bigint", nullable=true)
      */
     protected $hunter;
 
     /**
-     * @ORM\Column(name="hunterHeavy",type="bigint")
+     * @ORM\Column(name="hunterHeavy",type="bigint", nullable=true)
      */
     protected $hunterHeavy;
 
     /**
-     * @ORM\Column(name="hunterWar",type="bigint")
+     * @ORM\Column(name="hunterWar",type="bigint", nullable=true)
      */
     protected $hunterWar;
 
     /**
-     * @ORM\Column(name="corvet",type="bigint")
+     * @ORM\Column(name="corvet",type="bigint", nullable=true)
      */
     protected $corvet;
 
     /**
-     * @ORM\Column(name="corvetLaser",type="bigint")
+     * @ORM\Column(name="corvetLaser",type="bigint", nullable=true)
      */
     protected $corvetLaser;
 
     /**
-     * @ORM\Column(name="corvetWar",type="bigint")
+     * @ORM\Column(name="corvetWar",type="bigint", nullable=true)
      */
     protected $corvetWar;
 
     /**
-     * @ORM\Column(name="fregate",type="bigint")
+     * @ORM\Column(name="fregate",type="bigint", nullable=true)
      */
     protected $fregate;
 
     /**
-     * @ORM\Column(name="fregatePlasma",type="bigint")
+     * @ORM\Column(name="fregatePlasma",type="bigint", nullable=true)
      */
     protected $fregatePlasma;
 
     /**
-     * @ORM\Column(name="croiser",type="bigint")
+     * @ORM\Column(name="croiser",type="bigint", nullable=true)
      */
     protected $croiser;
 
     /**
-     * @ORM\Column(name="ironClad",type="bigint")
+     * @ORM\Column(name="ironClad",type="bigint", nullable=true)
      */
     protected $ironClad;
 
     /**
-     * @ORM\Column(name="destroyer",type="bigint")
+     * @ORM\Column(name="destroyer",type="bigint", nullable=true)
      */
     protected $destroyer;
 
@@ -371,7 +371,7 @@ class Planet
     protected $soldier;
 
     /**
-     * @ORM\Column(name="tank",type="smallint")
+     * @ORM\Column(name="tank",type="smallint", nullable=true)
      */
     protected $tank;
 
@@ -381,7 +381,7 @@ class Planet
     protected $worker;
 
     /**
-     * @ORM\Column(name="scientist",type="smallint")
+     * @ORM\Column(name="scientist",type="smallint", nullable=true)
      */
     protected $scientist;
 
@@ -478,7 +478,7 @@ class Planet
     {
         $this->fleets = new \Doctrine\Common\Collections\ArrayCollection();
         $this->constructions = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->centerSearch = 0;
+        $this->centerSearch = null;
         $this->imageFile = null;
         $this->brouilleurAt = null;
         $this->radarAt = null;
@@ -497,52 +497,52 @@ class Planet
         $this->niobiumMax = 500000;
         $this->waterMax = 400000;
         $this->soldierMax = 200;
-        $this->tank = 0;
+        $this->tank = null;
         $this->scientistMax = 0;
         $this->workerMax = 125000;
         $this->nbProduction = 6;
         $this->wtProduction = 5;
-        $this->miner = 0;
-        $this->niobiumStock = 0;
-        $this->extractor = 0;
-        $this->waterStock = 0;
-        $this->spaceShip = 0;
-        $this->metropole = 0;
-        $this->city = 0;
-        $this->caserne = 0;
-        $this->bunker = 0;
-        $this->island = 0;
-        $this->orbital = 0;
-        $this->radar = 0;
-        $this->skyRadar = 0;
-        $this->skyBrouilleur = 0;
-        $this->lightUsine = 0;
-        $this->heavyUsine = 0;
-        $this->sonde = 0;
-        $this->cargoI = 0;
-        $this->cargoV = 0;
-        $this->cargoX = 0;
-        $this->colonizer = 0;
-        $this->recycleur = 0;
-        $this->barge = 0;
-        $this->moonMaker = 0;
-        $this->radarShip = 0;
-        $this->brouilleurShip = 0;
-        $this->motherShip = 0;
-        $this->hunter = 0;
-        $this->hunterHeavy = 0;
-        $this->hunterWar = 0;
-        $this->corvet = 0;
-        $this->corvetLaser = 0;
-        $this->corvetWar = 0;
-        $this->fregate = 0;
-        $this->fregatePlasma = 0;
-        $this->croiser = 0;
-        $this->ironClad = 0;
-        $this->destroyer = 0;
+        $this->miner = null;
+        $this->niobiumStock = null;
+        $this->extractor = null;
+        $this->waterStock = null;
+        $this->spaceShip = null;
+        $this->metropole = null;
+        $this->city = null;
+        $this->caserne = null;
+        $this->bunker = null;
+        $this->island = null;
+        $this->orbital = null;
+        $this->radar = null;
+        $this->skyRadar = null;
+        $this->skyBrouilleur = null;
+        $this->lightUsine = null;
+        $this->heavyUsine = null;
+        $this->sonde = null;
+        $this->cargoI = null;
+        $this->cargoV = null;
+        $this->cargoX = null;
+        $this->colonizer = null;
+        $this->recycleur = null;
+        $this->barge = null;
+        $this->moonMaker = null;
+        $this->radarShip = null;
+        $this->brouilleurShip = null;
+        $this->motherShip = null;
+        $this->hunter = null;
+        $this->hunterHeavy = null;
+        $this->hunterWar = null;
+        $this->corvet = null;
+        $this->corvetLaser = null;
+        $this->corvetWar = null;
+        $this->fregate = null;
+        $this->fregatePlasma = null;
+        $this->croiser = null;
+        $this->ironClad = null;
+        $this->destroyer = null;
         $this->soldier = 50;
         $this->worker = 10000;
-        $this->scientist = 0;
+        $this->scientist = null;
         $this->groundPlace = 0;
         $this->skyPlace = 0;
         $this->ground = 0;

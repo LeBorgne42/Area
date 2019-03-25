@@ -25,127 +25,127 @@ class Product
     protected $planet;
 
     /**
-     * @ORM\Column(name="soldier",type="integer")
+     * @ORM\Column(name="soldier",type="integer", nullable=true)
      */
     protected $soldier;
 
     /**
-     * @ORM\Column(name="tank",type="smallint")
+     * @ORM\Column(name="tank",type="smallint", nullable=true)
      */
     protected $tank;
 
     /**
-     * @ORM\Column(name="scientist",type="smallint")
+     * @ORM\Column(name="scientist",type="smallint", nullable=true)
      */
     protected $scientist;
 
     /**
-     * @ORM\Column(name="sonde",type="integer")
+     * @ORM\Column(name="sonde",type="integer", nullable=true)
      */
     protected $sonde;
 
     /**
-     * @ORM\Column(name="cargoI",type="integer")
+     * @ORM\Column(name="cargoI",type="integer", nullable=true)
      */
     protected $cargoI;
 
     /**
-     * @ORM\Column(name="cargoV",type="integer")
+     * @ORM\Column(name="cargoV",type="integer", nullable=true)
      */
     protected $cargoV;
 
     /**
-     * @ORM\Column(name="cargoX",type="integer")
+     * @ORM\Column(name="cargoX",type="integer", nullable=true)
      */
     protected $cargoX;
 
     /**
-     * @ORM\Column(name="colonizer",type="smallint")
+     * @ORM\Column(name="colonizer",type="smallint", nullable=true)
      */
     protected $colonizer;
 
     /**
-     * @ORM\Column(name="recycleur",type="integer")
+     * @ORM\Column(name="recycleur",type="integer", nullable=true)
      */
     protected $recycleur;
 
     /**
-     * @ORM\Column(name="barge",type="integer")
+     * @ORM\Column(name="barge",type="integer", nullable=true)
      */
     protected $barge;
 
     /**
-     * @ORM\Column(name="moonMaker",type="smallint")
+     * @ORM\Column(name="moonMaker",type="smallint", nullable=true)
      */
     protected $moonMaker;
 
     /**
-     * @ORM\Column(name="radarShip",type="integer")
+     * @ORM\Column(name="radarShip",type="integer", nullable=true)
      */
     protected $radarShip;
 
     /**
-     * @ORM\Column(name="brouilleurShip",type="integer")
+     * @ORM\Column(name="brouilleurShip",type="integer", nullable=true)
      */
     protected $brouilleurShip;
 
     /**
-     * @ORM\Column(name="motherShip",type="smallint")
+     * @ORM\Column(name="motherShip",type="smallint", nullable=true)
      */
     protected $motherShip;
 
     /**
-     * @ORM\Column(name="hunter",type="integer")
+     * @ORM\Column(name="hunter",type="integer", nullable=true)
      */
     protected $hunter;
 
     /**
-     * @ORM\Column(name="hunterHeavy",type="integer")
+     * @ORM\Column(name="hunterHeavy",type="integer", nullable=true)
      */
     protected $hunterHeavy;
 
     /**
-     * @ORM\Column(name="hunterWar",type="integer")
+     * @ORM\Column(name="hunterWar",type="integer", nullable=true)
      */
     protected $hunterWar;
 
     /**
-     * @ORM\Column(name="corvet",type="integer")
+     * @ORM\Column(name="corvet",type="integer", nullable=true)
      */
     protected $corvet;
 
     /**
-     * @ORM\Column(name="corvetLaser",type="integer")
+     * @ORM\Column(name="corvetLaser",type="integer", nullable=true)
      */
     protected $corvetLaser;
 
     /**
-     * @ORM\Column(name="corvetWar",type="integer")
+     * @ORM\Column(name="corvetWar",type="integer", nullable=true)
      */
     protected $corvetWar;
 
     /**
-     * @ORM\Column(name="fregate",type="integer")
+     * @ORM\Column(name="fregate",type="integer", nullable=true)
      */
     protected $fregate;
 
     /**
-     * @ORM\Column(name="fregatePlasma",type="integer")
+     * @ORM\Column(name="fregatePlasma",type="integer", nullable=true)
      */
     protected $fregatePlasma;
 
     /**
-     * @ORM\Column(name="croiser",type="integer")
+     * @ORM\Column(name="croiser",type="integer", nullable=true)
      */
     protected $croiser;
 
     /**
-     * @ORM\Column(name="ironClad",type="integer")
+     * @ORM\Column(name="ironClad",type="integer", nullable=true)
      */
     protected $ironClad;
 
     /**
-     * @ORM\Column(name="destroyer",type="integer")
+     * @ORM\Column(name="destroyer",type="integer", nullable=true)
      */
     protected $destroyer;
 
@@ -158,31 +158,31 @@ class Product
      */
     public function __construct()
     {
-        $this->destroyer = 0;
-        $this->ironClad = 0;
-        $this->croiser = 0;
-        $this->fregate = 0;
-        $this->fregatePlasma = 0;
-        $this->corvet = 0;
-        $this->corvetLaser = 0;
-        $this->corvetWar = 0;
-        $this->hunter = 0;
-        $this->hunterHeavy = 0;
-        $this->hunterWar = 0;
-        $this->moonMaker = 0;
-        $this->motherShip = 0;
-        $this->radarShip = 0;
-        $this->brouilleurShip = 0;
-        $this->barge = 0;
-        $this->recycleur = 0;
-        $this->cargoI = 0;
-        $this->cargoV = 0;
-        $this->cargoX = 0;
-        $this->colonizer = 0;
-        $this->sonde = 0;
-        $this->soldier = 0;
-        $this->tank = 0;
-        $this->scientist = 0;
+        $this->destroyer = null;
+        $this->ironClad = null;
+        $this->croiser = null;
+        $this->fregate = null;
+        $this->fregatePlasma = null;
+        $this->corvet = null;
+        $this->corvetLaser = null;
+        $this->corvetWar = null;
+        $this->hunter = null;
+        $this->hunterHeavy = null;
+        $this->hunterWar = null;
+        $this->moonMaker = null;
+        $this->motherShip = null;
+        $this->radarShip = null;
+        $this->brouilleurShip = null;
+        $this->barge = null;
+        $this->recycleur = null;
+        $this->cargoI = null;
+        $this->cargoV = null;
+        $this->cargoX = null;
+        $this->colonizer = null;
+        $this->sonde = null;
+        $this->soldier = null;
+        $this->tank = null;
+        $this->scientist = null;
     }
 
     /**
