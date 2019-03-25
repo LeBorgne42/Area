@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\Front\ModifPasswordType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use App\Entity\Planet;
 use DateTime;
 use DateTimeZone;
 
@@ -17,16 +18,17 @@ use DateTimeZone;
 class OptionsController extends AbstractController
 {
     /**
-     * @Route("/mes-options/{idp}", name="my_options", requirements={"idp"="\d+"})
+     * @Route("/mes-options/{usePlanet}", name="my_options", requirements={"usePlanet"="\d+"})
      */
-    public function optionsAction(Request $request, $idp)
+    public function optionsAction(Request $request, Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
-
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $form_password = $this->createForm(ModifPasswordType::class);
         $form_password->handleRequest($request);

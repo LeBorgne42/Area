@@ -17,7 +17,7 @@
         <button type="button" class="close plus glyphicon glyphicon-remove" data-dismiss="modal"></button>
     </div>
     <div class="pb-3 createFleet">
-        {{ form_start(form_createFleet,{attr: { action: path('create_fleet', {'idp': usePlanet.getId()}) }}) }}
+        {{ form_start(form_createFleet,{attr: { action: path('create_fleet', {'usePlanet': usePlanet.getId()}) }}) }}
         <table class="table table-striped table-bordered table-dark">
             <tbody>
             <tr>

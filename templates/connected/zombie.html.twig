@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'front_zombie' %}
+
+{% block title %}{{ 'title'|trans }}{% endblock %}
+
+{% block body %}
+    <div class="front-block">
+        <div class="front-block-second">
+            <img src="{{ asset('img/zombie_indic.gif') }}">
+        </div>
+        <div class="front-block-game mt-4">
+            Missions et lancer une mission.
+            Missions pour tuer zombies sur planète contaminé.
+            Missions 1h, 3h 6h, 10h.
+
+            Lancement seulement si soldats disponiblent.
+            Succès suivant probabilitées.
+            Permet de trouver de l'uranium, mais risque de faire monter la Menace Zombie.
+        </div>
+    </div>
+{% endblock %}

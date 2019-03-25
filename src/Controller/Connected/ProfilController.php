@@ -5,6 +5,9 @@ namespace App\Controller\Connected;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use App\Entity\Planet;
+use App\Entity\User;
+use App\Entity\Ally;
 
 /**
  * @Route("/connect")
@@ -13,14 +16,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class ProfilController extends AbstractController
 {
     /**
-     * @Route("/profil-joueur/{idp}/{id}", name="user_profil", requirements={"idp"="\d+", "id"="\d+"})
+     * @Route("/profil-joueur/{usePlanet}/{userPlanet}", name="user_profil", requirements={"usePlanet"="\d+", "userPlanet"="\d+"})
      */
-    public function userProfilAction($idp, $id)
+    public function userProfilAction(Planet $usePlanet, User $userPlanet)
     {
-        $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
-        $userPlanet = $em->getRepository('App:User')->find(['id' => $id]);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         return $this->render('connected/profil/player.html.twig', [
             'usePlanet' => $usePlanet,
@@ -29,14 +32,14 @@ class ProfilController extends AbstractController
     }
 
     /**
-     * @Route("/profil-alliance/{idp}/{id}", name="ally_profil", requirements={"idp"="\d+", "id"="\d+"})
+     * @Route("/profil-alliance/{usePlanet}/{allyUser}", name="ally_profil", requirements={"usePlanet"="\d+", "allyUser"="\d+"})
      */
-    public function allyProfilAction($idp, $id)
+    public function allyProfilAction(Planet $usePlanet, Ally $allyUser)
     {
-        $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
-        $allyUser = $em->getRepository('App:Ally')->find(['id' => $id]);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         return $this->render('connected/profil/ally.html.twig', [
             'usePlanet' => $usePlanet,
@@ -45,14 +48,14 @@ class ProfilController extends AbstractController
     }
 
     /**
-     * @Route("/profil-joueur-popup/{idp}/{id}", name="user_profil_modal", requirements={"idp"="\d+", "id"="\d+"})
+     * @Route("/profil-joueur-popup/{usePlanet}/{userPlanet}", name="user_profil_modal", requirements={"usePlanet"="\d+", "userPlanet"="\d+"})
      */
-    public function userProfilModalAction($idp, $id)
+    public function userProfilModalAction(Planet $usePlanet, User $userPlanet)
     {
-        $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
-        $userPlanet = $em->getRepository('App:User')->find(['id' => $id]);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         return $this->render('connected/profil/modal_user.html.twig', [
             'usePlanet' => $usePlanet,
@@ -61,14 +64,14 @@ class ProfilController extends AbstractController
     }
 
     /**
-     * @Route("/profil-alliance-popup/{idp}/{id}", name="ally_profil_modal", requirements={"idp"="\d+", "id"="\d+"})
+     * @Route("/profil-alliance-popup/{usePlanet}/{allyUser}", name="ally_profil_modal", requirements={"usePlanet"="\d+", "allyUser"="\d+"})
      */
-    public function allyProfilModalAction($idp, $id)
+    public function allyProfilModalAction(Planet $usePlanet, Ally $allyUser)
     {
-        $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
-        $allyUser = $em->getRepository('App:Ally')->find(['id' => $id]);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         return $this->render('connected/profil/modal_ally.html.twig', [
             'usePlanet' => $usePlanet,

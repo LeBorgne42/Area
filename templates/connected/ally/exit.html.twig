@@ -23,20 +23,20 @@
                 <div class="text-center my-2">"{{ app.user.getAlly().getSlogan() }}"</div>
                 <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
                     <li class="nav-item">
-                        <a href="{{ path('ally', {'idp': usePlanet.getId()}) }}" >{{ app.user.getAlly().getUsers()|length }} {{ 'ally.members'|trans }}</a>
+                        <a href="{{ path('ally', {'usePlanet': usePlanet.getId()}) }}" >{{ app.user.getAlly().getUsers()|length }} {{ 'ally.members'|trans }}</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ path('ally_page_bank', {'idp': usePlanet.getId()}) }}" >{{ 'ally.found'|trans }}</a>
+                        <a href="{{ path('ally_page_bank', {'usePlanet': usePlanet.getId()}) }}" >{{ 'ally.found'|trans }}</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ path('ally_page_pacts', {'idp': usePlanet.getId()}) }}" >{{ app.user.getAlly().getPacts() }}  {{ 'ally.pacts'|trans }}</a>
+                        <a href="{{ path('ally_page_pacts', {'usePlanet': usePlanet.getId()}) }}" >{{ app.user.getAlly().getPacts() }}  {{ 'ally.pacts'|trans }}</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ path('ally_page_add', {'idp': usePlanet.getId()}) }}" >{{ 'ally.add'|trans }}</a>
+                        <a href="{{ path('ally_page_add', {'usePlanet': usePlanet.getId()}) }}" >{{ 'ally.add'|trans }}</a>
                     </li>
                     {% if app.user.getGrade().getPlacement() == 1 %}
                         <li class="nav-item">
-                            <a href="{{ path('ally_page_admin', {'idp': usePlanet.getId()}) }}" >{{ 'ally.admin'|trans }}</a>
+                            <a href="{{ path('ally_page_admin', {'usePlanet': usePlanet.getId()}) }}" >{{ 'ally.admin'|trans }}</a>
                         </li>
                     {% endif %}
                     {% if app.user.getAlly().getPolitic() == 'democrate' %}
@@ -50,7 +50,7 @@
                         <div class="tab-pane fade show active" id="leave" role="tabpanel" aria-labelledby="leave-tab">
                             <div class="pull-right mt-5">
                                 <span class="mr-3">{{ 'ally.leaveText'|trans }}</span>
-                                <a data-toggle="confirmation" data-placement="right" data-title="{{ 'ally.leave.question'|trans }}" href="{{ path('leave_ally', {'idp': usePlanet.getId()}) }}" class="btn btn-lg btn-danger">{{ 'leave'|trans }}</a>
+                                <a data-toggle="confirmation" data-placement="right" data-title="{{ 'ally.leave.question'|trans }}" href="{{ path('leave_ally', {'usePlanet': usePlanet.getId()}) }}" class="btn btn-lg btn-danger">{{ 'leave'|trans }}</a>
                             </div>
                         </div>
                     </div>

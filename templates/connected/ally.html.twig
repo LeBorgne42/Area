@@ -27,22 +27,22 @@
                         <a class="nav-link active" id="members-tab" data-toggle="tab" href="#members" role="tab" aria-controls="members" aria-selected="true">{{ app.user.getAlly().getUsers()|length }} {{ 'ally.members'|trans }}</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ path('ally_page_bank', {'idp': usePlanet.getId()}) }}" >{{ 'ally.found'|trans }}</a>
+                        <a href="{{ path('ally_page_bank', {'usePlanet': usePlanet.getId()}) }}" >{{ 'ally.found'|trans }}</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ path('ally_page_pacts', {'idp': usePlanet.getId()}) }}" >{{ app.user.getAlly().getPacts() }}  {{ 'ally.pacts'|trans }}</a>
+                        <a href="{{ path('ally_page_pacts', {'usePlanet': usePlanet.getId()}) }}" >{{ app.user.getAlly().getPacts() }}  {{ 'ally.pacts'|trans }}</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ path('ally_page_add', {'idp': usePlanet.getId()}) }}" >{{ 'ally.add'|trans }}</a>
+                        <a href="{{ path('ally_page_add', {'usePlanet': usePlanet.getId()}) }}" >{{ 'ally.add'|trans }}</a>
                     </li>
                     {% if app.user.getGrade().getPlacement() == 1 %}
                         <li class="nav-item">
-                            <a href="{{ path('ally_page_admin', {'idp': usePlanet.getId()}) }}" >{{ 'ally.admin'|trans }}</a>
+                            <a href="{{ path('ally_page_admin', {'usePlanet': usePlanet.getId()}) }}" >{{ 'ally.admin'|trans }}</a>
                         </li>
                     {% endif %}
                     {% if app.user.getAlly().getPolitic() == 'democrate' %}
                         <li class="nav-item">
-                            <a href="{{ path('ally_page_exit', {'idp': usePlanet.getId()}) }}" >{{ 'ally.leave'|trans }}</a>
+                            <a href="{{ path('ally_page_exit', {'usePlanet': usePlanet.getId()}) }}" >{{ 'ally.leave'|trans }}</a>
                         </li>
                     {% endif %}
                 </ul>
@@ -64,13 +64,13 @@
                                 <tr>
                                     <td class="center-cells">
                                         {% if app.user.getGrade().getPlacement() == 1 %}
-                                            <button class="confirm-button" href="{{ path('ally_addUser_grade', {'id': user.getId(), 'idp': usePlanet.getId() }) }}" data-toggle="modal" data-target="#openModal">{{ user.getGrade().getName() }}</button> <span class="glyphicon glyphicon-question-sign text-orange" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.changeGrade'|trans }}"></span>
+                                            <button class="confirm-button" href="{{ path('ally_addUser_grade', {'newGradeUser': user.getId(), 'usePlanet': usePlanet.getId() }) }}" data-toggle="modal" data-target="#openModal">{{ user.getGrade().getName() }}</button> <span class="glyphicon glyphicon-question-sign text-orange" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.changeGrade'|trans }}"></span>
                                         {% else %}
                                             {{ user.getGrade().getName() }}
                                         {% endif %}
                                     </td>
                                     <td class="center-cells">
-                                        <span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'idp': usePlanet.getId(), 'id': user.getId()}) }}">{{ user.getUsername() }}</a></span>
+                                        <span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'usePlanet': usePlanet.getId(), 'userPlanet': user.getId()}) }}">{{ user.getUsername() }}</a></span>
                                     </td>
                                     <td class="center-cells">
                                         {{ user.getJoinAllyAt()|date('H:i d/m/Y') }}
@@ -83,7 +83,7 @@
                                     </td>
                                     {% if app.user.getGrade().getCanKick() == 1 and app.user.getAlly().getPolitic() != 'fascism' %}
                                         <td class="center-cells">
-                                            <a class="text-rouge" data-toggle="confirmation" data-placement="right" data-title="{{ 'ally.member.kick.question'|trans }}" href="{{ path('ally_kick',{'id': user.getId(), 'idp': usePlanet.getId()}) }}"><div class="glyphicon glyphicon-remove"></div> <span>{{ 'ally.kick'|trans }}</span></a>
+                                            <a class="text-rouge" data-toggle="confirmation" data-placement="right" data-title="{{ 'ally.member.kick.question'|trans }}" href="{{ path('ally_kick',{'kicked': user.getId(), 'usePlanet': usePlanet.getId()}) }}"><div class="glyphicon glyphicon-remove"></div> <span>{{ 'ally.kick'|trans }}</span></a>
                                         </td>
                                     {% endif %}
                                 </tr>

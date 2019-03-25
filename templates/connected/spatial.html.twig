@@ -382,7 +382,7 @@
                     {% if fleet.getUser() == app.user and fleet.getPlanete() is null %}
                         <tr>
                             <th class="tab-cells-name">
-                                "{{  fleet.getName() }}" {% if fleet.getFightAt() == null %}<span><a class="ml-3 float-right" href="{{ path('destroy_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}"><span>{{ 'spatial.destroyFleet'|trans }}</span></a></span><span><a class="ml-3 float-right" href="{{ path('manage_fleet', {'idp': usePlanet.getId(), 'id': fleet.getId()}) }}" data-toggle="modal" data-target="#editModal"><span>{{ 'spatial.seeFlotte'|trans }}</span></a></span>{% else %}<span class="float-right text-rouge">{{ 'fleet.combat'|trans }}</span>{% endif %}
+                                "{{  fleet.getName() }}" {% if fleet.getFightAt() == null %}<span><a class="ml-3 float-right" href="{{ path('destroy_fleet', {'usePlanet': usePlanet.getId(), 'fleetGive': fleet.getId()}) }}"><span>{{ 'spatial.destroyFleet'|trans }}</span></a></span><span><a class="ml-3 float-right" href="{{ path('manage_fleet', {'usePlanet': usePlanet.getId(), 'id': fleet.getId()}) }}" data-toggle="modal" data-target="#editModal"><span>{{ 'spatial.seeFlotte'|trans }}</span></a></span>{% else %}<span class="float-right text-rouge">{{ 'fleet.combat'|trans }}</span>{% endif %}
                             </th>
                             <td class="center-cells text-center">
                                 {{ fleet.getNbrShips()|number_format }}
@@ -398,7 +398,7 @@
                 {% endfor %}
                 </tbody>
             </table>
-            {% if usePlanet.getShipOn() > 0 %}<a class="btn btn-lg btn-info float-right mb-2{% if app.user.getTutorial() == 20 %} tutorial-show{% endif %}" href="{{ path('create_fleet', {'idp': usePlanet.getId()}) }}" data-toggle="modal" data-target="#createModal"><span>{{ 'spatial.createFlotte'|trans }}</span></a>{% endif %}
+            {% if usePlanet.getShipOn() > 0 %}<a class="btn btn-lg btn-info float-right mb-2{% if app.user.getTutorial() == 20 %} tutorial-show{% endif %}" href="{{ path('create_fleet', {'usePlanet': usePlanet.getId()}) }}" data-toggle="modal" data-target="#createModal"><span>{{ 'spatial.createFlotte'|trans }}</span></a>{% endif %}
         </div>
     <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">

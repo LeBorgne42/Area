@@ -5,6 +5,7 @@ namespace App\Controller\Connected\Building;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use App\Entity\Planet;
 use DateTime;
 use Dateinterval;
 use DateTimeZone;
@@ -16,15 +17,17 @@ use DateTimeZone;
 class SpaceShipyardController extends AbstractController
 {
     /**
-     * @Route("/contruire-chantier-spatiale/{idp}", name="building_add_spaceShipyard", requirements={"idp"="\d+"})
+     * @Route("/contruire-chantier-spatiale/{usePlanet}", name="building_add_spaceShipyard", requirements={"usePlanet"="\d+"})
      */
-    public function buildingAddSpaceShipyardAction($idp)
+    public function buildingAddSpaceShipyardAction(Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $level = $usePlanet->getSpaceShip() + 1;
         $usePlanetNb = $usePlanet->getNiobium();
@@ -35,7 +38,7 @@ class SpaceShipyardController extends AbstractController
         if(($usePlanetNb < ($level * 3000) || $usePlanetWt < ($level * 2000)) ||
             ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround()) ||
             ($user->getIndustry() == 0 || $newSky > $usePlanet->getSky())) {
-            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
         }
 
         $now->add(new DateInterval('PT' . ($level * 180) . 'S'));
@@ -47,20 +50,21 @@ class SpaceShipyardController extends AbstractController
         $usePlanet->setConstructAt($now);
         $em->flush();
 
-        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
     }
 
     /**
-     * @Route("/detruire-chantier-spatiale/{idp}", name="building_remove_spaceShipyard", requirements={"idp"="\d+"})
+     * @Route("/detruire-chantier-spatiale/{usePlanet}", name="building_remove_spaceShipyard", requirements={"usePlanet"="\d+"})
      */
-    public function buildingRemoveSpaceShipyardAction($idp)
+    public function buildingRemoveSpaceShipyardAction(Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
-
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $level = $usePlanet->getSpaceShip();
         $newGround = $usePlanet->getGroundPlace() - 2;
@@ -68,7 +72,7 @@ class SpaceShipyardController extends AbstractController
 
         if(($level == 0 || $usePlanet->getConstructAt() > $now)
         || $usePlanet->getProduct()) {
-            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
         }
         $now->add(new DateInterval('PT' . 600 . 'S'));
         $usePlanet->setSpaceShip($level - 1);
@@ -79,25 +83,21 @@ class SpaceShipyardController extends AbstractController
         $usePlanet->setConstructAt($now);
         $em->flush();
 
-        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
     }
 
     /**
-     * @Route("/contruire-usine-legere/{idp}", name="building_add_lightUsine", requirements={"idp"="\d+"})
+     * @Route("/contruire-usine-legere/{usePlanet}", name="building_add_lightUsine", requirements={"usePlanet"="\d+"})
      */
-    public function buildingAddLightUsineAction($idp)
+    public function buildingAddLightUsineAction(Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(['id' => $idp, 'user' => $user])
-            ->getQuery()
-            ->getOneOrNullResult();
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $level = $usePlanet->getLightUsine() + 1;
         $usePlanetNb = $usePlanet->getNiobium();
@@ -107,7 +107,7 @@ class SpaceShipyardController extends AbstractController
         if(($usePlanetNb < ($level * 6000) || $usePlanetWt < ($level * 3900)) ||
             ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround()) ||
             ($user->getLightShip() == 0)) {
-            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
         }
 
         $now->add(new DateInterval('PT' . ($level * 2160) . 'S'));
@@ -118,33 +118,28 @@ class SpaceShipyardController extends AbstractController
         $usePlanet->setConstructAt($now);
         $em->flush();
 
-        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
     }
 
     /**
-     * @Route("/detruire-usine-legere/{idp}", name="building_remove_lightUsine", requirements={"idp"="\d+"})
+     * @Route("/detruire-usine-legere/{usePlanet}", name="building_remove_lightUsine", requirements={"usePlanet"="\d+"})
      */
-    public function buildingRemoveLightUsineAction($idp)
+    public function buildingRemoveLightUsineAction(Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
-
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(['id' => $idp, 'user' => $user])
-            ->getQuery()
-            ->getOneOrNullResult();
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $level = $usePlanet->getLightUsine();
         $newGround = $usePlanet->getGroundPlace() - 6;
 
         if(($level == 0 || $usePlanet->getConstructAt() > $now)
         || $usePlanet->getProduct()) {
-            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
         }
         $now->add(new DateInterval('PT' . 600 . 'S'));
         $usePlanet->setLightUsine($level - 1);
@@ -154,25 +149,21 @@ class SpaceShipyardController extends AbstractController
         $usePlanet->setConstructAt($now);
         $em->flush();
 
-        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
     }
 
     /**
-     * @Route("/contruire-usine-lourde/{idp}", name="building_add_heavyUsine", requirements={"idp"="\d+"})
+     * @Route("/contruire-usine-lourde/{usePlanet}", name="building_add_heavyUsine", requirements={"usePlanet"="\d+"})
      */
-    public function buildingAddHeavyUsineAction($idp)
+    public function buildingAddHeavyUsineAction(Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(['id' => $idp, 'user' => $user])
-            ->getQuery()
-            ->getOneOrNullResult();
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $level = $usePlanet->getHeavyUsine() + 1;
         $usePlanetNb = $usePlanet->getNiobium();
@@ -182,7 +173,7 @@ class SpaceShipyardController extends AbstractController
         if(($usePlanetNb < ($level * 83000) || $usePlanetWt < ($level * 68000)) ||
             ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround()) ||
             ($user->getHeavyShip() == 0)) {
-            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
         }
 
         $now->add(new DateInterval('PT' . ($level * 7200) . 'S'));
@@ -195,33 +186,28 @@ class SpaceShipyardController extends AbstractController
 
 
 
-        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
     }
 
     /**
-     * @Route("/detruire-usine-lourde/{idp}", name="building_remove_heavyUsine", requirements={"idp"="\d+"})
+     * @Route("/detruire-usine-lourde/{usePlanet}", name="building_remove_heavyUsine", requirements={"usePlanet"="\d+"})
      */
-    public function buildingRemoveHeavyUsineAction($idp)
+    public function buildingRemoveHeavyUsineAction(Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
-
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(['id' => $idp, 'user' => $user])
-            ->getQuery()
-            ->getOneOrNullResult();
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $level = $usePlanet->getHeavyUsine();
         $newGround = $usePlanet->getGroundPlace() - 12;
 
         if(($level == 0 || $usePlanet->getConstructAt() > $now)
         || $usePlanet->getProduct()) {
-            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
         }
         $now->add(new DateInterval('PT' . 600 . 'S'));
         $usePlanet->setHeavyUsine($level - 1);
@@ -231,25 +217,21 @@ class SpaceShipyardController extends AbstractController
         $usePlanet->setConstructAt($now);
         $em->flush();
 
-        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
     }
 
     /**
-     * @Route("/contruire-caserne/{idp}", name="building_add_caserne", requirements={"idp"="\d+"})
+     * @Route("/contruire-caserne/{usePlanet}", name="building_add_caserne", requirements={"usePlanet"="\d+"})
      */
-    public function buildingAddCaserneAction($idp)
+    public function buildingAddCaserneAction(Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(['id' => $idp, 'user' => $user])
-            ->getQuery()
-            ->getOneOrNullResult();
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $level = $usePlanet->getCaserne() + 1;
         $usePlanetNb = $usePlanet->getNiobium();
@@ -259,7 +241,7 @@ class SpaceShipyardController extends AbstractController
         if(($usePlanetNb < ($level * 13000) || $usePlanetWt < ($level * 19000)) ||
             ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround()) ||
             ($user->getDiscipline() == 0)) {
-            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
         }
 
         $now->add(new DateInterval('PT' . ($level * 2100) . 'S'));
@@ -270,33 +252,28 @@ class SpaceShipyardController extends AbstractController
         $usePlanet->setConstructAt($now);
         $em->flush();
 
-        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
     }
 
     /**
-     * @Route("/detruire-caserne/{idp}", name="building_remove_caserne", requirements={"idp"="\d+"})
+     * @Route("/detruire-caserne/{usePlanet}", name="building_remove_caserne", requirements={"usePlanet"="\d+"})
      */
-    public function buildingRemoveCaserneAction($idp)
+    public function buildingRemoveCaserneAction(Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
-
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(['id' => $idp, 'user' => $user])
-            ->getQuery()
-            ->getOneOrNullResult();
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $level = $usePlanet->getCaserne();
         $newGround = $usePlanet->getGroundPlace() - 6;
 
         if(($level == 0 || $usePlanet->getConstructAt() > $now) ||
             ($usePlanet->getSoldier() > $usePlanet->getSoldierMax() - 2500 || $usePlanet->getSoldierAt())) {
-            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
         }
         $now->add(new DateInterval('PT' . 600 . 'S'));
         $usePlanet->setCaserne($level - 1);
@@ -306,25 +283,21 @@ class SpaceShipyardController extends AbstractController
         $usePlanet->setConstructAt($now);
         $em->flush();
 
-        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
     }
 
     /**
-     * @Route("/contruire-bunker/{idp}", name="building_add_bunker", requirements={"idp"="\d+"})
+     * @Route("/contruire-bunker/{usePlanet}", name="building_add_bunker", requirements={"usePlanet"="\d+"})
      */
-    public function buildingAddBunkerAction($idp)
+    public function buildingAddBunkerAction(Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(['id' => $idp, 'user' => $user])
-            ->getQuery()
-            ->getOneOrNullResult();
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $level = $usePlanet->getBunker() + 1;
         $usePlanetNb = $usePlanet->getNiobium();
@@ -334,7 +307,7 @@ class SpaceShipyardController extends AbstractController
         if(($usePlanetNb < ($level * 200000) || $usePlanetWt < ($level * 190000)) ||
             ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround()) ||
             ($user->getDiscipline() == 0)) {
-            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
         }
 
         $now->add(new DateInterval('PT' . ($level * 4320) . 'S'));
@@ -345,33 +318,28 @@ class SpaceShipyardController extends AbstractController
         $usePlanet->setConstructAt($now);
         $em->flush();
 
-        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
     }
 
     /**
-     * @Route("/detruire-bunker/{idp}", name="building_remove_bunker", requirements={"idp"="\d+"})
+     * @Route("/detruire-bunker/{usePlanet}", name="building_remove_bunker", requirements={"usePlanet"="\d+"})
      */
-    public function buildingRemoveBunkerAction($idp)
+    public function buildingRemoveBunkerAction(Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
-
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(['id' => $idp, 'user' => $user])
-            ->getQuery()
-            ->getOneOrNullResult();
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $level = $usePlanet->getBunker();
         $newGround = $usePlanet->getGroundPlace() - 10;
 
         if(($level == 0 || $usePlanet->getConstructAt() > $now) ||
             ($usePlanet->getSoldier() > $usePlanet->getSoldierMax() - 20000 || $usePlanet->getSoldierAt())) {
-            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
         }
         $now->add(new DateInterval('PT' . 600 . 'S'));
         $usePlanet->setBunker($level - 1);
@@ -381,6 +349,6 @@ class SpaceShipyardController extends AbstractController
         $usePlanet->setConstructAt($now);
         $em->flush();
 
-        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
     }
 }

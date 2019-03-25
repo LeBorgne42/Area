@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\Front\UserImageType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use App\Entity\Planet;
 use DateTime;
 use Dateinterval;
 use DateTimeZone;
@@ -18,9 +19,9 @@ use DateTimeZone;
 class OverviewController extends AbstractController
 {
     /**
-     * @Route("/empire/{idp}", name="overview", requirements={"idp"="\d+"})
+     * @Route("/empire/{usePlanet}", name="overview", requirements={"usePlanet"="\d+"})
      */
-    public function overviewAction(Request $request, $idp)
+    public function overviewAction(Request $request, Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
@@ -29,8 +30,9 @@ class OverviewController extends AbstractController
         if($user->getGameOver() || $user->getAllPlanets() == 0) {
             return $this->redirectToRoute('game_over');
         }
-
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $allPlanets = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')

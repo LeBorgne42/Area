@@ -6,6 +6,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
+use App\Entity\Planet;
 use App\Form\Front\NavigateType;
 use App\Form\Front\InteractFleetType;
 use App\Entity\Fleet;
@@ -20,22 +21,24 @@ use DateInterval;
 class SectorController extends AbstractController
 {
     /**
-     * @Route("/carte-spatiale/{id}/{gal}/{idp}", name="map", requirements={"id"="\d+", "idp"="\d+", "gal"="\d+"})
+     * @Route("/carte-spatiale/{id}/{gal}/{usePlanet}", name="map", requirements={"id"="\d+", "usePlanet"="\d+", "gal"="\d+"})
      */
-    public function mapAction(Request $request, $id, $idp, $gal)
+    public function mapAction(Request $request, $id, Planet $usePlanet, $gal)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $form_navigate = $this->createForm(NavigateType::class, null, ["galaxy" => $gal, "sector" => $id]);
         $form_navigate->handleRequest($request);
 
         if ($form_navigate->isSubmitted() && $form_navigate->isValid()) {
             if ($form_navigate->get('sector')->getData() && $form_navigate->get('galaxy')->getData()) {
-                return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $form_navigate->get('sector')->getData(), 'gal' => $form_navigate->get('galaxy')->getData()]);
+                return $this->redirectToRoute('map', ['usePlanet' => $usePlanet->getId(), 'id' => $form_navigate->get('sector')->getData(), 'gal' => $form_navigate->get('galaxy')->getData()]);
             }
-            return $this->redirectToRoute('galaxy', ['idp' => $usePlanet->getId(), 'id' => $form_navigate->get('galaxy')->getData()]);
+            return $this->redirectToRoute('galaxy', ['usePlanet' => $usePlanet->getId(), 'id' => $form_navigate->get('galaxy')->getData()]);
         }
 
         $sectorId = $em->getRepository('App:Sector')
@@ -122,13 +125,15 @@ class SectorController extends AbstractController
     }
 
     /**
-     * @Route("/flotte-orbite/{id}/{idp}", name="fleet_sector", requirements={"id"="\d+", "idp"="\d+"})
+     * @Route("/flotte-orbite/{id}/{usePlanet}", name="fleet_sector", requirements={"id"="\d+", "usePlanet"="\d+"})
      */
-    public function fleetAction($id, $idp)
+    public function fleetAction($id, Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $fleets = $em->getRepository('App:Fleet')
             ->createQueryBuilder('f')
@@ -146,24 +151,24 @@ class SectorController extends AbstractController
     }
 
     /**
-     * @Route("/interaction-planete/{id}/{idp}", name="planet_interact", requirements={"id"="\d+", "idp"="\d+"})
+     * @Route("/interaction-planete/{planet}/{usePlanet}", name="planet_interact", requirements={"planet"="\d+", "usePlanet"="\d+"})
      */
-    public function planetInteractAction(Request $request, $id, $idp)
+    public function planetInteractAction(Request $request, Planet $planet, Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
-
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
-        $planet = $em->getRepository('App:Planet')->find(['id' => $id]);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $form_sendFleet = $this->createForm(InteractFleetType::class, null, ["user" => $user->getId()]);
         $form_sendFleet->handleRequest($request);
 
         if($planet && $usePlanet) {
         } else {
-            return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getPosition()]);
+            return $this->redirectToRoute('map', ['usePlanet' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getPosition()]);
         }
         if ($form_sendFleet->isSubmitted() && $form_sendFleet->isValid()) {
             $fleet = $form_sendFleet->get('list')->getData();
@@ -172,7 +177,7 @@ class SectorController extends AbstractController
             $planete = $planet->getPosition();
             $galaxy = $planet->getSector()->getGalaxy()->getPosition();
             if($user->getHyperespace() != 1 && $fleet->getPlanet()->getSector()->getGalaxy()->getPosition() != $galaxy) {
-                return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getPosition()]);
+                return $this->redirectToRoute('map', ['usePlanet' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getPosition()]);
             }
             if($fleet->getPlanet()->getSector()->getGalaxy()->getPosition() != $galaxy) {
                 $base = 18;
@@ -195,7 +200,7 @@ class SectorController extends AbstractController
             }
             $carburant = round($price * ($fleet->getNbrSignatures() / 200));
             if($carburant > $user->getBitcoin()) {
-                return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getPosition()]);
+                return $this->redirectToRoute('map', ['usePlanet' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getPosition()]);
             }
             if($fleet->getMotherShip()) {
                 $speed = $fleet->getSpeed() - ($fleet->getSpeed() * 0.10);
@@ -219,7 +224,7 @@ class SectorController extends AbstractController
                 $user->setTutorial(16);
             }
             $em->flush();
-            return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getPosition()]);
+            return $this->redirectToRoute('map', ['usePlanet' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getPosition()]);
         }
 
         return $this->render('connected/map/interact.html.twig', [
@@ -230,17 +235,17 @@ class SectorController extends AbstractController
     }
 
     /**
-     * @Route("/envoyer-sonde/{id}/{idp}", name="send_sonde", requirements={"id"="\d+", "idp"="\d+"})
+     * @Route("/envoyer-sonde/{planet}/{usePlanet}", name="send_sonde", requirements={"planet"="\d+", "usePlanet"="\d+"})
      */
-    public function sendSondeAction($id, $idp)
+    public function sendSondeAction(Planet $planet, Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
-
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
-        $planet = $em->getRepository('App:Planet')->find(['id' => $id]);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $fPlanet = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
@@ -252,14 +257,14 @@ class SectorController extends AbstractController
             ->getOneOrNullResult();
 
         if($fPlanet == null) {
-            return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getPosition()]);
+            return $this->redirectToRoute('map', ['usePlanet' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getPosition()]);
         }
         $sFleet= $fPlanet->getSector()->getPosition();
         $sector = $planet->getSector()->getPosition();
         $planete = $planet->getPosition();
         $galaxy = $planet->getSector()->getGalaxy()->getPosition();
         if($user->getHyperespace() == 0 && $fPlanet->getSector()->getGalaxy()->getPosition() != $galaxy) {
-            return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $fPlanet->getSector()->getPosition(), 'gal' => $fPlanet->getSector()->getGalaxy()->getPosition()]);
+            return $this->redirectToRoute('map', ['usePlanet' => $usePlanet->getId(), 'id' => $fPlanet->getSector()->getPosition(), 'gal' => $fPlanet->getSector()->getGalaxy()->getPosition()]);
         }
         if($fPlanet->getSector()->getGalaxy()->getPosition() != $galaxy) {
             $base = 18;
@@ -282,7 +287,7 @@ class SectorController extends AbstractController
         }
         $carburant = round($price * ($fPlanet->getNbrSignatures() / 200));
         if(1 > $user->getBitcoin()) {
-            return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getPosition()]);
+            return $this->redirectToRoute('map', ['usePlanet' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getPosition()]);
         }
         $fleet = new Fleet();
         $fleet->setSonde(1);
@@ -313,6 +318,6 @@ class SectorController extends AbstractController
         }
 
         $em->flush();
-        return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getPosition()]);
+        return $this->redirectToRoute('map', ['usePlanet' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getPosition()]);
     }
 }

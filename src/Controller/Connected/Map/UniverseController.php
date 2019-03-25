@@ -5,6 +5,7 @@ namespace App\Controller\Connected\Map;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use App\Entity\Planet;
 
 /**
  * @Route("/connect")
@@ -13,13 +14,15 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class UniverseController extends AbstractController
 {
     /**
-     * @Route("/univers/{idp}", name="universe", requirements={"idp"="\d+"})
+     * @Route("/univers/{usePlanet}", name="universe", requirements={"usePlanet"="\d+"})
      */
-    public function universeAction($idp)
+    public function universeAction(Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $galaxys = $em->getRepository('App:Galaxy')
             ->createQueryBuilder('g')

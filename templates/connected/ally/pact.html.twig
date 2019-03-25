@@ -11,25 +11,25 @@
                 <h1 class="text-center p-4">{{ 'ally.pactsTitle'|trans }}</h1>
                 <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
                     <li class="nav-item">
-                        <a href="{{ path('ally', {'idp': usePlanet.getId()}) }}" >{{ app.user.getAlly().getUsers()|length }} {{ 'ally.members'|trans }}</a>
+                        <a href="{{ path('ally', {'usePlanet': usePlanet.getId()}) }}" >{{ app.user.getAlly().getUsers()|length }} {{ 'ally.members'|trans }}</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ path('ally_page_bank', {'idp': usePlanet.getId()}) }}" >{{ 'ally.found'|trans }}</a>
+                        <a href="{{ path('ally_page_bank', {'usePlanet': usePlanet.getId()}) }}" >{{ 'ally.found'|trans }}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" id="pacts-tab" data-toggle="tab" href="#pacts" role="tab" aria-controls="pacts" aria-selected="true">{{ app.user.getAlly().getPacts() }}  {{ 'ally.pacts'|trans }}</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ path('ally_page_add', {'idp': usePlanet.getId()}) }}" >{{ 'ally.add'|trans }}</a>
+                        <a href="{{ path('ally_page_add', {'usePlanet': usePlanet.getId()}) }}" >{{ 'ally.add'|trans }}</a>
                     </li>
                     {% if app.user.getGrade().getPlacement() == 1 %}
                         <li class="nav-item">
-                            <a href="{{ path('ally_page_admin', {'idp': usePlanet.getId()}) }}" >{{ 'ally.admin'|trans }}</a>
+                            <a href="{{ path('ally_page_admin', {'usePlanet': usePlanet.getId()}) }}" >{{ 'ally.admin'|trans }}</a>
                         </li>
                     {% endif %}
                     {% if app.user.getAlly().getPolitic() == 'democrate' %}
                         <li class="nav-item">
-                            <a href="{{ path('ally_page_exit', {'idp': usePlanet.getId()}) }}" >{{ 'ally.leave'|trans }}</a>
+                            <a href="{{ path('ally_page_exit', {'usePlanet': usePlanet.getId()}) }}" >{{ 'ally.leave'|trans }}</a>
                         </li>
                     {% endif %}
                 </ul>
@@ -71,7 +71,7 @@
                                             {{ allied.getSignedAt()|date('d/m/Y H:i') }}
                                         </td>
                                         <td class="center-cells">
-                                            {% if allied.getDismissBy() %}<span class="timerArea" hidden>{{ allied.getDismissAt()|date('Y/m/d H:i:s') }}</span>{% else %}<a class="text-rouge" href="{{ path('ally_remove_pact',{'id': allied.getId(), 'idp': usePlanet.getId()}) }}"><div class="glyphicon glyphicon-remove"></div> <span>{{ 'ally.refuseCancelPact'|trans }}</span></a>{% endif %}
+                                            {% if allied.getDismissBy() %}<span class="timerArea" hidden>{{ allied.getDismissAt()|date('Y/m/d H:i:s') }}</span>{% else %}<a class="text-rouge" href="{{ path('ally_remove_pact',{'pact': allied.getId(), 'usePlanet': usePlanet.getId()}) }}"><div class="glyphicon glyphicon-remove"></div> <span>{{ 'ally.refuseCancelPact'|trans }}</span></a>{% endif %}
                                         </td>
                                     </tr>
                                 {% endfor %}
@@ -99,7 +99,7 @@
                                             {{ pna.getSignedAt()|date('d/m/Y H:i') }}
                                         </td>
                                         <td class="center-cells">
-                                            <a class="text-rouge" href="{{ path('ally_remove_pna',{'id': pna.getId(), 'idp': usePlanet.getId()}) }}"><div class="glyphicon glyphicon-remove"></div> <span>{{ 'ally.refuseCancelPact'|trans }}</span></a>
+                                            <a class="text-rouge" href="{{ path('ally_remove_pna',{'pact': pna.getId(), 'usePlanet': usePlanet.getId()}) }}"><div class="glyphicon glyphicon-remove"></div> <span>{{ 'ally.refuseCancelPact'|trans }}</span></a>
                                         </td>
                                     </tr>
                                 {% endfor %}
@@ -123,7 +123,7 @@
                                             {{ war.getSignedAt()|date('d/m/Y H:i') }}
                                         </td>
                                         <td class="center-cells">
-                                            <a class="text-orange" href="{{ path('ally_make_peace',{'id': war.getId(), 'idp': usePlanet.getId()}) }}"><div class="glyphicon glyphicon-flag"></div> <span>{{ 'ally.makePeace'|trans }}</span></a>
+                                            <a class="text-orange" href="{{ path('ally_make_peace',{'war': war.getId(), 'usePlanet': usePlanet.getId()}) }}"><div class="glyphicon glyphicon-flag"></div> <span>{{ 'ally.makePeace'|trans }}</span></a>
                                         </td>
                                     </tr>
                                 {% endfor %}
@@ -173,8 +173,8 @@
                                             {{ pna.getSignedAt()|date('d/m/Y H:i') }}
                                         </td>
                                         <td class="center-cells">
-                                            <a href="{{ path('ally_acceptPna',{'id': pna.getId(), 'idp': usePlanet.getId()}) }}"><div class="glyphicon glyphicon-ok"></div> <span>{{ 'ally.acceptPact'|trans }}</span></a>
-                                            <a class="text-rouge" href="{{ path('ally_refusePna',{'id': pna.getId(), 'idp': usePlanet.getId()}) }}"><div class="glyphicon glyphicon-remove"></div> <span>{{ 'ally.refusePact'|trans }}</span></a>
+                                            <a href="{{ path('ally_acceptPna',{'pact': pna.getId(), 'usePlanet': usePlanet.getId()}) }}"><div class="glyphicon glyphicon-ok"></div> <span>{{ 'ally.acceptPact'|trans }}</span></a>
+                                            <a class="text-rouge" href="{{ path('ally_refusePna',{'pact': pna.getId(), 'usePlanet': usePlanet.getId()}) }}"><div class="glyphicon glyphicon-remove"></div> <span>{{ 'ally.refusePact'|trans }}</span></a>
                                         </td>
                                     {% endfor %}
                                     {% for allied in waitingAllied %}
@@ -185,8 +185,8 @@
                                             {{ allied.getSignedAt()|date('d/m/Y H:i') }}
                                         </td>
                                         <td class="center-cells">
-                                            <a href="{{ path('ally_acceptAllied',{'id': allied.getId(), 'idp': usePlanet.getId()}) }}"><div class="glyphicon glyphicon-ok"></div> <span>{{ 'ally.acceptPact'|trans }}</span></a>
-                                            <a class="text-rouge" href="{{ path('ally_refuseAllied',{'id': allied.getId(), 'idp': usePlanet.getId()}) }}"><div class="glyphicon glyphicon-remove"></div> <span>{{ 'ally.refusePact'|trans }}</span></a>
+                                            <a href="{{ path('ally_acceptAllied',{'pact': allied.getId(), 'usePlanet': usePlanet.getId()}) }}"><div class="glyphicon glyphicon-ok"></div> <span>{{ 'ally.acceptPact'|trans }}</span></a>
+                                            <a class="text-rouge" href="{{ path('ally_refuseAllied',{'pact': allied.getId(), 'usePlanet': usePlanet.getId()}) }}"><div class="glyphicon glyphicon-remove"></div> <span>{{ 'ally.refusePact'|trans }}</span></a>
                                         </td>
                                     {% endfor %}
                                 </tr>
@@ -229,7 +229,7 @@
                                 {% endif %}
                             </th>
                             <th class="tab-cells-name p-2">
-                                <span><a data-toggle="modal" data-target="#allyModal" href="{{ path('ally_profil_modal', {'idp': usePlanet.getId(), 'id': ally.getId()}) }}">[{{ ally.getSigle() }}] {{ ally.getName() }}</a></span>
+                                <span><a data-toggle="modal" data-target="#allyModal" href="{{ path('ally_profil_modal', {'usePlanet': usePlanet.getId(), 'allyUser': ally.getId()}) }}">[{{ ally.getSigle() }}] {{ ally.getName() }}</a></span>
                             </th>
                             <th class="tab-cells-name p-2">
                                 {{ ally.getPolitic()|trans }}

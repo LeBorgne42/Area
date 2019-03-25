@@ -5,6 +5,7 @@ namespace App\Controller\Connected\Research;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use App\Entity\Planet;
 use DateTime;
 use Dateinterval;
 use DateTimeZone;
@@ -16,21 +17,17 @@ use DateTimeZone;
 class PoliticController extends AbstractController
 {
     /**
-     * @Route("/lancer-recherche/{search}/{idp}", name="research_ally", requirements={"search"="\w+", "idp"="\d+"})
+     * @Route("/lancer-recherche/{search}/{usePlanet}", name="research_ally", requirements={"search"="\w+", "usePlanet"="\d+"})
      */
-    public function researchAllyAction($idp, $search)
+    public function researchAllyAction(Planet $usePlanet, $search)
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(['id' => $idp, 'user' => $user])
-            ->getQuery()
-            ->getOneOrNullResult();
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $level = $user->getWhichResearch($search) + 1;
         $userBt = $user->getBitcoin();
@@ -40,7 +37,7 @@ class PoliticController extends AbstractController
         if(($userBt < ($level * $cost)) ||
             ($level == 6 || $user->getSearchAt() > $now) ||
             $user->getWhichResearch($search) === null) {
-            return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('search', ['usePlanet' => $usePlanet->getId()]);
         }
 
         $now->add(new DateInterval('PT' . round(($level * $time / $user->getScientistProduction())) . 'S'));
@@ -49,6 +46,6 @@ class PoliticController extends AbstractController
         $user->setBitcoin($userBt - ($level * $cost));
         $em->flush();
 
-        return $this->redirectToRoute('search', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('search', ['usePlanet' => $usePlanet->getId()]);
     }
 }

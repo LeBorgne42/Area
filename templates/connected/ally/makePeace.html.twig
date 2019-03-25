@@ -77,7 +77,7 @@
                                         {{ peace.getPlanet() }}
                                     </td>
                                     <td rowspan="3" class="center-cells cell-middle">
-                                        <a class="text-vert" href="{{ path('ally_accept_peace',{'id': peace.getId(), 'idp': usePlanet.getId()}) }}"><div class="glyphicon glyphicon-ok"></div> <span>{{ 'ally.acceptPeace'|trans }}</span></a>
+                                        <a class="text-vert" href="{{ path('ally_accept_peace',{'id': peace.getId(), 'usePlanet': usePlanet.getId()}) }}"><div class="glyphicon glyphicon-ok"></div> <span>{{ 'ally.acceptPeace'|trans }}</span></a>
                                     </td>
                                 </tr>
                                 <tr>
@@ -127,7 +127,7 @@
                                         {{ peace.getPlanet() }}
                                     </td>
                                     <td rowspan="3" class="center-cells cell-middle">
-                                        <a class="text-rouge" href="{{ path('ally_remove_peace',{'id': peace.getId(), 'idp': usePlanet.getId()}) }}"><div class="glyphicon glyphicon-remove"></div> <span>{{ 'ally.removePeace'|trans }}</span></a>
+                                        <a class="text-rouge" href="{{ path('ally_remove_peace',{'peace': peace.getId(), 'usePlanet': usePlanet.getId()}) }}"><div class="glyphicon glyphicon-remove"></div> <span>{{ 'ally.removePeace'|trans }}</span></a>
                                     </td>
                                 </tr>
                                 <tr>

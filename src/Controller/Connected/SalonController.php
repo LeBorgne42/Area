@@ -8,7 +8,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\Front\SalonType;
+use App\Entity\Planet;
 use App\Entity\S_Content;
+use App\Entity\Salon;
 use App\Entity\View;
 use DateTime;
 use DateTimeZone;
@@ -21,10 +23,10 @@ use DateInterval;
 class SalonController extends AbstractController
 {
     /**
-     * @Route("/salon/{idp}", name="salon", requirements={"idp"="\d+"})
-     * @Route("/salon/{idp}/{id}", name="salon_id", requirements={"idp"="\d+", "id"="\d+"})
+     * @Route("/salon/{usePlanet}", name="salon", requirements={"usePlanet"="\d+"})
+     * @Route("/salon/{usePlanet}/{id}", name="salon_id", requirements={"usePlanet"="\d+", "id"="\d+"})
      */
-    public function salonAction(Request $request, $idp, $id = 1)
+    public function salonAction(Request $request, Planet $usePlanet, $id = 1)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
@@ -37,8 +39,9 @@ class SalonController extends AbstractController
         if($user->getGameOver()) {
             return $this->redirectToRoute('game_over');
         }
-
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         if($user->getAlly()) {
             $sigle = $user->getAlly()->getSigle();
@@ -83,7 +86,7 @@ class SalonController extends AbstractController
             }
         }
         if($ok == 0) {
-            return $this->redirectToRoute('salon', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('salon', ['usePlanet' => $usePlanet->getId()]);
         }
 
         $form_message = $this->createForm(SalonType::class);
@@ -205,14 +208,15 @@ class SalonController extends AbstractController
     }
 
     /**
-     * @Route("/rejoindre-salon/{sigle}/{idp}", name="ally_join_salon", requirements={"sigle"="\w+", "idp"="\d+"})
+     * @Route("/rejoindre-salon/{sigle}/{usePlanet}", name="ally_join_salon", requirements={"sigle"="\w+", "usePlanet"="\d+"})
      */
-    public function addSalonAction($sigle, $idp)
+    public function addSalonAction($sigle, Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $salon = $em->getRepository('App:Salon')
             ->createQueryBuilder('s')
@@ -225,29 +229,24 @@ class SalonController extends AbstractController
 
         $em->flush();
 
-        return $this->redirectToRoute('salon', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('salon', ['usePlanet' => $usePlanet->getId()]);
     }
 
     /**
-     * @Route("/quitter-salon/{id}/{idp}", name="ally_leave_salon", requirements={"id"="\d+", "idp"="\d+"})
+     * @Route("/quitter-salon/{salon}/{usePlanet}", name="ally_leave_salon", requirements={"salon"="\d+", "usePlanet"="\d+"})
      */
-    public function leaveSalonAction($id, $idp)
+    public function leaveSalonAction(Salon $salon, Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
-
-        $salon = $em->getRepository('App:Salon')
-            ->createQueryBuilder('s')
-            ->where('s.id = :id')
-            ->setParameter('id', $id)
-            ->getQuery()
-            ->getOneOrNullResult();
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $salon->removeUser($user);
 
         $em->flush();
 
-        return $this->redirectToRoute('salon', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('salon', ['usePlanet' => $usePlanet->getId()]);
     }
 }

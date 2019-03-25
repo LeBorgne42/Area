@@ -5,6 +5,7 @@ namespace App\Controller\Connected\Building;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use App\Entity\Planet;
 use DateTime;
 use Dateinterval;
 use DateTimeZone;
@@ -16,15 +17,17 @@ use DateTimeZone;
 class EconomicController extends AbstractController
 {
     /**
-     * @Route("/contruire-laboratoire/{idp}", name="building_add_search", requirements={"idp"="\d+"})
+     * @Route("/contruire-laboratoire/{usePlanet}", name="building_add_search", requirements={"usePlanet"="\d+"})
      */
-    public function buildingAddSearchAction($idp)
+    public function buildingAddSearchAction(Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $level = $usePlanet->getCenterSearch() + 1;
         $usePlanetNb = $usePlanet->getNiobium();
@@ -33,7 +36,7 @@ class EconomicController extends AbstractController
 
         if(($usePlanetNb < ($level * 2850) || $usePlanetWt < ($level * 3580)) ||
             ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround())) {
-            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
         }
 
         $now->add(new DateInterval('PT' . ($level * 900) . 'S'));
@@ -44,27 +47,29 @@ class EconomicController extends AbstractController
         $usePlanet->setConstructAt($now);
         $em->flush();
 
-        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
     }
 
     /**
-     * @Route("/detruire-laboratoire/{idp}", name="building_remove_search", requirements={"idp"="\d+"})
+     * @Route("/detruire-laboratoire/{usePlanet}", name="building_remove_search", requirements={"usePlanet"="\d+"})
      */
-    public function buildingRemoveSearchAction($idp)
+    public function buildingRemoveSearchAction(Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
 
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $level = $usePlanet->getCenterSearch();
         $newGround = $usePlanet->getGroundPlace() - 5;
 
         if(($level == 0 || $usePlanet->getConstructAt() > $now) ||
             ($usePlanet->getScientist() > $usePlanet->getScientistMax() - 500)) {
-            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
         }
         $now->add(new DateInterval('PT' . 600 . 'S'));
         $usePlanet->setCenterSearch($level - 1);
@@ -74,19 +79,21 @@ class EconomicController extends AbstractController
         $usePlanet->setConstructAt($now);
         $em->flush();
 
-        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
     }
 
     /**
-     * @Route("/contruire-ville/{idp}", name="building_add_city", requirements={"idp"="\d+"})
+     * @Route("/contruire-ville/{usePlanet}", name="building_add_city", requirements={"usePlanet"="\d+"})
      */
-    public function buildingAddCityAction($idp)
+    public function buildingAddCityAction(Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $level = $usePlanet->getCity() + 1;
         $usePlanetNb = $usePlanet->getNiobium();
@@ -96,7 +103,7 @@ class EconomicController extends AbstractController
         if(($usePlanetNb < ($level * 15000) || $usePlanetWt < ($level * 11000)) ||
             ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround()) ||
             $user->getDemography() == 0) {
-            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
         }
 
         $now->add(new DateInterval('PT' . ($level * 720) . 'S'));
@@ -107,26 +114,28 @@ class EconomicController extends AbstractController
         $usePlanet->setConstructAt($now);
         $em->flush();
 
-        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
     }
 
     /**
-     * @Route("/detruire-ville/{idp}", name="building_remove_city", requirements={"idp"="\d+"})
+     * @Route("/detruire-ville/{usePlanet}", name="building_remove_city", requirements={"usePlanet"="\d+"})
      */
-    public function buildingRemoveCityAction($idp)
+    public function buildingRemoveCityAction(Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
 
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $level = $usePlanet->getCity();
         $newGround = $usePlanet->getGroundPlace() - 6;
 
         if($level == 0 || $usePlanet->getConstructAt() > $now) {
-            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
         }
         $now->add(new DateInterval('PT' . 600 . 'S'));
         $usePlanet->setCity($level - 1);
@@ -137,19 +146,21 @@ class EconomicController extends AbstractController
         $usePlanet->setConstructAt($now);
         $em->flush();
 
-        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
     }
     
     /**
-     * @Route("/contruire-metropole/{idp}", name="building_add_metropole", requirements={"idp"="\d+"})
+     * @Route("/contruire-metropole/{usePlanet}", name="building_add_metropole", requirements={"usePlanet"="\d+"})
      */
-    public function buildingAddMetropoleAction($idp)
+    public function buildingAddMetropoleAction(Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $level = $usePlanet->getMetropole() + 1;
         $usePlanetNb = $usePlanet->getNiobium();
@@ -160,7 +171,7 @@ class EconomicController extends AbstractController
         if(($usePlanetNb < ($level * 75000) || $usePlanetWt < ($level * 55000)) ||
             ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround()) ||
             ($user->getDemography() < 5 || $newSky > $usePlanet->getSky())) {
-            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
         }
 
         $now->add(new DateInterval('PT' . ($level * 2800) . 'S'));
@@ -172,27 +183,29 @@ class EconomicController extends AbstractController
         $usePlanet->setConstructAt($now);
         $em->flush();
 
-        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
     }
 
     /**
-     * @Route("/detruire-metropole/{idp}", name="building_remove_metropole", requirements={"idp"="\d+"})
+     * @Route("/detruire-metropole/{usePlanet}", name="building_remove_metropole", requirements={"usePlanet"="\d+"})
      */
-    public function buildingRemoveMetropoleAction($idp)
+    public function buildingRemoveMetropoleAction(Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
 
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $level = $usePlanet->getMetropole();
         $newGround = $usePlanet->getGroundPlace() - 6;
         $newSky = $usePlanet->getSkyPlace() - 6;
 
         if($level == 0 || $usePlanet->getConstructAt() > $now) {
-            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
         }
         $now->add(new DateInterval('PT' . 600 . 'S'));
         $usePlanet->setMetropole($level - 1);
@@ -204,6 +217,6 @@ class EconomicController extends AbstractController
         $usePlanet->setConstructAt($now);
         $em->flush();
 
-        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
     }
 }

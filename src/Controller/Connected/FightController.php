@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use App\Entity\Report;
 use App\Entity\Fleet;
+use App\Entity\Planet;
 use App\Entity\Exchange;
 use DateTime;
 use DateTimeZone;
@@ -676,17 +677,18 @@ class FightController extends AbstractController
     }
 
       /**
-       * @Route("/hello-we-come-for-you/{idp}/{fleet}/", name="invader_planet", requirements={"idp"="\d+", "fleet"="\d+"})
+       * @Route("/hello-we-come-for-you/{usePlanet}/{invader}/", name="invader_planet", requirements={"usePlanet"="\d+", "invader"="\d+"})
        */
-    public function invaderAction($idp, $fleet)
+    public function invaderAction(Planet $usePlanet, Fleet $invader)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
         $server = $em->getRepository('App:Server')->find(['id' => 1]);
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
-        $invader = $em->getRepository('App:Fleet')->find(['id' => $fleet]);
+        if ($usePlanet->getUser() != $user || $invader->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
         if ($user->getPoliticBarge() > 0) {
             $barge = $invader->getBarge() * 2500 * (1 + ($user->getPoliticBarge() / 4));
         } else {
@@ -886,7 +888,7 @@ class FightController extends AbstractController
             $em->flush();
         }
 
-        return $this->redirectToRoute('report', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('report', ['usePlanet' => $usePlanet->getId()]);
     }
 
     /**
@@ -933,6 +935,6 @@ class FightController extends AbstractController
             $em->flush();
         }
 
-        return $this->redirectToRoute('building', ['idp' => $newPlanet->getId()]);
+        return $this->redirectToRoute('building', ['usePlanet' => $newPlanet->getId()]);
     }
 }

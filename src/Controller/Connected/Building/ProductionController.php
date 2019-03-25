@@ -7,6 +7,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use App\Entity\Planet;
 use DateTime;
 use Dateinterval;
 use DateTimeZone;
@@ -18,15 +19,17 @@ use DateTimeZone;
 class ProductionController extends AbstractController
 {
     /**
-     * @Route("/contruire-mine/{idp}", name="building_add_mine", requirements={"idp"="\d+"})
+     * @Route("/contruire-mine/{usePlanet}", name="building_add_mine", requirements={"usePlanet"="\d+"})
      */
-    public function buildingAddMineAction($idp)
+    public function buildingAddMineAction(Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $level = $usePlanet->getMiner() + 1;
         $usePlanetNb = $usePlanet->getNiobium();
@@ -34,7 +37,7 @@ class ProductionController extends AbstractController
         $newGround = $usePlanet->getGroundPlace() + 1;
         if(($usePlanetNb < ($level * 450) || $usePlanetWt < ($level * 200)) ||
             ($newGround > $usePlanet->getGround())) {
-            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
         }
         if ($usePlanet->getConstructAt() > $now) {
             $level = $level + $usePlanet->getConstructionsLike('miner');
@@ -62,25 +65,26 @@ class ProductionController extends AbstractController
         }
         $em->flush();
 
-        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
     }
 
     /**
-     * @Route("/detruire-mine/{idp}", name="building_remove_mine", requirements={"idp"="\d+"})
+     * @Route("/detruire-mine/{usePlanet}", name="building_remove_mine", requirements={"usePlanet"="\d+"})
      */
-    public function buildingRemoveMineAction($idp)
+    public function buildingRemoveMineAction(Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
-
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $level = $usePlanet->getMiner();
         $newGround = $usePlanet->getGroundPlace() - 1;
         if($level == 0 || $usePlanet->getConstructAt() > $now) {
-            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
         }
         $now->add(new DateInterval('PT' . 60 . 'S'));
         $usePlanet->setMiner($level - 1);
@@ -90,20 +94,21 @@ class ProductionController extends AbstractController
         $usePlanet->setConstructAt($now);
         $em->flush();
 
-        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
     }
 
     /**
-     * @Route("/contruire-puit/{idp}", name="building_add_extract", requirements={"idp"="\d+"})
+     * @Route("/contruire-puit/{usePlanet}", name="building_add_extract", requirements={"usePlanet"="\d+"})
      */
-    public function buildingAddExtractAction($idp)
+    public function buildingAddExtractAction(Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
-
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $level = $usePlanet->getExtractor() + 1;
         $usePlanetNb = $usePlanet->getNiobium();
@@ -111,7 +116,7 @@ class ProductionController extends AbstractController
         $newGround = $usePlanet->getGroundPlace() + 1;
         if(($usePlanetNb < ($level * 200) || $usePlanetWt < ($level * 500)) ||
             ($newGround > $usePlanet->getGround())) {
-            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
         }
         if ($usePlanet->getConstructAt() > $now) {
             $level = $level + $usePlanet->getConstructionsLike('extractor');
@@ -139,25 +144,26 @@ class ProductionController extends AbstractController
         }
         $em->flush();
 
-        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
     }
 
     /**
-     * @Route("/detruire-puit/{idp}", name="building_remove_extract", requirements={"idp"="\d+"})
+     * @Route("/detruire-puit/{usePlanet}", name="building_remove_extract", requirements={"usePlanet"="\d+"})
      */
-    public function buildingRemoveExtractAction($idp)
+    public function buildingRemoveExtractAction(Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
-
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $level = $usePlanet->getExtractor();
         $newGround = $usePlanet->getGroundPlace() - 1;
         if($level == 0 || $usePlanet->getConstructAt() > $now) {
-            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
         }
         $now->add(new DateInterval('PT' . 60 . 'S'));
         $usePlanet->setExtractor($level - 1);
@@ -167,20 +173,21 @@ class ProductionController extends AbstractController
         $usePlanet->setConstructAt($now);
         $em->flush();
 
-        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
     }
 
     /**
-     * @Route("/contruire-stockage-niobium/{idp}", name="building_add_niobiumStock", requirements={"idp"="\d+"})
+     * @Route("/contruire-stockage-niobium/{usePlanet}", name="building_add_niobiumStock", requirements={"usePlanet"="\d+"})
      */
-    public function buildingAddNiobiumStockAction($idp)
+    public function buildingAddNiobiumStockAction(Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
-
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $level = $usePlanet->getNiobiumStock() + 1;
         $usePlanetNb = $usePlanet->getNiobium();
@@ -189,7 +196,7 @@ class ProductionController extends AbstractController
         if(($usePlanetNb < ($level * 150000) || $usePlanetWt < ($level * 100000)) ||
             ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround()) ||
         $user->getCargo() < 2) {
-            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
         }
         $now->add(new DateInterval('PT' . ($level * 2160) . 'S'));
         $usePlanet->setNiobium($usePlanetNb - ($level * 150000));
@@ -199,25 +206,26 @@ class ProductionController extends AbstractController
         $usePlanet->setConstructAt($now);
         $em->flush();
 
-        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
     }
 
     /**
-     * @Route("/detruire-stockage-niobium/{idp}", name="building_remove_niobiumStock", requirements={"idp"="\d+"})
+     * @Route("/detruire-stockage-niobium/{usePlanet}", name="building_remove_niobiumStock", requirements={"usePlanet"="\d+"})
      */
-    public function buildingRemoveNiobiumStockAction($idp)
+    public function buildingRemoveNiobiumStockAction(Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
-
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $level = $usePlanet->getNiobiumStock();
         $newGround = $usePlanet->getGroundPlace() - 3;
         if($level == 0 || $usePlanet->getConstructAt() > $now) {
-            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
         }
         $now->add(new DateInterval('PT' . 600 . 'S'));
         $usePlanet->setExtractor($level - 1);
@@ -227,20 +235,21 @@ class ProductionController extends AbstractController
         $usePlanet->setConstructAt($now);
         $em->flush();
 
-        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
     }
 
     /**
-     * @Route("/contruire-stockage-eau/{idp}", name="building_add_waterStock", requirements={"idp"="\d+"})
+     * @Route("/contruire-stockage-eau/{usePlanet}", name="building_add_waterStock", requirements={"usePlanet"="\d+"})
      */
-    public function buildingAddWaterStockAction($idp)
+    public function buildingAddWaterStockAction(Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
-
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $level = $usePlanet->getWaterStock() + 1;
         $usePlanetNb = $usePlanet->getNiobium();
@@ -249,7 +258,7 @@ class ProductionController extends AbstractController
         if(($usePlanetNb < ($level * 110000) || $usePlanetWt < ($level * 180000)) ||
             ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround()) ||
             $user->getCargo() < 2) {
-            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
         }
         $now->add(new DateInterval('PT' . ($level * 2160) . 'S'));
         $usePlanet->setNiobium($usePlanetNb - ($level * 110000));
@@ -259,25 +268,26 @@ class ProductionController extends AbstractController
         $usePlanet->setConstructAt($now);
         $em->flush();
 
-        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
     }
 
     /**
-     * @Route("/detruire-stockage-eau/{idp}", name="building_remove_waterStock", requirements={"idp"="\d+"})
+     * @Route("/detruire-stockage-eau/{usePlanet}", name="building_remove_waterStock", requirements={"usePlanet"="\d+"})
      */
-    public function buildingRemoveWaterStockAction($idp)
+    public function buildingRemoveWaterStockAction(Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
-
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $level = $usePlanet->getWaterStock();
         $newGround = $usePlanet->getGroundPlace() - 3;
         if($level == 0 || $usePlanet->getConstructAt() > $now) {
-            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
         }
         $now->add(new DateInterval('PT' . 600 . 'S'));
         $usePlanet->setWaterMax($usePlanet->getWaterMax() - 750000);
@@ -287,6 +297,6 @@ class ProductionController extends AbstractController
         $usePlanet->setConstructAt($now);
         $em->flush();
 
-        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
     }
 }

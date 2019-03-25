@@ -5,6 +5,7 @@ namespace App\Controller\Connected\Building;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use App\Entity\Planet;
 use DateTime;
 use DateTimeZone;
 use Dateinterval;
@@ -16,15 +17,17 @@ use Dateinterval;
 class BuildingController extends AbstractController
 {
     /**
-     * @Route("/batiment/{idp}", name="building", requirements={"idp"="\d+"})
+     * @Route("/batiment/{usePlanet}", name="building", requirements={"usePlanet"="\d+"})
      */
-    public function buildingAction($idp)
+    public function buildingAction(Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         if(($user->getTutorial() == 4)) {
             $user->setTutorial(5);
@@ -38,29 +41,21 @@ class BuildingController extends AbstractController
     }
 
     /**
-     * @Route("/annuler-construction/{idp}/{id}", name="cancel_construction", requirements={"idp"="\d+", "id"="\d+"})
+     * @Route("/annuler-construction/{usePlanet}/{cancelPlanet}", name="cancel_construction", requirements={"usePlanet"="\d+", "cancelPlanet"="\d+"})
      */
-    public function cancelConstructionAction($idp, $id)
+    public function cancelConstructionAction(Planet $usePlanet,Planet $cancelPlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
-
-
-        $cancelPlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(['id' => $id, 'user' => $user])
-            ->getQuery()
-            ->getOneOrNullResult();
-
+        if ($usePlanet->getUser() != $user || $cancelPlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $build = $cancelPlanet->getConstruct();
         if ($build == 'destruct') {
-            return $this->redirectToRoute('overview', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('overview', ['usePlanet' => $usePlanet->getId()]);
         } elseif ($build == 'miner') {
             $level = $cancelPlanet->getMiner() + 1;
             $cancelPlanet->setNiobium($cancelPlanet->getNiobium() + ($level * 225));
@@ -160,29 +155,22 @@ class BuildingController extends AbstractController
         }
         $em->flush();
 
-        if ($id == $idp) {
-            return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+        if ($cancelPlanet == $cancelPlanet) {
+            return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
         }
-        return $this->redirectToRoute('overview', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('overview', ['usePlanet' => $usePlanet->getId()]);
     }
 
     /**
-     * @Route("/annuler-construction-liste/{idp}/{id}", name="building_listCancel", requirements={"idp"="\d+", "id"="\d+"})
+     * @Route("/annuler-construction-liste/{usePlanet}/{construction}", name="building_listCancel", requirements={"usePlanet"="\d+", "construction"="\d+"})
      */
-    public function buildingListCancelAction($idp, $id)
+    public function buildingListCancelAction(Planet $usePlanet, Planet $construction)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
-
-        $construction = $em->getRepository('App:Construction')
-            ->createQueryBuilder('c')
-            ->join('c.planet', 'p')
-            ->where('c.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(['id' => $id, 'user' => $user])
-            ->getQuery()
-            ->getOneOrNullResult();
+        if ($usePlanet->getUser() != $user || $construction->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $build = $construction->getConstruct();
         $cancelPlanet = $construction->getPlanet();
@@ -201,6 +189,6 @@ class BuildingController extends AbstractController
         $em->remove($construction);
         $em->flush();
 
-        return $this->redirectToRoute('building', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
     }
 }

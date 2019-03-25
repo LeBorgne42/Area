@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\Front\PlanetRenameType;
+use App\Entity\Planet;
 
 /**
  * @Route("/connect")
@@ -15,9 +16,9 @@ use App\Form\Front\PlanetRenameType;
 class PlanetController extends AbstractController
 {
     /**
-     * @Route("/planete/{idp}", name="planet", requirements={"idp"="\d+"})
+     * @Route("/planete/{usePlanet}", name="planet", requirements={"usePlanet"="\d+"})
      */
-    public function planetAction(Request $request, $idp)
+    public function planetAction(Request $request, Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
@@ -25,8 +26,9 @@ class PlanetController extends AbstractController
         if($user->getGameOver()) {
             return $this->redirectToRoute('game_over');
         }
-
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $planetsSeller = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
@@ -62,7 +64,7 @@ class PlanetController extends AbstractController
             }
 
             $em->flush();
-            return $this->redirectToRoute('planet', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('planet', ['usePlanet' => $usePlanet->getId()]);
         }
         if(($user->getTutorial() == 2)) {
             $user->setTutorial(3);
@@ -78,22 +80,15 @@ class PlanetController extends AbstractController
     }
 
     /**
-     * @Route("/planete-abandon/{idp}/{id}", name="planet_abandon", requirements={"idp"="\d+","id"="\d+"})
+     * @Route("/planete-abandon/{usePlanet}/{abandonPlanet}", name="planet_abandon", requirements={"usePlanet"="\d+","abandonPlanet"="\d+"})
      */
-    public function planetAbandonAction($idp, $id)
+    public function planetAbandonAction(Planet $usePlanet, Planet $abandonPlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
-
-        $abandonPlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(['id' => $id, 'user' => $user])
-            ->getQuery()
-            ->getOneOrNullResult();
+        if ($usePlanet->getUser() != $user || $abandonPlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $fleetComing = $em->getRepository('App:Fleet')
             ->createQueryBuilder('f')
@@ -109,7 +104,7 @@ class PlanetController extends AbstractController
             ->getResult();
 
         if($abandonPlanet->getFleetsAbandon($user) == 1 || $fleetComing) {
-            return $this->redirectToRoute('planet', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('planet', ['usePlanet' => $usePlanet->getId()]);
         }
 
         if($abandonPlanet->getSky() == 5 && $abandonPlanet->getGround() == 25) {
@@ -156,6 +151,6 @@ class PlanetController extends AbstractController
             $usePlanet = $em->getRepository('App:Planet')->findByFirstPlanet($user->getUsername());
         }
 
-        return $this->redirectToRoute('planet', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('planet', ['usePlanet' => $usePlanet->getId()]);
     }
 }

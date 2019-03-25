@@ -21,16 +21,17 @@ use DateInterval;
 class MarketController extends AbstractController
 {
     /**
-     * @Route("/marchands/{idp}", name="market", requirements={"idp"="\d+"})
+     * @Route("/marchands/{usePlanet}", name="market", requirements={"usePlanet"="\d+"})
      */
-    public function marketAction(Request $request, $idp)
+    public function marketAction(Request $request, Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
-
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $quests = $em->getRepository('App:Quest')
             ->createQueryBuilder('q')
@@ -60,7 +61,7 @@ class MarketController extends AbstractController
             if(($cost > $user->getRank()->getWarPoint() ||
                 ($planetBuy->getSoldier() + abs($form_market->get('soldier')->getData())) > $planetBuy->getSoldierMax()) ||
                     ($planetBuy->getWorker() + abs($form_market->get('worker')->getData())) > $planetBuy->getWorkerMax()) {
-                return $this->redirectToRoute('market', ['idp' => $usePlanet->getId()]);
+                return $this->redirectToRoute('market', ['usePlanet' => $usePlanet->getId()]);
             }
 
             $user->setBitcoin($user->getBitcoin() + abs($form_market->get('bitcoin')->getData()));
@@ -74,7 +75,7 @@ class MarketController extends AbstractController
             }
 
             $em->flush();
-            return $this->redirectToRoute('market', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('market', ['usePlanet' => $usePlanet->getId()]);
         }
 
         if(($user->getTutorial() == 16)) {
@@ -90,13 +91,15 @@ class MarketController extends AbstractController
     }
 
     /**
-     * @Route("/ajouter-ajouter-marchand/{idp}//{planet}", name="planet_seller_add", requirements={"idp"="\d+","planet"="\d+"})
+     * @Route("/ajouter-ajouter-marchand/{usePlanet}//{planet}", name="planet_seller_add", requirements={"usePlanet"="\d+","planet"="\d+"})
      */
-    public function planetAddAction($idp, Planet $planet)
+    public function planetAddAction(Planet $usePlanet, Planet $planet)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         if($user->getGameOver()) {
             return $this->redirectToRoute('game_over');
@@ -107,17 +110,19 @@ class MarketController extends AbstractController
             $em->flush();
         }
 
-        return $this->redirectToRoute('planet', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('planet', ['usePlanet' => $usePlanet->getId()]);
     }
 
     /**
-     * @Route("/planete-enlever-marchand/{idp}/{planet}", name="planet_seller_sub", requirements={"idp"="\d+","planet"="\d+"})
+     * @Route("/planete-enlever-marchand/{usePlanet}/{planet}", name="planet_seller_sub", requirements={"usePlanet"="\d+","planet"="\d+"})
      */
-    public function planetSubAction($idp, Planet $planet)
+    public function planetSubAction(Planet $usePlanet, Planet $planet)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         if($user->getGameOver()) {
             return $this->redirectToRoute('game_over');
@@ -128,17 +133,19 @@ class MarketController extends AbstractController
             $em->flush();
         }
 
-        return $this->redirectToRoute('planet', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('planet', ['usePlanet' => $usePlanet->getId()]);
     }
 
     /**
-     * @Route("/vente-auto-marchand/{idp}/", name="planets_seller", requirements={"idp"="\d+"})
+     * @Route("/vente-auto-marchand/{usePlanet}/", name="planets_seller", requirements={"usePlanet"="\d+"})
      */
-    public function sellMerchantAction($idp)
+    public function sellMerchantAction(Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
         $server = $em->getRepository('App:Server')->find(['id' => 1]);
         $merchant = $em->getRepository('App:User')->findOneBy(['merchant' => 1]);
         $now = new DateTime();
@@ -213,6 +220,6 @@ class MarketController extends AbstractController
 
         $em->flush();
 
-        return $this->redirectToRoute('report', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('report_id', ['usePlanet' => $usePlanet->getId(), 'id' => 'economic']);
     }
 }

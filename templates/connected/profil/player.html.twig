@@ -48,11 +48,11 @@
                         {% endfor %}
                     </div>
                 {% endif %}
-                <div class="my-2 text-middle"><span class="glyphicon glyphicon-link text-orange"></span> {{ 'user.ally'|trans }} {% if user.getAlly() %}<span><a data-toggle="modal" data-target="#allyModal" href="{{ path('ally_profil_modal', {'idp': usePlanet.getId(), 'id': user.getAlly().getId()}) }}">{{ user.getAlly().getName() }}</a></span>{% else %}{{ 'user.allyNone'|trans }}{% endif %}</div>
+                <div class="my-2 text-middle"><span class="glyphicon glyphicon-link text-orange"></span> {{ 'user.ally'|trans }} {% if user.getAlly() %}<span><a data-toggle="modal" data-target="#allyModal" href="{{ path('ally_profil_modal', {'usePlanet': usePlanet.getId(), 'allyUser': user.getAlly().getId()}) }}">{{ user.getAlly().getName() }}</a></span>{% else %}{{ 'user.allyNone'|trans }}{% endif %}</div>
                 {% if user.getAlly() %}<div class="my-2 text-middle"><span class="glyphicon glyphicon-link text-orange"></span> {{ 'user.politic'|trans }} {{ user.getAlly().getPolitic()|trans }}</div>{% endif %}
             </div>
         </div>
-        <div class="my-4 text-center pb-3"><a class="confirm-button" data-toggle="modal" data-target="#respondeModal" href="{{ path('message_responde', {'idp': usePlanet.getId(), 'id': user.getId()}) }}">{{ 'responde'|trans }}</a></div>
+        <div class="my-4 text-center pb-3"><a class="confirm-button" data-toggle="modal" data-target="#respondeModal" href="{{ path('message_responde', {'usePlanet': usePlanet.getId(), 'id': user.getId()}) }}">{{ 'responde'|trans }}</a></div>
     </div>
     <div class="modal fade" id="allyModal" tabindex="-1" role="dialog" aria-labelledby="allyModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">

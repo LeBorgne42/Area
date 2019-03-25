@@ -5,6 +5,7 @@ namespace App\Controller\Connected;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use App\Entity\Planet;
 use DateTime;
 use DateTimeZone;
 
@@ -15,9 +16,9 @@ use DateTimeZone;
 class SearchController extends AbstractController
 {
     /**
-     * @Route("/recherche/{idp}", name="search", requirements={"idp"="\d+"})
+     * @Route("/recherche/{usePlanet}", name="search", requirements={"usePlanet"="\d+"})
      */
-    public function searchAction($idp)
+    public function searchAction(Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
@@ -27,14 +28,9 @@ class SearchController extends AbstractController
         if($user->getGameOver()) {
             return $this->redirectToRoute('game_over');
         }
-
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(['id' => $idp, 'user' => $user])
-            ->getQuery()
-            ->getOneOrNullResult();
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         if($user->getTutorial() == 7) {
             $user->setTutorial(8);
@@ -53,21 +49,17 @@ class SearchController extends AbstractController
     }
 
     /**
-     * @Route("/annuler-rechercher/{idp}", name="research_cancel", requirements={"idp"="\d+"})
+     * @Route("/annuler-rechercher/{usePlanet}", name="research_cancel", requirements={"usePlanet"="\d+"})
      */
-    public function researchCancelAction($idp)
+    public function researchCancelAction(Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(['id' => $idp, 'user' => $user])
-            ->getQuery()
-            ->getOneOrNullResult();
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $research = $user->getSearch();
         if ($research == 'onde') {
@@ -126,6 +118,6 @@ class SearchController extends AbstractController
 
         $em->flush();
 
-        return $this->redirectToRoute('overview', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('overview', ['usePlanet' => $usePlanet->getId()]);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Controller\Connected;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use App\Entity\Planet;
 use App\Entity\Report;
 use DateTime;
 use DateTimeZone;
@@ -17,18 +18,19 @@ use DateInterval;
 class ReportController extends AbstractController
 {
     /**
-     * @Route("/rapport/{idp}", name="report", requirements={"idp"="\d+"})
-     * @Route("/rapport/{idp}/{id}", name="report_id", requirements={"idp"="\d+", "id"="\w+"})
+     * @Route("/rapport/{usePlanet}", name="report", requirements={"usePlanet"="\d+"})
+     * @Route("/rapport/{usePlanet}/{id}", name="report_id", requirements={"usePlanet"="\d+", "id"="\w+"})
      */
-    public function reportAction($idp, $id = 'defaut')
+    public function reportAction(Planet $usePlanet, $id = 'defaut')
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $now->sub(new DateInterval('PT' . 2592000 . 'S'));
-
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $removeReports = $em->getRepository('App:Report')
             ->createQueryBuilder('r')
@@ -96,64 +98,52 @@ class ReportController extends AbstractController
     }
 
     /**
-     * @Route("/report-view/{idp}/{id}", name="report_view", requirements={"idp"="\d+", "id"="\d+"})
+     * @Route("/report-view/{usePlanet}/{report}", name="report_view", requirements={"usePlanet"="\d+", "report"="\d+"})
      */
-    public function reportViewAction($idp, $id)
+    public function reportViewAction(Planet $usePlanet, Report $report)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
-
-        $report = $em->getRepository('App:Report')
-            ->createQueryBuilder('r')
-            ->where('r.id = :id')
-            ->andWhere('r.user = :user')
-            ->setParameters(['id' => $id, 'user' => $user])
-            ->getQuery()
-            ->getOneOrNullResult();
+        if ($usePlanet->getUser() != $user || $report->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $report->setNewReport(0);
 
         $em->flush();
 
-        return $this->redirectToRoute('report_id', ['idp' => $usePlanet->getId(), 'id' => $report->getType()]);
+        return $this->redirectToRoute('report_id', ['usePlanet' => $usePlanet->getId(), 'id' => $report->getType()]);
     }
 
     /**
-     * @Route("/supprimer-rapport/{idp}/{id}", name="report_delete", requirements={"idp"="\d+", "id"="\d+"})
+     * @Route("/supprimer-rapport/{usePlanet}/{report}", name="report_delete", requirements={"usePlanet"="\d+", "report"="\d+"})
      */
-    public function reportDeleteAction($idp, $id)
+    public function reportDeleteAction(Planet $usePlanet, Report $report)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
-
-        $report = $em->getRepository('App:Report')
-            ->createQueryBuilder('r')
-            ->where('r.id = :id')
-            ->andWhere('r.user = :user')
-            ->setParameters(['id' => $id, 'user' => $user])
-            ->getQuery()
-            ->getOneOrNullResult();
+        if ($usePlanet->getUser() != $user || $report->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $report->setImageName(null);
         $path = $report->getType();
         $em->remove($report);
         $em->flush();
 
-        return $this->redirectToRoute('report_id', ['idp' => $usePlanet->getId(), 'id' => $path]);
+        return $this->redirectToRoute('report_id', ['usePlanet' => $usePlanet->getId(), 'id' => $path]);
     }
 
     /**
-     * @Route("/rapport-share/{idp}/{id}", name="report_share", requirements={"idp"="\d+", "id"="\d+"})
+     * @Route("/rapport-share/{usePlanet}/{id}", name="report_share", requirements={"usePlanet"="\d+", "id"="\d+"})
      */
-    public function reportShareAction($idp, Report $id)
+    public function reportShareAction(Planet $usePlanet, Report $id)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
         if ($user == $id->getUser()) {
             $alpha = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-'];
             $newShareKey = $alpha[rand(0, 36)] . $alpha[rand(0, 36)] . $alpha[rand(0, 36)] . $alpha[rand(0, 36)] . $alpha[rand(0, 36)] . $alpha[rand(0, 36)]
@@ -164,18 +154,19 @@ class ReportController extends AbstractController
             $em->flush();
         }
 
-        return $this->redirectToRoute('report_id', ['idp' => $usePlanet->getId(), 'id' => $id->getType()]);
+        return $this->redirectToRoute('report_id', ['usePlanet' => $usePlanet->getId(), 'id' => $id->getType()]);
     }
 
     /**
-     * @Route("/report-view-all/{idp}/", name="report_all_view", requirements={"idp"="\d+"})
+     * @Route("/report-view-all/{usePlanet}/", name="report_all_view", requirements={"usePlanet"="\d+"})
      */
-    public function reportAllViewAction($idp)
+    public function reportAllViewAction(Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $reports = $em->getRepository('App:Report')
             ->createQueryBuilder('r')
@@ -190,6 +181,6 @@ class ReportController extends AbstractController
         }
         $em->flush();
 
-        return $this->redirectToRoute('report', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('report', ['usePlanet' => $usePlanet->getId()]);
     }
 }

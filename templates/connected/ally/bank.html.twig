@@ -11,31 +11,31 @@
                 <h1 class="text-center p-4">{{ 'ally.banktitle'|trans }} <small>({{ 'ally.taxe'|trans }} {{ app.user.getAlly().getTaxe() }}%)</small></h1>
                 <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
                     <li class="nav-item">
-                        <a href="{{ path('ally', {'idp': usePlanet.getId()}) }}" >{{ app.user.getAlly().getUsers()|length }} {{ 'ally.members'|trans }}</a>
+                        <a href="{{ path('ally', {'usePlanet': usePlanet.getId()}) }}" >{{ app.user.getAlly().getUsers()|length }} {{ 'ally.members'|trans }}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" id="bank-tab" data-toggle="tab" href="#bank" role="tab" aria-controls="bank" aria-selected="false">{{ 'ally.found'|trans }}</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ path('ally_page_pacts', {'idp': usePlanet.getId()}) }}" >{{ app.user.getAlly().getPacts() }}  {{ 'ally.pacts'|trans }}</a>
+                        <a href="{{ path('ally_page_pacts', {'usePlanet': usePlanet.getId()}) }}" >{{ app.user.getAlly().getPacts() }}  {{ 'ally.pacts'|trans }}</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ path('ally_page_add', {'idp': usePlanet.getId()}) }}" >{{ 'ally.add'|trans }}</a>
+                        <a href="{{ path('ally_page_add', {'usePlanet': usePlanet.getId()}) }}" >{{ 'ally.add'|trans }}</a>
                     </li>
                     {% if app.user.getGrade().getPlacement() == 1 %}
                         <li class="nav-item">
-                            <a href="{{ path('ally_page_admin', {'idp': usePlanet.getId()}) }}" >{{ 'ally.admin'|trans }}</a>
+                            <a href="{{ path('ally_page_admin', {'usePlanet': usePlanet.getId()}) }}" >{{ 'ally.admin'|trans }}</a>
                         </li>
                     {% endif %}
                     {% if app.user.getAlly().getPolitic() == 'democrate' %}
                         <li class="nav-item">
-                            <a href="{{ path('ally_page_exit', {'idp': usePlanet.getId()}) }}" >{{ 'ally.leave'|trans }}</a>
+                            <a href="{{ path('ally_page_exit', {'usePlanet': usePlanet.getId()}) }}" >{{ 'ally.leave'|trans }}</a>
                         </li>
                     {% endif %}
                 </ul>
                 {% if app.user.getGrade().getPlacement() == 1 %}
                     <div class="my-5 text-center">
-                        {% set x = 1 %}{% for info in app.user.getAlly().getLevelCost()  %} {% if x == 1 %}{{ 'ally.levelUpMembers'|trans }} {{ info|number_format }} <a href="{{ path('ally_level', {'idp': usePlanet.getId()}) }}" class="confirm-button">{{ 'ally.levelUp'|trans }}</a>{% elseif x == 2 %}{{ 'ally.levelUpCost'|trans }} {{ info|number_format }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}">{% elseif x == 3 %}{{ info|number_format }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'pdgImg'|trans }}" src="{{ asset('img/pdg.png') }}">{% endif %}{% set x = x + 1 %}{% endfor %}
+                        {% set x = 1 %}{% for info in app.user.getAlly().getLevelCost()  %} {% if x == 1 %}{{ 'ally.levelUpMembers'|trans }} {{ info|number_format }} <a href="{{ path('ally_level', {'usePlanet': usePlanet.getId()}) }}" class="confirm-button">{{ 'ally.levelUp'|trans }}</a>{% elseif x == 2 %}{{ 'ally.levelUpCost'|trans }} {{ info|number_format }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}">{% elseif x == 3 %}{{ info|number_format }} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'pdgImg'|trans }}" src="{{ asset('img/pdg.png') }}">{% endif %}{% set x = x + 1 %}{% endfor %}
                     </div>
                 {% endif %}
                 <div class="tab-content" id="myTabContent">
@@ -80,7 +80,7 @@
                                     <td class="center-cells">{% if exchange.getType() == 1 %}{{ 'ally.pdgDonate'|trans }}{% else %}{{ 'ally.bitcoinDonate'|trans }}{% endif %}</td>
                                     <td class="center-cells">{{ exchange.getAmount()|number_format }}</td>
                                     <td class="center-cells">{{ exchange.getContent() }}</td>
-                                    <td class="center-cells">{% if exchange.getAmount() < 0 %}{% if exchange.getAccepted() == 1 %}<span class="text-vert">{{ 'ally.exchangeAccepted'|trans }}</span>{% else %}{% if app.user.getGrade().getPlacement() == 1 %}<span><a href="{{ path('ally_accept_exchange',{'id': exchange.getId(), 'idp': usePlanet.getId()}) }}">{{ 'ally.exchangeAccept'|trans }}</a></span> / <span><a href="{{ path('ally_refuse_exchange',{'id': exchange.getId(), 'idp': usePlanet.getId()}) }}">{{ 'ally.exchangeRefuse'|trans }}</a></span>{% else %}<span class="text-rouge">{{ 'ally.exchangeWaiting'|trans }}</span>{% endif %}{% endif %} - {% endif %}{{ exchange.getCreatedAT()|date('d/m/Y H:i') }}</td>
+                                    <td class="center-cells">{% if exchange.getAmount() < 0 %}{% if exchange.getAccepted() == 1 %}<span class="text-vert">{{ 'ally.exchangeAccepted'|trans }}</span>{% else %}{% if app.user.getGrade().getPlacement() == 1 %}<span><a href="{{ path('ally_accept_exchange',{'id': exchange.getId(), 'usePlanet': usePlanet.getId()}) }}">{{ 'ally.exchangeAccept'|trans }}</a></span> / <span><a href="{{ path('ally_refuse_exchange',{'id': exchange.getId(), 'usePlanet': usePlanet.getId()}) }}">{{ 'ally.exchangeRefuse'|trans }}</a></span>{% else %}<span class="text-rouge">{{ 'ally.exchangeWaiting'|trans }}</span>{% endif %}{% endif %} - {% endif %}{{ exchange.getCreatedAT()|date('d/m/Y H:i') }}</td>
                                 </tr>
                             {% endfor %}
                             </tbody>

@@ -21,9 +21,9 @@ use DateTimeZone;
 class ConfirmController extends AbstractController
 {
     /**
-     * @Route("/confirmation-compte/{idp}", name="confirm_account", requirements={"idp"="\d+"})
+     * @Route("/confirmation-compte/{usePlanet}", name="confirm_account", requirements={"usePlanet"="\d+"})
      */
-    public function confirmAction(Request $request, Planet $idp, \Swift_Mailer $mailer)
+    public function confirmAction(Request $request, Planet $usePlanet, \Swift_Mailer $mailer)
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
@@ -31,7 +31,7 @@ class ConfirmController extends AbstractController
         $user = $this->getUser();
 
         if($user->getConfirmed() == 1) {
-            return $this->redirectToRoute('overview', ['idp' => $idp->getId()]);
+            return $this->redirectToRoute('overview', ['usePlanet' => $usePlanet->getId()]);
         }
 
         $form_confirm = $this->createForm(ConfirmType::class, $user);
@@ -73,7 +73,7 @@ class ConfirmController extends AbstractController
 
         return $this->render('connected/confirm.html.twig', [
             'form_confirm' => $form_confirm->createView(),
-            'usePlanet' => $idp,
+            'usePlanet' => $usePlanet,
         ]);
     }
 }

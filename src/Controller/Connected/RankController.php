@@ -5,6 +5,7 @@ namespace App\Controller\Connected;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use App\Entity\Planet;
 
 /**
  * @Route("/connect")
@@ -13,13 +14,15 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 class RankController extends AbstractController
 {
     /**
-     * @Route("/classement-alliance/{idp}", name="rank_ally", requirements={"idp"="\d+"})
+     * @Route("/classement-alliance/{usePlanet}", name="rank_ally", requirements={"usePlanet"="\d+"})
      */
-    public function rankAction($idp)
+    public function rankAction(Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $allAllys = $em->getRepository('App:Ally')
             ->createQueryBuilder('a')
@@ -35,13 +38,15 @@ class RankController extends AbstractController
     }
 
     /**
-     * @Route("/classement-joueurs/{idp}", name="rank_user", requirements={"idp"="\d+"})
+     * @Route("/classement-joueurs/{usePlanet}", name="rank_user", requirements={"usePlanet"="\d+"})
      */
-    public function rankUserAction($idp)
+    public function rankUserAction(Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $users = $em->getRepository('App:User')
             ->createQueryBuilder('u')
@@ -63,13 +68,15 @@ class RankController extends AbstractController
     }
 
 //    /**
-//     * @Route("/classement-joueurs/{idp}", name="rank_user", requirements={"idp"="\d+"})
+//     * @Route("/classement-joueurs/{usePlanet}", name="rank_user", requirements={"usePlanet"="\d+"})
 //     */
-//    public function rankUserAction($idp)
+//    public function rankUserAction(Planet $usePlanet)
 //    {
 //        $em = $this->getDoctrine()->getManager();
 //        $user = $this->getUser();
-//        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+//        if ($usePlanet->getUser() != $user) {
+//          return $this->redirectToRoute('home');
+//        }
 //
 //        $users = $em->getRepository('App:User')
 //            ->createQueryBuilder('u')

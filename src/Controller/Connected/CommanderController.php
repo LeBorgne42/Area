@@ -19,20 +19,23 @@ use DateTimeZone;
 class CommanderController extends AbstractController
 {
     /**
-     * @Route("/commandant/{idp}", name="commander", requirements={"idp"="\d+"})
+     * @Route("/commandant/{usePlanet}", name="commander", requirements={"usePlanet"="\d+"})
      */
-    public function commanderAction(Planet $idp)
+    public function commanderAction(Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $user->setCommander($commander);
         $em->flush();
 
         return $this->render('connected/commander.html.twig', [
-            'usePlanet' => $idp,
+            'usePlanet' => $usePlanet,
         ]);
     }
 }

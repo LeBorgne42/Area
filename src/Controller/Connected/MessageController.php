@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Form\Front\MessageType;
 use App\Form\Front\MessageRespondeType;
 use App\Entity\Message;
+use App\Entity\Planet;
 use DateTime;
 use DateTimeZone;
 use DateInterval;
@@ -20,9 +21,9 @@ use DateInterval;
 class MessageController extends AbstractController
 {
     /**
-     * @Route("/message/{idp}", name="message", requirements={"idp"="\d+"})
+     * @Route("/message/{usePlanet}", name="message", requirements={"usePlanet"="\d+"})
      */
-    public function messageAction(Request $request, $idp)
+    public function messageAction(Request $request, Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
@@ -36,8 +37,9 @@ class MessageController extends AbstractController
         if($user->getGameOver()) {
             return $this->redirectToRoute('game_over');
         }
-
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $removeMessages = $em->getRepository('App:Message')
             ->createQueryBuilder('m')
@@ -110,9 +112,9 @@ class MessageController extends AbstractController
     }
 
     /**
-     * @Route("/repondre/{idp}/{id}", name="message_responde", requirements={"idp"="\d+", "id"="\d+"})
+     * @Route("/repondre/{usePlanet}/{id}", name="message_responde", requirements={"usePlanet"="\d+", "id"="\d+"})
      */
-    public function messageRespondeAction(Request $request, $idp, $id)
+    public function messageRespondeAction(Request $request, Planet $usePlanet, $id)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
@@ -123,11 +125,12 @@ class MessageController extends AbstractController
         if($user->getGameOver()) {
             return $this->redirectToRoute('game_over');
         }
-
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         if($user->getSalonBan() > $now) {
-            return $this->redirectToRoute('message', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('message', ['usePlanet' => $usePlanet->getId()]);
         }
 
         $form_message = $this->createForm(MessageRespondeType::class, $message);
@@ -154,7 +157,7 @@ class MessageController extends AbstractController
             }
 
             $em->flush();
-            return $this->redirectToRoute('message', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('message', ['usePlanet' => $usePlanet->getId()]);
         }
 
         return $this->render('connected/profil/user_responde.html.twig', [
@@ -165,31 +168,34 @@ class MessageController extends AbstractController
     }
 
     /**
-     * @Route("/message-view/{idp}/{id}", name="message_view", requirements={"idp"="\d+", "id"="\d+"})
+     * @Route("/message-view/{usePlanet}/{id}", name="message_view", requirements={"usePlanet"="\d+", "id"="\d+"})
      */
-    public function messageViewAction($idp, Message $id)
+    public function messageViewAction(Planet $usePlanet, Message $id)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         if ($user == $id->getUser()) {
             $id->setNewMessage(false);
             $em->flush();
         }
 
-        return $this->redirectToRoute('message', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('message', ['usePlanet' => $usePlanet->getId()]);
     }
 
     /**
-     * @Route("/message-share/{idp}/{id}", name="message_share", requirements={"idp"="\d+", "id"="\d+"})
+     * @Route("/message-share/{usePlanet}/{id}", name="message_share", requirements={"usePlanet"="\d+", "id"="\d+"})
      */
-    public function messageShareAction($idp, Message $id)
+    public function messageShareAction(Planet $usePlanet, Message $id)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
         if ($user == $id->getUser()) {
             $alpha = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-'];
             $newShareKey = $alpha[rand(0, 36)] . $alpha[rand(0, 36)] . $alpha[rand(0, 36)] . $alpha[rand(0, 36)] . $alpha[rand(0, 36)] . $alpha[rand(0, 36)]
@@ -200,18 +206,19 @@ class MessageController extends AbstractController
             $em->flush();
         }
 
-        return $this->redirectToRoute('message', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('message', ['usePlanet' => $usePlanet->getId()]);
     }
 
     /**
-     * @Route("/message-view-all/{idp}/", name="message_all_view", requirements={"idp"="\d+"})
+     * @Route("/message-view-all/{usePlanet}/", name="message_all_view", requirements={"usePlanet"="\d+"})
      */
-    public function messageAllViewAction($idp)
+    public function messageAllViewAction(Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $messages = $em->getRepository('App:Message')
             ->createQueryBuilder('m')
@@ -227,6 +234,6 @@ class MessageController extends AbstractController
 
         $em->flush();
 
-        return $this->redirectToRoute('message', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('message', ['usePlanet' => $usePlanet->getId()]);
     }
 }

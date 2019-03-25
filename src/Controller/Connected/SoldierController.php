@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\Front\CaserneRecruitType;
 use App\Form\Front\ScientistRecruitType;
+use App\Entity\Planet;
 use DateTime;
 use Dateinterval;
 use DateTimeZone;
@@ -19,9 +20,9 @@ use DateTimeZone;
 class SoldierController extends AbstractController
 {
     /**
-     * @Route("/entrainement/{idp}", name="soldier", requirements={"idp"="\d+"})
+     * @Route("/entrainement/{usePlanet}", name="soldier", requirements={"usePlanet"="\d+"})
      */
-    public function soldierAction(Request $request, $idp)
+    public function soldierAction(Request $request, Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
@@ -29,14 +30,9 @@ class SoldierController extends AbstractController
         if($user->getGameOver()) {
             return $this->redirectToRoute('game_over');
         }
-
-        $usePlanet = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.id = :id')
-            ->andWhere('p.user = :user')
-            ->setParameters(['id' => $idp, 'user' => $user])
-            ->getQuery()
-            ->getOneOrNullResult();
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $form_caserneRecruit = $this->createForm(CaserneRecruitType::class);
         $form_caserneRecruit->handleRequest($request);
@@ -56,11 +52,11 @@ class SoldierController extends AbstractController
                 if($nbrSoldier * $price > $user->getBitcoin() ||
                     ($nbrSoldier * 2 > $usePlanet->getWorker() || ($usePlanet->getSoldier() + $nbrSoldier) > $usePlanet->getSoldierMax()) ||
                     ($usePlanet->getWorker() < 5000)) {
-                    return $this->redirectToRoute('soldier', ['idp' => $usePlanet->getId()]);
+                    return $this->redirectToRoute('soldier', ['usePlanet' => $usePlanet->getId()]);
                 }
                 if($usePlanet->getSoldierAt()) {
                     if ($usePlanet->getSoldier() + $usePlanet->getSoldierAtNbr() + $nbrSoldier > $usePlanet->getSoldierMax()) {
-                        return $this->redirectToRoute('soldier', ['idp' => $usePlanet->getId()]);
+                        return $this->redirectToRoute('soldier', ['usePlanet' => $usePlanet->getId()]);
                     }
                     $tmpSoldier = $usePlanet->getSoldierAtNbr();
                     $now->add(new DateInterval('PT' . round(($nbrSoldier + $tmpSoldier) / 10) . 'S'));  // X10 NORMAL GAME
@@ -86,11 +82,11 @@ class SoldierController extends AbstractController
                     $nbrTank * 5 > $usePlanet->getWorker() ||
                     $nbrTank * 40000 > $usePlanet->getNiobium() ||
                     ($usePlanet->getWorker() < 5000 || ($usePlanet->getTank() + $nbrTank) > 500)) {
-                    return $this->redirectToRoute('soldier', ['idp' => $usePlanet->getId()]);
+                    return $this->redirectToRoute('soldier', ['usePlanet' => $usePlanet->getId()]);
                 }
                 if($usePlanet->getTankAt()) {
                     if ($usePlanet->getTank() + $usePlanet->getTankAtNbr() + $nbrTank > 500) {
-                        return $this->redirectToRoute('soldier', ['idp' => $usePlanet->getId()]);
+                        return $this->redirectToRoute('soldier', ['usePlanet' => $usePlanet->getId()]);
                     }
                     $tmpTank = $usePlanet->getTankAtNbr();
                     $now->add(new DateInterval('PT' . round(($nbrTank + $tmpTank) * 900) . 'S'));
@@ -116,11 +112,11 @@ class SoldierController extends AbstractController
                 if($nbrScientist > ($user->getBitcoin() / 250) ||
                     $nbrScientist > ($usePlanet->getWorker() / 10) ||
                     ($usePlanet->getWorker() < 5000 || ($usePlanet->getScientist() + $nbrScientist) > $usePlanet->getScientistMax())) {
-                    return $this->redirectToRoute('soldier', ['idp' => $usePlanet->getId()]);
+                    return $this->redirectToRoute('soldier', ['usePlanet' => $usePlanet->getId()]);
                 }
                 if($usePlanet->getScientistAt()) {
                     if ($usePlanet->getScientist() + $usePlanet->getScientistAtNbr() + $nbrScientist > $usePlanet->getScientistMax()) {
-                        return $this->redirectToRoute('soldier', ['idp' => $usePlanet->getId()]);
+                        return $this->redirectToRoute('soldier', ['usePlanet' => $usePlanet->getId()]);
                     }
                     $tmpScientist = $usePlanet->getScientistAtNbr();
                     $now->add(new DateInterval('PT' . round((($nbrScientist + $tmpScientist) * 60)/ $user->getScientistProduction()) . 'S'));
@@ -139,7 +135,7 @@ class SoldierController extends AbstractController
                 }
             }
             $em->flush();
-            return $this->redirectToRoute('soldier', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('soldier', ['usePlanet' => $usePlanet->getId()]);
         }
 
         return $this->render('connected/soldier.html.twig', [

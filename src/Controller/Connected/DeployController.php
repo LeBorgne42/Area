@@ -5,6 +5,8 @@ namespace App\Controller\Connected;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use App\Entity\Planet;
+use App\Entity\Fleet;
 use DateTime;
 use DateTimeZone;
 use Dateinterval;
@@ -12,17 +14,18 @@ use Dateinterval;
 class DeployController extends AbstractController
 {
     /**
-     * @Route("/deployer-radar/{idp}/{fleet}/", name="deploy_radar", requirements={"idp"="\d+", "fleet"="\d+"})
+     * @Route("/deployer-radar/{usePlanet}/{fleet}/", name="deploy_radar", requirements={"usePlanet"="\d+", "fleet"="\d+"})
      */
-    public function deployRadarAction($idp, $fleet)
+    public function deployRadarAction(Planet $usePlanet, Fleet $fleet)
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $now->add(new DateInterval('PT' . 7200 . 'S'));
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
-        $fleet = $em->getRepository('App:Fleet')->find(['id' => $fleet]);
+        if ($usePlanet->getUser() != $user || $fleet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
         $planet = $fleet->getPlanet();
 
         if($fleet->getRadarShip() && $planet->getEmpty() == true) {
@@ -42,21 +45,22 @@ class DeployController extends AbstractController
             $em->flush();
         }
 
-        return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getPosition()]);
+        return $this->redirectToRoute('map', ['usePlanet' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getPosition()]);
     }
     /**
-     * @Route("/deployer-brouilleur/{idp}/{fleet}/", name="deploy_brouilleur", requirements={"idp"="\d+", "fleet"="\d+"})
+     * @Route("/deployer-brouilleur/{usePlanet}/{fleet}/", name="deploy_brouilleur", requirements={"usePlanet"="\d+", "fleet"="\d+"})
      */
-    public function deployBrouilleurAction($idp, $fleet)
+    public function deployBrouilleurAction(Planet $usePlanet, Fleet $fleet)
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $now->add(new DateInterval('PT' . 3600 . 'S'));
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user || $fleet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
         $planet = $fleet->getPlanet();
-        $fleet = $em->getRepository('App:Fleet')->find(['id' => $fleet]);
 
         if($fleet->getBrouilleurShip() && $planet->getEmpty() == true) {
             $fleet->setBrouilleurShip($fleet->getBrouilleurShip() - 1);
@@ -75,19 +79,20 @@ class DeployController extends AbstractController
             $em->flush();
         }
 
-        return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getPosition()]);
+        return $this->redirectToRoute('map', ['usePlanet' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getPosition()]);
     }
     /**
-     * @Route("/deployer-lunar/{idp}/{fleet}/", name="deploy_moonMaker", requirements={"idp"="\d+", "fleet"="\d+"})
+     * @Route("/deployer-lunar/{usePlanet}/{fleet}/", name="deploy_moonMaker", requirements={"usePlanet"="\d+", "fleet"="\d+"})
      */
-    public function deployMoonMakerAction($idp, $fleet)
+    public function deployMoonMakerAction(Planet $usePlanet, Fleet $fleet)
     {
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
-        $fleet = $em->getRepository('App:Fleet')->find(['id' => $fleet]);
+        if ($usePlanet->getUser() != $user || $fleet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
         $planet = $fleet->getPlanet();
 
         if($fleet->getMoonMaker() && $planet->getEmpty() == true &&
@@ -132,6 +137,6 @@ class DeployController extends AbstractController
             $em->flush();
         }
 
-        return $this->redirectToRoute('map', ['idp' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getPosition()]);
+        return $this->redirectToRoute('map', ['usePlanet' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getPosition()]);
     }
 }

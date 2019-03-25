@@ -11,6 +11,7 @@ use App\Form\Front\SpatialFleetType;
 use App\Entity\Fleet;
 use App\Entity\Product;
 use App\Entity\Report;
+use App\Entity\Planet;
 use Dateinterval;
 use DateTime;
 use DateTimeZone;
@@ -22,9 +23,9 @@ use DateTimeZone;
 class SpatialController extends AbstractController
 {
     /**
-     * @Route("/chantier-spatial/{idp}", name="spatial", requirements={"idp"="\d+"})
+     * @Route("/chantier-spatial/{usePlanet}", name="spatial", requirements={"usePlanet"="\d+"})
      */
-    public function spatialAction(Request $request, $idp)
+    public function spatialAction(Request $request, Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
@@ -34,15 +35,16 @@ class SpatialController extends AbstractController
         if($user->getGameOver()) {
             return $this->redirectToRoute('game_over');
         }
-
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $form_spatialShip = $this->createForm(SpatialShipType::class);
         $form_spatialShip->handleRequest($request);
 
         if ($form_spatialShip->isSubmitted() && $form_spatialShip->isValid()) {
             if($usePlanet->getSpaceShip() == 0) {
-                return $this->redirectToRoute('spatial', ['idp' => $usePlanet->getId()]);
+                return $this->redirectToRoute('spatial', ['usePlanet' => $usePlanet->getId()]);
             }
 
             if(($user->getTutorial() == 19)) {
@@ -139,7 +141,7 @@ class SpatialController extends AbstractController
                 ($warPoint > $user->getRank()->getWarPoint() || $bitcoinLess > $user->getBitcoin()) ||
                 ($user->getColonizer() && $colonizer) || ($motherShip && $user->getMotherShip()))
             {
-                return $this->redirectToRoute('spatial', ['idp' => $usePlanet->getId()]);
+                return $this->redirectToRoute('spatial', ['usePlanet' => $usePlanet->getId()]);
             }
             if($usePlanet->getProduct()) {
                 $reNow = new DateTime();
@@ -230,19 +232,20 @@ class SpatialController extends AbstractController
     }
 
     /**
-     * @Route("/creer-flotte/{idp}", name="create_fleet", requirements={"idp"="\d+"})
+     * @Route("/creer-flotte/{usePlanet}", name="create_fleet", requirements={"usePlanet"="\d+"})
      */
-    public function createFleetAction(Request $request, $idp)
+    public function createFleetAction(Request $request, Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
 
         if(count($user->getFleets()) >= 75) {
             $this->addFlash("fail", "Vous avez atteint la limite de flottes autorisées par l'Instance.");
-            return $this->redirectToRoute('spatial', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('spatial', ['usePlanet' => $usePlanet->getId()]);
         }
 
         $form_createFleet = $this->createForm(SpatialFleetType::class);
@@ -277,7 +280,7 @@ class SpatialController extends AbstractController
                 ($total == 0 || $cargoI < 0) || ($cargoV < 0 || $cargoX < 0) || ($hunterHeavy < 0 || $corvet < 0) ||
                 ($corvetLaser < 0 || $fregatePlasma < 0) || ($croiser < 0 || $ironClad < 0) || ($destroyer < 0 || $hunterWar < 0) ||
                 ($corvetWar < 0 || $moonMaker < 0 ) || ($radarShip < 0  || $brouilleurShip < 0 ) || ($motherShip < 0 )) {
-                return $this->redirectToRoute('spatial', ['idp' => $usePlanet->getId()]);
+                return $this->redirectToRoute('spatial', ['usePlanet' => $usePlanet->getId()]);
             }
 
             $fleet = new Fleet();
@@ -445,7 +448,7 @@ class SpatialController extends AbstractController
             $em->flush();
 
 
-            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('fleet', ['usePlanet' => $usePlanet->getId()]);
         }
 
         return $this->render('connected/fleet/create.html.twig', [

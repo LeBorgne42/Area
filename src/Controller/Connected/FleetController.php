@@ -16,6 +16,7 @@ use App\Form\Front\FleetAttackType;
 use App\Form\Front\FleetListType;
 use App\Entity\Fleet;
 use App\Entity\Report;
+use App\Entity\Planet;
 use App\Entity\Fleet_List;
 use Datetime;
 use DatetimeZone;
@@ -28,9 +29,9 @@ use DateInterval;
 class FleetController  extends AbstractController
 {
     /**
-     * @Route("/flotte/{idp}", name="fleet", requirements={"idp"="\d+"})
+     * @Route("/flotte/{usePlanet}", name="fleet", requirements={"usePlanet"="\d+"})
      */
-    public function fleetAction($idp)
+    public function fleetAction(Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
@@ -41,7 +42,9 @@ class FleetController  extends AbstractController
             return $this->redirectToRoute('game_over');
         }
 
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $fleetGiveMove = $em->getRepository('App:Fleet')
             ->createQueryBuilder('f')
@@ -105,9 +108,9 @@ class FleetController  extends AbstractController
     }
 
     /**
-     * @Route("/flotte-liste/{idp}", name="fleet_list", requirements={"idp"="\d+"})
+     * @Route("/flotte-liste/{usePlanet}", name="fleet_list", requirements={"usePlanet"="\d+"})
      */
-    public function fleetListAction(Request $request, $idp)
+    public function fleetListAction(Request $request, Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
@@ -118,7 +121,9 @@ class FleetController  extends AbstractController
             return $this->redirectToRoute('game_over');
         }
 
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $form_listCreate = $this->createForm(FleetListType::class);
         $form_listCreate->handleRequest($request);
@@ -127,7 +132,7 @@ class FleetController  extends AbstractController
         if ($form_listCreate->isSubmitted()) {
             if(count($user->getFleetLists()) >= 10) {
                 $this->addFlash("fail", "Vous avez atteint la limite de Cohortes autorisées par l'Instance.");
-                return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
+                return $this->redirectToRoute('fleet_list', ['usePlanet' => $usePlanet->getId()]);
             }
 
             $fleetList = new Fleet_List();
@@ -168,13 +173,15 @@ class FleetController  extends AbstractController
     }
 
     /**
-     * @Route("/flotte-liste-ajouter/{idp}/{fleetList}/{fleet}", name="fleet_list_add", requirements={"idp"="\d+","fleetList"="\d+","fleet"="\d+"})
+     * @Route("/flotte-liste-ajouter/{usePlanet}/{fleetList}/{fleet}", name="fleet_list_add", requirements={"usePlanet"="\d+","fleetList"="\d+","fleet"="\d+"})
      */
-    public function fleetListAddAction($idp, Fleet_List $fleetList, Fleet $fleet)
+    public function fleetListAddAction(Planet $usePlanet, Fleet_List $fleetList, Fleet $fleet)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         if($user->getGameOver()) {
             return $this->redirectToRoute('game_over');
@@ -189,17 +196,19 @@ class FleetController  extends AbstractController
             $em->flush();
         }
 
-        return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('fleet_list', ['usePlanet' => $usePlanet->getId()]);
     }
 
     /**
-     * @Route("/flotte-liste-sub/{idp}/{fleetList}/{fleet}", name="fleet_list_sub", requirements={"idp"="\d+","fleetList"="\d+","fleet"="\d+"})
+     * @Route("/flotte-liste-sub/{usePlanet}/{fleetList}/{fleet}", name="fleet_list_sub", requirements={"usePlanet"="\d+","fleetList"="\d+","fleet"="\d+"})
      */
-    public function fleetListSubAction($idp, Fleet_List $fleetList, Fleet $fleet)
+    public function fleetListSubAction(Planet $usePlanet, Fleet_List $fleetList, Fleet $fleet)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         if ($user->getGameOver()) {
             return $this->redirectToRoute('game_over');
@@ -211,19 +220,21 @@ class FleetController  extends AbstractController
             $em->flush();
         }
 
-        return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('fleet_list', ['usePlanet' => $usePlanet->getId()]);
     }
 
     /**
-     * @Route("/flotte-liste-destroy/{idp}/{fleetList}", name="fleet_list_destroy", requirements={"idp"="\d+","fleetList"="\d+"})
+     * @Route("/flotte-liste-destroy/{usePlanet}/{fleetList}", name="fleet_list_destroy", requirements={"usePlanet"="\d+","fleetList"="\d+"})
      */
-    public function fleetListDestroyAction($idp, Fleet_List $fleetList)
+    public function fleetListDestroyAction(Planet $usePlanet, Fleet_List $fleetList)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         if ($user->getGameOver()) {
             return $this->redirectToRoute('game_over');
@@ -238,17 +249,19 @@ class FleetController  extends AbstractController
             $em->flush();
         }
 
-        return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('fleet_list', ['usePlanet' => $usePlanet->getId()]);
     }
 
     /**
-     * @Route("/flotte-alliance-ajouter/{idp}/{fleet}", name="fleet_ally_add", requirements={"idp"="\d+","fleet"="\d+"})
+     * @Route("/flotte-alliance-ajouter/{usePlanet}/{fleet}", name="fleet_ally_add", requirements={"usePlanet"="\d+","fleet"="\d+"})
      */
-    public function fleetAllyAddAction($idp, Fleet $fleet)
+    public function fleetAllyAddAction(Planet $usePlanet, Fleet $fleet)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         if ($user->getGameOver()) {
             return $this->redirectToRoute('game_over');
@@ -261,17 +274,19 @@ class FleetController  extends AbstractController
             }
         }
 
-        return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('fleet_list', ['usePlanet' => $usePlanet->getId()]);
     }
 
     /**
-     * @Route("/flotte-alliance-sub/{idp}/{fleet}", name="fleet_ally_sub", requirements={"idp"="\d+","fleet"="\d+"})
+     * @Route("/flotte-alliance-sub/{usePlanet}/{fleet}", name="fleet_ally_sub", requirements={"usePlanet"="\d+","fleet"="\d+"})
      */
-    public function fleetAllySubAction($idp, Fleet $fleet)
+    public function fleetAllySubAction(Planet $usePlanet, Fleet $fleet)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         if ($user->getGameOver()) {
             return $this->redirectToRoute('game_over');
@@ -282,18 +297,20 @@ class FleetController  extends AbstractController
             $em->flush();
         }
 
-        return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('fleet_list', ['usePlanet' => $usePlanet->getId()]);
     }
 
     /**
-     * @Route("/gerer-flotte/{idp}/{id}/", name="manage_fleet", requirements={"idp"="\d+", "id"="\d+"})
+     * @Route("/gerer-flotte/{usePlanet}/{id}/", name="manage_fleet", requirements={"usePlanet"="\d+", "id"="\d+"})
      */
-    public function manageFleetAction(Request $request, $idp, $id)
+    public function manageFleetAction(Request $request, Planet $usePlanet, $id)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
 
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         if ($user->getAlly()) {
             if ($user->getGrade()->getPlacement() == 1) {
@@ -345,7 +362,7 @@ class FleetController  extends AbstractController
 
         if($fleetGive && $usePlanet) {
         } else {
-            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('fleet', ['usePlanet' => $usePlanet->getId()]);
         }
 
         if($request->isXmlHttpRequest()) {
@@ -716,7 +733,7 @@ class FleetController  extends AbstractController
                 ($corvetLaser < 0 || $fregatePlasma < 0) || ($croiser < 0 || $ironClad < 0) ||
                 ($hunterWar < 0 || $corvetWar < 0) ||
                 ($moonMaker < 0 || $radarShip < 0) || ($brouilleurShip < 0 || $colonizer < 0)) {
-                return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+                return $this->redirectToRoute('fleet', ['usePlanet' => $usePlanet->getId()]);
             }
 
             if($fleetGive->getNbrShips() == 0) {
@@ -741,9 +758,9 @@ class FleetController  extends AbstractController
 
             $em->flush();
             if ($fleetGive->getFleetList()) {
-                return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
+                return $this->redirectToRoute('fleet_list', ['usePlanet' => $usePlanet->getId()]);
             } else {
-                return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+                return $this->redirectToRoute('fleet', ['usePlanet' => $usePlanet->getId()]);
             }
         }
 
@@ -758,24 +775,16 @@ class FleetController  extends AbstractController
     }
 
     /**
-     * @Route("/detruire-flotte/{idp}/{id}", name="destroy_fleet", requirements={"idp"="\d+", "id"="\d+"})
+     * @Route("/detruire-flotte/{usePlanet}/{fleetGive}", name="destroy_fleet", requirements={"usePlanet"="\d+", "fleetGive"="\d+"})
      */
-    public function destroyFleetAction($idp, $id)
+    public function destroyFleetAction(Planet $usePlanet, Fleet $fleetGive)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
 
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
-
-        $fleetGive = $em->getRepository('App:Fleet')
-            ->createQueryBuilder('f')
-            ->where('f.id = :id')
-            ->andWhere('f.user = :user')
-            ->andWhere('f.fightAt is null')
-            ->andWhere('f.flightTime is null')
-            ->setParameters(['id' => $id, 'user' => $user])
-            ->getQuery()
-            ->getOneOrNullResult();
+        if ($usePlanet->getUser() != $user || $fleetGive->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $planetTake = $fleetGive->getPlanet();
         if($fleetGive && $usePlanet &&
@@ -785,7 +794,7 @@ class FleetController  extends AbstractController
             ($planetTake->getNiobium() + $fleetGive->getNiobium()) <= $planetTake->getNiobiumMax() &&
             ($planetTake->getWater() + $fleetGive->getWater()) <= $planetTake->getWaterMax()) {
         } else {
-            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('fleet', ['usePlanet' => $usePlanet->getId()]);
         }
 
         $planetTake->setColonizer($planetTake->getColonizer() + $fleetGive->getColonizer());
@@ -819,13 +828,13 @@ class FleetController  extends AbstractController
 
         $em->flush();
 
-        return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('fleet', ['usePlanet' => $usePlanet->getId()]);
     }
 
     /**
-     * @Route("/envoyer-flotte/{idp}/{id}", name="send_fleet", requirements={"idp"="\d+", "id"="\d+"})
+     * @Route("/envoyer-flotte/{usePlanet}/{id}", name="send_fleet", requirements={"usePlanet"="\d+", "id"="\d+"})
      */
-    public function sendFleetAction(Request $request, $idp, $id)
+    public function sendFleetAction(Request $request, Planet $usePlanet, $id)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
@@ -835,7 +844,9 @@ class FleetController  extends AbstractController
         $moreNow->setTimezone(new DateTimeZone('Europe/Paris'));
         $moreNow->add(new DateInterval('PT' . 120 . 'S'));
 
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $ally = 'w';
         if ($user->getAlly()) {
@@ -858,7 +869,7 @@ class FleetController  extends AbstractController
 
         if($fleetGive && $usePlanet) {
         } else {
-            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('fleet', ['usePlanet' => $usePlanet->getId()]);
         }
         if ($form_sendFleet->isSubmitted() && $form_sendFleet->isValid()) {
             $sectorDestroy = $em->getRepository('App:Sector')
@@ -871,9 +882,9 @@ class FleetController  extends AbstractController
 
             if($sectorDestroy && $form_sendFleet->get('sector')->getData() != $fleetGive->getPlanet()->getSector()->getPosition()) { // AJOUTER LA GALAXIE
                 if ($fleetGive->getFleetList()) {
-                    return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
+                    return $this->redirectToRoute('fleet_list', ['usePlanet' => $usePlanet->getId()]);
                 } else {
-                    return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+                    return $this->redirectToRoute('fleet', ['usePlanet' => $usePlanet->getId()]);
                 }
             }
 
@@ -884,9 +895,9 @@ class FleetController  extends AbstractController
                 $galaxy = $planetTake->getSector()->getGalaxy()->getPosition();
                 if($planetTake == $fleetGive->getPlanet()) {
                     if ($fleetGive->getFleetList()) {
-                        return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
+                        return $this->redirectToRoute('fleet_list', ['usePlanet' => $usePlanet->getId()]);
                     } else {
-                        return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+                        return $this->redirectToRoute('fleet', ['usePlanet' => $usePlanet->getId()]);
                     }
                 }
             } else {
@@ -899,7 +910,7 @@ class FleetController  extends AbstractController
                 $planetTakee = $form_sendFleet->get('planete')->getData();
 
                 if (($galaxy < 1 || $galaxy > 5) || ($sector < 1 || $sector > 100) || ($planetTakee < 1 || $planetTakee > 25)) {
-                    return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+                    return $this->redirectToRoute('fleet', ['usePlanet' => $usePlanet->getId()]);
                 }
 
                 $planetTake = $em->getRepository('App:Planet')
@@ -915,9 +926,9 @@ class FleetController  extends AbstractController
 
                 if($planetTake == $fleetGive->getPlanet()) {
                     if ($fleetGive->getFleetList()) {
-                        return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
+                        return $this->redirectToRoute('fleet_list', ['usePlanet' => $usePlanet->getId()]);
                     } else {
-                        return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+                        return $this->redirectToRoute('fleet', ['usePlanet' => $usePlanet->getId()]);
                     }
                 }
             }
@@ -943,7 +954,7 @@ class FleetController  extends AbstractController
             }
             $carburant = round($price * ($fleetGive->getNbrSignatures() / 200));
             if($carburant > $user->getBitcoin()) {
-                return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+                return $this->redirectToRoute('fleet', ['usePlanet' => $usePlanet->getId()]);
             }
             if($fleetGive->getMotherShip()) {
                 $speed = $fleetGive->getSpeed() - ($fleetGive->getSpeed() * 0.10);
@@ -971,42 +982,32 @@ class FleetController  extends AbstractController
 
             $em->flush();
             if ($fleetGive->getFleetList()) {
-                return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
+                return $this->redirectToRoute('fleet_list', ['usePlanet' => $usePlanet->getId()]);
             } else {
-                return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+                return $this->redirectToRoute('fleet', ['usePlanet' => $usePlanet->getId()]);
             }
         }
-        return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+        return $this->redirectToRoute('fleet', ['usePlanet' => $usePlanet->getId()]);
     }
 
     /**
-     * @Route("/decharger-niobium/{idp}/{id}", name="discharge_fleet_niobium", requirements={"idp"="\d+", "id"="\d+"})
+     * @Route("/decharger-niobium/{usePlanet}/{fleetGive}", name="discharge_fleet_niobium", requirements={"usePlanet"="\d+", "fleetGive"="\d+"})
      */
-    public function dischargeNiobiumFleetAction($idp, $id)
+    public function dischargeNiobiumFleetAction(Planet $usePlanet, Fleet $fleetGive)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $server = $em->getRepository('App:Server')->find(['id' => 1]);
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
-
-        $fleetGive = $em->getRepository('App:Fleet')
-            ->createQueryBuilder('f')
-            ->join('f.planet', 'p')
-            ->where('f.id = :id')
-            ->andWhere('f.user = :user')
-            ->andWhere('f.fightAt is null')
-            ->andWhere('f.flightTime is null')
-            ->andWhere('p.user is not null or p.merchant = true')
-            ->setParameters(['id' => $id, 'user' => $user])
-            ->getQuery()
-            ->getOneOrNullResult();
+        if ($usePlanet->getUser() != $user || $fleetGive->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $planetTake = $fleetGive->getPlanet();
         if($fleetGive && $usePlanet) {
         } else {
-            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('fleet', ['usePlanet' => $usePlanet->getId()]);
         }
         
         if($planetTake->getMerchant() == true) {
@@ -1051,40 +1052,30 @@ class FleetController  extends AbstractController
         $em->flush();
 
         if ($fleetGive->getFleetList()) {
-            return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('fleet_list', ['usePlanet' => $usePlanet->getId()]);
         } else {
-            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('fleet', ['usePlanet' => $usePlanet->getId()]);
         }
     }
 
     /**
-     * @Route("/decharger-water/{idp}/{id}", name="discharge_fleet_water", requirements={"idp"="\d+", "id"="\d+"})
+     * @Route("/decharger-water/{usePlanet}/{fleetGive}", name="discharge_fleet_water", requirements={"usePlanet"="\d+", "fleetGive"="\d+"})
      */
-    public function dischargeWaterFleetAction($idp, $id)
+    public function dischargeWaterFleetAction(Planet $usePlanet, Fleet $fleetGive)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $server = $em->getRepository('App:Server')->find(['id' => 1]);
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
-
-        $fleetGive = $em->getRepository('App:Fleet')
-            ->createQueryBuilder('f')
-            ->join('f.planet', 'p')
-            ->where('f.id = :id')
-            ->andWhere('f.user = :user')
-            ->andWhere('f.fightAt is null')
-            ->andWhere('f.flightTime is null')
-            ->andWhere('p.user is not null or p.merchant = true')
-            ->setParameters(['id' => $id, 'user' => $user])
-            ->getQuery()
-            ->getOneOrNullResult();
+        if ($usePlanet->getUser() != $user || $fleetGive->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $planetTake = $fleetGive->getPlanet();
         if($fleetGive && $usePlanet) {
         } else {
-            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('fleet', ['usePlanet' => $usePlanet->getId()]);
         }
         if($planetTake->getMerchant() == true) {
             if ($user->getPoliticPdg() > 0) {
@@ -1128,40 +1119,30 @@ class FleetController  extends AbstractController
         $em->flush();
 
         if ($fleetGive->getFleetList()) {
-            return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('fleet_list', ['usePlanet' => $usePlanet->getId()]);
         } else {
-            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('fleet', ['usePlanet' => $usePlanet->getId()]);
         }
     }
 
     /**
-     * @Route("/decharger-soldat/{idp}/{id}", name="discharge_fleet_soldier", requirements={"idp"="\d+", "id"="\d+"})
+     * @Route("/decharger-soldat/{usePlanet}/{fleetGive}", name="discharge_fleet_soldier", requirements={"usePlanet"="\d+", "fleetGive"="\d+"})
      */
-    public function dischargeSoldierFleetAction($idp, $id)
+    public function dischargeSoldierFleetAction(Planet $usePlanet, Fleet $fleetGive)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $server = $em->getRepository('App:Server')->find(['id' => 1]);
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
-
-        $fleetGive = $em->getRepository('App:Fleet')
-            ->createQueryBuilder('f')
-            ->join('f.planet', 'p')
-            ->where('f.id = :id')
-            ->andWhere('f.user = :user')
-            ->andWhere('f.fightAt is null')
-            ->andWhere('f.flightTime is null')
-            ->andWhere('p.user is not null or p.merchant = true')
-            ->setParameters(['id' => $id, 'user' => $user])
-            ->getQuery()
-            ->getOneOrNullResult();
+        if ($usePlanet->getUser() != $user || $fleetGive->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $planetTake = $fleetGive->getPlanet();
         if($fleetGive && $usePlanet) {
         } else {
-            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('fleet', ['usePlanet' => $usePlanet->getId()]);
         }
         if($planetTake->getMerchant() == true) {
             if ($user->getPoliticPdg() > 0) {
@@ -1205,40 +1186,30 @@ class FleetController  extends AbstractController
         $em->flush();
 
         if ($fleetGive->getFleetList()) {
-            return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('fleet_list', ['usePlanet' => $usePlanet->getId()]);
         } else {
-            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('fleet', ['usePlanet' => $usePlanet->getId()]);
         }
     }
 
     /**
-     * @Route("/decharger-travailleurs/{idp}/{id}", name="discharge_fleet_worker", requirements={"idp"="\d+", "id"="\d+"})
+     * @Route("/decharger-travailleurs/{usePlanet}/{fleetGive}", name="discharge_fleet_worker", requirements={"usePlanet"="\d+", "fleetGive"="\d+"})
      */
-    public function dischargeWorkerFleetAction($idp, $id)
+    public function dischargeWorkerFleetAction(Planet $usePlanet, Fleet $fleetGive)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $server = $em->getRepository('App:Server')->find(['id' => 1]);
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
-
-        $fleetGive = $em->getRepository('App:Fleet')
-            ->createQueryBuilder('f')
-            ->join('f.planet', 'p')
-            ->where('f.id = :id')
-            ->andWhere('f.user = :user')
-            ->andWhere('f.fightAt is null')
-            ->andWhere('f.flightTime is null')
-            ->andWhere('p.user is not null or p.merchant = true')
-            ->setParameters(['id' => $id, 'user' => $user])
-            ->getQuery()
-            ->getOneOrNullResult();
+        if ($usePlanet->getUser() != $user || $fleetGive->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $planetTake = $fleetGive->getPlanet();
         if($fleetGive && $usePlanet) {
         } else {
-            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('fleet', ['usePlanet' => $usePlanet->getId()]);
         }
         if($planetTake->getMerchant() == true) {
             if ($user->getPoliticPdg() > 0) {
@@ -1282,40 +1253,30 @@ class FleetController  extends AbstractController
         $em->flush();
 
         if ($fleetGive->getFleetList()) {
-            return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('fleet_list', ['usePlanet' => $usePlanet->getId()]);
         } else {
-            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('fleet', ['usePlanet' => $usePlanet->getId()]);
         }
     }
 
     /**
-     * @Route("/decharger-scientifique/{idp}/{id}", name="discharge_fleet_scientist", requirements={"idp"="\d+", "id"="\d+"})
+     * @Route("/decharger-scientifique/{usePlanet}/{fleetGive}", name="discharge_fleet_scientist", requirements={"usePlanet"="\d+", "fleetGive"="\d+"})
      */
-    public function dischargeScientistFleetAction($idp, $id)
+    public function dischargeScientistFleetAction(Planet $usePlanet, Fleet $fleetGive)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $server = $em->getRepository('App:Server')->find(['id' => 1]);
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
-
-        $fleetGive = $em->getRepository('App:Fleet')
-            ->createQueryBuilder('f')
-            ->join('f.planet', 'p')
-            ->where('f.id = :id')
-            ->andWhere('f.user = :user')
-            ->andWhere('f.fightAt is null')
-            ->andWhere('f.flightTime is null')
-            ->andWhere('p.user is not null or p.merchant = true')
-            ->setParameters(['id' => $id, 'user' => $user])
-            ->getQuery()
-            ->getOneOrNullResult();
+        if ($usePlanet->getUser() != $user || $fleetGive->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $planetTake = $fleetGive->getPlanet();
         if($fleetGive && $usePlanet) {
         } else {
-            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('fleet', ['usePlanet' => $usePlanet->getId()]);
         }
         if($planetTake->getMerchant() == true) {
             if ($user->getPoliticPdg() > 0) {
@@ -1359,40 +1320,30 @@ class FleetController  extends AbstractController
         $em->flush();
 
         if ($fleetGive->getFleetList()) {
-            return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('fleet_list', ['usePlanet' => $usePlanet->getId()]);
         } else {
-            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('fleet', ['usePlanet' => $usePlanet->getId()]);
         }
     }
 
     /**
-     * @Route("/decharger-tout/{idp}/{id}", name="discharge_fleet_all", requirements={"idp"="\d+", "id"="\d+"})
+     * @Route("/decharger-tout/{usePlanet}/{fleetGive}", name="discharge_fleet_all", requirements={"usePlanet"="\d+", "fleetGive"="\d+"})
      */
-    public function dischargeAllFleetAction($idp, $id)
+    public function dischargeAllFleetAction(Planet $usePlanet, Fleet $fleetGive)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $server = $em->getRepository('App:Server')->find(['id' => 1]);
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
-
-        $fleetGive = $em->getRepository('App:Fleet')
-            ->createQueryBuilder('f')
-            ->join('f.planet', 'p')
-            ->where('f.id = :id')
-            ->andWhere('f.user = :user')
-            ->andWhere('f.fightAt is null')
-            ->andWhere('f.flightTime is null')
-            ->andWhere('p.user is not null or p.merchant = true')
-            ->setParameters(['id' => $id, 'user' => $user])
-            ->getQuery()
-            ->getOneOrNullResult();
+        if ($usePlanet->getUser() != $user || $fleetGive->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         $planetTake = $fleetGive->getPlanet();
         if($fleetGive && $usePlanet) {
         } else {
-            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('fleet', ['usePlanet' => $usePlanet->getId()]);
         }
         if($planetTake->getMerchant() == true) {
             $reportSell = new Report();
@@ -1464,44 +1415,22 @@ class FleetController  extends AbstractController
         $em->flush();
 
         if ($fleetGive->getFleetList()) {
-            return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('fleet_list', ['usePlanet' => $usePlanet->getId()]);
         } else {
-            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('fleet', ['usePlanet' => $usePlanet->getId()]);
         }
     }
 
     /**
-     * @Route("/fusionner-flotte/{idp}/{id}/{id2}", name="fusion_fleet", requirements={"idp"="\d+", "id"="\d+", "id2"="\d+"})
+     * @Route("/fusionner-flotte/{usePlanet}/{fleetGive}/{fleetTake}", name="fusion_fleet", requirements={"usePlanet"="\d+", "fleetGive"="\d+", "fleetTake"="\d+"})
      */
-    public function fusionFleetAction($idp, $id, $id2)
+    public function fusionFleetAction(Planet $usePlanet, $fleetGive, $fleetTake)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
 
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
-
-        $fleetGive = $em->getRepository('App:Fleet')
-            ->createQueryBuilder('f')
-            ->where('f.id = :id')
-            ->andWhere('f.user = :user')
-            ->andWhere('f.fightAt is null')
-            ->andWhere('f.flightTime is null')
-            ->setParameters(['id' => $id, 'user' => $user])
-            ->getQuery()
-            ->getOneOrNullResult();
-
-        $fleetTake = $em->getRepository('App:Fleet')
-            ->createQueryBuilder('f')
-            ->where('f.id = :id')
-            ->andWhere('f.user = :user')
-            ->andWhere('f.fightAt is null')
-            ->andWhere('f.flightTime is null')
-            ->setParameters(['id' => $id2, 'user' => $user])
-            ->getQuery()
-            ->getOneOrNullResult();
-        if($fleetGive && $usePlanet) {
-        } else {
-            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+        if ($usePlanet->getUser() != $user || $fleetGive->getUser() != $user || $fleetTake->getUser() != $user) {
+            return $this->redirectToRoute('home');
         }
 
         $fleetTake->setColonizer($fleetTake->getColonizer() + $fleetGive->getColonizer());
@@ -1539,34 +1468,28 @@ class FleetController  extends AbstractController
         $em->flush();
 
         if ($fleetTake->getFleetList()) {
-            return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('fleet_list', ['usePlanet' => $usePlanet->getId()]);
         } else {
-            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('fleet', ['usePlanet' => $usePlanet->getId()]);
         }
     }
 
     /**
-     * @Route("/scinder-flotte/{idp}/{id}", name="fleet_split", requirements={"idp"="\d+", "id"="\d+"})
+     * @Route("/scinder-flotte/{usePlanet}/{oldFleet}", name="fleet_split", requirements={"usePlanet"="\d+", "oldFleet"="\d+"})
      */
-    public function splitFleetAction(Request $request, $idp, $id)
+    public function splitFleetAction(Request $request, Planet $usePlanet, Fleet $oldFleet)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
 
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
+        if ($usePlanet->getUser() != $user || $oldFleet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         if(count($user->getFleets()) >= 75) {
             $this->addFlash("fail", "Vous avez atteint la limite de flottes autorisées par l'Instance.");
-            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('fleet', ['usePlanet' => $usePlanet->getId()]);
         }
-
-        $oldFleet = $em->getRepository('App:Fleet')
-            ->createQueryBuilder('f')
-            ->where('f.id = :id')
-            ->andWhere('f.user = :user')
-            ->setParameters(['id' => $id, 'user' => $user])
-            ->getQuery()
-            ->getOneOrNullResult();
 
         $form_spatialShip = $this->createForm(SpatialFleetType::class);
         $form_spatialShip->handleRequest($request);
@@ -1601,7 +1524,7 @@ class FleetController  extends AbstractController
                 ($total == 0 || $cargoI < 0) || ($cargoV < 0 || $cargoX < 0) || ($hunterHeavy < 0 || $corvet < 0) ||
                 ($corvetLaser < 0 || $fregatePlasma < 0) || ($croiser < 0 || $ironClad < 0) || ($destroyer < 0 || $hunterWar < 0) ||
                 ($corvetWar < 0 || $moonMaker < 0) || ($radarShip < 0 || $brouilleurShip < 0) || ($motherShip < 0 || $cargoTotal < 0)) {
-                return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+                return $this->redirectToRoute('fleet', ['usePlanet' => $usePlanet->getId()]);
             }
             $eAlly = $user->getAllyEnnemy();
             $warAlly = [];
@@ -1693,9 +1616,9 @@ class FleetController  extends AbstractController
 
 
             if ($oldFleet->getFleetList() || $fleet->getFleetList()) {
-                return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
+                return $this->redirectToRoute('fleet_list', ['usePlanet' => $usePlanet->getId()]);
             } else {
-                return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+                return $this->redirectToRoute('fleet', ['usePlanet' => $usePlanet->getId()]);
             }
         }
 
@@ -1707,24 +1630,17 @@ class FleetController  extends AbstractController
     }
 
     /**
-     * @Route("/annuler-flotte/{idp}/{id}/", name="cancel_fleet", requirements={"idp"="\d+", "id"="\d+"})
+     * @Route("/annuler-flotte/{usePlanet}/{fleet}/", name="cancel_fleet", requirements={"usePlanet"="\d+", "fleet"="\d+"})
      */
-    public function cancelFleetAction($idp, $id)
+    public function cancelFleetAction(Planet $usePlanet, Fleet $fleet)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
-
-        $usePlanet = $em->getRepository('App:Planet')->findByCurrentPlanet($idp, $user);
-
-        $fleet = $em->getRepository('App:Fleet')
-            ->createQueryBuilder('f')
-            ->where('f.id = :id')
-            ->andWhere('f.user = :user')
-            ->setParameters(['id' => $id, 'user' => $user])
-            ->getQuery()
-            ->getOneOrNullResult();
+        if ($usePlanet->getUser() != $user || $fleet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
 
         if($fleet->getCancelFlight() > $now) {
             $fleet->setFlightTime(null);
@@ -1736,9 +1652,9 @@ class FleetController  extends AbstractController
         }
 
         if ($fleet->getFleetList()) {
-            return $this->redirectToRoute('fleet_list', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('fleet_list', ['usePlanet' => $usePlanet->getId()]);
         } else {
-            return $this->redirectToRoute('fleet', ['idp' => $usePlanet->getId()]);
+            return $this->redirectToRoute('fleet', ['usePlanet' => $usePlanet->getId()]);
         }
     }
 }
