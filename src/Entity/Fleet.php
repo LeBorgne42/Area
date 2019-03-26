@@ -1839,6 +1839,22 @@ class Fleet
     }
 
     /**
+     * @return mixed
+     */
+    public function getUranium()
+    {
+        return $this->uranium;
+    }
+
+    /**
+     * @param mixed $uranium
+     */
+    public function setUranium($uranium): void
+    {
+        $this->uranium = $uranium;
+    }
+
+    /**
      * @param mixed $cancelFlight
      */
     public function setCancelFlight($cancelFlight): void

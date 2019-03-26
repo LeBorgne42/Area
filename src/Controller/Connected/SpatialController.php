@@ -215,9 +215,7 @@ class SpatialController extends AbstractController
             }
 
             $em->flush();
-
-            $form_spatialShip = null;
-            $form_spatialShip = $this->createForm(SpatialShipType::class);
+            return $this->redirectToRoute('spatial', ['usePlanet' => $usePlanet->getId()]);
         }
 
         if(($user->getTutorial() == 18)) {

@@ -160,16 +160,16 @@ class FightController extends AbstractController
         $politicB = null;
 
         foreach($blockAtt as $attacker) {
-            if ($attacker->getAlly()) {
-                $politicA = $attacker->getAlly()->getPolitic();
-                if ($attacker->getPoliticArmor() > 0) {
-                    $armor = $armor + ($attacker->getArmor() * (1 + ($attacker->getPoliticArmor() / 10)));
+            if ($attacker->getUser()->getAlly()) {
+                $politicA = $attacker->getUser()->getAlly()->getPolitic();
+                if ($attacker->getUser()->getPoliticArmor() > 0) {
+                    $armor = $armor + ($attacker->getArmor() * (1 + ($attacker->getUser()->getPoliticArmor() / 10)));
                 } else {
                     $armor = $armor + $attacker->getArmor();
                 }
-                if ($attacker->getPoliticArmement() > 0) {
-                    $missile = $missile + ($attacker->getMissile() * (1 + ($attacker->getPoliticArmement() / 10)));
-                    $laser = $laser + ($attacker->getLaser() * (1 + ($attacker->getPoliticArmement() / 10)));
+                if ($attacker->getUser()->getPoliticArmement() > 0) {
+                    $missile = $missile + ($attacker->getMissile() * (1 + ($attacker->getUser()->getPoliticArmement() / 10)));
+                    $laser = $laser + ($attacker->getLaser() * (1 + ($attacker->getUser()->getPoliticArmement() / 10)));
                 } else {
                     $missile = $missile + $attacker->getMissile();
                     $laser = $laser + $attacker->getLaser();
@@ -185,16 +185,16 @@ class FightController extends AbstractController
             $armeSaveA = $missile + $laser + $plasma;
         }
         foreach($blockDef as $defender) {
-            if ($defender->getAlly()) {
-                $politicB = $defender->getAlly()->getPolitic();
-                if ($defender->getPoliticArmor() > 0) {
-                    $armorD = $armorD + ($defender->getArmor() * (1 + ($defender->getPoliticArmor() / 10)));
+            if ($defender->getUser()->getAlly()) {
+                $politicB = $defender->getUser()->getAlly()->getPolitic();
+                if ($defender->getUser()->getPoliticArmor() > 0) {
+                    $armorD = $armorD + ($defender->getArmor() * (1 + ($defender->getUser()->getPoliticArmor() / 10)));
                 } else {
                     $armorD = $armorD + $defender->getArmor();
                 }
-                if ($defender->getPoliticArmement() > 0) {
-                    $missileD = $missileD + ($defender->getMissile() * (1 + ($defender->getPoliticArmement() / 10)));
-                    $laserD = $laserD + ($defender->getLaser() * (1 + ($defender->getPoliticArmement() / 10)));
+                if ($defender->getUser()->getPoliticArmement() > 0) {
+                    $missileD = $missileD + ($defender->getUser()->getMissile() * (1 + ($defender->getUser()->getPoliticArmement() / 10)));
+                    $laserD = $laserD + ($defender->getLaser() * (1 + ($defender->getUser()->getPoliticArmement() / 10)));
                 } else {
                     $missileD = $missileD + $defender->getMissile();
                     $laserD = $laserD + $defender->getLaser();
@@ -698,7 +698,7 @@ class FightController extends AbstractController
         $userDefender= $invader->getPlanet()->getUser();
         $barbed = $userDefender->getBarbedAdv();
         $dSoldier = $defenser->getSoldier() > 0 ? ($defenser->getSoldier() * 6) * $barbed : 0;
-        $dTanks = $defenser->getTank() > 0 ? $defenser->getTank() * 300 : 0;
+        $dTanks = $defenser->getTank() > 0 ? $defenser->getTank() * 900 : 0;
         $dWorker = $defenser->getWorker();
         if ($userDefender->getPoliticSoldierAtt() > 0) {
             $dSoldier = $dSoldier * (1 + ($userDefender->getPoliticSoldierAtt() / 10));
@@ -774,7 +774,7 @@ class FightController extends AbstractController
                         $soldierDtmp = $soldierDtmp - $defenser->getSoldier();
                         $workerDtmp = $workerDtmp - $defenser->getWorker();
                     } else {
-                        $diviser = (1 + ($userDefender->getPoliticTankDef() / 10)) * 300;
+                        $diviser = (1 + ($userDefender->getPoliticTankDef() / 10)) * 900;
                         $defenser->setTank(round($aMilitary / $diviser));
                         $tankDtmp = $tankDtmp - $defenser->getTank();
                         $soldierDtmp = $soldierDtmp - $defenser->getSoldier();
@@ -790,7 +790,7 @@ class FightController extends AbstractController
                 if ($userDefender->getZombie() == 1) {
                     $reportInv->setTitle("Rapport contre attaque : Défaite");
                     $reportInv->setImageName("zombie_lose_report.jpg");
-                    $reportInv->setContent("Vous pensiez partir pour une promenade de santé mais la réalité vous rattrape vite... Vous avez envoyé tout vos soldats au casse-pipe.<br>Pire, vous avez attirer l'attention des zombies et fait monter la menace de 10 points ! Vous avez interêt a prendre vite " . $defenser->getName() . " en " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . " sinon votre Empire ne tiendra pas longtemps. Vous avez tué <span class='text-vert'>" . number_format(round($soldierDtmp + ($workerDtmp / 6) + ($tankDtmp * 300))) . "</span> zombies. Tous vos soldats sont morts et vos barges se sont égarés sur la planète.<br>N'abandonnez pas et sortez vos tripes !");
+                    $reportInv->setContent("Vous pensiez partir pour une promenade de santé mais la réalité vous rattrape vite... Vous avez envoyé tout vos soldats au casse-pipe.<br>Pire, vous avez attirer l'attention des zombies et fait monter la menace de 10 points ! Vous avez interêt a prendre vite " . $defenser->getName() . " en " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . " sinon votre Empire ne tiendra pas longtemps. Vous avez tué <span class='text-vert'>" . number_format(round($soldierDtmp + ($workerDtmp / 6) + ($tankDtmp * 900))) . "</span> zombies. Tous vos soldats sont morts et vos barges se sont égarés sur la planète.<br>N'abandonnez pas et sortez vos tripes !");
                     $user->setZombieAtt($user->getZombieAtt() + 10);
                 } else {
                     $reportDef->setTitle("Rapport d'invasion : Victoire (défense)");
@@ -832,7 +832,7 @@ class FightController extends AbstractController
                     $hydra = $em->getRepository('App:User')->findOneBy(['zombie' => 1]);
                     $reportInv->setTitle("Rapport contre attaque : Victoire");
                     $reportInv->setImageName("invade_win_report.jpg");
-                    $reportInv->setContent("Vos soldats débarquent sur la planète zombie et sorte l'artillerie lourde ! Les rues s'enlisent de mort mais l'entraînement prévaut sur la peur et vous purgez cette planète de cette peste macabre.<br> La planète " . $defenser->getName() . " en " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . " est désormais libre. Et votre indice d'attaque zombie est divisé par 10. Lors de l'assaut vous dénombrez <span class='text-rouge'>-" . number_format(round($soldierAtmp)) . "</span> pertes parmis vos soldats. Mais vous avez exterminé <span class='text-vert'>" . number_format(round($soldierDtmp + ($workerDtmp / 6) + ($tankDtmp * 300))) . "</span> zombies ! <br>Et vous remportez <span class='text-vert'>+" . number_format($warPointAtt) . "</span> points de Guerre.");
+                    $reportInv->setContent("Vos soldats débarquent sur la planète zombie et sorte l'artillerie lourde ! Les rues s'enlisent de mort mais l'entraînement prévaut sur la peur et vous purgez cette planète de cette peste macabre.<br> La planète " . $defenser->getName() . " en " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . " est désormais libre. Et votre indice d'attaque zombie est divisé par 10. Lors de l'assaut vous dénombrez <span class='text-rouge'>-" . number_format(round($soldierAtmp)) . "</span> pertes parmis vos soldats. Mais vous avez exterminé <span class='text-vert'>" . number_format(round($soldierDtmp + ($workerDtmp / 6) + ($tankDtmp * 900))) . "</span> zombies ! <br>Et vous remportez <span class='text-vert'>+" . number_format($warPointAtt) . "</span> points de Guerre.");
 
                     if ($userDefender->getZombie() == 1) {
                         $image = [

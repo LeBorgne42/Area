@@ -9,7 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Translation\Translator;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
-class MissionType extends AbstractType
+class MissionUraType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder

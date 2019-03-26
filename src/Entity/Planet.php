@@ -126,6 +126,11 @@ class Planet
     protected $fleets;
 
     /**
+     * @ORM\OneToMany(targetEntity="Mission", mappedBy="planet", fetch="EXTRA_LAZY")
+     */
+    protected $missions;
+
+    /**
      * @ORM\OneToMany(targetEntity="Construction", mappedBy="planet", fetch="EXTRA_LAZY")
      */
     protected $constructions;
@@ -482,6 +487,7 @@ class Planet
     public function __construct()
     {
         $this->fleets = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->missions = new \Doctrine\Common\Collections\ArrayCollection();
         $this->constructions = new \Doctrine\Common\Collections\ArrayCollection();
         $this->centerSearch = null;
         $this->imageFile = null;
@@ -957,6 +963,62 @@ class Planet
     public function removeFleet(\App\Entity\Fleet $fleet)
     {
         $this->fleets->removeElement($fleet);
+    }
+
+    /**
+     * Add mission
+     *
+     * @param \App\Entity\Mission $mission
+     *
+     * @return Planet
+     */
+    public function addMission(\App\Entity\Mission $mission)
+    {
+        $this->missions[] = $mission;
+
+        return $this;
+    }
+
+    /**
+     * Remove mission
+     *
+     * @param \App\Entity\Mission $mission
+     */
+    public function removeMission(\App\Entity\Mission $mission)
+    {
+        $this->missions->removeElement($mission);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUranium()
+    {
+        return $this->uranium;
+    }
+
+    /**
+     * @param mixed $uranium
+     */
+    public function setUranium($uranium): void
+    {
+        $this->uranium = $uranium;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMissions()
+    {
+        return $this->missions;
+    }
+
+    /**
+     * @param mixed $missions
+     */
+    public function setMissions($missions): void
+    {
+        $this->missions = $missions;
     }
 
     /**
