@@ -30,6 +30,8 @@ class ZombieController extends AbstractController
         $user = $this->getUser();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
+        $nowMission = new DateTime();
+        $nowMission->setTimezone(new DateTimeZone('Europe/Paris'));
 
         if($user->getGameOver()) {
             return $this->redirectToRoute('game_over');
@@ -82,15 +84,14 @@ class ZombieController extends AbstractController
             if ($soldier > $planet->getSoldier() || $tank > $planet->getTank() || !$gain || ($soldier == 0 && $tank == 0) || count($planet->getMissions()) >= 3) {
                 return $this->redirectToRoute('zombie', ['usePlanet' => $usePlanet->getId()]);
             } else {
-                $percent = rand(1, 100) > $percent ? 0 : 1;
-                $now->add(new DateInterval('PT' . $time . 'H'));
+                $nowMission->add(new DateInterval('PT' . $time . 'H'));
                 $mission = new Mission();
                 $mission->setMissionAt($now);
                 $mission->setType(0);
                 $mission->setPlanet($planet);
                 $mission->setSoldier($soldier);
                 $mission->setTank($tank);
-                $mission->setWin($percent);
+                $mission->setPercent($percent);
                 $mission->setGain($gain * $alea);
                 $planet->setSoldier($planet->getSoldier() - $soldier);
                 $planet->setTank($planet->getTank() - $tank);
@@ -115,7 +116,7 @@ class ZombieController extends AbstractController
             }
             if ($time == 1) {
                 $percent = ROUND(90 / $zombie);
-                $gain = 1;
+                $gain = 2;
             } elseif ($time == 3) {
                 $percent = ROUND(70 / $zombie);
                 $gain = 5;
@@ -129,15 +130,14 @@ class ZombieController extends AbstractController
             if ($soldier > $planet->getSoldier() || $tank > $planet->getTank() || !$gain || ($soldier == 0 && $tank == 0) || count($planet->getMissions()) >= 3) {
                 return $this->redirectToRoute('zombie', ['usePlanet' => $usePlanet->getId()]);
             } else {
-                $percent = rand(1, 100) > $percent ? 0 : 1;
-                $now->add(new DateInterval('PT' . $time . 'H'));
+                $nowMission->add(new DateInterval('PT' . $time . 'H'));
                 $mission = new Mission();
                 $mission->setMissionAt($now);
                 $mission->setType(1);
                 $mission->setPlanet($planet);
                 $mission->setSoldier($soldier);
                 $mission->setTank($tank);
-                $mission->setWin($percent);
+                $mission->setPercent($percent);
                 $mission->setGain($gain * $alea);
                 $planet->setSoldier($planet->getSoldier() - $soldier);
                 $planet->setTank($planet->getTank() - $tank);
@@ -150,8 +150,89 @@ class ZombieController extends AbstractController
         return $this->render('connected/zombie.html.twig', [
             'usePlanet' => $usePlanet,
             'planet' => $planet,
+            'now' => $now,
             'form_missionZombie' => $form_missionZombie->createView(),
             'form_missionUranium' => $form_missionUranium->createView()
         ]);
+    }
+
+    /**
+     * @Route("/finir-mission/{usePlanet}/{mission}", name="mission_finish", requirements={"usePlanet"="\d+", "mission"="\d+"})
+     */
+    public function reportViewAction(Planet $usePlanet, Mission $mission)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
+
+        if ($usePlanet->getUser() != $user || $mission->getMissionAt() > $now) {
+            return $this->redirectToRoute('home');
+        }
+        $reportMission = new Report();
+        $reportMission->setType('zombie');
+        $reportMission->setSendAt($now);
+        $reportMission->setUser($user);
+        $planet = $mission->getPlanet();
+        if ($mission->getType() == 0) {
+            if (rand(1, 100) <= $mission->getPercent()) {
+                $lose = 1 + ((100 - $mission->getPercent()) / rand(4,7)) / 100;
+                if ($planet->getSoldier() + round($mission->getSoldier() / $lose) > $planet->getSoldierMax() || $planet->getTank() + round($mission->getTank() / $lose) > 500) {
+                    return $this->redirectToRoute('zombie', ['usePlanet' => $usePlanet->getId()]);
+                }
+                $soldier = $mission->getSoldier() - round($mission->getSoldier() / $lose);
+                $tank = $mission->getTank() - round($mission->getTank() / $lose);
+                $planet->setSoldier($planet->getSoldier() + round($mission->getSoldier() / $lose));
+                $planet->setTank($planet->getTank() + round($mission->getTank() / $lose));
+                $user->setZombieAtt($user->getZombieAtt() - $mission->getGain());
+                $em->remove($mission);
+                $reportMission->setTitle("Mission d'élimination zombies");
+                $reportMission->setImageName("zombie_win_report.jpg");
+                $reportMission->setContent("L'escouade militaire envoyé en mission est de retour, son capitaine vous fait son rapport :<br> <span class='text-vert'>-" . number_format($mission->getGain()) . "</span> menace zombie sur la planète.<br><span class='text-rouge'>" . number_format($soldier) . "</span> soldats meurent dans la mission ainsi que <span class='text-rouge'>" . number_format($tank) . "</span> tanks.");
+            } else {
+                $reportMission->setTitle("Échec mission");
+                $reportMission->setImageName("zombie_lose_report.jpg");
+                if ($planet->getSoldier() + round($mission->getSoldier() / 2) > $planet->getSoldierMax() || $planet->getTank() + round($mission->getTank() / 2) > 500) {
+                    return $this->redirectToRoute('zombie', ['usePlanet' => $usePlanet->getId()]);
+                }
+                $planet->setSoldier($planet->getSoldier() + round($mission->getSoldier() / 2));
+                $planet->setTank($planet->getTank() + round($mission->getTank() / 2));
+                $reportMission->setContent("Des hommes de l'escouade militaire envoyée reviennent progressivement par petit groupe.<br>Ils ne s'attendaient pas a une telle résistance... <span class='text-rouge'>" . number_format($mission->getSoldier() / 2) . "</span> soldats sont morts durant la mission ainsi que <span class='text-rouge'>" . number_format($mission->getTank() / 2) . "</span> tanks.");
+                $em->remove($mission);
+            }
+        } else {
+            if (rand(1, 100) <= $mission->getPercent()) {
+                $lose = 1 + ((100 - $mission->getPercent()) / rand(3,6)) / 100;
+                if ($planet->getSoldier() + round($mission->getSoldier() / $lose) > $planet->getSoldierMax() || $planet->getTank() + round($mission->getTank() / $lose) > 500) {
+                    return $this->redirectToRoute('zombie', ['usePlanet' => $usePlanet->getId()]);
+                }
+                $soldier = $mission->getSoldier() - round($mission->getSoldier() / $lose);
+                $tank = $mission->getTank() - round($mission->getTank() / $lose);
+                $planet->setSoldier($planet->getSoldier() + round($mission->getSoldier() / $lose));
+                $planet->setTank($planet->getTank() + round($mission->getTank() / $lose));
+                $planet->setUranium($planet->getUranium() + $mission->getGain());
+                $user->setZombieAtt($user->getZombieAtt() + 1);
+                $reportMission->setTitle("Mission de récupération d'uranium");
+                $reportMission->setImageName("uranium_win_report.jpg");
+                $reportMission->setContent("L'escouade militaire envoyé en mission est de retour, son capitaine vous fait son rapport :<br> <span class='text-vert'>+" . number_format($mission->getGain()) . "</span> uranium ont été récupérés en zone zombie.<br><span class='text-rouge'>" . number_format($soldier) . "</span> soldats meurent dans la mission ainsi que <span class='text-rouge'>" . number_format($tank) . "</span> tanks.<br>Vous étiez en mission sur le territoire zombie et avez fait augmenter la menace de <span class='text-rouge'>+1</span>.");
+                $em->remove($mission);
+            } else {
+                $lose = round($mission->getPercent() / 10);
+                $user->setZombieAtt($user->getZombieAtt() + $lose);
+                $reportMission->setTitle("Échec mission");
+                $reportMission->setImageName("zombie_lose_report.jpg");
+                if ($planet->getSoldier() + round($mission->getSoldier() / 2) > $planet->getSoldierMax() || $planet->getTank() + round($mission->getTank() / 2) > 500) {
+                    return $this->redirectToRoute('zombie', ['usePlanet' => $usePlanet->getId()]);
+                }
+                $planet->setSoldier($planet->getSoldier() + round($mission->getSoldier() / 2));
+                $planet->setTank($planet->getTank() + round($mission->getTank() / 2));
+                $reportMission->setContent("Des hommes de l'escouade militaire envoyée reviennent progressivement par petit groupe.<br>Ils ne s'attendaient pas a une telle résistance... <span class='text-rouge'>" . number_format($mission->getSoldier() / 2) . "</span> soldats sont morts durant la mission ainsi que <span class='text-rouge'>" . number_format($mission->getTank() / 2) . "</span> tanks.<br>Vous étiez en mission sur le territoire zombie et avez fait augmenter la menace de <span class='text-rouge'>+". $lose ."</span>.");
+                $em->remove($mission);
+            }
+        }
+        $em->persist($reportMission);
+        $em->flush();
+
+        return $this->redirectToRoute('report_id', ['usePlanet' => $usePlanet->getId(), 'id' => 'zombie']);
     }
 }

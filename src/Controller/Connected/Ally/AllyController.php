@@ -725,9 +725,8 @@ class AllyController extends AbstractController
                     }
                 }
             }
-            $form_exchange = null;
-            $form_exchange = $this->createForm(ExchangeType::class);
             $em->flush();
+            return $this->redirectToRoute('ally_page_bank', ['usePlanet' => $usePlanet->getId()]);
         }
 
         return $this->render('connected/ally/bank.html.twig', [
@@ -928,6 +927,7 @@ class AllyController extends AbstractController
             $em->persist($grade);
             $ally->addGrade($grade);
             $em->flush();
+            return $this->redirectToRoute('ally_page_admin', ['usePlanet' => $usePlanet->getId()]);
         }
 
         return $this->render('connected/ally/admin.html.twig', [

@@ -29,7 +29,7 @@ class Report
     protected $user;
 
     /**
-     * @ORM\Column(name="title",type="string", length=50)
+     * @ORM\Column(name="title",type="string", length=75)
      * @Assert\NotBlank(message = "required")
      */
     protected $title;

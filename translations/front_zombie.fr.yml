@@ -14,6 +14,7 @@ zombie.time: Temps
 zombie.succed: Réussite
 zombie.gain: Gain
 zombie.type: Type
+zombie.finish: 'Récupérer rapport'
 zombie.uranium: 'Mission de récupèration d''uranium'
 tooltip.uranium: 'Lancer cette mission pour récupérer de l''uranium dans les zones infectées par les zombies.'
 form.nbr: 0
@@ -22,3 +23,5 @@ form.three: 3h
 form.six: 6h
 form.ten: 10h
 form.startMission: Lancer
+1: Uranium
+0: Zombie

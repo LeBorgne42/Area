@@ -31,17 +31,20 @@ statistic: 'Statistiques'
 objective: 'Histoire'
 niobium: Niobium
 water: Eau
+uranium: Uranium
 coin: Bitcoin
 universe: Univers
 forum: Forum
 workers: Travailleurs
 scientists: Scientifiques
 soldiers: Soldats
+tanks: Tanks
 groundImg: Terrain
 tooltip.ships: 'Vaisseaux au sol'
 tooltip.caserne: 'Caserne/bunker sur la planète'
 tooltip.tanks: 'Construction de tanks'
 tooltip.scientists: 'Centre de recherche'
+tooltip.uranium: 'Uranium présent sur la planète'
 SkyImg: Espace
 rank: Classement
 quest: 'Objectifs'

@@ -78,7 +78,7 @@
                                 <tr>
                                     <td class="center-cells">{{ exchange.getName() }}</td>
                                     <td class="center-cells">{% if exchange.getType() == 1 %}{{ 'ally.pdgDonate'|trans }}{% else %}{{ 'ally.bitcoinDonate'|trans }}{% endif %}</td>
-                                    <td class="center-cells">{{ exchange.getAmount()|number_format }}</td>
+                                    <td class="center-cells">{% if exchange.getAmount() > 0 %}<span class="text-vert">+{{ exchange.getAmount()|number_format }}</span>{% else %}<span class="text-rouge">{{ exchange.getAmount()|number_format }}</span>{% endif %}</td>
                                     <td class="center-cells">{{ exchange.getContent() }}</td>
                                     <td class="center-cells">{% if exchange.getAmount() < 0 %}{% if exchange.getAccepted() == 1 %}<span class="text-vert">{{ 'ally.exchangeAccepted'|trans }}</span>{% else %}{% if app.user.getGrade().getPlacement() == 1 %}<span><a href="{{ path('ally_accept_exchange',{'id': exchange.getId(), 'usePlanet': usePlanet.getId()}) }}">{{ 'ally.exchangeAccept'|trans }}</a></span> / <span><a href="{{ path('ally_refuse_exchange',{'id': exchange.getId(), 'usePlanet': usePlanet.getId()}) }}">{{ 'ally.exchangeRefuse'|trans }}</a></span>{% else %}<span class="text-rouge">{{ 'ally.exchangeWaiting'|trans }}</span>{% endif %}{% endif %} - {% endif %}{{ exchange.getCreatedAT()|date('d/m/Y H:i') }}</td>
                                 </tr>

@@ -2,17 +2,17 @@
 
 <nav class="navbar-right text-center pr-4 hideForLittle">
     <a href="{{ path('zombie', {'usePlanet': usePlanet.getId()}) }}">
-    <div data-toggle="tooltip" data-placement="left" title="{{ 'tooltip.zombie'|trans }}" class="mb-4 bg-right px-4 py-2">
-        <div class="pt-2 float-left"><img height="32" width="32" src="{{ asset('img/zombie_indic.gif') }}"></div>
-        <div class="float-right">
-            <div class="mt-2">
-                {{ 'zombie.indic'|trans }} {{ app.user.getZombieAtt() }}
-            </div>
-            <div class="mt-2">
-                <span class="mt-5 timerArea" hidden>{% if app.user.getZombieAt() %}{{ app.user.getZombieAt()|date('Y/m/d H:i:s') }}{% endif %}</span>
+        <div data-toggle="tooltip" data-placement="left" title="{{ 'tooltip.zombie'|trans }}" class="mb-4 bg-right px-4 py-2 zombie-right">
+            <div class="pt-2 float-left"><img height="32" width="32" src="{{ asset('img/zombie_indic.gif') }}"></div>
+            <div class="float-right">
+                <div class="mt-2">
+                    {{ 'zombie.indic'|trans }} {{ app.user.getZombieAtt() }}
+                </div>
+                <div class="mt-2">
+                    <span class="mt-5 timerArea" hidden>{% if app.user.getZombieAt() %}{{ app.user.getZombieAt()|date('Y/m/d H:i:s') }}{% endif %}</span>
+                </div>
             </div>
         </div>
-    </div>
     </a>
     {% for planet in app.user.getPlanets() %}
         {% if planet == usePlanet %}
@@ -30,6 +30,7 @@
                         {% if (planet.getCaserne() > 0 or planet.getBunker() > 0) and planet.getLightUsine() > 0 and app.user.getTank() > 0 %}<span data-toggle="tooltip" data-placement="bottom" title="{{ 'tooltip.tanks'|trans }}"><img height="10" src="{{ asset('img/tanks.png') }}"></span>{% endif %}
                         {% if planet.getCaserne() > 0 %}<span data-toggle="tooltip" data-placement="bottom" title="{{ 'tooltip.caserne'|trans }}"><img height="12" src="{{ asset('img/soldier.png') }}"></span>{% endif %}
                         {% if planet.getCenterSearch() > 0 %}<span data-toggle="tooltip" data-placement="bottom" title="{{ 'tooltip.scientists'|trans }}"><img height="10" src="{{ asset('img/scientist.png') }}"></span>{% endif %}
+                        {% if planet.getUranium() > 0 %}<span data-toggle="tooltip" data-placement="bottom" title="{{ 'tooltip.uranium'|trans }}"><img height="10" src="{{ asset('img/uranium.png') }}"></span>{% endif %}
                     </div>
                 </div>
             </div>
@@ -60,6 +61,7 @@
                                 {% if (planet.getCaserne() > 0 or planet.getBunker() > 0) and planet.getLightUsine() > 0 and app.user.getTank() > 0 %}<span data-toggle="tooltip" data-placement="bottom" title="{{ 'tooltip.tanks'|trans }}"><img height="10" src="{{ asset('img/tanks.png') }}"></span>{% endif %}
                                 {% if planet.getCaserne() > 0 %}<span data-toggle="tooltip" data-placement="bottom" title="{{ 'tooltip.caserne'|trans }}"><img height="12" src="{{ asset('img/soldier.png') }}"></span>{% endif %}
                                 {% if planet.getCenterSearch() > 0 %}<span data-toggle="tooltip" data-placement="bottom" title="{{ 'tooltip.scientists'|trans }}"><img height="10" src="{{ asset('img/scientist.png') }}"></span>{% endif %}
+                                {% if planet.getUranium() > 0 %}<span data-toggle="tooltip" data-placement="bottom" title="{{ 'tooltip.uranium'|trans }}"><img height="10" src="{{ asset('img/uranium.png') }}"></span>{% endif %}
                             </div>
                         </div>
                     </div>

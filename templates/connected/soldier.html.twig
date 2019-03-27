@@ -17,7 +17,7 @@
                         <img class="mr-3" src="{{ asset('img/soldier.png') }}"> {{ 'caserner.soldier'|trans }} x {{ usePlanet.getSoldier()|number_format }} / {{ usePlanet.getSoldierMax()|number_format }} <span class="float-right"><span class="ml-5"><span class="bitcoinProduct">{{ 75 - price }}</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></span> <span class="ml-3"><span class="workerProduct">2</span> <img data-toggle="tooltip" data-placement="bottom" title="{{ 'workerImg'|trans }}" src="{{ asset('img/worker.png') }}"></span></span>
                     </th>
                     <td class="center-cells"{% if usePlanet.getWorker() < 5000 %} hidden{% endif %}>
-                        {{ form_widget(form_caserneRecruit.soldier,{attr: { max: app.user.getBitcoin() / 75 - price }}) }}
+                        {{ form_widget(form_caserneRecruit.soldier,{attr: { max: usePlanet.getSoldierMax() - usePlanet.getSoldier()}}) }}
                     </td>
                 </tr>
                 <tr class="text-center" {% if usePlanet.getSoldierAtNbr() == null %} hidden{% endif %}>
@@ -41,7 +41,7 @@
                     </th>
                     <td class="center-cells"{% if usePlanet.getWorker() < 5000 %} hidden{% endif %}>
                         {% if (usePlanet.getBunker() > 0 or usePlanet.getCaserne() > 0) and usePlanet.getLightUsine() > 0 and app.user.getTank() == 1 %}
-                            {{ form_widget(form_caserneRecruit.tank,{attr: { max: app.user.getBitcoin() / 500 }}) }}
+                            {{ form_widget(form_caserneRecruit.tank,{attr: { max: 500 - usePlanet.getTank() }}) }}
                         {% else %}
                             {{ form_widget(form_caserneRecruit.tank,{'attr': { 'disabled': 'disabled', 'class': 'game-input-off text-right' }}) }}
                         {% endif %}
@@ -75,7 +75,7 @@
                     </th>
                     <td class="center-cells"{% if usePlanet.getWorker() < 5000 %} hidden{% endif %}>
                         {% if usePlanet.getCenterSearch() > 0 %}
-                            {{ form_widget(form_caserneRecruit.scientist,{attr: { max: app.user.getBitcoin() / 250 }}) }}
+                            {{ form_widget(form_caserneRecruit.scientist,{attr: { max: usePlanet.getScientistMax() - usePlanet.getScientist() }}) }}
                         {% else %}
                             {{ form_widget(form_caserneRecruit.scientist,{'attr': { 'disabled': 'disabled', 'class': 'game-input-off text-right' }}) }}
                         {% endif %}

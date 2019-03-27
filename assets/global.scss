@@ -382,26 +382,26 @@ span a {
 }
 
 progress.product-full::-webkit-progress-value {
-  width: 65px;
+  width: 60px;
   height: 7px;
   background-color: red;
   border: 1px solid black;
 }
 
 progress.product-ressource::-webkit-progress-value {
-  width: 65px;
+  width: 60px;
   height: 6px;
   background-color: limegreen;
 }
 
 progress.product-ressource {
-  width: 65px;
+  width: 60px;
   height: 6px;
   background-color: limegreen;
 }
 
 progress.product-full {
-  width: 65px;
+  width: 60px;
   height: 7px;
   background-color: red;
 }

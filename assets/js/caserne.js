@@ -4,6 +4,15 @@ function manageTotalCaserne() {
         var product = 0;
         var worker = 0;
         var bitcoin = 0;
+        if($('#caserne_recruit_soldier').attr('max') - $('#caserne_recruit_soldier').val() < 0) {
+            $('#caserne_recruit_soldier').val($('#caserne_recruit_soldier').attr('max'));
+        }
+        if($('#caserne_recruit_tank').attr('max') - $('#caserne_recruit_tank').val() < 0) {
+            $('#caserne_recruit_tank').val($('#caserne_recruit_tank').attr('max'));
+        }
+        if($('#caserne_recruit_scientist').attr('max') - $('#caserne_recruit_scientist').val() < 0) {
+            $('#caserne_recruit_scientist').val($('#caserne_recruit_scientist').attr('max'));
+        }
         $('.nbrProduct').each( function(){
             if($(this).val() > 0) {
                 if (product == 0) {

@@ -82,7 +82,7 @@ function manageUraMission() {
         if($('.uraMission .nbrTime').val() > 0) {
             timeUra = $('.uraMission .nbrTime').val();
             if (timeUra == 1) {
-                gainUra = 1;
+                gainUra = 2;
                 succeedUra = Math.round(90 / zombie);
             } else if (timeUra == 2) {
                 gainUra = 5;

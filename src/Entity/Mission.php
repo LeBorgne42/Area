@@ -46,9 +46,9 @@ class Mission
     protected $gain;
 
     /**
-     * @ORM\Column(name="win", type="boolean")
+     * @ORM\Column(name="percent", type="smallint")
      */
-    protected $win;
+    protected $percent;
 
     /**
      * @ORM\Column(name="type", type="boolean")
@@ -161,17 +161,17 @@ class Mission
     /**
      * @return mixed
      */
-    public function getWin()
+    public function getPercent()
     {
-        return $this->win;
+        return $this->percent;
     }
 
     /**
-     * @param mixed $win
+     * @param mixed $percent
      */
-    public function setWin($win): void
+    public function setPercent($percent): void
     {
-        $this->win = $win;
+        $this->percent = $percent;
     }
 
     public function getId()

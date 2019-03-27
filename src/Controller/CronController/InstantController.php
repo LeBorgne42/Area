@@ -376,12 +376,12 @@ class InstantController extends AbstractController
             if($dMilitary > $aMilitary) {
                 if ($zUser->getAlly()) {
                     if ($zUser->getAlly()->getPolitic() == 'fascism') {
-                        $zUser->setZombieAtt($zUser->getZombieAtt() + 1);
+                        $zUser->setZombieAtt($zUser->getZombieAtt() + 15);
                     } else {
-                        $zUser->setZombieAtt($zUser->getZombieAtt() + 3);
+                        $zUser->setZombieAtt($zUser->getZombieAtt() + 20);
                     }
                 } else {
-                    $zUser->setZombieAtt($zUser->getZombieAtt() + 2);
+                    $zUser->setZombieAtt($zUser->getZombieAtt() + 5);
                 }
                 $warPointDef = round($aMilitary);
                 $zUser->getRank()->setWarPoint($zUser->getRank()->getWarPoint() + $warPointDef);
