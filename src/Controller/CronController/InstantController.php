@@ -33,12 +33,12 @@ class InstantController extends AbstractController
             ->getResult();
 
         if($asteroides) {
-            $nowAste->add(new DateInterval('PT' . 57600 . 'S'));
+            $nowAste->add(new DateInterval('PT' . (25000 * rand(1, 4)) . 'S'));
             foreach ($asteroides as $asteroide) {
 
                 $asteroide->setRecycleAt($nowAste);
-                $asteroide->setNbCdr($asteroide->getNbCdr() + rand(1500000, 3000000));
-                $asteroide->setWtCdr($asteroide->getWtCdr() + rand(1200000, 2800000));
+                $asteroide->setNbCdr($asteroide->getNbCdr() + rand(500000, 2000000));
+                $asteroide->setWtCdr($asteroide->getWtCdr() + rand(400000, 1800000));
 
 
                 if(rand(1, 50) == 50) {

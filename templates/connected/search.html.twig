@@ -23,7 +23,8 @@
         {% endif %}
         <div class="research">
             <div id="timeDefaut" hidden>{{ date|date('Y/m/d H:i:s') }}</div>
-            <div class="block-title ml-4"><h2>{{ 'research.titleUtility'|trans }}</h2></div>
+            <h1 class="float-right mr-3" data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}">{{ 'bitcoin'|trans }} <span id="bitcoin">{{ app.user.getBitcoin()|number_format }}</span> <img src="{{ asset('img/coin.png') }}"></h1>
+            <div class="block-title ml-4 mt-5"><h2>{{ 'research.titleUtility'|trans }}</h2></div>
             <table class="table table-striped table-bordered table-dark text-center">
                 <tbody>
                 <tr class="{% if app.user.getUtility() == 3 %}finish-search{% else %}access-search{% endif %}">

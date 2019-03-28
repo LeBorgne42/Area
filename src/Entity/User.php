@@ -1397,8 +1397,10 @@ class User implements UserInterface, \Serializable
         }
         if ($this->politicCostTank > 0) {
             $tPrice = 250 / (1 + ($this->politicCostTank / 5));
+            $tPrices = 500 / (1 + ($this->politicCostTank / 5));
         } else {
             $tPrice = 250;
+            $tPrices = 500;
         }
         if ($this->politicCostScientist > 0) {
             $scPrice = 50 / (1 + ($this->politicCostScientist / 5));
@@ -1414,6 +1416,12 @@ class User implements UserInterface, \Serializable
             $return = $return + ($planet->getTankAtNbr() * $tPrice);
             $return = $return + ($planet->getScientist() * $scPrice);
             $return = $return + ($planet->getScientistAtNbr() * $scPrices);
+            if ($planet->getMissions()) {
+                foreach($planet->getMissions() as $mission) {
+                    $return = $return + ($mission->getSoldier() * $sPrices);
+                    $return = $return + ($mission->getTank() * $tPrices);
+                }
+            }
         }
         foreach($this->fleets as $fleet) {
             $return = $return + ($fleet->getSoldier() * $sPrices);

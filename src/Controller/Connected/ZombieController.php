@@ -70,7 +70,7 @@ class ZombieController extends AbstractController
             }
             if ($time == 1) {
                 $percent = ROUND(90 / $zombie);
-                $gain = 1;
+                $gain = 2;
             } elseif ($time == 3) {
                 $percent = ROUND(70 / $zombie);
                 $gain = 5;
@@ -86,7 +86,7 @@ class ZombieController extends AbstractController
             } else {
                 $nowMission->add(new DateInterval('PT' . $time . 'H'));
                 $mission = new Mission();
-                $mission->setMissionAt($now);
+                $mission->setMissionAt($nowMission);
                 $mission->setType(0);
                 $mission->setPlanet($planet);
                 $mission->setSoldier($soldier);
@@ -132,7 +132,7 @@ class ZombieController extends AbstractController
             } else {
                 $nowMission->add(new DateInterval('PT' . $time . 'H'));
                 $mission = new Mission();
-                $mission->setMissionAt($now);
+                $mission->setMissionAt($nowMission);
                 $mission->setType(1);
                 $mission->setPlanet($planet);
                 $mission->setSoldier($soldier);

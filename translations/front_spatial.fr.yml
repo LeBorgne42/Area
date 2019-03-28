@@ -23,6 +23,7 @@ form.name: ''
 niobiumImg: Niobium
 waterImg: Water
 bitcoinImg: Bitcoin
+bitcoin: 'Bitcoins :'
 spatial.orbiteFlotte: 'Flottes en orbite'
 spatial.createFlotte: 'Créer une nouvelle flotte'
 spatial.createFleet: 'Choix des vaisseaux'

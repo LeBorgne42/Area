@@ -14,7 +14,7 @@ function manageZbMission() {
             $('#mission_tank').val($('#mission_tank').attr('max'));
         }
         if($('.zbMission .nbrSoldier').val() > 0) {
-            soldierZb = $('.zbMission .nbrSoldier').val();
+            soldierZb = $('.zbMission .nbrSoldier').val() * 2;
         }
         if($('.zbMission .nbrTank').val() > 0) {
             tankZb = $('.zbMission .nbrTank').val() * 75;
@@ -28,7 +28,7 @@ function manageZbMission() {
         if($('.zbMission .nbrTime').val() > 0) {
             timeZb = $('.zbMission .nbrTime').val();
             if (timeZb == 1) {
-                gainZb = -1;
+                gainZb = -2;
                 succeedZb = Math.round(90 / zombie);
             } else if (timeZb == 2) {
                 gainZb = -5;

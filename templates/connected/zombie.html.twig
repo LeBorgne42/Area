@@ -153,7 +153,7 @@
                                 {{ mission.getTank() }} <img width="18" src="{{ asset('img/tanks.png') }}">
                             </td>
                             <td class="center-cells">
-                                {% if mission.getType() == 1 %}+{{ mission.getGain() }} <img width="12" src="{{ asset('img/uranium.png') }}">{% else %}-{{ mission.getGain() }} <img width="12" src="{{ asset('img/zombie_indic.gif') }}">{% endif %}
+                                {% if mission.getType() == 1 %}<span class="text-vert">+{{ mission.getGain() }}</span> <img width="12" src="{{ asset('img/uranium.png') }}">{% else %}<span class="text-vert">-{{ mission.getGain() }}</span> <img width="12" src="{{ asset('img/zombie_indic.gif') }}">{% endif %}
                             </td>
                             <td class="center-cells text-center">
                                 {% if mission.getType() == 1 %}{{ 'zombie.uranium'|trans }}{% else %}{{ 'zombie.zombie'|trans }}{% endif %}
