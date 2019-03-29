@@ -80,20 +80,45 @@ class AllyController extends AbstractController
                 ->getQuery()
                 ->getOneOrNullResult();
 
-            $newLeader = $em->getRepository('App:User')
-                ->createQueryBuilder('u')
-                ->where('u.voteAlly > :vote and u.id != :user')
-                ->andWhere('u.ally = :ally')
-                ->setParameters(['vote' => $leader->getVoteAlly(), 'ally' => $user->getAlly(), 'user' => $leader->getId()])
-                ->orderBy('u.voteAlly', 'DESC')
-                ->getQuery()
-                ->getOneOrNullResult();
+            if ($leader) {
+                $newLeader = $em->getRepository('App:User')
+                    ->createQueryBuilder('u')
+                    ->where('u.voteAlly > :vote and u.id != :user')
+                    ->andWhere('u.ally = :ally')
+                    ->setParameters(['vote' => $leader->getVoteAlly(), 'ally' => $user->getAlly(), 'user' => $leader->getId()])
+                    ->orderBy('u.voteAlly', 'DESC')
+                    ->getQuery()
+                    ->getOneOrNullResult();
 
-            if ($newLeader) {
-                $tmpGrade = $newLeader->getGrade();
-                $newLeader->setGrade($leader->getGrade());
-                $leader->setGrade($tmpGrade);
-                $em->flush();
+                if ($newLeader) {
+                    $tmpGrade = $newLeader->getGrade();
+                    $newLeader->setGrade($leader->getGrade());
+                    $leader->setGrade($tmpGrade);
+                    $em->flush();
+                }
+            } else {
+                $newLeader = $em->getRepository('App:User')
+                    ->createQueryBuilder('u')
+                    ->andWhere('u.ally = :ally')
+                    ->setParameters(['ally' => $user->getAlly()])
+                    ->orderBy('u.voteAlly', 'DESC')
+                    ->getQuery()
+                    ->setMaxResults(1)
+                    ->getOneOrNullResult();
+
+                $tmpGrade = $em->getRepository('App:Grade')
+                    ->createQueryBuilder('g')
+                    ->where('g.placement = :top')
+                    ->andWhere('g.ally = :ally')
+                    ->setParameters(['top' => 1, 'ally' => $user->getAlly()])
+                    ->getQuery()
+                    ->setMaxResults(1)
+                    ->getOneOrNullResult();
+
+                if ($newLeader && $tmpGrade) {
+                    $newLeader->setGrade($tmpGrade);
+                    $em->flush();
+                }
             }
         }
 

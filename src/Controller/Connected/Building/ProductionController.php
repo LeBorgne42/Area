@@ -229,7 +229,7 @@ class ProductionController extends AbstractController
         }
         $now->add(new DateInterval('PT' . 600 . 'S'));
         $usePlanet->setExtractor($level - 1);
-        $usePlanet->setNiobiumMax($usePlanet->getNiobiumMax() - 750000);
+        $usePlanet->setNiobiumMax($usePlanet->getNiobiumMax() - 5000000);
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setConstruct('destruct');
         $usePlanet->setConstructAt($now);
@@ -290,7 +290,7 @@ class ProductionController extends AbstractController
             return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
         }
         $now->add(new DateInterval('PT' . 600 . 'S'));
-        $usePlanet->setWaterMax($usePlanet->getWaterMax() - 750000);
+        $usePlanet->setWaterMax($usePlanet->getWaterMax() - 5000000);
         $usePlanet->setExtractor($level - 1);
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setConstruct('destruct');

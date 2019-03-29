@@ -505,8 +505,8 @@ class Planet
         $this->wtCdr = 0;
         $this->shipProduction = 1;
         $this->workerProduction = 6000;
-        $this->niobiumMax = 500000;
-        $this->waterMax = 400000;
+        $this->niobiumMax = 1300000;
+        $this->waterMax = 1000000;
         $this->soldierMax = 200;
         $this->tank = null;
         $this->scientistMax = 0;

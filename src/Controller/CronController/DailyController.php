@@ -136,7 +136,7 @@ class DailyController extends AbstractController
             if ($gain - $empireCost > 0) {
                 $color = '<span class="text-vert">+';
             } else {
-                $color = '<span class="text-rouge">-';
+                $color = '<span class="text-rouge">';
             }
             if ($nbrQuests == 0) {
                 $report->setContent($report->getContent() . " Ce qui vous donne un revenu de " . $color . number_format(round($gain - $empireCost)) . "</span> bitcoins. Comme vous avez terminé toutes les quêtes vous recevez un bonus de 20.000 PDG ! Bonne journée suprême Commandant.");

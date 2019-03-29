@@ -278,7 +278,10 @@ class FightController extends AbstractController
                 $reportWin->getUser()->setViewReport(false);
                 $reportWinUtilA->setUser($reportWin->getUser());
                 $em->persist($reportWinUtilA);
+                $planet = $reportWin->getPlanet();
             }
+            $planet->setNbCdr($planet->getNbCdr() + ($debrisDef * rand(30,40)));
+            $planet->setWtCdr($planet->getWtCdr() + $debrisDef * rand(20,30));
             $em->flush();
             return($blockAtt);
         }
@@ -305,7 +308,10 @@ class FightController extends AbstractController
                 $reportWinUtilB->setUser($reportWin->getUser());
                 $reportWin->getUser()->setViewReport(false);
                 $em->persist($reportWinUtilB);
+                $planet = $reportWin->getPlanet();
             }
+            $planet->setNbCdr($planet->getNbCdr() + ($debrisAtt * rand(30,40)));
+            $planet->setWtCdr($planet->getWtCdr() + $debrisAtt * rand(20,30));
             $em->flush();
             return($blockDef);
         }

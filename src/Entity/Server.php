@@ -71,11 +71,17 @@ class Server
     protected $nbrResearch;
 
     /**
+     * @ORM\Column(name="dailyReport",type="datetime", nullable=true)
+     */
+    protected $dailyReport;
+
+    /**
      * User constructor.
      */
     public function __construct()
     {
         $this->open = false;
+        $this->dailyReport = null;
         $this->nbrMessage = 0;
         $this->nbrColonize = 0;
         $this->nbrSalonMessage = 0;
@@ -245,6 +251,22 @@ class Server
     public function setNbrZombie($nbrZombie): void
     {
         $this->nbrZombie = $nbrZombie;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDailyReport()
+    {
+        return $this->dailyReport;
+    }
+
+    /**
+     * @param mixed $dailyReport
+     */
+    public function setDailyReport($dailyReport): void
+    {
+        $this->dailyReport = $dailyReport;
     }
 
     public function getId()

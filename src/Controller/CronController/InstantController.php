@@ -176,6 +176,180 @@ class InstantController extends AbstractController
             ->getQuery()
             ->getResult();
 
+        $dailyReport = $em->getRepository('App:Server')
+            ->createQueryBuilder('s')
+            ->where('s.dailyReport < :now')
+            ->setParameters(['now' => $now])
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        if ($dailyReport) {
+            $users = $em->getRepository('App:User')
+                ->createQueryBuilder('u')
+                ->join('u.rank', 'r')
+                ->where('u.id != :one')
+                ->setParameters(['one' => 1])
+                ->orderBy('r.point', 'DESC')
+                ->getQuery()
+                ->getResult();
+
+            $x = 1;
+            foreach ($users as $user) {
+
+                $maxQuest = count($user->getWhichQuest()) - 1;
+                $first = rand(0, $maxQuest);
+                $second = $first;
+                $third = $second;
+                while ($second == $first) {
+                    $second = rand(0, $maxQuest);
+                }
+                while ($third == $first or $third == $second) {
+                    $third = rand(0, $maxQuest);
+                }
+                $questOne = $em->getRepository('App:Quest')->findOneByName($user->getWhichQuest()[$first]);
+                $questTwo = $em->getRepository('App:Quest')->findOneByName($user->getWhichQuest()[$second]);
+                $questTree = $em->getRepository('App:Quest')->findOneByName($user->getWhichQuest()[$third]);
+                $report = new Report();
+                $report->setType('economic');
+                $report->setTitle("Rapport de l'empire");
+                $report->setImageName("daily_report.jpg");
+                $report->setSendAt($now);
+                $report->setUser($user);
+                $ally = $user->getAlly();
+                $nbrQuests = count($user->getQuests());
+                foreach ($user->getQuests() as $quest) {
+                    $user->removeQuest($quest);
+                }
+                $user->addQuest($questOne);
+                $worker = 0;
+                $planetPoint= 0;
+                $buildingCost = 0;
+                if ($user->getPoliticWorker() > 0) {
+                    $workerBonus = (1 + ($user->getPoliticWorker() / 5));
+                } else {
+                    $workerBonus = 1;
+                }
+                foreach ($user->getPlanets() as $planet) {
+                    if($planet->getRadarAt() == null && $planet->getBrouilleurAt() == null) {
+                        if (($planet->getWorker() + $planet->getWorkerProduction() > $planet->getWorkerMax())) {
+                            $planet->setWorker($planet->getWorkerMax());
+                        } else {
+                            $planet->setWorker($planet->getWorker() + ($planet->getWorkerProduction() * $workerBonus));
+                        }
+                        $worker = $worker + $planet->getWorker();
+                        $planetPoint = $planetPoint + $planet->getBuildingPoint();
+                        $buildingCost = $buildingCost + $planet->getBuildingCost();
+                    }
+                }
+                $gain = round($worker / 2);
+                $lose = null;
+                if($ally) {
+                    $user->addQuest($questTwo);
+                    if($ally->getPeaces()) {
+                        foreach($ally->getPeaces() as $peace) {
+                            if($peace->getType() == false && $peace->getAccepted() == 1) {
+                                $otherAlly = $em->getRepository('App:Ally')
+                                    ->createQueryBuilder('a')
+                                    ->where('a.sigle = :sigle')
+                                    ->setParameter('sigle', $peace->getAllyTag())
+                                    ->getQuery()
+                                    ->getOneOrNullResult();
+
+                                $lose = (($peace->getTaxe() / 100) * $gain);
+                                if($lose < 0) {
+                                    $lose = (($peace->getTaxe() / 100) * $user->getBitcoin());
+                                }
+                                $gain = $gain - $lose;
+                                $user->setBitcoin($user->getBitcoin() - $lose);
+                                $otherAlly->setBitcoin($otherAlly->getBitcoin() + $lose);
+                                $exchange = new Exchange();
+                                $exchange->setAlly($otherAlly);
+                                $exchange->setCreatedAt($now);
+                                $exchange->setType(0);
+                                $exchange->setAccepted(1);
+                                $exchange->setContent("Taxe liée à la paix.");
+                                $exchange->setAmount($lose);
+                                $exchange->setName($user->getUserName());
+                                $em->persist($exchange);
+                                $report->setContent($report->getContent() . " La paix que vous avez signé envoi directement <span class='text-rouge'>-" . number_format(round($lose)) . "</span> bitcoins à l'aliance [" . $otherAlly->getSigle() . "].<br>");
+                            }
+                        }
+                    }
+                    $userBitcoin = $user->getBitcoin();
+                    $taxe = (($ally->getTaxe() / 100) * $gain);
+                    $gain = $gain - $taxe;
+                    $user->setBitcoin($userBitcoin - $taxe);
+                    $report->setContent(" Le montant envoyé dans les fonds de votre alliance s'élève à <span class='text-rouge'>-" . number_format(round($taxe)) . "</span> bitcoins.<br>");
+                    $allyBitcoin = $ally->getBitcoin();
+                    $allyBitcoin = $allyBitcoin + $taxe;
+                    $ally->setBitcoin($allyBitcoin);
+                } else {
+                    $questAlly = $em->getRepository('App:Quest')->findOneById(50);
+                    $user->addQuest($questAlly);
+                }
+                $user->addQuest($questTree);
+                $troops = $user->getAllTroops();
+                $ship = $user->getAllShipsCost();
+                $cost = $user->getBitcoin();
+                $report->setContent($report->getContent() . " Le travaille fournit par vos travailleurs vous rapporte <span class='text-vert'>+" . number_format(round($gain)) . "</span> bitcoins.");
+                $empireCost = $troops + $ship + $buildingCost;
+                $cost = $cost - $empireCost + ($gain);
+                $report->setContent($report->getContent() . " L'entretien de votre empire vous coûte cependant <span class='text-rouge'>-" . number_format(round($empireCost)) . "</span> bitcoins.<br>");
+                $point = round(round($worker / 100) + round($user->getAllShipsPoint() / 75) + round($troops / 75) + $planetPoint);
+                $user->setBitcoin($cost);
+                if ($gain - $empireCost > 0) {
+                    $color = '<span class="text-vert">+';
+                } else {
+                    $color = '<span class="text-rouge">';
+                }
+                if ($nbrQuests == 0) {
+                    $report->setContent($report->getContent() . " Ce qui vous donne un revenu de " . $color . number_format(round($gain - $empireCost)) . "</span> bitcoins. Comme vous avez terminé toutes les quêtes vous recevez un bonus de 20.000 PDG ! Bonne journée suprême Commandant.");
+                    $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + 20000);
+                } else {
+                    $report->setContent($report->getContent() . " Ce qui vous donne un revenu de " . $color . number_format(round($gain - $empireCost)) . "</span> bitcoins.<br>Bonne journée Commandant.");
+                }
+                if ($point - $user->getRank()->getOldPoint() > 0) {
+                    $user->setExperience($user->getExperience() + ($point - $user->getRank()->getOldPoint()));
+                }
+                $user->getRank()->setOldPoint($user->getRank()->getPoint());
+                $user->getRank()->setPoint($point);
+                $user->setViewReport(false);
+
+                $em->persist($report);
+                $x++;
+            }
+
+            $em->flush();
+
+            $users = $em->getRepository('App:User')
+                ->createQueryBuilder('u')
+                ->join('u.rank', 'r')
+                ->where('u.id != :one')
+                ->setParameters(['one' => 1])
+                ->orderBy('r.point', 'DESC')
+                ->getQuery()
+                ->getResult();
+
+            $x = 1;
+            foreach ($users as $user) {
+                $user->getRank()->setOldPosition($user->getRank()->getPosition());
+                $user->getRank()->setPosition($x);
+                $x++;
+            }
+
+            $allys = $em->getRepository('App:Ally')->findAll();
+
+            foreach ($allys as $ally) {
+                $ally->setRank($ally->getUsersPoint());
+            }
+
+            $nowDaily = new DateTime();
+            $nowDaily->setTimezone(new DateTimeZone('Europe/Paris'));
+            $nowDaily->add(new DateInterval('PT' . 86398 . 'S'));
+            $server->setDailyReport($nowDaily);
+            $em->flush();
+        }
+
         foreach ($userGOs as $userGO) {
             foreach ($userGO->getFleetLists() as $list) {
                 foreach ($list->getFleets() as $fleetL) {
@@ -513,22 +687,41 @@ class InstantController extends AbstractController
         }
 
         foreach ($planetSoldiers as $soldierAt) {
-            $soldierAt->setSoldier($soldierAt->getSoldier() + $soldierAt->getSoldierAtNbr());
-            $soldierAt->setSoldierAt(null);
-            $soldierAt->setSoldierAtNbr(null);
+            if ($soldierAt->getSoldier() + $soldierAt->getSoldierAtNbr() <= $soldierAt->getSoldierMax()) {
+                $soldierAt->setSoldier($soldierAt->getSoldier() + $soldierAt->getSoldierAtNbr());
+                $soldierAt->setSoldierAt(null);
+                $soldierAt->setSoldierAtNbr(null);
+            } else {
+                $soldierAt->setSoldier($soldierAt->getSoldierMax());
+                $soldierAt->setSoldierAt(null);
+                $soldierAt->setSoldierAtNbr(null);
+            }
         }
 
         foreach ($planetTanks as $tankAt) {
-            $tankAt->setTank($tankAt->getTank() + $tankAt->getTankAtNbr());
-            $tankAt->setTankAt(null);
-            $tankAt->setTankAtNbr(null);
+            if ($soldierAt->getTank() + $soldierAt->getTankAtNbr() <= 500) {
+                $tankAt->setTank($tankAt->getTank() + $tankAt->getTankAtNbr());
+                $tankAt->setTankAt(null);
+                $tankAt->setTankAtNbr(null);
+            } else {
+                $tankAt->setTank(500);
+                $tankAt->setTankAt(null);
+                $tankAt->setTankAtNbr(null);
+            }
         }
 
         foreach ($planetScientists as $scientistAt) {
-            $scientistAt->setScientist($scientistAt->getScientist() + $scientistAt->GetScientistAtNbr());
-            $scientistAt->getUser()->setScientistProduction(round($scientistAt->getUser()->getScientistProduction() + ($scientistAt->getScientist() / 10000)));
-            $scientistAt->setScientistAt(null);
-            $scientistAt->setScientistAtNbr(null);
+            if ($soldierAt->getScientist() + $soldierAt->getScientistAtNbr() <= $soldierAt->getScientistMax()) {
+                $scientistAt->setScientist($scientistAt->getScientist() + $scientistAt->getScientistAtNbr());
+                $scientistAt->getUser()->setScientistProduction(round($scientistAt->getUser()->getScientistProduction() + ($scientistAt->getScientist() / 10000)));
+                $scientistAt->setScientistAt(null);
+                $scientistAt->setScientistAtNbr(null);
+            } else {
+                $scientistAt->setScientist($scientistAt->getScientistMax());
+                $scientistAt->getUser()->setScientistProduction(round($scientistAt->getUser()->getScientistProduction() + ($scientistAt->getScientistMax() / 10000)));
+                $scientistAt->setScientistAt(null);
+                $scientistAt->setScientistAtNbr(null);
+            }
         }
 
         foreach ($radars as $radar) {
@@ -645,10 +838,10 @@ class InstantController extends AbstractController
                 $planet->setWtProduction($planet->getWtProduction() + ($planet->getExtractor() * 1.09));
             } elseif ($build == 'niobiumStock') {
                 $planet->setNiobiumStock($planet->getNiobiumStock() + 1);
-                $planet->setNiobiumMax($planet->getNiobiumMax() + 1000000);
+                $planet->setNiobiumMax($planet->getNiobiumMax() + 5000000);
             } elseif ($build == 'waterStock') {
                 $planet->setWaterStock($planet->getWaterStock() + 1);
-                $planet->setWaterMax($planet->getWaterMax() + 1000000);
+                $planet->setWaterMax($planet->getWaterMax() + 5000000);
             } elseif ($build == 'city') {
                 $planet->setCity($planet->getCity() + 1);
                 $planet->setWorkerProduction($planet->getWorkerProduction() + 2000);
