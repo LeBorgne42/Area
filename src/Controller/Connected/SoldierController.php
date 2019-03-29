@@ -51,11 +51,23 @@ class SoldierController extends AbstractController
                 }
                 if($nbrSoldier * $price > $user->getBitcoin() ||
                     ($nbrSoldier * 2 > $usePlanet->getWorker() || ($usePlanet->getSoldier() + $nbrSoldier) > $usePlanet->getSoldierMax()) ||
-                    ($usePlanet->getWorker() < 5000)) {
+                    ($usePlanet->getWorker() < 10000)) {
+                    if ($nbrSoldier * 2 > $usePlanet->getWorker()) {
+                        $this->addFlash("fail", "Vous n'avez pas assez de travailleurs.");
+                    } elseif ($usePlanet->getSoldier() + $nbrSoldier > $usePlanet->getSoldierMax()) {
+                        $this->addFlash("fail", "Vous dépassez la limite de soldats sur la planète.");
+                    } elseif ($usePlanet->getWorker() < 10000) {
+                        $this->addFlash("fail", "Une planète ne peut avoir moins de 10000 travailleurs.");
+                    } elseif ($nbrSoldier * $price > $user->getBitcoin()) {
+                        $this->addFlash("fail", "Vous ne disposez pas d'assez de bitcoins.");
+                    } else {
+                        $this->addFlash("fail", "Vous n'avez pas toutes les conditions requises.");
+                    }
                     return $this->redirectToRoute('soldier', ['usePlanet' => $usePlanet->getId()]);
                 }
                 if($usePlanet->getSoldierAt()) {
                     if ($usePlanet->getSoldier() + $usePlanet->getSoldierAtNbr() + $nbrSoldier > $usePlanet->getSoldierMax()) {
+                        $this->addFlash("fail", "Vous dépassez la limite de soldats sur la planète.");
                         return $this->redirectToRoute('soldier', ['usePlanet' => $usePlanet->getId()]);
                     }
                     $tmpSoldier = $usePlanet->getSoldierAtNbr();
@@ -81,11 +93,25 @@ class SoldierController extends AbstractController
                 if($nbrTank * 600 > $user->getBitcoin() ||
                     $nbrTank * 5 > $usePlanet->getWorker() ||
                     $nbrTank * 40000 > $usePlanet->getNiobium() ||
-                    ($usePlanet->getWorker() < 5000 || ($usePlanet->getTank() + $nbrTank) > 500)) {
+                    ($usePlanet->getWorker() < 10000 || ($usePlanet->getTank() + $nbrTank) > 500)) {
+                    if ($nbrTank * 5 > $usePlanet->getWorker()) {
+                        $this->addFlash("fail", "Vous n'avez pas assez de travailleurs.");
+                    } elseif ($nbrTank * 600 > $user->getBitcoin()) {
+                        $this->addFlash("fail", "Vous ne disposez pas d'assez de bitcoins.");
+                    } elseif ($nbrTank * 40000 > $usePlanet->getNiobium()) {
+                        $this->addFlash("fail", "Vous ne disposez pas d'assez de niobiums.");
+                    } elseif ($usePlanet->getTank() + $nbrTank > 500) {
+                        $this->addFlash("fail", "Vous dépassez la limite de tanks sur la planète.");
+                    } elseif ($usePlanet->getWorker() < 10000) {
+                        $this->addFlash("fail", "Une planète ne peut avoir moins de 10000 travailleurs.");
+                    } else {
+                        $this->addFlash("fail", "Vous n'avez pas toutes les conditions requises.");
+                    }
                     return $this->redirectToRoute('soldier', ['usePlanet' => $usePlanet->getId()]);
                 }
                 if($usePlanet->getTankAt()) {
                     if ($usePlanet->getTank() + $usePlanet->getTankAtNbr() + $nbrTank > 500) {
+                        $this->addFlash("fail", "Vous dépassez la limite de tanks sur la planète.");
                         return $this->redirectToRoute('soldier', ['usePlanet' => $usePlanet->getId()]);
                     }
                     $tmpTank = $usePlanet->getTankAtNbr();
@@ -109,13 +135,25 @@ class SoldierController extends AbstractController
                 $now = new DateTime();
                 $now->setTimezone(new DateTimeZone('Europe/Paris'));
                 $nbrScientist = abs($form_caserneRecruit->get('scientist')->getData());
-                if($nbrScientist > ($user->getBitcoin() / 250) ||
-                    $nbrScientist > ($usePlanet->getWorker() / 10) ||
-                    ($usePlanet->getWorker() < 5000 || ($usePlanet->getScientist() + $nbrScientist) > $usePlanet->getScientistMax())) {
+                if($nbrScientist > $user->getBitcoin() / 250 ||
+                    $nbrScientist * 10 > $usePlanet->getWorker() ||
+                    ($usePlanet->getWorker() < 10000 || ($usePlanet->getScientist() + $nbrScientist) > $usePlanet->getScientistMax())) {
+                    if ($nbrScientist * 10 > $usePlanet->getWorker()) {
+                        $this->addFlash("fail", "Vous n'avez pas assez de travailleurs.");
+                    } elseif ($nbrScientist > $user->getBitcoin() / 250) {
+                        $this->addFlash("fail", "Vous ne disposez pas d'assez de bitcoins.");
+                    } elseif ($usePlanet->getScientist() + $nbrScientist > $usePlanet->getScientistMax()) {
+                        $this->addFlash("fail", "Vous dépassez la limite de scientifiques sur la planète.");
+                    } elseif ($usePlanet->getWorker() < 10000) {
+                        $this->addFlash("fail", "Une planète ne peut avoir moins de 10000 travailleurs.");
+                    } else {
+                        $this->addFlash("fail", "Vous n'avez pas toutes les conditions requises.");
+                    }
                     return $this->redirectToRoute('soldier', ['usePlanet' => $usePlanet->getId()]);
                 }
                 if($usePlanet->getScientistAt()) {
                     if ($usePlanet->getScientist() + $usePlanet->getScientistAtNbr() + $nbrScientist > $usePlanet->getScientistMax()) {
+                        $this->addFlash("fail", "Vous dépassez la limite de scientifiques sur la planète.");
                         return $this->redirectToRoute('soldier', ['usePlanet' => $usePlanet->getId()]);
                     }
                     $tmpScientist = $usePlanet->getScientistAtNbr();

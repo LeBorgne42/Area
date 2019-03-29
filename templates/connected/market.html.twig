@@ -5,6 +5,11 @@
 {% block title %}{{ 'title'|trans }}{% endblock %}
 
 {% block body %}
+    {% for message in app.flashes('fail') %}
+        <div class="flash-notice mt-5 alerte-flash-error text-center">
+            {{ message }}
+        </div>
+    {% endfor %}
     <div class="front-block">
         {% if app.user.getTutorial() == 17 %}
             <table class="table table-striped borderOverview tutorial">

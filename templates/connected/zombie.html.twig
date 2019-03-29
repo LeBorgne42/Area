@@ -6,6 +6,11 @@
 
 {% block body %}
     <script type="text/javascript" src="{{ asset('build/zombie.js') }}"></script>
+    {% for message in app.flashes('fail') %}
+        <div class="flash-notice mt-5 alerte-flash-error text-center">
+            {{ message }}
+        </div>
+    {% endfor %}
     <div class="front-block">
         <div class="front-block-second text-center">
             <img class="float-left" src="{{ asset('img/zombie_indic.gif') }}">

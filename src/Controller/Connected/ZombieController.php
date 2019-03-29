@@ -82,6 +82,13 @@ class ZombieController extends AbstractController
                 $gain = 15;
             }
             if ($soldier > $planet->getSoldier() || $tank > $planet->getTank() || !$gain || ($soldier == 0 && $tank == 0) || count($planet->getMissions()) >= 3) {
+                if (count($planet->getMissions()) >= 3) {
+                    $this->addFlash("fail", "Maximum 3 missions.");
+                } elseif ($soldier == 0 && $tank == 0) {
+                    $this->addFlash("fail", "Vous n'avez pas suffisament de soldats/tanks.");
+                } else {
+                    $this->addFlash("fail", "Vous n'avez pas toutes les conditions requises.");
+                }
                 return $this->redirectToRoute('zombie', ['usePlanet' => $usePlanet->getId()]);
             } else {
                 $nowMission->add(new DateInterval('PT' . $time . 'H'));
@@ -128,6 +135,7 @@ class ZombieController extends AbstractController
                 $gain = 15;
             }
             if ($soldier > $planet->getSoldier() || $tank > $planet->getTank() || !$gain || ($soldier == 0 && $tank == 0) || count($planet->getMissions()) >= 3) {
+                $this->addFlash("fail", "Maximum 3 missions.");
                 return $this->redirectToRoute('zombie', ['usePlanet' => $usePlanet->getId()]);
             } else {
                 $nowMission->add(new DateInterval('PT' . $time . 'H'));
@@ -178,6 +186,7 @@ class ZombieController extends AbstractController
             if (rand(1, 100) <= $mission->getPercent()) {
                 $lose = 1 + ((100 - $mission->getPercent()) / rand(4,7)) / 100;
                 if ($planet->getSoldier() + round($mission->getSoldier() / $lose) > $planet->getSoldierMax() || $planet->getTank() + round($mission->getTank() / $lose) > 500) {
+                    $this->addFlash("fail", "Vous n'avez pas assez de place pour vos soldats ou tanks.");
                     return $this->redirectToRoute('zombie', ['usePlanet' => $usePlanet->getId()]);
                 }
                 $soldier = $mission->getSoldier() - round($mission->getSoldier() / $lose);
@@ -193,6 +202,7 @@ class ZombieController extends AbstractController
                 $reportMission->setTitle("Échec mission");
                 $reportMission->setImageName("zombie_lose_report.jpg");
                 if ($planet->getSoldier() + round($mission->getSoldier() / 2) > $planet->getSoldierMax() || $planet->getTank() + round($mission->getTank() / 2) > 500) {
+                    $this->addFlash("fail", "Vous n'avez pas assez de place pour vos soldats ou tanks.");
                     return $this->redirectToRoute('zombie', ['usePlanet' => $usePlanet->getId()]);
                 }
                 $planet->setSoldier($planet->getSoldier() + round($mission->getSoldier() / 2));
@@ -204,6 +214,7 @@ class ZombieController extends AbstractController
             if (rand(1, 100) <= $mission->getPercent()) {
                 $lose = 1 + ((100 - $mission->getPercent()) / rand(3,6)) / 100;
                 if ($planet->getSoldier() + round($mission->getSoldier() / $lose) > $planet->getSoldierMax() || $planet->getTank() + round($mission->getTank() / $lose) > 500) {
+                    $this->addFlash("fail", "Vous n'avez pas assez de place pour vos soldats ou tanks.");
                     return $this->redirectToRoute('zombie', ['usePlanet' => $usePlanet->getId()]);
                 }
                 $soldier = $mission->getSoldier() - round($mission->getSoldier() / $lose);
@@ -222,6 +233,7 @@ class ZombieController extends AbstractController
                 $reportMission->setTitle("Échec mission");
                 $reportMission->setImageName("zombie_lose_report.jpg");
                 if ($planet->getSoldier() + round($mission->getSoldier() / 2) > $planet->getSoldierMax() || $planet->getTank() + round($mission->getTank() / 2) > 500) {
+                    $this->addFlash("fail", "Vous n'avez pas assez de place pour vos soldats ou tanks.");
                     return $this->redirectToRoute('zombie', ['usePlanet' => $usePlanet->getId()]);
                 }
                 $planet->setSoldier($planet->getSoldier() + round($mission->getSoldier() / 2));

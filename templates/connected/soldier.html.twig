@@ -6,6 +6,11 @@
 
 {% block body %}
     <script type="text/javascript" src="{{ asset('build/caserne.js') }}"></script>
+    {% for message in app.flashes('fail') %}
+        <div class="flash-notice mt-5 alerte-flash-error text-center">
+            {{ message }}
+        </div>
+    {% endfor %}
     {{ form_start(form_caserneRecruit) }}
         <div class="front-block soldier">
             <h1 class="float-right" data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}">{{ 'bitcoin'|trans }} <span id="bitcoin">{{ app.user.getBitcoin()|number_format }}</span> <img src="{{ asset('img/coin.png') }}"></h1>

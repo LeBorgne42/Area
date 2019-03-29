@@ -61,6 +61,15 @@ class MarketController extends AbstractController
             if(($cost > $user->getRank()->getWarPoint() ||
                 ($planetBuy->getSoldier() + abs($form_market->get('soldier')->getData())) > $planetBuy->getSoldierMax()) ||
                     ($planetBuy->getWorker() + abs($form_market->get('worker')->getData())) > $planetBuy->getWorkerMax()) {
+                if ($planetBuy->getSoldier() + abs($form_market->get('soldier')->getData()) > $planetBuy->getSoldierMax()) {
+                    $this->addFlash("fail", "Vous dépassez la limite de soldats sur la planète.");
+                } elseif ($planetBuy->getWorker() + abs($form_market->get('worker')->getData()) > $planetBuy->getWorkerMax()) {
+                    $this->addFlash("fail", "Vous dépassez la limite de travailleurs sur la planète.");
+                } elseif ($cost > $user->getRank()->getWarPoint()) {
+                    $this->addFlash("fail", "Vous n'avez pas assez de bitcoins.");
+                } else {
+                    $this->addFlash("fail", "Vous n'avez pas toutes les conditions requises.");
+                }
                 return $this->redirectToRoute('market', ['usePlanet' => $usePlanet->getId()]);
             }
 
