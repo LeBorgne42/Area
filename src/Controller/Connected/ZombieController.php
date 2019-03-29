@@ -103,6 +103,9 @@ class ZombieController extends AbstractController
                 $planet->setSoldier($planet->getSoldier() - $soldier);
                 $planet->setTank($planet->getTank() - $tank);
                 $em->persist($mission);
+                if ($user->getTutorial() == 52) {
+                    $user->setTutorial(53);
+                }
                 $em->flush();
             }
             return $this->redirectToRoute('zombie', ['usePlanet' => $usePlanet->getId()]);
@@ -150,9 +153,18 @@ class ZombieController extends AbstractController
                 $planet->setSoldier($planet->getSoldier() - $soldier);
                 $planet->setTank($planet->getTank() - $tank);
                 $em->persist($mission);
+
+                if ($user->getTutorial() == 52) {
+                    $user->setTutorial(53);
+                }
                 $em->flush();
             }
             return $this->redirectToRoute('zombie', ['usePlanet' => $usePlanet->getId()]);
+        }
+
+        if(($user->getTutorial() == 51)) {
+            $user->setTutorial(52);
+            $em->flush();
         }
 
         return $this->render('connected/zombie.html.twig', [
@@ -241,6 +253,12 @@ class ZombieController extends AbstractController
                 $reportMission->setContent("Des hommes de l'escouade militaire envoyée reviennent progressivement par petit groupe.<br>Ils ne s'attendaient pas a une telle résistance... <span class='text-rouge'>" . number_format($mission->getSoldier() / 2) . "</span> soldats sont morts durant la mission ainsi que <span class='text-rouge'>" . number_format($mission->getTank() / 2) . "</span> tanks.<br>Vous étiez en mission sur le territoire zombie et avez fait augmenter la menace de <span class='text-rouge'>+". $lose ."</span>.");
                 $em->remove($mission);
             }
+        }
+        if ($user->getZombieAtt() <= 0) {
+            $user->setZombieAtt(1);
+        }
+        if ($user->getTutorial() == 53) {
+            $user->setTutorial(54);
         }
         $em->persist($reportMission);
         $em->flush();

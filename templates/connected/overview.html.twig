@@ -25,15 +25,15 @@
             </tr>
             </tbody>
         </table>
-        {% if app.user.getTutorial() == 1 %}
+        {% if app.user.getTutorial() == 1 or app.user.getTutorial() == 51 %}
             <table class="table table-striped borderOverview tutorial">
                 <tbody>
                 <tr>
                     <th class="tab-cells-name p-3 tutorial">
                         <div class="row">
                             <div class="col-12 py-1">
-                                <h1 class="text-center tutorial-title">{{ 'overview.tutorialTitle'|trans|raw }}</h1>
-                                {{ 'overview.tutorial'|trans|raw }}
+                                {% if app.user.getTutorial() == 1 %}<h1 class="text-center tutorial-title">{{ 'overview.tutorialTitle'|trans|raw }}</h1>{% endif %}
+                                {% if app.user.getTutorial() == 1 %}{{ 'overview.tutorial'|trans|raw }}{% elseif app.user.getTutorial() == 51 %}{{ 'overview.tutorialBis'|trans|raw }}{% endif %}
                             </div>
                         </div>
                     </th>
@@ -247,7 +247,7 @@
                     {% for planet in app.user.getPlanets() %}
                         {% if planet.getSpaceShip() %}
                             <tr>
-                                <th class="tab-cells-name p-2{% if app.user.getTutorial() < 50 %} tutorial-hide{% endif %}">
+                                <th class="tab-cells-name p-2{% if app.user.getTutorial() < 18 %} tutorial-hide{% endif %}">
                                     {{ planet.getName() }} : {% if planet.getProduct() %}<span><a class="tipProduct" href="{{ path('spatial', {'usePlanet': planet.getId()}) }}" data-placement="right" data-trigger="" title="{% for ships in planet.getProduct().getShips() %}<div class='my-3 text-left'>{% set x = 0 %}{% for info in ships %} {% if x == 0 %}{{ info }}{% else %}{{ info|trans }}{% endif %}{% set x = x + 1 %} {% endfor %}</div>{% endfor %}" data-html="true">{{ 'overview.inProduct'|trans }}</a></span>(<span class="timerArea" hidden>{{ planet.getProduct().getProductAt()|date('Y/m/d H:i:s') }}</span>){% else %}<span><a href="{{ path('spatial', {'usePlanet': planet.getId()}) }}">{{ 'cell.spatialNone'|trans|raw }}</a></span>{% endif %}
                                 </th>
                             </tr>

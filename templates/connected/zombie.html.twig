@@ -12,6 +12,21 @@
         </div>
     {% endfor %}
     <div class="front-block">
+        {% if app.user.getTutorial() == 52 or app.user.getTutorial() == 53 %}
+            <table class="table table-striped borderOverview tutorial">
+                <tbody>
+                <tr>
+                    <th class="tab-cells-name p-3 tutorial">
+                        <div class="row">
+                            <div class="col-12 py-1">
+                                {% if app.user.getTutorial() == 52 %}{{ 'zombie.tutorial'|trans|raw }}{% elseif app.user.getTutorial() == 53 %}{{ 'zombie.tutorialBis'|trans|raw }}{% endif %}
+                            </div>
+                        </div>
+                    </th>
+                </tr>
+                </tbody>
+            </table>
+        {% endif %}
         <div class="front-block-second text-center">
             <img class="float-left" src="{{ asset('img/zombie_indic.gif') }}">
             <img class="float-right mt-4" src="{{ vich_uploader_asset(planet, 'imageFile') }}">
@@ -51,25 +66,47 @@
                             </th>
                         </tr>
                         <tr>
-                            <td class="center-cells">
-                                {{ form_widget(form_missionZombie.soldier,{attr: { max: planet.getSoldier()}}) }}
-                            </td>
-                            <td class="center-cells">
-                                {{ form_widget(form_missionZombie.tank,{attr: { max: planet.getTank()}}) }}
-                            </td>
-                            <td class="center-cells">
-                                {{ form_widget(form_missionZombie.time) }}
-                            </td>
-                            <td class="center-cells text-center">
-                                <span class="zombieGain">0</span> <img width="12" src="{{ asset('img/zombie_indic.gif') }}">
-                            </td>
-                            <td class="center-cells text-center">
-                                <span class="zombiePercent">0%</span>
-                            </td>
+                            {% if app.user.getZombieAtt() > 1 %}
+                                <td class="center-cells">
+                                    {{ form_widget(form_missionZombie.soldier,{attr: { max: planet.getSoldier()}}) }}
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_missionZombie.tank,{attr: { max: planet.getTank()}}) }}
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_missionZombie.time) }}
+                                </td>
+                                <td class="center-cells text-center">
+                                    <span class="zombieGain">0</span> <img width="12" src="{{ asset('img/zombie_indic.gif') }}">
+                                </td>
+                                <td class="center-cells text-center">
+                                    <span class="zombiePercent">0%</span>
+                                </td>
+                            {% else %}
+                                <td class="center-cells">
+                                    {{ form_widget(form_missionZombie.soldier,{attr: { disabled: 'disabled'}}) }}
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_missionZombie.tank,{attr: { disabled: 'disabled' }}) }}
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_missionZombie.time,{attr: { disabled: 'disabled' }}) }}
+                                </td>
+                                <td class="center-cells text-center">
+                                    <span class="zombieGain">0</span> <img width="12" src="{{ asset('img/zombie_indic.gif') }}">
+                                </td>
+                                <td class="center-cells text-center">
+                                    <span class="zombiePercent">0%</span>
+                                </td>
+                            {% endif %}
                         </tr>
                         </tbody>
                     </table>
-                    {{ form_widget(form_missionZombie.sendForm) }}
+                    {% if app.user.getZombieAtt() > 1 %}
+                        {{ form_widget(form_missionZombie.sendForm) }}
+                    {% else %}
+                        {{ form_widget(form_missionZombie.sendForm,{attr: { disabled: 'disabled' }}) }}
+                    {% endif %}
                     {{ form_end(form_missionZombie) }}
                 </div>
                 <div class="col-6">

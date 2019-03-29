@@ -529,6 +529,9 @@ class InstantController extends AbstractController
             $reportDef->setType('invade');
             $reportDef->setSendAt($now);
             $reportDef->setUser($zUser);
+            if ($zUser->getZombieAtt() == 1 && $zUser->getTutorial() == 50) {
+                $zUser->setTutorial(51);
+            }
 
             $barbed = $zUser->getBarbedAdv();
             $dSoldier = $planetAtt->getSoldier() > 0 ? ($planetAtt->getSoldier() * 6) * $barbed : 0;
@@ -550,12 +553,12 @@ class InstantController extends AbstractController
             if($dMilitary > $aMilitary) {
                 if ($zUser->getAlly()) {
                     if ($zUser->getAlly()->getPolitic() == 'fascism') {
-                        $zUser->setZombieAtt($zUser->getZombieAtt() + 15);
+                        $zUser->setZombieAtt($zUser->getZombieAtt() + 5);
                     } else {
-                        $zUser->setZombieAtt($zUser->getZombieAtt() + 20);
+                        $zUser->setZombieAtt($zUser->getZombieAtt() + 10);
                     }
                 } else {
-                    $zUser->setZombieAtt($zUser->getZombieAtt() + 5);
+                    $zUser->setZombieAtt($zUser->getZombieAtt() + 1);
                 }
                 $warPointDef = round($aMilitary);
                 $zUser->getRank()->setWarPoint($zUser->getRank()->getWarPoint() + $warPointDef);
@@ -699,7 +702,7 @@ class InstantController extends AbstractController
         }
 
         foreach ($planetTanks as $tankAt) {
-            if ($soldierAt->getTank() + $soldierAt->getTankAtNbr() <= 500) {
+            if ($tankAt->getTank() + $tankAt->getTankAtNbr() <= 500) {
                 $tankAt->setTank($tankAt->getTank() + $tankAt->getTankAtNbr());
                 $tankAt->setTankAt(null);
                 $tankAt->setTankAtNbr(null);
@@ -711,7 +714,7 @@ class InstantController extends AbstractController
         }
 
         foreach ($planetScientists as $scientistAt) {
-            if ($soldierAt->getScientist() + $soldierAt->getScientistAtNbr() <= $soldierAt->getScientistMax()) {
+            if ($scientistAt->getScientist() + $scientistAt->getScientistAtNbr() <= $scientistAt->getScientistMax()) {
                 $scientistAt->setScientist($scientistAt->getScientist() + $scientistAt->getScientistAtNbr());
                 $scientistAt->getUser()->setScientistProduction(round($scientistAt->getUser()->getScientistProduction() + ($scientistAt->getScientist() / 10000)));
                 $scientistAt->setScientistAt(null);
