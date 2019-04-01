@@ -19,7 +19,7 @@ class ReportController extends AbstractController
 {
     /**
      * @Route("/rapport/{usePlanet}", name="report", requirements={"usePlanet"="\d+"})
-     * @Route("/rapport/{usePlanet}/{id}", name="report_id", requirements={"usePlanet"="\d+", "id"="\w+"})
+     * @Route("/rapport/{id}/{usePlanet}", name="report_id", requirements={"usePlanet"="\d+", "id"="\w+"})
      */
     public function reportAction(Planet $usePlanet, $id = 'defaut')
     {
@@ -98,7 +98,7 @@ class ReportController extends AbstractController
     }
 
     /**
-     * @Route("/report-view/{usePlanet}/{report}", name="report_view", requirements={"usePlanet"="\d+", "report"="\d+"})
+     * @Route("/report-view/{report}/{usePlanet}", name="report_view", requirements={ "report"="\d+", "usePlanet"="\d+"})
      */
     public function reportViewAction(Planet $usePlanet, Report $report)
     {
@@ -112,11 +112,11 @@ class ReportController extends AbstractController
 
         $em->flush();
 
-        return $this->redirectToRoute('report_id', ['usePlanet' => $usePlanet->getId(), 'id' => $report->getType()]);
+        return $this->redirectToRoute('report_id', ['id' => $report->getType(), 'usePlanet' => $usePlanet->getId()]);
     }
 
     /**
-     * @Route("/supprimer-rapport/{usePlanet}/{report}", name="report_delete", requirements={"usePlanet"="\d+", "report"="\d+"})
+     * @Route("/supprimer-rapport/{report}/{usePlanet}", name="report_delete", requirements={"usePlanet"="\d+", "report"="\d+"})
      */
     public function reportDeleteAction(Planet $usePlanet, Report $report)
     {
@@ -131,11 +131,11 @@ class ReportController extends AbstractController
         $em->remove($report);
         $em->flush();
 
-        return $this->redirectToRoute('report_id', ['usePlanet' => $usePlanet->getId(), 'id' => $path]);
+        return $this->redirectToRoute('report_id', ['id' => $path, 'usePlanet' => $usePlanet->getId()]);
     }
 
     /**
-     * @Route("/rapport-share/{usePlanet}/{id}", name="report_share", requirements={"usePlanet"="\d+", "id"="\d+"})
+     * @Route("/rapport-share/{id}/{usePlanet}", name="report_share", requirements={"usePlanet"="\d+", "id"="\d+"})
      */
     public function reportShareAction(Planet $usePlanet, Report $id)
     {
@@ -154,7 +154,7 @@ class ReportController extends AbstractController
             $em->flush();
         }
 
-        return $this->redirectToRoute('report_id', ['usePlanet' => $usePlanet->getId(), 'id' => $id->getType()]);
+        return $this->redirectToRoute('report_id', ['id' => $id->getType(), 'usePlanet' => $usePlanet->getId()]);
     }
 
     /**

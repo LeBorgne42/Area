@@ -229,6 +229,6 @@ class MarketController extends AbstractController
 
         $em->flush();
 
-        return $this->redirectToRoute('report_id', ['usePlanet' => $usePlanet->getId(), 'id' => 'economic']);
+        return $this->redirectToRoute('report_id', ['id' => 'economic', 'usePlanet' => $usePlanet->getId()]);
     }
 }
