@@ -93,7 +93,7 @@ class ConnectController extends AbstractController
         $user->setDailyConnect($now);
         $nextZombie = new DateTime();
         $nextZombie->setTimezone(new DateTimeZone('Europe/Paris'));
-        $nextZombie->add(new DateInterval('PT' . 172800 . 'S'));
+        $nextZombie->add(new DateInterval('PT' . 144 . 'H'));
         $user->setZombieAt($nextZombie);
         $user->setGameOver(null);
         $salon->addUser($user);

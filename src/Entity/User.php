@@ -45,7 +45,7 @@ class User implements UserInterface, \Serializable
     protected $email;
 
     /**
-     * @ORM\Column(name="experience",type="integer")
+     * @ORM\Column(name="experience",type="integer", nullable=true)
      */
     protected $experience;
 
@@ -239,7 +239,7 @@ class User implements UserInterface, \Serializable
     protected $scientistProduction;
 
     /**
-     * @ORM\Column(name="onde",type="smallint")
+     * @ORM\Column(name="onde",type="smallint", nullable=true)
      */
     protected $onde;
 
