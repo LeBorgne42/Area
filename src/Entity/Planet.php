@@ -106,6 +106,11 @@ class Planet
     protected $scientistMax;
 
     /**
+     * @ORM\Column(name="nuclear_bomb",type="smallint", nullable=true)
+     */
+    protected $nuclearBomb;
+
+    /**
      * @ORM\Column(name="workerMax",type="integer")
      */
     protected $workerMax;
@@ -164,6 +169,16 @@ class Planet
      * @ORM\Column(name="soldierAt",type="datetime", nullable=true)
      */
     protected $soldierAt;
+
+    /**
+     * @ORM\Column(name="nuclearAt",type="datetime", nullable=true)
+     */
+    protected $nuclearAt;
+
+    /**
+     * @ORM\Column(name="nuclearAtNbr",type="smallint", nullable=true)
+     */
+    protected $nuclearAtNbr;
 
     /**
      * @ORM\Column(name="soldierAtNbr",type="integer", nullable=true)
@@ -239,6 +254,11 @@ class Planet
      * @ORM\Column(name="bunker",type="smallint", nullable=true)
      */
     protected $bunker;
+
+    /**
+     * @ORM\Column(name="nuclear_base",type="smallint", nullable=true)
+     */
+    protected $nuclearBase;
 
     /**
      * @ORM\Column(name="radar",type="smallint", nullable=true)
@@ -525,6 +545,7 @@ class Planet
         $this->island = null;
         $this->orbital = null;
         $this->radar = null;
+        $this->nuclearBase = null;
         $this->skyRadar = null;
         $this->skyBrouilleur = null;
         $this->lightUsine = null;
@@ -561,6 +582,9 @@ class Planet
         $this->recycleAt = null;
         $this->autoSeller = 0;
         $this->uranium = null;
+        $this->nuclearBomb = null;
+        $this->nuclearAt = null;
+        $this->nuclearAtNbr = null;
     }
 
     /**
@@ -933,11 +957,6 @@ class Planet
     public function getNbrFleets(): int
     {
         $nbr = 0;
-        foreach($this->fleets as $fleet) {
-            if ($fleet->getFlightTime() == null ) {
-                $nbr++;
-            }
-        }
         return $nbr;
     }
 
@@ -2400,6 +2419,70 @@ class Planet
     public function setTankAtNbr($tankAtNbr): void
     {
         $this->tankAtNbr = $tankAtNbr;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNuclearBase()
+    {
+        return $this->nuclearBase;
+    }
+
+    /**
+     * @param mixed $nuclearBase
+     */
+    public function setNuclearBase($nuclearBase): void
+    {
+        $this->nuclearBase = $nuclearBase;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNuclearBomb()
+    {
+        return $this->nuclearBomb;
+    }
+
+    /**
+     * @param mixed $nuclearBomb
+     */
+    public function setNuclearBomb($nuclearBomb): void
+    {
+        $this->nuclearBomb = $nuclearBomb;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNuclearAt()
+    {
+        return $this->nuclearAt;
+    }
+
+    /**
+     * @param mixed $nuclearAt
+     */
+    public function setNuclearAt($nuclearAt): void
+    {
+        $this->nuclearAt = $nuclearAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNuclearAtNbr()
+    {
+        return $this->nuclearAtNbr;
+    }
+
+    /**
+     * @param mixed $nuclearAtNbr
+     */
+    public function setNuclearAtNbr($nuclearAtNbr): void
+    {
+        $this->nuclearAtNbr = $nuclearAtNbr;
     }
 
     /**

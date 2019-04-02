@@ -27,95 +27,95 @@
             </table>
         {% endif %}
         {% if app.user.getZombie() == 0 %}
-        <div class="front-block-game">
-            {% if quests %}
-                <div class="mb-4">
-                    {{ 'quest.info'|trans }}
+            <div class="front-block-game">
+                {% if quests %}
+                    <div class="mb-4">
+                        {{ 'quest.info'|trans }}
+                    </div>
+                    <table class="table table-striped table-bordered table-dark mb-5">
+                        <tbody>
+                        <tr>
+                            <th class="tab-cells-name text-center">
+                                {{ 'quest.name'|trans }}
+                            </th>
+                            <th class="tab-cells-name text-center">
+                                {{ 'quest.gain'|trans }}
+                            </th>
+                            <th class="tab-cells-name text-center">
+                                {{ 'quest.star'|trans }}
+                            </th>
+                        </tr>
+                        {% for quest in quests %}
+                                <tr class="text-center">
+                                    <td>{{ quest.name|trans|raw }}</td>
+                                    <td>{{ quest.gain|number_format }} <img src="{{ asset('img/pdg.png') }}"></td>
+                                    <td>
+                                        {% if quest.gain == 2500 %}
+                                            <div class="text-or glyphicon glyphicon-star"></div>
+                                        {% elseif quest.gain == 5000 %}
+                                            <div class="text-or glyphicon glyphicon-star"></div>
+                                            <div class="text-or glyphicon glyphicon-star"></div>
+                                        {% elseif quest.gain == 10000 %}
+                                            <div class="text-or glyphicon glyphicon-star"></div>
+                                            <div class="text-or glyphicon glyphicon-star"></div>
+                                            <div class="text-or glyphicon glyphicon-star"></div>
+                                        {% elseif quest.gain == 20000 %}
+                                            <div class="text-or glyphicon glyphicon-star"></div>
+                                            <div class="text-or glyphicon glyphicon-star"></div>
+                                            <div class="text-or glyphicon glyphicon-star"></div>
+                                            <div class="text-or glyphicon glyphicon-star"></div>
+                                        {% elseif quest.gain == 40000 %}
+                                            <div class="text-or glyphicon glyphicon-star"></div>
+                                            <div class="text-or glyphicon glyphicon-star"></div>
+                                            <div class="text-or glyphicon glyphicon-star"></div>
+                                            <div class="text-or glyphicon glyphicon-star"></div>
+                                            <div class="text-or glyphicon glyphicon-star"></div>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+                {{ form_start(form_market) }}
+                <img class="float-left" src="{{ asset('img/market.jpg') }}">
+                <div class="row">
+                    <div class="col-12 mb-5">
+                        {{ 'market.text'|trans }}
+                    </div>
+                    <div class="col-3 mb-3">
+                        {{ 'market.planet'|trans }}
+                    </div>
+                    <div class="col-3 mb-3">
+                        {{ form_widget(form_market.planet) }}
+                    </div>
+                    <div class="col-4 mb-3">
+                        {{ 'market.bitcoin'|trans|raw }}
+                    </div>
+                    <div class="col-2 mb-3">
+                        {{ form_widget(form_market.bitcoin,{attr: { max: app.user.getRank().getWarPoint() }}) }}
+                    </div>
+                    <div class="col-4">
+                        {{ 'market.worker'|trans|raw }}
+                    </div>
+                    <div class="col-2">
+                        {{ form_widget(form_market.worker,{attr: { max: app.user.getRank().getWarPoint() }}) }}
+                    </div>
+                    <div class="col-4">
+                        {{ 'market.soldier'|trans|raw }}
+                    </div>
+                    <div class="col-2">
+                        {{ form_widget(form_market.soldier,{attr: { max: app.user.getRank().getWarPoint() }}) }}
+                    </div>
+                    <div class="col-12 mt-5">
+                        {{ form_widget(form_market.sendForm) }}
+                    </div>
+                    <div class="col-12 mt-5">
+                        {{ 'market.pdg'|trans }} {{ app.user.getRank().getWarPoint()|number_format }} <img src="{{ asset('img/pdg.png') }}"> {{ 'market.pdgs'|trans }}
+                    </div>
                 </div>
-                <table class="table table-striped table-bordered table-dark mb-5">
-                    <tbody>
-                    <tr>
-                        <th class="tab-cells-name text-center">
-                            {{ 'quest.name'|trans }}
-                        </th>
-                        <th class="tab-cells-name text-center">
-                            {{ 'quest.gain'|trans }}
-                        </th>
-                        <th class="tab-cells-name text-center">
-                            {{ 'quest.star'|trans }}
-                        </th>
-                    </tr>
-                    {% for quest in quests %}
-                            <tr class="text-center">
-                                <td>{{ quest.name|trans|raw }}</td>
-                                <td>{{ quest.gain|number_format }} <img src="{{ asset('img/pdg.png') }}"></td>
-                                <td>
-                                    {% if quest.gain == 2500 %}
-                                        <div class="text-or glyphicon glyphicon-star"></div>
-                                    {% elseif quest.gain == 5000 %}
-                                        <div class="text-or glyphicon glyphicon-star"></div>
-                                        <div class="text-or glyphicon glyphicon-star"></div>
-                                    {% elseif quest.gain == 10000 %}
-                                        <div class="text-or glyphicon glyphicon-star"></div>
-                                        <div class="text-or glyphicon glyphicon-star"></div>
-                                        <div class="text-or glyphicon glyphicon-star"></div>
-                                    {% elseif quest.gain == 20000 %}
-                                        <div class="text-or glyphicon glyphicon-star"></div>
-                                        <div class="text-or glyphicon glyphicon-star"></div>
-                                        <div class="text-or glyphicon glyphicon-star"></div>
-                                        <div class="text-or glyphicon glyphicon-star"></div>
-                                    {% elseif quest.gain == 40000 %}
-                                        <div class="text-or glyphicon glyphicon-star"></div>
-                                        <div class="text-or glyphicon glyphicon-star"></div>
-                                        <div class="text-or glyphicon glyphicon-star"></div>
-                                        <div class="text-or glyphicon glyphicon-star"></div>
-                                        <div class="text-or glyphicon glyphicon-star"></div>
-                                    {% endif %}
-                                </td>
-                            </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            {% endif %}
-            {{ form_start(form_market) }}
-            <img class="float-left" src="{{ asset('img/market.jpg') }}">
-            <div class="row">
-                <div class="col-12 mb-5">
-                    {{ 'market.text'|trans }}
-                </div>
-                <div class="col-3 mb-3">
-                    {{ 'market.planet'|trans }}
-                </div>
-                <div class="col-3 mb-3">
-                    {{ form_widget(form_market.planet) }}
-                </div>
-                <div class="col-4 mb-3">
-                    {{ 'market.bitcoin'|trans|raw }}
-                </div>
-                <div class="col-2 mb-3">
-                    {{ form_widget(form_market.bitcoin,{attr: { max: app.user.getRank().getWarPoint() }}) }}
-                </div>
-                <div class="col-4">
-                    {{ 'market.worker'|trans|raw }}
-                </div>
-                <div class="col-2">
-                    {{ form_widget(form_market.worker,{attr: { max: app.user.getRank().getWarPoint() }}) }}
-                </div>
-                <div class="col-4">
-                    {{ 'market.soldier'|trans|raw }}
-                </div>
-                <div class="col-2">
-                    {{ form_widget(form_market.soldier,{attr: { max: app.user.getRank().getWarPoint() }}) }}
-                </div>
-                <div class="col-12 mt-5">
-                    {{ form_widget(form_market.sendForm) }}
-                </div>
-                <div class="col-12 mt-5">
-                    {{ 'market.pdg'|trans }} {{ app.user.getRank().getWarPoint()|number_format }} <img src="{{ asset('img/pdg.png') }}"> {{ 'market.pdgs'|trans }}
-                </div>
+                {{ form_end(form_market) }}
             </div>
-            {{ form_end(form_market) }}
-        </div>
         {% endif %}
     </div>
 {% endblock %}

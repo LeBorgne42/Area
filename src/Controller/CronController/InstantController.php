@@ -99,6 +99,13 @@ class InstantController extends AbstractController
             ->getQuery()
             ->getResult();
 
+        $planetNuclear = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->where('p.nuclearAt < :now')
+            ->setParameters(['now' => $now])
+            ->getQuery()
+            ->getResult();
+
         $planetScientists = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->where('p.scientistAt < :now')
@@ -713,6 +720,18 @@ class InstantController extends AbstractController
             }
         }
 
+        foreach ($planetNuclear as $nuclear) {
+            if ($nuclear->getNuclearBomb() + $nuclear->getNuclearAtNbr() <= $nuclear->getNuclearBase()) {
+                $nuclear->setNuclearBomb($nuclear->getNuclearBomb() + $nuclear->getNuclearAtNbr());
+                $nuclear->setNuclearAt(null);
+                $nuclear->setNuclearAtNbr(null);
+            } else {
+                $nuclear->setNuclearBomb($nuclear->getNuclearBase());
+                $nuclear->setNuclearAt(null);
+                $nuclear->setNuclearAtNbr(null);
+            }
+        }
+
         foreach ($planetScientists as $scientistAt) {
             if ($scientistAt->getScientist() + $scientistAt->getScientistAtNbr() <= $scientistAt->getScientistMax()) {
                 $scientistAt->setScientist($scientistAt->getScientist() + $scientistAt->getScientistAtNbr());
@@ -869,6 +888,8 @@ class InstantController extends AbstractController
             } elseif ($build == 'bunker') {
                 $planet->setBunker($planet->getBunker() + 1);
                 $planet->setSoldierMax($planet->getSoldierMax() + 20000);
+            } elseif ($build == 'nuclearBase') {
+                $planet->setNuclearBase($planet->getNuclearBase() + 1);
             } elseif ($build == 'island') {
                 $planet->setIsland($planet->getIsland() + 1);
                 $planet->setGround($planet->getGround() + 10);

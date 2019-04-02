@@ -47,6 +47,21 @@ class CaserneRecruitType extends AbstractType
                 ]
             )
             ->add(
+                'nuclear',
+                null,
+                [
+                    'label' => 'form.nbr',
+                    'data' => null,
+                    'attr'  => [
+                        'placeholder' => 'form.nbr',
+                        'class' => 'nbrProduct game-input text-right',
+                        'max' => '5',
+                        'autocomplete' => 'off',
+                    ],
+                    'required' => false,
+                ]
+            )
+            ->add(
                 'scientist',
                 null,
                 [

@@ -870,6 +870,7 @@ class AllyController extends AbstractController
         $lastActivity->sub(new DateInterval('PT' . 5184000 . 'S'));
         $usersRecruitable = $em->getRepository('App:User')
             ->createQueryBuilder('u')
+            ->select('u.username, u.id, u.lastActivity, u.imageName')
             ->where('u.lastActivity > :date')
             ->andWhere('u.ally is null')
             ->andWhere('u.rank is not null')

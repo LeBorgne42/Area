@@ -30,7 +30,7 @@
         <div class="front-block-second text-center">
             <img class="float-left" src="{{ asset('img/zombie_indic.gif') }}">
             <img class="float-right mt-4" src="{{ vich_uploader_asset(planet, 'imageFile') }}">
-            <div class="text-more mt-5">{{ 'zombie.planet'|trans }} «{{ planet.getName() }}» <span><a href="{{ path('map', {id: planet.getSector().getPosition(), 'usePlanet': planet.getId(), 'gal': planet.getSector().getGalaxy().getPosition()}) }}">{{ planet.getSector().getGalaxy.getPosition() }}:{{ planet.getSector().getPosition() }}:{{ planet.getPosition() }}</a></span> {{ 'zombie.infected'|trans }}</div>
+            <div class="text-more mt-5">{{ 'zombie.planet'|trans }} «{{ planet.getName() }}» <span><a href="{{ path('map', {'sector': planet.getSector().getId(), 'gal': planet.getSector().getGalaxy().getId(), 'usePlanet': planet.getId()}) }}">{{ planet.getSector().getGalaxy.getPosition() }}:{{ planet.getSector().getPosition() }}:{{ planet.getPosition() }}</a></span> {{ 'zombie.infected'|trans }}</div>
             <div class="text-more">{{ 'zombie.menace'|trans }} <span class="zombieIndicator text-rouge">{{ app.user.getZombieAtt() }}</span></div>
             <div class="text-more">{{ 'zombie.available.defense'|trans }} {{ planet.getSoldier() }}/{{ planet.getSoldierMax() }} <img class="mr-3" src="{{ asset('img/soldier.png') }}"> {{ planet.getTank() }}/500 <img class="mr-3" src="{{ asset('img/tanks.png') }}"></div>
             <div class="text-more mb-3">{{ 'zombie.attack'|trans }} <span class="mt-5 timerArea text-rouge" hidden>{% if app.user.getZombieAt() %}{{ app.user.getZombieAt()|date('Y/m/d H:i:s') }}{% endif %}</span></div>

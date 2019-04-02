@@ -27,7 +27,7 @@ class ReportController extends AbstractController
         $user = $this->getUser();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
-        $now->sub(new DateInterval('PT' . 2592000 . 'S'));
+        $now->sub(new DateInterval('PT' . 480 . 'H'));
         if ($usePlanet->getUser() != $user) {
             return $this->redirectToRoute('home');
         }

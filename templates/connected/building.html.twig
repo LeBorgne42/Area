@@ -448,6 +448,53 @@
                         </td>
                     </tr>
                 {% endif %}
+                {% if usePlanet.getUranium() == 0 %}
+                    <tr class="blocked-building">
+                        <th class="tab-cells-name">
+                            <img class="float-left building-img ml-3" width="40" src="{{ asset('img/nuclear_base.jpg') }}"><button class="text-orange mt-3" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.nuclearBase'|trans|raw }}">{{ 'building.nuclearBase'|trans|raw }}</button>
+                        </th>
+                        <td class="center-cells cell-middle">
+                            {{ 'building.nuclearBase.blocked'|trans }}
+                        </td>
+                        <td colspan="2" width="101px" class="center-cells cell-middle">
+                            <span class="text-rouge">{{ 'building.blocked'|trans }}</span>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr class="access-build">
+                        <td class="center-cells">
+                            <img class="float-left building-img ml-3" src="{{ asset('img/nuclear_base.jpg') }}"><button class="text-orange" data-toggle="popover" data-trigger="focus" title="{{ 'popover.title'|trans }}" data-html="true" data-content="{{ 'popover.nuclearBase'|trans|raw }}"><strong>{{ 'building.nuclearBase'|trans }} x {{ usePlanet.getNuclearBase()|trans }}</strong></button>
+                            <div class="mt-4">{% if (usePlanet.getNuclearBase() + 1) * 1000000 > usePlanet.getNiobium() %}<span class="text-rouge">{{ ((usePlanet.getNuclearBase() + 1) * 1000000)|number_format }}</span>{% else %}{{ ((usePlanet.getNuclearBase() + 1) * 1000000)|number_format }}{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'niobiumImg'|trans }}" src="{{ asset('img/niobium.png') }}"></div>
+                            <div class="mt-4">{% if 2 + usePlanet.getGroundPlace() > usePlanet.getGround() %}<span class="text-rouge">2</span>{% else %}2{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}" src="{{ asset('img/ground.png') }}"></div>
+                        </td>
+                        <td class="center-cells cell-middle">
+                            {{ 'building.nuclearBase.desc'|trans }}
+                        </td>
+                        <td class="center-cells p-1">
+                            {% if usePlanet.getConstruct() == 'nuclearBase' %}
+                                <img width="60" src="{{ asset('img/construct2.gif') }}">
+                                <div class="timerArea" hidden>{{ usePlanet.getConstructAt()|date('Y/m/d H:i:s') }}</div>
+
+                            {% else %}
+                                {% if planetNb >= ((usePlanet.getNuclearBase() + 1) * 1000000) and usePlanet.getGroundPlace() + 2 <= usePlanet.getGround() and usePlanet.getConstructAt() < date and usePlanet.getNuclearBase() < 6 %}
+                                    <div>{% if ((usePlanet.getNuclearBase() + 1) * 4320) < 3600 %}{{  ((usePlanet.getNuclearBase() + 1) * 4320- 3600)|date('i:s') }}{% else %}{{  ((usePlanet.getNuclearBase() + 1) * 4320- 3600)|date('H:i:s') }}{% endif %}</div>
+                                    <a class="btn btn-lg btn-start mt-3" href="{{ path('building_add_nuclear', {'usePlanet': usePlanet.getId()}) }}">{{ 'building.build'|trans }}</a>
+                                {% else %}
+                                    <a class="btn btn-lg btn-secondary mt-5" disabled>{{ 'building.build'|trans }}</a>
+                                {% endif %}
+                            {% endif %}
+                        </td>
+                        <td class="center-cells p-4">
+                            {% if usePlanet.getNuclearBase() > 0 and usePlanet.getConstructAt() == null %}
+                                <a class="btn btn-lg btn-danger  mt-5" data-toggle="confirmation" data-placement="right" data-title="{{ 'building.demolition.question'|trans }}" href="{{ path('building_remove_nuclear', {'usePlanet': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
+                            {% elseif usePlanet.getConstruct() == 'nuclearBase' %}
+                                <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'cancelPlanet': usePlanet.getId(), 'usePlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
+                            {% else %}
+                                <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endif %}
                 {% if app.user.getIndustry() <= 0 and usePlanet.getSpaceShip() == 0 %}
                     <tr class="blocked-building">
                         <th class="tab-cells-name">

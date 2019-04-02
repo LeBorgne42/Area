@@ -131,6 +131,47 @@ class SoldierController extends AbstractController
                     $user->removeQuest($quest);
                 }
             }
+            if ($form_caserneRecruit->get('nuclear')->getData() && $usePlanet->getNuclearBase() > 0) {
+                $now = new DateTime();
+                $now->setTimezone(new DateTimeZone('Europe/Paris'));
+                $nbrNuclear = abs($form_caserneRecruit->get('nuclear')->getData());
+                if($nbrNuclear > $user->getBitcoin() / 25000 ||
+                    $nbrNuclear * 1000 > $usePlanet->getUranium() ||
+                    ($usePlanet->getWorker() < 10000 || ($usePlanet->getNuclearBomb() + $nbrNuclear) > $usePlanet->getNuclearBase())) {
+                    if ($nbrNuclear * 1000 > $usePlanet->getUranium()) {
+                        $this->addFlash("fail", "Vous n'avez pas assez d'uranium.");
+                    } elseif ($nbrNuclear > $user->getBitcoin() / 25000) {
+                        $this->addFlash("fail", "Vous ne disposez pas d'assez de bitcoins.");
+                    } elseif ($usePlanet->getNuclearBomb() + $nbrNuclear > $usePlanet->getNuclearBase()) {
+                        $this->addFlash("fail", "Vous dépassez la limite de bombes nucléaires sur la planète.");
+                    } elseif ($usePlanet->getWorker() < 10000) {
+                        $this->addFlash("fail", "Une planète ne peut avoir moins de 10000 travailleurs.");
+                    } else {
+                        $this->addFlash("fail", "Vous n'avez pas toutes les conditions requises.");
+                    }
+                    return $this->redirectToRoute('soldier', ['usePlanet' => $usePlanet->getId()]);
+                }
+                if($usePlanet->getNuclearAt()) {
+                    if ($usePlanet->getNuclearBomb() + $usePlanet->getNuclearAtNbr() + $nbrNuclear > $usePlanet->getNuclearBase()) {
+                        $this->addFlash("fail", "Vous dépassez la limite de bombes nucléaires sur la planète.");
+                        return $this->redirectToRoute('soldier', ['usePlanet' => $usePlanet->getId()]);
+                    }
+                    $tmpNuclear = $usePlanet->getNuclearAtNbr();
+                    $now->add(new DateInterval('PT' . round(($nbrNuclear + $tmpNuclear) * 60) . 'S'));
+                    $usePlanet->setNuclearAtNbr($usePlanet->getNuclearAtNbr() + $nbrNuclear);
+                } else {
+                    $now->add(new DateInterval('PT' . round($nbrNuclear * 24) . 'H'));
+                    $usePlanet->setNuclearAtNbr($nbrNuclear);
+                }
+                $usePlanet->setUranium($usePlanet->getUranium() - ($nbrNuclear * 1000));
+                $user->setBitcoin($user->getBitcoin() - ($nbrNuclear * 25000));
+                $usePlanet->setNuclearAt($now);
+                $quest = $user->checkQuests('nuclear');
+                if($quest) {
+                    $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $quest->getGain());
+                    $user->removeQuest($quest);
+                }
+            }
             if ($form_caserneRecruit->get('scientist')->getData() && $usePlanet->getCenterSearch() > 0) {
                 $now = new DateTime();
                 $now->setTimezone(new DateTimeZone('Europe/Paris'));

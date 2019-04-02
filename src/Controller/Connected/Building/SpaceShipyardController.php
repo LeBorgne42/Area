@@ -17,7 +17,7 @@ use DateTimeZone;
 class SpaceShipyardController extends AbstractController
 {
     /**
-     * @Route("/contruire-chantier-spatiale/{usePlanet}", name="building_add_spaceShipyard", requirements={"usePlanet"="\d+"})
+     * @Route("/construire-chantier-spatiale/{usePlanet}", name="building_add_spaceShipyard", requirements={"usePlanet"="\d+"})
      */
     public function buildingAddSpaceShipyardAction(Planet $usePlanet)
     {
@@ -87,7 +87,7 @@ class SpaceShipyardController extends AbstractController
     }
 
     /**
-     * @Route("/contruire-usine-legere/{usePlanet}", name="building_add_lightUsine", requirements={"usePlanet"="\d+"})
+     * @Route("/construire-usine-legere/{usePlanet}", name="building_add_lightUsine", requirements={"usePlanet"="\d+"})
      */
     public function buildingAddLightUsineAction(Planet $usePlanet)
     {
@@ -153,7 +153,7 @@ class SpaceShipyardController extends AbstractController
     }
 
     /**
-     * @Route("/contruire-usine-lourde/{usePlanet}", name="building_add_heavyUsine", requirements={"usePlanet"="\d+"})
+     * @Route("/construire-usine-lourde/{usePlanet}", name="building_add_heavyUsine", requirements={"usePlanet"="\d+"})
      */
     public function buildingAddHeavyUsineAction(Planet $usePlanet)
     {
@@ -221,7 +221,7 @@ class SpaceShipyardController extends AbstractController
     }
 
     /**
-     * @Route("/contruire-caserne/{usePlanet}", name="building_add_caserne", requirements={"usePlanet"="\d+"})
+     * @Route("/construire-caserne/{usePlanet}", name="building_add_caserne", requirements={"usePlanet"="\d+"})
      */
     public function buildingAddCaserneAction(Planet $usePlanet)
     {
@@ -287,7 +287,7 @@ class SpaceShipyardController extends AbstractController
     }
 
     /**
-     * @Route("/contruire-bunker/{usePlanet}", name="building_add_bunker", requirements={"usePlanet"="\d+"})
+     * @Route("/construire-bunker/{usePlanet}", name="building_add_bunker", requirements={"usePlanet"="\d+"})
      */
     public function buildingAddBunkerAction(Planet $usePlanet)
     {
@@ -345,6 +345,69 @@ class SpaceShipyardController extends AbstractController
         $usePlanet->setBunker($level - 1);
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setSoldierMax($usePlanet->getSoldierMax() - 20000);
+        $usePlanet->setConstruct('destruct');
+        $usePlanet->setConstructAt($now);
+        $em->flush();
+
+        return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
+    }
+
+    /**
+     * @Route("/construire-nucleaire/{usePlanet}", name="building_add_nuclear", requirements={"usePlanet"="\d+"})
+     */
+    public function buildingAddNuclearAction(Planet $usePlanet)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
+        $user = $this->getUser();
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
+
+        $level = $usePlanet->getNuclearBase() + 1;
+        $usePlanetNb = $usePlanet->getNiobium();
+        $newGround = $usePlanet->getGroundPlace() + 2;
+
+        if(($usePlanetNb < ($level * 1000000)) ||
+            ($usePlanet->getConstructAt() > $now || $newGround > $usePlanet->getGround()) ||
+            $level == 6) {
+            return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
+        }
+
+        $now->add(new DateInterval('PT' . ($level * 4320) . 'S'));
+        $usePlanet->setNiobium($usePlanetNb - ($level * 1000000));
+        $usePlanet->setGroundPlace($newGround);
+        $usePlanet->setConstruct('nuclearBase');
+        $usePlanet->setConstructAt($now);
+        $em->flush();
+
+        return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
+    }
+
+    /**
+     * @Route("/detruire-nucleaire/{usePlanet}", name="building_remove_nuclear", requirements={"usePlanet"="\d+"})
+     */
+    public function buildingRemoveNuclearAction(Planet $usePlanet)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
+        $user = $this->getUser();
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
+
+        $level = $usePlanet->getNuclearBase();
+        $newGround = $usePlanet->getGroundPlace() - 2;
+
+        if(($level == 0 || $usePlanet->getConstructAt() > $now) ||
+            $usePlanet->getSoldier() > $usePlanet->getNuclearMax() - 1) {
+            return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
+        }
+        $now->add(new DateInterval('PT' . 600 . 'S'));
+        $usePlanet->setNuclearBase($level - 1);
+        $usePlanet->setGroundPlace($newGround);
         $usePlanet->setConstruct('destruct');
         $usePlanet->setConstructAt($now);
         $em->flush();
