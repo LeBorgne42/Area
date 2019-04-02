@@ -29,7 +29,7 @@ class ConnectController extends AbstractController
         $usePlanet = $em->getRepository('App:Planet')->findByFirstPlanet($user->getUsername());
 
         if($usePlanet) {
-            return $this->redirectToRoute('overview', ['usePlanet' => $usePlanet->getId(), 'usePlanet' => $usePlanet]);
+            return $this->redirectToRoute('overview', ['usePlanet' => $usePlanet->getId()]);
         }
 
         $planet = $em->getRepository('App:Planet')

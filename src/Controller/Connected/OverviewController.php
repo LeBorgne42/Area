@@ -34,36 +34,20 @@ class OverviewController extends AbstractController
             return $this->redirectToRoute('home');
         }
 
-        $allPlanets = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->where('p.user = :user')
-            ->setParameters(['user' => $this->getUser()])
-            ->orderBy('p.id')
+        $attackFleets = $em->getRepository('App:Fleet')
+            ->createQueryBuilder('f')
+            ->join('f.sector', 's')
+            ->join('s.galaxy', 'g')
+            ->where('f.user != :user')
+            ->andWhere('f.flightTime is not null')
+            ->andWhere('f.planete = :planete')
+            ->andWhere('s.position = :sector')
+            ->andWhere('g.position = :galaxy')
+            ->setParameters(['user' => $user, 'planete' => $usePlanet->getPosition(), 'sector' => $usePlanet->getSector()->getPosition(), 'galaxy' => $usePlanet->getSector()->getGalaxy()->getPosition()])
+            ->orderBy('f.flightTime')
             ->getQuery()
+            ->setMaxResults(5)
             ->getResult();
-
-        $attackFleets = new \ArrayObject();
-        foreach ($allPlanets as $planet) {
-            $allFleets = $em->getRepository('App:Fleet')
-                ->createQueryBuilder('f')
-                ->join('f.sector', 's')
-                ->join('s.galaxy', 'g')
-                ->where('f.user != :user')
-                ->andWhere('f.planete = :planete')
-                ->andWhere('s.position = :sector')
-                ->andWhere('g.position = :galaxy')
-                ->setParameters(['user' => $user, 'planete' => $planet->getPosition(), 'sector' => $planet->getSector()->getPosition(), 'galaxy' =>$planet->getSector()->getGalaxy()->getPosition()])
-                ->orderBy('f.flightTime')
-                ->getQuery()
-                ->getResult();
-
-            if($allFleets) {
-                $attackFleets = $allFleets;
-            }
-        }
-        if (count($attackFleets) == 0) {
-            $attackFleets = null;
-        }
 
 
         $oneHour = new DateTime();

@@ -683,7 +683,7 @@ class FightController extends AbstractController
     }
 
       /**
-       * @Route("/hello-we-come-for-you/{usePlanet}/{invader}/", name="invader_planet", requirements={"usePlanet"="\d+", "invader"="\d+"})
+       * @Route("/hello-we-come-for-you/{invader}/{usePlanet}", name="invader_planet", requirements={"usePlanet"="\d+", "invader"="\d+"})
        */
     public function invaderAction(Planet $usePlanet, Fleet $invader)
     {

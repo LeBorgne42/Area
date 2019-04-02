@@ -31,9 +31,9 @@ class GalaxyController extends AbstractController
 
         if ($form_navigate->isSubmitted() && $form_navigate->isValid()) {
             if ($form_navigate->get('sector')->getData() && $form_navigate->get('galaxy')->getData()) {
-                return $this->redirectToRoute('map', ['usePlanet' => $usePlanet->getId(), 'id' => $form_navigate->get('sector')->getData(), 'gal' => $form_navigate->get('galaxy')->getData()]);
+                return $this->redirectToRoute('map', ['sector' => $form_navigate->get('sector')->getData(), 'gal' => $form_navigate->get('galaxy')->getData(), 'usePlanet' => $usePlanet->getId()]);
             }
-            return $this->redirectToRoute('galaxy', ['usePlanet' => $usePlanet->getId(), 'id' => $form_navigate->get('galaxy')->getData()]);
+            return $this->redirectToRoute('galaxy', ['id' => $form_navigate->get('galaxy')->getData(), 'usePlanet' => $usePlanet->getId()]);
         }
 
         $planets = $em->getRepository('App:Planet')

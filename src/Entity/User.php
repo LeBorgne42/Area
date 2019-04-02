@@ -1416,12 +1416,12 @@ class User implements UserInterface, \Serializable
             $return = $return + ($planet->getTankAtNbr() * $tPrice);
             $return = $return + ($planet->getScientist() * $scPrice);
             $return = $return + ($planet->getScientistAtNbr() * $scPrices);
-            if ($planet->getMissions()) {
+      /*      if ($planet->getMissions()) {
                 foreach($planet->getMissions() as $mission) {
-                    $return = $return + ($mission->getSoldier() * $sPrices);
+                    $return = $return + ($mission->getSoldier() * $sPrices); //fixmr
                     $return = $return + ($mission->getTank() * $tPrices);
                 }
-            }
+            }*/
         }
         foreach($this->fleets as $fleet) {
             $return = $return + ($fleet->getSoldier() * $sPrices);

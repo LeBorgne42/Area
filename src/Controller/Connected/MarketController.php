@@ -100,7 +100,7 @@ class MarketController extends AbstractController
     }
 
     /**
-     * @Route("/ajouter-ajouter-marchand/{usePlanet}//{planet}", name="planet_seller_add", requirements={"usePlanet"="\d+","planet"="\d+"})
+     * @Route("/ajouter-ajouter-marchand/{usePlanet}/{planet}", name="planet_seller_add", requirements={"usePlanet"="\d+","planet"="\d+"})
      */
     public function planetAddAction(Planet $usePlanet, Planet $planet)
     {
@@ -123,7 +123,7 @@ class MarketController extends AbstractController
     }
 
     /**
-     * @Route("/planete-enlever-marchand/{usePlanet}/{planet}", name="planet_seller_sub", requirements={"usePlanet"="\d+","planet"="\d+"})
+     * @Route("/planete-enlever-marchand/{planet}/{usePlanet}", name="planet_seller_sub", requirements={"usePlanet"="\d+","planet"="\d+"})
      */
     public function planetSubAction(Planet $usePlanet, Planet $planet)
     {

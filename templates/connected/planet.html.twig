@@ -49,7 +49,7 @@
                 <tr>
                     {% endif %}
                     <td width="160" class="center-cells text-center">
-                        <a class="text-or glyphicon glyphicon-remove" href="{{ path('planet_seller_sub', {'usePlanet': usePlanet.getId(), 'planet': planet.getId()}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.remove'|trans }}"></a> <span{% if planet.getNiobium() >= planet.getNiobiumMax() or planet.getWater() >= planet.getWaterMax() %} class="text-rouge"{% endif %}>{{ planet.getName() }}</span>
+                        <a class="text-or glyphicon glyphicon-remove" href="{{ path('planet_seller_sub', {'planet': planet.getId(), 'usePlanet': usePlanet.getId()}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.remove'|trans }}"></a> <span{% if planet.getNiobium() >= planet.getNiobiumMax() or planet.getWater() >= planet.getWaterMax() %} class="text-rouge"{% endif %}>{{ planet.getName() }}</span>
                     </td>
                     {% set x = x + 1 %}
                     {% if x % 5 == 0 %}
@@ -87,7 +87,7 @@
                     {{ 'planet.population'|trans }}
                 </th>
             </tr>
-            {% for planet in app.user.getPlanets() %}
+            {% for planet in allPlanets %}
                 {% if planet.getEmpty() == true %}
                 {% else %}
                     {% set form_rename = formObject.createView %}
@@ -107,7 +107,7 @@
                                 </div>
                             </div>
                             <div class="mt-4 text-left">
-                                {{ 'position'|trans }} <span><a href="{{ path('map', {id: planet.getSector().getPosition(), 'usePlanet': planet.getId(), 'gal': planet.getSector().getGalaxy().getPosition()}) }}">{{ planet.getSector().getGalaxy.getPosition() }}:{{ planet.getSector().getPosition() }}:{{ planet.getPosition() }}</a></span>
+                                {{ 'position'|trans }} <span><a href="{{ path('map', {'sector': planet.getSector().getId(), 'gal': planet.getSector().getGalaxy().getId(), 'usePlanet': planet.getId()}) }}">{{ planet.getSector().getGalaxy.getPosition() }}:{{ planet.getSector().getPosition() }}:{{ planet.getPosition() }}</a></span>
                                 {%  if planet.getMoon() == false %}<a class="btn btn-sm btn-danger float-right" data-toggle="confirmation" data-placement="right" data-title="{{ 'planet.abandon.question'|trans }}" href="{{ path('planet_abandon', {'abandonPlanet': planet.getId(), 'usePlanet': planet.getId()}) }}">{{ 'planet.abandon'|trans }}</a>{% endif %}
                             </div>
                         </td>

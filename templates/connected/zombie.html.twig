@@ -204,7 +204,7 @@
                                 {{ mission.getPercent() }}%
                             </td>
                             <td class="center-cells text-center p-1">
-                                {% if mission.getMissionAt() > now %}<div class="timerArea" hidden>{{ mission.getMissionAt()|date('Y/m/d H:i:s') }}</div>{% else %}<a class="badge badge-success p-2" href="{{ path('mission_finish', {'usePlanet': usePlanet.getId(), 'mission': mission.getId()}) }}">{{ 'zombie.finish'|trans }}</span></a>{% endif %}
+                                {% if mission.getMissionAt() > now %}<div class="timerArea" hidden>{{ mission.getMissionAt()|date('Y/m/d H:i:s') }}</div>{% else %}<a class="badge badge-success p-2" href="{{ path('mission_finish', {'mission': mission.getId(), 'usePlanet': usePlanet.getId()}) }}">{{ 'zombie.finish'|trans }}</span></a>{% endif %}
                             </td>
                         </tr>
                     {% endfor %}

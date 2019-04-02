@@ -112,7 +112,7 @@ class MessageController extends AbstractController
     }
 
     /**
-     * @Route("/repondre/{usePlanet}/{id}", name="message_responde", requirements={"usePlanet"="\d+", "id"="\d+"})
+     * @Route("/repondre/{id}/{usePlanet}", name="message_responde", requirements={"usePlanet"="\d+", "id"="\d+"})
      */
     public function messageRespondeAction(Request $request, Planet $usePlanet, $id)
     {
@@ -168,7 +168,7 @@ class MessageController extends AbstractController
     }
 
     /**
-     * @Route("/message-view/{usePlanet}/{id}", name="message_view", requirements={"usePlanet"="\d+", "id"="\d+"})
+     * @Route("/message-view/{id}/{usePlanet}", name="message_view", requirements={"usePlanet"="\d+", "id"="\d+"})
      */
     public function messageViewAction(Planet $usePlanet, Message $id)
     {
@@ -187,7 +187,7 @@ class MessageController extends AbstractController
     }
 
     /**
-     * @Route("/message-share/{usePlanet}/{id}", name="message_share", requirements={"usePlanet"="\d+", "id"="\d+"})
+     * @Route("/message-share/{id}/{usePlanet}", name="message_share", requirements={"usePlanet"="\d+", "id"="\d+"})
      */
     public function messageShareAction(Planet $usePlanet, Message $id)
     {

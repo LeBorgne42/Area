@@ -68,7 +68,7 @@
                             {% if usePlanet.getMiner() > 0 and usePlanet.getConstructAt() == null %}
                                 <a class="btn btn-lg btn-danger mt-5" data-toggle="confirmation" data-placement="right" data-title="{{ 'building.demolition.question'|trans }}" href="{{ path('building_remove_mine', {'usePlanet': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                             {% elseif usePlanet.getConstruct() == 'miner' %}
-                                <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'usePlanet': usePlanet.getId(), 'cancelPlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
+                                <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'cancelPlanet': usePlanet.getId(), 'usePlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
                             {% else %}
                                 <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
                             {% endif %}
@@ -107,7 +107,7 @@
                             {% if usePlanet.getExtractor() > 0 and usePlanet.getConstructAt() == null %}
                             <a class="btn btn-lg btn-danger  mt-5" data-toggle="confirmation" data-placement="right" data-title="{{ 'building.demolition.question'|trans }}" href="{{ path('building_remove_extract', {'usePlanet': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                             {% elseif usePlanet.getConstruct() == 'extractor' %}
-                                <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'usePlanet': usePlanet.getId(), 'cancelPlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
+                                <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'cancelPlanet': usePlanet.getId(), 'usePlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
                             {% else %}
                             <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
                             {% endif %}
@@ -154,7 +154,7 @@
                             {% if usePlanet.getNiobiumStock() > 0 and usePlanet.getConstructAt() == null %}
                                 <a class="btn btn-lg btn-danger  mt-5" data-toggle="confirmation" data-placement="right" data-title="{{ 'building.demolition.question'|trans }}" href="{{ path('building_remove_niobiumStock', {'usePlanet': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                             {% elseif usePlanet.getConstruct() == 'niobiumStock' %}
-                                <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'usePlanet': usePlanet.getId(), 'cancelPlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
+                                <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'cancelPlanet': usePlanet.getId(), 'usePlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
                             {% else %}
                                 <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
                             {% endif %}
@@ -201,7 +201,7 @@
                             {% if usePlanet.getWaterStock() > 0 and usePlanet.getConstructAt() == null %}
                                 <a class="btn btn-lg btn-danger  mt-5" data-toggle="confirmation" data-placement="right" data-title="{{ 'building.demolition.question'|trans }}" href="{{ path('building_remove_waterStock', {'usePlanet': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                             {% elseif usePlanet.getConstruct() == 'waterStock' %}
-                                <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'usePlanet': usePlanet.getId(), 'cancelPlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
+                                <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'cancelPlanet': usePlanet.getId(), 'usePlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
                             {% else %}
                                 <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
                             {% endif %}
@@ -248,7 +248,7 @@
                         {% if usePlanet.getCenterSearch() > 0 and usePlanet.getConstructAt() == null %}
                             <a class="btn btn-lg btn-danger  mt-5" data-toggle="confirmation" data-placement="right" data-title="{{ 'building.demolition.question'|trans }}" href="{{ path('building_remove_search', {'usePlanet': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                         {% elseif usePlanet.getConstruct() == 'centerSearch' %}
-                            <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'usePlanet': usePlanet.getId(), 'cancelPlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
+                            <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'cancelPlanet': usePlanet.getId(), 'usePlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
                         {% else %}
                             <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
                         {% endif %}
@@ -295,7 +295,7 @@
                             {% if usePlanet.getCity() > 0 and usePlanet.getConstructAt() == null %}
                                 <a class="btn btn-lg btn-danger  mt-5" data-toggle="confirmation" data-placement="right" data-title="{{ 'building.demolition.question'|trans }}" href="{{ path('building_remove_city', {'usePlanet': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                             {% elseif usePlanet.getConstruct() == 'city' %}
-                                <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'usePlanet': usePlanet.getId(), 'cancelPlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
+                                <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'cancelPlanet': usePlanet.getId(), 'usePlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
                             {% else %}
                                 <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
                             {% endif %}
@@ -342,7 +342,7 @@
                             {% if usePlanet.getMetropole() > 0 and usePlanet.getConstructAt() == null %}
                                 <a class="btn btn-lg btn-danger  mt-5" data-toggle="confirmation" data-placement="right" data-title="{{ 'building.demolition.question'|trans }}" href="{{ path('building_remove_metropole', {'usePlanet': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                             {% elseif usePlanet.getConstruct() == 'metropole' %}
-                                <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'usePlanet': usePlanet.getId(), 'cancelPlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
+                                <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'cancelPlanet': usePlanet.getId(), 'usePlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
                             {% else %}
                                 <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
                             {% endif %}
@@ -394,7 +394,7 @@
                             {% if usePlanet.getCaserne() > 0 and usePlanet.getConstructAt() == null %}
                                 <a class="btn btn-lg btn-danger  mt-5" data-toggle="confirmation" data-placement="right" data-title="{{ 'building.demolition.question'|trans }}" href="{{ path('building_remove_caserne', {'usePlanet': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                             {% elseif usePlanet.getConstruct() == 'caserne' %}
-                                <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'usePlanet': usePlanet.getId(), 'cancelPlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
+                                <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'cancelPlanet': usePlanet.getId(), 'usePlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
                             {% else %}
                                 <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
                             {% endif %}
@@ -441,7 +441,7 @@
                             {% if usePlanet.getBunker() > 0 and usePlanet.getConstructAt() == null %}
                                 <a class="btn btn-lg btn-danger  mt-5" data-toggle="confirmation" data-placement="right" data-title="{{ 'building.demolition.question'|trans }}" href="{{ path('building_remove_bunker', {'usePlanet': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                             {% elseif usePlanet.getConstruct() == 'bunker' %}
-                                <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'usePlanet': usePlanet.getId(), 'cancelPlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
+                                <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'cancelPlanet': usePlanet.getId(), 'usePlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
                             {% else %}
                                 <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
                             {% endif %}
@@ -488,7 +488,7 @@
                             {% if usePlanet.getSpaceShip() > 0 and usePlanet.getConstructAt() == null %}
                                 <a class="btn btn-lg btn-danger  mt-5" data-toggle="confirmation" data-placement="right" data-title="{{ 'building.demolition.question'|trans }}" href="{{ path('building_remove_spaceShipyard', {'usePlanet': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                             {% elseif usePlanet.getConstruct() == 'spaceShip' %}
-                                <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'usePlanet': usePlanet.getId(), 'cancelPlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
+                                <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'cancelPlanet': usePlanet.getId(), 'usePlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
                             {% else %}
                                 <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
                             {% endif %}
@@ -539,7 +539,7 @@
                             {% if usePlanet.getLightUsine() > 0 and usePlanet.getConstructAt() == null %}
                                 <a class="btn btn-lg btn-danger" href="{{ path('building_remove_lightUsine', {'usePlanet': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                             {% elseif usePlanet.getConstruct() == 'lightUsine' %}
-                                <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'usePlanet': usePlanet.getId(), 'cancelPlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
+                                <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'cancelPlanet': usePlanet.getId(), 'usePlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
                             {% else %}
                                 <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
                             {% endif %}
@@ -590,7 +590,7 @@
                             {% if usePlanet.getHeavyUsine() > 0 and usePlanet.getConstructAt() == null %}
                                 <a class="btn btn-lg btn-danger" href="{{ path('building_remove_heavyUsine', {'usePlanet': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                             {% elseif usePlanet.getConstruct() == 'heavyUsine' %}
-                                <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'usePlanet': usePlanet.getId(), 'cancelPlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
+                                <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'cancelPlanet': usePlanet.getId(), 'usePlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
                             {% else %}
                                 <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
                             {% endif %}
@@ -642,7 +642,7 @@
                             {% if usePlanet.getRadar() > 0 and usePlanet.getConstructAt() == null %}
                                 <a class="btn btn-lg btn-danger  mt-5" data-toggle="confirmation" data-placement="right" data-title="{{ 'building.demolition.question'|trans }}" href="{{ path('building_remove_radar', {'usePlanet': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                             {% elseif usePlanet.getConstruct() == 'radar' %}
-                                <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'usePlanet': usePlanet.getId(), 'cancelPlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
+                                <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'cancelPlanet': usePlanet.getId(), 'usePlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
                             {% else %}
                                 <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
                             {% endif %}
@@ -689,7 +689,7 @@
                             {% if usePlanet.getSkyRadar() > 0 and usePlanet.getConstructAt() == null %}
                                 <a class="btn btn-lg btn-danger  mt-5" data-toggle="confirmation" data-placement="right" data-title="{{ 'building.demolition.question'|trans }}" href="{{ path('building_remove_skyRadar', {'usePlanet': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                             {% elseif usePlanet.getConstruct() == 'skyRadar' %}
-                                <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'usePlanet': usePlanet.getId(), 'cancelPlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
+                                <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'cancelPlanet': usePlanet.getId(), 'usePlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
                             {% else %}
                                 <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
                             {% endif %}
@@ -736,7 +736,7 @@
                             {% if usePlanet.getSkyBrouilleur() > 0 and usePlanet.getConstructAt() == null %}
                                 <a class="btn btn-lg btn-danger  mt-5" data-toggle="confirmation" data-placement="right" data-title="{{ 'building.demolition.question'|trans }}" href="{{ path('building_remove_brouilleur', {'usePlanet': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                             {% elseif usePlanet.getConstruct() == 'skyBrouilleur' %}
-                                <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'usePlanet': usePlanet.getId(), 'cancelPlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
+                                <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'cancelPlanet': usePlanet.getId(), 'usePlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
                             {% else %}
                                 <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
                             {% endif %}
@@ -785,7 +785,7 @@
                             </td>
                             {% if usePlanet.getConstruct() == 'island' %}
                             <td class="center-cells p-4">
-                                    <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'usePlanet': usePlanet.getId(), 'cancelPlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
+                                    <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'cancelPlanet': usePlanet.getId(), 'usePlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
                             </td>
                             {% endif %}
                         </tr>
@@ -826,7 +826,7 @@
                             </td>
                             {% if usePlanet.getConstruct() == 'orbital' %}
                             <td class="center-cells p-4">
-                                <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'usePlanet': usePlanet.getId(), 'cancelPlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
+                                <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'cancelPlanet': usePlanet.getId(), 'usePlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
                             </td>
                             {% endif %}
                         </tr>

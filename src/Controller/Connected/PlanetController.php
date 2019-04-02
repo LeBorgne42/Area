@@ -80,7 +80,7 @@ class PlanetController extends AbstractController
     }
 
     /**
-     * @Route("/planete-abandon/{usePlanet}/{abandonPlanet}", name="planet_abandon", requirements={"usePlanet"="\d+","abandonPlanet"="\d+"})
+     * @Route("/planete-abandon/{abandonPlanet}/{usePlanet}", name="planet_abandon", requirements={"usePlanet"="\d+","abandonPlanet"="\d+"})
      */
     public function planetAbandonAction(Planet $usePlanet, Planet $abandonPlanet)
     {

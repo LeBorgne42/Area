@@ -41,7 +41,7 @@ class BuildingController extends AbstractController
     }
 
     /**
-     * @Route("/annuler-construction/{usePlanet}/{cancelPlanet}", name="cancel_construction", requirements={"usePlanet"="\d+", "cancelPlanet"="\d+"})
+     * @Route("/annuler-construction/{cancelPlanet}/{usePlanet}", name="cancel_construction", requirements={"usePlanet"="\d+", "cancelPlanet"="\d+"})
      */
     public function cancelConstructionAction(Planet $usePlanet,Planet $cancelPlanet)
     {
@@ -162,7 +162,7 @@ class BuildingController extends AbstractController
     }
 
     /**
-     * @Route("/annuler-construction-liste/{usePlanet}/{construction}", name="building_listCancel", requirements={"usePlanet"="\d+", "construction"="\d+"})
+     * @Route("/annuler-construction-liste/{construction}/{usePlanet}", name="building_listCancel", requirements={"usePlanet"="\d+", "construction"="\d+"})
      */
     public function buildingListCancelAction(Planet $usePlanet, Planet $construction)
     {

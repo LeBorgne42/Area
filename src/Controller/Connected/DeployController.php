@@ -14,7 +14,7 @@ use Dateinterval;
 class DeployController extends AbstractController
 {
     /**
-     * @Route("/deployer-radar/{usePlanet}/{fleet}/", name="deploy_radar", requirements={"usePlanet"="\d+", "fleet"="\d+"})
+     * @Route("/deployer-radar/{fleet}/{usePlanet}", name="deploy_radar", requirements={"usePlanet"="\d+", "fleet"="\d+"})
      */
     public function deployRadarAction(Planet $usePlanet, Fleet $fleet)
     {
@@ -45,10 +45,10 @@ class DeployController extends AbstractController
             $em->flush();
         }
 
-        return $this->redirectToRoute('map', ['usePlanet' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getPosition()]);
+        return $this->redirectToRoute('map', ['sector' => $planet->getSector()->getId(), 'gal' => $planet->getSector()->getGalaxy()->getId(), 'usePlanet' => $usePlanet->getId()]);
     }
     /**
-     * @Route("/deployer-brouilleur/{usePlanet}/{fleet}/", name="deploy_brouilleur", requirements={"usePlanet"="\d+", "fleet"="\d+"})
+     * @Route("/deployer-brouilleur/{fleet}/{usePlanet}", name="deploy_brouilleur", requirements={"usePlanet"="\d+", "fleet"="\d+"})
      */
     public function deployBrouilleurAction(Planet $usePlanet, Fleet $fleet)
     {
@@ -79,10 +79,10 @@ class DeployController extends AbstractController
             $em->flush();
         }
 
-        return $this->redirectToRoute('map', ['usePlanet' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getPosition()]);
+        return $this->redirectToRoute('map', ['sector' => $planet->getSector()->getId(), 'gal' => $planet->getSector()->getGalaxy()->getId(), 'usePlanet' => $usePlanet->getId()]);
     }
     /**
-     * @Route("/deployer-lunar/{usePlanet}/{fleet}/", name="deploy_moonMaker", requirements={"usePlanet"="\d+", "fleet"="\d+"})
+     * @Route("/deployer-lunar/{fleet}/{usePlanet}", name="deploy_moonMaker", requirements={"usePlanet"="\d+", "fleet"="\d+"})
      */
     public function deployMoonMakerAction(Planet $usePlanet, Fleet $fleet)
     {
@@ -137,6 +137,6 @@ class DeployController extends AbstractController
             $em->flush();
         }
 
-        return $this->redirectToRoute('map', ['usePlanet' => $usePlanet->getId(), 'id' => $planet->getSector()->getPosition(), 'gal' => $planet->getSector()->getGalaxy()->getPosition()]);
+        return $this->redirectToRoute('map', ['sector' => $planet->getSector()->getId(), 'gal' => $planet->getSector()->getGalaxy()->getId(), 'usePlanet' => $usePlanet->getId()]);
     }
 }

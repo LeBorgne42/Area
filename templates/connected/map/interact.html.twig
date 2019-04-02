@@ -62,7 +62,7 @@
             {% if planet.getUser() and (app.user.getWhereRadar(planet.getSector().getPosition(), planet.getSector().getGalaxy().getPosition()) or planet.getOurFleet(app.user)) %}
                 <tr>
                     <td colspan="3" class="center-cells">
-                        <span><a data-toggle="modal" data-target="#userpModal" href="{{ path('user_profil_modal', {'usePlanet': usePlanet.getId(), 'userPlanet': planet.getUser().getId()}) }}">{{ 'interact.seeProfil'|trans }} {{ planet.getUser().getUserName() }}</a></span>
+                        <span><a data-toggle="modal" data-target="#userpModal" href="{{ path('user_profil_modal', {'userPlanet': planet.getUser().getId(), 'usePlanet': usePlanet.getId()}) }}">{{ 'interact.seeProfil'|trans }} {{ planet.getUser().getUserName() }}</a></span>
                     </td>
                 </tr>
             {% endif %}

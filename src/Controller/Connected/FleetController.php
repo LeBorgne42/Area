@@ -173,7 +173,7 @@ class FleetController  extends AbstractController
     }
 
     /**
-     * @Route("/flotte-liste-ajouter/{usePlanet}/{fleetList}/{fleet}", name="fleet_list_add", requirements={"usePlanet"="\d+","fleetList"="\d+","fleet"="\d+"})
+     * @Route("/flotte-liste-ajouter/{fleetList}/{fleet}/{usePlanet}", name="fleet_list_add", requirements={"usePlanet"="\d+","fleetList"="\d+","fleet"="\d+"})
      */
     public function fleetListAddAction(Planet $usePlanet, Fleet_List $fleetList, Fleet $fleet)
     {
@@ -200,7 +200,7 @@ class FleetController  extends AbstractController
     }
 
     /**
-     * @Route("/flotte-liste-sub/{usePlanet}/{fleetList}/{fleet}", name="fleet_list_sub", requirements={"usePlanet"="\d+","fleetList"="\d+","fleet"="\d+"})
+     * @Route("/flotte-liste-sub/{fleetList}/{fleet}/{usePlanet}", name="fleet_list_sub", requirements={"usePlanet"="\d+","fleetList"="\d+","fleet"="\d+"})
      */
     public function fleetListSubAction(Planet $usePlanet, Fleet_List $fleetList, Fleet $fleet)
     {
@@ -224,7 +224,7 @@ class FleetController  extends AbstractController
     }
 
     /**
-     * @Route("/flotte-liste-destroy/{usePlanet}/{fleetList}", name="fleet_list_destroy", requirements={"usePlanet"="\d+","fleetList"="\d+"})
+     * @Route("/flotte-liste-destroy/{fleetList}/{usePlanet}", name="fleet_list_destroy", requirements={"usePlanet"="\d+","fleetList"="\d+"})
      */
     public function fleetListDestroyAction(Planet $usePlanet, Fleet_List $fleetList)
     {
@@ -253,7 +253,7 @@ class FleetController  extends AbstractController
     }
 
     /**
-     * @Route("/flotte-alliance-ajouter/{usePlanet}/{fleet}", name="fleet_ally_add", requirements={"usePlanet"="\d+","fleet"="\d+"})
+     * @Route("/flotte-alliance-ajouter/{fleet}/{usePlanet}", name="fleet_ally_add", requirements={"usePlanet"="\d+","fleet"="\d+"})
      */
     public function fleetAllyAddAction(Planet $usePlanet, Fleet $fleet)
     {
@@ -278,7 +278,7 @@ class FleetController  extends AbstractController
     }
 
     /**
-     * @Route("/flotte-alliance-sub/{usePlanet}/{fleet}", name="fleet_ally_sub", requirements={"usePlanet"="\d+","fleet"="\d+"})
+     * @Route("/flotte-alliance-sub/{fleet}/{usePlanet}", name="fleet_ally_sub", requirements={"usePlanet"="\d+","fleet"="\d+"})
      */
     public function fleetAllySubAction(Planet $usePlanet, Fleet $fleet)
     {
@@ -301,7 +301,7 @@ class FleetController  extends AbstractController
     }
 
     /**
-     * @Route("/gerer-flotte/{usePlanet}/{fleetGive}/", name="manage_fleet", requirements={"usePlanet"="\d+", "fleetGive"="\d+"})
+     * @Route("/gerer-flotte/{fleetGive}/{usePlanet}", name="manage_fleet", requirements={"usePlanet"="\d+", "fleetGive"="\d+"})
      */
     public function manageFleetAction(Request $request, Planet $usePlanet, Fleet $fleetGive)
     {
@@ -744,7 +744,7 @@ class FleetController  extends AbstractController
     }
 
     /**
-     * @Route("/detruire-flotte/{usePlanet}/{fleetGive}", name="destroy_fleet", requirements={"usePlanet"="\d+", "fleetGive"="\d+"})
+     * @Route("/detruire-flotte/{fleetGive}/{usePlanet}", name="destroy_fleet", requirements={"usePlanet"="\d+", "fleetGive"="\d+"})
      */
     public function destroyFleetAction(Planet $usePlanet, Fleet $fleetGive)
     {
@@ -801,7 +801,7 @@ class FleetController  extends AbstractController
     }
 
     /**
-     * @Route("/envoyer-flotte/{usePlanet}/{fleetGive}", name="send_fleet", requirements={"usePlanet"="\d+", "fleetGive"="\d+"})
+     * @Route("/envoyer-flotte/{fleetGive}/{usePlanet}", name="send_fleet", requirements={"usePlanet"="\d+", "fleetGive"="\d+"})
      */
     public function sendFleetAction(Request $request, Planet $usePlanet, Fleet $fleetGive)
     {
@@ -948,7 +948,7 @@ class FleetController  extends AbstractController
     }
 
     /**
-     * @Route("/decharger-niobium/{usePlanet}/{fleetGive}", name="discharge_fleet_niobium", requirements={"usePlanet"="\d+", "fleetGive"="\d+"})
+     * @Route("/decharger-niobium/{fleetGive}/{usePlanet}", name="discharge_fleet_niobium", requirements={"usePlanet"="\d+", "fleetGive"="\d+"})
      */
     public function dischargeNiobiumFleetAction(Planet $usePlanet, Fleet $fleetGive)
     {
@@ -1016,7 +1016,7 @@ class FleetController  extends AbstractController
     }
 
     /**
-     * @Route("/decharger-water/{usePlanet}/{fleetGive}", name="discharge_fleet_water", requirements={"usePlanet"="\d+", "fleetGive"="\d+"})
+     * @Route("/decharger-water/{fleetGive}/{usePlanet}", name="discharge_fleet_water", requirements={"usePlanet"="\d+", "fleetGive"="\d+"})
      */
     public function dischargeWaterFleetAction(Planet $usePlanet, Fleet $fleetGive)
     {
@@ -1083,7 +1083,7 @@ class FleetController  extends AbstractController
     }
 
     /**
-     * @Route("/decharger-soldat/{usePlanet}/{fleetGive}", name="discharge_fleet_soldier", requirements={"usePlanet"="\d+", "fleetGive"="\d+"})
+     * @Route("/decharger-soldat/{fleetGive}/{usePlanet}", name="discharge_fleet_soldier", requirements={"usePlanet"="\d+", "fleetGive"="\d+"})
      */
     public function dischargeSoldierFleetAction(Planet $usePlanet, Fleet $fleetGive)
     {
@@ -1150,7 +1150,7 @@ class FleetController  extends AbstractController
     }
 
     /**
-     * @Route("/decharger-travailleurs/{usePlanet}/{fleetGive}", name="discharge_fleet_worker", requirements={"usePlanet"="\d+", "fleetGive"="\d+"})
+     * @Route("/decharger-travailleurs/{fleetGive}/{usePlanet}", name="discharge_fleet_worker", requirements={"usePlanet"="\d+", "fleetGive"="\d+"})
      */
     public function dischargeWorkerFleetAction(Planet $usePlanet, Fleet $fleetGive)
     {
@@ -1217,7 +1217,7 @@ class FleetController  extends AbstractController
     }
 
     /**
-     * @Route("/decharger-scientifique/{usePlanet}/{fleetGive}", name="discharge_fleet_scientist", requirements={"usePlanet"="\d+", "fleetGive"="\d+"})
+     * @Route("/decharger-scientifique/{fleetGive}/{usePlanet}", name="discharge_fleet_scientist", requirements={"usePlanet"="\d+", "fleetGive"="\d+"})
      */
     public function dischargeScientistFleetAction(Planet $usePlanet, Fleet $fleetGive)
     {
@@ -1284,7 +1284,7 @@ class FleetController  extends AbstractController
     }
 
     /**
-     * @Route("/decharger-tout/{usePlanet}/{fleetGive}", name="discharge_fleet_all", requirements={"usePlanet"="\d+", "fleetGive"="\d+"})
+     * @Route("/decharger-tout/{fleetGive}/{usePlanet}", name="discharge_fleet_all", requirements={"usePlanet"="\d+", "fleetGive"="\d+"})
      */
     public function dischargeAllFleetAction(Planet $usePlanet, Fleet $fleetGive)
     {
@@ -1379,7 +1379,7 @@ class FleetController  extends AbstractController
     }
 
     /**
-     * @Route("/fusionner-flotte/{usePlanet}/{fleetGive}/{fleetTake}", name="fusion_fleet", requirements={"usePlanet"="\d+", "fleetGive"="\d+", "fleetTake"="\d+"})
+     * @Route("/fusionner-flotte/{fleetGive}/{fleetTake}/{usePlanet}", name="fusion_fleet", requirements={"usePlanet"="\d+", "fleetGive"="\d+", "fleetTake"="\d+"})
      */
     public function fusionFleetAction(Planet $usePlanet, Fleet $fleetGive, Fleet $fleetTake)
     {
@@ -1432,7 +1432,7 @@ class FleetController  extends AbstractController
     }
 
     /**
-     * @Route("/scinder-flotte/{usePlanet}/{oldFleet}", name="fleet_split", requirements={"usePlanet"="\d+", "oldFleet"="\d+"})
+     * @Route("/scinder-flotte/{oldFleet}/{usePlanet}", name="fleet_split", requirements={"usePlanet"="\d+", "oldFleet"="\d+"})
      */
     public function splitFleetAction(Request $request, Planet $usePlanet, Fleet $oldFleet)
     {
@@ -1587,7 +1587,7 @@ class FleetController  extends AbstractController
     }
 
     /**
-     * @Route("/annuler-flotte/{usePlanet}/{fleet}/", name="cancel_fleet", requirements={"usePlanet"="\d+", "fleet"="\d+"})
+     * @Route("/annuler-flotte/{fleet}/{usePlanet}", name="cancel_fleet", requirements={"usePlanet"="\d+", "fleet"="\d+"})
      */
     public function cancelFleetAction(Planet $usePlanet, Fleet $fleet)
     {

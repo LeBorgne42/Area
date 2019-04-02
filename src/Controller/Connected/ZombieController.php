@@ -177,7 +177,7 @@ class ZombieController extends AbstractController
     }
 
     /**
-     * @Route("/finir-mission/{usePlanet}/{mission}", name="mission_finish", requirements={"usePlanet"="\d+", "mission"="\d+"})
+     * @Route("/finir-mission/{mission}/{usePlanet}", name="mission_finish", requirements={"usePlanet"="\d+", "mission"="\d+"})
      */
     public function reportViewAction(Planet $usePlanet, Mission $mission)
     {

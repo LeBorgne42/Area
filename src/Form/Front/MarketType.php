@@ -32,7 +32,7 @@ class MarketType extends AbstractType
                             ->join('p.user', 'u')
                             ->where('u.id = :user')
                             ->setParameter('user', $options['user'])
-                            ->orderBy('p.sector', 'ASC');
+                            ->orderBy('p.name', 'ASC');
                     },
                     'choice_label' => 'name',
                     'attr'  => [

@@ -32,7 +32,7 @@ class ProfilController extends AbstractController
     }
 
     /**
-     * @Route("/profil-alliance/{usePlanet}/{allyUser}", name="ally_profil", requirements={"usePlanet"="\d+", "allyUser"="\d+"})
+     * @Route("/profil-alliance/{allyUser}/{usePlanet}", name="ally_profil", requirements={"usePlanet"="\d+", "allyUser"="\d+"})
      */
     public function allyProfilAction(Planet $usePlanet, Ally $allyUser)
     {
@@ -48,7 +48,7 @@ class ProfilController extends AbstractController
     }
 
     /**
-     * @Route("/profil-joueur-popup/{usePlanet}/{userPlanet}", name="user_profil_modal", requirements={"usePlanet"="\d+", "userPlanet"="\d+"})
+     * @Route("/profil-joueur-popup/{userPlanet}/{usePlanet}", name="user_profil_modal", requirements={"usePlanet"="\d+", "userPlanet"="\d+"})
      */
     public function userProfilModalAction(Planet $usePlanet, User $userPlanet)
     {
@@ -64,7 +64,7 @@ class ProfilController extends AbstractController
     }
 
     /**
-     * @Route("/profil-alliance-popup/{usePlanet}/{allyUser}", name="ally_profil_modal", requirements={"usePlanet"="\d+", "allyUser"="\d+"})
+     * @Route("/profil-alliance-popup/{allyUser}/{usePlanet}", name="ally_profil_modal", requirements={"usePlanet"="\d+", "allyUser"="\d+"})
      */
     public function allyProfilModalAction(Planet $usePlanet, Ally $allyUser)
     {

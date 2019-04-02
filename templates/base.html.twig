@@ -10,6 +10,8 @@
         {% endblock %}
     </head>
     <body class="area">
+    {% set allPlanets = app.user.getPlanets() %}
+    {% set allTuto = app.user.getTutorial() %}
 
     {%- block left_menu -%}
         {% include 'menu/_left_menu.html.twig' %}

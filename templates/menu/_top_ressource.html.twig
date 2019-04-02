@@ -5,7 +5,7 @@
     <form id="planet_choice" name="planet_choice" method="post" action="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'usePlanet': usePlanet.getId()})) }}">
         <select class="planetChoice select2">
             <option value="{{ usePlanet.getId() }}">{{ usePlanet.getName() }} - {{ usePlanet.getSector().getGalaxy.getPosition() }}:{{ usePlanet.getSector().getPosition() }}:{{ usePlanet.getPosition() }}</option>
-            {% for planet in app.user.getPlanets() %}
+            {% for planet in allPlanets %}
                 {% if planet != usePlanet %}
                     <option value="{{ planet.getId() }}">{{ planet.getName() }} - {{ planet.getSector().getGalaxy.getPosition() }}:{{ planet.getSector().getPosition() }}:{{ planet.getPosition() }}</option>
                 {% endif %}
