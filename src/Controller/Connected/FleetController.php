@@ -930,6 +930,8 @@ class FleetController  extends AbstractController
                 $fleetGive->setFlightType(3);
             } elseif($form_sendFleet->get('flightType')->getData() == '4' && $planetTake->getUser()) {
                 $fleetGive->setFlightType(4);
+            } elseif($form_sendFleet->get('flightType')->getData() == '5' && $planetTake->getUser()) {
+                $fleetGive->setFlightType(5);
             } else {
                 $fleetGive->setFlightType(1);
             }

@@ -312,4 +312,62 @@ class SectorController extends AbstractController
         $em->flush();
         return $this->redirectToRoute('map', ['usePlanet' => $usePlanet->getId(), 'sector' => $planet->getSector()->getId(), 'gal' => $planet->getSector()->getGalaxy()->getId()]);
     }
+
+    /**
+     * @Route("/envoyer-missiles/{planet}/{usePlanet}", name="send_nuclear", requirements={"planet"="\d+", "usePlanet"="\d+"})
+     */
+    public function sendNuclearAction(Planet $planet, Planet $usePlanet)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
+        if ($usePlanet->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
+
+        $fPlanet = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->andWhere('p.user = :user')
+            ->andwhere('p.nuclearBomb > :zero')
+            ->setParameters(['user' => $user, 'zero' => 0])
+            ->getQuery()
+            ->setMaxResults(1)
+            ->getOneOrNullResult();
+
+        if ($fPlanet == null) {
+            return $this->redirectToRoute('map', ['usePlanet' => $usePlanet->getId(), 'sector' => $planet->getSector()->getId(), 'gal' => $planet->getSector()->getGalaxy()->getId()]);
+        }
+        $planete = $planet->getPosition();
+        $galaxy = $planet->getSector()->getGalaxy()->getPosition();
+        if ($user->getHyperespace() == 0 && $fPlanet->getSector()->getGalaxy()->getPosition() != $galaxy) {
+            return $this->redirectToRoute('map', ['usePlanet' => $usePlanet->getId(), 'id' => $fPlanet->getSector()->getPosition(), 'gal' => $fPlanet->getSector()->getGalaxy()->getPosition()]);
+        }
+        if (1 > $user->getBitcoin()) {
+            return $this->redirectToRoute('map', ['usePlanet' => $usePlanet->getId(), 'sector' => $planet->getSector()->getId(), 'gal' => $planet->getSector()->getGalaxy()->getId()]);
+        }
+        $fleet = new Fleet();
+        $fleet->setNuclearBomb(1);
+        $fleet->setUser($user);
+        $fleet->setPlanet($fPlanet);
+        $fleet->setName('Missile nucléaire');
+        $fPlanet->setNuclearBomb($fPlanet->getNuclearBomb() - 1);
+        $now->add(new DateInterval('PT' . round(1800) . 'S'));
+        $fleet->setNewPlanet($planet->getId());
+        $fleet->setFlightTime($now);
+        $fleet->setSector($planet->getSector());
+        $fleet->setPlanete($planete);
+        $fleet->setFlightType(6);
+        $em->persist($fleet);
+        if ($planet->getUser()) {
+            $quest = $user->checkQuests('nuclear_planet');
+            if ($quest) {
+                $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $quest->getGain());
+                $user->removeQuest($quest);
+            }
+        }
+
+        $em->flush();
+        return $this->redirectToRoute('map', ['usePlanet' => $usePlanet->getId(), 'sector' => $planet->getSector()->getId(), 'gal' => $planet->getSector()->getGalaxy()->getId()]);
+    }
 }

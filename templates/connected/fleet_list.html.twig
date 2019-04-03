@@ -91,13 +91,13 @@
                             </th>
                             <td class="center-cells text-center">
                                 {% if fleet.getPlanet() %}
-                                    <span><a href="{{ path('map', {'id': fleet.getPlanet().getSector.getPosition(), 'usePlanet': usePlanet.getId(), 'gal': fleet.getPlanet().getSector().getGalaxy().getPosition()}) }}">{{ fleet.getplanet().getName() }} - {{ fleet.getPlanet().getSector().getGalaxy.getPosition() }}:{{ fleet.getPlanet().getSector.getPosition() }}:{{ fleet.getPlanet().getPosition() }}</a></span>
+                                    <span><a href="{{ path('map', {'sector': fleet.getPlanet().getSector.getId(), 'gal': fleet.getPlanet().getSector().getGalaxy().getId(), 'usePlanet': usePlanet.getId()}) }}">{{ fleet.getplanet().getName() }} - {{ fleet.getPlanet().getSector().getGalaxy.getPosition() }}:{{ fleet.getPlanet().getSector.getPosition() }}:{{ fleet.getPlanet().getPosition() }}</a></span>
                                 {% endif %}
                             </td>
                             {% if fleetList.getFlightTime() %}
                                 <td class="center-cells text-center">
                                     {% if fleet.getFlightTime() %}
-                                        <span><a href="{{ path('map', {'id': fleet.getSector().getPosition(), 'usePlanet': usePlanet.getId(), 'gal': fleet.getSector().getGalaxy().getPosition()}) }}">{{ fleet.getSector().getGalaxy.getPosition() }}:{{ fleet.getSector.getPosition() }}:{{ fleet.getPlanete() }}</a></span>
+                                        <span><a href="{{ path('map', {'sector': fleet.getSector().getId(), 'gal': fleet.getSector().getGalaxy().getId(), 'usePlanet': usePlanet.getId()}) }}">{{ fleet.getSector().getGalaxy.getPosition() }}:{{ fleet.getSector.getPosition() }}:{{ fleet.getPlanete() }}</a></span>
                                     {% endif %}
                                 </td>
                                 <td class="center-cells text-center">
@@ -176,13 +176,13 @@
                             </th>
                             <td class="center-cells text-center">
                                 {% if fleet.getPlanet() %}
-                                    <span><a href="{{ path('map', {'id': fleet.getPlanet().getSector.getPosition(), 'usePlanet': usePlanet.getId(), 'gal': fleet.getPlanet().getSector().getGalaxy().getPosition()}) }}">{{ fleet.getplanet().getName() }} - {{ fleet.getPlanet().getSector().getGalaxy.getPosition() }}:{{ fleet.getPlanet().getSector.getPosition() }}:{{ fleet.getPlanet().getPosition() }}</a></span>
+                                    <span><a href="{{ path('map', {'sector': fleet.getPlanet().getSector.getId(), 'gal': fleet.getPlanet().getSector().getGalaxy().getId(), 'usePlanet': usePlanet.getId()}) }}">{{ fleet.getplanet().getName() }} - {{ fleet.getPlanet().getSector().getGalaxy.getPosition() }}:{{ fleet.getPlanet().getSector.getPosition() }}:{{ fleet.getPlanet().getPosition() }}</a></span>
                                 {% endif %}
                             </td>
                             {% if app.user.getAlly().getFlightTime() %}
                                 <td class="center-cells text-center">
                                     {% if fleet.getFlightTime() %}
-                                        <span><a href="{{ path('map', {'id': fleet.getSector().getPosition(), 'usePlanet': usePlanet.getId(), 'gal': fleet.getSector().getGalaxy().getPosition()}) }}">{{ fleet.getSector().getGalaxy.getPosition() }}:{{ fleet.getSector.getPosition() }}:{{ fleet.getPlanete() }}</a></span>
+                                        <span><a href="{{ path('map', {'sector': fleet.getSector().getId(), 'gal': fleet.getSector().getGalaxy().getId(), 'usePlanet': usePlanet.getId()}) }}">{{ fleet.getSector().getGalaxy.getPosition() }}:{{ fleet.getSector.getPosition() }}:{{ fleet.getPlanete() }}</a></span>
                                     {% endif %}
                                 </td>
                                 <td class="center-cells text-center">

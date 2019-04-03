@@ -133,6 +133,10 @@ class BuildingController extends AbstractController
             $cancelPlanet->setNiobium($cancelPlanet->getNiobium() + ($level * 25500));
             $cancelPlanet->setWater($cancelPlanet->getWater() + ($level * 16000));
             $cancelPlanet->setSkyPlace($cancelPlanet->getSkyPlace() - 4);
+        } elseif ($build == 'nuclearBase') {
+            $level = $cancelPlanet->getNuclearBase() + 1;
+            $cancelPlanet->setNiobium($cancelPlanet->getNiobium() + ($level * 1000000));
+            $cancelPlanet->setGroundPlace($cancelPlanet->getGroundPlace() - 2);
         } elseif ($build == 'island') {
             $level = $cancelPlanet->getIsland() + 1;
             $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + ($level * 200000));

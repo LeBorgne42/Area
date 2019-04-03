@@ -233,6 +233,11 @@ class Fleet
     protected $scientist;
 
     /**
+     * @ORM\Column(name="nuclear_bomb",type="smallint", nullable=true)
+     */
+    protected $nuclearBomb;
+
+    /**
      * @ORM\Column(name="niobium",type="bigint", nullable=true)
      */
     protected $niobium;
@@ -290,6 +295,7 @@ class Fleet
         $this->cancelFlight = null;
         $this->flightType = null;
         $this->ally = null;
+        $this->nuclearBomb = null;
     }
 
     public function getId()
@@ -798,8 +804,9 @@ class Fleet
         $croiser = $this->getCroiser();
         $ironClad = $this->getIronClad();
         $destroyer = $this->getDestroyer();
+        $nuclear = $this->getNuclearBomb();
 
-        $nbr = $motherShip + $brouilleurShip + $radarShip + $moonMaker + $hunterWar + $corvetWar + $fregate + $colonizer + $barge + $hunter + $recycleur + $sonde + $cargoI + $cargoV + $cargoX + $hunterHeavy + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
+        $nbr = $motherShip + $brouilleurShip + $radarShip + $moonMaker + $hunterWar + $corvetWar + $fregate + $colonizer + $barge + $hunter + $recycleur + $sonde + $cargoI + $cargoV + $cargoX + $hunterHeavy + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer + $nuclear;
         return $nbr;
     }
 
@@ -830,8 +837,9 @@ class Fleet
         $croiser = $this->getCroiser() * 300;
         $ironClad = $this->getIronClad() * 700;
         $destroyer = $this->getDestroyer() * 1500;
+        $nuclear = $this->getNuclearBomb() * 250000;
 
-        $nbr = $motherShip + $brouilleurShip + $radarShip + $moonMaker + $hunterWar + $corvetWar + $fregate + $colonizer + $barge + $hunter + $recycleur + $sonde + $cargoI + $cargoV + $cargoX + $hunterHeavy + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
+        $nbr = $motherShip + $brouilleurShip + $radarShip + $moonMaker + $hunterWar + $corvetWar + $fregate + $colonizer + $barge + $hunter + $recycleur + $sonde + $cargoI + $cargoV + $cargoX + $hunterHeavy + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer + $nuclear;
         if($this->getMotherShip() == 1) {
             $nbr = $nbr * 0.9;
         }
@@ -1852,6 +1860,22 @@ class Fleet
     public function setUranium($uranium): void
     {
         $this->uranium = $uranium;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNuclearBomb()
+    {
+        return $this->nuclearBomb;
+    }
+
+    /**
+     * @param mixed $nuclearBomb
+     */
+    public function setNuclearBomb($nuclearBomb): void
+    {
+        $this->nuclearBomb = $nuclearBomb;
     }
 
     /**

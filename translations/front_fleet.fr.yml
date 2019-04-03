@@ -105,6 +105,7 @@ form.discharge: 'Décharger et revenir'
 form.col: Coloniser
 form.num: 0
 form.invade: Envahir
+form.loot: Piller
 fleet.st: ST
 tooltip.remove: 'Supprimer flotte de la Cohorte ?'
 tooltip.cancel: 'Annuler l''envoi de la flotte ?'

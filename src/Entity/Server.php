@@ -46,6 +46,11 @@ class Server
     protected $nbrInvasion;
 
     /**
+     * @ORM\Column(name="nbr_loot",type="bigint")
+     */
+    protected $nbrLoot;
+
+    /**
      * @ORM\Column(name="nbr_zombie",type="bigint")
      */
     protected $nbrZombie;
@@ -267,6 +272,22 @@ class Server
     public function setDailyReport($dailyReport): void
     {
         $this->dailyReport = $dailyReport;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNbrLoot()
+    {
+        return $this->nbrLoot;
+    }
+
+    /**
+     * @param mixed $nbrLoot
+     */
+    public function setNbrLoot($nbrLoot): void
+    {
+        $this->nbrLoot = $nbrLoot;
     }
 
     public function getId()

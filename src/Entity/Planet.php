@@ -957,6 +957,11 @@ class Planet
     public function getNbrFleets(): int
     {
         $nbr = 0;
+        foreach($this->fleets as $fleet) {
+            if ($fleet->getFlightTime() == null ) {
+                $nbr++;
+            }
+        }
         return $nbr;
     }
 
