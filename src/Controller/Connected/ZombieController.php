@@ -263,6 +263,6 @@ class ZombieController extends AbstractController
         $em->persist($reportMission);
         $em->flush();
 
-        return $this->redirectToRoute('report_id', ['id' => 'zombie', 'usePlanet' => $usePlanet->getId()]);
+        return $this->redirectToRoute('zombie', ['usePlanet' => $usePlanet->getId()]);
     }
 }

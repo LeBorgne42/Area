@@ -240,22 +240,10 @@ class InstantController extends AbstractController
                 $worker = 0;
                 $planetPoint= 0;
                 $buildingCost = 0;
-                if ($user->getPoliticWorker() > 0) {
-                    $workerBonus = (1 + ($user->getPoliticWorker() / 5));
-                } else {
-                    $workerBonus = 1;
-                }
                 foreach ($user->getPlanets() as $planet) {
-                    if($planet->getRadarAt() == null && $planet->getBrouilleurAt() == null) {
-                        if (($planet->getWorker() + $planet->getWorkerProduction() > $planet->getWorkerMax())) {
-                            $planet->setWorker($planet->getWorkerMax());
-                        } else {
-                            $planet->setWorker($planet->getWorker() + ($planet->getWorkerProduction() * $workerBonus));
-                        }
-                        $worker = $worker + $planet->getWorker();
-                        $planetPoint = $planetPoint + $planet->getBuildingPoint();
-                        $buildingCost = $buildingCost + $planet->getBuildingCost();
-                    }
+                    $worker = $worker + $planet->getWorker();
+                    $planetPoint = $planetPoint + $planet->getBuildingPoint();
+                    $buildingCost = $buildingCost + $planet->getBuildingCost();
                 }
                 $gain = round($worker / 2);
                 $lose = null;
@@ -933,7 +921,7 @@ class InstantController extends AbstractController
                 $planet->setWaterMax($planet->getWaterMax() + 5000000);
             } elseif ($build == 'city') {
                 $planet->setCity($planet->getCity() + 1);
-                $planet->setWorkerProduction($planet->getWorkerProduction() + 2000);
+                $planet->setWorkerProduction($planet->getWorkerProduction() + 2.78);
                 $planet->setWorkerMax($planet->getWorkerMax() + 25000);
                 $quest = $planet->getUser()->checkQuests('build_city');
                 if($quest) {
@@ -942,7 +930,7 @@ class InstantController extends AbstractController
                 }
             } elseif ($build == 'metropole') {
                 $planet->setMetropole($planet->getMetropole() + 1);
-                $planet->setWorkerProduction($planet->getWorkerProduction() + 5000);
+                $planet->setWorkerProduction($planet->getWorkerProduction() + 4.16);
                 $planet->setWorkerMax($planet->getWorkerMax() + 75000);
                 $quest = $planet->getUser()->checkQuests('build_metro');
                 if($quest) {

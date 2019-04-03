@@ -81,7 +81,7 @@ class Planet
     protected $product;
 
     /**
-     * @ORM\Column(name="workerProduction",type="integer")
+     * @ORM\Column(name="workerProduction",type="decimal", precision=28, scale=5)
      */
     protected $workerProduction;
 
@@ -524,7 +524,7 @@ class Planet
         $this->nbCdr = 0;
         $this->wtCdr = 0;
         $this->shipProduction = 1;
-        $this->workerProduction = 6000;
+        $this->workerProduction = 5.5;
         $this->niobiumMax = 1300000;
         $this->waterMax = 1000000;
         $this->soldierMax = 200;

@@ -196,7 +196,7 @@ class Ally
         $this->bitcoin = 0;
         $this->createdAt = null;
         $this->imageFile = null;
-        $this->rank = null;
+        $this->rank = 1;
         $this->descritpion = '-';
         $this->politic = 'democrat';
         $this->level = 0;

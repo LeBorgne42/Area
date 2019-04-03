@@ -275,9 +275,21 @@ class UserEvent implements EventSubscriberInterface
                                 $user->setIpAddress($userIp);
                             }
                         }
+                        if ($user->getPoliticWorker() > 0) {
+                            $workerBonus = (1 + ($user->getPoliticWorker() / 5));
+                        } else {
+                            $workerBonus = 1;
+                        }
                         foreach ($user->getPlanets() as $planet) {
                             $nbProd = ($planet->getNbProduction() * $seconds) / 60;
                             $wtProd = ($planet->getWtProduction() * $seconds) / 60;
+
+                            if (($planet->getWorker() + $planet->getWorkerProduction() > $planet->getWorkerMax())) {
+                                $planet->setWorker($planet->getWorkerMax());
+                            } else {
+                                $planet->setWorker($planet->getWorker() + ($planet->getWorkerProduction() * $workerBonus));
+                            }
+
                             if ($user->getAlly()) {
                                 if ($user->getPoliticProd() > 0) {
                                     $niobium = $planet->getNiobium() + ($nbProd * (1.2 + ($user->getPoliticProd() / 14)));
