@@ -34,7 +34,7 @@
                                         {% else %}
                                             <img height="15" width="15" src="{{ asset('img/avatar.png') }}">
                                         {% endif %}
-                                        {% if message.getUser().getAlly() %}<span><a data-toggle="modal" data-target="#allyModal" href="{{ path('ally_profil_modal', {'usePlanet': usePlanet.getId(), 'allyUser': message.getUser().getAlly().getId()}) }}">[{{ message.getUser().getAlly().getSigle() }}] </a></span>{% endif %}<span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'usePlanet': usePlanet.getId(), 'userPlanet': message.getUser().getId()}) }}" {% if message.getUser() == app.user %} class="text-vert"{% endif %}>{{ message.getUser().getUserName() }}</a></span> :  <span class="ml-2">{{ message.getMessage()|raw }}</span>
+                                        {% if message.getUser().getAlly() %}<span><a data-toggle="modal" data-target="#allyModal" href="{{ path('ally_profil_modal', {'allyUser': message.getUser().getAlly().getId(), 'usePlanet': usePlanet.getId()}) }}">[{{ message.getUser().getAlly().getSigle() }}] </a></span>{% endif %}<span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'usePlanet': usePlanet.getId(), 'userPlanet': message.getUser().getId()}) }}" {% if message.getUser() == app.user %} class="text-vert"{% endif %}>{{ message.getUser().getUserName() }}</a></span> :  <span class="ml-2">{{ message.getMessage()|raw }}</span>
                                     </div>
                                 </th>
                                 <th width="125px" class="tab-cells-name cell-middle">
@@ -69,20 +69,20 @@
             {% set x = 1 %}
             {% if salon.getId() == 1 %}
                 {% for userCo in userCos if userCo.lastActivity > connected %}
-                        {% if x > 1 %} - {% endif %}{% if userCo.getAlly() %}<span><a data-toggle="modal" data-target="#allyModal" href="{{ path('ally_profil_modal', {'usePlanet': usePlanet.getId(), 'allyUser': userCo.getAlly().getId()}) }}">[{{ userCo.getAlly().getSigle() }}] </a></span>{% endif %}<span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'usePlanet': usePlanet.getId(), 'userPlanet': userCo.getId()}) }}">{{ userCo.getUserName() }}</a></span>
+                        {% if x > 1 %} - {% endif %}{% if userCo.getAlly() %}<span><a data-toggle="modal" data-target="#allyModal" href="{{ path('ally_profil_modal', {'allyUser': userCo.getAlly().getId(), 'usePlanet': usePlanet.getId()}) }}">[{{ userCo.getAlly().getSigle() }}] </a></span>{% endif %}<span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'usePlanet': usePlanet.getId(), 'userPlanet': userCo.getId()}) }}">{{ userCo.getUserName() }}</a></span>
                     {% set x = x + 1 %}
                 {% endfor %}
             {% else %}
                 {% if salon.getAllys() and salon.getUsers()|length == 0 %}
                     {% for ally in salon.getAllys() %}
                         {% for user in ally.getUsers() if user.lastActivity > connected %}
-                                {% if x > 1 %} - {% endif %}{% if user.getAlly() %}<span><a data-toggle="modal" data-target="#allyModal" href="{{ path('ally_profil_modal', {'usePlanet': usePlanet.getId(), 'allyUser': user.getAlly().getId()}) }}">[{{ user.getAlly().getSigle() }}] </a></span>{% endif %}<span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'usePlanet': usePlanet.getId(), 'userPlanet': user.getId()}) }}">{{ user.getUserName() }}</a></span>
+                                {% if x > 1 %} - {% endif %}{% if user.getAlly() %}<span><a data-toggle="modal" data-target="#allyModal" href="{{ path('ally_profil_modal', {'allyUser': user.getAlly().getId(), 'usePlanet': usePlanet.getId()}) }}">[{{ user.getAlly().getSigle() }}] </a></span>{% endif %}<span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'usePlanet': usePlanet.getId(), 'userPlanet': user.getId()}) }}">{{ user.getUserName() }}</a></span>
                             {% set x = x + 1 %}
                         {% endfor %}
                     {% endfor %}
                 {% endif %}
                 {% for user in salon.getUsers() if user.lastActivity > connected %}
-                        {% if x > 1 %} - {% endif %}{% if user.getAlly() %}<span><a data-toggle="modal" data-target="#allyModal" href="{{ path('ally_profil_modal', {'usePlanet': usePlanet.getId(), 'allyUser': user.getAlly().getId()}) }}">[{{ user.getAlly().getSigle() }}] </a></span>{% endif %}<span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'usePlanet': usePlanet.getId(), 'userPlanet': user.getId()}) }}">{{ user.getUserName() }}</a></span>
+                        {% if x > 1 %} - {% endif %}{% if user.getAlly() %}<span><a data-toggle="modal" data-target="#allyModal" href="{{ path('ally_profil_modal', {'allyUser': user.getAlly().getId(), 'usePlanet': usePlanet.getId()}) }}">[{{ user.getAlly().getSigle() }}] </a></span>{% endif %}<span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'usePlanet': usePlanet.getId(), 'userPlanet': user.getId()}) }}">{{ user.getUserName() }}</a></span>
                     {% set x = x + 1 %}
                 {% endfor %}
             {% endif %}

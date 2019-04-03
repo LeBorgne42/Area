@@ -18,7 +18,13 @@
     {%- endblock -%}
 
     {%- block top_ressource -%}
-        {% include 'menu/_top_ressource.html.twig' %}
+        {% if app.request.attributes.get('_route') == 'spatial' %}
+            {% include 'menu/_top_ressource_space.html.twig' %}
+        {% elseif app.request.attributes.get('_route') == 'building' %}
+            {% include 'menu/_top_ressource_building.html.twig' %}
+        {% else %}
+            {% include 'menu/_top_ressource.html.twig' %}
+        {% endif %}
     {%- endblock -%}
 
     {%- block right_planet -%}

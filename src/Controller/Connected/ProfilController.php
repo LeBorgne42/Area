@@ -18,7 +18,7 @@ class ProfilController extends AbstractController
     /**
      * @Route("/profil-joueur/{usePlanet}/{userPlanet}", name="user_profil", requirements={"usePlanet"="\d+", "userPlanet"="\d+"})
      */
-    public function userProfilAction(Planet $usePlanet, User $userPlanet)
+    public function userProfilAction(User $userPlanet, Planet $usePlanet)
     {
         $user = $this->getUser();
         if ($usePlanet->getUser() != $user) {
@@ -34,7 +34,7 @@ class ProfilController extends AbstractController
     /**
      * @Route("/profil-alliance/{allyUser}/{usePlanet}", name="ally_profil", requirements={"usePlanet"="\d+", "allyUser"="\d+"})
      */
-    public function allyProfilAction(Planet $usePlanet, Ally $allyUser)
+    public function allyProfilAction(Ally $allyUser, Planet $usePlanet)
     {
         $user = $this->getUser();
         if ($usePlanet->getUser() != $user) {
@@ -50,7 +50,7 @@ class ProfilController extends AbstractController
     /**
      * @Route("/profil-joueur-popup/{userPlanet}/{usePlanet}", name="user_profil_modal", requirements={"usePlanet"="\d+", "userPlanet"="\d+"})
      */
-    public function userProfilModalAction(Planet $usePlanet, User $userPlanet)
+    public function userProfilModalAction(User $userPlanet, Planet $usePlanet)
     {
         $user = $this->getUser();
         if ($usePlanet->getUser() != $user) {
@@ -66,7 +66,7 @@ class ProfilController extends AbstractController
     /**
      * @Route("/profil-alliance-popup/{allyUser}/{usePlanet}", name="ally_profil_modal", requirements={"usePlanet"="\d+", "allyUser"="\d+"})
      */
-    public function allyProfilModalAction(Planet $usePlanet, Ally $allyUser)
+    public function allyProfilModalAction(Ally $allyUser, Planet $usePlanet)
     {
         $user = $this->getUser();
         if ($usePlanet->getUser() != $user) {
