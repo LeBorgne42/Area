@@ -993,6 +993,9 @@ class Fleet
         if ($this->destroyer > 0) {
             $return[] = [number_format($this->destroyer), 'destroyer'];
         }
+        if ($this->nuclearBomb > 0) {
+            $return[] = [number_format($this->nuclearBomb), 'nuclearBomb'];
+        }
         return $return;
     }
 

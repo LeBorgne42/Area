@@ -66,7 +66,7 @@
                     <span><a href="{{ path('send_sonde', {'planet': planet.getId(), 'usePlanet': usePlanet.getId()}) }}">{{ 'interact.sendSonde'|trans }}</a></span>
                 </td>
             </tr>
-            {% if planet.getUser() %}
+            {% if planet.getUser() and planet.getUser().getZombie() == 0 %}
                 <tr>
                     <td colspan="3" class="center-cells">
                         <span><a href="{{ path('send_nuclear', {'planet': planet.getId(), 'usePlanet': usePlanet.getId()}) }}">{{ 'interact.sendNuclear'|trans }}</a></span>

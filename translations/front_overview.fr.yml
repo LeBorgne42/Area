@@ -3,6 +3,9 @@ modify: modifier
 tooltip.modify: 'Modifiez votre avatar !'
 tooltip.tanks: 'Tanks'
 tooltip.soldiers: 'Soldats'
+overview.yourFleet: 'Votre flotte'
+overview.fromTo: 'est en transit de'
+overview.goTo: 'vers'
 tooltip.scientists: 'Scientifiques'
 tooltip.level: 'Le niveau de votre Commandant.'
 tooltip.pseudo: 'Le nom de votre Commandant.'
@@ -30,14 +33,17 @@ info.allyMissing: 'Rejoignez une alliance !'
 info.allyMissingBoost: 'Et obtenez +20%'
 info.allyMissingBoost2: 'de ressources !'
 info.defcon: 'Niveau d''alerte Alliance :'
-overview.fleetName: 'Flottes en approche'
-overview.myFleet: 'Flottes proches de la destination'
+overview.otherFleet: 'Flottes en approchent'
+overview.oneFleet: 'Une flotte'
+overview.fromPlayer: 'du joueur'
+overview.arriveFrom: 'venant de'
+overview.arriveTo: 'arrive sur'
+overview.myFleet: 'Mouvements en cours'
 overview.from: De
-overview.goTo: Vers
 overview.time: Temps
 overview.fleetShips: 'Vaisseaux : ST'
 overview.fleetSignature: Signature
-tooltip.signature: 'ST signifie signature thermique, il serait trop facile que tout le monde sache ce qu''il y a dans la composition de votre flotte, ainsi la signature donne un ordre de grandeur sans rentrer dans le détails de la flotte.'
+tooltip.signature: 'Ceci correspond a la signature thermique de votre flotte.'
 title.lastFleet: 'Flottes en mouvement'
 title.planet: Planète
 constructionsWaiting: 'Constructions en attentes sur la planète'

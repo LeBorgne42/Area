@@ -116,6 +116,7 @@ tooltip.colonize: 'Cliquez pour coloniser cette planète.'
 tooltip.recycle: 'Temps avant prochain recyclage.'
 fleet.deleteList: Supprimer
 sonde: Sondes
+nuclearBomb: 'Missile nucléaire'
 destroyer: Destroyers
 ironClad: Cuirassés
 croiser: Croiseurs
