@@ -136,9 +136,9 @@ class SoldierController extends AbstractController
                 $now->setTimezone(new DateTimeZone('Europe/Paris'));
                 $nbrNuclear = abs($form_caserneRecruit->get('nuclear')->getData());
                 if($nbrNuclear > $user->getBitcoin() / 25000 ||
-                    $nbrNuclear * 1000 > $usePlanet->getUranium() ||
+                    $nbrNuclear * 500 > $usePlanet->getUranium() ||
                     ($usePlanet->getWorker() < 10000 || ($usePlanet->getNuclearBomb() + $nbrNuclear) > $usePlanet->getNuclearBase())) {
-                    if ($nbrNuclear * 1000 > $usePlanet->getUranium()) {
+                    if ($nbrNuclear * 500 > $usePlanet->getUranium()) {
                         $this->addFlash("fail", "Vous n'avez pas assez d'uranium.");
                     } elseif ($nbrNuclear > $user->getBitcoin() / 25000) {
                         $this->addFlash("fail", "Vous ne disposez pas d'assez de bitcoins.");
@@ -157,13 +157,13 @@ class SoldierController extends AbstractController
                         return $this->redirectToRoute('soldier', ['usePlanet' => $usePlanet->getId()]);
                     }
                     $tmpNuclear = $usePlanet->getNuclearAtNbr();
-                    $now->add(new DateInterval('PT' . round(($nbrNuclear + $tmpNuclear) * 60) . 'S'));
+                    $now->add(new DateInterval('PT' . round(($nbrNuclear + $tmpNuclear) * 24) . 'H'));
                     $usePlanet->setNuclearAtNbr($usePlanet->getNuclearAtNbr() + $nbrNuclear);
                 } else {
                     $now->add(new DateInterval('PT' . round($nbrNuclear * 24) . 'H'));
                     $usePlanet->setNuclearAtNbr($nbrNuclear);
                 }
-                $usePlanet->setUranium($usePlanet->getUranium() - ($nbrNuclear * 1000));
+                $usePlanet->setUranium($usePlanet->getUranium() - ($nbrNuclear * 500));
                 $user->setBitcoin($user->getBitcoin() - ($nbrNuclear * 25000));
                 $usePlanet->setNuclearAt($now);
                 $quest = $user->checkQuests('nuclear');

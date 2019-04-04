@@ -77,7 +77,7 @@ function manageTime() {
             } else {
                 if (date_now > 0) {
                     if (jours > 0) {
-                        area.text('(' + jours + ':' + heures + ':' + minutes + ':' + secondes + ')');
+                        area.text('(' + jours + 'j ' + heures + ':' + minutes + ':' + secondes + ')');
                         area.removeAttr('hidden');
                     } else if (heures > 0) {
                         area.text('(' + heures + ':' + minutes + ':' + secondes + ')');
@@ -118,7 +118,6 @@ $(document).ready(function() {
     $('[data-toggle="popover"]').popover();
     $('[data-toggle="tooltip"]').tooltip();
     $('[data-toggle="confirmation"]').confirmation();
-
     $("body").scrollspy({
         target: "#navbar-rules",
         offset: 70

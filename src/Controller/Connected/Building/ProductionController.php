@@ -88,7 +88,7 @@ class ProductionController extends AbstractController
         }
         $now->add(new DateInterval('PT' . 60 . 'S'));
         $usePlanet->setMiner($level - 1);
-        $usePlanet->setNbProduction($usePlanet->getNbProduction() - ($level * 1.1));
+        $usePlanet->setNbProduction($usePlanet->getNbProduction() - ($level * 1.06));
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setConstruct('destruct');
         $usePlanet->setConstructAt($now);
@@ -167,7 +167,7 @@ class ProductionController extends AbstractController
         }
         $now->add(new DateInterval('PT' . 60 . 'S'));
         $usePlanet->setExtractor($level - 1);
-        $usePlanet->setWtProduction($usePlanet->getWtProduction() - ($level * 1.09));
+        $usePlanet->setWtProduction($usePlanet->getWtProduction() - ($level * 1.05));
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setConstruct('destruct');
         $usePlanet->setConstructAt($now);
