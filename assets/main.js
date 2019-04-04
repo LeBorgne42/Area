@@ -90,6 +90,7 @@ function manageTime() {
                         area.removeAttr('hidden');
                     }
                     secondes = secondes - 1;
+                    secondes = (secondes > 10) ? secondes : '0' + secondes;
                     if (secondes == 0 || secondes < 0) {
                         if (minutes == 0 && heures == 0 && jours == 0) {
                             area.html("<a style='cursor: pointer;' onclick='window.location.reload(false)'>Terminée</a>");
@@ -99,9 +100,11 @@ function manageTime() {
                         } else {
                             secondes = 60;
                             minutes = minutes - 1;
+                            minutes = (minutes > 10) ? minutes : '0' + minutes;
                             if (minutes == 0 && heures != 0) {
                                 minutes = 60;
                                 heures = heures - 1;
+                                heures = (heures > 10) ? heures : '0' + heures;
                             }
                         }
                     }
