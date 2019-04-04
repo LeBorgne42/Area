@@ -785,20 +785,20 @@ class InstantController extends AbstractController
             $reportNuclearAtt = new Report();
             $reportNuclearAtt->setType('invade');
             $reportNuclearAtt->setTitle("Votre missile nucléaire a touché sa cible !");
-            $reportNuclearAtt->setImageName("nuclear.jpg");
+            $reportNuclearAtt->setImageName("nuclear_attack.png");
             $reportNuclearAtt->setSendAt($now);
             $reportNuclearAtt->setUser($nuclear->getUser());
             $reportNuclearDef = new Report();
             $reportNuclearDef->setType('invade');
             $reportNuclearDef->setTitle("Un missile nucléaire vous a frapper !");
-            $reportNuclearDef->setImageName("nuclear.jpg");
+            $reportNuclearDef->setImageName("nuclear_attack.png");
             $reportNuclearDef->setSendAt($now);
             $reportNuclearDef->setUser($newHome->getUser());
             $em->remove($nuclear);
             if ($newHome->getMetropole() > 0) {
                 $newHome->setMetropole($newHome->getMetropole() - 1);
                 $newHome->setWorkerMax($newHome->getWorkerMax() - 75000);
-                $newHome->setWorkerProduction($newHome->getWorkerProduction() - 5000);
+                $newHome->setWorkerProduction($newHome->getWorkerProduction() - 4.16);
                 if ($newHome->getWorker() > $newHome->getWorkerMax()) {
                     $newHome->setWorker($newHome->getWorkerMax());
                 }
@@ -807,7 +807,7 @@ class InstantController extends AbstractController
             } elseif ($newHome->getCity() > 0) {
                 $newHome->setCity($newHome->getCity() - 1);
                 $newHome->setWorkerMax($newHome->getWorkerMax() - 25000);
-                $newHome->setWorkerProduction($newHome->getWorkerProduction() - 2000);
+                $newHome->setWorkerProduction($newHome->getWorkerProduction() - 2.78);
                 if ($newHome->getWorker() > $newHome->getWorkerMax()) {
                     $newHome->setWorker($newHome->getWorkerMax());
                 }
@@ -827,8 +827,11 @@ class InstantController extends AbstractController
                 if ($newHome->getSoldier() > $newHome->getSoldierMax()) {
                     $newHome->setSoldier($newHome->getSoldierMax());
                 }
-                $reportNuclearDef->setContent("Un missile vient de frapper votre planète " . $newHome->getName() . " en " . "<span><a href='/connect/carte-spatiale/" . $newHome->getSector()->getPosition() ."/" . $newHome->getSector()->getGalaxy()->getPosition() ."/" . $usePlanet->getId() . "'>(" . $newHome->getSector()->getGalaxy()->getPosition() . "." . $newHome->getSector()->getPosition() . "." . $newHome->getPosition() . ")</a></span> Une caserne a été détruite.. Il provenait du Dirigeant " . $nuclear->getUser()->getUsername() . ".");
+                $reportNuclearDef->setContent("Un missile vient de frapper votre planète " . $newHome->getName() . " en " . "<span><a href='/connect/carte-spatiale/" . $newHome->getSector()->getPosition() ."/" . $newHome->getSector()->getGalaxy()->getPosition() ."/" . $usePlanet->getId() . "'>(" . $newHome->getSector()->getGalaxy()->getPosition() . "." . $newHome->getSector()->getPosition() . "." . $newHome->getPosition() . ")</a></span> Une caserne a été détruite. Il provenait du Dirigeant " . $nuclear->getUser()->getUsername() . ".");
                 $reportNuclearAtt->setContent("Votre missile vient de frapper la planète adverse " . $newHome->getName() . " en " . "<span><a href='/connect/carte-spatiale/" . $newHome->getSector()->getPosition() ."/" . $newHome->getSector()->getGalaxy()->getPosition() ."/" . $usePlanet->getId() . "'>(" . $newHome->getSector()->getGalaxy()->getPosition() . "." . $newHome->getSector()->getPosition() . "." . $newHome->getPosition() . ")</a></span>. Une caserne a été détruite.");
+            } else {
+                $reportNuclearDef->setContent("Un missile vient de frapper votre planète " . $newHome->getName() . " en " . "<span><a href='/connect/carte-spatiale/" . $newHome->getSector()->getPosition() ."/" . $newHome->getSector()->getGalaxy()->getPosition() ."/" . $usePlanet->getId() . "'>(" . $newHome->getSector()->getGalaxy()->getPosition() . "." . $newHome->getSector()->getPosition() . "." . $newHome->getPosition() . ")</a></span> Par chance votre planète n'avait aucune infrastructures ciblées. Il provenait du Dirigeant " . $nuclear->getUser()->getUsername() . ".");
+                $reportNuclearAtt->setContent("Votre missile vient de frapper la planète adverse " . $newHome->getName() . " en " . "<span><a href='/connect/carte-spatiale/" . $newHome->getSector()->getPosition() ."/" . $newHome->getSector()->getGalaxy()->getPosition() ."/" . $usePlanet->getId() . "'>(" . $newHome->getSector()->getGalaxy()->getPosition() . "." . $newHome->getSector()->getPosition() . "." . $newHome->getPosition() . ")</a></span>. Aucune infrastructure n'a été détruite.");
             }
             $em->persist($reportNuclearAtt);
             $em->persist($reportNuclearDef);
