@@ -64,6 +64,10 @@ function manageTime() {
         var heures = Math.floor((date_now - (jours * 60 * 60 * 24)) / (60 * 60));
         var minutes = Math.floor((date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60))) / 60);
         var secondes = Math.floor(date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60 + minutes * 60)));
+        jours = (jours > 10) ? jours : '0' + jours;
+        heures = (heures > 10) ? heures : '0' + heures;
+        minutes = (minutes > 10) ? minutes : '0' + minutes;
+        secondes = (secondes > 10) ? secondes : '0' + secondes;
         setInterval(function() {
             if (build < now) {
                 area.html("<a style='cursor: pointer;' onclick='window.location.reload(false)'>Terminée</a>");
@@ -73,16 +77,16 @@ function manageTime() {
             } else {
                 if (date_now > 0) {
                     if (jours > 0) {
-                        area.text(jours + 'j ' + heures + 'h ' + minutes + 'mins ' + secondes + 's');
+                        area.text('(' + jours + ':' + heures + ':' + minutes + ':' + secondes + ')');
                         area.removeAttr('hidden');
                     } else if (heures > 0) {
-                        area.text(heures + 'h ' + minutes + 'mins ' + secondes + 's');
+                        area.text('(' + heures + ':' + minutes + ':' + secondes + ')');
                         area.removeAttr('hidden');
                     } else if (minutes > 0) {
-                        area.text(minutes + 'mins ' + secondes + 's');
+                        area.text('(' + minutes + ':' + secondes + ')');
                         area.removeAttr('hidden');
                     } else if (secondes > 0) {
-                        area.text(secondes + ' secondes');
+                        area.text('(' + secondes + ')');
                         area.removeAttr('hidden');
                     }
                     secondes = secondes - 1;
