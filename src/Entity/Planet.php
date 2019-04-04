@@ -1763,9 +1763,9 @@ class Planet
     }
 
     /**
-     * @return \DateTime
+     * @return
      */
-    public function getUpdatedAt(): \DateTime
+    public function getUpdatedAt()
     {
         return $this->updatedAt;
     }

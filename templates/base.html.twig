@@ -11,6 +11,7 @@
     </head>
     <body class="area">
     {% set allPlanets = app.user.getPlanets() %}
+    {#{% set allPlanets = render(controller('App\\Controller\\Connected\\AllPlanetsController::allPlanetsAction')) %}#}
     {% set allTuto = app.user.getTutorial() %}
 
     {%- block left_menu -%}

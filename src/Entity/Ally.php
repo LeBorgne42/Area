@@ -471,7 +471,7 @@ class Ally
      */
     public function addGrade(\App\Entity\Grade $grade)
     {
-        $this->grade[] = $grade;
+        $this->grades[] = $grade;
 
         return $this;
     }
@@ -483,7 +483,7 @@ class Ally
      */
     public function removeGrade(\App\Entity\Grade $grade)
     {
-        $this->grade->removeElement($grade);
+        $this->grades->removeElement($grade);
     }
 
     /**
@@ -795,9 +795,9 @@ class Ally
     }
 
     /**
-     * @return \DateTime
+     * @return
      */
-    public function getUpdatedAt(): \DateTime
+    public function getUpdatedAt()
     {
         return $this->updatedAt;
     }
@@ -839,7 +839,7 @@ class Ally
      */
     public function getGrade()
     {
-        return $this->grade;
+        return $this->grades;
     }
 
     /**
@@ -847,7 +847,7 @@ class Ally
      */
     public function setGrade($grade): void
     {
-        $this->grade = $grade;
+        $this->grades = $grade;
     }
 
     /**
@@ -1109,22 +1109,6 @@ class Ally
     public function setMaxMembers($maxMembers): void
     {
         $this->maxMembers = $maxMembers;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDescritpion(): string
-    {
-        return $this->descritpion;
-    }
-
-    /**
-     * @param string $descritpion
-     */
-    public function setDescritpion(string $descritpion): void
-    {
-        $this->descritpion = $descritpion;
     }
 
     /**

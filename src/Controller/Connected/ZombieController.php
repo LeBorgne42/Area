@@ -24,7 +24,7 @@ class ZombieController extends AbstractController
     /**
      * @Route("/zombie/{usePlanet}", name="zombie", requirements={"usePlanet"="\d+"})
      */
-    public function soldierAction(Request $request, Planet $usePlanet)
+    public function ZombieAction(Request $request, Planet $usePlanet)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
@@ -179,7 +179,7 @@ class ZombieController extends AbstractController
     /**
      * @Route("/finir-mission/{mission}/{usePlanet}", name="mission_finish", requirements={"usePlanet"="\d+", "mission"="\d+"})
      */
-    public function reportViewAction(Planet $usePlanet, Mission $mission)
+    public function zombieFinishAction(Planet $usePlanet, Mission $mission)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
