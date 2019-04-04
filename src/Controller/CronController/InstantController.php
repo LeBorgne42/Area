@@ -37,8 +37,8 @@ class InstantController extends AbstractController
             foreach ($asteroides as $asteroide) {
 
                 $asteroide->setRecycleAt($nowAste);
-                $asteroide->setNbCdr($asteroide->getNbCdr() + rand(500000, 2000000));
-                $asteroide->setWtCdr($asteroide->getWtCdr() + rand(400000, 1800000));
+                $asteroide->setNbCdr($asteroide->getNbCdr() + rand(50000, 500000));
+                $asteroide->setWtCdr($asteroide->getWtCdr() + rand(40000, 400000));
 
 
                 if(rand(1, 50) == 50) {
@@ -638,7 +638,7 @@ class InstantController extends AbstractController
             $zUser->setZombieAt($nextZombie);
             $fleetZb = new Fleet();
             $fleetZb->setName('Horde');
-            $fleetZb->setCorvet(1 + round(($zUser->getAllShipsPoint() / (10 * rand(1, 3)))));
+            $fleetZb->setCorvet(1 + round(($zUser->getAllShipsPoint() / (5 * rand(1, 5)))));
             $fleetZb->setUser($zombie);
             $fleetZb->setPlanet($planetZb);
             $fleetZb->setPlanete($planetAtt->getPosition());

@@ -158,6 +158,7 @@ class FightController extends AbstractController
         $debrisDef = 0;
         $politicA = null;
         $politicB = null;
+        $zombie = 0;
 
         foreach($blockAtt as $attacker) {
             if ($attacker->getUser()->getAlly()) {
@@ -183,6 +184,9 @@ class FightController extends AbstractController
             $shield = $shield + $attacker->getShield();
             $debrisAtt = $debrisAtt + $attacker->getNbrSignatures() + $attacker->getCargoFull();
             $armeSaveA = $missile + $laser + $plasma;
+            if ($attacker->getUser()->getZombie() == 1) {
+                $zombie = 1;
+            }
         }
         foreach($blockDef as $defender) {
             if ($defender->getUser()->getAlly()) {
@@ -208,6 +212,9 @@ class FightController extends AbstractController
             $plasmaD = $plasmaD + $defender->getPlasma();
             $debrisDef = $debrisDef + $defender->getNbrSignatures() + $defender->getCargoFull();
             $armeSaveB = $laserD + $plasmaD + $missileD;
+            if ($defender->getUser()->getZombie() == 1) {
+                $zombie = 1;
+            }
         }
         if ($politicA && $politicB && $politicA != $politicB) {
             if ($politicA == 'fascim' && $politicB == 'communism') {
@@ -239,8 +246,13 @@ class FightController extends AbstractController
 
         $armorSaveA = $armor;
         $armorSaveD = $armorD;
-        $warPointA = round($armor / 80);
-        $warPointB = round($armorD / 80);
+        if ($zombie == 1) {
+            $warPointA = round($armor / 800);
+            $warPointB = round($armorD / 800);
+        } else {
+            $warPointA = round($armor / 80);
+            $warPointB = round($armorD / 80);
+        }
         $attAll = $missile + $laser + $plasma;
         $defAll = $missileD + $laserD + $plasmaD;
 
