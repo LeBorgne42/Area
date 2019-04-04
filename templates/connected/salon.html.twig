@@ -29,17 +29,13 @@
                             <tr>
                                 <th class="tab-cells-name">
                                     <div>
+                                        {{ message.getSendAt()|date('H:i') }}
                                         {% if message.getUser().getImageName() %}
                                             <img height="15" width="15" src="{{ vich_uploader_asset(message.getUser(), 'imageFile') }}">
                                         {% else %}
                                             <img height="15" width="15" src="{{ asset('img/avatar.png') }}">
                                         {% endif %}
-                                        {% if message.getUser().getAlly() %}<span><a data-toggle="modal" data-target="#allyModal" href="{{ path('ally_profil_modal', {'allyUser': message.getUser().getAlly().getId(), 'usePlanet': usePlanet.getId()}) }}">[{{ message.getUser().getAlly().getSigle() }}] </a></span>{% endif %}<span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'usePlanet': usePlanet.getId(), 'userPlanet': message.getUser().getId()}) }}" {% if message.getUser() == app.user %} class="text-vert"{% endif %}>{{ message.getUser().getUserName() }}</a></span> :  <span class="ml-2">{{ message.getMessage()|raw }}</span>
-                                    </div>
-                                </th>
-                                <th width="125px" class="tab-cells-name cell-middle">
-                                    <div>
-                                        {{ message.getSendAt()|date('H:i:s  d/m/Y') }}
+                                        {% if message.getUser().getAlly() %}<span class="text-orange nameSalon">[{{ message.getUser().getAlly().getSigle() }}] </span>{% endif %}<span class="text-orange nameSalon{% if message.getUser() == app.user %} text-vert{% endif %}">{{ message.getUser().getUserName() }}</span> :  <span class="ml-2 {% if app.user.getUsername() ~ ' >' in message.getMessage() or (app.user.getAlly() and app.user.getAlly().getSigle() ~ ' >' in  message.getMessage()) %} text-bleu{% endif %}">{{ message.getMessage()|raw }}</span>
                                     </div>
                                 </th>
                             </tr>

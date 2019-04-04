@@ -18,6 +18,15 @@ function manageSalon() {
     }
 }
 
+
+function manageFocusSalon() {
+    $('.nameSalon').off('click').on('click',function(e){
+        if ($('#salon_content').val().indexOf($(this).text() + " > ") == -1) {
+            $('#salon_content').val($(this).text() + " > "  + $('#salon_content').val());
+        }
+    });
+}
+
 function manageDisplaySalon(){
     if(document.location.href.match('/salon(/|$)')) {
         setTimeout( function(){
@@ -37,4 +46,5 @@ function manageDisplaySalon(){
 $(document).ready(function() {
     manageDisplaySalon();
     manageSalon();
+    manageFocusSalon();
 });
