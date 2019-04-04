@@ -930,7 +930,7 @@ class User implements UserInterface, \Serializable
     public function getFirstPlanet()
     {
         foreach ($this->planets as $planet) {
-            return $planet->getSector()->getGalaxy()->getPosition() . ":" . $planet->getSector()->getPosition() . ":" . $planet->getPosition();
+            return "(" . $planet->getSector()->getGalaxy()->getPosition() . "." . $planet->getSector()->getPosition() . "." . $planet->getPosition() . ")";
         }
         return 'Game over';
     }
