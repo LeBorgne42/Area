@@ -4,7 +4,7 @@ tooltip.planetAlly: '[%ally%] %name%'
 tooltip.planetInfos: 'Terrain: %land% <img class="mb-1" src="https://www.areauniverse.eu/img/ground.png"> <br> Espace: %sky% <img class="mb-1" src="https://www.areauniverse.eu/img/sky.png"> <br> Radar: %radar% <br> Brouilleur: %brouilleur% <br> Au sol: %ground%'
 tooltip.planetOrbite: '%orbite%'
 map.coming: 'Flottes entrant dans le secteur'
-map.fleetName: 'Nom de flotte'
+map.fleetName: Nom
 map.from: De
 map.goTo: Vers
 map.time: Temps

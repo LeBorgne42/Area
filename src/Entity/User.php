@@ -1073,7 +1073,7 @@ class User implements UserInterface, \Serializable
         } elseif ($this->heavyShip < 3) {
             return $return;
         } elseif ($this->ally) {
-            if ($this->ally == 'fascism') {
+            if ($this->ally->getPolitic() == 'fascism') {
                 if ($this->politicBarge < 5){
                     return $return;
                 } elseif ($this->politicCostTank < 5){
@@ -1090,7 +1090,7 @@ class User implements UserInterface, \Serializable
                     return $return;
                 }
             }
-            if ($this->ally == 'democrat') {
+            if ($this->ally->getPolitic() == 'democrat') {
                 if ($this->politicCostScientist < 5){
                     return $return;
                 } elseif ($this->politicArmor < 5){
@@ -1107,7 +1107,7 @@ class User implements UserInterface, \Serializable
                     return $return;
                 }
             }
-            if ($this->ally == 'communism') {
+            if ($this->ally->getPolitic() == 'communism') {
                 if ($this->politicCostSoldier < 5){
                     return $return;
                 } elseif ($this->politicInvade < 5){

@@ -131,6 +131,11 @@ class Planet
     protected $fleets;
 
     /**
+     * @ORM\OneToMany(targetEntity="Destination", mappedBy="planet", fetch="EXTRA_LAZY")
+     */
+    protected $destinations;
+
+    /**
      * @ORM\OneToMany(targetEntity="Mission", mappedBy="planet", fetch="EXTRA_LAZY")
      */
     protected $missions;
@@ -506,6 +511,7 @@ class Planet
 
     public function __construct()
     {
+        $this->destinations = new \Doctrine\Common\Collections\ArrayCollection();
         $this->fleets = new \Doctrine\Common\Collections\ArrayCollection();
         $this->missions = new \Doctrine\Common\Collections\ArrayCollection();
         $this->constructions = new \Doctrine\Common\Collections\ArrayCollection();
@@ -857,7 +863,7 @@ class Planet
     {
         $planete = 0;
         foreach($this->getFleets() as $fleet) {
-            if($fleet->getPlanete()) {
+            if($fleet->getFlightTime()) {
                 $planete = 0;
             } else {
                 if($fleet->getUser() != $user) {
@@ -963,6 +969,46 @@ class Planet
             }
         }
         return $nbr;
+    }
+
+    /**
+     * Add destination
+     *
+     * @param \App\Entity\Destination $destination
+     *
+     * @return Planet
+     */
+    public function addDestination(\App\Entity\Destination $destination)
+    {
+        $this->destinations[] = $destination;
+
+        return $this;
+    }
+
+    /**
+     * Remove destination
+     *
+     * @param \App\Entity\Destination $destination
+     */
+    public function removeDestination(\App\Entity\Destination $destination)
+    {
+        $this->destinations->removeElement($destination);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDestinations()
+    {
+        return $this->destinations;
+    }
+
+    /**
+     * @param mixed $destinations
+     */
+    public function setDestinations($destinations): void
+    {
+        $this->destinations = $destinations;
     }
 
     /**

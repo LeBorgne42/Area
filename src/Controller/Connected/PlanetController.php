@@ -92,14 +92,17 @@ class PlanetController extends AbstractController
 
         $fleetComing = $em->getRepository('App:Fleet')
             ->createQueryBuilder('f')
-            ->join('f.sector', 's')
+            ->join('f.destination', 'd')
+            ->join('d.planet', 'dp')
+            ->join('dp.sector', 's')
             ->join('s.galaxy', 'g')
-            ->where('f.planete = :planete')
+            ->where('f.flightTime is not null')
+            ->andWhere('dp.position = :planete')
             ->andWhere('s.position = :sector')
             ->andWhere('g.position = :galaxy')
             ->andWhere('f.user != :user')
-            ->andWhere('f.attack = :true')
-            ->setParameters(['planete' => $abandonPlanet->getPosition(), 'true' => 1, 'sector' => $abandonPlanet->getSector()->getPosition(), 'galaxy' => $abandonPlanet->getSector()->getGalaxy()->getPosition(), 'user' => $user])
+            ->andWhere('f.attack = true')
+            ->setParameters(['planete' => $abandonPlanet->getPosition(), 'sector' => $abandonPlanet->getSector()->getPosition(), 'galaxy' => $abandonPlanet->getSector()->getGalaxy()->getPosition(), 'user' => $user])
             ->getQuery()
             ->getResult();
 

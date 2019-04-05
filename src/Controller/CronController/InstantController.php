@@ -8,6 +8,7 @@ use App\Entity\Report;
 use App\Entity\Fleet;
 use App\Entity\Rank;
 use App\Entity\User;
+use App\Entity\Destination;
 use DateTime;
 use DateTimeZone;
 use Dateinterval;
@@ -641,8 +642,10 @@ class InstantController extends AbstractController
             $fleetZb->setCorvet(1 + round(($zUser->getAllShipsPoint() / (5 * rand(1, 5)))));
             $fleetZb->setUser($zombie);
             $fleetZb->setPlanet($planetZb);
-            $fleetZb->setPlanete($planetAtt->getPosition());
-            $fleetZb->setSector($planetAtt->getSector());
+            $destination = new Destination();
+            $destination->setFleet($fleetZb);
+            $destination->setPlanet($planetAtt);
+            $em->persist($destination);
             $fleetZb->setFlightTime($timeAtt);
             $fleetZb->setAttack(1);
             $fleetZb->setFlightType(1);
@@ -783,13 +786,13 @@ class InstantController extends AbstractController
 
             $usePlanet = $em->getRepository('App:Planet')->findByFirstPlanet($newHome->getUser()->getUsername());
             $reportNuclearAtt = new Report();
-            $reportNuclearAtt->setType('invade');
+            $reportNuclearAtt->setType('fight');
             $reportNuclearAtt->setTitle("Votre missile nucléaire a touché sa cible !");
             $reportNuclearAtt->setImageName("nuclear_attack.png");
             $reportNuclearAtt->setSendAt($now);
             $reportNuclearAtt->setUser($nuclear->getUser());
             $reportNuclearDef = new Report();
-            $reportNuclearDef->setType('invade');
+            $reportNuclearDef->setType('fight');
             $reportNuclearDef->setTitle("Un missile nucléaire vous a frapper !");
             $reportNuclearDef->setImageName("nuclear_attack.png");
             $reportNuclearDef->setSendAt($now);
@@ -1041,16 +1044,7 @@ class InstantController extends AbstractController
                 if (!$usePlanet) {
                     $em->remove($fleet);
                 } else {
-                    $newHome = $em->getRepository('App:Planet')
-                        ->createQueryBuilder('p')
-                        ->join('p.sector', 's')
-                        ->join('s.galaxy', 'g')
-                        ->where('p.position = :planete')
-                        ->andWhere('s.position = :sector')
-                        ->andWhere('g.position = :galaxy')
-                        ->setParameters(['planete' => $fleet->getPlanete(), 'sector' => $fleet->getSector()->getPosition(), 'galaxy' => $fleet->getSector()->getGalaxy()->getPosition()])
-                        ->getQuery()
-                        ->getOneOrNullResult();
+                    $newHome = $fleet->getDestination()->getPlanet();
 
                     $userFleet = $fleet->getUser();
                     $report = new Report();
@@ -1062,11 +1056,9 @@ class InstantController extends AbstractController
                     $report->setContent("Bonjour dirigeant " . $userFleet->getUserName() . " votre flotte " . "<span><a href='/connect/gerer-flotte/" . $usePlanet->getId() . "/" . $fleet->getId() . "' data-toggle='modal' data-target='#editModal'>" . $fleet->getName() . "</a></span>" . " vient d'arriver en " . "<span><a href='/connect/carte-spatiale/" . $newHome->getSector()->getPosition() . "/" . $newHome->getSector()->getGalaxy()->getPosition() . "/" . $usePlanet->getId() . "'>" . $newHome->getSector()->getGalaxy()->getPosition() . ":" . $newHome->getSector()->getPosition() . ":" . $newHome->getPosition() . "</a></span>.");
                     $userFleet->setViewReport(false);
                     $oldPlanet = $fleet->getPlanet();
-                    $fleet->setPlanet($newHome);
-                    $fleet->setPlanete(null);
                     $fleet->setFlightTime(null);
-                    $fleet->setNewPlanet(null);
-                    $fleet->setSector(null);
+                    $fleet->setPlanet($newHome);
+                    $em->remove($fleet->getDestination());
 
                     $user = $fleet->getUser();
                     $eAlly = $user->getAllyEnnemy();
@@ -1197,7 +1189,7 @@ class InstantController extends AbstractController
                         $user = $fleet->getUser();
                         $newPlanet = $fleet->getPlanet();
 
-                        if ($fleet->getFlightType() == '1') {
+                        if ($fleet->getFlightType() == '1' && $fleet->getUser()->getZombie() == 0) {
                             $em->persist($report);
                         }
                         if ($fleet->getFlightType() == '2') {
@@ -1281,11 +1273,11 @@ class InstantController extends AbstractController
                                 }
                             }
 
-                            $planetTakee = $fleet->getPlanete();
-                            $sFleet = $fleet->getPlanet()->getSector()->getPosition();
+                            $planetTakee = $newPlanet->getPosition();
+                            $sFleet = $newPlanet->getSector()->getPosition();
                             $sector = $oldPlanet->getSector()->getPosition();
                             $galaxy = $oldPlanet->getSector()->getGalaxy()->getPosition();
-                            if ($fleet->getPlanet()->getSector()->getGalaxy()->getPosition() != $galaxy) {
+                            if ($newPlanet->getSector()->getGalaxy()->getPosition() != $galaxy) {
                                 $base = 18;
                                 $price = 25;
                             } else {
@@ -1319,11 +1311,12 @@ class InstantController extends AbstractController
                                 $nowFlight = new DateTime();
                                 $nowFlight->setTimezone(new DateTimeZone('Europe/Paris'));
                                 $nowFlight->add(new DateInterval('PT' . round($distance) . 'S'));
-                                $fleet->setNewPlanet($oldPlanet->getId());
                                 $fleet->setFlightTime($nowFlight);
                                 $fleet->setFlightType(1);
-                                $fleet->setSector($oldPlanet->getSector());
-                                $fleet->setPlanete($oldPlanet->getPosition());
+                                $destination = new Destination();
+                                $destination->setFleet($fleet);
+                                $destination->setPlanet($oldPlanet);
+                                $em->persist($destination);
                                 $fleet->setCancelFlight($moreNow);
                                 $fuser->setBitcoin($user->getBitcoin() - $carburant);
                             }
@@ -1463,9 +1456,6 @@ class InstantController extends AbstractController
                                     $defenser->setTank(0);
                                     if($fleet->getCargoPlace() > $fleet->getCargoFull()) {
                                         $place = $fleet->getCargoPlace() - $fleet->getCargoFull();
-                                        $niobium = 0;
-                                        $water = 0;
-                                        $uranium = 0;
                                         if ($place > $defenser->getNiobium()) {
                                             $fleet->setNiobium($fleet->getNiobium() + $defenser->getNiobium());
                                             $place = $place - $defenser->getNiobium();
@@ -1716,7 +1706,9 @@ class InstantController extends AbstractController
                             }
                         }
                     } else {
-                        $em->persist($report);
+                        if ($fleet->getUser()->getZombie() == 0) {
+                            $em->persist($report);
+                        }
                     }
                 }
             }

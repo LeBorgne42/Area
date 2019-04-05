@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Form\Front\MarketType;
 use App\Entity\Planet;
 use App\Entity\Report;
+use App\Entity\Destination;
 use App\Entity\Fleet;
 use DateTime;
 use DateTimeZone;
@@ -172,6 +173,13 @@ class MarketController extends AbstractController
             ->getQuery()
             ->getResult();
 
+        $planetMerchant = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->andWhere('p.merchant = true')
+            ->getQuery()
+            ->setMaxResults(1)
+            ->getOneOrNullResult();
+
         $gain = 0;
         $newWarPointS = 0;
         foreach ($planetsSeller as $planet) {
@@ -196,8 +204,10 @@ class MarketController extends AbstractController
                     $fleet->setMoonMaker(1);
                     $fleet->setUser($merchant);
                     $fleet->setPlanet($planet);
-                    $fleet->setPlanete(26);
-                    $fleet->setSector($planet->getSector());
+                    $destination = new Destination();
+                    $destination->setFleet($fleet);
+                    $destination->setPlanet($planetMerchant);
+                    $em->persist($destination);
                     $fleet->setFlightTime($repor);
                     $fleet->setAttack(0);
                     $fleet->setName('Cargos');

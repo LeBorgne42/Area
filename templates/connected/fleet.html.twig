@@ -93,16 +93,16 @@
                             {% endif %}
                         </td>
                         <td class="center-cells text-center">
-                            <span><a href="{{ path('map', {'sector': fleet.getSector().getId(), 'gal': fleet.getSector().getGalaxy().getId(), 'usePlanet': usePlanet.getId()}) }}">({{ fleet.getSector().getGalaxy.getPosition() }}.{{ fleet.getSector.getPosition() }}.{{ fleet.getPlanete() }})</a></span>
+                            <span><a href="{{ path('map', {'sector': fleet.getDestination().getPlanet().getSector().getId(), 'gal': fleet.getDestination().getPlanet().getSector().getGalaxy().getId(), 'usePlanet': usePlanet.getId()}) }}">{{ fleet.getDestination().getPlanet().getName() }} - ({{ fleet.getDestination().getPlanet().getSector().getGalaxy.getPosition() }}.{{ fleet.getDestination().getPlanet().getSector.getPosition() }}.{{ fleet.getDestination().getPlanet().getposition() }})</a></span>
                         </td>
                         <td class="center-cells text-center">
                             <span class="timerArea" hidden>{{ fleet.getFlightTime()|date('Y/m/d H:i:s') }}</span>
                         </td>
                         <td class="center-cells text-center">
-                            <span class="tipProduct" data-placement="right" data-trigger="" title="{% for ships in fleet.getShipsFleet() %}<div class='my-3 text-left'>{% set x = 0 %}{% for info in ships %} {% if x == 0 %}{{ info }}{% else %}{{ info|trans }}{% endif %}{% set x = x + 1 %} {% endfor %}</div>{% endfor %}" data-html="true">{{ fleet.getNbrShips()|number_format }} => {{ fleet.getNbrSignatures()|number_format }}</span>
+                            <span class="tipProduct" data-placement="right" data-trigger="" title="{% for ships in fleet.getShipsFleet() %}<div class='my-3 text-left'>{% set x = 0 %}{% for info in ships %} {% if x == 0 %}{{ info }}{% else %}{{ info|trans }}{% endif %}{% set x = x + 1 %} {% endfor %}</div>{% endfor %}" data-html="true">({{ fleet.getNbrSignatures()|number_format }})</span>
                         </td>
                         <td class="center-cells text-center">
-                            <span class="tipProduct" data-placement="right" data-trigger="" title="{% for cargos in fleet.getCargosFleet() %}<div class='my-3 text-left'>{% set x = 0 %}{% for info in cargos %} {% if x == 0 %}{{ info }}{% else %}{{ info|trans }}{% endif %}{% set x = x + 1 %} {% endfor %}</div>{% endfor %}" data-html="true">{{ fleet.getCargoFull()|number_format }} / {{ fleet.getCargoPlace()|number_format }}</span>
+                            <span class="tipProduct" data-placement="right" data-trigger="" title="{% for cargos in fleet.getCargosFleet() %}<div class='my-3 text-left'>{% set x = 0 %}{% for info in cargos %} {% if x == 0 %}{{ info }}{% else %}{{ info|trans }}{% endif %}{% set x = x + 1 %} {% endfor %}</div>{% endfor %}" data-html="true">{{ fleet.getCargoFull()|number_format }}</span>
                         </td>
                         {% if fleet.cancelFlight() > date %}
                             <td class="center-cells text-center">

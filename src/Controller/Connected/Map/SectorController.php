@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Planet;
 use App\Entity\Sector;
 use App\Entity\Galaxy;
+use App\Entity\Destination;
 use App\Form\Front\NavigateType;
 use App\Form\Front\InteractFleetType;
 use App\Entity\Fleet;
@@ -58,7 +59,9 @@ class SectorController extends AbstractController
             ->createQueryBuilder('f')
             ->leftJoin('f.planet', 'p')
             ->join('p.sector', 'ps')
-            ->join('f.sector', 'fs')
+            ->join('f.destination', 'd')
+            ->join('d.planet', 'dp')
+            ->join('dp.sector', 'fs')
             ->join('fs.galaxy', 'g')
             ->where('fs.position = :id')
             ->andWhere('g.position = :gal')
@@ -73,7 +76,9 @@ class SectorController extends AbstractController
             ->join('f.planet', 'p')
             ->join('p.sector', 'ps')
             ->join('ps.galaxy', 'g')
-            ->join('f.sector', 'fs')
+            ->join('f.destination', 'd')
+            ->join('d.planet', 'dp')
+            ->join('dp.sector', 'fs')
             ->where('fs.position != :id')
             ->andWhere('ps.position = :id')
             ->andWhere('g.position = :gal')
@@ -87,7 +92,9 @@ class SectorController extends AbstractController
             ->join('f.planet', 'p')
             ->join('p.sector', 'ps')
             ->join('ps.galaxy', 'gp')
-            ->join('f.sector', 'fs')
+            ->join('f.destination', 'd')
+            ->join('d.planet', 'dp')
+            ->join('dp.sector', 'fs')
             ->join('fs.galaxy', 'gs')
             ->where('ps.position = :id')
             ->andWhere('fs.position = :id')
@@ -204,10 +211,11 @@ class SectorController extends AbstractController
             $moreNow = new DateTime();
             $moreNow->setTimezone(new DateTimeZone('Europe/Paris'));
             $moreNow->add(new DateInterval('PT' . 120 . 'S'));
-            $fleet->setNewPlanet($planet->getId());
             $fleet->setFlightTime($now);
-            $fleet->setSector($planet->getSector());
-            $fleet->setPlanete($planete);
+            $destination = new Destination();
+            $destination->setFleet($fleet);
+            $destination->setPlanet($planet);
+            $em->persist($destination);
             $fleet->setFlightType($form_sendFleet->get('flightType')->getData());
             $fleet->setCancelFlight($moreNow);
             $user->setBitcoin($user->getBitcoin() - $carburant);
@@ -293,10 +301,11 @@ class SectorController extends AbstractController
         $moreNow = new DateTime();
         $moreNow->setTimezone(new DateTimeZone('Europe/Paris'));
         $moreNow->add(new DateInterval('PT' . 120 . 'S'));
-        $fleet->setNewPlanet($planet->getId());
         $fleet->setFlightTime($now);
-        $fleet->setSector($planet->getSector());
-        $fleet->setPlanete($planete);
+        $destination = new Destination();
+        $destination->setFleet($fleet);
+        $destination->setPlanet($planet);
+        $em->persist($destination);
         $fleet->setFlightType(1);
         $fleet->setCancelFlight($moreNow);
         $user->setBitcoin($user->getBitcoin() - $carburant);
@@ -338,7 +347,6 @@ class SectorController extends AbstractController
         if ($fPlanet == null) {
             return $this->redirectToRoute('map', ['usePlanet' => $usePlanet->getId(), 'sector' => $planet->getSector()->getId(), 'gal' => $planet->getSector()->getGalaxy()->getId()]);
         }
-        $planete = $planet->getPosition();
         $galaxy = $planet->getSector()->getGalaxy()->getPosition();
         if ($user->getHyperespace() == 0 && $fPlanet->getSector()->getGalaxy()->getPosition() != $galaxy) {
             return $this->redirectToRoute('map', ['usePlanet' => $usePlanet->getId(), 'id' => $fPlanet->getSector()->getPosition(), 'gal' => $fPlanet->getSector()->getGalaxy()->getPosition()]);
@@ -353,10 +361,11 @@ class SectorController extends AbstractController
         $fleet->setName('Missile nucléaire');
         $fPlanet->setNuclearBomb($fPlanet->getNuclearBomb() - 1);
         $now->add(new DateInterval('PT' . round(1800) . 'S'));
-        $fleet->setNewPlanet($planet->getId());
         $fleet->setFlightTime($now);
-        $fleet->setSector($planet->getSector());
-        $fleet->setPlanete($planete);
+        $destination = new Destination();
+        $destination->setFleet($fleet);
+        $destination->setPlanet($planet);
+        $em->persist($destination);
         $fleet->setFlightType(6);
         $em->persist($fleet);
         if ($planet->getUser()) {

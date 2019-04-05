@@ -17,6 +17,7 @@ use App\Form\Front\FleetListType;
 use App\Entity\Fleet;
 use App\Entity\Report;
 use App\Entity\Planet;
+use App\Entity\Destination;
 use App\Entity\Fleet_List;
 use Datetime;
 use DatetimeZone;
@@ -49,7 +50,7 @@ class FleetController  extends AbstractController
         $fleetGiveMove = $em->getRepository('App:Fleet')
             ->createQueryBuilder('f')
             ->where('f.user = :user')
-            ->andWhere('f.planete is not null')
+            ->andWhere('f.flightTime is not null')
             ->setParameters(['user' => $user])
             ->orderBy('f.flightTime')
             ->getQuery()
@@ -60,7 +61,7 @@ class FleetController  extends AbstractController
             ->join('f.planet', 'p')
             ->join('p.sector', 's')
             ->where('f.user = :user')
-            ->andWhere('f.planete is null')
+            ->andWhere('f.flightTime is null')
             ->andWhere('f.planet = :planet')
             ->setParameters(['user' => $user, 'planet' => $usePlanet])
             ->orderBy('s.position, p.position')
@@ -72,7 +73,7 @@ class FleetController  extends AbstractController
             ->join('f.planet', 'p')
             ->join('p.sector', 's')
             ->where('f.user = :user')
-            ->andWhere('f.planete is null')
+            ->andWhere('f.flightTime is null')
             ->andWhere('f.planet != :planet')
             ->andWhere('f.planet in (:planets)')
             ->setParameters(['user' => $user, 'planet' => $usePlanet, 'planets' => $user->getPlanets()])
@@ -85,7 +86,7 @@ class FleetController  extends AbstractController
             ->join('f.planet', 'p')
             ->join('p.sector', 's')
             ->where('f.user = :user')
-            ->andWhere('f.planete is null')
+            ->andWhere('f.flightTime is null')
             ->andWhere('f.planet not in (:planets)')
             ->setParameters(['user' => $user, 'planets' => $user->getPlanets()])
             ->orderBy('s.position, p.position')
@@ -173,7 +174,7 @@ class FleetController  extends AbstractController
     }
 
     /**
-     * @Route("/flotte-liste-ajouter/{fleetList}/{fleet}/{usePlanet}", name="fleet_list_add", requirements={"usePlanet"="\d+","fleetList"="\d+","fleet"="\d+"})
+     * @Route("/flotte-liste-ajouter/{usePlanet}/{fleetList}/{fleet}", name="fleet_list_add", requirements={"usePlanet"="\d+","fleetList"="\d+","fleet"="\d+"})
      */
     public function fleetListAddAction(Planet $usePlanet, Fleet_List $fleetList, Fleet $fleet)
     {
@@ -200,7 +201,7 @@ class FleetController  extends AbstractController
     }
 
     /**
-     * @Route("/flotte-liste-sub/{fleetList}/{fleet}/{usePlanet}", name="fleet_list_sub", requirements={"usePlanet"="\d+","fleetList"="\d+","fleet"="\d+"})
+     * @Route("/flotte-liste-sub/{usePlanet}/{fleetList}/{fleet}", name="fleet_list_sub", requirements={"usePlanet"="\d+","fleetList"="\d+","fleet"="\d+"})
      */
     public function fleetListSubAction(Planet $usePlanet, Fleet_List $fleetList, Fleet $fleet)
     {
@@ -253,7 +254,7 @@ class FleetController  extends AbstractController
     }
 
     /**
-     * @Route("/flotte-alliance-ajouter/{fleet}/{usePlanet}", name="fleet_ally_add", requirements={"usePlanet"="\d+","fleet"="\d+"})
+     * @Route("/flotte-alliance-ajouter/{usePlanet}/{fleet}", name="fleet_ally_add", requirements={"usePlanet"="\d+","fleet"="\d+"})
      */
     public function fleetAllyAddAction(Planet $usePlanet, Fleet $fleet)
     {
@@ -278,7 +279,7 @@ class FleetController  extends AbstractController
     }
 
     /**
-     * @Route("/flotte-alliance-sub/{fleet}/{usePlanet}", name="fleet_ally_sub", requirements={"usePlanet"="\d+","fleet"="\d+"})
+     * @Route("/flotte-alliance-sub/{usePlanet}/{fleet}", name="fleet_ally_sub", requirements={"usePlanet"="\d+","fleet"="\d+"})
      */
     public function fleetAllySubAction(Planet $usePlanet, Fleet $fleet)
     {
@@ -920,7 +921,10 @@ class FleetController  extends AbstractController
             }
             $distance = $speed * $base * 100; // 1000 MODE NORMAL
             $now->add(new DateInterval('PT' . round($distance) . 'S'));
-            $fleetGive->setNewPlanet($planetTake->getId());
+            $destination = new Destination();
+            $destination->setFleet($fleetGive);
+            $destination->setPlanet($planetTake);
+            $em->persist($destination);
             $fleetGive->setFlightTime($now);
             $fleetGive->setCancelFlight($moreNow);
             if($form_sendFleet->get('flightType')->getData() == '2' && ($planetTake->getUser() || $planetTake->getMerchant() == true)) {
@@ -935,8 +939,6 @@ class FleetController  extends AbstractController
             } else {
                 $fleetGive->setFlightType(1);
             }
-            $fleetGive->setSector($planetTake->getSector());
-            $fleetGive->setPlanete($planetTakee);
             $user->setBitcoin($user->getBitcoin() - $carburant);
 
             $em->flush();
@@ -1603,9 +1605,7 @@ class FleetController  extends AbstractController
 
         if($fleet->getCancelFlight() > $now) {
             $fleet->setFlightTime(null);
-            $fleet->setPlanete(null);
-            $fleet->setSector(null);
-            $fleet->setNewPlanet(null);
+            $em->remove($fleet->getDestination());
 
             $em->flush();
         }

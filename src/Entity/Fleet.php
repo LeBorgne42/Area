@@ -62,15 +62,15 @@ class Fleet
     protected $planet;
 
     /**
+     * @ORM\OneToOne(targetEntity="Destination", mappedBy="fleet", fetch="EXTRA_LAZY")
+     */
+    protected $destination;
+
+    /**
      * @ORM\OneToOne(targetEntity="Commander", inversedBy="fleet", fetch="EXTRA_LAZY", cascade={"persist"})
      * @ORM\JoinColumn(name="commander_id", referencedColumnName="id")
      */
     protected $commander;
-
-    /**
-     * @ORM\Column(name="newPlanet",type="smallint", nullable=true)
-     */
-    protected $newPlanet;
 
     /**
      * @ORM\Column(name="flightTime",type="datetime", nullable=true)
@@ -91,16 +91,6 @@ class Fleet
      * @ORM\Column(name="recycleAt",type="datetime", nullable=true)
      */
     protected $recycleAt;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Sector", inversedBy="fleets", fetch="EXTRA_LAZY")
-     */
-    protected $sector;
-
-    /**
-     * @ORM\Column(name="planete",type="smallint", nullable=true)
-     */
-    protected $planete;
 
     /**
      * @ORM\Column(name="sonde",type="bigint", nullable=true)
@@ -288,9 +278,7 @@ class Fleet
         $this->cargoX = null;
         $this->colonizer = null;
         $this->sonde = null;
-        $this->planete = null;
         $this->fightAt = null;
-        $this->newPlanet = null;
         $this->flightTime = null;
         $this->cancelFlight = null;
         $this->flightType = null;
@@ -1444,54 +1432,6 @@ class Fleet
     /**
      * @return mixed
      */
-    public function getSector()
-    {
-        return $this->sector;
-    }
-
-    /**
-     * @param mixed $sector
-     */
-    public function setSector($sector): void
-    {
-        $this->sector = $sector;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPlanete()
-    {
-        return $this->planete;
-    }
-
-    /**
-     * @param mixed $planete
-     */
-    public function setPlanete($planete): void
-    {
-        $this->planete = $planete;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getNewPlanet()
-    {
-        return $this->newPlanet;
-    }
-
-    /**
-     * @param mixed $newPlanet
-     */
-    public function setNewPlanet($newPlanet): void
-    {
-        $this->newPlanet = $newPlanet;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getFightAt()
     {
         return $this->fightAt;
@@ -1879,6 +1819,22 @@ class Fleet
     public function setNuclearBomb($nuclearBomb): void
     {
         $this->nuclearBomb = $nuclearBomb;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDestination()
+    {
+        return $this->destination;
+    }
+
+    /**
+     * @param mixed $destination
+     */
+    public function setDestination($destination): void
+    {
+        $this->destination = $destination;
     }
 
     /**

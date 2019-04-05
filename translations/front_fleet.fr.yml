@@ -1,7 +1,7 @@
 title: Flotte
 fleet.onThisPlanet: 'Sur %planet%'
 fleet.createFlotte: 'Créer une nouvelle flotte'
-fleet.fleetName: 'Nom de la flotte'
+fleet.fleetName: Nom
 fleet.fleetShips: 'Vaisseaux : ST'
 fleet.fleetSignature: Signature
 fleet.seeFlotte: 'gestion flotte'
@@ -76,7 +76,7 @@ recyclerCancel: annuler
 fleet.flightTime: 'Temps de vol :'
 fleet.split: scinder
 fleet.splitFleet: 'Scinder flotte en deux'
-fleet.name: 'Nom de flotte'
+fleet.name: Nom
 fleet.hunterWar: 'Chasseur a plasma'
 fleet.corvetWar: 'Corvette de combat'
 fleet.moonMaker: Lunar

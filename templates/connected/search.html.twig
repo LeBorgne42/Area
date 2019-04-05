@@ -1092,7 +1092,7 @@
                 {% if app.user.getAlly() and app.user.getAlly().getPolitic == 'fascism' %}
                     <tr class="{% if app.user.getPoliticWorker() == 5 %}finish-search{% else %}access-search{% endif %}">
                         <th class="tab-cells-name">
-                            <img class="float-left building-img ml-3" src="{{ asset('img/worker_ally.jpg') }}"><button class="text-orange">{{ 'title.worker.ally'|trans|raw }} - {{ 'research.level'|trans|raw }} {{ app.user.getPoliticRecycleur()|trans }} / 5</button>
+                            <img class="float-left building-img ml-3" src="{{ asset('img/worker_ally.jpg') }}"><button class="text-orange">{{ 'title.worker.ally'|trans|raw }} - {{ 'research.level'|trans|raw }} {{ app.user.getPoliticWorker()|trans }} / 5</button>
                             {% if app.user.getPoliticWorker() != 5 %}<div class="mt-4">{% if (app.user.getPoliticWorker() + 1) * app.user.getResearchCost('worker_ally') > app.user.getBitcoin() %}<span class="text-rouge">{{ ((app.user.getPoliticWorker() + 1) * app.user.getResearchCost('worker_ally'))|number_format }}</span>{% else %}{{ ((app.user.getPoliticWorker() + 1) * app.user.getResearchCost('worker_ally'))|number_format }}{% endif %} <img data-toggle="tooltip" data-placement="bottom" title="{{ 'bitcoinImg'|trans }}" src="{{ asset('img/coin.png') }}"></div>{% endif %}
                         </th>
                         {% if app.user.getPoliticWorker() == 5 %}
