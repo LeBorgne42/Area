@@ -1,0 +1,27 @@
+<div style="margin-top: 2rem;margin-left: 3rem;"><img src="{{ absolute_url(asset('img/logo.png')) }}"></div>
+
+<h3>Bonjour {{ username }} nous sommes heureux de vous annoncer l'ouverture d'un nouveau serveur Exile à cette adresse :</h3>
+
+<a href="https://s03.exile.ovh/">https://s03.exile.ovh/</a>
+
+<div>
+    Et pour ceux qui veulent continuer l'aventure Area Universe, voici les nouveautés :
+    <br>
+    - Les régimes politiques avec bonus/malus et recherche spécifiques.
+    - Les zombies et attaques zombies.
+    - La ressource Uranium qui permet la construction de missiles nucléaires.
+    - Le lancement de missiles nucléaires sur d'autres planètes.
+    - Le pillage de ressources d'une planète.
+    - Les tanks pour défendre une planète des invasions/pillages.
+    - Deux bâtiments pour agrandir le terrain/Espace des planètes.
+    - Le design pour une meilleure expèrience de jeu.
+    - Une optimisation du recyclage (automatique).
+</div>
+
+<div>Revenez jeter un oeil en cliquant <a href="{{ url('home') }}">ici</a>.</div>
+
+<div>Si vous avez oublié votre mot de passe <a href="{{ url('recoveryPw', {'key': id}) }}">cliquez ici</a> pour en obtenir un nouveau.</div>
+
+<div>Area Universe.</div>
+
+<small><a href="{{ url('deactivate_newletter', {'key': key}) }}">Cliquer ici pour ne plus recevoir de mail.</a></small>

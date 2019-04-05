@@ -111,12 +111,12 @@ class ExternalController extends AbstractController
         $users = $em->getRepository('App:User')->findAll();
 
         foreach($users as $user) {
-            $message = (new \Swift_Message('Nouveau serveur 2019'))
+            $message = (new \Swift_Message('Nouveau serveur Exile'))
                 ->setFrom('support@areauniverse.eu')
                 ->setTo($user->getEmail())
                 ->setBody(
                     $this->renderView(
-                        'emails/new_server.html.twig',
+                        'emails/new_email.html.twig',
                         [
                             'username' => $user->getUsername(),
                             'key' => $user->getId() //fixmr encrypt
