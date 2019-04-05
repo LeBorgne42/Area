@@ -780,7 +780,7 @@ class InstantController extends AbstractController
                 ->where('p.position = :planete')
                 ->andWhere('s.position = :sector')
                 ->andWhere('g.position = :galaxy')
-                ->setParameters(['planete' => $nuclear->getPlanete(), 'sector' => $nuclear->getSector()->getPosition(), 'galaxy' => $nuclear->getSector()->getGalaxy()->getPosition()])
+                ->setParameters(['planete' => $nuclear->getDestination()->getPlanet()->getPosition(), 'sector' => $nuclear->getDestination()->getPlanet()->getSector()->getPosition(), 'galaxy' => $nuclear->getDestination()->getPlanet()->getSector()->getGalaxy()->getPosition()])
                 ->getQuery()
                 ->getOneOrNullResult();
 
@@ -845,9 +845,9 @@ class InstantController extends AbstractController
         $tmpNoCdr->add(new DateInterval('PT' . 600 . 'S'));
         foreach ($fleetCdrs as $fleetCdr) {
             if ($fleetCdr->getUser()->getPoliticRecycleur() > 0) {
-                $recycle = $fleetCdr->getRecycleur() * (1000 + ($fleetCdr->getUser()->getPoliticRecycleur() * 200));
+                $recycle = $fleetCdr->getRecycleur() * (500 + ($fleetCdr->getUser()->getPoliticRecycleur() * 200));
             } else {
-                $recycle = $fleetCdr->getRecycleur() * 1000;
+                $recycle = $fleetCdr->getRecycleur() * 500;
             }
             $planetCdr = $fleetCdr->getPlanet();
             if ($fleetCdr->getCargoPlace() > ($fleetCdr->getCargoFull() + ($recycle * 2))) {
@@ -1058,7 +1058,9 @@ class InstantController extends AbstractController
                     $oldPlanet = $fleet->getPlanet();
                     $fleet->setFlightTime(null);
                     $fleet->setPlanet($newHome);
-                    $em->remove($fleet->getDestination());
+                    if ($fleet->getFlightType() != '2') {
+                        $em->remove($fleet->getDestination());
+                    }
 
                     $user = $fleet->getUser();
                     $eAlly = $user->getAllyEnnemy();
@@ -1313,10 +1315,7 @@ class InstantController extends AbstractController
                                 $nowFlight->add(new DateInterval('PT' . round($distance) . 'S'));
                                 $fleet->setFlightTime($nowFlight);
                                 $fleet->setFlightType(1);
-                                $destination = new Destination();
-                                $destination->setFleet($fleet);
-                                $destination->setPlanet($oldPlanet);
-                                $em->persist($destination);
+                                $fleet->getDestination()->setPlanet($oldPlanet);
                                 $fleet->setCancelFlight($moreNow);
                                 $fuser->setBitcoin($user->getBitcoin() - $carburant);
                             }

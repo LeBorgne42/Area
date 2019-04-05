@@ -74,7 +74,7 @@ class SpaceShipyardController extends AbstractController
         || $usePlanet->getProduct()) {
             return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
         }
-        $now->add(new DateInterval('PT' . 600 . 'S'));
+        $now->add(new DateInterval('PT' . 180 . 'S'));
         $usePlanet->setSpaceShip($level - 1);
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setShipProduction($usePlanet->getShipProduction() - 0.1);
@@ -141,7 +141,7 @@ class SpaceShipyardController extends AbstractController
         || $usePlanet->getProduct()) {
             return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
         }
-        $now->add(new DateInterval('PT' . 600 . 'S'));
+        $now->add(new DateInterval('PT' . 180 . 'S'));
         $usePlanet->setLightUsine($level - 1);
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setShipProduction($usePlanet->getShipProduction() - 0.15);
@@ -209,7 +209,7 @@ class SpaceShipyardController extends AbstractController
         || $usePlanet->getProduct()) {
             return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
         }
-        $now->add(new DateInterval('PT' . 600 . 'S'));
+        $now->add(new DateInterval('PT' . 180 . 'S'));
         $usePlanet->setHeavyUsine($level - 1);
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setShipProduction($usePlanet->getShipProduction() - 0.3);
@@ -275,7 +275,7 @@ class SpaceShipyardController extends AbstractController
             ($usePlanet->getSoldier() > $usePlanet->getSoldierMax() - 2500 || $usePlanet->getSoldierAt())) {
             return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
         }
-        $now->add(new DateInterval('PT' . 600 . 'S'));
+        $now->add(new DateInterval('PT' . 180 . 'S'));
         $usePlanet->setCaserne($level - 1);
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setSoldierMax($usePlanet->getSoldierMax() - 2500);
@@ -341,7 +341,7 @@ class SpaceShipyardController extends AbstractController
             ($usePlanet->getSoldier() > $usePlanet->getSoldierMax() - 20000 || $usePlanet->getSoldierAt())) {
             return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
         }
-        $now->add(new DateInterval('PT' . 600 . 'S'));
+        $now->add(new DateInterval('PT' . 180 . 'S'));
         $usePlanet->setBunker($level - 1);
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setSoldierMax($usePlanet->getSoldierMax() - 20000);
@@ -405,7 +405,7 @@ class SpaceShipyardController extends AbstractController
             $usePlanet->getSoldier() > $usePlanet->getNuclearMax() - 1) {
             return $this->redirectToRoute('building', ['usePlanet' => $usePlanet->getId()]);
         }
-        $now->add(new DateInterval('PT' . 600 . 'S'));
+        $now->add(new DateInterval('PT' . 180 . 'S'));
         $usePlanet->setNuclearBase($level - 1);
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setConstruct('destruct');
