@@ -91,8 +91,8 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
   font-size: 1.2rem;
   background-image: url("../public/img/form-game.jpg");
   line-height: 1.5rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
   text-shadow: 1.5px 1.5px 2px rgba(0,0,0, 0.8);
   border: 1px solid silver;
   border-radius: 5px;
@@ -307,7 +307,7 @@ a:hover {
 }
 
 .text-vert {
-  color: #00cc00;
+  color: lawngreen;
 }
 
 .text-bleu {

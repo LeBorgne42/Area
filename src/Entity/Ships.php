@@ -1,0 +1,1528 @@
+<?php
+
+namespace App\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\Criteria;
+
+/**
+ * @ORM\Table(name="ships")
+ * @ORM\Entity
+ */
+class Ships
+{
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @ORM\OneToOne(targetEntity="User", mappedBy="ship", fetch="EXTRA_LAZY")
+     */
+    protected $user;
+
+    /**
+     * @ORM\Column(name="pointHunter",type="smallint")
+     */
+    protected $pointHunter;
+
+    /**
+     * @ORM\Column(name="armorHunter",type="smallint")
+     */
+    protected $armorHunter;
+
+    /**
+     * @ORM\Column(name="accurateHunter",type="smallint")
+     */
+    protected $accurateHunter;
+
+    /**
+     * @ORM\Column(name="missileHunter",type="smallint")
+     */
+    protected $missileHunter;
+
+    /**
+     * @ORM\Column(name="pointHunterHeavy",type="smallint")
+     */
+    protected $pointHunterHeavy;
+
+    /**
+     * @ORM\Column(name="armorHunterHeavy",type="smallint")
+     */
+    protected $armorHunterHeavy;
+
+    /**
+     * @ORM\Column(name="accurateHunterHeavy",type="smallint")
+     */
+    protected $accurateHunterHeavy;
+
+    /**
+     * @ORM\Column(name="missileHunterHeavy",type="smallint")
+     */
+    protected $missileHunterHeavy;
+
+    /**
+     * @ORM\Column(name="pointHunterWar",type="smallint")
+     */
+    protected $pointHunterWar;
+
+    /**
+     * @ORM\Column(name="armorHunterWar",type="smallint")
+     */
+    protected $armorHunterWar;
+
+    /**
+     * @ORM\Column(name="accurateHunterWar",type="smallint")
+     */
+    protected $accurateHunterWar;
+
+    /**
+     * @ORM\Column(name="missileHunterWar",type="smallint")
+     */
+    protected $missileHunterWar;
+
+    /**
+     * @ORM\Column(name="laserHunterWar",type="smallint")
+     */
+    protected $laserHunterWar;
+
+    /**
+     * @ORM\Column(name="plasmaHunterWar",type="smallint")
+     */
+    protected $plasmaHunterWar;
+
+    /**
+     * @ORM\Column(name="pointCorvet",type="smallint")
+     */
+    protected $pointCorvet;
+
+    /**
+     * @ORM\Column(name="armorCorvet",type="smallint")
+     */
+    protected $armorCorvet;
+
+    /**
+     * @ORM\Column(name="accurateCorvet",type="smallint")
+     */
+    protected $accurateCorvet;
+
+    /**
+     * @ORM\Column(name="missileCorvet",type="smallint")
+     */
+    protected $missileCorvet;
+
+    /**
+     * @ORM\Column(name="shieldCorvet",type="smallint")
+     */
+    protected $shieldCorvet;
+
+    /**
+     * @ORM\Column(name="pointCorvetLaser",type="smallint")
+     */
+    protected $pointCorvetLaser;
+
+    /**
+     * @ORM\Column(name="armorCorvetLaser",type="smallint")
+     */
+    protected $armorCorvetLaser;
+
+    /**
+     * @ORM\Column(name="accurateCorveLasert",type="smallint")
+     */
+    protected $accurateCorvetLaser;
+
+    /**
+     * @ORM\Column(name="missileCorvetLaser",type="smallint")
+     */
+    protected $missileCorvetLaser;
+
+    /**
+     * @ORM\Column(name="laserCorvetLaser",type="smallint")
+     */
+    protected $laserCorvetLaser;
+
+    /**
+     * @ORM\Column(name="shieldCorvetLaser",type="smallint")
+     */
+    protected $shieldCorvetLaser;
+
+    /**
+     * @ORM\Column(name="pointCorvetWar",type="smallint")
+     */
+    protected $pointCorvetWar;
+
+    /**
+     * @ORM\Column(name="armorCorvetWar",type="smallint")
+     */
+    protected $armorCorvetWar;
+
+    /**
+     * @ORM\Column(name="accurateCorvetWar",type="smallint")
+     */
+    protected $accurateCorvetWar;
+
+    /**
+     * @ORM\Column(name="missileCorvetWar",type="smallint")
+     */
+    protected $missileCorvetWar;
+
+    /**
+     * @ORM\Column(name="laserCorvetWar",type="smallint")
+     */
+    protected $laserCorvetWar;
+
+    /**
+     * @ORM\Column(name="shieldCorvetWar",type="smallint")
+     */
+    protected $shieldCorvetWar;
+
+    /**
+     * @ORM\Column(name="pointFregate",type="smallint")
+     */
+    protected $pointFregate;
+
+    /**
+     * @ORM\Column(name="armorFregate",type="smallint")
+     */
+    protected $armorFregate;
+
+    /**
+     * @ORM\Column(name="accurateFregate",type="smallint")
+     */
+    protected $accurateFregate;
+
+    /**
+     * @ORM\Column(name="missileFregate",type="smallint")
+     */
+    protected $missileFregate;
+
+    /**
+     * @ORM\Column(name="laserFregate",type="smallint")
+     */
+    protected $laserFregate;
+
+    /**
+     * @ORM\Column(name="shieldFregate",type="smallint")
+     */
+    protected $shieldFregate;
+
+    /**
+     * @ORM\Column(name="pointFregatePlasma",type="smallint")
+     */
+    protected $pointFregatePlasma;
+
+    /**
+     * @ORM\Column(name="armorFregatePlasma",type="smallint")
+     */
+    protected $armorFregatePlasma;
+
+    /**
+     * @ORM\Column(name="accurateFregatePlasma",type="smallint")
+     */
+    protected $accurateFregatePlasma;
+
+    /**
+     * @ORM\Column(name="missileFregatePlasma",type="smallint")
+     */
+    protected $missileFregatePlasma;
+
+    /**
+     * @ORM\Column(name="laserFregatePlasma",type="smallint")
+     */
+    protected $laserFregatePlasma;
+
+    /**
+     * @ORM\Column(name="shieldFregatePlasma",type="smallint")
+     */
+    protected $shieldFregatePlasma;
+
+    /**
+     * @ORM\Column(name="plasmaFregatePlasma",type="smallint")
+     */
+    protected $plasmaFregatePlasma;
+
+    /**
+     * @ORM\Column(name="pointCroiser",type="smallint")
+     */
+    protected $pointCroiser;
+
+    /**
+     * @ORM\Column(name="armorCroiser",type="smallint")
+     */
+    protected $armorCroiser;
+
+    /**
+     * @ORM\Column(name="accurateCroiser",type="smallint")
+     */
+    protected $accurateCroiser;
+
+    /**
+     * @ORM\Column(name="missileCroiser",type="smallint")
+     */
+    protected $missileCroiser;
+
+    /**
+     * @ORM\Column(name="laserCroiser",type="smallint")
+     */
+    protected $laserCroiser;
+
+    /**
+     * @ORM\Column(name="shieldCroiser",type="smallint")
+     */
+    protected $shieldCroiser;
+
+    /**
+     * @ORM\Column(name="plasmaCroiser",type="smallint")
+     */
+    protected $plasmaCroiser;
+
+    /**
+     * @ORM\Column(name="pointIronClad",type="smallint")
+     */
+    protected $pointIronClad;
+
+    /**
+     * @ORM\Column(name="armorIronClad",type="smallint")
+     */
+    protected $armorIronClad;
+
+    /**
+     * @ORM\Column(name="accurateIronClad",type="smallint")
+     */
+    protected $accurateIronClad;
+
+    /**
+     * @ORM\Column(name="missileIronClad",type="smallint")
+     */
+    protected $missileIronClad;
+
+    /**
+     * @ORM\Column(name="laserIronClad",type="smallint")
+     */
+    protected $laserIronClad;
+
+    /**
+     * @ORM\Column(name="shieldIronClad",type="smallint")
+     */
+    protected $shieldIronClad;
+
+    /**
+     * @ORM\Column(name="plasmaIronClad",type="smallint")
+     */
+    protected $plasmaIronClad;
+
+    /**
+     * @ORM\Column(name="pointDestroyer",type="smallint")
+     */
+    protected $pointDestroyer;
+
+    /**
+     * @ORM\Column(name="armorDestroyer",type="smallint")
+     */
+    protected $armorDestroyer;
+
+    /**
+     * @ORM\Column(name="accurateDestroyer",type="smallint")
+     */
+    protected $accurateDestroyer;
+
+    /**
+     * @ORM\Column(name="missileDestroyer",type="smallint")
+     */
+    protected $missileDestroyer;
+
+    /**
+     * @ORM\Column(name="laserDestroyer",type="smallint")
+     */
+    protected $laserDestroyer;
+
+    /**
+     * @ORM\Column(name="shieldDestroyer",type="smallint")
+     */
+    protected $shieldDestroyer;
+
+    /**
+     * @ORM\Column(name="plasmaDestroyer",type="smallint")
+     */
+    protected $plasmaDestroyer;
+
+    /**
+     * @ORM\Column(name="lastUpdate",type="datetime", nullable=true)
+     */
+    protected $lastUpdate;
+
+    /**
+     * @ORM\Column(name="max",type="smallint")
+     */
+    protected $max;
+
+    /**
+     * User constructor.
+     */
+    public function __construct()
+    {
+        $this->pointHunter = 3;
+        $this->armorHunter = 5;
+        $this->accurateHunter = 0;
+        $this->missileHunter = 1;
+        $this->pointHunterHeavy = 5;
+        $this->armorHunterHeavy = 10;
+        $this->accurateHunterHeavy = 0;
+        $this->missileHunterHeavy = 2;
+        $this->pointHunterWar = 20;
+        $this->armorHunterWar = 20;
+        $this->accurateHunterWar = 0;
+        $this->missileHunterWar = 0;
+        $this->laserHunterWar = 0;
+        $this->plasmaHunterWar = 0;
+        $this->pointCorvet = 12;
+        $this->armorCorvet = 40;
+        $this->accurateCorvet = 0;
+        $this->missileCorvet = 6;
+        $this->shieldCorvet = 1;
+        $this->pointCorvetLaser = 20;
+        $this->armorCorvetLaser = 65;
+        $this->accurateCorvetLaser = 0;
+        $this->missileCorvetLaser = 9;
+        $this->laserCorvetLaser = 2;
+        $this->shieldCorvetLaser = 2;
+        $this->pointCorvetWar = 30;
+        $this->armorCorvetWar = 75;
+        $this->accurateCorvetWar = 0;
+        $this->missileCorvetWar = 15;
+        $this->laserCorvetWar = 4;
+        $this->shieldCorvetWar = 4;
+        $this->pointFregate = 25;
+        $this->armorFregate = 110;
+        $this->accurateFregate = 0;
+        $this->missileFregate = 22;
+        $this->laserFregate = 3;
+        $this->shieldFregate = 5;
+        $this->pointFregatePlasma = 55;
+        $this->armorFregatePlasma = 300;
+        $this->accurateFregatePlasma = 0;
+        $this->missileFregatePlasma = 27;
+        $this->laserFregatePlasma = 3;
+        $this->shieldFregatePlasma = 7;
+        $this->plasmaFregatePlasma = 12;
+        $this->pointCroiser = 100;
+        $this->armorCroiser = 640;
+        $this->accurateCroiser = 0;
+        $this->missileCroiser = 40;
+        $this->laserCroiser = 10;
+        $this->shieldCroiser = 10;
+        $this->plasmaCroiser = 5;
+        $this->pointIronClad = 275;
+        $this->armorIronClad = 1250;
+        $this->accurateIronClad = 0;
+        $this->missileIronClad = 50;
+        $this->laserIronClad = 8;
+        $this->shieldIronClad = 12;
+        $this->plasmaIronClad = 8;
+        $this->pointDestroyer = 630;
+        $this->armorDestroyer = 2600;
+        $this->accurateDestroyer = 0;
+        $this->missileDestroyer = 100;
+        $this->laserDestroyer = 0;
+        $this->shieldDestroyer = 120;
+        $this->plasmaDestroyer = 0;
+        $this->lastUpdate = null;
+        $this->max = 40;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user): void
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArmorHunter()
+    {
+        return $this->armorHunter;
+    }
+
+    /**
+     * @param mixed $armorHunter
+     */
+    public function setArmorHunter($armorHunter): void
+    {
+        $this->armorHunter = $armorHunter;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAccurateHunter()
+    {
+        return $this->accurateHunter;
+    }
+
+    /**
+     * @param mixed $accurateHunter
+     */
+    public function setAccurateHunter($accurateHunter): void
+    {
+        $this->accurateHunter = $accurateHunter;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMissileHunter()
+    {
+        return $this->missileHunter;
+    }
+
+    /**
+     * @param mixed $missileHunter
+     */
+    public function setMissileHunter($missileHunter): void
+    {
+        $this->missileHunter = $missileHunter;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPointHunter()
+    {
+        return $this->pointHunter;
+    }
+
+    /**
+     * @param mixed $pointHunter
+     */
+    public function setPointHunter($pointHunter): void
+    {
+        $this->pointHunter = $pointHunter;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPointHunterHeavy()
+    {
+        return $this->pointHunterHeavy;
+    }
+
+    /**
+     * @param mixed $pointHunterHeavy
+     */
+    public function setPointHunterHeavy($pointHunterHeavy): void
+    {
+        $this->pointHunterHeavy = $pointHunterHeavy;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArmorHunterHeavy()
+    {
+        return $this->armorHunterHeavy;
+    }
+
+    /**
+     * @param mixed $armorHunterHeavy
+     */
+    public function setArmorHunterHeavy($armorHunterHeavy): void
+    {
+        $this->armorHunterHeavy = $armorHunterHeavy;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAccurateHunterHeavy()
+    {
+        return $this->accurateHunterHeavy;
+    }
+
+    /**
+     * @param mixed $accurateHunterHeavy
+     */
+    public function setAccurateHunterHeavy($accurateHunterHeavy): void
+    {
+        $this->accurateHunterHeavy = $accurateHunterHeavy;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMissileHunterHeavy()
+    {
+        return $this->missileHunterHeavy;
+    }
+
+    /**
+     * @param mixed $missileHunterHeavy
+     */
+    public function setMissileHunterHeavy($missileHunterHeavy): void
+    {
+        $this->missileHunterHeavy = $missileHunterHeavy;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPointHunterWar()
+    {
+        return $this->pointHunterWar;
+    }
+
+    /**
+     * @param mixed $pointHunterWar
+     */
+    public function setPointHunterWar($pointHunterWar): void
+    {
+        $this->pointHunterWar = $pointHunterWar;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArmorHunterWar()
+    {
+        return $this->armorHunterWar;
+    }
+
+    /**
+     * @param mixed $armorHunterWar
+     */
+    public function setArmorHunterWar($armorHunterWar): void
+    {
+        $this->armorHunterWar = $armorHunterWar;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAccurateHunterWar()
+    {
+        return $this->accurateHunterWar;
+    }
+
+    /**
+     * @param mixed $accurateHunterWar
+     */
+    public function setAccurateHunterWar($accurateHunterWar): void
+    {
+        $this->accurateHunterWar = $accurateHunterWar;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMissileHunterWar()
+    {
+        return $this->missileHunterWar;
+    }
+
+    /**
+     * @param mixed $missileHunterWar
+     */
+    public function setMissileHunterWar($missileHunterWar): void
+    {
+        $this->missileHunterWar = $missileHunterWar;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLaserHunterWar()
+    {
+        return $this->laserHunterWar;
+    }
+
+    /**
+     * @param mixed $laserHunterWar
+     */
+    public function setLaserHunterWar($laserHunterWar): void
+    {
+        $this->laserHunterWar = $laserHunterWar;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPlasmaHunterWar()
+    {
+        return $this->plasmaHunterWar;
+    }
+
+    /**
+     * @param mixed $plasmaHunterWar
+     */
+    public function setPlasmaHunterWar($plasmaHunterWar): void
+    {
+        $this->plasmaHunterWar = $plasmaHunterWar;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPointCorvet()
+    {
+        return $this->pointCorvet;
+    }
+
+    /**
+     * @param mixed $pointCorvet
+     */
+    public function setPointCorvet($pointCorvet): void
+    {
+        $this->pointCorvet = $pointCorvet;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArmorCorvet()
+    {
+        return $this->armorCorvet;
+    }
+
+    /**
+     * @param mixed $armorCorvet
+     */
+    public function setArmorCorvet($armorCorvet): void
+    {
+        $this->armorCorvet = $armorCorvet;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAccurateCorvet()
+    {
+        return $this->accurateCorvet;
+    }
+
+    /**
+     * @param mixed $accurateCorvet
+     */
+    public function setAccurateCorvet($accurateCorvet): void
+    {
+        $this->accurateCorvet = $accurateCorvet;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMissileCorvet()
+    {
+        return $this->missileCorvet;
+    }
+
+    /**
+     * @param mixed $missileCorvet
+     */
+    public function setMissileCorvet($missileCorvet): void
+    {
+        $this->missileCorvet = $missileCorvet;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShieldCorvet()
+    {
+        return $this->shieldCorvet;
+    }
+
+    /**
+     * @param mixed $shieldCorvet
+     */
+    public function setShieldCorvet($shieldCorvet): void
+    {
+        $this->shieldCorvet = $shieldCorvet;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPointCorvetLaser()
+    {
+        return $this->pointCorvetLaser;
+    }
+
+    /**
+     * @param mixed $pointCorvetLaser
+     */
+    public function setPointCorvetLaser($pointCorvetLaser): void
+    {
+        $this->pointCorvetLaser = $pointCorvetLaser;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArmorCorvetLaser()
+    {
+        return $this->armorCorvetLaser;
+    }
+
+    /**
+     * @param mixed $armorCorvetLaser
+     */
+    public function setArmorCorvetLaser($armorCorvetLaser): void
+    {
+        $this->armorCorvetLaser = $armorCorvetLaser;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAccurateCorvetLaser()
+    {
+        return $this->accurateCorvetLaser;
+    }
+
+    /**
+     * @param mixed $accurateCorvetLaser
+     */
+    public function setAccurateCorvetLaser($accurateCorvetLaser): void
+    {
+        $this->accurateCorvetLaser = $accurateCorvetLaser;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMissileCorvetLaser()
+    {
+        return $this->missileCorvetLaser;
+    }
+
+    /**
+     * @param mixed $missileCorvetLaser
+     */
+    public function setMissileCorvetLaser($missileCorvetLaser): void
+    {
+        $this->missileCorvetLaser = $missileCorvetLaser;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLaserCorvetLaser()
+    {
+        return $this->laserCorvetLaser;
+    }
+
+    /**
+     * @param mixed $laserCorvetLaser
+     */
+    public function setLaserCorvetLaser($laserCorvetLaser): void
+    {
+        $this->laserCorvetLaser = $laserCorvetLaser;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShieldCorvetLaser()
+    {
+        return $this->shieldCorvetLaser;
+    }
+
+    /**
+     * @param mixed $shieldCorvetLaser
+     */
+    public function setShieldCorvetLaser($shieldCorvetLaser): void
+    {
+        $this->shieldCorvetLaser = $shieldCorvetLaser;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPointCorvetWar()
+    {
+        return $this->pointCorvetWar;
+    }
+
+    /**
+     * @param mixed $pointCorvetWar
+     */
+    public function setPointCorvetWar($pointCorvetWar): void
+    {
+        $this->pointCorvetWar = $pointCorvetWar;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArmorCorvetWar()
+    {
+        return $this->armorCorvetWar;
+    }
+
+    /**
+     * @param mixed $armorCorvetWar
+     */
+    public function setArmorCorvetWar($armorCorvetWar): void
+    {
+        $this->armorCorvetWar = $armorCorvetWar;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAccurateCorvetWar()
+    {
+        return $this->accurateCorvetWar;
+    }
+
+    /**
+     * @param mixed $accurateCorvetWar
+     */
+    public function setAccurateCorvetWar($accurateCorvetWar): void
+    {
+        $this->accurateCorvetWar = $accurateCorvetWar;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMissileCorvetWar()
+    {
+        return $this->missileCorvetWar;
+    }
+
+    /**
+     * @param mixed $missileCorvetWar
+     */
+    public function setMissileCorvetWar($missileCorvetWar): void
+    {
+        $this->missileCorvetWar = $missileCorvetWar;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLaserCorvetWar()
+    {
+        return $this->laserCorvetWar;
+    }
+
+    /**
+     * @param mixed $laserCorvetWar
+     */
+    public function setLaserCorvetWar($laserCorvetWar): void
+    {
+        $this->laserCorvetWar = $laserCorvetWar;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShieldCorvetWar()
+    {
+        return $this->shieldCorvetWar;
+    }
+
+    /**
+     * @param mixed $shieldCorvetWar
+     */
+    public function setShieldCorvetWar($shieldCorvetWar): void
+    {
+        $this->shieldCorvetWar = $shieldCorvetWar;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPointFregate()
+    {
+        return $this->pointFregate;
+    }
+
+    /**
+     * @param mixed $pointFregate
+     */
+    public function setPointFregate($pointFregate): void
+    {
+        $this->pointFregate = $pointFregate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArmorFregate()
+    {
+        return $this->armorFregate;
+    }
+
+    /**
+     * @param mixed $armorFregate
+     */
+    public function setArmorFregate($armorFregate): void
+    {
+        $this->armorFregate = $armorFregate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAccurateFregate()
+    {
+        return $this->accurateFregate;
+    }
+
+    /**
+     * @param mixed $accurateFregate
+     */
+    public function setAccurateFregate($accurateFregate): void
+    {
+        $this->accurateFregate = $accurateFregate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMissileFregate()
+    {
+        return $this->missileFregate;
+    }
+
+    /**
+     * @param mixed $missileFregate
+     */
+    public function setMissileFregate($missileFregate): void
+    {
+        $this->missileFregate = $missileFregate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLaserFregate()
+    {
+        return $this->laserFregate;
+    }
+
+    /**
+     * @param mixed $laserFregate
+     */
+    public function setLaserFregate($laserFregate): void
+    {
+        $this->laserFregate = $laserFregate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShieldFregate()
+    {
+        return $this->shieldFregate;
+    }
+
+    /**
+     * @param mixed $shieldFregate
+     */
+    public function setShieldFregate($shieldFregate): void
+    {
+        $this->shieldFregate = $shieldFregate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPointFregatePlasma()
+    {
+        return $this->pointFregatePlasma;
+    }
+
+    /**
+     * @param mixed $pointFregatePlasma
+     */
+    public function setPointFregatePlasma($pointFregatePlasma): void
+    {
+        $this->pointFregatePlasma = $pointFregatePlasma;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArmorFregatePlasma()
+    {
+        return $this->armorFregatePlasma;
+    }
+
+    /**
+     * @param mixed $armorFregatePlasma
+     */
+    public function setArmorFregatePlasma($armorFregatePlasma): void
+    {
+        $this->armorFregatePlasma = $armorFregatePlasma;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAccurateFregatePlasma()
+    {
+        return $this->accurateFregatePlasma;
+    }
+
+    /**
+     * @param mixed $accurateFregatePlasma
+     */
+    public function setAccurateFregatePlasma($accurateFregatePlasma): void
+    {
+        $this->accurateFregatePlasma = $accurateFregatePlasma;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMissileFregatePlasma()
+    {
+        return $this->missileFregatePlasma;
+    }
+
+    /**
+     * @param mixed $missileFregatePlasma
+     */
+    public function setMissileFregatePlasma($missileFregatePlasma): void
+    {
+        $this->missileFregatePlasma = $missileFregatePlasma;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLaserFregatePlasma()
+    {
+        return $this->laserFregatePlasma;
+    }
+
+    /**
+     * @param mixed $laserFregatePlasma
+     */
+    public function setLaserFregatePlasma($laserFregatePlasma): void
+    {
+        $this->laserFregatePlasma = $laserFregatePlasma;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShieldFregatePlasma()
+    {
+        return $this->shieldFregatePlasma;
+    }
+
+    /**
+     * @param mixed $shieldFregatePlasma
+     */
+    public function setShieldFregatePlasma($shieldFregatePlasma): void
+    {
+        $this->shieldFregatePlasma = $shieldFregatePlasma;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPlasmaFregatePlasma()
+    {
+        return $this->plasmaFregatePlasma;
+    }
+
+    /**
+     * @param mixed $plasmaFregatePlasma
+     */
+    public function setPlasmaFregatePlasma($plasmaFregatePlasma): void
+    {
+        $this->plasmaFregatePlasma = $plasmaFregatePlasma;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPointCroiser()
+    {
+        return $this->pointCroiser;
+    }
+
+    /**
+     * @param mixed $pointCroiser
+     */
+    public function setPointCroiser($pointCroiser): void
+    {
+        $this->pointCroiser = $pointCroiser;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArmorCroiser()
+    {
+        return $this->armorCroiser;
+    }
+
+    /**
+     * @param mixed $armorCroiser
+     */
+    public function setArmorCroiser($armorCroiser): void
+    {
+        $this->armorCroiser = $armorCroiser;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAccurateCroiser()
+    {
+        return $this->accurateCroiser;
+    }
+
+    /**
+     * @param mixed $accurateCroiser
+     */
+    public function setAccurateCroiser($accurateCroiser): void
+    {
+        $this->accurateCroiser = $accurateCroiser;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMissileCroiser()
+    {
+        return $this->missileCroiser;
+    }
+
+    /**
+     * @param mixed $missileCroiser
+     */
+    public function setMissileCroiser($missileCroiser): void
+    {
+        $this->missileCroiser = $missileCroiser;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLaserCroiser()
+    {
+        return $this->laserCroiser;
+    }
+
+    /**
+     * @param mixed $laserCroiser
+     */
+    public function setLaserCroiser($laserCroiser): void
+    {
+        $this->laserCroiser = $laserCroiser;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShieldCroiser()
+    {
+        return $this->shieldCroiser;
+    }
+
+    /**
+     * @param mixed $shieldCroiser
+     */
+    public function setShieldCroiser($shieldCroiser): void
+    {
+        $this->shieldCroiser = $shieldCroiser;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPlasmaCroiser()
+    {
+        return $this->plasmaCroiser;
+    }
+
+    /**
+     * @param mixed $plasmaCroiser
+     */
+    public function setPlasmaCroiser($plasmaCroiser): void
+    {
+        $this->plasmaCroiser = $plasmaCroiser;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPointIronClad()
+    {
+        return $this->pointIronClad;
+    }
+
+    /**
+     * @param mixed $pointIronClad
+     */
+    public function setPointIronClad($pointIronClad): void
+    {
+        $this->pointIronClad = $pointIronClad;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArmorIronClad()
+    {
+        return $this->armorIronClad;
+    }
+
+    /**
+     * @param mixed $armorIronClad
+     */
+    public function setArmorIronClad($armorIronClad): void
+    {
+        $this->armorIronClad = $armorIronClad;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAccurateIronClad()
+    {
+        return $this->accurateIronClad;
+    }
+
+    /**
+     * @param mixed $accurateIronClad
+     */
+    public function setAccurateIronClad($accurateIronClad): void
+    {
+        $this->accurateIronClad = $accurateIronClad;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMissileIronClad()
+    {
+        return $this->missileIronClad;
+    }
+
+    /**
+     * @param mixed $missileIronClad
+     */
+    public function setMissileIronClad($missileIronClad): void
+    {
+        $this->missileIronClad = $missileIronClad;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLaserIronClad()
+    {
+        return $this->laserIronClad;
+    }
+
+    /**
+     * @param mixed $laserIronClad
+     */
+    public function setLaserIronClad($laserIronClad): void
+    {
+        $this->laserIronClad = $laserIronClad;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShieldIronClad()
+    {
+        return $this->shieldIronClad;
+    }
+
+    /**
+     * @param mixed $shieldIronClad
+     */
+    public function setShieldIronClad($shieldIronClad): void
+    {
+        $this->shieldIronClad = $shieldIronClad;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPlasmaIronClad()
+    {
+        return $this->plasmaIronClad;
+    }
+
+    /**
+     * @param mixed $plasmaIronClad
+     */
+    public function setPlasmaIronClad($plasmaIronClad): void
+    {
+        $this->plasmaIronClad = $plasmaIronClad;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPointDestroyer()
+    {
+        return $this->pointDestroyer;
+    }
+
+    /**
+     * @param mixed $pointDestroyer
+     */
+    public function setPointDestroyer($pointDestroyer): void
+    {
+        $this->pointDestroyer = $pointDestroyer;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArmorDestroyer()
+    {
+        return $this->armorDestroyer;
+    }
+
+    /**
+     * @param mixed $armorDestroyer
+     */
+    public function setArmorDestroyer($armorDestroyer): void
+    {
+        $this->armorDestroyer = $armorDestroyer;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAccurateDestroyer()
+    {
+        return $this->accurateDestroyer;
+    }
+
+    /**
+     * @param mixed $accurateDestroyer
+     */
+    public function setAccurateDestroyer($accurateDestroyer): void
+    {
+        $this->accurateDestroyer = $accurateDestroyer;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMissileDestroyer()
+    {
+        return $this->missileDestroyer;
+    }
+
+    /**
+     * @param mixed $missileDestroyer
+     */
+    public function setMissileDestroyer($missileDestroyer): void
+    {
+        $this->missileDestroyer = $missileDestroyer;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLaserDestroyer()
+    {
+        return $this->laserDestroyer;
+    }
+
+    /**
+     * @param mixed $laserDestroyer
+     */
+    public function setLaserDestroyer($laserDestroyer): void
+    {
+        $this->laserDestroyer = $laserDestroyer;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShieldDestroyer()
+    {
+        return $this->shieldDestroyer;
+    }
+
+    /**
+     * @param mixed $shieldDestroyer
+     */
+    public function setShieldDestroyer($shieldDestroyer): void
+    {
+        $this->shieldDestroyer = $shieldDestroyer;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPlasmaDestroyer()
+    {
+        return $this->plasmaDestroyer;
+    }
+
+    /**
+     * @param mixed $plasmaDestroyer
+     */
+    public function setPlasmaDestroyer($plasmaDestroyer): void
+    {
+        $this->plasmaDestroyer = $plasmaDestroyer;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastUpdate()
+    {
+        return $this->lastUpdate;
+    }
+
+    /**
+     * @param mixed $lastUpdate
+     */
+    public function setLastUpdate($lastUpdate): void
+    {
+        $this->lastUpdate = $lastUpdate;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMax()
+    {
+        return $this->max;
+    }
+
+    /**
+     * @param mixed $max
+     */
+    public function setMax($max): void
+    {
+        $this->max = $max;
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+}

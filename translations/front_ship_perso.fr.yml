@@ -1,0 +1,33 @@
+title: 'Personalisation vaisseaux'
+ship.sonde: Sonde
+ship.colonizer: Colonisateur
+ship.recycleur: Recycleur
+ship.barge: 'Barge d''invasion'
+ship.hunter: Chasseur
+ship.hunterHeavy: 'Chasseur lourd'
+ship.hunterWar: 'Chasseur a plasma'
+ship.cargoV: 'Cargo V'
+ship.cargoI: 'Cargo I'
+ship.cargoX: 'Cargo X'
+ship.corvet: Corvette
+ship.corvetLaser: 'Corvette a laser'
+ship.corvetWar: 'Corvette de combat'
+ship.fregate: Fregate
+ship.fregatePlasma: 'Frégate a plasma'
+ship.croiser: Croiseur
+ship.ironClad: Cuirassé
+ship.destroyer: Destroyer
+ship.armor: 'Coque :'
+ship.shield: 'Bouclier :'
+ship.accurate: 'Précision :'
+ship.missile: 'Missile :'
+ship.laser: 'Laser :'
+ship.plasma: 'Plasma :'
+form.nbr: 0
+ship.personalisation: 'Améliorez vos vaisseaux !'
+ship.lastPoints: 'Vous pouvez encore dépensez %nbr% points aujourd''hui.'
+ship.nextUpdate: 'Prochaines améliorations dans :'
+ship.point: 'Points :'
+form.change: 'Appliquer'
+quest.tutorial: 'C''est ici que vous produisez les vaisseaux qui constitueront vos flottes et silloneront les galaxies. Pour débuter vous avez une production gratuite, lancez la construction de 10 chasseurs a plasma et 5 corvettes de combats.'
+quest.tutorialBis: 'Alerte ! Votre planète est attaquée !!! Une flotte remplie de zombies est en orbite de votre planète (l''aperçu de votre planète a droite est rouge pour signaler les intrusions)! Ils viennent de tenter une invasion sur votre planète et ont échoué, ne leur laissez pas le temps de recommencer et dès que vos vaisseaux sont construits créer une flotte pour les détruires.'

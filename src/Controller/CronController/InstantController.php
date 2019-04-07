@@ -117,7 +117,7 @@ class InstantController extends AbstractController
         $fleets = $em->getRepository('App:Fleet')
             ->createQueryBuilder('f')
             ->where('f.flightTime < :now')
-            ->andWhere('f.flightType != :six')
+            ->andWhere('f.flightType != :six or f.flightType is null')
             ->setParameters(['now' => $now, 'six' => 6])
             ->getQuery()
             ->getResult();
@@ -1038,6 +1038,7 @@ class InstantController extends AbstractController
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         foreach ($fleets as $fleet) {
             if ($fleet->getUser()->getMerchant() == 1) {
+                $em->remove($fleet->getDestination());
                 $em->remove($fleet);
             } else {
                 $usePlanet = $em->getRepository('App:Planet')->findByFirstPlanet($fleet->getUser()->getUsername());

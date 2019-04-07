@@ -40,7 +40,7 @@ class Report
     protected $newReport;
 
     /**
-     * @ORM\Column(name="content",type="string", length=12000)
+     * @ORM\Column(name="content",type="string", length=16000)
      * @Assert\NotBlank(message = "required")
      */
     protected $content;

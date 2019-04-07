@@ -27,6 +27,7 @@ Encore
     .addEntry('fleet_list', './assets/js/fleet_list.js')
     .addEntry('caserne', './assets/js/caserne.js')
     .addEntry('zombie', './assets/js/zombie.js')
+    .addEntry('ships', './assets/js/ships.js')
     .enableForkedTypeScriptTypesChecking()
 ;
 

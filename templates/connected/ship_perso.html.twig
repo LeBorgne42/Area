@@ -1,0 +1,1043 @@
+{% extends 'base.html.twig' %}
+
+{% trans_default_domain 'front_ship_perso' %}
+
+{% block title %}{{ 'title'|trans }}{% endblock %}
+
+{% block body %}
+    <script type="text/javascript" src="{{ asset('build/ships.js') }}"></script>
+    {% for message in app.flashes('fail') %}
+        <div class="flash-notice mt-5 alerte-flash-error text-center">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <div class="front-block">
+        {% if app.user.getTutorial() == 100 or app.user.getTutorial() == 101 %}
+            <table class="table table-striped borderOverview tutorial">
+                <tbody>
+                <tr>
+                    <th class="tab-cells-name p-3 tutorial">
+                        <div class="row">
+                            <div class="col-12 py-1">
+                                {% if app.user.getTutorial() == 19 %}{{ 'quest.tutorial'|trans|raw }}{% elseif app.user.getTutorial() == 20  %}{{ 'quest.tutorialBis'|trans|raw }}{% endif %}
+                            </div>
+                        </div>
+                    </th>
+                </tr>
+                </tbody>
+            </table>
+        {% endif %}
+        <div class="front-block-second">
+            <div class="row">
+                <div class="col-12">
+                    <div class="block-title mb-3"><h2>{{ 'ship.personalisation'|trans }}</h2></div>
+                    <table class="table table-striped table-bordered table-dark persoFleetClick">
+                        <tbody>
+                        <tr>
+                            <th width="74" class="p-0 hunterClick">
+                                <img width="74" src="{{ asset('img/hunter.jpg') }}">
+                            </th>
+                            <td class="text-center hunterClick">
+                                {{ 'ship.hunter'|trans|raw }}<br> {{ 'ship.point'|trans|raw }} <span class="{% if app.user.getShip().getPointHunter() > 0 %}text-vert{% else %}text-rouge{% endif %}">{{ app.user.getShip().getPointHunter() }}</span>
+                            </td>
+                            <th width="74" class="p-0 hunterHeavyClick">
+                                <img width="74" src="{{ asset('img/hunterHeavy.jpg') }}">
+                            </th>
+                            <td class="text-center hunterHeavyClick">
+                                {{ 'ship.hunterHeavy'|trans|raw }}<br> {{ 'ship.point'|trans|raw }} <span class="{% if app.user.getShip().getPointHunterHeavy() > 0 %}text-vert{% else %}text-rouge{% endif %}">{{ app.user.getShip().getPointHunterHeavy() }}</span>
+                            </td>
+                            <th width="74" class="p-0 hunterWarClick">
+                                <img width="74" src="{{ asset('img/hunterWar.jpg') }}">
+                            </th>
+                            <td class="text-center hunterWarClick">
+                                {{ 'ship.hunterWar'|trans|raw }}<br> {{ 'ship.point'|trans|raw }} <span class="{% if app.user.getShip().getPointHunterWar() > 0 %}text-vert{% else %}text-rouge{% endif %}">{{ app.user.getShip().getPointHunterWar() }}</span>
+                            </td>
+                            <th width="74" class="p-0 corvetClick">
+                                <img width="74" src="{{ asset('img/corvet.jpg') }}">
+                            </th>
+                            <td class="text-center corvetClick">
+                                {{ 'ship.corvet'|trans|raw }}<br> {{ 'ship.point'|trans|raw }} <span class="{% if app.user.getShip().getPointCorvet() > 0 %}text-vert{% else %}text-rouge{% endif %}">{{ app.user.getShip().getPointCorvet() }}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th width="74" class="p-0 corvetLaserClick">
+                                <img width="74" src="{{ asset('img/corvetLaser.jpg') }}">
+                            </th>
+                            <td class="text-center corvetLaserClick">
+                                {{ 'ship.corvetLaser'|trans|raw }}<br> {{ 'ship.point'|trans|raw }} <span class="{% if app.user.getShip().getPointCorvetLaser() > 0 %}text-vert{% else %}text-rouge{% endif %}">{{ app.user.getShip().getPointCorvetLaser() }}</span>
+                            </td>
+                            <th width="74" class="p-0 corvetWarClick">
+                                <img width="74" src="{{ asset('img/corvetWar.jpg') }}">
+                            </th>
+                            <td class="text-center corvetWarClick">
+                                {{ 'ship.corvetWar'|trans|raw }}<br> {{ 'ship.point'|trans|raw }} <span class="{% if app.user.getShip().getPointCorvetWar() > 0 %}text-vert{% else %}text-rouge{% endif %}">{{ app.user.getShip().getPointCorvetWar() }}</span>
+                            </td>
+                            <th width="74" class="p-0 fregateClick">
+                                <img width="74" src="{{ asset('img/fregate.jpg') }}">
+                            </th>
+                            <td class="text-center fregateClick">
+                                {{ 'ship.fregate'|trans|raw }}<br> {{ 'ship.point'|trans|raw }} <span class="{% if app.user.getShip().getPointFregate() > 0 %}text-vert{% else %}text-rouge{% endif %}">{{ app.user.getShip().getPointFregate() }}</span>
+                            </td>
+                            <th width="74" class="p-0 fregatePlasmaClick">
+                                <img width="74" src="{{ asset('img/fregatePlasma.jpg') }}">
+                            </th>
+                            <td class="text-center fregatePlasmaClick">
+                                {{ 'ship.fregatePlasma'|trans|raw }}<br> {{ 'ship.point'|trans|raw }} <span class="{% if app.user.getShip().getPointFregatePlasma() > 0 %}text-vert{% else %}text-rouge{% endif %}">{{ app.user.getShip().getPointFregatePlasma() }}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th width="74" class="p-0 croiserClick">
+                                <img width="74" src="{{ asset('img/croiser.jpg') }}">
+                            </th>
+                            <td class="text-center croiserClick">
+                                {{ 'ship.croiser'|trans|raw }}<br> {{ 'ship.point'|trans|raw }} <span class="{% if app.user.getShip().getPointCroiser() > 0 %}text-vert{% else %}text-rouge{% endif %}">{{ app.user.getShip().getPointCroiser() }}</span>
+                            </td>
+                            <th width="74" class="p-0 ironCladClick">
+                                <img width="74" src="{{ asset('img/ironClad.jpg') }}">
+                            </th>
+                            <td class="text-center ironCladClick">
+                                {{ 'ship.ironClad'|trans|raw }}<br> {{ 'ship.point'|trans|raw }} <span class="{% if app.user.getShip().getPointIronClad() > 0 %}text-vert{% else %}text-rouge{% endif %}">{{ app.user.getShip().getPointIronClad() }}</span>
+                            </td>
+                            <th width="74" class="p-0 destroyerClick">
+                                <img width="74" src="{{ asset('img/destroyer.jpg') }}">
+                            </th>
+                            <td class="text-center destroyerClick">
+                                {{ 'ship.destroyer'|trans|raw }}<br> {{ 'ship.point'|trans|raw }} <span class="{% if app.user.getShip().getPointDestroyer() > 0 %}text-vert{% else %}text-rouge{% endif %}">{{ app.user.getShip().getPointDestroyer() }}</span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-striped table-bordered table-dark persoFleet">
+                        <tbody>
+                        {% if app.user.getShip().getPointHunter() == 0 %}
+                            <tr name="hunter" class="hidden">
+                                <th width="32" class="p-0 text-center">
+                                    <img width="32" src="{{ asset('img/hunter.jpg') }}">
+                                </th>
+                                <td class="text-center p-0">
+                                    {{ 'ship.hunter'|trans|raw }} {{ 'ship.point'|trans|raw }} <span class="text-rouge">0</span>
+                                </td>
+                                <td class="p-0 text-center mt-1">
+                                    {{ 'ship.armor'|trans|raw }} {{ app.user.getShip().getArmorHunter() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.shield'|trans|raw }} 0
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.accurate'|trans|raw }} {{ app.user.getShip().getAccurateHunter() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.missile'|trans|raw }} {{ app.user.getShip().getMissileHunter() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.laser'|trans|raw }} 0
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.plasma'|trans|raw }} 0
+                                </td>
+                            </tr>
+                        {% else %}
+                            {% set form_shipPerso = formObject.createView %}
+                            {{ form_start(form_shipPerso) }}
+                            <tr name="hunter" class="hidden">
+                                <th width="74" rowspan="2" class="p-0">
+                                    <img width="74" src="{{ asset('img/hunter.jpg') }}">
+                                </th>
+                                <td rowspan="2" class="text-center">
+                                    {{ form_widget(form_shipPerso.ship,{'attr': { 'hidden': 'hidden', 'value': 'hunter' }}) }}
+                                    {{ 'ship.hunter'|trans|raw }}<br> {{ 'ship.point'|trans|raw }} <span class="totalPoints">{{ app.user.getShip().getPointHunter() }}</span><span class="totalExec hidden">{{ app.user.getShip().getPointHunter() }}</span>
+                                </td>
+                                <td>
+                                    {{ 'ship.armor'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getArmorHunter() }}</span> <span class="basis" hidden>{{ app.user.getShip().getArmorHunter() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.armor) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.shield'|trans|raw }} 0
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.shield,{'attr': { 'disabled': 'disabled', 'class': 'game-input-off text-left' }}) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.accurate'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getAccurateHunter() }}</span> <span class="basis" hidden>{{ app.user.getShip().getAccurateHunter() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.accurate,{'attr': { 'disabled': 'disabled', 'class': 'game-input-off text-left' }}) }}
+                                </td>
+                            </tr>
+                            <tr name="hunter" class="hidden">
+                                <td>
+                                    {{ 'ship.missile'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getMissileHunter() }}</span> <span class="basis" hidden>{{ app.user.getShip().getMissileHunter() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.missile) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.laser'|trans|raw }} 0
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.laser,{'attr': { 'disabled': 'disabled', 'class': 'game-input-off text-left' }}) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.plasma'|trans|raw }} 0
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.plasma,{'attr': { 'disabled': 'disabled', 'class': 'game-input-off text-left' }}) }}
+                                </td>
+                            </tr>
+                            <tr name="hunter" class="hidden">
+                                <td colspan="2" class="text-center">
+                                    {{ form_widget(form_shipPerso.sendForm) }}
+                                </td>
+                            </tr>
+                            {{ form_end(form_shipPerso) }}
+                        {% endif %}
+                        {% if app.user.getShip().getPointHunterHeavy() == 0 %}
+                            <tr name="hunterHeavy" class="hidden">
+                                <th width="32" class="p-0 text-center">
+                                    <img width="32" src="{{ asset('img/hunterHeavy.jpg') }}">
+                                </th>
+                                <td class="text-center p-0">
+                                    {{ 'ship.hunterHeavy'|trans|raw }} {{ 'ship.point'|trans|raw }} <span class="text-rouge">0</span>
+                                </td>
+                                <td class="p-0 text-center mt-1">
+                                    {{ 'ship.armor'|trans|raw }} {{ app.user.getShip().getArmorHunterHeavy() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.shield'|trans|raw }} 0
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.accurate'|trans|raw }} {{ app.user.getShip().getAccurateHunterHeavy() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.missile'|trans|raw }} {{ app.user.getShip().getMissileHunterHeavy() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.laser'|trans|raw }} 0
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.plasma'|trans|raw }} 0
+                                </td>
+                            </tr>
+                        {% else %}
+                            {% set form_shipPerso = formObject.createView %}
+                            {{ form_start(form_shipPerso) }}
+                            <tr name="hunterHeavy" class="hidden">
+                                <th width="74" rowspan="2" class="p-0">
+                                    <img width="74" src="{{ asset('img/hunterHeavy.jpg') }}">
+                                </th>
+                                <td rowspan="2" class="text-center">
+                                    {{ form_widget(form_shipPerso.ship,{'attr': { 'hidden': 'hidden', 'value': 'hunterHeavy' }}) }}
+                                    {{ 'ship.hunterHeavy'|trans|raw }}<br> {{ 'ship.point'|trans|raw }} <span class="totalPoints">{{ app.user.getShip().getPointHunterHeavy() }}</span><span class="totalExec hidden">{{ app.user.getShip().getPointHunterHeavy() }}</span>
+                                </td>
+                                <td>
+                                    {{ 'ship.armor'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getArmorHunterHeavy() }}</span> <span class="basis" hidden>{{ app.user.getShip().getArmorHunterHeavy() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.armor) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.shield'|trans|raw }} 0
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.shield,{'attr': { 'disabled': 'disabled', 'class': 'game-input-off text-left' }}) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.accurate'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getAccurateHunterHeavy() }}</span> <span class="basis" hidden>{{ app.user.getShip().getAccurateHunterHeavy() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.accurate,{'attr': { 'disabled': 'disabled', 'class': 'game-input-off text-left' }}) }}
+                                </td>
+                            </tr>
+                            <tr name="hunterHeavy" class="hidden">
+                                <td>
+                                    {{ 'ship.missile'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getMissileHunterHeavy() }}</span> <span class="basis" hidden>{{ app.user.getShip().getMissileHunterHeavy() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.missile) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.laser'|trans|raw }} 0
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.laser,{'attr': { 'disabled': 'disabled', 'class': 'game-input-off text-left' }}) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.plasma'|trans|raw }} 0
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.plasma,{'attr': { 'disabled': 'disabled', 'class': 'game-input-off text-left' }}) }}
+                                </td>
+                            </tr>
+                            <tr name="hunterHeavy" class="hidden">
+                                <td colspan="2" class="text-center">
+                                    {{ form_widget(form_shipPerso.sendForm) }}
+                                </td>
+                            </tr>
+                            {{ form_end(form_shipPerso) }}
+                        {% endif %}
+                        {% if app.user.getShip().getPointHunterWar() == 0 %}
+                            <tr name="hunterWar" class="hidden">
+                                <th width="32" class="p-0 text-center">
+                                    <img width="32" src="{{ asset('img/hunterWar.jpg') }}">
+                                </th>
+                                <td class="text-center p-0">
+                                    {{ 'ship.hunterWar'|trans|raw }} {{ 'ship.point'|trans|raw }} <span class="text-rouge">0</span>
+                                </td>
+                                <td class="p-0 text-center mt-1">
+                                    {{ 'ship.armor'|trans|raw }} {{ app.user.getShip().getArmorHunterWar() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.shield'|trans|raw }} 0
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.accurate'|trans|raw }} {{ app.user.getShip().getAccurateHunterWar() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.missile'|trans|raw }} {{ app.user.getShip().getMissileHunterWar() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.laser'|trans|raw }} {{ app.user.getShip().getLaserHunterWar() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.plasma'|trans|raw }}  {{ app.user.getShip().getPlasmaHunterWar() }}
+                                </td>
+                            </tr>
+                        {% else %}
+                            {% set form_shipPerso = formObject.createView %}
+                            {{ form_start(form_shipPerso) }}
+                            <tr name="hunterWar" class="hidden">
+                                <th width="74" rowspan="2" class="p-0">
+                                    <img width="74" src="{{ asset('img/hunterWar.jpg') }}">
+                                </th>
+                                <td rowspan="2" class="text-center">
+                                    {{ form_widget(form_shipPerso.ship,{'attr': { 'hidden': 'hidden', 'value': 'hunterWar' }}) }}
+                                    {{ 'ship.hunterWar'|trans|raw }}<br> {{ 'ship.point'|trans|raw }} <span class="totalPoints">{{ app.user.getShip().getPointHunterWar() }}</span><span class="totalExec hidden">{{ app.user.getShip().getPointHunterWar() }}</span>
+                                </td>
+                                <td>
+                                    {{ 'ship.armor'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getArmorHunterWar() }}</span> <span class="basis" hidden>{{ app.user.getShip().getArmorHunterWar() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.armor) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.shield'|trans|raw }} 0
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.shield,{'attr': { 'disabled': 'disabled', 'class': 'game-input-off text-left' }}) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.accurate'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getAccurateHunterWar() }}</span> <span class="basis" hidden>{{ app.user.getShip().getAccurateHunterWar() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.accurate,{'attr': { 'disabled': 'disabled', 'class': 'game-input-off text-left' }}) }}
+                                </td>
+                            </tr>
+                            <tr name="hunterWar" class="hidden">
+                                <td>
+                                    {{ 'ship.missile'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getMissileHunterWar() }}</span> <span class="basis" hidden>{{ app.user.getShip().getMissileHunterWar() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.missile) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.laser'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getLaserHunterWar() }}</span> <span class="basis" hidden>{{ app.user.getShip().getLaserHunterWar() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.laser) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.plasma'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getPlasmaHunterWar() }}</span> <span class="basis" hidden>{{ app.user.getShip().getPlasmaHunterWar() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.plasma) }}
+                                </td>
+                            </tr>
+                            <tr name="hunterWar" class="hidden">
+                                <td colspan="2" class="text-center">
+                                    {{ form_widget(form_shipPerso.sendForm) }}
+                                </td>
+                            </tr>
+                            {{ form_end(form_shipPerso) }}
+                        {% endif %}
+                        {% if app.user.getShip().getPointCorvet() == 0 %}
+                            <tr name="corvet" class="hidden">
+                                <th width="32" class="p-0 text-center">
+                                    <img width="32" src="{{ asset('img/corvet.jpg') }}">
+                                </th>
+                                <td class="text-center p-0">
+                                    {{ 'ship.corvet'|trans|raw }} {{ 'ship.point'|trans|raw }} <span class="text-rouge">0</span>
+                                </td>
+                                <td class="p-0 text-center mt-1">
+                                    {{ 'ship.armor'|trans|raw }} {{ app.user.getShip().getArmorCorvet() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.shield'|trans|raw }} {{ app.user.getShip().getShieldCorvet() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.accurate'|trans|raw }} {{ app.user.getShip().getAccurateCorvet() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.missile'|trans|raw }} {{ app.user.getShip().getMissileCorvet() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.laser'|trans|raw }} 0
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.plasma'|trans|raw }} 0
+                                </td>
+                            </tr>
+                        {% else %}
+                            {% set form_shipPerso = formObject.createView %}
+                            {{ form_start(form_shipPerso) }}
+                            <tr name="corvet" class="hidden">
+                                <th width="74" rowspan="2" class="p-0">
+                                    <img width="74" src="{{ asset('img/corvet.jpg') }}">
+                                </th>
+                                <td rowspan="2" class="text-center">
+                                    {{ form_widget(form_shipPerso.ship,{'attr': { 'hidden': 'hidden', 'value': 'corvet' }}) }}
+                                    {{ 'ship.corvet'|trans|raw }}<br> {{ 'ship.point'|trans|raw }} <span class="totalPoints">{{ app.user.getShip().getPointCorvet() }}</span><span class="totalExec hidden">{{ app.user.getShip().getPointCorvet() }}</span>
+                                </td>
+                                <td>
+                                    {{ 'ship.armor'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getArmorCorvet() }}</span> <span class="basis" hidden>{{ app.user.getShip().getArmorCorvet() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.armor) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.shield'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getShieldCorvet() }}</span> <span class="basis" hidden>{{ app.user.getShip().getShieldCorvet() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.shield) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.accurate'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getAccurateCorvet() }}</span> <span class="basis" hidden>{{ app.user.getShip().getAccurateCorvet() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.accurate,{'attr': { 'disabled': 'disabled', 'class': 'game-input-off text-left' }}) }}
+                                </td>
+                            </tr>
+                            <tr name="corvet" class="hidden">
+                                <td>
+                                    {{ 'ship.missile'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getMissileCorvet() }}</span> <span class="basis" hidden>{{ app.user.getShip().getMissileCorvet() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.missile) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.laser'|trans|raw }} 0
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.laser,{'attr': { 'disabled': 'disabled', 'class': 'game-input-off text-left' }}) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.plasma'|trans|raw }} 0
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.plasma,{'attr': { 'disabled': 'disabled', 'class': 'game-input-off text-left' }}) }}
+                                </td>
+                            </tr>
+                            <tr name="corvet" class="hidden">
+                                <td colspan="2" class="text-center">
+                                    {{ form_widget(form_shipPerso.sendForm) }}
+                                </td>
+                            </tr>
+                            {{ form_end(form_shipPerso) }}
+                        {% endif %}
+                        {% if app.user.getShip().getPointCorvetLaser() == 0 %}
+                            <tr name="corvetLaser" class="hidden">
+                                <th width="32" class="p-0 text-center">
+                                    <img width="32" src="{{ asset('img/corvetLaser.jpg') }}">
+                                </th>
+                                <td class="text-center p-0">
+                                    {{ 'ship.corvetLaser'|trans|raw }} {{ 'ship.point'|trans|raw }} <span class="text-rouge">0</span>
+                                </td>
+                                <td class="p-0 text-center mt-1">
+                                    {{ 'ship.armor'|trans|raw }} {{ app.user.getShip().getArmorCorvetLaser() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.shield'|trans|raw }} {{ app.user.getShip().getShieldCorvetLaser() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.accurate'|trans|raw }} {{ app.user.getShip().getAccurateCorvetLaser() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.missile'|trans|raw }} {{ app.user.getShip().getMissileCorvetLaser() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.laser'|trans|raw }} {{ app.user.getShip().getLaserCorvetLaser() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.plasma'|trans|raw }}  0
+                                </td>
+                            </tr>
+                        {% else %}
+                            {% set form_shipPerso = formObject.createView %}
+                            {{ form_start(form_shipPerso) }}
+                            <tr name="corvetLaser" class="hidden">
+                                <th width="74" rowspan="2" class="p-0">
+                                    <img width="74" src="{{ asset('img/corvetLaser.jpg') }}">
+                                </th>
+                                <td rowspan="2" class="text-center">
+                                    {{ form_widget(form_shipPerso.ship,{'attr': { 'hidden': 'hidden', 'value': 'corvetLaser' }}) }}
+                                    {{ 'ship.corvetLaser'|trans|raw }}<br> {{ 'ship.point'|trans|raw }} <span class="totalPoints">{{ app.user.getShip().getPointCorvetLaser() }}</span><span class="totalExec hidden">{{ app.user.getShip().getPointCorvetLaser() }}</span>
+                                </td>
+                                <td>
+                                    {{ 'ship.armor'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getArmorCorvetLaser() }}</span> <span class="basis" hidden>{{ app.user.getShip().getArmorCorvetLaser() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.armor) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.shield'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getShieldCorvetLaser() }}</span> <span class="basis" hidden>{{ app.user.getShip().getShieldCorvetLaser() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.shield) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.accurate'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getAccurateCorvetLaser() }}</span> <span class="basis" hidden>{{ app.user.getShip().getAccurateCorvetLaser() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.accurate,{'attr': { 'disabled': 'disabled', 'class': 'game-input-off text-left' }}) }}
+                                </td>
+                            </tr>
+                            <tr name="corvetLaser" class="hidden">
+                                <td>
+                                    {{ 'ship.missile'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getMissileCorvetLaser() }}</span> <span class="basis" hidden>{{ app.user.getShip().getMissileCorvetLaser() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.missile) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.laser'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getLaserCorvetLaser() }}</span> <span class="basis" hidden>{{ app.user.getShip().getLaserCorvetLaser() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.laser) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.plasma'|trans|raw }} 0
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.plasma,{'attr': { 'disabled': 'disabled', 'class': 'game-input-off text-left' }}) }}
+                                </td>
+                            </tr>
+                            <tr name="corvetLaser" class="hidden">
+                                <td colspan="2" class="text-center">
+                                    {{ form_widget(form_shipPerso.sendForm) }}
+                                </td>
+                            </tr>
+                            {{ form_end(form_shipPerso) }}
+                        {% endif %}
+                        {% if app.user.getShip().getPointCorvetWar() == 0 %}
+                            <tr name="corvetWar" class="hidden">
+                                <th width="32" class="p-0 text-center">
+                                    <img width="32" src="{{ asset('img/corvetWar.jpg') }}">
+                                </th>
+                                <td class="text-center p-0">
+                                    {{ 'ship.corvetWar'|trans|raw }} {{ 'ship.point'|trans|raw }} <span class="text-rouge">0</span>
+                                </td>
+                                <td class="p-0 text-center mt-1">
+                                    {{ 'ship.armor'|trans|raw }} {{ app.user.getShip().getArmorCorvetWar() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.shield'|trans|raw }} {{ app.user.getShip().getShieldCorvetWar() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.accurate'|trans|raw }} {{ app.user.getShip().getAccurateCorvetWar() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.missile'|trans|raw }} {{ app.user.getShip().getMissileCorvetWar() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.laser'|trans|raw }} {{ app.user.getShip().getLaserCorvetWar() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.plasma'|trans|raw }}
+                                </td>
+                            </tr>
+                        {% else %}
+                            {% set form_shipPerso = formObject.createView %}
+                            {{ form_start(form_shipPerso) }}
+                            <tr name="corvetWar" class="hidden">
+                                <th width="74" rowspan="2" class="p-0">
+                                    <img width="74" src="{{ asset('img/corvetWar.jpg') }}">
+                                </th>
+                                <td rowspan="2" class="text-center">
+                                    {{ form_widget(form_shipPerso.ship,{'attr': { 'hidden': 'hidden', 'value': 'corvetWar' }}) }}
+                                    {{ 'ship.corvetWar'|trans|raw }}<br> {{ 'ship.point'|trans|raw }} <span class="totalPoints">{{ app.user.getShip().getPointCorvetWar() }}</span><span class="totalExec hidden">{{ app.user.getShip().getPointCorvetWar() }}</span>
+                                </td>
+                                <td>
+                                    {{ 'ship.armor'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getArmorCorvetWar() }}</span> <span class="basis" hidden>{{ app.user.getShip().getArmorCorvetWar() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.armor) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.shield'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getShieldCorvetWar() }}</span> <span class="basis" hidden>{{ app.user.getShip().getShieldCorvetWar() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.shield) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.accurate'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getAccurateCorvetWar() }}</span> <span class="basis" hidden>{{ app.user.getShip().getAccurateCorvetWar() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.accurate,{'attr': { 'disabled': 'disabled', 'class': 'game-input-off text-left' }}) }}
+                                </td>
+                            </tr>
+                            <tr name="corvetWar" class="hidden">
+                                <td>
+                                    {{ 'ship.missile'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getMissileCorvetWar() }}</span> <span class="basis" hidden>{{ app.user.getShip().getMissileCorvetWar() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.missile) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.laser'|trans|raw }}  <span class="addPoint">{{ app.user.getShip().getLaserCorvetWar() }}</span> <span class="basis" hidden>{{ app.user.getShip().getLaserCorvetWar() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.laser) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.plasma'|trans|raw }} 0
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.plasma,{'attr': { 'disabled': 'disabled', 'class': 'game-input-off text-left' }}) }}
+                                </td>
+                            </tr>
+                            <tr name="corvetWar" class="hidden">
+                                <td colspan="2" class="text-center">
+                                    {{ form_widget(form_shipPerso.sendForm) }}
+                                </td>
+                            </tr>
+                            {{ form_end(form_shipPerso) }}
+                        {% endif %}
+                        {% if app.user.getShip().getPointFregate() == 0 %}
+                            <tr name="fregate" class="hidden">
+                                <th width="32" class="p-0 text-center">
+                                    <img width="32" src="{{ asset('img/fregate.jpg') }}">
+                                </th>
+                                <td class="text-center p-0">
+                                    {{ 'ship.fregate'|trans|raw }} {{ 'ship.point'|trans|raw }} <span class="text-rouge">0</span>
+                                </td>
+                                <td class="p-0 text-center mt-1">
+                                    {{ 'ship.armor'|trans|raw }} {{ app.user.getShip().getArmorFregate() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.shield'|trans|raw }} {{ app.user.getShip().getShieldFregate() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.accurate'|trans|raw }} {{ app.user.getShip().getAccurateFregate() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.missile'|trans|raw }} {{ app.user.getShip().getMissileFregate() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.laser'|trans|raw }} {{ app.user.getShip().getLaserFregate() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.plasma'|trans|raw }}
+                                </td>
+                            </tr>
+                        {% else %}
+                            {% set form_shipPerso = formObject.createView %}
+                            {{ form_start(form_shipPerso) }}
+                            <tr name="fregate" class="hidden">
+                                <th width="74" rowspan="2" class="p-0">
+                                    <img width="74" src="{{ asset('img/fregate.jpg') }}">
+                                </th>
+                                <td rowspan="2" class="text-center">
+                                    {{ form_widget(form_shipPerso.ship,{'attr': { 'hidden': 'hidden', 'value': 'fregate' }}) }}
+                                    {{ 'ship.fregate'|trans|raw }}<br> {{ 'ship.point'|trans|raw }} <span class="totalPoints">{{ app.user.getShip().getPointFregate() }}</span><span class="totalExec hidden">{{ app.user.getShip().getPointFregate() }}</span>
+                                </td>
+                                <td>
+                                    {{ 'ship.armor'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getArmorFregate() }}</span> <span class="basis" hidden>{{ app.user.getShip().getArmorFregate() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.armor) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.shield'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getShieldFregate() }}</span> <span class="basis" hidden>{{ app.user.getShip().getShieldFregate() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.shield) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.accurate'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getAccurateFregate() }}</span> <span class="basis" hidden>{{ app.user.getShip().getAccurateFregate() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.accurate,{'attr': { 'disabled': 'disabled', 'class': 'game-input-off text-left' }}) }}
+                                </td>
+                            </tr>
+                            <tr name="fregate" class="hidden">
+                                <td>
+                                    {{ 'ship.missile'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getMissileFregate() }}</span> <span class="basis" hidden>{{ app.user.getShip().getMissileFregate() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.missile) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.laser'|trans|raw }}  <span class="addPoint">{{ app.user.getShip().getLaserFregate() }}</span> <span class="basis" hidden>{{ app.user.getShip().getLaserFregate() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.laser) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.plasma'|trans|raw }} 0
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.plasma,{'attr': { 'disabled': 'disabled', 'class': 'game-input-off text-left' }}) }}
+                                </td>
+                            </tr>
+                            <tr name="fregate" class="hidden">
+                                <td colspan="2" class="text-center">
+                                    {{ form_widget(form_shipPerso.sendForm) }}
+                                </td>
+                            </tr>
+                            {{ form_end(form_shipPerso) }}
+                        {% endif %}
+                        {% if app.user.getShip().getPointFregatePlasma() == 0 %}
+                            <tr name="fregatePlasma" class="hidden">
+                                <th width="32" class="p-0 text-center">
+                                    <img width="32" src="{{ asset('img/fregatePlasma.jpg') }}">
+                                </th>
+                                <td class="text-center p-0">
+                                    {{ 'ship.fregatePlasma'|trans|raw }} {{ 'ship.point'|trans|raw }} <span class="text-rouge">0</span>
+                                </td>
+                                <td class="p-0 text-center mt-1">
+                                    {{ 'ship.armor'|trans|raw }} {{ app.user.getShip().getArmorFregatePlasma() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.shield'|trans|raw }} {{ app.user.getShip().getShieldFregatePlasma() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.accurate'|trans|raw }} {{ app.user.getShip().getAccurateFregatePlasma() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.missile'|trans|raw }} {{ app.user.getShip().getMissileFregatePlasma() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.laser'|trans|raw }} {{ app.user.getShip().getLaserFregatePlasma() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.plasma'|trans|raw }} {{ app.user.getShip().getPlasmaFregatePlasma() }}
+                                </td>
+                            </tr>
+                        {% else %}
+                            {% set form_shipPerso = formObject.createView %}
+                            {{ form_start(form_shipPerso) }}
+                            <tr name="fregatePlasma" class="hidden">
+                                <th width="74" rowspan="2" class="p-0">
+                                    <img width="74" src="{{ asset('img/fregatePlasma.jpg') }}">
+                                </th>
+                                <td rowspan="2" class="text-center">
+                                    {{ form_widget(form_shipPerso.ship,{'attr': { 'hidden': 'hidden', 'value': 'fregatePlasma' }}) }}
+                                    {{ 'ship.fregatePlasma'|trans|raw }}<br> {{ 'ship.point'|trans|raw }} <span class="totalPoints">{{ app.user.getShip().getPointFregatePlasma() }}</span><span class="totalExec hidden">{{ app.user.getShip().getPointFregatePlasma() }}</span>
+                                </td>
+                                <td>
+                                    {{ 'ship.armor'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getArmorFregatePlasma() }}</span> <span class="basis" hidden>{{ app.user.getShip().getArmorFregatePlasma() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.armor) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.shield'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getShieldFregatePlasma() }}</span> <span class="basis" hidden>{{ app.user.getShip().getShieldFregatePlasma() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.shield) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.accurate'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getAccurateFregatePlasma() }}</span> <span class="basis" hidden>{{ app.user.getShip().getAccurateFregatePlasma() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.accurate,{'attr': { 'disabled': 'disabled', 'class': 'game-input-off text-left' }}) }}
+                                </td>
+                            </tr>
+                            <tr name="fregatePlasma" class="hidden">
+                                <td>
+                                    {{ 'ship.missile'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getMissileFregatePlasma() }}</span> <span class="basis" hidden>{{ app.user.getShip().getMissileFregatePlasma() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.missile) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.laser'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getLaserFregatePlasma() }}</span> <span class="basis" hidden>{{ app.user.getShip().getLaserFregatePlasma() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.laser) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.plasma'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getPlasmaFregatePlasma() }}</span> <span class="basis" hidden>{{ app.user.getShip().getPlasmaFregatePlasma() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.plasma) }}
+                                </td>
+                            </tr>
+                            <tr name="fregatePlasma" class="hidden">
+                                <td colspan="2" class="text-center">
+                                    {{ form_widget(form_shipPerso.sendForm) }}
+                                </td>
+                            </tr>
+                            {{ form_end(form_shipPerso) }}
+                        {% endif %}
+                        {% if app.user.getShip().getPointCroiser() == 0 %}
+                            <tr name="croiser" class="hidden">
+                                <th width="32" class="p-0 text-center">
+                                    <img width="32" src="{{ asset('img/croiser.jpg') }}">
+                                </th>
+                                <td class="text-center p-0">
+                                    {{ 'ship.croiser'|trans|raw }} {{ 'ship.point'|trans|raw }} <span class="text-rouge">0</span>
+                                </td>
+                                <td class="p-0 text-center mt-1">
+                                    {{ 'ship.armor'|trans|raw }} {{ app.user.getShip().getArmorCroiser() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.shield'|trans|raw }} {{ app.user.getShip().getShieldCroiser() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.accurate'|trans|raw }} {{ app.user.getShip().getAccurateCroiser() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.missile'|trans|raw }} {{ app.user.getShip().getMissileCroiser() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.laser'|trans|raw }} {{ app.user.getShip().getLaserCroiser() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.plasma'|trans|raw }} {{ app.user.getShip().getPlasmaCroiser() }}
+                                </td>
+                            </tr>
+                        {% else %}
+                            {% set form_shipPerso = formObject.createView %}
+                            {{ form_start(form_shipPerso) }}
+                            <tr name="croiser" class="hidden">
+                                <th width="74" rowspan="2" class="p-0">
+                                    <img width="74" src="{{ asset('img/croiser.jpg') }}">
+                                </th>
+                                <td rowspan="2" class="text-center">
+                                    {{ form_widget(form_shipPerso.ship,{'attr': { 'hidden': 'hidden', 'value': 'croiser' }}) }}
+                                    {{ 'ship.croiser'|trans|raw }}<br> {{ 'ship.point'|trans|raw }} <span class="totalPoints">{{ app.user.getShip().getPointCroiser() }}</span><span class="totalExec hidden">{{ app.user.getShip().getPointCroiser() }}</span>
+                                </td>
+                                <td>
+                                    {{ 'ship.armor'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getArmorCroiser() }}</span> <span class="basis" hidden>{{ app.user.getShip().getArmorCroiser() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.armor) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.shield'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getShieldCroiser() }}</span> <span class="basis" hidden>{{ app.user.getShip().getShieldCroiser() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.shield) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.accurate'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getAccurateCroiser() }}</span> <span class="basis" hidden>{{ app.user.getShip().getAccurateCroiser() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.accurate,{'attr': { 'disabled': 'disabled', 'class': 'game-input-off text-left' }}) }}
+                                </td>
+                            </tr>
+                            <tr name="croiser" class="hidden">
+                                <td>
+                                    {{ 'ship.missile'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getMissileCroiser() }}</span> <span class="basis" hidden>{{ app.user.getShip().getMissileCroiser() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.missile) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.laser'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getLaserCroiser() }}</span> <span class="basis" hidden>{{ app.user.getShip().getLaserCroiser() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.laser) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.plasma'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getPlasmaCroiser() }}</span> <span class="basis" hidden>{{ app.user.getShip().getPlasmaCroiser() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.plasma) }}
+                                </td>
+                            </tr>
+                            <tr name="croiser" class="hidden">
+                                <td colspan="2" class="text-center">
+                                    {{ form_widget(form_shipPerso.sendForm) }}
+                                </td>
+                            </tr>
+                            {{ form_end(form_shipPerso) }}
+                        {% endif %}
+                        {% if app.user.getShip().getPointIronClad() == 0 %}
+                            <tr name="ironClad" class="hidden">
+                                <th width="32" class="p-0 text-center">
+                                    <img width="32" src="{{ asset('img/ironClad.jpg') }}">
+                                </th>
+                                <td class="text-center p-0">
+                                    {{ 'ship.ironClad'|trans|raw }} {{ 'ship.point'|trans|raw }} <span class="text-rouge">0</span>
+                                </td>
+                                <td class="p-0 text-center mt-1">
+                                    {{ 'ship.armor'|trans|raw }} {{ app.user.getShip().getArmorIronClad() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.shield'|trans|raw }} {{ app.user.getShip().getShieldIronClad() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.accurate'|trans|raw }} {{ app.user.getShip().getAccurateIronClad() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.missile'|trans|raw }} {{ app.user.getShip().getMissileIronClad() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.laser'|trans|raw }} {{ app.user.getShip().getLaserIronClad() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.plasma'|trans|raw }} {{ app.user.getShip().getPlasmaIronClad() }}
+                                </td>
+                            </tr>
+                        {% else %}
+                            {% set form_shipPerso = formObject.createView %}
+                            {{ form_start(form_shipPerso) }}
+                            <tr name="ironClad" class="hidden">
+                                <th width="74" rowspan="2" class="p-0">
+                                    <img width="74" src="{{ asset('img/ironClad.jpg') }}">
+                                </th>
+                                <td rowspan="2" class="text-center">
+                                    {{ form_widget(form_shipPerso.ship,{'attr': { 'hidden': 'hidden', 'value': 'ironClad' }}) }}
+                                    {{ 'ship.ironClad'|trans|raw }}<br> {{ 'ship.point'|trans|raw }} <span class="totalPoints">{{ app.user.getShip().getPointIronClad() }}</span><span class="totalExec hidden">{{ app.user.getShip().getPointIronClad() }}</span>
+                                </td>
+                                <td>
+                                    {{ 'ship.armor'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getArmorIronClad() }}</span> <span class="basis" hidden>{{ app.user.getShip().getArmorIronClad() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.armor) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.shield'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getShieldIronClad() }}</span> <span class="basis" hidden>{{ app.user.getShip().getShieldIronClad() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.shield) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.accurate'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getAccurateIronClad() }}</span> <span class="basis" hidden>{{ app.user.getShip().getAccurateIronClad() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.accurate,{'attr': { 'disabled': 'disabled', 'class': 'game-input-off text-left' }}) }}
+                                </td>
+                            </tr>
+                            <tr name="ironClad" class="hidden">
+                                <td>
+                                    {{ 'ship.missile'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getMissileIronClad() }}</span> <span class="basis" hidden>{{ app.user.getShip().getMissileIronClad() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.missile) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.laser'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getLaserIronClad() }}</span> <span class="basis" hidden>{{ app.user.getShip().getLaserIronClad() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.laser) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.plasma'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getPlasmaIronClad() }}</span> <span class="basis" hidden>{{ app.user.getShip().getPlasmaIronClad() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.plasma) }}
+                                </td>
+                            </tr>
+                            <tr name="ironClad" class="hidden">
+                                <td colspan="2" class="text-center">
+                                    {{ form_widget(form_shipPerso.sendForm) }}
+                                </td>
+                            </tr>
+                            {{ form_end(form_shipPerso) }}
+                        {% endif %}
+                        {% if app.user.getShip().getPointDestroyer() == 0 %}
+                            <tr name="destroyer" class="hidden">
+                                <th width="32" class="p-0 text-center">
+                                    <img width="32" src="{{ asset('img/destroyer.jpg') }}">
+                                </th>
+                                <td class="text-center p-0">
+                                    {{ 'ship.destroyer'|trans|raw }} {{ 'ship.point'|trans|raw }} <span class="text-rouge">0</span>
+                                </td>
+                                <td class="p-0 text-center mt-1">
+                                    {{ 'ship.armor'|trans|raw }} {{ app.user.getShip().getArmorDestroyer() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.shield'|trans|raw }} {{ app.user.getShip().getShieldDestroyer() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.accurate'|trans|raw }} {{ app.user.getShip().getAccurateDestroyer() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.missile'|trans|raw }} {{ app.user.getShip().getMissileDestroyer() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.laser'|trans|raw }} {{ app.user.getShip().getLaserDestroyer() }}
+                                </td>
+                                <td class="p-0 text-center">
+                                    {{ 'ship.plasma'|trans|raw }} {{ app.user.getShip().getPlasmaDestroyer() }}
+                                </td>
+                            </tr>
+                        {% else %}
+                            {% set form_shipPerso = formObject.createView %}
+                            {{ form_start(form_shipPerso) }}
+                            <tr name="destroyer" class="hidden">
+                                <th width="74" rowspan="2" class="p-0">
+                                    <img width="74" src="{{ asset('img/destroyer.jpg') }}">
+                                </th>
+                                <td rowspan="2" class="text-center">
+                                    {{ form_widget(form_shipPerso.ship,{'attr': { 'hidden': 'hidden', 'value': 'destroyer' }}) }}
+                                    {{ 'ship.destroyer'|trans|raw }}<br> {{ 'ship.point'|trans|raw }} <span class="totalPoints">{{ app.user.getShip().getPointDestroyer() }}</span><span class="totalExec hidden">{{ app.user.getShip().getPointDestroyer() }}</span>
+                                </td>
+                                <td>
+                                    {{ 'ship.armor'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getArmorDestroyer() }}</span> <span class="basis" hidden>{{ app.user.getShip().getArmorDestroyer() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.armor) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.shield'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getShieldDestroyer() }}</span> <span class="basis" hidden>{{ app.user.getShip().getShieldDestroyer() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.shield) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.accurate'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getAccurateDestroyer() }}</span> <span class="basis" hidden>{{ app.user.getShip().getAccurateDestroyer() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.accurate,{'attr': { 'disabled': 'disabled', 'class': 'game-input-off text-left' }}) }}
+                                </td>
+                            </tr>
+                            <tr name="destroyer" class="hidden">
+                                <td>
+                                    {{ 'ship.missile'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getMissileDestroyer() }}</span> <span class="basis" hidden>{{ app.user.getShip().getMissileDestroyer() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.missile) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.laser'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getLaserDestroyer() }}</span> <span class="basis" hidden>{{ app.user.getShip().getLaserDestroyer() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.laser) }}
+                                </td>
+                                <td>
+                                    {{ 'ship.plasma'|trans|raw }} <span class="addPoint">{{ app.user.getShip().getPlasmaDestroyer() }}</span> <span class="basis" hidden>{{ app.user.getShip().getPlasmaDestroyer() }}</span>
+                                </td>
+                                <td class="center-cells">
+                                    {{ form_widget(form_shipPerso.plasma) }}
+                                </td>
+                            </tr>
+                            <tr name="destroyer" class="hidden">
+                                <td colspan="2" class="text-center">
+                                    {{ form_widget(form_shipPerso.sendForm) }}
+                                </td>
+                            </tr>
+                            {{ form_end(form_shipPerso) }}
+                        {% endif %}
+                        </tbody>
+                    </table>
+                    {% if app.user.getShip().getMax() > 0 %}<div class="block-title mt-4"><h2>{{ 'ship.lastPoints'|trans({'%nbr%': app.user.getShip().getMax()}) }}</h2></div>{% else %}<div class="block-title mt-4"><h2>{{ 'ship.nextUpdate'|trans }} <span class="timerArea" hidden>{{ app.user.getShip().getLastUpdate()|date('Y/m/d H:i:s') }}</span></h2></div>{% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -120,6 +120,12 @@ class User implements UserInterface, \Serializable
     protected $commander;
 
     /**
+     * @ORM\OneToOne(targetEntity="Ships", inversedBy="user", fetch="EXTRA_LAZY", cascade={"persist"})
+     * @ORM\JoinColumn(name="ship_id", referencedColumnName="id")
+     */
+    protected $ship;
+
+    /**
      *
      * @ORM\Column(type="string", length=64)
      * @Assert\NotBlank(message = "required")
@@ -3131,6 +3137,22 @@ class User implements UserInterface, \Serializable
     public function setViews($views): void
     {
         $this->views = $views;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShip()
+    {
+        return $this->ship;
+    }
+
+    /**
+     * @param mixed $ship
+     */
+    public function setShip($ship): void
+    {
+        $this->ship = $ship;
     }
 
     /**

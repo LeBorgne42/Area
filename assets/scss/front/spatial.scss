@@ -101,3 +101,31 @@
     vertical-align: middle;
   }
 }
+
+.persoFleet {
+  td.center-cells {
+    width: 65px;
+  }
+}
+
+.persoFleet {
+  td.center-cells input {
+    height: 20px;
+  }
+  th.tab-cells-name {
+    vertical-align: middle;
+  }
+}
+
+.totalPoints {
+  color: lawngreen;
+}
+
+.persoFleetClick {
+  th {
+    cursor: pointer;
+  }
+  td {
+    cursor: pointer;
+  }
+}
