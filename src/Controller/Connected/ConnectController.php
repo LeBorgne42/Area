@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use App\Entity\Rank;
 use App\Entity\Report;
+use App\Entity\Ships;
 use DateTime;
 use DateTimeZone;
 use Dateinterval;
@@ -85,6 +86,11 @@ class ConnectController extends AbstractController
             ->getQuery()
             ->getOneOrNullResult();
 
+        if (!$user->getShip()) {
+            $ships = new Ships();
+            $user->setShip($ships);
+            $em->persist($ships);
+        }
         $rank = new Rank();
         $em->persist($rank);
         $user->setRank($rank);

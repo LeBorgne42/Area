@@ -6,8 +6,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Report;
 use App\Entity\Fleet;
-use App\Entity\Rank;
-use App\Entity\User;
+use App\Entity\Ships;
 use App\Entity\Destination;
 use DateTime;
 use DateTimeZone;
@@ -193,6 +192,21 @@ class InstantController extends AbstractController
             ->getQuery()
             ->getResult();
 
+        $userShips = $em->getRepository('App:User')
+            ->createQueryBuilder('u')
+            ->where('u.rank is not null')
+            ->andWhere('u.ship is null')
+            ->getQuery()
+            ->getResult();
+
+        foreach ($userShips as $userShip) {
+            if (!$userShip->getShip()) {
+                $ships = new Ships();
+                $userShip->setShip($ships);
+                $em->persist($ships);
+            }
+        }
+
         $dailyReport = $em->getRepository('App:Server')
             ->createQueryBuilder('s')
             ->where('s.dailyReport < :now')
@@ -362,6 +376,9 @@ class InstantController extends AbstractController
                 }
                 $em->remove($list);
             }
+            $ship = $userGO->getShip();
+            $userGO->setShip(null);
+            $em->remove($ship);
             $userGO->setBitcoin(25000);
             $userGO->setSearch(null);
             $em->remove($userGO->getRank(null));

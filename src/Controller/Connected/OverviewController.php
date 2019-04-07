@@ -110,6 +110,9 @@ class OverviewController extends AbstractController
                     }
                     $em->remove($list);
                 }
+                $ship = $user->getShip();
+                $user->setShip(null);
+                $em->remove($ship);
                 $user->setBitcoin(25000);
                 $user->setSearch(null);
                 $em->remove($user->getRank(null));

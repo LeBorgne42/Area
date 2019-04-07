@@ -314,6 +314,9 @@ class ServerController extends AbstractController
             ->getOneOrNullResult();
 
         foreach ($users as $user) {
+            $ship = $user->getShip();
+            $user->setShip(null);
+            $em->remove($ship);
             $user->setBitcoin(25000);
             $user->setAlly(null);
             $user->setSearch(null);

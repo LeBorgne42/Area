@@ -3,7 +3,6 @@
 namespace App\EventListener;
 
 use App\Entity\User;
-use App\Entity\Ships;
 use App\Entity\Report;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -85,12 +84,6 @@ class UserEvent implements EventSubscriberInterface
                 $twentyfour->sub(new DateInterval('PT' . 86400 . 'S'));
 
                 if ($user instanceof User) {
-                    if (!$user->getShip()) {
-                        $ships = new Ships();
-                        $user->setShip($ships);
-                        $this->em->persist($ships);
-                        $this->em->flush();
-                    }
                     if ($twentyfour > $user->getDailyConnect()) {
                         $user->setDailyConnect($now);
                         $bonus = (($user->getLevel() + 1) * 10000);
