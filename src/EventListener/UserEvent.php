@@ -273,6 +273,8 @@ class UserEvent implements EventSubscriberInterface
                             } else {
                                 $user->setIpAddress($userIp);
                             }
+                        } else {
+                            $user->setIpAddress(null);
                         }
                         if ($user->getPoliticWorker() > 0) {
                             $workerBonus = (1 + ($user->getPoliticWorker() / 5));

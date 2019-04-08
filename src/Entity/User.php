@@ -807,34 +807,6 @@ class User implements UserInterface, \Serializable
     /**
      * @return mixed
      */
-    public function getSigleAlliedArray($sigles)
-    {
-        $ally = $this->getAlly();
-        if($sigles && $ally) {
-            foreach ($sigles as $sigle) {
-                foreach ($ally->getPnas() as $pna) {
-                    if ($pna->getAllyTag() == $sigle && $pna->getAccepted() == true) {
-                        return $pna->getAllyTag();
-                    }
-                }
-                foreach ($ally->getAllieds() as $pact) {
-                    if ($pact->getAllyTag() == $sigle && $pact->getAccepted() == true) {
-                        return $pact->getAllyTag();
-                    }
-                }
-                foreach ($ally->getPeaces() as $peace) {
-                    if ($peace->getAllyTag() == $sigle && $peace->getAccepted() == true) {
-                        return $peace->getAllyTag();
-                    }
-                }
-            }
-        }
-        return null;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getWhichViewsSalon($tmpSalon)
     {
         if($this->getViews()) {
@@ -959,7 +931,7 @@ class User implements UserInterface, \Serializable
     public function getRessourceFull()
     {
         foreach($this->planets as $planet) {
-            if($planet->getNiobium() >= $planet->getNiobiumMax() || $planet->getWater() >= $planet->getWaterMax()) {
+            if($planet->getNiobium() >= $planet->getNiobiumMax() || $planet->getWater() >= $planet->getWaterMax()) { // fixmr requete globale des planètes
                 return ' planetFull';
             }
         }
@@ -1424,7 +1396,7 @@ class User implements UserInterface, \Serializable
             $return = $return + ($planet->getScientistAtNbr() * $scPrices);
       /*      if ($planet->getMissions()) {
                 foreach($planet->getMissions() as $mission) {
-                    $return = $return + ($mission->getSoldier() * $sPrices); //fixmr
+                    $return = $return + ($mission->getSoldier() * $sPrices); //fixmr optimiser
                     $return = $return + ($mission->getTank() * $tPrices);
                 }
             }*/
@@ -1542,27 +1514,27 @@ class User implements UserInterface, \Serializable
             $return = 3;
         } elseif ($this->experience < 40000) {
             $return = 4;
-        } elseif ($this->experience < 75000) {
-            $return = 5;
         } elseif ($this->experience < 100000) {
-            $return = 6;
+            $return = 5;
         } elseif ($this->experience < 150000) {
-            $return = 7;
+            $return = 6;
         } elseif ($this->experience < 200000) {
-            $return = 8;
+            $return = 7;
         } elseif ($this->experience < 280000) {
-            $return = 9;
+            $return = 8;
         } elseif ($this->experience < 350000) {
-            $return = 10;
+            $return = 9;
         } elseif ($this->experience < 450000) {
-            $return = 11;
+            $return = 10;
         } elseif ($this->experience < 600000) {
-            $return = 12;
+            $return = 11;
         } elseif ($this->experience < 800000) {
-            $return = 13;
+            $return = 12;
         } elseif ($this->experience < 1000000) {
-            $return = 14;
+            $return = 13;
         } elseif ($this->experience < 1300000) {
+            $return = 14;
+        } elseif ($this->experience < 2000000) {
             $return = 15;
         }
 

@@ -628,8 +628,9 @@ class Fleet
         $scientist = $this->getScientist();
         $niobium = $this->getNiobium();
         $water = $this->getWater();
+        $uranium = $this->getUranium();
 
-        $nbr = $worker + $soldier + $scientist + $niobium + $water;
+        $nbr = $worker + $soldier + $scientist + $niobium + $water + $uranium;
         return $nbr;
     }
 
@@ -638,14 +639,14 @@ class Fleet
      */
     public function getCargoPlace(): int
     {
-        $barge = $this->getBarge() * 2500;
-        $recycleur = $this->getRecycleur() * 10000;
+        $barge = $this->getBarge() * 1000;
+        $recycleur = $this->getRecycleur() * 5000;
         if ($this->getUser()->getPoliticCargo() > 0) {
-            $cargoI = ($this->getCargoI() * 25000) * (1 + ($this->getUser()->getPoliticCargo() / 5));
+            $cargoI = ($this->getCargoI() * 30000) * (1 + ($this->getUser()->getPoliticCargo() / 5));
             $cargoV = ($this->getCargoV() * 100000) * (1 + ($this->getUser()->getPoliticCargo() / 5));
             $cargoX = ($this->getCargoX() * 250000) * (1 + ($this->getUser()->getPoliticCargo() / 5));
         } else {
-            $cargoI = $this->getCargoI() * 25000;
+            $cargoI = $this->getCargoI() * 30000;
             $cargoV = $this->getCargoV() * 100000;
             $cargoX = $this->getCargoX() * 250000;
         }
@@ -917,6 +918,9 @@ class Fleet
         }
         if ($this->water > 0) {
             $return[] = [number_format($this->water), 'fleet.water'];
+        }
+        if ($this->uranium > 0) {
+            $return[] = [number_format($this->uranium), 'fleet.uranium'];
         }
         if ($this->worker > 0) {
             $return[] = [number_format($this->worker), 'fleet.worker'];

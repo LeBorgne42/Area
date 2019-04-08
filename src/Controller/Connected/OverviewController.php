@@ -261,6 +261,11 @@ class OverviewController extends AbstractController
             }
             $galaxys = $em->getRepository('App:Galaxy')
                 ->createQueryBuilder('g')
+                ->join('g.sectors', 's')
+                ->join('s.planets', 'p')
+                ->join('p.user', 'u')
+                ->select('g.position, count(DISTINCT u.id) as users')
+                ->groupBy('g.id')
                 ->orderBy('g.position', 'ASC')
                 ->getQuery()
                 ->getResult();

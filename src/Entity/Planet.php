@@ -682,8 +682,9 @@ class Planet
         $croiser = $this->getCroiser() * 300;
         $ironClad = $this->getIronClad() * 700;
         $destroyer = $this->getDestroyer() * 1500;
+        $nuclear = $this->getNuclearBomb() * 250000;
 
-        $nbr = $corvetWar + $hunterWar + $motherShip + $brouilleurShip + $radarShip + $radarShip + $moonMaker + $fregate + $colonizer + $barge + $hunter + $recycleur + $sonde + $cargoI + $cargoV + $cargoX + $hunterHeavy + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
+        $nbr = $corvetWar + $hunterWar + $motherShip + $brouilleurShip + $radarShip + $radarShip + $moonMaker + $fregate + $colonizer + $barge + $hunter + $recycleur + $sonde + $cargoI + $cargoV + $cargoX + $hunterHeavy + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer + $nuclear;
         return $nbr;
     }
 
@@ -707,8 +708,11 @@ class Planet
         $radar = $this->getRadar() * 8;
         $skyr = $this->getSkyRadar() * 60;
         $brouilleur = $this->getSkyBrouilleur() * 100;
+        $nuclear = $this->getNuclearBase() * 300;
+        $orbital = $this->getOrbital() * 2000;
+        $island = $this->getIsland() * 2000;
 
-        $nbr = $extractor + $niobiumStock + $waterStock + $miner + $caserne + $bunker + $center + $city + $metropole + $light + $heavy + $space + $radar + $skyr + $brouilleur;
+        $nbr = $extractor + $niobiumStock + $waterStock + $miner + $caserne + $bunker + $center + $city + $metropole + $light + $heavy + $space + $radar + $skyr + $brouilleur + $nuclear + $orbital + $island;
         return $nbr;
     }
 
@@ -732,8 +736,11 @@ class Planet
         $radar = $this->getRadar() * 200;
         $skyr = $this->getSkyRadar() * 2000;
         $brouilleur = $this->getSkyBrouilleur() * 6000;
+        $nuclear = $this->getNuclearBase() * 75000;
+        $orbital = $this->getOrbital() * 15000;
+        $island = $this->getIsland() * 15000;
 
-        $nbr = $extractor + $niobiumStock + $waterStock + $miner + $caserne + $bunker + $center + $city + $metropole + $light + $heavy + $space + $radar + $skyr + $brouilleur;
+        $nbr = $extractor + $niobiumStock + $waterStock + $miner + $caserne + $bunker + $center + $city + $metropole + $light + $heavy + $space + $radar + $skyr + $brouilleur + $nuclear + $orbital + $island;
         return $nbr;
     }
 
@@ -761,21 +768,6 @@ class Planet
         $nbr = 0;
         foreach($this->constructions as $construct) {
             if($construct->getConstruct() == $name) {
-                $nbr++;
-            }
-        }
-
-        return $nbr;
-    }
-
-    /**
-     * @return int
-     */
-    public function getFleetWithRec(): int
-    {
-        $nbr = 0;
-        foreach($this->fleets as $fleet) {
-            if($fleet->getRecycleur() > 0) {
                 $nbr++;
             }
         }

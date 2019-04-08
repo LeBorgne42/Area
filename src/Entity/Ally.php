@@ -294,20 +294,6 @@ class Ally
     }
 
     /**
-     * @return int
-     */
-    public function getAllPdg() : int
-    {
-        $nbr = 0;
-        foreach($this->getUsers() as $user) {
-            if($user->getRank()) {
-                $nbr = $nbr + $user->getRank()->getWarPoint();
-            }
-        }
-        return $nbr;
-    }
-
-    /**
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getUsers()
@@ -672,21 +658,6 @@ class Ally
     /**
      * @return int
      */
-    public function getAllyFleets(): int
-    {
-        $return = 0;
-
-        foreach($this->getUsers() as $user) {
-            foreach ($user->getFleets() as $fleet) {
-                $return++;
-            }
-        }
-        return $return;
-    }
-
-    /**
-     * @return int
-     */
     public function getFlightTime() : int
     {
         foreach ($this->fleets as $fleet) {
@@ -698,19 +669,6 @@ class Ally
     }
 
     /**
-     * @return int
-     */
-    public function getAllShips(): int
-    {
-        $return = 0;
-
-        foreach($this->getUsers() as $user) {
-            $return = $return + $user->getAllShips();
-        }
-        return $return;
-    }
-
-    /**
      * @return mixed
      */
     public function getNewMember()
@@ -718,7 +676,7 @@ class Ally
         $return = null;
 
         foreach($this->getGrades() as $grade) {
-            if($grade->getName() == "Membre") {
+            if($grade->getPlacement() == 5) {
                 $return = $grade;
             }
         }

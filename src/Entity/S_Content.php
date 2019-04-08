@@ -61,18 +61,7 @@ class S_Content
      */
     public function getMessage()
     {
-        if($this->salon->getName() == 'Private') {
-            $encrypt_method = "aes256";
-            $secret_key = '°)Qfdd:M§¨¨èè!iV2dfgdfg&';
-            $secret_iv = '°)!!èQ:Mghfg§¨g¨iV!!dfg&';
-            $key = hash('sha256', $secret_key);
-            $iv = substr(hash('sha256', $secret_iv), 0, 16);
-            $decrypt = openssl_decrypt($this->message, $encrypt_method, $key, false, $iv);
-            $decrypt = str_replace('d(kKd-&é°?,/+sSqwX@', '', $decrypt);
-            return $decrypt;
-        } else {
-            return $this->message;
-        }
+        return $this->message;
     }
 
     /**

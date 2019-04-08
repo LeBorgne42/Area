@@ -64,10 +64,10 @@ function manageTime() {
         var heures = Math.floor((date_now - (jours * 60 * 60 * 24)) / (60 * 60));
         var minutes = Math.floor((date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60))) / 60);
         var secondes = Math.floor(date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60 + minutes * 60)));
-        jours = (jours > 10) ? jours : '0' + jours;
-        heures = (heures > 10) ? heures : '0' + heures;
-        minutes = (minutes > 10) ? minutes : '0' + minutes;
-        secondes = (secondes > 10) ? secondes : '0' + secondes;
+        jours = (jours > 9) ? jours : '0' + jours;
+        heures = (heures > 9) ? heures : '0' + heures;
+        minutes = (minutes > 9) ? minutes : '0' + minutes;
+        secondes = (secondes > 9) ? secondes : '0' + secondes;
         setInterval(function() {
             if (build < now) {
                 area.html("<a style='cursor: pointer;' onclick='window.location.reload(false)'>Terminée</a>");
@@ -90,21 +90,18 @@ function manageTime() {
                         area.removeAttr('hidden');
                     }
                     secondes = secondes - 1;
-                    secondes = (secondes > 10) ? secondes : '0' + secondes;
+                    secondes = (secondes > 9) ? secondes : '0' + secondes;
                     if (secondes == 0 || secondes < 0) {
                         if (minutes == 0 && heures == 0 && jours == 0) {
                             area.html("<a style='cursor: pointer;' onclick='window.location.reload(false)'>Terminée</a>");
-                            setTimeout(function () {
-                                //window.location.href = window.location.href;
-                            }, 2000);
                         } else {
                             secondes = 60;
                             minutes = minutes - 1;
-                            minutes = (minutes > 10) ? minutes : '0' + minutes;
+                            minutes = (minutes > 9) ? minutes : '0' + minutes;
                             if (minutes == 0 && heures != 0) {
                                 minutes = 60;
                                 heures = heures - 1;
-                                heures = (heures > 10) ? heures : '0' + heures;
+                                heures = (heures > 9) ? heures : '0' + heures;
                             }
                         }
                     }

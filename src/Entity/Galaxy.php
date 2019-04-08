@@ -68,23 +68,6 @@ class Galaxy
     }
 
     /**
-     * @return mixed
-     */
-    public function getPlayers()
-    {
-        $players = 0;
-        $criteria = Criteria::create();
-        $criteria->where($criteria::expr()->neq('user', null))
-            ->andWhere($criteria::expr()->eq('ground', 25))
-            ->andWhere($criteria::expr()->eq('sky', 5));
-
-        foreach($this->getSectors() as $sector) {
-            $players += count($sector->getPlanets()->matching($criteria));
-        }
-        return $players;
-    }
-
-    /**
      * Add sector
      *
      * @param \App\Entity\Sector $sector
