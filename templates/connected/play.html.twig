@@ -21,7 +21,7 @@
             <h1>{{ 'choseGalaxy'|trans }}</h1>
         </div>
         {% for galaxy in galaxys %}
-            <a href="{{ path('connect_server', {'id': galaxy.getPosition()}) }}"><span><img class="galaxy-block mr-4 mb-4" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.galaxy'|trans({'%position%': galaxy.getPosition()}) }}" src="{{ asset('img/galaxy.png') }}"><span class="galaxy-position">{{ 'galaxy.nbr'|trans({'%position%': galaxy.getPosition()}) }}</span><span class="galaxy-players">{{ 'galaxy.players'|trans({'%players%': galaxy.getPlayers()}) }}</span></span></a>
+            <a href="{{ path('connect_server', {'id': galaxy.position}) }}"><span><img class="galaxy-block mr-4 mb-4" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.galaxy'|trans({'%position%': galaxy.position}) }}" src="{{ asset('img/galaxy.png') }}"><span class="galaxy-position">{{ 'galaxy.nbr'|trans({'%position%': galaxy.position}) }}</span><span class="galaxy-players">{{ 'galaxy.players'|trans({'%players%': galaxy.users|number_format }) }}</span></span></a>
         {% endfor %}
         <div>
         </div>
