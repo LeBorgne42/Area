@@ -903,6 +903,39 @@ class User implements UserInterface, \Serializable
     }
 
     /**
+     * @return string
+     */
+    public function getFleetsColor($user, $sigle): string
+    {
+        $color = 'pp-enemy';
+        if ($this->getId() == $user) {
+            return 'pp-mine';
+        }
+        if ($this->getAlly() and $sigle) {
+            if ($this->getAlly()->getSigle() == $sigle && $color != 'pp-mine' && $sigle) {
+                return 'pp-ally';
+            }
+            if ($this->getAlly() && $sigle) {
+                if (count($this->getAlly()->getAllieds()) > 0) {
+                    foreach ($this->getAlly()->getAllieds() as $allied) {
+                        if ($allied->getAllyTag() == $sigle && $allied->getAccepted() == 1) {
+                            return 'pp-ally';
+                        }
+                    }
+                }
+                if (count($this->getAlly()->getPeaces()) > 0) {
+                    foreach ($this->getAlly()->getPeaces() as $peace) {
+                        if ($peace->getAllyTag() == $sigle && $peace->getAccepted() == 1) {
+                            return 'pp-peace';
+                        }
+                    }
+                }
+            }
+        }
+        return $color;
+    }
+
+    /**
      * @return mixed
      */
     public function getFirstPlanet()

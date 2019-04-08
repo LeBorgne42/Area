@@ -71,6 +71,11 @@ class Planet
     protected $wtCdr;
 
     /**
+     * @ORM\Column(name="signature",type="bigint")
+     */
+    protected $signature;
+
+    /**
      * @ORM\Column(name="shipProduction",type="decimal", precision=28, scale=5)
      */
     protected $shipProduction;
@@ -591,6 +596,7 @@ class Planet
         $this->nuclearBomb = null;
         $this->nuclearAt = null;
         $this->nuclearAtNbr = null;
+        $this->signature = null;
     }
 
     /**
@@ -652,6 +658,39 @@ class Planet
         $destroyer = $this->getDestroyer();
 
         $nbr = $corvetWar + $hunterWar + $motherShip + $brouilleurShip + $radarShip + $moonMaker + $fregate + $colonizer + $barge + $hunter + $recycleur + $sonde + $cargoI + $cargoV + $cargoX + $hunterHeavy + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer ;
+        return $nbr;
+    }
+
+    /**
+     * @return int
+     */
+    public function putNewSignature(): int
+    {
+        $sonde = $this->getSonde();
+        $colonizer = $this->getColonizer() * 200;
+        $recycleur = $this->getRecycleur() * 80;
+        $cargoI = $this->getCargoI() * 50;
+        $cargoV = $this->getCargoV() * 120;
+        $cargoX = $this->getCargoX() * 250;
+        $barge = $this->getBarge() * 50;
+        $moonMaker = $this->getMoonMaker() * 50000;
+        $radarShip = $this->getRadarShip() * 500;
+        $brouilleurShip = $this->getBrouilleurShip() * 1000;
+        $motherShip = $this->getMotherShip() * 20000;
+        $hunter = $this->getHunter() * 5;
+        $hunterHeavy = $this->getHunterHeavy() * 8;
+        $hunterWar = $this->getHunterWar() * 15;
+        $corvet = $this->getCorvet() * 25;
+        $corvetLaser = $this->getCorvetLaser() * 40;
+        $corvetWar = $this->getCorvetWar() * 45;
+        $fregate = $this->getFregate() * 60;
+        $fregatePlasma = $this->getFregatePlasma() * 150;
+        $croiser = $this->getCroiser() * 300;
+        $ironClad = $this->getIronClad() * 700;
+        $destroyer = $this->getDestroyer() * 1500;
+        $nuclear = $this->getNuclearBomb() * 250000;
+
+        $nbr = $corvetWar + $hunterWar + $motherShip + $brouilleurShip + $radarShip + $radarShip + $moonMaker + $fregate + $colonizer + $barge + $hunter + $recycleur + $sonde + $cargoI + $cargoV + $cargoX + $hunterHeavy + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer + $nuclear;
         return $nbr;
     }
 
@@ -737,8 +776,8 @@ class Planet
         $skyr = $this->getSkyRadar() * 2000;
         $brouilleur = $this->getSkyBrouilleur() * 6000;
         $nuclear = $this->getNuclearBase() * 75000;
-        $orbital = $this->getOrbital() * 15000;
-        $island = $this->getIsland() * 15000;
+        $orbital = $this->getOrbital() * 5000;
+        $island = $this->getIsland() * 5000;
 
         $nbr = $extractor + $niobiumStock + $waterStock + $miner + $caserne + $bunker + $center + $city + $metropole + $light + $heavy + $space + $radar + $skyr + $brouilleur + $nuclear + $orbital + $island;
         return $nbr;
@@ -776,42 +815,18 @@ class Planet
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getFleetsColor($user): string
+    public function getFleetWithRec(): int
     {
-        $color = 'pp-enemy';
+        $nbr = 0;
         foreach($this->fleets as $fleet) {
-            if (!$fleet->getFlightTime()) {
-                $color = 'pp-enemy';
-                if ($fleet->getUser() == $user) {
-                    $color = 'pp-mine';
-                }
-                if($fleet->getUser()->getAlly() == $user->getAlly() && $color != 'pp-mine' && $user->getAlly()) {
-                    $color = 'pp-ally';
-                }
-                if ($fleet->getUser()->getAlly() && $user->getAlly()) {
-                    if (count($fleet->getUser()->getAlly()->getAllieds()) > 0) {
-                        foreach($fleet->getUser()->getAlly()->getAllieds() as $allied) {
-                            if($allied->getAllyTag() == $user->getAlly()->getSigle() && $allied->getAccepted() == 1) {
-                                $color = 'pp-ally';
-                            }
-                        }
-                    }
-                    if (count($fleet->getUser()->getAlly()->getPeaces()) > 0) {
-                        foreach($fleet->getUser()->getAlly()->getPeaces() as $peace) {
-                            if($peace->getAllyTag() == $user->getAlly()->getSigle() && $peace->getAccepted() == 1) {
-                                $color = 'pp-peace';
-                            }
-                        }
-                    }
-                }
-                if($color == 'pp-enemy') {
-                    return $color;
-                }
+            if($fleet->getRecycleur() > 0) {
+                $nbr++;
             }
         }
-        return $color;
+
+        return $nbr;
     }
 
     /**
@@ -2526,6 +2541,22 @@ class Planet
     public function setNuclearAtNbr($nuclearAtNbr): void
     {
         $this->nuclearAtNbr = $nuclearAtNbr;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSignature()
+    {
+        return $this->signature;
+    }
+
+    /**
+     * @param mixed $signature
+     */
+    public function setSignature($signature): void
+    {
+        $this->signature = $signature;
     }
 
     /**

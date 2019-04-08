@@ -43,11 +43,81 @@ class SectorController extends AbstractController
             }
             return $this->redirectToRoute('galaxy', ['id' => $form_navigate->get('galaxy')->getData(), 'usePlanet' => $usePlanet->getId()]);
         }
+        if ($user->getAlly()) {
+            $viewSector = $em->getRepository('App:Ally')
+                ->createQueryBuilder('a')
+                ->leftJoin('a.users', 'u')
+                ->leftJoin('u.planets', 'p')
+                ->join('p.sector', 's')
+                ->join('s.galaxy', 'g')
+                ->select('sum(DISTINCT p.radar + p.skyRadar) as allRadar')
+                ->groupBy('p.id')
+                ->where('s.position = :id')
+                ->andWhere('g.position = :gal')
+                ->setParameters(['id' => $sector->getPosition(), 'gal' => $gal->getPosition()])
+                ->orderBy('p.radar', 'DESC')
+                ->addOrderBy('p.skyRadar', 'DESC')
+                ->getQuery()
+                ->setMaxResults(1)
+                ->getOneOrNullResult();
+
+            $viewFleets = $em->getRepository('App:Fleet')
+                ->createQueryBuilder('f')
+                ->join('f.user', 'u')
+                ->join('u.ally', 'a')
+                ->join('f.planet', 'p')
+                ->join('p.sector', 's')
+                ->join('s.galaxy', 'g')
+                ->select('p.id as id')
+                ->groupBy('f.id')
+                ->where('s.position = :id')
+                ->andWhere('g.position = :gal')
+                ->andWhere('a.id = :alliance')
+                ->setParameters(['id' => $sector->getPosition(), 'gal' => $gal->getPosition(), 'alliance' => $user->getAlly()->getId()])
+                ->getQuery()
+                ->getResult();
+        } else {
+            $viewSector = $em->getRepository('App:User')
+                ->createQueryBuilder('u')
+                ->leftJoin('u.planets', 'p')
+                ->join('p.sector', 's')
+                ->join('s.galaxy', 'g')
+                ->select('sum(DISTINCT p.radar + p.skyRadar) as allRadar')
+                ->groupBy('p.id')
+                ->where('s.position = :id')
+                ->andWhere('g.position = :gal')
+                ->setParameters(['id' => $sector->getPosition(), 'gal' => $gal->getPosition()])
+                ->orderBy('p.radar', 'DESC')
+                ->addOrderBy('p.skyRadar', 'DESC')
+                ->getQuery()
+                ->setMaxResults(1)
+                ->getOneOrNullResult();
+
+            $viewFleets = $em->getRepository('App:Fleet')
+                ->createQueryBuilder('f')
+                ->join('f.user', 'u')
+                ->join('f.planet', 'p')
+                ->join('p.sector', 's')
+                ->join('s.galaxy', 'g')
+                ->select('p.id as id')
+                ->groupBy('f.id')
+                ->where('s.position = :id')
+                ->andWhere('g.position = :gal')
+                ->andWhere('u.id = :user')
+                ->setParameters(['id' => $sector->getPosition(), 'gal' => $gal->getPosition(), 'user' => $user->getId()])
+                ->getQuery()
+                ->getResult();
+        }
 
         $planets = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
+            ->leftJoin('p.user', 'u')
+            ->leftJoin('p.fleets', 'f')
+            ->leftJoin('u.ally', 'a')
             ->join('p.sector', 's')
             ->join('s.galaxy', 'g')
+            ->select('p.id, p.position, p.name, p.ground, p.sky, p.nbCdr, p.wtCdr, p.signature, p.imageName, p.empty, p.merchant, p.cdr, p.skyRadar, p.radar, p.skyBrouilleur, u.id as user, u.username as username, u.zombie as zombie, a.id as alliance, a.sigle as sigle, count(DISTINCT f) as fleets') // count(DISTINCT p) as planets, sum(DISTINCT r.warPoint) as pdg
+            ->groupBy('p.id')
             ->where('s.position = :id')
             ->andWhere('g.position = :gal')
             ->setParameters(['id' => $sector->getPosition(), 'gal' => $gal->getPosition()])
@@ -55,14 +125,38 @@ class SectorController extends AbstractController
             ->getQuery()
             ->getResult();
 
+        $fleets = $em->getRepository('App:Fleet')
+            ->createQueryBuilder('f')
+            ->join('f.user', 'u')
+            ->leftJoin('u.ally', 'a')
+            ->join('f.planet', 'p')
+            ->join('p.sector', 's')
+            ->join('s.galaxy', 'g')
+            ->select('p.id as planet, f.id, f.name, f.fightAt, f.signature, u.id as user, u.username as username, a.sigle as alliance')
+            ->groupBy('f.id')
+            ->where('s.position = :id')
+            ->andWhere('g.position = :gal')
+            ->andWhere('f.flightTime is null')
+            ->setParameters(['id' => $sector->getPosition(), 'gal' => $gal->getPosition()])
+            ->getQuery()
+            ->getResult();
+
         $fleetIn = $em->getRepository('App:Fleet')
             ->createQueryBuilder('f')
-            ->leftJoin('f.planet', 'p')
+            ->join('f.user', 'u')
+            ->leftJoin('u.ally', 'a')
+            ->join('f.planet', 'p')
+            ->leftJoin('p.user', 'pu')
+            ->leftJoin('pu.ally', 'pa')
             ->join('p.sector', 'ps')
+            ->join('ps.galaxy', 'gp')
             ->join('f.destination', 'd')
             ->join('d.planet', 'dp')
+            ->leftJoin('dp.user', 'du')
+            ->leftJoin('du.ally', 'da')
             ->join('dp.sector', 'fs')
             ->join('fs.galaxy', 'g')
+            ->select('f.id, f.name, f.flightTime, p.name as planetname, pu.id as puser, pa.id as palliance, du.id as duser, da.id as dalliance, dp.name as dname, dp.position as dposition, p.position as position, ps.position as sector, gp.position as galaxy, fs.position as dsector, g.position as dgalaxy, f.signature, u.id as user, u.username as username, a.id as alliance, a.sigle as sigle, u.merchant as merchant, a.imageName as imageName')
             ->where('fs.position = :id')
             ->andWhere('g.position = :gal')
             ->andWhere('ps.position != :id')
@@ -73,15 +167,23 @@ class SectorController extends AbstractController
 
         $fleetOut = $em->getRepository('App:Fleet')
             ->createQueryBuilder('f')
+            ->join('f.user', 'u')
+            ->leftJoin('u.ally', 'a')
             ->join('f.planet', 'p')
+            ->leftJoin('p.user', 'pu')
+            ->leftJoin('pu.ally', 'pa')
             ->join('p.sector', 'ps')
-            ->join('ps.galaxy', 'g')
+            ->join('ps.galaxy', 'gp')
             ->join('f.destination', 'd')
             ->join('d.planet', 'dp')
+            ->leftJoin('dp.user', 'du')
+            ->leftJoin('du.ally', 'da')
             ->join('dp.sector', 'fs')
+            ->join('fs.galaxy', 'g')
+            ->select('f.id, f.name, f.flightTime, p.name as planetname, pu.id as puser, pa.id as palliance, du.id as duser, da.id as dalliance, dp.name as dname, dp.position as dposition, p.position as position, ps.position as sector, gp.position as galaxy, fs.position as dsector, g.position as dgalaxy, f.signature, u.id as user, u.username as username, a.id as alliance, a.sigle as sigle, u.merchant as merchant, a.imageName as imageName')
             ->where('fs.position != :id')
             ->andWhere('ps.position = :id')
-            ->andWhere('g.position = :gal')
+            ->andWhere('gp.position = :gal')
             ->setParameters(['id' => $sector->getPosition(), 'gal' => $gal->getPosition()])
             ->orderBy('f.flightTime')
             ->getQuery()
@@ -89,13 +191,20 @@ class SectorController extends AbstractController
 
         $fleetCurrent = $em->getRepository('App:Fleet')
             ->createQueryBuilder('f')
+            ->join('f.user', 'u')
+            ->leftJoin('u.ally', 'a')
             ->join('f.planet', 'p')
+            ->leftJoin('p.user', 'pu')
+            ->leftJoin('pu.ally', 'pa')
             ->join('p.sector', 'ps')
             ->join('ps.galaxy', 'gp')
             ->join('f.destination', 'd')
             ->join('d.planet', 'dp')
+            ->leftJoin('dp.user', 'du')
+            ->leftJoin('du.ally', 'da')
             ->join('dp.sector', 'fs')
             ->join('fs.galaxy', 'gs')
+            ->select('f.id, f.name, f.flightTime, p.name as planetname, pu.id as puser, pa.id as palliance, du.id as duser, da.id as dalliance, dp.name as dname, dp.position as dposition, p.position as position, ps.position as sector, gp.position as galaxy, f.signature, u.id as user, u.username as username, a.id as alliance, a.sigle as sigle, u.merchant as merchant, a.imageName as imageName')
             ->where('ps.position = :id')
             ->andWhere('fs.position = :id')
             ->andWhere('gs.position = :gal')
@@ -114,9 +223,12 @@ class SectorController extends AbstractController
         return $this->render('connected/map/sector.html.twig', [
             'form_navigate' => $form_navigate->createView(),
             'planets' => $planets,
+            'fleets' => $fleets,
             'usePlanet' => $usePlanet,
             'id' => $sector->getPosition(),
             'gal' => $gal->getPosition(),
+            'viewSector' => $viewSector,
+            'viewFleets' => $viewFleets,
             'fleetIn' => $fleetIn,
             'fleetOut' => $fleetOut,
             'fleetCurrent' => $fleetCurrent,

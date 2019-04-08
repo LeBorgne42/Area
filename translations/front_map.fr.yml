@@ -1,17 +1,17 @@
 title: 'Carte spatiale'
 tooltip.planet: '%name%'
 tooltip.planetAlly: '[%ally%] %name%'
-tooltip.planetInfos: 'Terrain: %land% <img class="mb-1" src="https://www.areauniverse.eu/img/ground.png"> <br> Espace: %sky% <img class="mb-1" src="https://www.areauniverse.eu/img/sky.png"> <br> Radar: %radar% <br> Brouilleur: %brouilleur% <br> Au sol: %ground%'
+tooltip.planetInfos: '<h4 class="text-blanc">Planète</h4>Terrain: %land% <img class="mb-1" src="/img/ground.png"> <br> Espace: %sky% <img class="mb-1" src="/img/sky.png"> <br> Radar: %radar% <br> Brouilleur: %brouilleur%'
 tooltip.planetOrbite: '%orbite%'
 map.coming: 'Flottes entrant dans le secteur'
-map.fleetName: Nom
+map.fleetName: Joueur
+map.name: Flotte
 map.from: De
 map.goTo: Vers
 map.time: Temps
-map.fleetSignature: Signature
 map.out: 'Flottes sortant du secteur'
 map.planetHostile: Occupée
-tooltip.cdr: '%niobium% Niobium  <img class="mb-1" src="https://www.areauniverse.eu/img/niobium.png"><br> %water% Water <img class="mb-1" src="https://www.areauniverse.eu/img/water.png">'
+tooltip.cdr: '<h4 class="text-blanc">Ressources</h4>%niobium% Niobium  <img class="mb-1" src="/img/niobium.png"><br> %water% Water <img class="mb-1" src="/img/water.png">'
 tooltip.brouillage: Brouillage
 map.current: 'Mouvement de flotte dans le secteur'
 sector.number: Secteur
@@ -22,8 +22,9 @@ tooltip.fleetQuit: 'Ce cadre vous montre les flottes qui sortent de ce secteur.'
 sector.profilUser: 'voir profil'
 sector.manageFleet: gestion
 fleet.combat: 'en combat'
-tooltip.radarInfos: '<br>%user% <br> Radar: %radar% <br> Brouilleur: %brouilleur%'
+tooltip.radarInfos: '<h4 class="text-blanc">Radar</h4><br>%user% <br> Radar: %radar% <br> Brouilleur: %brouilleur%'
 galaxy.number: Galaxie
 sector.tutorial: 'Sur cette page vous pouvez découvrir les autres planètes de votre secteur ainsi que les flottes en mouvements au dessous. Prenez le temps de regarder les informations de chaque planète inhabitée (en blanc) n''ayant pas déjà un joueur et notez celle avec le plus de terrain. Nous allons la coloniser !<br>Cliquez sur la planète en question puis dans le menu déroulant selectionné la flotte avec le colonisateur puis l''option coloniser et «Envoyer» !!'
 sector.tutorialBis: 'En regardant en dessous de la carte vous pouvez maintenant distinguer votre flotte avec son heure d''arrivée, il n''y a plus qu''a attendre qu''elle arrive ! Nous avons bien le temps de faire un tour sur la page des «Objectifs».'
-sector.groundfleet: 'au sol'
+sector.groundfleet: 'Au sol'
+sector.fleet: 'Flottes'

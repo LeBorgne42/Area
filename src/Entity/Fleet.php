@@ -93,6 +93,11 @@ class Fleet
     protected $recycleAt;
 
     /**
+     * @ORM\Column(name="signature",type="bigint")
+     */
+    protected $signature;
+
+    /**
      * @ORM\Column(name="sonde",type="bigint", nullable=true)
      */
     protected $sonde;
@@ -284,6 +289,7 @@ class Fleet
         $this->flightType = null;
         $this->ally = null;
         $this->nuclearBomb = null;
+        $this->signature = 1;
     }
 
     public function getId()
@@ -857,6 +863,42 @@ class Fleet
     }
 
     /**
+     * @return int
+     */
+    public function putNewSignature(): int
+    {
+        $sonde = $this->getSonde();
+        $colonizer = $this->getColonizer() * 200;
+        $recycleur = $this->getRecycleur() * 80;
+        $cargoI = $this->getCargoI() * 50;
+        $cargoV = $this->getCargoV() * 120;
+        $cargoX = $this->getCargoX() * 250;
+        $barge = $this->getBarge() * 50;
+        $moonMaker = $this->getMoonMaker() * 50000;
+        $radarShip = $this->getRadarShip() * 500;
+        $brouilleurShip = $this->getBrouilleurShip() * 1000;
+        $motherShip = $this->getMotherShip() * 20000;
+        $hunter = $this->getHunter() * 5;
+        $hunterHeavy = $this->getHunterHeavy() * 8;
+        $hunterWar = $this->getHunterWar() * 15;
+        $corvet = $this->getCorvet() * 25;
+        $corvetLaser = $this->getCorvetLaser() * 40;
+        $corvetWar = $this->getCorvetWar() * 45;
+        $fregate = $this->getFregate() * 60;
+        $fregatePlasma = $this->getFregatePlasma() * 150;
+        $croiser = $this->getCroiser() * 300;
+        $ironClad = $this->getIronClad() * 700;
+        $destroyer = $this->getDestroyer() * 1500;
+        $nuclear = $this->getNuclearBomb() * 250000;
+
+        $nbr = $motherShip + $brouilleurShip + $radarShip + $moonMaker + $hunterWar + $corvetWar + $fregate + $colonizer + $barge + $hunter + $recycleur + $sonde + $cargoI + $cargoV + $cargoX + $hunterHeavy + $corvet + $corvetLaser + $fregatePlasma + $croiser + $ironClad + $destroyer + $nuclear;
+        if($this->getMotherShip() == 1) {
+            $nbr = $nbr * 0.9;
+        }
+        return $nbr;
+    }
+
+    /**
      * @return float
      */
     public function getSpeed(): float
@@ -1149,37 +1191,6 @@ class Fleet
                 $this->setIronClad(round($new));
             }
         }
-    }
-
-    /**
-     * @return string
-     */
-    public function getFleetsColor($user): string
-    {
-        $color = 'pp-enemy';
-        if ($this->getUser() == $user) {
-            return 'pp-mine';
-        }
-        if($this->getUser()->getAlly() == $user->getAlly() && $color != 'pp-mine' && $user->getAlly()) {
-            return 'pp-ally';
-        }
-        if ($this->getUser()->getAlly() && $user->getAlly()) {
-            if (count($this->getUser()->getAlly()->getAllieds()) > 0) {
-                foreach($this->getUser()->getAlly()->getAllieds() as $allied) {
-                    if($allied->getAllyTag() == $user->getAlly()->getSigle() && $allied->getAccepted() == 1) {
-                        return 'pp-ally';
-                    }
-                }
-            }
-            if (count($this->getUser()->getAlly()->getPeaces()) > 0) {
-                foreach($this->getUser()->getAlly()->getPeaces() as $peace) {
-                    if($peace->getAllyTag() == $user->getAlly()->getSigle() && $peace->getAccepted() == 1) {
-                        return 'pp-peace';
-                    }
-                }
-            }
-        }
-        return $color;
     }
 
     /**
@@ -1860,6 +1871,22 @@ class Fleet
     public function setDestination($destination): void
     {
         $this->destination = $destination;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSignature()
+    {
+        return $this->signature;
+    }
+
+    /**
+     * @param mixed $signature
+     */
+    public function setSignature($signature): void
+    {
+        $this->signature = $signature;
     }
 
     /**

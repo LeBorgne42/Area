@@ -48,6 +48,10 @@
 
 div.tooltip-inner {
   max-width: 500px;
+  background: #3c3c3c;
+  color: #BCBCC0;
+  text-align: left;
+  padding: 0px 5px;
 }
 
 div.tooltip-inner span a.ally {
@@ -89,6 +93,11 @@ div.tooltip-inner span a.manage {
 .pp-ia {
   font-weight: 600;
   color: #FF00BF;
+  font-size: 1.2rem!important;
+}
+.pp-col {
+  font-weight: 600;
+  color: silver;
   font-size: 1.2rem!important;
 }
 
@@ -165,6 +174,7 @@ div.tooltip-inner span a.manage {
 .sector td.center-cells {
   height: 120px;
   border: none;
+  position: relative;
 }
 
 td.special-cell {
@@ -218,8 +228,10 @@ td.special-cell {
 }
 
 .planet-position-empty {
-  float: left;
-  font-size: 0.7rem;
+  font-size: 1.4rem;
+  position: absolute;
+  bottom: 8px;
+  left: 45%;
 }
 
 .navigate {
