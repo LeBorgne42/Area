@@ -328,8 +328,8 @@ class FightController extends AbstractController
             return($blockDef);
         }
 
-        $firstBlood = (($missile / 4) + ($plasma * 1.5) + ($laser));
-        $firstBloodD = (($missileD / 4) + ($plasmaD * 1.5) + ($laserD));
+        $firstBlood = (($missile / 4) + ($plasma * 2) + ($laser * 1.5));
+        $firstBloodD = (($missileD / 4) + ($plasmaD * 2) + ($laserD * 1.5));
         $countSAtt = 0;
         $countSDef = 0;
         if(($firstBlood > 0) && $shieldD > 0) {
@@ -352,28 +352,26 @@ class FightController extends AbstractController
             $countSAtt = 1;
             $armor = $armor - $firstBloodD;
         }
-        $secondShot = ($missile + ($plasma / 1.5) + $laser);
-        $secondShotD = ($missileD + ($plasmaD / 1.5) + $laserD);
+        $secondShot = (($missile * 2) + ($plasma / 4) + ($laser * 1.5));
+        $secondShotD = (($missileD * 2) + ($plasmaD / 4) + ($laserD * 1.5));
         if($countSDef - $countSAtt > 0) {
             $armorD = $armorD - ($secondShot * ($countSDef - $countSAtt));
-            $secondShotD = ($missileD + ($plasmaD / 1.5) + $laserD);
+            $secondShotD = (($missileD * 2) + ($plasmaD / 4) + ($laserD * 1.5));
         }
         if($countSAtt - $countSDef > 0) {
             $armor = $armor - ($secondShot * ($countSAtt - $countSDef));
-            $secondShot = ($missile + ($plasma / 1.5) + $laser);
+            $secondShot = (($missile * 2) + ($plasma / 4) + ($laser * 1.5));
         }
-
         $countShot = 0;
         while($armorD > 0 && $armor > 0 && $countShot < 100) {
             $countShot++;
             if ($armorD > 0) {
                 $armorD = $armorD - $secondShot;
-                $tmpSecondShot = $secondShot;
-                $secondShot = $secondShot;
+                $secondShot = $secondShot - (($armor - $secondShotD) / 11);
             }
             if($armor > 0) {
-                $armor = $armor - $tmpSecondShot;
-                $secondShotD = $secondShotD;
+                $armor = $armor - $secondShotD;
+                $secondShotD = $secondShotD - (($armorD - $secondShot) / 11);
             }
         }
 

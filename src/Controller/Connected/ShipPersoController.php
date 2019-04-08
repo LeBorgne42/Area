@@ -91,12 +91,12 @@ class ShipPersoController extends AbstractController
                     $ship->setPointCorvetLaser($ship->getPointCorvetLaser() - $points);
                 }
                 if ($form_shipPerso->get('ship')->getData() == 'corvetWar' && $points <= $ship->getPointCorvetWar()) {
-                    $ship->setArmorCorvetWart($ship->getArmorCorvetWart() + $armor);
-                    $ship->setMissileCorvetWart($ship->getMissileCorvetWart() + $missile);
-                    $ship->setShieldCorvetWart($ship->getShieldCorvetWart() + $shield);
-                    $ship->setLaserCorvetWart($ship->getLaserCorvetWart() + $laser);
-                    $ship->setAccurateCorvetWart($ship->getAccurateCorvetWart() + $accurate);
-                    $ship->setPointCorvetWart($ship->getPointCorvetWart() - $points);
+                    $ship->setArmorCorvetWar($ship->getArmorCorvetWar() + $armor);
+                    $ship->setMissileCorvetWar($ship->getMissileCorvetWar() + $missile);
+                    $ship->setShieldCorvetWar($ship->getShieldCorvetWar() + $shield);
+                    $ship->setLaserCorvetWar($ship->getLaserCorvetWar() + $laser);
+                    $ship->setAccurateCorvetWar($ship->getAccurateCorvetWar() + $accurate);
+                    $ship->setPointCorvetWar($ship->getPointCorvetWar() - $points);
                 }
                 if ($form_shipPerso->get('ship')->getData() == 'fregate' && $points <= $ship->getPointFregate()) {
                     $ship->setArmorFregate($ship->getArmorFregate() + $armor);
