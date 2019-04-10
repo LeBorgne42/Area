@@ -201,7 +201,7 @@ class MarketController extends AbstractController
                     $repor->setTimezone(new DateTimeZone('Europe/Paris'));
                     $repor->add(new DateInterval('PT' . 1200 . 'S'));
                     $fleet = new Fleet();
-                    $fleet->setMoonMaker(1);
+                    $fleet->setHunter(1);
                     $fleet->setUser($merchant);
                     $fleet->setPlanet($planet);
                     $destination = new Destination();
@@ -211,6 +211,7 @@ class MarketController extends AbstractController
                     $fleet->setFlightTime($repor);
                     $fleet->setAttack(0);
                     $fleet->setName('Cargos');
+                    $fleet->setSignature(250);
                     $em->persist($fleet);
                 }
             }

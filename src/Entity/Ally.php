@@ -605,25 +605,6 @@ class Ally
     }
 
     /**
-     * @return mixed
-     */
-    public function getGalaxyPlanets()
-    {
-        $return = [];
-        foreach ($this->getUsers() as $user) {
-            if(count($user->getGalaxyPlanets()) > 0) {
-                foreach ($user->getGalaxyPlanets() as $galaxy) {
-                    if (!in_array($galaxy, $return)) { // fixmr vérifier fonction
-                        $return[] = $galaxy;
-                    }
-                }
-            }
-        }
-
-        return $return;
-    }
-
-    /**
      * @return int
      */
     public function getPlanetsMax(): int

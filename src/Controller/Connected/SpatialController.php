@@ -65,6 +65,7 @@ class SpatialController extends AbstractController
                 $fleet->setPlanet($usePlanet);
                 $fleet->setAttack(1);
                 $fleet->setName('Horde');
+                $fleet->setSignature($fleet->getNbrSignatures());
                 $em->persist($fleet);
                 $reportDef = new Report();
                 $reportDef->setType('invade');
@@ -399,6 +400,7 @@ class SpatialController extends AbstractController
             $fleet->setUser($user);
             $fleet->setPlanet($usePlanet);
             $fleet->setName($form_createFleet->get('name')->getData());
+            $fleet->setSignature($fleet->getNbrSignatures());
             $em->persist($fleet);
             $usePlanet->setCargoI($cargoI);
             $usePlanet->setCargoV($cargoV);
@@ -443,6 +445,7 @@ class SpatialController extends AbstractController
                 }
                 $user->setTutorial(11);
             }
+            $usePlanet->setSignature($usePlanet->getNbrSignatures());
             $em->flush();
 
 

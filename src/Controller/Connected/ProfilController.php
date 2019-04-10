@@ -16,18 +16,31 @@ use App\Entity\Ally;
 class ProfilController extends AbstractController
 {
     /**
-     * @Route("/profil-joueur/{usePlanet}/{userPlanet}", name="user_profil", requirements={"usePlanet"="\d+", "userPlanet"="\d+"})
+     * @Route("/profil-joueur/{userPlanet}/{usePlanet}", name="user_profil", requirements={"usePlanet"="\d+", "userPlanet"="\d+"})
      */
     public function userProfilAction(User $userPlanet, Planet $usePlanet)
     {
+        $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
         if ($usePlanet->getUser() != $user) {
             return $this->redirectToRoute('home');
         }
 
+        $galaxys = $em->getRepository('App:Galaxy')
+            ->createQueryBuilder('g')
+            ->join('g.sectors', 's')
+            ->join('s.planets', 'p')
+            ->select('g.position')
+            ->groupBy('g.id')
+            ->where('p.user = :user')
+            ->setParameters(['user' => $userPlanet])
+            ->getQuery()
+            ->getResult();
+
         return $this->render('connected/profil/player.html.twig', [
             'usePlanet' => $usePlanet,
             'user' => $userPlanet,
+            'galaxys' => $galaxys
         ]);
     }
 
@@ -36,14 +49,27 @@ class ProfilController extends AbstractController
      */
     public function allyProfilAction(Ally $allyUser, Planet $usePlanet)
     {
+        $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
         if ($usePlanet->getUser() != $user) {
             return $this->redirectToRoute('home');
         }
+        $galaxys = $em->getRepository('App:Galaxy')
+            ->createQueryBuilder('g')
+            ->join('g.sectors', 's')
+            ->join('s.planets', 'p')
+            ->join('p.user', 'u')
+            ->select('g.position')
+            ->groupBy('g.id')
+            ->where('u.ally = :ally')
+            ->setParameters(['ally' => $allyUser])
+            ->getQuery()
+            ->getResult();
 
         return $this->render('connected/profil/ally.html.twig', [
             'usePlanet' => $usePlanet,
             'ally' => $allyUser,
+            'galaxys' => $galaxys
         ]);
     }
 
@@ -52,14 +78,26 @@ class ProfilController extends AbstractController
      */
     public function userProfilModalAction(User $userPlanet, Planet $usePlanet)
     {
+        $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
         if ($usePlanet->getUser() != $user) {
             return $this->redirectToRoute('home');
         }
+        $galaxys = $em->getRepository('App:Galaxy')
+            ->createQueryBuilder('g')
+            ->join('g.sectors', 's')
+            ->join('s.planets', 'p')
+            ->select('g.position')
+            ->groupBy('g.id')
+            ->where('p.user = :user')
+            ->setParameters(['user' => $userPlanet])
+            ->getQuery()
+            ->getResult();
 
         return $this->render('connected/profil/modal_user.html.twig', [
             'usePlanet' => $usePlanet,
             'user' => $userPlanet,
+            'galaxys' => $galaxys
         ]);
     }
 
@@ -68,14 +106,27 @@ class ProfilController extends AbstractController
      */
     public function allyProfilModalAction(Ally $allyUser, Planet $usePlanet)
     {
+        $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
         if ($usePlanet->getUser() != $user) {
             return $this->redirectToRoute('home');
         }
+        $galaxys = $em->getRepository('App:Galaxy')
+            ->createQueryBuilder('g')
+            ->join('g.sectors', 's')
+            ->join('s.planets', 'p')
+            ->join('p.user', 'u')
+            ->select('g.position')
+            ->groupBy('g.id')
+            ->where('u.ally = :ally')
+            ->setParameters(['ally' => $allyUser])
+            ->getQuery()
+            ->getResult();
 
         return $this->render('connected/profil/modal_ally.html.twig', [
             'usePlanet' => $usePlanet,
             'ally' => $allyUser,
+            'galaxys' => $galaxys
         ]);
     }
 }

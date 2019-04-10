@@ -102,10 +102,11 @@
                                     <a class="planet tipFleet" data-placement="right" data-trigger="" title="<h4 class='text-blanc'>{{ 'sector.fleet'|trans }}</h4>
                                                     {% for fleet in fleets %}
                                                     {% if fleet.planet == planet.id %}
+                                                        {% set colorMyFleet = app.user.getFleetsColor(fleet.user, fleet.alliance) %}
                                                         {% if colorFleet != 'pp-enemy' %}
                                                             {% set colorFleet = app.user.getFleetsColor(fleet.user, fleet.alliance) %}
                                                         {% endif %}
-                                                        <div class='my-1 text-left'><a class='{{ colorFleet }}' href='{% if fleet.user == app.user.getId() %}{{ path('manage_fleet', {'fleetGive': fleet.id, 'usePlanet': usePlanet.getId()}) }}{% elseif fleet.alliance %}{{ path('ally_profil', {'usePlanet': usePlanet.getId(), 'allyUser': fleet.alliance}) }}{% else %}{{ path('user_profil', {'userPlanet': fleet.user, 'usePlanet': usePlanet.getId()}) }}{% endif %}'>{% if fleet.alliance %}[{{ fleet.alliance }}] {% endif %}{{ fleet.name }}</span></a> ({{ fleet.signature|number_format }})</span>{% if fleet.fightAt %}<span class='ml-2 text-rouge'>{{ 'fleet.combat'|trans }}</span>{% endif %}</div>
+                                                        <div class='my-1 text-left'><a class='{{ colorMyFleet }}' href='{% if fleet.user == app.user.getId() %}{{ path('manage_fleet', {'fleetGive': fleet.id, 'usePlanet': usePlanet.getId()}) }}{% elseif fleet.alliance %}{{ path('ally_profil', {'usePlanet': usePlanet.getId(), 'allyUser': fleet.alliance}) }}{% else %}{{ path('user_profil', {'userPlanet': fleet.user, 'usePlanet': usePlanet.getId()}) }}{% endif %}'>{% if fleet.alliance %}[{{ fleet.alliance }}] {% endif %}{{ fleet.name }}</span></a> ({{ fleet.signature|number_format }})</span>{% if fleet.fightAt %}<span class='ml-2 text-rouge'>{{ 'fleet.combat'|trans }}</span>{% endif %}</div>
                                                     {% endif %}{% endfor %}{% if planet.signature > 0 %}{% endif %}"data-html="true">{% if colorFleet == 'pp-enemy' %}<img src="{{ asset('img/fleets-enemy.gif') }}">{% elseif colorFleet == 'pp-mine' %}<img src="{{ asset('img/fleets.gif') }}">{% elseif colorFleet == 'pp-ally' %}<img src="{{ asset('img/fleets.gif') }}">{% elseif colorFleet == 'pp-peace' %}<img src="{{ asset('img/fleets.gif') }}">{% endif %}
                                     </a>
                                 </div>
@@ -145,10 +146,11 @@
                         <a class="planet tipFleet" data-placement="right" data-trigger="" title="<h4 class='text-blanc'>{{ 'sector.fleet'|trans }}</h4>
                                                     {% for fleet in fleets %}
                                                     {% if fleet.planet == planet.id %}
+                                                        {% set colorMyFleet = app.user.getFleetsColor(fleet.user, fleet.alliance) %}
                                                         {% if colorFleet != 'pp-enemy' %}
                                                             {% set colorFleet = app.user.getFleetsColor(fleet.user, fleet.alliance) %}
                                                         {% endif %}
-                                                        <div class='my-1 text-left'><a class='{{ colorFleet }}' href='{% if fleet.user == app.user.getId() %}{{ path('manage_fleet', {'fleetGive': fleet.id, 'usePlanet': usePlanet.getId()}) }}{% elseif fleet.alliance %}{{ path('ally_profil', {'usePlanet': usePlanet.getId(), 'allyUser': fleet.alliance}) }}{% else %}{{ path('user_profil', {'userPlanet': fleet.user, 'usePlanet': usePlanet.getId()}) }}{% endif %}'>{% if fleet.alliance %}[{{ fleet.alliance }}] {% endif %}{{ fleet.name }}</span></a> ({{ fleet.signature|number_format }})</span>{% if fleet.fightAt %}<span class='ml-2 text-rouge'>{{ 'fleet.combat'|trans }}</span>{% endif %}</div>
+                                                        <div class='my-1 text-left'><a class='{{ colorMyFleet }}' href='{% if fleet.user == app.user.getId() %}{{ path('manage_fleet', {'fleetGive': fleet.id, 'usePlanet': usePlanet.getId()}) }}{% elseif fleet.alliance %}{{ path('ally_profil', {'usePlanet': usePlanet.getId(), 'allyUser': fleet.alliance}) }}{% else %}{{ path('user_profil', {'userPlanet': fleet.user, 'usePlanet': usePlanet.getId()}) }}{% endif %}'>{% if fleet.alliance %}[{{ fleet.alliance }}] {% endif %}{{ fleet.name }}</span></a> ({{ fleet.signature|number_format }})</span>{% if fleet.fightAt %}<span class='ml-2 text-rouge'>{{ 'fleet.combat'|trans }}</span>{% endif %}</div>
                                                     {% endif %}{% endfor %}"data-html="true">{% if colorFleet == 'pp-enemy' %}<img src="{{ asset('img/fleets-enemy.gif') }}">{% elseif colorFleet == 'pp-mine' %}<img src="{{ asset('img/fleets.gif') }}">{% elseif colorFleet == 'pp-ally' %}<img src="{{ asset('img/fleets.gif') }}">{% elseif colorFleet == 'pp-peace' %}<img src="{{ asset('img/fleets.gif') }}">{% endif %}
                         </a>
                     </div>
@@ -321,5 +323,11 @@
             </table>
         </div>
     {% endif %}
+    </div>
+    <div class="modal fade" id="planetModal" tabindex="-1" role="dialog" aria-labelledby="planetModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content special">
+            </div>
+        </div>
     </div>
 {% endblock %}

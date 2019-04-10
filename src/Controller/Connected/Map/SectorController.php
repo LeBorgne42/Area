@@ -406,6 +406,7 @@ class SectorController extends AbstractController
         $fleet->setUser($user);
         $fleet->setPlanet($fPlanet);
         $fleet->setName('Auto Sonde');
+        $fleet->setSignature($fleet->getNbrSignatures());
         $fPlanet->setSonde($fPlanet->getSonde() - 1);
         $speed = $fleet->getSpeed();
         $distance = $speed * $base * 100;
@@ -479,6 +480,7 @@ class SectorController extends AbstractController
         $destination->setPlanet($planet);
         $em->persist($destination);
         $fleet->setFlightType(6);
+        $fleet->setSignature($fleet->getNbrSignatures());
         $em->persist($fleet);
         if ($planet->getUser()) {
             $quest = $user->checkQuests('nuclear_planet');

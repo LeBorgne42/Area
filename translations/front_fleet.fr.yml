@@ -6,7 +6,38 @@ fleet.fleetShips: 'Vaisseaux : ST'
 fleet.fleetSignature: Signature
 fleet.seeFlotte: 'gestion flotte'
 fleet.inAir: 'Flottes en mouvement'
+fleet.attitude: Attitude
+fleet.destroy: Abandonner
+fleet.commander: Commandant
+fleet.signature: Signature
+fleet.cost: Entretien
+fleet.speed: Vitesse
+fleet.share: Partage
+fleet.interact: Interaction
+fleet.shareInfo: 'Partager la flotte a l''alliance :'
+fleet.cargos: Cargaison
+fleet.unity: unités
+fleet.raid: Piller
+fleet.action: Action
+fleet.detected: détectée
+fleet.destination: 'Déplacer la flotte'
+fleet.coord: 'Déstination'
+fleet.costMove: 'Coût'
+fleet.myPlanets: 'Mes planètes'
+fleet.patrol: 'En patrouille autour de'
+fleet.attack: 'Combat engagé autour de'
+fleet.transit: 'En transit de'
+fleet.abandon: Abandonner
+fleet.question: 'Êtes vous sûr de vouloir abandonner cette flotte aux zombies ?'
+fleet.rec: Recyclage
+fleet.ships: Vaisseaux
+fleet.quantity: Quantité
+fleet.transfert: Transférer
+fleet.to: 'vers'
 fleet.from: De
+fleet.activate: Activer
+fleet.deactivate: Désactiver
+fleet.spy: Espionner
 fleet.goTo: Vers
 fleet.time: Temps
 fleet.otherPlanet: 'Flottes sur mes autres planètes'
@@ -25,8 +56,9 @@ fleet.recycleur: Recycleur
 fleet.hunter: Chasseur
 fleet.fregate: Fregate
 fleet.barge: Barge
-form.nbr: Nombre
+form.nbr: 0
 form.manageFleet: Transferer
+form.scinder: 'Diviser la flotte'
 form.renameFleet: Renommer
 form.sendFleet: Envoyer
 form.name: ''
@@ -35,7 +67,9 @@ fleet.attackMode: 'mode attaque (attention aux représailles)'
 fleet.galaxy: galaxie
 fleet.sector: secteur
 fleet.planete: planète
-fleet.cargo: Cargo
+fleet.cargoEdit: 'Cargaison de la flotte'
+fleet.cargo: 'Cargaison'
+fleet.soute: Soute
 fleet.sendCoord: ordre
 fleet.invade: Envahir
 fleet.colonize: Coloniser
@@ -45,7 +79,9 @@ fleet.uranium: Uranium
 fleet.soldier: Soldats
 fleet.worker: Travailleurs
 fleet.scientist: Scientifiques
-fleet.discharge: Decharger
+fleet.discharge: Décharger
+fleet.charge: charger
+fleet.dcharge: décharger
 fleet.tutorial: 'Commandant il est l''heure de faire vos preuves dans la conquête spatiale, vous débutez avec quelques vaisseaux et nous allons les utiliser ! Cliquez sur «Créer une flotte» puis mettez y le nom que vous souhaitez et surtout : Un colonisateur.'
 fleet.tutorialBis: 'Votre flotte a été crée et est en orbite de votre planète. Pour le moment vous n''avez qu''une flotte mais pour une meilleure organisation allez sur la page «Cohorte».'
 fleet.tutorialTer: 'Votre flotte est en combat contre une Horde Zombie, le combat durera 5 minutes puis vous aurez le rapport de combat, d''aileurs rendons nous sur la page «Rapport» pour y voir l''invasion manquée.'
@@ -71,12 +107,15 @@ fleet.croiser: Croiseur
 fleet.ironClad: Cuirassé
 fleet.destroyer: Destroyer
 tooltip.userFleet: '%name%'
-fleet.fusion: fusion
+fleet.fusion: fusionner
 recycler: recyclage
 recyclerCancel: annuler
-fleet.flightTime: 'Temps de vol :'
-fleet.split: scinder
-fleet.splitFleet: 'Scinder flotte en deux'
+fleet.flightTime: 'Durée'
+fleet.fleet: 'Flottes en orbite'
+fleet.manage: Gérer
+fleet.split: Scinder
+fleet.putOnGround: 'mettre au sol'
+fleet.splitFleet: 'Diviser la flotte'
 fleet.name: Nom
 fleet.hunterWar: 'Chasseur a plasma'
 fleet.corvetWar: 'Corvette de combat'
@@ -96,7 +135,16 @@ fleet.deploy: déployer
 click.radar: 'Cliquez pour déployer le radar'
 click.brouilleur: 'Cliquez pour déployer le brouilleur'
 fleet.allShip: Tout
+fleet.ressources: Ressources
+fleet.back: Retour
+fleet.oldCargo: 'Cargaison sur '
+fleet.newCargo: 'Cargaison sur la nouvelle flotte'
+fleet.onGround: 'Au sol'
+fleet.manageShip: 'Gestion des vaisseaux'
+fleet.carg: 'Cargo'
+form.putOnGround: 'Transfert des vaisseaux'
 fleet.allDischarge: 'Tout decharger'
+fleet.cargoLess: 'Cargaison de votre flotte'
 fleet.remove: Retirer
 form.fleetList: 'Créer nouvelle Cohorte'
 fleetList.add: 'Ajouter flotte'
@@ -139,4 +187,4 @@ cargoI: 'Cargos I'
 cargoV: 'Cargos V'
 cargoX: 'Cargos X'
 colonizer: Colonisateurs
-fleet.recyclage: 'Prochain recyclage :'
+fleet.recyclage: 'Prochain :'

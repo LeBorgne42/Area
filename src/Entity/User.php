@@ -1660,24 +1660,6 @@ class User implements UserInterface, \Serializable
     /**
      * @return mixed
      */
-    public function getGalaxyPlanets()
-    {
-        $return = [];
-
-        if(count($this->getPlanets()) > 0){
-            foreach ($this->getPlanets() as $planet) {
-                if (!in_array($planet->getSector()->getGalaxy()->getPosition(), $return)) { // fixmr vérifier fonction
-                    $return[] = $planet->getSector()->getGalaxy()->getPosition();
-                }
-            }
-
-            return $return;
-        }
-    }
-
-    /**
-     * @return mixed
-     */
     public function getFleetsInList($fleetList)
     {
         $fleets = null;

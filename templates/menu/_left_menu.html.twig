@@ -58,6 +58,11 @@
     <div class="btn-left{% if app.request.attributes.get('_route') == 'spatial' %} currentRoute{% endif %}{% if allTuto < 18 %} tutorial-hide{% elseif allTuto == 18 %} tutorial-show{% endif %}">
         <a href="{{ path('spatial', {'usePlanet': usePlanet.getId()}) }}"><span>{{ 'spatial'|trans }}</span></a>
     </div>
+    {% if usePlanet.getShipOn() > 0 %}
+        <div class="btn-left{% if allTuto < 50 %} tutorial-hide{% endif %}">
+            <a href="{{ path('create_fleet', {'usePlanet': usePlanet.getId()}) }}" data-toggle="modal" data-target="#createFleetModal"><span>{{ 'createFlotte'|trans }}</span></a>
+        </div>
+    {% endif %}
     <div class="btn-left{% if app.request.attributes.get('_route') == 'ship_perso' %} currentRoute{% endif %}{% if allTuto < 50 %} tutorial-hide{% endif %}">
         <a href="{{ path('ship_perso', {'usePlanet': usePlanet.getId()}) }}"><span>{{ 'ship.perso'|trans }}</span></a>
     </div>

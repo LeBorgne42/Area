@@ -27,7 +27,7 @@ class FleetSendType extends AbstractType
                     'label' => 'form.num',
                     'attr'  => [
                         'placeholder' => 'form.num',
-                        'class' => 'game-input text-right',
+                        'class' => 'game-input coord text-right',
                         'min' => '1',
                         'max' => '20',
                     ],
@@ -42,7 +42,7 @@ class FleetSendType extends AbstractType
                     'data' => 0,
                     'attr'  => [
                         'placeholder' => 'form.num',
-                        'class' => 'game-input text-right',
+                        'class' => 'game-input coord text-right',
                         'min' => '1',
                         'max' => '100',
                         'autocomplete' => 'off',
@@ -58,7 +58,7 @@ class FleetSendType extends AbstractType
                     'data' => 0,
                     'attr'  => [
                         'placeholder' => 'form.num',
-                        'class' => 'game-input text-right',
+                        'class' => 'game-input coord text-right',
                         'min' => '1',
                         'max' => '25',
                         'autocomplete' => 'off',
@@ -82,8 +82,8 @@ class FleetSendType extends AbstractType
                     'choice_label' => 'name',
                     'attr'  => [
                         'placeholder' => 'form.planet',
-                        'class' => 'game-input',
-                        'style' => 'width:180px;',
+                        'class' => 'game-input coord',
+                        'style' => 'width:150px;',
                     ],
                     'required' => false,
                     'mapped' => false,
@@ -97,8 +97,8 @@ class FleetSendType extends AbstractType
                     'label' => 'form.flightType',
                     'attr'  => [
                         'placeholder' => 'form.flightType',
-                        'class' => 'game-input select2',
-                        'style' => 'width:180px;',
+                        'class' => 'game-input coord select2',
+                        'style' => 'width:150px;',
                     ],
                     'required' => true
                 ]

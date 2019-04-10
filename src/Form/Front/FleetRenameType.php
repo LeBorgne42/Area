@@ -25,6 +25,7 @@ class FleetRenameType extends AbstractType
                     'attr'  => [
                         'placeholder' => 'form.name',
                         'class' => 'game-input',
+                        'value' => $options['name'],
                         'style' => 'height:30px;',
                         'maxlength' => '15',
                         'minlength' => '2',
@@ -51,9 +52,10 @@ class FleetRenameType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
+        $resolver->setRequired(['name']);
         $resolver->setDefaults(
             [
-                'data_class'         =>  'App\Entity\Fleet',
+                'data_class'         =>  null,
                 'translation_domain' => 'front_fleet',
             ]
         );

@@ -93,6 +93,7 @@ class ServerController extends AbstractController
                     $fleet->setPlanet($planet);
                     $fleet->setAttack(1);
                     $fleet->setName('Horde');
+                    $fleet->setSignature($fleet->getNbrSignatures());
                     $em->persist($fleet);
                 } else {
                     if (rand(1, 20) < 6) {
@@ -117,6 +118,7 @@ class ServerController extends AbstractController
                         $fleet->setPlanet($planet);
                         $fleet->setAttack(1);
                         $fleet->setName('Horde');
+                        $fleet->setSignature($fleet->getNbrSignatures());
                         $em->persist($fleet);
                     } else {
                         $nbrPlanets++;
@@ -196,6 +198,7 @@ class ServerController extends AbstractController
             $fleet->setPlanet($putFleet);
             $fleet->setAttack(1);
             $fleet->setName('Horde');
+            $fleet->setSignature($fleet->getNbrSignatures());
             $em->persist($fleet);
         }
         $em->flush();

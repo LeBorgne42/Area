@@ -584,7 +584,7 @@
                         </td>
                         <td class="center-cells cell-middle">
                             {% if usePlanet.getLightUsine() > 0 and usePlanet.getConstructAt() == null %}
-                                <a class="btn btn-lg btn-danger" href="{{ path('building_remove_lightUsine', {'usePlanet': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
+                                <a class="btn btn-lg btn-danger" data-toggle="confirmation" data-placement="right" data-title="{{ 'building.demolition.question'|trans }}" href="{{ path('building_remove_lightUsine', {'usePlanet': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                             {% elseif usePlanet.getConstruct() == 'lightUsine' %}
                                 <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'cancelPlanet': usePlanet.getId(), 'usePlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
                             {% else %}
@@ -635,7 +635,7 @@
                         </td>
                         <td class="center-cells cell-middle">
                             {% if usePlanet.getHeavyUsine() > 0 and usePlanet.getConstructAt() == null %}
-                                <a class="btn btn-lg btn-danger" href="{{ path('building_remove_heavyUsine', {'usePlanet': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
+                                <a class="btn btn-lg btn-danger" data-toggle="confirmation" data-placement="right" data-title="{{ 'building.demolition.question'|trans }}" href="{{ path('building_remove_heavyUsine', {'usePlanet': usePlanet.getId()}) }}">{{ 'building.demolish'|trans }}</a>
                             {% elseif usePlanet.getConstruct() == 'heavyUsine' %}
                                 <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'cancelPlanet': usePlanet.getId(), 'usePlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
                             {% else %}
@@ -830,11 +830,13 @@
                                     {% endif %}
                                 {% endif %}
                             </td>
-                            {% if usePlanet.getConstruct() == 'island' %}
                             <td class="center-cells p-4">
+                                {% if usePlanet.getConstruct() == 'island' %}
                                     <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'cancelPlanet': usePlanet.getId(), 'usePlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
+                                {% else %}
+                                    <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
+                                {% endif %}
                             </td>
-                            {% endif %}
                         </tr>
                     {% endif %}
                     {% if app.user.getExpansion() != 2 and usePlanet.getOrbital() == 0 %}
@@ -871,11 +873,13 @@
                                     {% endif %}
                                 {% endif %}
                             </td>
-                            {% if usePlanet.getConstruct() == 'orbital' %}
                             <td class="center-cells p-4">
-                                <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'cancelPlanet': usePlanet.getId(), 'usePlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
+                                {% if usePlanet.getConstruct() == 'orbital' %}
+                                    <a class="btn btn-lg btn-danger mt-5" href="{{ path('cancel_construction', {'cancelPlanet': usePlanet.getId(), 'usePlanet': usePlanet.getId()}) }}">{{ 'building.cancel'|trans }}</a>
+                                {% else %}
+                                    <a class="btn btn-lg btn-danger mt-5" disabled>{{ 'building.demolish'|trans }}</a>
+                                {% endif %}
                             </td>
-                            {% endif %}
                         </tr>
                     {% endif %}
                     </tbody>

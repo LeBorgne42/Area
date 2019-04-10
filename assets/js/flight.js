@@ -39,16 +39,20 @@ function manageFlightTime(){
         var minutes = Math.floor((date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60))) / 60);
         var secondes = Math.floor(date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60 + minutes * 60)));
         if (jours > 0) {
-            $('#flightTime').text(jours + ' jours ' + heures + ' heures ' + minutes + ' mins ' + secondes + 's' + '   Prix : ' + carburant + ' bitcoin');
+            $('#flightTime').text(jours + ' jours ' + heures + ' heures ' + minutes + ' mins ' + secondes + 'secondes');
+            $('#flightCost').text(carburant);
         } else if (heures > 0)
         {
-            $('#flightTime').text(heures + ' heures ' + minutes + ' mins ' + secondes + 's' + '   Prix : ' + carburant + ' bitcoin');
+            $('#flightTime').text(heures + ' heures ' + minutes + ' mins ' + secondes + 'secondes');
+            $('#flightCost').text(carburant);
         } else if (minutes > 0)
         {
-            $('#flightTime').text(minutes + ' mins ' + secondes + 's' + '   Prix : ' + carburant + ' bitcoin');
+            $('#flightTime').text(minutes + ' mins ' + secondes + 'secondes');
+            $('#flightCost').text(carburant);
         } else if (secondes > 0)
         {
-            $('#flightTime').text(secondes + ' secondes' + '   Prix : ' + carburant + ' bitcoin');
+            $('#flightTime').text(secondes + ' secondes');
+            $('#flightCost').text(carburant);
         }
     });
 
@@ -87,16 +91,20 @@ function manageFlightTime(){
         var minutes = Math.floor((date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60))) / 60);
         var secondes = Math.floor(date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60 + minutes * 60)));
         if (jours > 0) {
-            $('#flightTime').text(jours + ' jours ' + heures + ' heures ' + minutes + ' mins ' + secondes + 's' + '   Prix : ' + carburant + ' bitcoin');
+            $('#flightTime').text(jours + ' jours ' + heures + ' heures ' + minutes + ' mins ' + secondes + 'secondes');
+            $('#flightCost').text(carburant);
         } else if (heures > 0)
         {
-            $('#flightTime').text(heures + ' heures ' + minutes + ' mins ' + secondes + 's' + '   Prix : ' + carburant + ' bitcoin');
+            $('#flightTime').text(heures + ' heures ' + minutes + ' mins ' + secondes + 'secondes');
+            $('#flightCost').text(carburant);
         } else if (minutes > 0)
         {
-            $('#flightTime').text(minutes + ' mins ' + secondes + 's' + '   Prix : ' + carburant + ' bitcoin');
+            $('#flightTime').text(minutes + ' mins ' + secondes + 'secondes');
+            $('#flightCost').text(carburant);
         } else if (secondes > 0)
         {
-            $('#flightTime').text(secondes + ' secondes' + '   Prix : ' + carburant + ' bitcoin');
+            $('#flightTime').text(secondes + ' secondes');
+            $('#flightCost').text(carburant);
         }
     });
 
@@ -125,7 +133,7 @@ function manageFlightTime(){
             var base = Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2));
             var price = base / 3;
         }
-        carburant = Math.round(price * ($('#signatureFleet').text() / 200));
+        carburant = Math.round(price * ($('#signatureFleet').text() / 200)) > 0 ? Math.round(price * ($('#signatureFleet').text() / 200)) : 1;
         var now = new Date();
         var travel = new Date();
         travel.setSeconds(travel.getSeconds() + (base * speed * 100)); // 1000 MODE NORMAL
@@ -135,16 +143,20 @@ function manageFlightTime(){
         var minutes = Math.floor((date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60))) / 60);
         var secondes = Math.floor(date_now - ((jours * 60 * 60 * 24 + heures * 60 * 60 + minutes * 60)));
         if (jours > 0) {
-            $('#flightTime').text(jours + ' jours ' + heures + ' heures ' + minutes + ' mins ' + secondes + 's' + '   Prix : ' + carburant + ' bitcoin');
+            $('#flightTime').text(jours + ' jours ' + heures + ' heures ' + minutes + ' mins ' + secondes + 'secondes');
+            $('#flightCost').text(carburant);
         } else if (heures > 0)
         {
-            $('#flightTime').text(heures + ' heures ' + minutes + ' mins ' + secondes + 's' + '   Prix : ' + carburant + ' bitcoin');
+            $('#flightTime').text(heures + ' heures ' + minutes + ' mins ' + secondes + 'secondes');
+            $('#flightCost').text(carburant);
         } else if (minutes > 0)
         {
-            $('#flightTime').text(minutes + ' mins ' + secondes + 's' + '   Prix : ' + carburant + ' bitcoin');
+            $('#flightTime').text(minutes + ' mins ' + secondes + 'secondes');
+            $('#flightCost').text(carburant);
         } else if (secondes > 0)
         {
-            $('#flightTime').text(secondes + ' secondes' + '   Prix : ' + carburant + ' bitcoin');
+            $('#flightTime').text(secondes + ' secondes');
+            $('#flightCost').text(carburant);
         }
     });
 }
@@ -516,13 +528,19 @@ function manageMaxClick() {
             parent.find('input:eq(1)').val(parent.find('input:eq(1)').attr('max'));
         });
     });
+    $('.addAllRes').off('click').on('click',function(e){
+        $('.maxInputLessR').each( function(){
+            var parent = $(this).parent().parent();
+            parent.find('input:first').val(parent.find('input:first').attr('max'));
+        });
+    });
 }
-
+/*
 function manageRenameFleetForm() {
     $('#fleet_rename_sendForm').off('click').on('click',function(e){
         e.preventDefault();
 
-        var content = $(this).closest('form')[0][0].value;
+        var content = $(this).closest('input')[0][0].value;
         $form = $(this).closest('form');
         $.ajax({
             url: $form.attr('action'),
@@ -530,7 +548,7 @@ function manageRenameFleetForm() {
             data: {name: 'name', data: content}
         });
     });
-}
+}*/
 
 $(document).ready(function() {
     manageFlightTime();
@@ -538,5 +556,5 @@ $(document).ready(function() {
     manageAttackFleetForm();
     manageMaxShip();
     manageMaxClick();
-    manageRenameFleetForm();
+    //manageRenameFleetForm();
 });

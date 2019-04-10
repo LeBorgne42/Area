@@ -70,7 +70,7 @@
                                         {% endif %}
                                     </td>
                                     <td class="center-cells">
-                                        <span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'usePlanet': usePlanet.getId(), 'userPlanet': user.getId()}) }}">{{ user.getUsername() }}</a></span>
+                                        <span><a data-toggle="modal" data-target="#userModal" href="{{ path('user_profil_modal', {'userPlanet': user.getId(), 'usePlanet': usePlanet.getId()}) }}">{{ user.getUsername() }}</a></span>
                                     </td>
                                     <td class="center-cells">
                                         {{ user.getJoinAllyAt()|date('H:i d/m/Y') }}

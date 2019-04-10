@@ -70,6 +70,7 @@ class FightController extends AbstractController
             if ($tmpcount < 2) {
                 foreach ($fleetsWars as $fleetsWar) {
                     $fleetsWar->setFightAt(null);
+                    $fleetsWar->setSignature($fleetsWar->getNbrSignatures());
                     $em->flush();
                 }
                 exit;
@@ -113,6 +114,7 @@ class FightController extends AbstractController
             } else {
                 foreach ($fleetsWars as $fleetsWar) {
                     $fleetsWar->setFightAt(null);
+                    $fleetsWar->setSignature($fleetsWar->getNbrSignatures());
                     $em->flush();
                 }
                 exit;
@@ -526,7 +528,7 @@ class FightController extends AbstractController
                     $defenderWin->getUser()->getRank()->setWarPoint($defenderWin->getUser()->getRank()->getWarPoint() + $newWarPoint);
                 }
                 $defenderWin->setFightAt(null);
-                $em->flush();
+                $defenderWin->setSignature($defenderWin->getNbrSignatures());
             }
             $planet->setNbCdr($planet->getNbCdr() + ($debrisAtt * rand(30,40)));
             $planet->setWtCdr($planet->getWtCdr() + $debrisAtt * rand(20,30));
@@ -682,7 +684,7 @@ class FightController extends AbstractController
                     $attackerWin->getUser()->getRank()->setWarPoint($attackerWin->getUser()->getRank()->getWarPoint() + $newWarPoint);
                 }
                 $attackerWin->setFightAt(null);
-                $em->persist($attackerWin);
+                $attackerWin->setSignature($attackerWin->getNbrSignatures());
             }
             $planet->setNbCdr($planet->getNbCdr() + ($debrisDef * rand(30,40)));
             $planet->setWtCdr($planet->getWtCdr() + $debrisDef * rand(20,30));
@@ -811,7 +813,7 @@ class FightController extends AbstractController
                 } else {
                     $reportDef->setTitle("Rapport d'invasion : Victoire (défense)");
                     $reportDef->setImageName("defend_win_report.jpg");
-                    $reportDef->setContent("Bien joué ! Vos travailleurs et soldats ont repoussé l'invasion du joueur " . $fleet->getUser()->getUserName() . " sur votre planète " . $defenser->getName() . " - (" . $defenser->getSector()->getgalaxy()->getPosition() . "." . $defenser->getSector()->getPosition() . "." . $defenser->getPosition() . ") .  <span class='text-vert'>" . number_format($soldierAtmp) . "</span> soldats vous ont attaqué, tous ont été tué. Vous avez ainsi prit le contrôle des barges de l'attaquant.<br>Et vous remportez <span class='text-vert'>+" . number_format($warPointDef) . "</span> points de Guerre.");
+                    $reportDef->setContent("Bien joué ! Vos travailleurs et soldats ont repoussé l'invasion du joueur " . $user->getUserName() . " sur votre planète " . $defenser->getName() . " - (" . $defenser->getSector()->getgalaxy()->getPosition() . "." . $defenser->getSector()->getPosition() . "." . $defenser->getPosition() . ") .  <span class='text-vert'>" . number_format($soldierAtmp) . "</span> soldats vous ont attaqué, tous ont été tué. Vous avez ainsi prit le contrôle des barges de l'attaquant.<br>Et vous remportez <span class='text-vert'>+" . number_format($warPointDef) . "</span> points de Guerre.");
                     $reportInv->setTitle("Rapport d'invasion : Défaite (attaque)");
                     $reportInv->setImageName("invade_lose_report.jpg");
                     $reportInv->setContent("'AH AH AH AH' le rire de " . $userDefender->getUserName() . " résonne à vos oreilles d'un curieuse façon. Votre sang bouillonne vous l'a vouliez cette planète. Qu'il rigole donc, vous reviendrez prendre " . $defenser->getName() . " - (" . $defenser->getSector()->getgalaxy()->getPosition() . "." . $defenser->getSector()->getPosition() . "." . $defenser->getPosition() . ") et ferez effacer des livres d'histoires son ridicule nom. Vous avez tout de même tué <span class='text-vert'>" . number_format($soldierDtmp) . "</span> soldats, <span class='text-vert'>" . number_format($tankDtmp) ."</span> tanks et <span class='text-vert'>" . number_format($workerDtmp) . "</span> travailleurs à l'ennemi. Tous vos soldats sont morts et vos barges sont resté sur la planète.<br>Courage commandant.");
@@ -903,6 +905,173 @@ class FightController extends AbstractController
             }
             $em->flush();
         }
+
+        return $this->redirectToRoute('report', ['usePlanet' => $usePlanet->getId()]);
+    }
+
+    /**
+     * @Route("/merci-pour-les-ressources/{raider}/{usePlanet}", name="raid_planet", requirements={"usePlanet"="\d+", "raider"="\d+"})
+     */
+    public function raidAction(Planet $usePlanet, Fleet $raider)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $server = $em->getRepository('App:Server')->find(['id' => 1]);
+        $now = new DateTime();
+        $now->setTimezone(new DateTimeZone('Europe/Paris'));
+
+        if ($usePlanet->getUser() != $user || $raider->getUser() != $user) {
+            return $this->redirectToRoute('home');
+        }
+        if ($raider->getUser()->getPoliticBarge() > 0) {
+            $barge = $raider->getBarge() * 2500 * (1 + ($raider->getUser()->getPoliticBarge() / 4));
+        } else {
+            $barge = $raider->getBarge() * 2500;
+        }
+        $defenser = $raider->getPlanet();
+        $userDefender = $raider->getPlanet()->getUser();
+        $barbed = $userDefender->getBarbedAdv();
+        $dSoldier = $defenser->getSoldier() > 0 ? ($defenser->getSoldier() * 6) * $barbed : 0;
+        $dTanks = $defenser->getTank() > 0 ? $defenser->getTank() * 900 : 0;
+        if ($userDefender->getPoliticSoldierAtt() > 0) {
+            $dSoldier = $dSoldier * (1 + ($userDefender->getPoliticSoldierAtt() / 10));
+        }
+        if ($userDefender->getPoliticTankDef() > 0) {
+            $dTanks = $dTanks * (1 + ($userDefender->getPoliticTankDef() / 10));
+        }
+        $dMilitary = $dSoldier + $dTanks;
+
+        $reportLoot = new Report();
+        $reportLoot->setType('invade');
+        $reportLoot->setSendAt($now);
+        $reportLoot->setUser($raider->getUser());
+        $raider->getUser()->setViewReport(false);
+        $reportDef = new Report();
+        $reportDef->setType('invade');
+        $reportDef->setSendAt($now);
+        $reportDef->setUser($userDefender);
+        $userDefender->setViewReport(false);
+        $dSigle = null;
+        if ($userDefender->getAlly()) {
+            $dSigle = $userDefender->getAlly()->getSigle();
+        }
+
+        if ($barge && $raider->getPlanet()->getUser() && $raider->getAllianceUser() && $raider->getUser()->getSigleAllied($dSigle) == NULL && $userDefender->getZombie() == 0) {
+            if($barge >= $raider->getSoldier()) {
+                $aMilitary = $raider->getSoldier() * 6;
+                $soldierAtmp = $raider->getSoldier();
+                $soldierAtmpTotal = 0;
+            } else {
+                $aMilitary = $barge * 6;
+                $soldierAtmp = $barge;
+                $soldierAtmpTotal = $raider->getSoldier() - $barge;
+            }
+            if ($raider->getUser()->getPoliticSoldierAtt() > 0) {
+                $aMilitary = $aMilitary * (1 + ($user->getPoliticSoldierAtt() / 10));
+            }
+            if($dMilitary > $aMilitary) {
+                $warPointDef = round($aMilitary);
+                if ($userDefender->getPoliticPdg() > 0) {
+                    $warPointDef = round($warPointDef * (1 + ($userDefender->getPoliticPdg() / 10)));
+                }
+                $userDefender->getRank()->setWarPoint($userDefender->getRank()->getWarPoint() + $warPointDef);
+                $aMilitary = $dSoldier - $aMilitary;
+                if($barge < $raider->getSoldier()) {
+                    $raider->setSoldier($raider->getSoldier() - $barge);
+                }
+                $defenser->setBarge($defenser->getBarge() + $raider->getBarge());
+                $raider->setBarge(0);
+                if($aMilitary <= 0) {
+                    $soldierDtmp = $defenser->getSoldier();
+                    $tankDtmp = $defenser->getTank();
+                    $defenser->setSoldier(0);
+                    $aMilitary = $dTanks - abs($aMilitary);
+                    if($aMilitary > 0) {
+                        $diviser = (1 + ($userDefender->getPoliticTankDef() / 10)) * 900;
+                        $defenser->setTank(round($aMilitary / $diviser));
+                        $tankDtmp = $tankDtmp - $defenser->getTank();
+                        $soldierDtmp = $soldierDtmp - $defenser->getSoldier();
+                    }
+                } else {
+                    $diviser = (1 + ($userDefender->getPoliticSoldierAtt() / 10)) * (5 * $userDefender->getBarbedAdv());
+                    $defenser->setSoldier($soldierAtmpTotal + round($aMilitary / $diviser));
+                    $tankDtmp = $defenser->getTank();
+                    $soldierDtmp = $soldierAtmpTotal + round($aMilitary / $diviser);
+                }
+
+                $reportDef->setTitle("Rapport de pillage : Victoire (défense)");
+                $reportDef->setImageName("defend_win_report.jpg");
+                $reportDef->setContent("Le dirigeant " . $raider->getUser()->getUserName() . " a tenté de piller votre planète " . $defenser->getName() . " en " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . ". Il a échoué grâce a vos solides défenses. Vous avez éliminé <span class='text-vert'>" . number_format($soldierAtmp) . "</span> soldats et prit le contrôle des barges de l'attaquant.<br>Et vous remportez <span class='text-vert'>+" . number_format($warPointDef) . "</span> points de Guerre.");
+                $reportLoot->setTitle("Rapport de pillage : Défaite (attaque)");
+                $reportLoot->setImageName("invade_lose_report.jpg");
+                $reportLoot->setContent("Le dirigeant " . $userDefender->getUserName() . " vous attendait de pieds fermes. Sa planète " . $defenser->getName() . " en " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . " était trop renforcée pour vous. Vous tué tout de même <span class='text-vert'>" . number_format($soldierDtmp) . "</span> soldats, <span class='text-vert'>" . number_format($tankDtmp) ."</span> tanks. Tous vos soldats sont morts et vos barges sont resté sur la planète.<br>La prochaine fois, préparez votre attaque commandant.");
+            } else {
+                $soldierDtmp = $defenser->getSoldier() != 0 ? $defenser->getSoldier() : 1;
+                $tankDtmp = $defenser->getTank();
+                $warPointAtt = round($soldierDtmp);
+                if ($raider->getUser()->getPoliticPdg() > 0) {
+                    $warPointAtt = round($warPointAtt * (1 + ($raider->getUser()->getPoliticPdg() / 10)));
+                }
+                if ($raider->getUser()->getPoliticSoldierAtt() > 0) {
+                    $aMilitary = $aMilitary / (1 + ($raider->getUser()->getPoliticSoldierAtt() / 10));
+                }
+                $raider->setSoldier($soldierAtmpTotal + round(($aMilitary - $dMilitary) / 5));
+                $soldierAtmp = $soldierAtmpTotal + $soldierAtmp - $raider->getSoldier();
+                $defenser->setSoldier(0);
+                $defenser->setTank(0);
+                if($raider->getCargoPlace() > $raider->getCargoFull()) {
+                    $place = $raider->getCargoPlace() - $raider->getCargoFull();
+                    if ($place > $defenser->getNiobium()) {
+                        $raider->setNiobium($raider->getNiobium() + $defenser->getNiobium());
+                        $place = $place - $defenser->getNiobium();
+                        $niobium = $defenser->getNiobium();
+                        $defenser->setNiobium(0);
+                    } else {
+                        $raider->setNiobium($raider->getNiobium() + $place);
+                        $defenser->setNiobium($raider->getNiobium() - $place);
+                        $niobium = $place;
+                        $place = 0;
+                    }
+                    if ($place > $defenser->getWater()) {
+                        $raider->setWater($raider->getWater() + $defenser->getWater());
+                        $place = $place - $defenser->getWater();
+                        $water = $defenser->getWater();
+                        $defenser->setWater(0);
+                    } else {
+                        $raider->setWater($raider->getWater() + $place);
+                        $defenser->setWater($raider->getWater() - $place);
+                        $water = $place;
+                        $place = 0;
+                    }
+                    if ($place > $defenser->getUranium()) {
+                        $raider->setUranium($raider->getUranium() + $defenser->getUranium());
+                        $uranium = $defenser->getUranium();
+                        $defenser->setUranium(0);
+                    } else {
+                        $raider->setUranium($raider->getUranium() + $place);
+                        $defenser->setUranium($raider->getUranium() - $place);
+                        $uranium = $place;
+                    }
+                }
+                $raider->getUser()->getRank()->setWarPoint($raider->getUser()->getRank()->getWarPoint() + $warPointAtt);
+                $reportDef->setTitle("Rapport de pillage : Défaite (défense)");
+                $reportDef->setImageName("defend_lose_report.jpg");
+                $reportDef->setContent("Le dirigeant " . $raider->getUser()->getUserName() . " vient de piller (" . number_format(round($niobium)) . " niobiums" . number_format(round($water)) . " eaux" . number_format(round($uranium)) . " uraniums) votre planète " . $defenser->getName() . " - " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . ".  " . number_format(round($soldierAtmp)) . " soldats ennemis sont tout de même éliminé. C'est toujours ça de gagner. Vos <span class='text-rouge'>-" . number_format($soldierDtmp) . "</span> soldats, <span class='text-rouge'>-" . number_format($tankDtmp) ."</span> tanks. Votre économie en a prit un coup, mais si vous étiez là pour planter des choux ça se serait ! Préparez la contre-attaque !");
+                $reportLoot->setTitle("Rapport de pillage : Victoire (attaque)");
+                $reportLoot->setImageName("invade_win_report.jpg");
+                $reportLoot->setContent("Vos soldats ont finit de charger vos cargos (" . number_format(round($niobium)) . " niobiums" . number_format(round($water)) . " eaux" . number_format(round($uranium)) . " uraniums) et remontent dans les barges, le pillage de la planète " . $defenser->getName() . " en " . $defenser->getSector()->getgalaxy()->getPosition() . ":" . $defenser->getSector()->getPosition() . ":" . $defenser->getPosition() . " s'est bien passé. Vos pertes sont de <span class='text-rouge'>-" . number_format(round($soldierAtmp)) . "</span> soldats. Mais les défenseurs ont aussi leurs pertes : <span class='text-vert'>" . number_format($soldierDtmp) . "</span> soldats, <span class='text-vert'>" . number_format($tankDtmp) ."</span> tanks.<br>Vous remportez <span class='text-vert'>+" . number_format($warPointAtt) . "</span> points de Guerre.");
+                $quest = $raider->getUser()->checkQuests('loot');
+                if($quest) {
+                    $raider->getUser()->getRank()->setWarPoint($raider->getUser()->getRank()->getWarPoint() + $quest->getGain());
+                    $raider->getUser()->removeQuest($quest);
+                }
+            }
+            $server->setNbrLoot($server->getNbrLoot() + 1);
+            $em->persist($reportLoot);
+            $em->persist($reportDef);
+        }
+
+        $em->flush();
 
         return $this->redirectToRoute('report', ['usePlanet' => $usePlanet->getId()]);
     }
