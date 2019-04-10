@@ -601,6 +601,9 @@ class FleetController  extends AbstractController
             return $this->redirectToRoute('manage_fleet', ['fleetGive' => $fleetGive->getId(), 'usePlanet' => $usePlanet->getId()]);
         }
 
+        $fleetGive->setSignature($fleetGive->getNbrSignatures());
+        $em->flush();
+
         return $this->render('connected/fleet/edit.html.twig', [
             'fleet' => $fleetGive,
             'usePlanet' => $usePlanet,

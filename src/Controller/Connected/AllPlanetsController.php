@@ -17,6 +17,16 @@ class AllPlanetsController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
+
+        if ($user->getOrderPlanet() == 'alpha') {
+            $crit = 'p.name';
+        } elseif ($user->getOrderPlanet() == 'colo') {
+            $crit = 'p.nbColo';
+        } else {
+            $crit = 'p.id';
+        }
+        $order = 'ASC';
+
         $allPlanets = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
             ->join('p.sector', 's')
@@ -24,7 +34,7 @@ class AllPlanetsController extends AbstractController
             ->select('p.id, p.position, p.name, p.caserne, p.signature, p.bunker, p.centerSearch, p. lightUsine, p.uranium, p.empty, s.position as sector, g.position as galaxy, s.id as idSector, g.id as idGalaxy, p.construct, p.ground, p.groundPlace, p.sky, p.skyPlace, p.imageName')
             ->where('p.user = :user')
             ->setParameters(['user' => $user])
-            ->orderBy('p.id', 'ASC')
+            ->orderBy($crit, $order)
             ->getQuery()
             ->getResult();
 

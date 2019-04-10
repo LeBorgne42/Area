@@ -34,7 +34,7 @@
         </div>
     </div>
     {% for planet in allPlanets %}
-        {% if planet != usePlanet %}
+        {% if planet.id != usePlanet.getId() %}
             {% if planet.empty == true %}
                 <div class="mb-4 bg-right-empty px-4 py-2">
                     <div class="pt-1 float-left"><a class="ml-2" href="{{ path('map', {'sector': planet.idSector, 'gal': planet.idGalaxy, 'usePlanet': usePlanet.getId()}) }}"><img height="15" src="{{ asset('img/vradar.png') }}"></a></div>

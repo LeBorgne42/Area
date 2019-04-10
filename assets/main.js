@@ -113,7 +113,9 @@ function manageTime() {
 
 $(document).ready(function() {
     $('[data-toggle="popover"]').popover();
-    $('[data-toggle="tooltip"]').tooltip();
+    $('[data-toggle="tooltip"]').tooltip({
+        trigger: 'hover'
+    });
     $('[data-toggle="confirmation"]').confirmation();
     $("body").scrollspy({
         target: "#navbar-rules",

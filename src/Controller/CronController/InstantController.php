@@ -552,7 +552,7 @@ class InstantController extends AbstractController
                 ->setMaxresults(1)
                 ->getOneOrNullResult();
 
-            if ($zUser->getZombieAtt() > 5) {
+            if ($zUser->getZombieAtt() > 0) {
                 $reportDef = new Report();
                 $reportDef->setType('invade');
                 $reportDef->setSendAt($now);
@@ -626,6 +626,7 @@ class InstantController extends AbstractController
                     $reportDef->setType("zombie");
                     $reportDef->setImageName("zombie_lose_report.jpg");
                     $reportDef->setContent("Vous recevez des rapports de toutes parts vous signalant des zombies sur la planète " . $planetAtt->getName() . " en <span><a href='/connect/carte-spatiale/" . $planetAtt->getSector()->getPosition() . "/" . $planetAtt->getSector()->getGalaxy()->getPosition() . "/" . $usePlanet->getId() . "'>" . $planetAtt->getSector()->getGalaxy()->getPosition() . ":" . $planetAtt->getSector()->getPosition() . ":" . $planetAtt->getPosition() . "</a></span>.<br>Mais vous tardez a réagir et le manque de préparation lui est fatale.<br>Vous recevez ces derniers mots de votre Gouverneur local «Salopard! Vous étiez censé nous protéger, ou est l'armée !»<br> Les dernières images de la planète vous montre des zombies envahissant le moindre recoin de la planète.<br>Vos <span class='text-rouge'>" . number_format($soldierDtmp) . "</span> soldats, <span class='text-rouge'>" . number_format($tankDtmp) . "</span> tanks et <span class='text-rouge'>" . number_format($workerDtmp) . "</span> travailleurs sont tous mort. Votre empire en a prit un coup, mais il vous reste des planètes, remettez vous en question! Consolidez vos positions et allez détuire les nids de zombies!");
+                    $em->persist($reportDef);
                     $planetAtt->setWorker(125000);
                     if ($planetAtt->getGround() != 25 && $planetAtt->getSky() != 5) {
                         if ($planetAtt->getSoldierMax() >= 2500) {
@@ -673,7 +674,12 @@ class InstantController extends AbstractController
             $zUser->setZombieAt($nextZombie);
             $fleetZb = new Fleet();
             $fleetZb->setName('Horde');
-            $fleetZb->setCorvet(1 + round(($zUser->getAllShipsPoint() / (5 * rand(1, 5)))));
+            $fleetZb->setHunter(1 + round(($zUser->getAllShipsPoint() / (5 * rand(1, 5))) / 6));
+            $fleetZb->setHunterWar(1 + round(($zUser->getAllShipsPoint() / (5 * rand(1, 5))) / 6));
+            $fleetZb->setCorvet(1 + round(($zUser->getAllShipsPoint() / (5 * rand(1, 5))) / 6));
+            $fleetZb->setCorvetLaser(1 + round(($zUser->getAllShipsPoint() / (5 * rand(1, 5))) / 6));
+            $fleetZb->setCorvetWar(1 + round(($zUser->getAllShipsPoint() / (5 * rand(1, 5))) / 6));
+            $fleetZb->setFregate(1 + round(($zUser->getAllShipsPoint() / (5 * rand(1, 5))) / 6));
             $fleetZb->setUser($zombie);
             $fleetZb->setPlanet($planetZb);
             $fleetZb->setSignature($fleetZb->getNbrSignatures());
@@ -685,7 +691,6 @@ class InstantController extends AbstractController
             $fleetZb->setAttack(1);
             $fleetZb->setFlightType(1);
             $em->persist($fleetZb);
-            $em->persist($reportDef);
         }
 
         foreach ($peaces as $peace) {

@@ -59,7 +59,7 @@ class ZombieController extends AbstractController
             $soldier = abs($form_missionZombie->get('soldier')->getData());
             $tank = abs($form_missionZombie->get('tank')->getData());
             $time = abs($form_missionZombie->get('time')->getData());
-            $zombie = $user->getZombieATT() * 75;
+            $zombie = $user->getZombieAtt() * 75;
             $zombieTotal = $zombie;
             $zombie = $zombie - $soldier - $tank;
             $alea = rand(1, 100) == 100 ? 2 : 1;
@@ -115,7 +115,7 @@ class ZombieController extends AbstractController
             $soldier = abs($form_missionUranium->get('soldier')->getData());
             $tank = abs($form_missionUranium->get('tank')->getData());
             $time = abs($form_missionUranium->get('time')->getData());
-            $zombie = $user->getZombieATT() * 75;
+            $zombie = $user->getZombieAtt() * 75;
             $zombieTotal = $zombie;
             $zombie = $zombie - $soldier - $tank;
             $alea = rand(1, 100) == 100 ? 2 : 1;
@@ -254,8 +254,8 @@ class ZombieController extends AbstractController
                 $em->remove($mission);
             }
         }
-        if ($user->getZombieAtt() <= 0) {
-            $user->setZombieAtt(1);
+        if ($user->getZombieAtt() <= -20) {
+            $user->setZombieAtt(-20);
         }
         if ($user->getTutorial() == 53) {
             $user->setTutorial(54);
