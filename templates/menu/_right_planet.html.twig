@@ -1,5 +1,6 @@
 {% trans_default_domain 'front_menu' %}
 
+    {% set allTuto = app.user.getTutorial() %}
 <nav class="navbar-right text-center pr-4 hideForLittle">
     {% if allTuto > 22 %}<a href="{{ path('zombie', {'usePlanet': usePlanet.getId()}) }}">{% endif %}
         <div data-toggle="tooltip" data-placement="left" title="{{ 'tooltip.zombie'|trans }}" class="mb-4 bg-right px-4 py-2 zombie-right{% if allTuto == 51 %} tutorial-show{% endif %}">
@@ -18,13 +19,13 @@
         <div class="pt-2 float-left"><a href="{{ usePlanet.getId() }}"><img height="32" width="32" src="{{ vich_uploader_asset(usePlanet, 'imageFile') }}"></a></div>
         <div class="float-right">
             <div class="mt-2{% if allTuto < 14 %} tutorial-hide{% endif %}">
-                {% if usePlanet.getOffensiveFleet(app.user) == 'neutre' %}<span data-toggle="tooltip" data-placement="bottom" title="{{ 'fleetNoAlly'|trans }}" class="text-rouge">{{ usePlanet.getName() }}</span>{% else %}{{ usePlanet.getName() }}{% endif %} - <span><a href="{{ path('map', {'sector': usePlanet.getSector().getId(), 'gal': usePlanet.getSector().getGalaxy().getId(), 'usePlanet': usePlanet.getId()}) }}">{{ usePlanet.getSector().getGalaxy.getPosition() }}:{{ usePlanet.getSector().getPosition() }}:{{ usePlanet.getPosition() }}</a></span>
+                {% if usePlanet.getOffensiveFleet(app.user) == 'neutre' %}<span data-toggle="tooltip" data-placement="bottom" title="{{ 'fleetNoAlly'|trans }}" class="text-rouge">{{ usePlanet.getName() }}</span>{% else %}{{ usePlanet.getName() }}{% endif %} - <span><a href="{{ path('map', {'sector': usePlanet.getSector().getId(), 'gal': usePlanet.getSector().getGalaxy().getId(), 'usePlanet': usePlanet.getId()}) }}">({{ usePlanet.getSector().getGalaxy.getPosition() }}.{{ usePlanet.getSector().getPosition() }}.{{ usePlanet.getPosition() }})</a></span>
             </div>
             <div class="ml-2">
                 <span data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}">{{ usePlanet.getGroundPlace() }}/{{ usePlanet.getGround() }} <img src="{{ asset('img/ground.png') }}"></span> <span data-toggle="tooltip" data-placement="bottom" title="{{ 'SkyImg'|trans }}">{{ usePlanet.getSkyPlace() }}/{{ usePlanet.getSky() }} <img src="{{ asset('img/sky.png') }}"></span>
             </div>
             <div class="ml-2">
-                {% if usePlanet.getShipOn() > 0 %}<span data-toggle="tooltip" data-placement="bottom" title="{{ 'tooltip.ships'|trans }}">{{ usePlanet.getShipOn() }} <span class="glyphicon glyphicon-plane"></span></span>{% endif %}
+                {% if usePlanet.getSignature() > 0 %}<span data-toggle="tooltip" data-placement="bottom" title="{{ 'tooltip.ships'|trans }}">({{ usePlanet.getSignature()|number_format }}) <span class="glyphicon glyphicon-plane"></span></span>{% endif %}
                 {% if (usePlanet.getCaserne() > 0 or usePlanet.getBunker() > 0) and usePlanet.getLightUsine() > 0 and app.user.getTank() > 0 %}<span data-toggle="tooltip" data-placement="bottom" title="{{ 'tooltip.tanks'|trans }}"><img height="10" src="{{ asset('img/tanks.png') }}"></span>{% endif %}
                 {% if usePlanet.getCaserne() > 0 %}<span data-toggle="tooltip" data-placement="bottom" title="{{ 'tooltip.caserne'|trans }}"><img height="12" src="{{ asset('img/soldier.png') }}"></span>{% endif %}
                 {% if usePlanet.getCenterSearch() > 0 %}<span data-toggle="tooltip" data-placement="bottom" title="{{ 'tooltip.scientists'|trans }}"><img height="10" src="{{ asset('img/scientist.png') }}"></span>{% endif %}
@@ -34,33 +35,33 @@
     </div>
     {% for planet in allPlanets %}
         {% if planet != usePlanet %}
-            {% if planet.getEmpty() == true %}
+            {% if planet.empty == true %}
                 <div class="mb-4 bg-right-empty px-4 py-2">
-                    <div class="pt-1 float-left"><a class="ml-2" href="{{ path('map', {'sector': planet.getSector().getId(), 'gal': planet.getSector().getGalaxy().getId(), 'usePlanet': usePlanet.getId()}) }}"><img height="15" src="{{ asset('img/vradar.png') }}"></a></div>
+                    <div class="pt-1 float-left"><a class="ml-2" href="{{ path('map', {'sector': planet.idSector, 'gal': planet.idGalaxy, 'usePlanet': usePlanet.getId()}) }}"><img height="15" src="{{ asset('img/vradar.png') }}"></a></div>
                     <div class="float-right">
                         <div class="mt-2">
-                            {{ planet.getName() }} - <span><a href="{{ path('map', {'sector': planet.getSector().getId(), 'gal': planet.getSector().getGalaxy().getPosition(), 'usePlanet': usePlanet.getId()}) }}">{{ planet.getSector().getGalaxy.getPosition() }}:{{ planet.getSector().getPosition() }}:{{ planet.getPosition() }}</a></span>
+                            {{ planet.name }} - <span><a href="{{ path('map', {'sector': planet.idSector, 'gal': planet.idGalaxy, 'usePlanet': usePlanet.getId()}) }}">({{ planet.galaxy }}.{{ planet.sector }}.{{ planet.position }})</a></span>
                             <br>
-                            <span class="mt-5 timerArea" hidden>{% if planet.getRadarAt() %}{{ planet.getRadarAt()|date('Y/m/d H:i:s') }}{% elseif planet.getBrouilleurAt() %}{{ planet.getBrouilleurAt()|date('Y/m/d H:i:s') }}{% endif %}</span>
+                            <span class="mt-5 timerArea" hidden>{% if planet.radarAt %}{{ planet.radarAt|date('Y/m/d H:i:s') }}{% elseif planet.brouilleurAt %}{{ planet.brouilleurAt|date('Y/m/d H:i:s') }}{% endif %}</span>
                         </div>
                     </div>
                 </div>
                 {% else %}
-                    <div{% if planet.getOffensiveFleet(app.user) == 'ennemy' %} data-toggle="tooltip" data-placement="bottom" title="{{ 'embargo'|trans }}"{% endif %} class="mb-4 bg-right px-4 py-2{% if planet.getOffensiveFleet(app.user) == 'ennemy' %} planetFull{% elseif planet.getConstruct() is null and (planet.getGround() != planet.getGroundPlace()) %} constructFree{% endif %}">  {#or planet.getSkyPlace() != planet.getSky()#}
-                        <div class="pt-2 float-left"><a href="{{ planet.getId() }}"><img height="32" width="32" src="{{ vich_uploader_asset(planet, 'imageFile') }}"></a></div>
+                    {#planet.getOffensiveFleet(app.user)#}<div{% if 'offensive' == 'ennemy' %} data-toggle="tooltip" data-placement="bottom" title="{{ 'embargo'|trans }}"{% endif %} class="mb-4 bg-right px-4 py-2{% if 'offensive' == 'ennemy' %} planetFull{% elseif planet.construct is null and (planet.ground != planet.groundPlace) %} constructFree{% endif %}">  {#or planet.getSkyPlace() != planet.getSky()#}
+                        <div class="pt-2 float-left"><a href="{{ planet.id }}"><img height="32" width="32" src="{{ vich_uploader_asset(planet, 'imageFile', 'App\\Entity\\Planet') }}"></a></div>
                         <div class="float-right">
                             <div class="mt-2{% if allTuto < 14 %} tutorial-hide{% endif %}">
-                                {% if planet.getOffensiveFleet(app.user) == 'neutre' %}<span data-toggle="tooltip" data-placement="bottom" title="{{ 'fleetNoAlly'|trans }}" class="text-rouge">{{ planet.getName() }}</span>{% else %}{{ planet.getName() }}{% endif %} - <span><a href="{{ path('map', {'sector': planet.getSector().getPosition(), 'gal': planet.getSector().getGalaxy().getId(), 'usePlanet': usePlanet.getId()}) }}">{{ planet.getSector().getGalaxy.getPosition() }}:{{ planet.getSector().getPosition() }}:{{ planet.getPosition() }}</a></span>
+                                {% if 'offensive' == 'neutre' %}<span data-toggle="tooltip" data-placement="bottom" title="{{ 'fleetNoAlly'|trans }}" class="text-rouge">{{ planet.name }}</span>{% else %}{{ planet.name }}{% endif %} - <span><a href="{{ path('map', {'sector': planet.idSector, 'gal': planet.idGalaxy, 'usePlanet': usePlanet.getId()}) }}">{{ planet.galaxy }}:{{ planet.sector }}:{{ planet.position }}</a></span>
                             </div>
                             <div class="ml-2">
-                                <span data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}">{{ planet.getGroundPlace() }}/{{ planet.getGround() }} <img src="{{ asset('img/ground.png') }}"></span> <span data-toggle="tooltip" data-placement="bottom" title="{{ 'SkyImg'|trans }}">{{ planet.getSkyPlace() }}/{{ planet.getSky() }} <img src="{{ asset('img/sky.png') }}"></span>
+                                <span data-toggle="tooltip" data-placement="bottom" title="{{ 'groundImg'|trans }}">{{ planet.groundPlace }}/{{ planet.ground }} <img src="{{ asset('img/ground.png') }}"></span> <span data-toggle="tooltip" data-placement="bottom" title="{{ 'SkyImg'|trans }}">{{ planet.skyPlace }}/{{ planet.sky }} <img src="{{ asset('img/sky.png') }}"></span>
                             </div>
                             <div class="ml-2">
-                                {% if planet.getShipOn() > 0 %}<span data-toggle="tooltip" data-placement="bottom" title="{{ 'tooltip.ships'|trans }}">{{ planet.getShipOn() }} <span class="glyphicon glyphicon-plane"></span></span>{% endif %}
-                                {% if (planet.getCaserne() > 0 or planet.getBunker() > 0) and planet.getLightUsine() > 0 and app.user.getTank() > 0 %}<span data-toggle="tooltip" data-placement="bottom" title="{{ 'tooltip.tanks'|trans }}"><img height="10" src="{{ asset('img/tanks.png') }}"></span>{% endif %}
-                                {% if planet.getCaserne() > 0 %}<span data-toggle="tooltip" data-placement="bottom" title="{{ 'tooltip.caserne'|trans }}"><img height="12" src="{{ asset('img/soldier.png') }}"></span>{% endif %}
-                                {% if planet.getCenterSearch() > 0 %}<span data-toggle="tooltip" data-placement="bottom" title="{{ 'tooltip.scientists'|trans }}"><img height="10" src="{{ asset('img/scientist.png') }}"></span>{% endif %}
-                                {% if planet.getUranium() > 0 %}<span data-toggle="tooltip" data-placement="bottom" title="{{ 'tooltip.uranium'|trans }}"><img height="10" src="{{ asset('img/uranium.png') }}"></span>{% endif %}
+                                {% if planet.signature > 0 %}<span data-toggle="tooltip" data-placement="bottom" title="{{ 'tooltip.ships'|trans }}">({{ planet.signature|number_format }}) <span class="glyphicon glyphicon-plane"></span></span>{% endif %}
+                                {% if (planet.caserne > 0 or planet.bunker > 0) and planet.lightUsine > 0 and app.user.getTank() > 0 %}<span data-toggle="tooltip" data-placement="bottom" title="{{ 'tooltip.tanks'|trans }}"><img height="10" src="{{ asset('img/tanks.png') }}"></span>{% endif %}
+                                {% if planet.caserne > 0 %}<span data-toggle="tooltip" data-placement="bottom" title="{{ 'tooltip.caserne'|trans }}"><img height="12" src="{{ asset('img/soldier.png') }}"></span>{% endif %}
+                                {% if planet.centerSearch > 0 %}<span data-toggle="tooltip" data-placement="bottom" title="{{ 'tooltip.scientists'|trans }}"><img height="10" src="{{ asset('img/scientist.png') }}"></span>{% endif %}
+                                {% if planet.uranium > 0 %}<span data-toggle="tooltip" data-placement="bottom" title="{{ 'tooltip.uranium'|trans }}"><img height="10" src="{{ asset('img/uranium.png') }}"></span>{% endif %}
                             </div>
                         </div>
                     </div>

@@ -1064,6 +1064,7 @@ class InstantController extends AbstractController
             $planetProduct->setCroiser($planetProduct->getCroiser() + $product->getCroiser());
             $planetProduct->setIronClad($planetProduct->getIronClad() + $product->getIronClad());
             $planetProduct->setDestroyer($planetProduct->getDestroyer() + $product->getDestroyer());
+            $planetProduct->setSignature($planetProduct->getNbrSignatures());
             $em->remove($product);
         }
 

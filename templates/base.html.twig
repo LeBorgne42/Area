@@ -11,7 +11,6 @@
     </head>
     <body class="area">
     {% set allPlanets = app.user.getPlanets() %}
-    {#{% set allPlanets = render(controller('App\\Controller\\Connected\\AllPlanetsController::allPlanetsAction')) %}#}
     {% set allTuto = app.user.getTutorial() %}
 
     {%- block left_menu -%}
@@ -29,7 +28,7 @@
     {%- endblock -%}
 
     {%- block right_planet -%}
-        {% include 'menu/_right_planet.html.twig' %}
+        {{ render(controller('App\\Controller\\Connected\\AllPlanetsController::allPlanetsAction', {'usePlanet': usePlanet.getId(), 'id': 1})) }}
     {%- endblock -%}
 
         {% block body %}{% endblock %}
