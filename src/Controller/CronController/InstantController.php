@@ -1236,6 +1236,27 @@ class InstantController extends AbstractController
                         $user = $fleet->getUser();
                         $newPlanet = $fleet->getPlanet();
 
+                        if ($fleet->getUser()->getZombie() == 1) {
+                            $zbRegroups = $em->getRepository('App:Fleet')
+                                ->createQueryBuilder('f')
+                                ->where('f.planet = :planet')
+                                ->andWhere('f.flightTime is null')
+                                ->andWhere('f.user = :user')
+                                ->andWhere('f.id != :fleet')
+                                ->setParameters(['planet' => $newHome, 'user' => $fleet->getUser(), 'fleet' => $fleet->getId()])
+                                ->getQuery()
+                                ->getResult();
+
+                            foreach ($zbRegroups as $zbRegroup) {
+                                $fleet->setHunter($fleet->getHunter() + $zbRegroup->getHunter());
+                                $fleet->setHunterWar($fleet->getHunterWar() + $zbRegroup->getHunterWar());
+                                $fleet->setCorvet($fleet->getCorvet() + $zbRegroup->getCorvet());
+                                $fleet->setCorvetLaser($fleet->getCorvetLaser() + $zbRegroup->getCorvetLaser());
+                                $fleet->setCorvetWar($fleet->getCorvetWar() + $zbRegroup->getCorvetWar());
+                                $fleet->setFregate($fleet->getFregate() + $zbRegroup->getFregate());
+                                $em->remove($zbRegroup);
+                            }
+                        }
                         if ($fleet->getFlightType() == '1' && $fleet->getUser()->getZombie() == 0) {
                             $em->persist($report);
                         }
