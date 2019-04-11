@@ -65,13 +65,31 @@ class InstantController extends AbstractController
                         $newAsteroides->setImageName('cdr.png');
                         $newAsteroides->setName('Astéroïdes');
                         $iaPlayer = $em->getRepository('App:User')->findOneBy(['zombie' => 1]);
+                        $planetZb = $em->getRepository('App:Planet')
+                            ->createQueryBuilder('p')
+                            ->where('p.user = :user')
+                            ->setParameters(['user' => $iaPlayer])
+                            ->orderBy('p.ground', 'ASC')
+                            ->getQuery()
+                            ->setMaxresults(1)
+                            ->getOneOrNullResult();
+
+                        $timeAttAst = new DateTime();
+                        $timeAttAst->setTimezone(new DateTimeZone('Europe/Paris'));
+                        $timeAttAst->add(new DateInterval('PT' . 24 . 'H'));
                         $fleet = new Fleet();
-                        $fleet->setHunterWar(rand(50, 100000));
-                        $fleet->setCorvetWar(rand(50, 2500));
-                        $fleet->setFregatePlasma(rand(20, 1000));
-                        $fleet->setDestroyer(rand(1, 200));
+                        $alea = rand(10, 100);
+                        $fleet->setHunterWar(300 * $alea);
+                        $fleet->setCorvetWar(50 * $alea);
+                        $fleet->setFregatePlasma(3 * $alea);
+                        $fleet->setDestroyer(1 * $alea);
                         $fleet->setUser($iaPlayer);
-                        $fleet->setPlanet($newAsteroides);
+                        $fleet->setPlanet($planetZb);
+                        $destination = new Destination();
+                        $destination->setFleet($fleet);
+                        $destination->setPlanet($newAsteroides);
+                        $em->persist($destination);
+                        $fleet->setFlightTime($timeAttAst);
                         $fleet->setAttack(1);
                         $fleet->setName('Horde');
                         $fleet->setSignature($fleet->getNbrSignatures());
@@ -1748,18 +1766,6 @@ class InstantController extends AbstractController
      */
     public function repareAction()
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $travs = $em->getRepository('App:Planet')
-            ->createQueryBuilder('p')
-            ->getQuery()
-            ->getResult();
-
-        foreach ($travs as $trav) {
-            $trav->setWorkerProduction($trav->getWorkerProduction() * 2);
-        }
-
-        $em->flush();
         exit;
     }
 }
