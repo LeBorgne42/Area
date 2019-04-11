@@ -49,10 +49,38 @@ class GalaxyController extends AbstractController
             ->getQuery()
             ->getResult();
 
+        $doms = $em->getRepository('App:Ally')
+            ->createQueryBuilder('a')
+            ->join('a.users', 'u')
+            ->join('u.planets', 'p')
+            ->join('p.sector', 's')
+            ->join('s.galaxy', 'g')
+            ->select('a.id, a.sigle as alliance, count(p) as number')
+            ->groupBy('a.id')
+            ->where('g.position = :id')
+            ->setParameter('id', $id)
+            ->orderBy('count(p.id)', 'DESC')
+            ->getQuery()
+            ->getResult();
+
+        $totalPlanet = $em->getRepository('App:Galaxy')
+            ->createQueryBuilder('g')
+            ->join('g.sectors', 's')
+            ->join('s.planets', 'p')
+            ->select('count(p) as number')
+            ->groupBy('g.id')
+            ->where('g.position = :id')
+            ->setParameter('id', $id)
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getSingleScalarResult();
+
         return $this->render('connected/map/galaxy.html.twig', [
             'form_navigate' => $form_navigate->createView(),
             'planets' => $planets,
             'usePlanet' => $usePlanet,
+            'doms' => $doms,
+            'totalPlanet' => $totalPlanet
         ]);
     }
 }

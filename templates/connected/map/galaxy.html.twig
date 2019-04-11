@@ -48,6 +48,9 @@
             <div class="mt-3 galaxy-info text-center">
                 <span class="pp-mine text-more">&#x25A0</span> {{ 'galaxy.mine'|trans }} <span class="pp-ally ml-4 text-more">&#x25A0</span> {{ 'galaxy.ally'|trans }} <span class="pp-enemy ml-4 text-more">&#x25A0</span> {{ 'galaxy.enemy'|trans }} <span class="pp-ia ml-4 text-more">&#x25A0</span> {{ 'galaxy.ia'|trans }} <span class="pp-cdr ml-4 text-more">&#x25A0</span> {{ 'galaxy.cdr'|trans }} <span class="ml-4">&#x25A0</span> {{ 'galaxy.empty'|trans }} <span class="ml-4"><img src="{{ asset('img/special.gif') }}"></span> {{ 'galaxy.zombie'|trans }}
             </div>
+            <div class="mt-3 galaxy-info text-center">
+                {{ 'galaxy.domination'|trans }}{% for dom in doms %}<span class="ml-3">(<a href="{{ path('ally_profil', {'allyUser': dom.id, 'usePlanet': usePlanet.getId()}) }}">[{{ dom.alliance }}]</a></span> {{ (dom.number * 100 / totalPlanet ) }}%){% endfor %}
+            </div>
         </div>
     </div>
 {% endblock %}

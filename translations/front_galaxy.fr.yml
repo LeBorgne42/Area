@@ -4,6 +4,7 @@ galaxy.mine: 'Planète contrôlée'
 galaxy.ally: 'Alliée'
 galaxy.enemy: 'Hostile'
 galaxy.empty: 'Inhabitée'
+galaxy.domination: 'Domination de la galaxie par '
 galaxy.ia: Marchands
 galaxy.zombie: Zombies
 galaxy.cdr: Ressources
