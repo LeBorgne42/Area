@@ -66,6 +66,13 @@ class ConnectController extends AbstractController
             $planet->setSoldier(200);
             $planet->setColonizer(1);
             $user->addPlanet($planet);
+            foreach ($planet->getFleets() as $fleet) {
+                if ($fleet->getUser()->getZombie() == 1) {
+                    $em->remove($fleet);
+                } else {
+                    $fleet->setPlanet($fleet->getUser()->getFirstPlanetFleet());
+                }
+            }
         } else {
             $this->addFlash("full", "Cette galaxie est déjà pleine !");
             $galaxys = $em->getRepository('App:Galaxy')

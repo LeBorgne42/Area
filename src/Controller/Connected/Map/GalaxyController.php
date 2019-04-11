@@ -60,6 +60,7 @@ class GalaxyController extends AbstractController
             ->where('g.position = :id')
             ->setParameter('id', $id)
             ->orderBy('count(p.id)', 'DESC')
+            ->setMaxResults(3)
             ->getQuery()
             ->getResult();
 
@@ -71,7 +72,6 @@ class GalaxyController extends AbstractController
             ->groupBy('g.id')
             ->where('g.position = :id')
             ->setParameter('id', $id)
-            ->setMaxResults(3)
             ->getQuery()
             ->getSingleScalarResult();
 

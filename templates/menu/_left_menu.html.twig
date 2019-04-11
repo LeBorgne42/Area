@@ -59,7 +59,7 @@
         <a href="{{ path('spatial', {'usePlanet': usePlanet.getId()}) }}"><span>{{ 'spatial'|trans }}</span></a>
     </div>
     {% if usePlanet.getShipOn() > 0 %}
-        <div class="btn-left{% if allTuto < 50 %} tutorial-hide{% endif %}">
+        <div class="btn-left{% if allTuto < 10 %} tutorial-hide{% elseif app.user.getTutorial() == 10 or app.user.getTutorial() == 20 %} tutorial-show{% endif %}">
             <a href="{{ path('create_fleet', {'usePlanet': usePlanet.getId()}) }}" data-toggle="modal" data-target="#createFleetModal"><span>{{ 'createFlotte'|trans }}</span></a>
         </div>
     {% endif %}

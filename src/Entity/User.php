@@ -949,6 +949,17 @@ class User implements UserInterface, \Serializable
     /**
      * @return mixed
      */
+    public function getFirstPlanetFleet()
+    {
+        foreach ($this->planets as $planet) {
+            return $planet;
+        }
+        return null;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getAllyFriends()
     {
         if($this->getAlly()) {

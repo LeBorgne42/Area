@@ -677,12 +677,12 @@ class InstantController extends AbstractController
             $zUser->setZombieAt($nextZombie);
             $fleetZb = new Fleet();
             $fleetZb->setName('Horde');
-            $fleetZb->setHunter(1 + round(($zUser->getAllShipsPoint() / (5 * rand(1, 5))) / 6));
-            $fleetZb->setHunterWar(1 + round(($zUser->getAllShipsPoint() / (5 * rand(1, 5))) / 6));
-            $fleetZb->setCorvet(1 + round(($zUser->getAllShipsPoint() / (5 * rand(1, 5))) / 6));
-            $fleetZb->setCorvetLaser(1 + round(($zUser->getAllShipsPoint() / (5 * rand(1, 5))) / 6));
-            $fleetZb->setCorvetWar(1 + round(($zUser->getAllShipsPoint() / (5 * rand(1, 5))) / 6));
-            $fleetZb->setFregate(1 + round(($zUser->getAllShipsPoint() / (5 * rand(1, 5))) / 6));
+            $fleetZb->setHunter(1 + round(($zUser->getAllShipsPoint() / (3 * rand(1, 5))) / 5));
+            $fleetZb->setHunterWar(1 + round(($zUser->getAllShipsPoint() / (4 * rand(1, 5))) / 5));
+            $fleetZb->setCorvet(1 + round(($zUser->getAllShipsPoint() / (5 * rand(1, 5))) / 5));
+            $fleetZb->setCorvetLaser(1 + round(($zUser->getAllShipsPoint() / (6 * rand(1, 5))) / 5));
+            $fleetZb->setCorvetWar(1 + round(($zUser->getAllShipsPoint() / (7 * rand(1, 5))) / 5));
+            $fleetZb->setFregate(1 + round(($zUser->getAllShipsPoint() / (8 * rand(1, 5))) / 5));
             $fleetZb->setUser($zombie);
             $fleetZb->setPlanet($planetZb);
             $fleetZb->setSignature($fleetZb->getNbrSignatures());
