@@ -34,16 +34,55 @@ class OverviewController extends AbstractController
             return $this->redirectToRoute('home');
         }
 
+        $allTroops = $em->getRepository('App:User')
+            ->createQueryBuilder('u')
+            ->join('u.planets', 'p')
+            ->leftJoin('p.missions', 'm')
+            ->leftJoin('p.product', 'pp')
+            ->leftJoin('u.fleets', 'f')
+            ->select('sum(DISTINCT p.soldier) as soldier, sum(DISTINCT p.soldierAtNbr) as soldierAtNbr, sum(DISTINCT p.tank) as tank, sum(DISTINCT p.tankAtNbr) as tankAtNbr, sum(DISTINCT p.scientist) as scientist, sum(DISTINCT p.scientistAtNbr) as scientistAtNbr, sum(DISTINCT m.soldier) as msoldier, sum(DISTINCT m.tank) as mtank, sum(DISTINCT f.soldier) as fsoldier, sum(DISTINCT f.tank) as ftank, sum(DISTINCT p.signature) as psignature, sum(DISTINCT f.signature) as fsignature, sum(DISTINCT pp.signature) as ppsignature')
+            ->groupBy('u.id')
+            ->where('p.user = :user')
+            ->setParameters(['user' => $user])
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $allShips = $user->getPriceShips($allTroops);
+        $allTroops = $user->getPriceTroops($allTroops);
+
+        $allBuildings = $em->getRepository('App:User')
+            ->createQueryBuilder('u')
+            ->join('u.planets', 'p')
+            ->select('sum(p.miner * 15) as miner, sum(p.extractor * 15) as extractor, sum(p.niobiumStock * 45) as niobiumStock, sum(p.waterStock * 45) as waterStock, sum(p.caserne * 1000) as caserne, sum(p.bunker * 12000) as bunker, sum(p.centerSearch * 800) as centerSearch, sum(p.city * 200) as city, sum(p.metropole * 400) as metropole, sum(p.lightUsine * 5000) as lightUsine, sum(p.heavyUsine * 10000) as heavyUsine, sum(p.spaceShip * 1500) as spaceShip, sum(p.radar * 200) as radar, sum(p.skyRadar * 2000) as skyRadar, sum(p.skyBrouilleur * 6000) as skyBrouilleur, sum(p.nuclearBase * 50000) as nuclearBase, sum(p.orbital * 5000) as orbital, sum(p.island * 5000) as island, sum(p.worker) as worker')
+            ->groupBy('u.id')
+            ->where('p.user = :user')
+            ->setParameters(['user' => $user])
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        $allWorkers = $allBuildings['worker'];
+        $allBuilding = $allBuildings['centerSearch'] + $allBuildings['miner'] + $allBuildings['extractor'] + $allBuildings['niobiumStock'] + $allBuildings['waterStock'] + $allBuildings['city'] + $allBuildings['metropole'] + $allBuildings['bunker'] + $allBuildings['caserne'] + $allBuildings['spaceShip'] + $allBuildings['lightUsine'] + $allBuildings['heavyUsine'] + $allBuildings['radar'] + $allBuildings['skyRadar'] + $allBuildings['skyBrouilleur'] + $allBuildings['nuclearBase'] + $allBuildings['orbital'] + $allBuildings['island'];
+
         $attackFleets = $em->getRepository('App:Fleet')
             ->createQueryBuilder('f')
+            ->join('f.user', 'u')
+            ->leftJoin('u.ally', 'a')
+            ->join('f.planet', 'p')
+            ->join('p.sector', 's')
+            ->join('s.galaxy', 'g')
             ->join('f.destination', 'd')
             ->join('d.planet', 'dp')
+            ->join('dp.sector', 'ds')
+            ->join('ds.galaxy', 'dg')
+            ->select('f.attack, f.name, f.signature, p.name as pName, p.position as position, s.position as sector, g.position as galaxy, s.id as idSector, g.id as idGalaxy, dp.name as dName, dp.position as dPosition, ds.position as dSector, dg.position as dGalaxy, ds.id as dIdSector, dg.id as dIdGalaxy, f.flightTime, u.id as user, a.sigle as sigle, u.username as username')
             ->where('f.user != :user')
             ->andWhere('dp.user = :user')
             ->setParameters(['user' => $user])
             ->orderBy('f.flightTime')
-            ->getQuery()
             ->setMaxResults(5)
+            ->getQuery()
             ->getResult();
 
 
@@ -52,11 +91,40 @@ class OverviewController extends AbstractController
         $oneHour->add(new DateInterval('PT' . 3600 . 'S'));
         $fleetMove = $em->getRepository('App:Fleet')
             ->createQueryBuilder('f')
+            ->join('f.planet', 'p')
+            ->join('p.sector', 's')
+            ->join('s.galaxy', 'g')
+            ->join('f.destination', 'd')
+            ->join('d.planet', 'dp')
+            ->join('dp.sector', 'ds')
+            ->join('ds.galaxy', 'dg')
+            ->select('f.attack, f.name, f.signature, p.name as pName, p.position as position, s.position as sector, g.position as galaxy, s.id as idSector, g.id as idGalaxy, dp.name as dName, dp.position as dPosition, ds.position as dSector, dg.position as dGalaxy, ds.id as dIdSector, dg.id as dIdGalaxy, f.flightTime')
             ->where('f.user = :user')
             ->andWhere('f.flightTime < :time')
             ->setParameters(['user' => $user, 'time' => $oneHour])
             ->orderBy('f.flightTime')
-            ->setMaxResults(4)
+            ->setMaxResults(8)
+            ->getQuery()
+            ->getResult();
+
+
+        if ($user->getOrderPlanet() == 'alpha') {
+            $crit = 'p.name';
+        } elseif ($user->getOrderPlanet() == 'colo') {
+            $crit = 'p.nbColo';
+        } else {
+            $crit = 'p.id';
+        }
+        $order = 'ASC';
+
+        $myPlanets = $em->getRepository('App:Planet')
+            ->createQueryBuilder('p')
+            ->leftJoin('p.constructions', 'c')
+            ->select('p.name, p.id, p.sky, p.skyPlace, p.ground, p.groundPlace, p.construct, p.constructAt, count(c.construct) as nbrConstruct')
+            ->groupBy('p.id')
+            ->where('p.user = :user')
+            ->setParameters(['user' => $user])
+            ->orderBy($crit, $order)
             ->getQuery()
             ->getResult();
 
@@ -83,6 +151,11 @@ class OverviewController extends AbstractController
             'date' => $now,
             'attackFleets' => $attackFleets,
             'fleetMove' => $fleetMove,
+            'allTroops' => $allTroops,
+            'allShips' => $allShips,
+            'allBuildings' => $allBuilding,
+            'allWorkers' => $allWorkers,
+            'myPlanets' => $myPlanets
         ]);
     }
 

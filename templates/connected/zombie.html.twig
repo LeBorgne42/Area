@@ -66,7 +66,7 @@
                             </th>
                         </tr>
                         <tr>
-                            {% if app.user.getZombieAtt() > 1 %}
+                            {% if app.user.getZombieAtt() > -20 %}
                                 <td class="center-cells">
                                     {{ form_widget(form_missionZombie.soldier,{attr: { max: planet.getSoldier()}}) }}
                                 </td>
@@ -102,7 +102,7 @@
                         </tr>
                         </tbody>
                     </table>
-                    {% if app.user.getZombieAtt() > 1 %}
+                    {% if app.user.getZombieAtt() > -20 %}
                         {{ form_widget(form_missionZombie.sendForm) }}
                     {% else %}
                         {{ form_widget(form_missionZombie.sendForm,{attr: { disabled: 'disabled' }}) }}

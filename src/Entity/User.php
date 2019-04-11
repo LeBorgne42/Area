@@ -1315,6 +1315,19 @@ class User implements UserInterface, \Serializable
     /**
      * @return int
      */
+    public function getPriceShips($ships): int
+    {
+        $ships['ppsignature'] = $ships['ppsignature'] / 5;
+        $ships['psignature'] = $ships['psignature'] / 5;
+        $ships['fsignature'] = $ships['fsignature'];
+        $return = $ships['ppsignature'] + $ships['psignature'] + $ships['fsignature'];
+
+        return $return;
+    }
+
+    /**
+     * @return int
+     */
     public function getAllShipsCost(): int
     {
         $return = 0;
@@ -1396,6 +1409,47 @@ class User implements UserInterface, \Serializable
     /**
      * @return int
      */
+    public function getPriceTroops($troops): int
+    {
+        if ($this->politicCostSoldier > 0) {
+            $sPrice = 3 / (1 + ($this->politicCostSoldier / 10));
+            $sPrices = 6 / ( 1 + ($this->politicCostSoldier / 10));
+        } else {
+            $sPrice = 3;
+            $sPrices = 6;
+        }
+        if ($this->politicCostTank > 0) {
+            $tPrice = 250 / (1 + ($this->politicCostTank / 5));
+            $tPrices = 500 / (1 + ($this->politicCostTank / 5));
+        } else {
+            $tPrice = 250;
+            $tPrices = 500;
+        }
+        if ($this->politicCostScientist > 0) {
+            $scPrice = 50 / (1 + ($this->politicCostScientist / 5));
+            $scPrices = 100 / (1 + ($this->politicCostScientist / 5));
+        } else {
+            $scPrice = 50;
+            $scPrices = 100;
+        }
+        $troops['soldier'] = $troops['soldier'] * $sPrice;
+        $troops['soldierAtNbr'] = $troops['soldierAtNbr'];
+        $troops['tank'] = $troops['tank'] * $tPrice;
+        $troops['tankAtNbr'] = $troops['tankAtNbr'] * $tPrice;
+        $troops['scientist'] = $troops['scientist'] * $scPrice;
+        $troops['scientistAtNbr'] = $troops['scientistAtNbr'] * $scPrices;
+        $troops['msoldier'] = $troops['msoldier'] * $sPrices;
+        $troops['mtank'] = $troops['mtank'] * $tPrices;
+        $troops['fsoldier'] = $troops['fsoldier'] * $sPrices;
+        $troops['ftank'] = $troops['ftank'] * $scPrice;
+        $return = $troops['soldier'] + $troops['soldierAtNbr'] + $troops['tank'] + $troops['tankAtNbr'] + $troops['scientist'] + $troops['scientistAtNbr'] + $troops['msoldier'] + $troops['mtank'] + $troops['fsoldier'] + $troops['ftank'];
+
+        return $return;
+    }
+
+    /**
+     * @return int
+     */
     public function getAllTroops(): int
     {
         $return = 0;
@@ -1427,12 +1481,12 @@ class User implements UserInterface, \Serializable
             $return = $return + ($planet->getTankAtNbr() * $tPrice);
             $return = $return + ($planet->getScientist() * $scPrice);
             $return = $return + ($planet->getScientistAtNbr() * $scPrices);
-      /*      if ($planet->getMissions()) {
+            if ($planet->getMissions()) {
                 foreach($planet->getMissions() as $mission) {
-                    $return = $return + ($mission->getSoldier() * $sPrices); //fixmr optimiser
+                    $return = $return + ($mission->getSoldier() * $sPrices);
                     $return = $return + ($mission->getTank() * $tPrices);
                 }
-            }*/
+            }
         }
         foreach($this->fleets as $fleet) {
             $return = $return + ($fleet->getSoldier() * $sPrices);

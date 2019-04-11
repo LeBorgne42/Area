@@ -150,6 +150,11 @@ class Product
     protected $destroyer;
 
     /**
+     * @ORM\Column(name="signature",type="bigint")
+     */
+    protected $signature;
+
+    /**
      * @ORM\Column(name="productAt",type="datetime")
      */
     protected $productAt;
@@ -183,6 +188,7 @@ class Product
         $this->soldier = null;
         $this->tank = null;
         $this->scientist = null;
+        $this->signature = 1;
     }
 
     /**
@@ -722,6 +728,22 @@ class Product
     public function getMotherShip()
     {
         return $this->motherShip;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSignature()
+    {
+        return $this->signature;
+    }
+
+    /**
+     * @param mixed $signature
+     */
+    public function setSignature($signature): void
+    {
+        $this->signature = $signature;
     }
 
     /**

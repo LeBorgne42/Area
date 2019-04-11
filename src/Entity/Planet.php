@@ -732,19 +732,19 @@ class Planet
      */
     public function getBuildingPoint(): int
     {
-        $extractor = $this->getExtractor() * 10;
+        $extractor = $this->getExtractor() * 15;
         $miner = $this->getMiner() * 15;
-        $niobiumStock = $this->getNiobiumStock() * 40;
+        $niobiumStock = $this->getNiobiumStock() * 45;
         $waterStock = $this->getWaterStock() * 45;
         $caserne = $this->getCaserne() * 25;
         $bunker = $this->getBunker() * 130;
-        $center = $this->getCenterSearch() * 3;
+        $center = $this->getCenterSearch() * 30;
         $city = $this->getCity() * 65;
         $metropole = $this->getMetropole() * 120;
         $light = $this->getLightUsine() * 50;
         $heavy = $this->getHeavyUsine() * 150;
         $space = $this->getSpaceShip() * 30;
-        $radar = $this->getRadar() * 8;
+        $radar = $this->getRadar() * 20;
         $skyr = $this->getSkyRadar() * 60;
         $brouilleur = $this->getSkyBrouilleur() * 100;
         $nuclear = $this->getNuclearBase() * 300;
@@ -760,9 +760,9 @@ class Planet
      */
     public function getBuildingCost(): int
     {
-        $extractor = $this->getExtractor() * 10;
+        $extractor = $this->getExtractor() * 15;
         $miner = $this->getMiner() * 15;
-        $niobiumStock = $this->getNiobiumStock() * 40;
+        $niobiumStock = $this->getNiobiumStock() * 45;
         $waterStock = $this->getWaterStock() * 45;
         $caserne = $this->getCaserne() * 1000;
         $bunker = $this->getBunker() * 12000;
@@ -775,7 +775,7 @@ class Planet
         $radar = $this->getRadar() * 200;
         $skyr = $this->getSkyRadar() * 2000;
         $brouilleur = $this->getSkyBrouilleur() * 6000;
-        $nuclear = $this->getNuclearBase() * 75000;
+        $nuclear = $this->getNuclearBase() * 50000;
         $orbital = $this->getOrbital() * 5000;
         $island = $this->getIsland() * 5000;
 

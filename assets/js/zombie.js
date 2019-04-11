@@ -5,7 +5,7 @@ function manageZbMission() {
         var soldierZb = 0;
         var tankZb = 0;
         var timeZb = 0;
-        var zombie = $('.zombieIndicator').text() * 75;
+        var zombie = Math.abs($('.zombieIndicator').text()) * 75;
         var zombieTotal = zombie;
         if($('#mission_soldier').attr('max') - $('#mission_soldier').val() < 0) {
             $('#mission_soldier').val($('#mission_soldier').attr('max'));
@@ -60,6 +60,9 @@ function manageUraMission() {
         var tankUra = 0;
         var timeUra = 0;
         var zombie = $('.zombieIndicator').text() * 75;
+        if (zombie <= 0) {
+            zombie = 1;
+        }
         var zombieTotal = zombie;
         if($('#mission_ura_soldier').attr('max') - $('#mission_ura_soldier').val() < 0) {
             $('#mission_ura_soldier').val($('#mission_ura_soldier').attr('max'));

@@ -169,6 +169,7 @@ class SpatialController extends AbstractController
                 $product->setCroiser($product->getCroiser() + $croiser);
                 $product->setIronClad($product->getIronClad() + $ironClad);
                 $product->setDestroyer($product->getDestroyer() + $destroyer);
+                $product->setSignature($product->getNbrSignatures());
                 $oldNow = $product->getProductAt();
                 $tmpDate = $oldNow->diff($reNow);
                 $reNow->add(new DateInterval('PT' . round($time) . 'S'));
@@ -199,6 +200,8 @@ class SpatialController extends AbstractController
                 $product->setCroiser($croiser);
                 $product->setIronClad($ironClad);
                 $product->setDestroyer($destroyer);
+                $product->setDestroyer($destroyer);
+                $product->setSignature($product->getNbrSignatures());
                 $product->setProductAt($now);
             }
 
