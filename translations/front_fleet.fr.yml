@@ -149,6 +149,13 @@ fleet.remove: Retirer
 form.fleetList: 'Créer nouvelle Cohorte'
 fleetList.add: 'Ajouter flotte'
 fleet.cancelFleet: Annuler
+workerImg: Travailleurs
+soldierImg: Soldats
+niobiumImg: Niobium
+waterImg: Eau
+tankImg: Tanks
+scientistImg: Scientifiques
+uraniumImg: Uranium
 form.normal: Normal
 form.discharge: 'Décharger et revenir'
 form.col: Coloniser

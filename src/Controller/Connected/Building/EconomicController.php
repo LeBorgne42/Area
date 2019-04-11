@@ -141,7 +141,7 @@ class EconomicController extends AbstractController
         $usePlanet->setCity($level - 1);
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setWorkerMax($usePlanet->getWorkerMax() - 25000);
-        $usePlanet->setWorkerProduction($usePlanet->getWorkerProduction() - 2.78);
+        $usePlanet->setWorkerProduction($usePlanet->getWorkerProduction() - 5.56);
         $usePlanet->setConstruct('destruct');
         $usePlanet->setConstructAt($now);
         $em->flush();
@@ -211,7 +211,7 @@ class EconomicController extends AbstractController
         $usePlanet->setMetropole($level - 1);
         $usePlanet->setGroundPlace($newGround);
         $usePlanet->setWorkerMax($usePlanet->getWorkerMax() - 75000);
-        $usePlanet->setWorkerProduction($usePlanet->getWorkerProduction() - 4.16);
+        $usePlanet->setWorkerProduction($usePlanet->getWorkerProduction() - 8.32);
         $usePlanet->setSkyPlace($newSky);
         $usePlanet->setConstruct('destruct');
         $usePlanet->setConstructAt($now);

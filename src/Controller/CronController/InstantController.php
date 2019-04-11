@@ -193,21 +193,6 @@ class InstantController extends AbstractController
             ->getQuery()
             ->getResult();
 
-        $userShips = $em->getRepository('App:User')
-            ->createQueryBuilder('u')
-            ->where('u.rank is not null')
-            ->andWhere('u.ship is null')
-            ->getQuery()
-            ->getResult();
-
-        foreach ($userShips as $userShip) {
-            if (!$userShip->getShip()) {
-                $ships = new Ships();
-                $userShip->setShip($ships);
-                $em->persist($ships);
-            }
-        }
-
         $dailyReport = $em->getRepository('App:Server')
             ->createQueryBuilder('s')
             ->where('s.dailyReport < :now')
@@ -841,7 +826,7 @@ class InstantController extends AbstractController
             if ($newHome->getMetropole() > 0) {
                 $newHome->setMetropole($newHome->getMetropole() - 1);
                 $newHome->setWorkerMax($newHome->getWorkerMax() - 75000);
-                $newHome->setWorkerProduction($newHome->getWorkerProduction() - 4.16);
+                $newHome->setWorkerProduction($newHome->getWorkerProduction() - 8.32);
                 if ($newHome->getWorker() > $newHome->getWorkerMax()) {
                     $newHome->setWorker($newHome->getWorkerMax());
                 }
@@ -850,7 +835,7 @@ class InstantController extends AbstractController
             } elseif ($newHome->getCity() > 0) {
                 $newHome->setCity($newHome->getCity() - 1);
                 $newHome->setWorkerMax($newHome->getWorkerMax() - 25000);
-                $newHome->setWorkerProduction($newHome->getWorkerProduction() - 2.78);
+                $newHome->setWorkerProduction($newHome->getWorkerProduction() - 5.56);
                 if ($newHome->getWorker() > $newHome->getWorkerMax()) {
                     $newHome->setWorker($newHome->getWorkerMax());
                 }
@@ -918,7 +903,7 @@ class InstantController extends AbstractController
                         $reportRec->setSendAt($now);
                         $reportRec->setUser($fleetCdr->getUser());
                         $usePlanet = $em->getRepository('App:Planet')->findByFirstPlanet($fleetCdr->getUser()->getUsername());
-                        $reportRec->setContent("Bonjour dirigeant " . $fleetCdr->getUser()->getUserName() . " votre flotte " . "<span><a href='/connect/gerer-flotte/" . $usePlanet->getId() ."/" . $fleetCdr->getId() . "' data-toggle='modal' data-target='#editModal'>" . $fleetCdr->getName() . "</a></span>" . " vient de terminer de recycler en " . "<span><a href='/connect/carte-spatiale/" . $fleetCdr->getPlanet()->getSector()->getPosition() ."/" . $fleetCdr->getPlanet()->getSector()->getGalaxy()->getPosition() ."/" . $usePlanet->getId() . "'>" . $fleetCdr->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $fleetCdr->getPlanet()->getSector()->getPosition() . ":" . $fleetCdr->getPlanet()->getPosition() . "</a></span>.");
+                        $reportRec->setContent("Bonjour dirigeant " . $fleetCdr->getUser()->getUserName() . " votre flotte " . "<span><a href='/connect/gerer-flotte/" . $fleetCdr->getId() ."/" . $usePlanet->getId() . "'>" . $fleetCdr->getName() . "</a></span>" . " vient de terminer de recycler en " . "<span><a href='/connect/carte-spatiale/" . $fleetCdr->getPlanet()->getSector()->getPosition() ."/" . $fleetCdr->getPlanet()->getSector()->getGalaxy()->getPosition() ."/" . $usePlanet->getId() . "'>" . $fleetCdr->getPlanet()->getSector()->getGalaxy()->getPosition() . ":" . $fleetCdr->getPlanet()->getSector()->getPosition() . ":" . $fleetCdr->getPlanet()->getPosition() . "</a></span>.");
                         $em->persist($reportRec);
                         $fleetCdr->getUser()->setViewReport(false);
                     }
@@ -975,7 +960,7 @@ class InstantController extends AbstractController
                 $planet->setWaterMax($planet->getWaterMax() + 5000000);
             } elseif ($build == 'city') {
                 $planet->setCity($planet->getCity() + 1);
-                $planet->setWorkerProduction($planet->getWorkerProduction() + 2.78);
+                $planet->setWorkerProduction($planet->getWorkerProduction() + 5.56);
                 $planet->setWorkerMax($planet->getWorkerMax() + 25000);
                 $quest = $planet->getUser()->checkQuests('build_city');
                 if($quest) {
@@ -984,7 +969,7 @@ class InstantController extends AbstractController
                 }
             } elseif ($build == 'metropole') {
                 $planet->setMetropole($planet->getMetropole() + 1);
-                $planet->setWorkerProduction($planet->getWorkerProduction() + 4.16);
+                $planet->setWorkerProduction($planet->getWorkerProduction() + 8.32);
                 $planet->setWorkerMax($planet->getWorkerMax() + 75000);
                 $quest = $planet->getUser()->checkQuests('build_metro');
                 if($quest) {
@@ -1095,7 +1080,7 @@ class InstantController extends AbstractController
                     $report->setImageName("travel_report.jpg");
                     $report->setSendAt($now);
                     $report->setUser($userFleet);
-                    $report->setContent("Bonjour dirigeant " . $userFleet->getUserName() . " votre flotte " . "<span><a href='/connect/gerer-flotte/" . $usePlanet->getId() . "/" . $fleet->getId() . "' data-toggle='modal' data-target='#editModal'>" . $fleet->getName() . "</a></span>" . " vient d'arriver en " . "<span><a href='/connect/carte-spatiale/" . $newHome->getSector()->getPosition() . "/" . $newHome->getSector()->getGalaxy()->getPosition() . "/" . $usePlanet->getId() . "'>" . $newHome->getSector()->getGalaxy()->getPosition() . ":" . $newHome->getSector()->getPosition() . ":" . $newHome->getPosition() . "</a></span>.");
+                    $report->setContent("Bonjour dirigeant " . $userFleet->getUserName() . " votre flotte " . "<span><a href='/connect/gerer-flotte/" . $fleet->getId() . "/" . $usePlanet->getId() . "'>" . $fleet->getName() . "</a></span>" . " vient d'arriver en " . "<span><a href='/connect/carte-spatiale/" . $newHome->getSector()->getPosition() . "/" . $newHome->getSector()->getGalaxy()->getPosition() . "/" . $usePlanet->getId() . "'>" . $newHome->getSector()->getGalaxy()->getPosition() . ":" . $newHome->getSector()->getPosition() . ":" . $newHome->getPosition() . "</a></span>.");
                     $userFleet->setViewReport(false);
                     $oldPlanet = $fleet->getPlanet();
                     $fleet->setFlightTime(null);
@@ -1765,29 +1750,13 @@ class InstantController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $zombie = $em->getRepository('App:User')->findOneBy(['zombie' => 1]);
-        $newZombies = $em->getRepository('App:Planet')
+        $travs = $em->getRepository('App:Planet')
             ->createQueryBuilder('p')
-            ->leftJoin('p.user', 'u')
-            ->where('p.user is null and p.empty = false and p.cdr = false')
             ->getQuery()
             ->getResult();
 
-        foreach ($newZombies as $newZombie) {
-            if ((($newZombie->getSector()->getPosition() >= 1 && $newZombie->getSector()->getPosition() <= 9) || ($newZombie->getSector()->getPosition() >= 92 && $newZombie->getSector()->getPosition() <= 99) || ($newZombie->getSector()->getPosition() % 10 == 0 || $newZombie->getSector()->getPosition() % 10 == 1)) && $newZombie->getPosition() == 13) {
-
-                $newZombie->setUser($zombie);
-                $newZombie->setWorker(round(25000 * rand(1,4)));
-                if ($newZombie->getSoldierMax() >= 2500) {
-                    $newZombie->setSoldier($newZombie->getSoldierMax());
-                } else {
-                    $newZombie->setCaserne(1);
-                    $newZombie->setSoldier(2500);
-                    $newZombie->setSoldierMax(2500);
-                }
-                $newZombie->setName('Base Zombie');
-                $newZombie->setImageName('hydra_planet.png');
-            }
+        foreach ($travs as $trav) {
+            $trav->setWorkerProduction($trav->getWorkerProduction() * 2);
         }
 
         $em->flush();

@@ -50,7 +50,7 @@ class SectorController extends AbstractController
                 ->join('u.planets', 'p')
                 ->join('p.sector', 's')
                 ->join('s.galaxy', 'g')
-                ->select('p.id, sum(DISTINCT p.radar + p.skyRadar) as allRadar')
+                ->select('p.id, p.radar as radar, p.skyRadar as skyRadar')
                 ->groupBy('p.id')
                 ->where('s.position = :id')
                 ->andWhere('g.position = :gal')
@@ -61,7 +61,6 @@ class SectorController extends AbstractController
                 ->getQuery()
                 ->setMaxResults(1)
                 ->getOneOrNullResult();
-            var_dump($viewSector);
 
             $viewFleets = $em->getRepository('App:Fleet')
                 ->createQueryBuilder('f')
@@ -84,7 +83,7 @@ class SectorController extends AbstractController
                 ->join('u.planets', 'p')
                 ->join('p.sector', 's')
                 ->join('s.galaxy', 'g')
-                ->select('p.id, sum(DISTINCT p.radar + p.skyRadar) as allRadar')
+                ->select('p.id, p.radar as radar, p.skyRadar as skyRadar')
                 ->groupBy('p.id')
                 ->where('s.position = :id')
                 ->andWhere('g.position = :gal')

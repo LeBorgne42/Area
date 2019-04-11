@@ -38,15 +38,6 @@ class AllPlanetsController extends AbstractController
             ->getQuery()
             ->getResult();
 
-        if ($id == 1) {
-            return $this->render('menu/_right_planet.html.twig', ['allPlanets' => $allPlanets, 'usePlanet' => $usePlanet]);
-        } elseif ($id == 3) {
-            return $this->render('menu/_top_ressource_space.html.twig', ['allPlanets' => $allPlanets, 'usePlanet' => $usePlanet]);
-        } elseif ($id == 4) {
-            return $this->render('menu/_top_ressource.html.twig', ['allPlanets' => $allPlanets, 'usePlanet' => $usePlanet]);
-        } elseif ($id == 2) {
-            return $this->render('menu/_top_ressource_building.html.twig', ['allPlanets' => $allPlanets, 'usePlanet' => $usePlanet]);
-        }
         return $this->render('menu/_right_planet.html.twig', ['allPlanets' => $allPlanets, 'usePlanet' => $usePlanet]);
     }
 }

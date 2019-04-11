@@ -535,7 +535,7 @@ class Planet
         $this->nbCdr = 0;
         $this->wtCdr = 0;
         $this->shipProduction = 1;
-        $this->workerProduction = 5.5;
+        $this->workerProduction = 11;
         $this->niobiumMax = 1300000;
         $this->waterMax = 1000000;
         $this->soldierMax = 200;
