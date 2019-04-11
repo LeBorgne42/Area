@@ -44,7 +44,7 @@
                     <br>
                     {% set x = 1 %}
                     {% for allied in ally.getAllieds() if allied.getAccepted() == 1 %}
-                        {% if x > 1 %} - {% endif %}<span class="text-vert"><a href="{{ path('ally_profil', {'usePlanet': usePlanet.getId(), 'allyUser': ally.getId()}) }}">{{ allied.getAllytag() }}</a></span>
+                        {% if x > 1 %} - {% endif %}<span class="text-vert"><a href="{{ path('ally_profil', {'allyUser': ally.getId(), 'usePlanet': usePlanet.getId()}) }}">{{ allied.getAllytag() }}</a></span>
                         {% set x = x + 1 %}
                     {% endfor %}
                 </div>
@@ -53,7 +53,7 @@
                     <br>
                     {% set x = 1 %}
                     {% for pna in ally.getPnas() if pna.getAccepted() == 1 %}
-                        {% if x > 1 %} - {% endif %}<span class="text-bleu"><a href="{{ path('ally_profil', {'usePlanet': usePlanet.getId(), 'allyUser': ally.getId()}) }}">{{ pna.getAllytag() }}</a></span>
+                        {% if x > 1 %} - {% endif %}<span class="text-bleu"><a href="{{ path('ally_profil', {'allyUser': ally.getId(), 'usePlanet': usePlanet.getId()}) }}">{{ pna.getAllytag() }}</a></span>
                         {% set x = x + 1 %}
                     {% endfor %}
                 </div>
@@ -62,7 +62,7 @@
                     <br>
                     {% set x = 1 %}
                     {% for war in ally.getWars() %}
-                        {% if x > 1 %} - {% endif %}<span class="text-rouge"><a href="{{ path('ally_profil', {'usePlanet': usePlanet.getId(), 'allyUser': ally.getId()}) }}">{{ war.getAllytag() }}</a></span>
+                        {% if x > 1 %} - {% endif %}<span class="text-rouge"><a href="{{ path('ally_profil', {'allyUser': ally.getId(), 'usePlanet': usePlanet.getId()}) }}">{{ war.getAllytag() }}</a></span>
                         {% set x = x + 1 %}
                     {% endfor %}
                 </div>

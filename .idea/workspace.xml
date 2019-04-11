@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97f042ea-d0ee-4bd9-bb02-3d850e24f659" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/Map/GalaxyController.php" afterPath="$PROJECT_DIR$/src/Controller/Connected/Map/GalaxyController.php" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/map/galaxy.html.twig" afterPath="$PROJECT_DIR$/templates/connected/map/galaxy.html.twig" />
-      <change beforePath="$PROJECT_DIR$/translations/front_galaxy.fr.yml" afterPath="$PROJECT_DIR$/translations/front_galaxy.fr.yml" />
+      <change beforePath="$PROJECT_DIR$/templates/connected/ally/noAlly.html.twig" afterPath="$PROJECT_DIR$/templates/connected/ally/noAlly.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/connected/map/sector.html.twig" afterPath="$PROJECT_DIR$/templates/connected/map/sector.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/connected/profil/ally.html.twig" afterPath="$PROJECT_DIR$/templates/connected/profil/ally.html.twig" />
+      <change beforePath="$PROJECT_DIR$/templates/connected/profil/modal_ally.html.twig" afterPath="$PROJECT_DIR$/templates/connected/profil/modal_ally.html.twig" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,7 +23,7 @@
         <entry file="file://$PROJECT_DIR$/templates/connected/map/galaxy.html.twig">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="765">
-              <caret line="51" column="47" lean-forward="false" selection-start-line="51" selection-start-column="47" selection-end-line="51" selection-end-column="47" />
+              <caret line="51" column="117" lean-forward="false" selection-start-line="51" selection-start-column="106" selection-end-line="51" selection-end-column="117" />
               <folding />
             </state>
           </provider>
@@ -42,7 +43,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getNbrSignatures</find>
       <find>getNbr</find>
       <find>Mission</find>
       <find>getNuclearBase</find>
@@ -72,6 +72,7 @@
       <find>ally_profil'</find>
       <find>getSingleScalar</find>
       <find>setMax</find>
+      <find>{ 'usePlanet'</find>
     </findStrings>
     <replaceStrings>
       <replace>moreUranium</replace>
@@ -469,12 +470,12 @@
       <workItem from="1553069594287" duration="64784000" />
       <workItem from="1553262221690" duration="146939000" />
       <workItem from="1554219475991" duration="121948000" />
-      <workItem from="1554678512662" duration="130230000" />
+      <workItem from="1554678512662" duration="130371000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2571939000" />
+    <option name="totallyTimeSpent" value="2572080000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -487,7 +488,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-640" y="-1080" width="1920" height="1080" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287483" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286991" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -978,7 +978,7 @@
     <entry file="file://$PROJECT_DIR$/templates/connected/map/galaxy.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="765">
-          <caret line="51" column="47" lean-forward="false" selection-start-line="51" selection-start-column="47" selection-end-line="51" selection-end-column="47" />
+          <caret line="51" column="117" lean-forward="false" selection-start-line="51" selection-start-column="106" selection-end-line="51" selection-end-column="117" />
           <folding />
         </state>
       </provider>
