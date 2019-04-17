@@ -708,9 +708,9 @@ class FightController extends AbstractController
             return $this->redirectToRoute('home');
         }
         if ($user->getPoliticBarge() > 0) {
-            $barge = $invader->getBarge() * 2500 * (1 + ($user->getPoliticBarge() / 4));
+            $barge = $invader->getBarge() * 1000 * (1 + ($user->getPoliticBarge() / 4));
         } else {
-            $barge = $invader->getBarge() * 2500;
+            $barge = $invader->getBarge() * 1000;
         }
         $defenser = $invader->getPlanet();
         $userDefender= $invader->getPlanet()->getUser();
@@ -726,6 +726,11 @@ class FightController extends AbstractController
         }
         if ($userDefender->getPoliticWorkerDef() > 0) {
             $dWorker = $dWorker * (1 + ($userDefender->getPoliticWorkerDef() / 5));
+        }
+        if ($userDefender->getZombie() == 1) {
+            $dWorker = rand($dWorker / 10);
+            $dSoldier = rand($dSoldier / 5);
+            $dTanks = rand($dTanks / 2);
         }
         $dMilitary = $dWorker + $dSoldier + $dTanks;
         $alea = rand(4, 8);
@@ -757,10 +762,12 @@ class FightController extends AbstractController
                 $aMilitary = $invader->getSoldier() * $alea;
                 $soldierAtmp = $invader->getSoldier();
                 $soldierAtmpTotal = 0;
+                $moreBarge = round($invader->getSoldier() / 1000);
             } else {
                 $aMilitary = $barge * $alea;
                 $soldierAtmp = $barge;
                 $soldierAtmpTotal = $invader->getSoldier() - $barge;
+                $moreBarge = $invader->getBarge();
             }
             if ($user->getPoliticSoldierAtt() > 0) {
                 $aMilitary = $aMilitary * (1 + ($user->getPoliticSoldierAtt() / 10));
@@ -777,8 +784,8 @@ class FightController extends AbstractController
                 if($barge < $invader->getSoldier()) {
                     $invader->setSoldier($invader->getSoldier() - $barge);
                 }
-                $defenser->setBarge($defenser->getBarge() + $invader->getBarge());
-                $invader->setBarge(0);
+                $defenser->setBarge($defenser->getBarge() + $moreBarge);
+                $invader->setBarge($invader->getBarge() - $moreBarge);
                 if($aMilitary <= 0) {
                     $soldierDtmp = $defenser->getSoldier();
                     $workerDtmp = $defenser->getWorker();

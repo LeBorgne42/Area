@@ -264,7 +264,7 @@ class InstantController extends AbstractController
                     $planetPoint = $planetPoint + $planet->getBuildingPoint();
                     $buildingCost = $buildingCost + $planet->getBuildingCost();
                 }
-                $gain = round($worker / 2);
+                $gain = round($worker / 5);
                 $lose = null;
                 if($ally) {
                     $user->addQuest($questTwo);
@@ -368,7 +368,7 @@ class InstantController extends AbstractController
 
             $nowDaily = new DateTime();
             $nowDaily->setTimezone(new DateTimeZone('Europe/Paris'));
-            $nowDaily->add(new DateInterval('PT' . 86398 . 'S'));
+            $nowDaily->add(new DateInterval('PT' . round(86397 + rand(1,2)) . 'S'));
             $server->setDailyReport($nowDaily);
             $em->flush();
         }
@@ -1424,9 +1424,9 @@ class InstantController extends AbstractController
                             }
                         } elseif ($fleet->getFlightType() == '4') {
                             if ($fleet->getUser()->getPoliticBarge() > 0) {
-                                $barge = $fleet->getBarge() * 2500 * (1 + ($fleet->getUser()->getPoliticBarge() / 4));
+                                $barge = $fleet->getBarge() * 1000 * (1 + ($fleet->getUser()->getPoliticBarge() / 4));
                             } else {
-                                $barge = $fleet->getBarge() * 2500;
+                                $barge = $fleet->getBarge() * 1000;
                             }
                             $defenser = $fleet->getPlanet();
                             $userDefender = $fleet->getPlanet()->getUser();
@@ -1461,10 +1461,12 @@ class InstantController extends AbstractController
                                     $aMilitary = $fleet->getSoldier() * 6;
                                     $soldierAtmp = $fleet->getSoldier();
                                     $soldierAtmpTotal = 0;
+                                    $moreBarge = round($fleet->getSoldier() / 1000);
                                 } else {
                                     $aMilitary = $barge * 6;
                                     $soldierAtmp = $barge;
                                     $soldierAtmpTotal = $fleet->getSoldier() - $barge;
+                                    $moreBarge = $fleet->getBarge();
                                 }
                                 if ($fleet->getUser()->getPoliticSoldierAtt() > 0) {
                                     $aMilitary = $aMilitary * (1 + ($user->getPoliticSoldierAtt() / 10));
@@ -1479,8 +1481,8 @@ class InstantController extends AbstractController
                                     if($barge < $fleet->getSoldier()) {
                                         $fleet->setSoldier($fleet->getSoldier() - $barge);
                                     }
-                                    $defenser->setBarge($defenser->getBarge() + $fleet->getBarge());
-                                    $fleet->setBarge(0);
+                                    $defenser->setBarge($defenser->getBarge() + $moreBarge);
+                                    $fleet->setBarge($fleet->getBarge() - $moreBarge);
                                     if($aMilitary <= 0) {
                                         $soldierDtmp = $defenser->getSoldier();
                                         $tankDtmp = $defenser->getTank();
@@ -1572,9 +1574,9 @@ class InstantController extends AbstractController
                             }
                         } elseif ($fleet->getFlightType() == '5' && $fleet->getPlanet()->getUser()) {
                             if ($fleet->getUser()->getPoliticBarge() > 0) {
-                                $barge = $fleet->getBarge() * 2500 * (1 + ($fleet->getUser()->getPoliticBarge() / 4));
+                                $barge = $fleet->getBarge() * 1000 * (1 + ($fleet->getUser()->getPoliticBarge() / 4));
                             } else {
-                                $barge = $fleet->getBarge() * 2500;
+                                $barge = $fleet->getBarge() * 1000;
                             }
                             $defenser = $fleet->getPlanet();
                             $userDefender = $fleet->getPlanet()->getUser();
@@ -1590,6 +1592,11 @@ class InstantController extends AbstractController
                             }
                             if ($userDefender->getPoliticWorkerDef() > 0) {
                                 $dWorker = $dWorker * (1 + ($userDefender->getPoliticWorkerDef() / 5));
+                            }
+                            if ($userDefender->getZombie() == 1) {
+                                $dWorker = rand($dWorker / 10);
+                                $dSoldier = rand($dSoldier / 5);
+                                $dTanks = rand($dTanks / 2);
                             }
                             $dMilitary = $dWorker + $dSoldier + $dTanks;
                             $alea = rand(4, 8);
@@ -1622,10 +1629,12 @@ class InstantController extends AbstractController
                                     $aMilitary = $fleet->getSoldier() * $alea;
                                     $soldierAtmp = $fleet->getSoldier();
                                     $soldierAtmpTotal = 0;
+                                    $moreBarge = round($fleet->getSoldier() / 1000);
                                 } else {
                                     $aMilitary = $barge * $alea;
                                     $soldierAtmp = $barge;
                                     $soldierAtmpTotal = $fleet->getSoldier() - $barge;
+                                    $moreBarge = $fleet->getBarge();
                                 }
                                 if ($fleet->getUser()->getPoliticSoldierAtt() > 0) {
                                     $aMilitary = $aMilitary * (1 + ($user->getPoliticSoldierAtt() / 10));
@@ -1642,8 +1651,8 @@ class InstantController extends AbstractController
                                     if($barge < $fleet->getSoldier()) {
                                         $fleet->setSoldier($fleet->getSoldier() - $barge);
                                     }
-                                    $defenser->setBarge($defenser->getBarge() + $fleet->getBarge());
-                                    $fleet->setBarge(0);
+                                    $defenser->setBarge($defenser->getBarge() + $moreBarge);
+                                    $fleet->setBarge($fleet->getBarge() - $moreBarge);
                                     if($aMilitary <= 0) {
                                         $soldierDtmp = $defenser->getSoldier();
                                         $workerDtmp = $defenser->getWorker();

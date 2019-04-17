@@ -1344,12 +1344,12 @@ class User implements UserInterface, \Serializable
         $return = 0;
         foreach($this->planets as $planet) {
             if($planet->getProduct()) {
-                $return = $return + ($planet->getProduct()->getNbrSignatures() / 5);
+                $return = $return + $planet->getProduct()->getNbrSignatures();
             }
             $return = $return + ($planet->getNbrSignatures() / 5);
         }
         foreach($this->fleets as $fleet) {
-            $return = $return + $fleet->getNbrSignatures();
+            $return = $return + ($fleet->getNbrSignatures() * 5);
         }
         return $return;
     }
@@ -1465,25 +1465,25 @@ class User implements UserInterface, \Serializable
     {
         $return = 0;
         if ($this->politicCostSoldier > 0) {
-            $sPrice = 3 / (1 + ($this->politicCostSoldier / 10));
-            $sPrices = 6 / ( 1 + ($this->politicCostSoldier / 10));
+            $sPrice = 1 / (1 + ($this->politicCostSoldier / 10));
+            $sPrices = 5 / ( 1 + ($this->politicCostSoldier / 10));
         } else {
-            $sPrice = 3;
-            $sPrices = 6;
+            $sPrice = 1;
+            $sPrices = 3;
         }
         if ($this->politicCostTank > 0) {
             $tPrice = 250 / (1 + ($this->politicCostTank / 5));
             $tPrices = 500 / (1 + ($this->politicCostTank / 5));
         } else {
-            $tPrice = 250;
-            $tPrices = 500;
+            $tPrice = 80;
+            $tPrices = 250;
         }
         if ($this->politicCostScientist > 0) {
-            $scPrice = 50 / (1 + ($this->politicCostScientist / 5));
-            $scPrices = 100 / (1 + ($this->politicCostScientist / 5));
+            $scPrice = 100 / (1 + ($this->politicCostScientist / 5));
+            $scPrices = 200 / (1 + ($this->politicCostScientist / 5));
         } else {
-            $scPrice = 50;
-            $scPrices = 100;
+            $scPrice = 100;
+            $scPrices = 200;
         }
         foreach($this->planets as $planet) {
             $return = $return + ($planet->getSoldier() * $sPrice);

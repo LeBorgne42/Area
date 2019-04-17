@@ -86,7 +86,7 @@ class UserEvent implements EventSubscriberInterface
                 if ($user instanceof User) {
                     if ($twentyfour > $user->getDailyConnect()) {
                         $user->setDailyConnect($now);
-                        $bonus = (($user->getLevel() + 1) * 10000);
+                        $bonus = (($user->getLevel() + 1) * 5000) * rand(1,5);
                         $user->setBitcoin($user->getBitcoin() + $bonus);
                         $user->setViewReport(false);
                         $reportDaily = new Report();
@@ -284,11 +284,22 @@ class UserEvent implements EventSubscriberInterface
                         foreach ($user->getPlanets() as $planet) {
                             $nbProd = ($planet->getNbProduction() * $seconds) / 60;
                             $wtProd = ($planet->getWtProduction() * $seconds) / 60;
+                            $workerMore = (($planet->getWorkerProduction() * $workerBonus * $seconds) / 60);
 
-                            if (($planet->getWorker() + $planet->getWorkerProduction() > $planet->getWorkerMax())) {
-                                $planet->setWorker($planet->getWorkerMax());
+                            if ($seconds > 129600) {
+                                $secondsLvl = $seconds % 86400 + 1;
+                                $workerMore = $workerMore / $secondsLvl;
+                                if (($planet->getWorker() + $workerMore >= $planet->getWorkerMax())) {
+                                    $planet->setWorker($planet->getWorkerMax());
+                                } else {
+                                    $planet->setWorker($planet->getWorker() + (($planet->getWorkerProduction() * $workerBonus * $seconds) / 60));
+                                }
                             } else {
-                                $planet->setWorker($planet->getWorker() + ($planet->getWorkerProduction() * $workerBonus));
+                                if (($planet->getWorker() + $workerMore >= $planet->getWorkerMax())) {
+                                    $planet->setWorker($planet->getWorkerMax());
+                                } else {
+                                    $planet->setWorker($planet->getWorker() + (($planet->getWorkerProduction() * $workerBonus * $seconds) / 60));
+                                }
                             }
 
                             if ($user->getAlly()) {
