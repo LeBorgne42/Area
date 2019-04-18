@@ -374,24 +374,19 @@
                     <th class="tab-cells-name text-center">
                         {{ 'spatial.cargo'|trans }}
                     </th>
-                    <td class="center-cells text-center">
-                        {{ 'spatial.fleetSignature'|trans }}
-                    </td>
+
                 </tr>
                 {% for fleet in usePlanet.getFleets() %}
                     {% if fleet.getUser() == app.user and fleet.flightTime() is null %}
                         <tr>
-                            <th class="tab-cells-name">
-                                "{{  fleet.getName() }}" {% if fleet.getFightAt() == null %}<span><a class="ml-3 float-right" href="{{ path('destroy_fleet', {'usePlanet': usePlanet.getId(), 'fleetGive': fleet.getId()}) }}"><span>{{ 'spatial.destroyFleet'|trans }}</span></a></span><span><a class="ml-3 float-right" href="{{ path('manage_fleet', {'usePlanet': usePlanet.getId(), 'fleetGive': fleet.getId()}) }}" data-toggle="modal" data-target="#editModal"><span>{{ 'spatial.seeFlotte'|trans }}</span></a></span>{% else %}<span class="float-right text-rouge">{{ 'fleet.combat'|trans }}</span>{% endif %}
+                            <th class="text-center">
+                                {% if fleet.getAttack() == 1 %}<img src="{{ asset('img/stance_attack.gif') }}">{% else %}<img src="{{ asset('img/stance_defend.gif') }}">{% endif %}<span><a class="ml-2" href="{{ path('manage_fleet', {'usePlanet': usePlanet.getId(), 'fleetGive': fleet.getId()}) }}">{{  fleet.getName() }}</a></span>{% if fleet.getFightAt() == null %} {% if fleet.getRecycleur() and fleet.getRecycleAt() %}<span data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.recycle'|trans }}" class="timerArea ml-3 float-right" hidden>{{ fleet.getRecycleAt()|date('Y/m/d H:i:s') }}</span> {% endif %}<span><a class="ml-3 float-right" href="{{ path('destroy_fleet', {'fleetGive': fleet.getId(), 'usePlanet': usePlanet.getId()}) }}" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.drop'|trans }}"><span>{{ 'spatial.destroyFleet'|trans }}</span></a></span> {% else %}<span class="float-right text-rouge">{{ 'fleet.combat'|trans }}</span>{% endif %}
                             </th>
                             <td class="center-cells text-center">
-                                {{ fleet.getNbrShips()|number_format }}
+                                <span class="tipProduct" data-placement="right" data-trigger="" title="{% for ships in fleet.getShipsFleet() %}<div class='my-3 text-left'>{% set x = 0 %}{% for info in ships %} {% if x == 0 %}{{ info }}{% else %}{{ info|trans }}{% endif %}{% set x = x + 1 %} {% endfor %}</div>{% endfor %}" data-html="true">{{ fleet.getNbrShips()|number_format }} => ({{ fleet.getNbrSignatures()|number_format }})</span>
                             </td>
                             <td class="center-cells text-center">
-                                {{ fleet.getCargoFull()|number_format }} / {{ fleet.getCargoPlace()|number_format }}
-                            </td>
-                            <td class="center-cells text-center">
-                                {{ fleet.getNbrSignatures()|number_format }}
+                                <span class="tipProduct" data-placement="right" data-trigger="" title="{% for cargos in fleet.getCargosFleet() %}<div class='my-3 text-left'>{% set x = 0 %}{% for info in cargos %} {% if x == 0 %}{{ info }}{% else %}{{ info|trans }}{% endif %}{% set x = x + 1 %} {% endfor %}</div>{% endfor %}" data-html="true">{{ fleet.getCargoFull()|number_format }} / {{ fleet.getCargoPlace()|number_format }}</span>
                             </td>
                         </tr>
                     {% endif %}
