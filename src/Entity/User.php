@@ -1328,9 +1328,9 @@ class User implements UserInterface, \Serializable
      */
     public function getPriceShips($ships): int
     {
-        $ships['ppsignature'] = $ships['ppsignature'] / 5;
-        $ships['psignature'] = $ships['psignature'] / 5;
-        $ships['fsignature'] = $ships['fsignature'];
+        $ships['ppsignature'] = $ships['ppsignature'];
+        $ships['psignature'] = $ships['psignature'] / 2;
+        $ships['fsignature'] = $ships['fsignature'] * 5;
         $return = $ships['ppsignature'] + $ships['psignature'] + $ships['fsignature'];
 
         return $return;
@@ -1346,7 +1346,7 @@ class User implements UserInterface, \Serializable
             if($planet->getProduct()) {
                 $return = $return + $planet->getProduct()->getNbrSignatures();
             }
-            $return = $return + ($planet->getNbrSignatures() / 5);
+            $return = $return + ($planet->getNbrSignatures() / 2);
         }
         foreach($this->fleets as $fleet) {
             $return = $return + ($fleet->getNbrSignatures() * 5);
@@ -1423,25 +1423,25 @@ class User implements UserInterface, \Serializable
     public function getPriceTroops($troops): int
     {
         if ($this->politicCostSoldier > 0) {
-            $sPrice = 3 / (1 + ($this->politicCostSoldier / 10));
+            $sPrice = 1 / (1 + ($this->politicCostSoldier / 10));
             $sPrices = 6 / ( 1 + ($this->politicCostSoldier / 10));
         } else {
-            $sPrice = 3;
+            $sPrice = 1;
             $sPrices = 6;
         }
         if ($this->politicCostTank > 0) {
-            $tPrice = 250 / (1 + ($this->politicCostTank / 5));
-            $tPrices = 500 / (1 + ($this->politicCostTank / 5));
+            $tPrice = 80 / (1 + ($this->politicCostTank / 5));
+            $tPrices = 250 / (1 + ($this->politicCostTank / 5));
         } else {
-            $tPrice = 250;
-            $tPrices = 500;
+            $tPrice = 80;
+            $tPrices = 250;
         }
         if ($this->politicCostScientist > 0) {
             $scPrice = 50 / (1 + ($this->politicCostScientist / 5));
             $scPrices = 100 / (1 + ($this->politicCostScientist / 5));
         } else {
-            $scPrice = 50;
-            $scPrices = 100;
+            $scPrice = 100;
+            $scPrices = 200;
         }
         $troops['soldier'] = $troops['soldier'] * $sPrice;
         $troops['soldierAtNbr'] = $troops['soldierAtNbr'];
@@ -1466,13 +1466,13 @@ class User implements UserInterface, \Serializable
         $return = 0;
         if ($this->politicCostSoldier > 0) {
             $sPrice = 1 / (1 + ($this->politicCostSoldier / 10));
-            $sPrices = 5 / ( 1 + ($this->politicCostSoldier / 10));
+            $sPrices = 6 / ( 1 + ($this->politicCostSoldier / 10));
         } else {
             $sPrice = 1;
-            $sPrices = 3;
+            $sPrices = 6;
         }
         if ($this->politicCostTank > 0) {
-            $tPrice = 250 / (1 + ($this->politicCostTank / 5));
+            $tPrice = 80 / (1 + ($this->politicCostTank / 5));
             $tPrices = 500 / (1 + ($this->politicCostTank / 5));
         } else {
             $tPrice = 80;
