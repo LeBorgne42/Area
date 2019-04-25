@@ -241,7 +241,7 @@ class AllyController extends AbstractController
                 $mGrade->setPlacement(5);
                 $mGrade->setName("Soldat");
                 $ally->setMaxMembers(2);
-                $ally->setImageName('fascism.png');
+                $ally->setImageName('fascism.jpg');
                 $ally->setBitcoin(15000);
                 $ally->setPdg(2000);
                 $em->persist($sGrade);
