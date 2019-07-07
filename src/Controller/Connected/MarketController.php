@@ -156,7 +156,6 @@ class MarketController extends AbstractController
         if ($usePlanet->getUser() != $user) {
             return $this->redirectToRoute('home');
         }
-        $server = $em->getRepository('App:Server')->find(['id' => 1]);
         $merchant = $em->getRepository('App:User')->findOneBy(['merchant' => 1]);
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
@@ -229,7 +228,6 @@ class MarketController extends AbstractController
             if ($user->getZombie() == 0) {
                 $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $newWarPointS);
             }
-            $server->setNbrSell($server->getNbrSell() + 1);
             $user->setViewReport(false);
             $quest = $user->checkQuests('sell');
             if($quest) {

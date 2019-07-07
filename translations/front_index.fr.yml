@@ -1,6 +1,6 @@
 title: 'Area Universe'
-server.off: 'Pré-connexion ouverte'
-server.on: 'Serveur ouvert'
+server.off: 'Serveurs fermés'
+server.on: 'Serveurs ouverts'
 username: Pseudo
 password: 'Mot de passe'
 email: Email

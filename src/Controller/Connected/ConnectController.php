@@ -40,7 +40,7 @@ class ConnectController extends AbstractController
             ->where('p.user is null')
             ->andWhere('p.ground = :ground')
             ->andWhere('p.sky = :sky')
-            ->andWhere('g.position = :id')
+            ->andWhere('g.id = :id')
             ->setParameters(['ground' => 25, 'sky' => 5, 'id' => $id])
             ->setMaxResults(1)
             ->getQuery()

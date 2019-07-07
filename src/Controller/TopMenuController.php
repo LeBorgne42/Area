@@ -37,6 +37,7 @@ class TopMenuController extends AbstractController
             'usePlanet' => $usePlanet,
         ]);
     }
+
     /**
      * @Route("/medias/{_locale}", name="medias", defaults={"_locale" = "fr"}, requirements={"_locale" = "fr|en|de"})
      * @Route("/medias", name="medias_noSlash")
@@ -62,6 +63,7 @@ class TopMenuController extends AbstractController
             'usePlanet' => $usePlanet,
         ]);
     }
+
     /**
      * @Route("/but-du-jeu/{_locale}", name="point_game", defaults={"_locale" = "fr"}, requirements={"_locale" = "fr|en|de"})
      * @Route("/but-du-jeu", name="point_game_noSlash")
@@ -85,64 +87,6 @@ class TopMenuController extends AbstractController
 
         return $this->render('anonymous/point_game.html.twig', [
             'usePlanet' => $usePlanet,
-        ]);
-    }
-    /**
-     * @Route("/statistiques/{_locale}", name="statistics", defaults={"_locale" = "fr"}, requirements={"_locale" = "fr|en|de"})
-     * @Route("/statistiques", name="statistics_noSlash")
-     */
-    public function statisticsAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $lastActivity = new DateTime();
-        $lastActivity->setTimezone(new DateTimeZone('Europe/Paris'));
-        $lastActivity->sub(new DateInterval('PT' . 1800 . 'S'));
-        $server = $em->getRepository('App:Server')->find(['id' => 1]);
-
-        if($this->getUser()) {
-            $usePlanet = $em->getRepository('App:Planet')
-                ->createQueryBuilder('p')
-                ->join('p.user', 'u')
-                ->where('u.username = :user')
-                ->setParameters(['user' => $this->getUser()->getUsername()])
-                ->getQuery()
-                ->setMaxResults(1)
-                ->getOneOrNullResult();
-        } else {
-            $usePlanet = null;
-        }
-
-        $nbrAlly = $em->getRepository('App:Ally')
-            ->createQueryBuilder('a')
-            ->select('count(a)')
-            ->getQuery()
-            ->getSingleScalarResult();
-
-        $nbrUsers = $em->getRepository('App:User')
-            ->createQueryBuilder('u')
-            ->select('count(u)')
-            ->getQuery()
-            ->getSingleScalarResult();
-
-        $nbrUsersConnected = $em->getRepository('App:User')
-            ->createQueryBuilder('u')
-            ->where('u.lastActivity > :date')
-            ->setParameters(['date' => $lastActivity])
-            ->select('count(u)')
-            ->getQuery()
-            ->getSingleScalarResult();
-
-        $nbrUsersConnected = count($nbrUsersConnected);
-        if(!$nbrUsersConnected) {
-            $nbrUsersConnected = 1;
-        }
-
-        return $this->render('anonymous/statistics.html.twig', [
-            'usePlanet' => $usePlanet,
-            'allUsers' => $nbrUsers,
-            'nbrAlly' => $nbrAlly,
-            'userCos' => $nbrUsersConnected,
-            'server' => $server
         ]);
     }
 

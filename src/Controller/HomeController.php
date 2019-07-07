@@ -13,7 +13,7 @@ class HomeController extends AbstractController
     public function index()
     {
         $em = $this->getDoctrine()->getManager();
-        $server = $em->getRepository('App:Server')->find(['id' => 1]);
+        $servers = $em->getRepository('App:Server')->findBy(['open' => 1]);
         $user = $this->getUser();
 
         if($user) {
@@ -32,7 +32,10 @@ class HomeController extends AbstractController
         } else {
             $usePlanet = null;
         }
-
+        $server = 0;
+        if ($servers) {
+            $server = 1;
+        }
         return $this->render('index.html.twig', [
             'usePlanet' => $usePlanet,
             'server' => $server

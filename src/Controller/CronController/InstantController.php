@@ -20,7 +20,7 @@ class InstantController extends AbstractController
     public function buildFleetAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $server = $em->getRepository('App:Server')->find(['id' => 1]);
+        $servers = $em->getRepository('App:Server')->findAll();
         $nowAste = new DateTime();
         $nowAste->setTimezone(new DateTimeZone('Europe/Paris'));
 
@@ -369,7 +369,9 @@ class InstantController extends AbstractController
             $nowDaily = new DateTime();
             $nowDaily->setTimezone(new DateTimeZone('Europe/Paris'));
             $nowDaily->add(new DateInterval('PT' . round(86397 + rand(1,2)) . 'S'));
-            $server->setDailyReport($nowDaily);
+            foreach ($servers as $server) {
+                $server->setDailyReport($nowDaily);
+            }
             $em->flush();
         }
 
@@ -1045,7 +1047,6 @@ class InstantController extends AbstractController
                 $planet->setConstruct(null);
                 $planet->setConstructAt(null);
             }
-            $server->setNbrBuilding($server->getNbrBuilding() + 1);
         }
 
         foreach ($products as $product) {
@@ -1287,7 +1288,6 @@ class InstantController extends AbstractController
                                 $fleet->setSoldier(0);
                                 $fleet->setWorker(0);
                                 $fleet->setScientist(0);
-                                $server->setNbrSell($server->getNbrSell() + 1);
                                 $quest = $user->checkQuests('sell');
                                 if ($quest) {
                                     $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $quest->getGain());
@@ -1420,7 +1420,6 @@ class InstantController extends AbstractController
                                 $reportColo->setContent("Vous venez de coloniser une planète inhabitée en : " . "<span><a href='/connect/carte-spatiale/" . $newPlanet->getSector()->getPosition() . "/" . $newPlanet->getSector()->getGalaxy()->getPosition() . "/" . $usePlanet->getId() . "'>" . $newPlanet->getSector()->getGalaxy()->getPosition() . ":" . $newPlanet->getSector()->getPosition() . ":" . $newPlanet->getPosition() . "</a></span>" . ". Cette planète fait désormais partit de votre Empire, pensez a la renommer sur la page Planètes.");
                                 $fleet->getUser()->setViewReport(false);
                                 $em->persist($reportColo);
-                                $server->setNbrColonize($server->getNbrColonize() + 1);
                             }
                         } elseif ($fleet->getFlightType() == '4') {
                             if ($fleet->getUser()->getPoliticBarge() > 0) {
@@ -1568,7 +1567,6 @@ class InstantController extends AbstractController
                                         $fleet->getUser()->removeQuest($quest);
                                     }
                                 }
-                                $server->setNbrLoot($server->getNbrLoot() + 1);
                                 $em->persist($reportLoot);
                                 $em->persist($reportDef);
                             }
@@ -1772,7 +1770,6 @@ class InstantController extends AbstractController
                                 if($fleet->getNbrShips() == 0) {
                                     $em->remove($fleet);
                                 }
-                                $server->setNbrInvasion($server->getNbrInvasion() + 1);
                                 $em->persist($reportInv);
                                 if ($userDefender->getZombie() == 0) {
                                     $em->persist($reportDef);

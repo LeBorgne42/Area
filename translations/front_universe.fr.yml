@@ -3,3 +3,8 @@ tooltip.galaxy: 'Galaxy %position%'
 galaxy.nbr: 'Galaxy %position%'
 galaxy.players: '%players% joueurs'
 choseGalaxy: 'Choisissez une Galaxie !'
+server.open: Ouvert
+server.closed: Fermé
+server.pvp: Pvp
+server.pve: Pve
+server: Serveur

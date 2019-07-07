@@ -10,9 +10,6 @@
             <li>
                 <a class="btn-menu" href="{{ path('rules') }}">{{ 'rules'|trans }}</a>
             </li>
-            <li>
-                <a class="btn-menu" href="{{ path('statistics') }}">{{ 'statistic'|trans }}</a>
-            </li>
         </ul>
     </div>
     <a class="btn-top" href="{{ path('medias') }}">{{ 'media'|trans }}</a>
@@ -28,7 +25,8 @@
         </span>
     </div>
     {% if is_granted('ROLE_ADMIN') %}
-        <div class="btn-group">
+        <a class="btn-top" href="{{ path('administration') }}">{{ 'easyadmin'|trans }}</a>
+        {#<div class="btn-group">
             <span class="btn-top dropdown-toggle" data-toggle="dropdown">{{ 'easyadmin'|trans }}</span>
             <ul class="dropdown-menu menu-home" role="menu">
                 <li>
@@ -59,7 +57,7 @@
                     <a class="btn-menu" href="{{ path('logout') }}">{{ 'logout'|trans }}</a>
                 </li>
             </ul>
-        </div>
+        </div>#}
     {% endif %}
     {% if is_granted('ROLE_USER') %}
         <a class="btn-top" href="{{ path('logout') }}">{{ 'logout'|trans }}</a>

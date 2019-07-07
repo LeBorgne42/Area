@@ -30,6 +30,12 @@ class Galaxy
      */
     protected $position;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Server", inversedBy="galaxys", fetch="EXTRA_LAZY")
+     * @ORM\JoinColumn(name="server_id", referencedColumnName="id")
+     */
+    protected $server;
+
     public function __construct()
     {
         $this->sectors = new \Doctrine\Common\Collections\ArrayCollection();
@@ -89,6 +95,22 @@ class Galaxy
     public function removeSector(\App\Entity\Sector $sector)
     {
         $this->sectors->removeElement($sector);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getServer()
+    {
+        return $this->server;
+    }
+
+    /**
+     * @param mixed $server
+     */
+    public function setServer($server): void
+    {
+        $this->server = $server;
     }
 
     public function getId()

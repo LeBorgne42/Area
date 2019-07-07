@@ -815,7 +815,6 @@ class FleetController  extends AbstractController
         $user = $this->getUser();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
-        $server = $em->getRepository('App:Server')->find(['id' => 1]);
         if ($usePlanet->getUser() != $user || $fleetGive->getUser() != $user) {
             return $this->redirectToRoute('home');
         }
@@ -862,7 +861,6 @@ class FleetController  extends AbstractController
             $planetTake->setNiobium($planetTake->getNiobiumMax());
             $fleetGive->setNiobium(($planetTake->getNiobium() + $fleetGive->getNiobium()) - $planetTake->getNiobiumMax());
         }
-        $server->setNbrSell($server->getNbrSell() + 1);
         $user->setViewReport(false);
 
         $em->flush();
@@ -879,7 +877,6 @@ class FleetController  extends AbstractController
         $user = $this->getUser();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
-        $server = $em->getRepository('App:Server')->find(['id' => 1]);
         if ($usePlanet->getUser() != $user || $fleetGive->getUser() != $user) {
             return $this->redirectToRoute('home');
         }
@@ -925,7 +922,6 @@ class FleetController  extends AbstractController
             $planetTake->setWater($planetTake->getWaterMax());
             $fleetGive->setWater(($planetTake->getWater() + $fleetGive->getWater()) - $planetTake->getWaterMax());
         }
-        $server->setNbrSell($server->getNbrSell() + 1);
         $user->setViewReport(false);
 
         $em->flush();
@@ -942,7 +938,6 @@ class FleetController  extends AbstractController
         $user = $this->getUser();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
-        $server = $em->getRepository('App:Server')->find(['id' => 1]);
         if ($usePlanet->getUser() != $user || $fleetGive->getUser() != $user) {
             return $this->redirectToRoute('home');
         }
@@ -988,7 +983,6 @@ class FleetController  extends AbstractController
             $planetTake->setSoldier($planetTake->getSoldierMax());
             $fleetGive->setSoldier(($planetTake->getSoldier() + $fleetGive->getSoldier()) - $planetTake->getSoldierMax());
         }
-        $server->setNbrSell($server->getNbrSell() + 1);
         $user->setViewReport(false);
 
         $em->flush();
@@ -1005,7 +999,6 @@ class FleetController  extends AbstractController
         $user = $this->getUser();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
-        $server = $em->getRepository('App:Server')->find(['id' => 1]);
         if ($usePlanet->getUser() != $user || $fleetGive->getUser() != $user) {
             return $this->redirectToRoute('home');
         }
@@ -1051,7 +1044,6 @@ class FleetController  extends AbstractController
             $planetTake->setWorker($planetTake->getWorkerMax());
             $fleetGive->setWorker(($planetTake->getWorker() + $fleetGive->getWorker()) - $planetTake->getWorkerMax());
         }
-        $server->setNbrSell($server->getNbrSell() + 1);
         $user->setViewReport(false);
 
         $em->flush();
@@ -1068,7 +1060,6 @@ class FleetController  extends AbstractController
         $user = $this->getUser();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
-        $server = $em->getRepository('App:Server')->find(['id' => 1]);
         if ($usePlanet->getUser() != $user || $fleetGive->getUser() != $user) {
             return $this->redirectToRoute('home');
         }
@@ -1114,7 +1105,6 @@ class FleetController  extends AbstractController
             $planetTake->setScientist($planetTake->getScientistMax());
             $fleetGive->setScientist(($planetTake->getScientist() + $fleetGive->getScientist()) - $planetTake->getScientistMax());
         }
-        $server->setNbrSell($server->getNbrSell() + 1);
         $user->setViewReport(false);
 
         $em->flush();
@@ -1131,7 +1121,6 @@ class FleetController  extends AbstractController
         $user = $this->getUser();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
-        $server = $em->getRepository('App:Server')->find(['id' => 1]);
         if ($usePlanet->getUser() != $user || $fleetGive->getUser() != $user) {
             return $this->redirectToRoute('home');
         }
@@ -1205,7 +1194,6 @@ class FleetController  extends AbstractController
             $planetTake->setWorker($planetTake->getWorkerMax());
             $fleetGive->setWorker(($planetTake->getWorker() + $fleetGive->getWorker()) - $planetTake->getWorkerMax());
         }
-        $server->setNbrSell($server->getNbrSell() + 1);
         $user->setViewReport(false);
 
         $em->flush();

@@ -1,0 +1,10 @@
+title: Administration
+server.open: Ouvert
+server.closed: Fermé
+server.pvp: Pvp
+server.pve: Pve
+galaxy.nbr: 'Galaxy %position%'
+galaxy.players: '%players% joueurs'
+server: Serveur
+galaxy.destroy: Détruire
+galaxy.create: Créer

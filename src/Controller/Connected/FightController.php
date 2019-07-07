@@ -143,8 +143,6 @@ class FightController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
-        $server = $em->getRepository('App:Server')->find(['id' => 1]);
-        $server->setNbrBattle($server->getNbrBattle() + 1);
 
         $armor = 0;
         $shield = 0;
@@ -701,7 +699,6 @@ class FightController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        $server = $em->getRepository('App:Server')->find(['id' => 1]);
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         if ($usePlanet->getUser() != $user || $invader->getUser() != $user) {
@@ -905,7 +902,6 @@ class FightController extends AbstractController
             if($invader->getNbrShips() == 0) {
                 $em->remove($invader);
             }
-            $server->setNbrInvasion($server->getNbrInvasion() + 1);
             $em->persist($reportInv);
             if ($userDefender->getZombie() == 0) {
                 $em->persist($reportDef);
@@ -923,7 +919,6 @@ class FightController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        $server = $em->getRepository('App:Server')->find(['id' => 1]);
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
 
@@ -1073,7 +1068,6 @@ class FightController extends AbstractController
                     $raider->getUser()->removeQuest($quest);
                 }
             }
-            $server->setNbrLoot($server->getNbrLoot() + 1);
             $em->persist($reportLoot);
             $em->persist($reportDef);
         }
@@ -1092,7 +1086,6 @@ class FightController extends AbstractController
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone('Europe/Paris'));
         $user = $this->getUser();
-        $server = $em->getRepository('App:Server')->find(['id' => 1]);
         $colonize = $em->getRepository('App:Fleet')->find(['id' => $fleet]);
         $newPlanet = $colonize->getPlanet();
 
@@ -1118,7 +1111,6 @@ class FightController extends AbstractController
             $reportColo->setContent("Vous venez de coloniser une planète inhabitée en : (" .  $newPlanet->getSector()->getgalaxy()->getPosition() . "." . $newPlanet->getSector()->getPosition() . "." . $newPlanet->getPosition() . ") . Cette planète fait désormais partit de votre Empire, pensez a la renommer sur la page Planètes.");
             $user->setViewReport(false);
             $em->persist($reportColo);
-            $server->setNbrColonize($server->getNbrColonize() + 1);
             $quest = $user->checkQuests('colonize');
             if($quest) {
                 $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $quest->getGain());

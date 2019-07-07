@@ -596,7 +596,7 @@ class Planet
         $this->nuclearBomb = null;
         $this->nuclearAt = null;
         $this->nuclearAtNbr = null;
-        $this->signature = null;
+        $this->signature = 0;
     }
 
     /**

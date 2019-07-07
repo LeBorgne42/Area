@@ -35,11 +35,6 @@
   border-radius: 5px;
 }
 
-#registration-check {
-  cursor: pointer;
-  padding: 0.2rem 1rem;
-}
-
 @-webkit-keyframes autofill {
   to {
     background-image: url("../public/img/form.jpg");
@@ -66,7 +61,7 @@
 }
 
 .server-off {
-  color: #FC7F23;
+  color: red;
   text-shadow: 1.5px 1.5px 2px rgba(0,0,0, 0.8);
 }
 

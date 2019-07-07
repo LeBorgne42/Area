@@ -184,11 +184,15 @@ class OverviewController extends AbstractController
                     $em->remove($list);
                 }
                 $ship = $user->getShip();
-                $user->setShip(null);
-                $em->remove($ship);
+                if ($ship) {
+                    $user->setShip(null);
+                    $em->remove($ship);
+                }
                 $user->setBitcoin(25000);
                 $user->setSearch(null);
-                $em->remove($user->getRank(null));
+                if ($user->getRank()) {
+                    $em->remove($user->getRank());
+                }
                 $user->setRank(null);
                 $user->setGrade(null);
                 $user->setJoinAllyAt(null);
@@ -332,12 +336,21 @@ class OverviewController extends AbstractController
 
                 $em->flush();
             }
+            $servers = $em->getRepository('App:Server')
+                ->createQueryBuilder('s')
+                ->select('s.id, s.open, s.pvp')
+                ->groupBy('s.id')
+                ->orderBy('s.id', 'ASC')
+                ->getQuery()
+                ->getResult();
+
             $galaxys = $em->getRepository('App:Galaxy')
                 ->createQueryBuilder('g')
+                ->join('g.server', 'ss')
                 ->join('g.sectors', 's')
                 ->join('s.planets', 'p')
-                ->join('p.user', 'u')
-                ->select('g.position, count(DISTINCT u.id) as users')
+                ->leftJoin('p.user', 'u')
+                ->select('g.id, g.position, count(DISTINCT u.id) as users, ss.id as server')
                 ->groupBy('g.id')
                 ->orderBy('g.position', 'ASC')
                 ->getQuery()
@@ -345,6 +358,7 @@ class OverviewController extends AbstractController
 
             return $this->render('connected/game_over.html.twig', [
                 'galaxys' => $galaxys,
+                'servers' => $servers
             ]);
         } else {
             return $this->redirectToRoute('home');

@@ -24,7 +24,7 @@
                 {% if app.user is null %}
                      <div id="connect-register">
                          <div>
-                             <input disabled="disabled" class="login-input text-center{% if server.getOpen() == 1 %} server-on{% else %} server-off{% endif %}" value="{% if server.getOpen() == 1 %}{{ 'server.on'|trans }}{% else %}{{ 'server.off'|trans }}{% endif %}"/>
+                             <input disabled="disabled" class="login-input text-center{% if server == 1 %} server-on{% else %} server-off{% endif %}" value="{% if server == 1 %}{{ 'server.on'|trans }}{% else %}{{ 'server.off'|trans }}{% endif %}"/>
                          </div>
                          <form action="{{ path('login') }}" method="post">
                              <div>
@@ -38,7 +38,7 @@
                              </div>
                              <div>
                                  {#<a class="recovery-button" href="{{ path('recoveryPw') }}" data-toggle="modal" data-target="#openModal">{{ 'recoveryPw'|trans }}</a>#}
-                                 <span id="registration-check" class="confirm-button">{{ 'register'|trans }}</span>
+                                 <button id="registration-check" class="confirm-button">{{ 'register'|trans }}</button>
                                  <button class="confirm-button" type="submit">{{ 'login'|trans }}</button>
                              </div>
                          </form>

@@ -186,15 +186,10 @@ class SecurityController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        $server = $em->getRepository('App:Server')->find(['id' => 1]);
 
         if($user) {
             if($user->getRoles()[0] == 'ROLE_PRIVATE') {
                 return $this->redirectToRoute('private_home');
-            }
-
-            if($server->getOpen() == false && $user->getRoles()[0] == 'ROLE_USER') {
-                return $this->redirectToRoute('pre_ally');
             }
 
             if($user->getGameOver()) {
@@ -251,7 +246,6 @@ class SecurityController extends Controller
     public function loginRedirectAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $server = $em->getRepository('App:Server')->find(['id' => 1]);
         $user = $this->getUser();
 
         if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
@@ -268,14 +262,11 @@ class SecurityController extends Controller
             ->getQuery()
             ->getOneOrNullResult();
 
-        if($userSameIp) {
+        if($userSameIp && $this->getUser()->getRoles()[0] == 'ROLE_USER') {
             $this->addFlash("fail", "Cette IP est déjà rattachée au compte de - " . $userSameIp->getUsername());
             return $this->redirectToRoute('home');
         }
 
-        if($server->getOpen() == false && $this->getUser()->getRoles()[0] == 'ROLE_USER') {
-            return $this->redirectToRoute('pre_ally');
-        }
         if ($this->getUser()->getRoles()[0] == 'ROLE_USER') {
             $em = $this->getDoctrine()->getManager();
             $now = new DateTime();
@@ -293,24 +284,35 @@ class SecurityController extends Controller
             if($usePlanet) {
                 return $this->redirectToRoute('overview', ['usePlanet' => $usePlanet->getId()]);
             } else {
+
+                $servers = $em->getRepository('App:Server')
+                    ->createQueryBuilder('s')
+                    ->select('s.id, s.open, s.pvp')
+                    ->groupBy('s.id')
+                    ->orderBy('s.id', 'ASC')
+                    ->getQuery()
+                    ->getResult();
+
                 $galaxys = $em->getRepository('App:Galaxy')
                     ->createQueryBuilder('g')
+                    ->join('g.server', 'ss')
                     ->join('g.sectors', 's')
                     ->join('s.planets', 'p')
-                    ->join('p.user', 'u')
-                    ->select('g.position, count(DISTINCT u.id) as users')
+                    ->leftJoin('p.user', 'u')
+                    ->select('g.id, g.position, count(DISTINCT u.id) as users, ss.id as server')
                     ->groupBy('g.id')
                     ->orderBy('g.position', 'ASC')
                     ->getQuery()
                     ->getResult();
 
                 return $this->render('connected/play.html.twig', [
-                    'galaxys' => $galaxys
+                    'galaxys' => $galaxys,
+                    'servers' => $servers
                 ]);
             }
         }
         if ($this->getUser()->getRoles()[0] == 'ROLE_MODO' || $this->getUser()->getRoles()[0] == 'ROLE_ADMIN') {
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('administration');
         }
         return $this->redirectToRoute('logout');
     }
