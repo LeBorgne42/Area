@@ -201,19 +201,29 @@ class SecurityController extends Controller
             if($usePlanet) {
                 return $this->redirectToRoute('overview', ['usePlanet' => $usePlanet->getId()]);
             } else {
+                $servers = $em->getRepository('App:Server')
+                    ->createQueryBuilder('s')
+                    ->select('s.id, s.open, s.pvp')
+                    ->groupBy('s.id')
+                    ->orderBy('s.id', 'ASC')
+                    ->getQuery()
+                    ->getResult();
+
                 $galaxys = $em->getRepository('App:Galaxy')
                     ->createQueryBuilder('g')
+                    ->join('g.server', 'ss')
                     ->join('g.sectors', 's')
                     ->join('s.planets', 'p')
-                    ->join('p.user', 'u')
-                    ->select('g.position, count(DISTINCT u.id) as users')
+                    ->leftJoin('p.user', 'u')
+                    ->select('g.id, g.position, count(DISTINCT u.id) as users, ss.id as server')
                     ->groupBy('g.id')
                     ->orderBy('g.position', 'ASC')
                     ->getQuery()
                     ->getResult();
 
                 return $this->render('connected/play.html.twig', [
-                    'galaxys' => $galaxys
+                    'galaxys' => $galaxys,
+                    'servers' => $servers
                 ]);
             }
         }
