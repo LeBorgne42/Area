@@ -5,6 +5,8 @@
         <img src="{{ asset('img/logo.png') }}">
         {#<br>
         <a target="_blank" href="http://area-control.forumactif.com/f8-mise-a-jour"><button class="text-orange my-4"><strong>{{ 'version'|trans }}</strong></button></a>#}
+        <span class="border-empire" data-toggle="tooltip" data-placement="bottom" title="{{ 'coin'|trans }}"><span id="bitcoin">{{ app.user.getBitcoin()|number_format }}</span> <img src="{{ asset('img/coin.png') }}"></span>
+        {% if app.user.getRank().getWarPoint() > 0 %}<span class="border-empire" data-toggle="tooltip" data-placement="bottom" title="{{ 'market'|trans }}"><span id="pdg">{{ app.user.getRank().getWarPoint()|number_format }}</span> <img src="{{ asset('img/pdg.png') }}"></span>{% endif %}
     </div>
     {% if app.user.getConfirmed() == 0 %}
         <div class="btn-left{% if app.request.attributes.get('_route') == 'confirm_account' %} currentRoute{% endif %}">
