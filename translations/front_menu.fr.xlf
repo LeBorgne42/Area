@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="XKTzhQz" resname="version">
+        <source>version</source>
+        <target>Beta v0.9</target>
+      </trans-unit>
+      <trans-unit id="AwGETM2" resname="footer">
+        <source>footer</source>
+        <target>Suivez nous sur facebook!</target>
+      </trans-unit>
+      <trans-unit id="chyVJa3" resname="media">
+        <source>media</source>
+        <target>Medias</target>
+      </trans-unit>
+      <trans-unit id="kFxtcov" resname="easyadmin">
+        <source>easyadmin</source>
+        <target>Pannel Admin</target>
+      </trans-unit>
+      <trans-unit id="z13smyn" resname="adminMail">
+        <source>adminMail</source>
+        <target>Mail global</target>
+      </trans-unit>
+      <trans-unit id="RyBN3EO" resname="serveur.activate">
+        <source>serveur.activate</source>
+        <target>Activer</target>
+      </trans-unit>
+      <trans-unit id="MaT5CcF" resname="serveur.deactivate">
+        <source>serveur.deactivate</source>
+        <target>Désactiver</target>
+      </trans-unit>
+      <trans-unit id="OxMy_uf" resname="serveur.createBig">
+        <source>serveur.createBig</source>
+        <target>Créer Univers</target>
+      </trans-unit>
+      <trans-unit id="qYeZmcl" resname="serveur.createLittle">
+        <source>serveur.createLittle</source>
+        <target>Créer petit Univers</target>
+      </trans-unit>
+      <trans-unit id="VuIqTIC" resname="serveur.kill.sector">
+        <source>serveur.kill.sector</source>
+        <target>Détruire secteur</target>
+      </trans-unit>
+      <trans-unit id="5QqyKJ7" resname="serveur.kill.serveur">
+        <source>serveur.kill.serveur</source>
+        <target>Détruire Univers</target>
+      </trans-unit>
+      <trans-unit id="ACcM9j_" resname="logout">
+        <source>logout</source>
+        <target>Déconnexion</target>
+      </trans-unit>
+      <trans-unit id="bKXKt35" resname="game">
+        <source>game</source>
+        <target>Jeu</target>
+      </trans-unit>
+      <trans-unit id="9iwgkgo" resname="globalView">
+        <source>globalView</source>
+        <target>Vue d'ensemble</target>
+      </trans-unit>
+      <trans-unit id="XrLOKRx" resname="fleet">
+        <source>fleet</source>
+        <target>Flottes</target>
+      </trans-unit>
+      <trans-unit id="Y9DNBVT" resname="fleetList">
+        <source>fleetList</source>
+        <target>Cohortes</target>
+      </trans-unit>
+      <trans-unit id="y1gV.lw" resname="planet">
+        <source>planet</source>
+        <target>Planètes</target>
+      </trans-unit>
+      <trans-unit id="JBkykGe" resname="search">
+        <source>search</source>
+        <target>Recherches</target>
+      </trans-unit>
+      <trans-unit id="f0GhvTS" resname="ally">
+        <source>ally</source>
+        <target>Alliance</target>
+      </trans-unit>
+      <trans-unit id="66SuM.V" resname="galaxy">
+        <source>galaxy</source>
+        <target>Galaxie</target>
+      </trans-unit>
+      <trans-unit id="PT8lHQw" resname="ship.perso">
+        <source>ship.perso</source>
+        <target>Vaisseaux</target>
+      </trans-unit>
+      <trans-unit id="SUYLe7v" resname="zombie">
+        <source>zombie</source>
+        <target>Zombies</target>
+      </trans-unit>
+      <trans-unit id="YL6YYXU" resname="map">
+        <source>map</source>
+        <target>Carte spatiale</target>
+      </trans-unit>
+      <trans-unit id="UWfpZ34" resname="building">
+        <source>building</source>
+        <target>Infrastructures</target>
+      </trans-unit>
+      <trans-unit id="uemYtpK" resname="spatial">
+        <source>spatial</source>
+        <target>Chantier spatial</target>
+      </trans-unit>
+      <trans-unit id="4MCMKx9" resname="soldier">
+        <source>soldier</source>
+        <target>Entraînement</target>
+      </trans-unit>
+      <trans-unit id="q1MKE_R" resname="message">
+        <source>message</source>
+        <target>Messagerie</target>
+      </trans-unit>
+      <trans-unit id="hF6RgxM" resname="report">
+        <source>report</source>
+        <target>Rapport</target>
+      </trans-unit>
+      <trans-unit id="Gia33ub" resname="salon">
+        <source>salon</source>
+        <target>Salon</target>
+      </trans-unit>
+      <trans-unit id="T5NaDwP" resname="disconnect">
+        <source>disconnect</source>
+        <target>Deconnexion</target>
+      </trans-unit>
+      <trans-unit id="bGIdGgU" resname="rules">
+        <source>rules</source>
+        <target>Règlement</target>
+      </trans-unit>
+      <trans-unit id="5ZMOYyE" resname="statistic">
+        <source>statistic</source>
+        <target>Statistiques</target>
+      </trans-unit>
+      <trans-unit id="f1D1454" resname="createFlotte">
+        <source>createFlotte</source>
+        <target>Créer flotte</target>
+      </trans-unit>
+      <trans-unit id="1FS_xlb" resname="objective">
+        <source>objective</source>
+        <target>Histoire</target>
+      </trans-unit>
+      <trans-unit id="_4825eT" resname="niobium">
+        <source>niobium</source>
+        <target>Niobium</target>
+      </trans-unit>
+      <trans-unit id="D0FoSQ4" resname="water">
+        <source>water</source>
+        <target>Eau</target>
+      </trans-unit>
+      <trans-unit id="qBGgTdh" resname="uranium">
+        <source>uranium</source>
+        <target>Uranium</target>
+      </trans-unit>
+      <trans-unit id="s6GYS6C" resname="coin">
+        <source>coin</source>
+        <target>Bitcoin</target>
+      </trans-unit>
+      <trans-unit id="MnpzgNL" resname="universe">
+        <source>universe</source>
+        <target>Univers</target>
+      </trans-unit>
+      <trans-unit id="TrQaKp3" resname="forum">
+        <source>forum</source>
+        <target>Forum</target>
+      </trans-unit>
+      <trans-unit id="7VdKpx6" resname="workers">
+        <source>workers</source>
+        <target>Travailleurs</target>
+      </trans-unit>
+      <trans-unit id="PnRdSf0" resname="scientists">
+        <source>scientists</source>
+        <target>Scientifiques</target>
+      </trans-unit>
+      <trans-unit id="LGetVL2" resname="soldiers">
+        <source>soldiers</source>
+        <target>Soldats</target>
+      </trans-unit>
+      <trans-unit id="308716S" resname="tanks">
+        <source>tanks</source>
+        <target>Tanks</target>
+      </trans-unit>
+      <trans-unit id="Y50NcSG" resname="groundImg">
+        <source>groundImg</source>
+        <target>Terrain</target>
+      </trans-unit>
+      <trans-unit id=".NuhG6f" resname="tooltip.ships">
+        <source>tooltip.ships</source>
+        <target>Vaisseaux au sol</target>
+      </trans-unit>
+      <trans-unit id="zUMI.E2" resname="tooltip.caserne">
+        <source>tooltip.caserne</source>
+        <target>Caserne/bunker sur la planète</target>
+      </trans-unit>
+      <trans-unit id="rzPvY6E" resname="tooltip.tanks">
+        <source>tooltip.tanks</source>
+        <target>Construction de tanks</target>
+      </trans-unit>
+      <trans-unit id="kJp0Acd" resname="tooltip.scientists">
+        <source>tooltip.scientists</source>
+        <target>Centre de recherche</target>
+      </trans-unit>
+      <trans-unit id="OpkX3_K" resname="tooltip.uranium">
+        <source>tooltip.uranium</source>
+        <target>Uranium présent sur la planète</target>
+      </trans-unit>
+      <trans-unit id="52KRUGo" resname="SkyImg">
+        <source>SkyImg</source>
+        <target>Espace</target>
+      </trans-unit>
+      <trans-unit id="WoRg9rG" resname="rank">
+        <source>rank</source>
+        <target>Classement</target>
+      </trans-unit>
+      <trans-unit id="rBoccUP" resname="quest">
+        <source>quest</source>
+        <target>Objectifs</target>
+      </trans-unit>
+      <trans-unit id="5NaT0k5" resname="market">
+        <source>market</source>
+        <target>Points de Guerre</target>
+      </trans-unit>
+      <trans-unit id="P.flgMF" resname="helpNew">
+        <source>helpNew</source>
+        <target>Aide débutant</target>
+      </trans-unit>
+      <trans-unit id="Jdm6zkl" resname="fleetNoAlly">
+        <source>fleetNoAlly</source>
+        <target>Des flottes non alliées ont été repérées en orbite de notre planète.</target>
+      </trans-unit>
+      <trans-unit id="n8Bz5tL" resname="embargo">
+        <source>embargo</source>
+        <target>Cette planète subit actuellement un embargo.</target>
+      </trans-unit>
+      <trans-unit id="kOOBYaG" resname="previousPlanet">
+        <source>previousPlanet</source>
+        <target>Planète précédente</target>
+      </trans-unit>
+      <trans-unit id="Fe2J2Gb" resname="nextPlanet">
+        <source>nextPlanet</source>
+        <target>Planète suivante</target>
+      </trans-unit>
+      <trans-unit id="TFTEmGj" resname="tooltip.search">
+        <source>tooltip.search</source>
+        <target>Vous pouvez lancer une recherche !</target>
+      </trans-unit>
+      <trans-unit id="gOeYoM1" resname="tooltip.building">
+        <source>tooltip.building</source>
+        <target>Vous pouvez construire un bâtiment !</target>
+      </trans-unit>
+      <trans-unit id="eFSFQeF" resname="modifyOptions">
+        <source>modifyOptions</source>
+        <target>Mes options</target>
+      </trans-unit>
+      <trans-unit id="r4IYFny" resname="confirm.account">
+        <source>confirm.account</source>
+        <target>Valider compte</target>
+      </trans-unit>
+      <trans-unit id="LEb28tD" resname="overview.product">
+        <source>overview.product</source>
+        <target>Production :</target>
+      </trans-unit>
+      <trans-unit id="rxj8g22" resname="overview.hangar">
+        <source>overview.hangar</source>
+        <target>Hangar :</target>
+      </trans-unit>
+      <trans-unit id="5m737Pk" resname="tooltip.zombie">
+        <source>tooltip.zombie</source>
+        <target>Le niveau de la menace zombie vous indique quelle sera la puissance de la prochaine attaque zombie ainsi que son heure, soyez donc prêt ! Pour faire baisser le niveau de menace détruisez une Base Zombie.</target>
+      </trans-unit>
+      <trans-unit id="c2pmmkw" resname="zombie.indic">
+        <source>zombie.indic</source>
+        <target>Menace Zombie :</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

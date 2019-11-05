@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="qvIyBkY" resname="title">
+        <source>title</source>
+        <target>Messagerie</target>
+      </trans-unit>
+      <trans-unit id="r9tSxw9" resname="message.create">
+        <source>message.create</source>
+        <target>Envoyer message</target>
+      </trans-unit>
+      <trans-unit id="oa8rs1c" resname="message.anonymous">
+        <source>message.anonymous</source>
+        <target>Envoyer un message anonyme</target>
+      </trans-unit>
+      <trans-unit id="PzRYvCg" resname="message.bitcoin">
+        <source>message.bitcoin</source>
+        <target>Joindre bitcoin</target>
+      </trans-unit>
+      <trans-unit id="ZPgRQAU" resname="form.title">
+        <source>form.title</source>
+        <target>Titre du message</target>
+      </trans-unit>
+      <trans-unit id="idN0Syj" resname="form.content">
+        <source>form.content</source>
+        <target>Attention les insultes sont interdites.</target>
+      </trans-unit>
+      <trans-unit id="F8eseLz" resname="form.sendMessage">
+        <source>form.sendMessage</source>
+        <target>Envoyer le message</target>
+      </trans-unit>
+      <trans-unit id="6LscGBH" resname="form.num">
+        <source>form.num</source>
+        <target>combien ?</target>
+      </trans-unit>
+      <trans-unit id="ooxWWf0" resname="form.user">
+        <source>form.user</source>
+        <target>Pseudo</target>
+      </trans-unit>
+      <trans-unit id="eqR0LZq" resname="form.name">
+        <source>form.name</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="d2YVdWW" resname="message.received">
+        <source>message.received</source>
+        <target>Messages reçus</target>
+      </trans-unit>
+      <trans-unit id="QKnaN_Y" resname="message.sent">
+        <source>message.sent</source>
+        <target>Messages envoyés</target>
+      </trans-unit>
+      <trans-unit id="UrGWFH4" resname="message.sender">
+        <source>message.sender</source>
+        <target>Envoyé par :</target>
+      </trans-unit>
+      <trans-unit id="oHkgHzD" resname="message.bitcoinRe">
+        <source>message.bitcoinRe</source>
+        <target>Bitcoins :</target>
+      </trans-unit>
+      <trans-unit id="PBjxl6D" resname="message.title">
+        <source>message.title</source>
+        <target>Titre : </target>
+      </trans-unit>
+      <trans-unit id="ljTKoF6" resname="message.anonymousSender">
+        <source>message.anonymousSender</source>
+        <target>Anonyme</target>
+      </trans-unit>
+      <trans-unit id="_GW2IlL" resname="message.sendTo">
+        <source>message.sendTo</source>
+        <target>Envoyé à : </target>
+      </trans-unit>
+      <trans-unit id="_7rss1L" resname="message.sendAnonym">
+        <source>message.sendAnonym</source>
+        <target>En anonyme</target>
+      </trans-unit>
+      <trans-unit id="MVrSuJG" resname="responde">
+        <source>responde</source>
+        <target>Répondre</target>
+      </trans-unit>
+      <trans-unit id="_GR2qik" resname="AllNewView">
+        <source>AllNewView</source>
+        <target>Marquer tout les messages comme lus</target>
+      </trans-unit>
+      <trans-unit id="wpZv_Ya" resname="NewMessage">
+        <source>NewMessage</source>
+        <target>Nouveau</target>
+      </trans-unit>
+      <trans-unit id="w7xFrDU" resname="share">
+        <source>share</source>
+        <target>Générer lien de partage</target>
+      </trans-unit>
+      <trans-unit id="Zj6hv.." resname="to">
+        <source>to</source>
+        <target>à</target>
+      </trans-unit>
+      <trans-unit id="WuhObZ_" resname="share.title">
+        <source>share.title</source>
+        <target>Message</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

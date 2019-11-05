@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="qvIyBkY" resname="title">
+        <source>title</source>
+        <target>Chantier spatial</target>
+      </trans-unit>
+      <trans-unit id="I6Sbo0q" resname="spatial.constructShip">
+        <source>spatial.constructShip</source>
+        <target>Construction de vaisseaux</target>
+      </trans-unit>
+      <trans-unit id="JiE5vZV" resname="spatial.sonde">
+        <source>spatial.sonde</source>
+        <target>Sonde</target>
+      </trans-unit>
+      <trans-unit id="EHqfUpe" resname="spatial.colonizer">
+        <source>spatial.colonizer</source>
+        <target>Colonisateur</target>
+      </trans-unit>
+      <trans-unit id="oAx2wfc" resname="spatial.recycleur">
+        <source>spatial.recycleur</source>
+        <target>Recycleur</target>
+      </trans-unit>
+      <trans-unit id="wxAyo96" resname="spatial.barge">
+        <source>spatial.barge</source>
+        <target>Barge d'invasion</target>
+      </trans-unit>
+      <trans-unit id="_bO5XNk" resname="spatial.hunter">
+        <source>spatial.hunter</source>
+        <target>Chasseur</target>
+      </trans-unit>
+      <trans-unit id="D6QTTMt" resname="spatial.fregate">
+        <source>spatial.fregate</source>
+        <target>Fregate</target>
+      </trans-unit>
+      <trans-unit id="F2FdxR0" resname="spatial.cargoV">
+        <source>spatial.cargoV</source>
+        <target>Cargo V</target>
+      </trans-unit>
+      <trans-unit id="SumBDkI" resname="spatial.cargoI">
+        <source>spatial.cargoI</source>
+        <target>Cargo I</target>
+      </trans-unit>
+      <trans-unit id="yZrWsgz" resname="spatial.cargoX">
+        <source>spatial.cargoX</source>
+        <target>Cargo X</target>
+      </trans-unit>
+      <trans-unit id="9yVLy2V" resname="spatial.hunterHeavy">
+        <source>spatial.hunterHeavy</source>
+        <target>Chasseur lourd</target>
+      </trans-unit>
+      <trans-unit id="Nvt_.4H" resname="spatial.corvet">
+        <source>spatial.corvet</source>
+        <target>Corvette</target>
+      </trans-unit>
+      <trans-unit id="_EB6Lju" resname="spatial.corvetLaser">
+        <source>spatial.corvetLaser</source>
+        <target>Corvette a laser</target>
+      </trans-unit>
+      <trans-unit id="YXPOuGw" resname="spatial.fregatePlasma">
+        <source>spatial.fregatePlasma</source>
+        <target>Frégate a plasma</target>
+      </trans-unit>
+      <trans-unit id="ZiHpBCq" resname="spatial.croiser">
+        <source>spatial.croiser</source>
+        <target>Croiseur</target>
+      </trans-unit>
+      <trans-unit id="OEG6toY" resname="spatial.ironClad">
+        <source>spatial.ironClad</source>
+        <target>Cuirassé</target>
+      </trans-unit>
+      <trans-unit id="qbX1P6l" resname="spatial.destroyer">
+        <source>spatial.destroyer</source>
+        <target>Destroyer</target>
+      </trans-unit>
+      <trans-unit id="oQe3T9N" resname="form.construct">
+        <source>form.construct</source>
+        <target>Construire</target>
+      </trans-unit>
+      <trans-unit id="GSc..hC" resname="form.nbr">
+        <source>form.nbr</source>
+        <target>0</target>
+      </trans-unit>
+      <trans-unit id="dlBkXyG" resname="form.addFleet">
+        <source>form.addFleet</source>
+        <target>Créer la flotte</target>
+      </trans-unit>
+      <trans-unit id="eqR0LZq" resname="form.name">
+        <source>form.name</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="m6sGu6I" resname="niobiumImg">
+        <source>niobiumImg</source>
+        <target>Niobium</target>
+      </trans-unit>
+      <trans-unit id="Yj5B.bE" resname="waterImg">
+        <source>waterImg</source>
+        <target>Water</target>
+      </trans-unit>
+      <trans-unit id="DqzFjv7" resname="bitcoinImg">
+        <source>bitcoinImg</source>
+        <target>Bitcoin</target>
+      </trans-unit>
+      <trans-unit id="a4jAhyR" resname="bitcoin">
+        <source>bitcoin</source>
+        <target>Bitcoins :</target>
+      </trans-unit>
+      <trans-unit id="zJmjZkR" resname="spatial.orbiteFlotte">
+        <source>spatial.orbiteFlotte</source>
+        <target>Flottes en orbite</target>
+      </trans-unit>
+      <trans-unit id="0y9qEew" resname="spatial.createFlotte">
+        <source>spatial.createFlotte</source>
+        <target>Créer une nouvelle flotte</target>
+      </trans-unit>
+      <trans-unit id="M6VDMqt" resname="spatial.createFleet">
+        <source>spatial.createFleet</source>
+        <target>Choix des vaisseaux</target>
+      </trans-unit>
+      <trans-unit id="JO9EzQo" resname="spatial.seeFlotte">
+        <source>spatial.seeFlotte</source>
+        <target>gestion flotte</target>
+      </trans-unit>
+      <trans-unit id="tEaM9v0" resname="spatial.fleetName">
+        <source>spatial.fleetName</source>
+        <target>Nom de la flotte</target>
+      </trans-unit>
+      <trans-unit id="ZVsNS6Q" resname="spatial.fleetShips">
+        <source>spatial.fleetShips</source>
+        <target>Vaisseaux</target>
+      </trans-unit>
+      <trans-unit id="c2yz9Cy" resname="spatial.fleetSignature">
+        <source>spatial.fleetSignature</source>
+        <target>Signature</target>
+      </trans-unit>
+      <trans-unit id="R7hoajA" resname="spatial.destroyFleet">
+        <source>spatial.destroyFleet</source>
+        <target>mettre au sol</target>
+      </trans-unit>
+      <trans-unit id="135P7Xj" resname="spatial.sendFleet">
+        <source>spatial.sendFleet</source>
+        <target>envoyer</target>
+      </trans-unit>
+      <trans-unit id="nzpDNNU" resname="spatial.cargo">
+        <source>spatial.cargo</source>
+        <target>Cargo</target>
+      </trans-unit>
+      <trans-unit id="RtHr9Wt" resname="workerImg">
+        <source>workerImg</source>
+        <target>Travailleurs</target>
+      </trans-unit>
+      <trans-unit id="Wa8x3jc" resname="soldierImg">
+        <source>soldierImg</source>
+        <target>Soldats</target>
+      </trans-unit>
+      <trans-unit id="Iv4I0Pd" resname="popover.title">
+        <source>popover.title</source>
+        <target>Caractéristiques techniques</target>
+      </trans-unit>
+      <trans-unit id="nN2fuAM" resname="popover.sonde">
+        <source>popover.sonde</source>
+        <target><![CDATA[<h5>Signature thermique : 1<br>Vitesse : 1.000/lm</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="3Q4hsLc" resname="popover.colo">
+        <source>popover.colo</source>
+        <target><![CDATA[<h5>Signature thermique : 200<br>Vitesse : 50/lm<hr>Coloniser une planète</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="ziOCBGh" resname="popover.rec">
+        <source>popover.rec</source>
+        <target><![CDATA[<h5>Signature thermique : 80<br>Vitesse : 75/lm<br>Cargo : 5.000<br>Recyclage : %recycle%/10mins<hr>Recycler des ressources</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="41GTw1y" resname="popover.barge">
+        <source>popover.barge</source>
+        <target><![CDATA[<h5>Signature thermique : 50<br>Vitesse : 25/lm<br>Capacitée invasion : %barge%<hr>Envahir une planète</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="rcBuKuN" resname="popover.cargoI">
+        <source>popover.cargoI</source>
+        <target><![CDATA[<h5>Signature thermique : 50<br>Vitesse : 160/lm<br>Cargo : %cargo%</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="aU5TXfh" resname="popover.cargoV">
+        <source>popover.cargoV</source>
+        <target><![CDATA[<h5>Signature thermique : 120<br>Vitesse : 150/lm<br>Cargo : %cargo%</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="eYrngtF" resname="popover.cargoX">
+        <source>popover.cargoX</source>
+        <target><![CDATA[<h5>Signature thermique : 250<br>Vitesse : 140/lm<br>Cargo : %cargo%</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="Po7odEt" resname="popover.hunter">
+        <source>popover.hunter</source>
+        <target><![CDATA[<h5>Signature thermique : 5<br>Vitesse : 150/lm<br>Coque : %armor%<br>Missile : %missile%</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="2HBtQuW" resname="popover.hunterHeavy">
+        <source>popover.hunterHeavy</source>
+        <target><![CDATA[<h5>Signature thermique : 8<br>Vitesse : 150/lm<br>Coque : %armor%<br>Missile : %missile%<br>Cargo : %cargo%</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="1Paz3bQ" resname="popover.hunterWar">
+        <source>popover.hunterWar</source>
+        <target><![CDATA[<h5>Signature thermique : 15<br>Vitesse : 150/lm<br>Coque : %armor%<br>Missile : %missile%<br>Laser : %laser%<br>Plasma : %plasma%</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="ikRev7r" resname="popover.corvet">
+        <source>popover.corvet</source>
+        <target><![CDATA[<h5>Signature thermique : 25<br>Vitesse : 130/lm<br>Coque : %armor%<br>Bouclier : %shield%<br>Missile : %missile%</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="yfQ7uZT" resname="popover.corvetLaser">
+        <source>popover.corvetLaser</source>
+        <target><![CDATA[<h5>Signature thermique : 40<br>Vitesse : 100/lm<br>Coque : %armor%<br>Bouclier : %shield%<br>Missile : %missile%<br>Laser : %laser%</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="0WCeWgm" resname="popover.corvetWar">
+        <source>popover.corvetWar</source>
+        <target><![CDATA[<h5>Signature thermique : 45<br>Vitesse : 130/lm<br>Coque : %armor%<br>Bouclier : %shield%<br>Missile : %missile%<br>Laser : %laser%</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="hc4VijL" resname="popover.fregate">
+        <source>popover.fregate</source>
+        <target><![CDATA[<h5>Signature thermique : 60<br>Vitesse : 90<br>Coque : %armor%<br>Bouclier : %shield%<br>Missile : %missile%<br>Laser : %laser%<br>Cargo : %cargo%</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="Dlb5jwQ" resname="popover.fregatePlasma">
+        <source>popover.fregatePlasma</source>
+        <target><![CDATA[<h5>Signature thermique : 150<br>Vitesse : 80<br>Coque : %armor%<br>Bouclier : %shield%<br>Missile : %missile%<br>Laser : %laser%<br>Plasma : %plasma%</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="u1b4H0Q" resname="popover.croiser">
+        <source>popover.croiser</source>
+        <target><![CDATA[<h5>Signature thermique : 300<br>Vitesse : 70<br>Coque : %armor%<br>Bouclier : %shield%<br>Missile : %missile%<br>Laser : %laser%<br>Plasma : %plasma%</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="yto59TL" resname="popover.ironClad">
+        <source>popover.ironClad</source>
+        <target><![CDATA[<h5>Signature thermique : 700<br>Vitesse : 50/lm<br>Coque : %armor%<br>Bouclier : %shield%<br>Missile : %missile%<br>Laser : %laser%<br>Plasma : %plasma%</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="EtLDoTI" resname="popover.destroyer">
+        <source>popover.destroyer</source>
+        <target><![CDATA[<h5>Signature thermique : 1.500<br>Vitesse : 60/lm<br>Coque : %armor%<br>Bouclier : %shield%<br>Missile : %missile%<br>Laser : %laser%<br>Plasma : %plasma%</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="XClzx3k" resname="spatial.noSpaceShip">
+        <source>spatial.noSpaceShip</source>
+        <target>Vous ne disposez pas d'un chantier spatial !</target>
+      </trans-unit>
+      <trans-unit id="gQbjsf3" resname="fleet.combat">
+        <source>fleet.combat</source>
+        <target>en combat</target>
+      </trans-unit>
+      <trans-unit id="lgOzgMT" resname="spatial.totalProduct">
+        <source>spatial.totalProduct</source>
+        <target>Total :</target>
+      </trans-unit>
+      <trans-unit id="Oz9TnIl" resname="spatial.timeProduct">
+        <source>spatial.timeProduct</source>
+        <target>Temps restant</target>
+      </trans-unit>
+      <trans-unit id="6NcrBqC" resname="spatial.timeProductBlock">
+        <source>spatial.timeProductBlock</source>
+        <target>En construction</target>
+      </trans-unit>
+      <trans-unit id="hkYHERw" resname="spatial.hunterWar">
+        <source>spatial.hunterWar</source>
+        <target>Chasseur a plasma</target>
+      </trans-unit>
+      <trans-unit id="r6MHm9g" resname="pdgImg">
+        <source>pdgImg</source>
+        <target>Points de Guerre</target>
+      </trans-unit>
+      <trans-unit id="SwvwH5I" resname="spatial.corvetWar">
+        <source>spatial.corvetWar</source>
+        <target>Corvette de combat</target>
+      </trans-unit>
+      <trans-unit id="7DHbEty" resname="popover.moonMaker">
+        <source>popover.moonMaker</source>
+        <target><![CDATA[<h5>Signature thermique : 50.000<br>Vitesse : 5/lm<hr>Création de lune</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="sBHytoE" resname="spatial.moonMaker">
+        <source>spatial.moonMaker</source>
+        <target>Lunar</target>
+      </trans-unit>
+      <trans-unit id="nFWBMzh" resname="popover.radarShip">
+        <source>popover.radarShip</source>
+        <target><![CDATA[<h5>Signature thermique : 500<br>Vitesse : 1.000/lm<hr>Déployer un radar</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="YJepBw2" resname="spatial.radarShip">
+        <source>spatial.radarShip</source>
+        <target>Vaisseau radar</target>
+      </trans-unit>
+      <trans-unit id="iXNoMPK" resname="popover.motherShip">
+        <source>popover.motherShip</source>
+        <target><![CDATA[<h5>Signature thermique : 20.000<br>Vitesse : 100/lm<br>Coque : 20.000<br>Bouclier : 5.000<hr>+10% de coque<br>+5% de bouclier total<br>+10% de cargo total<br>+10% vitesse de flotte<br>-10% de signature totale</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="UZlyW2d" resname="spatial.motherShip">
+        <source>spatial.motherShip</source>
+        <target>Vaisseau mère</target>
+      </trans-unit>
+      <trans-unit id="kPaD099" resname="popover.brouilleurShip">
+        <source>popover.brouilleurShip</source>
+        <target><![CDATA[<h5>Signature thermique : 1000<br>Vitesse : 1.000/lm<hr>Déployer un brouilleur</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="IzPjLDG" resname="spatial.brouilleurShip">
+        <source>spatial.brouilleurShip</source>
+        <target>Vaisseau brouilleur</target>
+      </trans-unit>
+      <trans-unit id="QG6B7Sj" resname="quest.tutorial">
+        <source>quest.tutorial</source>
+        <target>C'est ici que vous produisez les vaisseaux qui constitueront vos flottes et silloneront les galaxies. Pour débuter vous avez une production gratuite, lancez la construction de 10 chasseurs a plasma et 5 corvettes de combats.</target>
+      </trans-unit>
+      <trans-unit id="SvwPUFp" resname="quest.tutorialBis">
+        <source>quest.tutorialBis</source>
+        <target>Alerte ! Votre planète est attaquée !!! Une flotte remplie de zombies est en orbite de votre planète (l'aperçu de votre planète a droite est rouge pour signaler les intrusions)! Ils viennent de tenter une invasion sur votre planète et ont échoué, ne leur laissez pas le temps de recommencer et dès que vos vaisseaux sont construits créer une flotte pour les détruires.</target>
+      </trans-unit>
+      <trans-unit id="sImv46x" resname="tooltip.recycle">
+        <source>tooltip.recycle</source>
+        <target>__tooltip.recycle</target>
+      </trans-unit>
+      <trans-unit id="IQTJJwj" resname="tooltip.drop">
+        <source>tooltip.drop</source>
+        <target>__tooltip.drop</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

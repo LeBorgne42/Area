@@ -4,3 +4,6 @@ rank.user: Pseudo
 rank.points: Points
 rank.planets: Planètes
 rank.createdAt: 'Crée le'
+democrat: 'Joueur Démocrate'
+fascism: 'Joueur Fasciste'
+communism: 'Joueur Communiste'

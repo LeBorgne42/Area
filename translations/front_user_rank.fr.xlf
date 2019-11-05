@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="qvIyBkY" resname="title">
+        <source>title</source>
+        <target>Classement joueurs</target>
+      </trans-unit>
+      <trans-unit id="ZYD3XUB" resname="rank.position">
+        <source>rank.position</source>
+        <target>Position</target>
+      </trans-unit>
+      <trans-unit id="4ItEhDE" resname="rank.user">
+        <source>rank.user</source>
+        <target>Pseudo</target>
+      </trans-unit>
+      <trans-unit id="lbV.JR5" resname="rank.points">
+        <source>rank.points</source>
+        <target>Points</target>
+      </trans-unit>
+      <trans-unit id="9Rlt.Te" resname="rank.planets">
+        <source>rank.planets</source>
+        <target>Planètes</target>
+      </trans-unit>
+      <trans-unit id="SKPNyxT" resname="rank.createdAt">
+        <source>rank.createdAt</source>
+        <target>Crée le</target>
+      </trans-unit>
+      <trans-unit id="e1FDvsl" resname="politic.democrat">
+        <source>politic.democrat</source>
+        <target>Joueur Démocrate</target>
+      </trans-unit>
+      <trans-unit id="4lZkLEC" resname="politic.fascism">
+        <source>politic.fascism</source>
+        <target>Joueur Fasciste</target>
+      </trans-unit>
+      <trans-unit id="7dTpI7R" resname="politic.communism">
+        <source>politic.communism</source>
+        <target>Joueur Communiste</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

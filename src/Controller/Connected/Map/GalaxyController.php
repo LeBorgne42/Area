@@ -64,6 +64,20 @@ class GalaxyController extends AbstractController
             ->getQuery()
             ->getResult();
 
+        $zombies = $em->getRepository('App:User')
+            ->createQueryBuilder('u')
+            ->join('u.planets', 'p')
+            ->join('p.sector', 's')
+            ->join('s.galaxy', 'g')
+            ->select('u.id, count(p) as number')
+            ->groupBy('u.id')
+            ->where('g.position = :id')
+            ->andWhere('u.id = :one')
+            ->setParameters(['one' => 1, 'id' => $id])
+            ->orderBy('count(p.id)', 'DESC')
+            ->getQuery()
+            ->getOneOrNullResult();
+
         $totalPlanet = $em->getRepository('App:Galaxy')
             ->createQueryBuilder('g')
             ->join('g.sectors', 's')
@@ -80,6 +94,7 @@ class GalaxyController extends AbstractController
             'planets' => $planets,
             'usePlanet' => $usePlanet,
             'doms' => $doms,
+            'zombies' => $zombies,
             'totalPlanet' => $totalPlanet
         ]);
     }

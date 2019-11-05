@@ -1,0 +1,802 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="qvIyBkY" resname="title">
+        <source>title</source>
+        <target>Flotte</target>
+      </trans-unit>
+      <trans-unit id="vvdeTDa" resname="fleet.onThisPlanet">
+        <source>fleet.onThisPlanet</source>
+        <target>Sur %planet%</target>
+      </trans-unit>
+      <trans-unit id="aiWcmsv" resname="fleet.createFlotte">
+        <source>fleet.createFlotte</source>
+        <target>Créer une nouvelle flotte</target>
+      </trans-unit>
+      <trans-unit id="LbCVsJ8" resname="fleet.fleetName">
+        <source>fleet.fleetName</source>
+        <target>Nom</target>
+      </trans-unit>
+      <trans-unit id="XT7XKs0" resname="fleet.fleetShips">
+        <source>fleet.fleetShips</source>
+        <target>Vaisseaux : ST</target>
+      </trans-unit>
+      <trans-unit id="AAGmMEg" resname="fleet.fleetSignature">
+        <source>fleet.fleetSignature</source>
+        <target>Signature</target>
+      </trans-unit>
+      <trans-unit id="46QSjJ4" resname="fleet.seeFlotte">
+        <source>fleet.seeFlotte</source>
+        <target>gestion flotte</target>
+      </trans-unit>
+      <trans-unit id="xKsfeHk" resname="fleet.inAir">
+        <source>fleet.inAir</source>
+        <target>Flottes en mouvement</target>
+      </trans-unit>
+      <trans-unit id="SI4NetU" resname="fleet.attitude">
+        <source>fleet.attitude</source>
+        <target>Attitude</target>
+      </trans-unit>
+      <trans-unit id="qV5jXMq" resname="fleet.destroy">
+        <source>fleet.destroy</source>
+        <target>Abandonner</target>
+      </trans-unit>
+      <trans-unit id="psI1.ad" resname="fleet.commander">
+        <source>fleet.commander</source>
+        <target>Commandant</target>
+      </trans-unit>
+      <trans-unit id="0felNq3" resname="fleet.signature">
+        <source>fleet.signature</source>
+        <target>Signature</target>
+      </trans-unit>
+      <trans-unit id="7RTBl2r" resname="fleet.cost">
+        <source>fleet.cost</source>
+        <target>Entretien</target>
+      </trans-unit>
+      <trans-unit id="Iv8fiIA" resname="fleet.speed">
+        <source>fleet.speed</source>
+        <target>Vitesse</target>
+      </trans-unit>
+      <trans-unit id="kTh0vcK" resname="fleet.share">
+        <source>fleet.share</source>
+        <target>Partage</target>
+      </trans-unit>
+      <trans-unit id="St945RS" resname="fleet.interact">
+        <source>fleet.interact</source>
+        <target>Interaction</target>
+      </trans-unit>
+      <trans-unit id="PcWlw6y" resname="fleet.shareInfo">
+        <source>fleet.shareInfo</source>
+        <target>Partager la flotte a l'alliance :</target>
+      </trans-unit>
+      <trans-unit id="AADmaM7" resname="fleet.cargos">
+        <source>fleet.cargos</source>
+        <target>Cargaison</target>
+      </trans-unit>
+      <trans-unit id="HAyI8Q_" resname="fleet.unity">
+        <source>fleet.unity</source>
+        <target>unités</target>
+      </trans-unit>
+      <trans-unit id="GRCyNtf" resname="fleet.raid">
+        <source>fleet.raid</source>
+        <target>Piller</target>
+      </trans-unit>
+      <trans-unit id="8JC_via" resname="fleet.action">
+        <source>fleet.action</source>
+        <target>Action</target>
+      </trans-unit>
+      <trans-unit id="10BCzyH" resname="fleet.detected">
+        <source>fleet.detected</source>
+        <target>détectée</target>
+      </trans-unit>
+      <trans-unit id="sdP4nLc" resname="fleet.destination">
+        <source>fleet.destination</source>
+        <target>Déplacer la flotte</target>
+      </trans-unit>
+      <trans-unit id="LMniSkn" resname="fleet.coord">
+        <source>fleet.coord</source>
+        <target>Déstination</target>
+      </trans-unit>
+      <trans-unit id="ahFeT0q" resname="fleet.costMove">
+        <source>fleet.costMove</source>
+        <target>Coût</target>
+      </trans-unit>
+      <trans-unit id="K9asjS7" resname="fleet.myPlanets">
+        <source>fleet.myPlanets</source>
+        <target>Mes planètes</target>
+      </trans-unit>
+      <trans-unit id="L7de3YQ" resname="fleet.patrol">
+        <source>fleet.patrol</source>
+        <target>En patrouille autour de</target>
+      </trans-unit>
+      <trans-unit id="cdfGIi5" resname="fleet.attack">
+        <source>fleet.attack</source>
+        <target>Combat engagé autour de</target>
+      </trans-unit>
+      <trans-unit id="nZSTamL" resname="fleet.transit">
+        <source>fleet.transit</source>
+        <target>En transit de</target>
+      </trans-unit>
+      <trans-unit id="8G6pbvD" resname="fleet.abandon">
+        <source>fleet.abandon</source>
+        <target>Abandonner</target>
+      </trans-unit>
+      <trans-unit id="uW1loZW" resname="fleet.question">
+        <source>fleet.question</source>
+        <target>Êtes vous sûr de vouloir abandonner cette flotte aux zombies ?</target>
+      </trans-unit>
+      <trans-unit id="M0tMyRB" resname="fleet.rec">
+        <source>fleet.rec</source>
+        <target>Recyclage</target>
+      </trans-unit>
+      <trans-unit id="Vf5aHVh" resname="fleet.ships">
+        <source>fleet.ships</source>
+        <target>Vaisseaux</target>
+      </trans-unit>
+      <trans-unit id="M1_EvvK" resname="fleet.quantity">
+        <source>fleet.quantity</source>
+        <target>Quantité</target>
+      </trans-unit>
+      <trans-unit id="aEu31gD" resname="fleet.transfert">
+        <source>fleet.transfert</source>
+        <target>Transférer</target>
+      </trans-unit>
+      <trans-unit id="Dxfr3s5" resname="fleet.to">
+        <source>fleet.to</source>
+        <target>vers</target>
+      </trans-unit>
+      <trans-unit id="juRdUZu" resname="fleet.from">
+        <source>fleet.from</source>
+        <target>De</target>
+      </trans-unit>
+      <trans-unit id="86dV.69" resname="fleet.activate">
+        <source>fleet.activate</source>
+        <target>Activer</target>
+      </trans-unit>
+      <trans-unit id="E7AaQxn" resname="fleet.deactivate">
+        <source>fleet.deactivate</source>
+        <target>Désactiver</target>
+      </trans-unit>
+      <trans-unit id="iI_xdaZ" resname="fleet.spy">
+        <source>fleet.spy</source>
+        <target>Espionner</target>
+      </trans-unit>
+      <trans-unit id="c38LiVK" resname="fleet.goTo">
+        <source>fleet.goTo</source>
+        <target>Vers</target>
+      </trans-unit>
+      <trans-unit id="Q1PYoFA" resname="fleet.time">
+        <source>fleet.time</source>
+        <target>Temps</target>
+      </trans-unit>
+      <trans-unit id="G2cTzxM" resname="fleet.otherPlanet">
+        <source>fleet.otherPlanet</source>
+        <target>Flottes sur mes autres planètes</target>
+      </trans-unit>
+      <trans-unit id="LShN5XD" resname="fleet.planet">
+        <source>fleet.planet</source>
+        <target>Planète</target>
+      </trans-unit>
+      <trans-unit id="6heu_bX" resname="fleet.createFleet">
+        <source>fleet.createFleet</source>
+        <target>Gestion flotte</target>
+      </trans-unit>
+      <trans-unit id="e8OXkFN" resname="fleet.fleetShip">
+        <source>fleet.fleetShip</source>
+        <target>Vaisseaux</target>
+      </trans-unit>
+      <trans-unit id="bKFARfx" resname="fleet.destroyFleet">
+        <source>fleet.destroyFleet</source>
+        <target>mettre au sol</target>
+      </trans-unit>
+      <trans-unit id="0QXv6gT" resname="fleet.exploration">
+        <source>fleet.exploration</source>
+        <target>Flottes en explorations</target>
+      </trans-unit>
+      <trans-unit id="x38.gzg" resname="fleet.beforeName">
+        <source>fleet.beforeName</source>
+        <target>Flotte</target>
+      </trans-unit>
+      <trans-unit id="Mic8wUn" resname="fleet.addShip">
+        <source>fleet.addShip</source>
+        <target>Ajouter</target>
+      </trans-unit>
+      <trans-unit id="q1AlXdP" resname="fleet.depart">
+        <source>fleet.depart</source>
+        <target>Envoyer</target>
+      </trans-unit>
+      <trans-unit id="cBRIzR." resname="fleet.removeShip">
+        <source>fleet.removeShip</source>
+        <target>Enlever</target>
+      </trans-unit>
+      <trans-unit id="EGWSIzb" resname="fleet.sonde">
+        <source>fleet.sonde</source>
+        <target>Sonde</target>
+      </trans-unit>
+      <trans-unit id="XSmFHor" resname="fleet.colonizer">
+        <source>fleet.colonizer</source>
+        <target>Colonisateur</target>
+      </trans-unit>
+      <trans-unit id="RplaZcW" resname="fleet.recycleur">
+        <source>fleet.recycleur</source>
+        <target>Recycleur</target>
+      </trans-unit>
+      <trans-unit id="rs.v.4l" resname="fleet.hunter">
+        <source>fleet.hunter</source>
+        <target>Chasseur</target>
+      </trans-unit>
+      <trans-unit id="8IWO6YH" resname="fleet.fregate">
+        <source>fleet.fregate</source>
+        <target>Fregate</target>
+      </trans-unit>
+      <trans-unit id="64FXg_M" resname="fleet.barge">
+        <source>fleet.barge</source>
+        <target>Barge</target>
+      </trans-unit>
+      <trans-unit id="GSc..hC" resname="form.nbr">
+        <source>form.nbr</source>
+        <target>0</target>
+      </trans-unit>
+      <trans-unit id="0tNWNCj" resname="form.manageFleet">
+        <source>form.manageFleet</source>
+        <target>Transferer</target>
+      </trans-unit>
+      <trans-unit id="bwTC.v0" resname="form.scinder">
+        <source>form.scinder</source>
+        <target>Diviser la flotte</target>
+      </trans-unit>
+      <trans-unit id="Wj.hXom" resname="form.renameFleet">
+        <source>form.renameFleet</source>
+        <target>Renommer</target>
+      </trans-unit>
+      <trans-unit id="1VtLY75" resname="form.sendFleet">
+        <source>form.sendFleet</source>
+        <target>Envoyer</target>
+      </trans-unit>
+      <trans-unit id="eqR0LZq" resname="form.name">
+        <source>form.name</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="uSfXOBt" resname="fleet.sendFleet">
+        <source>fleet.sendFleet</source>
+        <target>Envoyer</target>
+      </trans-unit>
+      <trans-unit id="0ySTWNd" resname="fleet.attackMode">
+        <source>fleet.attackMode</source>
+        <target>mode attaque (attention aux représailles)</target>
+      </trans-unit>
+      <trans-unit id="AuNlwCn" resname="fleet.galaxy">
+        <source>fleet.galaxy</source>
+        <target>galaxie</target>
+      </trans-unit>
+      <trans-unit id="Nhc_vTD" resname="fleet.sector">
+        <source>fleet.sector</source>
+        <target>secteur</target>
+      </trans-unit>
+      <trans-unit id="9bWJZ4v" resname="fleet.planete">
+        <source>fleet.planete</source>
+        <target>planète</target>
+      </trans-unit>
+      <trans-unit id="Z22Mf_h" resname="fleet.cargoEdit">
+        <source>fleet.cargoEdit</source>
+        <target>Cargaison de la flotte</target>
+      </trans-unit>
+      <trans-unit id="BWF0MKi" resname="fleet.cargo">
+        <source>fleet.cargo</source>
+        <target>Cargaison</target>
+      </trans-unit>
+      <trans-unit id="kjBNyDv" resname="fleet.soute">
+        <source>fleet.soute</source>
+        <target>Soute</target>
+      </trans-unit>
+      <trans-unit id="WIlkcvo" resname="fleet.sendCoord">
+        <source>fleet.sendCoord</source>
+        <target>ordre</target>
+      </trans-unit>
+      <trans-unit id="r5QMWuE" resname="fleet.invade">
+        <source>fleet.invade</source>
+        <target>Envahir</target>
+      </trans-unit>
+      <trans-unit id="lmPG_kh" resname="fleet.colonize">
+        <source>fleet.colonize</source>
+        <target>Coloniser</target>
+      </trans-unit>
+      <trans-unit id="UMYnT74" resname="fleet.niobium">
+        <source>fleet.niobium</source>
+        <target>Niobium</target>
+      </trans-unit>
+      <trans-unit id="e6ZBGPD" resname="fleet.water">
+        <source>fleet.water</source>
+        <target>Eau</target>
+      </trans-unit>
+      <trans-unit id="6ji468Y" resname="fleet.uranium">
+        <source>fleet.uranium</source>
+        <target>Uranium</target>
+      </trans-unit>
+      <trans-unit id="gzptKx1" resname="fleet.soldier">
+        <source>fleet.soldier</source>
+        <target>Soldats</target>
+      </trans-unit>
+      <trans-unit id="e96dLnv" resname="fleet.worker">
+        <source>fleet.worker</source>
+        <target>Travailleurs</target>
+      </trans-unit>
+      <trans-unit id="eaZ.SVp" resname="fleet.scientist">
+        <source>fleet.scientist</source>
+        <target>Scientifiques</target>
+      </trans-unit>
+      <trans-unit id="OF1OiXu" resname="fleet.discharge">
+        <source>fleet.discharge</source>
+        <target>Décharger</target>
+      </trans-unit>
+      <trans-unit id="8rfIsAZ" resname="fleet.charge">
+        <source>fleet.charge</source>
+        <target>charger</target>
+      </trans-unit>
+      <trans-unit id="YpGDGs." resname="fleet.dcharge">
+        <source>fleet.dcharge</source>
+        <target>décharger</target>
+      </trans-unit>
+      <trans-unit id="Iyy9oII" resname="fleet.tutorial">
+        <source>fleet.tutorial</source>
+        <target>Commandant il est l'heure de faire vos preuves dans la conquête spatiale, vous débutez avec quelques vaisseaux et nous allons les utiliser ! Cliquez sur «Créer une flotte» puis mettez y le nom que vous souhaitez et surtout : Un colonisateur.</target>
+      </trans-unit>
+      <trans-unit id="rQKL_NZ" resname="fleet.tutorialBis">
+        <source>fleet.tutorialBis</source>
+        <target>Votre flotte a été crée et est en orbite de votre planète. Pour le moment vous n'avez qu'une flotte mais pour une meilleure organisation allez sur la page «Cohorte».</target>
+      </trans-unit>
+      <trans-unit id="gLAinR7" resname="fleet.tutorialTer">
+        <source>fleet.tutorialTer</source>
+        <target>Votre flotte est en combat contre une Horde Zombie, le combat durera 5 minutes puis vous aurez le rapport de combat, d'aileurs rendons nous sur la page «Rapport» pour y voir l'invasion manquée.</target>
+      </trans-unit>
+      <trans-unit id="pd3QKhY" resname="fleetList.tutorial">
+        <source>fleetList.tutorial</source>
+        <target>Les Cohorte vous permettent d'organiser vos flottes comme vous le voulez dans des listes, dans la plupart des cas de trier les flottes de sondes, de cargos, de recycleurs, de guerre et d'invasions pour gagner du temps. Entrez un nom et une prioritée puis cliquez sur «Créer nouvelle Cohorte».</target>
+      </trans-unit>
+      <trans-unit id="tUQTD_m" resname="fleetList.tutorialBis">
+        <source>fleetList.tutorialBis</source>
+        <target>Votre Cohorte est crée vous pouvez y ajouter votre flotte précedement crée, cliquez sur «ajouter flotte», selectionné votre flotte et c'est partit!</target>
+      </trans-unit>
+      <trans-unit id="q8ui2Qf" resname="fleetList.tutorialTer">
+        <source>fleetList.tutorialTer</source>
+        <target>On y est presque, votre flotte a rejoint la Cohorte. Maintenant rendons nous sur la page «Carte Spatiale» pour l'utiliser.</target>
+      </trans-unit>
+      <trans-unit id="2Q6YVIw" resname="tooltip.fleetOnPlanet">
+        <source>tooltip.fleetOnPlanet</source>
+        <target>Dans ce cadre vous pouvez voir les flottes que vous avez sur votre planète actuelle.</target>
+      </trans-unit>
+      <trans-unit id="ZeJxp5t" resname="tooltip.cargo">
+        <source>tooltip.cargo</source>
+        <target>Il s'agit de la place que votre flotte a en soute pour vos transports de ressources(niobium, eau) ou humains(soldat, travailleur, scientique).</target>
+      </trans-unit>
+      <trans-unit id="efCcG4D" resname="tooltip.signature">
+        <source>tooltip.signature</source>
+        <target>ST signifie signature thermique, il serait trop facile que tout le monde sache ce qu'il y a dans la composition de votre flotte, ainsi la signature donne un ordre de grandeur sans rentrer dans le détails de la flotte.</target>
+      </trans-unit>
+      <trans-unit id="OUiEoUC" resname="tooltip.fleetMove">
+        <source>tooltip.fleetMove</source>
+        <target>Toutes vos flottes qui sont en mouvement d'une planète vers une autre s'affiche ici.</target>
+      </trans-unit>
+      <trans-unit id="OpDoRf6" resname="tooltip.fleetOtherPlanet">
+        <source>tooltip.fleetOtherPlanet</source>
+        <target>Ici sont les flottes que vous avez sur vos autres planètes.</target>
+      </trans-unit>
+      <trans-unit id="QvbtHQr" resname="tooltip.fleetNoMyPlanet">
+        <source>tooltip.fleetNoMyPlanet</source>
+        <target>Et enfin les flottes qui sont sur aucune de vos planètes.</target>
+      </trans-unit>
+      <trans-unit id="b7ILNzx" resname="tooltip.allyFleet">
+        <source>tooltip.allyFleet</source>
+        <target>Vous pouvez partager vos flottes avec les membres de votre alliance, seuls les dirigeants de votre alliance pourront les utiliser.</target>
+      </trans-unit>
+      <trans-unit id="gQbjsf3" resname="fleet.combat">
+        <source>fleet.combat</source>
+        <target>en combat</target>
+      </trans-unit>
+      <trans-unit id="DJYtbb3" resname="fleet.cargoI">
+        <source>fleet.cargoI</source>
+        <target>Cargo I</target>
+      </trans-unit>
+      <trans-unit id="vc8aNVZ" resname="fleet.cargoV">
+        <source>fleet.cargoV</source>
+        <target>Cargo V</target>
+      </trans-unit>
+      <trans-unit id="N5A_SWZ" resname="fleet.cargoX">
+        <source>fleet.cargoX</source>
+        <target>Cargo X</target>
+      </trans-unit>
+      <trans-unit id="L3vD9mM" resname="fleet.hunterHeavy">
+        <source>fleet.hunterHeavy</source>
+        <target>Chasseur lourd</target>
+      </trans-unit>
+      <trans-unit id="yJ4M1nt" resname="fleet.corvet">
+        <source>fleet.corvet</source>
+        <target>Corvette</target>
+      </trans-unit>
+      <trans-unit id="JeAk1L6" resname="fleet.corvetLaser">
+        <source>fleet.corvetLaser</source>
+        <target>Corvette a laser</target>
+      </trans-unit>
+      <trans-unit id="DAFNCgw" resname="fleet.fregatePlasma">
+        <source>fleet.fregatePlasma</source>
+        <target>Frégate a plasma</target>
+      </trans-unit>
+      <trans-unit id="SXOp4sZ" resname="fleet.croiser">
+        <source>fleet.croiser</source>
+        <target>Croiseur</target>
+      </trans-unit>
+      <trans-unit id="bQP3Aa7" resname="fleet.ironClad">
+        <source>fleet.ironClad</source>
+        <target>Cuirassé</target>
+      </trans-unit>
+      <trans-unit id="3S5nFku" resname="fleet.destroyer">
+        <source>fleet.destroyer</source>
+        <target>Destroyer</target>
+      </trans-unit>
+      <trans-unit id="_A0JFb0" resname="tooltip.userFleet">
+        <source>tooltip.userFleet</source>
+        <target>%name%</target>
+      </trans-unit>
+      <trans-unit id="eyJOlLR" resname="fleet.fusion">
+        <source>fleet.fusion</source>
+        <target>fusionner</target>
+      </trans-unit>
+      <trans-unit id="NkIoX1c" resname="recycler">
+        <source>recycler</source>
+        <target>recyclage</target>
+      </trans-unit>
+      <trans-unit id="m5V.Au1" resname="recyclerCancel">
+        <source>recyclerCancel</source>
+        <target>annuler</target>
+      </trans-unit>
+      <trans-unit id="700rYqU" resname="fleet.flightTime">
+        <source>fleet.flightTime</source>
+        <target>Durée</target>
+      </trans-unit>
+      <trans-unit id="FI005kI" resname="fleet.fleet">
+        <source>fleet.fleet</source>
+        <target>Flottes en orbite</target>
+      </trans-unit>
+      <trans-unit id="dOjNXLu" resname="fleet.manage">
+        <source>fleet.manage</source>
+        <target>Gérer</target>
+      </trans-unit>
+      <trans-unit id="nqlGvuh" resname="fleet.split">
+        <source>fleet.split</source>
+        <target>Scinder</target>
+      </trans-unit>
+      <trans-unit id="ZXSQ2Ap" resname="fleet.putOnGround">
+        <source>fleet.putOnGround</source>
+        <target>mettre au sol</target>
+      </trans-unit>
+      <trans-unit id="QKL2.8l" resname="fleet.splitFleet">
+        <source>fleet.splitFleet</source>
+        <target>Diviser la flotte</target>
+      </trans-unit>
+      <trans-unit id="hXJ0mXn" resname="fleet.name">
+        <source>fleet.name</source>
+        <target>Nom</target>
+      </trans-unit>
+      <trans-unit id="XE7MEfR" resname="fleet.hunterWar">
+        <source>fleet.hunterWar</source>
+        <target>Chasseur a plasma</target>
+      </trans-unit>
+      <trans-unit id="aFXfnlI" resname="fleet.corvetWar">
+        <source>fleet.corvetWar</source>
+        <target>Corvette de combat</target>
+      </trans-unit>
+      <trans-unit id="4Ybd6nW" resname="fleet.moonMaker">
+        <source>fleet.moonMaker</source>
+        <target>Lunar</target>
+      </trans-unit>
+      <trans-unit id="fGtDBGf" resname="fleet.radarShip">
+        <source>fleet.radarShip</source>
+        <target>Vaisseau radar</target>
+      </trans-unit>
+      <trans-unit id="6ixMgxD" resname="fleet.brouilleurShip">
+        <source>fleet.brouilleurShip</source>
+        <target>Vaisseau brouilleur</target>
+      </trans-unit>
+      <trans-unit id="I1jlww3" resname="fleet.motherShip">
+        <source>fleet.motherShip</source>
+        <target>Vaisseau mère</target>
+      </trans-unit>
+      <trans-unit id="xqLUEDf" resname="help.colonizer">
+        <source>help.colonizer</source>
+        <target>Pour coloniser une planète, vous devez positionner votre flotte au dessus d'une planète inhabitée. Le bouton "Coloniser apparaîtra ensuite."</target>
+      </trans-unit>
+      <trans-unit id="9M3XPCQ" resname="fleet.help">
+        <source>fleet.help</source>
+        <target>aide</target>
+      </trans-unit>
+      <trans-unit id="TXlLdIN" resname="help.recycleur">
+        <source>help.recycleur</source>
+        <target>Pour pouvoir recycler il faut positionner votre flotte sur un astèroïde ou sur une planète aillant un champs de ruine en orbite.</target>
+      </trans-unit>
+      <trans-unit id="MhCMuF0" resname="help.barge">
+        <source>help.barge</source>
+        <target>Pour envahir une planète, mettez votre flotte au dessus d'une planète hostile, le bouton "envahir" apparaîtra (vous ne pouvez pas envahir un allié).</target>
+      </trans-unit>
+      <trans-unit id="Sb3BvJ1" resname="help.moonMaker">
+        <source>help.moonMaker</source>
+        <target>Ce vaisseau doit être positionner sur un emplacement vide contenant un minimum de 10M de chaque ressource en champs de ruine pour qu'il puisse se déployer et...</target>
+      </trans-unit>
+      <trans-unit id="B5Lf00." resname="help.radar">
+        <source>help.radar</source>
+        <target>Le vaisseau radar doit être sur un emplacement vide pour être déployer et fournir un radar au joueur dans le secteur.</target>
+      </trans-unit>
+      <trans-unit id="yo56SdI" resname="help.brouilleur">
+        <source>help.brouilleur</source>
+        <target>Le vaisseau brouilleur doit être sur un emplacement vide pour être déployer et fournir un brouilleur au joueur.</target>
+      </trans-unit>
+      <trans-unit id="_.2K72a" resname="click.moonMaker">
+        <source>click.moonMaker</source>
+        <target>Cliquez pour créer une lune</target>
+      </trans-unit>
+      <trans-unit id="mRDqyJm" resname="fleet.deploy">
+        <source>fleet.deploy</source>
+        <target>déployer</target>
+      </trans-unit>
+      <trans-unit id="4ulRARI" resname="click.radar">
+        <source>click.radar</source>
+        <target>Cliquez pour déployer le radar</target>
+      </trans-unit>
+      <trans-unit id="C_zlhLn" resname="click.brouilleur">
+        <source>click.brouilleur</source>
+        <target>Cliquez pour déployer le brouilleur</target>
+      </trans-unit>
+      <trans-unit id="_RhWDMo" resname="fleet.allShip">
+        <source>fleet.allShip</source>
+        <target>Tout</target>
+      </trans-unit>
+      <trans-unit id="EVXXTpe" resname="fleet.ressources">
+        <source>fleet.ressources</source>
+        <target>Ressources</target>
+      </trans-unit>
+      <trans-unit id="rhb9xkM" resname="fleet.back">
+        <source>fleet.back</source>
+        <target>Retour</target>
+      </trans-unit>
+      <trans-unit id="55TSZYq" resname="fleet.oldCargo">
+        <source>fleet.oldCargo</source>
+        <target>Cargaison sur </target>
+      </trans-unit>
+      <trans-unit id="3V1eigV" resname="fleet.newCargo">
+        <source>fleet.newCargo</source>
+        <target>Cargaison sur la nouvelle flotte</target>
+      </trans-unit>
+      <trans-unit id="Rv5usyd" resname="fleet.onGround">
+        <source>fleet.onGround</source>
+        <target>Au sol</target>
+      </trans-unit>
+      <trans-unit id="ifWrCM3" resname="fleet.manageShip">
+        <source>fleet.manageShip</source>
+        <target>Gestion des vaisseaux</target>
+      </trans-unit>
+      <trans-unit id="nUWWhgJ" resname="fleet.carg">
+        <source>fleet.carg</source>
+        <target>Cargo</target>
+      </trans-unit>
+      <trans-unit id="_Xv6Bps" resname="form.putOnGround">
+        <source>form.putOnGround</source>
+        <target>Transfert des vaisseaux</target>
+      </trans-unit>
+      <trans-unit id="MblSBzn" resname="fleet.allDischarge">
+        <source>fleet.allDischarge</source>
+        <target>Tout decharger</target>
+      </trans-unit>
+      <trans-unit id="3_Gxp2B" resname="fleet.cargoLess">
+        <source>fleet.cargoLess</source>
+        <target>Cargaison de votre flotte</target>
+      </trans-unit>
+      <trans-unit id="ncdmP4o" resname="fleet.remove">
+        <source>fleet.remove</source>
+        <target>Retirer</target>
+      </trans-unit>
+      <trans-unit id="pBiAcyt" resname="form.fleetList">
+        <source>form.fleetList</source>
+        <target>Créer nouvelle Cohorte</target>
+      </trans-unit>
+      <trans-unit id="N0JYg0i" resname="fleetList.add">
+        <source>fleetList.add</source>
+        <target>Ajouter flotte</target>
+      </trans-unit>
+      <trans-unit id="lIhogYu" resname="fleet.cancelFleet">
+        <source>fleet.cancelFleet</source>
+        <target>Annuler</target>
+      </trans-unit>
+      <trans-unit id="RtHr9Wt" resname="workerImg">
+        <source>workerImg</source>
+        <target>Travailleurs</target>
+      </trans-unit>
+      <trans-unit id="Wa8x3jc" resname="soldierImg">
+        <source>soldierImg</source>
+        <target>Soldats</target>
+      </trans-unit>
+      <trans-unit id="m6sGu6I" resname="niobiumImg">
+        <source>niobiumImg</source>
+        <target>Niobium</target>
+      </trans-unit>
+      <trans-unit id="Yj5B.bE" resname="waterImg">
+        <source>waterImg</source>
+        <target>Eau</target>
+      </trans-unit>
+      <trans-unit id="jGtiudl" resname="tankImg">
+        <source>tankImg</source>
+        <target>Tanks</target>
+      </trans-unit>
+      <trans-unit id="RFT6Mw5" resname="scientistImg">
+        <source>scientistImg</source>
+        <target>Scientifiques</target>
+      </trans-unit>
+      <trans-unit id="sd_7DJN" resname="uraniumImg">
+        <source>uraniumImg</source>
+        <target>Uranium</target>
+      </trans-unit>
+      <trans-unit id="BXqmmPr" resname="form.normal">
+        <source>form.normal</source>
+        <target>Normal</target>
+      </trans-unit>
+      <trans-unit id="zRD0oeL" resname="form.discharge">
+        <source>form.discharge</source>
+        <target>Décharger et revenir</target>
+      </trans-unit>
+      <trans-unit id="8vLSq.Q" resname="form.col">
+        <source>form.col</source>
+        <target>Coloniser</target>
+      </trans-unit>
+      <trans-unit id="6LscGBH" resname="form.num">
+        <source>form.num</source>
+        <target>0</target>
+      </trans-unit>
+      <trans-unit id="XeUbHeB" resname="form.invade">
+        <source>form.invade</source>
+        <target>Envahir</target>
+      </trans-unit>
+      <trans-unit id="ToDnHjF" resname="form.loot">
+        <source>form.loot</source>
+        <target>Piller</target>
+      </trans-unit>
+      <trans-unit id="I6ZSFWH" resname="fleet.st">
+        <source>fleet.st</source>
+        <target>ST</target>
+      </trans-unit>
+      <trans-unit id="q6jBep." resname="tooltip.remove">
+        <source>tooltip.remove</source>
+        <target>Supprimer flotte de la Cohorte ?</target>
+      </trans-unit>
+      <trans-unit id="MSIEP35" resname="tooltip.cancel">
+        <source>tooltip.cancel</source>
+        <target>Annuler l'envoi de la flotte ?</target>
+      </trans-unit>
+      <trans-unit id="IQTJJwj" resname="tooltip.drop">
+        <source>tooltip.drop</source>
+        <target>Poser la flotte sur la planète ?</target>
+      </trans-unit>
+      <trans-unit id="oswoSuC" resname="tooltip.destroy">
+        <source>tooltip.destroy</source>
+        <target>Supprimer la Cohorte de flottes ?</target>
+      </trans-unit>
+      <trans-unit id="_jUOMYG" resname="tooltip.invade">
+        <source>tooltip.invade</source>
+        <target>Cliquez pour envahir cette planète.</target>
+      </trans-unit>
+      <trans-unit id="_XR4m.j" resname="tooltip.colonize">
+        <source>tooltip.colonize</source>
+        <target>Cliquez pour coloniser cette planète.</target>
+      </trans-unit>
+      <trans-unit id="sImv46x" resname="tooltip.recycle">
+        <source>tooltip.recycle</source>
+        <target>Temps avant prochain recyclage.</target>
+      </trans-unit>
+      <trans-unit id="jPoAMXc" resname="fleet.deleteList">
+        <source>fleet.deleteList</source>
+        <target>Supprimer</target>
+      </trans-unit>
+      <trans-unit id="lpqMng7" resname="sonde">
+        <source>sonde</source>
+        <target>Sondes</target>
+      </trans-unit>
+      <trans-unit id="jeXJL4Y" resname="nuclearBomb">
+        <source>nuclearBomb</source>
+        <target>Missile nucléaire</target>
+      </trans-unit>
+      <trans-unit id="0jlqH7y" resname="destroyer">
+        <source>destroyer</source>
+        <target>Destroyers</target>
+      </trans-unit>
+      <trans-unit id="PutGqDE" resname="ironClad">
+        <source>ironClad</source>
+        <target>Cuirassés</target>
+      </trans-unit>
+      <trans-unit id="forBpWQ" resname="croiser">
+        <source>croiser</source>
+        <target>Croiseurs</target>
+      </trans-unit>
+      <trans-unit id="HDPT6vN" resname="fregate">
+        <source>fregate</source>
+        <target>Frégates</target>
+      </trans-unit>
+      <trans-unit id="r9ERVg_" resname="fregatePlasma">
+        <source>fregatePlasma</source>
+        <target>Frégates a plasma</target>
+      </trans-unit>
+      <trans-unit id="2.nJwu3" resname="corvet">
+        <source>corvet</source>
+        <target>Corvettes</target>
+      </trans-unit>
+      <trans-unit id="LH3PyOs" resname="corvetLaser">
+        <source>corvetLaser</source>
+        <target>Corvettes a laser</target>
+      </trans-unit>
+      <trans-unit id="V_ZDq8H" resname="corvetWar">
+        <source>corvetWar</source>
+        <target>Corvettes de combat</target>
+      </trans-unit>
+      <trans-unit id="6aY6TrF" resname="hunter">
+        <source>hunter</source>
+        <target>Chasseurs</target>
+      </trans-unit>
+      <trans-unit id="L643JOr" resname="hunterHeavy">
+        <source>hunterHeavy</source>
+        <target>Chasseurs lourds</target>
+      </trans-unit>
+      <trans-unit id="A41r57z" resname="hunterWar">
+        <source>hunterWar</source>
+        <target>Chasseurs a plasma</target>
+      </trans-unit>
+      <trans-unit id="nmQgNWv" resname="moonMaker">
+        <source>moonMaker</source>
+        <target>Lunars</target>
+      </trans-unit>
+      <trans-unit id="9E3pVu9" resname="motherShip">
+        <source>motherShip</source>
+        <target>Vaisseau mère</target>
+      </trans-unit>
+      <trans-unit id="HRpi48b" resname="radarShip">
+        <source>radarShip</source>
+        <target>Vaisseaux radar</target>
+      </trans-unit>
+      <trans-unit id="gb8Q3um" resname="brouilleurShip">
+        <source>brouilleurShip</source>
+        <target>Vaisseaux brouilleur</target>
+      </trans-unit>
+      <trans-unit id="cgvSBcv" resname="barges">
+        <source>barges</source>
+        <target>Barges</target>
+      </trans-unit>
+      <trans-unit id="cljn2hX" resname="recycleurs">
+        <source>recycleurs</source>
+        <target>Recycleurs</target>
+      </trans-unit>
+      <trans-unit id="iOJhr_p" resname="cargoI">
+        <source>cargoI</source>
+        <target>Cargos I</target>
+      </trans-unit>
+      <trans-unit id="2q0E7w_" resname="cargoV">
+        <source>cargoV</source>
+        <target>Cargos V</target>
+      </trans-unit>
+      <trans-unit id="miauVv9" resname="cargoX">
+        <source>cargoX</source>
+        <target>Cargos X</target>
+      </trans-unit>
+      <trans-unit id="ROtshFP" resname="colonizer">
+        <source>colonizer</source>
+        <target>Colonisateurs</target>
+      </trans-unit>
+      <trans-unit id="wSQx3o9" resname="fleet.recyclage">
+        <source>fleet.recyclage</source>
+        <target>Prochain :</target>
+      </trans-unit>
+      <trans-unit id="AEjMhY1" resname="fleet.tank">
+        <source>fleet.tank</source>
+        <target>__fleet.tank</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

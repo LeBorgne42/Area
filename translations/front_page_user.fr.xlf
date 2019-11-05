@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="qvIyBkY" resname="title">
+        <source>title</source>
+        <target>Page joueur</target>
+      </trans-unit>
+      <trans-unit id="xp8mj7Q" resname="user.name">
+        <source>user.name</source>
+        <target>Pseudo :</target>
+      </trans-unit>
+      <trans-unit id="bfEcknd" resname="user.level">
+        <source>user.level</source>
+        <target>Niveau du joueur :</target>
+      </trans-unit>
+      <trans-unit id="IOHdobU" resname="user.ally">
+        <source>user.ally</source>
+        <target>Alliance :</target>
+      </trans-unit>
+      <trans-unit id="8UXky.Q" resname="user.allyNone">
+        <source>user.allyNone</source>
+        <target>Aucune</target>
+      </trans-unit>
+      <trans-unit id="MsFxn2r" resname="user.galaxy">
+        <source>user.galaxy</source>
+        <target>Galaxie(s) :</target>
+      </trans-unit>
+      <trans-unit id=".igXXV8" resname="user.planet">
+        <source>user.planet</source>
+        <target>Planètes :</target>
+      </trans-unit>
+      <trans-unit id="zPaM9vv" resname="user.first.planet">
+        <source>user.first.planet</source>
+        <target>Position :</target>
+      </trans-unit>
+      <trans-unit id="WiHE4OS" resname="user.fleet">
+        <source>user.fleet</source>
+        <target>Flottes :</target>
+      </trans-unit>
+      <trans-unit id="MVrSuJG" resname="responde">
+        <source>responde</source>
+        <target>Écrire au joueur</target>
+      </trans-unit>
+      <trans-unit id="HE4XnEB" resname="user.politic">
+        <source>user.politic</source>
+        <target>Politique :</target>
+      </trans-unit>
+      <trans-unit id="XlQLx8u" resname="monarchy">
+        <source>monarchy</source>
+        <target>Monarchie</target>
+      </trans-unit>
+      <trans-unit id="YegaUOq" resname="democrat">
+        <source>democrat</source>
+        <target>Démocratie</target>
+      </trans-unit>
+      <trans-unit id="B.t__u7" resname="fascism">
+        <source>fascism</source>
+        <target>Fascisme</target>
+      </trans-unit>
+      <trans-unit id="UfKQN2b" resname="anarchism">
+        <source>anarchism</source>
+        <target>Anarchisme</target>
+      </trans-unit>
+      <trans-unit id="2SAdNwW" resname="communism">
+        <source>communism</source>
+        <target>Communisme</target>
+      </trans-unit>
+      <trans-unit id="4TekUT5" resname="theocrat">
+        <source>theocrat</source>
+        <target>Théocratie</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

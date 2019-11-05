@@ -381,6 +381,9 @@ class ServerController extends AbstractController
                 $user->removeProposal($proposal);
             }
             foreach ($user->getFleets() as $fleet) {
+                if ($fleet->getDestination()) {
+                    $em->remove($fleet->getDestination());
+                }
                 $user->removeFleet($fleet);
             }
             foreach ($user->getPlanets() as $planet) {

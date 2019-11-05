@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="qvIyBkY" resname="title">
+        <source>title</source>
+        <target>Carte spatiale</target>
+      </trans-unit>
+      <trans-unit id="38OUcAN" resname="tooltip.planet">
+        <source>tooltip.planet</source>
+        <target>%name%</target>
+      </trans-unit>
+      <trans-unit id="uFkPPGX" resname="tooltip.planetAlly">
+        <source>tooltip.planetAlly</source>
+        <target>[%ally%] %name%</target>
+      </trans-unit>
+      <trans-unit id="9QZR_kz" resname="tooltip.planetInfos">
+        <source>tooltip.planetInfos</source>
+        <target><![CDATA[<h4 class="text-blanc">Planète</h4>Terrain: %land% <img class="mb-1" src="/img/ground.png"> <br> Espace: %sky% <img class="mb-1" src="/img/sky.png"> <br> Radar: %radar% <br> Brouilleur: %brouilleur%]]></target>
+      </trans-unit>
+      <trans-unit id="J6hI.O1" resname="tooltip.planetOrbite">
+        <source>tooltip.planetOrbite</source>
+        <target>%orbite%</target>
+      </trans-unit>
+      <trans-unit id="wgjnYg9" resname="map.coming">
+        <source>map.coming</source>
+        <target>Flottes entrant dans le secteur</target>
+      </trans-unit>
+      <trans-unit id="OlRBQuR" resname="map.fleetName">
+        <source>map.fleetName</source>
+        <target>Joueur</target>
+      </trans-unit>
+      <trans-unit id="xiAXiI0" resname="map.name">
+        <source>map.name</source>
+        <target>Flotte</target>
+      </trans-unit>
+      <trans-unit id="_iuUojN" resname="map.from">
+        <source>map.from</source>
+        <target>De</target>
+      </trans-unit>
+      <trans-unit id="KkNHyqc" resname="map.goTo">
+        <source>map.goTo</source>
+        <target>Vers</target>
+      </trans-unit>
+      <trans-unit id="UPan9wk" resname="map.time">
+        <source>map.time</source>
+        <target>Temps</target>
+      </trans-unit>
+      <trans-unit id="1xu4PTD" resname="map.out">
+        <source>map.out</source>
+        <target>Flottes sortant du secteur</target>
+      </trans-unit>
+      <trans-unit id="Sw4ZV0_" resname="map.planetHostile">
+        <source>map.planetHostile</source>
+        <target>Occupée</target>
+      </trans-unit>
+      <trans-unit id="eis0VD." resname="tooltip.cdr">
+        <source>tooltip.cdr</source>
+        <target><![CDATA[<h4 class="text-blanc">Ressources</h4>%niobium% Niobium  <img class="mb-1" src="/img/niobium.png"><br> %water% Water <img class="mb-1" src="/img/water.png">]]></target>
+      </trans-unit>
+      <trans-unit id="C8hsIOM" resname="tooltip.brouillage">
+        <source>tooltip.brouillage</source>
+        <target>Brouillage</target>
+      </trans-unit>
+      <trans-unit id="lohqZaM" resname="map.current">
+        <source>map.current</source>
+        <target>Mouvement de flotte dans le secteur</target>
+      </trans-unit>
+      <trans-unit id="C0dtHpp" resname="sector.number">
+        <source>sector.number</source>
+        <target>Secteur</target>
+      </trans-unit>
+      <trans-unit id="bQMiCZ5" resname="tooltip.fleetHere">
+        <source>tooltip.fleetHere</source>
+        <target>Les flottes qui transit au sein même de ce secteur sont affiché ici.</target>
+      </trans-unit>
+      <trans-unit id="efCcG4D" resname="tooltip.signature">
+        <source>tooltip.signature</source>
+        <target>Ici nous parlons de signature thermique, il serait trop facile que tout le monde sache ce qu'il y a dans la composition de votre flotte, ainsi la signature donne un ordre de grandeur sans rentrer dans le détails de la flotte.</target>
+      </trans-unit>
+      <trans-unit id="cFbjiI4" resname="tooltip.fleetEntrance">
+        <source>tooltip.fleetEntrance</source>
+        <target>Les flottes qui viennent d'un autre secteur sont représenté là.</target>
+      </trans-unit>
+      <trans-unit id="_4sKowY" resname="tooltip.fleetQuit">
+        <source>tooltip.fleetQuit</source>
+        <target>Ce cadre vous montre les flottes qui sortent de ce secteur.</target>
+      </trans-unit>
+      <trans-unit id="PqUC5qv" resname="sector.profilUser">
+        <source>sector.profilUser</source>
+        <target>voir profil</target>
+      </trans-unit>
+      <trans-unit id="87pTXTH" resname="sector.manageFleet">
+        <source>sector.manageFleet</source>
+        <target>gestion</target>
+      </trans-unit>
+      <trans-unit id="gQbjsf3" resname="fleet.combat">
+        <source>fleet.combat</source>
+        <target>en combat</target>
+      </trans-unit>
+      <trans-unit id="usL7nai" resname="tooltip.radarInfos">
+        <source>tooltip.radarInfos</source>
+        <target><![CDATA[<h4 class="text-blanc">Radar</h4><br>%user% <br> Radar: %radar% <br> Brouilleur: %brouilleur%]]></target>
+      </trans-unit>
+      <trans-unit id="jqQxbPq" resname="galaxy.number">
+        <source>galaxy.number</source>
+        <target>Galaxie</target>
+      </trans-unit>
+      <trans-unit id="Lqzf7NH" resname="sector.tutorial">
+        <source>sector.tutorial</source>
+        <target><![CDATA[Sur cette page vous pouvez découvrir les autres planètes de votre secteur ainsi que les flottes en mouvements au dessous. Prenez le temps de regarder les informations de chaque planète inhabitée (en blanc) n'ayant pas déjà un joueur et notez celle avec le plus de terrain. Nous allons la coloniser !<br>Cliquez sur la planète en question puis dans le menu déroulant selectionné la flotte avec le colonisateur puis l'option coloniser et «Envoyer» !!]]></target>
+      </trans-unit>
+      <trans-unit id="IPsBwS6" resname="sector.tutorialBis">
+        <source>sector.tutorialBis</source>
+        <target>En regardant en dessous de la carte vous pouvez maintenant distinguer votre flotte avec son heure d'arrivée, il n'y a plus qu'a attendre qu'elle arrive ! Nous avons bien le temps de faire un tour sur la page des «Objectifs».</target>
+      </trans-unit>
+      <trans-unit id="LsAb3Gt" resname="sector.groundfleet">
+        <source>sector.groundfleet</source>
+        <target>Au sol</target>
+      </trans-unit>
+      <trans-unit id="OvySTLB" resname="sector.fleet">
+        <source>sector.fleet</source>
+        <target>Flottes</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

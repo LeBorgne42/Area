@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="qvIyBkY" resname="title">
+        <source>title</source>
+        <target>Classement alliance</target>
+      </trans-unit>
+      <trans-unit id="ZYD3XUB" resname="rank.position">
+        <source>rank.position</source>
+        <target>Rank</target>
+      </trans-unit>
+      <trans-unit id="kQynMdo" resname="rank.ally">
+        <source>rank.ally</source>
+        <target>Alliance</target>
+      </trans-unit>
+      <trans-unit id="Zz8APCh" resname="rank.members">
+        <source>rank.members</source>
+        <target>Membres</target>
+      </trans-unit>
+      <trans-unit id="9Rlt.Te" resname="rank.planets">
+        <source>rank.planets</source>
+        <target>Planètes</target>
+      </trans-unit>
+      <trans-unit id="SKPNyxT" resname="rank.createdAt">
+        <source>rank.createdAt</source>
+        <target>Crée le</target>
+      </trans-unit>
+      <trans-unit id="Luu0I46" resname="ally.ambassy">
+        <source>ally.ambassy</source>
+        <target>Rejoindre</target>
+      </trans-unit>
+      <trans-unit id="I.vQbk9" resname="rank.embassy">
+        <source>rank.embassy</source>
+        <target>Ambassade</target>
+      </trans-unit>
+      <trans-unit id="NuJ_LtY" resname="rank.logo">
+        <source>rank.logo</source>
+        <target>Logo</target>
+      </trans-unit>
+      <trans-unit id="gi5QM5_" resname="rank.pdg">
+        <source>rank.pdg</source>
+        <target>Pdg</target>
+      </trans-unit>
+      <trans-unit id="e1FDvsl" resname="politic.democrat">
+        <source>politic.democrat</source>
+        <target>Alliance Démocrate</target>
+      </trans-unit>
+      <trans-unit id="4lZkLEC" resname="politic.fascism">
+        <source>politic.fascism</source>
+        <target>Alliance Fasciste</target>
+      </trans-unit>
+      <trans-unit id="7dTpI7R" resname="politic.communism">
+        <source>politic.communism</source>
+        <target>Alliance Communiste</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

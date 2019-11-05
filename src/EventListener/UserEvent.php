@@ -231,14 +231,11 @@ class UserEvent implements EventSubscriberInterface
                             }
                             $user->setSearch(null);
                             $user->setSearchAt(null);
-                            $server = $this->em->getRepository('App:Server')->find(['id' => 1]);
-                            $server->setNbrResearch($server->getNbrResearch() + 1);
                             $quest = $user->checkQuests('research');
                             if($quest) {
                                 $user->getRank()->setWarPoint($user->getRank()->getWarPoint() + $quest->getGain());
                                 $user->removeQuest($quest);
                             }
-                            $this->em->flush($server);
                             $this->em->flush($user);
                         }
                     }

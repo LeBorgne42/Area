@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="KXQfBEc" resname="form.defcon">
+        <source>form.defcon</source>
+        <target>Niveau du DEFCON :</target>
+      </trans-unit>
+      <trans-unit id="N7xyN0P" resname="form.send">
+        <source>form.send</source>
+        <target>Actualiser</target>
+      </trans-unit>
+      <trans-unit id="wuEMIL9" resname="peace">
+        <source>peace</source>
+        <target>0 - Paix</target>
+      </trans-unit>
+      <trans-unit id="HW8EdU_" resname="preparation">
+        <source>preparation</source>
+        <target>1 - Préparation militaire</target>
+      </trans-unit>
+      <trans-unit id="BOKlhhl" resname="warcoming">
+        <source>warcoming</source>
+        <target>2 - Guerre imminente</target>
+      </trans-unit>
+      <trans-unit id="otjapCg" resname="war">
+        <source>war</source>
+        <target>3 - En guerre</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

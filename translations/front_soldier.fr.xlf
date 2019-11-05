@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="qvIyBkY" resname="title">
+        <source>title</source>
+        <target>Soldat</target>
+      </trans-unit>
+      <trans-unit id="MH5OVjW" resname="soldier.recruit">
+        <source>soldier.recruit</source>
+        <target>Recruter des soldats</target>
+      </trans-unit>
+      <trans-unit id="gT_W7zK" resname="caserner.soldier">
+        <source>caserner.soldier</source>
+        <target>Soldats en caserne</target>
+      </trans-unit>
+      <trans-unit id="G_jx0yd" resname="caserner.nuclear">
+        <source>caserner.nuclear</source>
+        <target>Bombes nucléaires</target>
+      </trans-unit>
+      <trans-unit id="DqzFjv7" resname="bitcoinImg">
+        <source>bitcoinImg</source>
+        <target>Bitcoin</target>
+      </trans-unit>
+      <trans-unit id="sd_7DJN" resname="uraniumImg">
+        <source>uraniumImg</source>
+        <target>Uranium</target>
+      </trans-unit>
+      <trans-unit id="a4jAhyR" resname="bitcoin">
+        <source>bitcoin</source>
+        <target>Bitcoins :</target>
+      </trans-unit>
+      <trans-unit id="m6sGu6I" resname="niobiumImg">
+        <source>niobiumImg</source>
+        <target>Niobium</target>
+      </trans-unit>
+      <trans-unit id="xWTJf4C" resname="scientist.recruit">
+        <source>scientist.recruit</source>
+        <target>Engager des scientifiques</target>
+      </trans-unit>
+      <trans-unit id="02kEZnl" resname="caserner.scientist">
+        <source>caserner.scientist</source>
+        <target>Scientifiques dans les centres</target>
+      </trans-unit>
+      <trans-unit id="dP4.HE3" resname="tank.recruit">
+        <source>tank.recruit</source>
+        <target>Construire des tanks</target>
+      </trans-unit>
+      <trans-unit id="giPRe8T" resname="nuclear.recruit">
+        <source>nuclear.recruit</source>
+        <target>Fabriquer des bombes nucléaires</target>
+      </trans-unit>
+      <trans-unit id="0Wnftuf" resname="caserner.tank">
+        <source>caserner.tank</source>
+        <target>Tanks dans nos hangars</target>
+      </trans-unit>
+      <trans-unit id="GSc..hC" resname="form.nbr">
+        <source>form.nbr</source>
+        <target>0</target>
+      </trans-unit>
+      <trans-unit id="D1dl0NE" resname="form.recruitCaserne">
+        <source>form.recruitCaserne</source>
+        <target>Lancer</target>
+      </trans-unit>
+      <trans-unit id="RtHr9Wt" resname="workerImg">
+        <source>workerImg</source>
+        <target>Travailleurs</target>
+      </trans-unit>
+      <trans-unit id="RFT6Mw5" resname="scientistImg">
+        <source>scientistImg</source>
+        <target>Scientifiques</target>
+      </trans-unit>
+      <trans-unit id="jGtiudl" resname="tankImg">
+        <source>tankImg</source>
+        <target>Tanks</target>
+      </trans-unit>
+      <trans-unit id="A9MmfF2" resname="caserner.soldierProd">
+        <source>caserner.soldierProd</source>
+        <target> soldats en production</target>
+      </trans-unit>
+      <trans-unit id="75E7GwH" resname="caserner.scientistProd">
+        <source>caserner.scientistProd</source>
+        <target> scientifiques en production</target>
+      </trans-unit>
+      <trans-unit id="HzRkwFo" resname="caserner.tankProd">
+        <source>caserner.tankProd</source>
+        <target> tanks en production</target>
+      </trans-unit>
+      <trans-unit id="PA5NOTa" resname="caserner.nuclearProd">
+        <source>caserner.nuclearProd</source>
+        <target> bombes nucléaires en production</target>
+      </trans-unit>
+      <trans-unit id="cDrLmJQ" resname="caserner.noScientist">
+        <source>caserner.noScientist</source>
+        <target>Requis : Centre de recherche</target>
+      </trans-unit>
+      <trans-unit id="MEP_oTc" resname="caserner.noTank">
+        <source>caserner.noTank</source>
+        <target>Requis : Unitées blindées - Usine d'armement + Caserne ou Bunker</target>
+      </trans-unit>
+      <trans-unit id="8YnA2AI" resname="caserner.noNuclear">
+        <source>caserner.noNuclear</source>
+        <target>Requis : Base nucléaire</target>
+      </trans-unit>
+      <trans-unit id="g76BfKP" resname="caserner.totalProduct">
+        <source>caserner.totalProduct</source>
+        <target>Total :</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

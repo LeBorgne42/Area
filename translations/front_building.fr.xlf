@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="qvIyBkY" resname="title">
+        <source>title</source>
+        <target>Batiment</target>
+      </trans-unit>
+      <trans-unit id="i0GTjxB" resname="building.infos">
+        <source>building.infos</source>
+        <target>Infrastructures</target>
+      </trans-unit>
+      <trans-unit id="OXOo2k9" resname="building.construct">
+        <source>building.construct</source>
+        <target>Construire</target>
+      </trans-unit>
+      <trans-unit id="v0s9bw5" resname="building.mining">
+        <source>building.mining</source>
+        <target>Mine de niobium</target>
+      </trans-unit>
+      <trans-unit id="XqsJgh5" resname="building.build">
+        <source>building.build</source>
+        <target>Construire</target>
+      </trans-unit>
+      <trans-unit id="m6UXbRh" resname="building.buildList">
+        <source>building.buildList</source>
+        <target>Ajouter</target>
+      </trans-unit>
+      <trans-unit id="t2Mvd8." resname="building.demolish">
+        <source>building.demolish</source>
+        <target>Detruire</target>
+      </trans-unit>
+      <trans-unit id="k96OBPF" resname="building.cancel">
+        <source>building.cancel</source>
+        <target>Annuler</target>
+      </trans-unit>
+      <trans-unit id="Mix2Xcf" resname="building.extract">
+        <source>building.extract</source>
+        <target>Extracteur d'eau</target>
+      </trans-unit>
+      <trans-unit id="DMiKcjG" resname="building.titleRessource">
+        <source>building.titleRessource</source>
+        <target>Production de ressources</target>
+      </trans-unit>
+      <trans-unit id="zmqdVPd" resname="building.titleShip">
+        <source>building.titleShip</source>
+        <target>Infrastructures militaire</target>
+      </trans-unit>
+      <trans-unit id="eW0VLTt" resname="building.titleEco">
+        <source>building.titleEco</source>
+        <target>Infrastructures économique</target>
+      </trans-unit>
+      <trans-unit id="OgJOpjA" resname="building.titleSpy">
+        <source>building.titleSpy</source>
+        <target>Service de renseignement</target>
+      </trans-unit>
+      <trans-unit id="p2Ny9Zu" resname="building.titleExtra">
+        <source>building.titleExtra</source>
+        <target>Aménagement territorial</target>
+      </trans-unit>
+      <trans-unit id="gxMgITb" resname="building.search">
+        <source>building.search</source>
+        <target>Centre de recherche</target>
+      </trans-unit>
+      <trans-unit id="7Vwc_ko" resname="building.city">
+        <source>building.city</source>
+        <target>Grande ville</target>
+      </trans-unit>
+      <trans-unit id="JeszIWN" resname="building.metropole">
+        <source>building.metropole</source>
+        <target>Metropole</target>
+      </trans-unit>
+      <trans-unit id="DFVv_ZW" resname="building.caserne">
+        <source>building.caserne</source>
+        <target>Caserne</target>
+      </trans-unit>
+      <trans-unit id="VoZ8hRu" resname="building.chantier">
+        <source>building.chantier</source>
+        <target>Chantier spatial</target>
+      </trans-unit>
+      <trans-unit id="yqrhzw0" resname="building.light">
+        <source>building.light</source>
+        <target>Usine d'armement</target>
+      </trans-unit>
+      <trans-unit id="i7OXCqU" resname="building.heavy">
+        <source>building.heavy</source>
+        <target>Industrie lourde</target>
+      </trans-unit>
+      <trans-unit id="qyo8rbd" resname="building.radar">
+        <source>building.radar</source>
+        <target>Radar au sol</target>
+      </trans-unit>
+      <trans-unit id="l7KyVsF" resname="tooltip.cancelList">
+        <source>tooltip.cancelList</source>
+        <target>Annuler construction</target>
+      </trans-unit>
+      <trans-unit id="o_mXEAQ" resname="building.skyRadar">
+        <source>building.skyRadar</source>
+        <target>Radar d'espace</target>
+      </trans-unit>
+      <trans-unit id="Slc.OD0" resname="building.brouilleur">
+        <source>building.brouilleur</source>
+        <target>Brouilleur de radar</target>
+      </trans-unit>
+      <trans-unit id="BPtCQbt" resname="building.island">
+        <source>building.island</source>
+        <target>Ville flottante</target>
+      </trans-unit>
+      <trans-unit id="MHFceGw" resname="building.orbital">
+        <source>building.orbital</source>
+        <target>Station orbitale</target>
+      </trans-unit>
+      <trans-unit id="jSwC322" resname="building.nuclearBase">
+        <source>building.nuclearBase</source>
+        <target>Base nucléaire</target>
+      </trans-unit>
+      <trans-unit id="7FJ03AS" resname="building.constructions">
+        <source>building.constructions</source>
+        <target>Bâtiments en liste d'attente : </target>
+      </trans-unit>
+      <trans-unit id="gUnoJwu" resname="building.tutorial">
+        <source>building.tutorial</source>
+        <target>Comme vous pouvez le constater votre planète de départ a déjà quelques constructions, nous allons rajouter quelques mines et extracteurs pour augmenter la production de ressource, cliquez sur «Construire».</target>
+      </trans-unit>
+      <trans-unit id="KIPmxAm" resname="building.tutorialBis">
+        <source>building.tutorialBis</source>
+        <target>Le bâtiment est actuellement en construction, pour éviter d'avoir a attendre mettez d'autres mines et extracteurs en en attente de construction en cliquant sur «Ajouter».</target>
+      </trans-unit>
+      <trans-unit id="5h5V1KZ" resname="building.tutorialTer">
+        <source>building.tutorialTer</source>
+        <target>Parfait ! Rendez vous sur l'onglet «Recherches».</target>
+      </trans-unit>
+      <trans-unit id="m6sGu6I" resname="niobiumImg">
+        <source>niobiumImg</source>
+        <target>Niobium</target>
+      </trans-unit>
+      <trans-unit id="Yj5B.bE" resname="waterImg">
+        <source>waterImg</source>
+        <target>Eau</target>
+      </trans-unit>
+      <trans-unit id="Y50NcSG" resname="groundImg">
+        <source>groundImg</source>
+        <target>Terrain</target>
+      </trans-unit>
+      <trans-unit id="r6MHm9g" resname="pdgImg">
+        <source>pdgImg</source>
+        <target>Points de Guerre</target>
+      </trans-unit>
+      <trans-unit id="ixM6OGi" resname="miner">
+        <source>miner</source>
+        <target>Mine de niobium</target>
+      </trans-unit>
+      <trans-unit id="dIjXOFC" resname="extractor">
+        <source>extractor</source>
+        <target>Extracteur d'eau</target>
+      </trans-unit>
+      <trans-unit id="EaYsI0E" resname="city">
+        <source>city</source>
+        <target>Grande ville</target>
+      </trans-unit>
+      <trans-unit id="NhiOGRV" resname="metropole">
+        <source>metropole</source>
+        <target>Metropole</target>
+      </trans-unit>
+      <trans-unit id="77mswlN" resname="caserne">
+        <source>caserne</source>
+        <target>Caserne</target>
+      </trans-unit>
+      <trans-unit id="Df4X9q3" resname="destruct">
+        <source>destruct</source>
+        <target>Destruction</target>
+      </trans-unit>
+      <trans-unit id="f7nJuEY" resname="centerSearch">
+        <source>centerSearch</source>
+        <target>Centre de recherche</target>
+      </trans-unit>
+      <trans-unit id="N8vRK7j" resname="lightUsine">
+        <source>lightUsine</source>
+        <target>Usine d'armement</target>
+      </trans-unit>
+      <trans-unit id="ZCR6b64" resname="heavyUsine">
+        <source>heavyUsine</source>
+        <target>Usine lourde</target>
+      </trans-unit>
+      <trans-unit id="ZAk11AY" resname="spaceShip">
+        <source>spaceShip</source>
+        <target>Chantier spatial</target>
+      </trans-unit>
+      <trans-unit id=".y6WP.b" resname="radar">
+        <source>radar</source>
+        <target>Radar au sol</target>
+      </trans-unit>
+      <trans-unit id="z0ToDLR" resname="skyRadar">
+        <source>skyRadar</source>
+        <target>Radar d'espace</target>
+      </trans-unit>
+      <trans-unit id="GEctx2W" resname="skyBrouilleur">
+        <source>skyBrouilleur</source>
+        <target>Brouilleur de radar</target>
+      </trans-unit>
+      <trans-unit id="5yBc.sV" resname="skyImg">
+        <source>skyImg</source>
+        <target>Espace</target>
+      </trans-unit>
+      <trans-unit id="v3_SD_N" resname="building.canBe">
+        <source>building.canBe</source>
+        <target>x 0</target>
+      </trans-unit>
+      <trans-unit id="lxktNPt" resname="building.Activated">
+        <source>building.Activated</source>
+        <target>Construit</target>
+      </trans-unit>
+      <trans-unit id="47DEQpj" resname="">
+        <source></source>
+        <target>0</target>
+      </trans-unit>
+      <trans-unit id="X_zrZv." resname="0">
+        <source>0</source>
+        <target>0</target>
+      </trans-unit>
+      <trans-unit id="a4ayc.8" resname="1">
+        <source>1</source>
+        <target>1</target>
+      </trans-unit>
+      <trans-unit id="B9WeEEZ" resname="building.mining.desc">
+        <source>building.mining.desc</source>
+        <target>Plus votre mine de niobium sera élevé et mieux s'en portera votre empire.</target>
+      </trans-unit>
+      <trans-unit id="BJkwuW2" resname="building.extract.desc">
+        <source>building.extract.desc</source>
+        <target>Si le niobium est la principale ressource, l'eau n'en est pas moins autant indispensable.</target>
+      </trans-unit>
+      <trans-unit id="9M.gLqo" resname="building.search.desc">
+        <source>building.search.desc</source>
+        <target>Vous débutez avec 100 scientifiques, mais vous iriez bien plus vite s'il y en avait plus...</target>
+      </trans-unit>
+      <trans-unit id="KipHxQu" resname="building.city.desc">
+        <source>building.city.desc</source>
+        <target>Une ville augmenterais le nombre de travailleurs chaque jour.</target>
+      </trans-unit>
+      <trans-unit id="RrsSAa1" resname="building.metropole.desc">
+        <source>building.metropole.desc</source>
+        <target>Quand a une metropole, elle l'augmenterais grandement.</target>
+      </trans-unit>
+      <trans-unit id="cOpOmJU" resname="building.caserne.desc">
+        <source>building.caserne.desc</source>
+        <target>Besoin de plus de soldats, et plus rapidement ?</target>
+      </trans-unit>
+      <trans-unit id="pGcTXzO" resname="building.chantier.desc">
+        <source>building.chantier.desc</source>
+        <target>Sans chantier spatial n'ésperez pas produire le moindre vaisseaux.</target>
+      </trans-unit>
+      <trans-unit id="l2dQj4." resname="building.light.desc">
+        <source>building.light.desc</source>
+        <target>Cette petite usine fabrique des vaisseaux rapides et légers.</target>
+      </trans-unit>
+      <trans-unit id="i6wKIEg" resname="building.heavy.desc">
+        <source>building.heavy.desc</source>
+        <target>Ce mastodonte de l'industrie permet des constructions de vaisseaux très lourds.</target>
+      </trans-unit>
+      <trans-unit id="i9vJYkv" resname="building.radar.desc">
+        <source>building.radar.desc</source>
+        <target>Personne n'aime être aveugle, encore moins au milieu d'une galaxie hostile.</target>
+      </trans-unit>
+      <trans-unit id="3_5oHi." resname="building.skyRadar.desc">
+        <source>building.skyRadar.desc</source>
+        <target>Si votre planète manque de place, un radar en orbite vous en fera gagner.</target>
+      </trans-unit>
+      <trans-unit id="M74vcV8" resname="building.brouilleur.desc">
+        <source>building.brouilleur.desc</source>
+        <target>Besoin d'intimité ? Ce brouilleur cachera toutes les informations compromettantes.</target>
+      </trans-unit>
+      <trans-unit id="C0CQUrq" resname="building.island.desc">
+        <source>building.island.desc</source>
+        <target>Grâce a notre technologie de pointe nous pouvons désormais construire sur l'eau !</target>
+      </trans-unit>
+      <trans-unit id="8GGEXQK" resname="building.orbital.desc">
+        <source>building.orbital.desc</source>
+        <target>Quand la place manque, que les océans se remplissent, tournons le regards vers les cieux.</target>
+      </trans-unit>
+      <trans-unit id="rTv5wGX" resname="building.nuclearBase.desc">
+        <source>building.nuclearBase.desc</source>
+        <target>N'avez vous jamais voulut déclencher une guerre nucléaire ?</target>
+      </trans-unit>
+      <trans-unit id="Iv4I0Pd" resname="popover.title">
+        <source>popover.title</source>
+        <target>Prochain niveau</target>
+      </trans-unit>
+      <trans-unit id="9CADnRt" resname="popover.miner">
+        <source>popover.miner</source>
+        <target><![CDATA[<h5>Production de niobium : +%product%</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="OuAmt72" resname="popover.extract">
+        <source>popover.extract</source>
+        <target><![CDATA[<h5>Production d'eau : +%product%</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="n..PEX7" resname="popover.search">
+        <source>popover.search</source>
+        <target><![CDATA[<h5>Capacitée scientifique : +500</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="8SOF457" resname="popover.city">
+        <source>popover.city</source>
+        <target><![CDATA[<h5>Production de travailleurs : +8.000/j<br>Capacité travailleurs : +25.000</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="N5ySGZV" resname="popover.metropole">
+        <source>popover.metropole</source>
+        <target><![CDATA[<h5>Production de travailleurs : +12.000/j<br>Capacité travailleurs : +75.000</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="nYAEBrK" resname="popover.caserne">
+        <source>popover.caserne</source>
+        <target><![CDATA[<h5>Capacitée soldats : +2500<hr>Construction de tank</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="H89PyOt" resname="popover.chantier">
+        <source>popover.chantier</source>
+        <target><![CDATA[<h5>Production de vaisseaux : +10%</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="VtdtuYq" resname="popover.light">
+        <source>popover.light</source>
+        <target><![CDATA[<h5>Production de vaisseaux : +15%<br>Construction de tank</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="0stv3KQ" resname="popover.heavy">
+        <source>popover.heavy</source>
+        <target><![CDATA[<h5>Production de vaisseaux : +30%</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="XJCpQoO" resname="popover.radar">
+        <source>popover.radar</source>
+        <target><![CDATA[<h5>Puissance radar : +1</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="5XZIWEv" resname="popover.skyRadar">
+        <source>popover.skyRadar</source>
+        <target><![CDATA[<h5>Puissance radar : +1</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="3X9_a3o" resname="popover.brouilleur">
+        <source>popover.brouilleur</source>
+        <target><![CDATA[<h5>Puissance brouilleur : +1</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="KAz.7.L" resname="popover.island">
+        <source>popover.island</source>
+        <target><![CDATA[<h5>Terrain : +10</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="v_uvPNJ" resname="popover.orbital">
+        <source>popover.orbital</source>
+        <target><![CDATA[<h5>Espace : +5</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="EqPgDSs" resname="popover.nuclearBase">
+        <source>popover.nuclearBase</source>
+        <target><![CDATA[<h5>Missile nucléaire : +1</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="YvUa5vu" resname="building.finish">
+        <source>building.finish</source>
+        <target>CONTRUIT</target>
+      </trans-unit>
+      <trans-unit id="saLq22Z" resname="building.blocked">
+        <source>building.blocked</source>
+        <target>BLOQUÉE</target>
+      </trans-unit>
+      <trans-unit id="0mIAcJh" resname="building.delete">
+        <source>building.delete</source>
+        <target>Supprimer bâtiment</target>
+      </trans-unit>
+      <trans-unit id="FeCPS8z" resname="building.deleteTxt">
+        <source>building.deleteTxt</source>
+        <target>Êtes vous sûr de vouloir supprimer ce bâtiment ? Vous ne pourrez plus construire pendant une heure.</target>
+      </trans-unit>
+      <trans-unit id="vf92AUo" resname="building.deleteSave">
+        <source>building.deleteSave</source>
+        <target>Détruire</target>
+      </trans-unit>
+      <trans-unit id="tXZZJvK" resname="building.deleteCancel">
+        <source>building.deleteCancel</source>
+        <target>Annuler</target>
+      </trans-unit>
+      <trans-unit id="heVvSjV" resname="building.destroyBuild">
+        <source>building.destroyBuild</source>
+        <target>Une démolition est en cours : </target>
+      </trans-unit>
+      <trans-unit id="S7Dz.EE" resname="popover.niobiumStock">
+        <source>popover.niobiumStock</source>
+        <target><![CDATA[<h5>Stockage de niobium : +5.000.000</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="TkbcIRW" resname="building.niobiumStock">
+        <source>building.niobiumStock</source>
+        <target>Entrepôt de Niobium</target>
+      </trans-unit>
+      <trans-unit id="ZyPFbJF" resname="building.niobiumStock.desc">
+        <source>building.niobiumStock.desc</source>
+        <target>Vous regardez votre production de niobium et vous dites "Mais ou vais-je mettre tout ça!" Et bien ici !</target>
+      </trans-unit>
+      <trans-unit id="65.ri9r" resname="building.waterStock.desc">
+        <source>building.waterStock.desc</source>
+        <target>Si vous ne jurez que par le niobium, stockez tout de même votre eau... Cela pourrait servir.</target>
+      </trans-unit>
+      <trans-unit id="6oXOPi8" resname="popover.waterStock">
+        <source>popover.waterStock</source>
+        <target><![CDATA[<h5>Stockage d'eau : +5.000.000</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="amp.mNk" resname="building.waterStock">
+        <source>building.waterStock</source>
+        <target>Réservoir d'eau</target>
+      </trans-unit>
+      <trans-unit id="o9xKPqU" resname="popover.bunker">
+        <source>popover.bunker</source>
+        <target><![CDATA[<h5>Capacitée soldats : +20.000<br>Construction de tank</h5>]]></target>
+      </trans-unit>
+      <trans-unit id="j316cgf" resname="building.bunker">
+        <source>building.bunker</source>
+        <target>Fort défensif</target>
+      </trans-unit>
+      <trans-unit id="jnFKhL6" resname="building.bunker.desc">
+        <source>building.bunker.desc</source>
+        <target>Il pensait venir les mains dans les poches... Avec un fort défensif ils vont devoir se sortir les doigts pour prendre votre planète !</target>
+      </trans-unit>
+      <trans-unit id="vrlXW9a" resname="building.demolition.question">
+        <source>building.demolition.question</source>
+        <target>Souhaitez vous détruire ce bâtiment ?</target>
+      </trans-unit>
+      <trans-unit id="PkLJlCy" resname="building.niobiumStock.blocked">
+        <source>building.niobiumStock.blocked</source>
+        <target>Requis : Gestion des cargaisons niveau 1</target>
+      </trans-unit>
+      <trans-unit id="y6qQ6Aa" resname="building.waterStock.blocked">
+        <source>building.waterStock.blocked</source>
+        <target>Requis :  Gestion des cargaisons niveau 1</target>
+      </trans-unit>
+      <trans-unit id="2m0E0WK" resname="building.search.blocked">
+        <source>building.search.blocked</source>
+        <target>Requis : Développer industrie niveau 5</target>
+      </trans-unit>
+      <trans-unit id="DNf9scq" resname="building.city.blocked">
+        <source>building.city.blocked</source>
+        <target>Requis : Redéfinition urbaine niveau 1</target>
+      </trans-unit>
+      <trans-unit id="jurjrz7" resname="building.metropole.blocked">
+        <source>building.metropole.blocked</source>
+        <target>Requis : Redéfinition urbaine niveau 5</target>
+      </trans-unit>
+      <trans-unit id="VjSkhoN" resname="building.caserne.blocked">
+        <source>building.caserne.blocked</source>
+        <target>Requis : Accroissement militaire niveau 1</target>
+      </trans-unit>
+      <trans-unit id="v5JuqKs" resname="building.bunker.blocked">
+        <source>building.bunker.blocked</source>
+        <target>Requis : Accroissement militaire niveau 3</target>
+      </trans-unit>
+      <trans-unit id="qlAH3e0" resname="building.chantier.blocked">
+        <source>building.chantier.blocked</source>
+        <target>Requis : Industrie niveau 1</target>
+      </trans-unit>
+      <trans-unit id="JCj0CKv" resname="building.light.blocked">
+        <source>building.light.blocked</source>
+        <target>Requis : Vaisseaux légers niveau 1</target>
+      </trans-unit>
+      <trans-unit id="DK0PvLR" resname="building.heavy.blocked">
+        <source>building.heavy.blocked</source>
+        <target>Requis : Vaisseaux lourds niveau 1</target>
+      </trans-unit>
+      <trans-unit id="xui59Ne" resname="building.radar.blocked">
+        <source>building.radar.blocked</source>
+        <target>Requis : Scanner de système solaire niveau 1</target>
+      </trans-unit>
+      <trans-unit id="n8IXhad" resname="building.skyRadar.blocked">
+        <source>building.skyRadar.blocked</source>
+        <target>Requis : Scanner de système solaire niveau 3</target>
+      </trans-unit>
+      <trans-unit id="IOhkS2U" resname="building.brouilleur.blocked">
+        <source>building.brouilleur.blocked</source>
+        <target>Requis : Scanner de système solaire niveau 5</target>
+      </trans-unit>
+      <trans-unit id="UkUxHUG" resname="building.island.blocked">
+        <source>building.island.blocked</source>
+        <target>Requis : Expansion territoriale 1</target>
+      </trans-unit>
+      <trans-unit id="tK4a850" resname="building.orbital.blocked">
+        <source>building.orbital.blocked</source>
+        <target>Requis : Expansion territoriale niveau 2</target>
+      </trans-unit>
+      <trans-unit id=".Lmkxzn" resname="building.nuclearBase.blocked">
+        <source>building.nuclearBase.blocked</source>
+        <target>Requis : Uranium</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

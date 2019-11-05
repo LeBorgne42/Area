@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="qvIyBkY" resname="title">
+        <source>title</source>
+        <target>Rapport Automatique</target>
+      </trans-unit>
+      <trans-unit id="5QumSMJ" resname="report.title">
+        <source>report.title</source>
+        <target>Titre</target>
+      </trans-unit>
+      <trans-unit id="No0hBYh" resname="report.tutorial">
+        <source>report.tutorial</source>
+        <target><![CDATA[Ici apparaîtrons tout les rapports de votre Empire : L'arrivée de votre flotte sur une planète, le succès d'une invasion, un combat spatial, une colonisation, une vente aux marchands...etc<br>Ainsi que votre Rapport d'Empire tout les jours a 18h00 et le revenu en bitcoins de vos travailleurs.<br>Une fois votre rapport de bienvenu lu, marquez le comme lu et rendez vous sur la page «Planètes».]]></target>
+      </trans-unit>
+      <trans-unit id="YttU.jU" resname="report.tutorialBis">
+        <source>report.tutorialBis</source>
+        <target><![CDATA[vos travailleurs et soldats ont contribués a défendre votre planète contre l'envahisseur. Attention à toujours avoir des soldats sur vos planètes, sans eux vos travailleurs seraient vite submergés et anéantis.<br>Il vous reste encore plein de chose a découvrir Commandant, pour terminer ce tutoriel rendez vous sur l'onglet «Salon». N'hésitez pas à solliciter les autres joueurs si vous avez besoin d'aide !]]></target>
+      </trans-unit>
+      <trans-unit id="_GR2qik" resname="AllNewView">
+        <source>AllNewView</source>
+        <target>Marquer tout comme lu</target>
+      </trans-unit>
+      <trans-unit id="3K.rhXL" resname="deleteReport">
+        <source>deleteReport</source>
+        <target>Supprimer</target>
+      </trans-unit>
+      <trans-unit id="WdOT8ba" resname="newReport">
+        <source>newReport</source>
+        <target>Marquer lu</target>
+      </trans-unit>
+      <trans-unit id="w7xFrDU" resname="share">
+        <source>share</source>
+        <target>Générer lien de partage</target>
+      </trans-unit>
+      <trans-unit id="KDkdO8Z" resname="of">
+        <source>of</source>
+        <target>de</target>
+      </trans-unit>
+      <trans-unit id="WuhObZ_" resname="share.title">
+        <source>share.title</source>
+        <target>Rapport</target>
+      </trans-unit>
+      <trans-unit id="6gEfDJC" resname="report.defaut">
+        <source>report.defaut</source>
+        <target>Basic</target>
+      </trans-unit>
+      <trans-unit id="PYInEKx" resname="report.zombie">
+        <source>report.zombie</source>
+        <target>Zombie</target>
+      </trans-unit>
+      <trans-unit id="Xp6RKP0" resname="report.fight">
+        <source>report.fight</source>
+        <target>Combat</target>
+      </trans-unit>
+      <trans-unit id="gqRFbxX" resname="report.invade">
+        <source>report.invade</source>
+        <target>Invasion</target>
+      </trans-unit>
+      <trans-unit id="0z0uT02" resname="report.economic">
+        <source>report.economic</source>
+        <target>Economique</target>
+      </trans-unit>
+      <trans-unit id="hRI0dxL" resname="report.move">
+        <source>report.move</source>
+        <target>Flotte</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

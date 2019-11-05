@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="qvIyBkY" resname="title">
+        <source>title</source>
+        <target>Page alliance</target>
+      </trans-unit>
+      <trans-unit id="nrw6kj4" resname="ally.name">
+        <source>ally.name</source>
+        <target>Nom d'alliance :</target>
+      </trans-unit>
+      <trans-unit id="Xbnrl81" resname="ally.nbr">
+        <source>ally.nbr</source>
+        <target>Membres :</target>
+      </trans-unit>
+      <trans-unit id="4_PHYZK" resname="ally.galaxy">
+        <source>ally.galaxy</source>
+        <target>Galaxie(s) :</target>
+      </trans-unit>
+      <trans-unit id="ptAcLRF" resname="ally.planet">
+        <source>ally.planet</source>
+        <target>Planètes :</target>
+      </trans-unit>
+      <trans-unit id="Rj3rgbh" resname="ally.fleet">
+        <source>ally.fleet</source>
+        <target>Flottes :</target>
+      </trans-unit>
+      <trans-unit id="_m.GKPI" resname="ally.leader">
+        <source>ally.leader</source>
+        <target>Dirigeants</target>
+      </trans-unit>
+      <trans-unit id="RAxKXdf" resname="ally.diplomate">
+        <source>ally.diplomate</source>
+        <target>Diplomates</target>
+      </trans-unit>
+      <trans-unit id="aJIxIAR" resname="ally.recruiter">
+        <source>ally.recruiter</source>
+        <target>Recruteurs</target>
+      </trans-unit>
+      <trans-unit id="qoEDcyR" resname="ally.members">
+        <source>ally.members</source>
+        <target>Citoyens</target>
+      </trans-unit>
+      <trans-unit id="R2eP_jS" resname="ally.allied">
+        <source>ally.allied</source>
+        <target>Pacte défensif :</target>
+      </trans-unit>
+      <trans-unit id="2DVyGYK" resname="ally.pna">
+        <source>ally.pna</source>
+        <target>Pacte de non-agression :</target>
+      </trans-unit>
+      <trans-unit id=".Ol.pak" resname="ally.war">
+        <source>ally.war</source>
+        <target>Guerre :</target>
+      </trans-unit>
+      <trans-unit id="Luu0I46" resname="ally.ambassy">
+        <source>ally.ambassy</source>
+        <target>Rejoindre ambassade</target>
+      </trans-unit>
+      <trans-unit id="q5xs52g" resname="ally.level">
+        <source>ally.level</source>
+        <target>Niveau : </target>
+      </trans-unit>
+      <trans-unit id="XlQLx8u" resname="monarchy">
+        <source>monarchy</source>
+        <target>Monarchie</target>
+      </trans-unit>
+      <trans-unit id="YegaUOq" resname="democrat">
+        <source>democrat</source>
+        <target>Démocratie</target>
+      </trans-unit>
+      <trans-unit id="B.t__u7" resname="fascism">
+        <source>fascism</source>
+        <target>Fascisme</target>
+      </trans-unit>
+      <trans-unit id="UfKQN2b" resname="anarchism">
+        <source>anarchism</source>
+        <target>Anarchisme</target>
+      </trans-unit>
+      <trans-unit id="2SAdNwW" resname="communism">
+        <source>communism</source>
+        <target>Communisme</target>
+      </trans-unit>
+      <trans-unit id="4TekUT5" resname="theocrat">
+        <source>theocrat</source>
+        <target>Théocratie</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

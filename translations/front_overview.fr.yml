@@ -79,6 +79,8 @@ overview.tutorialTitle: 'Tutoriel'
 cell.spatialNone: 'Aucun vaisseaux'
 miner: 'Mine de niobium'
 extractor: 'Extracteur d''eau'
+waterStock: 'Réservoir d''eau'
+niobiumStock: 'Entrepôt de Niobium'
 city: 'Grande ville'
 metropole: Metropole
 caserne: Caserne

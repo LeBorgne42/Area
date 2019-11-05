@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="qvIyBkY" resname="title">
+        <source>title</source>
+        <target>Univers</target>
+      </trans-unit>
+      <trans-unit id="xrBxTDn" resname="tooltip.galaxy">
+        <source>tooltip.galaxy</source>
+        <target>Galaxy %position%</target>
+      </trans-unit>
+      <trans-unit id="i8pKWiv" resname="galaxy.nbr">
+        <source>galaxy.nbr</source>
+        <target>Galaxy %position%</target>
+      </trans-unit>
+      <trans-unit id="tGBywkh" resname="galaxy.players">
+        <source>galaxy.players</source>
+        <target>%players% joueurs</target>
+      </trans-unit>
+      <trans-unit id="ypb4mr5" resname="choseGalaxy">
+        <source>choseGalaxy</source>
+        <target>Choisissez une Galaxie !</target>
+      </trans-unit>
+      <trans-unit id="K1F.G9I" resname="server.open">
+        <source>server.open</source>
+        <target>Ouvert</target>
+      </trans-unit>
+      <trans-unit id="n9rpMaD" resname="server.closed">
+        <source>server.closed</source>
+        <target>Fermé</target>
+      </trans-unit>
+      <trans-unit id="ovw0T5S" resname="server.pvp">
+        <source>server.pvp</source>
+        <target>Pvp</target>
+      </trans-unit>
+      <trans-unit id="f_IpTKX" resname="server.pve">
+        <source>server.pve</source>
+        <target>Pve</target>
+      </trans-unit>
+      <trans-unit id="s_rNM0M" resname="server">
+        <source>server</source>
+        <target>Serveur</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

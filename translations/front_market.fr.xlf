@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="qvIyBkY" resname="title">
+        <source>title</source>
+        <target>Points de Guerre</target>
+      </trans-unit>
+      <trans-unit id="d8s1_FM" resname="market.text">
+        <source>market.text</source>
+        <target>Bienvenu à vous, que désirez vous acheter avec vos points de guerre ?</target>
+      </trans-unit>
+      <trans-unit id="Zl.IgtP" resname="market.planet">
+        <source>market.planet</source>
+        <target>Sélectionner planète</target>
+      </trans-unit>
+      <trans-unit id="I9mUEG." resname="market.bitcoin">
+        <source>market.bitcoin</source>
+        <target><![CDATA[Bictoins : 0.20 <img src="/img/pdg.png"> = 1 <img height="10" src="/img/coin.png">]]></target>
+      </trans-unit>
+      <trans-unit id="6WtuNkL" resname="market.worker">
+        <source>market.worker</source>
+        <target><![CDATA[Travailleurs : 2 <img src="/img/pdg.png"> = 1 <img height="10" src="/img/worker.png">]]></target>
+      </trans-unit>
+      <trans-unit id="HQAdJcf" resname="market.soldier">
+        <source>market.soldier</source>
+        <target><![CDATA[Soldats : 5 <img src="/img/pdg.png"> = 1 <img height="10" src="/img/soldier.png">]]></target>
+      </trans-unit>
+      <trans-unit id="abOQ3g3" resname="form.planet">
+        <source>form.planet</source>
+        <target>Planète</target>
+      </trans-unit>
+      <trans-unit id="GSc..hC" resname="form.nbr">
+        <source>form.nbr</source>
+        <target>nombre</target>
+      </trans-unit>
+      <trans-unit id="veb84D_" resname="form.buyMarket">
+        <source>form.buyMarket</source>
+        <target>Acheter</target>
+      </trans-unit>
+      <trans-unit id="jHr.wC3" resname="market.pdg">
+        <source>market.pdg</source>
+        <target>Vous disposez de</target>
+      </trans-unit>
+      <trans-unit id="XmB7xEF" resname="market.pdgs">
+        <source>market.pdgs</source>
+        <target>points de Guerre.</target>
+      </trans-unit>
+      <trans-unit id="kF_rVmZ" resname="quest.name">
+        <source>quest.name</source>
+        <target>Quête à accomplir</target>
+      </trans-unit>
+      <trans-unit id="9CcAayc" resname="quest.gain">
+        <source>quest.gain</source>
+        <target>Récompense</target>
+      </trans-unit>
+      <trans-unit id="cYU3rNJ" resname="quest.star">
+        <source>quest.star</source>
+        <target>Rareté</target>
+      </trans-unit>
+      <trans-unit id="bWDDWIb" resname="quest.info">
+        <source>quest.info</source>
+        <target>Chaque jour lors du rapport de l'Empire vous recevez aléatoirement trois quêtes a finir avant le prochain rapport :</target>
+      </trans-unit>
+      <trans-unit id="QG6B7Sj" resname="quest.tutorial">
+        <source>quest.tutorial</source>
+        <target><![CDATA[Tout les jours à 18h00 vous recevez votre rapport d'Empire avec ses bitcoins quotidien et 3 quêtes a accomplir en 24h, si celle-ci ne sont pas remplie elles seront supprimées. Un conseil : Ne les loupez pas ! Les points de Guerre que vous y gagnerez vous seront très utile à échanger contre des soldats, travailleurs, bitcoins ou même des vaisseaux d'élites.<br>Continuons sur la page «Alliance».]]></target>
+      </trans-unit>
+      <trans-unit id="t_ANXb7" resname="private_message">
+        <source>private_message</source>
+        <target>Envoyer un message privé</target>
+      </trans-unit>
+      <trans-unit id="HisZ2IX" resname="salon_message">
+        <source>salon_message</source>
+        <target>Écrire un message dans le salon</target>
+      </trans-unit>
+      <trans-unit id="oA.pO1w" resname="spy_planet">
+        <source>spy_planet</source>
+        <target>Sonder la planète d'un joueur</target>
+      </trans-unit>
+      <trans-unit id="wPIdRRR" resname="sell">
+        <source>sell</source>
+        <target>Vendre des ressources aux marchands</target>
+      </trans-unit>
+      <trans-unit id="mpceGnR" resname="colonize">
+        <source>colonize</source>
+        <target>Coloniser une planète</target>
+      </trans-unit>
+      <trans-unit id="71mIED1" resname="recycle">
+        <source>recycle</source>
+        <target>Recycler des ressources</target>
+      </trans-unit>
+      <trans-unit id="cgNrnZc" resname="ally_join">
+        <source>ally_join</source>
+        <target>Rejoindre/Créer une alliance</target>
+      </trans-unit>
+      <trans-unit id="XEtD5rm" resname="logo_ally">
+        <source>logo_ally</source>
+        <target>Changer le logo de l'alliance</target>
+      </trans-unit>
+      <trans-unit id="1BbF5n3" resname="build_city">
+        <source>build_city</source>
+        <target>Construire le bâtiment Grande ville</target>
+      </trans-unit>
+      <trans-unit id="5rxJ804" resname="build_metro">
+        <source>build_metro</source>
+        <target>Construire le bâtiment Metropole</target>
+      </trans-unit>
+      <trans-unit id="LsqjjWH" resname="build_heavy">
+        <source>build_heavy</source>
+        <target>Construire le bâtiment Industrie lourde</target>
+      </trans-unit>
+      <trans-unit id="WauE7i4" resname="invade">
+        <source>invade</source>
+        <target>Envahir la planète d'un joueur</target>
+      </trans-unit>
+      <trans-unit id="GIARoZ5" resname="destroy_fleet">
+        <source>destroy_fleet</source>
+        <target>Détruire une flotte adverse (non utilitaire)</target>
+      </trans-unit>
+      <trans-unit id="ZvYtGAf" resname="research">
+        <source>research</source>
+        <target>Finir une recherche</target>
+      </trans-unit>
+      <trans-unit id="32HnrdF" resname="pdg">
+        <source>pdg</source>
+        <target>Dépenser des Points de Guerre</target>
+      </trans-unit>
+      <trans-unit id="FqzN9Mz" resname="cohort">
+        <source>cohort</source>
+        <target>Créer une nouvelle Cohorte</target>
+      </trans-unit>
+      <trans-unit id="4MCMKx9" resname="soldier">
+        <source>soldier</source>
+        <target>Entraîner des soldats</target>
+      </trans-unit>
+      <trans-unit id="wtonALh" resname="scientist">
+        <source>scientist</source>
+        <target>Entraîner des scientifiques</target>
+      </trans-unit>
+      <trans-unit id="7FpeCGu" resname="ships">
+        <source>ships</source>
+        <target>Construire des vaisseaux</target>
+      </trans-unit>
+      <trans-unit id="NZjOb5Z" resname="logo">
+        <source>logo</source>
+        <target>Changez votre avatar</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

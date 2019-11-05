@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="qvIyBkY" resname="title">
+        <source>title</source>
+        <target>Valider le compte</target>
+      </trans-unit>
+      <trans-unit id="B0VCgO_" resname="form.username">
+        <source>form.username</source>
+        <target>Pseudo</target>
+      </trans-unit>
+      <trans-unit id="yjqmSBK" resname="form.password">
+        <source>form.password</source>
+        <target>Mot de passe</target>
+      </trans-unit>
+      <trans-unit id="3IGOm9D" resname="form.email">
+        <source>form.email</source>
+        <target>Email</target>
+      </trans-unit>
+      <trans-unit id="IJ79sa2" resname="form.confirm">
+        <source>form.confirm</source>
+        <target>Enregistrer</target>
+      </trans-unit>
+      <trans-unit id="2Ki0ajs" resname="info.changes">
+        <source>info.changes</source>
+        <target>Changez les infos de votre compte test, vous ne pouvez le faire qu'une fois.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

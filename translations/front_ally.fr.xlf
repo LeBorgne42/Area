@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="qvIyBkY" resname="title">
+        <source>title</source>
+        <target>Alliance</target>
+      </trans-unit>
+      <trans-unit id="YZdZVQP" resname="delete">
+        <source>delete</source>
+        <target>Supprimer l'alliance</target>
+      </trans-unit>
+      <trans-unit id="qoEDcyR" resname="ally.members">
+        <source>ally.members</source>
+        <target>membres</target>
+      </trans-unit>
+      <trans-unit id="eqR0LZq" resname="form.name">
+        <source>form.name</source>
+        <target>Nom de l'alliance (max 15)</target>
+      </trans-unit>
+      <trans-unit id="BJZrngn" resname="form.sigle">
+        <source>form.sigle</source>
+        <target>Sigle (max 4)</target>
+      </trans-unit>
+      <trans-unit id="5slGOln" resname="form.slogan">
+        <source>form.slogan</source>
+        <target>Cri de ralliement (max 30)</target>
+      </trans-unit>
+      <trans-unit id="WbmNFTg" resname="form.taxe">
+        <source>form.taxe</source>
+        <target>(1 à 10%)</target>
+      </trans-unit>
+      <trans-unit id="Fi2TPoc" resname="form.taxeAlly">
+        <source>form.taxeAlly</source>
+        <target>Taxe d'alliance :</target>
+      </trans-unit>
+      <trans-unit id="N7xyN0P" resname="form.send">
+        <source>form.send</source>
+        <target>Créer une alliance</target>
+      </trans-unit>
+      <trans-unit id="6_Cta_a" resname="form.add">
+        <source>form.add</source>
+        <target>Envoyer proposition</target>
+      </trans-unit>
+      <trans-unit id="4EF9w8W" resname="form.transfert">
+        <source>form.transfert</source>
+        <target>Transfert</target>
+      </trans-unit>
+      <trans-unit id="6LscGBH" resname="form.num">
+        <source>form.num</source>
+        <target>nombre</target>
+      </trans-unit>
+      <trans-unit id="sYW13kw" resname="form.exchangeType">
+        <source>form.exchangeType</source>
+        <target>Type de transfert</target>
+      </trans-unit>
+      <trans-unit id="MvdztL2" resname="form.pactType">
+        <source>form.pactType</source>
+        <target>Type de pacte</target>
+      </trans-unit>
+      <trans-unit id="3zrClAZ" resname="form.image">
+        <source>form.image</source>
+        <target>Image</target>
+      </trans-unit>
+      <trans-unit id="qeh0NgM" resname="form.allyName">
+        <source>form.allyName</source>
+        <target>Sigle de l'alliance</target>
+      </trans-unit>
+      <trans-unit id="h2JZhLm" resname="form.description">
+        <source>form.description</source>
+        <target>Description de l'alliance</target>
+      </trans-unit>
+      <trans-unit id="b2n4Q1X" resname="form.nameUser">
+        <source>form.nameUser</source>
+        <target>Pseudo du joueur</target>
+      </trans-unit>
+      <trans-unit id="o0PIkm1" resname="Donner">
+        <source>Donner</source>
+        <target>Donner</target>
+      </trans-unit>
+      <trans-unit id="QeIu2TN" resname="Retirer">
+        <source>Retirer</source>
+        <target>Retirer</target>
+      </trans-unit>
+      <trans-unit id="plHuvxo" resname="ally.admin">
+        <source>ally.admin</source>
+        <target>Administration</target>
+      </trans-unit>
+      <trans-unit id="9fVXlYQ" resname="ally.add">
+        <source>ally.add</source>
+        <target>Ajouter un membre</target>
+      </trans-unit>
+      <trans-unit id="dPb4cUT" resname="ally.delete">
+        <source>ally.delete</source>
+        <target>Supprimer alliance</target>
+      </trans-unit>
+      <trans-unit id="OkY.7Fp" resname="ally.memberGrade">
+        <source>ally.memberGrade</source>
+        <target>Rang</target>
+      </trans-unit>
+      <trans-unit id="3T6jSPr" resname="ally.memberName">
+        <source>ally.memberName</source>
+        <target>Pseudo</target>
+      </trans-unit>
+      <trans-unit id="6NkpGAs" resname="ally.memberDateJoin">
+        <source>ally.memberDateJoin</source>
+        <target>Adhésion</target>
+      </trans-unit>
+      <trans-unit id="wfGDLtE" resname="ally.memberPoint">
+        <source>ally.memberPoint</source>
+        <target>Points</target>
+      </trans-unit>
+      <trans-unit id=".PWAQMz" resname="ally.memberConnected">
+        <source>ally.memberConnected</source>
+        <target>En ligne</target>
+      </trans-unit>
+      <trans-unit id="s3DW.KH" resname="ally.deleteText">
+        <source>ally.deleteText</source>
+        <target>Êtes vous bien sûr de vouloir supprimer votre alliance ?</target>
+      </trans-unit>
+      <trans-unit id="OjPPcBg" resname="ally.proposalAt">
+        <source>ally.proposalAt</source>
+        <target>Date de proposition</target>
+      </trans-unit>
+      <trans-unit id="o0Uj.9W" resname="ally.cancelAsk">
+        <source>ally.cancelAsk</source>
+        <target>Annuler proposition</target>
+      </trans-unit>
+      <trans-unit id="bZ4L4i_" resname="ally.cancel">
+        <source>ally.cancel</source>
+        <target>Cliquez ici pour annuler</target>
+      </trans-unit>
+      <trans-unit id="TwtsSDp" resname="ally.allyName">
+        <source>ally.allyName</source>
+        <target>Nom d'alliance</target>
+      </trans-unit>
+      <trans-unit id="3NdNQWj" resname="ally.refuseProp">
+        <source>ally.refuseProp</source>
+        <target>Refuser la proposition reçue</target>
+      </trans-unit>
+      <trans-unit id="PItyk2s" resname="ally.refuse">
+        <source>ally.refuse</source>
+        <target>Cliquez ici pour refuser</target>
+      </trans-unit>
+      <trans-unit id="y8qIfy6" resname="ally.acceptProp">
+        <source>ally.acceptProp</source>
+        <target>Accepter la proposition</target>
+      </trans-unit>
+      <trans-unit id="wj8CT6s" resname="ally.accept">
+        <source>ally.accept</source>
+        <target>Rejoindre l'alliance</target>
+      </trans-unit>
+      <trans-unit id="mWcBXmP" resname="ally.leave">
+        <source>ally.leave</source>
+        <target>Quitter alliance</target>
+      </trans-unit>
+      <trans-unit id="TAoTlLf" resname="ally.leaveText">
+        <source>ally.leaveText</source>
+        <target>Êtes vous bien sûr de vouloir quitter votre alliance ?</target>
+      </trans-unit>
+      <trans-unit id="rxkxkLj" resname="leave">
+        <source>leave</source>
+        <target>Quitter l'alliance</target>
+      </trans-unit>
+      <trans-unit id="f.vksev" resname="ally.memberKick">
+        <source>ally.memberKick</source>
+        <target>Exclure</target>
+      </trans-unit>
+      <trans-unit id="j8lEMi_" resname="ally.kick">
+        <source>ally.kick</source>
+        <target>Exclure</target>
+      </trans-unit>
+      <trans-unit id="XqEwP9v" resname="ally.allyUsers">
+        <source>ally.allyUsers</source>
+        <target>Choisir membre</target>
+      </trans-unit>
+      <trans-unit id="QrujCJL" resname="ally.canRecruit">
+        <source>ally.canRecruit</source>
+        <target>Recruter</target>
+      </trans-unit>
+      <trans-unit id="lJfFfXL" resname="ally.gradeName">
+        <source>ally.gradeName</source>
+        <target>Nom du grade</target>
+      </trans-unit>
+      <trans-unit id="zBKJiP0" resname="ally.canPeace">
+        <source>ally.canPeace</source>
+        <target>Pacte/Pna</target>
+      </trans-unit>
+      <trans-unit id="wqKsFQi" resname="ally.canKick">
+        <source>ally.canKick</source>
+        <target>Exclure</target>
+      </trans-unit>
+      <trans-unit id="TQpes.m" resname="ally.canWar">
+        <source>ally.canWar</source>
+        <target>Guerre</target>
+      </trans-unit>
+      <trans-unit id="ftnQBH6" resname="ally.pacts">
+        <source>ally.pacts</source>
+        <target>Pactes</target>
+      </trans-unit>
+      <trans-unit id="CSkys_3" resname="form.send.vote">
+        <source>form.send.vote</source>
+        <target>Voter pour votre président</target>
+      </trans-unit>
+      <trans-unit id="oBzP3bR" resname="ally.alliedName">
+        <source>ally.alliedName</source>
+        <target>Pacte défensif</target>
+      </trans-unit>
+      <trans-unit id="jlX3rlI" resname="ally.cancelPact">
+        <source>ally.cancelPact</source>
+        <target>Rompre pacte</target>
+      </trans-unit>
+      <trans-unit id="JKzwkid" resname="ally.pnaName">
+        <source>ally.pnaName</source>
+        <target>Alliance en pna</target>
+      </trans-unit>
+      <trans-unit id="9C81rvM" resname="ally.cancelPna">
+        <source>ally.cancelPna</source>
+        <target>Rompre pna</target>
+      </trans-unit>
+      <trans-unit id="qOgX_GP" resname="ally.warName">
+        <source>ally.warName</source>
+        <target>Alliance ennemie</target>
+      </trans-unit>
+      <trans-unit id="LZqwcG_" resname="ally.cancelwar">
+        <source>ally.cancelwar</source>
+        <target>Proposer paix</target>
+      </trans-unit>
+      <trans-unit id="v4vLqWk" resname="ally.found">
+        <source>ally.found</source>
+        <target>Banque</target>
+      </trans-unit>
+      <trans-unit id="6mj0CkX" resname="ally.foundTotal">
+        <source>ally.foundTotal</source>
+        <target>Fond total de l'alliance :</target>
+      </trans-unit>
+      <trans-unit id="l24g1w3" resname="ally.levelUp">
+        <source>ally.levelUp</source>
+        <target>Monter niveau de l'alliance</target>
+      </trans-unit>
+      <trans-unit id="86cTPH2" resname="ally.levelUpMembers">
+        <source>ally.levelUpMembers</source>
+        <target>Limite de membres augmentée à </target>
+      </trans-unit>
+      <trans-unit id="3c8V9iX" resname="ally.levelUpCost">
+        <source>ally.levelUpCost</source>
+        <target>Coût : </target>
+      </trans-unit>
+      <trans-unit id="q5xs52g" resname="ally.level">
+        <source>ally.level</source>
+        <target>Niveau : </target>
+      </trans-unit>
+      <trans-unit id="awqcUhW" resname="ally.exchangerName">
+        <source>ally.exchangerName</source>
+        <target>Membre</target>
+      </trans-unit>
+      <trans-unit id="Gab30QQ" resname="ally.amount">
+        <source>ally.amount</source>
+        <target>Montant</target>
+      </trans-unit>
+      <trans-unit id="PmygEV6" resname="ally.donateAt">
+        <source>ally.donateAt</source>
+        <target>Statut</target>
+      </trans-unit>
+      <trans-unit id="xIAyz46" resname="ally.statut">
+        <source>ally.statut</source>
+        <target>Statut</target>
+      </trans-unit>
+      <trans-unit id="nW.nlNb" resname="ally.signedAt">
+        <source>ally.signedAt</source>
+        <target>Signé le</target>
+      </trans-unit>
+      <trans-unit id="2ZrhNc6" resname="ally.accepted">
+        <source>ally.accepted</source>
+        <target>Accepté</target>
+      </trans-unit>
+      <trans-unit id="bhvRHa2" resname="ally.pactWaiting">
+        <source>ally.pactWaiting</source>
+        <target>En attente</target>
+      </trans-unit>
+      <trans-unit id="45QXWYD" resname="ally.acceptCancel">
+        <source>ally.acceptCancel</source>
+        <target>Accepter/Refuser</target>
+      </trans-unit>
+      <trans-unit id="1kxp6G4" resname="ally.acceptPact">
+        <source>ally.acceptPact</source>
+        <target>Accepter</target>
+      </trans-unit>
+      <trans-unit id="cxI7Mo4" resname="ally.refusePact">
+        <source>ally.refusePact</source>
+        <target>Refuser</target>
+      </trans-unit>
+      <trans-unit id="__Rm4cE" resname="ally.refuseCancelPact">
+        <source>ally.refuseCancelPact</source>
+        <target>Annuler</target>
+      </trans-unit>
+      <trans-unit id="TeM2g5n" resname="ally.priority">
+        <source>ally.priority</source>
+        <target>Priorité</target>
+      </trans-unit>
+      <trans-unit id="IHUf8ri" resname="ally.connected">
+        <source>ally.connected</source>
+        <target>Oui</target>
+      </trans-unit>
+      <trans-unit id="_pBoWdq" resname="ally.notConnected">
+        <source>ally.notConnected</source>
+        <target>Non</target>
+      </trans-unit>
+      <trans-unit id="T4JPDKs" resname="tooltip.changeGrade">
+        <source>tooltip.changeGrade</source>
+        <target>Cliquez sur le rang du joueur pour changer son grade.</target>
+      </trans-unit>
+      <trans-unit id="Df4bEFP" resname="ally.banktitle">
+        <source>ally.banktitle</source>
+        <target>Banque de l'alliance</target>
+      </trans-unit>
+      <trans-unit id="L6wxuUo" resname="ally.taxe">
+        <source>ally.taxe</source>
+        <target>taxe :</target>
+      </trans-unit>
+      <trans-unit id="QC834jh" resname="ally.pactsTitle">
+        <source>ally.pactsTitle</source>
+        <target>Gestion des Pactes/Pnas/Guerre de l'alliance</target>
+      </trans-unit>
+      <trans-unit id="M16exqk" resname="ally.gradeTitle">
+        <source>ally.gradeTitle</source>
+        <target>Administration alliance</target>
+      </trans-unit>
+      <trans-unit id="4GRfR0B" resname="ally.addTitle">
+        <source>ally.addTitle</source>
+        <target>Recrutement de joueurs</target>
+      </trans-unit>
+      <trans-unit id="ZDiGJi4" resname="ally.machiavel">
+        <source>ally.machiavel</source>
+        <target>Vous avez trahis vos alliés</target>
+      </trans-unit>
+      <trans-unit id="ehzeGxH" resname="ally.traitor">
+        <source>ally.traitor</source>
+        <target>Vous avez été trahis</target>
+      </trans-unit>
+      <trans-unit id="wPnWRjV" resname="ally.banAlly">
+        <source>ally.banAlly</source>
+        <target>Vous pourrez rejoindre/créer une alliance dans : </target>
+      </trans-unit>
+      <trans-unit id="tohs44N" resname="ally.makePeace">
+        <source>ally.makePeace</source>
+        <target>Faire la paix</target>
+      </trans-unit>
+      <trans-unit id="OLILzaQ" resname="ally.makePeaceTitle">
+        <source>ally.makePeaceTitle</source>
+        <target>Proposition/demande de paix</target>
+      </trans-unit>
+      <trans-unit id="x50BlwZ" resname="ally.askFor">
+        <source>ally.askFor</source>
+        <target>Type</target>
+      </trans-unit>
+      <trans-unit id="w9wlltN" resname="ally.attrRetr">
+        <source>ally.attrRetr</source>
+        <target>Offre/Demande</target>
+      </trans-unit>
+      <trans-unit id="32h4HID" resname="ally.listNbr">
+        <source>ally.listNbr</source>
+        <target>Valeurs</target>
+      </trans-unit>
+      <trans-unit id="GJNdbrk" resname="ally.send">
+        <source>ally.send</source>
+        <target>Signer</target>
+      </trans-unit>
+      <trans-unit id="20yGP9Z" resname="ally.takePlanet">
+        <source>ally.takePlanet</source>
+        <target>Nombre de planètes</target>
+      </trans-unit>
+      <trans-unit id="fmgRsGH" resname="ally.takeTaxe">
+        <source>ally.takeTaxe</source>
+        <target>Bitcoins reversé par jour</target>
+      </trans-unit>
+      <trans-unit id="cH2bcYD" resname="ally.takePdg">
+        <source>ally.takePdg</source>
+        <target>Pourcentage des pdg</target>
+      </trans-unit>
+      <trans-unit id="Soucmyv" resname="ally.peacePropal">
+        <source>ally.peacePropal</source>
+        <target>Les propositions ennemies de paix</target>
+      </trans-unit>
+      <trans-unit id="A4CD23t" resname="ally.peaceOffer">
+        <source>ally.peaceOffer</source>
+        <target>Vos propositions de paix</target>
+      </trans-unit>
+      <trans-unit id="b4KGk3X" resname="ally.give">
+        <source>ally.give</source>
+        <target>Proposer</target>
+      </trans-unit>
+      <trans-unit id="WWRBKXm" resname="ally.claim">
+        <source>ally.claim</source>
+        <target>Réclamer</target>
+      </trans-unit>
+      <trans-unit id="UxCRbkr" resname="ally.acceptPeace">
+        <source>ally.acceptPeace</source>
+        <target>Accepter les termes</target>
+      </trans-unit>
+      <trans-unit id="sMjuVHU" resname="ally.removePeace">
+        <source>ally.removePeace</source>
+        <target>Annuler la proposition</target>
+      </trans-unit>
+      <trans-unit id="VqM0.zI" resname="ally.peaceName">
+        <source>ally.peaceName</source>
+        <target>Alliance en paix</target>
+      </trans-unit>
+      <trans-unit id="CQBHMcx" resname="ally.remainPeace">
+        <source>ally.remainPeace</source>
+        <target>Temps restant</target>
+      </trans-unit>
+      <trans-unit id="31BHkQU" resname="ally.statusPeace">
+        <source>ally.statusPeace</source>
+        <target>Statut</target>
+      </trans-unit>
+      <trans-unit id="7atHE6Q" resname="ally.warWin">
+        <source>ally.warWin</source>
+        <target>Victoire</target>
+      </trans-unit>
+      <trans-unit id="yoUYvFJ" resname="ally.warLose">
+        <source>ally.warLose</source>
+        <target>Défaite</target>
+      </trans-unit>
+      <trans-unit id="i0D_Sjf" resname="ally.pdgTotal">
+        <source>ally.pdgTotal</source>
+        <target>Fond de points de Guerre : </target>
+      </trans-unit>
+      <trans-unit id="Q545Is9" resname="ally.type">
+        <source>ally.type</source>
+        <target>Type</target>
+      </trans-unit>
+      <trans-unit id="bpMsLDY" resname="ally.pdgDonate">
+        <source>ally.pdgDonate</source>
+        <target>PDG</target>
+      </trans-unit>
+      <trans-unit id="uxXlrQJ" resname="ally.contentDonate">
+        <source>ally.contentDonate</source>
+        <target>Raison</target>
+      </trans-unit>
+      <trans-unit id="_yBKG.U" resname="ally.bitcoinDonate">
+        <source>ally.bitcoinDonate</source>
+        <target>Bitcoins</target>
+      </trans-unit>
+      <trans-unit id="xZ6ItyU" resname="ally.exchangeAccepted">
+        <source>ally.exchangeAccepted</source>
+        <target>Acceptée</target>
+      </trans-unit>
+      <trans-unit id="QWtInxw" resname="ally.exchangeWaiting">
+        <source>ally.exchangeWaiting</source>
+        <target>En attente</target>
+      </trans-unit>
+      <trans-unit id="L_1JIdi" resname="ally.exchangeAccept">
+        <source>ally.exchangeAccept</source>
+        <target>Oui</target>
+      </trans-unit>
+      <trans-unit id="_IamZxX" resname="ally.exchangeRefuse">
+        <source>ally.exchangeRefuse</source>
+        <target>Non</target>
+      </trans-unit>
+      <trans-unit id="tMvYK60" resname="ally.formBank">
+        <source>ally.formBank</source>
+        <target>Transaction alliance :</target>
+      </trans-unit>
+      <trans-unit id="kogZqcc" resname="ally.formGivePdg">
+        <source>ally.formGivePdg</source>
+        <target>Transaction de pdg</target>
+      </trans-unit>
+      <trans-unit id="Rh0tNKY" resname="ally.ranked">
+        <source>ally.ranked</source>
+        <target>Liste d'Alliances crées</target>
+      </trans-unit>
+      <trans-unit id="KhhULPI" resname="ally.proposals">
+        <source>ally.proposals</source>
+        <target>Proposition(s) de recrutement</target>
+      </trans-unit>
+      <trans-unit id="HNcYDdh" resname="ally.usersRecrut">
+        <source>ally.usersRecrut</source>
+        <target>Joueurs actifs sans alliance :</target>
+      </trans-unit>
+      <trans-unit id="r38NzrK" resname="tooltip.takePlanet">
+        <source>tooltip.takePlanet</source>
+        <target>Nombre de planète que vous demandez/offrez pour la paix(selectionné parmit les meilleurs).</target>
+      </trans-unit>
+      <trans-unit id="q37vdZ0" resname="tooltip.takeTaxe">
+        <source>tooltip.takeTaxe</source>
+        <target>Taxe que vous percevrez chaque jour pendant 2 semaines sur leurs revenus.</target>
+      </trans-unit>
+      <trans-unit id="D9YuxLs" resname="tooltip.takePdg">
+        <source>tooltip.takePdg</source>
+        <target>Taxe que vous recevrez pour chaque gain de pdg gagner en combat.</target>
+      </trans-unit>
+      <trans-unit id="KbzpVyL" resname="tooltip.sendPeace">
+        <source>tooltip.sendPeace</source>
+        <target>Si la paix est signé, celle-ci durera 2 semaines, aucun combat et aucune invasion ne sera possible durant cette période.</target>
+      </trans-unit>
+      <trans-unit id="kQynMdo" resname="rank.ally">
+        <source>rank.ally</source>
+        <target>Nom d'Alliance</target>
+      </trans-unit>
+      <trans-unit id="Zz8APCh" resname="rank.members">
+        <source>rank.members</source>
+        <target>Membres</target>
+      </trans-unit>
+      <trans-unit id="SKPNyxT" resname="rank.createdAt">
+        <source>rank.createdAt</source>
+        <target>Crée le</target>
+      </trans-unit>
+      <trans-unit id="4ItEhDE" resname="rank.user">
+        <source>rank.user</source>
+        <target>Nom du joueur</target>
+      </trans-unit>
+      <trans-unit id="gALA287" resname="rank.lastActivity">
+        <source>rank.lastActivity</source>
+        <target>Dernière activitée le</target>
+      </trans-unit>
+      <trans-unit id="Q.xhOA4" resname="rank.politic">
+        <source>rank.politic</source>
+        <target>Régime politique</target>
+      </trans-unit>
+      <trans-unit id="NuJ_LtY" resname="rank.logo">
+        <source>rank.logo</source>
+        <target>Logo</target>
+      </trans-unit>
+      <trans-unit id="pgACP6i" resname="ally.list">
+        <source>ally.list</source>
+        <target>Liste d'Alliances</target>
+      </trans-unit>
+      <trans-unit id="QG6B7Sj" resname="quest.tutorial">
+        <source>quest.tutorial</source>
+        <target><![CDATA[Area Universe se déroule dans un vaste univers, il est déconseillé de rester seul trop longtemps si vous voulez survivre... Ici vous pourrez plus tard créer votre propre alliance ou encore accepter l'invitation d'une autre alliance(la page «Classement» est un bon début pour chercher une alliance). Faire partit d'une alliance vous donne un bonus de production de 20% en ressources.<br> Passons aux choses sérieuses et rendons nous au «Chantier spatial».]]></target>
+      </trans-unit>
+      <trans-unit id="XlQLx8u" resname="monarchy">
+        <source>monarchy</source>
+        <target>Monarchie</target>
+      </trans-unit>
+      <trans-unit id="YegaUOq" resname="democrat">
+        <source>democrat</source>
+        <target>Démocratie</target>
+      </trans-unit>
+      <trans-unit id="B.t__u7" resname="fascism">
+        <source>fascism</source>
+        <target>Fascisme</target>
+      </trans-unit>
+      <trans-unit id="UfKQN2b" resname="anarchism">
+        <source>anarchism</source>
+        <target>Anarchisme</target>
+      </trans-unit>
+      <trans-unit id="2SAdNwW" resname="communism">
+        <source>communism</source>
+        <target>Communisme</target>
+      </trans-unit>
+      <trans-unit id="4TekUT5" resname="theocrat">
+        <source>theocrat</source>
+        <target>Théocratie</target>
+      </trans-unit>
+      <trans-unit id="iQYT6bx" resname="ally.member.kick.question">
+        <source>ally.member.kick.question</source>
+        <target>Souhaitez vous exclure ce membre ?</target>
+      </trans-unit>
+      <trans-unit id="AAFu8mi" resname="ally.leave.question">
+        <source>ally.leave.question</source>
+        <target>Souhaitez vous quitter l'alliance ?</target>
+      </trans-unit>
+      <trans-unit id="a1Q.NXK" resname="ally.delete.question">
+        <source>ally.delete.question</source>
+        <target>Souhaitez vous détruire l'alliance ?</target>
+      </trans-unit>
+      <trans-unit id="4qo1DSh" resname="form.give">
+        <source>form.give</source>
+        <target>Donner</target>
+      </trans-unit>
+      <trans-unit id="TcgNGui" resname="form.take">
+        <source>form.take</source>
+        <target>Retirer</target>
+      </trans-unit>
+      <trans-unit id="oPdRtj4" resname="form.proposal">
+        <source>form.proposal</source>
+        <target>Proposer</target>
+      </trans-unit>
+      <trans-unit id="Ft7bXRw" resname="form.claim">
+        <source>form.claim</source>
+        <target>Réclamer</target>
+      </trans-unit>
+      <trans-unit id="LQTSLHb" resname="form.non">
+        <source>form.non</source>
+        <target>Aucune</target>
+      </trans-unit>
+      <trans-unit id="1qRDSW2" resname="form.none">
+        <source>form.none</source>
+        <target>Aucun</target>
+      </trans-unit>
+      <trans-unit id="2rrSMlj" resname="form.defensive">
+        <source>form.defensive</source>
+        <target>Pacte défensif</target>
+      </trans-unit>
+      <trans-unit id="CXyeCPL" resname="form.pna">
+        <source>form.pna</source>
+        <target>Pacte de non-agression</target>
+      </trans-unit>
+      <trans-unit id="P_nvHzy" resname="form.war">
+        <source>form.war</source>
+        <target>Déclarer guerre</target>
+      </trans-unit>
+      <trans-unit id="y.d1y0h" resname="form.bitcoin">
+        <source>form.bitcoin</source>
+        <target>Bitcoin</target>
+      </trans-unit>
+      <trans-unit id="67qKUJU" resname="form.pdg">
+        <source>form.pdg</source>
+        <target>PDG</target>
+      </trans-unit>
+      <trans-unit id="idN0Syj" resname="form.content">
+        <source>form.content</source>
+        <target>Raison de la transaction.</target>
+      </trans-unit>
+      <trans-unit id="r6MHm9g" resname="pdgImg">
+        <source>pdgImg</source>
+        <target>Points de Guerre</target>
+      </trans-unit>
+      <trans-unit id="DqzFjv7" resname="bitcoinImg">
+        <source>bitcoinImg</source>
+        <target>Bitcoin</target>
+      </trans-unit>
+      <trans-unit id="OujO8ey" resname="ally.advantagesPolitic">
+        <source>ally.advantagesPolitic</source>
+        <target>Avantages Politiques :</target>
+      </trans-unit>
+      <trans-unit id="cp1rrIo" resname="tooltip.communism">
+        <source>tooltip.communism</source>
+        <target><![CDATA[<div class="text-left"><h3 class="text-vert">Pros :</h3><ul><li><span class="text-vert">Un</span> membre d'alliance supplémentaire.</li><li><span class="text-vert">+20%</span> d'attaque contre les alliances fascistes.</li><li>Les 7 recherches communistes suivantes :<ul><li><span class="text-vert">+100%</span> vitesse de recyclage.</li><li><span class="text-vert">+100%</span> défense des travailleurs.</li><li><span class="text-vert">+50%</span> puissance des vaisseaux.</li><li><span class="text-vert">-50%</span> coût d'entretien des soldats.</li><li><span class="text-vert">-25%</span> coût recrutement des soldats.</li><li><span class="text-vert">+5</span> planète via les invasions.</li><li><span class="text-vert">+50%</span> gain de points de Guerre.</li></ul></li></ul><h3 class="text-rouge">Cons :</h3><ul><li>Taxe fixée automatiquement a <span class="text-rouge">50%</span>.</li><li>Tout les membres ont le <span class="text-rouge">statut de dirigeant</span>.</li><li>Impossibilité de <span class="text-rouge">quitter</span> l'alliance.</li></ul></div>]]></target>
+      </trans-unit>
+      <trans-unit id="t9wHQqO" resname="tooltip.fascism">
+        <source>tooltip.fascism</source>
+        <target><![CDATA[<div class="text-left"><h3 class="text-vert">Pros :</h3><ul><li><span class="text-vert">Diminution</span> de la menace Zombie.</li><li><span class="text-vert">+20%</span> d'attaque contre les alliances démocratiques.</li><li><span class="text-vert">Seul</span> le Dirigeant est affiché publiquement.</li><li>Les 7 recherches fascistes suivantes :<ul><li><span class="text-vert">+100%</span> production de travailleurs.</li><li><span class="text-vert">+50%</span> puissance des vaisseaux.</li><li><span class="text-vert">+75%</span> capacitée des barges d'invasions.</li><li><span class="text-vert">+50%</span> force des soldats.</li><li><span class="text-vert">-100%</span> coût d'entretien des tanks.</li><li><span class="text-vert">+50</span> défense des tanks.</li><li><span class="text-vert">+5</span> planète via les invasions.</li></ul></li></ul><h3 class="text-rouge">Cons :</h3><ul><li>Si le dirigeant est mit <span class="text-rouge">game over</span> l'alliance est dissoute.</li><li>Impossibilité de <span class="text-rouge">quitter</span> l'alliance.</li><li>Impossibilité de <span class="text-rouge">supprimer</span> l'alliance.</li><li><span class="text-rouge">Un</span> membre d'alliance en moins.</li><li>Le Dirigeant est le <span class="text-rouge">seul</span> chef de l'alliance.</li></ul></div>]]></target>
+      </trans-unit>
+      <trans-unit id="3Gl1Y98" resname="tooltip.democrat">
+        <source>tooltip.democrat</source>
+        <target><![CDATA[<div class="text-left"><h3 class="text-vert">Pros :</h3><ul><li><span class="text-vert">Vote</span> pour désigner Président.</li><li><span class="text-vert">+20%</span> d'attaque contre les alliances communistes.</li><li>Les joueurs peuvent <span class="text-vert">quitter</span> l'alliance.</li><li>Les 7 recherches capitalistes suivantes :<ul><li><span class="text-vert">+35%</span> production de ressources.</li><li><span class="text-vert">+50%</span> vitesse des recherches.</li><li><span class="text-vert">-100%</span> coût d'entretien des scientifiques.</li><li><span class="text-vert">+100%</span> taille des cargos.</li><li><span class="text-vert">+50%</span> armure des vaisseaux.</li><li><span class="text-vert">+25%</span> gain lors de vente aux marchands.</li><li><span class="text-vert">+5</span> planète colonisable.</li></ul></li></ul><h3 class="text-rouge">Cons :</h3><ul><li>Tout les membres de l'alliance sont <span class="text-rouge">connus</span>.</li><li>La <span class="text-rouge">position</span> de la première planète est affichées.</li></ul></div>]]></target>
+      </trans-unit>
+      <trans-unit id="_XiJ2wL" resname="advice.fascism">
+        <source>advice.fascism</source>
+        <target>Défensif</target>
+      </trans-unit>
+      <trans-unit id="z7ljzVO" resname="advice.communism">
+        <source>advice.communism</source>
+        <target>Offensif</target>
+      </trans-unit>
+      <trans-unit id="SD9qd_X" resname="advice.democrat">
+        <source>advice.democrat</source>
+        <target>Économique</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

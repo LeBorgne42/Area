@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="qvIyBkY" resname="title">
+        <source>title</source>
+        <target>Salon</target>
+      </trans-unit>
+      <trans-unit id="idN0Syj" resname="form.content">
+        <source>form.content</source>
+        <target>Attention nous rappelons que les insultes/menaces seront sanctionnées.</target>
+      </trans-unit>
+      <trans-unit id="F8eseLz" resname="form.sendMessage">
+        <source>form.sendMessage</source>
+        <target>envoyer</target>
+      </trans-unit>
+      <trans-unit id="yaSPE6." resname="salon.close">
+        <source>salon.close</source>
+        <target>Fermer ce salon</target>
+      </trans-unit>
+      <trans-unit id="ACcM9j_" resname="logout">
+        <source>logout</source>
+        <target>Disconnect</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

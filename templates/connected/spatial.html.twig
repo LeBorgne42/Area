@@ -5,7 +5,6 @@
 {% block title %}{{ 'title'|trans }}{% endblock %}
 
 {% block body %}
-<script type="text/javascript" src="{{ asset('build/spatial.js') }}"></script>
     {% set bargeBonus = 1000 * (1 + (app.user.getPoliticBarge() / 4)) %}
     {% set recycleurBonus = 500 + (app.user.getPoliticRecycleur() * 200) %}
     {% set cargoBonus = 1.2 + (app.user.getPoliticCargo() / 5) %}

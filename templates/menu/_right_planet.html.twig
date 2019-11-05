@@ -2,6 +2,7 @@
 
     {% set allTuto = app.user.getTutorial() %}
 <nav class="navbar-right text-center pr-4 hideForLittle">
+    {% if allPlanets|length > 2 %}
     {% if allTuto > 22 %}<a href="{{ path('zombie', {'usePlanet': usePlanet.getId()}) }}">{% endif %}
         <div data-toggle="tooltip" data-placement="left" title="{{ 'tooltip.zombie'|trans }}" class="mb-4 bg-right px-4 py-2 zombie-right{% if allTuto == 51 %} tutorial-show{% endif %}">
             <div class="pt-2 float-left"><img height="32" width="32" src="{{ asset('img/zombie_indic.gif') }}"></div>
@@ -15,6 +16,7 @@
             </div>
         </div>
         {% if allTuto > 22 %}</a>{% endif %}
+    {% endif %}
     <div {% if usePlanet.getOffensiveFleet(app.user) == 'ennemy' %} data-toggle="tooltip" data-placement="bottom" title="{{ 'embargo'|trans }}"{% endif %} class="currentPlanet mb-4 bg-right px-4 py-2{% if usePlanet.getOffensiveFleet(app.user) == 'ennemy' %} planetFull{% elseif usePlanet.getConstruct() is null and (usePlanet.getGround() != usePlanet.getGroundPlace()) %} constructFree{% endif %}">
         <div class="pt-2 float-left"><a href="{{ usePlanet.getId() }}"><img height="32" width="32" src="{{ vich_uploader_asset(usePlanet, 'imageFile') }}"></a></div>
         <div class="float-right">

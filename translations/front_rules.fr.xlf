@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="qvIyBkY" resname="title">
+        <source>title</source>
+        <target>Réglement</target>
+      </trans-unit>
+      <trans-unit id="OYmRAJ2" resname="menu">
+        <source>menu</source>
+        <target>Réglement</target>
+      </trans-unit>
+      <trans-unit id="o65_AGr" resname="rules.one">
+        <source>rules.one</source>
+        <target>1. Comptes multiples</target>
+      </trans-unit>
+      <trans-unit id="iUvoPA3" resname="rules.oneSub1">
+        <source>rules.oneSub1</source>
+        <target>1.1. Multi-comptes</target>
+      </trans-unit>
+      <trans-unit id="azwsE5w" resname="rules.oneSub2">
+        <source>rules.oneSub2</source>
+        <target>1.2 Partage de compte</target>
+      </trans-unit>
+      <trans-unit id="PP7W0A9" resname="rules.two">
+        <source>rules.two</source>
+        <target>2. Contrainte</target>
+      </trans-unit>
+      <trans-unit id="NPzk.p8" resname="rules.three">
+        <source>rules.three</source>
+        <target>3. Triche</target>
+      </trans-unit>
+      <trans-unit id="EjqCwfb" resname="rules.threeSub1">
+        <source>rules.threeSub1</source>
+        <target>3.1 Bugusing</target>
+      </trans-unit>
+      <trans-unit id="3ukwLRE" resname="rules.threeSub2">
+        <source>rules.threeSub2</source>
+        <target>3.2 Scripting</target>
+      </trans-unit>
+      <trans-unit id="GDQ5YPg" resname="rules.four">
+        <source>rules.four</source>
+        <target>4. Comportement</target>
+      </trans-unit>
+      <trans-unit id="9g75A91" resname="rules.fourSub1">
+        <source>rules.fourSub1</source>
+        <target>4.1 Menaces sur la vie réelle</target>
+      </trans-unit>
+      <trans-unit id="Gh6SbEV" resname="rules.fourSub2">
+        <source>rules.fourSub2</source>
+        <target>4.2 Contenu</target>
+      </trans-unit>
+      <trans-unit id="i_lADOu" resname="rules.five">
+        <source>rules.five</source>
+        <target>5. Langue</target>
+      </trans-unit>
+      <trans-unit id="PXb4WFx" resname="rules.one.text">
+        <source>rules.one.text</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="XDikM84" resname="rules.oneSub1.text">
+        <source>rules.oneSub1.text</source>
+        <target>Il est possible d`utiliser plusieurs comptes sur un seul et même serveur. Ceux-ci doivent être signalés via email : support@areauniverse.eu. L`interaction directe entre ces comptes multiples signalés n`est pas permise. Le contournement de cette règle via des tiers n`est pas autorisé.</target>
+      </trans-unit>
+      <trans-unit id="8_1An7X" resname="rules.oneSub2.text">
+        <source>rules.oneSub2.text</source>
+        <target>Il n`est pas permis de partager ses données de connexions avec des tiers.</target>
+      </trans-unit>
+      <trans-unit id="nlZITum" resname="rules.two.text">
+        <source>rules.two.text</source>
+        <target>Il n`est pas permis de se procurer un avantage aux dépens de joueurs plus faibles. Sont considérés comme plus faibles les joueurs dont le classement général est moins bon que celui du joueur incriminé.</target>
+      </trans-unit>
+      <trans-unit id="ERONWzq" resname="rules.three.text">
+        <source>rules.three.text</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="ru2PhLx" resname="rules.threeSub1.text">
+        <source>rules.threeSub1.text</source>
+        <target>Il n`est pas permis de tirer volontairement profit d`un bug ou de délibérément omettre de le signaler.</target>
+      </trans-unit>
+      <trans-unit id="NyjmzIU" resname="rules.threeSub2.text">
+        <source>rules.threeSub2.text</source>
+        <target>L`utilisation de programmes ou de scripts n`est pas autorisée dans la mesure ou cette utilisation permet de se procurer un avantage vis-à-vis d`autres joueurs. Cette utilisation comprend les bots, macros et autres automatismes.</target>
+      </trans-unit>
+      <trans-unit id="W6HBRgS" resname="rules.four.text">
+        <source>rules.four.text</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id=".xwJwMk" resname="rules.fourSub1.text">
+        <source>rules.fourSub1.text</source>
+        <target>Il n`est pas permis d`adresser des menaces en relation avec la vie réelle à l`encontre d`autres joueurs.</target>
+      </trans-unit>
+      <trans-unit id="yjJPPl5" resname="rules.fourSub2.text">
+        <source>rules.fourSub2.text</source>
+        <target>Les insultes et comportements inconvenants vis-à-vis d`autres joueurs ne sont pas autorisés. De même, il est interdit de tenir des propos à caractère pornographique, raciste ou extrémiste de quelque sorte que ce soit. La publicité et les opinions politiques ou religieuses sont indésirables et n`ont pas droit de cité.</target>
+      </trans-unit>
+      <trans-unit id="vgBXXeK" resname="rules.five.text">
+        <source>rules.five.text</source>
+        <target>La langue principale du jeu est le français sur le salon public. L’anglais et l’allemand n’y sont pas tolérés.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

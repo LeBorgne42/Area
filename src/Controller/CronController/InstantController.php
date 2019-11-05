@@ -154,6 +154,8 @@ class InstantController extends AbstractController
             ->where('u.zombieAt < :now')
             ->andWhere('u.rank is not null')
             ->andWhere('p.id is not null')
+            ->groupBy('u.id')
+            ->having('count(p.id) >= 3')
             ->setParameters(['now' => $now])
             ->getQuery()
             ->getResult();

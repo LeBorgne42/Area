@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="qvIyBkY" resname="title">
+        <source>title</source>
+        <target>Zombie</target>
+      </trans-unit>
+      <trans-unit id="rOcl2kV" resname="zombie.mission">
+        <source>zombie.mission</source>
+        <target>Missions sur la planète infectée :</target>
+      </trans-unit>
+      <trans-unit id="5N9esDf" resname="zombie.zombie">
+        <source>zombie.zombie</source>
+        <target>Mission d'élimination zombies</target>
+      </trans-unit>
+      <trans-unit id="LdJsbYA" resname="zombie.planet">
+        <source>zombie.planet</source>
+        <target>Votre planète</target>
+      </trans-unit>
+      <trans-unit id="RPf72sM" resname="zombie.infected">
+        <source>zombie.infected</source>
+        <target>est infectée</target>
+      </trans-unit>
+      <trans-unit id="iUYHQXM" resname="zombie.menace">
+        <source>zombie.menace</source>
+        <target>Le niveau de menace zombies est a</target>
+      </trans-unit>
+      <trans-unit id="dK_wdXV" resname="zombie.attack">
+        <source>zombie.attack</source>
+        <target>La prochaine attaque est prévue dans</target>
+      </trans-unit>
+      <trans-unit id="3Pk.imn" resname="zombie.available.defense">
+        <source>zombie.available.defense</source>
+        <target>Vos troupes en défense </target>
+      </trans-unit>
+      <trans-unit id="pdkO4cL" resname="zombie.speech">
+        <source>zombie.speech</source>
+        <target>Commandant voici les infos a notre disposition : Les zombies se sont implantés sur notre planète et ne s'arrêteront sûrement pas à celle-ci si nous ne les combattons pas. Nous devons les affaiblir avant leur prochaine attaque, une mission d'élimination nous y aiderait grandement ! Nous pouvons aussi aller dans les zones qu'ils contrôlent, nos scientifiques ont découverts que de l'uranium y était présent. Attention cela risque de faire monter notre menace zombie.</target>
+      </trans-unit>
+      <trans-unit id="5m737Pk" resname="tooltip.zombie">
+        <source>tooltip.zombie</source>
+        <target>Lancer cette mission pour faire baisser le niveau de menace zombie en éliminant les zombies présent sur votre planète.</target>
+      </trans-unit>
+      <trans-unit id="lD8HBfv" resname="zombie.soldier">
+        <source>zombie.soldier</source>
+        <target>Soldats</target>
+      </trans-unit>
+      <trans-unit id="3xpFcbA" resname="zombie.tank">
+        <source>zombie.tank</source>
+        <target>Tanks</target>
+      </trans-unit>
+      <trans-unit id="T1irOc6" resname="zombie.time">
+        <source>zombie.time</source>
+        <target>Temps</target>
+      </trans-unit>
+      <trans-unit id="fqaxkrV" resname="zombie.succed">
+        <source>zombie.succed</source>
+        <target>Réussite</target>
+      </trans-unit>
+      <trans-unit id="8ZMp0GU" resname="zombie.gain">
+        <source>zombie.gain</source>
+        <target>Gain</target>
+      </trans-unit>
+      <trans-unit id="CWtbhn0" resname="zombie.type">
+        <source>zombie.type</source>
+        <target>Type</target>
+      </trans-unit>
+      <trans-unit id="Jjpya3E" resname="zombie.finish">
+        <source>zombie.finish</source>
+        <target>Récupérer rapport</target>
+      </trans-unit>
+      <trans-unit id="HXiMbGv" resname="zombie.uranium">
+        <source>zombie.uranium</source>
+        <target>Mission de récupèration d'uranium</target>
+      </trans-unit>
+      <trans-unit id="OpkX3_K" resname="tooltip.uranium">
+        <source>tooltip.uranium</source>
+        <target>Lancer cette mission pour récupérer de l'uranium dans les zones infectées par les zombies.</target>
+      </trans-unit>
+      <trans-unit id="GSc..hC" resname="form.nbr">
+        <source>form.nbr</source>
+        <target>0</target>
+      </trans-unit>
+      <trans-unit id="8e_QjdJ" resname="form.one">
+        <source>form.one</source>
+        <target>1h</target>
+      </trans-unit>
+      <trans-unit id="3PmWVS0" resname="form.three">
+        <source>form.three</source>
+        <target>3h</target>
+      </trans-unit>
+      <trans-unit id="boYFQYp" resname="form.six">
+        <source>form.six</source>
+        <target>6h</target>
+      </trans-unit>
+      <trans-unit id="MyX4LsK" resname="form.ten">
+        <source>form.ten</source>
+        <target>10h</target>
+      </trans-unit>
+      <trans-unit id="QEDm7s3" resname="form.startMission">
+        <source>form.startMission</source>
+        <target>Lancer</target>
+      </trans-unit>
+      <trans-unit id="a4ayc.8" resname="1">
+        <source>1</source>
+        <target>Uranium</target>
+      </trans-unit>
+      <trans-unit id="X_zrZv." resname="0">
+        <source>0</source>
+        <target>Zombie</target>
+      </trans-unit>
+      <trans-unit id="aqo9Ib4" resname="zombie.tutorial">
+        <source>zombie.tutorial</source>
+        <target><![CDATA[Cette page est dédié a la menace Zombie, elle vous indique quelle planète est infectée par les zombies et les effectifs que vous avez dessus pour la défendre.<br> A chaque attaque votre niveau de menace est augmenté de +1 si vous êtes sans alliance, +5 dans une alliance fasciste et +10 si vous êtes dans une autre alliance.<br>Deux choix s'offrent a vous, faire baisser la menace en envoyant vos soldats en missions. Ou lancer une mission pour récupérer de l'uranium. Allez y. ]]></target>
+      </trans-unit>
+      <trans-unit id="sGwFx8E" resname="zombie.tutorialBis">
+        <source>zombie.tutorialBis</source>
+        <target>Bien, maintenant vous devez attendre la fin du temps que vous avez choisit pour la mission. Puis ensuite récupérer le rapport. Vous aurez toujours des pertes lors de ces missions, le risque zero n'existe pas. Si vous envahissez une planète au main des Zombies vous divisez la menace zombie par 10, ce qui peut être une solution d'urgence.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -133,6 +133,26 @@ class DailyController extends AbstractController
             $report->setContent($report->getContent() . " L'entretien de votre empire vous coûte cependant <span class='text-rouge'>-" . number_format(round($empireCost)) . "</span> bitcoins.<br>");
             $point = round(round($worker / 100) + round($user->getAllShipsPoint() / 75) + round($troops / 75) + $planetPoint);
             $user->setBitcoin($cost);
+            if ($user->getBitcoin() < 0) {
+                foreach ($user->getFleetLists() as $list) {
+                    foreach ($list->getFleets() as $fleetL) {
+                        $fleetL->setFleetList(null);
+                    }
+                    $em->remove($list);
+                }
+                foreach($user->getFleets() as $fleet) {
+                    if ($fleet->getDestination()) {
+                        $em->remove($fleet->getDestination());
+                    }
+                    $em->remove($fleet);
+                }
+                foreach ($user->getPlanets() as $planet) {
+                    $planet->setSignature(0);
+                    $planet->setSoldier(0);
+                    $planet->setScientist(0);
+                }
+                $user->setBitcoin(5000);
+            }
             if ($gain - $empireCost > 0) {
                 $color = '<span class="text-vert">+';
             } else {

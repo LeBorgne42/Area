@@ -1,0 +1,662 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="qvIyBkY" resname="title">
+        <source>title</source>
+        <target>Votre Empire</target>
+      </trans-unit>
+      <trans-unit id="kQbWISu" resname="modify">
+        <source>modify</source>
+        <target>modifier</target>
+      </trans-unit>
+      <trans-unit id="2IXVIrF" resname="tooltip.modify">
+        <source>tooltip.modify</source>
+        <target>Modifiez votre avatar !</target>
+      </trans-unit>
+      <trans-unit id="rzPvY6E" resname="tooltip.tanks">
+        <source>tooltip.tanks</source>
+        <target>Tanks</target>
+      </trans-unit>
+      <trans-unit id="U6PJ4AE" resname="tooltip.soldiers">
+        <source>tooltip.soldiers</source>
+        <target>Soldats</target>
+      </trans-unit>
+      <trans-unit id="fK4Q0Mt" resname="overview.yourFleet">
+        <source>overview.yourFleet</source>
+        <target>Votre flotte</target>
+      </trans-unit>
+      <trans-unit id="kOyoj5c" resname="overview.fromTo">
+        <source>overview.fromTo</source>
+        <target>est en transit de</target>
+      </trans-unit>
+      <trans-unit id="5U55GzS" resname="overview.goTo">
+        <source>overview.goTo</source>
+        <target>vers</target>
+      </trans-unit>
+      <trans-unit id="kJp0Acd" resname="tooltip.scientists">
+        <source>tooltip.scientists</source>
+        <target>Scientifiques</target>
+      </trans-unit>
+      <trans-unit id="w8HtLS8" resname="tooltip.level">
+        <source>tooltip.level</source>
+        <target>Le niveau de votre Commandant.</target>
+      </trans-unit>
+      <trans-unit id="aEhHyon" resname="tooltip.pseudo">
+        <source>tooltip.pseudo</source>
+        <target>Le nom de votre Commandant.</target>
+      </trans-unit>
+      <trans-unit id="5wiEWx_" resname="tooltip.maxPlanets">
+        <source>tooltip.maxPlanets</source>
+        <target>Votre nombre de planètes ainsi que la limite maximum.</target>
+      </trans-unit>
+      <trans-unit id=".NuhG6f" resname="tooltip.ships">
+        <source>tooltip.ships</source>
+        <target>Total de vos vaisseaux</target>
+      </trans-unit>
+      <trans-unit id="MtvXZUq" resname="tooltip.shipsAlly">
+        <source>tooltip.shipsAlly</source>
+        <target>Total des vaisseaux de l'alliance</target>
+      </trans-unit>
+      <trans-unit id="Q5oOJ7L" resname="tooltip.maxPlanetsAlly">
+        <source>tooltip.maxPlanetsAlly</source>
+        <target>Le nombre de planète que tout les membres de l'alliance ont ensemble.</target>
+      </trans-unit>
+      <trans-unit id="SO7Gzgx" resname="tooltip.bitcoinAlly">
+        <source>tooltip.bitcoinAlly</source>
+        <target>Les bitcoins dans la banque de votre Alliance.</target>
+      </trans-unit>
+      <trans-unit id="YeKOyhx" resname="tooltip.pdg">
+        <source>tooltip.pdg</source>
+        <target>Pour gagner des Points de Guerre : Accomplissez les Objectifs, vendez des ressources aux marchands ou encore combattez d'autres joueurs!</target>
+      </trans-unit>
+      <trans-unit id="JThGHlS" resname="title.batiment">
+        <source>title.batiment</source>
+        <target>Bâtiment</target>
+      </trans-unit>
+      <trans-unit id="o6gxe84" resname="cell.batiment">
+        <source>cell.batiment</source>
+        <target>Aucun bâtiment en construction</target>
+      </trans-unit>
+      <trans-unit id="5HpdR_R" resname="title.search">
+        <source>title.search</source>
+        <target>Recherche</target>
+      </trans-unit>
+      <trans-unit id="KJ0cE6J" resname="cell.search">
+        <source>cell.search</source>
+        <target>Aucune recherche en cours</target>
+      </trans-unit>
+      <trans-unit id="xOo4G9j" resname="title.spatial">
+        <source>title.spatial</source>
+        <target>Chantier spatiale</target>
+      </trans-unit>
+      <trans-unit id="Ngu0kbC" resname="cell.spatial">
+        <source>cell.spatial</source>
+        <target>Aucune production en cours</target>
+      </trans-unit>
+      <trans-unit id="yzPf8jS" resname="title.fleet">
+        <source>title.fleet</source>
+        <target>Flotte</target>
+      </trans-unit>
+      <trans-unit id="8ufWjt4" resname="cell.fleet">
+        <source>cell.fleet</source>
+        <target>Aucune flotte en vol</target>
+      </trans-unit>
+      <trans-unit id="863oPpC" resname="cell.constructName">
+        <source>cell.constructName</source>
+        <target>Construction terminée dans </target>
+      </trans-unit>
+      <trans-unit id="VFXXqIm" resname="cell.searchName">
+        <source>cell.searchName</source>
+        <target>Recherche effectuée dans </target>
+      </trans-unit>
+      <trans-unit id="Wf2oH2s" resname="info.rank">
+        <source>info.rank</source>
+        <target>Rang :</target>
+      </trans-unit>
+      <trans-unit id="Id6jkaN" resname="info.planet">
+        <source>info.planet</source>
+        <target>Colonies :</target>
+      </trans-unit>
+      <trans-unit id="jqyEnwa" resname="info.fleet">
+        <source>info.fleet</source>
+        <target>Nombre de flotte :</target>
+      </trans-unit>
+      <trans-unit id="9sHTGdJ" resname="info.ally">
+        <source>info.ally</source>
+        <target>Alliance :</target>
+      </trans-unit>
+      <trans-unit id="Mt_5Gtw" resname="info.allyMissing">
+        <source>info.allyMissing</source>
+        <target>Rejoignez une alliance !</target>
+      </trans-unit>
+      <trans-unit id="qFrtYU7" resname="info.allyMissingBoost">
+        <source>info.allyMissingBoost</source>
+        <target>Et obtenez +20%</target>
+      </trans-unit>
+      <trans-unit id="weUHnfe" resname="info.allyMissingBoost2">
+        <source>info.allyMissingBoost2</source>
+        <target>de ressources !</target>
+      </trans-unit>
+      <trans-unit id="TThGpbF" resname="info.defcon">
+        <source>info.defcon</source>
+        <target>Niveau d'alerte Alliance :</target>
+      </trans-unit>
+      <trans-unit id="56UFhmD" resname="overview.otherFleet">
+        <source>overview.otherFleet</source>
+        <target>Flottes en approchent</target>
+      </trans-unit>
+      <trans-unit id="VYZ1uyz" resname="overview.oneFleet">
+        <source>overview.oneFleet</source>
+        <target>Une flotte</target>
+      </trans-unit>
+      <trans-unit id="fSXPtaW" resname="overview.fromPlayer">
+        <source>overview.fromPlayer</source>
+        <target>du joueur</target>
+      </trans-unit>
+      <trans-unit id="BaaxH03" resname="overview.arriveFrom">
+        <source>overview.arriveFrom</source>
+        <target>venant de</target>
+      </trans-unit>
+      <trans-unit id="QKv5JV7" resname="overview.arriveTo">
+        <source>overview.arriveTo</source>
+        <target>arrive sur</target>
+      </trans-unit>
+      <trans-unit id="npqTOTV" resname="overview.myFleet">
+        <source>overview.myFleet</source>
+        <target>Mouvements en cours</target>
+      </trans-unit>
+      <trans-unit id="Z5PFkhX" resname="overview.from">
+        <source>overview.from</source>
+        <target>De</target>
+      </trans-unit>
+      <trans-unit id="ajEPpLM" resname="overview.time">
+        <source>overview.time</source>
+        <target>Temps</target>
+      </trans-unit>
+      <trans-unit id="_sfLz5u" resname="overview.fleetShips">
+        <source>overview.fleetShips</source>
+        <target>Vaisseaux : ST</target>
+      </trans-unit>
+      <trans-unit id="MGcDn3X" resname="overview.fleetSignature">
+        <source>overview.fleetSignature</source>
+        <target>Signature</target>
+      </trans-unit>
+      <trans-unit id="efCcG4D" resname="tooltip.signature">
+        <source>tooltip.signature</source>
+        <target>Ceci correspond a la signature thermique de votre flotte.</target>
+      </trans-unit>
+      <trans-unit id="JE6eqmV" resname="title.lastFleet">
+        <source>title.lastFleet</source>
+        <target>Flottes en mouvement</target>
+      </trans-unit>
+      <trans-unit id="Y6D_Haj" resname="title.planet">
+        <source>title.planet</source>
+        <target>Planète</target>
+      </trans-unit>
+      <trans-unit id="de.mnAa" resname="constructionsWaiting">
+        <source>constructionsWaiting</source>
+        <target>Constructions en attentes sur la planète</target>
+      </trans-unit>
+      <trans-unit id="eqR0LZq" resname="form.name">
+        <source>form.name</source>
+        <target>nouveau nom</target>
+      </trans-unit>
+      <trans-unit id="9mrdxa5" resname="form.renamePlanet">
+        <source>form.renamePlanet</source>
+        <target>Renommer</target>
+      </trans-unit>
+      <trans-unit id="6zBeby0" resname="tooltip.rank">
+        <source>tooltip.rank</source>
+        <target>Votre classement est affiché ici avec l'évolution positive ou négative depuis les dernière 24h.</target>
+      </trans-unit>
+      <trans-unit id="B1iK4tz" resname="title.tmpbeta">
+        <source>title.tmpbeta</source>
+        <target><![CDATA[<-- Cliquez sur le bouton Beta vx.x pour accéder aux dernières mises à jour. (15/06/2018)]]></target>
+      </trans-unit>
+      <trans-unit id="B04E0Cf" resname="info.worker">
+        <source>info.worker</source>
+        <target>Travailleurs :</target>
+      </trans-unit>
+      <trans-unit id="ANj9SCJ" resname="info.cost">
+        <source>info.cost</source>
+        <target>Revenu journalier :</target>
+      </trans-unit>
+      <trans-unit id="YEsl8kz" resname="info.soldier">
+        <source>info.soldier</source>
+        <target>Défense :</target>
+      </trans-unit>
+      <trans-unit id="rFVpONx" resname="info.ship">
+        <source>info.ship</source>
+        <target>Vaisseaux :</target>
+      </trans-unit>
+      <trans-unit id="B3W7h01" resname="info.allyPlanets">
+        <source>info.allyPlanets</source>
+        <target>Planètes :</target>
+      </trans-unit>
+      <trans-unit id="PvmH48J" resname="info.allyBitcoin">
+        <source>info.allyBitcoin</source>
+        <target>Banque :</target>
+      </trans-unit>
+      <trans-unit id="dQrCNz4" resname="info.coin">
+        <source>info.coin</source>
+        <target>Bitcoins :</target>
+      </trans-unit>
+      <trans-unit id="sissGLT" resname="info.userName">
+        <source>info.userName</source>
+        <target>Empire :</target>
+      </trans-unit>
+      <trans-unit id="3LebeZS" resname="info.level">
+        <source>info.level</source>
+        <target>Niveau :</target>
+      </trans-unit>
+      <trans-unit id="vhuENoe" resname="info.grade">
+        <source>info.grade</source>
+        <target>Grade :</target>
+      </trans-unit>
+      <trans-unit id="6uaB2vE" resname="info.independant">
+        <source>info.independant</source>
+        <target>Indépendant</target>
+      </trans-unit>
+      <trans-unit id="lGvc2kp" resname="info.niobium">
+        <source>info.niobium</source>
+        <target>Niobium par heure :</target>
+      </trans-unit>
+      <trans-unit id="7hmuuf2" resname="info.water">
+        <source>info.water</source>
+        <target>Eau par heure :</target>
+      </trans-unit>
+      <trans-unit id="xpLzZOf" resname="info.scientist">
+        <source>info.scientist</source>
+        <target>Scientifiques :</target>
+      </trans-unit>
+      <trans-unit id="aU0Hv6x" resname="info.allyMembers">
+        <source>info.allyMembers</source>
+        <target>Membres : </target>
+      </trans-unit>
+      <trans-unit id="h_MdDI6" resname="info.allyShips">
+        <source>info.allyShips</source>
+        <target>Vaisseaux :</target>
+      </trans-unit>
+      <trans-unit id="ZsK9M84" resname="title.fleetOnYou">
+        <source>title.fleetOnYou</source>
+        <target>Flottes en approche</target>
+      </trans-unit>
+      <trans-unit id="CRVNSoX" resname="overview.search">
+        <source>overview.search</source>
+        <target>Recherche :</target>
+      </trans-unit>
+      <trans-unit id="6_qv2u7" resname="cell.searchNone">
+        <source>cell.searchNone</source>
+        <target>Aucune recherche</target>
+      </trans-unit>
+      <trans-unit id="GElcKsW" resname="overview.batiment">
+        <source>overview.batiment</source>
+        <target>Bâtiments en construction</target>
+      </trans-unit>
+      <trans-unit id="Cx306Vu" resname="cell.buildingNone">
+        <source>cell.buildingNone</source>
+        <target>Aucune construction</target>
+      </trans-unit>
+      <trans-unit id="RUXMn2a" resname="overview.spatial">
+        <source>overview.spatial</source>
+        <target>Vaisseaux en production</target>
+      </trans-unit>
+      <trans-unit id="Ov6cu5k" resname="overview.tutorial">
+        <source>overview.tutorial</source>
+        <target><![CDATA[Bonjour Commandant,<br>Cette page est la plus importante, elle synthétise votre Empire vous permettant de le gérer simplement.<br>Prenez votre temps pour y découvrir toutes les informations affichées et rendez vous ensuite sur la page des «Rapports».]]></target>
+      </trans-unit>
+      <trans-unit id="fQvVN_j" resname="overview.tutorialBis">
+        <source>overview.tutorialBis</source>
+        <target>Vous voici parmis nous depuis maintenant plus de 48h et vous venez d'avoir votre premier contacte avec les zombies. Cliquez sur le bouton «Menace Zombie» sur le menu a droite pour continuer.</target>
+      </trans-unit>
+      <trans-unit id="psfb2V3" resname="overview.tutorialTitle">
+        <source>overview.tutorialTitle</source>
+        <target>Tutoriel</target>
+      </trans-unit>
+      <trans-unit id="nDRAK8W" resname="cell.spatialNone">
+        <source>cell.spatialNone</source>
+        <target>Aucun vaisseaux</target>
+      </trans-unit>
+      <trans-unit id="ixM6OGi" resname="miner">
+        <source>miner</source>
+        <target>Mine de niobium</target>
+      </trans-unit>
+      <trans-unit id="dIjXOFC" resname="extractor">
+        <source>extractor</source>
+        <target>Extracteur d'eau</target>
+      </trans-unit>
+      <trans-unit id="dkSe0lT" resname="waterStock">
+        <source>waterStock</source>
+        <target>Réservoir d'eau</target>
+      </trans-unit>
+      <trans-unit id="w2WPb4V" resname="niobiumStock">
+        <source>niobiumStock</source>
+        <target>Entrepôt de Niobium</target>
+      </trans-unit>
+      <trans-unit id="EaYsI0E" resname="city">
+        <source>city</source>
+        <target>Grande ville</target>
+      </trans-unit>
+      <trans-unit id="NhiOGRV" resname="metropole">
+        <source>metropole</source>
+        <target>Metropole</target>
+      </trans-unit>
+      <trans-unit id="77mswlN" resname="caserne">
+        <source>caserne</source>
+        <target>Caserne</target>
+      </trans-unit>
+      <trans-unit id="Df4X9q3" resname="destruct">
+        <source>destruct</source>
+        <target>Destruction</target>
+      </trans-unit>
+      <trans-unit id="f7nJuEY" resname="centerSearch">
+        <source>centerSearch</source>
+        <target>Centre de recherche</target>
+      </trans-unit>
+      <trans-unit id="N8vRK7j" resname="lightUsine">
+        <source>lightUsine</source>
+        <target>Usine d'armement</target>
+      </trans-unit>
+      <trans-unit id="KM0sXBX" resname="island">
+        <source>island</source>
+        <target>Ville flottante</target>
+      </trans-unit>
+      <trans-unit id="ok5jxb7" resname="orbital">
+        <source>orbital</source>
+        <target>Station orbitale</target>
+      </trans-unit>
+      <trans-unit id="ZCR6b64" resname="heavyUsine">
+        <source>heavyUsine</source>
+        <target>Usine lourde</target>
+      </trans-unit>
+      <trans-unit id="ZAk11AY" resname="spaceShip">
+        <source>spaceShip</source>
+        <target>Chantier spatial</target>
+      </trans-unit>
+      <trans-unit id=".y6WP.b" resname="radar">
+        <source>radar</source>
+        <target>Radar au sol</target>
+      </trans-unit>
+      <trans-unit id="z0ToDLR" resname="skyRadar">
+        <source>skyRadar</source>
+        <target>Radar d'espace</target>
+      </trans-unit>
+      <trans-unit id="GEctx2W" resname="skyBrouilleur">
+        <source>skyBrouilleur</source>
+        <target>Brouilleur de radar</target>
+      </trans-unit>
+      <trans-unit id="I.L5l.U" resname="onde">
+        <source>onde</source>
+        <target>Scanner de système solaire</target>
+      </trans-unit>
+      <trans-unit id="FNJPmK4" resname="industry">
+        <source>industry</source>
+        <target>Développer industrie</target>
+      </trans-unit>
+      <trans-unit id="1DyL1Xl" resname="discipline">
+        <source>discipline</source>
+        <target>Accroissement militaire</target>
+      </trans-unit>
+      <trans-unit id="8OUgO7e" resname="hyperespace">
+        <source>hyperespace</source>
+        <target>Technologie hyperespace</target>
+      </trans-unit>
+      <trans-unit id="3y9_Cha" resname="barge">
+        <source>barge</source>
+        <target>Invasion planètaire</target>
+      </trans-unit>
+      <trans-unit id="V..MKNS" resname="utility">
+        <source>utility</source>
+        <target>Vaisseaux utilitaires </target>
+      </trans-unit>
+      <trans-unit id="mVGrorz" resname="demography">
+        <source>demography</source>
+        <target>Redéfinition urbaine</target>
+      </trans-unit>
+      <trans-unit id="Fn9EjxH" resname="expansion">
+        <source>expansion</source>
+        <target>Expansion territoriale</target>
+      </trans-unit>
+      <trans-unit id="yCFvtr0" resname="barbed">
+        <source>barbed</source>
+        <target>Barbelées</target>
+      </trans-unit>
+      <trans-unit id="KBo3R39" resname="tank">
+        <source>tank</source>
+        <target>Unitées blindées</target>
+      </trans-unit>
+      <trans-unit id="GemoD0C" resname="terraformation">
+        <source>terraformation</source>
+        <target>Terraformation</target>
+      </trans-unit>
+      <trans-unit id="MyJTLYW" resname="cargo">
+        <source>cargo</source>
+        <target>Gestion des cargaisons</target>
+      </trans-unit>
+      <trans-unit id="53t2Ohp" resname="recycleur">
+        <source>recycleur</source>
+        <target>Recyclage orbital</target>
+      </trans-unit>
+      <trans-unit id="sxmWNX9" resname="armement">
+        <source>armement</source>
+        <target>Armement</target>
+      </trans-unit>
+      <trans-unit id="P6HTxEY" resname="missile">
+        <source>missile</source>
+        <target>Arme missile</target>
+      </trans-unit>
+      <trans-unit id="lNj_LP_" resname="laser">
+        <source>laser</source>
+        <target>Arme laser</target>
+      </trans-unit>
+      <trans-unit id="DErIN6v" resname="plasma">
+        <source>plasma</source>
+        <target>Arme plasma</target>
+      </trans-unit>
+      <trans-unit id="Q7T1o2P" resname="lightShip">
+        <source>lightShip</source>
+        <target>Vaisseaux légers</target>
+      </trans-unit>
+      <trans-unit id="QjCSndq" resname="heavyShip">
+        <source>heavyShip</source>
+        <target>Vaisseaux lourds</target>
+      </trans-unit>
+      <trans-unit id="rrtdCOC" resname="recycleur_ally">
+        <source>recycleur_ally</source>
+        <target>Optimisation recyclage</target>
+      </trans-unit>
+      <trans-unit id="QYDe_ay" resname="worker_def_ally">
+        <source>worker_def_ally</source>
+        <target>Renforcement idéologique</target>
+      </trans-unit>
+      <trans-unit id="XtbH6aR" resname="armement_ally">
+        <source>armement_ally</source>
+        <target>Armements améliorés</target>
+      </trans-unit>
+      <trans-unit id="3s1bU8n" resname="cost_soldier_ally">
+        <source>cost_soldier_ally</source>
+        <target>Structure soviétique</target>
+      </trans-unit>
+      <trans-unit id="VjpSGSI" resname="soldier_sale_ally">
+        <source>soldier_sale_ally</source>
+        <target>Recrutement volontaires</target>
+      </trans-unit>
+      <trans-unit id="RXk_rMz" resname="invade_ally">
+        <source>invade_ally</source>
+        <target>Empire sans frontières</target>
+      </trans-unit>
+      <trans-unit id="ODHm1uH" resname="pdg_ally">
+        <source>pdg_ally</source>
+        <target>Points de Guerre</target>
+      </trans-unit>
+      <trans-unit id="Y68tz89" resname="worker_ally">
+        <source>worker_ally</source>
+        <target>Politique familiale</target>
+      </trans-unit>
+      <trans-unit id="_2iwvYM" resname="barge_ally">
+        <source>barge_ally</source>
+        <target>Invasions planifiées</target>
+      </trans-unit>
+      <trans-unit id="d8Kb5Et" resname="soldier_att_ally">
+        <source>soldier_att_ally</source>
+        <target>Puissance militaire</target>
+      </trans-unit>
+      <trans-unit id="l7dsCvm" resname="cost_tank_ally">
+        <source>cost_tank_ally</source>
+        <target>Supériorité mécanique</target>
+      </trans-unit>
+      <trans-unit id="ZRQoTGK" resname="tank_def_ally">
+        <source>tank_def_ally</source>
+        <target>Blindage tanks</target>
+      </trans-unit>
+      <trans-unit id="Kj5akmj" resname="prod_ally">
+        <source>prod_ally</source>
+        <target>Loi Macron</target>
+      </trans-unit>
+      <trans-unit id="9I_KBXI" resname="search_ally">
+        <source>search_ally</source>
+        <target>Mobilisation scientifique</target>
+      </trans-unit>
+      <trans-unit id="pGDxm.c" resname="cost_scientist_ally">
+        <source>cost_scientist_ally</source>
+        <target>Engouement scientifique</target>
+      </trans-unit>
+      <trans-unit id="gP3HxIh" resname="cargo_ally">
+        <source>cargo_ally</source>
+        <target>Cargos améliorés</target>
+      </trans-unit>
+      <trans-unit id="y6daGw4" resname="armor_ally">
+        <source>armor_ally</source>
+        <target>Blindage vaisseaux</target>
+      </trans-unit>
+      <trans-unit id="1hoWnBR" resname="merchant_ally">
+        <source>merchant_ally</source>
+        <target>Accords marchands</target>
+      </trans-unit>
+      <trans-unit id="NnKmXig" resname="colonisation_ally">
+        <source>colonisation_ally</source>
+        <target>Apport de la démocratie</target>
+      </trans-unit>
+      <trans-unit id="8ASEefJ" resname="info.warPoint">
+        <source>info.warPoint</source>
+        <target>Points de Guerre :</target>
+      </trans-unit>
+      <trans-unit id="L_EqTY0" resname="overview.inProduct">
+        <source>overview.inProduct</source>
+        <target>En production </target>
+      </trans-unit>
+      <trans-unit id="gJx_zZG" resname="tooltip.dailyCost">
+        <source>tooltip.dailyCost</source>
+        <target><![CDATA[Coût des troupes : <span class="text-rouge">-%soldier%</span> <img src='/img/coin.png'><br>Coût des vaisseaux : <span class="text-rouge">-%ship%</span> <img src='/img/coin.png'><br>Coût des bâtiments : <span class="text-rouge">-%build%</span> <img src='/img/coin.png'><br>Dépenses totales : <span class="text-rouge">-%bitcoin% <img src='/img/coin.png'></span><br>Gain total : <span class="text-vert">+%gain% <img src='/img/coin.png'></span>]]></target>
+      </trans-unit>
+      <trans-unit id="X_zrZv." resname="0">
+        <source>0</source>
+        <target>Paix</target>
+      </trans-unit>
+      <trans-unit id="a4ayc.8" resname="1">
+        <source>1</source>
+        <target>Préparation militaire</target>
+      </trans-unit>
+      <trans-unit id="1HNeOiZ" resname="2">
+        <source>2</source>
+        <target>Guerre imminente</target>
+      </trans-unit>
+      <trans-unit id="TgdAhWK" resname="3">
+        <source>3</source>
+        <target>En guerre</target>
+      </trans-unit>
+      <trans-unit id="lpqMng7" resname="sonde">
+        <source>sonde</source>
+        <target>Sondes</target>
+      </trans-unit>
+      <trans-unit id="0jlqH7y" resname="destroyer">
+        <source>destroyer</source>
+        <target>Destroyers</target>
+      </trans-unit>
+      <trans-unit id="PutGqDE" resname="ironClad">
+        <source>ironClad</source>
+        <target>Cuirassés</target>
+      </trans-unit>
+      <trans-unit id="forBpWQ" resname="croiser">
+        <source>croiser</source>
+        <target>Croiseurs</target>
+      </trans-unit>
+      <trans-unit id="HDPT6vN" resname="fregate">
+        <source>fregate</source>
+        <target>Frégates</target>
+      </trans-unit>
+      <trans-unit id="r9ERVg_" resname="fregatePlasma">
+        <source>fregatePlasma</source>
+        <target>Frégates a plasma</target>
+      </trans-unit>
+      <trans-unit id="2.nJwu3" resname="corvet">
+        <source>corvet</source>
+        <target>Corvettes</target>
+      </trans-unit>
+      <trans-unit id="LH3PyOs" resname="corvetLaser">
+        <source>corvetLaser</source>
+        <target>Corvettes a laser</target>
+      </trans-unit>
+      <trans-unit id="V_ZDq8H" resname="corvetWar">
+        <source>corvetWar</source>
+        <target>Corvettes de combat</target>
+      </trans-unit>
+      <trans-unit id="6aY6TrF" resname="hunter">
+        <source>hunter</source>
+        <target>Chasseurs</target>
+      </trans-unit>
+      <trans-unit id="L643JOr" resname="hunterHeavy">
+        <source>hunterHeavy</source>
+        <target>Chasseurs lourds</target>
+      </trans-unit>
+      <trans-unit id="A41r57z" resname="hunterWar">
+        <source>hunterWar</source>
+        <target>Chasseurs a plasma</target>
+      </trans-unit>
+      <trans-unit id="nmQgNWv" resname="moonMaker">
+        <source>moonMaker</source>
+        <target>Lunars</target>
+      </trans-unit>
+      <trans-unit id="9E3pVu9" resname="motherShip">
+        <source>motherShip</source>
+        <target>Vaisseau mère</target>
+      </trans-unit>
+      <trans-unit id="HRpi48b" resname="radarShip">
+        <source>radarShip</source>
+        <target>Vaisseaux radar</target>
+      </trans-unit>
+      <trans-unit id="gb8Q3um" resname="brouilleurShip">
+        <source>brouilleurShip</source>
+        <target>Vaisseaux brouilleur</target>
+      </trans-unit>
+      <trans-unit id="cgvSBcv" resname="barges">
+        <source>barges</source>
+        <target>Barges</target>
+      </trans-unit>
+      <trans-unit id="cljn2hX" resname="recycleurs">
+        <source>recycleurs</source>
+        <target>Recycleurs</target>
+      </trans-unit>
+      <trans-unit id="iOJhr_p" resname="cargoI">
+        <source>cargoI</source>
+        <target>Cargos I</target>
+      </trans-unit>
+      <trans-unit id="2q0E7w_" resname="cargoV">
+        <source>cargoV</source>
+        <target>Cargos V</target>
+      </trans-unit>
+      <trans-unit id="miauVv9" resname="cargoX">
+        <source>cargoX</source>
+        <target>Cargos X</target>
+      </trans-unit>
+      <trans-unit id="ROtshFP" resname="colonizer">
+        <source>colonizer</source>
+        <target>Colonisateurs</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

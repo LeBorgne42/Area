@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="qvIyBkY" resname="title">
+        <source>title</source>
+        <target>Mes options</target>
+      </trans-unit>
+      <trans-unit id="5Tmc5cb" resname="modifPassword">
+        <source>modifPassword</source>
+        <target>Changer le mot de passe</target>
+      </trans-unit>
+      <trans-unit id="lekveQ8" resname="planetOrder">
+        <source>planetOrder</source>
+        <target>Ordre des planètes</target>
+      </trans-unit>
+      <trans-unit id="SqGAKzh" resname="form.oldPassword">
+        <source>form.oldPassword</source>
+        <target>Ancien mdp</target>
+      </trans-unit>
+      <trans-unit id="yjqmSBK" resname="form.password">
+        <source>form.password</source>
+        <target>Nouveau mdp</target>
+      </trans-unit>
+      <trans-unit id="Figun.D" resname="form.confirmPassword">
+        <source>form.confirmPassword</source>
+        <target>Confirmer mdp</target>
+      </trans-unit>
+      <trans-unit id="mOU9WEo" resname="form.newOptions">
+        <source>form.newOptions</source>
+        <target>Sauvegarder</target>
+      </trans-unit>
+      <trans-unit id="dILjSod" resname="form.alpha">
+        <source>form.alpha</source>
+        <target>Alphabétique</target>
+      </trans-unit>
+      <trans-unit id="VBj_pH4" resname="form.pos">
+        <source>form.pos</source>
+        <target>Position</target>
+      </trans-unit>
+      <trans-unit id="8vLSq.Q" resname="form.col">
+        <source>form.col</source>
+        <target>Colonisation</target>
+      </trans-unit>
+      <trans-unit id="K0JJPRJ" resname="newletterActiver">
+        <source>newletterActiver</source>
+        <target>Activer/Désactiver Newletter</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -5,7 +5,6 @@
 {% block title %}{{ 'title'|trans }}{% endblock %}
 
 {% block body %}
-    <script type="text/javascript" src="{{ asset('build/flight.js') }}"></script>
     {% set cargoBonus = 1.2 + (app.user.getPoliticCargo() / 5) %}
     {% set multiple = oldFleet.getMotherShip() > 0 ? 1.1 : 1 %}
     <div class="front-block editFleet">

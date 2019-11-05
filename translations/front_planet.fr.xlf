@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="qvIyBkY" resname="title">
+        <source>title</source>
+        <target>Planète</target>
+      </trans-unit>
+      <trans-unit id="aMH8HCE" resname="planet.name">
+        <source>planet.name</source>
+        <target>Administration</target>
+      </trans-unit>
+      <trans-unit id="mR.LT_i" resname="planet.niobium">
+        <source>planet.niobium</source>
+        <target>Niobium</target>
+      </trans-unit>
+      <trans-unit id="UijlE2U" resname="planet.water">
+        <source>planet.water</source>
+        <target>Eau</target>
+      </trans-unit>
+      <trans-unit id="shncAxZ" resname="planet.place">
+        <source>planet.place</source>
+        <target>Défense</target>
+      </trans-unit>
+      <trans-unit id="qxnDpuN" resname="planet.worker">
+        <source>planet.worker</source>
+        <target>Travailleurs</target>
+      </trans-unit>
+      <trans-unit id="jaqAtqA" resname="planet.soldier">
+        <source>planet.soldier</source>
+        <target>Soldats</target>
+      </trans-unit>
+      <trans-unit id="9K8eblO" resname="planet.scientist">
+        <source>planet.scientist</source>
+        <target>Scientifiques</target>
+      </trans-unit>
+      <trans-unit id="31puIxy" resname="planet.fleet">
+        <source>planet.fleet</source>
+        <target>Flottes</target>
+      </trans-unit>
+      <trans-unit id="I1RKYt0" resname="planet.tutorial">
+        <source>planet.tutorial</source>
+        <target><![CDATA[Voici le résumé de chacune de vos planètes, pour le moment vous n'en avez qu'une. Renomez la !<br>Vous pouvez aussi plus facilement vendre les ressources de vos planètes aux marchands ici.]]></target>
+      </trans-unit>
+      <trans-unit id="lTIEe8i" resname="planet.tutorialBis">
+        <source>planet.tutorialBis</source>
+        <target>Bien ! Maintenant il faut développer votre planète, prochaine étape la page «Infrastructures».</target>
+      </trans-unit>
+      <trans-unit id="_4825eT" resname="niobium">
+        <source>niobium</source>
+        <target>Niobium</target>
+      </trans-unit>
+      <trans-unit id="D0FoSQ4" resname="water">
+        <source>water</source>
+        <target>Eau</target>
+      </trans-unit>
+      <trans-unit id="Y50NcSG" resname="groundImg">
+        <source>groundImg</source>
+        <target>Terrain</target>
+      </trans-unit>
+      <trans-unit id="52KRUGo" resname="SkyImg">
+        <source>SkyImg</source>
+        <target>Espace</target>
+      </trans-unit>
+      <trans-unit id="h_unbn8" resname="worker">
+        <source>worker</source>
+        <target>Travailleurs</target>
+      </trans-unit>
+      <trans-unit id="4MCMKx9" resname="soldier">
+        <source>soldier</source>
+        <target>Soldats</target>
+      </trans-unit>
+      <trans-unit id="wtonALh" resname="scientist">
+        <source>scientist</source>
+        <target>Scientifiques</target>
+      </trans-unit>
+      <trans-unit id="OWQY5Yj" resname="planet.image">
+        <source>planet.image</source>
+        <target>Planète</target>
+      </trans-unit>
+      <trans-unit id="TksR2eD" resname="planet.production">
+        <source>planet.production</source>
+        <target>Information</target>
+      </trans-unit>
+      <trans-unit id="hN1xJHl" resname="planet.population">
+        <source>planet.population</source>
+        <target>Population</target>
+      </trans-unit>
+      <trans-unit id="YqjDIXk" resname="planet.ship">
+        <source>planet.ship</source>
+        <target>Vaisseaux</target>
+      </trans-unit>
+      <trans-unit id="WkUkWVA" resname="position">
+        <source>position</source>
+        <target>Position :</target>
+      </trans-unit>
+      <trans-unit id="LiL2ISU" resname="planet.abandon">
+        <source>planet.abandon</source>
+        <target>Abandonner</target>
+      </trans-unit>
+      <trans-unit id="1_pt8Av" resname="planet.abandon.question">
+        <source>planet.abandon.question</source>
+        <target>Souhaitez vous abandonner la planète ?</target>
+      </trans-unit>
+      <trans-unit id=".NuhG6f" resname="tooltip.ships">
+        <source>tooltip.ships</source>
+        <target>Les vaisseaux qui sont posés sur votre planète.</target>
+      </trans-unit>
+      <trans-unit id="38OUcAN" resname="tooltip.planet">
+        <source>tooltip.planet</source>
+        <target>Infrastructures de la planète</target>
+      </trans-unit>
+      <trans-unit id="KBo3R39" resname="tank">
+        <source>tank</source>
+        <target>Tanks</target>
+      </trans-unit>
+      <trans-unit id="Gm4rIVO" resname="planetList.add">
+        <source>planetList.add</source>
+        <target>Ajouter</target>
+      </trans-unit>
+      <trans-unit id="4MWEHom" resname="market.autoSell">
+        <source>market.autoSell</source>
+        <target>Vente aux marchands </target>
+      </trans-unit>
+      <trans-unit id="zU0Nsqm" resname="tooltip.autoSell">
+        <source>tooltip.autoSell</source>
+        <target>Selectionnez des planètes et vendez en un clic toutes les ressources de celle-ci aux marchands ! (25% de gains en moins qu'en se déplaçant soit même aux marchands)</target>
+      </trans-unit>
+      <trans-unit id="q6jBep." resname="tooltip.remove">
+        <source>tooltip.remove</source>
+        <target>Retirer de la liste de planète</target>
+      </trans-unit>
+      <trans-unit id="JEENm9w" resname="market.sellAll">
+        <source>market.sellAll</source>
+        <target>Vendre les ressources</target>
+      </trans-unit>
+      <trans-unit id="HCv.NWJ" resname="planet.sellPrice">
+        <source>planet.sellPrice</source>
+        <target>Prix unitaire :</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

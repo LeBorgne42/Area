@@ -39,7 +39,7 @@ class ExtraController extends AbstractController
         }
 
         $now->add(new DateInterval('PT' . ($level * 9000) . 'S'));
-        $user->getRank()->setWarPoint($usePlanetPdg - 200000);
+        $user->getRank()->setWarPoint($usePlanetPdg - ($level * 200000));
         $usePlanet->setConstruct('island');
         $usePlanet->setConstructAt($now);
         $em->flush();
@@ -70,7 +70,7 @@ class ExtraController extends AbstractController
         }
 
         $now->add(new DateInterval('PT' . ($level * 9000) . 'S'));
-        $user->getRank()->setWarPoint($usePlanetPdg - 200000);
+        $user->getRank()->setWarPoint($usePlanetPdg - ($level * 200000));
         $usePlanet->setConstruct('orbital');
         $usePlanet->setConstructAt($now);
         $em->flush();

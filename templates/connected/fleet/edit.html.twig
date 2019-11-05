@@ -5,7 +5,6 @@
 {% block title %}{{ 'title'|trans }}{% endblock %}
 
 {% block body %}
-    <script type="text/javascript" src="{{ asset('build/flight.js') }}"></script>
 <div class="front-block editFleet">
     {% if fleet.getUser() == app.user or (fleet.getAlly() == app.user.getAlly() and app.user.getGrade().getPlacement() == 1) %}
         <div class="pb-3 createFleet">
@@ -484,7 +483,7 @@
                                 {% if oneF != fleet and oneF.getFlightTime() == null %}
                                     <tr>
                                         <td class="p-2 pl-4">
-                                            <span class="{% if oneF.getUser() == app.user() %}pp-mine{% elseif oneF.getUser().getAlly() == app.user().getAlly() and app.user().getAlly() %}pp-ally{% else %}pp-enemy{% endif %}" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.userFleet'|trans({'%name%': oneF.getUser().getUserName() }) }}">{% if oneF.getUser() == app.user() %}<a href="{{ path('manage_fleet', {'fleetGive': oneF.getId(), 'usePlanet': usePlanet.getId()}) }}">{% endif %}{{ oneF.getName() }} ({{ oneF.getSignature() }}){% if oneF.getUser() == app.user() %}</a>{% endif %}</span>{% if oneF.getUser() == fleet.getUser() and fleet.getFightAt() is null and fleet.getFlightTime() is null %} - <span><a href="{{ path('fusion_fleet', {'usePlanet': usePlanet.getId(), 'fleetGive': oneF.getId(), 'fleetTake': fleet.getId()}) }}">{{ 'fleet.fusion'|trans }}</a></span>{% endif %}
+                                            <span class="{% if oneF.getUser() == app.user() %}pp-mine{% elseif oneF.getUser().getAlly() == app.user().getAlly() and app.user().getAlly() %}pp-ally{% else %}pp-enemy{% endif %}" data-toggle="tooltip" data-placement="top" title="{{ 'tooltip.userFleet'|trans({'%name%': oneF.getUser().getUserName() }) }}">{% if oneF.getUser() == app.user() %}<a href="{{ path('manage_fleet', {'fleetGive': oneF.getId(), 'usePlanet': usePlanet.getId()}) }}">{% endif %}{{ oneF.getName() }} ({{ oneF.getSignature()|number_format }}){% if oneF.getUser() == app.user() %}</a>{% endif %}</span>{% if oneF.getUser() == fleet.getUser() and fleet.getFightAt() is null and fleet.getFlightTime() is null %} - <span><a href="{{ path('fusion_fleet', {'usePlanet': usePlanet.getId(), 'fleetGive': oneF.getId(), 'fleetTake': fleet.getId()}) }}">{{ 'fleet.fusion'|trans }}</a></span>{% endif %}
                                         </td>
                                     </tr>
                                 {% endif %}

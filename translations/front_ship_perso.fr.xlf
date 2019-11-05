@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="qvIyBkY" resname="title">
+        <source>title</source>
+        <target>Personalisation vaisseaux</target>
+      </trans-unit>
+      <trans-unit id="M2Jc_Ct" resname="ship.sonde">
+        <source>ship.sonde</source>
+        <target>Sonde</target>
+      </trans-unit>
+      <trans-unit id="zRk.rUR" resname="ship.colonizer">
+        <source>ship.colonizer</source>
+        <target>Colonisateur</target>
+      </trans-unit>
+      <trans-unit id="xNQeCpF" resname="ship.recycleur">
+        <source>ship.recycleur</source>
+        <target>Recycleur</target>
+      </trans-unit>
+      <trans-unit id="4yDF_O1" resname="ship.barge">
+        <source>ship.barge</source>
+        <target>Barge d'invasion</target>
+      </trans-unit>
+      <trans-unit id="CuXO2t." resname="ship.hunter">
+        <source>ship.hunter</source>
+        <target>Chasseur</target>
+      </trans-unit>
+      <trans-unit id="1FaeM6a" resname="ship.hunterHeavy">
+        <source>ship.hunterHeavy</source>
+        <target>Chasseur lourd</target>
+      </trans-unit>
+      <trans-unit id="XdQA3Xw" resname="ship.hunterWar">
+        <source>ship.hunterWar</source>
+        <target>Chasseur a plasma</target>
+      </trans-unit>
+      <trans-unit id="lPFz87a" resname="ship.cargoV">
+        <source>ship.cargoV</source>
+        <target>Cargo V</target>
+      </trans-unit>
+      <trans-unit id="PxexVf3" resname="ship.cargoI">
+        <source>ship.cargoI</source>
+        <target>Cargo I</target>
+      </trans-unit>
+      <trans-unit id="skEJKAK" resname="ship.cargoX">
+        <source>ship.cargoX</source>
+        <target>Cargo X</target>
+      </trans-unit>
+      <trans-unit id="1v_.dWa" resname="ship.corvet">
+        <source>ship.corvet</source>
+        <target>Corvette</target>
+      </trans-unit>
+      <trans-unit id="ozg.KOI" resname="ship.corvetLaser">
+        <source>ship.corvetLaser</source>
+        <target>Corvette a laser</target>
+      </trans-unit>
+      <trans-unit id="rVC86A0" resname="ship.corvetWar">
+        <source>ship.corvetWar</source>
+        <target>Corvette de combat</target>
+      </trans-unit>
+      <trans-unit id="myyPZ5y" resname="ship.fregate">
+        <source>ship.fregate</source>
+        <target>Fregate</target>
+      </trans-unit>
+      <trans-unit id="VoUJnSO" resname="ship.fregatePlasma">
+        <source>ship.fregatePlasma</source>
+        <target>Frégate a plasma</target>
+      </trans-unit>
+      <trans-unit id="VRjoM3D" resname="ship.croiser">
+        <source>ship.croiser</source>
+        <target>Croiseur</target>
+      </trans-unit>
+      <trans-unit id="M4DkO8L" resname="ship.ironClad">
+        <source>ship.ironClad</source>
+        <target>Cuirassé</target>
+      </trans-unit>
+      <trans-unit id="ofIna_C" resname="ship.destroyer">
+        <source>ship.destroyer</source>
+        <target>Destroyer</target>
+      </trans-unit>
+      <trans-unit id="rtELZuK" resname="ship.armor">
+        <source>ship.armor</source>
+        <target>Coque :</target>
+      </trans-unit>
+      <trans-unit id="VlP06ZC" resname="ship.shield">
+        <source>ship.shield</source>
+        <target>Bouclier :</target>
+      </trans-unit>
+      <trans-unit id="sv3J6qP" resname="ship.accurate">
+        <source>ship.accurate</source>
+        <target>Précision :</target>
+      </trans-unit>
+      <trans-unit id="XqSqyFm" resname="ship.missile">
+        <source>ship.missile</source>
+        <target>Missile :</target>
+      </trans-unit>
+      <trans-unit id="Ftb9rQI" resname="ship.laser">
+        <source>ship.laser</source>
+        <target>Laser :</target>
+      </trans-unit>
+      <trans-unit id="jp.4J9U" resname="ship.plasma">
+        <source>ship.plasma</source>
+        <target>Plasma :</target>
+      </trans-unit>
+      <trans-unit id="GSc..hC" resname="form.nbr">
+        <source>form.nbr</source>
+        <target>0</target>
+      </trans-unit>
+      <trans-unit id="zsbGAcz" resname="ship.personalisation">
+        <source>ship.personalisation</source>
+        <target>Améliorez vos vaisseaux !</target>
+      </trans-unit>
+      <trans-unit id="lT3c1Yb" resname="ship.lastPoints">
+        <source>ship.lastPoints</source>
+        <target>Vous pouvez encore dépensez %nbr% points aujourd'hui.</target>
+      </trans-unit>
+      <trans-unit id="eSjaJ6c" resname="ship.nextUpdate">
+        <source>ship.nextUpdate</source>
+        <target>Prochaines améliorations dans :</target>
+      </trans-unit>
+      <trans-unit id="9qRcC_s" resname="ship.point">
+        <source>ship.point</source>
+        <target>Points :</target>
+      </trans-unit>
+      <trans-unit id="TSioUO8" resname="form.change">
+        <source>form.change</source>
+        <target>Appliquer</target>
+      </trans-unit>
+      <trans-unit id="QG6B7Sj" resname="quest.tutorial">
+        <source>quest.tutorial</source>
+        <target>C'est ici que vous produisez les vaisseaux qui constitueront vos flottes et silloneront les galaxies. Pour débuter vous avez une production gratuite, lancez la construction de 10 chasseurs a plasma et 5 corvettes de combats.</target>
+      </trans-unit>
+      <trans-unit id="SvwPUFp" resname="quest.tutorialBis">
+        <source>quest.tutorialBis</source>
+        <target>Alerte ! Votre planète est attaquée !!! Une flotte remplie de zombies est en orbite de votre planète (l'aperçu de votre planète a droite est rouge pour signaler les intrusions)! Ils viennent de tenter une invasion sur votre planète et ont échoué, ne leur laissez pas le temps de recommencer et dès que vos vaisseaux sont construits créer une flotte pour les détruires.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

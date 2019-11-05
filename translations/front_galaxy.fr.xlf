@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="fr" target-language="fr" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="qvIyBkY" resname="title">
+        <source>title</source>
+        <target>Galaxie</target>
+      </trans-unit>
+      <trans-unit id=".PucnYg" resname="tooltip.sector">
+        <source>tooltip.sector</source>
+        <target>Secteur %position%</target>
+      </trans-unit>
+      <trans-unit id="xJY.708" resname="galaxy.mine">
+        <source>galaxy.mine</source>
+        <target>Planète contrôlée</target>
+      </trans-unit>
+      <trans-unit id="Pcf2n.q" resname="galaxy.ally">
+        <source>galaxy.ally</source>
+        <target>Alliée</target>
+      </trans-unit>
+      <trans-unit id="AVq5ian" resname="galaxy.enemy">
+        <source>galaxy.enemy</source>
+        <target>Hostile</target>
+      </trans-unit>
+      <trans-unit id="8qTtF.T" resname="galaxy.empty">
+        <source>galaxy.empty</source>
+        <target>Inhabitée</target>
+      </trans-unit>
+      <trans-unit id="WtoiHEF" resname="galaxy.domination">
+        <source>galaxy.domination</source>
+        <target>Domination de la galaxie par </target>
+      </trans-unit>
+      <trans-unit id="X3oaa80" resname="galaxy.ia">
+        <source>galaxy.ia</source>
+        <target>Marchands</target>
+      </trans-unit>
+      <trans-unit id="08qqUth" resname="galaxy.zombie">
+        <source>galaxy.zombie</source>
+        <target>Zombies</target>
+      </trans-unit>
+      <trans-unit id="B6u3O.e" resname="galaxy.cdr">
+        <source>galaxy.cdr</source>
+        <target>Ressources</target>
+      </trans-unit>
+      <trans-unit id="XzBeA2r" resname="form.galaxy">
+        <source>form.galaxy</source>
+        <target>0</target>
+      </trans-unit>
+      <trans-unit id="4klBQcl" resname="form.sector">
+        <source>form.sector</source>
+        <target>0</target>
+      </trans-unit>
+      <trans-unit id="PRqzH4p" resname="form.galaxys">
+        <source>form.galaxys</source>
+        <target>Galaxie</target>
+      </trans-unit>
+      <trans-unit id="QFhjdbc" resname="form.sectors">
+        <source>form.sectors</source>
+        <target>Secteur</target>
+      </trans-unit>
+      <trans-unit id="DaUvkVP" resname="form.navigate">
+        <source>form.navigate</source>
+        <target>Aller</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
