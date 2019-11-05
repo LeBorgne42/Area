@@ -4,6 +4,7 @@
     <list default="true" id="97f042ea-d0ee-4bd9-bb02-3d850e24f659" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/CronController/InstantController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/CronController/InstantController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/connected/overview.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/connected/overview.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -294,7 +295,7 @@
       <workItem from="1570488108653" duration="2168000" />
       <workItem from="1572849204405" duration="4703000" />
       <workItem from="1572890619713" duration="4347000" />
-      <workItem from="1572946643957" duration="3346000" />
+      <workItem from="1572946643957" duration="3565000" />
     </task>
     <servers />
   </component>

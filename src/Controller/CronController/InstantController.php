@@ -266,7 +266,7 @@ class InstantController extends AbstractController
                     $planetPoint = $planetPoint + $planet->getBuildingPoint();
                     $buildingCost = $buildingCost + $planet->getBuildingCost();
                 }
-                $gain = round($worker / 6);
+                $gain = round($worker / 3);
                 $lose = null;
                 if($ally) {
                     $user->addQuest($questTwo);
