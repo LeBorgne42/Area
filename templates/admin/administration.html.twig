@@ -15,6 +15,7 @@
                             <td>
                                 <span class="mx-5">{{ 'server'|trans }} {{ server.id }}</span>
                                 <img class="galaxy-block mr-4 mb-4" src="{{ asset('img/server.png') }}">
+                                <a class="btn-menu" href="{{ path('logout') }}">{{ 'logout'|trans }}</a>
                                 {% if server.open == 1 %}
                                     <a class="confirm-button text-vert" href="{{ path('deactive_server', {'serverId': server.id}) }}">{{ 'server.open'|trans }}</a>
                                 {% else %}
@@ -25,6 +26,7 @@
                                 {% else %}
                                     <a class="confirm-button text-vert" href="{{ path('pvp_server', {'serverId': server.id}) }}">{{ 'server.pve'|trans }}</a>
                                 {% endif %}
+                                <a class="btn-menu" href="{{ path('destroy_server', {'serverId': 1}) }}" target="_blank">{{ 'serveur.kill.serveur'|trans }}</a>
                             </td>
                         </tr>
                         </tbody>
@@ -32,11 +34,17 @@
                     <table class="table table-striped table-bordered table-dark text-left">
                         <tbody>
                         <tr>
+                            {% set x = 1 %}
                         {% for galaxy in galaxys if galaxy.server == server.id %}
+                            {% if (x - 1) % 5 == 0 %}
+                        </tr>
+                        <tr>
+                            {% endif %}
                             <td class="text-center">
                             <span><img class="galaxy-block mb-4" src="{{ asset('img/galaxy.png') }}"><span class="galaxy-position">{{ 'galaxy.nbr'|trans({'%position%': galaxy.position}) }}</span><span class="galaxy-players">{{ 'galaxy.players'|trans({'%players%': galaxy.users|number_format }) }}</span></span>
                                 <div><a class="confirm-button" href="{{ path('destroy_galaxy', {'galaxyId': galaxy.id}) }}">{{ 'galaxy.destroy'|trans }}</a></div>
                             </td>
+                            {% set x = x + 1 %}
                         {% endfor %}
                             <td class="text-center">
                                 <a class="confirm-button" href="{{ path('create_galaxy', {'serverId': server.id}) }}">{{ 'galaxy.create'|trans }}</a>
@@ -45,20 +53,6 @@
                         </tbody>
                     </table>
                 {% endfor %}
-
-
-
-
-                <li>
-                    <a class="btn-menu" href="{{ path('destroy_server', {'serverId': 1}) }}" target="_blank">{{ 'serveur.kill.serveur'|trans }}</a>
-                </li>
-
-                <li>
-                    <a class="btn-menu" href="{{ path('logout') }}">{{ 'logout'|trans }}</a>
-                </li>
-
-
-
              {#
                 <li>
                     <a class="btn-menu" href="{{ path('create_little') }}" target="_blank">{{ 'serveur.createLittle'|trans }}</a>
