@@ -4,10 +4,7 @@ namespace App\Controller\Connected;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
-use App\Form\Front\ConfirmType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use App\Entity\Planet;
 use DateTime;
 use DateTimeZone;
@@ -30,7 +27,7 @@ class CommanderController extends AbstractController
         if ($usePlanet->getUser() != $user) {
             return $this->redirectToRoute('home');
         }
-
+        $commander = 0;
         $user->setCommander($commander);
         $em->flush();
 

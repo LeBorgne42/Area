@@ -5,7 +5,6 @@ namespace App\Controller\Share;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use App\Entity\Report;
 
 class ShareController extends AbstractController
 {

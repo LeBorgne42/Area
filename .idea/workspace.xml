@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="97f042ea-d0ee-4bd9-bb02-3d850e24f659" name="Default" comment="">
+    <list default="true" id="97f042ea-d0ee-4bd9-bb02-3d850e24f659" name="Default" comment="Code clean">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/CommanderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Connected/CommanderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Connected/SoldierController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Connected/SoldierController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/CronController/InstantController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/CronController/InstantController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/connected/overview.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/connected/overview.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Share/ShareController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Share/ShareController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/TopMenuController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/TopMenuController.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -295,7 +298,9 @@
       <workItem from="1570488108653" duration="2168000" />
       <workItem from="1572849204405" duration="4703000" />
       <workItem from="1572890619713" duration="4347000" />
-      <workItem from="1572946643957" duration="3565000" />
+      <workItem from="1572946643957" duration="4181000" />
+      <workItem from="1573027944208" duration="149000" />
+      <workItem from="1573028110518" duration="2317000" />
     </task>
     <servers />
   </component>
@@ -323,5 +328,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Code clean" />
+    <option name="LAST_COMMIT_MESSAGE" value="Code clean" />
   </component>
 </project>

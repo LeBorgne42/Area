@@ -7,7 +7,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\Front\CaserneRecruitType;
-use App\Form\Front\ScientistRecruitType;
 use App\Entity\Planet;
 use DateTime;
 use Dateinterval;
