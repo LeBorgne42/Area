@@ -184,6 +184,11 @@ class User implements UserInterface, \Serializable
     protected $zombie;
 
     /**
+     * @ORM\Column(name="bot",type="boolean")
+     */
+    protected $bot;
+
+    /**
      * @ORM\Column(name="merchant",type="boolean")
      */
     protected $merchant;
@@ -567,6 +572,7 @@ class User implements UserInterface, \Serializable
         $this->dailyConnect = null;
         $this->zombieAt = null;
         $this->zombie = 0;
+        $this->bot = 0;
         $this->zombieAtt = 1;
         $this->merchant = 0;
     }
@@ -3109,6 +3115,22 @@ class User implements UserInterface, \Serializable
     public function setZombie($zombie): void
     {
         $this->zombie = $zombie;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBot()
+    {
+        return $this->bot;
+    }
+
+    /**
+     * @param mixed $bot
+     */
+    public function setBot($bot): void
+    {
+        $this->bot = $bot;
     }
 
     /**
