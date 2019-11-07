@@ -101,7 +101,7 @@ class MarketController extends AbstractController
     }
 
     /**
-     * @Route("/ajouter-ajouter-marchand/{usePlanet}/{planet}", name="planet_seller_add", requirements={"usePlanet"="\d+","planet"="\d+"})
+     * @Route("/planete-ajouter-marchand/{usePlanet}/{planet}", name="planet_seller_add", requirements={"usePlanet"="\d+","planet"="\d+"})
      */
     public function planetAddAction(Planet $usePlanet, Planet $planet)
     {
