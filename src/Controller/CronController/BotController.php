@@ -2,17 +2,17 @@
 
 namespace App\Controller\CronController;
 
-use App\Entity\Destination;
-use App\Entity\Fleet;
-use App\Entity\Report;
-use App\Entity\S_Content;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\User;
 use App\Entity\Ships;
 use App\Entity\Rank;
+use App\Entity\Destination;
+use App\Entity\Fleet;
+use App\Entity\S_Content;
 use DateTime;
 use Dateinterval;
+use DateTimeZone;
 
 class BotController extends AbstractController
 {
@@ -21,7 +21,7 @@ class BotController extends AbstractController
      */
     public function createBotAction()
     {
-        $em = $this->getDoctrine()->getManager();
+        /*$em = $this->getDoctrine()->getManager();
         $now = new DateTime();
         $creation = $now;
         $nickeNames = $em->getRepository('App:NickName')->findAll();
@@ -35,7 +35,7 @@ class BotController extends AbstractController
         foreach ($nickeNames as $nickName) {
             $nick = ucfirst ($nickName->getPseudo());
             $user = new User();
-            $creation->add(new DateInterval('PT' . rand(-4320, 1000) . 'H'));
+            $creation->add(new DateInterval('PT' . rand(1, 1000) . 'H'));
             $user->setUsername($nick);
             $user->setEmail($nick . '@fake.com');
             $user->setCreatedAt($now);
@@ -43,9 +43,11 @@ class BotController extends AbstractController
             $user->setTutorial(60);
             $user->setBot(true);
             $user->setDailyConnect($now);
+            $user->setLastActivity($now);
             $user->setNewletter(false);
             // image de profil
             $em->persist($user);
+            $em->flush();
 
             $planet = $em->getRepository('App:Planet')
                 ->createQueryBuilder('p')
@@ -60,7 +62,7 @@ class BotController extends AbstractController
 
             if($planet) {
                 $planet->setUser($user);
-                $planet->setName(str_shuffle($nick . 'ae'));
+                $planet->setName('Terra Nova');
                 $planet->setSonde(10);
                 $planet->setRadar(2);
                 $planet->setGroundPlace(10);
@@ -95,6 +97,7 @@ class BotController extends AbstractController
             $salon->addUser($user);
         }
         $em->flush();
+        exit;*/
     }
 
     /**
@@ -126,8 +129,8 @@ class BotController extends AbstractController
             ->getOneOrNullResult();
 
         foreach ($bots as $bot) {
-            $move->add(new DateInterval('PT' . rand(-10, 10) . 'M'));
-            if (rand(1, 12) == 1) {
+            $move->add(new DateInterval('PT' . rand(1, 10) . 'M'));
+            if (rand(1, 48) == 1) {
                 $fPlanet = $em->getRepository('App:Planet')
                     ->createQueryBuilder('p')
                     ->where('p.user = :user')
@@ -149,7 +152,7 @@ class BotController extends AbstractController
                     ->setMaxResults(1)
                     ->getOneOrNullResult();
 
-                if (!$fPlanet || !$planet) {
+                if ($fPlanet && $planet) {
                     $sFleet = $fPlanet->getSector()->getPosition();
                     $sector = $planet->getSector()->getPosition();
                     $planete = $planet->getPosition();
@@ -177,7 +180,6 @@ class BotController extends AbstractController
                     $sonde->setPlanet($fPlanet);
                     $sonde->setName('Auto Sonde');
                     $sonde->setSignature($sonde->getNbrSignatures());
-                    $fPlanet->setSonde($fPlanet->getSonde() - 1);
                     $speed = $sonde->getSpeed();
                     $distance = $speed * $base * 100;
                     $now->add(new DateInterval('PT' . round($distance) . 'S'));
@@ -192,11 +194,19 @@ class BotController extends AbstractController
                     $sonde->setFlightType(1);
                     $sonde->setCancelFlight($moreNow);
                     $em->persist($sonde);
-                    $bot->setDailyConnect($now);
                 }
+                $message = new S_Content();
+                $message->setSalon($salon);
+                $allMessages = ['Salut', 'Plop', 'Slt tlm', 'ca va ?', 'wesh', 'bj', 'bonjour', 'hellooo', 'hello', 'comment on fait pour coloniser ?', 'c\'est quoi les zombies ?', 'je me fais attaquer !!!!'];
+                $body = $allMessages[mt_rand(0, count($allMessages) - 1)];
+                $message->setMessage(nl2br($body));
+                $message->setSendAt($now);
+                $message->setUser($bot);
+                $em->persist($message);
+                $bot->setLastActivity($now);
             }
 
-            if (rand(1, 24) == 1) {
+            if (rand(1, 25) == 1) {
                 $planetsSeller = $em->getRepository('App:Planet')
                     ->createQueryBuilder('p')
                     ->where('p.user = :user')
@@ -225,20 +235,16 @@ class BotController extends AbstractController
                         $bot->setBitcoin($bot->getBitcoin() + 50000);
                     }
                 }
-                $message = new S_Content();
-                $message->setSalon($salon);
-                $message->setMessage(nl2br(array_rand(['Salut', 'Plop', 'Slt tlm', 'ca va ?', 'wesh', 'bj', 'bonjour', 'hellooo', 'hello', 'comment on fait pour coloniser ?', 'c\'est quoi les zombies ?', 'je me fais attaquer !!!!'], 1)));
-                $message->setSendAt($now);
-                $message->setUser($bot);
                 // créer une flotte et l'envoyer recyclage
-                $bot->setDailyConnect($now);
+                $bot->setLastActivity($now);
             }
-            if (rand(1, 100) == 1) {
+            if (rand(1, 20) == 1) {
                 // Alliance création/rejoindre/inviter
                 // créer une flotte et l'envoyer coloniser/envahir
-                $bot->setDailyConnect($now);
+                $bot->setLastActivity($now);
             }
         }
         $em->flush();
+        exit;
     }
 }

@@ -153,6 +153,7 @@ class InstantController extends AbstractController
             ->join('u.planets', 'p')
             ->where('u.zombieAt < :now')
             ->andWhere('u.rank is not null')
+            ->andWhere('u.bot = false')
             ->andWhere('p.id is not null')
             ->groupBy('u.id')
             ->having('count(p.id) >= 3')

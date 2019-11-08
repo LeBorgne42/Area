@@ -12,6 +12,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 class NickName
 {
     /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
      *
      * @ORM\Column(name="pseudo", type="string", length=16)
      * @Assert\NotBlank(message = "required")
@@ -20,6 +27,14 @@ class NickName
 
     public function __construct()
     {
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
